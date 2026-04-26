@@ -116,5 +116,56 @@ def main():
                 f.write(f"| {skill.get('name')} | {prereq_str} | {skill.get('level')} | {skill.get('conditions')} |\n")
         f.write(f"\n*Generated from gaia.json v{version}.*\n")
 
+    # generate user skill tree markdown projections
+    users_dir = 'users'
+    if os.path.isdir(users_dir):
+        for username in sorted(os.listdir(users_dir)):
+            user_dir = os.path.join(users_dir, username)
+            tree_path = os.path.join(user_dir, 'skill-tree.json')
+            if not os.path.isfile(tree_path):
+                continue
+            with open(tree_path, 'r') as tf:
+                tree = json.load(tf)
+
+            md_path = os.path.join(user_dir, 'skill-tree.md')
+            with open(md_path, 'w') as f:
+                f.write(f"# Skill Tree — {tree.get('userId', username)}\n")
+                f.write(f"**Last Updated:** {tree.get('updatedAt', 'unknown')}  \n")
+                stats = tree.get('stats', {})
+                f.write(f"**Total Skills Unlocked:** {stats.get('totalUnlocked', 0)}  \n")
+                f.write(f"**Highest Rarity:** {stats.get('highestRarity', 'none').capitalize()}  \n")
+                f.write(f"**Deepest Lineage:** {stats.get('deepestLineage', 0)}\n\n")
+                f.write("---\n\n")
+
+                f.write("## Unlocked Skills\n\n")
+                unlocked = tree.get('unlockedSkills', [])
+                if unlocked:
+                    f.write("| Skill | Type | Level | Rarity | Unlocked In | Date |\n")
+                    f.write("|---|---|---|---|---|---|\n")
+                    for us in unlocked:
+                        sid = us.get('skillId', '')
+                        sk = skill_map.get(sid, {})
+                        f.write(f"| {sk.get('name', sid)} | {sk.get('type', '').capitalize()} | "
+                                f"{us.get('level', '')} | {sk.get('rarity', '').capitalize()} | "
+                                f"{us.get('unlockedIn', '')} | {us.get('unlockedAt', '')} |\n")
+                else:
+                    f.write("_No skills unlocked yet._\n")
+                f.write("\n---\n\n")
+
+                f.write("## Pending Combinations\n\n")
+                pending = tree.get('pendingCombinations', [])
+                if pending:
+                    for pc in pending:
+                        candidate = pc.get('candidateResult', '')
+                        prereqs = ', '.join(f"`{s}`" for s in pc.get('detectedSkills', []))
+                        f.write(f"> **{candidate}** — combine {prereqs}  \n")
+                        f.write(f"> Level floor: {pc.get('levelFloor', '')}  \n")
+                        f.write(f"> Run `gaia fuse {candidate}` to confirm.\n\n")
+                else:
+                    f.write("_No pending combinations._\n\n")
+
+                f.write("---\n")
+                f.write("*Generated from skill-tree.json. Do not edit directly.*\n")
+
 if __name__ == '__main__':
     main()

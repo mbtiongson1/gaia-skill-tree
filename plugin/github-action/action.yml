@@ -26,4 +26,4 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         GAIA_USERNAME: ${{ inputs.username }}
       run: |
-        python plugin/cli/main.py scan
+        python -m plugin.cli.main scan
