@@ -21,7 +21,10 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install jsonschema
+        run: pip install jsonschema pytest
 
       - name: Run validation
         run: python scripts/validate.py
+
+      - name: Run tests
+        run: pytest tests/

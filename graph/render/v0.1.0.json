@@ -1,0 +1,439 @@
+{
+  "nodes": [
+    {
+      "id": "tokenize",
+      "label": "Tokenize",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "classify",
+      "label": "Classify",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "retrieve",
+      "label": "Retrieve",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "rank",
+      "label": "Rank",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "parseJson",
+      "label": "Parse JSON",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "parseHtml",
+      "label": "Parse HTML",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "executeBash",
+      "label": "Execute Bash",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "generateText",
+      "label": "Generate Text",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "summarize",
+      "label": "Summarize",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "citeSources",
+      "label": "Cite Sources",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "extractEntities",
+      "label": "Extract Entities",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "routeIntent",
+      "label": "Route Intent",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "evaluateOutput",
+      "label": "Evaluate Output",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "embedText",
+      "label": "Embed Text",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "chunkDocument",
+      "label": "Chunk Document",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "planDecompose",
+      "label": "Plan and Decompose",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "writeReport",
+      "label": "Write Report",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "audienceModel",
+      "label": "Audience Model",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "toolSelect",
+      "label": "Tool Select",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "errorInterpretation",
+      "label": "Error Interpretation",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "codeGeneration",
+      "label": "Code Generation",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "webSearch",
+      "label": "Web Search",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "scoreRelevance",
+      "label": "Score Relevance",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "formatOutput",
+      "label": "Format Output",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "diffContent",
+      "label": "Diff Content",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common"
+    },
+    {
+      "id": "webScrape",
+      "label": "Web Scrape",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "ghostwrite",
+      "label": "Ghostwrite",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare"
+    },
+    {
+      "id": "autonomousDebug",
+      "label": "Autonomous Debug",
+      "type": "composite",
+      "level": "III",
+      "rarity": "rare"
+    },
+    {
+      "id": "planAndExecute",
+      "label": "Plan and Execute",
+      "type": "composite",
+      "level": "III",
+      "rarity": "rare"
+    },
+    {
+      "id": "knowledgeHarvest",
+      "label": "Knowledge Harvest",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare"
+    },
+    {
+      "id": "ragPipeline",
+      "label": "RAG Pipeline",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "documentAnalyst",
+      "label": "Document Analyst",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "recursiveSelfImprovement",
+      "label": "Recursive Self-Improvement",
+      "type": "legendary",
+      "level": "I",
+      "rarity": "legendary"
+    },
+    {
+      "id": "multiAgentOrchestrationV",
+      "label": "Multi-Agent Orchestration V",
+      "type": "legendary",
+      "level": "I",
+      "rarity": "legendary"
+    },
+    {
+      "id": "autonomousResearchAgent",
+      "label": "Autonomous Research Agent",
+      "type": "legendary",
+      "level": "I",
+      "rarity": "legendary"
+    }
+  ],
+  "edges": [
+    {
+      "source": "webSearch",
+      "target": "webScrape",
+      "type": "prerequisite"
+    },
+    {
+      "source": "parseHtml",
+      "target": "webScrape",
+      "type": "prerequisite"
+    },
+    {
+      "source": "extractEntities",
+      "target": "webScrape",
+      "type": "prerequisite"
+    },
+    {
+      "source": "webSearch",
+      "target": "research",
+      "type": "prerequisite"
+    },
+    {
+      "source": "summarize",
+      "target": "research",
+      "type": "prerequisite"
+    },
+    {
+      "source": "citeSources",
+      "target": "research",
+      "type": "prerequisite"
+    },
+    {
+      "source": "research",
+      "target": "ghostwrite",
+      "type": "prerequisite"
+    },
+    {
+      "source": "writeReport",
+      "target": "ghostwrite",
+      "type": "prerequisite"
+    },
+    {
+      "source": "audienceModel",
+      "target": "ghostwrite",
+      "type": "prerequisite"
+    },
+    {
+      "source": "codeGeneration",
+      "target": "autonomousDebug",
+      "type": "prerequisite"
+    },
+    {
+      "source": "executeBash",
+      "target": "autonomousDebug",
+      "type": "prerequisite"
+    },
+    {
+      "source": "errorInterpretation",
+      "target": "autonomousDebug",
+      "type": "prerequisite"
+    },
+    {
+      "source": "routeIntent",
+      "target": "planAndExecute",
+      "type": "prerequisite"
+    },
+    {
+      "source": "planDecompose",
+      "target": "planAndExecute",
+      "type": "prerequisite"
+    },
+    {
+      "source": "toolSelect",
+      "target": "planAndExecute",
+      "type": "prerequisite"
+    },
+    {
+      "source": "webScrape",
+      "target": "knowledgeHarvest",
+      "type": "prerequisite"
+    },
+    {
+      "source": "extractEntities",
+      "target": "knowledgeHarvest",
+      "type": "prerequisite"
+    },
+    {
+      "source": "embedText",
+      "target": "knowledgeHarvest",
+      "type": "prerequisite"
+    },
+    {
+      "source": "retrieve",
+      "target": "ragPipeline",
+      "type": "prerequisite"
+    },
+    {
+      "source": "chunkDocument",
+      "target": "ragPipeline",
+      "type": "prerequisite"
+    },
+    {
+      "source": "embedText",
+      "target": "ragPipeline",
+      "type": "prerequisite"
+    },
+    {
+      "source": "scoreRelevance",
+      "target": "ragPipeline",
+      "type": "prerequisite"
+    },
+    {
+      "source": "parseJson",
+      "target": "documentAnalyst",
+      "type": "prerequisite"
+    },
+    {
+      "source": "extractEntities",
+      "target": "documentAnalyst",
+      "type": "prerequisite"
+    },
+    {
+      "source": "summarize",
+      "target": "documentAnalyst",
+      "type": "prerequisite"
+    },
+    {
+      "source": "formatOutput",
+      "target": "documentAnalyst",
+      "type": "prerequisite"
+    },
+    {
+      "source": "autonomousDebug",
+      "target": "recursiveSelfImprovement",
+      "type": "prerequisite"
+    },
+    {
+      "source": "evaluateOutput",
+      "target": "recursiveSelfImprovement",
+      "type": "prerequisite"
+    },
+    {
+      "source": "planAndExecute",
+      "target": "recursiveSelfImprovement",
+      "type": "prerequisite"
+    },
+    {
+      "source": "planAndExecute",
+      "target": "multiAgentOrchestrationV",
+      "type": "prerequisite"
+    },
+    {
+      "source": "routeIntent",
+      "target": "multiAgentOrchestrationV",
+      "type": "prerequisite"
+    },
+    {
+      "source": "toolSelect",
+      "target": "multiAgentOrchestrationV",
+      "type": "prerequisite"
+    },
+    {
+      "source": "research",
+      "target": "autonomousResearchAgent",
+      "type": "prerequisite"
+    },
+    {
+      "source": "knowledgeHarvest",
+      "target": "autonomousResearchAgent",
+      "type": "prerequisite"
+    },
+    {
+      "source": "ghostwrite",
+      "target": "autonomousResearchAgent",
+      "type": "prerequisite"
+    }
+  ],
+  "meta": {
+    "version": "0.1.0",
+    "generatedAt": "2026-04-26T00:00:00Z",
+    "totalNodes": 36,
+    "totalEdges": 35
+  }
+}
