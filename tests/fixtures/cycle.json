@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "version": "0.1.0",
+  "generatedAt": "2026-04-26T00:00:00Z",
+  "skills": [
+    {
+      "id": "A",
+      "name": "Skill A",
+      "type": "composite",
+      "level": "II",
+      "rarity": "common",
+      "description": "Part of a cycle.",
+      "prerequisites": [
+        "B",
+        "C"
+      ],
+      "status": "provisional",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "http://example.com",
+          "evaluator": "test",
+          "date": "2026-04-26"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Skill B",
+      "type": "composite",
+      "level": "II",
+      "rarity": "common",
+      "description": "Part of a cycle.",
+      "prerequisites": [
+        "A",
+        "C"
+      ],
+      "status": "provisional",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "http://example.com",
+          "evaluator": "test",
+          "date": "2026-04-26"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Skill C",
+      "type": "composite",
+      "level": "II",
+      "rarity": "common",
+      "description": "Part of a cycle.",
+      "prerequisites": [
+        "A",
+        "B"
+      ],
+      "status": "provisional",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "http://example.com",
+          "evaluator": "test",
+          "date": "2026-04-26"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "sourceSkillId": "A",
+      "targetSkillId": "B",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "B",
+      "targetSkillId": "C",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "C",
+      "targetSkillId": "A",
+      "edgeType": "prerequisite"
+    }
+  ]
+}

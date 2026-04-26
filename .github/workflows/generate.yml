@@ -1,0 +1,33 @@
+name: Gaia Generation Check
+
+on:
+  pull_request:
+    paths:
+      - 'graph/**'
+      - 'schema/**'
+
+jobs:
+  generate:
+    name: Projection Generation + Drift Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install jsonschema
+
+      - name: Generate Projections
+        run: python scripts/generateProjections.py
+
+      - name: Export GEXF
+        run: python scripts/exportGexf.py
+
+      - name: Check for Drift
+        run: |
+          git diff --exit-code || (echo "❌ Generated files differ from committed ones. Run scripts/generateProjections.py and scripts/exportGexf.py locally and commit the changes." && exit 1)

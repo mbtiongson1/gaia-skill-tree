@@ -1,0 +1,29 @@
+name: 'Gaia Skill Scanner'
+description: 'Scans your repository for Gaia skill references and updates your skill tree.'
+inputs:
+  github_token:
+    description: 'GitHub token for opening PRs'
+    required: true
+  username:
+    description: 'Your Gaia username (usually your GitHub username)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install requests jsonschema
+
+    - name: Run Gaia Scan
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        GAIA_USERNAME: ${{ inputs.username }}
+      run: |
+        python -m plugin.cli.main scan

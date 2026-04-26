@@ -1,0 +1,63 @@
+{
+  "userId": "mbtiongson1",
+  "updatedAt": "2026-04-26",
+  "unlockedSkills": [
+    {
+      "skillId": "webSearch",
+      "level": "II",
+      "unlockedAt": "2026-03-01",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree"
+    },
+    {
+      "skillId": "parseHtml",
+      "level": "II",
+      "unlockedAt": "2026-03-05",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree"
+    },
+    {
+      "skillId": "extractEntities",
+      "level": "II",
+      "unlockedAt": "2026-03-08",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree"
+    },
+    {
+      "skillId": "summarize",
+      "level": "II",
+      "unlockedAt": "2026-03-10",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree"
+    },
+    {
+      "skillId": "citeSources",
+      "level": "II",
+      "unlockedAt": "2026-03-12",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree"
+    },
+    {
+      "skillId": "webScrape",
+      "level": "III",
+      "unlockedAt": "2026-03-15",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree",
+      "combinedFrom": ["webSearch", "parseHtml", "extractEntities"]
+    },
+    {
+      "skillId": "research",
+      "level": "III",
+      "unlockedAt": "2026-04-01",
+      "unlockedIn": "mbtiongson1/gaia-skill-tree",
+      "combinedFrom": ["webSearch", "summarize", "citeSources"]
+    }
+  ],
+  "pendingCombinations": [
+    {
+      "detectedSkills": ["codeGeneration", "executeBash", "errorInterpretation"],
+      "candidateResult": "autonomousDebug",
+      "levelFloor": "III",
+      "promptedAt": "2026-04-26"
+    }
+  ],
+  "stats": {
+    "totalUnlocked": 7,
+    "highestRarity": "uncommon",
+    "deepestLineage": 2
+  }
+}
