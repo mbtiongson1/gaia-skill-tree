@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" version="1.2">
+  <meta lastmodifieddate="2026-04-26">
+    <creator>Gaia</creator>
+    <description>Gaia Skill Registry Graph</description>
+  </meta>
+  <graph defaultedgetype="directed" mode="static">
+    <attributes class="node">
+      <attribute id="level" title="level" type="string" />
+      <attribute id="rarity" title="rarity" type="string" />
+      <attribute id="status" title="status" type="string" />
+      <attribute id="type" title="type" type="string" />
+    </attributes>
+    <nodes>
+      <node id="audienceModel" label="Audience Model">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="autonomousDebug" label="Autonomous Debug">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="rare" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="autonomousResearchAgent" label="Autonomous Research Agent">
+        <attvalues>
+          <attvalue for="level" value="I" />
+          <attvalue for="rarity" value="legendary" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="legendary" />
+        </attvalues>
+      </node>
+      <node id="chunkDocument" label="Chunk Document">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="citeSources" label="Cite Sources">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="classify" label="Classify">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="codeGeneration" label="Code Generation">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="diffContent" label="Diff Content">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="documentAnalyst" label="Document Analyst">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="embedText" label="Embed Text">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="errorInterpretation" label="Error Interpretation">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="evaluateOutput" label="Evaluate Output">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="executeBash" label="Execute Bash">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="extractEntities" label="Extract Entities">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="formatOutput" label="Format Output">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="generateText" label="Generate Text">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="ghostwrite" label="Ghostwrite">
+        <attvalues>
+          <attvalue for="level" value="IV" />
+          <attvalue for="rarity" value="rare" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="knowledgeHarvest" label="Knowledge Harvest">
+        <attvalues>
+          <attvalue for="level" value="IV" />
+          <attvalue for="rarity" value="rare" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="multiAgentOrchestrationV" label="Multi-Agent Orchestration V">
+        <attvalues>
+          <attvalue for="level" value="I" />
+          <attvalue for="rarity" value="legendary" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="legendary" />
+        </attvalues>
+      </node>
+      <node id="parseHtml" label="Parse HTML">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="parseJson" label="Parse JSON">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="planAndExecute" label="Plan and Execute">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="rare" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="planDecompose" label="Plan and Decompose">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="ragPipeline" label="RAG Pipeline">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="rank" label="Rank">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="recursiveSelfImprovement" label="Recursive Self-Improvement">
+        <attvalues>
+          <attvalue for="level" value="I" />
+          <attvalue for="rarity" value="legendary" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="legendary" />
+        </attvalues>
+      </node>
+      <node id="research" label="Research">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="retrieve" label="Retrieve">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="routeIntent" label="Route Intent">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="scoreRelevance" label="Score Relevance">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="summarize" label="Summarize">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="tokenize" label="Tokenize">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="toolSelect" label="Tool Select">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="webScrape" label="Web Scrape">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="webSearch" label="Web Search">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="writeReport" label="Write Report">
+        <attvalues>
+          <attvalue for="level" value="II" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="e0" source="codeGeneration" target="autonomousDebug" />
+      <edge id="e1" source="executeBash" target="autonomousDebug" />
+      <edge id="e2" source="errorInterpretation" target="autonomousDebug" />
+      <edge id="e3" source="research" target="autonomousResearchAgent" />
+      <edge id="e4" source="knowledgeHarvest" target="autonomousResearchAgent" />
+      <edge id="e5" source="ghostwrite" target="autonomousResearchAgent" />
+      <edge id="e6" source="parseJson" target="documentAnalyst" />
+      <edge id="e7" source="extractEntities" target="documentAnalyst" />
+      <edge id="e8" source="summarize" target="documentAnalyst" />
+      <edge id="e9" source="formatOutput" target="documentAnalyst" />
+      <edge id="e10" source="research" target="ghostwrite" />
+      <edge id="e11" source="writeReport" target="ghostwrite" />
+      <edge id="e12" source="audienceModel" target="ghostwrite" />
+      <edge id="e13" source="webScrape" target="knowledgeHarvest" />
+      <edge id="e14" source="extractEntities" target="knowledgeHarvest" />
+      <edge id="e15" source="embedText" target="knowledgeHarvest" />
+      <edge id="e16" source="planAndExecute" target="multiAgentOrchestrationV" />
+      <edge id="e17" source="routeIntent" target="multiAgentOrchestrationV" />
+      <edge id="e18" source="toolSelect" target="multiAgentOrchestrationV" />
+      <edge id="e19" source="routeIntent" target="planAndExecute" />
+      <edge id="e20" source="planDecompose" target="planAndExecute" />
+      <edge id="e21" source="toolSelect" target="planAndExecute" />
+      <edge id="e22" source="retrieve" target="ragPipeline" />
+      <edge id="e23" source="chunkDocument" target="ragPipeline" />
+      <edge id="e24" source="embedText" target="ragPipeline" />
+      <edge id="e25" source="scoreRelevance" target="ragPipeline" />
+      <edge id="e26" source="autonomousDebug" target="recursiveSelfImprovement" />
+      <edge id="e27" source="evaluateOutput" target="recursiveSelfImprovement" />
+      <edge id="e28" source="planAndExecute" target="recursiveSelfImprovement" />
+      <edge id="e29" source="webSearch" target="research" />
+      <edge id="e30" source="summarize" target="research" />
+      <edge id="e31" source="citeSources" target="research" />
+      <edge id="e32" source="webSearch" target="webScrape" />
+      <edge id="e33" source="parseHtml" target="webScrape" />
+      <edge id="e34" source="extractEntities" target="webScrape" />
+    </edges>
+  </graph>
+</gexf>

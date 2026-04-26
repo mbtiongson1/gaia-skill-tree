@@ -1,0 +1,41 @@
+{
+  "userId": "gaiabot",
+  "updatedAt": "2026-04-26",
+  "unlockedSkills": [
+    {
+      "skillId": "routeIntent",
+      "level": "II",
+      "unlockedAt": "2026-04-20",
+      "unlockedIn": "gaia-registry/gaiabot-core"
+    },
+    {
+      "skillId": "planDecompose",
+      "level": "II",
+      "unlockedAt": "2026-04-21",
+      "unlockedIn": "gaia-registry/gaiabot-core"
+    },
+    {
+      "skillId": "toolSelect",
+      "level": "II",
+      "unlockedAt": "2026-04-22",
+      "unlockedIn": "gaia-registry/gaiabot-core"
+    },
+    {
+      "skillId": "planAndExecute",
+      "level": "III",
+      "unlockedAt": "2026-04-26",
+      "unlockedIn": "local-repo",
+      "combinedFrom": [
+        "routeIntent",
+        "planDecompose",
+        "toolSelect"
+      ]
+    }
+  ],
+  "pendingCombinations": [],
+  "stats": {
+    "totalUnlocked": 4,
+    "highestRarity": "common",
+    "deepestLineage": 1
+  }
+}
