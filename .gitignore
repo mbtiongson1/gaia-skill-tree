@@ -1,0 +1,32 @@
+# Gaia Skill Registry — .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Plugin local cache
+.gaia/skill-tree.cache.json
+
+# Temp files
+*.tmp
+*.bak
