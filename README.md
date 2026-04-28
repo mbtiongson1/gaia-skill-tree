@@ -17,22 +17,26 @@ GAIA SKILL GRAPH  v0.2.0
 
 ◆ ULTIMATE SKILLS  (7)  — Evidence-locked. One agent per era.
 │
-├─ ◆ True Dragon: Autonomous Scientific Discovery      [IV · Evolved]
-├─ ◆ True Craftsman: Full-Stack Developer              [IV · Evolved]
-└─ ◆ Grand Conductor: Multi-Agent Orchestration        [I · Dormant]
+├─ ◆ True Dragon: Autonomous Scientific Discovery     [IV · Evolved]
+├─ ◆ True Oracle: Autonomous Data Scientist           [IV · Evolved]
+├─ ◆ True Herald: Real-Time Voice Assistant           [IV · Evolved]
+├─ ◆ True Craftsman: Full-Stack Developer             [IV · Evolved]
+├─ ◆ Grand Conductor: Multi-Agent Orchestration       [I · Dormant]
+├─ ◆ True Sage: Recursive Self-Improvement            [I · Dormant]
+└─ ◆ Wisdom King: Autonomous Research Agent           [I · Dormant]
 
-◇ EXTRA SKILLS  (31)  — Emerged from combination. Transcend their parts.
+◇ EXTRA SKILLS  (22)  — Emerged from combination. Transcend their parts.
 │
-├─ ◇ Research              [IV · Evolved]    ← Web Search + Summarize + Cite Sources
-├─ ◇ RAG Pipeline          [III · Named]     ← Tokenize + Embed Text + Retrieve + Rank
-├─ ◇ Autonomous Debug      [IV · Evolved]    ← Code Generation + Execute Bash + Error Interpretation
-└─ ◇ ...and 28 more
+├─ ◇ Research              [III · Named]    ← Web Search + Summarize + Cite Sources
+├─ ◇ RAG Pipeline          [III · Named]    ← Retrieve + Chunk Document + Embed Text + Score Relevance
+├─ ◇ Autonomous Debug      [III · Named]    ← Code Generation + Execute Bash + Error Interpretation
+└─ ◇ ...and 19 more
 
-○ INTRINSIC SKILLS  (36)  — Atomic. The genome of every agent.
+○ INTRINSIC SKILLS  (49)  — Atomic. The genome of every agent.
 │
-├─ ○ Tokenize              [II · Awakened]
-├─ ○ Code Generation       [III · Named]
-└─ ○ ...and 34 more
+├─ ○ Code Generation       [II · Awakened]
+├─ ○ Web Search            [II · Awakened]
+└─ ○ ...and 47 more
 
 → Full graph: tree.md
 ```
