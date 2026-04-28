@@ -1,7 +1,7 @@
-# Cite Sources
+# [II · Awakened · Intrinsic Skill] Cite Sources
 **ID:** cite-sources  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

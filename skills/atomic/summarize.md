@@ -1,7 +1,7 @@
-# Summarize
+# [II · Awakened · Intrinsic Skill] Summarize
 **ID:** summarize  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

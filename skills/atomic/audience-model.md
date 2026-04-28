@@ -1,7 +1,7 @@
-# Audience Model
+# [II · Awakened · Intrinsic Skill] Audience Model
 **ID:** audience-model  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# Tool Select
+# [II · Awakened · Intrinsic Skill] Tool Select
 **ID:** tool-select  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

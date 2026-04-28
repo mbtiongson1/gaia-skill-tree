@@ -2,6 +2,23 @@
   "$schema": "./schema/skill.schema.json",
   "version": "0.2.0",
   "generatedAt": "2026-04-28",
+  "meta": {
+    "typeLabels": {
+      "atomic": "Intrinsic Skill",
+      "composite": "Extra Skill",
+      "legendary": "Ultimate Skill"
+    },
+    "levelLabels": {
+      "I": "Dormant",
+      "II": "Awakened",
+      "III": "Named",
+      "IV": "Evolved",
+      "V": "Transcendent"
+    },
+    "rarityLabels": {
+      "legendary": "Divine"
+    }
+  },
   "skills": [
     {
       "id": "tokenize",
@@ -953,7 +970,7 @@
     },
     {
       "id": "recursive-self-improvement",
-      "name": "Recursive Self-Improvement",
+      "name": "True Sage: Recursive Self-Improvement",
       "type": "legendary",
       "level": "I",
       "rarity": "legendary",
@@ -974,7 +991,7 @@
     },
     {
       "id": "multi-agent-orchestration-v",
-      "name": "Multi-Agent Orchestration V",
+      "name": "Grand Conductor: Multi-Agent Orchestration",
       "type": "legendary",
       "level": "I",
       "rarity": "legendary",
@@ -995,7 +1012,7 @@
     },
     {
       "id": "autonomous-research-agent",
-      "name": "Autonomous Research Agent",
+      "name": "Wisdom King: Autonomous Research Agent",
       "type": "legendary",
       "level": "I",
       "rarity": "legendary",
@@ -1775,7 +1792,7 @@
     },
     {
       "id": "full-stack-developer",
-      "name": "Full-Stack Developer",
+      "name": "True Craftsman: Full-Stack Developer",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
@@ -1818,7 +1835,7 @@
     },
     {
       "id": "autonomous-data-scientist",
-      "name": "Autonomous Data Scientist",
+      "name": "True Oracle: Autonomous Data Scientist",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
@@ -1861,7 +1878,7 @@
     },
     {
       "id": "real-time-voice-assistant",
-      "name": "Real-Time Voice Assistant",
+      "name": "True Herald: Real-Time Voice Assistant",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
@@ -2302,7 +2319,7 @@
     },
     {
       "id": "scientific-discovery",
-      "name": "Autonomous Scientific Discovery",
+      "name": "True Dragon: Autonomous Scientific Discovery",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",

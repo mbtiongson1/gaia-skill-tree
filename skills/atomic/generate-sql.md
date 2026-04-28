@@ -1,7 +1,7 @@
-# Generate SQL
+# [IV · Evolved · Intrinsic Skill] Generate SQL
 **ID:** generate-sql  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

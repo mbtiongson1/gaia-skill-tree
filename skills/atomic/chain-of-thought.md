@@ -1,7 +1,7 @@
-# Chain-of-Thought Reasoning
+# [IV · Evolved · Intrinsic Skill] Chain-of-Thought Reasoning
 **ID:** chain-of-thought  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -15,7 +15,7 @@ _None._
 
 ## Unlocks
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
-- [Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

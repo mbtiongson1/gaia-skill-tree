@@ -1,7 +1,7 @@
-# Classify
+# [II · Awakened · Intrinsic Skill] Classify
 **ID:** classify  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

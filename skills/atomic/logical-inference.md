@@ -1,7 +1,7 @@
-# Logical Inference
+# [IV · Evolved · Intrinsic Skill] Logical Inference
 **ID:** logical-inference  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

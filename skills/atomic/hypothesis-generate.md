@@ -1,7 +1,7 @@
-# Hypothesis Generation
+# [IV · Evolved · Intrinsic Skill] Hypothesis Generation
 **ID:** hypothesis-generate  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -14,7 +14,7 @@ Formulates novel, testable scientific hypotheses by synthesising existing litera
 _None._
 
 ## Unlocks
-- [Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

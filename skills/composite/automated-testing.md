@@ -1,7 +1,7 @@
-# Automated Testing
+# [IV · Evolved · Extra Skill] Automated Testing
 **ID:** automated-testing  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Generates test suites, executes them in a sandbox, interprets failures, and iter
 - [Error Interpretation](../atomic/error-interpretation.md)
 
 ## Unlocks
-- [Full-Stack Developer](../legendary/full-stack-developer.md)
+- [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)
 
 ## Fusion Condition
 _None specified._

@@ -1,7 +1,7 @@
-# Content Moderation
+# [IV · Evolved · Extra Skill] Content Moderation
 **ID:** content-moderation  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

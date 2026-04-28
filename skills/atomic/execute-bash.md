@@ -1,7 +1,7 @@
-# Execute Bash
+# [II · Awakened · Intrinsic Skill] Execute Bash
 **ID:** execute-bash  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

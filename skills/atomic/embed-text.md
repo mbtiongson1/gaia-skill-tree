@@ -1,7 +1,7 @@
-# Embed Text
+# [II · Awakened · Intrinsic Skill] Embed Text
 **ID:** embed-text  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

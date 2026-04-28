@@ -1,7 +1,7 @@
-# Translation Pipeline
+# [IV · Evolved · Extra Skill] Translation Pipeline
 **ID:** translation-pipeline  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

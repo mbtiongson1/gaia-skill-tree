@@ -1,7 +1,7 @@
-# Memory Manage
+# [IV · Evolved · Intrinsic Skill] Memory Manage
 **ID:** memory-manage  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -15,7 +15,7 @@ _None._
 
 ## Unlocks
 - [Conversational Agent](../composite/conversational-agent.md)
-- [Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
+- [True Herald: Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

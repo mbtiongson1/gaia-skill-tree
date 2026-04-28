@@ -1,7 +1,7 @@
-# Multimodal Reasoning
+# [IV · Evolved · Extra Skill] Multimodal Reasoning
 **ID:** multimodal-reasoning  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 

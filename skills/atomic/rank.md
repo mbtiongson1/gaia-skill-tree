@@ -1,7 +1,7 @@
-# Rank
+# [II · Awakened · Intrinsic Skill] Rank
 **ID:** rank  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

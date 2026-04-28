@@ -1,7 +1,7 @@
-# Web Scrape
+# [III · Named · Extra Skill] Web Scrape
 **ID:** web-scrape  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

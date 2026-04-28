@@ -1,7 +1,7 @@
-# Knowledge Harvest
+# [IV · Evolved · Extra Skill] Knowledge Harvest
 **ID:** knowledge-harvest  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 

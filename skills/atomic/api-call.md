@@ -1,7 +1,7 @@
-# API Call
+# [IV · Evolved · Intrinsic Skill] API Call
 **ID:** api-call  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

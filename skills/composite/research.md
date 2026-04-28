@@ -1,7 +1,7 @@
-# Research
+# [III · Named · Extra Skill] Research
 **ID:** research  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,11 +16,11 @@ Conducts multi-source information gathering, synthesis, and citation for a given
 - [Cite Sources](../atomic/cite-sources.md)
 
 ## Unlocks
-- [Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
+- [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
 - [Ghostwrite](../composite/ghostwrite.md)
 - [Hypothesis Generation](../atomic/hypothesis-generate.md)
 - [Registry Curation](../composite/registry-curation.md)
-- [Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Fusion Condition
 _None specified._

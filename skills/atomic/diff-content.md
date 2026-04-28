@@ -1,7 +1,7 @@
-# Diff Content
+# [II · Awakened · Intrinsic Skill] Diff Content
 **ID:** diff-content  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

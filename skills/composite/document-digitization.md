@@ -1,7 +1,7 @@
-# Document Digitization
+# [IV · Evolved · Extra Skill] Document Digitization
 **ID:** document-digitization  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

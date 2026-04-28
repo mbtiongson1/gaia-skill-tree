@@ -1,7 +1,7 @@
-# Text-to-SQL Pipeline
+# [IV · Evolved · Extra Skill] Text-to-SQL Pipeline
 **ID:** text-to-sql-pipeline  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

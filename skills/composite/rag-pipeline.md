@@ -1,7 +1,7 @@
-# RAG Pipeline
+# [III · Named · Extra Skill] RAG Pipeline
 **ID:** rag-pipeline  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# Math Reason
+# [IV · Evolved · Intrinsic Skill] Math Reason
 **ID:** math-reason  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -14,8 +14,8 @@ Solves multi-step mathematical problems including arithmetic, algebra, calculus,
 _None._
 
 ## Unlocks
-- [Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
-- [Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
+- [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

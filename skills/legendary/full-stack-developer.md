@@ -1,8 +1,8 @@
-# Full-Stack Developer
+# [IV · Evolved · Ultimate Skill] True Craftsman: Full-Stack Developer
 **ID:** full-stack-developer  
-**Type:** Legendary  
-**Level:** IV  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** IV · Evolved  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

@@ -1,7 +1,7 @@
-# Knowledge Graph Construction
+# [IV · Evolved · Extra Skill] Knowledge Graph Construction
 **ID:** knowledge-graph-build  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Extracts entities and relations from unstructured text, resolves co-references, 
 
 ## Unlocks
 - [RAG Pipeline](../composite/rag-pipeline.md)
-- [Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 
 ## Fusion Condition
 _None specified._

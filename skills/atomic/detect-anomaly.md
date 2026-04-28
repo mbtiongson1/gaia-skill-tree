@@ -1,7 +1,7 @@
-# Detect Anomaly
+# [IV · Evolved · Intrinsic Skill] Detect Anomaly
 **ID:** detect-anomaly  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,8 +1,8 @@
-# Multi-Agent Orchestration V
+# [I · Dormant · Ultimate Skill] Grand Conductor: Multi-Agent Orchestration
 **ID:** multi-agent-orchestration-v  
-**Type:** Legendary  
-**Level:** I  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** I · Dormant  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

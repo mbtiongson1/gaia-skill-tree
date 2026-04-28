@@ -1,7 +1,7 @@
-# Document Analyst
+# [III · Named · Extra Skill] Document Analyst
 **ID:** document-analyst  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

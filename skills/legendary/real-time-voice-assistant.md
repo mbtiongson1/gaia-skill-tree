@@ -1,8 +1,8 @@
-# Real-Time Voice Assistant
+# [IV · Evolved · Ultimate Skill] True Herald: Real-Time Voice Assistant
 **ID:** real-time-voice-assistant  
-**Type:** Legendary  
-**Level:** IV  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** IV · Evolved  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

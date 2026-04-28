@@ -1,7 +1,7 @@
-# Question Answer
+# [IV · Evolved · Intrinsic Skill] Question Answer
 **ID:** question-answer  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

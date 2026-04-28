@@ -1,7 +1,7 @@
-# Conversational Agent
+# [IV · Evolved · Extra Skill] Conversational Agent
 **ID:** conversational-agent  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

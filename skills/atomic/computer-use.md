@@ -1,7 +1,7 @@
-# Computer Use
+# [IV · Evolved · Intrinsic Skill] Computer Use
 **ID:** computer-use  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 
