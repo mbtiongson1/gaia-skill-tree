@@ -99,6 +99,36 @@ gaia tree --depth 3
 gaia fuse autonomous-debug
 ```
 
+## MCP Server (Agent-Native Integration)
+
+The fastest way to use Gaia — connect it directly to your agent (Claude Code, Cursor, VS Code, etc.) via MCP:
+
+```json
+{
+  "mcpServers": {
+    "gaia": {
+      "command": "npx",
+      "args": ["@gaia-registry/mcp-server"],
+      "env": { "GAIA_USER": "your-github-username" }
+    }
+  }
+}
+```
+
+Once connected, your agent gets these tools:
+
+| Tool | What it does |
+|------|-------------|
+| `gaia_lookup` | Search skills by ID or fuzzy name |
+| `gaia_suggest` | Get fusion recommendations from your current context |
+| `gaia_scan_context` | Detect skills from connected tools and project signals |
+| `gaia_my_tree` | View your skill tree and stats |
+| `gaia_propose` | Claim a fusion or propose a novel skill (opens PR) |
+
+The MCP server also exposes resources at `gaia://registry` and `gaia://tree/{username}`.
+
+See [`mcp-server/`](mcp-server/) for full documentation.
+
 ---
 
 ## Repository Structure
@@ -106,10 +136,12 @@ gaia fuse autonomous-debug
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
+├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)
 ├── users/                   ← Personal skill trees by GitHub username
 ├── scripts/                 ← Validation, projection, and analysis scripts
+├── scripts/crawlers/        ← Bot crawlers (MCP registries, npm, VS Code, HuggingFace)
 ├── plugin/                  ← CLI + GitHub Action for per-repo integration
 ├── registry.md              ← GENERATED flat index of all skills
 ├── combinations.md          ← GENERATED fusion recipe matrix
