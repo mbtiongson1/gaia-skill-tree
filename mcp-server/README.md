@@ -11,6 +11,7 @@ MCP server for the Gaia Skill Registry — agent-native skill detection, fusion,
   - [VS Code (GitHub Copilot / Continue)](#vs-code)
   - [Gemini (Google AI Studio)](#gemini)
   - [OpenAI Codex CLI](#openai-codex-cli)
+  - [OpenClaw](#openclaw)
   - [Other MCP-Compatible Agents](#other-mcp-compatible-agents)
 - [Tools](#tools)
 - [Resources](#resources)
@@ -175,6 +176,57 @@ For the OpenAI Codex CLI agent, add to your MCP config:
 ```
 
 > [Codex CLI docs](https://github.com/openai/codex)
+
+---
+
+### OpenClaw
+
+Edit `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "mcpServers": {
+    "gaia": {
+      "command": "npx",
+      "args": ["@gaia-registry/mcp-server"],
+      "env": { "GAIA_USER": "your-github-username" }
+    }
+  }
+}
+```
+
+Restart the gateway after saving:
+
+```bash
+openclaw gateway restart
+```
+
+**Verify it works:**
+
+```bash
+openclaw mcp list
+```
+
+**Per-agent routing** (optional) — restrict Gaia to specific agents:
+
+```json
+{
+  "mcpServers": {
+    "gaia": {
+      "command": "npx",
+      "args": ["@gaia-registry/mcp-server"],
+      "env": { "GAIA_USER": "your-github-username" }
+    }
+  },
+  "agents": {
+    "coder": {
+      "mcpServers": ["gaia"]
+    }
+  }
+}
+```
+
+> [OpenClaw docs](https://docs.openclaw.ai)
 
 ---
 
