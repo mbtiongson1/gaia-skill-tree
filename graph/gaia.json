@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "0.1.0",
-  "generatedAt": "2026-04-26T00:00:00Z",
+  "version": "0.2.0",
+  "generatedAt": "2026-04-28T00:00:00Z",
   "skills": [
     {
       "id": "tokenize",
@@ -39,7 +39,8 @@
       "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
       "prerequisites": [],
       "derivatives": [
-        "routeIntent"
+        "routeIntent",
+        "contentModeration"
       ],
       "conditions": "",
       "evidence": [
@@ -120,7 +121,8 @@
       "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
       "prerequisites": [],
       "derivatives": [
-        "documentAnalyst"
+        "documentAnalyst",
+        "textToSqlPipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -174,7 +176,8 @@
       "description": "Runs shell commands in a sandboxed environment, captures stdout/stderr, and handles exit codes.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug"
+        "autonomousDebug",
+        "automatedTesting"
       ],
       "conditions": "",
       "evidence": [
@@ -229,7 +232,8 @@
       "prerequisites": [],
       "derivatives": [
         "research",
-        "documentAnalyst"
+        "documentAnalyst",
+        "dataAnalysis"
       ],
       "conditions": "",
       "evidence": [
@@ -285,7 +289,9 @@
       "derivatives": [
         "webScrape",
         "knowledgeHarvest",
-        "documentAnalyst"
+        "documentAnalyst",
+        "contentModeration",
+        "documentDigitization"
       ],
       "conditions": "",
       "evidence": [
@@ -312,7 +318,8 @@
       "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
       "prerequisites": [],
       "derivatives": [
-        "planAndExecute"
+        "planAndExecute",
+        "conversationalAgent"
       ],
       "conditions": "",
       "evidence": [
@@ -338,7 +345,9 @@
       "rarity": "common",
       "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "codeReviewPipeline"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -473,7 +482,8 @@
       "description": "Adapts tone, complexity, and framing of output to match a target audience profile.",
       "prerequisites": [],
       "derivatives": [
-        "ghostwrite"
+        "ghostwrite",
+        "translationPipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -527,7 +537,8 @@
       "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug"
+        "autonomousDebug",
+        "automatedTesting"
       ],
       "conditions": "",
       "evidence": [
@@ -554,7 +565,8 @@
       "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug"
+        "autonomousDebug",
+        "codeReviewPipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -636,7 +648,9 @@
       "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
       "prerequisites": [],
       "derivatives": [
-        "documentAnalyst"
+        "documentAnalyst",
+        "textToSqlPipeline",
+        "documentDigitization"
       ],
       "conditions": "",
       "evidence": [
@@ -662,7 +676,9 @@
       "rarity": "common",
       "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "codeReviewPipeline"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -723,7 +739,8 @@
         "citeSources"
       ],
       "derivatives": [
-        "ghostwrite"
+        "ghostwrite",
+        "autonomousDataScientist"
       ],
       "conditions": "",
       "evidence": [
@@ -811,7 +828,9 @@
         "planDecompose",
         "toolSelect"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "realTimeVoiceAssistant"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -979,6 +998,891 @@
       "createdAt": "2026-04-26",
       "updatedAt": "2026-04-26",
       "version": "0.1.0"
+    },
+    {
+      "id": "translate",
+      "name": "Translate",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
+      "prerequisites": [],
+      "derivatives": [
+        "translationPipeline"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2207.04672",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "NLLB (No Language Left Behind) \u2014 Meta AI paper demonstrating 200-language translation at human-level quality on FLORES-200 benchmark."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "sentimentAnalysis",
+      "name": "Sentiment Analysis",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
+      "prerequisites": [],
+      "derivatives": [
+        "contentModeration",
+        "translationPipeline"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/1810.04805",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "BERT paper \u2014 achieves SOTA on SST-2 sentiment benchmark (93.5% accuracy), foundational evidence for LLM-based sentiment analysis."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "imageCaption",
+      "name": "Image Caption",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
+      "prerequisites": [],
+      "derivatives": [
+        "multimodalReasoning"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2301.12597",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "BLIP-2 \u2014 bootstrapped language-image pre-training achieving SOTA on COCO Captions (CIDEr 145.8) and NoCaps benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "speechToText",
+      "name": "Speech to Text",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
+      "prerequisites": [],
+      "derivatives": [
+        "voiceAgent"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2212.04356",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Whisper (OpenAI) \u2014 large-scale weak supervision across 680K hours of audio achieves near-human WER on LibriSpeech and multilingual benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "textToSpeech",
+      "name": "Text to Speech",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
+      "prerequisites": [],
+      "derivatives": [
+        "voiceAgent"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2301.02111",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "VALL-E (Microsoft) \u2014 neural codec language model achieving SOTA speech synthesis with 3-second voice cloning on LibriSpeech."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "generateSql",
+      "name": "Generate SQL",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
+      "prerequisites": [],
+      "derivatives": [
+        "textToSqlPipeline",
+        "dataAnalysis"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/1809.08887",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Spider benchmark \u2014 cross-domain text-to-SQL dataset; LLM baselines reach >85% exact match, establishing reproducible evaluation methodology."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "questionAnswer",
+      "name": "Question Answer",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Produces accurate, context-grounded answers to natural-language questions, handling unanswerable cases.",
+      "prerequisites": [],
+      "derivatives": [
+        "conversationalAgent",
+        "voiceAgent",
+        "multimodalReasoning"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/1806.03822",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SQuAD 2.0 \u2014 reading comprehension benchmark with 150K questions; modern LLMs exceed human F1 (90.9), providing rigorous reproducible evaluation."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "imageGenerate",
+      "name": "Image Generate",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Creates photorealistic or stylized images from text prompts using diffusion-based or autoregressive generative models.",
+      "prerequisites": [],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2112.10752",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Latent Diffusion Models (Rombach et al.) \u2014 foundational paper for Stable Diffusion; achieves FID 5.11 on LSUN-Beds at 200\u00d7 less compute than pixel-space diffusion."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "mathReason",
+      "name": "Math Reason",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
+      "prerequisites": [],
+      "derivatives": [
+        "autonomousDataScientist"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2206.14858",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Minerva (Google) \u2014 50.3% on MATH and 78.5% on MMLU-STEM benchmarks using chain-of-thought over scientific literature."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "logicalInference",
+      "name": "Logical Inference",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
+      "prerequisites": [],
+      "derivatives": [
+        "multimodalReasoning"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2201.11903",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Chain-of-Thought prompting (Wei et al.) \u2014 few-shot CoT elicits multi-step reasoning; +18% on GSM8K and +15% on SVAMP over standard prompting."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "memoryManage",
+      "name": "Memory Manage",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Maintains, indexes, and retrieves conversational and long-term memory across sessions, managing context window constraints.",
+      "prerequisites": [],
+      "derivatives": [
+        "conversationalAgent",
+        "realTimeVoiceAssistant"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2310.08560",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "MemGPT \u2014 virtual context management system enabling LLMs to handle unbounded memory; benchmarked on multi-session dialogue and document QA."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "apiCall",
+      "name": "API Call",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Constructs, executes, and handles responses from HTTP APIs by interpreting documentation and selecting appropriate endpoints and parameters.",
+      "prerequisites": [],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.15334",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Gorilla (Patil et al.) \u2014 LLM that generates accurate API calls across TorchHub, TensorFlow Hub, and HuggingFace; 20.43% AST accuracy improvement over GPT-4."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "refactorCode",
+      "name": "Refactor Code",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
+      "prerequisites": [],
+      "derivatives": [
+        "fullStackDeveloper"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2310.06770",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SWE-bench \u2014 2294 real GitHub issues benchmark; agents that resolve issues must safely refactor code while passing existing test suites."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "generateTest",
+      "name": "Generate Test",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Produces unit tests, integration tests, and edge-case test cases from source code or natural-language specifications.",
+      "prerequisites": [],
+      "derivatives": [
+        "automatedTesting"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2107.03374",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Codex/HumanEval (Chen et al.) \u2014 evaluates LLMs on writing Python functions that pass hand-crafted unit tests; pass@1 72.0% for GPT-4."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "parsePdf",
+      "name": "Parse PDF",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
+      "prerequisites": [],
+      "derivatives": [
+        "documentDigitization"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2308.13418",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Nougat (Meta AI) \u2014 visual transformer for scientific PDF parsing; 7.6% edit distance on arXiv papers, handling LaTeX, tables, and equations."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "detectAnomaly",
+      "name": "Detect Anomaly",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
+      "prerequisites": [],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2007.02500",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Deep Learning for Anomaly Detection survey (Pang et al., ACM CSUR) \u2014 comprehensive benchmark of 30+ methods across fraud, intrusion, and medical anomaly detection."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "dataVisualize",
+      "name": "Data Visualize",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
+      "prerequisites": [],
+      "derivatives": [
+        "dataAnalysis"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/microsoft/lida",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "LIDA (Microsoft) \u2014 open-source LLM-based data visualization tool with reproducible generation pipeline; evaluated on diverse real-world datasets."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "conversationalAgent",
+      "name": "Conversational Agent",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
+      "prerequisites": [
+        "questionAnswer",
+        "memoryManage",
+        "routeIntent"
+      ],
+      "derivatives": [],
+      "conditions": "Requires persistent memory store across turns.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain/chains/conversation",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "LangChain ConversationChain \u2014 reproducible open-source multi-turn conversational agent with buffer and summary memory backends."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "textToSqlPipeline",
+      "name": "Text-to-SQL Pipeline",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
+      "prerequisites": [
+        "generateSql",
+        "parseJson",
+        "formatOutput"
+      ],
+      "derivatives": [],
+      "conditions": "Requires schema context in prompt.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2304.11015",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "DIN-SQL \u2014 decomposed in-context learning for text-to-SQL; 82.8% execution accuracy on Spider dev, demonstrating end-to-end pipeline."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "codeReviewPipeline",
+      "name": "Code Review Pipeline",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
+      "prerequisites": [
+        "codeGeneration",
+        "diffContent",
+        "evaluateOutput"
+      ],
+      "derivatives": [
+        "fullStackDeveloper"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2203.09095",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "CodeReviewer (Microsoft) \u2014 pre-trained model for code review tasks; 28.7% BLEU improvement on comment generation and change quality prediction."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "dataAnalysis",
+      "name": "Data Analysis",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
+      "prerequisites": [
+        "generateSql",
+        "dataVisualize",
+        "summarize"
+      ],
+      "derivatives": [
+        "autonomousDataScientist"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/Sinaptik-AI/pandas-ai",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "pandas-ai \u2014 open-source agent for natural-language data analysis over pandas DataFrames; reproducible demos with logging and output artifacts."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "voiceAgent",
+      "name": "Voice Agent",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
+      "prerequisites": [
+        "speechToText",
+        "questionAnswer",
+        "textToSpeech"
+      ],
+      "derivatives": [
+        "realTimeVoiceAssistant"
+      ],
+      "conditions": "Requires real-time audio I/O or audio file access.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/rasa/rasa",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Rasa Open Source \u2014 production voice agent framework with ASR/TTS integrations; reproducible pipeline with test suite and documented benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "automatedTesting",
+      "name": "Automated Testing",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
+      "prerequisites": [
+        "generateTest",
+        "executeBash",
+        "errorInterpretation"
+      ],
+      "derivatives": [
+        "fullStackDeveloper"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/princeton-nlp/SWE-bench",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SWE-bench Verified \u2014 open-source evaluation harness where agents fix GitHub issues by generating and passing test suites; full execution logs archived."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "contentModeration",
+      "name": "Content Moderation",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
+      "prerequisites": [
+        "classify",
+        "sentimentAnalysis",
+        "extractEntities"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://platform.openai.com/docs/guides/moderation",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "OpenAI Moderation API \u2014 publicly documented multi-category content classifier with reproducible API calls, category scores, and evaluation methodology."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "multimodalReasoning",
+      "name": "Multimodal Reasoning",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
+      "prerequisites": [
+        "imageCaption",
+        "questionAnswer",
+        "logicalInference"
+      ],
+      "derivatives": [],
+      "conditions": "Requires vision-language model capability.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2304.08485",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "LLaVA \u2014 large language and vision assistant; 85.1% on ScienceQA and 64.3% on TextVQA, establishing reproducible multimodal reasoning benchmark."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "translationPipeline",
+      "name": "Translation Pipeline",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
+      "prerequisites": [
+        "translate",
+        "sentimentAnalysis",
+        "audienceModel"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2308.11596",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SeamlessM4T (Meta AI) \u2014 unified speech and text translation model with tone and register control; BLEU +3.3 over NLLB on FLORES-200."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "documentDigitization",
+      "name": "Document Digitization",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
+      "prerequisites": [
+        "parsePdf",
+        "extractEntities",
+        "formatOutput"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/VikParuchuri/marker",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Marker \u2014 open-source PDF-to-markdown pipeline with reproducible benchmarks; outperforms Nougat on edit distance across 1000+ arXiv PDFs."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "fullStackDeveloper",
+      "name": "Full-Stack Developer",
+      "type": "legendary",
+      "level": "IV",
+      "rarity": "legendary",
+      "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
+      "prerequisites": [
+        "codeReviewPipeline",
+        "automatedTesting",
+        "refactorCode"
+      ],
+      "derivatives": [],
+      "conditions": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2310.06770",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SWE-bench \u2014 2294 real GitHub issues; Claude 3.5 Sonnet (Cognition) resolves 49% on Verified, demonstrating full-cycle autonomous development."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/princeton-nlp/SWE-agent",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "SWE-agent \u2014 open-source agent with AgentComputer Interface; reproducible harness achieving 12.5% on SWE-bench full with logs and eval scripts."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2402.01030",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "CodeAct \u2014 executable code action space for LLM agents; +20% task completion vs JSON/text-based actions across 17 programming benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "autonomousDataScientist",
+      "name": "Autonomous Data Scientist",
+      "type": "legendary",
+      "level": "IV",
+      "rarity": "legendary",
+      "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
+      "prerequisites": [
+        "dataAnalysis",
+        "mathReason",
+        "research"
+      ],
+      "derivatives": [],
+      "conditions": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2210.12641",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "DS-1000 \u2014 benchmark of 1000 data science problems across NumPy/Pandas/Scikit-learn; GPT-4 achieves 43.3% pass@1, establishing reproducible DS evaluation."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2208.01756",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "AutoML Survey (He et al., ACM CSUR) \u2014 systematic review of autonomous ML pipeline search; demonstrates automated feature engineering, model selection, and HPO."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/microsoft/autogen",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "AutoGen (Microsoft) \u2014 multi-agent framework with reproducible data science notebooks; science agent achieves 44.3% on DS-1000 with full execution logs."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "realTimeVoiceAssistant",
+      "name": "Real-Time Voice Assistant",
+      "type": "legendary",
+      "level": "IV",
+      "rarity": "legendary",
+      "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
+      "prerequisites": [
+        "voiceAgent",
+        "memoryManage",
+        "planAndExecute"
+      ],
+      "derivatives": [],
+      "conditions": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2312.11805",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "AudioPaLM (Google) \u2014 unified audio language model supporting real-time spoken dialogue; SOTA on ASR and speech translation, demonstrating end-to-end voice assistant capability."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.11206",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "VoiceBox (Meta AI) \u2014 generative speech model with zero-shot TTS; enables real-time voice assistants with <100ms synthesis latency benchmarked on VCTK."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/openai/whisper",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Whisper + LLM integration demos \u2014 open-source real-time voice assistant pipelines combining Whisper STT, LLM reasoning, and TTS with documented latency benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
     }
   ],
   "edges": [
@@ -1313,6 +2217,396 @@
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "questionAnswer",
+      "targetSkillId": "conversationalAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires persistent memory store across turns.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "conversationalAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "memoryManage",
+      "targetSkillId": "conversationalAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires persistent memory store across turns.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "conversationalAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "routeIntent",
+      "targetSkillId": "conversationalAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires persistent memory store across turns.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "conversationalAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "generateSql",
+      "targetSkillId": "textToSqlPipeline",
+      "edgeType": "prerequisite",
+      "condition": "Requires schema context in prompt.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "textToSqlPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "parseJson",
+      "targetSkillId": "textToSqlPipeline",
+      "edgeType": "prerequisite",
+      "condition": "Requires schema context in prompt.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "textToSqlPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "formatOutput",
+      "targetSkillId": "textToSqlPipeline",
+      "edgeType": "prerequisite",
+      "condition": "Requires schema context in prompt.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "textToSqlPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "codeGeneration",
+      "targetSkillId": "codeReviewPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "codeReviewPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "diffContent",
+      "targetSkillId": "codeReviewPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "codeReviewPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "evaluateOutput",
+      "targetSkillId": "codeReviewPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "codeReviewPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "generateSql",
+      "targetSkillId": "dataAnalysis",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "dataAnalysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "dataVisualize",
+      "targetSkillId": "dataAnalysis",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "dataAnalysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "summarize",
+      "targetSkillId": "dataAnalysis",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "dataAnalysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "speechToText",
+      "targetSkillId": "voiceAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio I/O or audio file access.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "voiceAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "questionAnswer",
+      "targetSkillId": "voiceAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio I/O or audio file access.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "voiceAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "textToSpeech",
+      "targetSkillId": "voiceAgent",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio I/O or audio file access.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "voiceAgent#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "generateTest",
+      "targetSkillId": "automatedTesting",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "automatedTesting#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "executeBash",
+      "targetSkillId": "automatedTesting",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "automatedTesting#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "errorInterpretation",
+      "targetSkillId": "automatedTesting",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "automatedTesting#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "classify",
+      "targetSkillId": "contentModeration",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "contentModeration#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "sentimentAnalysis",
+      "targetSkillId": "contentModeration",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "contentModeration#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "extractEntities",
+      "targetSkillId": "contentModeration",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "contentModeration#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "imageCaption",
+      "targetSkillId": "multimodalReasoning",
+      "edgeType": "prerequisite",
+      "condition": "Requires vision-language model capability.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "multimodalReasoning#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "questionAnswer",
+      "targetSkillId": "multimodalReasoning",
+      "edgeType": "prerequisite",
+      "condition": "Requires vision-language model capability.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "multimodalReasoning#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "logicalInference",
+      "targetSkillId": "multimodalReasoning",
+      "edgeType": "prerequisite",
+      "condition": "Requires vision-language model capability.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "multimodalReasoning#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "translate",
+      "targetSkillId": "translationPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "translationPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "sentimentAnalysis",
+      "targetSkillId": "translationPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "translationPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "audienceModel",
+      "targetSkillId": "translationPipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "translationPipeline#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "parsePdf",
+      "targetSkillId": "documentDigitization",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "documentDigitization#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "extractEntities",
+      "targetSkillId": "documentDigitization",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "documentDigitization#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "formatOutput",
+      "targetSkillId": "documentDigitization",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "documentDigitization#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "codeReviewPipeline",
+      "targetSkillId": "fullStackDeveloper",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "fullStackDeveloper#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "automatedTesting",
+      "targetSkillId": "fullStackDeveloper",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "fullStackDeveloper#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "refactorCode",
+      "targetSkillId": "fullStackDeveloper",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "fullStackDeveloper#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "dataAnalysis",
+      "targetSkillId": "autonomousDataScientist",
+      "edgeType": "prerequisite",
+      "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "autonomousDataScientist#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "mathReason",
+      "targetSkillId": "autonomousDataScientist",
+      "edgeType": "prerequisite",
+      "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "autonomousDataScientist#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "research",
+      "targetSkillId": "autonomousDataScientist",
+      "edgeType": "prerequisite",
+      "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "autonomousDataScientist#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "voiceAgent",
+      "targetSkillId": "realTimeVoiceAssistant",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "realTimeVoiceAssistant#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "memoryManage",
+      "targetSkillId": "realTimeVoiceAssistant",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "realTimeVoiceAssistant#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "planAndExecute",
+      "targetSkillId": "realTimeVoiceAssistant",
+      "edgeType": "prerequisite",
+      "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "realTimeVoiceAssistant#evidence[0]"
+      ]
     }
   ]
 }
