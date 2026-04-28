@@ -4,15 +4,15 @@
   "generatedAt": "2026-04-26T00:00:00Z",
   "skills": [
     {
-      "id": "A",
+      "id": "skill-a",
       "name": "Skill A",
       "type": "composite",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",
       "prerequisites": [
-        "B",
-        "C"
+        "skill-b",
+        "skill-c"
       ],
       "status": "provisional",
       "evidence": [
@@ -25,15 +25,15 @@
       ]
     },
     {
-      "id": "B",
+      "id": "skill-b",
       "name": "Skill B",
       "type": "composite",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",
       "prerequisites": [
-        "A",
-        "C"
+        "skill-a",
+        "skill-c"
       ],
       "status": "provisional",
       "evidence": [
@@ -46,15 +46,15 @@
       ]
     },
     {
-      "id": "C",
+      "id": "skill-c",
       "name": "Skill C",
       "type": "composite",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",
       "prerequisites": [
-        "A",
-        "B"
+        "skill-a",
+        "skill-b"
       ],
       "status": "provisional",
       "evidence": [
@@ -69,18 +69,18 @@
   ],
   "edges": [
     {
-      "sourceSkillId": "A",
-      "targetSkillId": "B",
+      "sourceSkillId": "skill-a",
+      "targetSkillId": "skill-b",
       "edgeType": "prerequisite"
     },
     {
-      "sourceSkillId": "B",
-      "targetSkillId": "C",
+      "sourceSkillId": "skill-b",
+      "targetSkillId": "skill-c",
       "edgeType": "prerequisite"
     },
     {
-      "sourceSkillId": "C",
-      "targetSkillId": "A",
+      "sourceSkillId": "skill-c",
+      "targetSkillId": "skill-a",
       "edgeType": "prerequisite"
     }
   ]
