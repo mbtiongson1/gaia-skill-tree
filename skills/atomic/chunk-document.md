@@ -1,7 +1,7 @@
-# Chunk Document
+# [II · Awakened · Intrinsic Skill] Chunk Document
 **ID:** chunk-document  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

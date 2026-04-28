@@ -1,7 +1,7 @@
-# Data Visualize
+# [IV · Evolved · Intrinsic Skill] Data Visualize
 **ID:** data-visualize  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

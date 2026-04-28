@@ -1,7 +1,7 @@
-# Retrieve
+# [II · Awakened · Intrinsic Skill] Retrieve
 **ID:** retrieve  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# Autonomous Debug
+# [III · Named · Extra Skill] Autonomous Debug
 **ID:** autonomous-debug  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Rare  
 **Status:** Provisional
 

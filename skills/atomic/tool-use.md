@@ -1,7 +1,7 @@
-# Tool Use
+# [IV · Evolved · Intrinsic Skill] Tool Use
 **ID:** tool-use  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

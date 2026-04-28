@@ -1,7 +1,7 @@
-# Data Analysis
+# [IV · Evolved · Extra Skill] Data Analysis
 **ID:** data-analysis  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Conducts end-to-end quantitative analysis: queries data via SQL, computes statis
 - [Summarize](../atomic/summarize.md)
 
 ## Unlocks
-- [Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
+- [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
 
 ## Fusion Condition
 _None specified._

@@ -8,12 +8,12 @@
 
 ## Unlocked Skills
 
-| Skill | Type | Level | Rarity | Unlocked In | Date |
+| Skill | Class | Rank | Rarity | Unlocked In | Date |
 |---|---|---|---|---|---|
-| Route Intent | Atomic | II | Common | gaia-registry/gaiabot-core | 2026-04-20 |
-| Plan and Decompose | Atomic | II | Common | gaia-registry/gaiabot-core | 2026-04-21 |
-| Tool Select | Atomic | II | Common | gaia-registry/gaiabot-core | 2026-04-22 |
-| Plan and Execute | Composite | III | Rare | local-repo | 2026-04-26 |
+| ○ Route Intent | Intrinsic Skill | II · Awakened | Common | gaia-registry/gaiabot-core | 2026-04-20 |
+| ○ Plan and Decompose | Intrinsic Skill | II · Awakened | Common | gaia-registry/gaiabot-core | 2026-04-21 |
+| ○ Tool Select | Intrinsic Skill | II · Awakened | Common | gaia-registry/gaiabot-core | 2026-04-22 |
+| ◇ Plan and Execute | Extra Skill | III · Named | Rare | local-repo | 2026-04-26 |
 
 ---
 

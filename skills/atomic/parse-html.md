@@ -1,7 +1,7 @@
-# Parse HTML
+# [II · Awakened · Intrinsic Skill] Parse HTML
 **ID:** parse-html  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

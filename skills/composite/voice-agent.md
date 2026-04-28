@@ -1,7 +1,7 @@
-# Voice Agent
+# [IV · Evolved · Extra Skill] Voice Agent
 **ID:** voice-agent  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Handles spoken interactions end-to-end: transcribes audio input, produces langua
 - [Text to Speech](../atomic/text-to-speech.md)
 
 ## Unlocks
-- [Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
+- [True Herald: Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
 
 ## Fusion Condition
 Requires real-time audio I/O or audio file access.

@@ -1,7 +1,7 @@
-# Structured Output Generation
+# [III · Named · Intrinsic Skill] Structured Output Generation
 **ID:** structured-output  
-**Type:** Atomic  
-**Level:** III  
+**Type:** Intrinsic Skill  
+**Level:** III · Named  
 **Rarity:** Common  
 **Status:** Provisional
 

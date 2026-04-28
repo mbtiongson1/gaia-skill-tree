@@ -1,7 +1,7 @@
-# Extract Entities
+# [II · Awakened · Intrinsic Skill] Extract Entities
 **ID:** extract-entities  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

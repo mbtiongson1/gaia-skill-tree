@@ -1,7 +1,7 @@
-# Code Execution
+# [IV · Evolved · Intrinsic Skill] Code Execution
 **ID:** code-execution  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

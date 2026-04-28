@@ -1,7 +1,7 @@
-# Plan and Execute
+# [III · Named · Extra Skill] Plan and Execute
 **ID:** plan-and-execute  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Decomposes complex objectives into sub-tasks, selects tools, and orchestrates ex
 - [Tool Select](../atomic/tool-select.md)
 
 ## Unlocks
-- [Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
+- [True Herald: Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
 
 ## Fusion Condition
 _None specified._

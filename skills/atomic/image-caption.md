@@ -1,7 +1,7 @@
-# Image Caption
+# [IV · Evolved · Intrinsic Skill] Image Caption
 **ID:** image-caption  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

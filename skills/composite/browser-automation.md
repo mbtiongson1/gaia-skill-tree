@@ -1,7 +1,7 @@
-# Browser Automation
+# [IV · Evolved · Extra Skill] Browser Automation
 **ID:** browser-automation  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -15,7 +15,7 @@ Navigates web pages, fills forms, clicks elements, and extracts information by c
 - [Computer Use](../atomic/computer-use.md)
 
 ## Unlocks
-- [Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 
 ## Fusion Condition
 _None specified._

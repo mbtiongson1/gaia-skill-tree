@@ -1,8 +1,8 @@
-# Autonomous Scientific Discovery
+# [IV · Evolved · Ultimate Skill] True Dragon: Autonomous Scientific Discovery
 **ID:** scientific-discovery  
-**Type:** Legendary  
-**Level:** IV  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** IV · Evolved  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

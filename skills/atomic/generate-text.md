@@ -1,7 +1,7 @@
-# Generate Text
+# [II · Awakened · Intrinsic Skill] Generate Text
 **ID:** generate-text  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

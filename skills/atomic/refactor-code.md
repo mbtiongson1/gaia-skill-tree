@@ -1,7 +1,7 @@
-# Refactor Code
+# [IV · Evolved · Intrinsic Skill] Refactor Code
 **ID:** refactor-code  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -14,7 +14,7 @@ Restructures existing source code to improve readability, maintainability, or pe
 _None._
 
 ## Unlocks
-- [Full-Stack Developer](../legendary/full-stack-developer.md)
+- [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

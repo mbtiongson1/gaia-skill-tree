@@ -1,8 +1,8 @@
-# Autonomous Research Agent
+# [I · Dormant · Ultimate Skill] Wisdom King: Autonomous Research Agent
 **ID:** autonomous-research-agent  
-**Type:** Legendary  
-**Level:** I  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** I · Dormant  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

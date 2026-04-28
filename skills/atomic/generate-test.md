@@ -1,7 +1,7 @@
-# Generate Test
+# [IV · Evolved · Intrinsic Skill] Generate Test
 **ID:** generate-test  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

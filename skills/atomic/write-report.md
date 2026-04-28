@@ -1,7 +1,7 @@
-# Write Report
+# [II · Awakened · Intrinsic Skill] Write Report
 **ID:** write-report  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

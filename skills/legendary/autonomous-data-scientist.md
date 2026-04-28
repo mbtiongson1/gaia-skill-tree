@@ -1,8 +1,8 @@
-# Autonomous Data Scientist
+# [IV · Evolved · Ultimate Skill] True Oracle: Autonomous Data Scientist
 **ID:** autonomous-data-scientist  
-**Type:** Legendary  
-**Level:** IV  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** IV · Evolved  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

@@ -1,7 +1,7 @@
-# Plan and Decompose
+# [II · Awakened · Intrinsic Skill] Plan and Decompose
 **ID:** plan-decompose  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 

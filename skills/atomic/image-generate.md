@@ -1,7 +1,7 @@
-# Image Generate
+# [IV · Evolved · Intrinsic Skill] Image Generate
 **ID:** image-generate  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

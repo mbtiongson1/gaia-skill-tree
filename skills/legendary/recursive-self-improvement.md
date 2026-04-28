@@ -1,8 +1,8 @@
-# Recursive Self-Improvement
+# [I · Dormant · Ultimate Skill] True Sage: Recursive Self-Improvement
 **ID:** recursive-self-improvement  
-**Type:** Legendary  
-**Level:** I  
-**Rarity:** Legendary  
+**Type:** Ultimate Skill  
+**Level:** I · Dormant  
+**Rarity:** Divine  
 **Status:** Provisional
 
 ---

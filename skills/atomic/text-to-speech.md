@@ -1,7 +1,7 @@
-# Text to Speech
+# [IV · Evolved · Intrinsic Skill] Text to Speech
 **ID:** text-to-speech  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

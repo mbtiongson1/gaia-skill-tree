@@ -1,7 +1,7 @@
-# Self-Critique
+# [IV · Evolved · Intrinsic Skill] Self-Critique
 **ID:** self-critique  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -14,7 +14,7 @@ Iteratively evaluates and refines its own outputs using self-generated feedback,
 _None._
 
 ## Unlocks
-- [Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
+- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

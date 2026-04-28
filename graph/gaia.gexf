@@ -36,7 +36,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="autonomous-data-scientist" label="Autonomous Data Scientist">
+      <node id="autonomous-data-scientist" label="True Oracle: Autonomous Data Scientist">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -52,7 +52,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="autonomous-research-agent" label="Autonomous Research Agent">
+      <node id="autonomous-research-agent" label="Wisdom King: Autonomous Research Agent">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -244,7 +244,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="full-stack-developer" label="Full-Stack Developer">
+      <node id="full-stack-developer" label="True Craftsman: Full-Stack Developer">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -348,7 +348,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="multi-agent-orchestration-v" label="Multi-Agent Orchestration V">
+      <node id="multi-agent-orchestration-v" label="Grand Conductor: Multi-Agent Orchestration">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -436,7 +436,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="real-time-voice-assistant" label="Real-Time Voice Assistant">
+      <node id="real-time-voice-assistant" label="True Herald: Real-Time Voice Assistant">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -444,7 +444,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="recursive-self-improvement" label="Recursive Self-Improvement">
+      <node id="recursive-self-improvement" label="True Sage: Recursive Self-Improvement">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -492,7 +492,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="scientific-discovery" label="Autonomous Scientific Discovery">
+      <node id="scientific-discovery" label="True Dragon: Autonomous Scientific Discovery">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />

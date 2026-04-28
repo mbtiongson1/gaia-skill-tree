@@ -1,7 +1,7 @@
-# Code Review Pipeline
+# [IV · Evolved · Extra Skill] Code Review Pipeline
 **ID:** code-review-pipeline  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Performs automated code review by generating, diffing, and evaluating code chang
 - [Evaluate Output](../atomic/evaluate-output.md)
 
 ## Unlocks
-- [Full-Stack Developer](../legendary/full-stack-developer.md)
+- [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)
 
 ## Fusion Condition
 _None specified._

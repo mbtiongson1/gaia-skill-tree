@@ -1,7 +1,7 @@
-# Translate
+# [IV · Evolved · Intrinsic Skill] Translate
 **ID:** translate  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

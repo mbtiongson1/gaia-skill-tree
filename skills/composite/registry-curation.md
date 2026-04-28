@@ -1,7 +1,7 @@
-# Registry Curation
+# [IV · Evolved · Extra Skill] Registry Curation
 **ID:** registry-curation  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 

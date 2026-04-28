@@ -1,7 +1,7 @@
-# Ghostwrite
+# [IV · Evolved · Extra Skill] Ghostwrite
 **ID:** ghostwrite  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 

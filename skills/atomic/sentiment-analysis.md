@@ -1,7 +1,7 @@
-# Sentiment Analysis
+# [IV · Evolved · Intrinsic Skill] Sentiment Analysis
 **ID:** sentiment-analysis  
-**Type:** Atomic  
-**Level:** IV  
+**Type:** Intrinsic Skill  
+**Level:** IV · Evolved  
 **Rarity:** Common  
 **Status:** Provisional
 

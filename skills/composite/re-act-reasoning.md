@@ -1,7 +1,7 @@
-# ReAct Reasoning
+# [IV · Evolved · Extra Skill] ReAct Reasoning
 **ID:** re-act-reasoning  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -16,7 +16,7 @@ Interleaves free-form reasoning traces with discrete tool actions in a single lo
 
 ## Unlocks
 - [Plan and Execute](../composite/plan-and-execute.md)
-- [Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 
 ## Fusion Condition
 _None specified._

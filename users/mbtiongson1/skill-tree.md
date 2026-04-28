@@ -8,22 +8,22 @@
 
 ## Unlocked Skills
 
-| Skill | Type | Level | Rarity | Unlocked In | Date |
+| Skill | Class | Rank | Rarity | Unlocked In | Date |
 |---|---|---|---|---|---|
-| Web Search | Atomic | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-01 |
-| Parse HTML | Atomic | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-05 |
-| Extract Entities | Atomic | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-08 |
-| Summarize | Atomic | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-10 |
-| Cite Sources | Atomic | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-12 |
-| Web Scrape | Composite | III | Uncommon | mbtiongson1/gaia-skill-tree | 2026-03-15 |
-| Research | Composite | III | Uncommon | mbtiongson1/gaia-skill-tree | 2026-04-01 |
+| ○ Web Search | Intrinsic Skill | II · Awakened | Common | mbtiongson1/gaia-skill-tree | 2026-03-01 |
+| ○ Parse HTML | Intrinsic Skill | II · Awakened | Common | mbtiongson1/gaia-skill-tree | 2026-03-05 |
+| ○ Extract Entities | Intrinsic Skill | II · Awakened | Common | mbtiongson1/gaia-skill-tree | 2026-03-08 |
+| ○ Summarize | Intrinsic Skill | II · Awakened | Common | mbtiongson1/gaia-skill-tree | 2026-03-10 |
+| ○ Cite Sources | Intrinsic Skill | II · Awakened | Common | mbtiongson1/gaia-skill-tree | 2026-03-12 |
+| ◇ Web Scrape | Extra Skill | III · Named | Uncommon | mbtiongson1/gaia-skill-tree | 2026-03-15 |
+| ◇ Research | Extra Skill | III · Named | Uncommon | mbtiongson1/gaia-skill-tree | 2026-04-01 |
 
 ---
 
 ## Pending Combinations
 
 > **autonomous-debug** — combine `code-generation`, `execute-bash`, `error-interpretation`  
-> Level floor: III  
+> Level floor: III · Named  
 > Run `gaia fuse autonomous-debug` to confirm.
 
 ---
