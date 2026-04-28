@@ -14,8 +14,8 @@ Assigns one or more categorical labels to an input based on learned or rule-base
 _None._
 
 ## Unlocks
-- [Route Intent](../atomic/routeIntent.md)
-- [Content Moderation](../composite/contentModeration.md)
+- [Route Intent](../atomic/route-intent.md)
+- [Content Moderation](../composite/content-moderation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

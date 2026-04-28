@@ -14,7 +14,7 @@ Orders a set of candidate items by relevance, quality, or fitness for a given ob
 _None._
 
 ## Unlocks
-- [RAG Pipeline](../composite/ragPipeline.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

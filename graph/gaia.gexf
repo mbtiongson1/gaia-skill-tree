@@ -12,7 +12,7 @@
       <attribute id="type" title="type" type="string" />
     </attributes>
     <nodes>
-      <node id="apiCall" label="API Call">
+      <node id="api-call" label="API Call">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -20,7 +20,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="audienceModel" label="Audience Model">
+      <node id="audience-model" label="Audience Model">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -28,7 +28,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="automatedTesting" label="Automated Testing">
+      <node id="automated-testing" label="Automated Testing">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -36,7 +36,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="autonomousDataScientist" label="Autonomous Data Scientist">
+      <node id="autonomous-data-scientist" label="Autonomous Data Scientist">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -44,7 +44,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="autonomousDebug" label="Autonomous Debug">
+      <node id="autonomous-debug" label="Autonomous Debug">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="rare" />
@@ -52,7 +52,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="autonomousResearchAgent" label="Autonomous Research Agent">
+      <node id="autonomous-research-agent" label="Autonomous Research Agent">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -60,7 +60,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="browserAutomation" label="Browser Automation">
+      <node id="browser-automation" label="Browser Automation">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -68,7 +68,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="chainOfThought" label="Chain-of-Thought Reasoning">
+      <node id="chain-of-thought" label="Chain-of-Thought Reasoning">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -76,7 +76,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="chunkDocument" label="Chunk Document">
+      <node id="chunk-document" label="Chunk Document">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -84,7 +84,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="citeSources" label="Cite Sources">
+      <node id="cite-sources" label="Cite Sources">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -100,7 +100,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="codeExecution" label="Code Execution">
+      <node id="code-execution" label="Code Execution">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -108,7 +108,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="codeGeneration" label="Code Generation">
+      <node id="code-generation" label="Code Generation">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -116,7 +116,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="codeReviewPipeline" label="Code Review Pipeline">
+      <node id="code-review-pipeline" label="Code Review Pipeline">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -124,7 +124,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="computerUse" label="Computer Use">
+      <node id="computer-use" label="Computer Use">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
@@ -132,7 +132,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="contentModeration" label="Content Moderation">
+      <node id="content-moderation" label="Content Moderation">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -140,7 +140,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="conversationalAgent" label="Conversational Agent">
+      <node id="conversational-agent" label="Conversational Agent">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -148,7 +148,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="dataAnalysis" label="Data Analysis">
+      <node id="data-analysis" label="Data Analysis">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -156,7 +156,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="dataVisualize" label="Data Visualize">
+      <node id="data-visualize" label="Data Visualize">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -164,7 +164,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="detectAnomaly" label="Detect Anomaly">
+      <node id="detect-anomaly" label="Detect Anomaly">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -172,7 +172,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="diffContent" label="Diff Content">
+      <node id="diff-content" label="Diff Content">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -180,7 +180,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="documentAnalyst" label="Document Analyst">
+      <node id="document-analyst" label="Document Analyst">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="uncommon" />
@@ -188,7 +188,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="documentDigitization" label="Document Digitization">
+      <node id="document-digitization" label="Document Digitization">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -196,7 +196,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="embedText" label="Embed Text">
+      <node id="embed-text" label="Embed Text">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -204,7 +204,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="errorInterpretation" label="Error Interpretation">
+      <node id="error-interpretation" label="Error Interpretation">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -212,7 +212,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="evaluateOutput" label="Evaluate Output">
+      <node id="evaluate-output" label="Evaluate Output">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -220,7 +220,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="executeBash" label="Execute Bash">
+      <node id="execute-bash" label="Execute Bash">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -228,7 +228,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="extractEntities" label="Extract Entities">
+      <node id="extract-entities" label="Extract Entities">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -236,7 +236,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="formatOutput" label="Format Output">
+      <node id="format-output" label="Format Output">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -244,7 +244,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="fullStackDeveloper" label="Full-Stack Developer">
+      <node id="full-stack-developer" label="Full-Stack Developer">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -252,7 +252,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="generateSql" label="Generate SQL">
+      <node id="generate-sql" label="Generate SQL">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -260,7 +260,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="generateTest" label="Generate Test">
+      <node id="generate-test" label="Generate Test">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -268,7 +268,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="generateText" label="Generate Text">
+      <node id="generate-text" label="Generate Text">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -284,7 +284,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="hypothesisGenerate" label="Hypothesis Generation">
+      <node id="hypothesis-generate" label="Hypothesis Generation">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
@@ -292,7 +292,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="imageCaption" label="Image Caption">
+      <node id="image-caption" label="Image Caption">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -300,7 +300,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="imageGenerate" label="Image Generate">
+      <node id="image-generate" label="Image Generate">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -308,7 +308,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="knowledgeGraphBuild" label="Knowledge Graph Construction">
+      <node id="knowledge-graph-build" label="Knowledge Graph Construction">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -316,7 +316,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="knowledgeHarvest" label="Knowledge Harvest">
+      <node id="knowledge-harvest" label="Knowledge Harvest">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
@@ -324,7 +324,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="logicalInference" label="Logical Inference">
+      <node id="logical-inference" label="Logical Inference">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -332,7 +332,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="mathReason" label="Math Reason">
+      <node id="math-reason" label="Math Reason">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -340,7 +340,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="memoryManage" label="Memory Manage">
+      <node id="memory-manage" label="Memory Manage">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -348,7 +348,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="multiAgentOrchestrationV" label="Multi-Agent Orchestration V">
+      <node id="multi-agent-orchestration-v" label="Multi-Agent Orchestration V">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -356,7 +356,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="multimodalReasoning" label="Multimodal Reasoning">
+      <node id="multimodal-reasoning" label="Multimodal Reasoning">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
@@ -364,7 +364,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="parseHtml" label="Parse HTML">
+      <node id="parse-html" label="Parse HTML">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -372,7 +372,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="parseJson" label="Parse JSON">
+      <node id="parse-json" label="Parse JSON">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -380,7 +380,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="parsePdf" label="Parse PDF">
+      <node id="parse-pdf" label="Parse PDF">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -388,7 +388,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="planAndExecute" label="Plan and Execute">
+      <node id="plan-and-execute" label="Plan and Execute">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="rare" />
@@ -396,7 +396,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="planDecompose" label="Plan and Decompose">
+      <node id="plan-decompose" label="Plan and Decompose">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -404,7 +404,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="questionAnswer" label="Question Answer">
+      <node id="question-answer" label="Question Answer">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -412,7 +412,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="ragPipeline" label="RAG Pipeline">
+      <node id="rag-pipeline" label="RAG Pipeline">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="uncommon" />
@@ -428,7 +428,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="reActReasoning" label="ReAct Reasoning">
+      <node id="re-act-reasoning" label="ReAct Reasoning">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -436,7 +436,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="realTimeVoiceAssistant" label="Real-Time Voice Assistant">
+      <node id="real-time-voice-assistant" label="Real-Time Voice Assistant">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -444,7 +444,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="recursiveSelfImprovement" label="Recursive Self-Improvement">
+      <node id="recursive-self-improvement" label="Recursive Self-Improvement">
         <attvalues>
           <attvalue for="level" value="I" />
           <attvalue for="rarity" value="legendary" />
@@ -452,7 +452,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="refactorCode" label="Refactor Code">
+      <node id="refactor-code" label="Refactor Code">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -460,7 +460,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="registryCuration" label="Registry Curation">
+      <node id="registry-curation" label="Registry Curation">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
@@ -484,7 +484,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="routeIntent" label="Route Intent">
+      <node id="route-intent" label="Route Intent">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -492,7 +492,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="scientificDiscovery" label="Autonomous Scientific Discovery">
+      <node id="scientific-discovery" label="Autonomous Scientific Discovery">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="legendary" />
@@ -500,7 +500,7 @@
           <attvalue for="type" value="legendary" />
         </attvalues>
       </node>
-      <node id="scoreRelevance" label="Score Relevance">
+      <node id="score-relevance" label="Score Relevance">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -508,7 +508,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="selfCritique" label="Self-Critique">
+      <node id="self-critique" label="Self-Critique">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -516,7 +516,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="sentimentAnalysis" label="Sentiment Analysis">
+      <node id="sentiment-analysis" label="Sentiment Analysis">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -524,7 +524,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="speechToText" label="Speech to Text">
+      <node id="speech-to-text" label="Speech to Text">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -532,7 +532,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="structuredOutput" label="Structured Output Generation">
+      <node id="structured-output" label="Structured Output Generation">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="common" />
@@ -548,7 +548,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="textToSpeech" label="Text to Speech">
+      <node id="text-to-speech" label="Text to Speech">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="common" />
@@ -556,7 +556,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="textToSqlPipeline" label="Text-to-SQL Pipeline">
+      <node id="text-to-sql-pipeline" label="Text-to-SQL Pipeline">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -572,7 +572,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="toolSelect" label="Tool Select">
+      <node id="tool-select" label="Tool Select">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -580,7 +580,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="toolUse" label="Tool Use">
+      <node id="tool-use" label="Tool Use">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -596,7 +596,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="translationPipeline" label="Translation Pipeline">
+      <node id="translation-pipeline" label="Translation Pipeline">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -604,7 +604,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="voiceAgent" label="Voice Agent">
+      <node id="voice-agent" label="Voice Agent">
         <attvalues>
           <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="uncommon" />
@@ -612,7 +612,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="webScrape" label="Web Scrape">
+      <node id="web-scrape" label="Web Scrape">
         <attvalues>
           <attvalue for="level" value="III" />
           <attvalue for="rarity" value="uncommon" />
@@ -620,7 +620,7 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
-      <node id="webSearch" label="Web Search">
+      <node id="web-search" label="Web Search">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -628,7 +628,7 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
-      <node id="writeReport" label="Write Report">
+      <node id="write-report" label="Write Report">
         <attvalues>
           <attvalue for="level" value="II" />
           <attvalue for="rarity" value="common" />
@@ -638,92 +638,92 @@
       </node>
     </nodes>
     <edges>
-      <edge id="e0" source="generateTest" target="automatedTesting" />
-      <edge id="e1" source="executeBash" target="automatedTesting" />
-      <edge id="e2" source="errorInterpretation" target="automatedTesting" />
-      <edge id="e3" source="dataAnalysis" target="autonomousDataScientist" />
-      <edge id="e4" source="mathReason" target="autonomousDataScientist" />
-      <edge id="e5" source="research" target="autonomousDataScientist" />
-      <edge id="e6" source="codeGeneration" target="autonomousDebug" />
-      <edge id="e7" source="executeBash" target="autonomousDebug" />
-      <edge id="e8" source="errorInterpretation" target="autonomousDebug" />
-      <edge id="e9" source="research" target="autonomousResearchAgent" />
-      <edge id="e10" source="knowledgeHarvest" target="autonomousResearchAgent" />
-      <edge id="e11" source="ghostwrite" target="autonomousResearchAgent" />
-      <edge id="e12" source="webSearch" target="browserAutomation" />
-      <edge id="e13" source="computerUse" target="browserAutomation" />
-      <edge id="e14" source="codeGeneration" target="codeReviewPipeline" />
-      <edge id="e15" source="diffContent" target="codeReviewPipeline" />
-      <edge id="e16" source="evaluateOutput" target="codeReviewPipeline" />
-      <edge id="e17" source="classify" target="contentModeration" />
-      <edge id="e18" source="sentimentAnalysis" target="contentModeration" />
-      <edge id="e19" source="extractEntities" target="contentModeration" />
-      <edge id="e20" source="questionAnswer" target="conversationalAgent" />
-      <edge id="e21" source="memoryManage" target="conversationalAgent" />
-      <edge id="e22" source="routeIntent" target="conversationalAgent" />
-      <edge id="e23" source="generateSql" target="dataAnalysis" />
-      <edge id="e24" source="dataVisualize" target="dataAnalysis" />
-      <edge id="e25" source="summarize" target="dataAnalysis" />
-      <edge id="e26" source="parseJson" target="documentAnalyst" />
-      <edge id="e27" source="extractEntities" target="documentAnalyst" />
-      <edge id="e28" source="summarize" target="documentAnalyst" />
-      <edge id="e29" source="formatOutput" target="documentAnalyst" />
-      <edge id="e30" source="parsePdf" target="documentDigitization" />
-      <edge id="e31" source="extractEntities" target="documentDigitization" />
-      <edge id="e32" source="formatOutput" target="documentDigitization" />
-      <edge id="e33" source="codeReviewPipeline" target="fullStackDeveloper" />
-      <edge id="e34" source="automatedTesting" target="fullStackDeveloper" />
-      <edge id="e35" source="refactorCode" target="fullStackDeveloper" />
+      <edge id="e0" source="generate-test" target="automated-testing" />
+      <edge id="e1" source="execute-bash" target="automated-testing" />
+      <edge id="e2" source="error-interpretation" target="automated-testing" />
+      <edge id="e3" source="data-analysis" target="autonomous-data-scientist" />
+      <edge id="e4" source="math-reason" target="autonomous-data-scientist" />
+      <edge id="e5" source="research" target="autonomous-data-scientist" />
+      <edge id="e6" source="code-generation" target="autonomous-debug" />
+      <edge id="e7" source="execute-bash" target="autonomous-debug" />
+      <edge id="e8" source="error-interpretation" target="autonomous-debug" />
+      <edge id="e9" source="research" target="autonomous-research-agent" />
+      <edge id="e10" source="knowledge-harvest" target="autonomous-research-agent" />
+      <edge id="e11" source="ghostwrite" target="autonomous-research-agent" />
+      <edge id="e12" source="web-search" target="browser-automation" />
+      <edge id="e13" source="computer-use" target="browser-automation" />
+      <edge id="e14" source="code-generation" target="code-review-pipeline" />
+      <edge id="e15" source="diff-content" target="code-review-pipeline" />
+      <edge id="e16" source="evaluate-output" target="code-review-pipeline" />
+      <edge id="e17" source="classify" target="content-moderation" />
+      <edge id="e18" source="sentiment-analysis" target="content-moderation" />
+      <edge id="e19" source="extract-entities" target="content-moderation" />
+      <edge id="e20" source="question-answer" target="conversational-agent" />
+      <edge id="e21" source="memory-manage" target="conversational-agent" />
+      <edge id="e22" source="route-intent" target="conversational-agent" />
+      <edge id="e23" source="generate-sql" target="data-analysis" />
+      <edge id="e24" source="data-visualize" target="data-analysis" />
+      <edge id="e25" source="summarize" target="data-analysis" />
+      <edge id="e26" source="parse-json" target="document-analyst" />
+      <edge id="e27" source="extract-entities" target="document-analyst" />
+      <edge id="e28" source="summarize" target="document-analyst" />
+      <edge id="e29" source="format-output" target="document-analyst" />
+      <edge id="e30" source="parse-pdf" target="document-digitization" />
+      <edge id="e31" source="extract-entities" target="document-digitization" />
+      <edge id="e32" source="format-output" target="document-digitization" />
+      <edge id="e33" source="code-review-pipeline" target="full-stack-developer" />
+      <edge id="e34" source="automated-testing" target="full-stack-developer" />
+      <edge id="e35" source="refactor-code" target="full-stack-developer" />
       <edge id="e36" source="research" target="ghostwrite" />
-      <edge id="e37" source="writeReport" target="ghostwrite" />
-      <edge id="e38" source="audienceModel" target="ghostwrite" />
-      <edge id="e39" source="extractEntities" target="knowledgeGraphBuild" />
-      <edge id="e40" source="logicalInference" target="knowledgeGraphBuild" />
-      <edge id="e41" source="webScrape" target="knowledgeHarvest" />
-      <edge id="e42" source="extractEntities" target="knowledgeHarvest" />
-      <edge id="e43" source="embedText" target="knowledgeHarvest" />
-      <edge id="e44" source="planAndExecute" target="multiAgentOrchestrationV" />
-      <edge id="e45" source="routeIntent" target="multiAgentOrchestrationV" />
-      <edge id="e46" source="toolSelect" target="multiAgentOrchestrationV" />
-      <edge id="e47" source="imageCaption" target="multimodalReasoning" />
-      <edge id="e48" source="questionAnswer" target="multimodalReasoning" />
-      <edge id="e49" source="logicalInference" target="multimodalReasoning" />
-      <edge id="e50" source="routeIntent" target="planAndExecute" />
-      <edge id="e51" source="planDecompose" target="planAndExecute" />
-      <edge id="e52" source="toolSelect" target="planAndExecute" />
-      <edge id="e53" source="retrieve" target="ragPipeline" />
-      <edge id="e54" source="chunkDocument" target="ragPipeline" />
-      <edge id="e55" source="embedText" target="ragPipeline" />
-      <edge id="e56" source="scoreRelevance" target="ragPipeline" />
-      <edge id="e57" source="planDecompose" target="reActReasoning" />
-      <edge id="e58" source="toolUse" target="reActReasoning" />
-      <edge id="e59" source="voiceAgent" target="realTimeVoiceAssistant" />
-      <edge id="e60" source="memoryManage" target="realTimeVoiceAssistant" />
-      <edge id="e61" source="planAndExecute" target="realTimeVoiceAssistant" />
-      <edge id="e62" source="autonomousDebug" target="recursiveSelfImprovement" />
-      <edge id="e63" source="evaluateOutput" target="recursiveSelfImprovement" />
-      <edge id="e64" source="planAndExecute" target="recursiveSelfImprovement" />
-      <edge id="e65" source="research" target="registryCuration" />
-      <edge id="e66" source="codeGeneration" target="registryCuration" />
-      <edge id="e67" source="executeBash" target="registryCuration" />
-      <edge id="e68" source="webSearch" target="research" />
+      <edge id="e37" source="write-report" target="ghostwrite" />
+      <edge id="e38" source="audience-model" target="ghostwrite" />
+      <edge id="e39" source="extract-entities" target="knowledge-graph-build" />
+      <edge id="e40" source="logical-inference" target="knowledge-graph-build" />
+      <edge id="e41" source="web-scrape" target="knowledge-harvest" />
+      <edge id="e42" source="extract-entities" target="knowledge-harvest" />
+      <edge id="e43" source="embed-text" target="knowledge-harvest" />
+      <edge id="e44" source="plan-and-execute" target="multi-agent-orchestration-v" />
+      <edge id="e45" source="route-intent" target="multi-agent-orchestration-v" />
+      <edge id="e46" source="tool-select" target="multi-agent-orchestration-v" />
+      <edge id="e47" source="image-caption" target="multimodal-reasoning" />
+      <edge id="e48" source="question-answer" target="multimodal-reasoning" />
+      <edge id="e49" source="logical-inference" target="multimodal-reasoning" />
+      <edge id="e50" source="route-intent" target="plan-and-execute" />
+      <edge id="e51" source="plan-decompose" target="plan-and-execute" />
+      <edge id="e52" source="tool-select" target="plan-and-execute" />
+      <edge id="e53" source="retrieve" target="rag-pipeline" />
+      <edge id="e54" source="chunk-document" target="rag-pipeline" />
+      <edge id="e55" source="embed-text" target="rag-pipeline" />
+      <edge id="e56" source="score-relevance" target="rag-pipeline" />
+      <edge id="e57" source="plan-decompose" target="re-act-reasoning" />
+      <edge id="e58" source="tool-use" target="re-act-reasoning" />
+      <edge id="e59" source="voice-agent" target="real-time-voice-assistant" />
+      <edge id="e60" source="memory-manage" target="real-time-voice-assistant" />
+      <edge id="e61" source="plan-and-execute" target="real-time-voice-assistant" />
+      <edge id="e62" source="autonomous-debug" target="recursive-self-improvement" />
+      <edge id="e63" source="evaluate-output" target="recursive-self-improvement" />
+      <edge id="e64" source="plan-and-execute" target="recursive-self-improvement" />
+      <edge id="e65" source="research" target="registry-curation" />
+      <edge id="e66" source="code-generation" target="registry-curation" />
+      <edge id="e67" source="execute-bash" target="registry-curation" />
+      <edge id="e68" source="web-search" target="research" />
       <edge id="e69" source="summarize" target="research" />
-      <edge id="e70" source="citeSources" target="research" />
-      <edge id="e71" source="hypothesisGenerate" target="scientificDiscovery" />
-      <edge id="e72" source="research" target="scientificDiscovery" />
-      <edge id="e73" source="mathReason" target="scientificDiscovery" />
-      <edge id="e74" source="generateSql" target="textToSqlPipeline" />
-      <edge id="e75" source="parseJson" target="textToSqlPipeline" />
-      <edge id="e76" source="formatOutput" target="textToSqlPipeline" />
-      <edge id="e77" source="translate" target="translationPipeline" />
-      <edge id="e78" source="sentimentAnalysis" target="translationPipeline" />
-      <edge id="e79" source="audienceModel" target="translationPipeline" />
-      <edge id="e80" source="speechToText" target="voiceAgent" />
-      <edge id="e81" source="questionAnswer" target="voiceAgent" />
-      <edge id="e82" source="textToSpeech" target="voiceAgent" />
-      <edge id="e83" source="webSearch" target="webScrape" />
-      <edge id="e84" source="parseHtml" target="webScrape" />
-      <edge id="e85" source="extractEntities" target="webScrape" />
+      <edge id="e70" source="cite-sources" target="research" />
+      <edge id="e71" source="hypothesis-generate" target="scientific-discovery" />
+      <edge id="e72" source="research" target="scientific-discovery" />
+      <edge id="e73" source="math-reason" target="scientific-discovery" />
+      <edge id="e74" source="generate-sql" target="text-to-sql-pipeline" />
+      <edge id="e75" source="parse-json" target="text-to-sql-pipeline" />
+      <edge id="e76" source="format-output" target="text-to-sql-pipeline" />
+      <edge id="e77" source="translate" target="translation-pipeline" />
+      <edge id="e78" source="sentiment-analysis" target="translation-pipeline" />
+      <edge id="e79" source="audience-model" target="translation-pipeline" />
+      <edge id="e80" source="speech-to-text" target="voice-agent" />
+      <edge id="e81" source="question-answer" target="voice-agent" />
+      <edge id="e82" source="text-to-speech" target="voice-agent" />
+      <edge id="e83" source="web-search" target="web-scrape" />
+      <edge id="e84" source="parse-html" target="web-scrape" />
+      <edge id="e85" source="extract-entities" target="web-scrape" />
     </edges>
   </graph>
 </gexf>

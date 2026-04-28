@@ -15,8 +15,8 @@ _None._
 
 ## Unlocks
 - [Research](../composite/research.md)
-- [Document Analyst](../composite/documentAnalyst.md)
-- [Data Analysis](../composite/dataAnalysis.md)
+- [Document Analyst](../composite/document-analyst.md)
+- [Data Analysis](../composite/data-analysis.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

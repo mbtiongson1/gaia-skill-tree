@@ -14,7 +14,7 @@ Fetches relevant documents or passages from an indexed corpus given a query.
 _None._
 
 ## Unlocks
-- [RAG Pipeline](../composite/ragPipeline.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -12,8 +12,8 @@ Produces audience-tailored, research-backed long-form written content.
 
 ## Prerequisites
 - [Research](../composite/research.md)
-- [Write Report](../atomic/writeReport.md)
-- [Audience Model](../atomic/audienceModel.md)
+- [Write Report](../atomic/write-report.md)
+- [Audience Model](../atomic/audience-model.md)
 
 ## Unlocks
 _None._

@@ -12,7 +12,7 @@
       "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline"
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -39,8 +39,8 @@
       "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
       "prerequisites": [],
       "derivatives": [
-        "routeIntent",
-        "contentModeration"
+        "route-intent",
+        "content-moderation"
       ],
       "conditions": "",
       "evidence": [
@@ -67,7 +67,7 @@
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline"
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -94,7 +94,7 @@
       "description": "Orders a set of candidate items by relevance, quality, or fitness for a given objective.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline"
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -113,7 +113,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "parseJson",
+      "id": "parse-json",
       "name": "Parse JSON",
       "type": "atomic",
       "level": "II",
@@ -121,8 +121,8 @@
       "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
       "prerequisites": [],
       "derivatives": [
-        "documentAnalyst",
-        "textToSqlPipeline"
+        "document-analyst",
+        "text-to-sql-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -141,7 +141,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "parseHtml",
+      "id": "parse-html",
       "name": "Parse HTML",
       "type": "atomic",
       "level": "II",
@@ -149,7 +149,7 @@
       "description": "Extracts structured content from raw HTML, navigating DOM trees and handling malformed markup.",
       "prerequisites": [],
       "derivatives": [
-        "webScrape"
+        "web-scrape"
       ],
       "conditions": "",
       "evidence": [
@@ -168,7 +168,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "executeBash",
+      "id": "execute-bash",
       "name": "Execute Bash",
       "type": "atomic",
       "level": "II",
@@ -176,10 +176,10 @@
       "description": "Runs shell commands in a sandboxed environment, captures stdout/stderr, and handles exit codes.",
       "prerequisites": [],
       "derivatives": [
-        "automatedTesting",
-        "autonomousDebug",
-        "codeExecution",
-        "registryCuration"
+        "automated-testing",
+        "autonomous-debug",
+        "code-execution",
+        "registry-curation"
       ],
       "conditions": "",
       "evidence": [
@@ -198,7 +198,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "generateText",
+      "id": "generate-text",
       "name": "Generate Text",
       "type": "atomic",
       "level": "II",
@@ -234,8 +234,8 @@
       "prerequisites": [],
       "derivatives": [
         "research",
-        "documentAnalyst",
-        "dataAnalysis"
+        "document-analyst",
+        "data-analysis"
       ],
       "conditions": "",
       "evidence": [
@@ -254,7 +254,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "citeSources",
+      "id": "cite-sources",
       "name": "Cite Sources",
       "type": "atomic",
       "level": "II",
@@ -281,7 +281,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "extractEntities",
+      "id": "extract-entities",
       "name": "Extract Entities",
       "type": "atomic",
       "level": "II",
@@ -289,12 +289,12 @@
       "description": "Identifies and extracts named entities such as people, organizations, dates, and locations from text.",
       "prerequisites": [],
       "derivatives": [
-        "contentModeration",
-        "documentAnalyst",
-        "documentDigitization",
-        "knowledgeGraphBuild",
-        "knowledgeHarvest",
-        "webScrape"
+        "content-moderation",
+        "document-analyst",
+        "document-digitization",
+        "knowledge-graph-build",
+        "knowledge-harvest",
+        "web-scrape"
       ],
       "conditions": "",
       "evidence": [
@@ -313,7 +313,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "routeIntent",
+      "id": "route-intent",
       "name": "Route Intent",
       "type": "atomic",
       "level": "II",
@@ -321,8 +321,8 @@
       "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
       "prerequisites": [],
       "derivatives": [
-        "planAndExecute",
-        "conversationalAgent"
+        "plan-and-execute",
+        "conversational-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -341,7 +341,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "evaluateOutput",
+      "id": "evaluate-output",
       "name": "Evaluate Output",
       "type": "atomic",
       "level": "II",
@@ -349,8 +349,8 @@
       "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
       "prerequisites": [],
       "derivatives": [
-        "codeReviewPipeline",
-        "selfCritique"
+        "code-review-pipeline",
+        "self-critique"
       ],
       "conditions": "",
       "evidence": [
@@ -369,7 +369,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "embedText",
+      "id": "embed-text",
       "name": "Embed Text",
       "type": "atomic",
       "level": "II",
@@ -377,8 +377,8 @@
       "description": "Converts text into dense vector representations suitable for similarity search and clustering.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline",
-        "knowledgeHarvest"
+        "rag-pipeline",
+        "knowledge-harvest"
       ],
       "conditions": "",
       "evidence": [
@@ -397,7 +397,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "chunkDocument",
+      "id": "chunk-document",
       "name": "Chunk Document",
       "type": "atomic",
       "level": "II",
@@ -405,7 +405,7 @@
       "description": "Splits a document into semantically meaningful segments optimized for embedding and retrieval.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline"
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -424,7 +424,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "planDecompose",
+      "id": "plan-decompose",
       "name": "Plan and Decompose",
       "type": "atomic",
       "level": "II",
@@ -432,8 +432,8 @@
       "description": "Breaks a complex objective into an ordered sequence of executable sub-tasks.",
       "prerequisites": [],
       "derivatives": [
-        "planAndExecute",
-        "reActReasoning"
+        "plan-and-execute",
+        "re-act-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -452,7 +452,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "writeReport",
+      "id": "write-report",
       "name": "Write Report",
       "type": "atomic",
       "level": "II",
@@ -479,7 +479,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "audienceModel",
+      "id": "audience-model",
       "name": "Audience Model",
       "type": "atomic",
       "level": "II",
@@ -488,7 +488,7 @@
       "prerequisites": [],
       "derivatives": [
         "ghostwrite",
-        "translationPipeline"
+        "translation-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -507,7 +507,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "toolSelect",
+      "id": "tool-select",
       "name": "Tool Select",
       "type": "atomic",
       "level": "II",
@@ -515,9 +515,9 @@
       "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
       "prerequisites": [],
       "derivatives": [
-        "planAndExecute",
-        "reActReasoning",
-        "toolUse"
+        "plan-and-execute",
+        "re-act-reasoning",
+        "tool-use"
       ],
       "conditions": "",
       "evidence": [
@@ -536,7 +536,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "errorInterpretation",
+      "id": "error-interpretation",
       "name": "Error Interpretation",
       "type": "atomic",
       "level": "II",
@@ -544,8 +544,8 @@
       "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug",
-        "automatedTesting"
+        "autonomous-debug",
+        "automated-testing"
       ],
       "conditions": "",
       "evidence": [
@@ -564,7 +564,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "codeGeneration",
+      "id": "code-generation",
       "name": "Code Generation",
       "type": "atomic",
       "level": "II",
@@ -572,10 +572,10 @@
       "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug",
-        "codeExecution",
-        "codeReviewPipeline",
-        "registryCuration"
+        "autonomous-debug",
+        "code-execution",
+        "code-review-pipeline",
+        "registry-curation"
       ],
       "conditions": "",
       "evidence": [
@@ -594,7 +594,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "webSearch",
+      "id": "web-search",
       "name": "Web Search",
       "type": "atomic",
       "level": "II",
@@ -602,9 +602,9 @@
       "description": "Queries external search engines or APIs and retrieves relevant result sets.",
       "prerequisites": [],
       "derivatives": [
-        "browserAutomation",
+        "browser-automation",
         "research",
-        "webScrape"
+        "web-scrape"
       ],
       "conditions": "",
       "evidence": [
@@ -623,7 +623,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "scoreRelevance",
+      "id": "score-relevance",
       "name": "Score Relevance",
       "type": "atomic",
       "level": "II",
@@ -631,7 +631,7 @@
       "description": "Assigns a numerical relevance score to candidate items relative to a query or objective.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline"
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -650,7 +650,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "formatOutput",
+      "id": "format-output",
       "name": "Format Output",
       "type": "atomic",
       "level": "II",
@@ -658,10 +658,10 @@
       "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
       "prerequisites": [],
       "derivatives": [
-        "documentAnalyst",
-        "documentDigitization",
-        "structuredOutput",
-        "textToSqlPipeline"
+        "document-analyst",
+        "document-digitization",
+        "structured-output",
+        "text-to-sql-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -680,7 +680,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "diffContent",
+      "id": "diff-content",
       "name": "Diff Content",
       "type": "atomic",
       "level": "II",
@@ -688,7 +688,7 @@
       "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
       "prerequisites": [],
       "derivatives": [
-        "codeReviewPipeline"
+        "code-review-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -707,20 +707,20 @@
       "version": "0.1.0"
     },
     {
-      "id": "webScrape",
+      "id": "web-scrape",
       "name": "Web Scrape",
       "type": "composite",
       "level": "III",
       "rarity": "uncommon",
       "description": "Retrieves and structures data from web pages into usable entities.",
       "prerequisites": [
-        "webSearch",
-        "parseHtml",
-        "extractEntities"
+        "web-search",
+        "parse-html",
+        "extract-entities"
       ],
       "derivatives": [
-        "browserAutomation",
-        "knowledgeHarvest"
+        "browser-automation",
+        "knowledge-harvest"
       ],
       "conditions": "Structured output mode required.",
       "evidence": [
@@ -746,16 +746,16 @@
       "rarity": "uncommon",
       "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
       "prerequisites": [
-        "webSearch",
+        "web-search",
         "summarize",
-        "citeSources"
+        "cite-sources"
       ],
       "derivatives": [
-        "autonomousDataScientist",
+        "autonomous-data-scientist",
         "ghostwrite",
-        "hypothesisGenerate",
-        "registryCuration",
-        "scientificDiscovery"
+        "hypothesis-generate",
+        "registry-curation",
+        "scientific-discovery"
       ],
       "conditions": "",
       "evidence": [
@@ -782,8 +782,8 @@
       "description": "Produces audience-tailored, research-backed long-form written content.",
       "prerequisites": [
         "research",
-        "writeReport",
-        "audienceModel"
+        "write-report",
+        "audience-model"
       ],
       "derivatives": [],
       "conditions": "Requires research output as input context.",
@@ -803,16 +803,16 @@
       "version": "0.1.0"
     },
     {
-      "id": "autonomousDebug",
+      "id": "autonomous-debug",
       "name": "Autonomous Debug",
       "type": "composite",
       "level": "III",
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
       "prerequisites": [
-        "codeGeneration",
-        "executeBash",
-        "errorInterpretation"
+        "code-generation",
+        "execute-bash",
+        "error-interpretation"
       ],
       "derivatives": [],
       "conditions": "",
@@ -832,19 +832,19 @@
       "version": "0.1.0"
     },
     {
-      "id": "planAndExecute",
+      "id": "plan-and-execute",
       "name": "Plan and Execute",
       "type": "composite",
       "level": "III",
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
       "prerequisites": [
-        "routeIntent",
-        "planDecompose",
-        "toolSelect"
+        "route-intent",
+        "plan-decompose",
+        "tool-select"
       ],
       "derivatives": [
-        "realTimeVoiceAssistant"
+        "real-time-voice-assistant"
       ],
       "conditions": "",
       "evidence": [
@@ -863,16 +863,16 @@
       "version": "0.1.0"
     },
     {
-      "id": "knowledgeHarvest",
+      "id": "knowledge-harvest",
       "name": "Knowledge Harvest",
       "type": "composite",
       "level": "IV",
       "rarity": "rare",
       "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
       "prerequisites": [
-        "webScrape",
-        "extractEntities",
-        "embedText"
+        "web-scrape",
+        "extract-entities",
+        "embed-text"
       ],
       "derivatives": [],
       "conditions": "",
@@ -892,7 +892,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "ragPipeline",
+      "id": "rag-pipeline",
       "name": "RAG Pipeline",
       "type": "composite",
       "level": "III",
@@ -900,9 +900,9 @@
       "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
       "prerequisites": [
         "retrieve",
-        "chunkDocument",
-        "embedText",
-        "scoreRelevance"
+        "chunk-document",
+        "embed-text",
+        "score-relevance"
       ],
       "derivatives": [],
       "conditions": "",
@@ -922,17 +922,17 @@
       "version": "0.1.0"
     },
     {
-      "id": "documentAnalyst",
+      "id": "document-analyst",
       "name": "Document Analyst",
       "type": "composite",
       "level": "III",
       "rarity": "uncommon",
       "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
       "prerequisites": [
-        "parseJson",
-        "extractEntities",
+        "parse-json",
+        "extract-entities",
         "summarize",
-        "formatOutput"
+        "format-output"
       ],
       "derivatives": [],
       "conditions": "",
@@ -952,16 +952,16 @@
       "version": "0.1.0"
     },
     {
-      "id": "recursiveSelfImprovement",
+      "id": "recursive-self-improvement",
       "name": "Recursive Self-Improvement",
       "type": "legendary",
       "level": "I",
       "rarity": "legendary",
       "description": "Agent iteratively refines its own prompts, tools, or strategies based on performance feedback loops.",
       "prerequisites": [
-        "autonomousDebug",
-        "evaluateOutput",
-        "planAndExecute"
+        "autonomous-debug",
+        "evaluate-output",
+        "plan-and-execute"
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
@@ -973,16 +973,16 @@
       "version": "0.1.0"
     },
     {
-      "id": "multiAgentOrchestrationV",
+      "id": "multi-agent-orchestration-v",
       "name": "Multi-Agent Orchestration V",
       "type": "legendary",
       "level": "I",
       "rarity": "legendary",
       "description": "Coordinates multiple specialized agents across complex workflows with dynamic task allocation and conflict resolution.",
       "prerequisites": [
-        "planAndExecute",
-        "routeIntent",
-        "toolSelect"
+        "plan-and-execute",
+        "route-intent",
+        "tool-select"
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
@@ -994,7 +994,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "autonomousResearchAgent",
+      "id": "autonomous-research-agent",
       "name": "Autonomous Research Agent",
       "type": "legendary",
       "level": "I",
@@ -1002,7 +1002,7 @@
       "description": "Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.",
       "prerequisites": [
         "research",
-        "knowledgeHarvest",
+        "knowledge-harvest",
         "ghostwrite"
       ],
       "derivatives": [],
@@ -1023,7 +1023,7 @@
       "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
       "prerequisites": [],
       "derivatives": [
-        "translationPipeline"
+        "translation-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -1042,7 +1042,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "sentimentAnalysis",
+      "id": "sentiment-analysis",
       "name": "Sentiment Analysis",
       "type": "atomic",
       "level": "IV",
@@ -1050,8 +1050,8 @@
       "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
       "prerequisites": [],
       "derivatives": [
-        "contentModeration",
-        "translationPipeline"
+        "content-moderation",
+        "translation-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -1070,7 +1070,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "imageCaption",
+      "id": "image-caption",
       "name": "Image Caption",
       "type": "atomic",
       "level": "IV",
@@ -1078,7 +1078,7 @@
       "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
       "prerequisites": [],
       "derivatives": [
-        "multimodalReasoning"
+        "multimodal-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -1097,7 +1097,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "speechToText",
+      "id": "speech-to-text",
       "name": "Speech to Text",
       "type": "atomic",
       "level": "IV",
@@ -1105,7 +1105,7 @@
       "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
       "prerequisites": [],
       "derivatives": [
-        "voiceAgent"
+        "voice-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -1124,7 +1124,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "textToSpeech",
+      "id": "text-to-speech",
       "name": "Text to Speech",
       "type": "atomic",
       "level": "IV",
@@ -1132,7 +1132,7 @@
       "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
       "prerequisites": [],
       "derivatives": [
-        "voiceAgent"
+        "voice-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -1151,7 +1151,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "generateSql",
+      "id": "generate-sql",
       "name": "Generate SQL",
       "type": "atomic",
       "level": "IV",
@@ -1159,8 +1159,8 @@
       "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
       "prerequisites": [],
       "derivatives": [
-        "textToSqlPipeline",
-        "dataAnalysis"
+        "text-to-sql-pipeline",
+        "data-analysis"
       ],
       "conditions": "",
       "evidence": [
@@ -1179,7 +1179,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "questionAnswer",
+      "id": "question-answer",
       "name": "Question Answer",
       "type": "atomic",
       "level": "IV",
@@ -1187,9 +1187,9 @@
       "description": "Produces accurate, context-grounded answers to natural-language questions, handling unanswerable cases.",
       "prerequisites": [],
       "derivatives": [
-        "conversationalAgent",
-        "voiceAgent",
-        "multimodalReasoning"
+        "conversational-agent",
+        "voice-agent",
+        "multimodal-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -1208,7 +1208,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "imageGenerate",
+      "id": "image-generate",
       "name": "Image Generate",
       "type": "atomic",
       "level": "IV",
@@ -1233,7 +1233,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "mathReason",
+      "id": "math-reason",
       "name": "Math Reason",
       "type": "atomic",
       "level": "IV",
@@ -1241,8 +1241,8 @@
       "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDataScientist",
-        "scientificDiscovery"
+        "autonomous-data-scientist",
+        "scientific-discovery"
       ],
       "conditions": "",
       "evidence": [
@@ -1261,7 +1261,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "logicalInference",
+      "id": "logical-inference",
       "name": "Logical Inference",
       "type": "atomic",
       "level": "IV",
@@ -1269,9 +1269,9 @@
       "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
       "prerequisites": [],
       "derivatives": [
-        "chainOfThought",
-        "knowledgeGraphBuild",
-        "multimodalReasoning"
+        "chain-of-thought",
+        "knowledge-graph-build",
+        "multimodal-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -1290,7 +1290,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "memoryManage",
+      "id": "memory-manage",
       "name": "Memory Manage",
       "type": "atomic",
       "level": "IV",
@@ -1298,8 +1298,8 @@
       "description": "Maintains, indexes, and retrieves conversational and long-term memory across sessions, managing context window constraints.",
       "prerequisites": [],
       "derivatives": [
-        "conversationalAgent",
-        "realTimeVoiceAssistant"
+        "conversational-agent",
+        "real-time-voice-assistant"
       ],
       "conditions": "",
       "evidence": [
@@ -1318,7 +1318,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "apiCall",
+      "id": "api-call",
       "name": "API Call",
       "type": "atomic",
       "level": "IV",
@@ -1343,7 +1343,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "refactorCode",
+      "id": "refactor-code",
       "name": "Refactor Code",
       "type": "atomic",
       "level": "IV",
@@ -1351,7 +1351,7 @@
       "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
       "prerequisites": [],
       "derivatives": [
-        "fullStackDeveloper"
+        "full-stack-developer"
       ],
       "conditions": "",
       "evidence": [
@@ -1370,7 +1370,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "generateTest",
+      "id": "generate-test",
       "name": "Generate Test",
       "type": "atomic",
       "level": "IV",
@@ -1378,7 +1378,7 @@
       "description": "Produces unit tests, integration tests, and edge-case test cases from source code or natural-language specifications.",
       "prerequisites": [],
       "derivatives": [
-        "automatedTesting"
+        "automated-testing"
       ],
       "conditions": "",
       "evidence": [
@@ -1397,7 +1397,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "parsePdf",
+      "id": "parse-pdf",
       "name": "Parse PDF",
       "type": "atomic",
       "level": "IV",
@@ -1405,7 +1405,7 @@
       "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
       "prerequisites": [],
       "derivatives": [
-        "documentDigitization"
+        "document-digitization"
       ],
       "conditions": "",
       "evidence": [
@@ -1424,7 +1424,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "detectAnomaly",
+      "id": "detect-anomaly",
       "name": "Detect Anomaly",
       "type": "atomic",
       "level": "IV",
@@ -1449,7 +1449,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "dataVisualize",
+      "id": "data-visualize",
       "name": "Data Visualize",
       "type": "atomic",
       "level": "IV",
@@ -1457,7 +1457,7 @@
       "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
       "prerequisites": [],
       "derivatives": [
-        "dataAnalysis"
+        "data-analysis"
       ],
       "conditions": "",
       "evidence": [
@@ -1476,16 +1476,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "conversationalAgent",
+      "id": "conversational-agent",
       "name": "Conversational Agent",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
       "prerequisites": [
-        "questionAnswer",
-        "memoryManage",
-        "routeIntent"
+        "question-answer",
+        "memory-manage",
+        "route-intent"
       ],
       "derivatives": [],
       "conditions": "Requires persistent memory store across turns.",
@@ -1505,16 +1505,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "textToSqlPipeline",
+      "id": "text-to-sql-pipeline",
       "name": "Text-to-SQL Pipeline",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
       "prerequisites": [
-        "generateSql",
-        "parseJson",
-        "formatOutput"
+        "generate-sql",
+        "parse-json",
+        "format-output"
       ],
       "derivatives": [],
       "conditions": "Requires schema context in prompt.",
@@ -1534,19 +1534,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "codeReviewPipeline",
+      "id": "code-review-pipeline",
       "name": "Code Review Pipeline",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
       "prerequisites": [
-        "codeGeneration",
-        "diffContent",
-        "evaluateOutput"
+        "code-generation",
+        "diff-content",
+        "evaluate-output"
       ],
       "derivatives": [
-        "fullStackDeveloper"
+        "full-stack-developer"
       ],
       "conditions": "",
       "evidence": [
@@ -1565,19 +1565,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "dataAnalysis",
+      "id": "data-analysis",
       "name": "Data Analysis",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
       "prerequisites": [
-        "generateSql",
-        "dataVisualize",
+        "generate-sql",
+        "data-visualize",
         "summarize"
       ],
       "derivatives": [
-        "autonomousDataScientist"
+        "autonomous-data-scientist"
       ],
       "conditions": "",
       "evidence": [
@@ -1596,19 +1596,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "voiceAgent",
+      "id": "voice-agent",
       "name": "Voice Agent",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
       "prerequisites": [
-        "speechToText",
-        "questionAnswer",
-        "textToSpeech"
+        "speech-to-text",
+        "question-answer",
+        "text-to-speech"
       ],
       "derivatives": [
-        "realTimeVoiceAssistant"
+        "real-time-voice-assistant"
       ],
       "conditions": "Requires real-time audio I/O or audio file access.",
       "evidence": [
@@ -1627,19 +1627,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "automatedTesting",
+      "id": "automated-testing",
       "name": "Automated Testing",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
       "prerequisites": [
-        "generateTest",
-        "executeBash",
-        "errorInterpretation"
+        "generate-test",
+        "execute-bash",
+        "error-interpretation"
       ],
       "derivatives": [
-        "fullStackDeveloper"
+        "full-stack-developer"
       ],
       "conditions": "",
       "evidence": [
@@ -1658,7 +1658,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "contentModeration",
+      "id": "content-moderation",
       "name": "Content Moderation",
       "type": "composite",
       "level": "IV",
@@ -1666,8 +1666,8 @@
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
       "prerequisites": [
         "classify",
-        "sentimentAnalysis",
-        "extractEntities"
+        "sentiment-analysis",
+        "extract-entities"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1687,16 +1687,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "multimodalReasoning",
+      "id": "multimodal-reasoning",
       "name": "Multimodal Reasoning",
       "type": "composite",
       "level": "IV",
       "rarity": "rare",
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
       "prerequisites": [
-        "imageCaption",
-        "questionAnswer",
-        "logicalInference"
+        "image-caption",
+        "question-answer",
+        "logical-inference"
       ],
       "derivatives": [],
       "conditions": "Requires vision-language model capability.",
@@ -1716,7 +1716,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "translationPipeline",
+      "id": "translation-pipeline",
       "name": "Translation Pipeline",
       "type": "composite",
       "level": "IV",
@@ -1724,8 +1724,8 @@
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
       "prerequisites": [
         "translate",
-        "sentimentAnalysis",
-        "audienceModel"
+        "sentiment-analysis",
+        "audience-model"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1745,16 +1745,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "documentDigitization",
+      "id": "document-digitization",
       "name": "Document Digitization",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
       "prerequisites": [
-        "parsePdf",
-        "extractEntities",
-        "formatOutput"
+        "parse-pdf",
+        "extract-entities",
+        "format-output"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1774,16 +1774,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "fullStackDeveloper",
+      "id": "full-stack-developer",
       "name": "Full-Stack Developer",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
       "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
       "prerequisites": [
-        "codeReviewPipeline",
-        "automatedTesting",
-        "refactorCode"
+        "code-review-pipeline",
+        "automated-testing",
+        "refactor-code"
       ],
       "derivatives": [],
       "conditions": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
@@ -1817,15 +1817,15 @@
       "version": "0.2.0"
     },
     {
-      "id": "autonomousDataScientist",
+      "id": "autonomous-data-scientist",
       "name": "Autonomous Data Scientist",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
       "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
       "prerequisites": [
-        "dataAnalysis",
-        "mathReason",
+        "data-analysis",
+        "math-reason",
         "research"
       ],
       "derivatives": [],
@@ -1860,16 +1860,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "realTimeVoiceAssistant",
+      "id": "real-time-voice-assistant",
       "name": "Real-Time Voice Assistant",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
       "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
       "prerequisites": [
-        "voiceAgent",
-        "memoryManage",
-        "planAndExecute"
+        "voice-agent",
+        "memory-manage",
+        "plan-and-execute"
       ],
       "derivatives": [],
       "conditions": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
@@ -1903,7 +1903,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "registryCuration",
+      "id": "registry-curation",
       "name": "Registry Curation",
       "type": "composite",
       "level": "IV",
@@ -1911,8 +1911,8 @@
       "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
       "prerequisites": [
         "research",
-        "codeGeneration",
-        "executeBash"
+        "code-generation",
+        "execute-bash"
       ],
       "derivatives": [],
       "conditions": "Requires write access to the canonical graph and a passing validation suite.",
@@ -1939,7 +1939,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "toolUse",
+      "id": "tool-use",
       "name": "Tool Use",
       "type": "atomic",
       "level": "IV",
@@ -1947,7 +1947,7 @@
       "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
       "prerequisites": [],
       "derivatives": [
-        "reActReasoning"
+        "re-act-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -1973,7 +1973,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "chainOfThought",
+      "id": "chain-of-thought",
       "name": "Chain-of-Thought Reasoning",
       "type": "atomic",
       "level": "IV",
@@ -1981,8 +1981,8 @@
       "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
       "prerequisites": [],
       "derivatives": [
-        "reActReasoning",
-        "scientificDiscovery"
+        "re-act-reasoning",
+        "scientific-discovery"
       ],
       "conditions": "",
       "evidence": [
@@ -2008,7 +2008,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "selfCritique",
+      "id": "self-critique",
       "name": "Self-Critique",
       "type": "atomic",
       "level": "IV",
@@ -2016,7 +2016,7 @@
       "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
       "prerequisites": [],
       "derivatives": [
-        "recursiveSelfImprovement"
+        "recursive-self-improvement"
       ],
       "conditions": "",
       "evidence": [
@@ -2042,7 +2042,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "structuredOutput",
+      "id": "structured-output",
       "name": "Structured Output Generation",
       "type": "atomic",
       "level": "III",
@@ -2050,8 +2050,8 @@
       "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
       "prerequisites": [],
       "derivatives": [
-        "ragPipeline",
-        "textToSqlPipeline"
+        "rag-pipeline",
+        "text-to-sql-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -2077,7 +2077,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "codeExecution",
+      "id": "code-execution",
       "name": "Code Execution",
       "type": "atomic",
       "level": "IV",
@@ -2085,9 +2085,9 @@
       "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
       "prerequisites": [],
       "derivatives": [
-        "autonomousDebug",
-        "codeReviewPipeline",
-        "automatedTesting"
+        "autonomous-debug",
+        "code-review-pipeline",
+        "automated-testing"
       ],
       "conditions": "",
       "evidence": [
@@ -2113,7 +2113,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "computerUse",
+      "id": "computer-use",
       "name": "Computer Use",
       "type": "atomic",
       "level": "IV",
@@ -2121,7 +2121,7 @@
       "description": "Controls desktop GUIs and web browsers by interpreting screenshots, issuing mouse/keyboard actions, and verifying visual state to complete open-ended computer tasks.",
       "prerequisites": [],
       "derivatives": [
-        "browserAutomation"
+        "browser-automation"
       ],
       "conditions": "Requires screenshot observation loop and action executor (click, type, scroll).",
       "evidence": [
@@ -2147,7 +2147,7 @@
       "version": "0.2.0"
     },
     {
-      "id": "hypothesisGenerate",
+      "id": "hypothesis-generate",
       "name": "Hypothesis Generation",
       "type": "atomic",
       "level": "IV",
@@ -2155,7 +2155,7 @@
       "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
       "prerequisites": [],
       "derivatives": [
-        "scientificDiscovery"
+        "scientific-discovery"
       ],
       "conditions": "",
       "evidence": [
@@ -2188,19 +2188,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "reActReasoning",
+      "id": "re-act-reasoning",
       "name": "ReAct Reasoning",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
       "prerequisites": [
-        "planDecompose",
-        "toolUse"
+        "plan-decompose",
+        "tool-use"
       ],
       "derivatives": [
-        "planAndExecute",
-        "autonomousResearchAgent"
+        "plan-and-execute",
+        "autonomous-research-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -2226,18 +2226,18 @@
       "version": "0.2.0"
     },
     {
-      "id": "browserAutomation",
+      "id": "browser-automation",
       "name": "Browser Automation",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
       "prerequisites": [
-        "webSearch",
-        "computerUse"
+        "web-search",
+        "computer-use"
       ],
       "derivatives": [
-        "autonomousResearchAgent"
+        "autonomous-research-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -2263,19 +2263,19 @@
       "version": "0.2.0"
     },
     {
-      "id": "knowledgeGraphBuild",
+      "id": "knowledge-graph-build",
       "name": "Knowledge Graph Construction",
       "type": "composite",
       "level": "IV",
       "rarity": "uncommon",
       "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
       "prerequisites": [
-        "extractEntities",
-        "logicalInference"
+        "extract-entities",
+        "logical-inference"
       ],
       "derivatives": [
-        "ragPipeline",
-        "autonomousResearchAgent"
+        "rag-pipeline",
+        "autonomous-research-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -2301,16 +2301,16 @@
       "version": "0.2.0"
     },
     {
-      "id": "scientificDiscovery",
+      "id": "scientific-discovery",
       "name": "Autonomous Scientific Discovery",
       "type": "legendary",
       "level": "IV",
       "rarity": "legendary",
       "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report — completing a full research cycle without human intervention.",
       "prerequisites": [
-        "hypothesisGenerate",
+        "hypothesis-generate",
         "research",
-        "mathReason"
+        "math-reason"
       ],
       "derivatives": [],
       "conditions": "Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources.",
@@ -2346,8 +2346,8 @@
   ],
   "edges": [
     {
-      "sourceSkillId": "webSearch",
-      "targetSkillId": "webScrape",
+      "sourceSkillId": "web-search",
+      "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
       "levelFloor": "II",
@@ -2356,8 +2356,8 @@
       ]
     },
     {
-      "sourceSkillId": "parseHtml",
-      "targetSkillId": "webScrape",
+      "sourceSkillId": "parse-html",
+      "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
       "levelFloor": "II",
@@ -2366,8 +2366,8 @@
       ]
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "webScrape",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
       "levelFloor": "II",
@@ -2376,7 +2376,7 @@
       ]
     },
     {
-      "sourceSkillId": "webSearch",
+      "sourceSkillId": "web-search",
       "targetSkillId": "research",
       "edgeType": "prerequisite",
       "condition": "",
@@ -2396,7 +2396,7 @@
       ]
     },
     {
-      "sourceSkillId": "citeSources",
+      "sourceSkillId": "cite-sources",
       "targetSkillId": "research",
       "edgeType": "prerequisite",
       "condition": "",
@@ -2416,7 +2416,7 @@
       ]
     },
     {
-      "sourceSkillId": "writeReport",
+      "sourceSkillId": "write-report",
       "targetSkillId": "ghostwrite",
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
@@ -2426,7 +2426,7 @@
       ]
     },
     {
-      "sourceSkillId": "audienceModel",
+      "sourceSkillId": "audience-model",
       "targetSkillId": "ghostwrite",
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
@@ -2436,8 +2436,8 @@
       ]
     },
     {
-      "sourceSkillId": "codeGeneration",
-      "targetSkillId": "autonomousDebug",
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2446,8 +2446,8 @@
       ]
     },
     {
-      "sourceSkillId": "executeBash",
-      "targetSkillId": "autonomousDebug",
+      "sourceSkillId": "execute-bash",
+      "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2456,8 +2456,8 @@
       ]
     },
     {
-      "sourceSkillId": "errorInterpretation",
-      "targetSkillId": "autonomousDebug",
+      "sourceSkillId": "error-interpretation",
+      "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2466,8 +2466,8 @@
       ]
     },
     {
-      "sourceSkillId": "routeIntent",
-      "targetSkillId": "planAndExecute",
+      "sourceSkillId": "route-intent",
+      "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2476,8 +2476,8 @@
       ]
     },
     {
-      "sourceSkillId": "planDecompose",
-      "targetSkillId": "planAndExecute",
+      "sourceSkillId": "plan-decompose",
+      "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2486,8 +2486,8 @@
       ]
     },
     {
-      "sourceSkillId": "toolSelect",
-      "targetSkillId": "planAndExecute",
+      "sourceSkillId": "tool-select",
+      "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2496,8 +2496,8 @@
       ]
     },
     {
-      "sourceSkillId": "webScrape",
-      "targetSkillId": "knowledgeHarvest",
+      "sourceSkillId": "web-scrape",
+      "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2506,8 +2506,8 @@
       ]
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "knowledgeHarvest",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2516,8 +2516,8 @@
       ]
     },
     {
-      "sourceSkillId": "embedText",
-      "targetSkillId": "knowledgeHarvest",
+      "sourceSkillId": "embed-text",
+      "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2527,7 +2527,7 @@
     },
     {
       "sourceSkillId": "retrieve",
-      "targetSkillId": "ragPipeline",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2536,8 +2536,8 @@
       ]
     },
     {
-      "sourceSkillId": "chunkDocument",
-      "targetSkillId": "ragPipeline",
+      "sourceSkillId": "chunk-document",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2546,8 +2546,8 @@
       ]
     },
     {
-      "sourceSkillId": "embedText",
-      "targetSkillId": "ragPipeline",
+      "sourceSkillId": "embed-text",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2556,8 +2556,8 @@
       ]
     },
     {
-      "sourceSkillId": "scoreRelevance",
-      "targetSkillId": "ragPipeline",
+      "sourceSkillId": "score-relevance",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2566,8 +2566,8 @@
       ]
     },
     {
-      "sourceSkillId": "parseJson",
-      "targetSkillId": "documentAnalyst",
+      "sourceSkillId": "parse-json",
+      "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2576,8 +2576,8 @@
       ]
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "documentAnalyst",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2587,7 +2587,7 @@
     },
     {
       "sourceSkillId": "summarize",
-      "targetSkillId": "documentAnalyst",
+      "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2596,8 +2596,8 @@
       ]
     },
     {
-      "sourceSkillId": "formatOutput",
-      "targetSkillId": "documentAnalyst",
+      "sourceSkillId": "format-output",
+      "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2606,48 +2606,48 @@
       ]
     },
     {
-      "sourceSkillId": "autonomousDebug",
-      "targetSkillId": "recursiveSelfImprovement",
+      "sourceSkillId": "autonomous-debug",
+      "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "evaluateOutput",
-      "targetSkillId": "recursiveSelfImprovement",
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "planAndExecute",
-      "targetSkillId": "recursiveSelfImprovement",
+      "sourceSkillId": "plan-and-execute",
+      "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "planAndExecute",
-      "targetSkillId": "multiAgentOrchestrationV",
+      "sourceSkillId": "plan-and-execute",
+      "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "routeIntent",
-      "targetSkillId": "multiAgentOrchestrationV",
+      "sourceSkillId": "route-intent",
+      "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "toolSelect",
-      "targetSkillId": "multiAgentOrchestrationV",
+      "sourceSkillId": "tool-select",
+      "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
@@ -2655,15 +2655,15 @@
     },
     {
       "sourceSkillId": "research",
-      "targetSkillId": "autonomousResearchAgent",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "knowledgeHarvest",
-      "targetSkillId": "autonomousResearchAgent",
+      "sourceSkillId": "knowledge-harvest",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
@@ -2671,15 +2671,15 @@
     },
     {
       "sourceSkillId": "ghostwrite",
-      "targetSkillId": "autonomousResearchAgent",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
       "levelFloor": "II",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "questionAnswer",
-      "targetSkillId": "conversationalAgent",
+      "sourceSkillId": "question-answer",
+      "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
       "levelFloor": "II",
@@ -2688,8 +2688,8 @@
       ]
     },
     {
-      "sourceSkillId": "memoryManage",
-      "targetSkillId": "conversationalAgent",
+      "sourceSkillId": "memory-manage",
+      "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
       "levelFloor": "II",
@@ -2698,8 +2698,8 @@
       ]
     },
     {
-      "sourceSkillId": "routeIntent",
-      "targetSkillId": "conversationalAgent",
+      "sourceSkillId": "route-intent",
+      "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
       "levelFloor": "II",
@@ -2708,8 +2708,8 @@
       ]
     },
     {
-      "sourceSkillId": "generateSql",
-      "targetSkillId": "textToSqlPipeline",
+      "sourceSkillId": "generate-sql",
+      "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
       "levelFloor": "II",
@@ -2718,8 +2718,8 @@
       ]
     },
     {
-      "sourceSkillId": "parseJson",
-      "targetSkillId": "textToSqlPipeline",
+      "sourceSkillId": "parse-json",
+      "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
       "levelFloor": "II",
@@ -2728,8 +2728,8 @@
       ]
     },
     {
-      "sourceSkillId": "formatOutput",
-      "targetSkillId": "textToSqlPipeline",
+      "sourceSkillId": "format-output",
+      "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
       "levelFloor": "II",
@@ -2738,8 +2738,8 @@
       ]
     },
     {
-      "sourceSkillId": "codeGeneration",
-      "targetSkillId": "codeReviewPipeline",
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2748,8 +2748,8 @@
       ]
     },
     {
-      "sourceSkillId": "diffContent",
-      "targetSkillId": "codeReviewPipeline",
+      "sourceSkillId": "diff-content",
+      "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2758,8 +2758,8 @@
       ]
     },
     {
-      "sourceSkillId": "evaluateOutput",
-      "targetSkillId": "codeReviewPipeline",
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2768,8 +2768,8 @@
       ]
     },
     {
-      "sourceSkillId": "generateSql",
-      "targetSkillId": "dataAnalysis",
+      "sourceSkillId": "generate-sql",
+      "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2778,8 +2778,8 @@
       ]
     },
     {
-      "sourceSkillId": "dataVisualize",
-      "targetSkillId": "dataAnalysis",
+      "sourceSkillId": "data-visualize",
+      "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2789,7 +2789,7 @@
     },
     {
       "sourceSkillId": "summarize",
-      "targetSkillId": "dataAnalysis",
+      "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2798,8 +2798,8 @@
       ]
     },
     {
-      "sourceSkillId": "speechToText",
-      "targetSkillId": "voiceAgent",
+      "sourceSkillId": "speech-to-text",
+      "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
       "levelFloor": "II",
@@ -2808,8 +2808,8 @@
       ]
     },
     {
-      "sourceSkillId": "questionAnswer",
-      "targetSkillId": "voiceAgent",
+      "sourceSkillId": "question-answer",
+      "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
       "levelFloor": "II",
@@ -2818,8 +2818,8 @@
       ]
     },
     {
-      "sourceSkillId": "textToSpeech",
-      "targetSkillId": "voiceAgent",
+      "sourceSkillId": "text-to-speech",
+      "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
       "levelFloor": "II",
@@ -2828,8 +2828,8 @@
       ]
     },
     {
-      "sourceSkillId": "generateTest",
-      "targetSkillId": "automatedTesting",
+      "sourceSkillId": "generate-test",
+      "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2838,8 +2838,8 @@
       ]
     },
     {
-      "sourceSkillId": "executeBash",
-      "targetSkillId": "automatedTesting",
+      "sourceSkillId": "execute-bash",
+      "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2848,8 +2848,8 @@
       ]
     },
     {
-      "sourceSkillId": "errorInterpretation",
-      "targetSkillId": "automatedTesting",
+      "sourceSkillId": "error-interpretation",
+      "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2859,7 +2859,7 @@
     },
     {
       "sourceSkillId": "classify",
-      "targetSkillId": "contentModeration",
+      "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2868,8 +2868,8 @@
       ]
     },
     {
-      "sourceSkillId": "sentimentAnalysis",
-      "targetSkillId": "contentModeration",
+      "sourceSkillId": "sentiment-analysis",
+      "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2878,8 +2878,8 @@
       ]
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "contentModeration",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2888,8 +2888,8 @@
       ]
     },
     {
-      "sourceSkillId": "imageCaption",
-      "targetSkillId": "multimodalReasoning",
+      "sourceSkillId": "image-caption",
+      "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
       "levelFloor": "II",
@@ -2898,8 +2898,8 @@
       ]
     },
     {
-      "sourceSkillId": "questionAnswer",
-      "targetSkillId": "multimodalReasoning",
+      "sourceSkillId": "question-answer",
+      "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
       "levelFloor": "II",
@@ -2908,8 +2908,8 @@
       ]
     },
     {
-      "sourceSkillId": "logicalInference",
-      "targetSkillId": "multimodalReasoning",
+      "sourceSkillId": "logical-inference",
+      "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
       "levelFloor": "II",
@@ -2919,7 +2919,7 @@
     },
     {
       "sourceSkillId": "translate",
-      "targetSkillId": "translationPipeline",
+      "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2928,8 +2928,8 @@
       ]
     },
     {
-      "sourceSkillId": "sentimentAnalysis",
-      "targetSkillId": "translationPipeline",
+      "sourceSkillId": "sentiment-analysis",
+      "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2938,8 +2938,8 @@
       ]
     },
     {
-      "sourceSkillId": "audienceModel",
-      "targetSkillId": "translationPipeline",
+      "sourceSkillId": "audience-model",
+      "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2948,8 +2948,8 @@
       ]
     },
     {
-      "sourceSkillId": "parsePdf",
-      "targetSkillId": "documentDigitization",
+      "sourceSkillId": "parse-pdf",
+      "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2958,8 +2958,8 @@
       ]
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "documentDigitization",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2968,8 +2968,8 @@
       ]
     },
     {
-      "sourceSkillId": "formatOutput",
-      "targetSkillId": "documentDigitization",
+      "sourceSkillId": "format-output",
+      "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "II",
@@ -2978,8 +2978,8 @@
       ]
     },
     {
-      "sourceSkillId": "codeReviewPipeline",
-      "targetSkillId": "fullStackDeveloper",
+      "sourceSkillId": "code-review-pipeline",
+      "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -2988,8 +2988,8 @@
       ]
     },
     {
-      "sourceSkillId": "automatedTesting",
-      "targetSkillId": "fullStackDeveloper",
+      "sourceSkillId": "automated-testing",
+      "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -2998,8 +2998,8 @@
       ]
     },
     {
-      "sourceSkillId": "refactorCode",
-      "targetSkillId": "fullStackDeveloper",
+      "sourceSkillId": "refactor-code",
+      "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3008,8 +3008,8 @@
       ]
     },
     {
-      "sourceSkillId": "dataAnalysis",
-      "targetSkillId": "autonomousDataScientist",
+      "sourceSkillId": "data-analysis",
+      "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3018,8 +3018,8 @@
       ]
     },
     {
-      "sourceSkillId": "mathReason",
-      "targetSkillId": "autonomousDataScientist",
+      "sourceSkillId": "math-reason",
+      "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3029,7 +3029,7 @@
     },
     {
       "sourceSkillId": "research",
-      "targetSkillId": "autonomousDataScientist",
+      "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3038,8 +3038,8 @@
       ]
     },
     {
-      "sourceSkillId": "voiceAgent",
-      "targetSkillId": "realTimeVoiceAssistant",
+      "sourceSkillId": "voice-agent",
+      "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3048,8 +3048,8 @@
       ]
     },
     {
-      "sourceSkillId": "memoryManage",
-      "targetSkillId": "realTimeVoiceAssistant",
+      "sourceSkillId": "memory-manage",
+      "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3058,8 +3058,8 @@
       ]
     },
     {
-      "sourceSkillId": "planAndExecute",
-      "targetSkillId": "realTimeVoiceAssistant",
+      "sourceSkillId": "plan-and-execute",
+      "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
       "levelFloor": "II",
@@ -3069,7 +3069,7 @@
     },
     {
       "sourceSkillId": "research",
-      "targetSkillId": "registryCuration",
+      "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
       "levelFloor": "II",
@@ -3078,8 +3078,8 @@
       ]
     },
     {
-      "sourceSkillId": "codeGeneration",
-      "targetSkillId": "registryCuration",
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
       "levelFloor": "II",
@@ -3088,8 +3088,8 @@
       ]
     },
     {
-      "sourceSkillId": "executeBash",
-      "targetSkillId": "registryCuration",
+      "sourceSkillId": "execute-bash",
+      "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
       "levelFloor": "II",
@@ -3098,160 +3098,160 @@
       ]
     },
     {
-      "sourceSkillId": "toolUse",
-      "targetSkillId": "reActReasoning",
+      "sourceSkillId": "tool-use",
+      "targetSkillId": "re-act-reasoning",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "chainOfThought",
-      "targetSkillId": "reActReasoning",
+      "sourceSkillId": "chain-of-thought",
+      "targetSkillId": "re-act-reasoning",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "chainOfThought",
-      "targetSkillId": "scientificDiscovery",
+      "sourceSkillId": "chain-of-thought",
+      "targetSkillId": "scientific-discovery",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "selfCritique",
-      "targetSkillId": "recursiveSelfImprovement",
+      "sourceSkillId": "self-critique",
+      "targetSkillId": "recursive-self-improvement",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "structuredOutput",
-      "targetSkillId": "ragPipeline",
+      "sourceSkillId": "structured-output",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "structuredOutput",
-      "targetSkillId": "textToSqlPipeline",
+      "sourceSkillId": "structured-output",
+      "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "codeExecution",
-      "targetSkillId": "autonomousDebug",
+      "sourceSkillId": "code-execution",
+      "targetSkillId": "autonomous-debug",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "codeExecution",
-      "targetSkillId": "codeReviewPipeline",
+      "sourceSkillId": "code-execution",
+      "targetSkillId": "code-review-pipeline",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "codeExecution",
-      "targetSkillId": "automatedTesting",
+      "sourceSkillId": "code-execution",
+      "targetSkillId": "automated-testing",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "computerUse",
-      "targetSkillId": "browserAutomation",
+      "sourceSkillId": "computer-use",
+      "targetSkillId": "browser-automation",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "hypothesisGenerate",
-      "targetSkillId": "scientificDiscovery",
+      "sourceSkillId": "hypothesis-generate",
+      "targetSkillId": "scientific-discovery",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "planDecompose",
-      "targetSkillId": "reActReasoning",
+      "sourceSkillId": "plan-decompose",
+      "targetSkillId": "re-act-reasoning",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "reActReasoning",
-      "targetSkillId": "planAndExecute",
+      "sourceSkillId": "re-act-reasoning",
+      "targetSkillId": "plan-and-execute",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "reActReasoning",
-      "targetSkillId": "autonomousResearchAgent",
+      "sourceSkillId": "re-act-reasoning",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "webSearch",
-      "targetSkillId": "browserAutomation",
+      "sourceSkillId": "web-search",
+      "targetSkillId": "browser-automation",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "browserAutomation",
-      "targetSkillId": "autonomousResearchAgent",
+      "sourceSkillId": "browser-automation",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "extractEntities",
-      "targetSkillId": "knowledgeGraphBuild",
+      "sourceSkillId": "extract-entities",
+      "targetSkillId": "knowledge-graph-build",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "logicalInference",
-      "targetSkillId": "knowledgeGraphBuild",
+      "sourceSkillId": "logical-inference",
+      "targetSkillId": "knowledge-graph-build",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "knowledgeGraphBuild",
-      "targetSkillId": "ragPipeline",
+      "sourceSkillId": "knowledge-graph-build",
+      "targetSkillId": "rag-pipeline",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "knowledgeGraphBuild",
-      "targetSkillId": "autonomousResearchAgent",
+      "sourceSkillId": "knowledge-graph-build",
+      "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
       "levelFloor": "I",
@@ -3259,15 +3259,15 @@
     },
     {
       "sourceSkillId": "research",
-      "targetSkillId": "scientificDiscovery",
+      "targetSkillId": "scientific-discovery",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
     },
     {
-      "sourceSkillId": "mathReason",
-      "targetSkillId": "scientificDiscovery",
+      "sourceSkillId": "math-reason",
+      "targetSkillId": "scientific-discovery",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
