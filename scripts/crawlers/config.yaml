@@ -1,0 +1,58 @@
+crawlers:
+  mcp_registry:
+    sources:
+      - url: "https://mcp.so/api/servers"
+        name: "mcp.so"
+      - url: "https://registry.smithery.ai/servers"
+        name: "smithery"
+    batch_size: 50
+    min_downloads: 10
+
+  npm:
+    keywords:
+      - "mcp-server"
+      - "ai-agent"
+      - "langchain"
+      - "tool-use"
+      - "rag"
+      - "embedding"
+      - "llm-tool"
+    min_weekly_downloads: 100
+    max_age_days: 180
+    batch_size: 30
+
+  vscode_marketplace:
+    categories:
+      - "Machine Learning"
+      - "Data Science"
+      - "Programming Languages"
+    keywords:
+      - "ai"
+      - "copilot"
+      - "agent"
+      - "mcp"
+    min_installs: 1000
+    batch_size: 20
+
+  huggingface:
+    tasks:
+      - "text-generation"
+      - "summarization"
+      - "token-classification"
+      - "text-classification"
+      - "question-answering"
+      - "feature-extraction"
+    min_downloads: 1000
+    batch_size: 20
+
+evidence_thresholds:
+  auto_merge_score: 60
+  human_review_score: 30
+
+pr_settings:
+  owner: "mbtiongson1"
+  repo: "gaia-skill-tree"
+  bot_user: "gaiabot"
+  labels:
+    - "bot-proposal"
+  stale_days: 30

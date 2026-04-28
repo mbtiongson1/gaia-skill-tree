@@ -1,0 +1,91 @@
+export interface Skill {
+  id: string;
+  name: string;
+  type: "atomic" | "composite" | "legendary";
+  level: "I" | "II" | "III" | "IV" | "V";
+  rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
+  description: string;
+  prerequisites: string[];
+  derivatives: string[];
+  conditions: string;
+  evidence: EvidenceEntry[];
+  knownAgents: string[];
+  status: "provisional" | "validated" | "disputed" | "deprecated";
+  createdAt: string;
+  updatedAt: string;
+  version: string;
+}
+
+export interface EvidenceEntry {
+  class: "A" | "B" | "C";
+  source: string;
+  evaluator: string;
+  date: string;
+  notes?: string;
+  source_type?: "manual" | "mcp-registry" | "npm" | "vscode-marketplace" | "huggingface";
+}
+
+export interface Edge {
+  sourceSkillId: string;
+  targetSkillId: string;
+  edgeType: "prerequisite" | "corequisite" | "enhances";
+  condition: string;
+  levelFloor: string;
+  evidenceRefs: string[];
+}
+
+export interface GaiaGraph {
+  $schema?: string;
+  version: string;
+  generatedAt: string;
+  meta: {
+    typeLabels: Record<string, string>;
+    levelLabels: Record<string, string>;
+    rarityLabels: Record<string, string>;
+  };
+  skills: Skill[];
+  edges: Edge[];
+}
+
+export interface UnlockedSkill {
+  skillId: string;
+  level: string;
+  unlockedAt: string;
+  unlockedIn: string;
+  combinedFrom: string[];
+}
+
+export interface PendingCombination {
+  detectedSkills: string[];
+  candidateResult: string;
+  levelFloor: string;
+  promptedAt: string;
+}
+
+export interface UserSkillTree {
+  userId: string;
+  updatedAt: string;
+  unlockedSkills: UnlockedSkill[];
+  pendingCombinations: PendingCombination[];
+  stats: {
+    totalUnlocked: number;
+    highestRarity: string;
+    deepestLineage: number;
+  };
+}
+
+export interface GaiaConfig {
+  gaiaUser: string;
+  gaiaRegistryRef: string;
+  scanPaths: string[];
+  autoPromptCombinations: boolean;
+  lastScan?: string;
+}
+
+export interface FusionCandidate {
+  candidateResult: string;
+  levelFloor: string;
+  detectedSkills: string[];
+  missingSkills: string[];
+  status: "ready" | "one_away" | "partial";
+}

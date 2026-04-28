@@ -1,0 +1,118 @@
+name: "Auto-Triage"
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    outputs:
+      is_bot: ${{ steps.classify.outputs.is_bot }}
+      evidence_score: ${{ steps.score.outputs.score }}
+      has_legendary: ${{ steps.check_legendary.outputs.has_legendary }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Classify PR source
+        id: classify
+        run: |
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name' 2>/dev/null || echo "")
+          if echo "$LABELS" | grep -q "bot-proposal"; then
+            echo "is_bot=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_bot=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install jsonschema
+
+      - name: Validate schema + DAG
+        id: validate
+        run: python scripts/validate.py
+
+      - name: Extract evidence score
+        id: score
+        if: steps.classify.outputs.is_bot == 'true'
+        run: |
+          BODY=$(gh pr view ${{ github.event.pull_request.number }} --json body -q '.body')
+          SCORE=$(echo "$BODY" | grep -oP 'Evidence Score.*?\|\s*\K\d+' | head -1 || echo "0")
+          echo "score=${SCORE:-0}" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for legendary proposals
+        id: check_legendary
+        run: |
+          if git diff origin/main --name-only | grep -q "proposals/"; then
+            # Check if any proposal has type "legendary"
+            LEGENDARY=$(find proposals/ -name "*.json" -newer .git/refs/heads/main -exec grep -l '"type": "legendary"' {} \; 2>/dev/null | wc -l)
+            if [ "$LEGENDARY" -gt 0 ]; then
+              echo "has_legendary=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_legendary=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "has_legendary=false" >> $GITHUB_OUTPUT
+          fi
+
+  auto-merge:
+    needs: classify
+    if: needs.classify.outputs.is_bot == 'true' && needs.classify.outputs.has_legendary == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check evidence threshold
+        id: gate
+        run: |
+          SCORE=${{ needs.classify.outputs.evidence_score }}
+          if [ "${SCORE:-0}" -ge 60 ]; then
+            echo "pass=true" >> $GITHUB_OUTPUT
+          else
+            echo "pass=false" >> $GITHUB_OUTPUT
+            echo "Score $SCORE is below auto-merge threshold (60)"
+          fi
+
+      - name: Auto-merge
+        if: steps.gate.outputs.pass == 'true'
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --squash --auto
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Label for review
+        if: steps.gate.outputs.pass == 'false'
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  route-review:
+    needs: classify
+    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Request reviewers
+        run: |
+          if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "legendary" --add-label "needs-review"
+            gh pr edit ${{ github.event.pull_request.number }} --add-reviewer mbtiongson1
+            echo "Legendary skill proposed — requires 2 maintainer approvals"
+          else
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "human-proposal" --add-label "needs-review"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
