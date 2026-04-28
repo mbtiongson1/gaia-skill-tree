@@ -19,8 +19,8 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 | PR Type | Template | What You're Changing |
 |---|---|---|
-| New atomic skill | `new_atomic_skill.md` | Adding a primitive capability to `gaia.json` |
-| New composite skill | `new_composite_skill.md` | Adding a skill with 2+ prerequisites to `gaia.json` |
+| New Intrinsic Skill (`atomic`) | `new_atomic_skill.md` | Adding a primitive capability to `gaia.json` |
+| New Extra Skill (`composite`) | `new_composite_skill.md` | Adding a skill with 2+ prerequisites to `gaia.json` |
 | New fusion recipe | `new_fusion.md` | Adding edge records to `gaia.json` |
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
 | New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
@@ -29,10 +29,14 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 ## Naming Conventions
 
-- **Skill IDs** use `camelCase`: `webScrape`, `parseJson`, `autonomousDebug`.
+- **Skill IDs** use `kebab-case` in `gaia.json`: `web-scrape`, `parse-json`, `autonomous-debug`.
 - **Display names** use Title Case: "Web Scrape", "Parse JSON", "Autonomous Debug".
+- **Skill types** have display labels used in generated files — use the machine ID in `gaia.json`:
+  - `atomic` → **Intrinsic Skill**
+  - `composite` → **Extra Skill**
+  - `legendary` → **Ultimate Skill**
 - **No vendor names** in skill IDs or definitions. Skills must be agent-agnostic.
-- **No abbreviations** unless universally understood (`html`, `json`, `api` are fine; `nlp` should be `naturalLanguageProcessing`).
+- **No abbreviations** unless universally understood (`html`, `json`, `api` are fine; `nlp` should be `natural-language-processing`).
 - **No duplicates.** Before submitting, search `gaia.json` for existing skills that may already cover your concept. If overlap exists, consider a reclassification PR instead.
 
 ---
@@ -51,17 +55,17 @@ Every skill above Level I must include at least one evidence entry.
 
 ### Evidence by Level
 
-| Level | Name | Minimum Evidence |
+| Level | Rank | Minimum Evidence |
 |---|---|---|
-| I | Latent | None |
-| II | Emerging | 1× Class C |
-| III | Competent | 1× Class B |
-| IV | Proficient | 1× Class B or A |
-| V | Mastered | 1× Class A |
+| I | Dormant | None |
+| II | Awakened | 1× Class C |
+| III | Named | 1× Class B |
+| IV | Evolved | 1× Class B or A |
+| V | Transcendent | 1× Class A |
 
-### Legendary Requirements
+### Ultimate Skill Requirements
 
-Legendary-type skills have additional requirements:
+Ultimate Skill (`legendary`) type skills have additional requirements:
 - Minimum **3 Class A or B** evidence sources.
 - **2 maintainer approvals** before merge.
 - Status must be `validated` at merge (never `provisional`).
@@ -89,9 +93,9 @@ Legendary-type skills have additional requirements:
 ```
 
 Examples:
-- `[atomic] Parse CSV — adds CSV parsing as a primitive skill`
-- `[composite] Autonomous Debug — combines codeGen + bash + errorInterp`
-- `[reclassify] webScrape — upgrade from Level II to Level III with new evidence`
+- `[atomic] parse-csv — adds CSV parsing as a primitive Intrinsic Skill`
+- `[composite] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
+- `[reclassify] web-scrape — upgrade from Awakened (II) to Named (III) with new evidence`
 
 ---
 
@@ -121,7 +125,7 @@ Maintainers evaluate every PR against these criteria:
 | **Inflated rarity** | Rarity is declared rather than computed from prevalence data. |
 | **Ambiguous definition** | The skill description is vague, overlapping, or not falsifiable. |
 | **Hand-edited generated files** | Changes were made to `skills/`, `registry.md`, or `combinations.md` instead of `gaia.json`. |
-| **Legendary without approval** | Legendary skill submitted without meeting the 3-source / 2-approval bar. |
+| **Legendary without approval** | Ultimate Skill submitted without meeting the 3-source / 2-approval bar. |
 
 ---
 
