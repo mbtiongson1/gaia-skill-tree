@@ -2,7 +2,7 @@
 
 > The open, evidence-backed skill graph for AI agents — collect, evolve, and fuse capabilities into something legendary.
 
-[![Validate](https://github.com/gaia-registry/gaia/actions/workflows/validate.yml/badge.svg)](https://github.com/gaia-registry/gaia/actions/workflows/validate.yml)
+[![Validate](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml/badge.svg)](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -84,6 +84,8 @@ python3 scripts/generateProjections.py
 
 ## Install the Plugin (per-repo)
 
+> **Status: In Development** — The `gaia` CLI is not yet published to npm. Track progress or contribute in [plugin/](plugin/).
+
 ```bash
 # Initialize Gaia in your project
 gaia init
@@ -100,6 +102,8 @@ gaia fuse autonomous-debug
 ```
 
 ## MCP Server (Agent-Native Integration)
+
+> **Status: In Development** — `@gaia-registry/mcp-server` is not yet published to npm. See [mcp-server/](mcp-server/) to run it locally or contribute.
 
 The fastest way to use Gaia — connect it directly to your agent (Claude Code, Cursor, VS Code, etc.) via MCP:
 
