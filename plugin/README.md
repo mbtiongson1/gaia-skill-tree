@@ -2,6 +2,8 @@
 
 The Gaia Plugin is a set of tools to integrate your local development environment and CI/CD pipelines with the Gaia Skill Registry.
 
+> **Prefer the MCP server?** If you use Claude Code, Cursor, or any MCP-compatible agent, see [`mcp-server/`](../mcp-server/) for zero-config agent-native integration — no CLI needed.
+
 ## CLI Usage
 
 The Gaia CLI provides commands to manage your skill tree directly from your repository.
