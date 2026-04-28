@@ -12,11 +12,18 @@ The Gaia CLI provides commands to manage your skill tree directly from your repo
 
 - `gaia init`: Initializes `.gaia/config.json` in the current repo. Prompts for GitHub username and scan paths.
 - `gaia scan`: Scans repo for skill references, resolves them against the Gaia registry, and identifies new skills or combination candidates.
+- `gaia push`: Submits a batch intake record with detected canonical skills, proposed new skills, and similarity hints.
 - `gaia status`: Displays a summary of your current skill tree.
 - `gaia tree`: Renders your skill tree (use `--depth N` for limited views).
 - `gaia load [username]`: Fetches and caches a user's skill tree.
 - `gaia fuse [skillId]`: Confirms a pending combination and opens a PR to update your skill tree in the registry.
 - `gaia diff`: Shows skills detected in the current scan that are not yet in your skill tree.
+
+Preview a batch before writing it:
+
+```bash
+gaia push --dry-run
+```
 
 ## GitHub Action
 

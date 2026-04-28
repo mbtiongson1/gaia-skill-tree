@@ -6,6 +6,9 @@ on:
       - 'graph/**'
       - 'schema/**'
       - 'users/**'
+      - 'intake/**'
+      - 'scripts/**'
+      - 'plugin/**'
 
 jobs:
   validate:
@@ -25,6 +28,9 @@ jobs:
 
       - name: Run validation
         run: python scripts/validate.py
+
+      - name: Run intake validation
+        run: python scripts/validate_intake.py
 
       - name: Run tests
         run: pytest tests/

@@ -97,7 +97,10 @@ gaia init
 # Scan for skills your agent demonstrates
 gaia scan
 
-# View your skill tree with tier symbols
+# Submit a batch of detected known/proposed skills for review
+gaia push
+
+# View your skill tree
 gaia status
 gaia tree --depth 3
 

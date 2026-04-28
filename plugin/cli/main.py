@@ -7,7 +7,8 @@ from plugin.cli.scanner import scan_repo, load_config
 from plugin.cli.resolver import resolve_skills
 from plugin.cli.combinator import get_combinations
 from plugin.cli.treeManager import load_tree, save_tree, show_status, show_tree
-from plugin.cli.prWriter import open_pr
+from plugin.cli.prWriter import open_pr, open_intake_pr
+from plugin.cli.push import build_skill_batch, write_skill_batch
 
 def init_command(args):
     config_dir = '.gaia'
@@ -95,6 +96,23 @@ def fuse_command(args):
     save_tree(username, tree, registry_path=args.registry)
     open_pr(username, tree, candidate_result=target)
 
+def push_command(args):
+    config = load_config()
+    if not config:
+        print("Gaia not initialized. Run `gaia init` first.", file=sys.stderr)
+        sys.exit(1)
+
+    raw_tokens = scan_repo()
+    batch = build_skill_batch(raw_tokens, config, args.registry)
+
+    if args.dry_run:
+        print(json.dumps(batch, indent=2))
+        return
+
+    batch_path = write_skill_batch(batch, args.registry)
+    print(f"Wrote skill batch intake record: {batch_path}")
+    open_intake_pr(config.get('gaiaUser'), batch, batch_path=batch_path)
+
 def main():
     parser = argparse.ArgumentParser(prog="gaia", description="Gaia Plugin CLI")
     parser.add_argument('--registry', default=".", help="Path to local Gaia registry clone for testing")
@@ -105,6 +123,8 @@ def main():
     subparsers.add_parser('tree')
     fuse_parser = subparsers.add_parser('fuse')
     fuse_parser.add_argument('skillId', help="ID of the pending skill to fuse")
+    push_parser = subparsers.add_parser('push')
+    push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
     args = parser.parse_args()
     if args.command == 'init':
         init_command(args)
@@ -116,6 +136,8 @@ def main():
         tree_command(args)
     elif args.command == 'fuse':
         fuse_command(args)
+    elif args.command == 'push':
+        push_command(args)
     else:
         parser.print_help()
 
