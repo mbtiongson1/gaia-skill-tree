@@ -17,7 +17,7 @@ Skills are evidence-backed, level up through validated demonstrations, and combi
 
 ```bash
 # Clone the registry
-git clone https://github.com/gaia-registry/gaia.git
+git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia
 
 # Validate the canonical graph
