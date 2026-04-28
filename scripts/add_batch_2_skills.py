@@ -2,10 +2,10 @@
 """Batch 2 — inject 11 new skills into graph/gaia.json.
 
 New skills added:
-  Atomic (7): toolUse, chainOfThought, selfCritique, structuredOutput,
-              codeExecution, computerUse, hypothesisGenerate
-  Composite (3): reActReasoning, browserAutomation, knowledgeGraphBuild
-  Legendary (1): scientificDiscovery
+  Atomic (7): tool-use, chain-of-thought, self-critique, structured-output,
+              code-execution, computer-use, hypothesis-generate
+  Composite (3): react-reasoning, browser-automation, knowledge-graph-build
+  Legendary (1): scientific-discovery
 
 Run from repo root:
     python3 scripts/add_batch_2_skills.py
@@ -27,14 +27,14 @@ EVALUATOR = "mbtiongson1"
 
 NEW_ATOMICS = [
     {
-        "id": "toolUse",
+        "id": "tool-use",
         "name": "Tool Use",
         "type": "atomic",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
         "prerequisites": [],
-        "derivatives": ["reActReasoning"],
+        "derivatives": ["react-reasoning"],
         "conditions": "",
         "evidence": [
             {
@@ -59,14 +59,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "chainOfThought",
+        "id": "chain-of-thought",
         "name": "Chain-of-Thought Reasoning",
         "type": "atomic",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
         "prerequisites": [],
-        "derivatives": ["reActReasoning", "scientificDiscovery"],
+        "derivatives": ["react-reasoning", "scientific-discovery"],
         "conditions": "",
         "evidence": [
             {
@@ -91,14 +91,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "selfCritique",
+        "id": "self-critique",
         "name": "Self-Critique",
         "type": "atomic",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
         "prerequisites": [],
-        "derivatives": ["recursiveSelfImprovement"],
+        "derivatives": ["recursive-self-improvement"],
         "conditions": "",
         "evidence": [
             {
@@ -123,14 +123,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "structuredOutput",
+        "id": "structured-output",
         "name": "Structured Output Generation",
         "type": "atomic",
         "level": "III",
         "rarity": "common",
         "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
         "prerequisites": [],
-        "derivatives": ["ragPipeline", "textToSqlPipeline"],
+        "derivatives": ["rag-pipeline", "textToSqlPipeline"],
         "conditions": "",
         "evidence": [
             {
@@ -155,14 +155,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "codeExecution",
+        "id": "code-execution",
         "name": "Code Execution",
         "type": "atomic",
         "level": "IV",
         "rarity": "common",
         "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
         "prerequisites": [],
-        "derivatives": ["autonomousDebug", "codeReviewPipeline", "automatedTesting"],
+        "derivatives": ["autonomous-debug", "codeReviewPipeline", "automatedTesting"],
         "conditions": "",
         "evidence": [
             {
@@ -187,14 +187,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "computerUse",
+        "id": "computer-use",
         "name": "Computer Use",
         "type": "atomic",
         "level": "IV",
         "rarity": "rare",
         "description": "Controls desktop GUIs and web browsers by interpreting screenshots, issuing mouse/keyboard actions, and verifying visual state to complete open-ended computer tasks.",
         "prerequisites": [],
-        "derivatives": ["browserAutomation"],
+        "derivatives": ["browser-automation"],
         "conditions": "Requires screenshot observation loop and action executor (click, type, scroll).",
         "evidence": [
             {
@@ -219,14 +219,14 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "hypothesisGenerate",
+        "id": "hypothesis-generate",
         "name": "Hypothesis Generation",
         "type": "atomic",
         "level": "IV",
         "rarity": "rare",
         "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
         "prerequisites": [],
-        "derivatives": ["scientificDiscovery"],
+        "derivatives": ["scientific-discovery"],
         "conditions": "",
         "evidence": [
             {
@@ -265,14 +265,14 @@ NEW_ATOMICS = [
 
 NEW_COMPOSITES = [
     {
-        "id": "reActReasoning",
+        "id": "react-reasoning",
         "name": "ReAct Reasoning",
         "type": "composite",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
-        "prerequisites": ["planDecompose", "toolUse"],
-        "derivatives": ["planAndExecute", "autonomousResearchAgent"],
+        "prerequisites": ["plan-decompose", "tool-use"],
+        "derivatives": ["plan-and-execute", "autonomous-research-agent"],
         "conditions": "",
         "evidence": [
             {
@@ -297,14 +297,14 @@ NEW_COMPOSITES = [
         "version": VERSION,
     },
     {
-        "id": "browserAutomation",
+        "id": "browser-automation",
         "name": "Browser Automation",
         "type": "composite",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
-        "prerequisites": ["webSearch", "computerUse"],
-        "derivatives": ["autonomousResearchAgent"],
+        "prerequisites": ["web-search", "computer-use"],
+        "derivatives": ["autonomous-research-agent"],
         "conditions": "",
         "evidence": [
             {
@@ -329,14 +329,14 @@ NEW_COMPOSITES = [
         "version": VERSION,
     },
     {
-        "id": "knowledgeGraphBuild",
+        "id": "knowledge-graph-build",
         "name": "Knowledge Graph Construction",
         "type": "composite",
         "level": "IV",
         "rarity": "uncommon",
         "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
-        "prerequisites": ["extractEntities", "logicalInference"],
-        "derivatives": ["ragPipeline", "autonomousResearchAgent"],
+        "prerequisites": ["extract-entities", "logical-inference"],
+        "derivatives": ["rag-pipeline", "autonomous-research-agent"],
         "conditions": "",
         "evidence": [
             {
@@ -368,13 +368,13 @@ NEW_COMPOSITES = [
 
 NEW_LEGENDARIES = [
     {
-        "id": "scientificDiscovery",
+        "id": "scientific-discovery",
         "name": "Autonomous Scientific Discovery",
         "type": "legendary",
         "level": "IV",
         "rarity": "legendary",
         "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report — completing a full research cycle without human intervention.",
-        "prerequisites": ["hypothesisGenerate", "research", "mathReason"],
+        "prerequisites": ["hypothesis-generate", "research", "math-reason"],
         "derivatives": [],
         "conditions": "Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources.",
         "evidence": [
@@ -413,18 +413,18 @@ NEW_LEGENDARIES = [
 # ---------------------------------------------------------------------------
 
 DERIVATIVE_PATCHES = {
-    "toolSelect":      ["toolUse", "reActReasoning"],
-    "planDecompose":   ["reActReasoning"],
-    "logicalInference":["chainOfThought", "knowledgeGraphBuild"],
-    "evaluateOutput":  ["selfCritique"],
-    "formatOutput":    ["structuredOutput"],
-    "codeGeneration":  ["codeExecution"],
-    "executeBash":     ["codeExecution"],
-    "webSearch":       ["browserAutomation"],
-    "webScrape":       ["browserAutomation"],
-    "extractEntities": ["knowledgeGraphBuild"],
-    "research":        ["hypothesisGenerate", "scientificDiscovery"],
-    "mathReason":      ["scientificDiscovery"],
+    "tool-select":      ["tool-use", "react-reasoning"],
+    "plan-decompose":   ["react-reasoning"],
+    "logical-inference":["chain-of-thought", "knowledge-graph-build"],
+    "evaluate-output":  ["self-critique"],
+    "format-output":    ["structured-output"],
+    "code-generation":  ["code-execution"],
+    "execute-bash":     ["code-execution"],
+    "web-search":       ["browser-automation"],
+    "web-scrape":       ["browser-automation"],
+    "extract-entities": ["knowledge-graph-build"],
+    "research":        ["hypothesis-generate", "scientific-discovery"],
+    "math-reason":      ["scientific-discovery"],
 }
 
 # ---------------------------------------------------------------------------
@@ -513,10 +513,10 @@ def main():
                 edge_set.add(key)
                 new_edges_added += 1
 
-    # Append curation evidence to registryCuration skill
-    if "registryCuration" in skill_index:
-        skill_index["registryCuration"]["evidence"].append(CURATION_EVIDENCE)
-        skill_index["registryCuration"]["updatedAt"] = TODAY
+    # Append curation evidence to registry-curation skill
+    if "registry-curation" in skill_index:
+        skill_index["registry-curation"]["evidence"].append(CURATION_EVIDENCE)
+        skill_index["registry-curation"]["updatedAt"] = TODAY
 
     graph["generatedAt"] = TODAY
 
