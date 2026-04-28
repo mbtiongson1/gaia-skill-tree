@@ -25,8 +25,16 @@ class TestGaiaPush(unittest.TestCase):
                 )
             with open(os.path.join(tmp, "src", "agent.txt"), "w") as f:
                 f.write("tokenize semantic-search")
+            
+            # Initialize dummy git repo to ensure predictable repo detection
+            subprocess.run(["git", "init"], cwd=tmp, check=True, capture_output=True)
+            subprocess.run(
+                ["git", "remote", "add", "origin", "https://github.com/tester/local-repo.git"],
+                cwd=tmp, check=True, capture_output=True
+            )
 
             env = os.environ.copy()
+            env.pop("GITHUB_REPOSITORY", None)
             env["PYTHONPATH"] = REPO_ROOT
             result = subprocess.run(
                 [
