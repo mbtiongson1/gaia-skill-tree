@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Autonomous Debug](../composite/autonomousDebug.md)
+- [Automated Testing](../composite/automatedTesting.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -25,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*

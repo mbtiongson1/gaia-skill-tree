@@ -16,7 +16,11 @@ Conducts multi-source information gathering, synthesis, and citation for a given
 - [Cite Sources](../atomic/citeSources.md)
 
 ## Unlocks
+- [Autonomous Data Scientist](../legendary/autonomousDataScientist.md)
 - [Ghostwrite](../composite/ghostwrite.md)
+- [Hypothesis Generation](../atomic/hypothesisGenerate.md)
+- [Registry Curation](../composite/registryCuration.md)
+- [Autonomous Scientific Discovery](../legendary/scientificDiscovery.md)
 
 ## Fusion Condition
 _None specified._
@@ -30,4 +34,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*

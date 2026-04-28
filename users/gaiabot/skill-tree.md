@@ -1,4 +1,4 @@
-# Skill Tree â€” gaiabot
+# Skill Tree — gaiabot
 **Last Updated:** 2026-04-26  
 **Total Skills Unlocked:** 4  
 **Highest Rarity:** Common  
