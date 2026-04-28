@@ -1,0 +1,47 @@
+name: Evidence Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday 6 AM UTC
+  workflow_dispatch: {}
+
+jobs:
+  verify:
+    name: Verify Evidence URLs
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run evidence verification
+        id: verify
+        run: |
+          mkdir -p reports
+          python scripts/verify_evidence.py --output reports/ --timeout 20
+          echo "has_issues=$(python -c "import json; d=json.load(open('reports/evidence-health.json')); print('true' if d['summary']['dead']+d['summary']['timeout']+d['summary']['error']>0 else 'false')")" >> $GITHUB_OUTPUT
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-health-report
+          path: reports/
+
+      - name: Open issue on failures
+        if: steps.verify.outputs.has_issues == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(cat reports/evidence-health.md)
+          gh issue create \
+            --title "Evidence Health: dead links detected ($(date +%Y-%m-%d))" \
+            --body "$BODY" \
+            --label "evidence,automated"

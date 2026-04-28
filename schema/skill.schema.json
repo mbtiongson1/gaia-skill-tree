@@ -24,7 +24,7 @@
   "properties": {
     "id": {
       "type": "string",
-      "pattern": "^[a-z][a-zA-Z0-9]*$",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
       "description": "Unique camelCase identifier for the skill."
     },
     "name": {
@@ -56,7 +56,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^[a-z][a-zA-Z0-9]*$"
+        "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
       },
       "description": "Array of parent skill IDs required to unlock this skill."
     },
@@ -64,7 +64,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^[a-z][a-zA-Z0-9]*$"
+        "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
       },
       "description": "Array of child skill IDs that this skill contributes to."
     },

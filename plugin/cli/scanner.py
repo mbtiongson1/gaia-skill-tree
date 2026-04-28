@@ -10,7 +10,7 @@ def load_config():
         return json.load(f)
 
 def scan_file_for_skills(filepath):
-    skill_pattern = re.compile(r'\b[a-z][a-zA-Z0-9]*\b')
+    skill_pattern = re.compile(r'\b[a-z][a-z0-9]*(-[a-z0-9]+)*\b')
     found_skills = set()
     try:
         with open(filepath, 'r', encoding='utf-8') as f:

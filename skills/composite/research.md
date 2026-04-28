@@ -11,16 +11,16 @@
 Conducts multi-source information gathering, synthesis, and citation for a given topic.
 
 ## Prerequisites
-- [Web Search](../atomic/webSearch.md)
+- [Web Search](../atomic/web-search.md)
 - [Summarize](../atomic/summarize.md)
-- [Cite Sources](../atomic/citeSources.md)
+- [Cite Sources](../atomic/cite-sources.md)
 
 ## Unlocks
-- [Autonomous Data Scientist](../legendary/autonomousDataScientist.md)
+- [Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
 - [Ghostwrite](../composite/ghostwrite.md)
-- [Hypothesis Generation](../atomic/hypothesisGenerate.md)
-- [Registry Curation](../composite/registryCuration.md)
-- [Autonomous Scientific Discovery](../legendary/scientificDiscovery.md)
+- [Hypothesis Generation](../atomic/hypothesis-generate.md)
+- [Registry Curation](../composite/registry-curation.md)
+- [Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Fusion Condition
 _None specified._

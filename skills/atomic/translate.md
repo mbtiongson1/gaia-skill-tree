@@ -14,7 +14,7 @@ Converts text from one natural language to another while preserving meaning, ton
 _None._
 
 ## Unlocks
-- [Translation Pipeline](../composite/translationPipeline.md)
+- [Translation Pipeline](../composite/translation-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -22,9 +22,9 @@
 
 ## Pending Combinations
 
-> **autonomousDebug** — combine `codeGeneration`, `executeBash`, `errorInterpretation`  
+> **autonomous-debug** — combine `code-generation`, `execute-bash`, `error-interpretation`  
 > Level floor: III  
-> Run `gaia fuse autonomousDebug` to confirm.
+> Run `gaia fuse autonomous-debug` to confirm.
 
 ---
 *Generated from skill-tree.json. Do not edit directly.*

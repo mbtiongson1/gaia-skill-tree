@@ -50,7 +50,7 @@
       "properties": {
         "skillId": {
           "type": "string",
-          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
           "description": "Reference to a skill ID in the Gaia graph."
         },
         "level": {
@@ -71,7 +71,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-zA-Z0-9]*$"
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
           },
           "description": "Parent skill IDs used in fusion (for composite/legendary skills)."
         }
@@ -86,14 +86,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-zA-Z0-9]*$"
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
           },
           "minItems": 2,
           "description": "Set of prerequisite skill IDs detected together."
         },
         "candidateResult": {
           "type": "string",
-          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
           "description": "The composite/legendary skill that would be unlocked."
         },
         "levelFloor": {

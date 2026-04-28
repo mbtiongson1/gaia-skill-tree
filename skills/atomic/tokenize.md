@@ -14,7 +14,7 @@ Splits input text into discrete tokens suitable for downstream processing by lan
 _None._
 
 ## Unlocks
-- [RAG Pipeline](../composite/ragPipeline.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
