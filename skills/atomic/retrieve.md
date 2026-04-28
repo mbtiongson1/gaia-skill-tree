@@ -1,7 +1,7 @@
-# Retrieve
+# [II · Awakened · Intrinsic Skill] Retrieve
 **ID:** retrieve  
-**Type:** Atomic  
-**Level:** II  
+**Type:** Intrinsic Skill  
+**Level:** II · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -14,7 +14,7 @@ Fetches relevant documents or passages from an indexed corpus given a query.
 _None._
 
 ## Unlocks
-- [RAG Pipeline](../composite/ragPipeline.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -25,4 +25,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*

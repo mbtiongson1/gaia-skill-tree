@@ -1,0 +1,24 @@
+name: "Stale Bot Proposals"
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # Sunday midnight UTC
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-pr-message: "This bot proposal has been open for 30 days without merge. It will be auto-closed in 7 days unless updated."
+          close-pr-message: "Closing stale bot proposal. If this skill is still relevant, a future crawler run will re-propose it."
+          days-before-stale: 30
+          days-before-close: 7
+          only-labels: "bot-proposal"
+          stale-pr-label: "stale"
+          exempt-pr-labels: "needs-review,legendary"

@@ -1,7 +1,7 @@
-# Ghostwrite
+# [IV · Evolved · Extra Skill] Ghostwrite
 **ID:** ghostwrite  
-**Type:** Composite  
-**Level:** IV  
+**Type:** Extra Skill  
+**Level:** IV · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -12,8 +12,8 @@ Produces audience-tailored, research-backed long-form written content.
 
 ## Prerequisites
 - [Research](../composite/research.md)
-- [Write Report](../atomic/writeReport.md)
-- [Audience Model](../atomic/audienceModel.md)
+- [Write Report](../atomic/write-report.md)
+- [Audience Model](../atomic/audience-model.md)
 
 ## Unlocks
 _None._
@@ -30,4 +30,4 @@ Requires research output as input context.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*

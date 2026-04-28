@@ -13,12 +13,12 @@
   "properties": {
     "sourceSkillId": {
       "type": "string",
-      "pattern": "^[a-z][a-zA-Z0-9]*$",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
       "description": "The prerequisite skill ID (parent)."
     },
     "targetSkillId": {
       "type": "string",
-      "pattern": "^[a-z][a-zA-Z0-9]*$",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
       "description": "The derived skill ID (child)."
     },
     "edgeType": {

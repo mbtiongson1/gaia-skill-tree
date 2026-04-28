@@ -1,0 +1,9 @@
+{
+  "gaiaUser": "gaiabot",
+  "gaiaRegistryRef": "https://github.com/gaia-registry/gaia",
+  "scanPaths": [
+    "scripts",
+    "plugin"
+  ],
+  "autoPromptCombinations": false
+}

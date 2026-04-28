@@ -1,7 +1,7 @@
-# Research
+# [III · Named · Extra Skill] Research
 **ID:** research  
-**Type:** Composite  
-**Level:** III  
+**Type:** Extra Skill  
+**Level:** III · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -11,12 +11,16 @@
 Conducts multi-source information gathering, synthesis, and citation for a given topic.
 
 ## Prerequisites
-- [Web Search](../atomic/webSearch.md)
+- [Web Search](../atomic/web-search.md)
 - [Summarize](../atomic/summarize.md)
-- [Cite Sources](../atomic/citeSources.md)
+- [Cite Sources](../atomic/cite-sources.md)
 
 ## Unlocks
+- [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
 - [Ghostwrite](../composite/ghostwrite.md)
+- [Hypothesis Generation](../atomic/hypothesis-generate.md)
+- [Registry Curation](../composite/registry-curation.md)
+- [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 
 ## Fusion Condition
 _None specified._
@@ -30,4 +34,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
