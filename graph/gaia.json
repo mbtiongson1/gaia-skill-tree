@@ -177,7 +177,8 @@
       "prerequisites": [],
       "derivatives": [
         "autonomousDebug",
-        "automatedTesting"
+        "automatedTesting",
+        "registryCuration"
       ],
       "conditions": "",
       "evidence": [
@@ -566,7 +567,8 @@
       "prerequisites": [],
       "derivatives": [
         "autonomousDebug",
-        "codeReviewPipeline"
+        "codeReviewPipeline",
+        "registryCuration"
       ],
       "conditions": "",
       "evidence": [
@@ -740,7 +742,8 @@
       ],
       "derivatives": [
         "ghostwrite",
-        "autonomousDataScientist"
+        "autonomousDataScientist",
+        "registryCuration"
       ],
       "conditions": "",
       "evidence": [
@@ -1883,6 +1886,35 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
       "version": "0.2.0"
+    },
+    {
+      "id": "registryCuration",
+      "name": "Registry Curation",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
+      "prerequisites": [
+        "research",
+        "codeGeneration",
+        "executeBash"
+      ],
+      "derivatives": [],
+      "conditions": "Requires write access to the canonical graph and a passing validation suite.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree/pull/2",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-28",
+          "notes": "Reproducible demonstration: Claude Code agent researched 30 popular AI skills, sourced 22 peer-reviewed papers, generated gaia.json via script, passed all 6 validator checks, and submitted PR \u2014 full inputs/outputs archived in the PR diff."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-28",
+      "updatedAt": "2026-04-28",
+      "version": "0.2.0"
     }
   ],
   "edges": [
@@ -2606,6 +2638,36 @@
       "levelFloor": "II",
       "evidenceRefs": [
         "realTimeVoiceAssistant#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "research",
+      "targetSkillId": "registryCuration",
+      "edgeType": "prerequisite",
+      "condition": "Requires write access to the canonical graph and a passing validation suite.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "registryCuration#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "codeGeneration",
+      "targetSkillId": "registryCuration",
+      "edgeType": "prerequisite",
+      "condition": "Requires write access to the canonical graph and a passing validation suite.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "registryCuration#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "executeBash",
+      "targetSkillId": "registryCuration",
+      "edgeType": "prerequisite",
+      "condition": "Requires write access to the canonical graph and a passing validation suite.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "registryCuration#evidence[0]"
       ]
     }
   ]
