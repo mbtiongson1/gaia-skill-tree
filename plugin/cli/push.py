@@ -38,6 +38,7 @@ def detect_source_repo(config):
             capture_output=True,
             text=True,
             check=False,
+            cwd=".",
         ).stdout.strip()
     except Exception:
         remote = ""
