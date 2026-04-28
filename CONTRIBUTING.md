@@ -129,6 +129,11 @@ Maintainers evaluate every PR against these criteria:
 
 ---
 
+
+## Community Skill Source Research
+
+For contributors researching candidate skills from the broader SKILL.md ecosystem, see `docs/skill_source_contributions.md` for a curated list of commonly used repositories and extraction notes.
+
 ## Questions?
 
 Open an issue with the `question` label or start a discussion in the Discussions tab.
