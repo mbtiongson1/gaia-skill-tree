@@ -16,6 +16,7 @@ Retrieves and structures data from web pages into usable entities.
 - [Extract Entities](../atomic/extractEntities.md)
 
 ## Unlocks
+- [Browser Automation](../composite/browserAutomation.md)
 - [Knowledge Harvest](../composite/knowledgeHarvest.md)
 
 ## Fusion Condition
@@ -30,4 +31,4 @@ Structured output mode required.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*

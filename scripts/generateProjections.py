@@ -3,7 +3,7 @@ import os
 import datetime
 
 def main():
-    with open('graph/gaia.json', 'r') as f:
+    with open('graph/gaia.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     version = data.get('version', '0.1.0')
@@ -23,7 +23,7 @@ def main():
         skill_id = skill.get('id')
         file_path = f"skills/{skill_type}/{skill_id}.md"
         
-        with open(file_path, 'w') as f:
+        with open(file_path, 'w', encoding='utf-8') as f:
             f.write(f"# {skill.get('name')}\n")
             f.write(f"**ID:** {skill_id}  \n")
             f.write(f"**Type:** {skill_type.capitalize()}  \n")
@@ -96,7 +96,7 @@ def main():
             f.write(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*\n")
             
     # generate registry.md
-    with open('registry.md', 'w') as f:
+    with open('registry.md', 'w', encoding='utf-8') as f:
         f.write("# Gaia Skill Registry\n\n")
         f.write("| Name | Type | Level | Rarity | Status |\n")
         f.write("|---|---|---|---|---|\n")
@@ -105,7 +105,7 @@ def main():
         f.write(f"\n*Generated from gaia.json v{version}.*\n")
         
     # generate combinations.md
-    with open('combinations.md', 'w') as f:
+    with open('combinations.md', 'w', encoding='utf-8') as f:
         f.write("# Combinations\n\n")
         f.write("| Composite/Legendary | Prerequisites | Level Floor | Conditions |\n")
         f.write("|---|---|---|---|\n")
@@ -124,11 +124,11 @@ def main():
             tree_path = os.path.join(user_dir, 'skill-tree.json')
             if not os.path.isfile(tree_path):
                 continue
-            with open(tree_path, 'r') as tf:
+            with open(tree_path, 'r', encoding='utf-8') as tf:
                 tree = json.load(tf)
 
             md_path = os.path.join(user_dir, 'skill-tree.md')
-            with open(md_path, 'w') as f:
+            with open(md_path, 'w', encoding='utf-8') as f:
                 f.write(f"# Skill Tree — {tree.get('userId', username)}\n")
                 f.write(f"**Last Updated:** {tree.get('updatedAt', 'unknown')}  \n")
                 stats = tree.get('stats', {})

@@ -14,9 +14,12 @@ Identifies and extracts named entities such as people, organizations, dates, and
 _None._
 
 ## Unlocks
-- [Web Scrape](../composite/webScrape.md)
-- [Knowledge Harvest](../composite/knowledgeHarvest.md)
+- [Content Moderation](../composite/contentModeration.md)
 - [Document Analyst](../composite/documentAnalyst.md)
+- [Document Digitization](../composite/documentDigitization.md)
+- [Knowledge Graph Construction](../composite/knowledgeGraphBuild.md)
+- [Knowledge Harvest](../composite/knowledgeHarvest.md)
+- [Web Scrape](../composite/webScrape.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -27,4 +30,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.1.0 on 2026-04-26. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
