@@ -36,6 +36,9 @@ gaia init
 # Scan for skills
 gaia scan
 
+# Submit a batch of detected known/proposed skills for review
+gaia push
+
 # View your skill tree
 gaia status
 gaia tree --depth 3
@@ -49,6 +52,8 @@ gaia fuse autonomousDebug
 ```
 gaia/
 ├── graph/gaia.json          ← CANONICAL source of truth (the only file humans edit)
+├── graph/similarity.json    ← Similarity/layout metadata, separate from DAG edges
+├── intake/                  ← Batch skill proposals submitted by gaia push
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)
 ├── users/                   ← Personal skill trees by GitHub username

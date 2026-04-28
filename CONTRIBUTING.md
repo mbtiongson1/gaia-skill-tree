@@ -24,6 +24,7 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 | New fusion recipe | `new_fusion.md` | Adding edge records to `gaia.json` |
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
 | New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
+| Batch skill intake | `gaia push` | Submitting known and proposed skills detected from agent usage |
 
 ---
 
@@ -69,6 +70,34 @@ Legendary-type skills have additional requirements:
 ---
 
 ## How to Submit a PR
+
+### Batch Skill Intake
+
+For most new skill discovery, use Gaia from the repository where your agent
+demonstrates the skills:
+
+```bash
+gaia push
+```
+
+This creates a reviewable batch under `intake/skill-batches/` with detected
+canonical skills, proposed new skills, and similarity hints. These batch records
+are canonical intake records, but they are not DAG nodes until maintainers
+promote accepted skills into `graph/gaia.json`.
+
+To preview the batch without writing files:
+
+```bash
+gaia push --dry-run
+```
+
+Validate intake records locally:
+
+```bash
+python3 scripts/validate_intake.py
+```
+
+### Canonical Graph Changes
 
 1. **Fork** this repository.
 2. **Edit `graph/gaia.json`** directly — this is the only source of truth.
