@@ -268,7 +268,9 @@ gaia-skill-tree/
 ├── users/                   ← Personal skill trees by GitHub username
 ├── scripts/                 ← Validation, projection, and analysis scripts
 ├── scripts/crawlers/        ← Bot crawlers (MCP registries, npm, VS Code, HuggingFace)
-├── plugin/                  ← CLI + GitHub Action for per-repo integration
+├── src/gaia_cli/            ← Python package source for the gaia CLI (pip-installable)
+├── plugin/                  ← TypeScript CLI wrapper + GitHub Action for per-repo integration
+├── pyproject.toml           ← Package metadata and optional dependencies (e.g. [embeddings])
 ├── registry.md              ← GENERATED flat index of all skills
 ├── combinations.md          ← GENERATED fusion recipe matrix
 ├── tree.md                  ← GENERATED full ASCII skill graph
