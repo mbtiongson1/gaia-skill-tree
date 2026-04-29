@@ -23,11 +23,11 @@ def camel_to_dash(name: str) -> str:
     """Convert camelCase to lowercase-dash.
 
     Examples:
-        chainOfThought -> chain-of-thought
-        ragPipeline -> rag-pipeline
-        multiAgentOrchestrationV -> multi-agent-orchestration-v
+        chain-of-thought -> chain-of-thought
+        rag-pipeline -> rag-pipeline
+        multi-agent-orchestration-v -> multi-agent-orchestration-v
         textToSqlPipeline -> text-to-sql-pipeline
-        parseJson -> parse-json
+        parse-json -> parse-json
     """
     # Insert dash before uppercase letters (handles sequences like 'SQL' → 's-q-l'
     # but our IDs don't have consecutive caps by convention)

@@ -4,6 +4,23 @@ The Gaia CLI integrates local development repositories and CI pipelines with the
 
 > **Prefer the MCP server?** If you use Claude Code, Cursor, or any MCP-compatible agent, see [`mcp-server/`](../mcp-server/) for zero-config agent-native integration — no CLI needed.
 
+## Installation
+
+Install the Gaia CLI via npm:
+
+```bash
+npm install -g @gaia-registry/cli
+# or locally
+npm install @gaia-registry/cli
+```
+
+### Requirements
+
+- **Node.js 18+** — for running the npm package
+- **Python 3.8+** — the CLI shells out to Python for the core implementation
+
+The npm wrapper automatically detects your Python installation and will provide instructions if Python is not found.
+
 ## CLI Usage
 
 Run the Python CLI from a Gaia registry checkout:
@@ -94,3 +111,5 @@ python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia init
 python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia scan
 python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia push --dry-run
 ```
+
+The npm wrapper is in `src/bin/gaia.ts` and shells out to the Python CLI in `cli/main.py`.

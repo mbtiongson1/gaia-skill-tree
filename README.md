@@ -202,6 +202,8 @@ See [`mcp-server/`](mcp-server/) for full documentation.
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
+├── graph/similarity.json    ← Similarity/layout metadata, separate from DAG edges
+├── intake/                  ← Batch skill proposals submitted by gaia push
 ├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)

@@ -27,6 +27,7 @@ class TestGaiaPush(unittest.TestCase):
                 f.write("web-search semantic-search")
 
             env = os.environ.copy()
+            env.pop("GITHUB_REPOSITORY", None)
             env["PYTHONPATH"] = REPO_ROOT
             result = subprocess.run(
                 [
