@@ -90,6 +90,30 @@
       "type": "string",
       "description": "Optional free-text conditions required for fusion or level-up."
     },
+    "realVariants": {
+      "type": "array",
+      "description": "Named real-world implementations of this abstract skill. Populated by generateNamedIndex.py from status:named entries — do not hand-edit.",
+      "items": {
+        "type": "object",
+        "required": ["namedSkillId", "name", "contributor", "level", "origin"],
+        "additionalProperties": false,
+        "properties": {
+          "namedSkillId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]*/[a-z0-9][a-z0-9_-]*$"
+          },
+          "name": { "type": "string" },
+          "title": { "type": "string" },
+          "contributor": { "type": "string" },
+          "level": {
+            "type": "string",
+            "enum": ["II", "III", "IV", "V", "VI"]
+          },
+          "origin": { "type": "boolean" },
+          "catalogRef": { "type": "string" }
+        }
+      }
+    },
     "evidence": {
       "type": "array",
       "items": {

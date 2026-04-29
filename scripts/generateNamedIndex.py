@@ -47,6 +47,8 @@ INDEX_SKILL_FIELDS = [
     "status",
     "level",
     "description",
+    "title",
+    "catalogRef",
     "tags",
     "links",
 ]
@@ -264,13 +266,17 @@ def load_gaia_skill_ids(graph_path):
 
 
 def validate_and_group(named_skills, valid_ids):
-    """Validate all named skills and group by genericSkillRef.
+    """Validate all named skills and group by status and genericSkillRef.
 
-    Returns (errors, buckets) where buckets is a dict mapping
-    genericSkillRef -> list of stripped skill dicts.
+    Returns (errors, buckets, awaiting_classification, by_contributor) where:
+      - buckets: genericSkillRef -> list of skill dicts (status: named only)
+      - awaiting_classification: list of skill dicts (status: awakened)
+      - by_contributor: contributor -> list of skill id strings
     """
     errors = []
-    buckets = {}  # genericSkillRef -> list of dicts
+    buckets = {}  # genericSkillRef -> list of dicts (named only)
+    awaiting_classification = []  # awakened skills waiting for reviewer action
+    by_contributor = {}  # contributor -> [namedSkillId, ...]
 
     for fp, fm in named_skills:
         rel = os.path.relpath(fp)
@@ -303,13 +309,29 @@ def validate_and_group(named_skills, valid_ids):
         if missing or level not in VALID_LEVELS:
             continue  # don't add to buckets if fundamentally broken
 
-        bucket_key = ref or "__unknown__"
-        if bucket_key not in buckets:
-            buckets[bucket_key] = []
         entry = {field: fm.get(field) for field in INDEX_SKILL_FIELDS}
-        buckets[bucket_key].append(entry)
+        # Strip None values for optional fields to keep output clean
+        entry = {k: v for k, v in entry.items() if v is not None}
 
-    # Origin uniqueness per bucket
+        # Route by status: named → buckets (real variants); awakened → awaiting
+        status = fm.get("status", "awakened")
+        if status == "named":
+            bucket_key = ref or "__unknown__"
+            if bucket_key not in buckets:
+                buckets[bucket_key] = []
+            buckets[bucket_key].append(entry)
+        else:
+            awaiting_classification.append(entry)
+
+        # Always track in byContributor index
+        contributor = fm.get("contributor", "")
+        skill_id = fm.get("id", "")
+        if contributor and skill_id:
+            if contributor not in by_contributor:
+                by_contributor[contributor] = []
+            by_contributor[contributor].append(skill_id)
+
+    # Origin uniqueness per bucket (named only)
     for ref, entries in buckets.items():
         origins = [e for e in entries if e.get("origin") is True]
         if len(origins) > 1:
@@ -318,14 +340,16 @@ def validate_and_group(named_skills, valid_ids):
                 f"genericSkillRef '{ref}': more than one origin:true — {origin_ids}"
             )
 
-    return errors, buckets
+    return errors, buckets, awaiting_classification, by_contributor
 
 
-def write_index(buckets, output_path, today):
+def write_index(buckets, awaiting_classification, by_contributor, output_path, today):
     """Write the named skill index JSON file."""
     index = {
         "generatedAt": today,
         "buckets": buckets,
+        "awaitingClassification": awaiting_classification,
+        "byContributor": by_contributor,
     }
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
@@ -370,7 +394,7 @@ def main():
     valid_ids = {s["id"] for s in graph_data.get("skills", [])}
 
     print(f"Found {len(named_skills)} named skill file(s). Validating...")
-    errors, buckets = validate_and_group(named_skills, valid_ids)
+    errors, buckets, awaiting_classification, by_contributor = validate_and_group(named_skills, valid_ids)
 
     if errors:
         print(f"\n{len(errors)} validation error(s):")
@@ -378,10 +402,13 @@ def main():
             print(f"  {i}. {err}")
         sys.exit(1)
 
-    write_index(buckets, output_path, today)
-    total = sum(len(v) for v in buckets.values())
+    write_index(buckets, awaiting_classification, by_contributor, output_path, today)
+    total_named = sum(len(v) for v in buckets.values())
+    total_awaiting = len(awaiting_classification)
     print(f"\nWrote {output_path}")
-    print(f"  Buckets: {len(buckets)}, Total named skills: {total}")
+    print(f"  Buckets (named): {len(buckets)}, Named skills: {total_named}")
+    print(f"  Awaiting classification (awakened): {total_awaiting}")
+    print(f"  Contributors: {len(by_contributor)}")
     for ref, entries in sorted(buckets.items()):
         origin_marker = next(
             (" [origin]" for e in entries if e.get("origin")), ""

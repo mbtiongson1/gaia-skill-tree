@@ -40,12 +40,22 @@
     "genericSkillRef": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
-      "description": "References a skill ID in gaia.json that this named skill implements."
+      "description": "The abstract Gaia taxonomy ID this named skill implements. Secondary identifier used for graph traversal and prerequisite resolution. Not the primary display identity."
     },
     "status": {
       "type": "string",
       "enum": ["awakened", "named"],
-      "description": "Lifecycle status. 'awakened' = accepted but not yet named. 'named' = fully attributed."
+      "description": "Lifecycle status. Contributors must always submit with 'awakened'. Only reviewers may promote to 'named' by adding title or catalogRef in a separate classification PR."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reviewer-assigned RPG epithet displayed prominently alongside the skill name (e.g. 'The Scholar's Compass'). Must not be set by contributors. Requires status: named."
+    },
+    "catalogRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*(-[a-z0-9_-]+)*$",
+      "description": "Reviewer-assigned back-link to the realSkillCatalog item id that this named skill was promoted from (e.g. 'karpathy-autoresearch'). Must not be set by contributors. Requires status: named."
     },
     "level": {
       "type": "string",

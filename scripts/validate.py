@@ -358,7 +358,7 @@ def _parse_named_frontmatter(text):
     return data
 
 
-def validate_named_skills(graph, named_dir=None):
+def validate_named_skills(graph, named_dir=None, catalog_path=None):
     """Validate all named skill .md files in graph/named/.
 
     Checks:
@@ -366,6 +366,9 @@ def validate_named_skills(graph, named_dir=None):
       - level is II or above.
       - genericSkillRef resolves to a skill ID in graph (gaia.json).
       - At most one origin: true per genericSkillRef bucket.
+      - status 'named' requires title OR catalogRef (reviewer gate).
+      - title/catalogRef requires status 'named' (prevents contributor bypassing).
+      - catalogRef (if set) resolves to an item id in real_skill_catalog.json.
 
     Returns a list of error strings.
     """
@@ -375,9 +378,23 @@ def validate_named_skills(graph, named_dir=None):
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         named_dir = os.path.join(repo_root, "graph", "named")
 
+    if catalog_path is None:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        catalog_path = os.path.join(repo_root, "graph", "real_skill_catalog.json")
+
     if not os.path.isdir(named_dir):
         # Not an error — directory simply doesn't exist yet.
         return errors
+
+    # Load catalog item IDs for catalogRef resolution check
+    catalog_ids = set()
+    if os.path.isfile(catalog_path):
+        try:
+            with open(catalog_path, "r", encoding="utf-8") as f:
+                catalog_data = json.load(f)
+            catalog_ids = {item["id"] for item in catalog_data.get("items", []) if "id" in item}
+        except (OSError, json.JSONDecodeError):
+            pass  # Catalog missing or malformed — skip resolution checks
 
     valid_ids = {s["id"] for s in graph.get("skills", [])}
 
@@ -419,6 +436,29 @@ def validate_named_skills(graph, named_dir=None):
             errors.append(
                 f"Named skill {rel}: 'genericSkillRef' value '{ref}' "
                 f"does not match any skill ID in gaia.json."
+            )
+
+        # Reviewer gate: status 'named' requires title OR catalogRef
+        status = fm.get("status", "")
+        has_title = bool(fm.get("title", "").strip() if isinstance(fm.get("title"), str) else fm.get("title"))
+        has_catalog_ref = bool(fm.get("catalogRef", "").strip() if isinstance(fm.get("catalogRef"), str) else fm.get("catalogRef"))
+        if status == "named" and not has_title and not has_catalog_ref:
+            errors.append(
+                f"Named skill {rel}: status 'named' requires a reviewer-assigned "
+                f"'title' or 'catalogRef'. Submit with status: awakened first."
+            )
+        # Inverse: title/catalogRef are only valid on named status
+        if (has_title or has_catalog_ref) and status != "named":
+            errors.append(
+                f"Named skill {rel}: 'title' and 'catalogRef' are only valid on "
+                f"status: named skills (got '{status}'). These fields are reviewer-only."
+            )
+        # catalogRef must resolve to a known catalog item
+        catalog_ref = fm.get("catalogRef", "")
+        if catalog_ref and catalog_ids and catalog_ref not in catalog_ids:
+            errors.append(
+                f"Named skill {rel}: 'catalogRef' value '{catalog_ref}' does not "
+                f"match any item id in real_skill_catalog.json."
             )
 
         if not missing and level in _NAMED_VALID_LEVELS:
@@ -481,7 +521,7 @@ def main():
     print("   [6/7] Legendary constraints...")
     all_errors.extend(validate_legendary(graph))
 
-    # 7. Named skills validation
+    # 7. Named skills validation (includes reviewer gate + catalog cross-refs)
     print("   [7/7] Named skills validation...")
     all_errors.extend(validate_named_skills(graph))
 
