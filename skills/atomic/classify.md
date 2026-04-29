@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Classify
+# [0 · Basic · Intrinsic Skill] Classify
 **ID:** classify  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 

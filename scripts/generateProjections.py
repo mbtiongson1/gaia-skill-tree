@@ -21,9 +21,12 @@ def _run_generate_named_index():
         graph_path = os.path.join(repo_root, "graph", "gaia.json")
         output_path = os.path.join(named_dir, "index.json")
         if os.path.isdir(named_dir) and os.path.isfile(graph_path):
-            today = datetime.date.today().isoformat()
+            with open(graph_path, "r", encoding="utf-8") as gf:
+                gdata = json.load(gf)
+            ts = gdata.get("generatedAt", "")
+            today = (ts.split("T")[0] if "T" in ts else ts) if ts else datetime.date.today().isoformat()
             named_skills = mod.load_named_skills(named_dir)
-            valid_ids = mod.load_gaia_skill_ids(graph_path)
+            valid_ids = {s["id"] for s in gdata.get("skills", [])}
             errors, buckets = mod.validate_and_group(named_skills, valid_ids)
             if errors:
                 print(f"Warning: named skill validation errors ({len(errors)}):")
@@ -57,7 +60,7 @@ def get_tier_symbol(skill_type):
 
 
 def _sorted_legendaries(skills):
-    order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5}
+    order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5, "0": 6}
     return sorted(
         [s for s in skills if s.get("type") == "legendary"],
         key=lambda s: (order.get(s.get("level"), 9), s.get("name", ""))

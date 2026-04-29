@@ -16,7 +16,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test test/*.test.mjs",
+    "prepack": "cp -r ../src/gaia_cli ./gaia_cli 2>/dev/null || xcopy /E /I /Y ..\\src\\gaia_cli .\\gaia_cli >nul 2>&1",
+    "postpack": "rm -rf ./gaia_cli 2>/dev/null || rmdir /S /Q .\\gaia_cli >nul 2>&1",
+    "test": "npm run build && npm run prepack && node --test test/*.test.mjs; npm run postpack",
     "prepare": "npm run build",
     "prepack": "rm -rf gaia_cli && cp -R ../src/gaia_cli gaia_cli",
     "postpack": "rm -rf gaia_cli",

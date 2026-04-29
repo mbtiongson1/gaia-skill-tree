@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Tool Use
+# [I · Awakened · Intrinsic Skill] Tool Use
 **ID:** tool-use  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** I · Awakened  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

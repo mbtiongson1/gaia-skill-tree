@@ -46,7 +46,7 @@
       </node>
       <node id="autonomous-debug" label="Autonomous Debug">
         <attvalues>
-          <attvalue for="level" value="III" />
+          <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="composite" />
@@ -70,7 +70,7 @@
       </node>
       <node id="chain-of-thought" label="Chain-of-Thought Reasoning">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -94,7 +94,7 @@
       </node>
       <node id="classify" label="Classify">
         <attvalues>
-          <attvalue for="level" value="I" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -246,7 +246,7 @@
       </node>
       <node id="format-output" label="Format Output">
         <attvalues>
-          <attvalue for="level" value="I" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -286,7 +286,7 @@
       </node>
       <node id="generate-text" label="Generate Text">
         <attvalues>
-          <attvalue for="level" value="I" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -342,7 +342,7 @@
       </node>
       <node id="logical-inference" label="Logical Inference">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -398,7 +398,7 @@
       </node>
       <node id="parse-pdf" label="Parse PDF">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -406,7 +406,7 @@
       </node>
       <node id="plan-and-execute" label="Plan and Execute">
         <attvalues>
-          <attvalue for="level" value="III" />
+          <attvalue for="level" value="IV" />
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="composite" />
@@ -430,7 +430,7 @@
       </node>
       <node id="question-answer" label="Question Answer">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -542,7 +542,7 @@
       </node>
       <node id="self-critique" label="Self-Critique">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -550,7 +550,7 @@
       </node>
       <node id="sentiment-analysis" label="Sentiment Analysis">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -566,7 +566,7 @@
       </node>
       <node id="structured-output" label="Structured Output Generation">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -574,7 +574,7 @@
       </node>
       <node id="summarize" label="Summarize">
         <attvalues>
-          <attvalue for="level" value="I" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -598,7 +598,7 @@
       </node>
       <node id="tokenize" label="Tokenize">
         <attvalues>
-          <attvalue for="level" value="I" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -622,7 +622,7 @@
       </node>
       <node id="tool-use" label="Tool Use">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="I" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -630,7 +630,7 @@
       </node>
       <node id="translate" label="Translate">
         <attvalues>
-          <attvalue for="level" value="II" />
+          <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />

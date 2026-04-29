@@ -158,17 +158,17 @@ def fuse_command(args):
 
 _EMBEDDINGS_INSTALL_STEPS = """\
 
-  ╔════════════════════════════════════════════════════════════════╗
-  ║  Semantic search requires the embeddings package.             ║
-  ╚════════════════════════════════════════════════════════════════╝
+  +----------------------------------------------------------------+
+  |  Semantic search requires the embeddings package.              |
+  +----------------------------------------------------------------+
 
-  Step 1 — Install the embeddings library:
+  Step 1 -- Install the embeddings library:
             pip install "gaia-cli[embeddings]"
 
-  Step 2 — Generate embeddings (run once, ~30 seconds):
+  Step 2 -- Generate embeddings (run once, ~30 seconds):
             gaia embed
 
-  Step 3 — Search:
+  Step 3 -- Search:
             gaia search "<your query>"
 
   Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
@@ -176,9 +176,9 @@ _EMBEDDINGS_INSTALL_STEPS = """\
 
 _EMBEDDINGS_MISSING_STEPS = """\
 
-  ╔════════════════════════════════════════════════════════════════╗
-  ║  Embeddings have not been generated yet.                      ║
-  ╚════════════════════════════════════════════════════════════════╝
+  +----------------------------------------------------------------+
+  |  Embeddings have not been generated yet.                       |
+  +----------------------------------------------------------------+
 
   Generate them now (run once from the registry root, ~30 seconds):
     gaia embed

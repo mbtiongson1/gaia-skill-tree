@@ -1,7 +1,7 @@
-# [IV · Transcendent · Extra Skill] Tool Creation
+# [IV · Hardened · Extra Skill] Tool Creation
 **ID:** tool-creation  
 **Type:** Extra Skill  
-**Level:** IV · Transcendent  
+**Level:** IV · Hardened  
 **Rarity:** Rare  
 **Status:** Provisional
 

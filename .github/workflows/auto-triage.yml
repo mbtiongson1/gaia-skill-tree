@@ -116,14 +116,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Request reviewers
+      - name: Label and route
         run: |
-          if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
-            gh label create "draft-skills" --color "5319e7" --force 2>/dev/null || true
-            gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "draft-skills" --add-label "needs-review"
-          elif [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
+          if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
             gh label create "legendary" --color "d4a017" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
             gh pr edit ${{ github.event.pull_request.number }} --add-label "legendary" --add-label "needs-review"
@@ -133,6 +129,11 @@ jobs:
             gh label create "human-proposal" --color "1d76db" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
             gh pr edit ${{ github.event.pull_request.number }} --add-label "human-proposal" --add-label "needs-review"
+          fi
+
+          if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
+            gh label create "draft-skills" --color "5319e7" --force 2>/dev/null || true
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "draft-skills"
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

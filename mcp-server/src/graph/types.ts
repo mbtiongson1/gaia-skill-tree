@@ -2,7 +2,7 @@ export interface Skill {
   id: string;
   name: string;
   type: "atomic" | "composite" | "legendary";
-  level: "I" | "II" | "III" | "IV" | "V" | "VI";
+  level: "0" | "I" | "II" | "III" | "IV" | "V" | "VI";
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;
   prerequisites: string[];

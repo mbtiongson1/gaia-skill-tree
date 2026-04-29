@@ -354,6 +354,11 @@ def main():
         sys.exit(1)
 
     today = datetime.date.today().isoformat()
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = json.load(f)
+    graph_timestamp = graph_data.get("generatedAt", "")
+    if graph_timestamp:
+        today = graph_timestamp.split("T")[0] if "T" in graph_timestamp else graph_timestamp
 
     print(f"Scanning: {named_dir}")
     named_skills = load_named_skills(named_dir)
@@ -362,7 +367,7 @@ def main():
                     if not fp.endswith("index.json")]
 
     print(f"Loading skill IDs from: {graph_path}")
-    valid_ids = load_gaia_skill_ids(graph_path)
+    valid_ids = {s["id"] for s in graph_data.get("skills", [])}
 
     print(f"Found {len(named_skills)} named skill file(s). Validating...")
     errors, buckets = validate_and_group(named_skills, valid_ids)
