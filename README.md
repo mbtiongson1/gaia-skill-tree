@@ -86,26 +86,81 @@ python3 scripts/validate.py
 python3 scripts/generateProjections.py
 ```
 
-## Install the Plugin (per-repo)
+## CLI Usage
 
-> **Status: In Development** — The `gaia` CLI is not yet published to npm. Track progress or contribute in [plugin/](plugin/).
+The Gaia CLI scans an agent/project repository, compares detected skill names
+against the canonical Gaia registry, and can submit batch skill intake records
+for review.
+
+### Run from this checkout
+
+From the Gaia registry checkout:
 
 ```bash
-# Initialize Gaia in your project
+python3 plugin/cli/main.py --help
+```
+
+From another project, pass the local Gaia registry path with `--registry`:
+
+```bash
+python3 /path/to/gaia-skill-tree/plugin/cli/main.py \
+  --registry /path/to/gaia-skill-tree \
+  scan
+```
+
+If you have a shell wrapper named `gaia`, the same commands become:
+
+```bash
+gaia --registry /path/to/gaia-skill-tree scan
+gaia --registry /path/to/gaia-skill-tree push --dry-run
+gaia --registry /path/to/gaia-skill-tree push
+```
+
+### Project setup
+
+Run this inside the project you want Gaia to scan:
+
+```bash
+gaia init
+```
+
+This creates `.gaia/config.json`:
+
+```json
+{
+  "gaiaUser": "gaiabot",
+  "gaiaRegistryRef": "https://github.com/gaia-registry/gaia",
+  "scanPaths": ["scripts", "plugin"],
+  "autoPromptCombinations": false
+}
+```
+
+Update `gaiaUser` and `scanPaths` for your project before scanning.
+
+### Commands
+
+| Command | What it does |
+|---|---|
+| `gaia init` | Creates `.gaia/config.json` in the current project. |
+| `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
+| `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
+| `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
+| `gaia status` | Shows the configured user's registered skill-tree summary. |
+| `gaia tree` | Lists unlocked skills for the configured user. |
+| `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
+
+### Typical workflow
+
+```bash
+# In the project repo you want to scan
 gaia init
 
-# Scan for skills your agent demonstrates
-gaia scan
+# Preview detected skills and proposed intake
+gaia --registry /path/to/gaia-skill-tree scan
+gaia --registry /path/to/gaia-skill-tree push --dry-run
 
-# Submit a batch of detected known/proposed skills for review
-gaia push
-
-# View your skill tree
-gaia status
-gaia tree --depth 3
-
-# Fuse a detected combination
-gaia fuse autonomous-debug
+# Submit the batch intake record for review
+gaia --registry /path/to/gaia-skill-tree push
 ```
 
 ## MCP Server (Agent-Native Integration)

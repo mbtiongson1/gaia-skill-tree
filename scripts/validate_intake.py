@@ -15,7 +15,7 @@ except ImportError:
     HAS_JSONSCHEMA = False
 
 
-SKILL_ID_RE = re.compile(r"^[a-z][a-zA-Z0-9]*$")
+SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 VALID_TYPES = {"atomic", "composite", "legendary"}
 
 

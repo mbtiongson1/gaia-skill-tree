@@ -3,12 +3,22 @@ import sys
 import os
 import json
 
-from plugin.cli.scanner import scan_repo, load_config
-from plugin.cli.resolver import resolve_skills
-from plugin.cli.combinator import get_combinations
-from plugin.cli.treeManager import load_tree, save_tree, show_status, show_tree
-from plugin.cli.prWriter import open_pr, open_intake_pr
-from plugin.cli.push import build_skill_batch, write_skill_batch
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+try:
+    from plugin.cli.scanner import scan_repo, load_config
+    from plugin.cli.resolver import resolve_skills
+    from plugin.cli.combinator import get_combinations
+    from plugin.cli.treeManager import load_tree, save_tree, show_status, show_tree
+    from plugin.cli.prWriter import open_pr, open_intake_pr
+    from plugin.cli.push import build_skill_batch, write_skill_batch
+except ModuleNotFoundError:
+    from cli.scanner import scan_repo, load_config
+    from cli.resolver import resolve_skills
+    from cli.combinator import get_combinations
+    from cli.treeManager import load_tree, save_tree, show_status, show_tree
+    from cli.prWriter import open_pr, open_intake_pr
+    from cli.push import build_skill_batch, write_skill_batch
 
 def init_command(args):
     config_dir = '.gaia'

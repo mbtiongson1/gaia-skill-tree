@@ -24,7 +24,7 @@ class TestGaiaPush(unittest.TestCase):
                     f,
                 )
             with open(os.path.join(tmp, "src", "agent.txt"), "w") as f:
-                f.write("webSearch semanticSearch")
+                f.write("web-search semantic-search")
 
             env = os.environ.copy()
             env["PYTHONPATH"] = REPO_ROOT
@@ -45,8 +45,8 @@ class TestGaiaPush(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             batch = json.loads(result.stdout)
-            self.assertEqual([s["skillId"] for s in batch["knownSkills"]], ["webSearch"])
-            self.assertEqual([s["id"] for s in batch["proposedSkills"]], ["semanticSearch"])
+            self.assertEqual([s["skillId"] for s in batch["knownSkills"]], ["web-search"])
+            self.assertEqual([s["id"] for s in batch["proposedSkills"]], ["semantic-search"])
             self.assertEqual(batch["userId"], "tester")
             self.assertEqual(batch["sourceRepo"], "tester/local-repo")
 
