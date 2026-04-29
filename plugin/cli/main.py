@@ -114,18 +114,57 @@ def fuse_command(args):
     save_tree(username, tree, registry_path=args.registry)
     open_pr(username, tree, candidate_result=target)
 
+_EMBEDDINGS_INSTALL_STEPS = """\
+
+  ╔════════════════════════════════════════════════════════════════╗
+  ║  Semantic search requires the embeddings package.             ║
+  ╚════════════════════════════════════════════════════════════════╝
+
+  Step 1 — Install the embeddings library:
+            pip install "gaia-cli[embeddings]"
+
+  Step 2 — Generate embeddings (run once, ~30 seconds):
+            gaia embed
+
+  Step 3 — Search:
+            gaia search "<your query>"
+
+  Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
+"""
+
+_EMBEDDINGS_MISSING_STEPS = """\
+
+  ╔════════════════════════════════════════════════════════════════╗
+  ║  Embeddings have not been generated yet.                      ║
+  ╚════════════════════════════════════════════════════════════════╝
+
+  Generate them now (run once from the registry root, ~30 seconds):
+    gaia embed
+
+  Then retry:
+    gaia search "{query}"
+
+  Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
+"""
+
+
 def embed_command(args):
+    try:
+        import sentence_transformers  # noqa: F401
+    except ImportError:
+        print(_EMBEDDINGS_INSTALL_STEPS)
+        sys.exit(1)
     generate_embeddings(registry_path=args.registry)
 
 def search_command(args):
     embeddings_path = os.path.join(args.registry, 'graph', 'embeddings.json')
     try:
         results = semantic_search(args.query, embeddings_path, top_k=args.top_k)
-    except FileNotFoundError as e:
-        print(str(e))
+    except FileNotFoundError:
+        print(_EMBEDDINGS_MISSING_STEPS.format(query=args.query))
         return
-    except ImportError as e:
-        print(str(e))
+    except ImportError:
+        print(_EMBEDDINGS_INSTALL_STEPS)
         return
     if not results:
         print("No results found.")
