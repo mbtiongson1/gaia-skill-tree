@@ -7,6 +7,7 @@ on:
       - "graph/**"
       - "proposals/**"
       - "users/**"
+      - "intake/**"
 
 jobs:
   classify:
@@ -16,6 +17,7 @@ jobs:
       contents: read
     outputs:
       is_bot: ${{ steps.classify.outputs.is_bot }}
+      is_intake: ${{ steps.classify.outputs.is_intake }}
       evidence_score: ${{ steps.score.outputs.score }}
       has_legendary: ${{ steps.check_legendary.outputs.has_legendary }}
     steps:
@@ -25,10 +27,16 @@ jobs:
         id: classify
         run: |
           LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name' 2>/dev/null || echo "")
+          FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path' 2>/dev/null || echo "")
           if echo "$LABELS" | grep -q "bot-proposal"; then
             echo "is_bot=true" >> $GITHUB_OUTPUT
           else
             echo "is_bot=false" >> $GITHUB_OUTPUT
+          fi
+          if echo "$FILES" | grep -q "^intake/"; then
+            echo "is_intake=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_intake=false" >> $GITHUB_OUTPUT
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,7 +79,7 @@ jobs:
 
   auto-merge:
     needs: classify
-    if: needs.classify.outputs.is_bot == 'true' && needs.classify.outputs.has_legendary == 'false'
+    if: needs.classify.outputs.is_bot == 'true' && needs.classify.outputs.has_legendary == 'false' && needs.classify.outputs.is_intake != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -106,7 +114,7 @@ jobs:
 
   route-review:
     needs: classify
-    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true'
+    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true' || needs.classify.outputs.is_intake == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -115,7 +123,11 @@ jobs:
 
       - name: Request reviewers
         run: |
-          if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
+          if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
+            gh label create "draft-skills" --color "5319e7" --force 2>/dev/null || true
+            gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "draft-skills" --add-label "needs-review"
+          elif [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
             gh label create "legendary" --color "d4a017" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
             gh pr edit ${{ github.event.pull_request.number }} --add-label "legendary" --add-label "needs-review"

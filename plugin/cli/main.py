@@ -124,7 +124,7 @@ def push_command(args):
     if args.no_pr:
         print("Skipped PR creation (--no-pr).")
         return
-    open_intake_pr(config.get('gaiaUser'), batch, batch_path=batch_path)
+    open_intake_pr(config.get('gaiaUser'), batch, batch_path=batch_path, repo_root=args.registry)
 
 def main():
     parser = argparse.ArgumentParser(prog="gaia", description="Gaia Plugin CLI")

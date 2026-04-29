@@ -14,7 +14,7 @@
 ### Checklist
 
 **Contributor:**
-- [ ] Skill ID uses `camelCase` with no vendor references.
+- [ ] Skill ID uses `kebab-case` with no vendor references.
 - [ ] Description is precise, falsifiable, and non-overlapping with existing skills.
 - [ ] Evidence meets the minimum threshold for the claimed level.
 - [ ] `prerequisites` array is empty (atomic skills have no parents).

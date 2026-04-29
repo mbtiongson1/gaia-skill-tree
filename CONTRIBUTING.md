@@ -95,11 +95,22 @@ To preview the batch without writing files:
 gaia push --dry-run
 ```
 
+Write the intake file without opening a PR:
+
+```bash
+gaia push --no-pr
+```
+
 Validate intake records locally:
 
 ```bash
 python3 scripts/validate_intake.py
 ```
+
+Review flow for intake PRs:
+1. Contributor opens a draft intake PR containing `intake/skill-batches/<batchId>.json`.
+2. Reviewers mark each proposed skill as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
+3. Maintainers promote accepted draft skills into `graph/gaia.json` in a separate canonical graph PR.
 
 ### Canonical Graph Changes
 
@@ -139,7 +150,7 @@ Maintainers evaluate every PR against these criteria:
 | **Evidence quality** | Are sources reproducible, relevant, and correctly classified? |
 | **Classification quality** | Are the level and rarity justified with rationale? |
 | **Graph integrity** | Does the change introduce cycles, missing references, or orphaned nodes? |
-| **Naming** | Does the ID follow camelCase conventions? Is it agent-agnostic? |
+| **Naming** | Does the ID follow kebab-case conventions? Is it agent-agnostic? |
 
 ---
 
