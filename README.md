@@ -86,6 +86,16 @@ python3 scripts/validate.py
 python3 scripts/generateProjections.py
 ```
 
+## Real Skill Catalog
+
+Gaia also keeps a curated catalog of real-world named `SKILL.md` entries before they are promoted into the canonical graph:
+
+- Source data: [`graph/real_skill_catalog.json`](graph/real_skill_catalog.json)
+- Generated HTML: [`real-skills.html`](real-skills.html)
+- Generated Markdown: [`real-skills.md`](real-skills.md)
+
+Use this catalog to bucket popular named skills from sources such as VoltAgent's Awesome Agent Skills, AgentSkills.me, official skill pages, and Superpowers. The canonical DAG still lives in `graph/gaia.json`; the real skill catalog is a review surface for source-backed names and Gaia mappings.
+
 ## Install the Plugin (per-repo)
 
 > **Status: In Development** — The `gaia` CLI is not yet published to npm. Track progress or contribute in [plugin/](plugin/).
@@ -147,6 +157,7 @@ See [`mcp-server/`](mcp-server/) for full documentation.
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
+├── graph/real_skill_catalog.json ← Curated real-world named skills
 ├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)
@@ -157,6 +168,7 @@ gaia-skill-tree/
 ├── registry.md              ← GENERATED flat index of all skills
 ├── combinations.md          ← GENERATED fusion recipe matrix
 ├── tree.md                  ← GENERATED full ASCII skill graph
+├── real-skills.html         ← GENERATED linked catalog of real named skills
 ├── CONTRIBUTING.md          ← How to contribute
 └── docs/                    ← Governance, design spec, examples
 ```

@@ -1,0 +1,284 @@
+{
+  "$schema": "../schema/realSkillCatalog.schema.json",
+  "version": "0.1.0",
+  "updatedAt": "2026-04-30",
+  "sources": [
+    {
+      "id": "awesome-agent-skills",
+      "name": "VoltAgent Awesome Agent Skills",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "type": "curated-index",
+      "reportedSkillCount": "1100+",
+      "notes": "Hand-picked index of official and community SKILL.md repositories across Claude Code, Codex, Gemini CLI, Cursor, and related agents."
+    },
+    {
+      "id": "agentskills-me",
+      "name": "AgentSkills.me",
+      "url": "https://agentskills.me/",
+      "type": "directory",
+      "reportedSkillCount": "490",
+      "notes": "Browseable directory with concrete skill pages, popularity signals, source repositories, tool filters, and SKILL.md paths."
+    },
+    {
+      "id": "superpowers",
+      "name": "Superpowers Skills",
+      "url": "https://github.com/paulirish/superpowers",
+      "type": "methodology-skillset",
+      "reportedSkillCount": "13",
+      "notes": "Popular workflow skill set centered on agent discipline: brainstorming, TDD, debugging, planning, verification, review, and parallel execution."
+    },
+    {
+      "id": "officialskills",
+      "name": "Official Skills",
+      "url": "https://officialskills.sh/",
+      "type": "official-skill-index",
+      "reportedSkillCount": "1000+",
+      "notes": "Public pages linked by the VoltAgent index for official skills from Anthropic, Vercel, Stripe, Cloudflare, OpenAI, Hugging Face, and others."
+    }
+  ],
+  "buckets": [
+    {
+      "id": "agent-workflow-superpowers",
+      "name": "Agent Workflow and Superpowers",
+      "summary": "Named skills that improve how an agent plans, verifies, recovers context, and collaborates with humans.",
+      "items": [
+        {
+          "name": "superpowers/using-superpowers",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/using-superpowers/SKILL.md",
+          "description": "Routes each task through relevant skills before answering or editing.",
+          "mapsToGaia": ["route-intent", "tool-select", "self-critique"]
+        },
+        {
+          "name": "superpowers/brainstorming",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/brainstorming/SKILL.md",
+          "description": "Turns open-ended feature ideas into reviewed designs before implementation.",
+          "mapsToGaia": ["plan-decompose", "audience-model", "write-report"]
+        },
+        {
+          "name": "superpowers/test-driven-development",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/test-driven-development/SKILL.md",
+          "description": "Requires red-green-refactor implementation with failing tests before production code.",
+          "mapsToGaia": ["generate-test", "code-generation", "evaluate-output"]
+        },
+        {
+          "name": "superpowers/systematic-debugging",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/systematic-debugging/SKILL.md",
+          "description": "Frames failures around evidence, reproduction, hypothesis testing, and root cause.",
+          "mapsToGaia": ["error-interpretation", "execute-bash", "autonomous-debug"]
+        },
+        {
+          "name": "superpowers/verification-before-completion",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/verification-before-completion/SKILL.md",
+          "description": "Prevents completion claims until direct verification commands have run.",
+          "mapsToGaia": ["evaluate-output", "execute-bash", "self-critique"]
+        },
+        {
+          "name": "session-handoff",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/session-handoff",
+          "path": "skills/session-handoff",
+          "description": "Creates durable handoff documents for long-running agent sessions and context transfers.",
+          "mapsToGaia": ["memory-manage", "write-report", "format-output"]
+        }
+      ]
+    },
+    {
+      "id": "engineering-execution",
+      "name": "Engineering Execution",
+      "summary": "Skills that directly support codebase work, dependency changes, commits, reviews, and multi-agent coding workflows.",
+      "items": [
+        {
+          "name": "codex",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/codex",
+          "path": "skills/codex",
+          "description": "Runs Codex CLI for code analysis, refactoring, and automated editing.",
+          "mapsToGaia": ["code-generation", "refactor-code", "execute-bash"]
+        },
+        {
+          "name": "gemini",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/gemini",
+          "path": "skills/gemini",
+          "description": "Runs Gemini CLI for large-context code review, planning, and analysis.",
+          "mapsToGaia": ["code-review-pipeline", "summarize", "evaluate-output"]
+        },
+        {
+          "name": "dependency-updater",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/dependency-updater",
+          "path": "skills/dependency-updater",
+          "description": "Detects project dependency managers and applies safe dependency updates.",
+          "mapsToGaia": ["execute-bash", "detect-anomaly", "automated-testing"]
+        },
+        {
+          "name": "commit-work",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/commit-work",
+          "path": "skills/commit-work",
+          "description": "Stages intended changes, splits commits, and writes clear commit messages.",
+          "mapsToGaia": ["diff-content", "summarize", "format-output"]
+        },
+        {
+          "name": "superpowers/subagent-driven-development",
+          "sourceId": "superpowers",
+          "sourceUrl": "https://github.com/paulirish/superpowers",
+          "path": "skills/subagent-driven-development/SKILL.md",
+          "description": "Coordinates independent implementation slices across parallel coding agents.",
+          "mapsToGaia": ["multi-agent-orchestration-v", "plan-decompose", "tool-select"]
+        }
+      ]
+    },
+    {
+      "id": "frontend-product",
+      "name": "Frontend and Product Experience",
+      "summary": "Real named skills for UI quality, framework best practices, frontend testing, product content, and design systems.",
+      "items": [
+        {
+          "name": "vercel-react-best-practices",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/vercel-react-best-practices",
+          "path": "skills/react-best-practices",
+          "description": "Applies React and Next.js performance patterns from Vercel Engineering.",
+          "mapsToGaia": ["code-generation", "refactor-code", "automated-testing"]
+        },
+        {
+          "name": "frontend-design",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/frontend-design",
+          "path": "frontend-design",
+          "description": "Creates distinctive, production-grade frontend interfaces.",
+          "mapsToGaia": ["audience-model", "code-generation", "multimodal-reasoning"]
+        },
+        {
+          "name": "web-design-guidelines",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/web-design-guidelines",
+          "path": "skills/web-design-guidelines",
+          "description": "Captures modern responsive layout, accessibility, and visual hierarchy rules.",
+          "mapsToGaia": ["audience-model", "write-report", "evaluate-output"]
+        },
+        {
+          "name": "webapp-testing",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/anthropics/skills/webapp-testing",
+          "path": "anthropics/webapp-testing",
+          "description": "Tests local web applications with browser automation.",
+          "mapsToGaia": ["automated-testing", "computer-use", "evaluate-output"]
+        },
+        {
+          "name": "shadcn-ui",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/google-labs-code/skills/shadcn-ui",
+          "path": "google-labs-code/shadcn-ui",
+          "description": "Guides shadcn component usage for modern web UI work.",
+          "mapsToGaia": ["code-generation", "format-output", "refactor-code"]
+        }
+      ]
+    },
+    {
+      "id": "documents-research-data",
+      "name": "Documents, Research, and Data",
+      "summary": "Named skills for office documents, external research, scraping, data tools, and model/data discovery.",
+      "items": [
+        {
+          "name": "anthropics/docx",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/anthropics/skills/docx",
+          "path": "anthropics/docx",
+          "description": "Creates, edits, and analyzes Word documents.",
+          "mapsToGaia": ["parse-pdf", "write-report", "document-analyst"]
+        },
+        {
+          "name": "anthropics/xlsx",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/anthropics/skills/xlsx",
+          "path": "anthropics/xlsx",
+          "description": "Creates, edits, and analyzes spreadsheets.",
+          "mapsToGaia": ["data-analysis", "data-visualize", "generate-sql"]
+        },
+        {
+          "name": "firecrawl/firecrawl-build-search",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/firecrawl/skills/firecrawl-build-search",
+          "path": "firecrawl/firecrawl-build-search",
+          "description": "Integrates query-first web discovery with optional content hydration.",
+          "mapsToGaia": ["web-search", "web-scrape", "research"]
+        },
+        {
+          "name": "huggingface/hf-cli",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/huggingface/skills/hf-cli",
+          "path": "huggingface/hf-cli",
+          "description": "Uses the Hugging Face Hub CLI for model, dataset, and Space workflows.",
+          "mapsToGaia": ["retrieve", "api-call", "research"]
+        },
+        {
+          "name": "arxiv-search",
+          "sourceId": "agentskills-me",
+          "detailUrl": "https://agentskills.me/skill/arxiv-search",
+          "path": "skills/arxiv-search",
+          "description": "Searches and summarizes arXiv papers for research tasks.",
+          "mapsToGaia": ["web-search", "summarize", "cite-sources"]
+        }
+      ]
+    },
+    {
+      "id": "platform-domain-skills",
+      "name": "Platform and Domain Skills",
+      "summary": "Product-specific skills with clear sources that can inform future Gaia composites or known-agent mappings.",
+      "items": [
+        {
+          "name": "stripe/stripe-best-practices",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/stripe/skills/stripe-best-practices",
+          "path": "stripe/stripe-best-practices",
+          "description": "Guides Stripe integration decisions and implementation patterns.",
+          "mapsToGaia": ["api-call", "code-generation", "evaluate-output"]
+        },
+        {
+          "name": "cloudflare/workers-best-practices",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/cloudflare/skills/workers-best-practices",
+          "path": "cloudflare/workers-best-practices",
+          "description": "Captures Cloudflare Workers runtime and deployment patterns.",
+          "mapsToGaia": ["code-generation", "execute-bash", "automated-testing"]
+        },
+        {
+          "name": "netlify/netlify-deploy",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/netlify/skills/netlify-deploy",
+          "path": "netlify/netlify-deploy",
+          "description": "Deploys and troubleshoots Netlify applications.",
+          "mapsToGaia": ["execute-bash", "api-call", "evaluate-output"]
+        },
+        {
+          "name": "better-auth/create-auth",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://officialskills.sh/better-auth/skills/create-auth",
+          "path": "better-auth/create-auth",
+          "description": "Creates authentication setup with Better Auth.",
+          "mapsToGaia": ["code-generation", "api-call", "automated-testing"]
+        },
+        {
+          "name": "veniceai/venice-chat",
+          "sourceId": "awesome-agent-skills",
+          "detailUrl": "https://github.com/veniceai/skills/tree/main/skills/venice-chat",
+          "path": "veniceai/venice-chat",
+          "description": "Builds chat completions, multimodal inputs, tool calls, and streaming against Venice APIs.",
+          "mapsToGaia": ["api-call", "multimodal-reasoning", "conversational-agent"]
+        }
+      ]
+    }
+  ]
+}
