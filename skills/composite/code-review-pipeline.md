@@ -11,6 +11,7 @@
 Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.
 
 ## Prerequisites
+- [Code Execution](../atomic/code-execution.md)
 - [Code Generation](../atomic/code-generation.md)
 - [Diff Content](../atomic/diff-content.md)
 - [Evaluate Output](../atomic/evaluate-output.md)

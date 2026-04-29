@@ -11,12 +11,12 @@
 Extracts, structures, and embeds knowledge from web sources into a searchable corpus.
 
 ## Prerequisites
-- [Web Scrape](../composite/web-scrape.md)
-- [Extract Entities](../atomic/extract-entities.md)
 - [Embed Text](../atomic/embed-text.md)
+- [Extract Entities](../atomic/extract-entities.md)
+- [Web Scrape](../composite/web-scrape.md)
 
 ## Unlocks
-_None._
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 
 ## Fusion Condition
 _None specified._

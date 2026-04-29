@@ -11,9 +11,9 @@
 Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.
 
 ## Prerequisites
-- [Parse PDF](../atomic/parse-pdf.md)
 - [Extract Entities](../atomic/extract-entities.md)
 - [Format Output](../atomic/format-output.md)
+- [Parse PDF](../atomic/parse-pdf.md)
 
 ## Unlocks
 _None._

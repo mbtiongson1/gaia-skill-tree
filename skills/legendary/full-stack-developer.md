@@ -11,8 +11,8 @@
 Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.
 
 ## Prerequisites
-- [Code Review Pipeline](../composite/code-review-pipeline.md)
 - [Automated Testing](../composite/automated-testing.md)
+- [Code Review Pipeline](../composite/code-review-pipeline.md)
 - [Refactor Code](../atomic/refactor-code.md)
 
 ## Unlocks

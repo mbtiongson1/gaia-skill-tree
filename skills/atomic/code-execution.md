@@ -11,12 +11,13 @@
 Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.
 
 ## Prerequisites
-_None._
+- [Code Generation](../atomic/code-generation.md)
+- [Execute Bash](../atomic/execute-bash.md)
 
 ## Unlocks
+- [Automated Testing](../composite/automated-testing.md)
 - [Autonomous Debug](../composite/autonomous-debug.md)
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
-- [Automated Testing](../composite/automated-testing.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

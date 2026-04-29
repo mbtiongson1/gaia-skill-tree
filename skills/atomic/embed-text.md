@@ -14,8 +14,8 @@ Converts text into dense vector representations suitable for similarity search a
 _None._
 
 ## Unlocks
-- [RAG Pipeline](../composite/rag-pipeline.md)
 - [Knowledge Harvest](../composite/knowledge-harvest.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -11,9 +11,9 @@
 Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.
 
 ## Prerequisites
-- [Translate](../atomic/translate.md)
-- [Sentiment Analysis](../atomic/sentiment-analysis.md)
 - [Audience Model](../atomic/audience-model.md)
+- [Sentiment Analysis](../atomic/sentiment-analysis.md)
+- [Translate](../atomic/translate.md)
 
 ## Unlocks
 _None._

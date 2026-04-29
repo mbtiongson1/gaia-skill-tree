@@ -14,8 +14,8 @@ Diagnoses error messages, stack traces, and failure modes to identify root cause
 _None._
 
 ## Unlocks
-- [Autonomous Debug](../composite/autonomous-debug.md)
 - [Automated Testing](../composite/automated-testing.md)
+- [Autonomous Debug](../composite/autonomous-debug.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

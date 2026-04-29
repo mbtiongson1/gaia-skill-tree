@@ -11,8 +11,9 @@
 Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.
 
 ## Prerequisites
-- [Web Search](../atomic/web-search.md)
 - [Computer Use](../atomic/computer-use.md)
+- [Web Scrape](../composite/web-scrape.md)
+- [Web Search](../atomic/web-search.md)
 
 ## Unlocks
 - [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)

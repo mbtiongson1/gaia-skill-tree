@@ -11,11 +11,12 @@
 Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.
 
 ## Prerequisites
-_None._
+- [Classify](../atomic/classify.md)
 
 ## Unlocks
-- [Plan and Execute](../composite/plan-and-execute.md)
 - [Conversational Agent](../composite/conversational-agent.md)
+- [Grand Conductor: Multi-Agent Orchestration](../legendary/multi-agent-orchestration-v.md)
+- [Plan and Execute](../composite/plan-and-execute.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -11,8 +11,8 @@
 Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.
 
 ## Prerequisites
-- [Speech to Text](../atomic/speech-to-text.md)
 - [Question Answer](../atomic/question-answer.md)
+- [Speech to Text](../atomic/speech-to-text.md)
 - [Text to Speech](../atomic/text-to-speech.md)
 
 ## Unlocks

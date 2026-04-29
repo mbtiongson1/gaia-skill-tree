@@ -12,8 +12,8 @@ Integrates information from images and text to answer questions requiring visual
 
 ## Prerequisites
 - [Image Caption](../atomic/image-caption.md)
-- [Question Answer](../atomic/question-answer.md)
 - [Logical Inference](../atomic/logical-inference.md)
+- [Question Answer](../atomic/question-answer.md)
 
 ## Unlocks
 _None._

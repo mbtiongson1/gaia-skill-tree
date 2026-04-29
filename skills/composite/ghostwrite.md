@@ -11,12 +11,13 @@
 Produces audience-tailored, research-backed long-form written content.
 
 ## Prerequisites
+- [Audience Model](../atomic/audience-model.md)
+- [Generate Text](../atomic/generate-text.md)
 - [Research](../composite/research.md)
 - [Write Report](../atomic/write-report.md)
-- [Audience Model](../atomic/audience-model.md)
 
 ## Unlocks
-_None._
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 
 ## Fusion Condition
 Requires research output as input context.

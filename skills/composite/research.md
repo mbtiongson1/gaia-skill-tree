@@ -11,12 +11,13 @@
 Conducts multi-source information gathering, synthesis, and citation for a given topic.
 
 ## Prerequisites
-- [Web Search](../atomic/web-search.md)
-- [Summarize](../atomic/summarize.md)
 - [Cite Sources](../atomic/cite-sources.md)
+- [Summarize](../atomic/summarize.md)
+- [Web Search](../atomic/web-search.md)
 
 ## Unlocks
 - [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
+- [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
 - [Ghostwrite](../composite/ghostwrite.md)
 - [Hypothesis Generation](../atomic/hypothesis-generate.md)
 - [Registry Curation](../composite/registry-curation.md)

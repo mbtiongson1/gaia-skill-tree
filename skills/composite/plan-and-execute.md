@@ -11,12 +11,15 @@
 Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.
 
 ## Prerequisites
-- [Route Intent](../atomic/route-intent.md)
 - [Plan and Decompose](../atomic/plan-decompose.md)
+- [ReAct Reasoning](../composite/re-act-reasoning.md)
+- [Route Intent](../atomic/route-intent.md)
 - [Tool Select](../atomic/tool-select.md)
 
 ## Unlocks
+- [Grand Conductor: Multi-Agent Orchestration](../legendary/multi-agent-orchestration-v.md)
 - [True Herald: Real-Time Voice Assistant](../legendary/real-time-voice-assistant.md)
+- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
 
 ## Fusion Condition
 _None specified._

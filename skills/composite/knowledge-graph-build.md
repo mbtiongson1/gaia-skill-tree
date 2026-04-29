@@ -15,8 +15,8 @@ Extracts entities and relations from unstructured text, resolves co-references, 
 - [Logical Inference](../atomic/logical-inference.md)
 
 ## Unlocks
-- [RAG Pipeline](../composite/rag-pipeline.md)
 - [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Fusion Condition
 _None specified._

@@ -11,7 +11,7 @@
 Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.
 
 ## Prerequisites
-_None._
+- [Tool Select](../atomic/tool-select.md)
 
 ## Unlocks
 - [ReAct Reasoning](../composite/re-act-reasoning.md)

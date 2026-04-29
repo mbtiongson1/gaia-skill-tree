@@ -11,9 +11,10 @@
 Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report — completing a full research cycle without human intervention.
 
 ## Prerequisites
+- [Chain-of-Thought Reasoning](../atomic/chain-of-thought.md)
 - [Hypothesis Generation](../atomic/hypothesis-generate.md)
-- [Research](../composite/research.md)
 - [Math Reason](../atomic/math-reason.md)
+- [Research](../composite/research.md)
 
 ## Unlocks
 _None._

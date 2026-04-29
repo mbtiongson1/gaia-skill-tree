@@ -15,8 +15,8 @@ _None._
 
 ## Unlocks
 - [Conversational Agent](../composite/conversational-agent.md)
-- [Voice Agent](../composite/voice-agent.md)
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
+- [Voice Agent](../composite/voice-agent.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

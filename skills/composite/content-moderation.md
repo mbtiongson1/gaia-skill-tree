@@ -12,8 +12,8 @@ Detects policy-violating content by combining intent classification, sentiment s
 
 ## Prerequisites
 - [Classify](../atomic/classify.md)
-- [Sentiment Analysis](../atomic/sentiment-analysis.md)
 - [Extract Entities](../atomic/extract-entities.md)
+- [Sentiment Analysis](../atomic/sentiment-analysis.md)
 
 ## Unlocks
 _None._

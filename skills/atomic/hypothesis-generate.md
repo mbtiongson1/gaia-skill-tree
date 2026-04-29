@@ -11,7 +11,7 @@
 Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.
 
 ## Prerequisites
-_None._
+- [Research](../composite/research.md)
 
 ## Unlocks
 - [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)

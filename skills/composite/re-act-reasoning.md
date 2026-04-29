@@ -11,12 +11,14 @@
 Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.
 
 ## Prerequisites
+- [Chain-of-Thought Reasoning](../atomic/chain-of-thought.md)
 - [Plan and Decompose](../atomic/plan-decompose.md)
+- [Tool Select](../atomic/tool-select.md)
 - [Tool Use](../atomic/tool-use.md)
 
 ## Unlocks
-- [Plan and Execute](../composite/plan-and-execute.md)
 - [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [Plan and Execute](../composite/plan-and-execute.md)
 
 ## Fusion Condition
 _None specified._

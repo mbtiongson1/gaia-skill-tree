@@ -14,8 +14,8 @@ Translates natural-language data questions into syntactically correct, executabl
 _None._
 
 ## Unlocks
-- [Text-to-SQL Pipeline](../composite/text-to-sql-pipeline.md)
 - [Data Analysis](../composite/data-analysis.md)
+- [Text-to-SQL Pipeline](../composite/text-to-sql-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -11,9 +11,12 @@
 Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.
 
 ## Prerequisites
-- [Research](../composite/research.md)
-- [Knowledge Harvest](../composite/knowledge-harvest.md)
+- [Browser Automation](../composite/browser-automation.md)
 - [Ghostwrite](../composite/ghostwrite.md)
+- [Knowledge Graph Construction](../composite/knowledge-graph-build.md)
+- [Knowledge Harvest](../composite/knowledge-harvest.md)
+- [ReAct Reasoning](../composite/re-act-reasoning.md)
+- [Research](../composite/research.md)
 
 ## Unlocks
 _None._

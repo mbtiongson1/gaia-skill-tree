@@ -57,8 +57,8 @@
       "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
       "prerequisites": [],
       "derivatives": [
-        "route-intent",
-        "content-moderation"
+        "content-moderation",
+        "route-intent"
       ],
       "conditions": "",
       "evidence": [
@@ -140,6 +140,7 @@
       "prerequisites": [],
       "derivatives": [
         "document-analyst",
+        "structured-output",
         "text-to-sql-pipeline"
       ],
       "conditions": "",
@@ -197,7 +198,8 @@
         "automated-testing",
         "autonomous-debug",
         "code-execution",
-        "registry-curation"
+        "registry-curation",
+        "tool-use"
       ],
       "conditions": "",
       "evidence": [
@@ -224,7 +226,10 @@
       "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
       "prerequisites": [],
       "derivatives": [
-        "ghostwrite"
+        "chain-of-thought",
+        "ghostwrite",
+        "route-intent",
+        "self-critique"
       ],
       "conditions": "",
       "evidence": [
@@ -251,9 +256,9 @@
       "description": "Condenses longer input into a shorter representation that preserves key information and intent.",
       "prerequisites": [],
       "derivatives": [
-        "research",
+        "data-analysis",
         "document-analyst",
-        "data-analysis"
+        "research"
       ],
       "conditions": "",
       "evidence": [
@@ -333,14 +338,18 @@
     {
       "id": "route-intent",
       "name": "Route Intent",
-      "type": "atomic",
+      "type": "composite",
       "level": "I",
       "rarity": "common",
       "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
-      "prerequisites": [],
+      "prerequisites": [
+        "classify",
+        "generate-text"
+      ],
       "derivatives": [
-        "plan-and-execute",
-        "conversational-agent"
+        "conversational-agent",
+        "multi-agent-orchestration-v",
+        "plan-and-execute"
       ],
       "conditions": "",
       "evidence": [
@@ -368,6 +377,7 @@
       "prerequisites": [],
       "derivatives": [
         "code-review-pipeline",
+        "recursive-self-improvement",
         "self-critique"
       ],
       "conditions": "",
@@ -395,8 +405,8 @@
       "description": "Converts text into dense vector representations suitable for similarity search and clustering.",
       "prerequisites": [],
       "derivatives": [
-        "rag-pipeline",
-        "knowledge-harvest"
+        "knowledge-harvest",
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -533,6 +543,7 @@
       "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
       "prerequisites": [],
       "derivatives": [
+        "multi-agent-orchestration-v",
         "plan-and-execute",
         "re-act-reasoning",
         "tool-use"
@@ -562,8 +573,8 @@
       "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
       "prerequisites": [],
       "derivatives": [
-        "autonomous-debug",
-        "automated-testing"
+        "automated-testing",
+        "autonomous-debug"
       ],
       "conditions": "",
       "evidence": [
@@ -732,9 +743,9 @@
       "rarity": "uncommon",
       "description": "Retrieves and structures data from web pages into usable entities.",
       "prerequisites": [
-        "web-search",
+        "extract-entities",
         "parse-html",
-        "extract-entities"
+        "web-search"
       ],
       "derivatives": [
         "browser-automation",
@@ -764,12 +775,13 @@
       "rarity": "uncommon",
       "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
       "prerequisites": [
-        "web-search",
+        "cite-sources",
         "summarize",
-        "cite-sources"
+        "web-search"
       ],
       "derivatives": [
         "autonomous-data-scientist",
+        "autonomous-research-agent",
         "ghostwrite",
         "hypothesis-generate",
         "registry-curation",
@@ -799,11 +811,14 @@
       "rarity": "rare",
       "description": "Produces audience-tailored, research-backed long-form written content.",
       "prerequisites": [
+        "audience-model",
+        "generate-text",
         "research",
-        "write-report",
-        "audience-model"
+        "write-report"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "autonomous-research-agent"
+      ],
       "conditions": "Requires research output as input context.",
       "evidence": [
         {
@@ -828,11 +843,14 @@
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
       "prerequisites": [
+        "code-execution",
         "code-generation",
-        "execute-bash",
-        "error-interpretation"
+        "error-interpretation",
+        "execute-bash"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "recursive-self-improvement"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -857,12 +875,15 @@
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
       "prerequisites": [
-        "route-intent",
         "plan-decompose",
+        "re-act-reasoning",
+        "route-intent",
         "tool-select"
       ],
       "derivatives": [
-        "real-time-voice-assistant"
+        "multi-agent-orchestration-v",
+        "real-time-voice-assistant",
+        "recursive-self-improvement"
       ],
       "conditions": "",
       "evidence": [
@@ -888,11 +909,13 @@
       "rarity": "rare",
       "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
       "prerequisites": [
-        "web-scrape",
+        "embed-text",
         "extract-entities",
-        "embed-text"
+        "web-scrape"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "autonomous-research-agent"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -917,10 +940,14 @@
       "rarity": "uncommon",
       "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
       "prerequisites": [
-        "retrieve",
         "chunk-document",
         "embed-text",
-        "score-relevance"
+        "knowledge-graph-build",
+        "rank",
+        "retrieve",
+        "score-relevance",
+        "structured-output",
+        "tokenize"
       ],
       "derivatives": [],
       "conditions": "",
@@ -947,10 +974,10 @@
       "rarity": "uncommon",
       "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
       "prerequisites": [
-        "parse-json",
         "extract-entities",
-        "summarize",
-        "format-output"
+        "format-output",
+        "parse-json",
+        "summarize"
       ],
       "derivatives": [],
       "conditions": "",
@@ -979,7 +1006,8 @@
       "prerequisites": [
         "autonomous-debug",
         "evaluate-output",
-        "plan-and-execute"
+        "plan-and-execute",
+        "self-critique"
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
@@ -1035,9 +1063,12 @@
       "rarity": "legendary",
       "description": "Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.",
       "prerequisites": [
-        "research",
+        "browser-automation",
+        "ghostwrite",
+        "knowledge-graph-build",
         "knowledge-harvest",
-        "ghostwrite"
+        "re-act-reasoning",
+        "research"
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
@@ -1201,8 +1232,8 @@
       "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
       "prerequisites": [],
       "derivatives": [
-        "text-to-sql-pipeline",
-        "data-analysis"
+        "data-analysis",
+        "text-to-sql-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -1230,8 +1261,8 @@
       "prerequisites": [],
       "derivatives": [
         "conversational-agent",
-        "voice-agent",
-        "multimodal-reasoning"
+        "multimodal-reasoning",
+        "voice-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -1312,6 +1343,7 @@
       "prerequisites": [],
       "derivatives": [
         "chain-of-thought",
+        "hypothesis-generate",
         "knowledge-graph-build",
         "multimodal-reasoning"
       ],
@@ -1525,8 +1557,8 @@
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
       "prerequisites": [
-        "question-answer",
         "memory-manage",
+        "question-answer",
         "route-intent"
       ],
       "derivatives": [],
@@ -1554,9 +1586,10 @@
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
       "prerequisites": [
+        "format-output",
         "generate-sql",
         "parse-json",
-        "format-output"
+        "structured-output"
       ],
       "derivatives": [],
       "conditions": "Requires schema context in prompt.",
@@ -1583,6 +1616,7 @@
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
       "prerequisites": [
+        "code-execution",
         "code-generation",
         "diff-content",
         "evaluate-output"
@@ -1614,8 +1648,8 @@
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
       "prerequisites": [
-        "generate-sql",
         "data-visualize",
+        "generate-sql",
         "summarize"
       ],
       "derivatives": [
@@ -1645,8 +1679,8 @@
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
       "prerequisites": [
-        "speech-to-text",
         "question-answer",
+        "speech-to-text",
         "text-to-speech"
       ],
       "derivatives": [
@@ -1676,9 +1710,10 @@
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
       "prerequisites": [
-        "generate-test",
+        "code-execution",
+        "error-interpretation",
         "execute-bash",
-        "error-interpretation"
+        "generate-test"
       ],
       "derivatives": [
         "full-stack-developer"
@@ -1708,8 +1743,8 @@
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
       "prerequisites": [
         "classify",
-        "sentiment-analysis",
-        "extract-entities"
+        "extract-entities",
+        "sentiment-analysis"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1737,8 +1772,8 @@
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
       "prerequisites": [
         "image-caption",
-        "question-answer",
-        "logical-inference"
+        "logical-inference",
+        "question-answer"
       ],
       "derivatives": [],
       "conditions": "Requires vision-language model capability.",
@@ -1765,9 +1800,9 @@
       "rarity": "uncommon",
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
       "prerequisites": [
-        "translate",
+        "audience-model",
         "sentiment-analysis",
-        "audience-model"
+        "translate"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1794,9 +1829,9 @@
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
       "prerequisites": [
-        "parse-pdf",
         "extract-entities",
-        "format-output"
+        "format-output",
+        "parse-pdf"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1823,8 +1858,8 @@
       "rarity": "legendary",
       "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
       "prerequisites": [
-        "code-review-pipeline",
         "automated-testing",
+        "code-review-pipeline",
         "refactor-code"
       ],
       "derivatives": [],
@@ -1909,9 +1944,9 @@
       "rarity": "legendary",
       "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
       "prerequisites": [
-        "voice-agent",
         "memory-manage",
-        "plan-and-execute"
+        "plan-and-execute",
+        "voice-agent"
       ],
       "derivatives": [],
       "conditions": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
@@ -1952,9 +1987,9 @@
       "rarity": "rare",
       "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
       "prerequisites": [
-        "research",
         "code-generation",
-        "execute-bash"
+        "execute-bash",
+        "research"
       ],
       "derivatives": [],
       "conditions": "Requires write access to the canonical graph and a passing validation suite.",
@@ -1983,11 +2018,14 @@
     {
       "id": "tool-use",
       "name": "Tool Use",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "uncommon",
       "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
-      "prerequisites": [],
+      "prerequisites": [
+        "execute-bash",
+        "tool-select"
+      ],
       "derivatives": [
         "re-act-reasoning"
       ],
@@ -2017,11 +2055,14 @@
     {
       "id": "chain-of-thought",
       "name": "Chain-of-Thought Reasoning",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "uncommon",
       "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
-      "prerequisites": [],
+      "prerequisites": [
+        "generate-text",
+        "logical-inference"
+      ],
       "derivatives": [
         "re-act-reasoning",
         "scientific-discovery"
@@ -2052,11 +2093,14 @@
     {
       "id": "self-critique",
       "name": "Self-Critique",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "uncommon",
       "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
-      "prerequisites": [],
+      "prerequisites": [
+        "evaluate-output",
+        "generate-text"
+      ],
       "derivatives": [
         "recursive-self-improvement"
       ],
@@ -2086,11 +2130,14 @@
     {
       "id": "structured-output",
       "name": "Structured Output Generation",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "common",
       "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
-      "prerequisites": [],
+      "prerequisites": [
+        "format-output",
+        "parse-json"
+      ],
       "derivatives": [
         "rag-pipeline",
         "text-to-sql-pipeline"
@@ -2121,15 +2168,18 @@
     {
       "id": "code-execution",
       "name": "Code Execution",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "common",
       "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
-      "prerequisites": [],
+      "prerequisites": [
+        "code-generation",
+        "execute-bash"
+      ],
       "derivatives": [
+        "automated-testing",
         "autonomous-debug",
-        "code-review-pipeline",
-        "automated-testing"
+        "code-review-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -2191,11 +2241,14 @@
     {
       "id": "hypothesis-generate",
       "name": "Hypothesis Generation",
-      "type": "atomic",
+      "type": "composite",
       "level": "II",
       "rarity": "rare",
       "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
-      "prerequisites": [],
+      "prerequisites": [
+        "logical-inference",
+        "research"
+      ],
       "derivatives": [
         "scientific-discovery"
       ],
@@ -2237,12 +2290,14 @@
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
       "prerequisites": [
+        "chain-of-thought",
         "plan-decompose",
+        "tool-select",
         "tool-use"
       ],
       "derivatives": [
-        "plan-and-execute",
-        "autonomous-research-agent"
+        "autonomous-research-agent",
+        "plan-and-execute"
       ],
       "conditions": "",
       "evidence": [
@@ -2275,8 +2330,9 @@
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
       "prerequisites": [
-        "web-search",
-        "computer-use"
+        "computer-use",
+        "web-scrape",
+        "web-search"
       ],
       "derivatives": [
         "autonomous-research-agent"
@@ -2316,8 +2372,8 @@
         "logical-inference"
       ],
       "derivatives": [
-        "rag-pipeline",
-        "autonomous-research-agent"
+        "autonomous-research-agent",
+        "rag-pipeline"
       ],
       "conditions": "",
       "evidence": [
@@ -2350,9 +2406,10 @@
       "rarity": "legendary",
       "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report \u2014 completing a full research cycle without human intervention.",
       "prerequisites": [
+        "chain-of-thought",
         "hypothesis-generate",
-        "research",
-        "math-reason"
+        "math-reason",
+        "research"
       ],
       "derivatives": [],
       "conditions": "Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources.",

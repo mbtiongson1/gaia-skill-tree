@@ -14,6 +14,7 @@ Chooses the most appropriate tool or API from a set of available options given a
 _None._
 
 ## Unlocks
+- [Grand Conductor: Multi-Agent Orchestration](../legendary/multi-agent-orchestration-v.md)
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tool Use](../atomic/tool-use.md)

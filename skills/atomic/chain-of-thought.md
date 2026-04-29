@@ -11,7 +11,7 @@
 Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.
 
 ## Prerequisites
-_None._
+- [Logical Inference](../atomic/logical-inference.md)
 
 ## Unlocks
 - [ReAct Reasoning](../composite/re-act-reasoning.md)

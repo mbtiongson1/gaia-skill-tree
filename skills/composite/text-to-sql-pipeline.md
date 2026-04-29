@@ -11,9 +11,10 @@
 Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.
 
 ## Prerequisites
+- [Format Output](../atomic/format-output.md)
 - [Generate SQL](../atomic/generate-sql.md)
 - [Parse JSON](../atomic/parse-json.md)
-- [Format Output](../atomic/format-output.md)
+- [Structured Output Generation](../atomic/structured-output.md)
 
 ## Unlocks
 _None._

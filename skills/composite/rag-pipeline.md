@@ -11,10 +11,14 @@
 End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.
 
 ## Prerequisites
-- [Retrieve](../atomic/retrieve.md)
 - [Chunk Document](../atomic/chunk-document.md)
 - [Embed Text](../atomic/embed-text.md)
+- [Knowledge Graph Construction](../composite/knowledge-graph-build.md)
+- [Rank](../atomic/rank.md)
+- [Retrieve](../atomic/retrieve.md)
 - [Score Relevance](../atomic/score-relevance.md)
+- [Structured Output Generation](../atomic/structured-output.md)
+- [Tokenize](../atomic/tokenize.md)
 
 ## Unlocks
 _None._

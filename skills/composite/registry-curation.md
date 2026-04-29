@@ -11,9 +11,9 @@
 Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.
 
 ## Prerequisites
-- [Research](../composite/research.md)
 - [Code Generation](../atomic/code-generation.md)
 - [Execute Bash](../atomic/execute-bash.md)
+- [Research](../composite/research.md)
 
 ## Unlocks
 _None._

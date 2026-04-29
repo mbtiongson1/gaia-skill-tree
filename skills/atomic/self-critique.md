@@ -11,7 +11,7 @@
 Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.
 
 ## Prerequisites
-_None._
+- [Evaluate Output](../atomic/evaluate-output.md)
 
 ## Unlocks
 - [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)

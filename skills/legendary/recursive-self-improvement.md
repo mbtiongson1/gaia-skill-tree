@@ -14,6 +14,7 @@ Agent iteratively refines its own prompts, tools, or strategies based on perform
 - [Autonomous Debug](../composite/autonomous-debug.md)
 - [Evaluate Output](../atomic/evaluate-output.md)
 - [Plan and Execute](../composite/plan-and-execute.md)
+- [Self-Critique](../atomic/self-critique.md)
 
 ## Unlocks
 _None._

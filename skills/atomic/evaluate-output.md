@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
+- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
 - [Self-Critique](../atomic/self-critique.md)
 
 ## Evidence

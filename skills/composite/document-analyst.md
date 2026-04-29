@@ -11,10 +11,10 @@
 Parses, extracts entities from, summarizes, and formats structured documents.
 
 ## Prerequisites
-- [Parse JSON](../atomic/parse-json.md)
 - [Extract Entities](../atomic/extract-entities.md)
-- [Summarize](../atomic/summarize.md)
 - [Format Output](../atomic/format-output.md)
+- [Parse JSON](../atomic/parse-json.md)
+- [Summarize](../atomic/summarize.md)
 
 ## Unlocks
 _None._

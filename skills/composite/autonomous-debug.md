@@ -11,12 +11,13 @@
 Independently identifies, diagnoses, and fixes software bugs through code generation and execution.
 
 ## Prerequisites
+- [Code Execution](../atomic/code-execution.md)
 - [Code Generation](../atomic/code-generation.md)
-- [Execute Bash](../atomic/execute-bash.md)
 - [Error Interpretation](../atomic/error-interpretation.md)
+- [Execute Bash](../atomic/execute-bash.md)
 
 ## Unlocks
-_None._
+- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
 
 ## Fusion Condition
 _None specified._

@@ -11,9 +11,9 @@
 Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.
 
 ## Prerequisites
-- [Voice Agent](../composite/voice-agent.md)
 - [Memory Manage](../atomic/memory-manage.md)
 - [Plan and Execute](../composite/plan-and-execute.md)
+- [Voice Agent](../composite/voice-agent.md)
 
 ## Unlocks
 _None._

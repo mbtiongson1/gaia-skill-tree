@@ -11,9 +11,10 @@
 Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.
 
 ## Prerequisites
-- [Generate Test](../atomic/generate-test.md)
-- [Execute Bash](../atomic/execute-bash.md)
+- [Code Execution](../atomic/code-execution.md)
 - [Error Interpretation](../atomic/error-interpretation.md)
+- [Execute Bash](../atomic/execute-bash.md)
+- [Generate Test](../atomic/generate-test.md)
 
 ## Unlocks
 - [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)

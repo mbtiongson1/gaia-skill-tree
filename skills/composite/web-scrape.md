@@ -11,9 +11,9 @@
 Retrieves and structures data from web pages into usable entities.
 
 ## Prerequisites
-- [Web Search](../atomic/web-search.md)
-- [Parse HTML](../atomic/parse-html.md)
 - [Extract Entities](../atomic/extract-entities.md)
+- [Parse HTML](../atomic/parse-html.md)
+- [Web Search](../atomic/web-search.md)
 
 ## Unlocks
 - [Browser Automation](../composite/browser-automation.md)

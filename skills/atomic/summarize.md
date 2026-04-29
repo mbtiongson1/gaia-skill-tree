@@ -14,9 +14,9 @@ Condenses longer input into a shorter representation that preserves key informat
 _None._
 
 ## Unlocks
-- [Research](../composite/research.md)
-- [Document Analyst](../composite/document-analyst.md)
 - [Data Analysis](../composite/data-analysis.md)
+- [Document Analyst](../composite/document-analyst.md)
+- [Research](../composite/research.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

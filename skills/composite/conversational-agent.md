@@ -11,8 +11,8 @@
 Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.
 
 ## Prerequisites
-- [Question Answer](../atomic/question-answer.md)
 - [Memory Manage](../atomic/memory-manage.md)
+- [Question Answer](../atomic/question-answer.md)
 - [Route Intent](../atomic/route-intent.md)
 
 ## Unlocks

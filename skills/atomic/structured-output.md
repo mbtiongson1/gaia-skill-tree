@@ -11,7 +11,7 @@
 Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.
 
 ## Prerequisites
-_None._
+- [Format Output](../atomic/format-output.md)
 
 ## Unlocks
 - [RAG Pipeline](../composite/rag-pipeline.md)

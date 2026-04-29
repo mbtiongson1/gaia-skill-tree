@@ -11,8 +11,8 @@
 Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.
 
 ## Prerequisites
-- [Generate SQL](../atomic/generate-sql.md)
 - [Data Visualize](../atomic/data-visualize.md)
+- [Generate SQL](../atomic/generate-sql.md)
 - [Summarize](../atomic/summarize.md)
 
 ## Unlocks
