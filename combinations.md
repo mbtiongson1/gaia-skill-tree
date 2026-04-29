@@ -14,6 +14,7 @@
 | ◇ Document Analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III · Evolved |  |
 | ◇ Document Digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III · Evolved |  |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V · Transcendent | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
+| ◇ Function Calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III · Evolved | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV · Transcendent | Requires research output as input context. |
 | ◇ Knowledge Graph Construction | Extra Skill | Extract Entities, Logical Inference | III · Evolved |  |
 | ◇ Knowledge Harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV · Transcendent |  |
