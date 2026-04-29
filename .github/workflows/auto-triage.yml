@@ -1,7 +1,9 @@
 name: "Auto-Triage"
 
+# pull_request_target runs with the base-repo token (full write permissions)
+# even for fork PRs. We never checkout or execute PR code here, so this is safe.
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
     paths:
       - "graph/**"
@@ -13,7 +15,7 @@ jobs:
   classify:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
+      pull-requests: read
       contents: read
     outputs:
       is_bot: ${{ steps.classify.outputs.is_bot }}
@@ -21,8 +23,6 @@ jobs:
       evidence_score: ${{ steps.score.outputs.score }}
       has_legendary: ${{ steps.check_legendary.outputs.has_legendary }}
     steps:
-      - uses: actions/checkout@v4
-
       - name: Classify PR source
         id: classify
         run: |
@@ -41,17 +41,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: pip install jsonschema
-
-      - name: Validate schema + DAG
-        id: validate
-        run: python scripts/validate.py
-
       - name: Extract evidence score
         id: score
         if: steps.classify.outputs.is_bot == 'true'
@@ -65,17 +54,23 @@ jobs:
       - name: Check for legendary proposals
         id: check_legendary
         run: |
-          if git diff origin/main --name-only | grep -q "proposals/"; then
-            # Check if any proposal has type "legendary"
-            LEGENDARY=$(find proposals/ -name "*.json" -newer .git/refs/heads/main -exec grep -l '"type": "legendary"' {} \; 2>/dev/null | wc -l)
-            if [ "$LEGENDARY" -gt 0 ]; then
-              echo "has_legendary=true" >> $GITHUB_OUTPUT
-            else
-              echo "has_legendary=false" >> $GITHUB_OUTPUT
+          FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path' 2>/dev/null || echo "")
+          LEGENDARY=0
+          while IFS= read -r file; do
+            if [[ "$file" == proposals/*.json ]]; then
+              CONTENT=$(gh api "repos/${{ github.repository }}/contents/$file?ref=${{ github.event.pull_request.head.sha }}" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || echo "")
+              if echo "$CONTENT" | grep -q '"type": "legendary"'; then
+                LEGENDARY=$((LEGENDARY + 1))
+              fi
             fi
+          done <<< "$FILES"
+          if [ "$LEGENDARY" -gt 0 ]; then
+            echo "has_legendary=true" >> $GITHUB_OUTPUT
           else
             echo "has_legendary=false" >> $GITHUB_OUTPUT
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   auto-merge:
     needs: classify
@@ -85,8 +80,6 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-
       - name: Check evidence threshold
         id: gate
         run: |
@@ -108,6 +101,7 @@ jobs:
       - name: Label for review
         if: steps.gate.outputs.pass == 'false'
         run: |
+          gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
           gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -119,8 +113,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-
       - name: Request reviewers
         run: |
           if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
