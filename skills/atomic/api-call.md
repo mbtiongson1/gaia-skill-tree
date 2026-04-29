@@ -14,7 +14,7 @@ Constructs, executes, and handles responses from HTTP APIs by interpreting docum
 _None._
 
 ## Unlocks
-_None._
+- [Function Calling](../composite/function-calling.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
