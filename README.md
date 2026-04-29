@@ -100,76 +100,17 @@ gaia --registry . scan
 python3 scripts/generateProjections.py
 ```
 
-> **Why install embeddings?**
-> `gaia search` uses local semantic matching so you can find skills by meaning, not just keywords.
-> `gaia push` also uses it to suggest matching named-skill buckets for your proposed skills.
-> Without embeddings, both commands will prompt you to set them up.
-> The model runs fully locally — no API key, no network call after the first download.
+## Real Skill Catalog
 
-## CLI Usage
+Gaia also keeps a curated catalog of real-world named `SKILL.md` entries before they are promoted into the canonical graph:
 
-Install once from the repo root:
+- Source data: [`graph/real_skill_catalog.json`](graph/real_skill_catalog.json)
+- Generated HTML: [`real-skills.html`](real-skills.html)
+- Generated Markdown: [`real-skills.md`](real-skills.md)
 
-```bash
-pip install -e .
-```
+Use this catalog to bucket popular named skills from sources such as VoltAgent's Awesome Agent Skills, AgentSkills.me, official skill pages, and Superpowers. The canonical DAG still lives in `graph/gaia.json`; the real skill catalog is a review surface for source-backed names and Gaia mappings.
 
-Then `gaia` works from any directory — no path prefix needed.
-
-### Project setup
-
-Run this inside the project you want Gaia to scan:
-```bash
-gaia init --user your-github-username --scan AGENTS.md --scan scripts
-```
-
-For the previous non-interactive defaults, use:
-```bash
-gaia init --yes
-```
-
-This creates `.gaia/config.json`:
-```json
-{
-  "gaiaUser": "your-github-username",
-  "gaiaRegistryRef": "https://github.com/mbtiongson1/gaia-skill-tree",
-  "scanPaths": ["AGENTS.md", "scripts"],
-  "autoPromptCombinations": false
-}
-```
-
-Use `gaia doctor` after initialization to check the CLI, registry path, config, skill tree, embeddings, and scan paths.
-
-### Commands
-
-| Command | What it does |
-|---|---|
-| `gaia init` | Creates `.gaia/config.json` in the current project. Supports `--user`, `--registry-ref`, and repeated `--scan` flags. |
-| `gaia doctor` | Checks CLI/config/registry health and reports missing setup pieces. |
-| `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
-| `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
-| `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
-| `gaia push --no-pr` | Writes a batch intake record without trying to open a PR. |
-| `gaia name <batch> <index> <contributor/skill>` | Promotes an awakened skill from intake to a named skill in `graph/named/`. |
-| `gaia install <contributor/skill>` | Downloads a named skill into the repo (global cache + repo reference). |
-| `gaia install --list` | Lists all installed named skills. |
-| `gaia sync` | Updates installed named skills from their registry origin. |
-| `gaia uninstall <contributor/skill>` | Removes an installed named skill. |
-| `gaia embed` | Pre-computes embeddings for all skills. **Strongly recommended** — run once after `pip install -e ".[embeddings]"`, re-run when the graph changes. |
-| `gaia search <query>` | Semantic search across generic and named skills (requires embeddings — see above). |
-| `gaia graph` | Generates `graph/gaia.svg` from the canonical registry and opens it in your browser. Defaults to SVG + open. |
-| `gaia graph -o /tmp/gaia.svg --no-open` | Writes a graph image to a custom path without opening it. |
-| `gaia status` | Shows the configured user's registered skill-tree summary. |
-| `gaia tree` | Lists unlocked skills for the configured user. |
-| `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
-
-### View the skill graph
-
-Generate and open a static SVG image of the canonical skill graph:
-
-```bash
-gaia graph
-```
+## Install the Plugin (per-repo)
 
 Write the SVG somewhere specific:
 
@@ -257,11 +198,7 @@ See [`mcp-server/`](mcp-server/) for full documentation.
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
-├── graph/named/             ← Named skill implementations ({contributor}/{skill-name}.md)
-├── graph/named/index.json   ← GENERATED bucket index
-├── graph/embeddings.json    ← GENERATED skill embeddings (sentence-transformers)
-├── graph/similarity.json    ← GENERATED pairwise similarity scores
-├── intake/                  ← Batch skill proposals submitted by gaia push
+├── graph/real_skill_catalog.json ← Curated real-world named skills
 ├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)
@@ -274,6 +211,7 @@ gaia-skill-tree/
 ├── registry.md              ← GENERATED flat index of all skills
 ├── combinations.md          ← GENERATED fusion recipe matrix
 ├── tree.md                  ← GENERATED full ASCII skill graph
+├── real-skills.html         ← GENERATED linked catalog of real named skills
 ├── CONTRIBUTING.md          ← How to contribute
 └── docs/                    ← Governance, design spec, examples
 ```

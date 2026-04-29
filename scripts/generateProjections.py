@@ -41,6 +41,11 @@ def _run_generate_named_index():
         print(f"Warning: could not generate named index — {exc}")
 
 
+try:
+    from generateRealSkills import generate_catalog_pages
+except ModuleNotFoundError:
+    from scripts.generateRealSkills import generate_catalog_pages
+
 
 def get_type_label(meta, skill_type):
     return meta.get("typeLabels", {}).get(skill_type, skill_type.capitalize())
@@ -256,6 +261,11 @@ def main():
 
     # generate tree.md
     _generate_tree(skills, skill_map, meta, version, date_str)
+
+    catalog_path = 'graph/real_skill_catalog.json'
+    if os.path.isfile(catalog_path):
+        with open(catalog_path, 'r', encoding='utf-8') as cf:
+            generate_catalog_pages(json.load(cf))
 
     # generate user skill tree markdown projections
     users_dir = "users"
