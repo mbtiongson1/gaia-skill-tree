@@ -32,4 +32,4 @@
 | ◇ Voice Agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III · Evolved | Requires real-time audio I/O or audio file access. |
 | ◇ Web Scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III · Evolved | Structured output mode required. |
 
-*Generated from gaia.json v0.2.0.*
+*Generated from gaia.json v1.0.0.*

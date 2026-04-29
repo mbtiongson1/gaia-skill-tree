@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v0.2.0  ·  generated 2026-04-29
+GAIA SKILL TREE  v1.0.0  ·  generated 2026-04-29
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -93,4 +93,4 @@ Shared prerequisites marked (↑ see above) on second occurrence.
 
 ```
 
-*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*
