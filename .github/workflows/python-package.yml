@@ -1,0 +1,53 @@
+name: Python Package
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'README.md'
+      - 'src/**'
+      - 'plugin/cli/**'
+      - 'tests/**'
+      - 'graph/gaia.json'
+      - 'graph/named/**'
+      - 'schema/**'
+      - '.github/workflows/python-package.yml'
+  workflow_dispatch: {}
+
+jobs:
+  package:
+    name: Test, Build, and Smoke Test
+    runs-on: ubuntu-latest
+    env:
+      GAIA_HOME: ${{ runner.temp }}/gaia-home
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install development dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run Python tests
+        run: python -m pytest tests/
+
+      - name: Clean local build artifacts
+        run: rm -rf build dist *.egg-info src/*.egg-info
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Check package metadata
+        run: python -m twine check dist/*
+
+      - name: Install wheel in clean environment
+        run: |
+          set -euo pipefail
+          python -m venv "$RUNNER_TEMP/gaia-wheel-venv"
+          "$RUNNER_TEMP/gaia-wheel-venv/bin/python" -m pip install dist/*.whl
+          "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" --help
+          "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" doctor

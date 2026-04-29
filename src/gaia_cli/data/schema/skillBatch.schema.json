@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gaia-registry.github.io/schema/skillBatch.schema.json",
+  "title": "Gaia Skill Batch Intake",
+  "description": "Reviewable batch of known and proposed skills detected by gaia push.",
+  "type": "object",
+  "required": ["batchId", "userId", "sourceRepo", "generatedAt", "knownSkills", "proposedSkills", "similarity"],
+  "additionalProperties": false,
+  "properties": {
+    "batchId": { "type": "string", "minLength": 1 },
+    "userId": { "type": "string", "minLength": 1 },
+    "sourceRepo": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "knownSkills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["skillId"],
+        "additionalProperties": false,
+        "properties": {
+          "skillId": { "type": "string", "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$" }
+        }
+      }
+    },
+    "proposedSkills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "description", "sourceRepo"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "enum": ["atomic", "composite", "legendary"] },
+          "description": { "type": "string", "minLength": 10 },
+          "sourceRepo": { "type": "string", "minLength": 1 },
+          "lifecycle": { "type": "string", "enum": ["pending", "awakened", "named"], "default": "pending" },
+          "evidence": { "type": "array" },
+          "rationale": { "type": "string" },
+          "openQuestions": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "similarity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceSkillId", "targetSkillId", "score", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "sourceSkillId": { "type": "string", "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$" },
+          "targetSkillId": { "type": "string", "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$" },
+          "score": { "type": "number", "minimum": 0, "maximum": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

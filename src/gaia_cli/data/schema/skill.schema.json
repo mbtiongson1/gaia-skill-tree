@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gaia-registry.github.io/schema/skill.schema.json",
+  "title": "Gaia Skill Node",
+  "description": "Schema for a single skill node in the Gaia skill registry DAG.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "level",
+    "rarity",
+    "description",
+    "prerequisites",
+    "derivatives",
+    "evidence",
+    "knownAgents",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "description": "Unique camelCase identifier for the skill."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "atomic",
+        "composite",
+        "legendary"
+      ],
+      "description": "Skill classification type."
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI"
+      ],
+      "description": "Skill tier in the upgrade path (I = Foundation, VI = Apex)."
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary"
+      ],
+      "description": "Rarity tier based on agent prevalence."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Clear, agent-agnostic definition of the capability."
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+      },
+      "description": "Array of parent skill IDs required to unlock this skill."
+    },
+    "derivatives": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+      },
+      "description": "Array of child skill IDs that this skill contributes to."
+    },
+    "conditions": {
+      "type": "string",
+      "description": "Optional free-text conditions required for fusion or level-up."
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/evidenceEntry"
+      },
+      "description": "Array of evidence entries supporting the skill's level claim."
+    },
+    "knownAgents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of known agents that demonstrate this skill."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "provisional",
+        "validated",
+        "disputed",
+        "deprecated"
+      ],
+      "description": "Current validation status of the skill."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date when the skill was first added."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date of last modification."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this skill definition."
+    }
+  },
+  "definitions": {
+    "evidenceEntry": {
+      "type": "object",
+      "required": [
+        "class",
+        "source",
+        "evaluator",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ],
+          "description": "Evidence class: A (peer-reviewed), B (reproducible demo), C (credible demo)."
+        },
+        "source": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the evidence source."
+        },
+        "evaluator": {
+          "type": "string",
+          "description": "GitHub username of the person who evaluated the evidence."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of evaluation."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes about the evaluation."
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "atomic"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prerequisites": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "composite"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prerequisites": {
+            "minItems": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "legendary"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prerequisites": {
+            "minItems": 3
+          }
+        }
+      }
+    }
+  ]
+}
