@@ -34,6 +34,7 @@ class TestGaiaPush(unittest.TestCase):
             env = os.environ.copy()
             env.pop("GITHUB_REPOSITORY", None)
             env["PYTHONPATH"] = REPO_ROOT
+            env["PYTHONIOENCODING"] = "utf-8"
             result = subprocess.run(
                 [
                     "python3",
@@ -47,6 +48,7 @@ class TestGaiaPush(unittest.TestCase):
                 env=env,
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
             )
 
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -78,6 +80,7 @@ class TestGaiaPush(unittest.TestCase):
 
             env = os.environ.copy()
             env["PYTHONPATH"] = REPO_ROOT
+            env["PYTHONIOENCODING"] = "utf-8"
             result = subprocess.run(
                 [
                     "python3",
@@ -91,6 +94,7 @@ class TestGaiaPush(unittest.TestCase):
                 env=env,
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
             )
 
             self.assertEqual(result.returncode, 0, result.stderr)
