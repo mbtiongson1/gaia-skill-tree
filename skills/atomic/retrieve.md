@@ -14,6 +14,7 @@ Fetches relevant documents or passages from an indexed corpus given a query.
 _None._
 
 ## Unlocks
+- [Grounding](../composite/grounding.md)
 - [RAG Pipeline](../composite/rag-pipeline.md)
 
 ## Evidence
@@ -25,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

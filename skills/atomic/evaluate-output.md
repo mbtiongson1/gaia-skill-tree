@@ -15,6 +15,8 @@ _None._
 
 ## Unlocks
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
+- [Grounding](../composite/grounding.md)
+- [Multi-Agent Debate](../composite/multi-agent-debate.md)
 - [Prompt Optimization](../composite/prompt-optimization.md)
 - [Self-Critique](../atomic/self-critique.md)
 
@@ -27,4 +29,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

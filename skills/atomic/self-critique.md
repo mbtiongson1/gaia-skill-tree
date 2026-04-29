@@ -14,6 +14,7 @@ Iteratively evaluates and refines its own outputs using self-generated feedback,
 _None._
 
 ## Unlocks
+- [Multi-Agent Debate](../composite/multi-agent-debate.md)
 - [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
 
 ## Evidence
@@ -26,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

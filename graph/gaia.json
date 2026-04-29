@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/skill.schema.json",
   "version": "1.0.0",
-  "generatedAt": "2026-04-29",
+  "generatedAt": "2026-04-30",
   "meta": {
     "typeLabels": {
       "atomic": "Intrinsic Skill",
@@ -87,6 +87,7 @@
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
       "derivatives": [
+        "grounding",
         "rag-pipeline"
       ],
       "conditions": "",
@@ -102,7 +103,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
@@ -284,6 +285,7 @@
       "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
       "prerequisites": [],
       "derivatives": [
+        "grounding",
         "research"
       ],
       "conditions": "",
@@ -299,7 +301,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
@@ -372,6 +374,8 @@
       "prerequisites": [],
       "derivatives": [
         "code-review-pipeline",
+        "grounding",
+        "multi-agent-debate",
         "prompt-optimization",
         "self-critique"
       ],
@@ -388,7 +392,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-29",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
@@ -1135,7 +1139,8 @@
       "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
       "prerequisites": [],
       "derivatives": [
-        "multimodal-reasoning"
+        "multimodal-reasoning",
+        "object-detection"
       ],
       "conditions": "",
       "evidence": [
@@ -1150,7 +1155,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
@@ -1996,13 +2001,20 @@
           "source": "https://github.com/mbtiongson1/gaia-skill-tree",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Batch 3 curation: 5 skills added (2 atomic, 3 composite) \u2014 self-consistency, few-shot-learning, tree-of-thought, prompt-optimization, tool-creation."
+          "notes": "Batch 3 curation: 5 skills added (2 atomic, 3 composite) — self-consistency, few-shot-learning, tree-of-thought, prompt-optimization, tool-creation."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Batch 4 curation: 6 skills added (4 atomic, 2 composite) -- ocr, object-detection, code-explain, reward-modeling, grounding, multi-agent-debate."
         }
       ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-29",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
@@ -2085,6 +2097,7 @@
       "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
       "prerequisites": [],
       "derivatives": [
+        "multi-agent-debate",
         "re-act-reasoning",
         "scientific-discovery",
         "self-consistency",
@@ -2110,7 +2123,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-29",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
@@ -2122,6 +2135,7 @@
       "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
       "prerequisites": [],
       "derivatives": [
+        "multi-agent-debate",
         "recursive-self-improvement"
       ],
       "conditions": "",
@@ -2144,7 +2158,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
@@ -2469,7 +2483,7 @@
           "source": "https://arxiv.org/abs/2203.11171",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Wang et al. (2022) \u2014 Self-Consistency Improves Chain of Thought Reasoning in Language Models; +17.9% on GSM8K and +11.0% on MATH over greedy CoT decoding."
+          "notes": "Wang et al. (2022) — Self-Consistency Improves Chain of Thought Reasoning in Language Models; +17.9% on GSM8K and +11.0% on MATH over greedy CoT decoding."
         }
       ],
       "knownAgents": [],
@@ -2497,7 +2511,7 @@
           "source": "https://arxiv.org/abs/2005.14165",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Brown et al. (2020) \u2014 Language Models are Few-Shot Learners (GPT-3); in-context learning from 1-100 examples achieves near-SOTA on SuperGLUE, translation, and QA benchmarks."
+          "notes": "Brown et al. (2020) — Language Models are Few-Shot Learners (GPT-3); in-context learning from 1-100 examples achieves near-SOTA on SuperGLUE, translation, and QA benchmarks."
         }
       ],
       "knownAgents": [],
@@ -2527,14 +2541,14 @@
           "source": "https://arxiv.org/abs/2305.10601",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Yao et al. (2023) \u2014 Tree of Thoughts: Deliberate Problem Solving with LLMs; +74% on Game of 24 and +4% on Creative Writing vs chain-of-thought baseline."
+          "notes": "Yao et al. (2023) — Tree of Thoughts: Deliberate Problem Solving with LLMs; +74% on Game of 24 and +4% on Creative Writing vs chain-of-thought baseline."
         },
         {
           "class": "B",
           "source": "https://github.com/princeton-nlp/tree-of-thought-llm",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Princeton-NLP ToT repo \u2014 reproducible breadth-first and depth-first tree search implementations with evaluation scripts for Game of 24 and Mini Crosswords."
+          "notes": "Princeton-NLP ToT repo — reproducible breadth-first and depth-first tree search implementations with evaluation scripts for Game of 24 and Mini Crosswords."
         }
       ],
       "knownAgents": [],
@@ -2564,14 +2578,14 @@
           "source": "https://arxiv.org/abs/2310.03714",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Khattab et al. (2023) \u2014 DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines; automated prompt tuning matches or exceeds hand-crafted prompts on GSM8K, HotPotQA, and FEVER."
+          "notes": "Khattab et al. (2023) — DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines; automated prompt tuning matches or exceeds hand-crafted prompts on GSM8K, HotPotQA, and FEVER."
         },
         {
           "class": "B",
           "source": "https://github.com/stanfordnlp/dspy",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "DSPy \u2014 Stanford NLP library for programmable LM pipelines; 18k+ GitHub stars, supports multiple optimizers (BootstrapFewShot, MIPRO, COPRO) across any LM."
+          "notes": "DSPy — Stanford NLP library for programmable LM pipelines; 18k+ GitHub stars, supports multiple optimizers (BootstrapFewShot, MIPRO, COPRO) across any LM."
         }
       ],
       "knownAgents": [],
@@ -2602,20 +2616,235 @@
           "source": "https://arxiv.org/abs/2305.17126",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "Cai et al. (2023) \u2014 Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT."
+          "notes": "Cai et al. (2023) — Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT."
         },
         {
           "class": "B",
           "source": "https://github.com/ctlllll/LLM-ToolMaker",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
-          "notes": "LATM repo \u2014 reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches."
+          "notes": "LATM repo — reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches."
         }
       ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-29",
       "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "ocr",
+      "name": "OCR",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Extracts machine-readable text from raster images, scanned pages, and photo documents using optical character recognition, preserving layout and handling skew, noise, and varied fonts.",
+      "prerequisites": [],
+      "derivatives": [
+        "document-digitization"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2109.10282",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "TrOCR (Li et al., 2021) -- transformer-based OCR model achieving SOTA on IIIT-5K (97.9%), SVT (97.0%), and CUTE80 (97.9%) scene-text benchmarks, outperforming CNN+attention baselines across all datasets."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/JaidedAI/EasyOCR",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "EasyOCR -- production-grade OCR library supporting 80+ languages; 24k+ GitHub stars, reproducible benchmarks, and documented performance across diverse real-world document types."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "object-detection",
+      "name": "Object Detection",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Locates and classifies multiple objects within images by producing bounding boxes, confidence scores, and category labels in a single forward pass.",
+      "prerequisites": [],
+      "derivatives": [
+        "multimodal-reasoning",
+        "browser-automation"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2005.12872",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "DETR (Carion et al., 2020) -- end-to-end object detection with transformers; eliminates hand-crafted anchor design and achieves COCO AP 42.0 with ResNet-50, matching Faster R-CNN with simplified pipeline."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/ultralytics/ultralytics",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Ultralytics YOLOv8 -- production real-time detection library; COCO AP 50.2 at 8ms inference, 25k+ GitHub stars, reproducible training and evaluation scripts for detection and segmentation."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "code-explain",
+      "name": "Code Explain",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Generates accurate natural-language explanations of source code, describing intent, logic flow, and key decisions at function or module level.",
+      "prerequisites": [],
+      "derivatives": [
+        "code-review-pipeline",
+        "autonomous-debug"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2109.00859",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "CodeT5 (Wang et al., 2021) -- unified pre-trained model for code understanding and generation; 73.7 BLEU on CodeSearchNet code summarization (Python), SOTA across 4 programming languages on the NL4Code benchmark."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/salesforce/CodeT5",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Salesforce CodeT5/CodeT5+ open-source repository -- reproducible fine-tuning and evaluation scripts for code summarization, generation, and translation across 8 programming languages."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "reward-modeling",
+      "name": "Reward Modeling",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Learns a scalar reward signal from human preference comparisons between model outputs, enabling reinforcement learning from human feedback (RLHF) to align model behavior with human values.",
+      "prerequisites": [],
+      "derivatives": [
+        "recursive-self-improvement",
+        "prompt-optimization"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2203.02155",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "InstructGPT (Ouyang et al., 2022) -- RLHF with reward model trained on 33K human comparisons; 1.3B InstructGPT preferred over 175B GPT-3 by 85% of labelers, demonstrating reward modeling as the key alignment primitive."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/huggingface/trl",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "TRL (HuggingFace) -- production RLHF library with reward model training, PPO, DPO, and GRPO support; 10k+ GitHub stars, reproducible training scripts and documented evaluation pipelines."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "grounding",
+      "name": "Grounding",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
+      "prerequisites": [
+        "retrieve",
+        "cite-sources",
+        "evaluate-output"
+      ],
+      "derivatives": [
+        "research"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2210.08726",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "RARR (Gao et al., 2022) -- retrieval and attribution for LLM outputs; +32 points on the AIS attribution benchmark by revising ungrounded claims using retrieved web evidence."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/shmsw25/FActScoring",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "FActScore (Min et al., EMNLP 2023) -- atomic factuality scoring pipeline decomposing generation into claims and verifying each against a retrieval corpus; open-source with reproducible evaluation on biography generation."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "multi-agent-debate",
+      "name": "Multi-Agent Debate",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
+      "prerequisites": [
+        "self-critique",
+        "evaluate-output",
+        "chain-of-thought"
+      ],
+      "derivatives": [
+        "recursive-self-improvement"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.14325",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Du et al. (2023) -- Improving Factuality and Reasoning through Multi-Agent Debate; +14% truthfulness on TruthfulQA and +6% on MMLU Reasoning over single-model greedy decoding baselines."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2308.07201",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "ChatEval (Chan et al., 2023) -- role-play multi-agent debate framework for open-ended text quality evaluation; outperforms single LLM judges on correlation with human ratings across MT-Bench and Vicuna benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     }
   ],
@@ -3679,6 +3908,110 @@
     {
       "sourceSkillId": "tool-select",
       "targetSkillId": "function-calling",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "ocr",
+      "targetSkillId": "document-digitization",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "object-detection",
+      "targetSkillId": "multimodal-reasoning",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "object-detection",
+      "targetSkillId": "browser-automation",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "code-explain",
+      "targetSkillId": "code-review-pipeline",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "code-explain",
+      "targetSkillId": "autonomous-debug",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "reward-modeling",
+      "targetSkillId": "recursive-self-improvement",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "reward-modeling",
+      "targetSkillId": "prompt-optimization",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "retrieve",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "cite-sources",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "self-critique",
+      "targetSkillId": "multi-agent-debate",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "multi-agent-debate",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "chain-of-thought",
+      "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",

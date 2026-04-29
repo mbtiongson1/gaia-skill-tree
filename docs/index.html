@@ -236,11 +236,77 @@
     color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
     border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
   }
+  .skill-tooltip{
+    position:absolute;pointer-events:none;display:none;z-index:10;
+    background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
+    border-radius:.6rem;padding:.6rem .85rem;min-width:148px;max-width:230px;
+    backdrop-filter:blur(8px);
+  }
+  .skill-tooltip-name{font-weight:800;font-size:1rem;line-height:1.2;margin-bottom:.38rem}
+  .skill-tooltip-row{display:flex;align-items:center;gap:.4rem .5rem;flex-wrap:wrap}
+  .skill-tooltip-badge{
+    font-size:.65rem;font-weight:800;letter-spacing:.06em;
+    padding:.14rem .42rem;border-radius:999px;border:1px solid currentColor;
+    opacity:.85;
+  }
+  .skill-tooltip-detail{color:#64748b;font-size:.72rem;font-weight:700;letter-spacing:.05em}
+  .skill-tooltip-type-atomic{color:#38bdf8}
+  .skill-tooltip-type-composite{color:#c084fc}
+  .skill-tooltip-type-legendary{color:#f59e0b}
+  .graph-search-wrap{position:absolute;top:.75rem;right:.75rem;z-index:10}
+  .graph-search{
+    background:rgba(3,7,18,.15);border:1px solid rgba(148,163,184,.15);
+    border-radius:999px;padding:.28rem .72rem;font-size:.74rem;
+    color:#e2e8f0;outline:none;width:130px;font-family:inherit;
+    transition:background .2s,border-color .2s,width .2s;
+  }
+  .graph-search::placeholder{color:rgba(148,163,184,.38)}
+  .graph-search:hover,.graph-search:focus{
+    background:rgba(3,7,18,.72);border-color:rgba(148,163,184,.5);width:175px;
+  }
+  .graph-legend{
+    position:absolute;top:50%;right:.75rem;transform:translateY(-50%);z-index:10;
+    display:flex;flex-direction:column;gap:.55rem;
+    background:rgba(3,7,18,.78);border:none;
+    border-radius:.6rem;padding:.5rem .65rem;backdrop-filter:blur(8px);
+    max-height:calc(100% - 3.5rem);overflow-y:auto;user-select:none;
+  }
+  .graph-legend-section{display:flex;flex-direction:column;gap:.18rem}
+  .graph-legend-heading{
+    font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#64748b;margin-bottom:.1rem;
+  }
+  .graph-legend-item{
+    display:flex;align-items:center;gap:.38rem;
+    font-size:.7rem;font-weight:600;color:#94a3b8;
+    padding:.18rem .38rem;border-radius:4px;cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .graph-legend-item:hover{background:rgba(255,255,255,.06);color:#e2e8f0}
+  .graph-legend-item.active{background:rgba(56,189,248,.12);color:#e2e8f0;box-shadow:inset 0 0 0 1px rgba(56,189,248,.3)}
+  .graph-legend-swatch{border-radius:50%;flex-shrink:0}
+  .graph-legend-ranks{display:flex;flex-wrap:wrap;gap:.28rem;padding:.1rem 0}
+  .graph-legend-rank-pill{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    font-size:.6rem;font-weight:700;cursor:pointer;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .graph-legend-rank-pill:hover{transform:scale(1.18);box-shadow:0 0 8px currentColor}
+  .graph-legend-rank-pill.active{transform:scale(1.18);box-shadow:0 0 10px currentColor,inset 0 0 0 1.5px currentColor}
+  .graph-label-toggle{
+    position:absolute;right:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .7rem;
+    cursor:pointer;transition:border-color .2s,color .2s;font-family:inherit;
+  }
+  .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
   @media (max-width:700px){
     nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
     .graph-dialog{height:88vh}
     .graph-dialog-header{flex-direction:column}
     .graph-dialog-actions{justify-content:flex-start}
+    .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
   }
 
   /* ── FOOTER ── */
@@ -557,6 +623,14 @@
     legendary: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
   const TYPE_ORDER = { atomic:0, composite:1, legendary:2 };
+  const RANK_META = {
+    'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
+    'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
+    'III':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
+    'IV': { name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' },
+    'V':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
+    'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
+  };
   const FALLBACK_SKILLS = [
     { id:'tokenize', type:'atomic', name:'Tokenize', prerequisites:[] },
     { id:'retrieve', type:'atomic', name:'Retrieve', prerequisites:[] },
@@ -641,6 +715,23 @@
       statusEl: options.statusEl || null,
       running: options.autostart !== false,
       frame: null,
+      orbitX: 0,
+      orbitY: 0,
+      dragging: false,
+      dragLastX: 0,
+      dragLastY: 0,
+      hoveredId: null,
+      lastHoveredId: null,
+      projectedNodes: {},
+      tooltipEl: null,
+      nodeAlphas: {},
+      searchText: '',
+      legendFilterType: null,
+      legendFilterRank: null,
+      legendHoverType: null,
+      legendHoverRank: null,
+      legendEl: null,
+      showSlugs: false,
     };
 
     function resize() {
@@ -662,10 +753,14 @@
     function setSkills(skills) {
       state.skills = skills;
       state.positions = buildPositions(skills, state.scale);
+      const newAlphas = {};
+      skills.forEach(s => { newAlphas[s.id] = state.nodeAlphas[s.id] !== undefined ? state.nodeAlphas[s.id] : 1.0; });
+      state.nodeAlphas = newAlphas;
       if (state.statusEl) {
         const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
         const zoomNote = options.zoomable ? ' · scroll to zoom' : '';
-        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} links${zoomNote}`;
+        const dragNote = options.draggable ? ' · drag to orbit' : '';
+        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} links${zoomNote}${dragNote}`;
       }
     }
 
@@ -702,13 +797,56 @@
       if (!state.running) return;
       state.t += 0.006;
       ctx.clearRect(0, 0, state.width, state.height);
-      const ry = state.t * 0.16 + state.mx * 0.10;
-      const rx = Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
+      state.projectedNodes = {};
+      const ry = options.draggable
+        ? state.t * 0.16 + state.orbitY
+        : state.t * 0.16 + state.mx * 0.10;
+      const rx = options.draggable
+        ? Math.sin(state.t * 0.055) * 0.20 + state.orbitX
+        : Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
       const xf = {};
       state.skills.forEach(skill => {
         const p0 = state.positions[skill.id];
         if (!p0) return;
         xf[skill.id] = rotX(rotY(p0, ry), rx);
+      });
+      const neighborSet = new Set();
+      if (state.hoveredId) {
+        neighborSet.add(state.hoveredId);
+        const hoveredSkill = state.skills.find(s => s.id === state.hoveredId);
+        if (hoveredSkill) hoveredSkill.prerequisites.forEach(pid => neighborSet.add(pid));
+        state.skills.forEach(s => { if (s.prerequisites.includes(state.hoveredId)) neighborSet.add(s.id); });
+      }
+      const hovering = Boolean(state.hoveredId);
+      const isSearchActive = Boolean(state.searchText);
+      const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
+      const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
+      const legendFiltering = Boolean(state.legendFilterType || state.legendFilterRank);
+      state.skills.forEach(skill => {
+        let targetVis;
+        if (hovering) {
+          targetVis = skill.id === state.hoveredId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
+        } else if (legendHovering) {
+          const mt = !state.legendHoverType || skill.type === state.legendHoverType;
+          const mr = !state.legendHoverRank || skill.level === state.legendHoverRank;
+          targetVis = (mt && mr) ? 1.0 : 0.12;
+        } else if (legendFiltering) {
+          const mt = !state.legendFilterType || skill.type === state.legendFilterType;
+          const mr = !state.legendFilterRank || skill.level === state.legendFilterRank;
+          const matchesLegend = mt && mr;
+          if (isSearchActive) {
+            const matchesSearch = (skill.name || skill.id).toLowerCase().includes(searchQuery);
+            targetVis = (matchesLegend && matchesSearch) ? 1.0 : 0.12;
+          } else {
+            targetVis = matchesLegend ? 1.0 : 0.12;
+          }
+        } else if (isSearchActive) {
+          targetVis = (skill.name || skill.id).toLowerCase().includes(searchQuery) ? 1.0 : 0.12;
+        } else {
+          targetVis = 1.0;
+        }
+        if (state.nodeAlphas[skill.id] === undefined) state.nodeAlphas[skill.id] = targetVis;
+        state.nodeAlphas[skill.id] += (targetVis - state.nodeAlphas[skill.id]) * 0.15;
       });
       state.stars.forEach(star => {
         const p = rotX(rotY(star, ry), rx);
@@ -732,33 +870,80 @@
         const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
         const col = PALETTE[edge.type] || PALETTE.atomic;
         const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * state.scale) / (860 * state.scale), 0.08), 1);
+        const isNeighborEdge = hovering && neighborSet.has(edge.from) && neighborSet.has(edge.to);
+        const fromVis = state.nodeAlphas[edge.from] !== undefined ? state.nodeAlphas[edge.from] : 1.0;
+        const toVis   = state.nodeAlphas[edge.to]   !== undefined ? state.nodeAlphas[edge.to]   : 1.0;
+        const edgeVis = (fromVis + toVis) / 2;
+        const baseEdgeAlpha = isNeighborEdge ? 0.72 : 0.31;
         ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy);
-        ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * 0.31).toFixed(2)})`;
-        ctx.lineWidth = edge.type === 'legendary' ? 1.55 : 0.92;
+        ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * baseEdgeAlpha * edgeVis).toFixed(2)})`;
+        ctx.lineWidth = isNeighborEdge ? (edge.type === 'legendary' ? 2.2 : 1.4) : (edge.type === 'legendary' ? 1.55 : 0.92);
         ctx.stroke();
       });
       const nodes = state.skills.map(skill => ({ skill, z: xf[skill.id] ? xf[skill.id].z : -9999 })).sort((a,b) => a.z - b.z);
       nodes.forEach(({ skill }) => {
         const p = xf[skill.id]; if (!p) return;
         const pr = project(p);
+        state.projectedNodes[skill.id] = pr;
         const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
         const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
         const col = PALETTE[skill.type] || PALETTE.atomic;
         const baseR = skill.type === 'legendary' ? 12.5 : skill.type === 'composite' ? 6.9 : 3.5;
-        drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * 0.95);
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
       });
-      nodes.filter(({ skill }) => shouldLabel(skill)).forEach(({ skill }) => {
+      const labelNodes = nodes.filter(({ skill }) => shouldLabel(skill));
+      function drawLabel(skill, highlighted) {
         const p = xf[skill.id]; if (!p) return;
         const pr = project(p);
         const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0), 1);
-        if (depthAlpha < 0.22) return;
+        if (!highlighted && depthAlpha < 0.22) return;
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
+        if (labelAlpha < 0.04) return;
         const col = PALETTE[skill.type] || PALETTE.atomic;
         const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
-        ctx.font = `bold ${Math.max(7, Math.round(size * pr.scale * 1.45))}px Inter,system-ui,sans-serif`;
-        ctx.fillStyle = `rgba(${col.rgb},${(depthAlpha * 0.9).toFixed(2)})`;
+        ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
+        ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        ctx.fillText(skill.name, pr.sx, pr.sy + 18 * pr.scale);
+        const labelText = state.showSlugs ? skill.id : skill.name;
+        ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
+      }
+      labelNodes.forEach(({ skill }) => {
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        if (vis <= 0.95) drawLabel(skill, false);
       });
+      labelNodes.forEach(({ skill }) => {
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        if (vis > 0.95) drawLabel(skill, true);
+      });
+      if (options.hoverable && state.tooltipEl) {
+        const pr = state.projectedNodes[state.hoveredId];
+        if (state.hoveredId && pr) {
+          if (state.hoveredId !== state.lastHoveredId) {
+            const skill = state.skills.find(s => s.id === state.hoveredId);
+            const col = PALETTE[skill.type] || PALETTE.atomic;
+            const typeClass = `skill-tooltip-type-${skill.type}`;
+            const rm = skill.level ? RANK_META[skill.level] : null;
+            const rankPill = rm
+              ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level} ${rm.name}</span>`
+              : '';
+            state.tooltipEl.innerHTML =
+              `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +
+              `<div style="color:#64748b;font-size:.68rem;font-weight:500;margin-bottom:.3rem;font-family:monospace">${skill.id}</div>` +
+              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}</div>`;
+            state.lastHoveredId = state.hoveredId;
+          }
+          let tx = pr.sx + 18, ty = pr.sy - 34;
+          tx = Math.min(tx, state.width - 240); ty = Math.max(ty, 8);
+          state.tooltipEl.style.left = tx + 'px';
+          state.tooltipEl.style.top  = ty + 'px';
+          state.tooltipEl.style.display = 'block';
+        } else {
+          state.tooltipEl.style.display = 'none';
+          state.lastHoveredId = null;
+        }
+      }
       state.frame = requestAnimationFrame(draw);
     }
 
@@ -775,21 +960,139 @@
     }
 
     resize();
+    if (options.hoverable) {
+      const tip = document.createElement('div');
+      tip.className = 'skill-tooltip';
+      canvas.parentElement.appendChild(tip);
+      state.tooltipEl = tip;
+      const searchWrap = document.createElement('div');
+      searchWrap.className = 'graph-search-wrap';
+      const searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.className = 'graph-search';
+      searchInput.placeholder = 'Search skills…';
+      searchInput.setAttribute('aria-label', 'Filter skill graph');
+      searchInput.addEventListener('input', () => { state.searchText = searchInput.value.trim(); });
+      searchInput.addEventListener('mousedown', e => e.stopPropagation());
+      searchWrap.appendChild(searchInput);
+      canvas.parentElement.appendChild(searchWrap);
+      state.searchInputEl = searchInput;
+
+      const legend = document.createElement('div');
+      legend.className = 'graph-legend';
+      legend.innerHTML =
+        '<div class="graph-legend-section"><div class="graph-legend-heading">Type</div>' +
+        '<div class="graph-legend-item" data-legend-type="atomic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Atomic</div>' +
+        '<div class="graph-legend-item" data-legend-type="composite"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Composite</div>' +
+        '<div class="graph-legend-item" data-legend-type="legendary"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Legendary</div>' +
+        '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
+        '<div class="graph-legend-ranks">' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="I" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="II" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="III" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="IV" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="V" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="VI" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+        '</div></div>';
+      legend.addEventListener('mousedown', e => e.stopPropagation());
+      legend.querySelectorAll('.graph-legend-item[data-legend-type]').forEach(item => {
+        item.addEventListener('mouseenter', () => { state.legendHoverType = item.dataset.legendType; });
+        item.addEventListener('mouseleave', () => { state.legendHoverType = null; });
+        item.addEventListener('click', () => {
+          const val = state.legendFilterType === item.dataset.legendType ? null : item.dataset.legendType;
+          state.legendFilterType = val;
+          legend.querySelectorAll('[data-legend-type]').forEach(el => el.classList.remove('active'));
+          if (val) item.classList.add('active');
+        });
+      });
+      legend.querySelectorAll('.graph-legend-rank-pill').forEach(pill => {
+        pill.addEventListener('mouseenter', () => { state.legendHoverRank = pill.dataset.legendRank; });
+        pill.addEventListener('mouseleave', () => { state.legendHoverRank = null; });
+        pill.addEventListener('click', () => {
+          const val = state.legendFilterRank === pill.dataset.legendRank ? null : pill.dataset.legendRank;
+          state.legendFilterRank = val;
+          legend.querySelectorAll('.graph-legend-rank-pill').forEach(el => el.classList.remove('active'));
+          if (val) pill.classList.add('active');
+        });
+      });
+      canvas.parentElement.appendChild(legend);
+      state.legendEl = legend;
+
+      const labelToggle = document.createElement('button');
+      labelToggle.type = 'button';
+      labelToggle.className = 'graph-label-toggle';
+      labelToggle.textContent = 'Toggle Skills';
+      labelToggle.addEventListener('mousedown', e => e.stopPropagation());
+      labelToggle.addEventListener('click', () => {
+        state.showSlugs = !state.showSlugs;
+        labelToggle.textContent = state.showSlugs ? 'Show Names' : 'Toggle Skills';
+      });
+      canvas.parentElement.appendChild(labelToggle);
+      state.labelToggleEl = labelToggle;
+    }
     window.addEventListener('resize', resize);
     const pointerTarget = options.pointerTarget || canvas;
     pointerTarget.addEventListener('mousemove', event => {
       const rect = canvas.getBoundingClientRect();
-      state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
-      state.my = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+      if (options.draggable && state.dragging) {
+        state.orbitY += (event.clientX - state.dragLastX) * 0.007;
+        state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        state.dragLastX = event.clientX;
+        state.dragLastY = event.clientY;
+        state.hoveredId = null;
+      } else {
+        state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
+        state.my = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+        if (options.hoverable) {
+          const mx = event.clientX - rect.left;
+          const my = event.clientY - rect.top;
+          let closest = null, closestDist = 22;
+          Object.entries(state.projectedNodes).forEach(([id, pr]) => {
+            const d = Math.hypot(pr.sx - mx, pr.sy - my);
+            if (d < closestDist) { closestDist = d; closest = id; }
+          });
+          state.hoveredId = closest;
+          canvas.style.cursor = closest ? 'pointer' : (options.draggable ? 'grab' : 'default');
+        }
+      }
     });
+    if (options.draggable) {
+      canvas.style.cursor = 'grab';
+      canvas.addEventListener('mouseleave', () => { if (!state.dragging) state.hoveredId = null; });
+      canvas.addEventListener('mousedown', e => {
+        e.preventDefault();
+        state.dragging = true;
+        state.dragLastX = e.clientX;
+        state.dragLastY = e.clientY;
+        canvas.style.cursor = 'grabbing';
+      });
+      window.addEventListener('mouseup', () => {
+        if (!state.dragging) return;
+        state.dragging = false;
+        canvas.style.cursor = state.hoveredId ? 'pointer' : 'grab';
+      });
+    }
     if (options.zoomable) {
       canvas.addEventListener('wheel', e => {
         e.preventDefault();
         state.zoom = Math.max(0.3, Math.min(3.0, state.zoom * (1 - e.deltaY * 0.001)));
       }, { passive: false });
     }
+    function resetFilters() {
+      state.legendFilterType = null;
+      state.legendFilterRank = null;
+      state.legendHoverType = null;
+      state.legendHoverRank = null;
+      state.showSlugs = false;
+      state.searchText = '';
+      if (state.legendEl) {
+        state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+      }
+      if (state.searchInputEl) state.searchInputEl.value = '';
+      if (state.labelToggleEl) state.labelToggleEl.textContent = 'Toggle Skills';
+    }
     if (state.running) draw();
-    return { setSkills, resize, start, stop };
+    return { setSkills, resize, start, stop, resetFilters };
   }
 
   const hero = document.getElementById('hero');
@@ -798,7 +1101,7 @@
   const closeBtn = document.querySelector('[data-graph-close]');
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true
+    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true
   });
 
   function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
@@ -816,6 +1119,7 @@
   function closeDialog() {
     if (dialog.close) dialog.close();
     else dialog.removeAttribute('open');
+    modalGraph.resetFilters();
     modalGraph.stop();
   }
   closeBtn.addEventListener('click', closeDialog);

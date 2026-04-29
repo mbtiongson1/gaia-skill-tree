@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf \"C:/Users/C5396183/.claude/skills/gaia-curate\")",
+      "Read(//c/Users/C5396183/.claude/skills/**)"
+    ]
+  }
+}

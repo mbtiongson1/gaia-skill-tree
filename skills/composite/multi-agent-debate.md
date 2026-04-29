@@ -1,0 +1,34 @@
+# [IV · Hardened · Extra Skill] Multi-Agent Debate
+**ID:** multi-agent-debate  
+**Type:** Extra Skill  
+**Level:** IV · Hardened  
+**Rarity:** Rare  
+**Status:** Provisional
+
+---
+
+## Description
+Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.
+
+## Prerequisites
+- [Self-Critique](../atomic/self-critique.md)
+- [Evaluate Output](../atomic/evaluate-output.md)
+- [Chain-of-Thought Reasoning](../atomic/chain-of-thought.md)
+
+## Unlocks
+- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
+
+## Fusion Condition
+_None specified._
+
+## Evidence
+| Class | Source | Evaluator | Date |
+|---|---|---|---|
+| A | https://arxiv.org/abs/2305.14325 | mbtiongson1 | 2026-04-30 |
+| A | https://arxiv.org/abs/2308.07201 | mbtiongson1 | 2026-04-30 |
+
+## Known Agents
+_None verified yet._
+
+---
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*
