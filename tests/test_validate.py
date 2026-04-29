@@ -10,10 +10,14 @@ REAL_GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
 
 def run_validate(graph_path):
     """Helper to run validate.py and return (exit_code, stdout)."""
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
     result = subprocess.run(
         ["python3", VALIDATE_SCRIPT, "--graph", graph_path],
         capture_output=True,
-        text=True
+        text=True,
+        encoding="utf-8",
+        env=env
     )
     return result.returncode, result.stdout
 

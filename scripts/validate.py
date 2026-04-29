@@ -34,7 +34,7 @@ except ImportError:
 EVIDENCE_FLOOR = {
     "I": None,       # No evidence required (foundation tier)
     "II": {"C", "B", "A"},
-    "III": {"C", "B", "A"},
+    "III": {"B", "A"},
     "IV": {"B", "A"},
     "V": {"B", "A"},
     "VI": {"A"},
