@@ -12,6 +12,32 @@ except ModuleNotFoundError:
 
 
 SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
+MIN_PROPOSED_TOKEN_LENGTH = 3
+PROPOSED_STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "that",
+    "the",
+    "to",
+    "was",
+    "were",
+    "with",
+    "already",
+}
 
 
 def load_canonical_skill_map(registry_path):
@@ -96,6 +122,19 @@ def build_similarity(proposed_ids, canonical_skill_map, limit_per_skill=3):
     return links
 
 
+def filter_proposed_ids(valid_tokens, canonical_ids):
+    filtered = []
+    for token in valid_tokens:
+        if token in canonical_ids:
+            continue
+        if len(token) < MIN_PROPOSED_TOKEN_LENGTH:
+            continue
+        if token in PROPOSED_STOPWORDS:
+            continue
+        filtered.append(token)
+    return filtered
+
+
 def build_skill_batch(raw_tokens, config, registry_root, now=None):
     graph_path = os.path.join(registry_root, "graph", "gaia.json")
     canonical_ids = load_canonical_skills(graph_path)
@@ -106,7 +145,7 @@ def build_skill_batch(raw_tokens, config, registry_root, now=None):
 
     valid_tokens = sorted(token for token in raw_tokens if SKILL_ID_RE.match(token))
     known_ids = [token for token in valid_tokens if token in canonical_ids]
-    proposed_ids = [token for token in valid_tokens if token not in canonical_ids]
+    proposed_ids = filter_proposed_ids(valid_tokens, canonical_ids)
     batch_id = (
         f"{timestamp.strftime('%Y%m%d%H%M%S')}-"
         f"{config.get('gaiaUser', 'unknown')}-{source_repo.split('/')[-1]}"

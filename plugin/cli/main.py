@@ -121,6 +121,9 @@ def push_command(args):
 
     batch_path = write_skill_batch(batch, args.registry)
     print(f"Wrote skill batch intake record: {batch_path}")
+    if args.no_pr:
+        print("Skipped PR creation (--no-pr).")
+        return
     open_intake_pr(config.get('gaiaUser'), batch, batch_path=batch_path)
 
 def main():
@@ -135,6 +138,7 @@ def main():
     fuse_parser.add_argument('skillId', help="ID of the pending skill to fuse")
     push_parser = subparsers.add_parser('push')
     push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
+    push_parser.add_argument('--no-pr', action='store_true', help="Write intake record without creating a PR")
     args = parser.parse_args()
     if args.command == 'init':
         init_command(args)
