@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Math Reason
+# [II · Named · Intrinsic Skill] Math Reason
 **ID:** math-reason  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -26,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] Registry Curation
+# [IV · Transcendent · Extra Skill] Registry Curation
 **ID:** registry-curation  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** IV · Transcendent  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -31,4 +31,4 @@ Requires write access to the canonical graph and a passing validation suite.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

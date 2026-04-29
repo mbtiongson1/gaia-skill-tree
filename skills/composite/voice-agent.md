@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] Voice Agent
+# [III · Evolved · Extra Skill] Voice Agent
 **ID:** voice-agent  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -30,4 +30,4 @@ Requires real-time audio I/O or audio file access.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

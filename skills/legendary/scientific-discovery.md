@@ -1,7 +1,7 @@
-# [IV · Evolved · Ultimate Skill] True Dragon: Autonomous Scientific Discovery
+# [V · Transcendent · Ultimate Skill] True Dragon: Autonomous Scientific Discovery
 **ID:** scientific-discovery  
 **Type:** Ultimate Skill  
-**Level:** IV · Evolved  
+**Level:** V · Transcendent  
 **Rarity:** Divine  
 **Status:** Provisional
 
@@ -32,4 +32,4 @@ Requires laboratory tool access or simulation environment. Minimum 3 Class A/B e
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Logical Inference
+# [II · Named · Intrinsic Skill] Logical Inference
 **ID:** logical-inference  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -27,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

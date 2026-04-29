@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] Document Digitization
+# [III · Evolved · Extra Skill] Document Digitization
 **ID:** document-digitization  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -30,4 +30,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

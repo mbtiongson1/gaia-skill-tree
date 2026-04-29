@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Generate Test
+# [II · Named · Intrinsic Skill] Generate Test
 **ID:** generate-test  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -25,4 +25,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

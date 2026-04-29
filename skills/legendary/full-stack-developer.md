@@ -1,7 +1,7 @@
-# [IV · Evolved · Ultimate Skill] True Craftsman: Full-Stack Developer
+# [V · Transcendent · Ultimate Skill] True Craftsman: Full-Stack Developer
 **ID:** full-stack-developer  
 **Type:** Ultimate Skill  
-**Level:** IV · Evolved  
+**Level:** V · Transcendent  
 **Rarity:** Divine  
 **Status:** Provisional
 
@@ -32,4 +32,4 @@ Requires access to repository, execution environment, and test runner. Minimum 3
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

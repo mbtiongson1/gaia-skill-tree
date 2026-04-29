@@ -1,7 +1,7 @@
-# [III · Named · Intrinsic Skill] Structured Output Generation
+# [II · Named · Intrinsic Skill] Structured Output Generation
 **ID:** structured-output  
 **Type:** Intrinsic Skill  
-**Level:** III · Named  
+**Level:** II · Named  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -27,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

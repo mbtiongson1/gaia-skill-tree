@@ -1,7 +1,7 @@
-# [III · Named · Extra Skill] Research
+# [III · Evolved · Extra Skill] Research
 **ID:** research  
 **Type:** Extra Skill  
-**Level:** III · Named  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -34,4 +34,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

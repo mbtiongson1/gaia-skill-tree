@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Sentiment Analysis
+# [II · Named · Intrinsic Skill] Sentiment Analysis
 **ID:** sentiment-analysis  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -26,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

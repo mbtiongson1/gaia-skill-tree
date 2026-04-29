@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] Ghostwrite
+# [IV · Transcendent · Extra Skill] Ghostwrite
 **ID:** ghostwrite  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** IV · Transcendent  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -30,4 +30,4 @@ Requires research output as input context.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

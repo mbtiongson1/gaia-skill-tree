@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Hypothesis Generation
+# [II · Named · Intrinsic Skill] Hypothesis Generation
 **ID:** hypothesis-generate  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -27,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*

@@ -34,17 +34,34 @@
     },
     "type": {
       "type": "string",
-      "enum": ["atomic", "composite", "legendary"],
+      "enum": [
+        "atomic",
+        "composite",
+        "legendary"
+      ],
       "description": "Skill classification type."
     },
     "level": {
       "type": "string",
-      "enum": ["I", "II", "III", "IV", "V"],
-      "description": "Skill proficiency level (I = Latent, V = Mastered)."
+      "enum": [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI"
+      ],
+      "description": "Skill tier in the upgrade path (I = Foundation, VI = Apex)."
     },
     "rarity": {
       "type": "string",
-      "enum": ["common", "uncommon", "rare", "epic", "legendary"],
+      "enum": [
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary"
+      ],
       "description": "Rarity tier based on agent prevalence."
     },
     "description": {
@@ -88,7 +105,12 @@
     },
     "status": {
       "type": "string",
-      "enum": ["provisional", "validated", "disputed", "deprecated"],
+      "enum": [
+        "provisional",
+        "validated",
+        "disputed",
+        "deprecated"
+      ],
       "description": "Current validation status of the skill."
     },
     "createdAt": {
@@ -110,12 +132,21 @@
   "definitions": {
     "evidenceEntry": {
       "type": "object",
-      "required": ["class", "source", "evaluator", "date"],
+      "required": [
+        "class",
+        "source",
+        "evaluator",
+        "date"
+      ],
       "additionalProperties": false,
       "properties": {
         "class": {
           "type": "string",
-          "enum": ["A", "B", "C"],
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ],
           "description": "Evidence class: A (peer-reviewed), B (reproducible demo), C (credible demo)."
         },
         "source": {
@@ -142,7 +173,11 @@
   "allOf": [
     {
       "if": {
-        "properties": { "type": { "const": "atomic" } }
+        "properties": {
+          "type": {
+            "const": "atomic"
+          }
+        }
       },
       "then": {
         "properties": {
@@ -154,7 +189,11 @@
     },
     {
       "if": {
-        "properties": { "type": { "const": "composite" } }
+        "properties": {
+          "type": {
+            "const": "composite"
+          }
+        }
       },
       "then": {
         "properties": {
@@ -166,7 +205,11 @@
     },
     {
       "if": {
-        "properties": { "type": { "const": "legendary" } }
+        "properties": {
+          "type": {
+            "const": "legendary"
+          }
+        }
       },
       "then": {
         "properties": {

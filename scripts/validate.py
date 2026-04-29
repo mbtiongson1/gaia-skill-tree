@@ -32,11 +32,12 @@ except ImportError:
 
 
 EVIDENCE_FLOOR = {
-    "I": None,       # No evidence required
+    "I": None,       # No evidence required (foundation tier)
     "II": {"C", "B", "A"},
-    "III": {"B", "A"},
+    "III": {"C", "B", "A"},
     "IV": {"B", "A"},
-    "V": {"A"},
+    "V": {"B", "A"},
+    "VI": {"A"},
 }
 
 MIN_PREREQS = {
