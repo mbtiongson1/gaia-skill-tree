@@ -108,7 +108,7 @@ jobs:
 
   route-review:
     needs: classify
-    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true' || needs.classify.outputs.is_intake == 'true'
+    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
