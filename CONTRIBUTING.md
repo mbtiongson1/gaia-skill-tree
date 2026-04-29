@@ -7,11 +7,12 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 ## Table of Contents
 
 1. [Contribution Types](#contribution-types)
-2. [Naming Conventions](#naming-conventions)
-3. [Evidence Requirements](#evidence-requirements)
-4. [How to Submit a PR](#how-to-submit-a-pr)
-5. [Reviewer Rubric](#reviewer-rubric)
-6. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+2. [Automated Workflow (Claude Code)](#automated-workflow-claude-code)
+3. [Naming Conventions](#naming-conventions)
+4. [Evidence Requirements](#evidence-requirements)
+5. [How to Submit a PR](#how-to-submit-a-pr)
+6. [Reviewer Rubric](#reviewer-rubric)
+7. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
 
 ---
 
@@ -24,7 +25,41 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 | New fusion recipe | `new_fusion.md` | Adding edge records to `gaia.json` |
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
 | New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
-| Batch skill intake | `gaia push` | Submitting known and proposed skills detected from agent usage |
+| Batch skill intake | `gaia push` / `/gaia-draft-curate` | Submitting known and proposed skills detected from agent usage |
+
+---
+
+## Automated Workflow (Claude Code)
+
+If you have [Claude Code](https://claude.ai/code) installed, this repository ships two slash commands that automate the full contribution and review cycle.
+
+### `/gaia-curate` — add new skills to the registry
+
+Runs the complete curation pipeline end-to-end:
+1. Reads the current graph to avoid duplicates.
+2. Researches candidate skills with Class A/B evidence.
+3. Presents a draft review table — you classify each candidate as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject` before any file is touched.
+4. Writes and runs the generation script, validates the DAG, regenerates derived files, and opens a PR.
+
+```
+/gaia-curate
+```
+
+### `/gaia-draft-curate` — triage pending intake batches
+
+A lighter, read-only triage command for reviewing skill batches submitted via `gaia push`:
+1. Pulls latest and scans `intake/skill-batches/*.json`.
+2. Checks GitHub for open `draft-skills` PRs.
+3. Presents each proposed skill for classification: `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
+4. Optionally hands off to `/gaia-curate` to promote accepted skills into `graph/gaia.json`.
+
+```
+/gaia-draft-curate
+```
+
+Run `/gaia-draft-curate` first when contributors have pushed new intake batches. Use `/gaia-curate` when you are adding skills from your own research.
+
+> **Note:** These skills live in `.claude/skills/` at the root of this repo. Claude Code loads them automatically when you open the repo.
 
 ---
 
