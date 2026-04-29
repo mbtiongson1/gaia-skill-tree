@@ -112,7 +112,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      contents: read
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Request reviewers
         run: |
           if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
