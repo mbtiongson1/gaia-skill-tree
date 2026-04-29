@@ -18,6 +18,7 @@ _None._
 - [Code Execution](../atomic/code-execution.md)
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
 - [Registry Curation](../composite/registry-curation.md)
+- [Tool Creation](../composite/tool-creation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

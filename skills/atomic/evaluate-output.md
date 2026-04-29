@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
+- [Prompt Optimization](../composite/prompt-optimization.md)
 - [Self-Critique](../atomic/self-critique.md)
 
 ## Evidence
