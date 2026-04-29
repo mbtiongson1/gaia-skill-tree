@@ -57,7 +57,7 @@ def get_tier_symbol(skill_type):
 
 
 def _sorted_legendaries(skills):
-    order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5}
+    order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5, "0": 6}
     return sorted(
         [s for s in skills if s.get("type") == "legendary"],
         key=lambda s: (order.get(s.get("level"), 9), s.get("name", ""))

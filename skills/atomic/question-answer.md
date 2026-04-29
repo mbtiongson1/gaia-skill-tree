@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Question Answer
+# [0 · Basic · Intrinsic Skill] Question Answer
 **ID:** question-answer  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 

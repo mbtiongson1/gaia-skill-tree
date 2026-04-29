@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Summarize
+# [0 · Basic · Intrinsic Skill] Summarize
 **ID:** summarize  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 

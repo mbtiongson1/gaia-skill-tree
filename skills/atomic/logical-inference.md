@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Logical Inference
+# [I · Awakened · Intrinsic Skill] Logical Inference
 **ID:** logical-inference  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** I · Awakened  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

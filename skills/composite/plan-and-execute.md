@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Plan and Execute
+# [IV · Hardened · Extra Skill] Plan and Execute
 **ID:** plan-and-execute  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** IV · Hardened  
 **Rarity:** Rare  
 **Status:** Provisional
 
