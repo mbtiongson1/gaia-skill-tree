@@ -11,8 +11,9 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 3. [Naming Conventions](#naming-conventions)
 4. [Evidence Requirements](#evidence-requirements)
 5. [How to Submit a PR](#how-to-submit-a-pr)
-6. [Reviewer Rubric](#reviewer-rubric)
-7. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+6. [Named Skills](#named-skills)
+7. [Reviewer Rubric](#reviewer-rubric)
+8. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
 
 ---
 
@@ -26,6 +27,8 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
 | New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
 | Batch skill intake | `gaia push` / `/gaia-draft-curate` | Submitting known and proposed skills detected from agent usage |
+| New named skill | `new_named_skill.md` | Adding a real-world implementation to `graph/named/` |
+| Named skill classification | `named_skill_classification.md` | Reviewer-only: promoting an `awakened` named skill to `named` status |
 
 ---
 
@@ -173,6 +176,43 @@ Examples:
 - `[atomic] parse-csv — adds CSV parsing as a primitive Intrinsic Skill`
 - `[composite] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
 - `[reclassify] web-scrape — upgrade from Awakened (II) to Named (III) with new evidence`
+
+---
+
+## Named Skills
+
+Named skills are real-world implementations of abstract Gaia skills, attributed to a specific contributor. They live at `graph/named/{contributor}/{skill-name}.md`.
+
+### Contributor: submitting a named skill
+
+Always submit with `status: awakened`. Never set `title`, `catalogRef`, or `status: named` — these fields are reviewer-only. CI will fail if you attempt to set them.
+
+Use the `new_named_skill.md` PR template, which contains the full contributor and reviewer checklists.
+
+```bash
+# Example named skill frontmatter (contributor submits this)
+id: karpathy/autoresearch
+name: AutoResearch
+contributor: karpathy
+genericSkillRef: autonomous-research-agent
+status: awakened          # <-- always awakened at submission
+level: II
+origin: true
+description: "..."
+```
+
+### Reviewer: classifying a named skill
+
+After a named skill is merged as `awakened`, a reviewer checks whether it matches a real-world published implementation (a SKILL.md, open-source repo, or documented tool). If yes:
+
+1. Open a classification PR using the `named_skill_classification.md` template.
+2. Add `title` (reviewer-assigned RPG epithet) and optionally `catalogRef` (back-link to `graph/real_skill_catalog.json`).
+3. Change `status: awakened` → `status: named`.
+4. If no catalog entry exists yet, add one to `graph/real_skill_catalog.json` with `promotedNamedSkillId` pointing back.
+
+Only `status: named` skills surface as `realVariants` on abstract skill nodes and in the real-skills catalog. `awakened` skills remain in `graph/named/index.json` under `awaitingClassification` until classified.
+
+**Key rule:** Contributors declare skills. Reviewers classify identity.
 
 ---
 

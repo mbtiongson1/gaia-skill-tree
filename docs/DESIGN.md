@@ -180,6 +180,10 @@ gaia/
 ├── graph/
 │   ├── gaia.json                    ← CANONICAL. The only file humans edit directly.
 │   ├── gaia.gexf                    ← Generated Gephi export
+│   ├── named/                       ← Named skill implementations
+│   │   ├── {contributor}/{skill}.md ← Frontmatter + body per named skill
+│   │   └── index.json               ← GENERATED: buckets, awaitingClassification, byContributor
+│   ├── real_skill_catalog.json      ← Upstream catalog of real-world skill implementations
 │   └── render/                      ← Versioned static graph snapshots
 │       ├── v0.1.0.json
 │       └── v0.1.0.png
@@ -207,8 +211,10 @@ gaia/
 ├── combinations.md                  ← GENERATED. Fusion recipe matrix.
 │
 ├── schema/
-│   ├── skill.schema.json            ← Validates skill nodes
+│   ├── skill.schema.json            ← Validates skill nodes (includes optional realVariants array)
 │   ├── combination.schema.json      ← Validates fusion recipes / edges
+│   ├── namedSkill.schema.json       ← Validates graph/named/*.md frontmatter
+│   ├── realSkillCatalog.schema.json ← Validates graph/real_skill_catalog.json
 │   ├── skillTree.schema.json        ← Validates user skill trees
 │   └── pluginConfig.schema.json     ← Validates .gaia/config.json
 │
@@ -518,14 +524,42 @@ The generated `graph/named/index.json` provides fast lookup of all named impleme
 
 ### 13.3 Lifecycle
 
+Contributors always submit named skills with `status: awakened`. Reviewer classification is a separate, subsequent step.
+
 ```
-gaia push → intake/skill-batches/ (lifecycle: "pending")
-         → reviewer accepts (lifecycle: "awakened")
-         → gaia name <batch> <index> <contributor/skill-name>
-         → graph/named/{contributor}/{skill-name}.md (lifecycle: "named")
+Contributor opens PR (graph/named/{contributor}/{skill}.md)
+     status: awakened  ←  always. title/catalogRef: absent.
+            │
+            ▼ CI: schema valid, genericSkillRef resolves, level ≥ II
+            │
+            ▼ Reviewer: checks correctness, evidence, level
+            │
+         MERGE as status: awakened
+            │
+            │ Reviewer asks: does this match a real-world SKILL.md?
+            │
+    YES ────┤                              NO
+            ▼                              ▼
+ Reviewer opens classification PR    Skill sits as awakened
+ Adds: title (RPG epithet)           Visible in awaitingClassification
+ Adds: catalogRef (optional)         Not surfaced as realVariant
+ Sets: status: named
+ CI enforces: named requires
+   title OR catalogRef
+            │
+            ▼
+ MERGE → generateNamedIndex.py
+ populates realVariants on abstract node
 ```
 
-Level 0 (Basic) and Level I (Awakened) skills are generic-only. A skill only becomes "named" in the sense of Level II once a contributor claims it via `gaia name`. Basic skills (Level 0) are universal LLM primitives and do not accept named implementations.
+**Rule:** Contributors declare skills. Reviewers classify identity.
+
+The `graph/named/index.json` file produced by `generateNamedIndex.py` has three keys:
+- `buckets` — skills with `status: named`, grouped by `genericSkillRef` (feeds `realVariants` on abstract nodes)
+- `awaitingClassification` — skills with `status: awakened`, pending reviewer action
+- `byContributor` — secondary index mapping contributor username → list of named skill IDs
+
+Level 0 (Basic) and Level I (Awakened) skills are generic-only and do not accept named implementations.
 
 ### 13.4 Install & Sync
 
