@@ -1,6 +1,9 @@
 import subprocess
 import os
+import sys
 import unittest
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Define paths
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -58,6 +61,116 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(code, 1, "Expected legendary with no approval to fail validation.")
         self.assertIn("Validated legendary", out)
         self.assertIn("needs ≥3 Class A/B evidence", out)
+
+class TestNamedSkillValidation(unittest.TestCase):
+    """Tests that verify named skill files pass validate_and_group rules."""
+
+    def test_seed_skills_have_valid_levels(self):
+        """All seed named skills have a level in the valid set (II–VI)."""
+        from scripts.generateNamedIndex import load_named_skills, validate_and_group, load_gaia_skill_ids
+
+        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        if not os.path.isdir(named_dir):
+            self.skipTest("Named skills directory not present.")
+
+        named_skills = load_named_skills(named_dir)
+        named_skills = [(fp, fm) for fp, fm in named_skills if not fp.endswith("index.json")]
+
+        valid_ids = load_gaia_skill_ids(REAL_GRAPH_PATH)
+        errors, buckets = validate_and_group(named_skills, valid_ids)
+
+        self.assertEqual(
+            errors,
+            [],
+            f"Seed named skills failed validation:\n" + "\n".join(errors),
+        )
+
+    def test_seed_skills_have_no_level_i(self):
+        """No seed named skill uses level I (which is forbidden for named skills)."""
+        from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
+
+        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        if not os.path.isdir(named_dir):
+            self.skipTest("Named skills directory not present.")
+
+        named_skills = load_named_skills(named_dir)
+        named_skills = [(fp, fm) for fp, fm in named_skills if not fp.endswith("index.json")]
+
+        for fp, fm in named_skills:
+            level = fm.get("level", "")
+            self.assertNotEqual(
+                level,
+                "I",
+                f"Seed skill {fp} has forbidden level 'I'.",
+            )
+
+    def test_bad_level_fails_validation(self):
+        """validate_and_group reports an error when level is 'I'."""
+        from scripts.generateNamedIndex import validate_and_group
+
+        named_skills = [
+            (
+                "graph/named/fake/skill.md",
+                {
+                    "id": "fake/skill",
+                    "name": "Fake",
+                    "contributor": "fake",
+                    "origin": True,
+                    "genericSkillRef": "web-search",
+                    "status": "named",
+                    "level": "I",
+                    "description": "A fake skill at level I.",
+                },
+            )
+        ]
+        errors, _ = validate_and_group(named_skills, {"web-search"})
+        self.assertTrue(
+            any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
+                for e in errors),
+            f"Expected a level error, got: {errors}",
+        )
+
+    def test_missing_required_field_fails_validation(self):
+        """validate_and_group reports an error for missing required fields."""
+        from scripts.generateNamedIndex import validate_and_group
+
+        named_skills = [
+            (
+                "graph/named/fake/incomplete.md",
+                {
+                    "id": "fake/incomplete",
+                    # Missing: name, contributor, origin, genericSkillRef, status, level, description
+                },
+            )
+        ]
+        errors, _ = validate_and_group(named_skills, set())
+        self.assertGreater(len(errors), 0, "Expected errors for missing required fields.")
+
+    def test_unresolved_generic_ref_fails_validation(self):
+        """validate_and_group reports an error when genericSkillRef is not in gaia.json."""
+        from scripts.generateNamedIndex import validate_and_group
+
+        named_skills = [
+            (
+                "graph/named/fake/skill.md",
+                {
+                    "id": "fake/skill",
+                    "name": "Fake Skill",
+                    "contributor": "fake",
+                    "origin": True,
+                    "genericSkillRef": "definitely-not-a-real-skill-id",
+                    "status": "named",
+                    "level": "II",
+                    "description": "A skill that references a nonexistent generic skill.",
+                },
+            )
+        ]
+        errors, _ = validate_and_group(named_skills, {"web-search"})
+        self.assertTrue(
+            any("definitely-not-a-real-skill-id" in e for e in errors),
+            f"Expected unresolved-ref error, got: {errors}",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

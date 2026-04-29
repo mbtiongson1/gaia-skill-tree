@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gaia-registry.github.io/schema/namedSkill.schema.json",
+  "title": "Gaia Named Skill",
+  "description": "Schema for a named skill implementation contributed by a specific user. Named skills live in graph/named/{contributor}/{skill-name}.md as YAML frontmatter.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "contributor",
+    "origin",
+    "genericSkillRef",
+    "status",
+    "level",
+    "description",
+    "createdAt",
+    "updatedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*/[a-z0-9][a-z0-9_-]*$",
+      "description": "Unique identifier in contributor/skill-name format."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name of the named skill."
+    },
+    "contributor": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "description": "GitHub username of the contributor."
+    },
+    "origin": {
+      "type": "boolean",
+      "description": "True if this contributor is the original creator of this skill bucket."
+    },
+    "genericSkillRef": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "description": "References a skill ID in gaia.json that this named skill implements."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["awakened", "named"],
+      "description": "Lifecycle status. 'awakened' = accepted but not yet named. 'named' = fully attributed."
+    },
+    "level": {
+      "type": "string",
+      "enum": ["II", "III", "IV", "V", "VI"],
+      "description": "Minimum level (Named and above only; Level I is generic-only)."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Description of what this specific named implementation does."
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "github": {
+          "type": "string",
+          "format": "uri",
+          "description": "GitHub repository URL."
+        },
+        "agentskills": {
+          "type": "string",
+          "format": "uri",
+          "description": "agentskills.io page URL."
+        },
+        "docs": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation or landing page URL."
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "description": "Lowercase tags for categorization and search."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date when the named skill was first contributed."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date of last modification."
+    }
+  }
+}

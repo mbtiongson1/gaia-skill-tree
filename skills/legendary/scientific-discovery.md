@@ -32,4 +32,4 @@ Requires laboratory tool access or simulation environment. Minimum 3 Class A/B e
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*

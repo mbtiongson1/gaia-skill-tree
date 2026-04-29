@@ -1,6 +1,42 @@
 import json
 import os
 import datetime
+import sys
+import importlib.util
+
+
+def _run_generate_named_index():
+    """Invoke generateNamedIndex as a module to produce graph/named/index.json."""
+    scripts_dir = os.path.dirname(os.path.abspath(__file__))
+    module_path = os.path.join(scripts_dir, "generateNamedIndex.py")
+    if not os.path.isfile(module_path):
+        print("Warning: generateNamedIndex.py not found — skipping named index.")
+        return
+    spec = importlib.util.spec_from_file_location("generateNamedIndex", module_path)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+        repo_root = os.path.dirname(scripts_dir)
+        named_dir = os.path.join(repo_root, "graph", "named")
+        graph_path = os.path.join(repo_root, "graph", "gaia.json")
+        output_path = os.path.join(named_dir, "index.json")
+        if os.path.isdir(named_dir) and os.path.isfile(graph_path):
+            today = datetime.date.today().isoformat()
+            named_skills = mod.load_named_skills(named_dir)
+            valid_ids = mod.load_gaia_skill_ids(graph_path)
+            errors, buckets = mod.validate_and_group(named_skills, valid_ids)
+            if errors:
+                print(f"Warning: named skill validation errors ({len(errors)}):")
+                for err in errors:
+                    print(f"  {err}")
+            else:
+                mod.write_index(buckets, output_path, today)
+                total = sum(len(v) for v in buckets.values())
+                print(f"Generated named index: {total} skill(s) across "
+                      f"{len(buckets)} bucket(s).")
+    except Exception as exc:
+        print(f"Warning: could not generate named index — {exc}")
+
 
 
 def get_type_label(meta, skill_type):
@@ -314,6 +350,9 @@ def main():
                 f.write("*Generated from skill-tree.json. Do not edit directly.*\n")
 
     print(f"Generated projections for {len(skills)} skills.")
+
+    # Generate named skill index
+    _run_generate_named_index()
 
 
 def _generate_tree(skills, skill_map, meta, version, date_str):

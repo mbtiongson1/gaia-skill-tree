@@ -18,3 +18,21 @@ Validate intake records with:
 ```bash
 python3 scripts/validate_intake.py
 ```
+
+## Skill Lifecycle
+
+Each proposed skill in a batch has a `lifecycle` field:
+
+1. **pending** — Initial state when `gaia push` creates the batch. Awaiting reviewer classification.
+2. **awakened** — Reviewer has accepted the skill but it has no named attribution yet. The skill exists in the registry's awareness but isn't tied to a specific implementation.
+3. **named** — A contributor has claimed the skill and promoted it to `graph/named/{contributor}/{skill-name}.md`. The skill is now a fully attributed, named implementation.
+
+### Promoting a skill
+
+To promote an awakened skill to named:
+
+```bash
+gaia name intake/skill-batches/batch-abc123.json 0 karpathy/autoresearch
+```
+
+This creates the named skill file and updates the batch record.

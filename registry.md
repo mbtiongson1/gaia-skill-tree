@@ -81,4 +81,4 @@
 | ○ Web Search | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Write Report | Intrinsic Skill | I · Awakened | Common | Provisional |
 
-*Generated from gaia.json v0.2.0.*
+*Generated from gaia.json v1.0.0.*
