@@ -17,6 +17,7 @@ _None._
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tool Use](../atomic/tool-use.md)
+- [Function Calling](../composite/function-calling.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

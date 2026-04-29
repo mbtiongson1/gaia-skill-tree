@@ -33,6 +33,7 @@
 | ○ Few-Shot Learning | Intrinsic Skill | IV · Transcendent | Common | Provisional |
 | ○ Format Output | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | V · Transcendent | Divine | Provisional |
+| ◇ Function Calling | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Generate SQL | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Generate Test | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Generate Text | Intrinsic Skill | I · Awakened | Common | Provisional |
