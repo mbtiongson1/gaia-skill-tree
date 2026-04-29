@@ -62,6 +62,12 @@ class TestValidate(unittest.TestCase):
         self.assertIn("Validated legendary", out)
         self.assertIn("needs ≥3 Class A/B evidence", out)
 
+    def test_atomic_with_prerequisites(self):
+        """Ensure an atomic skill that declares prerequisites is rejected."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "atomic_with_prereqs.json"))
+        self.assertEqual(code, 1, "Expected atomic-with-prereqs to fail validation.")
+        self.assertIn("must have 0 prerequisites", out)
+
 class TestNamedSkillValidation(unittest.TestCase):
     """Tests that verify named skill files pass validate_and_group rules."""
 
