@@ -11,11 +11,14 @@
 
 Every AI agent capability exists somewhere on this graph. Skills start **Dormant**, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
 
+The snapshot below is an example of how the graph is rendered. Counts and labels
+will drift as the registry evolves.
+
 ```
-GAIA SKILL GRAPH  v0.2.0
+GAIA SKILL GRAPH  example snapshot
 ═════════════════════════════════════════════════════════════════
 
-◆ ULTIMATE SKILLS  (7)  — Evidence-locked. One agent per era.
+◆ ULTIMATE SKILLS  (<1% prevalence)  — Evidence-locked. Exceptionally rare.
 │
 ├─ ◆ True Dragon: Autonomous Scientific Discovery     [IV · Evolved]
 ├─ ◆ True Oracle: Autonomous Data Scientist           [IV · Evolved]
@@ -25,18 +28,18 @@ GAIA SKILL GRAPH  v0.2.0
 ├─ ◆ True Sage: Recursive Self-Improvement            [I · Dormant]
 └─ ◆ Wisdom King: Autonomous Research Agent           [I · Dormant]
 
-◇ EXTRA SKILLS  (22)  — Emerged from combination. Transcend their parts.
+◇ EXTRA SKILLS  (example set)  — Emerged from combination. Transcend their parts.
 │
 ├─ ◇ Research              [III · Named]    ← Web Search + Summarize + Cite Sources
 ├─ ◇ RAG Pipeline          [III · Named]    ← Retrieve + Chunk Document + Embed Text + Score Relevance
 ├─ ◇ Autonomous Debug      [III · Named]    ← Code Generation + Execute Bash + Error Interpretation
-└─ ◇ ...and 19 more
+└─ ◇ ...and more as the registry grows
 
-○ INTRINSIC SKILLS  (49)  — Atomic. The genome of every agent.
+○ INTRINSIC SKILLS  (example set)  — Atomic. The genome of every agent.
 │
 ├─ ○ Code Generation       [II · Awakened]
 ├─ ○ Web Search            [II · Awakened]
-└─ ○ ...and 47 more
+└─ ○ ...and more as the registry grows
 
 → Full graph: tree.md
 ```
@@ -47,7 +50,7 @@ GAIA SKILL GRAPH  v0.2.0
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
 - **Unlock combinations** — when your agent has the prerequisites, a new composite or ultimate skill becomes available to fuse. The CLI detects it automatically.
-- **Contribute to the canon** — submit evidence for new skills or level-ups via PR. The graph grows with the field.
+- **Contribute to the canon** — review draft skills, submit evidence, or create new skills from strong reviews. The graph grows with the field.
 
 ---
 
@@ -222,7 +225,20 @@ gaia-skill-tree/
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines including evidence requirements, PR templates, and naming conventions.
+Gaia is meant to be a shared map of agent capabilities, and there are a few
+good ways to help even if you are not ready to edit the graph directly.
+
+You can contribute by **reviewing skill drafts**: read a proposed skill, check
+whether the definition is clear, compare it against existing skills, evaluate
+the cited evidence, and submit peer review analysis that helps maintainers
+decide whether the skill should be accepted, renamed, merged, or reclassified.
+
+You can also contribute by **creating skills directly from reviews**: turn a
+well-supported review into a concrete Intrinsic Skill, Extra Skill, Ultimate
+Skill, fusion recipe, or reclassification PR with evidence and rationale.
+
+For full instructions, including evidence requirements, PR templates, naming
+rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
