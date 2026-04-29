@@ -7,8 +7,8 @@
 <style>
   :root {
     --atomic:   #38bdf8;
-    --composite:#a78bfa;
-    --legendary:#fbbf24;
+    --composite:#c084fc;
+    --legendary:#f59e0b;
     --bg:       #030712;
     --surface:  #0f172a;
     --border:   #1e293b;
@@ -134,11 +134,11 @@
   .tier-name{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
   .tier-desc{font-size:.875rem;color:var(--muted)}
   .atomic  {--card-glow:rgba(56,189,248,.4)}
-  .composite{--card-glow:rgba(167,139,250,.4)}
-  .legendary{--card-glow:rgba(251,191,36,.4)}
+  .composite{--card-glow:rgba(192,132,252,.4)}
+  .legendary{--card-glow:rgba(245,158,11,.4)}
   .badge-atomic  {background:rgba(56,189,248,.15);color:var(--atomic);border:1px solid rgba(56,189,248,.3)}
-  .badge-composite{background:rgba(167,139,250,.15);color:var(--composite);border:1px solid rgba(167,139,250,.3)}
-  .badge-legendary{background:rgba(251,191,36,.15);color:var(--legendary);border:1px solid rgba(251,191,36,.3)}
+  .badge-composite{background:rgba(192,132,252,.15);color:var(--composite);border:1px solid rgba(192,132,252,.3)}
+  .badge-legendary{background:rgba(245,158,11,.15);color:var(--legendary);border:1px solid rgba(245,158,11,.3)}
   /* ── STEPS ── */
   .steps{display:flex;flex-direction:column;gap:1.5rem}
   .step{
@@ -204,6 +204,7 @@
   .gloss-def{font-size:.82rem;color:var(--muted)}
   /* ── GRAPH DIALOG ── */
   .graph-dialog{
+    margin:auto;
     width:min(1120px,94vw);height:min(760px,86vh);padding:0;
     color:var(--text);background:rgba(3,7,18,.98);
     border:1px solid rgba(56,189,248,.35);border-radius:20px;
@@ -546,9 +547,9 @@
   const GRAPH_JSON_URL = 'graph/gaia.json';
   const GRAPH_SCALE = 1.25;
   const PALETTE = {
-    atomic:    { rgb:'56,189,248',  hex:'#38bdf8' },
-    composite: { rgb:'167,139,250', hex:'#a78bfa' },
-    legendary: { rgb:'251,191,36',  hex:'#fbbf24' },
+    atomic:    { rgb:'56,189,248',   hex:'#38bdf8' },
+    composite: { rgb:'192,132,252',  hex:'#c084fc' },
+    legendary: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
   const TYPE_ORDER = { atomic:0, composite:1, legendary:2 };
   const FALLBACK_SKILLS = [
@@ -631,6 +632,7 @@
       my: 0,
       labelMode: options.labelMode || 'legendary',
       scale: options.scale || GRAPH_SCALE,
+      zoom: 1,
       statusEl: options.statusEl || null,
       running: options.autostart !== false,
       frame: null,
@@ -657,7 +659,8 @@
       state.positions = buildPositions(skills, state.scale);
       if (state.statusEl) {
         const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
-        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} prerequisite links`;
+        const zoomNote = options.zoomable ? ' · scroll to zoom' : '';
+        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} links${zoomNote}`;
       }
     }
 
@@ -672,7 +675,8 @@
     function project(p) {
       const fov = Math.min(state.width, state.height) * 0.75;
       const dist = fov / (fov + p.z + 360 * state.scale);
-      return { sx: state.width / 2 + p.x * dist, sy: state.height / 2 + p.y * dist, scale: dist };
+      const z = state.zoom;
+      return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
     }
     function drawNode(sx, sy, r, color, alpha) {
       const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
@@ -684,7 +688,8 @@
       ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
     }
     function shouldLabel(skill) {
-      if (state.labelMode === 'all') return skill.type !== 'atomic' || stableHash(skill.id) % 5 === 0;
+      if (state.labelMode === 'none') return false;
+      if (state.labelMode === 'all') return true;
       if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
       return skill.type === 'legendary';
     }
@@ -772,6 +777,12 @@
       state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
       state.my = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
     });
+    if (options.zoomable) {
+      canvas.addEventListener('wheel', e => {
+        e.preventDefault();
+        state.zoom = Math.max(0.3, Math.min(3.0, state.zoom * (1 - e.deltaY * 0.001)));
+      }, { passive: false });
+    }
     if (state.running) draw();
     return { setSkills, resize, start, stop };
   }
@@ -780,9 +791,9 @@
   const trigger = document.querySelector('[data-graph-trigger]');
   const dialog = document.getElementById('skillGraphDialog');
   const closeBtn = document.querySelector('[data-graph-close]');
-  const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'legendary', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
+  const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'modal', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false
+    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true
   });
 
   function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
