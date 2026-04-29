@@ -4,6 +4,7 @@
 
 [![Validate](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml/badge.svg)](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
 ---
 
@@ -69,6 +70,12 @@ Skills level up through evidence, not declaration:
 | IV | **Transcendent** | Class B or A | Failure modes known; battle-tested |
 | V | **Transcendent** | Class B or A | Composable and self-improving |
 | VI | **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
+
+---
+
+## Tutorial
+
+**New here?** The interactive tutorial at **[gaia.tiongson.co](https://gaia.tiongson.co/)** covers everything visually — skill tiers, the rank system, and the full get-started workflow with copy-paste commands.
 
 ---
 
