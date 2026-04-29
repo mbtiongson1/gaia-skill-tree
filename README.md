@@ -78,42 +78,27 @@ Skills level up through evidence, not declaration:
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 
+# Install the gaia CLI (once)
+pip install -e .
+
 # Validate the canonical graph
-python3 scripts/validate.py
+gaia --registry . scan
 
 # Regenerate all skill pages, registry, tree, and user trees
 python3 scripts/generateProjections.py
 ```
 
+> **Embeddings support** (optional): `pip install -e ".[embeddings]"` adds `gaia embed` and `gaia search`.
+
 ## CLI Usage
 
-The Gaia CLI scans an agent/project repository, compares detected skill names
-against the canonical Gaia registry, and can submit batch skill intake records
-for review.
-
-### Run from this checkout
-
-From the Gaia registry checkout:
+Install once from the repo root:
 
 ```bash
-python3 plugin/cli/main.py --help
+pip install -e .
 ```
 
-From another project, pass the local Gaia registry path with `--registry`:
-
-```bash
-python3 /path/to/gaia-skill-tree/plugin/cli/main.py \
-  --registry /path/to/gaia-skill-tree \
-  scan
-```
-
-If you have a shell wrapper named `gaia`, the same commands become:
-
-```bash
-gaia --registry /path/to/gaia-skill-tree scan
-gaia --registry /path/to/gaia-skill-tree push --dry-run
-gaia --registry /path/to/gaia-skill-tree push
-```
+Then `gaia` works from any directory — no path prefix needed.
 
 ### Project setup
 
@@ -127,8 +112,8 @@ This creates `.gaia/config.json`:
 
 ```json
 {
-  "gaiaUser": "gaiabot",
-  "gaiaRegistryRef": "https://github.com/gaia-registry/gaia",
+  "gaiaUser": "your-github-username",
+  "gaiaRegistryRef": "https://github.com/mbtiongson1/gaia-skill-tree",
   "scanPaths": ["scripts", "plugin"],
   "autoPromptCombinations": false
 }
@@ -163,11 +148,11 @@ Update `gaiaUser` and `scanPaths` for your project before scanning.
 gaia init
 
 # Preview detected skills and proposed intake
-gaia --registry /path/to/gaia-skill-tree scan
-gaia --registry /path/to/gaia-skill-tree push --dry-run
+gaia scan
+gaia push --dry-run
 
 # Submit the batch intake record for review
-gaia --registry /path/to/gaia-skill-tree push
+gaia push
 ```
 
 Intake PRs are draft review artifacts. Accepted candidates are promoted later
