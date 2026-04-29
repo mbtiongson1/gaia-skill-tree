@@ -24,14 +24,7 @@ class TestGaiaPush(unittest.TestCase):
                     f,
                 )
             with open(os.path.join(tmp, "src", "agent.txt"), "w") as f:
-                f.write("tokenize semantic-search")
-            
-            # Initialize dummy git repo to ensure predictable repo detection
-            subprocess.run(["git", "init"], cwd=tmp, check=True, capture_output=True)
-            subprocess.run(
-                ["git", "remote", "add", "origin", "https://github.com/tester/local-repo.git"],
-                cwd=tmp, check=True, capture_output=True
-            )
+                f.write("web-search semantic-search")
 
             env = os.environ.copy()
             env.pop("GITHUB_REPOSITORY", None)
@@ -53,7 +46,7 @@ class TestGaiaPush(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             batch = json.loads(result.stdout)
-            self.assertEqual([s["skillId"] for s in batch["knownSkills"]], ["tokenize"])
+            self.assertEqual([s["skillId"] for s in batch["knownSkills"]], ["web-search"])
             self.assertEqual([s["id"] for s in batch["proposedSkills"]], ["semantic-search"])
             self.assertEqual(batch["userId"], "tester")
             self.assertEqual(batch["sourceRepo"], "tester/local-repo")

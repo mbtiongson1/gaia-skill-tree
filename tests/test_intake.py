@@ -26,14 +26,14 @@ def run_validate_intake(intake_dir):
     return result.returncode, result.stdout
 
 
-def write_batch(root, batch_id, proposed_id="semantic-search", similarity_target="tokenize"):
+def write_batch(root, batch_id, proposed_id="semantic-search", similarity_target="web-search"):
     os.makedirs(os.path.join(root, "skill-batches"), exist_ok=True)
     batch = {
         "batchId": batch_id,
         "userId": "tester",
         "sourceRepo": "tester/example",
         "generatedAt": "2026-04-29T00:00:00Z",
-        "knownSkills": [{"skillId": "tokenize"}],
+        "knownSkills": [{"skillId": "web-search"}],
         "proposedSkills": [
             {
                 "id": proposed_id,
@@ -66,7 +66,7 @@ class TestIntakeValidation(unittest.TestCase):
 
     def test_duplicate_proposed_id_against_canonical_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
-            write_batch(tmp, "batch-one", proposed_id="tokenize")
+            write_batch(tmp, "batch-one", proposed_id="web-search")
             code, out = run_validate_intake(tmp)
             self.assertEqual(code, 1)
             self.assertIn("duplicates canonical skill", out)

@@ -3,6 +3,8 @@ import sys
 import os
 import json
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
 try:
     from plugin.cli.scanner import scan_repo, load_config
     from plugin.cli.resolver import resolve_skills
