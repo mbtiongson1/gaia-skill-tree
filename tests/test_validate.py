@@ -83,7 +83,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         named_skills = [(fp, fm) for fp, fm in named_skills if not fp.endswith("index.json")]
 
         valid_ids = load_gaia_skill_ids(REAL_GRAPH_PATH)
-        errors, buckets = validate_and_group(named_skills, valid_ids)
+        errors, buckets, *_ = validate_and_group(named_skills, valid_ids)
 
         self.assertEqual(
             errors,
@@ -129,7 +129,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, {"web-search"})
+        errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
             any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
                 for e in errors),
@@ -149,7 +149,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, set())
+        errors, *_ = validate_and_group(named_skills, set())
         self.assertGreater(len(errors), 0, "Expected errors for missing required fields.")
 
     def test_unresolved_generic_ref_fails_validation(self):
@@ -171,7 +171,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, {"web-search"})
+        errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
             any("definitely-not-a-real-skill-id" in e for e in errors),
             f"Expected unresolved-ref error, got: {errors}",
