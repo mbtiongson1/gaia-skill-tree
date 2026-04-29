@@ -1,7 +1,7 @@
-# [IV · Transcendent · Intrinsic Skill] Few-Shot Learning
+# [IV · Hardened · Intrinsic Skill] Few-Shot Learning
 **ID:** few-shot-learning  
 **Type:** Intrinsic Skill  
-**Level:** IV · Transcendent  
+**Level:** IV · Hardened  
 **Rarity:** Common  
 **Status:** Provisional
 

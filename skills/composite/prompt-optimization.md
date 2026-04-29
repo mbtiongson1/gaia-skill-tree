@@ -1,7 +1,7 @@
-# [IV · Transcendent · Extra Skill] Prompt Optimization
+# [IV · Hardened · Extra Skill] Prompt Optimization
 **ID:** prompt-optimization  
 **Type:** Extra Skill  
-**Level:** IV · Transcendent  
+**Level:** IV · Hardened  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

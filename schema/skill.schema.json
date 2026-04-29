@@ -44,6 +44,7 @@
     "level": {
       "type": "string",
       "enum": [
+        "0",
         "I",
         "II",
         "III",
@@ -51,7 +52,7 @@
         "V",
         "VI"
       ],
-      "description": "Skill tier in the upgrade path (I = Foundation, VI = Apex)."
+      "description": "Skill tier in the upgrade path (0 = Basic, I = Awakened, VI = Transcendent ★)."
     },
     "rarity": {
       "type": "string",

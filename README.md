@@ -64,10 +64,11 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| I | **Awakened** | None | Foundation tier — catalogued and available |
+| 0 | **Basic** | None | Universal LLM primitive — any capable model does this by default |
+| I | **Awakened** | None | Foundation tier — catalogued agent capability |
 | II | **Named** | Class C | First confirmed demonstration |
 | III | **Evolved** | Class B | Reproducible, fully documented |
-| IV | **Transcendent** | Class B or A | Failure modes known; battle-tested |
+| IV | **Hardened** | Class B or A | Failure modes known; battle-tested |
 | V | **Transcendent** | Class B or A | Composable and self-improving |
 | VI | **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 

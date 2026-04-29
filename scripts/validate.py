@@ -33,6 +33,7 @@ except ImportError:
 
 
 EVIDENCE_FLOOR = {
+    "0": None,       # No evidence required (Basic tier — universal LLM primitives)
     "I": None,       # No evidence required (foundation tier)
     "II": {"C", "B", "A"},
     "III": {"B", "A"},

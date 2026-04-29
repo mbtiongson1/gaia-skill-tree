@@ -1,7 +1,7 @@
-# [IV · Transcendent · Extra Skill] Knowledge Harvest
+# [IV · Hardened · Extra Skill] Knowledge Harvest
 **ID:** knowledge-harvest  
 **Type:** Extra Skill  
-**Level:** IV · Transcendent  
+**Level:** IV · Hardened  
 **Rarity:** Rare  
 **Status:** Provisional
 

@@ -483,7 +483,7 @@ gaia push → intake/skill-batches/ (lifecycle: "pending")
          → graph/named/{contributor}/{skill-name}.md (lifecycle: "named")
 ```
 
-Levels I ("Awakened") skills are generic-only. A skill only becomes "named" in the sense of Level II once a contributor claims it via `gaia name`.
+Level 0 (Basic) and Level I (Awakened) skills are generic-only. A skill only becomes "named" in the sense of Level II once a contributor claims it via `gaia name`. Basic skills (Level 0) are universal LLM primitives and do not accept named implementations.
 
 ### 13.4 Install & Sync
 

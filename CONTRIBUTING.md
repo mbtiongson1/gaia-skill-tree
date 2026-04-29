@@ -79,7 +79,7 @@ Run `/gaia-draft-curate` first when contributors have pushed new intake batches.
 
 ## Evidence Requirements
 
-Every skill above Level I must include at least one evidence entry.
+Every skill above Level I (Awakened) must include at least one evidence entry. Level 0 (Basic) and Level I (Awakened) require no evidence.
 
 ### Evidence Classes
 
@@ -93,11 +93,13 @@ Every skill above Level I must include at least one evidence entry.
 
 | Level | Rank | Minimum Evidence |
 |---|---|---|
-| I | Dormant | None |
-| II | Awakened | 1× Class C |
-| III | Named | 1× Class B |
-| IV | Evolved | 1× Class B or A |
-| V | Transcendent | 1× Class A |
+| 0 | **Basic** | None |
+| I | **Awakened** | None |
+| II | **Named** | 1× Class C |
+| III | **Evolved** | 1× Class B |
+| IV | **Hardened** | 1× Class B or A |
+| V | **Transcendent** | 1× Class A |
+| VI | **Transcendent ★** | Class A + peer review |
 
 ### Ultimate Skill Requirements
 

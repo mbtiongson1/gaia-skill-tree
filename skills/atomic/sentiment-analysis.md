@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Sentiment Analysis
+# [0 · Basic · Intrinsic Skill] Sentiment Analysis
 **ID:** sentiment-analysis  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 
