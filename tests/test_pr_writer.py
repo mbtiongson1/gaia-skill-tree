@@ -1,4 +1,10 @@
+import os
+import sys
 import unittest
+
+
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, REPO_ROOT)
 
 from plugin.cli.prWriter import build_intake_pr_body
 
