@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
+- [Tool Creation](../composite/tool-creation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

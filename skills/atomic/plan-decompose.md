@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
+- [Tree of Thought](../composite/tree-of-thought.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

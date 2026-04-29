@@ -14,7 +14,9 @@ Produces coherent natural language output given a prompt, instruction, or contex
 _None._
 
 ## Unlocks
+- [Few-Shot Learning](../atomic/few-shot-learning.md)
 - [Ghostwrite](../composite/ghostwrite.md)
+- [Prompt Optimization](../composite/prompt-optimization.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

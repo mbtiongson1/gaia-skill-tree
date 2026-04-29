@@ -20,6 +20,7 @@
 | ◆ Grand Conductor: Multi-Agent Orchestration | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V · Transcendent | Requires extensive multi-system validation before level advancement. |
 | ◇ Multimodal Reasoning | Extra Skill | Image Caption, Question Answer, Logical Inference | III · Evolved | Requires vision-language model capability. |
 | ◇ Plan and Execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | III · Evolved |  |
+| ◇ Prompt Optimization | Extra Skill | Evaluate Output, Generate Text | IV · Transcendent |  |
 | ◇ RAG Pipeline | Extra Skill | Retrieve, Chunk Document, Embed Text, Score Relevance | III · Evolved |  |
 | ◇ ReAct Reasoning | Extra Skill | Plan and Decompose, Tool Use | III · Evolved |  |
 | ◆ True Herald: Real-Time Voice Assistant | Ultimate Skill | Voice Agent, Memory Manage, Plan and Execute | V · Transcendent | Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources. |
@@ -28,7 +29,9 @@
 | ◇ Research | Extra Skill | Web Search, Summarize, Cite Sources | III · Evolved |  |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | Hypothesis Generation, Research, Math Reason | V · Transcendent | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Text-to-SQL Pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | III · Evolved | Requires schema context in prompt. |
+| ◇ Tool Creation | Extra Skill | Code Generation, Tool Use | IV · Transcendent |  |
 | ◇ Translation Pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | III · Evolved |  |
+| ◇ Tree of Thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | IV · Transcendent |  |
 | ◇ Voice Agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III · Evolved | Requires real-time audio I/O or audio file access. |
 | ◇ Web Scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III · Evolved | Structured output mode required. |
 
