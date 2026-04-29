@@ -4,9 +4,26 @@ The Gaia Plugin is a set of tools to integrate your local development environmen
 
 > **Prefer the MCP server?** If you use Claude Code, Cursor, or any MCP-compatible agent, see [`mcp-server/`](../mcp-server/) for zero-config agent-native integration — no CLI needed.
 
+## Installation
+
+Install the Gaia CLI via npm:
+
+```bash
+npm install -g @gaia-registry/cli
+# or locally
+npm install @gaia-registry/cli
+```
+
+### Requirements
+
+- **Node.js 18+** — for running the npm package
+- **Python 3.8+** — the CLI shells out to Python for the core implementation
+
+The npm wrapper automatically detects your Python installation and will provide instructions if Python is not found.
+
 ## CLI Usage
 
-The Gaia CLI provides commands to manage your skill tree directly from your repository.
+Once installed, use the `gaia` command directly:
 
 ### Commands
 
@@ -65,14 +82,14 @@ The plugin is configured via a `.gaia/config.json` file in your repository root:
 }
 ```
 
-## Installation
+## Local Development
 
-Currently, the plugin is in early access. You can run it directly from the Gaia repository or use the GitHub Action.
+If you want to develop the npm wrapper locally:
 
 ```bash
-# Clone the gaia registry
-git clone https://github.com/gaia-registry/gaia.git
-
-# Run the CLI
-python gaia/plugin/cli/main.py --help
+npm install
+npm run build    # Compile TypeScript
+npm run dev      # Watch mode (requires separate setup)
 ```
+
+The npm wrapper is in `src/bin/gaia.ts` and shells out to the Python CLI in `cli/main.py`.

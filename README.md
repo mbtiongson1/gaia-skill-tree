@@ -88,9 +88,13 @@ python3 scripts/generateProjections.py
 
 ## Install the Plugin (per-repo)
 
-> **Status: In Development** — The `gaia` CLI is not yet published to npm. Track progress or contribute in [plugin/](plugin/).
-
 ```bash
+# Install globally
+npm install -g @gaia-registry/cli
+
+# Or install locally in your project
+npm install @gaia-registry/cli
+
 # Initialize Gaia in your project
 gaia init
 

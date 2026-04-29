@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { existsSync } from 'fs';
@@ -8,8 +8,9 @@ import { existsSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Path to the Python CLI entry point
+// Path to the Python CLI entry point and repo root
 const pythonCliPath = resolve(__dirname, '../../cli/main.py');
+const repoRoot = resolve(__dirname, '../../..');
 
 // Check if Python CLI exists
 if (!existsSync(pythonCliPath)) {
@@ -22,14 +23,12 @@ let pythonExecutable = 'python3';
 
 // Try to detect Python availability
 const detectPython = (): string => {
-  const { spawnSync } = require('child_process');
-  
   for (const python of ['python3', 'python']) {
-    const result = spawnSync(python, ['--version'], { 
+    const result = spawnSync(python, ['-V'], { 
       stdio: 'pipe',
-      shell: true 
+      shell: false,
     });
-    if (result.status === 0) {
+    if (result.status === 0 || result.stderr?.toString().includes('Python')) {
       return python;
     }
   }
@@ -47,10 +46,16 @@ try {
   process.exit(1);
 }
 
-// Spawn Python process with forwarded arguments
+// Prepare environment variables
+const env = {
+  ...process.env,
+  PYTHONPATH: repoRoot,
+};
+
+// Spawn Python process with forwarded arguments (no shell for security)
 const pythonProcess = spawn(pythonExecutable, [pythonCliPath, ...process.argv.slice(2)], {
   stdio: 'inherit',
-  shell: true
+  env,
 });
 
 // Forward exit code
