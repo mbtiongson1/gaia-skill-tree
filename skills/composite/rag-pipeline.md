@@ -25,7 +25,8 @@ _None specified._
 ## Evidence
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
-| B | https://github.com/gaia-registry/gaia/blob/main/docs/evidence/ragPipeline.md | mbtiongson1 | 2026-04-26 |
+| A | https://aclanthology.org/2024.eacl-demo.16/ | rico-favor | 2026-04-29 |
+| B | https://github.com/vibrantlabsai/ragas | rico-favor | 2026-04-29 |
 
 ## Known Agents
 _None verified yet._
