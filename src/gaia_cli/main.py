@@ -13,6 +13,7 @@ from gaia_cli.embeddings import generate_embeddings
 from gaia_cli.semantic_search import search as semantic_search, load_embeddings
 from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
 from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed
+from gaia_cli.graph import graph_command
 from gaia_cli.registry import (
     registry_graph_path,
     require_explicit_writable_registry,
@@ -349,6 +350,11 @@ def main():
     )
     install_parser.add_argument('--list', action='store_true', help="List all installed named skills")
     subparsers.add_parser('sync', help="Sync installed named skills with the registry")
+    graph_parser = subparsers.add_parser('graph', help="Generate and open the Gaia skill graph")
+    graph_parser.add_argument('--format', choices=('svg', 'json'), default='svg', help="Graph artifact format (default: svg)")
+    graph_parser.add_argument('-o', '--output', help="Output path (default: graph/gaia.svg)")
+    graph_parser.add_argument('--open', dest='open', action='store_true', default=True, help="Open the generated graph (default)")
+    graph_parser.add_argument('--no-open', dest='open', action='store_false', help="Do not open the generated graph")
     uninstall_parser = subparsers.add_parser('uninstall', help="Uninstall a named skill")
     uninstall_parser.add_argument('skill_id', help="Named skill ID to uninstall (e.g. karpathy/autoresearch)")
     args = parser.parse_args()
@@ -379,6 +385,8 @@ def main():
         install_command(args)
     elif args.command == 'sync':
         sync_command(args)
+    elif args.command == 'graph':
+        graph_command(args)
     elif args.command == 'uninstall':
         uninstall_command(args)
     else:

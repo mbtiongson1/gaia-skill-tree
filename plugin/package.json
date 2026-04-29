@@ -11,6 +11,7 @@
     "dist",
     "cli/**/*.py",
     "gaia_cli/**/*.py",
+    "gaia_cli/data/**/*",
     "README.md"
   ],
   "scripts": {
@@ -19,6 +20,8 @@
     "postpack": "rm -rf ./gaia_cli 2>/dev/null || rmdir /S /Q .\\gaia_cli >nul 2>&1",
     "test": "npm run build && npm run prepack && node --test test/*.test.mjs; npm run postpack",
     "prepare": "npm run build",
+    "prepack": "rm -rf gaia_cli && cp -R ../src/gaia_cli gaia_cli",
+    "postpack": "rm -rf gaia_cli",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

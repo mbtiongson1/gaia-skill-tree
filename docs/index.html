@@ -51,15 +51,31 @@
   }
   #canvas3d{
     position:absolute;inset:0;width:100%;height:100%;
-    pointer-events:none;opacity:.9;
+    pointer-events:none;opacity:1;
   }
   .hero-content{position:relative;z-index:2;max-width:700px}
+  .hero-title,.hero-sub,.hero-cta,.scroll-hint{transition:opacity .24s ease,filter .24s ease,transform .24s ease}
+  #hero.hero-graph-peek .hero-title,
+  #hero.hero-graph-peek .hero-sub,
+  #hero.hero-graph-peek .hero-cta,
+  #hero.hero-graph-peek .scroll-hint{
+    opacity:0;filter:blur(8px);pointer-events:none;transform:translateY(10px);
+  }
   .hero-eyebrow{
     display:inline-block;margin-bottom:1.2rem;
     font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
     color:var(--atomic);border:1px solid var(--atomic);
-    padding:.3rem .9rem;border-radius:999px;
-    background:rgba(56,189,248,.08);
+    padding:.45rem 1.05rem;border-radius:999px;
+    background:rgba(3,7,18,.58);
+    box-shadow:0 0 24px rgba(56,189,248,.18);
+  }
+  .graph-trigger{
+    appearance:none;font:inherit;cursor:pointer;position:relative;z-index:3;
+    transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;
+  }
+  .graph-trigger:hover,.graph-trigger:focus-visible{
+    background:rgba(56,189,248,.16);border-color:#7dd3fc;color:#e0f2fe;
+    box-shadow:0 0 36px rgba(56,189,248,.34);transform:translateY(-1px);outline:none;
   }
   h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem}
   h1 span{
@@ -186,6 +202,46 @@
   }
   .gloss-term{font-weight:700;font-size:.9rem;color:var(--atomic);margin-bottom:.25rem}
   .gloss-def{font-size:.82rem;color:var(--muted)}
+  /* ── GRAPH DIALOG ── */
+  .graph-dialog{
+    width:min(1120px,94vw);height:min(760px,86vh);padding:0;
+    color:var(--text);background:rgba(3,7,18,.98);
+    border:1px solid rgba(56,189,248,.35);border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.72),0 0 55px rgba(56,189,248,.16);
+    overflow:hidden;
+  }
+  .graph-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+  .graph-dialog-inner{display:flex;flex-direction:column;height:100%}
+  .graph-dialog-header{
+    display:flex;gap:1rem;align-items:flex-start;justify-content:space-between;
+    padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(167,139,250,.08));
+  }
+  .graph-dialog-title{font-weight:800;font-size:1rem;margin-bottom:.15rem}
+  .graph-dialog-sub{color:var(--muted);font-size:.82rem}
+  .graph-dialog-actions{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;justify-content:flex-end}
+  .graph-download,.graph-close{
+    color:var(--text);background:rgba(15,23,42,.84);border:1px solid var(--border);
+    border-radius:999px;text-decoration:none;font-size:.78rem;font-weight:700;
+    padding:.42rem .78rem;cursor:pointer;white-space:nowrap;
+  }
+  .graph-download:hover,.graph-close:hover,.graph-download:focus-visible,.graph-close:focus-visible{
+    border-color:var(--atomic);color:var(--atomic);outline:none;
+  }
+  .graph-canvas-wrap{position:relative;flex:1;min-height:0;background:radial-gradient(circle at center,rgba(15,23,42,.75),#020617 68%)}
+  #graphDialogCanvas{position:absolute;inset:0;width:100%;height:100%}
+  .graph-status{
+    position:absolute;left:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
+  }
+  @media (max-width:700px){
+    nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
+    .graph-dialog{height:88vh}
+    .graph-dialog-header{flex-direction:column}
+    .graph-dialog-actions{justify-content:flex-start}
+  }
+
   /* ── FOOTER ── */
   footer{
     text-align:center;padding:3rem 1.5rem;
@@ -208,6 +264,7 @@
     <li><a href="#what">What</a></li>
     <li><a href="#tiers">Tiers</a></li>
     <li><a href="#start">Get Started</a></li>
+    <li><a href="tree.md">Tree</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
   </ul>
@@ -217,8 +274,8 @@
 <section id="hero">
   <canvas id="canvas3d"></canvas>
   <div class="hero-content">
-    <span class="hero-eyebrow">Open Skill Graph for AI Agents</span>
-    <h1>Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
+    <button class="hero-eyebrow graph-trigger" type="button" data-graph-trigger aria-controls="skillGraphDialog">Open Skill Graph for AI Agents</button>
+    <h1 class="hero-title">Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
     <p class="hero-sub">
       Gaia maps AI agent skills — from primitive building blocks to legendary
       emergent capabilities — into an evidence-backed, versioned graph
@@ -236,6 +293,27 @@
     </svg>
   </div>
 </section>
+
+<dialog id="skillGraphDialog" class="graph-dialog" aria-labelledby="skillGraphTitle">
+  <div class="graph-dialog-inner">
+    <div class="graph-dialog-header">
+      <div>
+        <div id="skillGraphTitle" class="graph-dialog-title">Full Gaia Skill Graph</div>
+        <div class="graph-dialog-sub">Rendered from the canonical graph/gaia.json registry.</div>
+      </div>
+      <div class="graph-dialog-actions">
+        <a class="graph-download" href="graph/gaia.json" download>Download JSON</a>
+        <a class="graph-download" href="graph/gaia.gexf" download>Download GEXF</a>
+        <a class="graph-download" href="graph/gaia.svg" download>Download SVG</a>
+        <button type="button" class="graph-close" data-graph-close aria-label="Close skill graph">Close</button>
+      </div>
+    </div>
+    <div class="graph-canvas-wrap">
+      <canvas id="graphDialogCanvas"></canvas>
+      <div class="graph-status" data-graph-status>Loading full graph…</div>
+    </div>
+  </div>
+</dialog>
 
 <hr class="divider">
 
@@ -462,242 +540,286 @@
   </p>
 </footer>
 
-<!-- ─── 3D NODE GRAPH ANIMATION (zero-dependency Canvas 2D + perspective projection) ─── -->
+<!-- ─── FULL SKILL GRAPH ANIMATION (zero-dependency Canvas 2D + generated graph data) ─── -->
 <script>
 (function () {
-  const canvas = document.getElementById('canvas3d');
-  const ctx    = canvas.getContext('2d');
-  const DPR    = Math.min(window.devicePixelRatio || 1, 2);
-
-  let W, H;
-  function resize() {
-    W = canvas.parentElement.clientWidth;
-    H = canvas.parentElement.clientHeight;
-    canvas.width  = W * DPR;
-    canvas.height = H * DPR;
-    canvas.style.width  = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.scale(DPR, DPR);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* ── skill graph data ── */
-  const SKILLS = [
-    { id:'tokenize',        type:'atomic',    name:'Tokenize' },
-    { id:'retrieve',        type:'atomic',    name:'Retrieve' },
-    { id:'rank',            type:'atomic',    name:'Rank' },
-    { id:'embed-text',      type:'atomic',    name:'Embed Text' },
-    { id:'chunk-document',  type:'atomic',    name:'Chunk Doc' },
-    { id:'score-relevance', type:'atomic',    name:'Score Rel.' },
-    { id:'web-search',      type:'atomic',    name:'Web Search' },
-    { id:'summarize',       type:'atomic',    name:'Summarize' },
-    { id:'cite-sources',    type:'atomic',    name:'Cite Sources' },
-    { id:'parse-html',      type:'atomic',    name:'Parse HTML' },
-    { id:'extract-entities',type:'atomic',    name:'Extract Ent.' },
-    { id:'code-generation', type:'atomic',    name:'Code Gen' },
-    { id:'execute-bash',    type:'atomic',    name:'Exec Bash' },
-    { id:'route-intent',    type:'atomic',    name:'Route Intent' },
-    { id:'plan-decompose',  type:'atomic',    name:'Plan Decomp.' },
-    { id:'tool-select',     type:'atomic',    name:'Tool Select' },
-    { id:'write-report',    type:'atomic',    name:'Write Report' },
-    { id:'audience-model',  type:'atomic',    name:'Audience Mdl.' },
-    { id:'evaluate-output', type:'atomic',    name:'Eval Output' },
-    { id:'math-reason',     type:'atomic',    name:'Math Reason' },
-    { id:'rag-pipeline',    type:'composite', name:'RAG Pipeline',
-      prereqs:['retrieve','chunk-document','embed-text','score-relevance'] },
-    { id:'web-scrape',      type:'composite', name:'Web Scrape',
-      prereqs:['web-search','parse-html','extract-entities'] },
-    { id:'research',        type:'composite', name:'Research',
-      prereqs:['web-search','summarize','cite-sources'] },
-    { id:'autonomous-debug',type:'composite', name:'Auto Debug',
-      prereqs:['code-generation','execute-bash','route-intent'] },
-    { id:'plan-and-execute',type:'composite', name:'Plan & Execute',
-      prereqs:['route-intent','plan-decompose','tool-select'] },
-    { id:'knowledge-harvest',type:'composite',name:'Knowledge Harvest',
-      prereqs:['web-scrape','extract-entities','embed-text'] },
-    { id:'ghostwrite',      type:'composite', name:'Ghostwrite',
-      prereqs:['research','write-report','audience-model'] },
-    { id:'autonomous-research-agent', type:'legendary', name:'Auto Research',
-      prereqs:['research','knowledge-harvest','ghostwrite'] },
-    { id:'recursive-self-improvement',type:'legendary', name:'Self-Improve',
-      prereqs:['autonomous-debug','evaluate-output','plan-and-execute'] },
-  ];
-
+  const GRAPH_JSON_URL = 'graph/gaia.json';
+  const GRAPH_SCALE = 1.25;
   const PALETTE = {
     atomic:    { rgb:'56,189,248',  hex:'#38bdf8' },
     composite: { rgb:'167,139,250', hex:'#a78bfa' },
     legendary: { rgb:'251,191,36',  hex:'#fbbf24' },
   };
+  const TYPE_ORDER = { atomic:0, composite:1, legendary:2 };
+  const FALLBACK_SKILLS = [
+    { id:'tokenize', type:'atomic', name:'Tokenize', prerequisites:[] },
+    { id:'retrieve', type:'atomic', name:'Retrieve', prerequisites:[] },
+    { id:'embed-text', type:'atomic', name:'Embed Text', prerequisites:[] },
+    { id:'score-relevance', type:'atomic', name:'Score Relevance', prerequisites:[] },
+    { id:'web-search', type:'atomic', name:'Web Search', prerequisites:[] },
+    { id:'summarize', type:'atomic', name:'Summarize', prerequisites:[] },
+    { id:'cite-sources', type:'atomic', name:'Cite Sources', prerequisites:[] },
+    { id:'code-generation', type:'atomic', name:'Code Generation', prerequisites:[] },
+    { id:'execute-bash', type:'atomic', name:'Execute Bash', prerequisites:[] },
+    { id:'tool-select', type:'atomic', name:'Tool Select', prerequisites:[] },
+    { id:'rag-pipeline', type:'composite', name:'RAG Pipeline', prerequisites:['retrieve','embed-text','score-relevance'] },
+    { id:'research', type:'composite', name:'Research', prerequisites:['web-search','summarize','cite-sources'] },
+    { id:'autonomous-debug', type:'composite', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','tool-select'] },
+    { id:'autonomous-research-agent', type:'legendary', name:'Autonomous Research Agent', prerequisites:['research','rag-pipeline'] },
+  ];
 
-  /* ── place nodes on concentric spheres ── */
-  function spherePoint(r) {
-    const u = Math.random(), v = Math.random();
-    const th = 2 * Math.PI * u;
-    const ph = Math.acos(2 * v - 1);
+  function normalizeSkills(graph) {
+    const skills = (graph && graph.skills) ? graph.skills : FALLBACK_SKILLS;
+    return skills.map(skill => ({
+      id: skill.id,
+      name: skill.name || skill.id,
+      type: skill.type || 'atomic',
+      level: skill.level || '',
+      rarity: skill.rarity || '',
+      prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
+    })).filter(skill => skill.id);
+  }
+
+  function stableHash(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i += 1) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return Math.abs(h >>> 0);
+  }
+
+  function spherePoint(radius, seed, index, count) {
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const i = index + (seed % 17) / 17;
+    const y = 1 - (i / Math.max(count - 1, 1)) * 2;
+    const ring = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = golden * i + (seed % 360) * Math.PI / 180;
     return {
-      x: r * Math.sin(ph) * Math.cos(th),
-      y: r * Math.sin(ph) * Math.sin(th),
-      z: r * Math.cos(ph),
+      x: Math.cos(theta) * ring * radius,
+      y: y * radius,
+      z: Math.sin(theta) * ring * radius,
+      phase: (seed % 628) / 100,
     };
   }
 
-  const pos = {};
-  SKILLS.forEach(s => {
-    const r = s.type === 'atomic'    ? 200 + Math.random() * 50
-            : s.type === 'composite' ? 110 + Math.random() * 30
-            :                          28  + Math.random() * 18;
-    pos[s.id] = spherePoint(r);
-    pos[s.id].phase = Math.random() * Math.PI * 2;
-  });
-
-  /* ── stars ── */
-  const STARS = Array.from({ length: 240 }, () => ({
-    ...spherePoint(500 + Math.random() * 300),
-    size: 0.4 + Math.random() * 1.2,
-    alpha: 0.3 + Math.random() * 0.5,
-  }));
-
-  /* ── mouse parallax ── */
-  let mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth  - 0.5) * 2;
-    my = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-
-  /* ── 3-D rotation helpers ── */
-  function rotX(p, a) {
-    const c = Math.cos(a), s = Math.sin(a);
-    return { x: p.x, y: c*p.y - s*p.z, z: s*p.y + c*p.z, phase: p.phase };
-  }
-  function rotY(p, a) {
-    const c = Math.cos(a), s = Math.sin(a);
-    return { x: c*p.x + s*p.z, y: p.y, z: -s*p.x + c*p.z, phase: p.phase };
-  }
-
-  /* ── perspective projection ── */
-  function project(p) {
-    const fov  = 520;
-    const dist = fov / (fov + p.z + 320);
-    return {
-      sx: W / 2 + p.x * dist,
-      sy: H / 2 + p.y * dist,
-      scale: dist,
-    };
-  }
-
-  /* ── draw a glowing circle ── */
-  function drawNode(sx, sy, r, color, alpha) {
-    // outer glow
-    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.5);
-    grad.addColorStop(0,   `rgba(${color.rgb},${(alpha * 0.55).toFixed(2)})`);
-    grad.addColorStop(0.4, `rgba(${color.rgb},${(alpha * 0.18).toFixed(2)})`);
-    grad.addColorStop(1,   `rgba(${color.rgb},0)`);
-    ctx.beginPath();
-    ctx.arc(sx, sy, r * 3.5, 0, Math.PI * 2);
-    ctx.fillStyle = grad;
-    ctx.fill();
-    // core
-    ctx.beginPath();
-    ctx.arc(sx, sy, r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.1, 1).toFixed(2)})`;
-    ctx.fill();
-    // specular highlight
-    ctx.beginPath();
-    ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.6).toFixed(2)})`;
-    ctx.fill();
-  }
-
-  /* ── main loop ── */
-  let t = 0;
-  function draw() {
-    requestAnimationFrame(draw);
-    t += 0.006;
-
-    // clear
-    ctx.clearRect(0, 0, W, H);
-
-    const ry = t * 0.16 + mx * 0.10;
-    const rx = Math.sin(t * 0.055) * 0.20 + my * 0.055;
-
-    /* transform all positions */
-    const xf = {}; // transformed
-    const allPoints = [...SKILLS.map(s => s.id), ...STARS.map((_, i) => '__star' + i)];
-
-    SKILLS.forEach(s => {
-      let p = pos[s.id];
-      p = rotY(p, ry); p = rotX(p, rx);
-      xf[s.id] = p;
-    });
-    const starXf = STARS.map(st => {
-      let p = rotY(st, ry); p = rotX(p, rx);
-      return { ...p, size: st.size, alpha: st.alpha };
-    });
-
-    /* draw stars */
-    starXf.forEach(s => {
-      const pr = project(s);
-      if (pr.scale < 0.01) return;
-      ctx.beginPath();
-      ctx.arc(pr.sx, pr.sy, s.size * pr.scale * 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${(s.alpha * Math.min(pr.scale * 2, 1)).toFixed(2)})`;
-      ctx.fill();
-    });
-
-    /* draw edges (back to front: sort all by z) */
-    const edgeList = [];
-    SKILLS.forEach(s => {
-      if (!s.prereqs) return;
-      s.prereqs.forEach(pid => {
-        if (!xf[pid]) return;
-        const avgZ = (xf[s.id].z + xf[pid].z) / 2;
-        edgeList.push({ from: s.id, to: pid, type: s.type, avgZ });
+  function buildPositions(skills, scale) {
+    const groups = { atomic:[], composite:[], legendary:[] };
+    skills.forEach(skill => (groups[skill.type] || groups.atomic).push(skill));
+    Object.values(groups).forEach(group => group.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id)));
+    const positions = {};
+    const radii = { atomic: 250 * scale, composite: 145 * scale, legendary: 44 * scale };
+    Object.entries(groups).forEach(([type, group]) => {
+      group.forEach((skill, index) => {
+        positions[skill.id] = spherePoint(radii[type] || radii.atomic, stableHash(skill.id), index, group.length);
       });
     });
-    edgeList.sort((a, b) => a.avgZ - b.avgZ);
-
-    edgeList.forEach(e => {
-      const pa = project(xf[e.from]), pb = project(xf[e.to]);
-      const col = PALETTE[e.type];
-      const depthAlpha = Math.min(Math.max((xf[e.from].z + 350) / 700, 0), 1);
-      ctx.beginPath();
-      ctx.moveTo(pa.sx, pa.sy);
-      ctx.lineTo(pb.sx, pb.sy);
-      ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * 0.22).toFixed(2)})`;
-      ctx.lineWidth = e.type === 'legendary' ? 1.1 : 0.7;
-      ctx.stroke();
-    });
-
-    /* draw nodes back to front */
-    const nodeList = SKILLS.map(s => ({ s, z: xf[s.id].z }));
-    nodeList.sort((a, b) => a.z - b.z);
-
-    nodeList.forEach(({ s }) => {
-      const p  = xf[s.id];
-      const pr = project(p);
-      const pulse = 0.84 + 0.16 * Math.sin(t * 2.2 + p.phase);
-      const depthAlpha = Math.min(Math.max((p.z + 350) / 700, 0.1), 1);
-      const col = PALETTE[s.type];
-      const baseR = s.type === 'legendary' ? 10
-                  : s.type === 'composite'  ? 5.5 : 2.8;
-      const r = baseR * pr.scale * pulse;
-      drawNode(pr.sx, pr.sy, r, col, depthAlpha * 0.9);
-    });
-
-    /* label the legendary nodes */
-    nodeList.filter(({ s }) => s.type === 'legendary').forEach(({ s }) => {
-      const p  = xf[s.id];
-      const pr = project(p);
-      const depthAlpha = Math.min(Math.max((p.z + 350) / 700, 0), 1);
-      if (depthAlpha < 0.3) return;
-      ctx.font = `bold ${Math.round(10 * pr.scale * 1.4)}px Inter,system-ui,sans-serif`;
-      ctx.fillStyle = `rgba(251,191,36,${(depthAlpha * 0.85).toFixed(2)})`;
-      ctx.textAlign = 'center';
-      ctx.fillText(s.name, pr.sx, pr.sy + 14 * pr.scale * 1.4);
-    });
+    return positions;
   }
-  draw();
+
+  function createSkillGraph(canvas, options) {
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const state = {
+      skills: FALLBACK_SKILLS,
+      positions: buildPositions(FALLBACK_SKILLS, GRAPH_SCALE),
+      stars: [],
+      width: 0,
+      height: 0,
+      t: 0,
+      mx: 0,
+      my: 0,
+      labelMode: options.labelMode || 'legendary',
+      scale: options.scale || GRAPH_SCALE,
+      statusEl: options.statusEl || null,
+      running: options.autostart !== false,
+      frame: null,
+    };
+
+    function resize() {
+      const parent = canvas.parentElement;
+      state.width = parent.clientWidth;
+      state.height = parent.clientHeight;
+      canvas.width = state.width * DPR;
+      canvas.height = state.height * DPR;
+      canvas.style.width = state.width + 'px';
+      canvas.style.height = state.height + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      state.stars = Array.from({ length: options.stars || 260 }, (_, i) => {
+        const seed = i * 7919 + 97;
+        const point = spherePoint((500 + (seed % 280)) * state.scale, seed, i, options.stars || 260);
+        return { ...point, size: 0.4 + (seed % 13) / 10, alpha: 0.22 + (seed % 55) / 100 };
+      });
+    }
+
+    function setSkills(skills) {
+      state.skills = skills;
+      state.positions = buildPositions(skills, state.scale);
+      if (state.statusEl) {
+        const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
+        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} prerequisite links`;
+      }
+    }
+
+    function rotX(p, a) {
+      const c = Math.cos(a), s = Math.sin(a);
+      return { x: p.x, y: c*p.y - s*p.z, z: s*p.y + c*p.z, phase: p.phase };
+    }
+    function rotY(p, a) {
+      const c = Math.cos(a), s = Math.sin(a);
+      return { x: c*p.x + s*p.z, y: p.y, z: -s*p.x + c*p.z, phase: p.phase };
+    }
+    function project(p) {
+      const fov = Math.min(state.width, state.height) * 0.75;
+      const dist = fov / (fov + p.z + 360 * state.scale);
+      return { sx: state.width / 2 + p.x * dist, sy: state.height / 2 + p.y * dist, scale: dist };
+    }
+    function drawNode(sx, sy, r, color, alpha) {
+      const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
+      grad.addColorStop(0, `rgba(${color.rgb},${Math.min(alpha * 0.68, 1).toFixed(2)})`);
+      grad.addColorStop(0.42, `rgba(${color.rgb},${Math.min(alpha * 0.24, 1).toFixed(2)})`);
+      grad.addColorStop(1, `rgba(${color.rgb},0)`);
+      ctx.beginPath(); ctx.arc(sx, sy, r * 3.9, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.18, 1).toFixed(2)})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
+    }
+    function shouldLabel(skill) {
+      if (state.labelMode === 'all') return skill.type !== 'atomic' || stableHash(skill.id) % 5 === 0;
+      if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
+      return skill.type === 'legendary';
+    }
+    function draw() {
+      if (!state.running) return;
+      state.t += 0.006;
+      ctx.clearRect(0, 0, state.width, state.height);
+      const ry = state.t * 0.16 + state.mx * 0.10;
+      const rx = Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
+      const xf = {};
+      state.skills.forEach(skill => {
+        const p0 = state.positions[skill.id];
+        if (!p0) return;
+        xf[skill.id] = rotX(rotY(p0, ry), rx);
+      });
+      state.stars.forEach(star => {
+        const p = rotX(rotY(star, ry), rx);
+        const pr = project(p);
+        if (pr.scale < 0.01) return;
+        ctx.beginPath();
+        ctx.arc(pr.sx, pr.sy, star.size * pr.scale * 1.55, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${(star.alpha * Math.min(pr.scale * 2, 1)).toFixed(2)})`;
+        ctx.fill();
+      });
+      const edges = [];
+      state.skills.forEach(skill => {
+        if (!xf[skill.id]) return;
+        skill.prerequisites.forEach(pid => {
+          if (!xf[pid]) return;
+          edges.push({ from: pid, to: skill.id, type: skill.type, avgZ: (xf[skill.id].z + xf[pid].z) / 2 });
+        });
+      });
+      edges.sort((a,b) => a.avgZ - b.avgZ);
+      edges.forEach(edge => {
+        const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
+        const col = PALETTE[edge.type] || PALETTE.atomic;
+        const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * state.scale) / (860 * state.scale), 0.08), 1);
+        ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy);
+        ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * 0.31).toFixed(2)})`;
+        ctx.lineWidth = edge.type === 'legendary' ? 1.55 : 0.92;
+        ctx.stroke();
+      });
+      const nodes = state.skills.map(skill => ({ skill, z: xf[skill.id] ? xf[skill.id].z : -9999 })).sort((a,b) => a.z - b.z);
+      nodes.forEach(({ skill }) => {
+        const p = xf[skill.id]; if (!p) return;
+        const pr = project(p);
+        const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
+        const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
+        const col = PALETTE[skill.type] || PALETTE.atomic;
+        const baseR = skill.type === 'legendary' ? 12.5 : skill.type === 'composite' ? 6.9 : 3.5;
+        drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * 0.95);
+      });
+      nodes.filter(({ skill }) => shouldLabel(skill)).forEach(({ skill }) => {
+        const p = xf[skill.id]; if (!p) return;
+        const pr = project(p);
+        const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0), 1);
+        if (depthAlpha < 0.22) return;
+        const col = PALETTE[skill.type] || PALETTE.atomic;
+        const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
+        ctx.font = `bold ${Math.max(7, Math.round(size * pr.scale * 1.45))}px Inter,system-ui,sans-serif`;
+        ctx.fillStyle = `rgba(${col.rgb},${(depthAlpha * 0.9).toFixed(2)})`;
+        ctx.textAlign = 'center';
+        ctx.fillText(skill.name, pr.sx, pr.sy + 18 * pr.scale);
+      });
+      state.frame = requestAnimationFrame(draw);
+    }
+
+    function start() {
+      if (state.running) return;
+      state.running = true;
+      draw();
+    }
+
+    function stop() {
+      state.running = false;
+      if (state.frame) cancelAnimationFrame(state.frame);
+      state.frame = null;
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    const pointerTarget = options.pointerTarget || canvas;
+    pointerTarget.addEventListener('mousemove', event => {
+      const rect = canvas.getBoundingClientRect();
+      state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
+      state.my = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+    });
+    if (state.running) draw();
+    return { setSkills, resize, start, stop };
+  }
+
+  const hero = document.getElementById('hero');
+  const trigger = document.querySelector('[data-graph-trigger]');
+  const dialog = document.getElementById('skillGraphDialog');
+  const closeBtn = document.querySelector('[data-graph-close]');
+  const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'legendary', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
+  const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
+    labelMode:'modal', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false
+  });
+
+  function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
+  trigger.addEventListener('mouseenter', () => peek(true));
+  trigger.addEventListener('mouseleave', () => peek(false));
+  trigger.addEventListener('focus', () => peek(true));
+  trigger.addEventListener('blur', () => peek(false));
+  trigger.addEventListener('click', () => {
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    modalGraph.resize();
+    modalGraph.start();
+    peek(false);
+  });
+  function closeDialog() {
+    if (dialog.close) dialog.close();
+    else dialog.removeAttribute('open');
+    modalGraph.stop();
+  }
+  closeBtn.addEventListener('click', closeDialog);
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) closeDialog();
+  });
+  dialog.addEventListener('close', () => modalGraph.stop());
+
+  fetch(GRAPH_JSON_URL)
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(graph => normalizeSkills(graph))
+    .then(skills => { heroGraph.setSkills(skills); modalGraph.setSkills(skills); })
+    .catch(error => {
+      console.warn('Using embedded fallback skill graph:', error);
+      const status = document.querySelector('[data-graph-status]');
+      if (status) status.textContent = 'Using embedded preview graph. Run the page from docs/ to load the full graph.';
+    });
 })();
 </script>
 

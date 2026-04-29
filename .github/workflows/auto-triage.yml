@@ -114,6 +114,9 @@ jobs:
       pull-requests: write
       contents: read
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Request reviewers
       - name: Label and route
         run: |
           if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then

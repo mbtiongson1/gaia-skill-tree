@@ -157,9 +157,39 @@ Use `gaia doctor` after initialization to check the CLI, registry path, config, 
 | `gaia uninstall <contributor/skill>` | Removes an installed named skill. |
 | `gaia embed` | Pre-computes embeddings for all skills. **Strongly recommended** — run once after `pip install -e ".[embeddings]"`, re-run when the graph changes. |
 | `gaia search <query>` | Semantic search across generic and named skills (requires embeddings — see above). |
+| `gaia graph` | Generates `graph/gaia.svg` from the canonical registry and opens it in your browser. Defaults to SVG + open. |
+| `gaia graph -o /tmp/gaia.svg --no-open` | Writes a graph image to a custom path without opening it. |
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
+
+### View the skill graph
+
+Generate and open a static SVG image of the canonical skill graph:
+
+```bash
+gaia graph
+```
+
+Write the SVG somewhere specific:
+
+```bash
+gaia graph -o graph/gaia.svg --no-open
+```
+
+Generate browser-friendly layout JSON instead of SVG:
+
+```bash
+gaia graph --format json -o graph/render/latest.json --no-open
+```
+
+For graph tools such as Gephi or Cytoscape, regenerate the GEXF export:
+
+```bash
+python3 scripts/exportGexf.py
+```
+
+The public Pages experience also mirrors downloadable graph artifacts under `docs/graph/` so the site can offer JSON, GEXF, and SVG downloads.
 
 ### Typical workflow
 
@@ -177,6 +207,16 @@ gaia push
 
 Intake PRs are draft review artifacts. Accepted candidates are promoted later
 into canonical `graph/gaia.json` updates.
+
+### Maintainer hooks
+
+Contributors who edit the canonical graph can install the repo-local hook once:
+
+```bash
+bash scripts/install-git-hooks.sh
+```
+
+The pre-commit hook runs validation, regenerates Markdown projections, exports GEXF, renders `graph/gaia.svg`, mirrors public graph assets into `docs/graph/`, and stages the known generated files whenever staged graph source files change.
 
 ## MCP Server (Agent-Native Integration)
 
