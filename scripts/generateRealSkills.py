@@ -12,7 +12,7 @@ def _escape(value):
 
 
 def _source_by_id(catalog):
-    return {source["id"]: source for source in catalog.get("sources", [])}
+    return {source.get("id", source.get("repo", "")): source for source in catalog.get("sources", [])}
 
 
 def _source_label(source):
@@ -37,24 +37,31 @@ def _render_sources(catalog):
     return "\n".join(rows)
 
 
+def _render_item_card(item, sources):
+    """Render a single item as an HTML card."""
+    source_id = item.get("sourceId", item.get("sourceRepo", ""))
+    source = sources.get(source_id, {})
+    source_url = item.get("detailUrl") or item.get("sourceUrl") or item.get("url") or source.get("url", "")
+    maps_to = item.get("mapsToGaia", [])
+    chips = "".join(f"<span>{_escape(skill)}</span>" for skill in maps_to)
+    path = item.get("path")
+    path_html = f"<p class=\"path\">{_escape(path)}</p>" if path else ""
+    name = item.get("name", item.get("title", ""))
+    desc = item.get("description", "")
+    return (
+        "<article class=\"skill-card\">"
+        f"<h3><a href=\"{_escape(source_url)}\">{_escape(name)}</a></h3>"
+        f"<p>{_escape(desc)}</p>"
+        f"{path_html}"
+        f"<div class=\"chips\">{chips}</div>"
+        "</article>"
+    )
+
+
 def _render_bucket(bucket, sources):
     cards = []
     for item in bucket.get("items", []):
-        source = sources.get(item.get("sourceId"), {})
-        source_url = item.get("detailUrl") or item.get("sourceUrl") or source.get("url", "")
-        maps_to = item.get("mapsToGaia", [])
-        chips = "".join(f"<span>{_escape(skill)}</span>" for skill in maps_to)
-        path = item.get("path")
-        path_html = f"<p class=\"path\">{_escape(path)}</p>" if path else ""
-        cards.append(
-            "<article class=\"skill-card\">"
-            f"<h3><a href=\"{_escape(source_url)}\">{_escape(item.get('name'))}</a></h3>"
-            f"<p class=\"source\">{_escape(_source_label(source))}</p>"
-            f"<p>{_escape(item.get('description'))}</p>"
-            f"{path_html}"
-            f"<div class=\"chips\">{chips}</div>"
-            "</article>"
-        )
+        cards.append(_render_item_card(item, sources))
     return (
         "<section class=\"bucket\">"
         f"<h2>{_escape(bucket.get('name'))}</h2>"
@@ -66,8 +73,16 @@ def _render_bucket(bucket, sources):
 
 def _render_html(catalog):
     sources = _source_by_id(catalog)
-    buckets = "\n".join(_render_bucket(bucket, sources) for bucket in catalog.get("buckets", []))
-    generated_at = _escape(catalog.get("updatedAt", "unknown"))
+
+    # Support both bucket-based and flat-items formats
+    if catalog.get("buckets"):
+        content = "\n".join(_render_bucket(bucket, sources) for bucket in catalog["buckets"])
+    else:
+        items = catalog.get("items", [])
+        cards = "".join(_render_item_card(item, sources) for item in items)
+        content = f"<section class=\"bucket\"><h2>Skills</h2><div class=\"grid\">{cards}</div></section>"
+
+    generated_at = _escape(catalog.get("generatedAt", catalog.get("updatedAt", "unknown")))
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -207,7 +222,7 @@ def _render_html(catalog):
         {_render_sources(catalog)}
       </tbody>
     </table>
-    {buckets}
+    {content}
   </main>
   <footer>Generated from graph/real_skill_catalog.json on {generated_at}. Edit the JSON source, then run python3 scripts/generateProjections.py.</footer>
 </body>
@@ -220,32 +235,38 @@ def _render_markdown(catalog):
     lines = [
         "# Gaia Real Skill Catalog",
         "",
-        "Curated named skills from live SKILL.md ecosystems, grouped into Gaia-friendly buckets for review before promotion into the canonical graph.",
+        "Curated named skills from live SKILL.md ecosystems.",
         "",
         "## Sources",
         "",
-        "| Source | Type | Reported skills | Notes |",
-        "|---|---|---:|---|",
+        "| Source | Description | URL |",
+        "|---|---|---|",
     ]
     for source in catalog.get("sources", []):
-        lines.append(
-            f"| [{source.get('name')}]({source.get('url')}) | {source.get('type')} | "
-            f"{source.get('reportedSkillCount', '')} | {source.get('notes', '')} |"
-        )
+        name = source.get("name", source.get("repo", ""))
+        url = source.get("url", "")
+        desc = source.get("description", source.get("notes", ""))
+        lines.append(f"| {name} | {desc} | {url} |")
 
-    for bucket in catalog.get("buckets", []):
-        lines.extend(["", f"## {bucket.get('name')}", "", bucket.get("summary", ""), ""])
-        for item in bucket.get("items", []):
-            source = sources.get(item.get("sourceId"), {})
-            link = item.get("detailUrl") or item.get("sourceUrl") or source.get("url", "")
+    if catalog.get("buckets"):
+        for bucket in catalog["buckets"]:
+            lines.extend(["", f"## {bucket.get('name')}", "", bucket.get("summary", ""), ""])
+            for item in bucket.get("items", []):
+                source = sources.get(item.get("sourceId"), {})
+                link = item.get("detailUrl") or item.get("sourceUrl") or source.get("url", "")
+                maps_to = ", ".join(f"`{skill}`" for skill in item.get("mapsToGaia", []))
+                lines.append(f"- [{item.get('name')}]({link}) - {item.get('description')} Maps to: {maps_to}.")
+    else:
+        lines.extend(["", "## Items", ""])
+        for item in catalog.get("items", []):
+            link = item.get("url", item.get("detailUrl", ""))
+            name = item.get("name", item.get("title", ""))
+            desc = item.get("description", "")
             maps_to = ", ".join(f"`{skill}`" for skill in item.get("mapsToGaia", []))
-            path = item.get("path")
-            path_text = f" Path: `{path}`." if path else ""
-            lines.append(
-                f"- [{item.get('name')}]({link}) - {item.get('description')} "
-                f"Source: {source.get('name', item.get('sourceId'))}.{path_text} Maps to: {maps_to}."
-            )
-    lines.extend(["", f"*Generated from graph/real_skill_catalog.json on {catalog.get('updatedAt', 'unknown')}.*", ""])
+            lines.append(f"- [{name}]({link}) - {desc} Maps to: {maps_to}.")
+
+    generated_at = catalog.get("generatedAt", catalog.get("updatedAt", "unknown"))
+    lines.extend(["", f"*Generated from graph/real_skill_catalog.json on {generated_at}.*", ""])
     return "\n".join(lines)
 
 
