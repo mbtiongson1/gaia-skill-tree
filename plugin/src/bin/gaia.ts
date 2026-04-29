@@ -54,7 +54,7 @@ try {
 // Prepare environment variables
 const env = {
   ...process.env,
-  PYTHONPATH: [repoRoot, packageRoot, process.env.PYTHONPATH].filter(Boolean).join(':'),
+  PYTHONPATH: [resolve(packageRoot, 'src'), resolve(repoRoot, 'src'), repoRoot, packageRoot, process.env.PYTHONPATH].filter(Boolean).join(':'),
 };
 
 // Spawn Python process with forwarded arguments (no shell for security)

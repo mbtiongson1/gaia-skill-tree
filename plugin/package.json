@@ -10,12 +10,16 @@
   "files": [
     "dist",
     "cli/**/*.py",
+    "gaia_cli/**/*.py",
+    "gaia_cli/data/**/*",
     "README.md"
   ],
   "scripts": {
     "build": "tsc",
     "test": "npm run build && node --test test/*.test.mjs",
     "prepare": "npm run build",
+    "prepack": "rm -rf gaia_cli && cp -R ../src/gaia_cli gaia_cli",
+    "postpack": "rm -rf gaia_cli",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

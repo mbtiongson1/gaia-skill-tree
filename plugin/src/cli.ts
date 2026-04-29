@@ -19,7 +19,7 @@ export async function runGaiaCli(args: string[]): Promise<number> {
 
     const env = {
       ...process.env,
-      PYTHONPATH: [repoRoot, packageRoot, process.env.PYTHONPATH].filter(Boolean).join(':'),
+      PYTHONPATH: [resolve(packageRoot, 'src'), resolve(repoRoot, 'src'), repoRoot, packageRoot, process.env.PYTHONPATH].filter(Boolean).join(':'),
     };
 
     const pythonProcess = spawn('python3', [pythonCliPath, ...args], {
