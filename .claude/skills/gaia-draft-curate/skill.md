@@ -1,7 +1,7 @@
 ---
 name: gaia-draft-curate
 description: Review pending Gaia draft skill intake batches and open draft PRs. Classifies each proposed skill (accept/rename/duplicate/needs-evidence/reject) without touching graph/gaia.json. Optionally triggers a promotion PR for accepted skills. Use when the user asks to "check drafts", "review intake batches", "triage pending skills", or explicitly types /gaia-draft-curate.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # gaia-draft-curate
@@ -20,18 +20,35 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    ```
    Cross-reference with local batch files by `batchId` where possible. List any PRs that have no corresponding local batch (remote-only) and any local batches that have no open PR.
 
-4. **Display review table** — for each batch, show:
+4. **Evidence enrichment** — before displaying the review table, for each proposed skill in the batch:
+
+   a. Search GitHub for concrete implementations:
+   ```bash
+   gh search repos "<proposed-skill-name>" --sort=stars --limit=5
+   gh search repos --topic="<proposed-skill-id>" --sort=stars --limit=5
+   ```
+   b. If repos with >50 stars found, note as "Class B evidence available" with the repo URL.
+
+   c. Query SkillsMP for matching community skills:
+   ```
+   WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
+   ```
+   d. Note any SkillsMP matches as "Class C evidence available".
+
+   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Class B/A evidence should be favored for acceptance.
+
+5. **Display review table** — for each batch, show:
 
    **Batch `<batchId>`** | Source: `<sourceRepo>` | Generated: `<generatedAt>`
 
-   | # | Proposed ID | Name | Type | Similarity hints | Decision |
-   |---|---|---|---|---|---|
-   | 1 | `skill-id` | Skill Name | atomic | `existing-skill` (0.82), `other` (0.61) | _(pending)_ |
+   | # | Proposed ID | Name | Type | Similarity hints | Evidence Available | Decision |
+   |---|---|---|---|---|---|---|
+   | 1 | `skill-id` | Skill Name | atomic | `existing-skill` (0.82), `other` (0.61) | B: github.com/... | _(pending)_ |
    | … |
 
    Also show `knownSkills` count (already in registry — informational only, no action needed).
 
-5. **Collect decisions** — ask the user to classify each proposed skill:
+6. **Collect decisions** — ask the user to classify each proposed skill:
    - `accept` — ready to promote into `graph/gaia.json`
    - `rename <new-id>` — change the ID, then accept
    - `duplicate <existing-id>` — already covered; drop
@@ -40,13 +57,13 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
 
    Present one batch at a time. Do not proceed to the next batch until the current one is fully classified.
 
-6. **Summarise decisions** — after all batches are reviewed, print a final tally:
+7. **Summarise decisions** — after all batches are reviewed, print a final tally:
    - Accepted: N skills (list IDs)
    - Renamed: N skills (old-id → new-id)
    - Held (needs evidence): N (list IDs + missing evidence notes)
    - Dropped (duplicate/reject): N (list IDs)
 
-7. **Offer promotion** — if there are any accepted/renamed skills, ask the user:
+8. **Offer promotion** — if there are any accepted/renamed skills, ask the user:
    > "Promote accepted skills to `graph/gaia.json` now? This will invoke `/gaia-curate` for the accepted batch."
 
    - If **yes**: hand off to the `gaia-curate` workflow starting at step 4, pre-populating all decisions as `accept`. The promotion PR must link back to the originating intake PR(s).
@@ -60,7 +77,7 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
      gh pr create --title "[promote] <slug>" --body "Promotes accepted skills from intake PR #<N>"
      ```
 
-8. **Report** — output a final summary (see Output section).
+9. **Report** — output a final summary (see Output section).
 
 ## When there are no pending drafts
 
