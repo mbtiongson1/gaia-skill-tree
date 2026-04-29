@@ -30,8 +30,10 @@
 | ○ Evaluate Output | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Execute Bash | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Extract Entities | Intrinsic Skill | I · Awakened | Common | Provisional |
+| ○ Few-Shot Learning | Intrinsic Skill | IV · Hardened | Common | Provisional |
 | ○ Format Output | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | V · Transcendent | Divine | Provisional |
+| ◇ Function Calling | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Generate SQL | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Generate Test | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Generate Text | Intrinsic Skill | 0 · Basic | Common | Provisional |
@@ -51,6 +53,7 @@
 | ○ Parse PDF | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◇ Plan and Execute | Extra Skill | IV · Hardened | Rare | Provisional |
 | ○ Plan and Decompose | Intrinsic Skill | I · Awakened | Common | Provisional |
+| ◇ Prompt Optimization | Extra Skill | IV · Hardened | Uncommon | Provisional |
 | ○ Question Answer | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◇ RAG Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Rank | Intrinsic Skill | I · Awakened | Common | Provisional |
@@ -64,6 +67,7 @@
 | ○ Route Intent | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ○ Score Relevance | Intrinsic Skill | I · Awakened | Common | Provisional |
+| ○ Self-Consistency | Intrinsic Skill | IV · Hardened | Rare | Provisional |
 | ○ Self-Critique | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
 | ○ Sentiment Analysis | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ○ Speech to Text | Intrinsic Skill | II · Named | Common | Provisional |
@@ -72,10 +76,12 @@
 | ○ Text to Speech | Intrinsic Skill | II · Named | Common | Provisional |
 | ◇ Text-to-SQL Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Tokenize | Intrinsic Skill | 0 · Basic | Common | Provisional |
+| ◇ Tool Creation | Extra Skill | IV · Hardened | Rare | Provisional |
 | ○ Tool Select | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Tool Use | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
 | ○ Translate | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◇ Translation Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
+| ◇ Tree of Thought | Extra Skill | IV · Hardened | Rare | Provisional |
 | ◇ Voice Agent | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◇ Web Scrape | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Web Search | Intrinsic Skill | I · Awakened | Common | Provisional |
