@@ -16,8 +16,10 @@
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V · Transcendent | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
 | ◇ Function Calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III · Evolved | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV · Hardened | Requires research output as input context. |
+| ◇ Grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | III · Evolved |  |
 | ◇ Knowledge Graph Construction | Extra Skill | Extract Entities, Logical Inference | III · Evolved |  |
 | ◇ Knowledge Harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV · Hardened |  |
+| ◇ Multi-Agent Debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV · Hardened |  |
 | ◆ Grand Conductor: Multi-Agent Orchestration | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V · Transcendent | Requires extensive multi-system validation before level advancement. |
 | ◇ Multimodal Reasoning | Extra Skill | Image Caption, Question Answer, Logical Inference | III · Evolved | Requires vision-language model capability. |
 | ◇ Plan and Execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | IV · Hardened |  |

@@ -14,6 +14,7 @@
 | ○ Cite Sources | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Classify | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ○ Code Execution | Intrinsic Skill | II · Named | Common | Provisional |
+| ○ Code Explain | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Code Generation | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◇ Code Review Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Computer Use | Intrinsic Skill | II · Named | Rare | Provisional |
@@ -38,6 +39,7 @@
 | ○ Generate Test | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Generate Text | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◇ Ghostwrite | Extra Skill | IV · Hardened | Rare | Provisional |
+| ◇ Grounding | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Hypothesis Generation | Intrinsic Skill | II · Named | Rare | Provisional |
 | ○ Image Caption | Intrinsic Skill | II · Named | Uncommon | Provisional |
 | ○ Image Generate | Intrinsic Skill | II · Named | Uncommon | Provisional |
@@ -46,8 +48,11 @@
 | ○ Logical Inference | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
 | ○ Math Reason | Intrinsic Skill | II · Named | Uncommon | Provisional |
 | ○ Memory Manage | Intrinsic Skill | II · Named | Uncommon | Provisional |
+| ◇ Multi-Agent Debate | Extra Skill | IV · Hardened | Rare | Provisional |
 | ◆ Grand Conductor: Multi-Agent Orchestration | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ◇ Multimodal Reasoning | Extra Skill | III · Evolved | Rare | Provisional |
+| ○ Object Detection | Intrinsic Skill | II · Named | Uncommon | Provisional |
+| ○ OCR | Intrinsic Skill | II · Named | Uncommon | Provisional |
 | ○ Parse HTML | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Parse JSON | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Parse PDF | Intrinsic Skill | I · Awakened | Common | Provisional |
@@ -64,6 +69,7 @@
 | ◇ Registry Curation | Extra Skill | IV · Hardened | Rare | Provisional |
 | ◇ Research | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Retrieve | Intrinsic Skill | I · Awakened | Common | Provisional |
+| ○ Reward Modeling | Intrinsic Skill | II · Named | Rare | Provisional |
 | ○ Route Intent | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ○ Score Relevance | Intrinsic Skill | I · Awakened | Common | Provisional |
