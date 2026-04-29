@@ -2,14 +2,16 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
-
-from plugin.cli.push import build_skill_batch
 
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI_PATH = os.path.join(REPO_ROOT, "plugin", "cli", "main.py")
+sys.path.insert(0, REPO_ROOT)
+
+from plugin.cli.push import build_skill_batch
 
 
 class TestGaiaPush(unittest.TestCase):
