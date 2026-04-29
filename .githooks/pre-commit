@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+changed="$(git diff --cached --name-only)"
+if ! printf '%s\n' "$changed" | grep -Eq '^(graph/gaia\.json|graph/named/|intake/skill-batches/|scripts/generateProjections\.py|scripts/exportGexf\.py|scripts/renderGraphSvg\.py)'; then
+  exit 0
+fi
+
+generated_paths=(
+  registry.md
+  tree.md
+  combinations.md
+  skills
+  graph/gaia.gexf
+  graph/gaia.svg
+  graph/render
+  docs/graph/gaia.json
+  docs/graph/gaia.gexf
+  docs/graph/gaia.svg
+  docs/tree.md
+)
+
+unstaged_generated="$(git diff --name-only -- "${generated_paths[@]}" || true)"
+preexisting_untracked_generated="$(git ls-files --others --exclude-standard -- "${generated_paths[@]}" || true)"
+if [ -n "$unstaged_generated" ] || [ -n "$preexisting_untracked_generated" ]; then
+  printf 'Gaia pre-commit: generated files already have unstaged or untracked changes.\n' >&2
+  printf 'Review/stage or discard them before committing so the hook does not sweep unrelated work into the commit.\n' >&2
+  if [ -n "$unstaged_generated" ]; then
+    printf '\nUnstaged tracked generated files:\n%s\n' "$unstaged_generated" >&2
+  fi
+  if [ -n "$preexisting_untracked_generated" ]; then
+    printf '\nUntracked generated files:\n%s\n' "$preexisting_untracked_generated" >&2
+  fi
+  exit 1
+fi
+
+printf 'Gaia pre-commit: validating and regenerating graph artifacts...\n'
+python3 scripts/validate.py
+python3 scripts/generateProjections.py
+python3 scripts/exportGexf.py
+python3 scripts/renderGraphSvg.py --format svg --output graph/gaia.svg
+python3 scripts/renderGraphSvg.py --format json --output graph/render/latest.json
+python3 scripts/syncDocsGraphAssets.py
+
+git add "${generated_paths[@]}" 2>/dev/null || true
+
+printf 'Gaia pre-commit: generated artifacts refreshed and staged.\n'
