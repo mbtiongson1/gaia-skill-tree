@@ -111,29 +111,33 @@ Then `gaia` works from any directory — no path prefix needed.
 ### Project setup
 
 Run this inside the project you want Gaia to scan:
-
 ```bash
-gaia init
+gaia init --user your-github-username --scan AGENTS.md --scan scripts
+```
+
+For the previous non-interactive defaults, use:
+```bash
+gaia init --yes
 ```
 
 This creates `.gaia/config.json`:
-
 ```json
 {
   "gaiaUser": "your-github-username",
   "gaiaRegistryRef": "https://github.com/mbtiongson1/gaia-skill-tree",
-  "scanPaths": ["scripts", "plugin"],
+  "scanPaths": ["AGENTS.md", "scripts"],
   "autoPromptCombinations": false
 }
 ```
 
-Update `gaiaUser` and `scanPaths` for your project before scanning.
+Use `gaia doctor` after initialization to check the CLI, registry path, config, skill tree, embeddings, and scan paths.
 
 ### Commands
 
 | Command | What it does |
 |---|---|
-| `gaia init` | Creates `.gaia/config.json` in the current project. |
+| `gaia init` | Creates `.gaia/config.json` in the current project. Supports `--user`, `--registry-ref`, and repeated `--scan` flags. |
+| `gaia doctor` | Checks CLI/config/registry health and reports missing setup pieces. |
 | `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
 | `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
 | `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
