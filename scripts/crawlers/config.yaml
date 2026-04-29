@@ -56,3 +56,39 @@ pr_settings:
   labels:
     - "bot-proposal"
   stale_days: 30
+
+  github:
+    topics:
+      - "web-scraping"
+      - "llm-agent"
+      - "rag"
+      - "text-embedding"
+      - "code-generation"
+      - "browser-automation"
+      - "workflow-orchestration"
+      - "prompt-engineering"
+      - "vector-database"
+      - "document-parsing"
+      - "ocr"
+      - "speech-recognition"
+      - "image-generation"
+      - "multi-agent"
+      - "tool-use"
+    min_stars: 50
+    max_age_days: 365
+    batch_size: 30
+
+  skillsmp:
+    base_url: "https://skillsmp.com/api/v1"
+    daily_budget: 50
+    reserve_requests: 10
+    min_stars: 3
+    batch_size: 40
+
+  papers:
+    sources:
+      - "semantic_scholar"
+      - "arxiv"
+    min_citations: 10
+    max_age_years: 3
+    batch_size: 25

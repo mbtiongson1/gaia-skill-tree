@@ -1,5 +1,71 @@
 """Maps external marketplace entries to Gaia skill IDs using keyword matching."""
 
+GITHUB_TOPIC_TO_SKILL = {
+    "web-scraping": "web-scrape",
+    "web-crawler": "web-scrape",
+    "web-scraper": "web-scrape",
+    "llm-agent": "generate-text",
+    "llm": "generate-text",
+    "language-model": "generate-text",
+    "text-generation": "generate-text",
+    "rag": "rag-pipeline",
+    "retrieval-augmented-generation": "rag-pipeline",
+    "text-embedding": "embed-text",
+    "embeddings": "embed-text",
+    "vector-embedding": "embed-text",
+    "sentence-embeddings": "embed-text",
+    "code-generation": "code-generation",
+    "code-gen": "code-generation",
+    "codegen": "code-generation",
+    "browser-automation": "web-scrape",
+    "puppeteer": "web-scrape",
+    "playwright": "web-scrape",
+    "workflow-orchestration": "plan-decompose",
+    "task-orchestration": "plan-decompose",
+    "prompt-engineering": "generate-text",
+    "vector-database": "retrieve",
+    "vector-search": "retrieve",
+    "similarity-search": "retrieve",
+    "document-parsing": "chunk-document",
+    "pdf-parser": "chunk-document",
+    "document-loader": "chunk-document",
+    "ocr": "ocr",
+    "optical-character-recognition": "ocr",
+    "speech-recognition": "speech-to-text",
+    "speech-to-text": "speech-to-text",
+    "asr": "speech-to-text",
+    "image-generation": "image-caption",
+    "text-to-image": "image-caption",
+    "multi-agent": "multi-agent-debate",
+    "multi-agent-system": "multi-agent-debate",
+    "tool-use": "tool-select",
+    "function-calling": "tool-select",
+    "tool-calling": "tool-select",
+    "named-entity-recognition": "extract-entities",
+    "ner": "extract-entities",
+    "text-classification": "classify",
+    "sentiment-analysis": "classify",
+    "text-summarization": "summarize",
+    "summarization": "summarize",
+    "object-detection": "object-detection",
+    "image-classification": "object-detection",
+    "reward-model": "reward-modeling",
+    "rlhf": "reward-modeling",
+    "grounding": "grounding",
+    "code-explanation": "code-explain",
+}
+
+
+def map_github_topics(topics: list[str]) -> list[str]:
+    """Map GitHub repo topics directly to Gaia skill IDs."""
+    detected = set()
+    for topic in topics:
+        normalized = topic.lower().strip()
+        if normalized in GITHUB_TOPIC_TO_SKILL:
+            detected.add(GITHUB_TOPIC_TO_SKILL[normalized])
+    return list(detected)
+
+
 KEYWORD_TO_SKILL = {
     "web scraping": "web-scrape",
     "scraper": "web-scrape",

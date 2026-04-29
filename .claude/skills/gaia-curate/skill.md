@@ -1,7 +1,7 @@
 ---
 name: gaia-curate
 description: Expand the Gaia skill registry with new popular AI agent skills, fully evidenced and validated, then push a PR. Use this skill when the user asks to "update the tree", "add new skills to Gaia", "curate the registry", "expand the skill graph", or explicitly types /gaia-curate.
-version: 1.3.0
+version: 1.4.0
 ---
 
 # gaia-curate
@@ -11,7 +11,39 @@ Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent ski
 ## What this skill does
 
 1. **Read the current graph** — load `graph/gaia.json` to see every existing skill ID so nothing is duplicated.
-2. **Research** — identify the most impactful AI agent capabilities not yet in the registry. Prioritise skills with strong public evidence (arXiv papers, reproducible GitHub repos).
+2. **Research** — for each candidate skill, gather concrete evidence using ALL of the following channels (in order of priority):
+
+   **2a. GitHub search (50% of research effort — Class B evidence):**
+   Search for actual repos implementing the skill:
+   ```bash
+   gh search repos --topic="<skill-topic>" --sort=stars --limit=20
+   gh search repos "<skill-name> agent" --sort=stars --limit=10
+   ```
+   Qualify repos: stars > 50, last commit < 1 year, has README + license. Use the repo URL as Class B evidence. Prefer repos with CI, tests, and clear documentation.
+
+   **2b. SkillsMP search (10% — Class C evidence):**
+   Query the SkillsMP public API for related community skills:
+   ```
+   WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
+   ```
+   Use matching SkillsMP entries as supplementary Class C evidence. Rate limit: 50 requests/day unauthenticated.
+
+   **2c. Paper search (20% — Class A evidence):**
+   For skills targeting Level II+ or those with only Class C evidence:
+   ```
+   WebSearch: "<skill-name> arxiv 2024 2025 2026 agent benchmark"
+   WebSearch: "<skill-name> survey" site:arxiv.org
+   ```
+   Use arXiv abs URLs as Class A evidence. Only include papers with clear relevance and measurable benchmarks.
+
+   **2d. Existing tree audit (20%):**
+   Before proposing new skills, scan `graph/gaia.json` for:
+   - Skills at level 0/I with only Class C evidence (upgrade candidates)
+   - Skills with `status: "provisional"` that could be validated with better evidence
+   - Skills at level II+ missing Class A evidence
+
+   Prioritize upgrading these with B/A evidence before proposing entirely new skills. This ensures the tree grows stronger, not just wider.
+
 3. **Design the batch** — for each candidate skill determine:
    - Type: `atomic` (no prerequisites) / `composite` (≥2 prereqs) / `legendary` (≥3 prereqs + 3 Class A/B sources)
    - Level: target **IV** (Proficient) minimum — requires at least 1× Class B or A evidence
