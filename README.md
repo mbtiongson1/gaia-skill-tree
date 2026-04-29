@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
-🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◼ Basic &nbsp;·&nbsp; 🔵 Awakened &nbsp;·&nbsp; 🩵 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🩷 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
+🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◼ Basic &nbsp;·&nbsp; 🔵 Awakened &nbsp;·&nbsp; 🔹 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🟪 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
 
 ---
 
@@ -68,9 +68,9 @@ Skills level up through evidence, not declaration:
 |---|---|---|---|
 | `0` | ◼ **Basic** | None | Universal LLM primitive — any capable model does this by default |
 | `I` | 🔵 **Awakened** | None | Foundation tier — catalogued agent capability |
-| `II` | 🩵 **Named** | Class C | First confirmed demonstration |
+| `II` | 🔹 **Named** | Class C | First confirmed demonstration |
 | `III` | 🟣 **Evolved** | Class B | Reproducible, fully documented |
-| `IV` | 🩷 **Hardened** | Class B or A | Failure modes known; battle-tested |
+| `IV` | 🟪 **Hardened** | Class B or A | Failure modes known; battle-tested |
 | `V` | 🟡 **Transcendent** | Class B or A | Composable and self-improving |
 | `VI` | ⭐ **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
