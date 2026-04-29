@@ -6,7 +6,7 @@ import json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 try:
-    from plugin.cli.scanner import scan_repo, load_config
+    from plugin.cli.scanner import scan_repo, scan_repo_detailed, load_config
     from plugin.cli.resolver import resolve_skills
     from plugin.cli.combinator import get_combinations
     from plugin.cli.treeManager import load_tree, save_tree, show_status, show_tree
@@ -17,7 +17,7 @@ try:
     from plugin.cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
     from plugin.cli.install import install_skill, sync_skills, uninstall_skill, list_installed
 except ModuleNotFoundError:
-    from cli.scanner import scan_repo, load_config
+    from cli.scanner import scan_repo, scan_repo_detailed, load_config
     from cli.resolver import resolve_skills
     from cli.combinator import get_combinations
     from cli.treeManager import load_tree, save_tree, show_status, show_tree
@@ -28,6 +28,9 @@ except ModuleNotFoundError:
     from cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
     from cli.install import install_skill, sync_skills, uninstall_skill, list_installed
 
+DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
+
+
 def init_command(args):
     config_dir = '.gaia'
     os.makedirs(config_dir, exist_ok=True)
@@ -35,15 +38,18 @@ def init_command(args):
     if os.path.exists(config_path):
         print("Gaia is already initialized in this repository.")
         return
+
+    scan_paths = args.scan or ["scripts", "plugin"]
     config = {
-        "gaiaUser": "gaiabot",
-        "gaiaRegistryRef": "https://github.com/gaia-registry/gaia",
-        "scanPaths": ["scripts", "plugin"],
-        "autoPromptCombinations": False
+        "gaiaUser": args.user or "gaiabot",
+        "gaiaRegistryRef": args.registry_ref or DEFAULT_REGISTRY_REF,
+        "scanPaths": scan_paths,
+        "autoPromptCombinations": args.auto_prompt_combinations,
     }
     with open(config_path, 'w') as f:
         json.dump(config, f, indent=2)
     print(f"Initialized Gaia configuration at {config_path}")
+
 
 def scan_command(args):
     config = load_config()
@@ -51,11 +57,21 @@ def scan_command(args):
         print("Gaia not initialized. Run `gaia init` first.")
         return
     print("Scanning repository...")
-    raw_tokens = scan_repo()
+    scan_result = scan_repo_detailed()
+    raw_tokens = scan_result["tokens"]
     resolved = resolve_skills(raw_tokens, registry_path=os.path.join(args.registry, 'graph/gaia.json'))
-    print(f"Found {len(resolved)} skills referenced in the repository.")
+    print(
+        f"Scanned {scan_result['files_scanned']} file(s) across "
+        f"{len(scan_result['paths_found'])} configured path(s)."
+    )
+    if scan_result["paths_missing"]:
+        print("Missing scan paths: " + ", ".join(scan_result["paths_missing"]))
+    print(f"Found {scan_result['candidate_count']} candidate token(s).")
+    print(f"Matched {len(resolved)} canonical skill(s).")
     if resolved:
         print(", ".join(resolved))
+    else:
+        print('Tip: try `gaia search "code review"` or expand scanPaths.')
     username = config.get('gaiaUser')
     tree = load_tree(username, registry_path=args.registry)
     if tree:
@@ -74,8 +90,41 @@ def status_command(args):
     if not config:
         print("Gaia not initialized.")
         return
-    tree = load_tree(config.get('gaiaUser'), registry_path=args.registry)
+    username = config.get('gaiaUser')
+    tree = load_tree(username, registry_path=args.registry)
+    if not tree:
+        print(f'No skill tree found for user "{username}".')
+        print("Next steps:")
+        print("  gaia scan")
+        print("  gaia push --dry-run")
+        print("  gaia push --no-pr")
+        print(f"Or create users/{username}/skill-tree.json in the registry.")
+        return
     show_status(tree)
+
+
+def doctor_command(args):
+    config_path = os.path.join('.gaia', 'config.json')
+    config = load_config()
+    registry_path = os.path.abspath(args.registry)
+    print("Gaia CLI: OK")
+    print(f"Registry path: {args.registry}")
+    print(f"Registry graph: {'found' if os.path.exists(os.path.join(registry_path, 'graph', 'gaia.json')) else 'missing'}")
+    print(f"Config: {config_path if os.path.exists(config_path) else 'missing'}")
+    if not config:
+        print("User: unknown")
+        print("Skill tree: unknown")
+        return
+
+    username = config.get('gaiaUser')
+    print(f"User: {username}")
+    tree_path = os.path.join(registry_path, 'users', username or '', 'skill-tree.json')
+    print(f"Skill tree: {'found' if os.path.exists(tree_path) else 'missing'}")
+    embeddings_path = os.path.join(registry_path, 'graph', 'embeddings.json')
+    print(f"Embeddings: {'found' if os.path.exists(embeddings_path) else 'missing'}")
+    print("Scan paths:")
+    for path in config.get('scanPaths', []):
+        print(f"  - {path} {'exists' if os.path.exists(path) else 'missing'}")
 
 def tree_command(args):
     config = load_config()
@@ -114,18 +163,57 @@ def fuse_command(args):
     save_tree(username, tree, registry_path=args.registry)
     open_pr(username, tree, candidate_result=target)
 
+_EMBEDDINGS_INSTALL_STEPS = """\
+
+  ╔════════════════════════════════════════════════════════════════╗
+  ║  Semantic search requires the embeddings package.             ║
+  ╚════════════════════════════════════════════════════════════════╝
+
+  Step 1 — Install the embeddings library:
+            pip install "gaia-cli[embeddings]"
+
+  Step 2 — Generate embeddings (run once, ~30 seconds):
+            gaia embed
+
+  Step 3 — Search:
+            gaia search "<your query>"
+
+  Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
+"""
+
+_EMBEDDINGS_MISSING_STEPS = """\
+
+  ╔════════════════════════════════════════════════════════════════╗
+  ║  Embeddings have not been generated yet.                      ║
+  ╚════════════════════════════════════════════════════════════════╝
+
+  Generate them now (run once from the registry root, ~30 seconds):
+    gaia embed
+
+  Then retry:
+    gaia search "{query}"
+
+  Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
+"""
+
+
 def embed_command(args):
+    try:
+        import sentence_transformers  # noqa: F401
+    except ImportError:
+        print(_EMBEDDINGS_INSTALL_STEPS)
+        sys.exit(1)
     generate_embeddings(registry_path=args.registry)
 
 def search_command(args):
     embeddings_path = os.path.join(args.registry, 'graph', 'embeddings.json')
     try:
         results = semantic_search(args.query, embeddings_path, top_k=args.top_k)
-    except FileNotFoundError as e:
-        print(str(e))
+    except FileNotFoundError:
+        print(_EMBEDDINGS_MISSING_STEPS.format(query=args.query))
         return
-    except ImportError as e:
-        print(str(e))
+    except ImportError:
+        print(_EMBEDDINGS_INSTALL_STEPS)
         return
     if not results:
         print("No results found.")
@@ -222,9 +310,19 @@ def main():
     parser = argparse.ArgumentParser(prog="gaia", description="Gaia Plugin CLI")
     parser.add_argument('--registry', default=".", help="Path to local Gaia registry clone for testing")
     subparsers = parser.add_subparsers(dest='command')
-    subparsers.add_parser('init')
+    init_parser = subparsers.add_parser('init')
+    init_parser.add_argument('--user', help='Gaia username to write into .gaia/config.json')
+    init_parser.add_argument('--registry-ref', help='Gaia registry URL to write into .gaia/config.json')
+    init_parser.add_argument('--scan', action='append', help='Path to scan; repeat for multiple paths')
+    init_parser.add_argument('--yes', action='store_true', help='Use non-interactive defaults')
+    init_parser.add_argument(
+        '--auto-prompt-combinations',
+        action='store_true',
+        help='Enable automatic prompts for detected skill combinations',
+    )
     subparsers.add_parser('scan')
     subparsers.add_parser('status')
+    subparsers.add_parser('doctor')
     subparsers.add_parser('tree')
     fuse_parser = subparsers.add_parser('fuse')
     fuse_parser.add_argument('skillId', help="ID of the pending skill to fuse")
@@ -264,6 +362,8 @@ def main():
         scan_command(args)
     elif args.command == 'status':
         status_command(args)
+    elif args.command == 'doctor':
+        doctor_command(args)
     elif args.command == 'tree':
         tree_command(args)
     elif args.command == 'fuse':

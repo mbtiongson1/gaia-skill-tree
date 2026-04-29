@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaia — AI Agent Skill Registry</title>
+<style>
+  :root {
+    --atomic:   #38bdf8;
+    --composite:#a78bfa;
+    --legendary:#fbbf24;
+    --bg:       #030712;
+    --surface:  #0f172a;
+    --border:   #1e293b;
+    --text:     #e2e8f0;
+    --muted:    #64748b;
+    --code-bg:  #0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(3,7,18,.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{
+    font-size:1.15rem;font-weight:700;letter-spacing:.05em;
+    background:linear-gradient(90deg,var(--atomic),var(--composite));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  nav ul{list-style:none;display:flex;gap:2rem}
+  nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+  nav a:hover{color:var(--text)}
+  /* ── HERO ── */
+  #hero{
+    position:relative;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:6rem 1.5rem 3rem;
+    overflow:hidden;
+  }
+  #canvas3d{
+    position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;opacity:.9;
+  }
+  .hero-content{position:relative;z-index:2;max-width:700px}
+  .hero-eyebrow{
+    display:inline-block;margin-bottom:1.2rem;
+    font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--atomic);border:1px solid var(--atomic);
+    padding:.3rem .9rem;border-radius:999px;
+    background:rgba(56,189,248,.08);
+  }
+  h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem}
+  h1 span{
+    background:linear-gradient(135deg,var(--atomic) 0%,var(--composite) 50%,var(--legendary) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{font-size:1.15rem;color:var(--muted);max-width:540px;margin:0 auto 2.4rem}
+  .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{
+    padding:.75rem 1.8rem;border-radius:8px;font-size:.95rem;font-weight:600;
+    text-decoration:none;transition:all .2s;cursor:pointer;border:none;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    color:#fff;box-shadow:0 0 20px rgba(56,189,248,.3);
+  }
+  .btn-primary:hover{box-shadow:0 0 32px rgba(56,189,248,.5);transform:translateY(-1px)}
+  .btn-ghost{
+    background:transparent;color:var(--text);
+    border:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:var(--atomic);color:var(--atomic)}
+  .scroll-hint{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    color:var(--muted);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  .scroll-hint svg{width:20px;height:20px;stroke:var(--muted)}
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+  /* ── SECTIONS ── */
+  section{padding:5rem 1.5rem;max-width:1000px;margin:0 auto}
+  h2{
+    font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:.5rem;
+    background:linear-gradient(90deg,var(--text) 60%,var(--muted));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .section-sub{color:var(--muted);margin-bottom:2.5rem;font-size:1rem}
+  /* ── TIER CARDS ── */
+  .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+  .tier-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.5rem;transition:transform .2s,box-shadow .2s;
+    position:relative;overflow:hidden;
+  }
+  .tier-card::before{
+    content:'';position:absolute;inset:0;border-radius:14px;
+    background:radial-gradient(ellipse at top left,var(--card-glow,.2) 0%,transparent 70%);
+    opacity:.35;pointer-events:none;
+  }
+  .tier-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+  .tier-icon{font-size:2rem;margin-bottom:.8rem}
+  .tier-badge{
+    display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+    padding:.25rem .7rem;border-radius:999px;margin-bottom:.8rem;
+  }
+  .tier-name{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+  .tier-desc{font-size:.875rem;color:var(--muted)}
+  .atomic  {--card-glow:rgba(56,189,248,.4)}
+  .composite{--card-glow:rgba(167,139,250,.4)}
+  .legendary{--card-glow:rgba(251,191,36,.4)}
+  .badge-atomic  {background:rgba(56,189,248,.15);color:var(--atomic);border:1px solid rgba(56,189,248,.3)}
+  .badge-composite{background:rgba(167,139,250,.15);color:var(--composite);border:1px solid rgba(167,139,250,.3)}
+  .badge-legendary{background:rgba(251,191,36,.15);color:var(--legendary);border:1px solid rgba(251,191,36,.3)}
+  /* ── STEPS ── */
+  .steps{display:flex;flex-direction:column;gap:1.5rem}
+  .step{
+    display:grid;grid-template-columns:56px 1fr;gap:1.2rem;align-items:start;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.5rem;transition:border-color .2s;
+  }
+  .step:hover{border-color:var(--atomic)}
+  .step-num{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:1rem;flex-shrink:0;
+    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    color:#fff;box-shadow:0 0 16px rgba(56,189,248,.35);
+  }
+  .step h3{font-size:1.05rem;font-weight:700;margin-bottom:.3rem}
+  .step p{font-size:.9rem;color:var(--muted);margin-bottom:.8rem}
+  pre{
+    background:var(--code-bg);border:1px solid var(--border);
+    border-radius:8px;padding:1rem 1.2rem;overflow-x:auto;
+    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.83rem;line-height:1.6;color:#94a3b8;
+  }
+  .comment{color:#4b6378}
+  .cmd{color:#38bdf8}
+  .str{color:#86efac}
+  .kw{color:#a78bfa}
+  /* ── RANK TABLE ── */
+  .rank-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:rgba(56,189,248,.06)}
+  th,td{padding:.85rem 1.1rem;text-align:left;font-size:.875rem;border-bottom:1px solid var(--border)}
+  th{font-weight:700;color:var(--text);letter-spacing:.04em}
+  td{color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{color:var(--text);background:rgba(255,255,255,.025)}
+  .rank-badge{
+    display:inline-block;padding:.2rem .6rem;border-radius:999px;
+    font-size:.75rem;font-weight:700;
+  }
+  /* ── WORKFLOW ── */
+  .flow{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .flow-node{
+    background:var(--surface);border:1px solid var(--border);
+    padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;
+  }
+  .flow-arrow{color:var(--atomic);font-size:1.2rem}
+  /* ── INSTALL CALLOUT ── */
+  .callout{
+    background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(167,139,250,.08));
+    border:1px solid rgba(167,139,250,.25);border-radius:14px;
+    padding:1.8rem;margin:2rem 0;
+  }
+  .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--composite)}
+  .callout p{font-size:.9rem;color:var(--muted)}
+  /* ── GLOSSARY ── */
+  .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+  .gloss-item{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:1rem 1.2rem;
+  }
+  .gloss-term{font-weight:700;font-size:.9rem;color:var(--atomic);margin-bottom:.25rem}
+  .gloss-def{font-size:.82rem;color:var(--muted)}
+  /* ── FOOTER ── */
+  footer{
+    text-align:center;padding:3rem 1.5rem;
+    border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;
+  }
+  footer a{color:var(--atomic);text-decoration:none}
+  /* ── DIVIDER ── */
+  .divider{border:none;border-top:1px solid var(--border);margin:0}
+  /* ── ANIMATE ON SCROLL ── */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+  .reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <span class="nav-logo">◆ GAIA</span>
+  <ul>
+    <li><a href="#what">What</a></li>
+    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#start">Get Started</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#ranks">Ranks</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <canvas id="canvas3d"></canvas>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Open Skill Graph for AI Agents</span>
+    <h1>Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
+    <p class="hero-sub">
+      Gaia maps AI agent skills — from primitive building blocks to legendary
+      emergent capabilities — into an evidence-backed, versioned graph
+      anyone can contribute to.
+    </p>
+    <div class="hero-cta">
+      <a href="#start" class="btn btn-primary">Get Started →</a>
+      <a href="https://github.com/mbtiongson1/gaia-skill-tree" class="btn btn-ghost" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── WHAT IS GAIA ─── -->
+<section id="what" class="reveal">
+  <h2>What is Gaia?</h2>
+  <p class="section-sub">Think of it as a Pokédex for AI agent abilities — but open, evidence-backed, and community-owned.</p>
+
+  <div class="tier-grid">
+    <div class="tier-card atomic">
+      <div class="tier-icon">○</div>
+      <span class="tier-badge badge-atomic">Intrinsic</span>
+      <div class="tier-name">Atomic Skills</div>
+      <div class="tier-desc">The genome of every agent. Primitive, indivisible capabilities — <em>Tokenize</em>, <em>Retrieve</em>, <em>Classify</em>, <em>Embed Text</em>.</div>
+    </div>
+    <div class="tier-card composite">
+      <div class="tier-icon">◇</div>
+      <span class="tier-badge badge-composite">Extra Skill</span>
+      <div class="tier-name">Composite Skills</div>
+      <div class="tier-desc">Emerge when 2+ atomics combine — <em>RAG Pipeline</em>, <em>Autonomous Debug</em>, <em>Research</em>. More than the sum of their parts.</div>
+    </div>
+    <div class="tier-card legendary">
+      <div class="tier-icon">◆</div>
+      <span class="tier-badge badge-legendary">Ultimate Skill</span>
+      <div class="tier-name">Legendary Skills</div>
+      <div class="tier-desc">High-complexity emergent capabilities found in &lt;1% of agents — <em>Autonomous Research Agent</em>, <em>Full-Stack Developer</em>.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── RANKS ─── -->
+<section id="ranks" class="reveal">
+  <h2>The Rank System</h2>
+  <p class="section-sub">Skills level up through evidence, not declaration.</p>
+
+  <div class="rank-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span></td>
+          <td><strong>Awakened</strong></td><td>None</td>
+          <td>Catalogued and available — the foundation tier</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(99,202,183,.12);color:#63cab7">II</span></td>
+          <td><strong>Named</strong></td><td>Class C</td>
+          <td>First confirmed demonstration by a real contributor</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span></td>
+          <td><strong>Evolved</strong></td><td>Class B</td>
+          <td>Reproducible, fully documented</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span></td>
+          <td><strong>Transcendent</strong></td><td>Class B or A</td>
+          <td>Failure modes known; battle-tested</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span></td>
+          <td><strong>Transcendent</strong></td><td>Class B or A</td>
+          <td>Composable and self-improving</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(251,191,36,.2);color:#fbbf24">VI ★</span></td>
+          <td><strong>Transcendent ★</strong></td><td>Class A</td>
+          <td>Apex — peer-reviewed, named to the agent who unlocked it</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── GET STARTED ─── -->
+<section id="start" class="reveal">
+  <h2>Get Started</h2>
+  <p class="section-sub">Five steps from zero to your first skill scan.</p>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Clone the registry</h3>
+        <p>Grab your local copy of the canonical skill graph.</p>
+        <pre><span class="cmd">git clone</span> <span class="str">https://github.com/mbtiongson1/gaia-skill-tree.git</span>
+<span class="cmd">cd</span> gaia-skill-tree</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Install the CLI</h3>
+        <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
+        <pre><span class="comment"># Core install</span>
+<span class="cmd">pip install</span> -e .
+
+<span class="comment"># Strongly recommended — enables semantic search</span>
+<span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span>          <span class="comment"># ~30 sec, run once</span></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Initialize your project</h3>
+        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> config file.</p>
+        <pre><span class="cmd">gaia init</span>
+<span class="comment"># Edit .gaia/config.json — set your GitHub username</span></pre>
+        <pre>{
+  <span class="str">"gaiaUser"</span>: <span class="str">"your-github-username"</span>,
+  <span class="str">"scanPaths"</span>: [<span class="str">"src"</span>, <span class="str">"scripts"</span>]
+}</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Scan your repo</h3>
+        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion opportunities.</p>
+        <pre><span class="cmd">gaia scan</span>
+<span class="comment"># Prints detected skills and combination candidates</span></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>Submit a batch for review</h3>
+        <p>Preview what would be submitted with <code>--dry-run</code>, then push to create an intake record.</p>
+        <pre><span class="cmd">gaia push --dry-run</span>   <span class="comment"># preview the JSON</span>
+<span class="cmd">gaia push</span>             <span class="comment"># write intake + open a PR</span></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">💡 Tip — semantic search</div>
+    <p>Once embeddings are generated, <code>gaia search "autonomous research"</code> finds skills by
+    <em>meaning</em>, not just keywords. The model runs fully locally — no API key needed.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── WORKFLOW ─── -->
+<section id="workflow" class="reveal">
+  <h2>Skill Lifecycle</h2>
+  <p class="section-sub">How a skill travels from your repo to the canonical graph.</p>
+
+  <div class="flow">
+    <div class="flow-node">🔍 <strong>gaia scan</strong><br><small style="color:var(--muted)">detect skills</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node">📦 <strong>gaia push</strong><br><small style="color:var(--muted)">intake PR</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--atomic);color:var(--atomic)">⚡ <strong>Pending</strong><br><small>under review</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--composite);color:var(--composite)">✦ <strong>Awakened</strong><br><small>Level I</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--legendary);color:var(--legendary)">◆ <strong>Named</strong><br><small>Level II+</small></div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--composite),var(--legendary))">+</div>
+      <div>
+        <h3>Install a named skill</h3>
+        <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
+        <pre><span class="cmd">gaia install</span> karpathy/autoresearch
+<span class="cmd">gaia install --list</span>          <span class="comment"># see what's installed</span>
+<span class="cmd">gaia sync</span>                    <span class="comment"># pull latest versions</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--legendary),#f97316)">★</div>
+      <div>
+        <h3>Promote your own named skill</h3>
+        <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
+        <pre><span class="comment"># gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</span>
+<span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── GLOSSARY ─── -->
+<section class="reveal">
+  <h2>Quick Glossary</h2>
+  <p class="section-sub">Terms you'll see throughout the registry.</p>
+  <div class="glossary">
+    <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill lives here.</div></div>
+    <div class="gloss-item"><div class="gloss-term">intake/</div><div class="gloss-def">Staging area for proposed skills before they enter the graph.</div></div>
+    <div class="gloss-item"><div class="gloss-term">graph/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
+    <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before a composite or legendary can emerge.</div></div>
+    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier composite or legendary skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
+    <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">gaia embed</div><div class="gloss-def">Pre-computes local semantic vectors so `gaia search` works by meaning.</div></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p style="margin-bottom:.5rem">
+    <strong style="color:var(--text)">◆ GAIA</strong> — AI Agent Skill Registry
+  </p>
+  <p>
+    <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank">GitHub</a> ·
+    <a href="https://github.com/mbtiongson1/gaia-skill-tree/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a> ·
+    MIT License
+  </p>
+</footer>
+
+<!-- ─── 3D NODE GRAPH ANIMATION (zero-dependency Canvas 2D + perspective projection) ─── -->
+<script>
+(function () {
+  const canvas = document.getElementById('canvas3d');
+  const ctx    = canvas.getContext('2d');
+  const DPR    = Math.min(window.devicePixelRatio || 1, 2);
+
+  let W, H;
+  function resize() {
+    W = canvas.parentElement.clientWidth;
+    H = canvas.parentElement.clientHeight;
+    canvas.width  = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(DPR, DPR);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── skill graph data ── */
+  const SKILLS = [
+    { id:'tokenize',        type:'atomic',    name:'Tokenize' },
+    { id:'retrieve',        type:'atomic',    name:'Retrieve' },
+    { id:'rank',            type:'atomic',    name:'Rank' },
+    { id:'embed-text',      type:'atomic',    name:'Embed Text' },
+    { id:'chunk-document',  type:'atomic',    name:'Chunk Doc' },
+    { id:'score-relevance', type:'atomic',    name:'Score Rel.' },
+    { id:'web-search',      type:'atomic',    name:'Web Search' },
+    { id:'summarize',       type:'atomic',    name:'Summarize' },
+    { id:'cite-sources',    type:'atomic',    name:'Cite Sources' },
+    { id:'parse-html',      type:'atomic',    name:'Parse HTML' },
+    { id:'extract-entities',type:'atomic',    name:'Extract Ent.' },
+    { id:'code-generation', type:'atomic',    name:'Code Gen' },
+    { id:'execute-bash',    type:'atomic',    name:'Exec Bash' },
+    { id:'route-intent',    type:'atomic',    name:'Route Intent' },
+    { id:'plan-decompose',  type:'atomic',    name:'Plan Decomp.' },
+    { id:'tool-select',     type:'atomic',    name:'Tool Select' },
+    { id:'write-report',    type:'atomic',    name:'Write Report' },
+    { id:'audience-model',  type:'atomic',    name:'Audience Mdl.' },
+    { id:'evaluate-output', type:'atomic',    name:'Eval Output' },
+    { id:'math-reason',     type:'atomic',    name:'Math Reason' },
+    { id:'rag-pipeline',    type:'composite', name:'RAG Pipeline',
+      prereqs:['retrieve','chunk-document','embed-text','score-relevance'] },
+    { id:'web-scrape',      type:'composite', name:'Web Scrape',
+      prereqs:['web-search','parse-html','extract-entities'] },
+    { id:'research',        type:'composite', name:'Research',
+      prereqs:['web-search','summarize','cite-sources'] },
+    { id:'autonomous-debug',type:'composite', name:'Auto Debug',
+      prereqs:['code-generation','execute-bash','route-intent'] },
+    { id:'plan-and-execute',type:'composite', name:'Plan & Execute',
+      prereqs:['route-intent','plan-decompose','tool-select'] },
+    { id:'knowledge-harvest',type:'composite',name:'Knowledge Harvest',
+      prereqs:['web-scrape','extract-entities','embed-text'] },
+    { id:'ghostwrite',      type:'composite', name:'Ghostwrite',
+      prereqs:['research','write-report','audience-model'] },
+    { id:'autonomous-research-agent', type:'legendary', name:'Auto Research',
+      prereqs:['research','knowledge-harvest','ghostwrite'] },
+    { id:'recursive-self-improvement',type:'legendary', name:'Self-Improve',
+      prereqs:['autonomous-debug','evaluate-output','plan-and-execute'] },
+  ];
+
+  const PALETTE = {
+    atomic:    { rgb:'56,189,248',  hex:'#38bdf8' },
+    composite: { rgb:'167,139,250', hex:'#a78bfa' },
+    legendary: { rgb:'251,191,36',  hex:'#fbbf24' },
+  };
+
+  /* ── place nodes on concentric spheres ── */
+  function spherePoint(r) {
+    const u = Math.random(), v = Math.random();
+    const th = 2 * Math.PI * u;
+    const ph = Math.acos(2 * v - 1);
+    return {
+      x: r * Math.sin(ph) * Math.cos(th),
+      y: r * Math.sin(ph) * Math.sin(th),
+      z: r * Math.cos(ph),
+    };
+  }
+
+  const pos = {};
+  SKILLS.forEach(s => {
+    const r = s.type === 'atomic'    ? 200 + Math.random() * 50
+            : s.type === 'composite' ? 110 + Math.random() * 30
+            :                          28  + Math.random() * 18;
+    pos[s.id] = spherePoint(r);
+    pos[s.id].phase = Math.random() * Math.PI * 2;
+  });
+
+  /* ── stars ── */
+  const STARS = Array.from({ length: 240 }, () => ({
+    ...spherePoint(500 + Math.random() * 300),
+    size: 0.4 + Math.random() * 1.2,
+    alpha: 0.3 + Math.random() * 0.5,
+  }));
+
+  /* ── mouse parallax ── */
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  /* ── 3-D rotation helpers ── */
+  function rotX(p, a) {
+    const c = Math.cos(a), s = Math.sin(a);
+    return { x: p.x, y: c*p.y - s*p.z, z: s*p.y + c*p.z, phase: p.phase };
+  }
+  function rotY(p, a) {
+    const c = Math.cos(a), s = Math.sin(a);
+    return { x: c*p.x + s*p.z, y: p.y, z: -s*p.x + c*p.z, phase: p.phase };
+  }
+
+  /* ── perspective projection ── */
+  function project(p) {
+    const fov  = 520;
+    const dist = fov / (fov + p.z + 320);
+    return {
+      sx: W / 2 + p.x * dist,
+      sy: H / 2 + p.y * dist,
+      scale: dist,
+    };
+  }
+
+  /* ── draw a glowing circle ── */
+  function drawNode(sx, sy, r, color, alpha) {
+    // outer glow
+    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.5);
+    grad.addColorStop(0,   `rgba(${color.rgb},${(alpha * 0.55).toFixed(2)})`);
+    grad.addColorStop(0.4, `rgba(${color.rgb},${(alpha * 0.18).toFixed(2)})`);
+    grad.addColorStop(1,   `rgba(${color.rgb},0)`);
+    ctx.beginPath();
+    ctx.arc(sx, sy, r * 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    // core
+    ctx.beginPath();
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.1, 1).toFixed(2)})`;
+    ctx.fill();
+    // specular highlight
+    ctx.beginPath();
+    ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.6).toFixed(2)})`;
+    ctx.fill();
+  }
+
+  /* ── main loop ── */
+  let t = 0;
+  function draw() {
+    requestAnimationFrame(draw);
+    t += 0.006;
+
+    // clear
+    ctx.clearRect(0, 0, W, H);
+
+    const ry = t * 0.16 + mx * 0.10;
+    const rx = Math.sin(t * 0.055) * 0.20 + my * 0.055;
+
+    /* transform all positions */
+    const xf = {}; // transformed
+    const allPoints = [...SKILLS.map(s => s.id), ...STARS.map((_, i) => '__star' + i)];
+
+    SKILLS.forEach(s => {
+      let p = pos[s.id];
+      p = rotY(p, ry); p = rotX(p, rx);
+      xf[s.id] = p;
+    });
+    const starXf = STARS.map(st => {
+      let p = rotY(st, ry); p = rotX(p, rx);
+      return { ...p, size: st.size, alpha: st.alpha };
+    });
+
+    /* draw stars */
+    starXf.forEach(s => {
+      const pr = project(s);
+      if (pr.scale < 0.01) return;
+      ctx.beginPath();
+      ctx.arc(pr.sx, pr.sy, s.size * pr.scale * 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${(s.alpha * Math.min(pr.scale * 2, 1)).toFixed(2)})`;
+      ctx.fill();
+    });
+
+    /* draw edges (back to front: sort all by z) */
+    const edgeList = [];
+    SKILLS.forEach(s => {
+      if (!s.prereqs) return;
+      s.prereqs.forEach(pid => {
+        if (!xf[pid]) return;
+        const avgZ = (xf[s.id].z + xf[pid].z) / 2;
+        edgeList.push({ from: s.id, to: pid, type: s.type, avgZ });
+      });
+    });
+    edgeList.sort((a, b) => a.avgZ - b.avgZ);
+
+    edgeList.forEach(e => {
+      const pa = project(xf[e.from]), pb = project(xf[e.to]);
+      const col = PALETTE[e.type];
+      const depthAlpha = Math.min(Math.max((xf[e.from].z + 350) / 700, 0), 1);
+      ctx.beginPath();
+      ctx.moveTo(pa.sx, pa.sy);
+      ctx.lineTo(pb.sx, pb.sy);
+      ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * 0.22).toFixed(2)})`;
+      ctx.lineWidth = e.type === 'legendary' ? 1.1 : 0.7;
+      ctx.stroke();
+    });
+
+    /* draw nodes back to front */
+    const nodeList = SKILLS.map(s => ({ s, z: xf[s.id].z }));
+    nodeList.sort((a, b) => a.z - b.z);
+
+    nodeList.forEach(({ s }) => {
+      const p  = xf[s.id];
+      const pr = project(p);
+      const pulse = 0.84 + 0.16 * Math.sin(t * 2.2 + p.phase);
+      const depthAlpha = Math.min(Math.max((p.z + 350) / 700, 0.1), 1);
+      const col = PALETTE[s.type];
+      const baseR = s.type === 'legendary' ? 10
+                  : s.type === 'composite'  ? 5.5 : 2.8;
+      const r = baseR * pr.scale * pulse;
+      drawNode(pr.sx, pr.sy, r, col, depthAlpha * 0.9);
+    });
+
+    /* label the legendary nodes */
+    nodeList.filter(({ s }) => s.type === 'legendary').forEach(({ s }) => {
+      const p  = xf[s.id];
+      const pr = project(p);
+      const depthAlpha = Math.min(Math.max((p.z + 350) / 700, 0), 1);
+      if (depthAlpha < 0.3) return;
+      ctx.font = `bold ${Math.round(10 * pr.scale * 1.4)}px Inter,system-ui,sans-serif`;
+      ctx.fillStyle = `rgba(251,191,36,${(depthAlpha * 0.85).toFixed(2)})`;
+      ctx.textAlign = 'center';
+      ctx.fillText(s.name, pr.sx, pr.sy + 14 * pr.scale * 1.4);
+    });
+  }
+  draw();
+})();
+</script>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

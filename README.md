@@ -78,17 +78,25 @@ Skills level up through evidence, not declaration:
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 
-# Install the gaia CLI (once)
+# 1. Install the gaia CLI
 pip install -e .
 
-# Validate the canonical graph
+# 2. Enable semantic search (strongly recommended)
+pip install -e ".[embeddings]"
+gaia embed                      # ~30 seconds — run once, re-run when the graph changes
+
+# 3. Validate the canonical graph
 gaia --registry . scan
 
-# Regenerate all skill pages, registry, tree, and user trees
+# 4. Regenerate all skill pages, registry, tree, and user trees
 python3 scripts/generateProjections.py
 ```
 
-> **Embeddings support** (optional): `pip install -e ".[embeddings]"` adds `gaia embed` and `gaia search`.
+> **Why install embeddings?**
+> `gaia search` uses local semantic matching so you can find skills by meaning, not just keywords.
+> `gaia push` also uses it to suggest matching named-skill buckets for your proposed skills.
+> Without embeddings, both commands will prompt you to set them up.
+> The model runs fully locally — no API key, no network call after the first download.
 
 ## CLI Usage
 
@@ -103,29 +111,33 @@ Then `gaia` works from any directory — no path prefix needed.
 ### Project setup
 
 Run this inside the project you want Gaia to scan:
-
 ```bash
-gaia init
+gaia init --user your-github-username --scan AGENTS.md --scan scripts
+```
+
+For the previous non-interactive defaults, use:
+```bash
+gaia init --yes
 ```
 
 This creates `.gaia/config.json`:
-
 ```json
 {
   "gaiaUser": "your-github-username",
   "gaiaRegistryRef": "https://github.com/mbtiongson1/gaia-skill-tree",
-  "scanPaths": ["scripts", "plugin"],
+  "scanPaths": ["AGENTS.md", "scripts"],
   "autoPromptCombinations": false
 }
 ```
 
-Update `gaiaUser` and `scanPaths` for your project before scanning.
+Use `gaia doctor` after initialization to check the CLI, registry path, config, skill tree, embeddings, and scan paths.
 
 ### Commands
 
 | Command | What it does |
 |---|---|
-| `gaia init` | Creates `.gaia/config.json` in the current project. |
+| `gaia init` | Creates `.gaia/config.json` in the current project. Supports `--user`, `--registry-ref`, and repeated `--scan` flags. |
+| `gaia doctor` | Checks CLI/config/registry health and reports missing setup pieces. |
 | `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
 | `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
 | `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
@@ -135,8 +147,8 @@ Update `gaiaUser` and `scanPaths` for your project before scanning.
 | `gaia install --list` | Lists all installed named skills. |
 | `gaia sync` | Updates installed named skills from their registry origin. |
 | `gaia uninstall <contributor/skill>` | Removes an installed named skill. |
-| `gaia embed` | Pre-computes embeddings for all skills (requires `sentence-transformers`). |
-| `gaia search <query>` | Semantic search across generic and named skills. |
+| `gaia embed` | Pre-computes embeddings for all skills. **Strongly recommended** — run once after `pip install -e ".[embeddings]"`, re-run when the graph changes. |
+| `gaia search <query>` | Semantic search across generic and named skills (requires embeddings — see above). |
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
