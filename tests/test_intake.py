@@ -11,6 +11,8 @@ GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
 
 
 def run_validate_intake(intake_dir):
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
     result = subprocess.run(
         [
             "python3",
@@ -22,6 +24,8 @@ def run_validate_intake(intake_dir):
         ],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        env=env,
     )
     return result.returncode, result.stdout
 
