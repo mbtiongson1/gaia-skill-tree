@@ -9,37 +9,31 @@
 
 ## The Tree
 
-Every AI agent capability exists somewhere on this graph. Skills start **Dormant**, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
+Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
 
-The snapshot below is an example of how the graph is rendered. Counts and labels
-will drift as the registry evolves.
+The snapshot below shows the upgrade-path structure. Each legendary traces
+back through its full prerequisite chain.
 
 ```
-GAIA SKILL GRAPH  example snapshot
+GAIA SKILL TREE  v0.2.0
 ═════════════════════════════════════════════════════════════════
 
-◆ ULTIMATE SKILLS  (<1% prevalence)  — Evidence-locked. Exceptionally rare.
-│
-├─ ◆ True Dragon: Autonomous Scientific Discovery     [IV · Evolved]
-├─ ◆ True Oracle: Autonomous Data Scientist           [IV · Evolved]
-├─ ◆ True Herald: Real-Time Voice Assistant           [IV · Evolved]
-├─ ◆ True Craftsman: Full-Stack Developer             [IV · Evolved]
-├─ ◆ Grand Conductor: Multi-Agent Orchestration       [I · Dormant]
-├─ ◆ True Sage: Recursive Self-Improvement            [I · Dormant]
-└─ ◆ Wisdom King: Autonomous Research Agent           [I · Dormant]
-
-◇ EXTRA SKILLS  (example set)  — Emerged from combination. Transcend their parts.
-│
-├─ ◇ Research              [III · Named]    ← Web Search + Summarize + Cite Sources
-├─ ◇ RAG Pipeline          [III · Named]    ← Retrieve + Chunk Document + Embed Text + Score Relevance
-├─ ◇ Autonomous Debug      [III · Named]    ← Code Generation + Execute Bash + Error Interpretation
-└─ ◇ ...and more as the registry grows
-
-○ INTRINSIC SKILLS  (example set)  — Atomic. The genome of every agent.
-│
-├─ ○ Code Generation       [II · Awakened]
-├─ ○ Web Search            [II · Awakened]
-└─ ○ ...and more as the registry grows
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [I · Awakened]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ Knowledge Harvest  [IV · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
+  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
+  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
+  │  │  ├─ ○ Parse HTML  [I · Awakened]
+  │  │  └─ ○ Extract Entities  [I · Awakened]
+  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
+  │  └─ ○ Embed Text  [I · Awakened]
+  └─ ◇ Ghostwrite  [IV · Transcendent]  ← Research · Write Report · Audience Model
+     ├─ ◇ Research  [III · Evolved]  (↑ see above)
+     ├─ ○ Write Report  [I · Awakened]
+     └─ ○ Audience Model  [I · Awakened]
 
 → Full graph: tree.md
 ```
@@ -68,11 +62,12 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| I | **Dormant** | None | Catalogued but not yet demonstrated |
-| II | **Awakened** | Class C | First confirmed demonstration |
-| III | **Named** | Class B | Reproducible, fully documented |
-| IV | **Evolved** | Class B or A | Failure modes known; battle-tested |
-| V | **Transcendent** | Class A | Composable and self-improving; peer-reviewed |
+| I | **Awakened** | None | Foundation tier — catalogued and available |
+| II | **Named** | Class C | First confirmed demonstration |
+| III | **Evolved** | Class B | Reproducible, fully documented |
+| IV | **Transcendent** | Class B or A | Failure modes known; battle-tested |
+| V | **Transcendent** | Class B or A | Composable and self-improving |
+| VI | **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
 ---
 
