@@ -19,7 +19,7 @@ Explain why these specific prerequisites produce this emergent behavior. What ca
 ### Checklist
 
 **Contributor:**
-- [ ] Skill ID uses `camelCase` with no vendor references.
+- [ ] Skill ID uses `kebab-case` with no vendor references.
 - [ ] Description describes an emergent capability, not just "all parents at once."
 - [ ] At least 2 prerequisites listed, all referencing existing skill IDs in `gaia.json`.
 - [ ] Evidence meets the minimum threshold for the claimed level (Level III = Class B+).

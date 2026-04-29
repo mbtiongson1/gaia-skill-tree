@@ -148,6 +148,7 @@ Update `gaiaUser` and `scanPaths` for your project before scanning.
 | `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
 | `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
 | `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
+| `gaia push --no-pr` | Writes a batch intake record without trying to open a PR. |
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
@@ -165,6 +166,9 @@ gaia --registry /path/to/gaia-skill-tree push --dry-run
 # Submit the batch intake record for review
 gaia --registry /path/to/gaia-skill-tree push
 ```
+
+Intake PRs are draft review artifacts. Accepted candidates are promoted later
+into canonical `graph/gaia.json` updates.
 
 ## MCP Server (Agent-Native Integration)
 
