@@ -5,7 +5,10 @@ import subprocess
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
 
-from plugin.cli.resolver import load_canonical_skills
+try:
+    from plugin.cli.resolver import load_canonical_skills
+except ModuleNotFoundError:
+    from cli.resolver import load_canonical_skills
 
 
 SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")

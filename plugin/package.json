@@ -9,7 +9,7 @@
   },
   "files": [
     "dist",
-    "cli",
+    "cli/**/*.py",
     "README.md"
   ],
   "scripts": {

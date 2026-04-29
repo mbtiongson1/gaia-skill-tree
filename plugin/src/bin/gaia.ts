@@ -9,8 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Path to the Python CLI entry point and repo root
-const pythonCliPath = resolve(__dirname, '../../cli/main.py');
-const repoRoot = resolve(__dirname, '../../..');
+const packageRoot = resolve(__dirname, '../..');
+const repoRoot = resolve(packageRoot, '..');
+const packagedPythonCliPath = resolve(packageRoot, 'cli/main.py');
+const repoPythonCliPath = resolve(repoRoot, 'plugin/cli/main.py');
+const pythonCliPath = existsSync(packagedPythonCliPath)
+  ? packagedPythonCliPath
+  : repoPythonCliPath;
 
 // Check if Python CLI exists
 if (!existsSync(pythonCliPath)) {
@@ -49,7 +54,7 @@ try {
 // Prepare environment variables
 const env = {
   ...process.env,
-  PYTHONPATH: repoRoot,
+  PYTHONPATH: [repoRoot, packageRoot, process.env.PYTHONPATH].filter(Boolean).join(':'),
 };
 
 // Spawn Python process with forwarded arguments (no shell for security)

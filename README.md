@@ -97,7 +97,21 @@ npm install @gaia-registry/cli
 
 # Initialize Gaia in your project
 gaia init
+```
 
+The npm package provides the `gaia` CLI wrapper. It runs the bundled Python CLI
+and forwards arguments unchanged. Commands that read or update the canonical
+registry need a local Gaia registry checkout:
+
+```bash
+gaia --registry /path/to/gaia-skill-tree scan
+gaia --registry /path/to/gaia-skill-tree push --dry-run
+gaia --registry /path/to/gaia-skill-tree push
+```
+
+Common commands:
+
+```bash
 # Scan for skills your agent demonstrates
 gaia scan
 
@@ -151,6 +165,8 @@ See [`mcp-server/`](mcp-server/) for full documentation.
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
+├── graph/similarity.json    ← Similarity/layout metadata, separate from DAG edges
+├── intake/                  ← Batch skill proposals submitted by gaia push
 ├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions
 ├── skills/                  ← GENERATED skill pages (atomic, composite, legendary)

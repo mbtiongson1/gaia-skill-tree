@@ -89,7 +89,6 @@ If you want to develop the npm wrapper locally:
 ```bash
 npm install
 npm run build    # Compile TypeScript
-npm run dev      # Watch mode (requires separate setup)
 ```
 
 The npm wrapper is in `src/bin/gaia.ts` and shells out to the Python CLI in `cli/main.py`.
