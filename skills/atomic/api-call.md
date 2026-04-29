@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] API Call
+# [II · Named · Intrinsic Skill] API Call
 **ID:** api-call  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -14,7 +14,7 @@ Constructs, executes, and handles responses from HTTP APIs by interpreting docum
 _None._
 
 ## Unlocks
-_None._
+- [Function Calling](../composite/function-calling.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -25,4 +25,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

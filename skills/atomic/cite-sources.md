@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Cite Sources
+# [I · Awakened · Intrinsic Skill] Cite Sources
 **ID:** cite-sources  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -14,6 +14,7 @@ Attributes claims to specific sources with proper references, URLs, or bibliogra
 _None._
 
 ## Unlocks
+- [Grounding](../composite/grounding.md)
 - [Research](../composite/research.md)
 
 ## Evidence
@@ -25,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

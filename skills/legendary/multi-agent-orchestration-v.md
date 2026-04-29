@@ -1,7 +1,7 @@
-# [I · Dormant · Ultimate Skill] Grand Conductor: Multi-Agent Orchestration
+# [V · Transcendent · Ultimate Skill] Grand Conductor: Multi-Agent Orchestration
 **ID:** multi-agent-orchestration-v  
 **Type:** Ultimate Skill  
-**Level:** I · Dormant  
+**Level:** V · Transcendent  
 **Rarity:** Divine  
 **Status:** Provisional
 
@@ -22,10 +22,12 @@ _None._
 Requires extensive multi-system validation before level advancement.
 
 ## Evidence
-_None._
+| Class | Source | Evaluator | Date |
+|---|---|---|---|
+| B | https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md | mbtiongson1 | 2026-04-29 |
 
 ## Known Agents
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

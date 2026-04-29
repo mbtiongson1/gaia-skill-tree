@@ -1,7 +1,7 @@
-# [IV · Evolved · Ultimate Skill] True Herald: Real-Time Voice Assistant
+# [V · Transcendent · Ultimate Skill] True Herald: Real-Time Voice Assistant
 **ID:** real-time-voice-assistant  
 **Type:** Ultimate Skill  
-**Level:** IV · Evolved  
+**Level:** V · Transcendent  
 **Rarity:** Divine  
 **Status:** Provisional
 
@@ -32,4 +32,4 @@ Requires real-time audio pipeline, <500ms end-to-end latency target, and persist
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

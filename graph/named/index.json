@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-04-30",
+  "buckets": {
+    "autonomous-debug": [
+      {
+        "id": "devin-ai/autonomous-swe",
+        "name": "Autonomous SWE",
+        "contributor": "devin-ai",
+        "origin": true,
+        "genericSkillRef": "autonomous-debug",
+        "status": "named",
+        "level": "III",
+        "description": "Autonomous software engineering agent capable of end-to-end debugging, code generation, and self-correction across complex multi-file codebases.",
+        "tags": [
+          "software-engineering",
+          "autonomous",
+          "debugging",
+          "code-generation",
+          "self-correction"
+        ],
+        "links": {
+          "github": "https://github.com/cognition-labs/devin"
+        }
+      }
+    ],
+    "autonomous-research-agent": [
+      {
+        "id": "karpathy/autoresearch",
+        "name": "AutoResearch",
+        "contributor": "karpathy",
+        "origin": true,
+        "genericSkillRef": "autonomous-research-agent",
+        "status": "named",
+        "level": "II",
+        "description": "Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",
+        "tags": [
+          "research",
+          "autonomous",
+          "paper-synthesis"
+        ],
+        "links": {
+          "github": "https://github.com/karpathy/autoresearch"
+        }
+      }
+    ]
+  }
+}

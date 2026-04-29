@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Tool Select
+# [I · Awakened · Intrinsic Skill] Tool Select
 **ID:** tool-select  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -17,6 +17,7 @@ _None._
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tool Use](../atomic/tool-use.md)
+- [Function Calling](../composite/function-calling.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -27,4 +28,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

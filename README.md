@@ -4,39 +4,37 @@
 
 [![Validate](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml/badge.svg)](https://github.com/mbtiongson1/gaia-skill-tree/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
 ---
 
 ## The Tree
 
-Every AI agent capability exists somewhere on this graph. Skills start **Dormant**, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
+Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
+
+The snapshot below shows the upgrade-path structure. Each legendary traces
+back through its full prerequisite chain.
 
 ```
-GAIA SKILL GRAPH  v0.2.0
+GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
-◆ ULTIMATE SKILLS  (7)  — Evidence-locked. One agent per era.
-│
-├─ ◆ True Dragon: Autonomous Scientific Discovery     [IV · Evolved]
-├─ ◆ True Oracle: Autonomous Data Scientist           [IV · Evolved]
-├─ ◆ True Herald: Real-Time Voice Assistant           [IV · Evolved]
-├─ ◆ True Craftsman: Full-Stack Developer             [IV · Evolved]
-├─ ◆ Grand Conductor: Multi-Agent Orchestration       [I · Dormant]
-├─ ◆ True Sage: Recursive Self-Improvement            [I · Dormant]
-└─ ◆ Wisdom King: Autonomous Research Agent           [I · Dormant]
-
-◇ EXTRA SKILLS  (22)  — Emerged from combination. Transcend their parts.
-│
-├─ ◇ Research              [III · Named]    ← Web Search + Summarize + Cite Sources
-├─ ◇ RAG Pipeline          [III · Named]    ← Retrieve + Chunk Document + Embed Text + Score Relevance
-├─ ◇ Autonomous Debug      [III · Named]    ← Code Generation + Execute Bash + Error Interpretation
-└─ ◇ ...and 19 more
-
-○ INTRINSIC SKILLS  (49)  — Atomic. The genome of every agent.
-│
-├─ ○ Code Generation       [II · Awakened]
-├─ ○ Web Search            [II · Awakened]
-└─ ○ ...and 47 more
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [I · Awakened]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ Knowledge Harvest  [IV · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
+  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
+  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
+  │  │  ├─ ○ Parse HTML  [I · Awakened]
+  │  │  └─ ○ Extract Entities  [I · Awakened]
+  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
+  │  └─ ○ Embed Text  [I · Awakened]
+  └─ ◇ Ghostwrite  [IV · Transcendent]  ← Research · Write Report · Audience Model
+     ├─ ◇ Research  [III · Evolved]  (↑ see above)
+     ├─ ○ Write Report  [I · Awakened]
+     └─ ○ Audience Model  [I · Awakened]
 
 → Full graph: tree.md
 ```
@@ -47,7 +45,8 @@ GAIA SKILL GRAPH  v0.2.0
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
 - **Unlock combinations** — when your agent has the prerequisites, a new composite or ultimate skill becomes available to fuse. The CLI detects it automatically.
-- **Contribute to the canon** — submit evidence for new skills or level-ups via PR. The graph grows with the field.
+- **Name and share skills** — contribute named implementations of generic skills (e.g., `karpathy/autoresearch`), attributed to your GitHub identity and installable by anyone via `gaia install`.
+- **Contribute to the canon** — review draft skills, submit evidence, or create new skills from strong reviews. The graph grows with the field.
 
 ---
 
@@ -65,11 +64,19 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| I | **Dormant** | None | Catalogued but not yet demonstrated |
-| II | **Awakened** | Class C | First confirmed demonstration |
-| III | **Named** | Class B | Reproducible, fully documented |
-| IV | **Evolved** | Class B or A | Failure modes known; battle-tested |
-| V | **Transcendent** | Class A | Composable and self-improving; peer-reviewed |
+| 0 | **Basic** | None | Universal LLM primitive — any capable model does this by default |
+| I | **Awakened** | None | Foundation tier — catalogued agent capability |
+| II | **Named** | Class C | First confirmed demonstration |
+| III | **Evolved** | Class B | Reproducible, fully documented |
+| IV | **Hardened** | Class B or A | Failure modes known; battle-tested |
+| V | **Transcendent** | Class B or A | Composable and self-improving |
+| VI | **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
+
+---
+
+## Tutorial
+
+**New here?** The interactive tutorial at **[gaia.tiongson.co](https://gaia.tiongson.co/)** covers everything visually — skill tiers, the rank system, and the full get-started workflow with copy-paste commands.
 
 ---
 
@@ -79,10 +86,17 @@ Skills level up through evidence, not declaration:
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 
-# Validate the canonical graph
-python3 scripts/validate.py
+# 1. Install the gaia CLI
+pip install -e .
 
-# Regenerate all skill pages, registry, tree, and user trees
+# 2. Enable semantic search (strongly recommended)
+pip install -e ".[embeddings]"
+gaia embed                      # ~30 seconds — run once, re-run when the graph changes
+
+# 3. Validate the canonical graph
+gaia --registry . scan
+
+# 4. Regenerate all skill pages, registry, tree, and user trees
 python3 scripts/generateProjections.py
 ```
 
@@ -98,25 +112,52 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 
 ## Install the Plugin (per-repo)
 
-> **Status: In Development** — The `gaia` CLI is not yet published to npm. Track progress or contribute in [plugin/](plugin/).
+Write the SVG somewhere specific:
 
 ```bash
-# Initialize Gaia in your project
+gaia graph -o graph/gaia.svg --no-open
+```
+
+Generate browser-friendly layout JSON instead of SVG:
+
+```bash
+gaia graph --format json -o graph/render/latest.json --no-open
+```
+
+For graph tools such as Gephi or Cytoscape, regenerate the GEXF export:
+
+```bash
+python3 scripts/exportGexf.py
+```
+
+The public Pages experience also mirrors downloadable graph artifacts under `docs/graph/` so the site can offer JSON, GEXF, and SVG downloads.
+
+### Typical workflow
+
+```bash
+# In the project repo you want to scan
 gaia init
 
-# Scan for skills your agent demonstrates
+# Preview detected skills and proposed intake
 gaia scan
+gaia push --dry-run
 
-# Submit a batch of detected known/proposed skills for review
+# Submit the batch intake record for review
 gaia push
-
-# View your skill tree
-gaia status
-gaia tree --depth 3
-
-# Fuse a detected combination
-gaia fuse autonomous-debug
 ```
+
+Intake PRs are draft review artifacts. Accepted candidates are promoted later
+into canonical `graph/gaia.json` updates.
+
+### Maintainer hooks
+
+Contributors who edit the canonical graph can install the repo-local hook once:
+
+```bash
+bash scripts/install-git-hooks.sh
+```
+
+The pre-commit hook runs validation, regenerates Markdown projections, exports GEXF, renders `graph/gaia.svg`, mirrors public graph assets into `docs/graph/`, and stages the known generated files whenever staged graph source files change.
 
 ## MCP Server (Agent-Native Integration)
 
@@ -164,7 +205,9 @@ gaia-skill-tree/
 ├── users/                   ← Personal skill trees by GitHub username
 ├── scripts/                 ← Validation, projection, and analysis scripts
 ├── scripts/crawlers/        ← Bot crawlers (MCP registries, npm, VS Code, HuggingFace)
-├── plugin/                  ← CLI + GitHub Action for per-repo integration
+├── src/gaia_cli/            ← Python package source for the gaia CLI (pip-installable)
+├── plugin/                  ← TypeScript CLI wrapper + GitHub Action for per-repo integration
+├── pyproject.toml           ← Package metadata and optional dependencies (e.g. [embeddings])
 ├── registry.md              ← GENERATED flat index of all skills
 ├── combinations.md          ← GENERATED fusion recipe matrix
 ├── tree.md                  ← GENERATED full ASCII skill graph
@@ -177,7 +220,20 @@ gaia-skill-tree/
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines including evidence requirements, PR templates, and naming conventions.
+Gaia is meant to be a shared map of agent capabilities, and there are a few
+good ways to help even if you are not ready to edit the graph directly.
+
+You can contribute by **reviewing skill drafts**: read a proposed skill, check
+whether the definition is clear, compare it against existing skills, evaluate
+the cited evidence, and submit peer review analysis that helps maintainers
+decide whether the skill should be accepted, renamed, merged, or reclassified.
+
+You can also contribute by **creating skills directly from reviews**: turn a
+well-supported review into a concrete Intrinsic Skill, Extra Skill, Ultimate
+Skill, fusion recipe, or reclassification PR with evidence and rationale.
+
+For full instructions, including evidence requirements, PR templates, naming
+rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

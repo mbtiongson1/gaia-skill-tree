@@ -4,14 +4,14 @@
   "generatedAt": "2026-04-26T00:00:00Z",
   "skills": [
     {
-      "id": "A",
+      "id": "skill-a",
       "name": "Skill A",
       "type": "composite",
       "level": "III",
       "rarity": "common",
       "description": "Composite with only one prerequisite.",
       "prerequisites": [
-        "B"
+        "skill-b"
       ],
       "derivatives": [],
       "evidence": [
@@ -28,7 +28,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "B",
+      "id": "skill-b",
       "name": "Skill B",
       "type": "atomic",
       "level": "II",
@@ -36,7 +36,7 @@
       "description": "Valid atomic skill.",
       "prerequisites": [],
       "derivatives": [
-        "A"
+        "skill-a"
       ],
       "evidence": [
         {

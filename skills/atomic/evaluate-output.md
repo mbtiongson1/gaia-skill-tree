@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Evaluate Output
+# [I · Awakened · Intrinsic Skill] Evaluate Output
 **ID:** evaluate-output  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -15,6 +15,9 @@ _None._
 
 ## Unlocks
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
+- [Grounding](../composite/grounding.md)
+- [Multi-Agent Debate](../composite/multi-agent-debate.md)
+- [Prompt Optimization](../composite/prompt-optimization.md)
 - [Self-Critique](../atomic/self-critique.md)
 
 ## Evidence
@@ -26,4 +29,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

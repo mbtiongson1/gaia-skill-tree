@@ -4,16 +4,16 @@
   "generatedAt": "2026-04-26T00:00:00Z",
   "skills": [
     {
-      "id": "A",
+      "id": "skill-a",
       "name": "Skill A",
       "type": "legendary",
       "level": "V",
       "rarity": "legendary",
       "description": "Legendary skill with insufficient sources for validation.",
       "prerequisites": [
-        "B",
-        "C",
-        "D"
+        "skill-b",
+        "skill-c",
+        "skill-d"
       ],
       "derivatives": [],
       "evidence": [
@@ -36,7 +36,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "B",
+      "id": "skill-b",
       "name": "Skill B",
       "type": "atomic",
       "level": "II",
@@ -44,7 +44,7 @@
       "description": "Valid atomic skill.",
       "prerequisites": [],
       "derivatives": [
-        "A"
+        "skill-a"
       ],
       "evidence": [
         {
@@ -60,7 +60,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "C",
+      "id": "skill-c",
       "name": "Skill C",
       "type": "atomic",
       "level": "II",
@@ -68,7 +68,7 @@
       "description": "Valid atomic skill.",
       "prerequisites": [],
       "derivatives": [
-        "A"
+        "skill-a"
       ],
       "evidence": [
         {
@@ -84,7 +84,7 @@
       "version": "0.1.0"
     },
     {
-      "id": "D",
+      "id": "skill-d",
       "name": "Skill D",
       "type": "atomic",
       "level": "II",
@@ -92,7 +92,7 @@
       "description": "Valid atomic skill.",
       "prerequisites": [],
       "derivatives": [
-        "A"
+        "skill-a"
       ],
       "evidence": [
         {

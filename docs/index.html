@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaia — AI Agent Skill Registry</title>
+<style>
+  :root {
+    --atomic:   #38bdf8;
+    --composite:#c084fc;
+    --legendary:#f59e0b;
+    --bg:       #030712;
+    --surface:  #0f172a;
+    --border:   #1e293b;
+    --text:     #e2e8f0;
+    --muted:    #64748b;
+    --code-bg:  #0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 2rem;
+    background:rgba(3,7,18,.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{
+    font-size:1.15rem;font-weight:700;letter-spacing:.05em;
+    background:linear-gradient(90deg,var(--atomic),var(--composite));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  nav ul{list-style:none;display:flex;gap:2rem}
+  nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+  nav a:hover{color:var(--text)}
+  /* ── HERO ── */
+  #hero{
+    position:relative;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:6rem 1.5rem 3rem;
+    overflow:hidden;
+  }
+  #canvas3d{
+    position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;opacity:1;
+  }
+  .hero-content{position:relative;z-index:2;max-width:700px}
+  .hero-title,.hero-sub,.hero-cta,.scroll-hint{transition:opacity .24s ease,filter .24s ease,transform .24s ease}
+  #hero.hero-graph-peek .hero-title,
+  #hero.hero-graph-peek .hero-sub,
+  #hero.hero-graph-peek .hero-cta,
+  #hero.hero-graph-peek .scroll-hint{
+    opacity:0;filter:blur(8px);pointer-events:none;transform:translateY(10px);
+  }
+  .hero-eyebrow{
+    display:inline-block;margin-bottom:1.2rem;
+    font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--atomic);border:1px solid var(--atomic);
+    padding:.45rem 1.05rem;border-radius:999px;
+    background:rgba(3,7,18,.58);
+    box-shadow:0 0 24px rgba(56,189,248,.18);
+  }
+  .graph-trigger{
+    appearance:none;font:inherit;cursor:pointer;position:relative;z-index:3;
+    transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;
+  }
+  .graph-trigger:hover,.graph-trigger:focus-visible{
+    background:rgba(56,189,248,.16);border-color:#7dd3fc;color:#e0f2fe;
+    box-shadow:0 0 36px rgba(56,189,248,.34);transform:translateY(-1px);outline:none;
+  }
+  h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem}
+  h1 span{
+    background:linear-gradient(135deg,var(--atomic) 0%,var(--composite) 50%,var(--legendary) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{font-size:1.15rem;color:var(--muted);max-width:540px;margin:0 auto 2.4rem}
+  .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{
+    padding:.75rem 1.8rem;border-radius:8px;font-size:.95rem;font-weight:600;
+    text-decoration:none;transition:all .2s;cursor:pointer;border:none;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    color:#fff;box-shadow:0 0 20px rgba(56,189,248,.3);
+  }
+  .btn-primary:hover{box-shadow:0 0 32px rgba(56,189,248,.5);transform:translateY(-1px)}
+  .btn-ghost{
+    background:transparent;color:var(--text);
+    border:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:var(--atomic);color:var(--atomic)}
+  .scroll-hint{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    color:var(--muted);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  .scroll-hint svg{width:20px;height:20px;stroke:var(--muted)}
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+  /* ── SECTIONS ── */
+  section{padding:5rem 1.5rem;max-width:1000px;margin:0 auto}
+  h2{
+    font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:.5rem;
+    background:linear-gradient(90deg,var(--text) 60%,var(--muted));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .section-sub{color:var(--muted);margin-bottom:2.5rem;font-size:1rem}
+  /* ── TIER CARDS ── */
+  .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+  .tier-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.5rem;transition:transform .2s,box-shadow .2s;
+    position:relative;overflow:hidden;
+  }
+  .tier-card::before{
+    content:'';position:absolute;inset:0;border-radius:14px;
+    background:radial-gradient(ellipse at top left,var(--card-glow,.2) 0%,transparent 70%);
+    opacity:.35;pointer-events:none;
+  }
+  .tier-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+  .tier-icon{font-size:2rem;margin-bottom:.8rem}
+  .tier-badge{
+    display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+    padding:.25rem .7rem;border-radius:999px;margin-bottom:.8rem;
+  }
+  .tier-name{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+  .tier-desc{font-size:.875rem;color:var(--muted)}
+  .atomic  {--card-glow:rgba(56,189,248,.4)}
+  .composite{--card-glow:rgba(192,132,252,.4)}
+  .legendary{--card-glow:rgba(245,158,11,.4)}
+  .badge-atomic  {background:rgba(56,189,248,.15);color:var(--atomic);border:1px solid rgba(56,189,248,.3)}
+  .badge-composite{background:rgba(192,132,252,.15);color:var(--composite);border:1px solid rgba(192,132,252,.3)}
+  .badge-legendary{background:rgba(245,158,11,.15);color:var(--legendary);border:1px solid rgba(245,158,11,.3)}
+  /* ── STEPS ── */
+  .steps{display:flex;flex-direction:column;gap:1.5rem}
+  .step{
+    display:grid;grid-template-columns:56px 1fr;gap:1.2rem;align-items:start;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.5rem;transition:border-color .2s;
+  }
+  .step:hover{border-color:var(--atomic)}
+  .step-num{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:1rem;flex-shrink:0;
+    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    color:#fff;box-shadow:0 0 16px rgba(56,189,248,.35);
+  }
+  .step h3{font-size:1.05rem;font-weight:700;margin-bottom:.3rem}
+  .step p{font-size:.9rem;color:var(--muted);margin-bottom:.8rem}
+  pre{
+    background:var(--code-bg);border:1px solid var(--border);
+    border-radius:8px;padding:1rem 1.2rem;overflow-x:auto;
+    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.83rem;line-height:1.6;color:#94a3b8;
+  }
+  .comment{color:#4b6378}
+  .cmd{color:#38bdf8}
+  .str{color:#86efac}
+  .kw{color:#a78bfa}
+  /* ── RANK TABLE ── */
+  .rank-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:rgba(56,189,248,.06)}
+  th,td{padding:.85rem 1.1rem;text-align:left;font-size:.875rem;border-bottom:1px solid var(--border)}
+  th{font-weight:700;color:var(--text);letter-spacing:.04em}
+  td{color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{color:var(--text);background:rgba(255,255,255,.025)}
+  .rank-badge{
+    display:inline-block;padding:.2rem .6rem;border-radius:999px;
+    font-size:.75rem;font-weight:700;
+  }
+  /* ── WORKFLOW ── */
+  .flow{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .flow-node{
+    background:var(--surface);border:1px solid var(--border);
+    padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;
+  }
+  .flow-arrow{color:var(--atomic);font-size:1.2rem}
+  /* ── INSTALL CALLOUT ── */
+  .callout{
+    background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(167,139,250,.08));
+    border:1px solid rgba(167,139,250,.25);border-radius:14px;
+    padding:1.8rem;margin:2rem 0;
+  }
+  .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--composite)}
+  .callout p{font-size:.9rem;color:var(--muted)}
+  /* ── GLOSSARY ── */
+  .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+  .gloss-item{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:1rem 1.2rem;
+  }
+  .gloss-term{font-weight:700;font-size:.9rem;color:var(--atomic);margin-bottom:.25rem}
+  .gloss-def{font-size:.82rem;color:var(--muted)}
+  /* ── GRAPH DIALOG ── */
+  .graph-dialog{
+    margin:auto;
+    width:min(1120px,94vw);height:min(760px,86vh);padding:0;
+    color:var(--text);background:rgba(3,7,18,.98);
+    border:1px solid rgba(56,189,248,.35);border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.72),0 0 55px rgba(56,189,248,.16);
+    overflow:hidden;
+  }
+  .graph-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+  .graph-dialog-inner{display:flex;flex-direction:column;height:100%}
+  .graph-dialog-header{
+    display:flex;gap:1rem;align-items:flex-start;justify-content:space-between;
+    padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(167,139,250,.08));
+  }
+  .graph-dialog-title{font-weight:800;font-size:1rem;margin-bottom:.15rem}
+  .graph-dialog-sub{color:var(--muted);font-size:.82rem}
+  .graph-dialog-actions{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;justify-content:flex-end}
+  .graph-download,.graph-close{
+    color:var(--text);background:rgba(15,23,42,.84);border:1px solid var(--border);
+    border-radius:999px;text-decoration:none;font-size:.78rem;font-weight:700;
+    padding:.42rem .78rem;cursor:pointer;white-space:nowrap;
+  }
+  .graph-download:hover,.graph-close:hover,.graph-download:focus-visible,.graph-close:focus-visible{
+    border-color:var(--atomic);color:var(--atomic);outline:none;
+  }
+  .graph-canvas-wrap{position:relative;flex:1;min-height:0;background:radial-gradient(circle at center,rgba(15,23,42,.75),#020617 68%)}
+  #graphDialogCanvas{position:absolute;inset:0;width:100%;height:100%}
+  .graph-status{
+    position:absolute;left:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
+  }
+  .skill-tooltip{
+    position:absolute;pointer-events:none;display:none;z-index:10;
+    background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
+    border-radius:.6rem;padding:.6rem .85rem;min-width:148px;max-width:230px;
+    backdrop-filter:blur(8px);
+  }
+  .skill-tooltip-name{font-weight:800;font-size:1rem;line-height:1.2;margin-bottom:.38rem}
+  .skill-tooltip-row{display:flex;align-items:center;gap:.4rem .5rem;flex-wrap:wrap}
+  .skill-tooltip-badge{
+    font-size:.65rem;font-weight:800;letter-spacing:.06em;
+    padding:.14rem .42rem;border-radius:999px;border:1px solid currentColor;
+    opacity:.85;
+  }
+  .skill-tooltip-detail{color:#64748b;font-size:.72rem;font-weight:700;letter-spacing:.05em}
+  .skill-tooltip-type-atomic{color:#38bdf8}
+  .skill-tooltip-type-composite{color:#c084fc}
+  .skill-tooltip-type-legendary{color:#f59e0b}
+  .graph-search-wrap{position:absolute;top:.75rem;right:.75rem;z-index:10}
+  .graph-search{
+    background:rgba(3,7,18,.15);border:1px solid rgba(148,163,184,.15);
+    border-radius:999px;padding:.28rem .72rem;font-size:.74rem;
+    color:#e2e8f0;outline:none;width:130px;font-family:inherit;
+    transition:background .2s,border-color .2s,width .2s;
+  }
+  .graph-search::placeholder{color:rgba(148,163,184,.38)}
+  .graph-search:hover,.graph-search:focus{
+    background:rgba(3,7,18,.72);border-color:rgba(148,163,184,.5);width:175px;
+  }
+  .graph-legend{
+    position:absolute;top:50%;right:.75rem;transform:translateY(-50%);z-index:10;
+    display:flex;flex-direction:column;gap:.55rem;
+    background:rgba(3,7,18,.78);border:none;
+    border-radius:.6rem;padding:.5rem .65rem;backdrop-filter:blur(8px);
+    max-height:calc(100% - 3.5rem);overflow-y:auto;user-select:none;
+  }
+  .graph-legend-section{display:flex;flex-direction:column;gap:.18rem}
+  .graph-legend-heading{
+    font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#64748b;margin-bottom:.1rem;
+  }
+  .graph-legend-item{
+    display:flex;align-items:center;gap:.38rem;
+    font-size:.7rem;font-weight:600;color:#94a3b8;
+    padding:.18rem .38rem;border-radius:4px;cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .graph-legend-item:hover{background:rgba(255,255,255,.06);color:#e2e8f0}
+  .graph-legend-item.active{background:rgba(56,189,248,.12);color:#e2e8f0;box-shadow:inset 0 0 0 1px rgba(56,189,248,.3)}
+  .graph-legend-swatch{border-radius:50%;flex-shrink:0}
+  .graph-legend-ranks{display:flex;flex-wrap:wrap;gap:.28rem;padding:.1rem 0}
+  .graph-legend-rank-pill{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    font-size:.6rem;font-weight:700;cursor:pointer;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .graph-legend-rank-pill:hover{transform:scale(1.18);box-shadow:0 0 8px currentColor}
+  .graph-legend-rank-pill.active{transform:scale(1.18);box-shadow:0 0 10px currentColor,inset 0 0 0 1.5px currentColor}
+  .graph-label-toggle{
+    position:absolute;right:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .7rem;
+    cursor:pointer;transition:border-color .2s,color .2s;font-family:inherit;
+  }
+  .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
+  @media (max-width:700px){
+    nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
+    .graph-dialog{height:88vh}
+    .graph-dialog-header{flex-direction:column}
+    .graph-dialog-actions{justify-content:flex-start}
+    .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
+  }
+
+  /* ── FOOTER ── */
+  footer{
+    text-align:center;padding:3rem 1.5rem;
+    border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;
+  }
+  footer a{color:var(--atomic);text-decoration:none}
+  /* ── DIVIDER ── */
+  .divider{border:none;border-top:1px solid var(--border);margin:0}
+  /* ── ANIMATE ON SCROLL ── */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+  .reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <span class="nav-logo">◆ GAIA</span>
+  <ul>
+    <li><a href="#what">What</a></li>
+    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#start">Get Started</a></li>
+    <li><a href="tree.md">Tree</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#ranks">Ranks</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <canvas id="canvas3d"></canvas>
+  <div class="hero-content">
+    <button class="hero-eyebrow graph-trigger" type="button" data-graph-trigger aria-controls="skillGraphDialog">Open Skill Graph for AI Agents</button>
+    <h1 class="hero-title">Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
+    <p class="hero-sub">
+      Gaia maps AI agent skills — from primitive building blocks to legendary
+      emergent capabilities — into an evidence-backed, versioned graph
+      anyone can contribute to.
+    </p>
+    <div class="hero-cta">
+      <a href="#start" class="btn btn-primary">Get Started →</a>
+      <a href="https://github.com/mbtiongson1/gaia-skill-tree" class="btn btn-ghost" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<dialog id="skillGraphDialog" class="graph-dialog" aria-labelledby="skillGraphTitle">
+  <div class="graph-dialog-inner">
+    <div class="graph-dialog-header">
+      <div>
+        <div id="skillGraphTitle" class="graph-dialog-title">Full Gaia Skill Graph</div>
+        <div class="graph-dialog-sub">Rendered from the canonical graph/gaia.json registry.</div>
+      </div>
+      <div class="graph-dialog-actions">
+        <a class="graph-download" href="graph/gaia.json" download>Download JSON</a>
+        <a class="graph-download" href="graph/gaia.gexf" download>Download GEXF</a>
+        <a class="graph-download" href="graph/gaia.svg" download>Download SVG</a>
+        <button type="button" class="graph-close" data-graph-close aria-label="Close skill graph">Close</button>
+      </div>
+    </div>
+    <div class="graph-canvas-wrap">
+      <canvas id="graphDialogCanvas"></canvas>
+      <div class="graph-status" data-graph-status>Loading full graph…</div>
+    </div>
+  </div>
+</dialog>
+
+<hr class="divider">
+
+<!-- ─── WHAT IS GAIA ─── -->
+<section id="what" class="reveal">
+  <h2>What is Gaia?</h2>
+  <p class="section-sub">Think of it as a Pokédex for AI agent abilities — but open, evidence-backed, and community-owned.</p>
+
+  <div class="tier-grid">
+    <div class="tier-card atomic">
+      <div class="tier-icon">○</div>
+      <span class="tier-badge badge-atomic">Intrinsic</span>
+      <div class="tier-name">Atomic Skills</div>
+      <div class="tier-desc">The genome of every agent. Primitive, indivisible capabilities — <em>Tokenize</em>, <em>Retrieve</em>, <em>Classify</em>, <em>Embed Text</em>.</div>
+    </div>
+    <div class="tier-card composite">
+      <div class="tier-icon">◇</div>
+      <span class="tier-badge badge-composite">Extra Skill</span>
+      <div class="tier-name">Composite Skills</div>
+      <div class="tier-desc">Emerge when 2+ atomics combine — <em>RAG Pipeline</em>, <em>Autonomous Debug</em>, <em>Research</em>. More than the sum of their parts.</div>
+    </div>
+    <div class="tier-card legendary">
+      <div class="tier-icon">◆</div>
+      <span class="tier-badge badge-legendary">Ultimate Skill</span>
+      <div class="tier-name">Legendary Skills</div>
+      <div class="tier-desc">High-complexity emergent capabilities found in &lt;1% of agents — <em>Autonomous Research Agent</em>, <em>Full-Stack Developer</em>.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── RANKS ─── -->
+<section id="ranks" class="reveal">
+  <h2>The Rank System</h2>
+  <p class="section-sub">Skills level up through evidence, not declaration.</p>
+
+  <div class="rank-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(100,116,139,.12);color:#94a3b8">0</span></td>
+          <td><strong>Basic</strong></td><td>None</td>
+          <td>Universal LLM primitive — any capable model does this by default</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span></td>
+          <td><strong>Awakened</strong></td><td>None</td>
+          <td>Catalogued and available — the foundation tier</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(99,202,183,.12);color:#63cab7">II</span></td>
+          <td><strong>Named</strong></td><td>Class C</td>
+          <td>First confirmed demonstration by a real contributor</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span></td>
+          <td><strong>Evolved</strong></td><td>Class B</td>
+          <td>Reproducible, fully documented</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span></td>
+          <td><strong>Hardened</strong></td><td>Class B or A</td>
+          <td>Failure modes known; battle-tested</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span></td>
+          <td><strong>Transcendent</strong></td><td>Class B or A</td>
+          <td>Composable and self-improving</td>
+        </tr>
+        <tr>
+          <td><span class="rank-badge" style="background:rgba(251,191,36,.2);color:#fbbf24">VI ★</span></td>
+          <td><strong>Transcendent ★</strong></td><td>Class A</td>
+          <td>Apex — peer-reviewed, named to the agent who unlocked it</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── GET STARTED ─── -->
+<section id="start" class="reveal">
+  <h2>Get Started</h2>
+  <p class="section-sub">Five steps from zero to your first skill scan.</p>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Clone the registry</h3>
+        <p>Grab your local copy of the canonical skill graph.</p>
+        <pre><span class="cmd">git clone</span> <span class="str">https://github.com/mbtiongson1/gaia-skill-tree.git</span>
+<span class="cmd">cd</span> gaia-skill-tree</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Install the CLI</h3>
+        <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
+        <pre><span class="comment"># Core install</span>
+<span class="cmd">pip install</span> -e .
+
+<span class="comment"># Strongly recommended — enables semantic search</span>
+<span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span>          <span class="comment"># ~30 sec, run once</span></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Initialize your project</h3>
+        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> config file.</p>
+        <pre><span class="cmd">gaia init</span>
+<span class="comment"># Edit .gaia/config.json — set your GitHub username</span></pre>
+        <pre>{
+  <span class="str">"gaiaUser"</span>: <span class="str">"your-github-username"</span>,
+  <span class="str">"scanPaths"</span>: [<span class="str">"src"</span>, <span class="str">"scripts"</span>]
+}</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Scan your repo</h3>
+        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion opportunities.</p>
+        <pre><span class="cmd">gaia scan</span>
+<span class="comment"># Prints detected skills and combination candidates</span></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>Submit a batch for review</h3>
+        <p>Preview what would be submitted with <code>--dry-run</code>, then push to create an intake record.</p>
+        <pre><span class="cmd">gaia push --dry-run</span>   <span class="comment"># preview the JSON</span>
+<span class="cmd">gaia push</span>             <span class="comment"># write intake + open a PR</span></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">💡 Tip — semantic search</div>
+    <p>Once embeddings are generated, <code>gaia search "autonomous research"</code> finds skills by
+    <em>meaning</em>, not just keywords. The model runs fully locally — no API key needed.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── WORKFLOW ─── -->
+<section id="workflow" class="reveal">
+  <h2>Skill Lifecycle</h2>
+  <p class="section-sub">How a skill travels from your repo to the canonical graph.</p>
+
+  <div class="flow">
+    <div class="flow-node">🔍 <strong>gaia scan</strong><br><small style="color:var(--muted)">detect skills</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node">📦 <strong>gaia push</strong><br><small style="color:var(--muted)">intake PR</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--atomic);color:var(--atomic)">⚡ <strong>Pending</strong><br><small>under review</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--composite);color:var(--composite)">✦ <strong>Awakened</strong><br><small>Level I</small></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node" style="border-color:var(--legendary);color:var(--legendary)">◆ <strong>Named</strong><br><small>Level II+</small></div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--composite),var(--legendary))">+</div>
+      <div>
+        <h3>Install a named skill</h3>
+        <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
+        <pre><span class="cmd">gaia install</span> karpathy/autoresearch
+<span class="cmd">gaia install --list</span>          <span class="comment"># see what's installed</span>
+<span class="cmd">gaia sync</span>                    <span class="comment"># pull latest versions</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--legendary),#f97316)">★</div>
+      <div>
+        <h3>Promote your own named skill</h3>
+        <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
+        <pre><span class="comment"># gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</span>
+<span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── GLOSSARY ─── -->
+<section class="reveal">
+  <h2>Quick Glossary</h2>
+  <p class="section-sub">Terms you'll see throughout the registry.</p>
+  <div class="glossary">
+    <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill lives here.</div></div>
+    <div class="gloss-item"><div class="gloss-term">intake/</div><div class="gloss-def">Staging area for proposed skills before they enter the graph.</div></div>
+    <div class="gloss-item"><div class="gloss-term">graph/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
+    <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before a composite or legendary can emerge.</div></div>
+    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier composite or legendary skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
+    <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">gaia embed</div><div class="gloss-def">Pre-computes local semantic vectors so `gaia search` works by meaning.</div></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p style="margin-bottom:.5rem">
+    <strong style="color:var(--text)">◆ GAIA</strong> — AI Agent Skill Registry
+  </p>
+  <p>
+    <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank">GitHub</a> ·
+    <a href="https://github.com/mbtiongson1/gaia-skill-tree/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a> ·
+    MIT License
+  </p>
+</footer>
+
+<!-- ─── FULL SKILL GRAPH ANIMATION (zero-dependency Canvas 2D + generated graph data) ─── -->
+<script>
+(function () {
+  const GRAPH_JSON_URL = 'graph/gaia.json';
+  const GRAPH_SCALE = 1.25;
+  const PALETTE = {
+    atomic:    { rgb:'56,189,248',   hex:'#38bdf8' },
+    composite: { rgb:'192,132,252',  hex:'#c084fc' },
+    legendary: { rgb:'245,158,11',   hex:'#f59e0b' },
+  };
+  const TYPE_ORDER = { atomic:0, composite:1, legendary:2 };
+  const RANK_META = {
+    'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
+    'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
+    'III':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
+    'IV': { name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' },
+    'V':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
+    'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
+  };
+  const FALLBACK_SKILLS = [
+    { id:'tokenize', type:'atomic', name:'Tokenize', prerequisites:[] },
+    { id:'retrieve', type:'atomic', name:'Retrieve', prerequisites:[] },
+    { id:'embed-text', type:'atomic', name:'Embed Text', prerequisites:[] },
+    { id:'score-relevance', type:'atomic', name:'Score Relevance', prerequisites:[] },
+    { id:'web-search', type:'atomic', name:'Web Search', prerequisites:[] },
+    { id:'summarize', type:'atomic', name:'Summarize', prerequisites:[] },
+    { id:'cite-sources', type:'atomic', name:'Cite Sources', prerequisites:[] },
+    { id:'code-generation', type:'atomic', name:'Code Generation', prerequisites:[] },
+    { id:'execute-bash', type:'atomic', name:'Execute Bash', prerequisites:[] },
+    { id:'tool-select', type:'atomic', name:'Tool Select', prerequisites:[] },
+    { id:'rag-pipeline', type:'composite', name:'RAG Pipeline', prerequisites:['retrieve','embed-text','score-relevance'] },
+    { id:'research', type:'composite', name:'Research', prerequisites:['web-search','summarize','cite-sources'] },
+    { id:'autonomous-debug', type:'composite', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','tool-select'] },
+    { id:'autonomous-research-agent', type:'legendary', name:'Autonomous Research Agent', prerequisites:['research','rag-pipeline'] },
+  ];
+
+  function normalizeSkills(graph) {
+    const skills = (graph && graph.skills) ? graph.skills : FALLBACK_SKILLS;
+    return skills.map(skill => ({
+      id: skill.id,
+      name: skill.name || skill.id,
+      type: skill.type || 'atomic',
+      level: skill.level || '',
+      rarity: skill.rarity || '',
+      prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
+    })).filter(skill => skill.id);
+  }
+
+  function stableHash(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i += 1) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return Math.abs(h >>> 0);
+  }
+
+  function spherePoint(radius, seed, index, count) {
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const i = index + (seed % 17) / 17;
+    const y = 1 - (i / Math.max(count - 1, 1)) * 2;
+    const ring = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = golden * i + (seed % 360) * Math.PI / 180;
+    return {
+      x: Math.cos(theta) * ring * radius,
+      y: y * radius,
+      z: Math.sin(theta) * ring * radius,
+      phase: (seed % 628) / 100,
+    };
+  }
+
+  function buildPositions(skills, scale) {
+    const groups = { atomic:[], composite:[], legendary:[] };
+    skills.forEach(skill => (groups[skill.type] || groups.atomic).push(skill));
+    Object.values(groups).forEach(group => group.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id)));
+    const positions = {};
+    const radii = { atomic: 250 * scale, composite: 145 * scale, legendary: 44 * scale };
+    Object.entries(groups).forEach(([type, group]) => {
+      group.forEach((skill, index) => {
+        positions[skill.id] = spherePoint(radii[type] || radii.atomic, stableHash(skill.id), index, group.length);
+      });
+    });
+    return positions;
+  }
+
+  function createSkillGraph(canvas, options) {
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const state = {
+      skills: FALLBACK_SKILLS,
+      positions: buildPositions(FALLBACK_SKILLS, GRAPH_SCALE),
+      stars: [],
+      width: 0,
+      height: 0,
+      t: 0,
+      mx: 0,
+      my: 0,
+      labelMode: options.labelMode || 'legendary',
+      scale: options.scale || GRAPH_SCALE,
+      zoom: 1,
+      statusEl: options.statusEl || null,
+      running: options.autostart !== false,
+      frame: null,
+      orbitX: 0,
+      orbitY: 0,
+      dragging: false,
+      dragLastX: 0,
+      dragLastY: 0,
+      hoveredId: null,
+      lastHoveredId: null,
+      projectedNodes: {},
+      tooltipEl: null,
+      nodeAlphas: {},
+      searchText: '',
+      legendFilterType: null,
+      legendFilterRank: null,
+      legendHoverType: null,
+      legendHoverRank: null,
+      legendEl: null,
+      showSlugs: false,
+    };
+
+    function resize() {
+      const parent = canvas.parentElement;
+      state.width = parent.clientWidth;
+      state.height = parent.clientHeight;
+      canvas.width = state.width * DPR;
+      canvas.height = state.height * DPR;
+      canvas.style.width = state.width + 'px';
+      canvas.style.height = state.height + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      state.stars = Array.from({ length: options.stars || 260 }, (_, i) => {
+        const seed = i * 7919 + 97;
+        const point = spherePoint((500 + (seed % 280)) * state.scale, seed, i, options.stars || 260);
+        return { ...point, size: 0.4 + (seed % 13) / 10, alpha: 0.22 + (seed % 55) / 100 };
+      });
+    }
+
+    function setSkills(skills) {
+      state.skills = skills;
+      state.positions = buildPositions(skills, state.scale);
+      const newAlphas = {};
+      skills.forEach(s => { newAlphas[s.id] = state.nodeAlphas[s.id] !== undefined ? state.nodeAlphas[s.id] : 1.0; });
+      state.nodeAlphas = newAlphas;
+      if (state.statusEl) {
+        const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
+        const zoomNote = options.zoomable ? ' · scroll to zoom' : '';
+        const dragNote = options.draggable ? ' · drag to orbit' : '';
+        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} links${zoomNote}${dragNote}`;
+      }
+    }
+
+    function rotX(p, a) {
+      const c = Math.cos(a), s = Math.sin(a);
+      return { x: p.x, y: c*p.y - s*p.z, z: s*p.y + c*p.z, phase: p.phase };
+    }
+    function rotY(p, a) {
+      const c = Math.cos(a), s = Math.sin(a);
+      return { x: c*p.x + s*p.z, y: p.y, z: -s*p.x + c*p.z, phase: p.phase };
+    }
+    function project(p) {
+      const fov = Math.min(state.width, state.height) * 0.75;
+      const dist = fov / (fov + p.z + 360 * state.scale);
+      const z = state.zoom;
+      return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
+    }
+    function drawNode(sx, sy, r, color, alpha) {
+      const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
+      grad.addColorStop(0, `rgba(${color.rgb},${Math.min(alpha * 0.68, 1).toFixed(2)})`);
+      grad.addColorStop(0.42, `rgba(${color.rgb},${Math.min(alpha * 0.24, 1).toFixed(2)})`);
+      grad.addColorStop(1, `rgba(${color.rgb},0)`);
+      ctx.beginPath(); ctx.arc(sx, sy, r * 3.9, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.18, 1).toFixed(2)})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
+    }
+    function shouldLabel(skill) {
+      if (state.labelMode === 'none') return false;
+      if (state.labelMode === 'all') return true;
+      if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
+      return skill.type === 'legendary';
+    }
+    function draw() {
+      if (!state.running) return;
+      state.t += 0.006;
+      ctx.clearRect(0, 0, state.width, state.height);
+      state.projectedNodes = {};
+      const ry = options.draggable
+        ? state.t * 0.16 + state.orbitY
+        : state.t * 0.16 + state.mx * 0.10;
+      const rx = options.draggable
+        ? Math.sin(state.t * 0.055) * 0.20 + state.orbitX
+        : Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
+      const xf = {};
+      state.skills.forEach(skill => {
+        const p0 = state.positions[skill.id];
+        if (!p0) return;
+        xf[skill.id] = rotX(rotY(p0, ry), rx);
+      });
+      const neighborSet = new Set();
+      if (state.hoveredId) {
+        neighborSet.add(state.hoveredId);
+        const hoveredSkill = state.skills.find(s => s.id === state.hoveredId);
+        if (hoveredSkill) hoveredSkill.prerequisites.forEach(pid => neighborSet.add(pid));
+        state.skills.forEach(s => { if (s.prerequisites.includes(state.hoveredId)) neighborSet.add(s.id); });
+      }
+      const hovering = Boolean(state.hoveredId);
+      const isSearchActive = Boolean(state.searchText);
+      const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
+      const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
+      const legendFiltering = Boolean(state.legendFilterType || state.legendFilterRank);
+      state.skills.forEach(skill => {
+        let targetVis;
+        if (hovering) {
+          targetVis = skill.id === state.hoveredId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
+        } else if (legendHovering) {
+          const mt = !state.legendHoverType || skill.type === state.legendHoverType;
+          const mr = !state.legendHoverRank || skill.level === state.legendHoverRank;
+          targetVis = (mt && mr) ? 1.0 : 0.12;
+        } else if (legendFiltering) {
+          const mt = !state.legendFilterType || skill.type === state.legendFilterType;
+          const mr = !state.legendFilterRank || skill.level === state.legendFilterRank;
+          const matchesLegend = mt && mr;
+          if (isSearchActive) {
+            const matchesSearch = (skill.name || skill.id).toLowerCase().includes(searchQuery);
+            targetVis = (matchesLegend && matchesSearch) ? 1.0 : 0.12;
+          } else {
+            targetVis = matchesLegend ? 1.0 : 0.12;
+          }
+        } else if (isSearchActive) {
+          targetVis = (skill.name || skill.id).toLowerCase().includes(searchQuery) ? 1.0 : 0.12;
+        } else {
+          targetVis = 1.0;
+        }
+        if (state.nodeAlphas[skill.id] === undefined) state.nodeAlphas[skill.id] = targetVis;
+        state.nodeAlphas[skill.id] += (targetVis - state.nodeAlphas[skill.id]) * 0.15;
+      });
+      state.stars.forEach(star => {
+        const p = rotX(rotY(star, ry), rx);
+        const pr = project(p);
+        if (pr.scale < 0.01) return;
+        ctx.beginPath();
+        ctx.arc(pr.sx, pr.sy, star.size * pr.scale * 1.55, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${(star.alpha * Math.min(pr.scale * 2, 1)).toFixed(2)})`;
+        ctx.fill();
+      });
+      const edges = [];
+      state.skills.forEach(skill => {
+        if (!xf[skill.id]) return;
+        skill.prerequisites.forEach(pid => {
+          if (!xf[pid]) return;
+          edges.push({ from: pid, to: skill.id, type: skill.type, avgZ: (xf[skill.id].z + xf[pid].z) / 2 });
+        });
+      });
+      edges.sort((a,b) => a.avgZ - b.avgZ);
+      edges.forEach(edge => {
+        const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
+        const col = PALETTE[edge.type] || PALETTE.atomic;
+        const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * state.scale) / (860 * state.scale), 0.08), 1);
+        const isNeighborEdge = hovering && neighborSet.has(edge.from) && neighborSet.has(edge.to);
+        const fromVis = state.nodeAlphas[edge.from] !== undefined ? state.nodeAlphas[edge.from] : 1.0;
+        const toVis   = state.nodeAlphas[edge.to]   !== undefined ? state.nodeAlphas[edge.to]   : 1.0;
+        const edgeVis = (fromVis + toVis) / 2;
+        const baseEdgeAlpha = isNeighborEdge ? 0.72 : 0.31;
+        ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy);
+        ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * baseEdgeAlpha * edgeVis).toFixed(2)})`;
+        ctx.lineWidth = isNeighborEdge ? (edge.type === 'legendary' ? 2.2 : 1.4) : (edge.type === 'legendary' ? 1.55 : 0.92);
+        ctx.stroke();
+      });
+      const nodes = state.skills.map(skill => ({ skill, z: xf[skill.id] ? xf[skill.id].z : -9999 })).sort((a,b) => a.z - b.z);
+      nodes.forEach(({ skill }) => {
+        const p = xf[skill.id]; if (!p) return;
+        const pr = project(p);
+        state.projectedNodes[skill.id] = pr;
+        const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
+        const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
+        const col = PALETTE[skill.type] || PALETTE.atomic;
+        const baseR = skill.type === 'legendary' ? 12.5 : skill.type === 'composite' ? 6.9 : 3.5;
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
+      });
+      const labelNodes = nodes.filter(({ skill }) => shouldLabel(skill));
+      function drawLabel(skill, highlighted) {
+        const p = xf[skill.id]; if (!p) return;
+        const pr = project(p);
+        const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0), 1);
+        if (!highlighted && depthAlpha < 0.22) return;
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
+        if (labelAlpha < 0.04) return;
+        const col = PALETTE[skill.type] || PALETTE.atomic;
+        const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
+        ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
+        ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
+        ctx.textAlign = 'center';
+        const labelText = state.showSlugs ? skill.id : skill.name;
+        ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
+      }
+      labelNodes.forEach(({ skill }) => {
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        if (vis <= 0.95) drawLabel(skill, false);
+      });
+      labelNodes.forEach(({ skill }) => {
+        const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
+        if (vis > 0.95) drawLabel(skill, true);
+      });
+      if (options.hoverable && state.tooltipEl) {
+        const pr = state.projectedNodes[state.hoveredId];
+        if (state.hoveredId && pr) {
+          if (state.hoveredId !== state.lastHoveredId) {
+            const skill = state.skills.find(s => s.id === state.hoveredId);
+            const col = PALETTE[skill.type] || PALETTE.atomic;
+            const typeClass = `skill-tooltip-type-${skill.type}`;
+            const rm = skill.level ? RANK_META[skill.level] : null;
+            const rankPill = rm
+              ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level} ${rm.name}</span>`
+              : '';
+            state.tooltipEl.innerHTML =
+              `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +
+              `<div style="color:#64748b;font-size:.68rem;font-weight:500;margin-bottom:.3rem;font-family:monospace">${skill.id}</div>` +
+              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}</div>`;
+            state.lastHoveredId = state.hoveredId;
+          }
+          let tx = pr.sx + 18, ty = pr.sy - 34;
+          tx = Math.min(tx, state.width - 240); ty = Math.max(ty, 8);
+          state.tooltipEl.style.left = tx + 'px';
+          state.tooltipEl.style.top  = ty + 'px';
+          state.tooltipEl.style.display = 'block';
+        } else {
+          state.tooltipEl.style.display = 'none';
+          state.lastHoveredId = null;
+        }
+      }
+      state.frame = requestAnimationFrame(draw);
+    }
+
+    function start() {
+      if (state.running) return;
+      state.running = true;
+      draw();
+    }
+
+    function stop() {
+      state.running = false;
+      if (state.frame) cancelAnimationFrame(state.frame);
+      state.frame = null;
+    }
+
+    resize();
+    if (options.hoverable) {
+      const tip = document.createElement('div');
+      tip.className = 'skill-tooltip';
+      canvas.parentElement.appendChild(tip);
+      state.tooltipEl = tip;
+      const searchWrap = document.createElement('div');
+      searchWrap.className = 'graph-search-wrap';
+      const searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.className = 'graph-search';
+      searchInput.placeholder = 'Search skills…';
+      searchInput.setAttribute('aria-label', 'Filter skill graph');
+      searchInput.addEventListener('input', () => { state.searchText = searchInput.value.trim(); });
+      searchInput.addEventListener('mousedown', e => e.stopPropagation());
+      searchWrap.appendChild(searchInput);
+      canvas.parentElement.appendChild(searchWrap);
+      state.searchInputEl = searchInput;
+
+      const legend = document.createElement('div');
+      legend.className = 'graph-legend';
+      legend.innerHTML =
+        '<div class="graph-legend-section"><div class="graph-legend-heading">Type</div>' +
+        '<div class="graph-legend-item" data-legend-type="atomic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Atomic</div>' +
+        '<div class="graph-legend-item" data-legend-type="composite"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Composite</div>' +
+        '<div class="graph-legend-item" data-legend-type="legendary"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Legendary</div>' +
+        '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
+        '<div class="graph-legend-ranks">' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="I" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="II" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="III" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="IV" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="V" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="VI" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+        '</div></div>';
+      legend.addEventListener('mousedown', e => e.stopPropagation());
+      legend.querySelectorAll('.graph-legend-item[data-legend-type]').forEach(item => {
+        item.addEventListener('mouseenter', () => { state.legendHoverType = item.dataset.legendType; });
+        item.addEventListener('mouseleave', () => { state.legendHoverType = null; });
+        item.addEventListener('click', () => {
+          const val = state.legendFilterType === item.dataset.legendType ? null : item.dataset.legendType;
+          state.legendFilterType = val;
+          legend.querySelectorAll('[data-legend-type]').forEach(el => el.classList.remove('active'));
+          if (val) item.classList.add('active');
+        });
+      });
+      legend.querySelectorAll('.graph-legend-rank-pill').forEach(pill => {
+        pill.addEventListener('mouseenter', () => { state.legendHoverRank = pill.dataset.legendRank; });
+        pill.addEventListener('mouseleave', () => { state.legendHoverRank = null; });
+        pill.addEventListener('click', () => {
+          const val = state.legendFilterRank === pill.dataset.legendRank ? null : pill.dataset.legendRank;
+          state.legendFilterRank = val;
+          legend.querySelectorAll('.graph-legend-rank-pill').forEach(el => el.classList.remove('active'));
+          if (val) pill.classList.add('active');
+        });
+      });
+      canvas.parentElement.appendChild(legend);
+      state.legendEl = legend;
+
+      const labelToggle = document.createElement('button');
+      labelToggle.type = 'button';
+      labelToggle.className = 'graph-label-toggle';
+      labelToggle.textContent = 'Toggle Skills';
+      labelToggle.addEventListener('mousedown', e => e.stopPropagation());
+      labelToggle.addEventListener('click', () => {
+        state.showSlugs = !state.showSlugs;
+        labelToggle.textContent = state.showSlugs ? 'Show Names' : 'Toggle Skills';
+      });
+      canvas.parentElement.appendChild(labelToggle);
+      state.labelToggleEl = labelToggle;
+    }
+    window.addEventListener('resize', resize);
+    const pointerTarget = options.pointerTarget || canvas;
+    pointerTarget.addEventListener('mousemove', event => {
+      const rect = canvas.getBoundingClientRect();
+      if (options.draggable && state.dragging) {
+        state.orbitY += (event.clientX - state.dragLastX) * 0.007;
+        state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        state.dragLastX = event.clientX;
+        state.dragLastY = event.clientY;
+        state.hoveredId = null;
+      } else {
+        state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
+        state.my = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+        if (options.hoverable) {
+          const mx = event.clientX - rect.left;
+          const my = event.clientY - rect.top;
+          let closest = null, closestDist = 22;
+          Object.entries(state.projectedNodes).forEach(([id, pr]) => {
+            const d = Math.hypot(pr.sx - mx, pr.sy - my);
+            if (d < closestDist) { closestDist = d; closest = id; }
+          });
+          state.hoveredId = closest;
+          canvas.style.cursor = closest ? 'pointer' : (options.draggable ? 'grab' : 'default');
+        }
+      }
+    });
+    if (options.draggable) {
+      canvas.style.cursor = 'grab';
+      canvas.addEventListener('mouseleave', () => { if (!state.dragging) state.hoveredId = null; });
+      canvas.addEventListener('mousedown', e => {
+        e.preventDefault();
+        state.dragging = true;
+        state.dragLastX = e.clientX;
+        state.dragLastY = e.clientY;
+        canvas.style.cursor = 'grabbing';
+      });
+      window.addEventListener('mouseup', () => {
+        if (!state.dragging) return;
+        state.dragging = false;
+        canvas.style.cursor = state.hoveredId ? 'pointer' : 'grab';
+      });
+    }
+    if (options.zoomable) {
+      canvas.addEventListener('wheel', e => {
+        e.preventDefault();
+        state.zoom = Math.max(0.3, Math.min(3.0, state.zoom * (1 - e.deltaY * 0.001)));
+      }, { passive: false });
+    }
+    function resetFilters() {
+      state.legendFilterType = null;
+      state.legendFilterRank = null;
+      state.legendHoverType = null;
+      state.legendHoverRank = null;
+      state.showSlugs = false;
+      state.searchText = '';
+      if (state.legendEl) {
+        state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+      }
+      if (state.searchInputEl) state.searchInputEl.value = '';
+      if (state.labelToggleEl) state.labelToggleEl.textContent = 'Toggle Skills';
+    }
+    if (state.running) draw();
+    return { setSkills, resize, start, stop, resetFilters };
+  }
+
+  const hero = document.getElementById('hero');
+  const trigger = document.querySelector('[data-graph-trigger]');
+  const dialog = document.getElementById('skillGraphDialog');
+  const closeBtn = document.querySelector('[data-graph-close]');
+  const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
+  const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
+    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true
+  });
+
+  function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
+  trigger.addEventListener('mouseenter', () => peek(true));
+  trigger.addEventListener('mouseleave', () => peek(false));
+  trigger.addEventListener('focus', () => peek(true));
+  trigger.addEventListener('blur', () => peek(false));
+  trigger.addEventListener('click', () => {
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    modalGraph.resize();
+    modalGraph.start();
+    peek(false);
+  });
+  function closeDialog() {
+    if (dialog.close) dialog.close();
+    else dialog.removeAttribute('open');
+    modalGraph.resetFilters();
+    modalGraph.stop();
+  }
+  closeBtn.addEventListener('click', closeDialog);
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) closeDialog();
+  });
+  dialog.addEventListener('close', () => modalGraph.stop());
+
+  fetch(GRAPH_JSON_URL)
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    })
+    .then(graph => normalizeSkills(graph))
+    .then(skills => { heroGraph.setSkills(skills); modalGraph.setSkills(skills); })
+    .catch(error => {
+      console.warn('Using embedded fallback skill graph:', error);
+      const status = document.querySelector('[data-graph-status]');
+      if (status) status.textContent = 'Using embedded preview graph. Run the page from docs/ to load the full graph.';
+    });
+})();
+</script>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
-# [IV · Evolved · Ultimate Skill] True Oracle: Autonomous Data Scientist
+# [V · Transcendent · Ultimate Skill] True Oracle: Autonomous Data Scientist
 **ID:** autonomous-data-scientist  
 **Type:** Ultimate Skill  
-**Level:** IV · Evolved  
+**Level:** V · Transcendent  
 **Rarity:** Divine  
 **Status:** Provisional
 
@@ -32,4 +32,4 @@ Requires dataset access and compute environment. Minimum 3 Class A/B evidence so
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

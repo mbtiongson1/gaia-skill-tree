@@ -4,175 +4,175 @@
       "id": "tokenize",
       "label": "Tokenize",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "classify",
       "label": "Classify",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "retrieve",
       "label": "Retrieve",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "rank",
       "label": "Rank",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "parseJson",
       "label": "Parse JSON",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "parseHtml",
       "label": "Parse HTML",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "executeBash",
       "label": "Execute Bash",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "generateText",
       "label": "Generate Text",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "summarize",
       "label": "Summarize",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "citeSources",
       "label": "Cite Sources",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "extractEntities",
       "label": "Extract Entities",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "routeIntent",
       "label": "Route Intent",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "evaluateOutput",
       "label": "Evaluate Output",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "embedText",
       "label": "Embed Text",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "chunkDocument",
       "label": "Chunk Document",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "planDecompose",
       "label": "Plan and Decompose",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "writeReport",
       "label": "Write Report",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "audienceModel",
       "label": "Audience Model",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "toolSelect",
       "label": "Tool Select",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "errorInterpretation",
       "label": "Error Interpretation",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "codeGeneration",
       "label": "Code Generation",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "webSearch",
       "label": "Web Search",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "scoreRelevance",
       "label": "Score Relevance",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "formatOutput",
       "label": "Format Output",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
       "id": "diffContent",
       "label": "Diff Content",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common"
     },
     {
@@ -235,21 +235,21 @@
       "id": "recursiveSelfImprovement",
       "label": "Recursive Self-Improvement",
       "type": "legendary",
-      "level": "I",
+      "level": "V",
       "rarity": "legendary"
     },
     {
       "id": "multiAgentOrchestrationV",
       "label": "Multi-Agent Orchestration V",
       "type": "legendary",
-      "level": "I",
+      "level": "V",
       "rarity": "legendary"
     },
     {
       "id": "autonomousResearchAgent",
       "label": "Autonomous Research Agent",
       "type": "legendary",
-      "level": "I",
+      "level": "VI",
       "rarity": "legendary"
     }
   ],

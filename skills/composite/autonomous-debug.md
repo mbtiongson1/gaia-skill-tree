@@ -1,7 +1,7 @@
-# [III · Named · Extra Skill] Autonomous Debug
+# [IV · Hardened · Extra Skill] Autonomous Debug
 **ID:** autonomous-debug  
 **Type:** Extra Skill  
-**Level:** III · Named  
+**Level:** IV · Hardened  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -30,4 +30,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

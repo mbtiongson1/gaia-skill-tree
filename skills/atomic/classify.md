@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Classify
+# [0 · Basic · Intrinsic Skill] Classify
 **ID:** classify  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -14,8 +14,9 @@ Assigns one or more categorical labels to an input based on learned or rule-base
 _None._
 
 ## Unlocks
-- [Route Intent](../atomic/route-intent.md)
 - [Content Moderation](../composite/content-moderation.md)
+- [Few-Shot Learning](../atomic/few-shot-learning.md)
+- [Route Intent](../atomic/route-intent.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -26,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

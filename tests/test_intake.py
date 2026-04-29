@@ -11,6 +11,8 @@ GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
 
 
 def run_validate_intake(intake_dir):
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
     result = subprocess.run(
         [
             "python3",
@@ -22,18 +24,20 @@ def run_validate_intake(intake_dir):
         ],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        env=env,
     )
     return result.returncode, result.stdout
 
 
-def write_batch(root, batch_id, proposed_id="semanticSearch", similarity_target="webSearch"):
+def write_batch(root, batch_id, proposed_id="semantic-search", similarity_target="web-search"):
     os.makedirs(os.path.join(root, "skill-batches"), exist_ok=True)
     batch = {
         "batchId": batch_id,
         "userId": "tester",
         "sourceRepo": "tester/example",
         "generatedAt": "2026-04-29T00:00:00Z",
-        "knownSkills": [{"skillId": "webSearch"}],
+        "knownSkills": [{"skillId": "web-search"}],
         "proposedSkills": [
             {
                 "id": proposed_id,
@@ -66,15 +70,15 @@ class TestIntakeValidation(unittest.TestCase):
 
     def test_duplicate_proposed_id_against_canonical_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
-            write_batch(tmp, "batch-one", proposed_id="webSearch")
+            write_batch(tmp, "batch-one", proposed_id="web-search")
             code, out = run_validate_intake(tmp)
             self.assertEqual(code, 1)
             self.assertIn("duplicates canonical skill", out)
 
     def test_duplicate_proposed_ids_across_batches_fail(self):
         with tempfile.TemporaryDirectory() as tmp:
-            write_batch(tmp, "batch-one", proposed_id="semanticSearch")
-            write_batch(tmp, "batch-two", proposed_id="semanticSearch")
+            write_batch(tmp, "batch-one", proposed_id="semantic-search")
+            write_batch(tmp, "batch-two", proposed_id="semantic-search")
             code, out = run_validate_intake(tmp)
             self.assertEqual(code, 1)
             self.assertIn("Duplicate proposed skill", out)

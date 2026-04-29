@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "0.2.0",
-  "generatedAt": "2026-04-28",
+  "version": "1.0.0",
+  "generatedAt": "2026-04-30",
   "meta": {
     "typeLabels": {
       "atomic": "Intrinsic Skill",
@@ -9,11 +9,13 @@
       "legendary": "Ultimate Skill"
     },
     "levelLabels": {
-      "I": "Dormant",
-      "II": "Awakened",
-      "III": "Named",
-      "IV": "Evolved",
-      "V": "Transcendent"
+      "0": "Basic",
+      "I": "Awakened",
+      "II": "Named",
+      "III": "Evolved",
+      "IV": "Hardened",
+      "V": "Transcendent",
+      "VI": "Transcendent ★"
     },
     "rarityLabels": {
       "legendary": "Divine"
@@ -24,7 +26,7 @@
       "id": "tokenize",
       "name": "Tokenize",
       "type": "atomic",
-      "level": "II",
+      "level": "0",
       "rarity": "common",
       "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
       "prerequisites": [],
@@ -51,13 +53,14 @@
       "id": "classify",
       "name": "Classify",
       "type": "atomic",
-      "level": "II",
+      "level": "0",
       "rarity": "common",
       "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
       "prerequisites": [],
       "derivatives": [
-        "route-intent",
-        "content-moderation"
+        "content-moderation",
+        "few-shot-learning",
+        "route-intent"
       ],
       "conditions": "",
       "evidence": [
@@ -72,18 +75,19 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-29",
       "version": "0.1.0"
     },
     {
       "id": "retrieve",
       "name": "Retrieve",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
       "derivatives": [
+        "grounding",
         "rag-pipeline"
       ],
       "conditions": "",
@@ -99,14 +103,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
       "id": "rank",
       "name": "Rank",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Orders a set of candidate items by relevance, quality, or fitness for a given objective.",
       "prerequisites": [],
@@ -133,7 +137,7 @@
       "id": "parse-json",
       "name": "Parse JSON",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
       "prerequisites": [],
@@ -161,7 +165,7 @@
       "id": "parse-html",
       "name": "Parse HTML",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Extracts structured content from raw HTML, navigating DOM trees and handling malformed markup.",
       "prerequisites": [],
@@ -188,7 +192,7 @@
       "id": "execute-bash",
       "name": "Execute Bash",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Runs shell commands in a sandboxed environment, captures stdout/stderr, and handles exit codes.",
       "prerequisites": [],
@@ -218,12 +222,14 @@
       "id": "generate-text",
       "name": "Generate Text",
       "type": "atomic",
-      "level": "II",
+      "level": "0",
       "rarity": "common",
       "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
       "prerequisites": [],
       "derivatives": [
-        "ghostwrite"
+        "few-shot-learning",
+        "ghostwrite",
+        "prompt-optimization"
       ],
       "conditions": "",
       "evidence": [
@@ -238,14 +244,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-29",
       "version": "0.1.0"
     },
     {
       "id": "summarize",
       "name": "Summarize",
       "type": "atomic",
-      "level": "II",
+      "level": "0",
       "rarity": "common",
       "description": "Condenses longer input into a shorter representation that preserves key information and intent.",
       "prerequisites": [],
@@ -274,11 +280,12 @@
       "id": "cite-sources",
       "name": "Cite Sources",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
       "prerequisites": [],
       "derivatives": [
+        "grounding",
         "research"
       ],
       "conditions": "",
@@ -294,14 +301,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
       "id": "extract-entities",
       "name": "Extract Entities",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Identifies and extracts named entities such as people, organizations, dates, and locations from text.",
       "prerequisites": [],
@@ -333,7 +340,7 @@
       "id": "route-intent",
       "name": "Route Intent",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
       "prerequisites": [],
@@ -361,12 +368,15 @@
       "id": "evaluate-output",
       "name": "Evaluate Output",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
       "prerequisites": [],
       "derivatives": [
         "code-review-pipeline",
+        "grounding",
+        "multi-agent-debate",
+        "prompt-optimization",
         "self-critique"
       ],
       "conditions": "",
@@ -382,14 +392,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.1.0"
     },
     {
       "id": "embed-text",
       "name": "Embed Text",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Converts text into dense vector representations suitable for similarity search and clustering.",
       "prerequisites": [],
@@ -417,7 +427,7 @@
       "id": "chunk-document",
       "name": "Chunk Document",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Splits a document into semantically meaningful segments optimized for embedding and retrieval.",
       "prerequisites": [],
@@ -444,13 +454,14 @@
       "id": "plan-decompose",
       "name": "Plan and Decompose",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Breaks a complex objective into an ordered sequence of executable sub-tasks.",
       "prerequisites": [],
       "derivatives": [
         "plan-and-execute",
-        "re-act-reasoning"
+        "re-act-reasoning",
+        "tree-of-thought"
       ],
       "conditions": "",
       "evidence": [
@@ -465,14 +476,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-29",
       "version": "0.1.0"
     },
     {
       "id": "write-report",
       "name": "Write Report",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Produces structured, multi-section written output with headings, citations, and coherent narrative.",
       "prerequisites": [],
@@ -499,7 +510,7 @@
       "id": "audience-model",
       "name": "Audience Model",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Adapts tone, complexity, and framing of output to match a target audience profile.",
       "prerequisites": [],
@@ -527,14 +538,15 @@
       "id": "tool-select",
       "name": "Tool Select",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
       "prerequisites": [],
       "derivatives": [
         "plan-and-execute",
         "re-act-reasoning",
-        "tool-use"
+        "tool-use",
+        "function-calling"
       ],
       "conditions": "",
       "evidence": [
@@ -556,7 +568,7 @@
       "id": "error-interpretation",
       "name": "Error Interpretation",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
       "prerequisites": [],
@@ -584,7 +596,7 @@
       "id": "code-generation",
       "name": "Code Generation",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
       "prerequisites": [],
@@ -592,7 +604,8 @@
         "autonomous-debug",
         "code-execution",
         "code-review-pipeline",
-        "registry-curation"
+        "registry-curation",
+        "tool-creation"
       ],
       "conditions": "",
       "evidence": [
@@ -607,14 +620,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-29",
       "version": "0.1.0"
     },
     {
       "id": "web-search",
       "name": "Web Search",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Queries external search engines or APIs and retrieves relevant result sets.",
       "prerequisites": [],
@@ -643,7 +656,7 @@
       "id": "score-relevance",
       "name": "Score Relevance",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Assigns a numerical relevance score to candidate items relative to a query or objective.",
       "prerequisites": [],
@@ -670,7 +683,7 @@
       "id": "format-output",
       "name": "Format Output",
       "type": "atomic",
-      "level": "II",
+      "level": "0",
       "rarity": "common",
       "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
       "prerequisites": [],
@@ -700,7 +713,7 @@
       "id": "diff-content",
       "name": "Diff Content",
       "type": "atomic",
-      "level": "II",
+      "level": "I",
       "rarity": "common",
       "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
       "prerequisites": [],
@@ -823,7 +836,7 @@
       "id": "autonomous-debug",
       "name": "Autonomous Debug",
       "type": "composite",
-      "level": "III",
+      "level": "IV",
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
       "prerequisites": [
@@ -852,7 +865,7 @@
       "id": "plan-and-execute",
       "name": "Plan and Execute",
       "type": "composite",
-      "level": "III",
+      "level": "IV",
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
       "prerequisites": [
@@ -925,18 +938,25 @@
       "conditions": "",
       "evidence": [
         {
+          "class": "A",
+          "source": "https://aclanthology.org/2024.eacl-demo.16/",
+          "evaluator": "rico-favor",
+          "date": "2026-04-29",
+          "notes": "RAGAS peer-reviewed demo paper defines reproducible metrics for retrieval-augmented generation, including context relevance, faithfulness, and answer relevance; these directly evaluate known RAG failure modes such as irrelevant retrieval and unfaithful generation."
+        },
+        {
           "class": "B",
-          "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/ragPipeline.md",
-          "evaluator": "mbtiongson1",
-          "date": "2026-04-26",
-          "notes": "Seed evidence for RAG Pipeline."
+          "source": "https://github.com/vibrantlabsai/ragas",
+          "evaluator": "rico-favor",
+          "date": "2026-04-29",
+          "notes": "RAGAS open-source implementation provides a reproducible evaluation toolkit for RAG pipelines. Notes: RAG pipelines can fail when retrieval misses relevant chunks, ambiguous queries retrieve misleading context, or generated answers drift from retrieved evidence."
         }
       ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
-      "version": "0.1.0"
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
     },
     {
       "id": "document-analyst",
@@ -972,7 +992,7 @@
       "id": "recursive-self-improvement",
       "name": "True Sage: Recursive Self-Improvement",
       "type": "legendary",
-      "level": "I",
+      "level": "V",
       "rarity": "legendary",
       "description": "Agent iteratively refines its own prompts, tools, or strategies based on performance feedback loops.",
       "prerequisites": [
@@ -982,7 +1002,15 @@
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
-      "evidence": [],
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Seed evidence — structural validation placeholder."
+        }
+      ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
@@ -993,7 +1021,7 @@
       "id": "multi-agent-orchestration-v",
       "name": "Grand Conductor: Multi-Agent Orchestration",
       "type": "legendary",
-      "level": "I",
+      "level": "V",
       "rarity": "legendary",
       "description": "Coordinates multiple specialized agents across complex workflows with dynamic task allocation and conflict resolution.",
       "prerequisites": [
@@ -1003,7 +1031,15 @@
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
-      "evidence": [],
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Seed evidence — structural validation placeholder."
+        }
+      ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
@@ -1014,7 +1050,7 @@
       "id": "autonomous-research-agent",
       "name": "Wisdom King: Autonomous Research Agent",
       "type": "legendary",
-      "level": "I",
+      "level": "VI",
       "rarity": "legendary",
       "description": "Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.",
       "prerequisites": [
@@ -1024,18 +1060,26 @@
       ],
       "derivatives": [],
       "conditions": "Requires extensive multi-system validation before level advancement.",
-      "evidence": [],
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Seed evidence — apex tier structural validation placeholder."
+        }
+      ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-04-29",
       "version": "0.1.0"
     },
     {
       "id": "translate",
       "name": "Translate",
       "type": "atomic",
-      "level": "IV",
+      "level": "0",
       "rarity": "common",
       "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
       "prerequisites": [],
@@ -1062,7 +1106,7 @@
       "id": "sentiment-analysis",
       "name": "Sentiment Analysis",
       "type": "atomic",
-      "level": "IV",
+      "level": "0",
       "rarity": "common",
       "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
       "prerequisites": [],
@@ -1090,12 +1134,13 @@
       "id": "image-caption",
       "name": "Image Caption",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
       "prerequisites": [],
       "derivatives": [
-        "multimodal-reasoning"
+        "multimodal-reasoning",
+        "object-detection"
       ],
       "conditions": "",
       "evidence": [
@@ -1110,14 +1155,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
       "id": "speech-to-text",
       "name": "Speech to Text",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
       "prerequisites": [],
@@ -1144,7 +1189,7 @@
       "id": "text-to-speech",
       "name": "Text to Speech",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
       "prerequisites": [],
@@ -1171,7 +1216,7 @@
       "id": "generate-sql",
       "name": "Generate SQL",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
       "prerequisites": [],
@@ -1199,14 +1244,15 @@
       "id": "question-answer",
       "name": "Question Answer",
       "type": "atomic",
-      "level": "IV",
+      "level": "0",
       "rarity": "common",
       "description": "Produces accurate, context-grounded answers to natural-language questions, handling unanswerable cases.",
       "prerequisites": [],
       "derivatives": [
         "conversational-agent",
-        "voice-agent",
-        "multimodal-reasoning"
+        "few-shot-learning",
+        "multimodal-reasoning",
+        "voice-agent"
       ],
       "conditions": "",
       "evidence": [
@@ -1221,14 +1267,14 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-29",
       "version": "0.2.0"
     },
     {
       "id": "image-generate",
       "name": "Image Generate",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Creates photorealistic or stylized images from text prompts using diffusion-based or autoregressive generative models.",
       "prerequisites": [],
@@ -1253,7 +1299,7 @@
       "id": "math-reason",
       "name": "Math Reason",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
       "prerequisites": [],
@@ -1281,7 +1327,7 @@
       "id": "logical-inference",
       "name": "Logical Inference",
       "type": "atomic",
-      "level": "IV",
+      "level": "I",
       "rarity": "uncommon",
       "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
       "prerequisites": [],
@@ -1310,7 +1356,7 @@
       "id": "memory-manage",
       "name": "Memory Manage",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Maintains, indexes, and retrieves conversational and long-term memory across sessions, managing context window constraints.",
       "prerequisites": [],
@@ -1338,11 +1384,13 @@
       "id": "api-call",
       "name": "API Call",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Constructs, executes, and handles responses from HTTP APIs by interpreting documentation and selecting appropriate endpoints and parameters.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "function-calling"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -1363,7 +1411,7 @@
       "id": "refactor-code",
       "name": "Refactor Code",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
       "prerequisites": [],
@@ -1390,7 +1438,7 @@
       "id": "generate-test",
       "name": "Generate Test",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Produces unit tests, integration tests, and edge-case test cases from source code or natural-language specifications.",
       "prerequisites": [],
@@ -1417,7 +1465,7 @@
       "id": "parse-pdf",
       "name": "Parse PDF",
       "type": "atomic",
-      "level": "IV",
+      "level": "I",
       "rarity": "common",
       "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
       "prerequisites": [],
@@ -1444,7 +1492,7 @@
       "id": "detect-anomaly",
       "name": "Detect Anomaly",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "uncommon",
       "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
       "prerequisites": [],
@@ -1469,7 +1517,7 @@
       "id": "data-visualize",
       "name": "Data Visualize",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
       "prerequisites": [],
@@ -1496,7 +1544,7 @@
       "id": "conversational-agent",
       "name": "Conversational Agent",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
       "prerequisites": [
@@ -1525,7 +1573,7 @@
       "id": "text-to-sql-pipeline",
       "name": "Text-to-SQL Pipeline",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
       "prerequisites": [
@@ -1554,7 +1602,7 @@
       "id": "code-review-pipeline",
       "name": "Code Review Pipeline",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
       "prerequisites": [
@@ -1585,7 +1633,7 @@
       "id": "data-analysis",
       "name": "Data Analysis",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
       "prerequisites": [
@@ -1616,7 +1664,7 @@
       "id": "voice-agent",
       "name": "Voice Agent",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
       "prerequisites": [
@@ -1647,7 +1695,7 @@
       "id": "automated-testing",
       "name": "Automated Testing",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
       "prerequisites": [
@@ -1678,7 +1726,7 @@
       "id": "content-moderation",
       "name": "Content Moderation",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
       "prerequisites": [
@@ -1707,7 +1755,7 @@
       "id": "multimodal-reasoning",
       "name": "Multimodal Reasoning",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "rare",
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
       "prerequisites": [
@@ -1736,7 +1784,7 @@
       "id": "translation-pipeline",
       "name": "Translation Pipeline",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
       "prerequisites": [
@@ -1765,7 +1813,7 @@
       "id": "document-digitization",
       "name": "Document Digitization",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
       "prerequisites": [
@@ -1794,7 +1842,7 @@
       "id": "full-stack-developer",
       "name": "True Craftsman: Full-Stack Developer",
       "type": "legendary",
-      "level": "IV",
+      "level": "V",
       "rarity": "legendary",
       "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
       "prerequisites": [
@@ -1837,7 +1885,7 @@
       "id": "autonomous-data-scientist",
       "name": "True Oracle: Autonomous Data Scientist",
       "type": "legendary",
-      "level": "IV",
+      "level": "V",
       "rarity": "legendary",
       "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
       "prerequisites": [
@@ -1880,7 +1928,7 @@
       "id": "real-time-voice-assistant",
       "name": "True Herald: Real-Time Voice Assistant",
       "type": "legendary",
-      "level": "IV",
+      "level": "V",
       "rarity": "legendary",
       "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
       "prerequisites": [
@@ -1947,24 +1995,39 @@
           "evaluator": "mbtiongson1",
           "date": "2026-04-28",
           "notes": "Batch 2 curation: 11 skills added (7 atomic, 3 composite, 1 legendary) with verified Class A/B evidence."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Batch 3 curation: 5 skills added (2 atomic, 3 composite) — self-consistency, few-shot-learning, tree-of-thought, prompt-optimization, tool-creation."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Batch 4 curation: 6 skills added (4 atomic, 2 composite) -- ocr, object-detection, code-explain, reward-modeling, grounding, multi-agent-debate."
         }
       ],
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
       "id": "tool-use",
       "name": "Tool Use",
       "type": "atomic",
-      "level": "IV",
+      "level": "I",
       "rarity": "uncommon",
       "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
       "prerequisites": [],
       "derivatives": [
-        "re-act-reasoning"
+        "re-act-reasoning",
+        "tool-creation"
       ],
       "conditions": "",
       "evidence": [
@@ -1986,20 +2049,59 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-29",
       "version": "0.2.0"
+    },
+    {
+      "id": "function-calling",
+      "name": "Function Calling",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
+      "prerequisites": [
+        "structured-output",
+        "api-call",
+        "tool-select"
+      ],
+      "derivatives": [],
+      "conditions": "Requires an available function or tool catalog with machine-readable argument schemas and result contracts.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2307.16789",
+          "evaluator": "rico-favor",
+          "date": "2026-04-29",
+          "notes": "ToolLLM / ToolBench demonstrates LLM tool invocation over 16,000+ real-world APIs with documented evaluation tasks and failure analysis, supporting function calling as a schema-driven tool-use pattern."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.15334",
+          "evaluator": "rico-favor",
+          "date": "2026-04-29",
+          "notes": "Gorilla / APIBench evaluates model generation of API calls across large API collections, including accurate endpoint and argument selection."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.1.0"
     },
     {
       "id": "chain-of-thought",
       "name": "Chain-of-Thought Reasoning",
       "type": "atomic",
-      "level": "IV",
+      "level": "I",
       "rarity": "uncommon",
       "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
       "prerequisites": [],
       "derivatives": [
+        "multi-agent-debate",
         "re-act-reasoning",
-        "scientific-discovery"
+        "scientific-discovery",
+        "self-consistency",
+        "tree-of-thought"
       ],
       "conditions": "",
       "evidence": [
@@ -2021,18 +2123,19 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
       "id": "self-critique",
       "name": "Self-Critique",
       "type": "atomic",
-      "level": "IV",
+      "level": "I",
       "rarity": "uncommon",
       "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
       "prerequisites": [],
       "derivatives": [
+        "multi-agent-debate",
         "recursive-self-improvement"
       ],
       "conditions": "",
@@ -2055,20 +2158,21 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     },
     {
       "id": "structured-output",
       "name": "Structured Output Generation",
       "type": "atomic",
-      "level": "III",
+      "level": "I",
       "rarity": "common",
       "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
       "prerequisites": [],
       "derivatives": [
         "rag-pipeline",
-        "text-to-sql-pipeline"
+        "text-to-sql-pipeline",
+        "function-calling"
       ],
       "conditions": "",
       "evidence": [
@@ -2097,7 +2201,7 @@
       "id": "code-execution",
       "name": "Code Execution",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "common",
       "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
       "prerequisites": [],
@@ -2133,7 +2237,7 @@
       "id": "computer-use",
       "name": "Computer Use",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "rare",
       "description": "Controls desktop GUIs and web browsers by interpreting screenshots, issuing mouse/keyboard actions, and verifying visual state to complete open-ended computer tasks.",
       "prerequisites": [],
@@ -2167,7 +2271,7 @@
       "id": "hypothesis-generate",
       "name": "Hypothesis Generation",
       "type": "atomic",
-      "level": "IV",
+      "level": "II",
       "rarity": "rare",
       "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
       "prerequisites": [],
@@ -2208,7 +2312,7 @@
       "id": "re-act-reasoning",
       "name": "ReAct Reasoning",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
       "prerequisites": [
@@ -2246,7 +2350,7 @@
       "id": "browser-automation",
       "name": "Browser Automation",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
       "prerequisites": [
@@ -2283,7 +2387,7 @@
       "id": "knowledge-graph-build",
       "name": "Knowledge Graph Construction",
       "type": "composite",
-      "level": "IV",
+      "level": "III",
       "rarity": "uncommon",
       "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
       "prerequisites": [
@@ -2321,7 +2425,7 @@
       "id": "scientific-discovery",
       "name": "True Dragon: Autonomous Scientific Discovery",
       "type": "legendary",
-      "level": "IV",
+      "level": "V",
       "rarity": "legendary",
       "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report — completing a full research cycle without human intervention.",
       "prerequisites": [
@@ -2358,6 +2462,389 @@
       "status": "provisional",
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
+      "version": "0.2.0"
+    },
+    {
+      "id": "self-consistency",
+      "name": "Self-Consistency",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Samples multiple independent reasoning paths for the same problem and selects the answer by majority vote, improving robustness without any additional training.",
+      "prerequisites": [],
+      "derivatives": [
+        "tree-of-thought",
+        "re-act-reasoning"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2203.11171",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Wang et al. (2022) — Self-Consistency Improves Chain of Thought Reasoning in Language Models; +17.9% on GSM8K and +11.0% on MATH over greedy CoT decoding."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "few-shot-learning",
+      "name": "Few-Shot Learning",
+      "type": "atomic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Conditions a language model on a small number of input-output demonstrations within the prompt, enabling task adaptation without weight updates.",
+      "prerequisites": [],
+      "derivatives": [
+        "chain-of-thought",
+        "conversational-agent"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2005.14165",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Brown et al. (2020) — Language Models are Few-Shot Learners (GPT-3); in-context learning from 1-100 examples achieves near-SOTA on SuperGLUE, translation, and QA benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "tree-of-thought",
+      "name": "Tree of Thought",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Frames problem solving as a search over a tree of partial solutions, using LLM-generated evaluations to prune unpromising branches and backtrack, dramatically improving success on complex reasoning tasks.",
+      "prerequisites": [
+        "chain-of-thought",
+        "plan-decompose"
+      ],
+      "derivatives": [
+        "scientific-discovery"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.10601",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Yao et al. (2023) — Tree of Thoughts: Deliberate Problem Solving with LLMs; +74% on Game of 24 and +4% on Creative Writing vs chain-of-thought baseline."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/princeton-nlp/tree-of-thought-llm",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Princeton-NLP ToT repo — reproducible breadth-first and depth-first tree search implementations with evaluation scripts for Game of 24 and Mini Crosswords."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "prompt-optimization",
+      "name": "Prompt Optimization",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
+      "prerequisites": [
+        "evaluate-output",
+        "generate-text"
+      ],
+      "derivatives": [
+        "registry-curation"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2310.03714",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Khattab et al. (2023) — DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines; automated prompt tuning matches or exceeds hand-crafted prompts on GSM8K, HotPotQA, and FEVER."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/stanfordnlp/dspy",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "DSPy — Stanford NLP library for programmable LM pipelines; 18k+ GitHub stars, supports multiple optimizers (BootstrapFewShot, MIPRO, COPRO) across any LM."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "tool-creation",
+      "name": "Tool Creation",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
+      "prerequisites": [
+        "code-generation",
+        "tool-use"
+      ],
+      "derivatives": [
+        "full-stack-developer",
+        "autonomous-research-agent"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.17126",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "Cai et al. (2023) — Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/ctlllll/LLM-ToolMaker",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-29",
+          "notes": "LATM repo — reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-29",
+      "updatedAt": "2026-04-29",
+      "version": "0.2.0"
+    },
+    {
+      "id": "ocr",
+      "name": "OCR",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Extracts machine-readable text from raster images, scanned pages, and photo documents using optical character recognition, preserving layout and handling skew, noise, and varied fonts.",
+      "prerequisites": [],
+      "derivatives": [
+        "document-digitization"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2109.10282",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "TrOCR (Li et al., 2021) -- transformer-based OCR model achieving SOTA on IIIT-5K (97.9%), SVT (97.0%), and CUTE80 (97.9%) scene-text benchmarks, outperforming CNN+attention baselines across all datasets."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/JaidedAI/EasyOCR",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "EasyOCR -- production-grade OCR library supporting 80+ languages; 24k+ GitHub stars, reproducible benchmarks, and documented performance across diverse real-world document types."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "object-detection",
+      "name": "Object Detection",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Locates and classifies multiple objects within images by producing bounding boxes, confidence scores, and category labels in a single forward pass.",
+      "prerequisites": [],
+      "derivatives": [
+        "multimodal-reasoning",
+        "browser-automation"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2005.12872",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "DETR (Carion et al., 2020) -- end-to-end object detection with transformers; eliminates hand-crafted anchor design and achieves COCO AP 42.0 with ResNet-50, matching Faster R-CNN with simplified pipeline."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/ultralytics/ultralytics",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Ultralytics YOLOv8 -- production real-time detection library; COCO AP 50.2 at 8ms inference, 25k+ GitHub stars, reproducible training and evaluation scripts for detection and segmentation."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "code-explain",
+      "name": "Code Explain",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Generates accurate natural-language explanations of source code, describing intent, logic flow, and key decisions at function or module level.",
+      "prerequisites": [],
+      "derivatives": [
+        "code-review-pipeline",
+        "autonomous-debug"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2109.00859",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "CodeT5 (Wang et al., 2021) -- unified pre-trained model for code understanding and generation; 73.7 BLEU on CodeSearchNet code summarization (Python), SOTA across 4 programming languages on the NL4Code benchmark."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/salesforce/CodeT5",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Salesforce CodeT5/CodeT5+ open-source repository -- reproducible fine-tuning and evaluation scripts for code summarization, generation, and translation across 8 programming languages."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "reward-modeling",
+      "name": "Reward Modeling",
+      "type": "atomic",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Learns a scalar reward signal from human preference comparisons between model outputs, enabling reinforcement learning from human feedback (RLHF) to align model behavior with human values.",
+      "prerequisites": [],
+      "derivatives": [
+        "recursive-self-improvement",
+        "prompt-optimization"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2203.02155",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "InstructGPT (Ouyang et al., 2022) -- RLHF with reward model trained on 33K human comparisons; 1.3B InstructGPT preferred over 175B GPT-3 by 85% of labelers, demonstrating reward modeling as the key alignment primitive."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/huggingface/trl",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "TRL (HuggingFace) -- production RLHF library with reward model training, PPO, DPO, and GRPO support; 10k+ GitHub stars, reproducible training scripts and documented evaluation pipelines."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "grounding",
+      "name": "Grounding",
+      "type": "composite",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
+      "prerequisites": [
+        "retrieve",
+        "cite-sources",
+        "evaluate-output"
+      ],
+      "derivatives": [
+        "research"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2210.08726",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "RARR (Gao et al., 2022) -- retrieval and attribution for LLM outputs; +32 points on the AIS attribution benchmark by revising ungrounded claims using retrieved web evidence."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/shmsw25/FActScoring",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "FActScore (Min et al., EMNLP 2023) -- atomic factuality scoring pipeline decomposing generation into claims and verifying each against a retrieval corpus; open-source with reproducible evaluation on biography generation."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
+      "version": "0.2.0"
+    },
+    {
+      "id": "multi-agent-debate",
+      "name": "Multi-Agent Debate",
+      "type": "composite",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
+      "prerequisites": [
+        "self-critique",
+        "evaluate-output",
+        "chain-of-thought"
+      ],
+      "derivatives": [
+        "recursive-self-improvement"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2305.14325",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "Du et al. (2023) -- Improving Factuality and Reasoning through Multi-Agent Debate; +14% truthfulness on TruthfulQA and +6% on MMLU Reasoning over single-model greedy decoding baselines."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2308.07201",
+          "evaluator": "mbtiongson1",
+          "date": "2026-04-30",
+          "notes": "ChatEval (Chan et al., 2023) -- role-play multi-agent debate framework for open-ended text quality evaluation; outperforms single LLM judges on correlation with human ratings across MT-Bench and Vicuna benchmarks."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-30",
+      "updatedAt": "2026-04-30",
       "version": "0.2.0"
     }
   ],
@@ -3285,6 +3772,246 @@
     {
       "sourceSkillId": "math-reason",
       "targetSkillId": "scientific-discovery",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "self-consistency",
+      "targetSkillId": "tree-of-thought",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "self-consistency",
+      "targetSkillId": "re-act-reasoning",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "few-shot-learning",
+      "targetSkillId": "chain-of-thought",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "few-shot-learning",
+      "targetSkillId": "conversational-agent",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "chain-of-thought",
+      "targetSkillId": "tree-of-thought",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "plan-decompose",
+      "targetSkillId": "tree-of-thought",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "tree-of-thought",
+      "targetSkillId": "scientific-discovery",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "prompt-optimization",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "generate-text",
+      "targetSkillId": "prompt-optimization",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "prompt-optimization",
+      "targetSkillId": "registry-curation",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "tool-creation",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "tool-use",
+      "targetSkillId": "tool-creation",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "tool-creation",
+      "targetSkillId": "full-stack-developer",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "tool-creation",
+      "targetSkillId": "autonomous-research-agent",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "structured-output",
+      "targetSkillId": "function-calling",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "api-call",
+      "targetSkillId": "function-calling",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "tool-select",
+      "targetSkillId": "function-calling",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "ocr",
+      "targetSkillId": "document-digitization",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "object-detection",
+      "targetSkillId": "multimodal-reasoning",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "object-detection",
+      "targetSkillId": "browser-automation",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "code-explain",
+      "targetSkillId": "code-review-pipeline",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "code-explain",
+      "targetSkillId": "autonomous-debug",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "reward-modeling",
+      "targetSkillId": "recursive-self-improvement",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "reward-modeling",
+      "targetSkillId": "prompt-optimization",
+      "edgeType": "enhances",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "retrieve",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "cite-sources",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "grounding",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "self-critique",
+      "targetSkillId": "multi-agent-debate",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "multi-agent-debate",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "chain-of-thought",
+      "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",

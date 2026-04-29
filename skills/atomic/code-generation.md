@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Code Generation
+# [I · Awakened · Intrinsic Skill] Code Generation
 **ID:** code-generation  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -18,6 +18,7 @@ _None._
 - [Code Execution](../atomic/code-execution.md)
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
 - [Registry Curation](../composite/registry-curation.md)
+- [Tool Creation](../composite/tool-creation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -28,4 +29,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

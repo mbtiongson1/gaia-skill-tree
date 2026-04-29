@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Chain-of-Thought Reasoning
+# [I · Awakened · Intrinsic Skill] Chain-of-Thought Reasoning
 **ID:** chain-of-thought  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** I · Awakened  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -14,8 +14,11 @@ Produces explicit intermediate reasoning steps before arriving at a final answer
 _None._
 
 ## Unlocks
+- [Multi-Agent Debate](../composite/multi-agent-debate.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [Self-Consistency](../atomic/self-consistency.md)
+- [Tree of Thought](../composite/tree-of-thought.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -27,4 +30,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

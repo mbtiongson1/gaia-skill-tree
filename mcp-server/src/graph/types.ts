@@ -2,7 +2,7 @@ export interface Skill {
   id: string;
   name: string;
   type: "atomic" | "composite" | "legendary";
-  level: "I" | "II" | "III" | "IV" | "V";
+  level: "0" | "I" | "II" | "III" | "IV" | "V" | "VI";
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;
   prerequisites: string[];
@@ -80,6 +80,7 @@ export interface GaiaConfig {
   scanPaths: string[];
   autoPromptCombinations: boolean;
   lastScan?: string;
+  installedNamedSkills?: InstalledNamedSkill[];
 }
 
 export interface FusionCandidate {
@@ -88,4 +89,51 @@ export interface FusionCandidate {
   detectedSkills: string[];
   missingSkills: string[];
   status: "ready" | "one_away" | "partial";
+}
+
+export interface NamedSkill {
+  id: string;
+  name: string;
+  contributor: string;
+  origin: boolean;
+  genericSkillRef: string;
+  status: "awakened" | "named";
+  level: "II" | "III" | "IV" | "V" | "VI";
+  description: string;
+  links?: {
+    github?: string;
+    agentskills?: string;
+    docs?: string;
+  };
+  tags?: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NamedIndex {
+  generatedAt: string;
+  buckets: Record<string, NamedSkill[]>;
+}
+
+export interface EmbeddingEntry {
+  id: string;
+  vector: number[];
+}
+
+export interface EmbeddingsStore {
+  model: string;
+  dimensions: number;
+  generatedAt: string;
+  entries: EmbeddingEntry[];
+}
+
+export interface InstalledNamedSkill {
+  id: string;
+  installedAt: string;
+  sourceRef: string;
+  sha256?: string;
+}
+
+export interface InstallManifest {
+  installed: InstalledNamedSkill[];
 }

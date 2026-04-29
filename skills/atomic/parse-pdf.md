@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Parse PDF
+# [I · Awakened · Intrinsic Skill] Parse PDF
 **ID:** parse-pdf  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -25,4 +25,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

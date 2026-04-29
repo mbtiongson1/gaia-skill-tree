@@ -1,7 +1,7 @@
-# [III · Named · Intrinsic Skill] Structured Output Generation
+# [I · Awakened · Intrinsic Skill] Structured Output Generation
 **ID:** structured-output  
 **Type:** Intrinsic Skill  
-**Level:** III · Named  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [RAG Pipeline](../composite/rag-pipeline.md)
 - [Text-to-SQL Pipeline](../composite/text-to-sql-pipeline.md)
+- [Function Calling](../composite/function-calling.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -27,4 +28,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

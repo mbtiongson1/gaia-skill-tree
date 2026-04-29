@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Question Answer
+# [0 · Basic · Intrinsic Skill] Question Answer
 **ID:** question-answer  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** 0 · Basic  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -15,8 +15,9 @@ _None._
 
 ## Unlocks
 - [Conversational Agent](../composite/conversational-agent.md)
-- [Voice Agent](../composite/voice-agent.md)
+- [Few-Shot Learning](../atomic/few-shot-learning.md)
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
+- [Voice Agent](../composite/voice-agent.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -27,4 +28,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

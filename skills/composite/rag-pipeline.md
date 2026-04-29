@@ -1,7 +1,7 @@
-# [III · Named · Extra Skill] RAG Pipeline
+# [III · Evolved · Extra Skill] RAG Pipeline
 **ID:** rag-pipeline  
 **Type:** Extra Skill  
-**Level:** III · Named  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -25,10 +25,11 @@ _None specified._
 ## Evidence
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
-| B | https://github.com/gaia-registry/gaia/blob/main/docs/evidence/ragPipeline.md | mbtiongson1 | 2026-04-26 |
+| A | https://aclanthology.org/2024.eacl-demo.16/ | rico-favor | 2026-04-29 |
+| B | https://github.com/vibrantlabsai/ragas | rico-favor | 2026-04-29 |
 
 ## Known Agents
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

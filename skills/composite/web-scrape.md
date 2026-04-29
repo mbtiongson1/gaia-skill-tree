@@ -1,7 +1,7 @@
-# [III · Named · Extra Skill] Web Scrape
+# [III · Evolved · Extra Skill] Web Scrape
 **ID:** web-scrape  
 **Type:** Extra Skill  
-**Level:** III · Named  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -31,4 +31,4 @@ Structured output mode required.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

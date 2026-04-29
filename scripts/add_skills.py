@@ -219,7 +219,7 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "mathReason",
+        "id": "math-reason",
         "name": "Math Reason",
         "type": "atomic",
         "level": "IV",
@@ -244,7 +244,7 @@ NEW_ATOMICS = [
         "version": VERSION,
     },
     {
-        "id": "logicalInference",
+        "id": "logical-inference",
         "name": "Logical Inference",
         "type": "atomic",
         "level": "IV",
@@ -478,7 +478,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
-        "prerequisites": ["generateSql", "parseJson", "formatOutput"],
+        "prerequisites": ["generateSql", "parse-json", "format-output"],
         "derivatives": [],
         "conditions": "Requires schema context in prompt.",
         "evidence": [
@@ -503,7 +503,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
-        "prerequisites": ["codeGeneration", "diffContent", "evaluateOutput"],
+        "prerequisites": ["code-generation", "diff-content", "evaluate-output"],
         "derivatives": ["fullStackDeveloper"],
         "conditions": "",
         "evidence": [
@@ -578,7 +578,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
-        "prerequisites": ["generateTest", "executeBash", "errorInterpretation"],
+        "prerequisites": ["generateTest", "execute-bash", "error-interpretation"],
         "derivatives": ["fullStackDeveloper"],
         "conditions": "",
         "evidence": [
@@ -603,7 +603,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
-        "prerequisites": ["classify", "sentimentAnalysis", "extractEntities"],
+        "prerequisites": ["classify", "sentimentAnalysis", "extract-entities"],
         "derivatives": [],
         "conditions": "",
         "evidence": [
@@ -628,7 +628,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "rare",
         "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
-        "prerequisites": ["imageCaption", "questionAnswer", "logicalInference"],
+        "prerequisites": ["imageCaption", "questionAnswer", "logical-inference"],
         "derivatives": [],
         "conditions": "Requires vision-language model capability.",
         "evidence": [
@@ -653,7 +653,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
-        "prerequisites": ["translate", "sentimentAnalysis", "audienceModel"],
+        "prerequisites": ["translate", "sentimentAnalysis", "audience-model"],
         "derivatives": [],
         "conditions": "",
         "evidence": [
@@ -678,7 +678,7 @@ NEW_COMPOSITES = [
         "level": "IV",
         "rarity": "uncommon",
         "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
-        "prerequisites": ["parsePdf", "extractEntities", "formatOutput"],
+        "prerequisites": ["parsePdf", "extract-entities", "format-output"],
         "derivatives": [],
         "conditions": "",
         "evidence": [
@@ -745,7 +745,7 @@ NEW_LEGENDARIES = [
         "level": "IV",
         "rarity": "legendary",
         "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
-        "prerequisites": ["dataAnalysis", "mathReason", "research"],
+        "prerequisites": ["dataAnalysis", "math-reason", "research"],
         "derivatives": [],
         "conditions": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
         "evidence": [
@@ -784,7 +784,7 @@ NEW_LEGENDARIES = [
         "level": "IV",
         "rarity": "legendary",
         "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
-        "prerequisites": ["voiceAgent", "memoryManage", "planAndExecute"],
+        "prerequisites": ["voiceAgent", "memoryManage", "plan-and-execute"],
         "derivatives": [],
         "conditions": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
         "evidence": [
@@ -825,18 +825,18 @@ NEW_LEGENDARIES = [
 EXISTING_DERIVATIVE_PATCHES = {
     "routeIntent":        ["conversationalAgent"],
     "classify":           ["contentModeration"],
-    "extractEntities":    ["contentModeration", "documentDigitization"],
+    "extract-entities":    ["contentModeration", "documentDigitization"],
     "summarize":          ["dataAnalysis"],
-    "diffContent":        ["codeReviewPipeline"],
-    "evaluateOutput":     ["codeReviewPipeline"],
-    "codeGeneration":     ["codeReviewPipeline"],
-    "executeBash":        ["automatedTesting"],
-    "errorInterpretation":["automatedTesting"],
-    "formatOutput":       ["textToSqlPipeline", "documentDigitization"],
-    "audienceModel":      ["translationPipeline"],
-    "parseJson":          ["textToSqlPipeline"],
+    "diff-content":        ["codeReviewPipeline"],
+    "evaluate-output":     ["codeReviewPipeline"],
+    "code-generation":     ["codeReviewPipeline"],
+    "execute-bash":        ["automatedTesting"],
+    "error-interpretation":["automatedTesting"],
+    "format-output":       ["textToSqlPipeline", "documentDigitization"],
+    "audience-model":      ["translationPipeline"],
+    "parse-json":          ["textToSqlPipeline"],
     "research":           ["autonomousDataScientist"],
-    "planAndExecute":     ["realTimeVoiceAssistant"],
+    "plan-and-execute":     ["realTimeVoiceAssistant"],
 }
 
 # ---------------------------------------------------------------------------

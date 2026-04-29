@@ -1,7 +1,7 @@
-# [III · Named · Extra Skill] Document Analyst
+# [III · Evolved · Extra Skill] Document Analyst
 **ID:** document-analyst  
 **Type:** Extra Skill  
-**Level:** III · Named  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -31,4 +31,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

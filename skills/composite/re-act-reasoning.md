@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] ReAct Reasoning
+# [III · Evolved · Extra Skill] ReAct Reasoning
 **ID:** re-act-reasoning  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** III · Evolved  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -31,4 +31,4 @@ _None specified._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

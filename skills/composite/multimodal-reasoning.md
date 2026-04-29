@@ -1,7 +1,7 @@
-# [IV · Evolved · Extra Skill] Multimodal Reasoning
+# [III · Evolved · Extra Skill] Multimodal Reasoning
 **ID:** multimodal-reasoning  
 **Type:** Extra Skill  
-**Level:** IV · Evolved  
+**Level:** III · Evolved  
 **Rarity:** Rare  
 **Status:** Provisional
 
@@ -30,4 +30,4 @@ Requires vision-language model capability.
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

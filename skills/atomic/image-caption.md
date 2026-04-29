@@ -1,7 +1,7 @@
-# [IV · Evolved · Intrinsic Skill] Image Caption
+# [II · Named · Intrinsic Skill] Image Caption
 **ID:** image-caption  
 **Type:** Intrinsic Skill  
-**Level:** IV · Evolved  
+**Level:** II · Named  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
+- [Object Detection](../atomic/object-detection.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -25,4 +26,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

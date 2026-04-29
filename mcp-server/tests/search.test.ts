@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { searchSkills, findSkillById } from "../src/graph/search.js";
+import { searchSkills, findSkillById, searchAll } from "../src/graph/search.js";
 import type { GaiaGraph } from "../src/graph/types.js";
 
 const mockGraph: GaiaGraph = {
@@ -48,5 +48,25 @@ describe("findSkillById", () => {
 
   it("returns undefined for invalid ID", () => {
     expect(findSkillById(mockGraph, "nonexistent")).toBeUndefined();
+  });
+});
+
+describe("searchAll", () => {
+  it("returns generic skills from graph", () => {
+    const results = searchAll(mockGraph, "web search");
+    const generics = results.filter((r) => r.type === "generic");
+    expect(generics.length).toBeGreaterThan(0);
+  });
+
+  it("result items have type field", () => {
+    const results = searchAll(mockGraph, "code");
+    for (const r of results) {
+      expect(["generic", "named"]).toContain(r.type);
+    }
+  });
+
+  it("returns empty when no match", () => {
+    const results = searchAll(mockGraph, "zzzzzzzzz");
+    expect(results).toHaveLength(0);
   });
 });

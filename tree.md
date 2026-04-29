@@ -1,95 +1,96 @@
-# Gaia Skill Graph
+# Gaia Skill Tree
 
 ```
-GAIA SKILL GRAPH  v0.2.0  ·  generated 2026-04-28
-═════════════════════════════════════════════════════════════════
+GAIA SKILL TREE  v1.0.0  ·  generated 2026-04-30
+══════════════════════════════════════════════════════════════════════
+Upgrade paths — each legendary shows its full prerequisite chain.
+Shared prerequisites marked (↑ see above) on second occurrence.
+══════════════════════════════════════════════════════════════════════
 
-◆ ULTIMATE SKILL  (7 skills)
-│
-├─ ◆ True Oracle: Autonomous Data Scientist           [IV · Evolved]  ← Data Analysis + Math Reason + Research
-├─ ◆ Wisdom King: Autonomous Research Agent           [I · Dormant]  ← Research + Knowledge Harvest + Ghostwrite
-├─ ◆ True Craftsman: Full-Stack Developer             [IV · Evolved]  ← Code Review Pipeline + Automated Testing + Refactor Code
-├─ ◆ Grand Conductor: Multi-Agent Orchestration       [I · Dormant]  ← Plan and Execute + Route Intent + Tool Select
-├─ ◆ True Herald: Real-Time Voice Assistant           [IV · Evolved]  ← Voice Agent + Memory Manage + Plan and Execute
-├─ ◆ True Sage: Recursive Self-Improvement            [I · Dormant]  ← Autonomous Debug + Evaluate Output + Plan and Execute
-└─ ◆ True Dragon: Autonomous Scientific Discovery     [IV · Evolved]  ← Hypothesis Generation + Research + Math Reason
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [0 · Basic]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ Knowledge Harvest  [IV · Hardened]  ← Web Scrape · Extract Entities · Embed Text
+  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
+  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
+  │  │  ├─ ○ Parse HTML  [I · Awakened]
+  │  │  └─ ○ Extract Entities  [I · Awakened]
+  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
+  │  └─ ○ Embed Text  [I · Awakened]
+  └─ ◇ Ghostwrite  [IV · Hardened]  ← Research · Write Report · Audience Model
+     ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
+     ├─ ○ Write Report  [I · Awakened]
+     └─ ○ Audience Model  [I · Awakened]
 
-◇ EXTRA SKILL  (22 skills)
-│
-├─ ◇ Automated Testing                                [IV · Evolved]  ← Generate Test + Execute Bash + Error Interpretation
-├─ ◇ Autonomous Debug                                 [III · Named]  ← Code Generation + Execute Bash + Error Interpretation
-├─ ◇ Browser Automation                               [IV · Evolved]  ← Web Search + Computer Use
-├─ ◇ Code Review Pipeline                             [IV · Evolved]  ← Code Generation + Diff Content + Evaluate Output
-├─ ◇ Content Moderation                               [IV · Evolved]  ← Classify + Sentiment Analysis + Extract Entities
-├─ ◇ Conversational Agent                             [IV · Evolved]  ← Question Answer + Memory Manage + Route Intent
-├─ ◇ Data Analysis                                    [IV · Evolved]  ← Generate SQL + Data Visualize + Summarize
-├─ ◇ Document Analyst                                 [III · Named]  ← Parse JSON + Extract Entities + Summarize + Format Output
-├─ ◇ Document Digitization                            [IV · Evolved]  ← Parse PDF + Extract Entities + Format Output
-├─ ◇ Ghostwrite                                       [IV · Evolved]  ← Research + Write Report + Audience Model
-├─ ◇ Knowledge Graph Construction                     [IV · Evolved]  ← Extract Entities + Logical Inference
-├─ ◇ Knowledge Harvest                                [IV · Evolved]  ← Web Scrape + Extract Entities + Embed Text
-├─ ◇ Multimodal Reasoning                             [IV · Evolved]  ← Image Caption + Question Answer + Logical Inference
-├─ ◇ Plan and Execute                                 [III · Named]  ← Route Intent + Plan and Decompose + Tool Select
-├─ ◇ RAG Pipeline                                     [III · Named]  ← Retrieve + Chunk Document + Embed Text + Score Relevance
-├─ ◇ ReAct Reasoning                                  [IV · Evolved]  ← Plan and Decompose + Tool Use
-├─ ◇ Registry Curation                                [IV · Evolved]  ← Research + Code Generation + Execute Bash
-├─ ◇ Research                                         [III · Named]  ← Web Search + Summarize + Cite Sources
-├─ ◇ Text-to-SQL Pipeline                             [IV · Evolved]  ← Generate SQL + Parse JSON + Format Output
-├─ ◇ Translation Pipeline                             [IV · Evolved]  ← Translate + Sentiment Analysis + Audience Model
-├─ ◇ Voice Agent                                      [IV · Evolved]  ← Speech to Text + Question Answer + Text to Speech
-└─ ◇ Web Scrape                                       [III · Named]  ← Web Search + Parse HTML + Extract Entities
+◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+  │  ├─ ○ Route Intent  [I · Awakened]
+  │  ├─ ○ Plan and Decompose  [I · Awakened]
+  │  └─ ○ Tool Select  [I · Awakened]
+  ├─ ○ Route Intent  [I · Awakened]  (↑ see above)
+  └─ ○ Tool Select  [I · Awakened]  (↑ see above)
 
-○ INTRINSIC SKILL  (49 skills)
-│
-├─ ○ API Call                                         [IV · Evolved]
-├─ ○ Audience Model                                   [II · Awakened]
-├─ ○ Chain-of-Thought Reasoning                       [IV · Evolved]
-├─ ○ Chunk Document                                   [II · Awakened]
-├─ ○ Cite Sources                                     [II · Awakened]
-├─ ○ Classify                                         [II · Awakened]
-├─ ○ Code Execution                                   [IV · Evolved]
-├─ ○ Code Generation                                  [II · Awakened]
-├─ ○ Computer Use                                     [IV · Evolved]
-├─ ○ Data Visualize                                   [IV · Evolved]
-├─ ○ Detect Anomaly                                   [IV · Evolved]
-├─ ○ Diff Content                                     [II · Awakened]
-├─ ○ Embed Text                                       [II · Awakened]
-├─ ○ Error Interpretation                             [II · Awakened]
-├─ ○ Evaluate Output                                  [II · Awakened]
-├─ ○ Execute Bash                                     [II · Awakened]
-├─ ○ Extract Entities                                 [II · Awakened]
-├─ ○ Format Output                                    [II · Awakened]
-├─ ○ Generate SQL                                     [IV · Evolved]
-├─ ○ Generate Test                                    [IV · Evolved]
-├─ ○ Generate Text                                    [II · Awakened]
-├─ ○ Hypothesis Generation                            [IV · Evolved]
-├─ ○ Image Caption                                    [IV · Evolved]
-├─ ○ Image Generate                                   [IV · Evolved]
-├─ ○ Logical Inference                                [IV · Evolved]
-├─ ○ Math Reason                                      [IV · Evolved]
-├─ ○ Memory Manage                                    [IV · Evolved]
-├─ ○ Parse HTML                                       [II · Awakened]
-├─ ○ Parse JSON                                       [II · Awakened]
-├─ ○ Parse PDF                                        [IV · Evolved]
-├─ ○ Plan and Decompose                               [II · Awakened]
-├─ ○ Question Answer                                  [IV · Evolved]
-├─ ○ Rank                                             [II · Awakened]
-├─ ○ Refactor Code                                    [IV · Evolved]
-├─ ○ Retrieve                                         [II · Awakened]
-├─ ○ Route Intent                                     [II · Awakened]
-├─ ○ Score Relevance                                  [II · Awakened]
-├─ ○ Self-Critique                                    [IV · Evolved]
-├─ ○ Sentiment Analysis                               [IV · Evolved]
-├─ ○ Speech to Text                                   [IV · Evolved]
-├─ ○ Structured Output Generation                     [III · Named]
-├─ ○ Summarize                                        [II · Awakened]
-├─ ○ Text to Speech                                   [IV · Evolved]
-├─ ○ Tokenize                                         [II · Awakened]
-├─ ○ Tool Select                                      [II · Awakened]
-├─ ○ Tool Use                                         [IV · Evolved]
-├─ ○ Translate                                        [IV · Evolved]
-├─ ○ Web Search                                       [II · Awakened]
-└─ ○ Write Report                                     [II · Awakened]
+◆ True Craftsman: Full-Stack Developer  [V · Transcendent]  ← Code Review Pipeline · Automated Testing · Refactor Code
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Code Review Pipeline  [III · Evolved]  ← Code Generation · Diff Content · Evaluate Output
+  │  ├─ ○ Code Generation  [I · Awakened]
+  │  ├─ ○ Diff Content  [I · Awakened]
+  │  └─ ○ Evaluate Output  [I · Awakened]
+  ├─ ◇ Automated Testing  [III · Evolved]  ← Generate Test · Execute Bash · Error Interpretation
+  │  ├─ ○ Generate Test  [II · Named]
+  │  ├─ ○ Execute Bash  [I · Awakened]
+  │  └─ ○ Error Interpretation  [I · Awakened]
+  └─ ○ Refactor Code  [II · Named]
+
+◆ True Dragon: Autonomous Scientific Discovery  [V · Transcendent]  ← Hypothesis Generation · Research · Math Reason
+─────────────────────────────────────────────────────────────────
+  ├─ ○ Hypothesis Generation  [II · Named]
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [0 · Basic]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  └─ ○ Math Reason  [II · Named]
+
+◆ True Herald: Real-Time Voice Assistant  [V · Transcendent]  ← Voice Agent · Memory Manage · Plan and Execute
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Voice Agent  [III · Evolved]  ← Speech to Text · Question Answer · Text to Speech
+  │  ├─ ○ Speech to Text  [II · Named]
+  │  ├─ ○ Question Answer  [0 · Basic]
+  │  └─ ○ Text to Speech  [II · Named]
+  ├─ ○ Memory Manage  [II · Named]
+  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+     ├─ ○ Route Intent  [I · Awakened]
+     ├─ ○ Plan and Decompose  [I · Awakened]
+     └─ ○ Tool Select  [I · Awakened]
+
+◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
+  │  ├─ ○ Generate SQL  [II · Named]
+  │  ├─ ○ Data Visualize  [II · Named]
+  │  └─ ○ Summarize  [0 · Basic]
+  ├─ ○ Math Reason  [II · Named]
+  └─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+     ├─ ○ Web Search  [I · Awakened]
+     ├─ ○ Summarize  [0 · Basic]  (↑ see above)
+     └─ ○ Cite Sources  [I · Awakened]
+
+◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Autonomous Debug  [IV · Hardened]  ← Code Generation · Execute Bash · Error Interpretation
+  │  ├─ ○ Code Generation  [I · Awakened]
+  │  ├─ ○ Execute Bash  [I · Awakened]
+  │  └─ ○ Error Interpretation  [I · Awakened]
+  ├─ ○ Evaluate Output  [I · Awakened]
+  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+     ├─ ○ Route Intent  [I · Awakened]
+     ├─ ○ Plan and Decompose  [I · Awakened]
+     └─ ○ Tool Select  [I · Awakened]
+
 ```
 
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

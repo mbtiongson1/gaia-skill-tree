@@ -32,3 +32,5 @@ build/
 # Temp files
 *.tmp
 *.bak
+scratch/
+.hermes

@@ -1,7 +1,7 @@
-# [II · Awakened · Intrinsic Skill] Plan and Decompose
+# [I · Awakened · Intrinsic Skill] Plan and Decompose
 **ID:** plan-decompose  
 **Type:** Intrinsic Skill  
-**Level:** II · Awakened  
+**Level:** I · Awakened  
 **Rarity:** Common  
 **Status:** Provisional
 
@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
+- [Tree of Thought](../composite/tree-of-thought.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
@@ -26,4 +27,4 @@ _None._
 _None verified yet._
 
 ---
-*Generated from gaia.json v0.2.0 on 2026-04-28. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

@@ -1,12 +1,49 @@
-# Gaia Plugin
+# Gaia CLI
 
-The Gaia Plugin is a set of tools to integrate your local development environment and CI/CD pipelines with the Gaia Skill Registry.
+The Gaia CLI integrates local development repositories and CI pipelines with the Gaia Skill Registry.
 
 > **Prefer the MCP server?** If you use Claude Code, Cursor, or any MCP-compatible agent, see [`mcp-server/`](../mcp-server/) for zero-config agent-native integration — no CLI needed.
 
+## Installation
+
+Install the Gaia CLI via npm:
+
+```bash
+npm install -g @gaia-registry/cli
+# or locally
+npm install @gaia-registry/cli
+```
+
+### Requirements
+
+- **Node.js 18+** — for running the npm package
+- **Python 3.8+** — the CLI shells out to Python for the core implementation
+
+The npm wrapper automatically detects your Python installation and will provide instructions if Python is not found.
+
 ## CLI Usage
 
-The Gaia CLI provides commands to manage your skill tree directly from your repository.
+Run the Python CLI from a Gaia registry checkout:
+
+```bash
+python3 plugin/cli/main.py --help
+```
+
+From another project, pass the local registry checkout path:
+
+```bash
+python3 /path/to/gaia-skill-tree/plugin/cli/main.py \
+  --registry /path/to/gaia-skill-tree \
+  scan
+```
+
+If you have a shell wrapper named `gaia`, use the same commands directly:
+
+```bash
+gaia --registry /path/to/gaia-skill-tree scan
+gaia --registry /path/to/gaia-skill-tree push --dry-run
+gaia --registry /path/to/gaia-skill-tree push
+```
 
 ### Commands
 
@@ -14,10 +51,8 @@ The Gaia CLI provides commands to manage your skill tree directly from your repo
 - `gaia scan`: Scans repo for skill references, resolves them against the Gaia registry, and identifies new skills or combination candidates.
 - `gaia push`: Submits a batch intake record with detected canonical skills, proposed new skills, and similarity hints.
 - `gaia status`: Displays a summary of your current skill tree.
-- `gaia tree`: Renders your skill tree (use `--depth N` for limited views).
-- `gaia load [username]`: Fetches and caches a user's skill tree.
+- `gaia tree`: Lists unlocked skills for your configured user.
 - `gaia fuse [skillId]`: Confirms a pending combination and opens a PR to update your skill tree in the registry.
-- `gaia diff`: Shows skills detected in the current scan that are not yet in your skill tree.
 
 Preview a batch before writing it:
 
@@ -65,14 +100,16 @@ The plugin is configured via a `.gaia/config.json` file in your repository root:
 }
 ```
 
-## Installation
-
-Currently, the plugin is in early access. You can run it directly from the Gaia repository or use the GitHub Action.
+## Local Use
 
 ```bash
-# Clone the gaia registry
+# Clone the Gaia registry
 git clone https://github.com/gaia-registry/gaia.git
 
-# Run the CLI
-python gaia/plugin/cli/main.py --help
+# In the project repo you want Gaia to scan
+python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia init
+python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia scan
+python3 /path/to/gaia/plugin/cli/main.py --registry /path/to/gaia push --dry-run
 ```
+
+The npm wrapper is in `src/bin/gaia.ts` and shells out to the Python CLI in `cli/main.py`.
