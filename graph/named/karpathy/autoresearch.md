@@ -5,6 +5,8 @@ contributor: karpathy
 origin: true
 genericSkillRef: autonomous-research-agent
 status: named
+title: "The Scholar's Compass"
+catalogRef: karpathy-autoresearch
 level: II
 description: Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.
 links:
@@ -14,7 +16,7 @@ tags:
   - autonomous
   - paper-synthesis
 createdAt: "2026-04-29"
-updatedAt: "2026-04-29"
+updatedAt: "2026-04-30"
 ---
 
 ## Overview

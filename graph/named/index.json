@@ -11,6 +11,8 @@
         "status": "named",
         "level": "III",
         "description": "Autonomous software engineering agent capable of end-to-end debugging, code generation, and self-correction across complex multi-file codebases.",
+        "title": "The Codebreaker's Will",
+        "catalogRef": "devin-ai-autonomous-swe",
         "tags": [
           "software-engineering",
           "autonomous",
@@ -33,6 +35,8 @@
         "status": "named",
         "level": "II",
         "description": "Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",
+        "title": "The Scholar's Compass",
+        "catalogRef": "karpathy-autoresearch",
         "tags": [
           "research",
           "autonomous",
@@ -42,6 +46,15 @@
           "github": "https://github.com/karpathy/autoresearch"
         }
       }
+    ]
+  },
+  "awaitingClassification": [],
+  "byContributor": {
+    "devin-ai": [
+      "devin-ai/autonomous-swe"
+    ],
+    "karpathy": [
+      "karpathy/autoresearch"
     ]
   }
 }

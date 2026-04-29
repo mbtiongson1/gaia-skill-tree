@@ -5,6 +5,8 @@ contributor: devin-ai
 origin: true
 genericSkillRef: autonomous-debug
 status: named
+title: "The Codebreaker's Will"
+catalogRef: devin-ai-autonomous-swe
 level: III
 description: Autonomous software engineering agent capable of end-to-end debugging, code generation, and self-correction across complex multi-file codebases.
 links:
@@ -16,7 +18,7 @@ tags:
   - code-generation
   - self-correction
 createdAt: "2026-04-29"
-updatedAt: "2026-04-29"
+updatedAt: "2026-04-30"
 ---
 
 ## Overview
