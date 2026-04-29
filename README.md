@@ -15,7 +15,7 @@ The snapshot below shows the upgrade-path structure. Each legendary traces
 back through its full prerequisite chain.
 
 ```
-GAIA SKILL TREE  v0.2.0
+GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
 ◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]
@@ -44,6 +44,7 @@ GAIA SKILL TREE  v0.2.0
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
 - **Unlock combinations** — when your agent has the prerequisites, a new composite or ultimate skill becomes available to fuse. The CLI detects it automatically.
+- **Name and share skills** — contribute named implementations of generic skills (e.g., `karpathy/autoresearch`), attributed to your GitHub identity and installable by anyone via `gaia install`.
 - **Contribute to the canon** — review draft skills, submit evidence, or create new skills from strong reviews. The graph grows with the field.
 
 ---
@@ -144,6 +145,13 @@ Update `gaiaUser` and `scanPaths` for your project before scanning.
 | `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
 | `gaia push` | Writes a batch intake record under `intake/skill-batches/` in the registry checkout. |
 | `gaia push --no-pr` | Writes a batch intake record without trying to open a PR. |
+| `gaia name <batch> <index> <contributor/skill>` | Promotes an awakened skill from intake to a named skill in `graph/named/`. |
+| `gaia install <contributor/skill>` | Downloads a named skill into the repo (global cache + repo reference). |
+| `gaia install --list` | Lists all installed named skills. |
+| `gaia sync` | Updates installed named skills from their registry origin. |
+| `gaia uninstall <contributor/skill>` | Removes an installed named skill. |
+| `gaia embed` | Pre-computes embeddings for all skills (requires `sentence-transformers`). |
+| `gaia search <query>` | Semantic search across generic and named skills. |
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
@@ -204,7 +212,10 @@ See [`mcp-server/`](mcp-server/) for full documentation.
 ```
 gaia-skill-tree/
 ├── graph/gaia.json          ← CANONICAL source (the only file humans edit)
-├── graph/similarity.json    ← Similarity/layout metadata, separate from DAG edges
+├── graph/named/             ← Named skill implementations ({contributor}/{skill-name}.md)
+├── graph/named/index.json   ← GENERATED bucket index
+├── graph/embeddings.json    ← GENERATED skill embeddings (sentence-transformers)
+├── graph/similarity.json    ← GENERATED pairwise similarity scores
 ├── intake/                  ← Batch skill proposals submitted by gaia push
 ├── mcp-server/              ← TypeScript MCP server (agent-native integration)
 ├── schema/                  ← JSON Schema definitions

@@ -20,6 +20,7 @@ Exit codes:
 import json
 import sys
 import os
+import glob
 import argparse
 from collections import defaultdict
 
@@ -253,6 +254,188 @@ def compute_stats(graph):
         print(f"   ⚠ Orphaned composites: {orphaned}")
 
 
+_NAMED_REQUIRED_FIELDS = [
+    "id",
+    "name",
+    "contributor",
+    "origin",
+    "genericSkillRef",
+    "status",
+    "level",
+    "description",
+]
+
+_NAMED_VALID_LEVELS = {"II", "III", "IV", "V", "VI"}
+
+
+def _parse_named_frontmatter(text):
+    """Parse simple YAML frontmatter from a named skill markdown file.
+
+    Returns a dict of the frontmatter fields, or raises ValueError on malformed
+    input. Supports scalars, quoted strings, booleans, block sequences, and one
+    level of nested mappings (e.g. links:).
+    """
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        raise ValueError("File does not begin with '---' frontmatter delimiter.")
+
+    end = None
+    for i, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            end = i
+            break
+    if end is None:
+        raise ValueError("Frontmatter closing '---' not found.")
+
+    fm_lines = lines[1:end]
+    data = {}
+    i = 0
+
+    def _coerce(raw):
+        stripped = raw.strip().strip('"').strip("'")
+        if raw.strip().lower() == "true":
+            return True
+        if raw.strip().lower() == "false":
+            return False
+        return stripped
+
+    while i < len(fm_lines):
+        line = fm_lines[i]
+        if not line.strip():
+            i += 1
+            continue
+        if ":" not in line:
+            i += 1
+            continue
+
+        key, _, rest = line.partition(":")
+        key = key.strip()
+        rest = rest.strip()
+
+        if rest == "":
+            # Nested mapping or block sequence follows
+            nested_dict = {}
+            nested_list = []
+            j = i + 1
+            while j < len(fm_lines):
+                nline = fm_lines[j]
+                if not nline.strip():
+                    j += 1
+                    continue
+                if not nline.startswith(" "):
+                    break
+                stripped = nline.strip()
+                if stripped.startswith("- "):
+                    nested_list.append(stripped[2:].strip().strip('"').strip("'"))
+                    j += 1
+                elif ":" in stripped:
+                    sk, _, sv = stripped.partition(":")
+                    nested_dict[sk.strip()] = _coerce(sv.strip())
+                    j += 1
+                else:
+                    j += 1
+            if nested_list:
+                data[key] = nested_list
+                i = j
+            elif nested_dict:
+                data[key] = nested_dict
+                i = j
+            else:
+                data[key] = {}
+                i += 1
+        elif rest.startswith("["):
+            inner = rest[1:-1] if rest.endswith("]") else rest[1:]
+            if not inner.strip():
+                data[key] = []
+            else:
+                data[key] = [item.strip().strip('"').strip("'") for item in inner.split(",")]
+            i += 1
+        else:
+            data[key] = _coerce(rest)
+            i += 1
+
+    return data
+
+
+def validate_named_skills(graph, named_dir=None):
+    """Validate all named skill .md files in graph/named/.
+
+    Checks:
+      - All required fields are present.
+      - level is II or above.
+      - genericSkillRef resolves to a skill ID in graph (gaia.json).
+      - At most one origin: true per genericSkillRef bucket.
+
+    Returns a list of error strings.
+    """
+    errors = []
+
+    if named_dir is None:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        named_dir = os.path.join(repo_root, "graph", "named")
+
+    if not os.path.isdir(named_dir):
+        # Not an error — directory simply doesn't exist yet.
+        return errors
+
+    valid_ids = {s["id"] for s in graph.get("skills", [])}
+
+    pattern = os.path.join(named_dir, "**", "*.md")
+    md_files = sorted(glob.glob(pattern, recursive=True))
+    # Exclude any generated index file that might be .md (unlikely but safe)
+    md_files = [f for f in md_files if not f.endswith("index.json")]
+
+    buckets = defaultdict(list)  # genericSkillRef -> list of parsed fm dicts
+
+    for fp in md_files:
+        rel = os.path.relpath(fp)
+        try:
+            with open(fp, "r", encoding="utf-8") as f:
+                text = f.read()
+            fm = _parse_named_frontmatter(text)
+        except (OSError, ValueError) as exc:
+            errors.append(f"Named skill {rel}: cannot parse — {exc}")
+            continue
+
+        # Required fields
+        missing = [field for field in _NAMED_REQUIRED_FIELDS
+                   if field not in fm or fm[field] is None or fm[field] == ""]
+        if missing:
+            errors.append(
+                f"Named skill {rel}: missing required field(s): {', '.join(missing)}"
+            )
+
+        # Level >= II
+        level = fm.get("level", "")
+        if level not in _NAMED_VALID_LEVELS:
+            errors.append(
+                f"Named skill {rel}: 'level' must be II or above (got '{level}')."
+            )
+
+        # genericSkillRef resolves
+        ref = fm.get("genericSkillRef", "")
+        if ref and ref not in valid_ids:
+            errors.append(
+                f"Named skill {rel}: 'genericSkillRef' value '{ref}' "
+                f"does not match any skill ID in gaia.json."
+            )
+
+        if not missing and level in _NAMED_VALID_LEVELS:
+            buckets[ref].append(fm)
+
+    # Origin uniqueness per bucket
+    for ref, entries in buckets.items():
+        origins = [e for e in entries if e.get("origin") is True]
+        if len(origins) > 1:
+            ids = [e.get("id", "?") for e in origins]
+            errors.append(
+                f"Named skills: genericSkillRef '{ref}' has more than one "
+                f"origin:true — {ids}"
+            )
+
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate the Gaia canonical graph.")
     parser.add_argument("--graph", default=None, help="Path to gaia.json")
@@ -274,28 +457,32 @@ def main():
     all_errors = []
 
     # 1. Schema validation
-    print("   [1/6] Schema validation...")
+    print("   [1/7] Schema validation...")
     all_errors.extend(validate_schema(graph, schema_dir))
 
     # 2. DAG cycle detection
-    print("   [2/6] DAG cycle detection...")
+    print("   [2/7] DAG cycle detection...")
     all_errors.extend(validate_dag(graph))
 
     # 3. Reference integrity
-    print("   [3/6] Reference integrity...")
+    print("   [3/7] Reference integrity...")
     all_errors.extend(validate_references(graph))
 
     # 4. Prerequisite count
-    print("   [4/6] Prerequisite count...")
+    print("   [4/7] Prerequisite count...")
     all_errors.extend(validate_prerequisites_count(graph))
 
     # 5. Evidence threshold
-    print("   [5/6] Evidence thresholds...")
+    print("   [5/7] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
     # 6. Legendary constraints
-    print("   [6/6] Legendary constraints...")
+    print("   [6/7] Legendary constraints...")
     all_errors.extend(validate_legendary(graph))
+
+    # 7. Named skills validation
+    print("   [7/7] Named skills validation...")
+    all_errors.extend(validate_named_skills(graph))
 
     # Stats
     compute_stats(graph)

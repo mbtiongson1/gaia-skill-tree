@@ -30,6 +30,23 @@ Decisions are made through Pull Requests. Most PRs require one Maintainer approv
 - **Atomic/Composite Skills**: 1 Maintainer approval.
 - **Legendary Skills**: 2 Core Maintainer approvals.
 - **Schema Changes**: 2 Core Maintainer approvals.
+- **Named Skills**: 1 Maintainer approval (standard intake process, then `gaia name` promotion).
+
+## 2.1 Named Skill Governance
+
+### Naming Rights
+- The **origin** contributor is the first to promote a skill in a bucket via `gaia name`.
+- Origin status is permanent unless the contributor explicitly transfers it via a PR.
+- Additional contributors can add implementations to the same bucket without affecting origin status.
+
+### Promotion Process
+- A skill must first be accepted via the standard intake review process (lifecycle: "awakened").
+- Promotion from "awakened" to "named" requires a contributor to run `gaia name` and open a PR.
+- Named skills inherit their generic parent's level floor (minimum Level II).
+
+### Named Skill Disputes
+- If two contributors claim origin status for the same bucket, priority goes to the earlier `createdAt` date.
+- Disputes follow the same 14-day resolution process as generic skill disputes (see § 3).
 
 ## 3. Dispute Resolution
 

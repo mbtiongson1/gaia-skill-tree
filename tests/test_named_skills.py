@@ -1,0 +1,175 @@
+import json
+import os
+import sys
+import tempfile
+import unittest
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+class TestNamedSkillFrontmatter(unittest.TestCase):
+    """Test YAML frontmatter parsing in generateNamedIndex."""
+
+    def test_parse_valid_frontmatter(self):
+        """parse_frontmatter correctly extracts key-value data."""
+        from scripts.generateNamedIndex import parse_frontmatter
+        content = """---
+id: karpathy/autoresearch
+name: AutoResearch
+contributor: karpathy
+origin: true
+genericSkillRef: autonomous-research-agent
+status: named
+level: II
+description: Autonomous paper search and synthesis.
+createdAt: "2026-04-29"
+updatedAt: "2026-04-29"
+---
+
+## Overview
+Body text here.
+"""
+        fm, _ = parse_frontmatter(content)
+        self.assertEqual(fm.get("id"), "karpathy/autoresearch")
+        self.assertEqual(fm.get("contributor"), "karpathy")
+        self.assertTrue(fm.get("origin"))
+        self.assertEqual(fm.get("level"), "II")
+
+    def test_parse_missing_frontmatter_returns_empty(self):
+        """parse_frontmatter raises ValueError when no --- delimiters exist."""
+        from scripts.generateNamedIndex import parse_frontmatter
+        content = "No frontmatter here."
+        with self.assertRaises(ValueError):
+            parse_frontmatter(content)
+
+    def test_parse_frontmatter_with_links(self):
+        """parse_frontmatter handles nested links object."""
+        from scripts.generateNamedIndex import parse_frontmatter
+        content = """---
+id: test/skill
+name: Test
+contributor: test
+origin: false
+genericSkillRef: web-search
+status: named
+level: II
+description: A test skill.
+links:
+  github: https://github.com/test/skill
+createdAt: "2026-04-29"
+updatedAt: "2026-04-29"
+---
+"""
+        fm, _ = parse_frontmatter(content)
+        links = fm.get("links", {})
+        self.assertIn("github", links)
+
+
+class TestNamedSkillIndexGeneration(unittest.TestCase):
+    """Test generateNamedIndex.py bucket grouping and origin uniqueness."""
+
+    def test_single_origin_per_bucket(self):
+        """validate_and_group allows only one origin per genericSkillRef."""
+        from scripts.generateNamedIndex import validate_and_group
+
+        named_skills = [
+            ("graph/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice's version."}),
+            ("graph/named/bob/skill.md",   {"id": "bob/skill",   "name": "Skill", "contributor": "bob",   "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob's version."}),
+        ]
+        valid_ids = {"web-search"}
+        errors, _ = validate_and_group(named_skills, valid_ids)
+        self.assertTrue(any("origin" in e.lower() for e in errors), f"Expected origin duplicate error, got: {errors}")
+
+    def test_bucket_groups_by_generic_ref(self):
+        """validate_and_group returns correct bucket grouping."""
+        from scripts.generateNamedIndex import validate_and_group
+
+        named_skills = [
+            ("graph/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice version."}),
+            ("graph/named/bob/skill-b.md",   {"id": "bob/skill-b",   "name": "Skill B", "contributor": "bob",   "origin": False, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob version."}),
+            ("graph/named/carol/code.md",     {"id": "carol/code",    "name": "Carol Code", "contributor": "carol", "origin": True, "genericSkillRef": "code-generation", "status": "named", "level": "II", "description": "Carol version."}),
+        ]
+        valid_ids = {"web-search", "code-generation"}
+        errors, buckets = validate_and_group(named_skills, valid_ids)
+        self.assertEqual(errors, [])
+        self.assertIn("web-search", buckets)
+        self.assertEqual(len(buckets["web-search"]), 2)
+        self.assertIn("code-generation", buckets)
+        self.assertEqual(len(buckets["code-generation"]), 1)
+
+    def test_seed_index_json_is_valid(self):
+        """The committed graph/named/index.json is valid JSON with expected structure."""
+        index_path = os.path.join(REPO_ROOT, "graph", "named", "index.json")
+        if not os.path.exists(index_path):
+            self.skipTest("graph/named/index.json not present.")
+        with open(index_path) as f:
+            index = json.load(f)
+        self.assertIn("buckets", index)
+        self.assertIn("generatedAt", index)
+        self.assertIsInstance(index["buckets"], dict)
+
+
+class TestInstallModule(unittest.TestCase):
+    """Test the install/sync/uninstall logic."""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        # Create a fake registry with a named skill
+        self.registry = os.path.join(self.tmp, "registry")
+        named_dir = os.path.join(self.registry, "graph", "named", "alice")
+        os.makedirs(named_dir, exist_ok=True)
+        self.skill_path = os.path.join(named_dir, "my-skill.md")
+        with open(self.skill_path, "w") as f:
+            f.write("---\nid: alice/my-skill\n---\n\n# My Skill\n")
+        # Working directory for install
+        self.repo_dir = os.path.join(self.tmp, "repo")
+        os.makedirs(self.repo_dir, exist_ok=True)
+        self.orig_dir = os.getcwd()
+        os.chdir(self.repo_dir)
+
+    def tearDown(self):
+        os.chdir(self.orig_dir)
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_install_creates_manifest(self):
+        """install_skill creates .gaia/install-manifest.json."""
+        from plugin.cli.install import install_skill, get_manifest_path, load_manifest
+        result = install_skill("alice/my-skill", self.registry)
+        self.assertTrue(result)
+        self.assertTrue(os.path.exists(get_manifest_path()))
+        manifest = load_manifest()
+        ids = [e["id"] for e in manifest["installed"]]
+        self.assertIn("alice/my-skill", ids)
+
+    def test_uninstall_removes_from_manifest(self):
+        """uninstall_skill removes entry from manifest."""
+        from plugin.cli.install import install_skill, uninstall_skill, load_manifest
+        install_skill("alice/my-skill", self.registry)
+        uninstall_skill("alice/my-skill")
+        manifest = load_manifest()
+        ids = [e["id"] for e in manifest["installed"]]
+        self.assertNotIn("alice/my-skill", ids)
+
+    def test_install_nonexistent_skill_fails(self):
+        """install_skill returns False for unknown skill."""
+        from plugin.cli.install import install_skill
+        result = install_skill("nobody/fake-skill", self.registry)
+        self.assertFalse(result)
+
+    def test_sync_no_change_when_sha_matches(self):
+        """sync_skills reports up-to-date when source unchanged."""
+        import io
+        from contextlib import redirect_stdout
+        from plugin.cli.install import install_skill, sync_skills
+        install_skill("alice/my-skill", self.registry)
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            sync_skills(self.registry)
+        output = buf.getvalue()
+        self.assertIn("Up to date", output)
+
+
+if __name__ == "__main__":
+    unittest.main()

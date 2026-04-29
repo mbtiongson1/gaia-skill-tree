@@ -1,7 +1,8 @@
 import { loadGraph } from "../graph/loader.js";
 import { searchSkills, findSkillById } from "../graph/search.js";
 import { getAncestors, getDescendants } from "../graph/dag.js";
-import type { Skill } from "../graph/types.js";
+import { getNamedSkillsForGeneric } from "../graph/namedLoader.js";
+import type { Skill, NamedSkill } from "../graph/types.js";
 
 function formatSkill(skill: Skill, ancestors: Skill[], descendants: Skill[]): string {
   const lines: string[] = [
@@ -65,6 +66,22 @@ function formatSkill(skill: Skill, ancestors: Skill[], descendants: Skill[]): st
   return lines.join("\n");
 }
 
+function formatNamedImplementations(named: NamedSkill[]): string {
+  if (named.length === 0) return "";
+  const lines = ["", "## Named Implementations"];
+  for (const ns of named) {
+    const linkParts: string[] = [];
+    if (ns.links?.github) linkParts.push(`[GitHub](${ns.links.github})`);
+    if (ns.links?.agentskills) linkParts.push(`[AgentSkills](${ns.links.agentskills})`);
+    if (ns.links?.docs) linkParts.push(`[Docs](${ns.links.docs})`);
+    const links = linkParts.length > 0 ? ` — ${linkParts.join(", ")}` : "";
+    const origin = ns.origin ? " ⭐ origin" : "";
+    lines.push(`- **${ns.name}** (${ns.id})${origin}${links}`);
+    lines.push(`  ${ns.description.slice(0, 120)}`);
+  }
+  return lines.join("\n");
+}
+
 export async function lookupSkill(query: string): Promise<string> {
   const graph = await loadGraph();
 
@@ -72,7 +89,8 @@ export async function lookupSkill(query: string): Promise<string> {
   if (direct) {
     const ancestors = getAncestors(graph, direct.id);
     const descendants = getDescendants(graph, direct.id);
-    return formatSkill(direct, ancestors, descendants);
+    const named = getNamedSkillsForGeneric(direct.id);
+    return formatSkill(direct, ancestors, descendants) + formatNamedImplementations(named);
   }
 
   const results = searchSkills(graph, query);
@@ -84,7 +102,8 @@ export async function lookupSkill(query: string): Promise<string> {
     const skill = results[0];
     const ancestors = getAncestors(graph, skill.id);
     const descendants = getDescendants(graph, skill.id);
-    return formatSkill(skill, ancestors, descendants);
+    const named = getNamedSkillsForGeneric(skill.id);
+    return formatSkill(skill, ancestors, descendants) + formatNamedImplementations(named);
   }
 
   const lines = [`Found ${results.length} skills matching "${query}":\n`];

@@ -90,7 +90,36 @@ def build_proposed_skill(skill_id, source_repo):
         "type": "atomic",
         "description": f"Candidate skill detected from {source_repo} usage: {name}.",
         "sourceRepo": source_repo,
+        "lifecycle": "pending",
     }
+
+
+def find_named_skill_suggestions(proposed_id, named_dir, limit=3):
+    """Return named skills from graph/named/ that are lexically similar to proposed_id."""
+    if not os.path.isdir(named_dir):
+        return []
+    suggestions = []
+    for root, _dirs, files in os.walk(named_dir):
+        for fname in files:
+            if not fname.endswith(".md"):
+                continue
+            rel = os.path.relpath(os.path.join(root, fname), named_dir)
+            # Normalise to forward slashes and strip .md extension.
+            rel_fwd = rel.replace("\\", "/")
+            named_id = rel_fwd[:-3]  # strip ".md"
+            parts = named_id.split("/")
+            slug = parts[-1] if parts else named_id
+            score = max(
+                SequenceMatcher(None, proposed_id.lower(), slug.lower()).ratio(),
+                SequenceMatcher(None, proposed_id.lower(), named_id.lower()).ratio(),
+            )
+            if score >= 0.45:
+                suggestions.append((score, named_id))
+    suggestions.sort(key=lambda x: x[0], reverse=True)
+    return [
+        {"namedSkillId": named_id, "score": round(score, 3)}
+        for score, named_id in suggestions[:limit]
+    ]
 
 
 def similarity_score(candidate_id, canonical_skill):
@@ -152,13 +181,20 @@ def build_skill_batch(raw_tokens, config, registry_root, now=None):
         f"{config.get('gaiaUser', 'unknown')}-{source_repo.split('/')[-1]}"
     )
 
+    named_dir = os.path.join(registry_root, "graph", "named")
+    proposed_skills = []
+    for skill_id in proposed_ids:
+        skill = build_proposed_skill(skill_id, source_repo)
+        skill["namedSuggestions"] = find_named_skill_suggestions(skill_id, named_dir)
+        proposed_skills.append(skill)
+
     return {
         "batchId": batch_id,
         "userId": config.get("gaiaUser", "unknown"),
         "sourceRepo": source_repo,
         "generatedAt": generated_at,
         "knownSkills": [{"skillId": skill_id} for skill_id in known_ids],
-        "proposedSkills": [build_proposed_skill(skill_id, source_repo) for skill_id in proposed_ids],
+        "proposedSkills": proposed_skills,
         "similarity": build_similarity(proposed_ids, canonical_map),
     }
 

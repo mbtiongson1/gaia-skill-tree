@@ -116,5 +116,51 @@ class TestGaiaPush(unittest.TestCase):
             self.assertEqual([s["id"] for s in batch["proposedSkills"]], ["semantic-search"])
 
 
+    def test_proposed_skill_has_lifecycle_pending(self):
+        """build_skill_batch sets lifecycle: 'pending' on all proposed skills."""
+        with tempfile.TemporaryDirectory() as tmp:
+            registry = os.path.join(tmp, "registry")
+            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
+            shutil.copyfile(
+                os.path.join(REPO_ROOT, "graph", "gaia.json"),
+                os.path.join(registry, "graph", "gaia.json"),
+            )
+            batch = build_skill_batch(
+                {"semantic-search", "web-search"},
+                {"gaiaUser": "tester"},
+                registry,
+            )
+            proposed = batch.get("proposedSkills", [])
+            self.assertGreater(len(proposed), 0, "Expected at least one proposed skill.")
+            for skill in proposed:
+                self.assertEqual(
+                    skill.get("lifecycle"),
+                    "pending",
+                    f"Expected lifecycle='pending' for proposed skill {skill['id']!r}, "
+                    f"got {skill.get('lifecycle')!r}.",
+                )
+
+    def test_known_skills_have_no_lifecycle_field(self):
+        """build_skill_batch does not add a lifecycle field to known skills."""
+        with tempfile.TemporaryDirectory() as tmp:
+            registry = os.path.join(tmp, "registry")
+            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
+            shutil.copyfile(
+                os.path.join(REPO_ROOT, "graph", "gaia.json"),
+                os.path.join(registry, "graph", "gaia.json"),
+            )
+            batch = build_skill_batch(
+                {"web-search"},
+                {"gaiaUser": "tester"},
+                registry,
+            )
+            for skill in batch.get("knownSkills", []):
+                self.assertNotIn(
+                    "lifecycle",
+                    skill,
+                    f"Known skill {skill} should not have a lifecycle field.",
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
