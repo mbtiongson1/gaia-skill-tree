@@ -29,6 +29,7 @@ classifiers = [
 ]
 dependencies = [
     "jsonschema>=4.17.0",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
