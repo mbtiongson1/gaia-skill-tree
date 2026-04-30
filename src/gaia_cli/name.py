@@ -7,6 +7,10 @@ in graph/named/{contributor}/{skill-name}.md
 import datetime
 import json
 import os
+import re
+
+_CONTRIBUTOR_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+_SKILL_NAME_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 
 
 def find_awakened_skill(batch_path, skill_id):
@@ -64,6 +68,10 @@ def promote_to_named(skill_data, contributor, skill_name, registry_path):
         Absolute path to the written .md file.
     """
     today = datetime.date.today().isoformat()
+    if not _CONTRIBUTOR_RE.match(contributor):
+        raise ValueError(f"Invalid contributor: {contributor!r}")
+    if not _SKILL_NAME_RE.match(skill_name):
+        raise ValueError(f"Invalid skill_name: {skill_name!r}")
     named_id = f"{contributor}/{skill_name}"
     dest_dir = os.path.join(registry_path, "graph", "named", contributor)
     os.makedirs(dest_dir, exist_ok=True)

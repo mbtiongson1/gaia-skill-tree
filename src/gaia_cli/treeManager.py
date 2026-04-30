@@ -1,15 +1,26 @@
 import json
 import os
+import re
+
+_USERNAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+
+
+def _check_username(username: str) -> None:
+    if not username or not _USERNAME_RE.match(username):
+        raise ValueError(f"Invalid username: {username!r}")
+
 
 def load_tree(username, registry_path="."):
-    tree_path = os.path.join(registry_path, f"users/{username}/skill-tree.json")
+    _check_username(username)
+    tree_path = os.path.join(registry_path, "users", username, "skill-tree.json")
     if not os.path.exists(tree_path):
         return None
     with open(tree_path, 'r') as f:
         return json.load(f)
 
 def save_tree(username, tree_data, registry_path="."):
-    tree_path = os.path.join(registry_path, f"users/{username}/skill-tree.json")
+    _check_username(username)
+    tree_path = os.path.join(registry_path, "users", username, "skill-tree.json")
     os.makedirs(os.path.dirname(tree_path), exist_ok=True)
     with open(tree_path, 'w') as f:
         json.dump(tree_data, f, indent=2)
