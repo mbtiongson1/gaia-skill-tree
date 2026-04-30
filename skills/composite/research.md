@@ -2,8 +2,8 @@
 **ID:** research  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/research`
 
 ---
 

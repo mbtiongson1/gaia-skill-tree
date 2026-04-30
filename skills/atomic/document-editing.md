@@ -2,8 +2,8 @@
 **ID:** document-editing  
 **Type:** Intrinsic Skill  
 **Level:** 0  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Basic  
+**Skill Call:** `/document-editing`
 
 ---
 

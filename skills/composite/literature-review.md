@@ -2,8 +2,8 @@
 **ID:** literature-review  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/literature-review`
 
 ---
 

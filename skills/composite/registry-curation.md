@@ -2,8 +2,8 @@
 **ID:** registry-curation  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/registry-curation`
 
 ---
 

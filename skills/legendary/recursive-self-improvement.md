@@ -2,8 +2,8 @@
 **ID:** recursive-self-improvement  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/recursive-self-improvement`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** ocr  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/ocr`
 
 ---
 

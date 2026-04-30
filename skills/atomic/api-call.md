@@ -2,8 +2,8 @@
 **ID:** api-call  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/api-call`
 
 ---
 

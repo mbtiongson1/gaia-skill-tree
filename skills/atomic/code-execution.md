@@ -2,8 +2,8 @@
 **ID:** code-execution  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/code-execution`
 
 ---
 

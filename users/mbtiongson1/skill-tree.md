@@ -1,22 +1,22 @@
 # Skill Tree — mbtiongson1
 **Last Updated:** 2026-04-26  
 **Total Skills Unlocked:** 7  
-**Highest Rarity:** Uncommon  
+**Highest Tier:** uncommon  
 **Deepest Lineage:** 2
 
 ---
 
 ## Unlocked Skills
 
-| Skill | Class | Rank | Rarity | Unlocked In | Date |
+| Skill | Class | Rank | Tier | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Web Search | Intrinsic Skill | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-01 |
-| ○ Parse HTML | Intrinsic Skill | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-05 |
-| ○ Extract Entities | Intrinsic Skill | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-08 |
-| ○ Summarize | Intrinsic Skill | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-10 |
-| ○ Cite Sources | Intrinsic Skill | II | Common | mbtiongson1/gaia-skill-tree | 2026-03-12 |
-| ◇ Web Scrape | Extra Skill | III | Uncommon | mbtiongson1/gaia-skill-tree | 2026-03-15 |
-| ◇ Research | Extra Skill | III | Uncommon | mbtiongson1/gaia-skill-tree | 2026-04-01 |
+| ○ Web Search | Intrinsic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-01 |
+| ○ Parse HTML | Intrinsic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-05 |
+| ○ Extract Entities | Intrinsic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-08 |
+| ○ Summarize | Intrinsic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-10 |
+| ○ Cite Sources | Intrinsic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-12 |
+| ◇ Web Scrape | Extra Skill | III | Evolved | mbtiongson1/gaia-skill-tree | 2026-03-15 |
+| ◇ Research | Extra Skill | III | Evolved | mbtiongson1/gaia-skill-tree | 2026-04-01 |
 
 ---
 

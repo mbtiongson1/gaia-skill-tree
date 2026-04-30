@@ -2,8 +2,8 @@
 **ID:** semantic-cache  
 **Type:** Intrinsic Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/semantic-cache`
 
 ---
 

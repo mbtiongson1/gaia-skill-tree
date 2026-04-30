@@ -2,8 +2,8 @@
 **ID:** logical-inference  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/logical-inference`
 
 ---
 

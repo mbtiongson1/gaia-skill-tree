@@ -2,8 +2,8 @@
 **ID:** multi-agent-debate  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/multi-agent-debate`
 
 ---
 

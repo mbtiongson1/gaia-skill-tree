@@ -2,8 +2,8 @@
 **ID:** scientific-discovery  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/scientific-discovery`
 
 ---
 

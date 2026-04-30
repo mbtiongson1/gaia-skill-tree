@@ -2,8 +2,8 @@
 **ID:** test-driven-development  
 **Type:** Intrinsic Skill  
 **Level:** 0  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Basic  
+**Skill Call:** `/test-driven-development`
 
 ---
 

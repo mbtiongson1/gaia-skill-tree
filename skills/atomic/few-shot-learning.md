@@ -2,8 +2,8 @@
 **ID:** few-shot-learning  
 **Type:** Intrinsic Skill  
 **Level:** IV  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/few-shot-learning`
 
 ---
 

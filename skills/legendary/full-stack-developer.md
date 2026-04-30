@@ -2,8 +2,8 @@
 **ID:** full-stack-developer  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/full-stack-developer`
 
 ---
 

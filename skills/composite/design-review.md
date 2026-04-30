@@ -2,8 +2,8 @@
 **ID:** design-review  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/design-review`
 
 ---
 

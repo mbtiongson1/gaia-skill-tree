@@ -2,8 +2,8 @@
 **ID:** multimodal-reasoning  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/multimodal-reasoning`
 
 ---
 

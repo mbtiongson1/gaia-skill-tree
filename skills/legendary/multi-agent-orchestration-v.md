@@ -2,8 +2,8 @@
 **ID:** multi-agent-orchestration-v  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/multi-agent-orchestration-v`
 
 ---
 

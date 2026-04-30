@@ -2,8 +2,8 @@
 **ID:** function-calling  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/function-calling`
 
 ---
 

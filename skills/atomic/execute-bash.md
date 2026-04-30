@@ -2,8 +2,8 @@
 **ID:** execute-bash  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/execute-bash`
 
 ---
 

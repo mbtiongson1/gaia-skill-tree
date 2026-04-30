@@ -2,8 +2,8 @@
 **ID:** tool-use  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/tool-use`
 
 ---
 

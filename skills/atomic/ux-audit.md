@@ -2,8 +2,8 @@
 **ID:** ux-audit  
 **Type:** Intrinsic Skill  
 **Level:** 0  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Basic  
+**Skill Call:** `/ux-audit`
 
 ---
 

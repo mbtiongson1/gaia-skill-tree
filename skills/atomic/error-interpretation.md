@@ -2,8 +2,8 @@
 **ID:** error-interpretation  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/error-interpretation`
 
 ---
 

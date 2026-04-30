@@ -2,8 +2,8 @@
 **ID:** autonomous-debug  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/autonomous-debug`
 
 ---
 

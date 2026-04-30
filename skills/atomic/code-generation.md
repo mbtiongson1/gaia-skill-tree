@@ -2,8 +2,8 @@
 **ID:** code-generation  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/code-generation`
 
 ---
 

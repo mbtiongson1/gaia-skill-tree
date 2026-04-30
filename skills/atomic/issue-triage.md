@@ -2,8 +2,8 @@
 **ID:** issue-triage  
 **Type:** Intrinsic Skill  
 **Level:** IV  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/issue-triage`
 
 ---
 

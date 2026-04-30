@@ -2,8 +2,8 @@
 **ID:** agent-eval  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/agent-eval`
 
 ---
 

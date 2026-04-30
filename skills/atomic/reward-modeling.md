@@ -2,8 +2,8 @@
 **ID:** reward-modeling  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/reward-modeling`
 
 ---
 

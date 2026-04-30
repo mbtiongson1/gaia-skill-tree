@@ -2,8 +2,8 @@
 **ID:** write-report  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/write-report`
 
 ---
 

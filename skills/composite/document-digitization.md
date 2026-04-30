@@ -2,8 +2,8 @@
 **ID:** document-digitization  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/document-digitization`
 
 ---
 

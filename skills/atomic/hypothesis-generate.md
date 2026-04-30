@@ -2,8 +2,8 @@
 **ID:** hypothesis-generate  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/hypothesis-generate`
 
 ---
 

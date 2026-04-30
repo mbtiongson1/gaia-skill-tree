@@ -2,8 +2,8 @@
 **ID:** self-critique  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/self-critique`
 
 ---
 

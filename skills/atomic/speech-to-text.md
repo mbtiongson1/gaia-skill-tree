@@ -2,8 +2,8 @@
 **ID:** speech-to-text  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/speech-to-text`
 
 ---
 

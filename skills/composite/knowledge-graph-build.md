@@ -2,8 +2,8 @@
 **ID:** knowledge-graph-build  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/knowledge-graph-build`
 
 ---
 

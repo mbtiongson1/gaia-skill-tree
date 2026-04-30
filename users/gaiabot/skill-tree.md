@@ -1,19 +1,19 @@
 # Skill Tree — gaiabot
 **Last Updated:** 2026-04-26  
 **Total Skills Unlocked:** 4  
-**Highest Rarity:** Common  
+**Highest Tier:** common  
 **Deepest Lineage:** 1
 
 ---
 
 ## Unlocked Skills
 
-| Skill | Class | Rank | Rarity | Unlocked In | Date |
+| Skill | Class | Rank | Tier | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Route Intent | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-20 |
-| ○ Plan and Decompose | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-21 |
-| ○ Tool Select | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-22 |
-| ◇ Plan and Execute | Extra Skill | III | Rare | local-repo | 2026-04-26 |
+| ○ Route Intent | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-20 |
+| ○ Plan and Decompose | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-21 |
+| ○ Tool Select | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-22 |
+| ◇ Plan and Execute | Extra Skill | III | Evolved | local-repo | 2026-04-26 |
 
 ---
 
