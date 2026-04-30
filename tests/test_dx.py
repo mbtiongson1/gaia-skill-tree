@@ -38,6 +38,9 @@ def test_init_accepts_flags_and_uses_current_registry_default(tmp_path, monkeypa
 
 def test_init_yes_mode_preserves_non_interactive_defaults(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    # Prevent auto-detection from picking up the parent repo's username
+    import gaia_cli.main as gaia_main
+    monkeypatch.setattr(gaia_main, "_detect_github_username", lambda: None)
 
     run_cli(monkeypatch, ["init", "--yes"])
 

@@ -1,6 +1,19 @@
 name: Python Package
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'pyproject.toml'
+      - 'README.md'
+      - 'src/**'
+      - 'plugin/cli/**'
+      - 'tests/**'
+      - 'graph/gaia.json'
+      - 'graph/named/**'
+      - 'schema/**'
+      - '.github/workflows/python-package.yml'
   pull_request:
     paths:
       - 'pyproject.toml'

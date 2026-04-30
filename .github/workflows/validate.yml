@@ -1,6 +1,17 @@
 name: Validate Gaia Graph
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'graph/**'
+      - 'schema/**'
+      - 'users/**'
+      - 'intake/**'
+      - 'scripts/**'
+      - 'plugin/**'
+      - 'tests/**'
   pull_request:
     paths:
       - 'graph/**'

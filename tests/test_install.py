@@ -258,3 +258,60 @@ class TestSyncFlow:
         sync_skills(str(tmp_path))
         captured = capsys.readouterr()
         assert "Up to date" in captured.out or "updated" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# list_available — from gaia_cli.install
+# ---------------------------------------------------------------------------
+
+from gaia_cli.install import list_available
+
+_FRONTMATTER = """\
+---
+id: contrib/my-skill
+name: My Skill
+contributor: contrib
+origin: true
+genericSkillRef: web-search
+status: named
+level: II
+description: A test skill.
+---
+Content here.
+"""
+
+
+class TestListAvailable:
+    def _make_registry(self, tmp_path, skill_id="contrib/my-skill", content=_FRONTMATTER):
+        contributor, name = skill_id.split("/", 1)
+        d = tmp_path / "graph" / "named" / contributor
+        d.mkdir(parents=True, exist_ok=True)
+        (d / f"{name}.md").write_text(content, encoding="utf-8")
+
+    def test_returns_empty_when_no_named_dir(self, tmp_path):
+        result = list_available(str(tmp_path))
+        assert result == []
+
+    def test_returns_skill_with_parsed_meta(self, tmp_path):
+        self._make_registry(tmp_path)
+        result = list_available(str(tmp_path))
+        assert len(result) == 1
+        sid, meta = result[0]
+        assert sid == "contrib/my-skill"
+        assert meta["name"] == "My Skill"
+        assert meta["level"] == "II"
+        assert meta["genericSkillRef"] == "web-search"
+
+    def test_lists_multiple_contributors_sorted(self, tmp_path):
+        self._make_registry(tmp_path, "zeta/skill-z")
+        self._make_registry(tmp_path, "alpha/skill-a")
+        result = list_available(str(tmp_path))
+        ids = [r[0] for r in result]
+        assert ids == sorted(ids)
+
+    def test_ignores_non_md_files(self, tmp_path):
+        d = tmp_path / "graph" / "named" / "contrib"
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.json").write_text("{}")
+        result = list_available(str(tmp_path))
+        assert result == []
