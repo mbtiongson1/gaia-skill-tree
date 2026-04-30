@@ -143,4 +143,4 @@
 | `/recursive-self-improvement` | Transcendent | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
 | `/scientific-discovery` | Transcendent | `/hypothesis-generate`, `/research`, `/math-reason` |
 
-*Generated from gaia.json v2.1.0.*
+*Generated from gaia.json v2.1.1.*
