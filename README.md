@@ -72,6 +72,20 @@ GAIA SKILL TREE  v1.0.0
      ├─ ○ /plan-decompose  [I]
      └─ ○ /tool-select  [I]
 
+══════════════════════════════════════════════════════════════════════
+Pure / Undeveloped — atomic skills not yet wired into any upgrade path.
+══════════════════════════════════════════════════════════════════════
+
+  ○ /code-execution  [II · Named]
+  ○ mattpocock/zoom-out - Code Explain  [II · Named]
+  ○ /context-compression  [III · Evolved]
+  ○ /few-shot-learning  [IV · Hardened]
+  ○ /fine-tune  [IV · Hardened]
+  ○ mattpocock/triage - Issue Triage  [IV · Hardened]
+  ○ /prompt-injection-defense  [III · Evolved]
+  ○ /self-consistency  [IV · Hardened]
+  ○ /semantic-cache  [IV · Hardened]
+  ... (21 total)
 
 → Full graph: tree.md
 ```
