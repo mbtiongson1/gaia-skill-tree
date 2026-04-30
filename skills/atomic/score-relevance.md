@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [RAG Pipeline](../composite/rag-pipeline.md)
+- [Agent Evaluation](../composite/agent-eval.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
