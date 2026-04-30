@@ -59,8 +59,6 @@
       "prerequisites": [],
       "derivatives": [
         "content-moderation",
-        "few-shot-learning",
-        "route-intent",
         "guardrails"
       ],
       "conditions": "",
@@ -200,7 +198,6 @@
       "derivatives": [
         "automated-testing",
         "autonomous-debug",
-        "code-execution",
         "registry-curation"
       ],
       "conditions": "",
@@ -228,8 +225,6 @@
       "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
       "prerequisites": [],
       "derivatives": [
-        "few-shot-learning",
-        "ghostwrite",
         "prompt-optimization"
       ],
       "conditions": "",
@@ -378,7 +373,6 @@
         "grounding",
         "multi-agent-debate",
         "prompt-optimization",
-        "self-critique",
         "guardrails",
         "agent-eval"
       ],
@@ -548,8 +542,6 @@
       "prerequisites": [],
       "derivatives": [
         "plan-and-execute",
-        "re-act-reasoning",
-        "tool-use",
         "function-calling",
         "tool-chaining"
       ],
@@ -607,7 +599,6 @@
       "prerequisites": [],
       "derivatives": [
         "autonomous-debug",
-        "code-execution",
         "code-review-pipeline",
         "registry-curation",
         "tool-creation"
@@ -696,7 +687,6 @@
       "derivatives": [
         "document-analyst",
         "document-digitization",
-        "structured-output",
         "text-to-sql-pipeline"
       ],
       "conditions": "",
@@ -755,7 +745,6 @@
         "extract-entities"
       ],
       "derivatives": [
-        "browser-automation",
         "knowledge-harvest"
       ],
       "conditions": "Structured output mode required.",
@@ -789,7 +778,6 @@
       "derivatives": [
         "autonomous-data-scientist",
         "ghostwrite",
-        "hypothesis-generate",
         "registry-curation",
         "scientific-discovery"
       ],
@@ -938,7 +926,9 @@
         "retrieve",
         "chunk-document",
         "embed-text",
-        "score-relevance"
+        "score-relevance",
+        "tokenize",
+        "rank"
       ],
       "derivatives": [],
       "conditions": "",
@@ -1145,8 +1135,7 @@
       "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
       "prerequisites": [],
       "derivatives": [
-        "multimodal-reasoning",
-        "object-detection"
+        "multimodal-reasoning"
       ],
       "conditions": "",
       "evidence": [
@@ -1256,7 +1245,6 @@
       "prerequisites": [],
       "derivatives": [
         "conversational-agent",
-        "few-shot-learning",
         "multimodal-reasoning",
         "voice-agent"
       ],
@@ -1338,7 +1326,6 @@
       "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
       "prerequisites": [],
       "derivatives": [
-        "chain-of-thought",
         "knowledge-graph-build",
         "multimodal-reasoning"
       ],
@@ -2109,7 +2096,6 @@
         "multi-agent-debate",
         "re-act-reasoning",
         "scientific-discovery",
-        "self-consistency",
         "tree-of-thought"
       ],
       "conditions": "",
@@ -2793,9 +2779,7 @@
         "cite-sources",
         "evaluate-output"
       ],
-      "derivatives": [
-        "research"
-      ],
+      "derivatives": [],
       "conditions": "",
       "evidence": [
         {
@@ -2831,9 +2815,7 @@
         "evaluate-output",
         "chain-of-thought"
       ],
-      "derivatives": [
-        "recursive-self-improvement"
-      ],
+      "derivatives": [],
       "conditions": "",
       "evidence": [
         {
@@ -4083,7 +4065,7 @@
     {
       "sourceSkillId": "tool-use",
       "targetSkillId": "re-act-reasoning",
-      "edgeType": "enhances",
+      "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
@@ -4155,7 +4137,7 @@
     {
       "sourceSkillId": "computer-use",
       "targetSkillId": "browser-automation",
-      "edgeType": "enhances",
+      "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
@@ -4163,7 +4145,7 @@
     {
       "sourceSkillId": "hypothesis-generate",
       "targetSkillId": "scientific-discovery",
-      "edgeType": "enhances",
+      "edgeType": "prerequisite",
       "condition": "",
       "levelFloor": "I",
       "evidenceRefs": []
@@ -4595,6 +4577,22 @@
       "evidenceRefs": [
         "tool-chaining#evidence[0]"
       ]
+    },
+    {
+      "sourceSkillId": "tokenize",
+      "targetSkillId": "rag-pipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "rank",
+      "targetSkillId": "rag-pipeline",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": []
     }
   ]
 }

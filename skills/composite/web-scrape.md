@@ -16,7 +16,6 @@ Retrieves and structures data from web pages into usable entities.
 - [Extract Entities](../atomic/extract-entities.md)
 
 ## Unlocks
-- [Browser Automation](../composite/browser-automation.md)
 - [Knowledge Harvest](../composite/knowledge-harvest.md)
 
 ## Fusion Condition

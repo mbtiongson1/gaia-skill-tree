@@ -16,7 +16,7 @@ Verifies generated claims against retrieved evidence, identifies unsupported or 
 - [Evaluate Output](../atomic/evaluate-output.md)
 
 ## Unlocks
-- [Research](../composite/research.md)
+_None._
 
 ## Fusion Condition
 _None specified._

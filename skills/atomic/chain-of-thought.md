@@ -17,7 +17,6 @@ _None._
 - [Multi-Agent Debate](../composite/multi-agent-debate.md)
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
-- [Self-Consistency](../atomic/self-consistency.md)
 - [Tree of Thought](../composite/tree-of-thought.md)
 
 ## Evidence

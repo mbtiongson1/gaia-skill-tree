@@ -16,7 +16,6 @@ _None._
 ## Unlocks
 - [Automated Testing](../composite/automated-testing.md)
 - [Autonomous Debug](../composite/autonomous-debug.md)
-- [Code Execution](../atomic/code-execution.md)
 - [Registry Curation](../composite/registry-curation.md)
 
 ## Evidence

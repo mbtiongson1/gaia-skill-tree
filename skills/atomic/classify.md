@@ -15,8 +15,6 @@ _None._
 
 ## Unlocks
 - [Content Moderation](../composite/content-moderation.md)
-- [Few-Shot Learning](../atomic/few-shot-learning.md)
-- [Route Intent](../atomic/route-intent.md)
 - [Guardrails](../composite/guardrails.md)
 
 ## Evidence
