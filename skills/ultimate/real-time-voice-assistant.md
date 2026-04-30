@@ -32,4 +32,4 @@ Requires real-time audio pipeline, <500ms end-to-end latency target, and persist
 _None verified yet._
 
 ---
-*Generated from gaia.json v2.1.0 on 2026-04-30. Do not edit directly.*
+*Generated from gaia.json v2.1.1 on 2026-04-30. Do not edit directly.*
