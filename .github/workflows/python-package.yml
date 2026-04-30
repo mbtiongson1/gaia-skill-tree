@@ -18,8 +18,6 @@ jobs:
   package:
     name: Test, Build, and Smoke Test
     runs-on: ubuntu-latest
-    env:
-      GAIA_HOME: ${{ runner.temp }}/gaia-home
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,3 +49,5 @@ jobs:
           "$RUNNER_TEMP/gaia-wheel-venv/bin/python" -m pip install dist/*.whl
           "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" --help
           "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" doctor
+        env:
+          GAIA_HOME: ${{ runner.temp }}/gaia-home
