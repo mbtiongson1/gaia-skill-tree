@@ -16,6 +16,8 @@ _None._
 ## Unlocks
 - [Grounding](../composite/grounding.md)
 - [Research](../composite/research.md)
+- [Literature Review](../composite/literature-review.md)
+- [Scientific Writing](../composite/scientific-writing.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

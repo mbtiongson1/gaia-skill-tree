@@ -17,6 +17,7 @@ Conducts end-to-end quantitative analysis: queries data via SQL, computes statis
 
 ## Unlocks
 - [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
+- [ML Pipeline](../composite/ml-pipeline.md)
 
 ## Fusion Condition
 _None specified._
