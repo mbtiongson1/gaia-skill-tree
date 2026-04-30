@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Translation Pipeline
+# [III · Extra Skill] Translation Pipeline
 **ID:** translation-pipeline  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

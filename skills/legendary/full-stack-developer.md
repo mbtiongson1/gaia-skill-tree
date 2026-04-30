@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] True Craftsman: Full-Stack Developer
+# [V · Ultimate Skill] True Craftsman: Full-Stack Developer
 **ID:** full-stack-developer  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

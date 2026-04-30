@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Automated Testing
+# [III · Extra Skill] Automated Testing
 **ID:** automated-testing  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

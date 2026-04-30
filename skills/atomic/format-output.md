@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Format Output
+# [0 · Intrinsic Skill] Format Output
 **ID:** format-output  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

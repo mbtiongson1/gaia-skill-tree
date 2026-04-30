@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Content Moderation
+# [III · Extra Skill] Content Moderation
 **ID:** content-moderation  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

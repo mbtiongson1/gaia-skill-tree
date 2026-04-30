@@ -27,13 +27,13 @@ def _run_generate_named_index():
             today = (ts.split("T")[0] if "T" in ts else ts) if ts else datetime.date.today().isoformat()
             named_skills = mod.load_named_skills(named_dir)
             valid_ids = {s["id"] for s in gdata.get("skills", [])}
-            errors, buckets = mod.validate_and_group(named_skills, valid_ids)
+            errors, buckets, awaiting_classification, by_contributor = mod.validate_and_group(named_skills, valid_ids)
             if errors:
                 print(f"Warning: named skill validation errors ({len(errors)}):")
                 for err in errors:
                     print(f"  {err}")
             else:
-                mod.write_index(buckets, output_path, today)
+                mod.write_index(buckets, awaiting_classification, by_contributor, output_path, today)
                 total = sum(len(v) for v in buckets.values())
                 print(f"Generated named index: {total} skill(s) across "
                       f"{len(buckets)} bucket(s).")
@@ -52,8 +52,7 @@ def get_type_label(meta, skill_type):
 
 
 def get_level_label(meta, level):
-    name = meta.get("levelLabels", {}).get(level, level)
-    return f"{level} · {name}"
+    return str(level)
 
 
 def get_rarity_label(meta, rarity):
@@ -72,17 +71,8 @@ def _sorted_legendaries(skills):
     )
 
 
-def _prereq_inline(skill, skill_map):
-    prereq_ids = skill.get("prerequisites", [])
-    if not prereq_ids or skill.get("type") not in ("composite", "legendary"):
-        return ""
-    names = [skill_map.get(pid, {}).get("name", pid) for pid in prereq_ids]
-    short = [n.split(":")[-1].strip() if ":" in n else n for n in names]
-    return "  ← " + " · ".join(short)
-
-
 def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
-                    unlocked_ids=None, user_id=None):
+                    unlocked_ids=None, user_id=None, named_map=None):
     skill = skill_map.get(root_id)
     if not skill:
         return []
@@ -93,10 +83,9 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
     level = skill.get("level")
     level_label = get_level_label(meta, level)
 
-    if level == "VI" and user_id and unlocked_ids is not None and root_id in unlocked_ids:
-        level_label = f"VI · {user_id} · Transcendent"
+    named_id = (named_map or {}).get(root_id)
+    display = f"{named_id} - {name}" if named_id else f"/{root_id}"
 
-    inline = _prereq_inline(skill, skill_map)
     already_seen = root_id in seen
     back_ref = "  (↑ see above)" if already_seen else ""
 
@@ -104,7 +93,7 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
     if unlocked_ids is not None:
         check = "✓ " if root_id in unlocked_ids else "· "
 
-    line = f"{prefix}{connector} {check}{symbol} {name}  [{level_label}]{inline}{back_ref}"
+    line = f"{prefix}{connector} {check}{symbol} {display}  [{level_label}]{back_ref}"
     lines = [line]
 
     if already_seen:
@@ -120,7 +109,7 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
         is_last_child = (i == len(prereq_ids) - 1)
         lines.extend(_render_subtree(
             prereq_id, skill_map, meta, child_prefix, is_last_child, seen,
-            unlocked_ids=unlocked_ids, user_id=user_id,
+            unlocked_ids=unlocked_ids, user_id=user_id, named_map=named_map,
         ))
 
     return lines
@@ -259,8 +248,20 @@ def main():
                 f.write(f"| {name_display} | {type_label} | {prereq_str} | {level_label} | {skill.get('conditions', '')} |\n")
         f.write(f"\n*Generated from gaia.json v{version}.*\n")
 
-    # generate tree.md
-    _generate_tree(skills, skill_map, meta, version, date_str)
+    # generate tree.md — named index must be fresh first
+    _run_generate_named_index()
+
+    named_map = {}
+    named_index_path = os.path.join("graph", "named", "index.json")
+    if os.path.isfile(named_index_path):
+        with open(named_index_path, "r", encoding="utf-8") as nf:
+            nidx = json.load(nf)
+        for skill_id, entries in nidx.get("buckets", {}).items():
+            if entries:
+                origin = next((e for e in entries if e.get("origin")), entries[0])
+                named_map[skill_id] = origin.get("id", "")
+
+    _generate_tree(skills, skill_map, meta, version, date_str, named_map)
 
     catalog_path = 'graph/real_skill_catalog.json'
     if os.path.isfile(catalog_path):
@@ -321,19 +322,12 @@ def main():
                     llevel = legendary.get("level")
                     prereq_ids = legendary.get("prerequisites", [])
 
-                    if llevel == "VI" and lid in unlocked_ids:
-                        level_label = f"VI · {user_id} · Transcendent"
-                    else:
-                        level_label = get_level_label(meta, llevel)
-
-                    inline = ""
-                    if prereq_ids:
-                        names = [skill_map.get(pid, {}).get("name", pid) for pid in prereq_ids]
-                        short = [n.split(":")[-1].strip() if ":" in n else n for n in names]
-                        inline = "  ← " + " · ".join(short)
+                    level_label = get_level_label(meta, llevel)
+                    named_id = named_map.get(lid)
+                    display = f"{named_id} - {lname}" if named_id else f"/{lid}"
 
                     check = "✓ " if lid in unlocked_ids else "· "
-                    f.write(f"{check}◆ {lname}  [{level_label}]{inline}\n")
+                    f.write(f"{check}◆ {display}  [{level_label}]\n")
 
                     seen = {lid}
                     for i, prereq_id in enumerate(prereq_ids):
@@ -341,6 +335,7 @@ def main():
                         for sl in _render_subtree(
                             prereq_id, skill_map, meta, "  ", is_last, seen,
                             unlocked_ids=unlocked_ids, user_id=user_id,
+                            named_map=named_map,
                         ):
                             f.write(sl + "\n")
                     f.write("\n")
@@ -364,11 +359,8 @@ def main():
 
     print(f"Generated projections for {len(skills)} skills.")
 
-    # Generate named skill index
-    _run_generate_named_index()
 
-
-def _generate_tree(skills, skill_map, meta, version, date_str):
+def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
     legendaries = _sorted_legendaries(skills)
 
     lines = []
@@ -389,19 +381,17 @@ def _generate_tree(skills, skill_map, meta, version, date_str):
         level_label = get_level_label(meta, llevel)
         prereq_ids = legendary.get("prerequisites", [])
 
-        inline = ""
-        if prereq_ids:
-            names = [skill_map.get(pid, {}).get("name", pid) for pid in prereq_ids]
-            short = [n.split(":")[-1].strip() if ":" in n else n for n in names]
-            inline = "  ← " + " · ".join(short)
+        named_id = (named_map or {}).get(lid)
+        display = f"{named_id} - {lname}" if named_id else f"/{lid}"
 
-        lines.append(f"◆ {lname}  [{level_label}]{inline}")
+        lines.append(f"◆ {display}  [{level_label}]")
         lines.append("─" * 65)
 
         seen = {lid}
         for i, prereq_id in enumerate(prereq_ids):
             is_last = (i == len(prereq_ids) - 1)
-            lines.extend(_render_subtree(prereq_id, skill_map, meta, "  ", is_last, seen))
+            lines.extend(_render_subtree(prereq_id, skill_map, meta, "  ", is_last, seen,
+                                         named_map=named_map))
 
         lines.append("")
 

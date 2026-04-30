@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Rank
+# [I · Intrinsic Skill] Rank
 **ID:** rank  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

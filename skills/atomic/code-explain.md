@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Code Explain
+# [II · Intrinsic Skill] Code Explain
 **ID:** code-explain  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 

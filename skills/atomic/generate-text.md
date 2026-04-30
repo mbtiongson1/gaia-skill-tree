@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Generate Text
+# [0 · Intrinsic Skill] Generate Text
 **ID:** generate-text  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

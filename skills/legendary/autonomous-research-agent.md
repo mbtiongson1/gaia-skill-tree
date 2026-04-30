@@ -1,7 +1,7 @@
-# [VI · Transcendent â˜… · Ultimate Skill] Wisdom King: Autonomous Research Agent
+# [VI · Ultimate Skill] Wisdom King: Autonomous Research Agent
 **ID:** autonomous-research-agent  
 **Type:** Ultimate Skill  
-**Level:** VI · Transcendent â˜…  
+**Level:** VI  
 **Rarity:** Divine  
 **Status:** Provisional
 

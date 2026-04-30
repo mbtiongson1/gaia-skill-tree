@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Chain-of-Thought Reasoning
+# [I · Intrinsic Skill] Chain-of-Thought Reasoning
 **ID:** chain-of-thought  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

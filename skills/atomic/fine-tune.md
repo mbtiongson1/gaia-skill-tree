@@ -1,7 +1,7 @@
-# [IV · Hardened · Intrinsic Skill] Fine-Tune
+# [IV · Intrinsic Skill] Fine-Tune
 **ID:** fine-tune  
 **Type:** Intrinsic Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

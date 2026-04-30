@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Diff Content
+# [I · Intrinsic Skill] Diff Content
 **ID:** diff-content  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

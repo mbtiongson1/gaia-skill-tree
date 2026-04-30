@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Translate
+# [0 · Intrinsic Skill] Translate
 **ID:** translate  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

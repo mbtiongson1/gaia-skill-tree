@@ -1,7 +1,7 @@
-# [IV · Hardened · Intrinsic Skill] Self-Consistency
+# [IV · Intrinsic Skill] Self-Consistency
 **ID:** self-consistency  
 **Type:** Intrinsic Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

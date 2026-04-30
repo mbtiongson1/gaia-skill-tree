@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Code Review Pipeline
+# [III · Extra Skill] Code Review Pipeline
 **ID:** code-review-pipeline  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

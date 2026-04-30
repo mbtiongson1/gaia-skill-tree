@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Detect Anomaly
+# [II · Intrinsic Skill] Detect Anomaly
 **ID:** detect-anomaly  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

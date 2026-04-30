@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Error Interpretation
+# [I · Intrinsic Skill] Error Interpretation
 **ID:** error-interpretation  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

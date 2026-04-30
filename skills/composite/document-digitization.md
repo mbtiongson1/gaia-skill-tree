@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Document Digitization
+# [III · Extra Skill] Document Digitization
 **ID:** document-digitization  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Web Scrape
+# [III · Extra Skill] Web Scrape
 **ID:** web-scrape  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

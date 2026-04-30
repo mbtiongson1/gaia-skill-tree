@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] RAG Pipeline
+# [III · Extra Skill] RAG Pipeline
 **ID:** rag-pipeline  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

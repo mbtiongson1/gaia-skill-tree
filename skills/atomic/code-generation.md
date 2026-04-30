@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Code Generation
+# [I · Intrinsic Skill] Code Generation
 **ID:** code-generation  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

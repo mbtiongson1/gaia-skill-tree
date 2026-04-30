@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Parse JSON
+# [I · Intrinsic Skill] Parse JSON
 **ID:** parse-json  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

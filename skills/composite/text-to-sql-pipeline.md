@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Text-to-SQL Pipeline
+# [III · Extra Skill] Text-to-SQL Pipeline
 **ID:** text-to-sql-pipeline  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

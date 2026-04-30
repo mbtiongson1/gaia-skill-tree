@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] UX Audit
+# [0 · Intrinsic Skill] UX Audit
 **ID:** ux-audit  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -19,7 +19,7 @@ _None._
 ## Evidence
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
-| B | https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills | mbtiongson1 | 2026-04-30 |
+| B | https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md | mbtiongson1 | 2026-04-30 |
 
 ## Known Agents
 _None verified yet._

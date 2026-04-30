@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] True Dragon: Autonomous Scientific Discovery
+# [V · Ultimate Skill] True Dragon: Autonomous Scientific Discovery
 **ID:** scientific-discovery  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [IV · Hardened · Intrinsic Skill] Few-Shot Learning
+# [IV · Intrinsic Skill] Few-Shot Learning
 **ID:** few-shot-learning  
 **Type:** Intrinsic Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Common  
 **Status:** Provisional
 

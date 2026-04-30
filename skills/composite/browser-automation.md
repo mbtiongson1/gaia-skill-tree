@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Browser Automation
+# [III · Extra Skill] Browser Automation
 **ID:** browser-automation  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

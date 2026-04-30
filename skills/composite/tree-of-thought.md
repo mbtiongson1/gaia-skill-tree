@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Tree of Thought
+# [IV · Extra Skill] Tree of Thought
 **ID:** tree-of-thought  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

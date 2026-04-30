@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Document Analyst
+# [III · Extra Skill] Document Analyst
 **ID:** document-analyst  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

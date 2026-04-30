@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Voice Agent
+# [III · Extra Skill] Voice Agent
 **ID:** voice-agent  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

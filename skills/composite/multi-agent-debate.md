@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Multi-Agent Debate
+# [IV · Extra Skill] Multi-Agent Debate
 **ID:** multi-agent-debate  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

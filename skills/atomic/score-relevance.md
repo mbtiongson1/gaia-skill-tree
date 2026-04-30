@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Score Relevance
+# [I · Intrinsic Skill] Score Relevance
 **ID:** score-relevance  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

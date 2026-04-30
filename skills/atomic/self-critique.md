@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Self-Critique
+# [I · Intrinsic Skill] Self-Critique
 **ID:** self-critique  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

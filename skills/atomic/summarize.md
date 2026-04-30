@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Summarize
+# [0 · Intrinsic Skill] Summarize
 **ID:** summarize  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

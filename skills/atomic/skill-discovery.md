@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Skill Discovery
+# [0 · Intrinsic Skill] Skill Discovery
 **ID:** skill-discovery  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Autonomous Debug
+# [IV · Extra Skill] Autonomous Debug
 **ID:** autonomous-debug  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

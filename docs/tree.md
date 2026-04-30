@@ -1,96 +1,96 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v1.0.0  ·  generated 2026-04-29
+GAIA SKILL TREE  v1.0.0  ·  generated 2026-04-30
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
 ══════════════════════════════════════════════════════════════════════
 
-◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ ○ Web Search  [I · Awakened]
-  │  ├─ ○ Summarize  [I · Awakened]
-  │  └─ ○ Cite Sources  [I · Awakened]
-  ├─ ◇ Knowledge Harvest  [IV · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
-  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
-  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
-  │  │  ├─ ○ Parse HTML  [I · Awakened]
-  │  │  └─ ○ Extract Entities  [I · Awakened]
-  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
-  │  └─ ○ Embed Text  [I · Awakened]
-  └─ ◇ Ghostwrite  [IV · Transcendent]  ← Research · Write Report · Audience Model
-     ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
-     ├─ ○ Write Report  [I · Awakened]
-     └─ ○ Audience Model  [I · Awakened]
+  ├─ ◇ /research  [III]
+  │  ├─ ○ /web-search  [I]
+  │  ├─ ○ /summarize  [0]
+  │  └─ ○ /cite-sources  [I]
+  ├─ ◇ /knowledge-harvest  [IV]
+  │  ├─ ◇ /web-scrape  [III]
+  │  │  ├─ ○ /web-search  [I]  (↑ see above)
+  │  │  ├─ ○ /parse-html  [I]
+  │  │  └─ ○ /extract-entities  [I]
+  │  ├─ ○ /extract-entities  [I]  (↑ see above)
+  │  └─ ○ /embed-text  [I]
+  └─ ◇ /ghostwrite  [IV]
+     ├─ ◇ /research  [III]  (↑ see above)
+     ├─ ○ glincker/readme-generator - Write Report  [I]
+     └─ ○ /audience-model  [I]
 
-◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
+◆ ruvnet/flow-nexus-swarm - Grand Conductor: Multi-Agent Orchestration  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Plan and Execute  [III · Evolved]  ← Route Intent · Plan and Decompose · Tool Select
-  │  ├─ ○ Route Intent  [I · Awakened]
-  │  ├─ ○ Plan and Decompose  [I · Awakened]
-  │  └─ ○ Tool Select  [I · Awakened]
-  ├─ ○ Route Intent  [I · Awakened]  (↑ see above)
-  └─ ○ Tool Select  [I · Awakened]  (↑ see above)
+  ├─ ◇ /plan-and-execute  [IV]
+  │  ├─ ○ /route-intent  [I]
+  │  ├─ ○ /plan-decompose  [I]
+  │  └─ ○ /tool-select  [I]
+  ├─ ○ /route-intent  [I]  (↑ see above)
+  └─ ○ /tool-select  [I]  (↑ see above)
 
-◆ True Craftsman: Full-Stack Developer  [V · Transcendent]  ← Code Review Pipeline · Automated Testing · Refactor Code
+◆ /full-stack-developer  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Code Review Pipeline  [III · Evolved]  ← Code Generation · Diff Content · Evaluate Output
-  │  ├─ ○ Code Generation  [I · Awakened]
-  │  ├─ ○ Diff Content  [I · Awakened]
-  │  └─ ○ Evaluate Output  [I · Awakened]
-  ├─ ◇ Automated Testing  [III · Evolved]  ← Generate Test · Execute Bash · Error Interpretation
-  │  ├─ ○ Generate Test  [II · Named]
-  │  ├─ ○ Execute Bash  [I · Awakened]
-  │  └─ ○ Error Interpretation  [I · Awakened]
-  └─ ○ Refactor Code  [II · Named]
+  ├─ ◇ /code-review-pipeline  [III]
+  │  ├─ ○ /code-generation  [I]
+  │  ├─ ○ /diff-content  [I]
+  │  └─ ○ /evaluate-output  [I]
+  ├─ ◇ 0xdarkmatter/pytest-patterns - Automated Testing  [III]
+  │  ├─ ○ upsonic/unittest-generator - Generate Test  [II]
+  │  ├─ ○ /execute-bash  [I]
+  │  └─ ○ /error-interpretation  [I]
+  └─ ○ /refactor-code  [II]
 
-◆ True Dragon: Autonomous Scientific Discovery  [V · Transcendent]  ← Hypothesis Generation · Research · Math Reason
+◆ /scientific-discovery  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ○ Hypothesis Generation  [II · Named]
-  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ ○ Web Search  [I · Awakened]
-  │  ├─ ○ Summarize  [I · Awakened]
-  │  └─ ○ Cite Sources  [I · Awakened]
-  └─ ○ Math Reason  [II · Named]
+  ├─ ○ /hypothesis-generate  [II]
+  ├─ ◇ /research  [III]
+  │  ├─ ○ /web-search  [I]
+  │  ├─ ○ /summarize  [0]
+  │  └─ ○ /cite-sources  [I]
+  └─ ○ /math-reason  [II]
 
-◆ True Herald: Real-Time Voice Assistant  [V · Transcendent]  ← Voice Agent · Memory Manage · Plan and Execute
+◆ /real-time-voice-assistant  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Voice Agent  [III · Evolved]  ← Speech to Text · Question Answer · Text to Speech
-  │  ├─ ○ Speech to Text  [II · Named]
-  │  ├─ ○ Question Answer  [II · Named]
-  │  └─ ○ Text to Speech  [II · Named]
-  ├─ ○ Memory Manage  [II · Named]
-  └─ ◇ Plan and Execute  [III · Evolved]  ← Route Intent · Plan and Decompose · Tool Select
-     ├─ ○ Route Intent  [I · Awakened]
-     ├─ ○ Plan and Decompose  [I · Awakened]
-     └─ ○ Tool Select  [I · Awakened]
+  ├─ ◇ /voice-agent  [III]
+  │  ├─ ○ /speech-to-text  [II]
+  │  ├─ ○ /question-answer  [0]
+  │  └─ ○ /text-to-speech  [II]
+  ├─ ○ /memory-manage  [II]
+  └─ ◇ /plan-and-execute  [IV]
+     ├─ ○ /route-intent  [I]
+     ├─ ○ /plan-decompose  [I]
+     └─ ○ /tool-select  [I]
 
-◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
+◆ /autonomous-data-scientist  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
-  │  ├─ ○ Generate SQL  [II · Named]
-  │  ├─ ○ Data Visualize  [II · Named]
-  │  └─ ○ Summarize  [I · Awakened]
-  ├─ ○ Math Reason  [II · Named]
-  └─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-     ├─ ○ Web Search  [I · Awakened]
-     ├─ ○ Summarize  [I · Awakened]  (↑ see above)
-     └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ /data-analysis  [III]
+  │  ├─ ○ /generate-sql  [II]
+  │  ├─ ○ /data-visualize  [II]
+  │  └─ ○ /summarize  [0]
+  ├─ ○ /math-reason  [II]
+  └─ ◇ /research  [III]
+     ├─ ○ /web-search  [I]
+     ├─ ○ /summarize  [0]  (↑ see above)
+     └─ ○ /cite-sources  [I]
 
-◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
+◆ /recursive-self-improvement  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Autonomous Debug  [III · Evolved]  ← Code Generation · Execute Bash · Error Interpretation
-  │  ├─ ○ Code Generation  [I · Awakened]
-  │  ├─ ○ Execute Bash  [I · Awakened]
-  │  └─ ○ Error Interpretation  [I · Awakened]
-  ├─ ○ Evaluate Output  [I · Awakened]
-  └─ ◇ Plan and Execute  [III · Evolved]  ← Route Intent · Plan and Decompose · Tool Select
-     ├─ ○ Route Intent  [I · Awakened]
-     ├─ ○ Plan and Decompose  [I · Awakened]
-     └─ ○ Tool Select  [I · Awakened]
+  ├─ ◇ devin-ai/autonomous-swe - Autonomous Debug  [IV]
+  │  ├─ ○ /code-generation  [I]
+  │  ├─ ○ /execute-bash  [I]
+  │  └─ ○ /error-interpretation  [I]
+  ├─ ○ /evaluate-output  [I]
+  └─ ◇ /plan-and-execute  [IV]
+     ├─ ○ /route-intent  [I]
+     ├─ ○ /plan-decompose  [I]
+     └─ ○ /tool-select  [I]
 
 ```
 
-*Generated from gaia.json v1.0.0 on 2026-04-29. Do not edit directly.*
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Web Search
+# [I · Intrinsic Skill] Web Search
 **ID:** web-search  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

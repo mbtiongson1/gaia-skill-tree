@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Grounding
+# [III · Extra Skill] Grounding
 **ID:** grounding  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

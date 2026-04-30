@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Generate SQL
+# [II · Intrinsic Skill] Generate SQL
 **ID:** generate-sql  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 

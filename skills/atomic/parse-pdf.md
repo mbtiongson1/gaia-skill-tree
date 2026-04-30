@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Parse PDF
+# [I · Intrinsic Skill] Parse PDF
 **ID:** parse-pdf  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

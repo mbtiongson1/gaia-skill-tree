@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Text to Speech
+# [II · Intrinsic Skill] Text to Speech
 **ID:** text-to-speech  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 
