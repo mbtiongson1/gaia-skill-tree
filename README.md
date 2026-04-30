@@ -15,7 +15,7 @@ Every AI agent capability exists somewhere on this graph. Skills start at the fo
 The snapshot below shows two example upgrade paths from the full graph.
 
 ```
-GAIA SKILL TREE  v2.0.0
+GAIA SKILL TREE  v2.1.3
 ═══════════════════════════════════════════════════════
 
 ◆ karpathy/autoresearch - Wisdom King  [VI]
