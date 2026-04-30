@@ -7,7 +7,7 @@ Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
 ══════════════════════════════════════════════════════════════════════
 
-◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent â˜…]  ← Research · Knowledge Harvest · Ghostwrite
 ─────────────────────────────────────────────────────────────────
   ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
   │  ├─ ○ Web Search  [I · Awakened]

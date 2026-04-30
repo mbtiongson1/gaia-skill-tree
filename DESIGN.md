@@ -54,6 +54,22 @@ The rank color sequence intentionally mirrors an RPG rarity ramp: neutral → co
 
 ---
 
+## Level VI — Transcendent ★ Special Rendering
+
+VI nodes bypass `drawNode` entirely and use `drawNodeVI`, which runs every animation frame using the shared `state.t` clock:
+
+| Layer | Description |
+|---|---|
+| Outer glow | `createRadialGradient` from `r×0.5` to `r×(4.8 + 0.3·sin(t·1.8))` — hue cycles at 45°/s, with a 90° offset second stop and a fixed gold fade |
+| Core node | Radial gradient with three rainbow stops (hue, hue+200, hue+60) converging to `hsl(45,100%,45%)` gold at the rim |
+| Orbit sparkles | 6 dots, each rotating at 0.4 rad/s, distance pulsing with `sin(t·2.1 + i)`, each a different hue 60° apart, alpha pulsing at 3 rad/s |
+| Specular | Same white highlight as standard nodes, boosted to 85% alpha |
+
+The hue cycle formula: `hue = (t × 45) % 360` (full rainbow every ~8 s).  
+Gold dominates the outer fringe (`hsl(45,…)`) so the node reads as amber at a glance but shimmers through the full spectrum up close.
+
+---
+
 ## Graph Canvas
 
 Node radii (before depth/projection scale):

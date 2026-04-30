@@ -1,6 +1,77 @@
 {
   "generatedAt": "2026-04-30",
   "buckets": {
+    "test-driven-development": [
+      {
+        "id": "addy-osmani/test-driven-development",
+        "name": "Test-Driven Development",
+        "contributor": "addy-osmani",
+        "origin": true,
+        "genericSkillRef": "test-driven-development",
+        "status": "named",
+        "level": "II",
+        "description": "Forces the AI agent to follow a strict red-green-refactor TDD workflow \u2014 writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.",
+        "title": "The Red-Green Oath",
+        "catalogRef": "addy-osmani-test-driven-development",
+        "tags": [
+          "tdd",
+          "testing",
+          "red-green-refactor",
+          "workflow-enforcement",
+          "software-quality"
+        ],
+        "links": {
+          "github": "https://github.com/addyosmani/agent-skills"
+        }
+      }
+    ],
+    "document-editing": [
+      {
+        "id": "anthropic/pptx",
+        "name": "PPTX Editor",
+        "contributor": "anthropic",
+        "origin": true,
+        "genericSkillRef": "document-editing",
+        "status": "named",
+        "level": "II",
+        "description": "Extracts slide content from PowerPoint (.pptx) files using markitdown, applies edits or design principles in-place, and repacks the file \u2014 enabling agents to read, modify, and write structured presentation files without a GUI.",
+        "title": "The Slide Artisan",
+        "catalogRef": "anthropic-pptx",
+        "tags": [
+          "pptx",
+          "powerpoint",
+          "document-editing",
+          "markitdown",
+          "presentations"
+        ],
+        "links": {
+          "github": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md"
+        }
+      }
+    ],
+    "tool-creation": [
+      {
+        "id": "anthropic/skill-creator",
+        "name": "Skill Creator",
+        "contributor": "anthropic",
+        "origin": true,
+        "genericSkillRef": "tool-creation",
+        "status": "named",
+        "level": "II",
+        "description": "Interviews the user through a structured dialogue to elicit the skill's purpose, trigger conditions, and step-by-step instructions, then programmatically writes a new SKILL.md file ready for use in a Claude Code or Codex CLI skills directory.",
+        "title": "The Skill Forger's Art",
+        "catalogRef": "anthropic-skill-creator",
+        "tags": [
+          "skill-authoring",
+          "meta-agent",
+          "claude-code",
+          "tool-creation"
+        ],
+        "links": {
+          "github": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md"
+        }
+      }
+    ],
     "autonomous-debug": [
       {
         "id": "devin-ai/autonomous-swe",
@@ -25,6 +96,51 @@
         }
       }
     ],
+    "write-report": [
+      {
+        "id": "glincker/readme-generator",
+        "name": "README Generator",
+        "contributor": "glincker",
+        "origin": true,
+        "genericSkillRef": "write-report",
+        "status": "named",
+        "level": "II",
+        "description": "Analyzes a project's directory structure, dependency manifests, and configuration files to generate a professional README.md covering installation, usage, API reference, and contributing guidelines.",
+        "title": "The Document Weaver",
+        "catalogRef": "glincker-readme-generator",
+        "tags": [
+          "documentation",
+          "readme",
+          "code-analysis",
+          "project-structure"
+        ],
+        "links": {
+          "github": "https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md"
+        }
+      },
+      {
+        "id": "spring-ai/readme-generate",
+        "name": "REST API README Generator",
+        "contributor": "spring-ai",
+        "origin": false,
+        "genericSkillRef": "write-report",
+        "status": "named",
+        "level": "II",
+        "description": "Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and automatically generates structured API documentation in README format.",
+        "title": "The Endpoint Scribe",
+        "catalogRef": "spring-ai-readme-generate",
+        "tags": [
+          "java",
+          "spring",
+          "rest-api",
+          "documentation",
+          "readme"
+        ],
+        "links": {
+          "github": "https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills"
+        }
+      }
+    ],
     "autonomous-research-agent": [
       {
         "id": "karpathy/autoresearch",
@@ -46,15 +162,107 @@
           "github": "https://github.com/karpathy/autoresearch"
         }
       }
+    ],
+    "framework-upgrade": [
+      {
+        "id": "laravel/upgrade-laravel-v13",
+        "name": "Upgrade Laravel v13",
+        "contributor": "laravel",
+        "origin": true,
+        "genericSkillRef": "framework-upgrade",
+        "status": "named",
+        "level": "II",
+        "description": "Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, config migrations, and post-upgrade test validation.",
+        "title": "The Versionist's Trial",
+        "catalogRef": "laravel-upgrade-laravel-v13",
+        "tags": [
+          "laravel",
+          "php",
+          "framework-upgrade",
+          "migration"
+        ],
+        "links": {
+          "github": "https://github.com/laravel/boost/issues/698"
+        }
+      }
+    ],
+    "ux-audit": [
+      {
+        "id": "martin-stepanoski/nielsen-heuristics-audit",
+        "name": "Nielsen Heuristics Audit",
+        "contributor": "martin-stepanoski",
+        "origin": true,
+        "genericSkillRef": "ux-audit",
+        "status": "named",
+        "level": "II",
+        "description": "Audits a UI interface against Jakob Nielsen's 10 usability heuristics step-by-step, scoring each heuristic, surfacing violations, and producing a prioritized remediation report.",
+        "title": "The Ten Laws of Sight",
+        "catalogRef": "martin-stepanoski-nielsen-heuristics-audit",
+        "tags": [
+          "ux",
+          "usability",
+          "nielsen",
+          "heuristics",
+          "accessibility"
+        ],
+        "links": {
+          "npm": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills"
+        }
+      }
+    ],
+    "skill-discovery": [
+      {
+        "id": "vercel/find-skills",
+        "name": "Find Skills",
+        "contributor": "vercel",
+        "origin": true,
+        "genericSkillRef": "skill-discovery",
+        "status": "named",
+        "level": "II",
+        "description": "Searches the skills.sh registry by keyword or category, queries install counts to surface popular skills, and auto-installs the selected skill into the current project's skills directory.",
+        "title": "The Registry Scout",
+        "catalogRef": "vercel-find-skills",
+        "tags": [
+          "skill-registry",
+          "discovery",
+          "skills-sh",
+          "auto-install"
+        ],
+        "links": {
+          "github": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md"
+        }
+      }
     ]
   },
   "awaitingClassification": [],
   "byContributor": {
+    "addy-osmani": [
+      "addy-osmani/test-driven-development"
+    ],
+    "anthropic": [
+      "anthropic/pptx",
+      "anthropic/skill-creator"
+    ],
     "devin-ai": [
       "devin-ai/autonomous-swe"
     ],
+    "glincker": [
+      "glincker/readme-generator"
+    ],
     "karpathy": [
       "karpathy/autoresearch"
+    ],
+    "laravel": [
+      "laravel/upgrade-laravel-v13"
+    ],
+    "martin-stepanoski": [
+      "martin-stepanoski/nielsen-heuristics-audit"
+    ],
+    "spring-ai": [
+      "spring-ai/readme-generate"
+    ],
+    "vercel": [
+      "vercel/find-skills"
     ]
   }
 }

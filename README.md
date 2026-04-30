@@ -6,8 +6,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
-🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◼ Basic &nbsp;·&nbsp; 🔵 Awakened &nbsp;·&nbsp; 🩵 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🩷 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
-
 ---
 
 ## The Tree
@@ -21,22 +19,59 @@ back through its full prerequisite chain.
 GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
-◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+─────────────────────────────────────────────────────────────────
   ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
   │  ├─ ○ Web Search  [I · Awakened]
-  │  ├─ ○ Summarize  [I · Awakened]
+  │  ├─ ○ Summarize  [0 · Basic]
   │  └─ ○ Cite Sources  [I · Awakened]
-  ├─ ◇ Knowledge Harvest  [IV · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
+  ├─ ◇ Knowledge Harvest  [IV · Hardened]  ← Web Scrape · Extract Entities · Embed Text
   │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
   │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
   │  │  ├─ ○ Parse HTML  [I · Awakened]
   │  │  └─ ○ Extract Entities  [I · Awakened]
   │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
   │  └─ ○ Embed Text  [I · Awakened]
-  └─ ◇ Ghostwrite  [IV · Transcendent]  ← Research · Write Report · Audience Model
-     ├─ ◇ Research  [III · Evolved]  (↑ see above)
+  └─ ◇ Ghostwrite  [IV · Hardened]  ← Research · Write Report · Audience Model
+     ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
      ├─ ○ Write Report  [I · Awakened]
      └─ ○ Audience Model  [I · Awakened]
+
+◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+  │  ├─ ○ Route Intent  [I · Awakened]
+  │  ├─ ○ Plan and Decompose  [I · Awakened]
+  │  └─ ○ Tool Select  [I · Awakened]
+  ├─ ○ Route Intent  [I · Awakened]  (↑ see above)
+  └─ ○ Tool Select  [I · Awakened]  (↑ see above)
+
+...
+
+◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
+  │  ├─ ○ Generate SQL  [II · Named]
+  │  ├─ ○ Data Visualize  [II · Named]
+  │  └─ ○ Summarize  [0 · Basic]
+  ├─ ○ Math Reason  [II · Named]
+  └─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+     ├─ ○ Web Search  [I · Awakened]
+     ├─ ○ Summarize  [0 · Basic]  (↑ see above)
+     └─ ○ Cite Sources  [I · Awakened]
+
+◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Autonomous Debug  [IV · Hardened]  ← Code Generation · Execute Bash · Error Interpretation
+  │  ├─ ○ Code Generation  [I · Awakened]
+  │  ├─ ○ Execute Bash  [I · Awakened]
+  │  └─ ○ Error Interpretation  [I · Awakened]
+  ├─ ○ Evaluate Output  [I · Awakened]
+  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+     ├─ ○ Route Intent  [I · Awakened]
+     ├─ ○ Plan and Decompose  [I · Awakened]
+     └─ ○ Tool Select  [I · Awakened]
+
 
 → Full graph: tree.md
 ```
@@ -52,13 +87,20 @@ GAIA SKILL TREE  v1.0.0
 
 ---
 
+## Tutorial
+
+> [!TIP]
+> **New here?** The interactive tutorial at **[gaia.tiongson.co](https://gaia.tiongson.co/)** covers everything visually — skill tiers, the rank system, and the full get-started workflow with copy-paste commands.
+
+---
+
 ## The Hierarchy
 
 | Tier | Symbol | Display Name | What it means |
 |---|---|---|---|
-| 🔵 `atomic` | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
-| 🟣 `composite` | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
-| 🟡 `legendary` | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
+| atomic | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
+| composite | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
+| legendary | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
 ## Rank System
 
@@ -66,20 +108,13 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| `0` | ◼ **Basic** | None | Universal LLM primitive — any capable model does this by default |
-| `I` | 🔵 **Awakened** | None | Foundation tier — catalogued agent capability |
-| `II` | 🩵 **Named** | Class C | First confirmed demonstration |
-| `III` | 🟣 **Evolved** | Class B | Reproducible, fully documented |
-| `IV` | 🩷 **Hardened** | Class B or A | Failure modes known; battle-tested |
-| `V` | 🟡 **Transcendent** | Class B or A | Composable and self-improving |
-| `VI` | ⭐ **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
-
----
-
-## Tutorial
-
-> [!TIP]
-> **New here?** The interactive tutorial at **[gaia.tiongson.co](https://gaia.tiongson.co/)** covers everything visually — skill tiers, the rank system, and the full get-started workflow with copy-paste commands.
+| `0` | **Basic** | None | Universal LLM primitive — any capable model does this by default |
+| `I` | **Awakened** | None | Foundation tier — catalogued agent capability |
+| `II` | **Named** | Class C | First confirmed demonstration |
+| `III` | **Evolved** | Class B | Reproducible, fully documented |
+| `IV` | **Hardened** | Class B or A | Failure modes known; battle-tested |
+| `V` | **Transcendent** | Class B or A | Composable and self-improving |
+| `VI` | **Transcendent ◆** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
 ---
 
@@ -269,6 +304,7 @@ Skill, fusion recipe, or reclassification PR with evidence and rationale.
 
 For full instructions, including evidence requirements, PR templates, naming
 rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 
 ## License
 

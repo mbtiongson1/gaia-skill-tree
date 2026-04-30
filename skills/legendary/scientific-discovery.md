@@ -8,7 +8,7 @@
 ---
 
 ## Description
-Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report — completing a full research cycle without human intervention.
+Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report â€” completing a full research cycle without human intervention.
 
 ## Prerequisites
 - [Hypothesis Generation](../atomic/hypothesis-generate.md)

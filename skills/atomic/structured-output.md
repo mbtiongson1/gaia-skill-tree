@@ -17,6 +17,7 @@ _None._
 - [RAG Pipeline](../composite/rag-pipeline.md)
 - [Text-to-SQL Pipeline](../composite/text-to-sql-pipeline.md)
 - [Function Calling](../composite/function-calling.md)
+- [Guardrails](../composite/guardrails.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

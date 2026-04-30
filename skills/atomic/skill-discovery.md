@@ -1,0 +1,28 @@
+# [0 · Basic · Intrinsic Skill] Skill Discovery
+**ID:** skill-discovery  
+**Type:** Intrinsic Skill  
+**Level:** 0 · Basic  
+**Rarity:** Common  
+**Status:** Provisional
+
+---
+
+## Description
+Searches a skill or tool registry, ranks results by relevance and install count, and surfaces candidates for the agent to adopt or invoke.
+
+## Prerequisites
+_None._
+
+## Unlocks
+_None._
+
+## Evidence
+| Class | Source | Evaluator | Date |
+|---|---|---|---|
+| B | https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md | mbtiongson1 | 2026-04-30 |
+
+## Known Agents
+_None verified yet._
+
+---
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

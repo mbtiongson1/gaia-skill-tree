@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Function Calling](../composite/function-calling.md)
+- [Workflow Automation](../composite/workflow-automation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
