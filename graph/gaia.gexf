@@ -212,6 +212,14 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
+      <node id="document-editing" label="Document Editing">
+        <attvalues>
+          <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
       <node id="embed-text" label="Embed Text">
         <attvalues>
           <attvalue for="level" value="I" />
@@ -269,6 +277,14 @@
         </attvalues>
       </node>
       <node id="format-output" label="Format Output">
+        <attvalues>
+          <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="framework-upgrade" label="Framework Upgrade">
         <attvalues>
           <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
@@ -636,6 +652,14 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
+      <node id="skill-discovery" label="Skill Discovery">
+        <attvalues>
+          <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
       <node id="speech-to-text" label="Speech to Text">
         <attvalues>
           <attvalue for="level" value="II" />
@@ -656,6 +680,14 @@
         <attvalues>
           <attvalue for="level" value="0" />
           <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="test-driven-development" label="Test-Driven Development">
+        <attvalues>
+          <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
         </attvalues>
@@ -730,6 +762,14 @@
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
+      <node id="ux-audit" label="UX Audit">
+        <attvalues>
+          <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
       <node id="voice-agent" label="Voice Agent">

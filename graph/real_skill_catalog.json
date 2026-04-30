@@ -46,6 +46,31 @@
       "repo": "spring-ai-alibaba/examples",
       "description": "Spring AI Alibaba example projects including Claude Code skills.",
       "url": "https://github.com/spring-ai-alibaba/examples"
+    },
+    {
+      "repo": "ruvnet/ruflo",
+      "description": "Leading agent orchestration platform for Claude with multi-agent swarm deployment and event-driven workflows.",
+      "url": "https://github.com/ruvnet/ruflo"
+    },
+    {
+      "repo": "gooseworks-ai/goose-skills",
+      "description": "Library of GTM skills for Claude Code, Codex, Cursor including AI-first browser automation via Notte.",
+      "url": "https://github.com/gooseworks-ai/goose-skills"
+    },
+    {
+      "repo": "yonatangross/orchestkit",
+      "description": "Complete AI development toolkit for Claude Code with 103 skills including a production-grade RAG retrieval skill.",
+      "url": "https://github.com/yonatangross/orchestkit"
+    },
+    {
+      "repo": "Upsonic/Upsonic",
+      "description": "Framework for building autonomous AI agents in Python with prebuilt agent skills.",
+      "url": "https://github.com/Upsonic/Upsonic"
+    },
+    {
+      "repo": "aiskillstore/marketplace",
+      "description": "Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns.",
+      "url": "https://github.com/aiskillstore/marketplace"
     }
   ],
   "items": [
@@ -229,6 +254,111 @@
         "nielsen",
         "heuristics",
         "accessibility"
+      ]
+    },
+    {
+      "id": "ruvnet-flow-nexus-swarm",
+      "name": "ruvnet/flow-nexus-swarm",
+      "contributor": "ruvnet",
+      "title": "The Grand Conductor's Blueprint",
+      "description": "Cloud-based AI swarm orchestration supporting hierarchical, mesh, ring, and star topologies with event-driven workflows and intelligent agent assignment.",
+      "sourceRepo": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "mapsToGaia": [
+        "multi-agent-orchestration-v"
+      ],
+      "promotedNamedSkillId": "ruvnet/flow-nexus-swarm",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "multi-agent",
+        "swarm",
+        "orchestration",
+        "event-driven",
+        "workflow"
+      ]
+    },
+    {
+      "id": "gooseworks-notte-browser",
+      "name": "gooseworks/notte-browser",
+      "contributor": "gooseworks",
+      "title": "The Digital Navigator",
+      "description": "AI-first browser automation using the Notte Browser API for session control, page scraping, form filling, and autonomous web agent execution.",
+      "sourceRepo": "gooseworks-ai/goose-skills",
+      "url": "https://github.com/gooseworks-ai/goose-skills",
+      "mapsToGaia": [
+        "browser-automation"
+      ],
+      "promotedNamedSkillId": "gooseworks/notte-browser",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "browser",
+        "automation",
+        "web-agent",
+        "scraping",
+        "notte"
+      ]
+    },
+    {
+      "id": "yonatangross-orchestkit-rag",
+      "name": "yonatangross/orchestkit-rag",
+      "contributor": "yonatangross",
+      "title": "The Knowledge Architect",
+      "description": "Production-grade RAG retrieval skill covering 30+ patterns: HyDE, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.",
+      "sourceRepo": "yonatangross/orchestkit",
+      "url": "https://github.com/yonatangross/orchestkit",
+      "mapsToGaia": [
+        "rag-pipeline"
+      ],
+      "promotedNamedSkillId": "yonatangross/orchestkit-rag",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "rag",
+        "retrieval",
+        "hybrid-search",
+        "hyde",
+        "pgvector",
+        "reranking"
+      ]
+    },
+    {
+      "id": "upsonic-unittest-generator",
+      "name": "upsonic/unittest-generator",
+      "contributor": "upsonic",
+      "title": "The Test Weaver",
+      "description": "Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organised into concept-based subfolders.",
+      "sourceRepo": "Upsonic/Upsonic",
+      "url": "https://github.com/Upsonic/Upsonic",
+      "mapsToGaia": [
+        "generate-test"
+      ],
+      "promotedNamedSkillId": "upsonic/unittest-generator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "unit-testing",
+        "unittest",
+        "test-generation",
+        "python"
+      ]
+    },
+    {
+      "id": "0xdarkmatter-pytest-patterns",
+      "name": "0xdarkmatter/pytest-patterns",
+      "contributor": "0xdarkmatter",
+      "title": "The Quality Guardian",
+      "description": "Comprehensive pytest skill covering fixtures, parametrize, async testing, mocking, coverage strategies, and integration test patterns for pytest 7.0+ projects.",
+      "sourceRepo": "aiskillstore/marketplace",
+      "url": "https://github.com/aiskillstore/marketplace",
+      "mapsToGaia": [
+        "automated-testing"
+      ],
+      "promotedNamedSkillId": "0xdarkmatter/pytest-patterns",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "pytest",
+        "python",
+        "test-automation",
+        "fixtures",
+        "coverage"
       ]
     },
     {
