@@ -189,10 +189,8 @@ gaia init
 
 # Preview detected skills and proposed intake
 gaia scan
-gaia push --dry-run
-
-# Submit the batch intake record for review
-gaia push
+gaia push --dry-run   # preview the JSON
+gaia push             # write intake + open a PR
 ```
 
 Intake PRs are draft review artifacts. Accepted candidates are promoted later
