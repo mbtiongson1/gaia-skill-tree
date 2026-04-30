@@ -42,6 +42,8 @@
   nav ul{list-style:none;display:flex;gap:2rem}
   nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
   nav a:hover{color:var(--text)}
+  .nav-tree{color:var(--legendary)!important}
+  .nav-tree:hover{color:#fcd34d!important}
   /* ── HERO ── */
   #hero{
     position:relative;min-height:100vh;
@@ -298,19 +300,20 @@
     position:absolute;right:1rem;bottom:1rem;z-index:2;
     color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
     border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .7rem;
-    cursor:pointer;transition:border-color .2s,color .2s;font-family:inherit;
+    cursor:pointer;transition:border-color .2s,color .2s,background .2s;font-family:inherit;
   }
   .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
+  .graph-label-toggle.active{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.45);color:#e2e8f0}
   .graph-redpill{
-    position:absolute;top:.75rem;left:.75rem;z-index:10;
-    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
-    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .78rem;
+    position:absolute;bottom:3.4rem;right:.75rem;z-index:10;
+    color:#f87171;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(239,68,68,.45);border-radius:999px;padding:.3rem .78rem;
     cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
   }
-  .graph-redpill:hover{border-color:rgba(239,68,68,.5);color:#fca5a5}
+  .graph-redpill:hover{border-color:rgba(239,68,68,.75);color:#fca5a5;background:rgba(239,68,68,.08)}
   .graph-redpill.active{
-    background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.6);
-    color:#f87171;box-shadow:0 0 14px rgba(239,68,68,.35);
+    background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.7);
+    color:#fca5a5;box-shadow:0 0 14px rgba(239,68,68,.35);
   }
   @media (max-width:700px){
     nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
@@ -416,10 +419,10 @@
     <li><a href="#what">What</a></li>
     <li><a href="#what">Tiers</a></li>
     <li><a href="#start">Get Started</a></li>
-    <li><a href="../tree.md" target="_blank">Tree</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
     <li><a href="#named">Named</a></li>
+    <li><a href="../tree.md" target="_blank" class="nav-tree">Tree</a></li>
   </ul>
 </nav>
 
@@ -807,6 +810,7 @@
   function createSkillGraph(canvas, options) {
     const ctx = canvas.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const NAMED_LEVELS = new Set(['II','III','IV','V','VI']);
     const state = {
       skills: FALLBACK_SKILLS,
       positions: buildPositions(FALLBACK_SKILLS, GRAPH_SCALE),
@@ -840,6 +844,7 @@
       legendEl: null,
       showSlugs: false,
       redPillActive: false,
+      namedMap: {},
     };
 
     function resize() {
@@ -895,6 +900,17 @@
       ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.18, 1).toFixed(2)})`; ctx.fill();
       ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
     }
+    function drawNodeNamed(sx, sy, r, alpha) {
+      const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 4.2);
+      glow.addColorStop(0,   `rgba(239,68,68,${Math.min(alpha * 0.7, 1).toFixed(2)})`);
+      glow.addColorStop(0.4, `rgba(239,68,68,${Math.min(alpha * 0.25, 1).toFixed(2)})`);
+      glow.addColorStop(1,   'rgba(239,68,68,0)');
+      ctx.beginPath(); ctx.arc(sx, sy, r * 4.2, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(239,68,68,${Math.min(alpha * 1.2, 1).toFixed(2)})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
+    }
     function drawNodeVI(sx, sy, r, alpha, t, p) {
       const hue = (t * 45) % 360;
       const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + (p.phase || 0));
@@ -924,6 +940,7 @@
       ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
     }
     function shouldLabel(skill) {
+      if (state.redPillActive && NAMED_LEVELS.has(skill.level)) return true;
       if (state.labelMode === 'none') return false;
       if (state.labelMode === 'all') return true;
       if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
@@ -958,7 +975,6 @@
       const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
       const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
       const legendFiltering = Boolean(state.legendFilterType || state.legendFilterRank);
-      const NAMED_LEVELS = new Set(['II','III','IV','V','VI']);
       state.skills.forEach(skill => {
         let targetVis;
         if (hovering) {
@@ -1030,6 +1046,8 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         if (skill.level === 'VI') {
           drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
+        } else if (state.redPillActive && NAMED_LEVELS.has(skill.level)) {
+          drawNodeNamed(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis);
         } else {
           drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
         }
@@ -1043,12 +1061,18 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
         if (labelAlpha < 0.04) return;
-        const col = PALETTE[skill.type] || PALETTE.atomic;
+        const col = (state.redPillActive && NAMED_LEVELS.has(skill.level))
+          ? { rgb:'239,68,68' }
+          : (PALETTE[skill.type] || PALETTE.atomic);
         const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        const labelText = state.showSlugs ? skill.id : skill.name;
+        const labelText = (state.redPillActive && state.namedMap[skill.id])
+          ? state.namedMap[skill.id]
+          : state.showSlugs
+            ? '/' + skill.id
+            : skill.name;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
       labelNodes.forEach(({ skill }) => {
@@ -1163,8 +1187,8 @@
       const redPill = document.createElement('button');
       redPill.type = 'button';
       redPill.className = 'graph-redpill';
-      redPill.textContent = '⬤ Named Only';
-      redPill.title = 'Show only Named skills (Level II+) — contributor-verified implementations';
+      redPill.textContent = 'Named Skills';
+      redPill.title = 'Highlight Named skills (Level II+) with contributor attribution and red glow';
       redPill.addEventListener('mousedown', e => e.stopPropagation());
       redPill.addEventListener('click', () => {
         state.redPillActive = !state.redPillActive;
@@ -1176,11 +1200,11 @@
       const labelToggle = document.createElement('button');
       labelToggle.type = 'button';
       labelToggle.className = 'graph-label-toggle';
-      labelToggle.textContent = 'Toggle Skills';
+      labelToggle.textContent = 'Show /skill-name';
       labelToggle.addEventListener('mousedown', e => e.stopPropagation());
       labelToggle.addEventListener('click', () => {
         state.showSlugs = !state.showSlugs;
-        labelToggle.textContent = state.showSlugs ? 'Show Names' : 'Toggle Skills';
+        labelToggle.classList.toggle('active', state.showSlugs);
       });
       canvas.parentElement.appendChild(labelToggle);
       state.labelToggleEl = labelToggle;
@@ -1246,10 +1270,11 @@
         state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
       }
       if (state.searchInputEl) state.searchInputEl.value = '';
-      if (state.labelToggleEl) state.labelToggleEl.textContent = 'Toggle Skills';
+      if (state.labelToggleEl) state.labelToggleEl.classList.remove('active');
     }
     if (state.running) draw();
-    return { setSkills, resize, start, stop, resetFilters };
+    function setNamedMap(map) { state.namedMap = map || {}; }
+    return { setSkills, setNamedMap, resize, start, stop, resetFilters };
   }
 
   const hero = document.getElementById('hero');
@@ -1297,6 +1322,22 @@
       const status = document.querySelector('[data-graph-status]');
       if (status) status.textContent = 'Using embedded preview graph. Run the page from docs/ to load the full graph.';
     });
+
+  fetch('graph/named/index.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(indexData => {
+      const map = {};
+      const buckets = indexData.buckets || {};
+      Object.entries(buckets).forEach(([skillId, arr]) => {
+        if (Array.isArray(arr) && arr.length) {
+          const origin = arr.find(e => e.origin) || arr[0];
+          if (origin && origin.id) map[skillId] = origin.id;
+        }
+      });
+      heroGraph.setNamedMap(map);
+      modalGraph.setNamedMap(map);
+    })
+    .catch(() => {});
 })();
 </script>
 
