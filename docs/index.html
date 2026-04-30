@@ -590,12 +590,14 @@
       <div class="step-num">3</div>
       <div>
         <h3>Initialize your project</h3>
-        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> config file.</p>
+        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> file, auto-detecting your GitHub username and common skill paths.</p>
         <pre><span class="cmd">gaia init</span>
-<span class="comment"># Edit .gaia/config.json — set your GitHub username</span></pre>
+<span class="comment"># Username auto-detected from git remote / git config</span>
+<span class="comment"># Scan paths auto-detected from AGENTS.md, .claude/skills/, etc.</span>
+<span class="cmd">gaia init --user your-username</span>   <span class="comment"># override if needed</span></pre>
         <pre>{
-  <span class="str">"gaiaUser"</span>: <span class="str">"your-github-username"</span>,
-  <span class="str">"scanPaths"</span>: [<span class="str">"src"</span>, <span class="str">"scripts"</span>]
+  <span class="str">"gaiaUser"</span>: <span class="str">"mbtiongson1"</span>,       <span class="comment">// auto-filled</span>
+  <span class="str">"scanPaths"</span>: [<span class="str">".claude/skills"</span>]  <span class="comment">// auto-detected</span>
 }</pre>
       </div>
     </div>
