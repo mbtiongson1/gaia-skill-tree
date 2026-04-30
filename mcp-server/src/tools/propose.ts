@@ -8,7 +8,7 @@ interface ProposeInput {
   skillId?: string;
   name?: string;
   description?: string;
-  type?: "atomic" | "composite" | "legendary";
+  type?: "basic" | "extra" | "ultimate";
   prerequisites?: string[];
 }
 
@@ -112,7 +112,7 @@ async function proposeNovel(
   const newSkill: Partial<Skill> = {
     id,
     name: input.name!,
-    type: input.type ?? "atomic",
+    type: input.type ?? "basic",
     level: "I",
     rarity: "common",
     description: input.description!,
@@ -140,7 +140,7 @@ async function proposeNovel(
     owner: "mbtiongson1",
     repo: "gaia-skill-tree",
     title: `[new-skill] Propose: ${input.name}`,
-    body: `## New Skill Proposal\n\n**Proposed by:** ${user}\n**Name:** ${input.name}\n**Type:** ${input.type ?? "atomic"}\n**Description:** ${input.description}\n**Prerequisites:** ${(input.prerequisites ?? []).join(", ") || "none"}\n\nNovelty score: ${Math.round(novelty.confidence * 100)}%\nClosest existing: ${novelty.closestMatch?.name ?? "none"} (${Math.round((novelty.closestMatch?.similarity ?? 0) * 100)}%)\n\n---\n\n\`\`\`json\n${JSON.stringify(newSkill, null, 2)}\n\`\`\``,
+    body: `## New Skill Proposal\n\n**Proposed by:** ${user}\n**Name:** ${input.name}\n**Type:** ${input.type ?? "basic"}\n**Description:** ${input.description}\n**Prerequisites:** ${(input.prerequisites ?? []).join(", ") || "none"}\n\nNovelty score: ${Math.round(novelty.confidence * 100)}%\nClosest existing: ${novelty.closestMatch?.name ?? "none"} (${Math.round((novelty.closestMatch?.similarity ?? 0) * 100)}%)\n\n---\n\n\`\`\`json\n${JSON.stringify(newSkill, null, 2)}\n\`\`\``,
     branch,
     files: [
       {

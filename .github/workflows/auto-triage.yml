@@ -59,7 +59,7 @@ jobs:
           while IFS= read -r file; do
             if [[ "$file" == proposals/*.json ]]; then
               CONTENT=$(gh api "repos/${{ github.repository }}/contents/$file?ref=${{ github.event.pull_request.head.sha }}" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || echo "")
-              if echo "$CONTENT" | grep -q '"type": "legendary"'; then
+              if echo "$CONTENT" | grep -q '"type": "ultimate"'; then
                 LEGENDARY=$((LEGENDARY + 1))
               fi
             fi
@@ -119,9 +119,9 @@ jobs:
       - name: Label and route
         run: |
           if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
-            gh label create "legendary" --color "d4a017" --force 2>/dev/null || true
+            gh label create "ultimate" --color "d4a017" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "legendary" --add-label "needs-review"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "ultimate" --add-label "needs-review"
             gh pr edit ${{ github.event.pull_request.number }} --add-reviewer mbtiongson1
             echo "Legendary skill proposed — requires 2 maintainer approvals"
           else

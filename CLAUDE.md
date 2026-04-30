@@ -132,7 +132,7 @@ Named skills have YAML frontmatter with required fields: `id`, `name`, `contribu
 ### Contribution PR title format
 
 ```
-[atomic|composite|legendary|reclassify|fusion] skill-id — brief rationale
+[basic|extra|ultimate|reclassify|fusion] skill-id — brief rationale
 ```
 
 PR templates live in `.github/PULL_REQUEST_TEMPLATE/`. All canonical graph PRs edit only `graph/gaia.json`; generated files must be committed alongside if the pre-commit hook is not installed.

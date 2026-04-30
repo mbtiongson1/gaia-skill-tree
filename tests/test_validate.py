@@ -50,22 +50,22 @@ class TestValidate(unittest.TestCase):
         self.assertIn("needs evidence class", out)
 
     def test_orphaned_composite(self):
-        """Ensure composites with < 2 prerequisites are caught."""
-        code, out = run_validate(os.path.join(FIXTURES_DIR, "orphaned_composite.json"))
-        self.assertEqual(code, 1, "Expected orphaned composite to fail validation.")
+        """Ensure extras with < 2 prerequisites are caught."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "orphaned_extra.json"))
+        self.assertEqual(code, 1, "Expected orphaned extra to fail validation.")
         self.assertIn("needs ≥2 prerequisites", out)
 
     def test_legendary_no_approval(self):
-        """Ensure validated legendary with < 3 Class A/B evidence is caught."""
-        code, out = run_validate(os.path.join(FIXTURES_DIR, "legendary_no_approval.json"))
-        self.assertEqual(code, 1, "Expected legendary with no approval to fail validation.")
-        self.assertIn("Validated legendary", out)
+        """Ensure validated ultimate with < 3 Class A/B evidence is caught."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "ultimate_no_approval.json"))
+        self.assertEqual(code, 1, "Expected ultimate with no approval to fail validation.")
+        self.assertIn("Validated ultimate", out)
         self.assertIn("needs ≥3 Class A/B evidence", out)
 
     def test_atomic_with_prerequisites(self):
-        """Ensure an atomic skill that declares prerequisites is rejected."""
-        code, out = run_validate(os.path.join(FIXTURES_DIR, "atomic_with_prereqs.json"))
-        self.assertEqual(code, 1, "Expected atomic-with-prereqs to fail validation.")
+        """Ensure a basic skill that declares prerequisites is rejected."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "basic_with_prereqs.json"))
+        self.assertEqual(code, 1, "Expected basic-with-prereqs to fail validation.")
         self.assertIn("must have 0 prerequisites", out)
 
 class TestNamedSkillValidation(unittest.TestCase):

@@ -73,7 +73,7 @@ GAIA SKILL TREE  v1.0.0
      └─ ○ /tool-select  [I]
 
 ══════════════════════════════════════════════════════════════════════
-Pure / Undeveloped — atomic skills not yet wired into any upgrade path.
+Pure / Undeveloped — basic skills not yet wired into any upgrade path.
 ══════════════════════════════════════════════════════════════════════
 
   ○ /code-execution  [II · Named]
@@ -95,7 +95,7 @@ Pure / Undeveloped — atomic skills not yet wired into any upgrade path.
 ## What This Means for You
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
-- **Unlock combinations** — when your agent has the prerequisites, a new composite or ultimate skill becomes available to fuse. The CLI detects it automatically.
+- **Unlock combinations** — when your agent has the prerequisites, a new extra or ultimate skill becomes available to fuse. The CLI detects it automatically.
 - **Name and share skills** — contribute named implementations of generic skills (e.g., `karpathy/autoresearch`), attributed to your GitHub identity and installable by anyone via `gaia install`. Submit with `status: awakened`; a reviewer promotes to `status: named` after confirming the real-world identity. Browse all named skills at [`docs/index.html`](docs/index.html) or the live tutorial site.
 - **Contribute to the canon** — review draft skills, submit evidence, or create new skills from strong reviews. The graph grows with the field.
 
@@ -112,9 +112,9 @@ Pure / Undeveloped — atomic skills not yet wired into any upgrade path.
 
 | Tier | Symbol | Display Name | What it means |
 |---|---|---|---|
-| atomic | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
-| composite | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
-| legendary | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
+| basic | ○ | **Basic Skill** | Primitive, indivisible capability — the genome of every agent |
+| extra | ◇ | **Extra Skill** | Emerges from combining 2+ basic skills — transcends its parts |
+| ultimate | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
 ## Rank System — The Transcendent Line
 

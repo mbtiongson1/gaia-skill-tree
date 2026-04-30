@@ -44,7 +44,7 @@ def load_canonical_skill_map(registry_path):
     if not os.path.exists(registry_path):
         return {}
     try:
-        with open(registry_path, "r") as f:
+        with open(registry_path, "r", encoding="utf-8") as f:
             data = json.load(f)
     except Exception:
         return {}
@@ -87,7 +87,7 @@ def build_proposed_skill(skill_id, source_repo):
     return {
         "id": skill_id,
         "name": name,
-        "type": "atomic",
+        "type": "basic",
         "description": f"Candidate skill detected from {source_repo} usage: {name}.",
         "sourceRepo": source_repo,
         "lifecycle": "pending",

@@ -32,12 +32,16 @@
       "minLength": 1,
       "description": "Human-readable display name."
     },
+    "title": {
+      "type": "string",
+      "description": "Optional lore title. For unclaimed ultimate skills, stored in the graph but not rendered in projections until a named implementation claims the skill."
+    },
     "type": {
       "type": "string",
       "enum": [
-        "atomic",
-        "composite",
-        "legendary"
+        "basic",
+        "extra",
+        "ultimate"
       ],
       "description": "Skill classification type."
     },
@@ -200,7 +204,7 @@
       "if": {
         "properties": {
           "type": {
-            "const": "atomic"
+            "const": "basic"
           }
         }
       },
@@ -216,7 +220,7 @@
       "if": {
         "properties": {
           "type": {
-            "const": "composite"
+            "const": "extra"
           }
         }
       },
@@ -232,7 +236,7 @@
       "if": {
         "properties": {
           "type": {
-            "const": "legendary"
+            "const": "ultimate"
           }
         }
       },

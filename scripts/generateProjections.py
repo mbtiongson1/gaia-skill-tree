@@ -64,13 +64,32 @@ def get_tier_label(meta, level):
 
 
 def get_tier_symbol(skill_type):
-    return {"atomic": "○", "composite": "◇", "legendary": "◆"}.get(skill_type, "·")
+    return {"basic": "○", "extra": "◇", "ultimate": "◆"}.get(skill_type, "·")
 
 
-def _sorted_legendaries(skills):
+def _build_skill_display(skill_id, skill_type, named_map=None):
+    """Return canonical display string for a skill.
+
+    Basic  -> /slug (no tier prefix)
+    Extra  -> Extra Skill: /slug  (or Extra Skill: contributor/name)
+    Ultimate (claimed)   -> Ultimate Skill: contributor/name
+    Ultimate (unclaimed) -> Ultimate Skill: /slug [Unclaimed ✦]
+    """
+    named_id = (named_map or {}).get(skill_id)
+    if skill_type == "ultimate":
+        if named_id:
+            return f"Ultimate Skill: {named_id}"
+        return f"Ultimate Skill: /{skill_id} [Unclaimed ✦]"
+    if skill_type == "extra":
+        if named_id:
+            return f"Extra Skill: {named_id}"
+        return f"Extra Skill: /{skill_id}"
+    return named_id if named_id else f"/{skill_id}"
+
+def _sorted_ultimates(skills):
     order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5, "0": 6}
     return sorted(
-        [s for s in skills if s.get("type") == "legendary"],
+        [s for s in skills if s.get("type") == "ultimate"],
         key=lambda s: (order.get(s.get("level"), 9), s.get("name", ""))
     )
 
@@ -87,8 +106,8 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
     level = skill.get("level")
     level_label = get_level_label(meta, level)
 
-    named_id = (named_map or {}).get(root_id)
-    display = f"{named_id} - {name}" if named_id else f"/{root_id}"
+    skill_type = skill.get("type", "basic")
+    display = _build_skill_display(root_id, skill_type, named_map)
 
     already_seen = root_id in seen
     back_ref = "  (↑ see above)" if already_seen else ""
@@ -130,15 +149,27 @@ def main():
 
     skills.sort(key=lambda x: x["id"])
 
-    os.makedirs("skills/atomic", exist_ok=True)
-    os.makedirs("skills/composite", exist_ok=True)
-    os.makedirs("skills/legendary", exist_ok=True)
+    # Build named_map early so skill pages and registry can use it
+    _run_generate_named_index()
+    named_map = {}
+    named_index_path = os.path.join("graph", "named", "index.json")
+    if os.path.isfile(named_index_path):
+        with open(named_index_path, "r", encoding="utf-8") as nf:
+            nidx = json.load(nf)
+        for _sid, entries in nidx.get("buckets", {}).items():
+            if entries:
+                origin = next((e for e in entries if e.get("origin")), entries[0])
+                named_map[_sid] = origin.get("id", "")
+
+    os.makedirs("skills/basic", exist_ok=True)
+    os.makedirs("skills/extra", exist_ok=True)
+    os.makedirs("skills/ultimate", exist_ok=True)
 
     skill_map = {s["id"]: s for s in skills}
     date_str = timestamp.split("T")[0] if "T" in timestamp else timestamp
 
     for skill in skills:
-        skill_type = skill.get("type", "atomic")
+        skill_type = skill.get("type", "basic")
         skill_id = skill.get("id")
         skill_name = skill.get("name")
         level = skill.get("level")
@@ -150,9 +181,10 @@ def main():
         tier_label = get_tier_label(meta, level)
 
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write(f"# [{level_label} · {type_label}] {skill_name}\n")
+            page_display = _build_skill_display(skill_id, skill_type, named_map)
+            f.write(f"# {page_display}  [{level_label} · {tier_label}]\n")
             f.write(f"**ID:** {skill_id}  \n")
-            f.write(f"**Type:** {type_label}  \n")
+            f.write(f"**Type:** {type_label or 'Basic Skill'}  \n")
             f.write(f"**Level:** {level_label}  \n")
             f.write(f"**Tier:** {tier_label}  \n")
             f.write(f"**Skill Call:** `/{skill_id}`\n\n")
@@ -169,7 +201,7 @@ def main():
                 for prereq_id in prereqs:
                     prereq = skill_map.get(prereq_id)
                     if prereq:
-                        prereq_type = prereq.get("type", "atomic")
+                        prereq_type = prereq.get("type", "basic")
                         f.write(f"- [{prereq.get('name')}](../{prereq_type}/{prereq_id}.md)\n")
                     else:
                         f.write(f"- {prereq_id}\n")
@@ -183,13 +215,13 @@ def main():
                 for unlock_id in unlocks:
                     unlock = skill_map.get(unlock_id)
                     if unlock:
-                        unlock_type = unlock.get("type", "atomic")
+                        unlock_type = unlock.get("type", "basic")
                         f.write(f"- [{unlock.get('name')}](../{unlock_type}/{unlock_id}.md)\n")
                     else:
                         f.write(f"- {unlock_id}\n")
                 f.write("\n")
 
-            if skill_type in ["composite", "legendary"]:
+            if skill_type in ["extra", "ultimate"]:
                 f.write("## Fusion Condition\n")
                 conditions = skill.get("conditions", "")
                 if not conditions:
@@ -226,14 +258,14 @@ def main():
         f.write("| Name | Class | Rank | Tier | Skill Call |\n")
         f.write("|---|---|---|---|---|\n")
 
-        # collect orphaned atomic IDs for the pure section
+        # collect orphaned basic IDs for the pure section
         all_prereq_ids = set()
         for skill in skills:
             for pid in skill.get("prerequisites", []):
                 all_prereq_ids.add(pid)
         orphan_ids = {
             s["id"] for s in skills
-            if s.get("type") == "atomic"
+            if s.get("type") == "basic"
             and s["id"] not in all_prereq_ids
             and not s.get("prerequisites")
         }
@@ -241,15 +273,16 @@ def main():
         for skill in skills:
             if skill["id"] in orphan_ids:
                 continue
-            skill_type = skill.get("type", "atomic")
+            skill_type = skill.get("type", "basic")
             symbol = get_tier_symbol(skill_type)
             type_label = get_type_label(meta, skill_type)
             level = skill.get("level")
             level_label = get_level_label(meta, level)
             tier_label = get_tier_label(meta, level)
-            name_display = f"{symbol} {skill.get('name')}"
+            reg_display = _build_skill_display(skill.get('id'), skill_type, named_map)
+            name_display = f"{symbol} {reg_display}"
             skill_call = f"`/{skill.get('id')}`"
-            f.write(f"| {name_display} | {type_label} | {level_label} | {tier_label} | {skill_call} |\n")
+            f.write(f"| {name_display} | {type_label or 'Basic Skill'} | {level_label} | {tier_label} | {skill_call} |\n")
 
         f.write("\n")
         f.write("## Pure / Undeveloped\n\n")
@@ -266,7 +299,26 @@ def main():
             skill_call = f"`/{skill.get('id')}`"
             f.write(f"| {name_display} | Intrinsic Skill | {level_label} | {tier_label} | {skill_call} |\n")
 
-        f.write(f"\n*Generated from gaia.json v{version}.*\n")
+        f.write("\n")
+
+        # Unclaimed Ultimates section
+        unclaimed = [s for s in skills if s.get("type") == "ultimate" and s["id"] not in named_map]
+        if unclaimed:
+            f.write("## Ultimate Skills Awaiting Name\n\n")
+            f.write(
+                "*These Ultimate skills have no named implementation yet. "
+                "The first contributor to submit a valid named implementation "
+                "claims the title slot.  Submit with `gaia push` and open a PR.*\n\n"
+            )
+            f.write("| Skill Call | Level | Prerequisites |\n")
+            f.write("|---|---|---|\n")
+            for s in unclaimed:
+                prereq_names = ", ".join(f"`/{p}`" for p in s.get("prerequisites", []))
+                level_lbl = get_tier_label(meta, s.get("level"))
+                f.write(f"| `/{s['id']}` | {level_lbl} | {prereq_names} |\n")
+            f.write("\n")
+
+        f.write(f"*Generated from gaia.json v{version}.*\n")
 
     # generate combinations.md
     with open("combinations.md", "w", encoding="utf-8") as f:
@@ -274,30 +326,19 @@ def main():
         f.write("| Skill | Class | Prerequisites | Level Floor | Conditions |\n")
         f.write("|---|---|---|---|---|\n")
         for skill in skills:
-            if skill.get("type") in ["composite", "legendary"]:
+            if skill.get("type") in ["extra", "ultimate"]:
                 skill_type = skill.get("type")
                 symbol = get_tier_symbol(skill_type)
                 type_label = get_type_label(meta, skill_type)
                 level_label = get_level_label(meta, skill.get("level"))
                 prereqs = [skill_map.get(pid, {}).get("name", pid) for pid in skill.get("prerequisites", [])]
                 prereq_str = ", ".join(prereqs)
-                name_display = f"{symbol} {skill.get('name')}"
+                combo_display = _build_skill_display(skill.get('id'), skill_type, named_map)
+                name_display = f"{symbol} {combo_display}"
                 f.write(f"| {name_display} | {type_label} | {prereq_str} | {level_label} | {skill.get('conditions', '')} |\n")
         f.write(f"\n*Generated from gaia.json v{version}.*\n")
 
-    # generate tree.md — named index must be fresh first
-    _run_generate_named_index()
-
-    named_map = {}
-    named_index_path = os.path.join("graph", "named", "index.json")
-    if os.path.isfile(named_index_path):
-        with open(named_index_path, "r", encoding="utf-8") as nf:
-            nidx = json.load(nf)
-        for skill_id, entries in nidx.get("buckets", {}).items():
-            if entries:
-                origin = next((e for e in entries if e.get("origin")), entries[0])
-                named_map[skill_id] = origin.get("id", "")
-
+    # generate tree.md
     _generate_tree(skills, skill_map, meta, version, date_str, named_map)
 
     catalog_path = 'graph/real_skill_catalog.json'
@@ -307,7 +348,7 @@ def main():
 
     # generate user skill tree markdown projections
     users_dir = "users"
-    legendaries = _sorted_legendaries(skills)
+    legendaries = _sorted_ultimates(skills)
     if os.path.isdir(users_dir):
         for username in sorted(os.listdir(users_dir)):
             user_dir = os.path.join(users_dir, username)
@@ -337,7 +378,7 @@ def main():
                     for us in unlocked:
                         sid = us.get("skillId", "")
                         sk = skill_map.get(sid, {})
-                        sk_type = sk.get("type", "")
+                        sk_type = sk.get("type", "basic")
                         symbol = get_tier_symbol(sk_type)
                         type_label = get_type_label(meta, sk_type)
                         level = us.get("level", sk.get("level", ""))
@@ -362,8 +403,7 @@ def main():
                     prereq_ids = legendary.get("prerequisites", [])
 
                     level_label = get_level_label(meta, llevel)
-                    named_id = named_map.get(lid)
-                    display = f"{named_id} - {lname}" if named_id else f"/{lid}"
+                    display = _build_skill_display(lid, "ultimate", named_map)
 
                     check = "✓ " if lid in unlocked_ids else "· "
                     f.write(f"{check}◆ {display}  [{level_label}]\n")
@@ -400,7 +440,7 @@ def main():
 
 
 def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
-    legendaries = _sorted_legendaries(skills)
+    legendaries = _sorted_ultimates(skills)
 
     # compute orphaned atomics
     all_prereq_ids = set()
@@ -409,7 +449,7 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
             all_prereq_ids.add(pid)
     pure_skills = sorted(
         [s for s in skills
-         if s.get("type") == "atomic"
+         if s.get("type") == "basic"
          and s["id"] not in all_prereq_ids
          and not s.get("prerequisites")],
         key=lambda s: s.get("id", "")
@@ -433,8 +473,7 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
         level_label = get_level_label(meta, llevel)
         prereq_ids = legendary.get("prerequisites", [])
 
-        named_id = (named_map or {}).get(lid)
-        display = f"{named_id} - {lname}" if named_id else f"/{lid}"
+        display = _build_skill_display(lid, "ultimate", named_map)
 
         lines.append(f"◆ {display}  [{level_label}]")
         lines.append("─" * 65)
@@ -449,7 +488,7 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
 
     if pure_skills:
         lines.append("═" * 70)
-        lines.append("Pure / Undeveloped — atomic skills not yet wired into any upgrade path.")
+        lines.append("Pure / Undeveloped — basic skills not yet wired into any upgrade path.")
         lines.append("═" * 70)
         lines.append("")
         for ps in pure_skills:

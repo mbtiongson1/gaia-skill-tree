@@ -33,9 +33,9 @@ Four principles guide every design decision:
 │           │ generateProjections.py                               │
 │           ▼                                                      │
 │  ┌─────────────────────────────────────────────────────┐        │
-│  │  skills/atomic/*.md                                 │        │
-│  │  skills/composite/*.md       ← generated outputs   │        │
-│  │  skills/legendary/*.md                              │        │
+│  │  skills/basic/*.md                                 │        │
+│  │  skills/extra/*.md       ← generated outputs   │        │
+│  │  skills/ultimate/*.md                              │        │
 │  │  registry.md                                        │        │
 │  │  combinations.md                                    │        │
 │  └─────────────────────────────────────────────────────┘        │
@@ -379,7 +379,7 @@ gaia status
   Displays summary of the configured user's skill tree.
   Shows total unlocked, highest rarity, pending combinations.
 
-gaia tree [--depth N] [--type atomic|composite|legendary] [--rarity common|...]
+gaia tree [--depth N] [--type basic|extra|ultimate] [--rarity common|...]
   Displays the user's skill tree with optional filters.
   Default depth: full.
 
@@ -401,7 +401,7 @@ Input:
   ownedSkills    — set of skill IDs in the user's current skill tree
   gaiaGraph      — full gaia.json
 
-For each composite/legendary skill S in gaiaGraph:
+For each extra/ultimate skill S in gaiaGraph:
   If S is NOT in ownedSkills:
     If all prerequisites of S are in (detectedSkills ∪ ownedSkills):
       Add S to pendingCombinations with levelFloor = S.levelFloor
@@ -458,7 +458,7 @@ jobs:
 ```json
 {
   "nodes": [
-    { "id": "webScrape", "label": "Web Scrape", "type": "composite", "level": "III", "rarity": "uncommon" }
+    { "id": "webScrape", "label": "Web Scrape", "type": "extra", "level": "III", "rarity": "uncommon" }
   ],
   "edges": [
     { "source": "webSearch", "target": "webScrape", "type": "prerequisite" }

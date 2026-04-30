@@ -7,7 +7,7 @@ def build_candidate(
     id: str,
     name: str,
     description: str,
-    skill_type: str = "atomic",
+    skill_type: str = "basic",
     source_url: str = "",
     source_type: str = "manual",
     evaluator: str = "gaiabot",

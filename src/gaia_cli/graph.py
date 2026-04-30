@@ -18,13 +18,13 @@ from pathlib import Path
 from typing import Any
 
 PALETTE = {
-    "atomic": {"fill": "#38bdf8", "stroke": "#7dd3fc", "label": "Atomic"},
-    "composite": {"fill": "#a78bfa", "stroke": "#c4b5fd", "label": "Composite"},
-    "legendary": {"fill": "#fbbf24", "stroke": "#fde68a", "label": "Legendary"},
+    "basic": {"fill": "#38bdf8", "stroke": "#7dd3fc", "label": "Basic"},
+    "extra": {"fill": "#a78bfa", "stroke": "#c4b5fd", "label": "Extra"},
+    "ultimate": {"fill": "#fbbf24", "stroke": "#fde68a", "label": "Ultimate"},
 }
-TYPE_ORDER = {"atomic": 0, "composite": 1, "legendary": 2}
-RADIUS_BY_TYPE = {"atomic": 285, "composite": 170, "legendary": 54}
-NODE_RADIUS = {"atomic": 6, "composite": 10, "legendary": 15}
+TYPE_ORDER = {"basic": 0, "extra": 1, "ultimate": 2}
+RADIUS_BY_TYPE = {"basic": 285, "extra": 170, "ultimate": 54}
+NODE_RADIUS = {"basic": 6, "extra": 10, "ultimate": 15}
 
 
 def _registry_root(registry_path: str | os.PathLike[str]) -> Path:
@@ -47,16 +47,16 @@ def _stable_angle(skill_id: str, index: int, total: int) -> float:
 
 def build_render_graph(graph: dict[str, Any], width: int = 1280, height: int = 880) -> dict[str, Any]:
     skills = graph.get("skills", [])
-    groups: dict[str, list[dict[str, Any]]] = {"atomic": [], "composite": [], "legendary": []}
+    groups: dict[str, list[dict[str, Any]]] = {"basic": [], "extra": [], "ultimate": []}
     for skill in skills:
-        groups.setdefault(skill.get("type", "atomic"), []).append(skill)
+        groups.setdefault(skill.get("type", "basic"), []).append(skill)
 
     for bucket in groups.values():
         bucket.sort(key=lambda s: (str(s.get("level", "")), str(s.get("name", s.get("id", "")))))
 
     cx, cy = width / 2, height / 2
     nodes: list[dict[str, Any]] = []
-    for skill_type in ("atomic", "composite", "legendary"):
+    for skill_type in ("basic", "extra", "ultimate"):
         bucket = groups.get(skill_type, [])
         radius = RADIUS_BY_TYPE.get(skill_type, 220)
         for i, skill in enumerate(bucket):
@@ -86,7 +86,7 @@ def build_render_graph(graph: dict[str, Any], width: int = 1280, height: int = 8
             continue
         for source in skill.get("prerequisites", []) or []:
             if source in skill_ids:
-                edges.append({"source": source, "target": target, "type": skill.get("type", "atomic")})
+                edges.append({"source": source, "target": target, "type": skill.get("type", "basic")})
 
     nodes.sort(key=lambda n: (TYPE_ORDER.get(str(n.get("type")), 9), str(n.get("label", ""))))
     return {
@@ -110,16 +110,16 @@ def render_svg(render_graph: dict[str, Any]) -> str:
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
         '<title id="title">Gaia AI Agent Skill Graph</title>',
-        '<desc id="desc">Canonical Gaia skill graph rendered from graph/gaia.json, with atomic skills on the outer ring, composite skills in the middle ring, and legendary skills at the core.</desc>',
+        '<desc id="desc">Canonical Gaia skill graph rendered from graph/gaia.json, with basic skills on the outer ring, extra skills in the middle ring, and ultimate skills at the core.</desc>',
         "<defs>",
         '<radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#172554"/><stop offset="55%" stop-color="#06111f"/><stop offset="100%" stop-color="#030712"/></radialGradient>',
         '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>',
         "</defs>",
         f'<rect width="{width}" height="{height}" fill="url(#bg)"/>',
         '<g opacity="0.32" stroke="#334155" stroke-width="1" fill="none">',
-        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["atomic"]}"/>',
-        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["composite"]}"/>',
-        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["legendary"]}"/>',
+        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["basic"]}"/>',
+        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["extra"]}"/>',
+        f'<circle cx="{width/2:.1f}" cy="{height/2:.1f}" r="{RADIUS_BY_TYPE["ultimate"]}"/>',
         "</g>",
         '<g class="edges" fill="none">',
     ]
@@ -129,7 +129,7 @@ def render_svg(render_graph: dict[str, Any]) -> str:
         target = node_by_id.get(edge.get("target"))
         if not source or not target:
             continue
-        color = PALETTE.get(str(edge.get("type")), PALETTE["atomic"])["fill"]
+        color = PALETTE.get(str(edge.get("type")), PALETTE["basic"])["fill"]
         lines.append(
             f'<line x1="{source["x"]}" y1="{source["y"]}" x2="{target["x"]}" y2="{target["y"]}" stroke="{color}" stroke-opacity="0.32" stroke-width="1.15"/>'
         )
@@ -137,7 +137,7 @@ def render_svg(render_graph: dict[str, Any]) -> str:
 
     lines.append('<g class="nodes" filter="url(#glow)">')
     for node in nodes:
-        color = PALETTE.get(str(node.get("type")), PALETTE["atomic"])
+        color = PALETTE.get(str(node.get("type")), PALETTE["basic"])
         lines.append(
             f'<circle cx="{node["x"]}" cy="{node["y"]}" r="{node["radius"]}" fill="{color["fill"]}" stroke="{color["stroke"]}" stroke-width="1.6"><title>{escape(str(node.get("label", "")))}</title></circle>'
         )
@@ -146,11 +146,11 @@ def render_svg(render_graph: dict[str, Any]) -> str:
     lines.append('<g class="labels" font-family="Inter, ui-sans-serif, system-ui, sans-serif" text-anchor="middle">')
     for node in nodes:
         typ = str(node.get("type"))
-        if typ == "atomic" and int(sum(ord(c) for c in str(node.get("id", ""))) % 4) != 0:
+        if typ == "basic" and int(sum(ord(c) for c in str(node.get("id", ""))) % 4) != 0:
             continue
-        color = PALETTE.get(typ, PALETTE["atomic"])["fill"]
-        size = 10 if typ == "atomic" else 12 if typ == "composite" else 16
-        weight = 600 if typ != "legendary" else 800
+        color = PALETTE.get(typ, PALETTE["basic"])["fill"]
+        size = 10 if typ == "basic" else 12 if typ == "extra" else 16
+        weight = 600 if typ != "ultimate" else 800
         y = float(node["y"]) - float(node["radius"]) - 7
         lines.append(
             f'<text x="{node["x"]}" y="{y:.1f}" fill="{color}" font-size="{size}" font-weight="{weight}" opacity="0.92">{escape(str(node.get("label", "")))}</text>'
@@ -165,7 +165,7 @@ def render_svg(render_graph: dict[str, Any]) -> str:
             f'<text x="{legend_x}" y="{legend_y - 22}" font-size="20" font-weight="800" fill="#e2e8f0">Gaia Skill Graph</text>',
         ]
     )
-    for i, skill_type in enumerate(("atomic", "composite", "legendary")):
+    for i, skill_type in enumerate(("basic", "extra", "ultimate")):
         y = legend_y + i * 28
         color = PALETTE[skill_type]
         count = sum(1 for node in nodes if node.get("type") == skill_type)

@@ -8,9 +8,9 @@ export async function getRegistryResource(): Promise<string> {
     generatedAt: graph.generatedAt,
     totalSkills: graph.skills.length,
     byType: {
-      atomic: graph.skills.filter((s) => s.type === "atomic").length,
-      composite: graph.skills.filter((s) => s.type === "composite").length,
-      legendary: graph.skills.filter((s) => s.type === "legendary").length,
+      basic: graph.skills.filter((s) => s.type === "basic").length,
+      extra: graph.skills.filter((s) => s.type === "extra").length,
+      ultimate: graph.skills.filter((s) => s.type === "ultimate").length,
     },
     totalEdges: graph.edges.length,
     skills: graph.skills.map((s) => ({

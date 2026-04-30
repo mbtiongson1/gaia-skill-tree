@@ -59,7 +59,7 @@ class TestCandidateBuilder:
     def test_builds_valid_candidate(self):
         c = build_candidate("test-skill", "Test", "A test skill", source_url="https://x.com", source_type="npm", score=75)
         assert c["id"] == "test-skill"
-        assert c["type"] == "atomic"
+        assert c["type"] == "basic"
         assert c["status"] == "provisional"
         assert c["evidence"][0]["class"] == "C"
         assert "75" in c["evidence"][0]["notes"]

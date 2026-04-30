@@ -16,11 +16,11 @@ except ImportError:
 
 
 SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
-VALID_TYPES = {"atomic", "composite", "legendary"}
+VALID_TYPES = {"basic", "extra", "ultimate"}
 
 
 def load_json(path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 

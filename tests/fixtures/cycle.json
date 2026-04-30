@@ -6,7 +6,7 @@
     {
       "id": "skill-a",
       "name": "Skill A",
-      "type": "composite",
+      "type": "extra",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",
@@ -27,7 +27,7 @@
     {
       "id": "skill-b",
       "name": "Skill B",
-      "type": "composite",
+      "type": "extra",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",
@@ -48,7 +48,7 @@
     {
       "id": "skill-c",
       "name": "Skill C",
-      "type": "composite",
+      "type": "extra",
       "level": "II",
       "rarity": "common",
       "description": "Part of a cycle.",

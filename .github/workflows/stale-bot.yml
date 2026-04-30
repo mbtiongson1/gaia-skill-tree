@@ -21,4 +21,4 @@ jobs:
           days-before-close: 7
           only-labels: "bot-proposal"
           stale-pr-label: "stale"
-          exempt-pr-labels: "needs-review,legendary"
+          exempt-pr-labels: "needs-review,ultimate"
