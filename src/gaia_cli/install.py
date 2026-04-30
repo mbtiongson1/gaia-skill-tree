@@ -8,6 +8,7 @@ Manages a dual-layer cache:
 import hashlib
 import json
 import os
+import re
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -148,6 +149,92 @@ def uninstall_skill(skill_id):
     save_manifest(manifest)
     print(f"Uninstalled: {skill_id}")
     return True
+
+
+def _parse_frontmatter(path):
+    """Return the YAML frontmatter dict from a .md file, or {}."""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            text = f.read()
+        m = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
+        if not m:
+            return {}
+        import yaml
+        return yaml.safe_load(m.group(1)) or {}
+    except Exception:
+        return {}
+
+
+def list_available(registry_path):
+    """Return a sorted list of (skill_id, meta_dict) for all named skills in the registry."""
+    named_dir = os.path.join(registry_path, "graph", "named")
+    if not os.path.isdir(named_dir):
+        return []
+    skills = []
+    for contributor in sorted(os.listdir(named_dir)):
+        contrib_dir = os.path.join(named_dir, contributor)
+        if not os.path.isdir(contrib_dir):
+            continue
+        for fname in sorted(os.listdir(contrib_dir)):
+            if not fname.endswith(".md"):
+                continue
+            skill_name = fname[:-3]
+            skill_id = f"{contributor}/{skill_name}"
+            meta = _parse_frontmatter(os.path.join(contrib_dir, fname))
+            skills.append((skill_id, meta))
+    return skills
+
+
+def interactive_install(registry_path):
+    """Display all available named skills and let the user pick which to install."""
+    skills = list_available(registry_path)
+    if not skills:
+        print("No named skills found in registry.")
+        return
+
+    installed_ids = {e["id"] for e in load_manifest()["installed"]}
+
+    print(f"\n{'#':<4} {'ID':<40} {'Name':<30} Lvl")
+    print("─" * 85)
+    for i, (sid, meta) in enumerate(skills, 1):
+        name = meta.get("name") or sid.split("/", 1)[-1]
+        level = meta.get("level", "?")
+        marker = " ✓" if sid in installed_ids else "  "
+        print(f"{i:<4}{marker} {sid:<38} {name:<30} {level}")
+
+    print("\n✓ = already installed")
+    print("Enter numbers to install (space or comma separated), or press Enter to cancel:")
+    try:
+        raw = input("> ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print("\nCancelled.")
+        return
+
+    if not raw:
+        print("Cancelled.")
+        return
+
+    tokens = re.split(r"[\s,]+", raw)
+    selected = []
+    for tok in tokens:
+        if not tok:
+            continue
+        try:
+            idx = int(tok) - 1
+            if 0 <= idx < len(skills):
+                selected.append(skills[idx][0])
+            else:
+                print(f"  Skipping out-of-range: {tok}")
+        except ValueError:
+            print(f"  Skipping invalid input: {tok}")
+
+    if not selected:
+        print("Nothing selected.")
+        return
+
+    print()
+    for sid in selected:
+        install_skill(sid, registry_path)
 
 
 def list_installed():

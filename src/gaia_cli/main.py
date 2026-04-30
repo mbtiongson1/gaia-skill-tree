@@ -12,7 +12,7 @@ from gaia_cli.push import build_skill_batch, write_skill_batch
 from gaia_cli.embeddings import generate_embeddings
 from gaia_cli.semantic_search import search as semantic_search, load_embeddings
 from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
-from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed
+from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed, interactive_install
 from gaia_cli.graph import graph_command
 from gaia_cli.registry import (
     registry_graph_path,
@@ -432,8 +432,13 @@ def tree_command(args):
     if not config:
         print("Gaia not initialized.")
         return
+    graph_data = None
+    graph_path = registry_graph_path(args.registry)
+    if os.path.exists(graph_path):
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph_data = json.load(f)
     tree = load_tree(config.get('gaiaUser'), registry_path=args.registry)
-    show_tree(tree)
+    show_tree(tree, graph_data=graph_data)
 
 def fuse_command(args):
     config = load_config()
@@ -587,10 +592,10 @@ def name_command(args):
 
 def install_command(args):
     if args.list:
-        list_installed()
+        interactive_install(args.registry)
         return
     if not args.skill_id:
-        print("Error: provide a skill ID (contributor/skill-name) or use --list.", file=sys.stderr)
+        print("Error: provide a skill ID (contributor/skill-name) or use --list to browse.", file=sys.stderr)
         sys.exit(1)
     success = install_skill(args.skill_id, args.registry)
     if not success:
