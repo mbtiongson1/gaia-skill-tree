@@ -39,6 +39,13 @@ def sync_docs_graph_assets(root: Path = ROOT) -> None:
     shutil.copyfile(tree_src, tree_dst)
     print(f"Synced tree.md -> {tree_dst.relative_to(root)}")
 
+    named_index_src = root / "graph" / "named" / "index.json"
+    if named_index_src.exists():
+        named_index_dst = docs_graph / "named" / "index.json"
+        named_index_dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(named_index_src, named_index_dst)
+        print(f"Synced graph/named/index.json -> {named_index_dst.relative_to(root)}")
+
 
 def main() -> None:
     sync_docs_graph_assets()

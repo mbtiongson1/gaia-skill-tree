@@ -805,13 +805,30 @@
     'skill-discovery':             'vercel/find-skills',
     'rag-pipeline':                'yonatangross/orchestkit-rag',
   };
+  const FALLBACK_TITLE_MAP = {
+    'automated-testing':           'The Quality Guardian',
+    'test-driven-development':     'The Red-Green Oath',
+    'document-editing':            'The Slide Artisan',
+    'tool-creation':               "The Skill Forger's Art",
+    'autonomous-debug':            "The Codebreaker's Will",
+    'write-report':                'The Document Weaver',
+    'browser-automation':          'The Digital Navigator',
+    'autonomous-research-agent':   "The Scholar's Compass",
+    'framework-upgrade':           "The Versionist's Trial",
+    'ux-audit':                    'The Ten Laws of Sight',
+    'multi-agent-orchestration-v': "The Grand Conductor's Blueprint",
+    'generate-test':               'The Test Weaver',
+    'skill-discovery':             'The Registry Scout',
+    'rag-pipeline':                'The Knowledge Architect',
+  };
 
   function normalizeSkills(graph) {
+    const TYPE_ALIASES = { atomic: 'basic', composite: 'extra', legendary: 'ultimate' };
     const skills = (graph && graph.skills) ? graph.skills : FALLBACK_SKILLS;
     return skills.map(skill => ({
       id: skill.id,
       name: skill.name || skill.id,
-      type: skill.type || 'basic',
+      type: TYPE_ALIASES[skill.type] || skill.type || 'basic',
       level: skill.level || '',
       rarity: skill.rarity || '',
       prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
@@ -890,9 +907,10 @@
       legendHoverType: null,
       legendHoverRank: null,
       legendEl: null,
-      showSlugs: false,
+      showTitles: false,
       redPillActive: false,
       namedMap: FALLBACK_NAMED_MAP,
+      titleMap: FALLBACK_TITLE_MAP,
     };
 
     function resize() {
@@ -1116,8 +1134,8 @@
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        const labelText = (state.namedMap && state.namedMap[skill.id])
-          ? state.namedMap[skill.id]
+        const labelText = (state.showTitles && state.titleMap && state.titleMap[skill.id])
+          ? state.titleMap[skill.id]
           : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
@@ -1246,11 +1264,11 @@
       const labelToggle = document.createElement('button');
       labelToggle.type = 'button';
       labelToggle.className = 'graph-label-toggle';
-      labelToggle.textContent = 'Show /skill-name';
+      labelToggle.textContent = 'Show Title';
       labelToggle.addEventListener('mousedown', e => e.stopPropagation());
       labelToggle.addEventListener('click', () => {
-        state.showSlugs = !state.showSlugs;
-        labelToggle.classList.toggle('active', state.showSlugs);
+        state.showTitles = !state.showTitles;
+        labelToggle.classList.toggle('active', state.showTitles);
       });
       canvas.parentElement.appendChild(labelToggle);
       state.labelToggleEl = labelToggle;
@@ -1308,7 +1326,7 @@
       state.legendFilterRank = null;
       state.legendHoverType = null;
       state.legendHoverRank = null;
-      state.showSlugs = false;
+      state.showTitles = false;
       state.searchText = '';
       state.redPillActive = false;
       if (state.redPillEl) state.redPillEl.classList.remove('active');
@@ -1320,7 +1338,8 @@
     }
     if (state.running) draw();
     function setNamedMap(map) { state.namedMap = map || {}; }
-    return { setSkills, setNamedMap, resize, start, stop, resetFilters };
+    function setTitleMap(map) { state.titleMap = map || {}; }
+    return { setSkills, setNamedMap, setTitleMap, resize, start, stop, resetFilters };
   }
 
   const hero = document.getElementById('hero');
@@ -1373,15 +1392,19 @@
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(indexData => {
       const map = {};
+      const titleMap = {};
       const buckets = indexData.buckets || {};
       Object.entries(buckets).forEach(([skillId, arr]) => {
         if (Array.isArray(arr) && arr.length) {
           const origin = arr.find(e => e.origin) || arr[0];
           if (origin && origin.id) map[skillId] = origin.id;
+          if (origin && origin.title) titleMap[skillId] = origin.title;
         }
       });
       heroGraph.setNamedMap(map);
       modalGraph.setNamedMap(map);
+      heroGraph.setTitleMap(titleMap);
+      modalGraph.setTitleMap(titleMap);
     })
     .catch(() => {});
 })();
