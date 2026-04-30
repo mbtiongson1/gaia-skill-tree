@@ -2,6 +2,7 @@
 
 | Name | Class | Rank | Rarity | Status |
 |---|---|---|---|---|
+| ◇ Agent Evaluation | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ API Call | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Audience Model | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◇ Automated Testing | Extra Skill | III · Evolved | Uncommon | Provisional |
@@ -32,6 +33,7 @@
 | ○ Execute Bash | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Extract Entities | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Few-Shot Learning | Intrinsic Skill | IV · Hardened | Common | Provisional |
+| ○ Fine-Tune | Intrinsic Skill | IV · Hardened | Uncommon | Provisional |
 | ○ Format Output | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ◇ Function Calling | Extra Skill | III · Evolved | Uncommon | Provisional |
@@ -40,6 +42,7 @@
 | ○ Generate Text | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◇ Ghostwrite | Extra Skill | IV · Hardened | Rare | Provisional |
 | ◇ Grounding | Extra Skill | III · Evolved | Uncommon | Provisional |
+| ◇ Guardrails | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Hypothesis Generation | Intrinsic Skill | II · Named | Rare | Provisional |
 | ○ Image Caption | Intrinsic Skill | II · Named | Uncommon | Provisional |
 | ○ Image Generate | Intrinsic Skill | II · Named | Uncommon | Provisional |
@@ -75,6 +78,7 @@
 | ○ Score Relevance | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Self-Consistency | Intrinsic Skill | IV · Hardened | Rare | Provisional |
 | ○ Self-Critique | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
+| ○ Semantic Cache | Intrinsic Skill | IV · Hardened | Rare | Provisional |
 | ○ Sentiment Analysis | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ○ Speech to Text | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Structured Output Generation | Intrinsic Skill | I · Awakened | Common | Provisional |
@@ -91,6 +95,7 @@
 | ◇ Voice Agent | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◇ Web Scrape | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Web Search | Intrinsic Skill | I · Awakened | Common | Provisional |
+| ◇ Workflow Automation | Extra Skill | IV · Hardened | Uncommon | Provisional |
 | ○ Write Report | Intrinsic Skill | I · Awakened | Common | Provisional |
 
 *Generated from gaia.json v1.0.0.*

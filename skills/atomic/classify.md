@@ -17,6 +17,7 @@ _None._
 - [Content Moderation](../composite/content-moderation.md)
 - [Few-Shot Learning](../atomic/few-shot-learning.md)
 - [Route Intent](../atomic/route-intent.md)
+- [Guardrails](../composite/guardrails.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

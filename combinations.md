@@ -2,6 +2,7 @@
 
 | Skill | Class | Prerequisites | Level Floor | Conditions |
 |---|---|---|---|---|
+| ◇ Agent Evaluation | Extra Skill | Evaluate Output, Score Relevance | III · Evolved |  |
 | ◇ Automated Testing | Extra Skill | Generate Test, Execute Bash, Error Interpretation | III · Evolved |  |
 | ◆ True Oracle: Autonomous Data Scientist | Ultimate Skill | Data Analysis, Math Reason, Research | V · Transcendent | Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Autonomous Debug | Extra Skill | Code Generation, Execute Bash, Error Interpretation | IV · Hardened |  |
@@ -17,6 +18,7 @@
 | ◇ Function Calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III · Evolved | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV · Hardened | Requires research output as input context. |
 | ◇ Grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | III · Evolved |  |
+| ◇ Guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | III · Evolved | Requires a defined policy schema and an evaluation loop. |
 | ◇ Knowledge Graph Construction | Extra Skill | Extract Entities, Logical Inference | III · Evolved |  |
 | ◇ Knowledge Harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV · Hardened |  |
 | ◇ Multi-Agent Debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV · Hardened |  |
@@ -37,5 +39,6 @@
 | ◇ Tree of Thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | IV · Hardened |  |
 | ◇ Voice Agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III · Evolved | Requires real-time audio I/O or audio file access. |
 | ◇ Web Scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III · Evolved | Structured output mode required. |
+| ◇ Workflow Automation | Extra Skill | Plan and Decompose, Tool Use, API Call | IV · Hardened |  |
 
 *Generated from gaia.json v1.0.0.*
