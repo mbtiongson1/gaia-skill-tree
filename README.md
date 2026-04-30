@@ -19,58 +19,58 @@ back through its full prerequisite chain.
 GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
-◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ ○ Web Search  [I · Awakened]
-  │  ├─ ○ Summarize  [0 · Basic]
-  │  └─ ○ Cite Sources  [I · Awakened]
-  ├─ ◇ Knowledge Harvest  [IV · Hardened]  ← Web Scrape · Extract Entities · Embed Text
-  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
-  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
-  │  │  ├─ ○ Parse HTML  [I · Awakened]
-  │  │  └─ ○ Extract Entities  [I · Awakened]
-  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
-  │  └─ ○ Embed Text  [I · Awakened]
-  └─ ◇ Ghostwrite  [IV · Hardened]  ← Research · Write Report · Audience Model
-     ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
-     ├─ ○ Write Report  [I · Awakened]
-     └─ ○ Audience Model  [I · Awakened]
+  ├─ ◇ /research  [III]
+  │  ├─ ○ /web-search  [I]
+  │  ├─ ○ /summarize  [0]
+  │  └─ ○ /cite-sources  [I]
+  ├─ ◇ /knowledge-harvest  [IV]
+  │  ├─ ◇ /web-scrape  [III]
+  │  │  ├─ ○ /web-search  [I]  (↑ see above)
+  │  │  ├─ ○ /parse-html  [I]
+  │  │  └─ ○ /extract-entities  [I]
+  │  ├─ ○ /extract-entities  [I]  (↑ see above)
+  │  └─ ○ /embed-text  [I]
+  └─ ◇ /ghostwrite  [IV]
+     ├─ ◇ /research  [III]  (↑ see above)
+     ├─ ○ glincker/readme-generator - Write Report  [I]
+     └─ ○ /audience-model  [I]
 
-◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
+◆ ruvnet/flow-nexus-swarm - Grand Conductor: Multi-Agent Orchestration  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
-  │  ├─ ○ Route Intent  [I · Awakened]
-  │  ├─ ○ Plan and Decompose  [I · Awakened]
-  │  └─ ○ Tool Select  [I · Awakened]
-  ├─ ○ Route Intent  [I · Awakened]  (↑ see above)
-  └─ ○ Tool Select  [I · Awakened]  (↑ see above)
+  ├─ ◇ /plan-and-execute  [IV]
+  │  ├─ ○ /route-intent  [I]
+  │  ├─ ○ /plan-decompose  [I]
+  │  └─ ○ /tool-select  [I]
+  ├─ ○ /route-intent  [I]  (↑ see above)
+  └─ ○ /tool-select  [I]  (↑ see above)
 
 ...
 
-◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
+◆ /autonomous-data-scientist  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
-  │  ├─ ○ Generate SQL  [II · Named]
-  │  ├─ ○ Data Visualize  [II · Named]
-  │  └─ ○ Summarize  [0 · Basic]
-  ├─ ○ Math Reason  [II · Named]
-  └─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-     ├─ ○ Web Search  [I · Awakened]
-     ├─ ○ Summarize  [0 · Basic]  (↑ see above)
-     └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ /data-analysis  [III]
+  │  ├─ ○ /generate-sql  [II]
+  │  ├─ ○ /data-visualize  [II]
+  │  └─ ○ /summarize  [0]
+  ├─ ○ /math-reason  [II]
+  └─ ◇ /research  [III]
+     ├─ ○ /web-search  [I]
+     ├─ ○ /summarize  [0]  (↑ see above)
+     └─ ○ /cite-sources  [I]
 
-◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
+◆ /recursive-self-improvement  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Autonomous Debug  [IV · Hardened]  ← Code Generation · Execute Bash · Error Interpretation
-  │  ├─ ○ Code Generation  [I · Awakened]
-  │  ├─ ○ Execute Bash  [I · Awakened]
-  │  └─ ○ Error Interpretation  [I · Awakened]
-  ├─ ○ Evaluate Output  [I · Awakened]
-  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
-     ├─ ○ Route Intent  [I · Awakened]
-     ├─ ○ Plan and Decompose  [I · Awakened]
-     └─ ○ Tool Select  [I · Awakened]
+  ├─ ◇ /autonomous-debug  [IV]
+  │  ├─ ○ /code-generation  [I]
+  │  ├─ ○ /execute-bash  [I]
+  │  └─ ○ /error-interpretation  [I]
+  ├─ ○ /evaluate-output  [I]
+  └─ ◇ /plan-and-execute  [IV]
+     ├─ ○ /route-intent  [I]
+     ├─ ○ /plan-decompose  [I]
+     └─ ○ /tool-select  [I]
 
 
 → Full graph: tree.md
@@ -144,7 +144,7 @@ The registry ships an interactive Named Skills browser at [`docs/index.html`](do
 
 - **Level-filtered tabs** — browse by Named (II), Evolved (III), Hardened (IV), or all levels.
 - **Expandable cards** — each card shows the contributor, title, description, `genericSkillRef`, tags, and a direct link to the upstream SKILL.md.
-- **Graph canvas toggle** — the **Named Skills** button in the graph explorer dims all non-named nodes and highlights named implementations with contributor attribution and a distinct glow.
+- **Graph canvas** — node labels show `contributor/skill-name` for named implementations (e.g. `karpathy/autoresearch`) and `/slug` for anonymous skills by default. The **Named Skills** button dims all non-named nodes and adds a coloured ring glow to highlight named implementations.
 
 Serve locally with `python -m http.server 8080` from the repo root, then open `http://localhost:8080/docs/`.
 

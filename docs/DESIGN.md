@@ -577,16 +577,26 @@ Storage:
 - **Repo reference**: `.gaia/named-skills/{contributor}/{skill-name}.md` (symlink on Unix, copy on Windows)
 - **Manifest**: `.gaia/install-manifest.json` (tracks id, installedAt, sourceRef, sha256)
 
-### 13.6 Named Skills Graph Canvas Toggle
+### 13.6 Named Skills Graph Canvas
 
-The skill graph explorer in `docs/index.html` includes a **Named Skills** highlight button overlaid on the graph canvas. When activated:
+The skill graph explorer in `docs/index.html` renders node labels using the following default logic:
 
-- All non-named nodes are dimmed to 7 % opacity so named implementations stand out.
-- Named skill nodes receive a coloured ring glow.
-- Node labels switch from the generic skill name to `contributor/skill-name` attribution.
+- Named implementations (those with an entry in `state.namedMap`) always display their `contributor/skill-name` ID (e.g. `karpathy/autoresearch`).
+- Anonymous skills display their canonical slug prefixed with `/` (e.g. `/web-search`).
+- The **Named Skills** button (`state.redPillActive`) is an overlay toggle — it dims all non-named nodes to 7 % opacity and adds a coloured ring glow to named nodes; it does not affect label text.
 - The button state is local to the page session — it does not persist across reloads.
 
-This toggle is implemented in `createSkillGraph()` as `state.redPillActive` (toggled by the `.graph-redpill` button). It reads `state.namedMap`, a lookup built from the `buckets` section of `graph/named/index.json` that maps each `genericSkillRef` to its named implementations.
+The label logic is implemented in `createSkillGraph()`:
+
+```js
+const labelText = (state.namedMap && state.namedMap[skill.id])
+  ? state.namedMap[skill.id]
+  : '/' + skill.id;
+```
+
+`state.namedMap` is a lookup built from the `buckets` section of `graph/named/index.json`, mapping each `genericSkillRef` to the origin named implementation's ID.
+
+The tooltip rank pill shows the level numeral only (e.g. `VI`) — rank names (Awakened, Evolved, …) are not displayed in the UI but remain defined in `RANK_META` for colour-coding.
 
 The Named Skills browser section below the graph provides the same data in a paginated card layout with level-filtered tabs, expandable detail cards (dependencies, derivatives, variants, tags, upstream SKILL.md link), and does not require the graph canvas.
 
