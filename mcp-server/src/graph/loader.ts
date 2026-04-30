@@ -4,6 +4,8 @@ import type { GaiaGraph } from "./types.js";
 const REGISTRY_URL =
   "https://raw.githubusercontent.com/mbtiongson1/gaia-skill-tree/main/graph/gaia.json";
 
+const USERNAME_RE = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,37}[a-zA-Z0-9]$|^[a-zA-Z0-9]$/;
+
 let cachedGraph: GaiaGraph | null = null;
 
 export async function loadGraph(registryUrl?: string): Promise<GaiaGraph> {
@@ -61,8 +63,9 @@ export async function loadUserTree(
   username: string,
   registryUrl?: string
 ): Promise<Record<string, unknown> | null> {
+  if (!USERNAME_RE.test(username)) return null;
   const baseUrl = registryUrl ?? REGISTRY_URL.replace("/graph/gaia.json", "");
-  const url = `${baseUrl}/users/${username}/skill-tree.json`;
+  const url = `${baseUrl}/users/${encodeURIComponent(username)}/skill-tree.json`;
 
   try {
     const res = await fetch(url);

@@ -27,7 +27,7 @@ export function createServer(): McpServer {
   server.tool(
     "gaia_my_tree",
     "Show the current user's Gaia skill tree — unlocked skills, pending fusions, and progression stats.",
-    { username: z.string().optional().describe("GitHub username (defaults to configured GAIA_USER)") },
+    { username: z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9-]*$/, "Invalid GitHub username").max(39).optional().describe("GitHub username (defaults to configured GAIA_USER)") },
     async ({ username }) => {
       const result = await getMyTree(username);
       return { content: [{ type: "text", text: result }] };
