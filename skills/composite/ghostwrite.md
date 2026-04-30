@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Ghostwrite
+# [IV · Extra Skill] Ghostwrite
 **ID:** ghostwrite  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

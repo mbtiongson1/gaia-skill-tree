@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Multimodal Reasoning
+# [III · Extra Skill] Multimodal Reasoning
 **ID:** multimodal-reasoning  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Rare  
 **Status:** Provisional
 

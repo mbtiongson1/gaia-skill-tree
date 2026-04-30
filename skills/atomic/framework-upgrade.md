@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Framework Upgrade
+# [0 · Intrinsic Skill] Framework Upgrade
 **ID:** framework-upgrade  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

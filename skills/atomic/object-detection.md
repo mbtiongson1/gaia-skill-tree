@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Object Detection
+# [II · Intrinsic Skill] Object Detection
 **ID:** object-detection  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

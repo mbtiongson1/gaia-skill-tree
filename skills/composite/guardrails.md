@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Guardrails
+# [III · Extra Skill] Guardrails
 **ID:** guardrails  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

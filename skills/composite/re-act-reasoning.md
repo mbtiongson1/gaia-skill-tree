@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] ReAct Reasoning
+# [III · Extra Skill] ReAct Reasoning
 **ID:** re-act-reasoning  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

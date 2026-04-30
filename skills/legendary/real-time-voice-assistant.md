@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] True Herald: Real-Time Voice Assistant
+# [V · Ultimate Skill] True Herald: Real-Time Voice Assistant
 **ID:** real-time-voice-assistant  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

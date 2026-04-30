@@ -1,7 +1,7 @@
-# [IV · Hardened · Intrinsic Skill] Semantic Cache
+# [IV · Intrinsic Skill] Semantic Cache
 **ID:** semantic-cache  
 **Type:** Intrinsic Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

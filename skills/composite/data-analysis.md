@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Data Analysis
+# [III · Extra Skill] Data Analysis
 **ID:** data-analysis  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

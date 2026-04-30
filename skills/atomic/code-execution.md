@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Code Execution
+# [II · Intrinsic Skill] Code Execution
 **ID:** code-execution  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 

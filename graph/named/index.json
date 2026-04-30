@@ -47,7 +47,7 @@
           "software-quality"
         ],
         "links": {
-          "github": "https://github.com/addyosmani/agent-skills"
+          "github": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md"
         }
       }
     ],
@@ -163,7 +163,7 @@
           "readme"
         ],
         "links": {
-          "github": "https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills"
+          "github": "https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md"
         }
       }
     ],
@@ -256,7 +256,7 @@
           "accessibility"
         ],
         "links": {
-          "npm": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills"
+          "github": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md"
         }
       }
     ],

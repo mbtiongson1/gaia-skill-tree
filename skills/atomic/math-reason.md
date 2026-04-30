@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Math Reason
+# [II · Intrinsic Skill] Math Reason
 **ID:** math-reason  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

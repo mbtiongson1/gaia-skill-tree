@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Tokenize
+# [0 · Intrinsic Skill] Tokenize
 **ID:** tokenize  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

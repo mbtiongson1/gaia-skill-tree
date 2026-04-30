@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Data Visualize
+# [II · Intrinsic Skill] Data Visualize
 **ID:** data-visualize  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 

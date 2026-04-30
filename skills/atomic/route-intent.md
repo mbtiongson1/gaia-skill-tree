@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Route Intent
+# [I · Intrinsic Skill] Route Intent
 **ID:** route-intent  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

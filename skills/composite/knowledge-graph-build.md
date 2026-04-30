@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Knowledge Graph Construction
+# [III · Extra Skill] Knowledge Graph Construction
 **ID:** knowledge-graph-build  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

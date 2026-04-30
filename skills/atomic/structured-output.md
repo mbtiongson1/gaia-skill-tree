@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Structured Output Generation
+# [I · Intrinsic Skill] Structured Output Generation
 **ID:** structured-output  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

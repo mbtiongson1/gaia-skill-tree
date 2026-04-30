@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Workflow Automation
+# [IV · Extra Skill] Workflow Automation
 **ID:** workflow-automation  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Extract Entities
+# [I · Intrinsic Skill] Extract Entities
 **ID:** extract-entities  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] Grand Conductor: Multi-Agent Orchestration
+# [V · Ultimate Skill] Grand Conductor: Multi-Agent Orchestration
 **ID:** multi-agent-orchestration-v  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

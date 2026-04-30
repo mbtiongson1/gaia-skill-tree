@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Document Editing
+# [0 · Intrinsic Skill] Document Editing
 **ID:** document-editing  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

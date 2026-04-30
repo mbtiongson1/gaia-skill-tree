@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Image Caption
+# [II · Intrinsic Skill] Image Caption
 **ID:** image-caption  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] True Sage: Recursive Self-Improvement
+# [V · Ultimate Skill] True Sage: Recursive Self-Improvement
 **ID:** recursive-self-improvement  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Hypothesis Generation
+# [II · Intrinsic Skill] Hypothesis Generation
 **ID:** hypothesis-generate  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Rare  
 **Status:** Provisional
 

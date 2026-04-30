@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] OCR
+# [II · Intrinsic Skill] OCR
 **ID:** ocr  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

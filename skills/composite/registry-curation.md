@@ -1,7 +1,7 @@
-# [IV · Hardened · Extra Skill] Registry Curation
+# [IV · Extra Skill] Registry Curation
 **ID:** registry-curation  
 **Type:** Extra Skill  
-**Level:** IV · Hardened  
+**Level:** IV  
 **Rarity:** Rare  
 **Status:** Provisional
 

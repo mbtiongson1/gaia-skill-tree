@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Test-Driven Development
+# [0 · Intrinsic Skill] Test-Driven Development
 **ID:** test-driven-development  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
@@ -19,7 +19,7 @@ _None._
 ## Evidence
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
-| B | https://github.com/addyosmani/agent-skills | mbtiongson1 | 2026-04-30 |
+| B | https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md | mbtiongson1 | 2026-04-30 |
 
 ## Known Agents
 _None verified yet._

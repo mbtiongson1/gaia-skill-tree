@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Function Calling
+# [III · Extra Skill] Function Calling
 **ID:** function-calling  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

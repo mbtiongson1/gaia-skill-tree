@@ -1,7 +1,7 @@
-# [V · Transcendent · Ultimate Skill] True Oracle: Autonomous Data Scientist
+# [V · Ultimate Skill] True Oracle: Autonomous Data Scientist
 **ID:** autonomous-data-scientist  
 **Type:** Ultimate Skill  
-**Level:** V · Transcendent  
+**Level:** V  
 **Rarity:** Divine  
 **Status:** Provisional
 

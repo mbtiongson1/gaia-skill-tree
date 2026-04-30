@@ -10,92 +10,92 @@
 
 | Skill | Class | Rank | Rarity | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Route Intent | Intrinsic Skill | II · Named | Common | gaia-registry/gaiabot-core | 2026-04-20 |
-| ○ Plan and Decompose | Intrinsic Skill | II · Named | Common | gaia-registry/gaiabot-core | 2026-04-21 |
-| ○ Tool Select | Intrinsic Skill | II · Named | Common | gaia-registry/gaiabot-core | 2026-04-22 |
-| ◇ Plan and Execute | Extra Skill | III · Evolved | Rare | local-repo | 2026-04-26 |
+| ○ Route Intent | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-20 |
+| ○ Plan and Decompose | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-21 |
+| ○ Tool Select | Intrinsic Skill | II | Common | gaia-registry/gaiabot-core | 2026-04-22 |
+| ◇ Plan and Execute | Extra Skill | III | Rare | local-repo | 2026-04-26 |
 
 ---
 
 ## Upgrade Path
 
 ```
-· ◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent â˜…]  ← Research · Knowledge Harvest · Ghostwrite
-  ├─ · ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ · ○ Web Search  [I · Awakened]
-  │  ├─ · ○ Summarize  [0 · Basic]
-  │  └─ · ○ Cite Sources  [I · Awakened]
-  ├─ · ◇ Knowledge Harvest  [IV · Hardened]  ← Web Scrape · Extract Entities · Embed Text
-  │  ├─ · ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
-  │  │  ├─ · ○ Web Search  [I · Awakened]  (↑ see above)
-  │  │  ├─ · ○ Parse HTML  [I · Awakened]
-  │  │  └─ · ○ Extract Entities  [I · Awakened]
-  │  ├─ · ○ Extract Entities  [I · Awakened]  (↑ see above)
-  │  └─ · ○ Embed Text  [I · Awakened]
-  └─ · ◇ Ghostwrite  [IV · Hardened]  ← Research · Write Report · Audience Model
-     ├─ · ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
-     ├─ · ○ Write Report  [I · Awakened]
-     └─ · ○ Audience Model  [I · Awakened]
+· ◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
+  ├─ · ◇ /research  [III]
+  │  ├─ · ○ /web-search  [I]
+  │  ├─ · ○ /summarize  [0]
+  │  └─ · ○ /cite-sources  [I]
+  ├─ · ◇ /knowledge-harvest  [IV]
+  │  ├─ · ◇ /web-scrape  [III]
+  │  │  ├─ · ○ /web-search  [I]  (↑ see above)
+  │  │  ├─ · ○ /parse-html  [I]
+  │  │  └─ · ○ /extract-entities  [I]
+  │  ├─ · ○ /extract-entities  [I]  (↑ see above)
+  │  └─ · ○ /embed-text  [I]
+  └─ · ◇ /ghostwrite  [IV]
+     ├─ · ◇ /research  [III]  (↑ see above)
+     ├─ · ○ glincker/readme-generator - Write Report  [I]
+     └─ · ○ /audience-model  [I]
 
-· ◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
-  ├─ ✓ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
-  │  ├─ ✓ ○ Route Intent  [I · Awakened]
-  │  ├─ ✓ ○ Plan and Decompose  [I · Awakened]
-  │  └─ ✓ ○ Tool Select  [I · Awakened]
-  ├─ ✓ ○ Route Intent  [I · Awakened]  (↑ see above)
-  └─ ✓ ○ Tool Select  [I · Awakened]  (↑ see above)
+· ◆ ruvnet/flow-nexus-swarm - Grand Conductor: Multi-Agent Orchestration  [V]
+  ├─ ✓ ◇ /plan-and-execute  [IV]
+  │  ├─ ✓ ○ /route-intent  [I]
+  │  ├─ ✓ ○ /plan-decompose  [I]
+  │  └─ ✓ ○ /tool-select  [I]
+  ├─ ✓ ○ /route-intent  [I]  (↑ see above)
+  └─ ✓ ○ /tool-select  [I]  (↑ see above)
 
-· ◆ True Craftsman: Full-Stack Developer  [V · Transcendent]  ← Code Review Pipeline · Automated Testing · Refactor Code
-  ├─ · ◇ Code Review Pipeline  [III · Evolved]  ← Code Generation · Diff Content · Evaluate Output
-  │  ├─ · ○ Code Generation  [I · Awakened]
-  │  ├─ · ○ Diff Content  [I · Awakened]
-  │  └─ · ○ Evaluate Output  [I · Awakened]
-  ├─ · ◇ Automated Testing  [III · Evolved]  ← Generate Test · Execute Bash · Error Interpretation
-  │  ├─ · ○ Generate Test  [II · Named]
-  │  ├─ · ○ Execute Bash  [I · Awakened]
-  │  └─ · ○ Error Interpretation  [I · Awakened]
-  └─ · ○ Refactor Code  [II · Named]
+· ◆ /full-stack-developer  [V]
+  ├─ · ◇ /code-review-pipeline  [III]
+  │  ├─ · ○ /code-generation  [I]
+  │  ├─ · ○ /diff-content  [I]
+  │  └─ · ○ /evaluate-output  [I]
+  ├─ · ◇ 0xdarkmatter/pytest-patterns - Automated Testing  [III]
+  │  ├─ · ○ upsonic/unittest-generator - Generate Test  [II]
+  │  ├─ · ○ /execute-bash  [I]
+  │  └─ · ○ /error-interpretation  [I]
+  └─ · ○ /refactor-code  [II]
 
-· ◆ True Dragon: Autonomous Scientific Discovery  [V · Transcendent]  ← Hypothesis Generation · Research · Math Reason
-  ├─ · ○ Hypothesis Generation  [II · Named]
-  ├─ · ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ · ○ Web Search  [I · Awakened]
-  │  ├─ · ○ Summarize  [0 · Basic]
-  │  └─ · ○ Cite Sources  [I · Awakened]
-  └─ · ○ Math Reason  [II · Named]
+· ◆ /scientific-discovery  [V]
+  ├─ · ○ /hypothesis-generate  [II]
+  ├─ · ◇ /research  [III]
+  │  ├─ · ○ /web-search  [I]
+  │  ├─ · ○ /summarize  [0]
+  │  └─ · ○ /cite-sources  [I]
+  └─ · ○ /math-reason  [II]
 
-· ◆ True Herald: Real-Time Voice Assistant  [V · Transcendent]  ← Voice Agent · Memory Manage · Plan and Execute
-  ├─ · ◇ Voice Agent  [III · Evolved]  ← Speech to Text · Question Answer · Text to Speech
-  │  ├─ · ○ Speech to Text  [II · Named]
-  │  ├─ · ○ Question Answer  [0 · Basic]
-  │  └─ · ○ Text to Speech  [II · Named]
-  ├─ · ○ Memory Manage  [II · Named]
-  └─ ✓ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
-     ├─ ✓ ○ Route Intent  [I · Awakened]
-     ├─ ✓ ○ Plan and Decompose  [I · Awakened]
-     └─ ✓ ○ Tool Select  [I · Awakened]
+· ◆ /real-time-voice-assistant  [V]
+  ├─ · ◇ /voice-agent  [III]
+  │  ├─ · ○ /speech-to-text  [II]
+  │  ├─ · ○ /question-answer  [0]
+  │  └─ · ○ /text-to-speech  [II]
+  ├─ · ○ /memory-manage  [II]
+  └─ ✓ ◇ /plan-and-execute  [IV]
+     ├─ ✓ ○ /route-intent  [I]
+     ├─ ✓ ○ /plan-decompose  [I]
+     └─ ✓ ○ /tool-select  [I]
 
-· ◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
-  ├─ · ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
-  │  ├─ · ○ Generate SQL  [II · Named]
-  │  ├─ · ○ Data Visualize  [II · Named]
-  │  └─ · ○ Summarize  [0 · Basic]
-  ├─ · ○ Math Reason  [II · Named]
-  └─ · ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-     ├─ · ○ Web Search  [I · Awakened]
-     ├─ · ○ Summarize  [0 · Basic]  (↑ see above)
-     └─ · ○ Cite Sources  [I · Awakened]
+· ◆ /autonomous-data-scientist  [V]
+  ├─ · ◇ /data-analysis  [III]
+  │  ├─ · ○ /generate-sql  [II]
+  │  ├─ · ○ /data-visualize  [II]
+  │  └─ · ○ /summarize  [0]
+  ├─ · ○ /math-reason  [II]
+  └─ · ◇ /research  [III]
+     ├─ · ○ /web-search  [I]
+     ├─ · ○ /summarize  [0]  (↑ see above)
+     └─ · ○ /cite-sources  [I]
 
-· ◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
-  ├─ · ◇ Autonomous Debug  [IV · Hardened]  ← Code Generation · Execute Bash · Error Interpretation
-  │  ├─ · ○ Code Generation  [I · Awakened]
-  │  ├─ · ○ Execute Bash  [I · Awakened]
-  │  └─ · ○ Error Interpretation  [I · Awakened]
-  ├─ · ○ Evaluate Output  [I · Awakened]
-  └─ ✓ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
-     ├─ ✓ ○ Route Intent  [I · Awakened]
-     ├─ ✓ ○ Plan and Decompose  [I · Awakened]
-     └─ ✓ ○ Tool Select  [I · Awakened]
+· ◆ /recursive-self-improvement  [V]
+  ├─ · ◇ devin-ai/autonomous-swe - Autonomous Debug  [IV]
+  │  ├─ · ○ /code-generation  [I]
+  │  ├─ · ○ /execute-bash  [I]
+  │  └─ · ○ /error-interpretation  [I]
+  ├─ · ○ /evaluate-output  [I]
+  └─ ✓ ◇ /plan-and-execute  [IV]
+     ├─ ✓ ○ /route-intent  [I]
+     ├─ ✓ ○ /plan-decompose  [I]
+     └─ ✓ ○ /tool-select  [I]
 
 ```
 

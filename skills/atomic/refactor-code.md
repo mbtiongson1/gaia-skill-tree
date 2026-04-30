@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Refactor Code
+# [II · Intrinsic Skill] Refactor Code
 **ID:** refactor-code  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

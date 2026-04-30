@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Write Report
+# [I · Intrinsic Skill] Write Report
 **ID:** write-report  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

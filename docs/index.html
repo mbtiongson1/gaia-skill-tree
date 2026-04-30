@@ -1084,11 +1084,9 @@
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        const labelText = (state.redPillActive && state.namedMap[skill.id])
+        const labelText = (state.namedMap && state.namedMap[skill.id])
           ? state.namedMap[skill.id]
-          : state.showSlugs
-            ? '/' + skill.id
-            : skill.name;
+          : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
       labelNodes.forEach(({ skill }) => {
@@ -1108,7 +1106,7 @@
             const typeClass = `skill-tooltip-type-${skill.type}`;
             const rm = skill.level ? RANK_META[skill.level] : null;
             const rankPill = rm
-              ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level} ${rm.name}</span>`
+              ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level}</span>`
               : '';
             state.tooltipEl.innerHTML =
               `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +

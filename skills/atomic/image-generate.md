@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Image Generate
+# [II · Intrinsic Skill] Image Generate
 **ID:** image-generate  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Generate Test
+# [II · Intrinsic Skill] Generate Test
 **ID:** generate-test  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Common  
 **Status:** Provisional
 

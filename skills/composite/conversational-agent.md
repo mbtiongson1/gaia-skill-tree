@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Conversational Agent
+# [III · Extra Skill] Conversational Agent
 **ID:** conversational-agent  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

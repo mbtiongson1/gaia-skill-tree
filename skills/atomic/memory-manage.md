@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Memory Manage
+# [II · Intrinsic Skill] Memory Manage
 **ID:** memory-manage  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

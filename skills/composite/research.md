@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Research
+# [III · Extra Skill] Research
 **ID:** research  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 

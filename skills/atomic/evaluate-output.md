@@ -1,7 +1,7 @@
-# [I · Awakened · Intrinsic Skill] Evaluate Output
+# [I · Intrinsic Skill] Evaluate Output
 **ID:** evaluate-output  
 **Type:** Intrinsic Skill  
-**Level:** I · Awakened  
+**Level:** I  
 **Rarity:** Common  
 **Status:** Provisional
 

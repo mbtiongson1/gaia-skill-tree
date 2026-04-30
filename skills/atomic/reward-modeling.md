@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Reward Modeling
+# [II · Intrinsic Skill] Reward Modeling
 **ID:** reward-modeling  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Rare  
 **Status:** Provisional
 

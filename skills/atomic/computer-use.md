@@ -1,7 +1,7 @@
-# [II · Named · Intrinsic Skill] Computer Use
+# [II · Intrinsic Skill] Computer Use
 **ID:** computer-use  
 **Type:** Intrinsic Skill  
-**Level:** II · Named  
+**Level:** II  
 **Rarity:** Rare  
 **Status:** Provisional
 

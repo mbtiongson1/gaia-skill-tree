@@ -1,7 +1,7 @@
-# [0 · Basic · Intrinsic Skill] Question Answer
+# [0 · Intrinsic Skill] Question Answer
 **ID:** question-answer  
 **Type:** Intrinsic Skill  
-**Level:** 0 · Basic  
+**Level:** 0  
 **Rarity:** Common  
 **Status:** Provisional
 

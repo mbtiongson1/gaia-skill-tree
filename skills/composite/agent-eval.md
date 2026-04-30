@@ -1,7 +1,7 @@
-# [III · Evolved · Extra Skill] Agent Evaluation
+# [III · Extra Skill] Agent Evaluation
 **ID:** agent-eval  
 **Type:** Extra Skill  
-**Level:** III · Evolved  
+**Level:** III  
 **Rarity:** Uncommon  
 **Status:** Provisional
 
