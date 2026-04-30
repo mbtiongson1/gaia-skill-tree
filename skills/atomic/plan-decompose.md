@@ -18,6 +18,9 @@ _None._
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tree of Thought](../composite/tree-of-thought.md)
 - [Workflow Automation](../composite/workflow-automation.md)
+- [PRD Generation](../composite/prd-generation.md)
+- [Vertical Slice Planning](../composite/vertical-slice-planning.md)
+- [Design Review](../composite/design-review.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -20,6 +20,7 @@ Conducts multi-source information gathering, synthesis, and citation for a given
 - [Ghostwrite](../composite/ghostwrite.md)
 - [Registry Curation](../composite/registry-curation.md)
 - [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
+- [Literature Review](../composite/literature-review.md)
 
 ## Fusion Condition
 _None specified._

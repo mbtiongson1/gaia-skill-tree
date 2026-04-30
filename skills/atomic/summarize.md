@@ -17,6 +17,7 @@ _None._
 - [Research](../composite/research.md)
 - [Document Analyst](../composite/document-analyst.md)
 - [Data Analysis](../composite/data-analysis.md)
+- [Literature Review](../composite/literature-review.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

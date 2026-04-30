@@ -18,6 +18,7 @@ _None._
 - [Code Review Pipeline](../composite/code-review-pipeline.md)
 - [Registry Curation](../composite/registry-curation.md)
 - [Tool Creation](../composite/tool-creation.md)
+- [ML Pipeline](../composite/ml-pipeline.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

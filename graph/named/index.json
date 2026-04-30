@@ -49,6 +49,28 @@
         "links": {
           "github": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md"
         }
+      },
+      {
+        "id": "mattpocock/tdd",
+        "name": "TDD",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "test-driven-development",
+        "status": "named",
+        "level": "III",
+        "description": "Enforces strict vertical-slice TDD \u2014 one test then one implementation at a time \u2014 explicitly blocking horizontal slicing (all tests first, then all code). Tests verify behaviour through public interfaces only; mocking internal collaborators is treated as an anti-pattern.",
+        "title": "Vertical-Slice TDD",
+        "catalogRef": "mattpocock-tdd",
+        "tags": [
+          "tdd",
+          "red-green-refactor",
+          "vertical-slicing",
+          "tracer-bullet",
+          "public-interface-testing"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md"
+        }
       }
     ],
     "document-editing": [
@@ -73,6 +95,28 @@
         "links": {
           "github": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md"
         }
+      },
+      {
+        "id": "mattpocock/edit-article",
+        "name": "Edit Article",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "document-editing",
+        "status": "named",
+        "level": "II",
+        "description": "Edits articles by first sectioning them as a DAG of information dependencies, confirming the section order, then rewriting each section for clarity and flow with a 240-character-per-paragraph constraint.",
+        "title": "The Section-by-Section Rewrite",
+        "catalogRef": "mattpocock-edit-article",
+        "tags": [
+          "article-editing",
+          "prose-rewrite",
+          "information-dag",
+          "section-structure",
+          "clarity"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/personal/edit-article/SKILL.md"
+        }
       }
     ],
     "tool-creation": [
@@ -95,6 +139,28 @@
         ],
         "links": {
           "github": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md"
+        }
+      },
+      {
+        "id": "mattpocock/write-a-skill",
+        "name": "Write a Skill",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "tool-creation",
+        "status": "named",
+        "level": "III",
+        "description": "Guides creation of new agent skills through a structured requirements interview, then produces a SKILL.md with a trigger-aware description, progressive-disclosure layout, and optional bundled scripts or reference files \u2014 ready for installation in any Claude Code, Cursor, or Codex CLI skills directory.",
+        "title": "The Skill Scaffolder",
+        "catalogRef": "mattpocock-write-a-skill",
+        "tags": [
+          "skill-authoring",
+          "meta-agent",
+          "claude-code",
+          "skill-scaffolding",
+          "progressive-disclosure"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md"
         }
       }
     ],
@@ -119,6 +185,28 @@
         ],
         "links": {
           "github": "https://github.com/cognition-labs/devin"
+        }
+      },
+      {
+        "id": "mattpocock/diagnose",
+        "name": "Diagnose",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "autonomous-debug",
+        "status": "named",
+        "level": "II",
+        "description": "Drives a rigorous five-phase debugging discipline \u2014 build a feedback loop, minimise, hypothesise, instrument, fix and regression-test \u2014 refusing to proceed until a fast deterministic pass/fail signal exists. Applies to hard bugs and performance regressions.",
+        "title": "The Disciplined Diagnosis Loop",
+        "catalogRef": "mattpocock-diagnose",
+        "tags": [
+          "debugging",
+          "diagnosis",
+          "feedback-loop",
+          "regression",
+          "root-cause-analysis"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md"
         }
       }
     ],
@@ -260,6 +348,175 @@
         }
       }
     ],
+    "design-review": [
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "II",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        }
+      },
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "III",
+        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
+        "title": "The Domain-Aware Interrogator",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        }
+      }
+    ],
+    "refactor-code": [
+      {
+        "id": "mattpocock/improve-codebase-architecture",
+        "name": "Improve Codebase Architecture",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "refactor-code",
+        "status": "named",
+        "level": "III",
+        "description": "Identifies architectural deepening opportunities in a codebase \u2014 shallow modules with high interface-to-implementation ratios \u2014 using domain-glossary vocabulary and the deletion test, then grills the developer on the chosen candidate to design a deep-module replacement with better locality and testability.",
+        "title": "The Depth Seeker",
+        "catalogRef": "mattpocock-improve-codebase-architecture",
+        "tags": [
+          "architecture-review",
+          "deep-modules",
+          "refactoring",
+          "locality",
+          "testability",
+          "deletion-test"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md"
+        }
+      }
+    ],
+    "vertical-slice-planning": [
+      {
+        "id": "mattpocock/to-issues",
+        "name": "To Issues",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "vertical-slice-planning",
+        "status": "named",
+        "level": "III",
+        "description": "Breaks a plan, spec, or PRD into independently-grabbable GitHub issues as tracer-bullet vertical slices that each cut through all integration layers end-to-end. Classifies each slice HITL or AFK, maps dependency chains, quizzes the user on granularity, and publishes structured issues with acceptance criteria in dependency order.",
+        "title": "The Vertical Slicer",
+        "catalogRef": "mattpocock-to-issues",
+        "tags": [
+          "vertical-slicing",
+          "issue-decomposition",
+          "tracer-bullet",
+          "hitl",
+          "afk",
+          "acceptance-criteria"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md"
+        }
+      }
+    ],
+    "prd-generation": [
+      {
+        "id": "mattpocock/to-prd",
+        "name": "To PRD",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "prd-generation",
+        "status": "named",
+        "level": "II",
+        "description": "Synthesises the current conversation context and codebase knowledge into a fully-structured PRD \u2014 problem statement, extensive numbered user stories, implementation decisions (modules, interfaces, schema), testing decisions, and out-of-scope items \u2014 then publishes it to the project issue tracker.",
+        "title": "The PRD Synthesiser",
+        "catalogRef": "mattpocock-to-prd",
+        "tags": [
+          "prd",
+          "requirements",
+          "user-stories",
+          "product-management",
+          "issue-tracker"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md"
+        }
+      }
+    ],
+    "issue-triage": [
+      {
+        "id": "mattpocock/triage",
+        "name": "Triage",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "issue-triage",
+        "status": "named",
+        "level": "III",
+        "description": "Moves GitHub issues through a two-category (bug/enhancement) \u00d7 five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
+        "title": "The State-Machine Triager",
+        "catalogRef": "mattpocock-triage",
+        "tags": [
+          "issue-triage",
+          "state-machine",
+          "bug-reproduction",
+          "agent-brief",
+          "github-issues"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
+        }
+      }
+    ],
+    "code-explain": [
+      {
+        "id": "mattpocock/zoom-out",
+        "name": "Zoom Out",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "code-explain",
+        "status": "named",
+        "level": "II",
+        "description": "Signals the agent to ascend one layer of abstraction and produce a map of all relevant modules, callers, and domain-glossary terms in the unfamiliar code area, without explaining implementation details.",
+        "title": "The Abstraction Lift",
+        "catalogRef": "mattpocock-zoom-out",
+        "tags": [
+          "code-navigation",
+          "abstraction",
+          "module-map",
+          "domain-glossary",
+          "codebase-orientation"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/zoom-out/SKILL.md"
+        }
+      }
+    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -387,6 +644,19 @@
     ],
     "martin-stepanoski": [
       "martin-stepanoski/nielsen-heuristics-audit"
+    ],
+    "mattpocock": [
+      "mattpocock/diagnose",
+      "mattpocock/edit-article",
+      "mattpocock/grill-me",
+      "mattpocock/grill-with-docs",
+      "mattpocock/improve-codebase-architecture",
+      "mattpocock/tdd",
+      "mattpocock/to-issues",
+      "mattpocock/to-prd",
+      "mattpocock/triage",
+      "mattpocock/write-a-skill",
+      "mattpocock/zoom-out"
     ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"

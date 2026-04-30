@@ -24,6 +24,7 @@
 | ◇ Conversational Agent | Extra Skill | III | Uncommon | Provisional |
 | ◇ Data Analysis | Extra Skill | III | Uncommon | Provisional |
 | ○ Data Visualize | Intrinsic Skill | II | Common | Provisional |
+| ◇ Design Review | Extra Skill | III | Rare | Provisional |
 | ○ Detect Anomaly | Intrinsic Skill | II | Uncommon | Provisional |
 | ○ Diff Content | Intrinsic Skill | I | Common | Provisional |
 | ◇ Document Analyst | Extra Skill | III | Uncommon | Provisional |
@@ -49,11 +50,14 @@
 | ○ Hypothesis Generation | Intrinsic Skill | II | Rare | Provisional |
 | ○ Image Caption | Intrinsic Skill | II | Uncommon | Provisional |
 | ○ Image Generate | Intrinsic Skill | II | Uncommon | Provisional |
+| ○ Issue Triage | Intrinsic Skill | IV | Uncommon | Provisional |
 | ◇ Knowledge Graph Construction | Extra Skill | III | Uncommon | Provisional |
 | ◇ Knowledge Harvest | Extra Skill | IV | Rare | Provisional |
+| ◇ Literature Review | Extra Skill | IV | Uncommon | Provisional |
 | ○ Logical Inference | Intrinsic Skill | I | Uncommon | Provisional |
 | ○ Math Reason | Intrinsic Skill | II | Uncommon | Provisional |
 | ○ Memory Manage | Intrinsic Skill | II | Uncommon | Provisional |
+| ◇ ML Pipeline | Extra Skill | IV | Rare | Provisional |
 | ◇ Multi-Agent Debate | Extra Skill | IV | Rare | Provisional |
 | ◆ Grand Conductor: Multi-Agent Orchestration | Ultimate Skill | V | Divine | Provisional |
 | ◇ Multimodal Reasoning | Extra Skill | III | Rare | Provisional |
@@ -64,6 +68,7 @@
 | ○ Parse PDF | Intrinsic Skill | I | Common | Provisional |
 | ◇ Plan and Execute | Extra Skill | IV | Rare | Provisional |
 | ○ Plan and Decompose | Intrinsic Skill | I | Common | Provisional |
+| ◇ PRD Generation | Extra Skill | IV | Uncommon | Provisional |
 | ○ Prompt Injection Defense | Intrinsic Skill | III | Uncommon | Provisional |
 | ◇ Prompt Optimization | Extra Skill | IV | Uncommon | Provisional |
 | ○ Question Answer | Intrinsic Skill | 0 | Common | Provisional |
@@ -79,6 +84,8 @@
 | ○ Reward Modeling | Intrinsic Skill | II | Rare | Provisional |
 | ○ Route Intent | Intrinsic Skill | I | Common | Provisional |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | V | Divine | Provisional |
+| ○ Scientific Visualization | Intrinsic Skill | II | Uncommon | Provisional |
+| ◇ Scientific Writing | Extra Skill | III | Uncommon | Provisional |
 | ○ Score Relevance | Intrinsic Skill | I | Common | Provisional |
 | ○ Self-Consistency | Intrinsic Skill | IV | Rare | Provisional |
 | ○ Self-Critique | Intrinsic Skill | I | Uncommon | Provisional |
@@ -86,6 +93,7 @@
 | ○ Sentiment Analysis | Intrinsic Skill | 0 | Common | Provisional |
 | ○ Skill Discovery | Intrinsic Skill | 0 | Common | Provisional |
 | ○ Speech to Text | Intrinsic Skill | II | Common | Provisional |
+| ○ Statistical Analysis | Intrinsic Skill | III | Uncommon | Provisional |
 | ○ Structured Output Generation | Intrinsic Skill | I | Common | Provisional |
 | ○ Summarize | Intrinsic Skill | 0 | Common | Provisional |
 | ○ Test-Driven Development | Intrinsic Skill | 0 | Uncommon | Provisional |
@@ -100,6 +108,7 @@
 | ◇ Translation Pipeline | Extra Skill | III | Uncommon | Provisional |
 | ◇ Tree of Thought | Extra Skill | IV | Rare | Provisional |
 | ○ UX Audit | Intrinsic Skill | 0 | Uncommon | Provisional |
+| ◇ Vertical Slice Planning | Extra Skill | III | Uncommon | Provisional |
 | ○ Visual Question Answering | Intrinsic Skill | III | Uncommon | Provisional |
 | ◇ Voice Agent | Extra Skill | III | Uncommon | Provisional |
 | ◇ Web Scrape | Extra Skill | III | Uncommon | Provisional |

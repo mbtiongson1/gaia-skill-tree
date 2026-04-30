@@ -20,6 +20,7 @@ _None._
 - [Prompt Optimization](../composite/prompt-optimization.md)
 - [Guardrails](../composite/guardrails.md)
 - [Agent Evaluation](../composite/agent-eval.md)
+- [Design Review](../composite/design-review.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

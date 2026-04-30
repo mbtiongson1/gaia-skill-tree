@@ -1,0 +1,32 @@
+---
+id: mattpocock/triage
+name: Triage
+contributor: mattpocock
+origin: true
+genericSkillRef: issue-triage
+status: named
+title: "The State-Machine Triager"
+catalogRef: mattpocock-triage
+level: "III"
+description: Moves GitHub issues through a two-category (bug/enhancement) × five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.
+links:
+  github: https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md
+tags:
+  - issue-triage
+  - state-machine
+  - bug-reproduction
+  - agent-brief
+  - github-issues
+createdAt: "2026-04-30"
+updatedAt: "2026-04-30"
+---
+
+## Overview
+
+Triage implements a deterministic triage state machine on top of a project issue tracker. The agent reads all existing triage notes to avoid re-asking resolved questions, attempts bug reproduction via code tracing and test execution before any grilling, and applies exactly one category role and one state role per issue.
+
+For `ready-for-agent` issues the skill produces a structured agent brief. For `wontfix` enhancements it writes a `.out-of-scope/*.md` knowledge-base entry and links to it before closing. All comments must start with the AI-generation disclaimer. The maintainer can invoke quick state overrides bypassing grilling.
+
+## Origin
+
+First published by @mattpocock (Matt Pocock, Total TypeScript). This is the origin implementation for the `issue-triage` skill bucket.

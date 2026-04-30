@@ -1,0 +1,28 @@
+# [II · Intrinsic Skill] Scientific Visualization
+**ID:** scientific-visualization  
+**Type:** Intrinsic Skill  
+**Level:** II  
+**Rarity:** Uncommon  
+**Status:** Provisional
+
+---
+
+## Description
+Creates publication-ready scientific figures with multi-panel layouts, statistical annotations, colorblind-safe palettes, and journal-specific formatting (Nature, Science, Cell) using matplotlib, seaborn, and plotly.
+
+## Prerequisites
+_None._
+
+## Unlocks
+- [Scientific Writing](../composite/scientific-writing.md)
+
+## Evidence
+| Class | Source | Evaluator | Date |
+|---|---|---|---|
+| B | https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/scientific-skills/scientific-visualization/SKILL.md | mbtiongson1 | 2026-04-30 |
+
+## Known Agents
+_None verified yet._
+
+---
+*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

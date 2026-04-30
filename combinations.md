@@ -12,6 +12,7 @@
 | ◇ Content Moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Conversational Agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
 | ◇ Data Analysis | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
+| ◇ Design Review | Extra Skill | Evaluate Output, Plan and Decompose | III |  |
 | ◇ Document Analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
 | ◇ Document Digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III |  |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
@@ -21,10 +22,13 @@
 | ◇ Guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | III | Requires a defined policy schema and an evaluation loop. |
 | ◇ Knowledge Graph Construction | Extra Skill | Extract Entities, Logical Inference | III |  |
 | ◇ Knowledge Harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV |  |
+| ◇ Literature Review | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
+| ◇ ML Pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |
 | ◇ Multi-Agent Debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV |  |
 | ◆ Grand Conductor: Multi-Agent Orchestration | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V | Requires extensive multi-system validation before level advancement. |
 | ◇ Multimodal Reasoning | Extra Skill | Image Caption, Question Answer, Logical Inference | III | Requires vision-language model capability. |
 | ◇ Plan and Execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | IV |  |
+| ◇ PRD Generation | Extra Skill | Write Report, Plan and Decompose | IV |  |
 | ◇ Prompt Optimization | Extra Skill | Evaluate Output, Generate Text | IV |  |
 | ◇ RAG Pipeline | Extra Skill | Retrieve, Chunk Document, Embed Text, Score Relevance, Tokenize, Rank | III |  |
 | ◇ ReAct Reasoning | Extra Skill | Plan and Decompose, Tool Use | III |  |
@@ -33,11 +37,13 @@
 | ◇ Registry Curation | Extra Skill | Research, Code Generation, Execute Bash | IV | Requires write access to the canonical graph and a passing validation suite. |
 | ◇ Research | Extra Skill | Web Search, Summarize, Cite Sources | III |  |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | Hypothesis Generation, Research, Math Reason | V | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
+| ◇ Scientific Writing | Extra Skill | Write Report, Cite Sources, Scientific Visualization | III |  |
 | ◇ Text-to-SQL Pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | III | Requires schema context in prompt. |
 | ◇ Tool Chaining | Extra Skill | Tool Use, Tool Select | III | Requires at least two distinct tools whose data schemas are compatible for chaining. |
 | ◇ Tool Creation | Extra Skill | Code Generation, Tool Use | IV |  |
 | ◇ Translation Pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | III |  |
 | ◇ Tree of Thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | IV |  |
+| ◇ Vertical Slice Planning | Extra Skill | Plan and Decompose, Route Intent | III |  |
 | ◇ Voice Agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III | Requires real-time audio I/O or audio file access. |
 | ◇ Web Scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III | Structured output mode required. |
 | ◇ Workflow Automation | Extra Skill | Plan and Decompose, Tool Use, API Call | IV |  |

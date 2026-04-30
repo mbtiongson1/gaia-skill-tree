@@ -44,7 +44,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   │  ├─ ○ upsonic/unittest-generator - Generate Test  [II]
   │  ├─ ○ /execute-bash  [I]
   │  └─ ○ /error-interpretation  [I]
-  └─ ○ /refactor-code  [II]
+  └─ ○ mattpocock/improve-codebase-architecture - Refactor Code  [II]
 
 ◆ /scientific-discovery  [V]
 ─────────────────────────────────────────────────────────────────

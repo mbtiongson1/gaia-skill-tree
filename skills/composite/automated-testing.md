@@ -17,6 +17,7 @@ Generates test suites, executes them in a sandbox, interprets failures, and iter
 
 ## Unlocks
 - [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)
+- [ML Pipeline](../composite/ml-pipeline.md)
 
 ## Fusion Condition
 _None specified._

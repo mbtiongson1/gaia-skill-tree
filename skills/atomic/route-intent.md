@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Plan and Execute](../composite/plan-and-execute.md)
 - [Conversational Agent](../composite/conversational-agent.md)
+- [Vertical Slice Planning](../composite/vertical-slice-planning.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -15,6 +15,8 @@ _None._
 
 ## Unlocks
 - [Ghostwrite](../composite/ghostwrite.md)
+- [PRD Generation](../composite/prd-generation.md)
+- [Scientific Writing](../composite/scientific-writing.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
