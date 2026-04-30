@@ -668,6 +668,32 @@
 <span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
       </div>
     </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--ultimate);color:#000">✦</div>
+      <div>
+        <h3>Claim an unclaimed Ultimate skill</h3>
+        <p>Five Ultimate skills show <code style="color:var(--ultimate)">◆ /skill-id [Unclaimed ✦]</code> in the registry — no contributor has implemented them yet. Build one, push it through intake review, then name it to claim the title slot and become the origin contributor:</p>
+        <pre><span class="comment"># Find unclaimed ultimates — look for [Unclaimed ✦] in registry.md</span>
+<span class="comment"># Build your implementation, then:</span>
+<span class="cmd">gaia push</span>                    <span class="comment"># submit intake record</span>
+<span class="comment"># After maintainer marks it awakened:</span>
+<span class="cmd">gaia name</span> intake/skill-batches/batch-xyz.json 0 <span class="str">yourname/skill-name</span>
+<span class="comment"># The seed title becomes visible once your PR merges</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate));font-size:.75rem">◆+</div>
+      <div>
+        <h3>Propose a new Ultimate skill</h3>
+        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
+        <pre><span class="comment"># In graph/gaia.json — add your skill with:</span>
+<span class="comment">#   "type": "ultimate"</span>
+<span class="comment">#   "prerequisites": ["skill-a", "skill-b", "skill-c"]</span>
+<span class="comment">#   "evidence": [... 3× Class A or B sources ...]</span>
+<span class="comment">#   "status": "provisional"  (maintainers set to validated at merge)</span>
+<span class="cmd">python scripts/validate.py</span>   <span class="comment"># must pass before opening PR</span></pre>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -707,6 +733,7 @@
     <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
     <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
     <div class="gloss-item"><div class="gloss-term">gaia embed</div><div class="gloss-def">Pre-computes local semantic vectors so `gaia search` works by meaning.</div></div>
+    <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill with a hidden seed title but no contributor implementation yet — open for the taking.</div></div>
   </div>
 </section>
 
