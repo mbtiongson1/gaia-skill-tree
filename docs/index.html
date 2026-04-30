@@ -940,7 +940,7 @@
       ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
     }
     function shouldLabel(skill) {
-      if (state.redPillActive && NAMED_LEVELS.has(skill.level)) return true;
+      if (state.redPillActive && state.namedMap[skill.id]) return true;
       if (state.labelMode === 'none') return false;
       if (state.labelMode === 'all') return true;
       if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
@@ -998,7 +998,7 @@
         } else {
           targetVis = 1.0;
         }
-        if (state.redPillActive && !NAMED_LEVELS.has(skill.level)) targetVis = Math.min(targetVis, 0.07);
+        if (state.redPillActive && !state.namedMap[skill.id]) targetVis = Math.min(targetVis, 0.07);
         if (state.nodeAlphas[skill.id] === undefined) state.nodeAlphas[skill.id] = targetVis;
         state.nodeAlphas[skill.id] += (targetVis - state.nodeAlphas[skill.id]) * 0.15;
       });
@@ -1046,7 +1046,7 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         if (skill.level === 'VI') {
           drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
-        } else if (state.redPillActive && NAMED_LEVELS.has(skill.level)) {
+        } else if (state.redPillActive && state.namedMap[skill.id]) {
           drawNodeNamed(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis);
         } else {
           drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
@@ -1061,7 +1061,7 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
         if (labelAlpha < 0.04) return;
-        const col = (state.redPillActive && NAMED_LEVELS.has(skill.level))
+        const col = (state.redPillActive && state.namedMap[skill.id])
           ? { rgb:'239,68,68' }
           : (PALETTE[skill.type] || PALETTE.atomic);
         const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
