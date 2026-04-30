@@ -12,80 +12,29 @@
 
 Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
 
-The snapshot below shows the upgrade-path structure. Each legendary traces
-back through its full prerequisite chain.
+The snapshot below shows two example upgrade paths from the full graph.
 
 ```
 GAIA SKILL TREE  v2.0.0
-═════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════
 
-◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
-─────────────────────────────────────────────────────────────────
+◆ karpathy/autoresearch - Wisdom King  [VI]
   ├─ ◇ /research  [III]
   │  ├─ ○ /web-search  [I]
   │  ├─ ○ /summarize  [0]
   │  └─ ○ /cite-sources  [I]
   ├─ ◇ /knowledge-harvest  [IV]
-  │  ├─ ◇ /web-scrape  [III]
-  │  │  ├─ ○ /web-search  [I]  (↑ see above)
-  │  │  ├─ ○ /parse-html  [I]
-  │  │  └─ ○ /extract-entities  [I]
-  │  ├─ ○ /extract-entities  [I]  (↑ see above)
+  │  ├─ ◇ /web-scrape  [III] ...
   │  └─ ○ /embed-text  [I]
-  └─ ◇ /ghostwrite  [IV]
-     ├─ ◇ /research  [III]  (↑ see above)
-     ├─ ○ glincker/readme-generator - Write Report  [I]
-     └─ ○ /audience-model  [I]
-
-◆ ruvnet/flow-nexus-swarm - Grand Conductor: Multi-Agent Orchestration  [V]
-─────────────────────────────────────────────────────────────────
-  ├─ ◇ /plan-and-execute  [IV]
-  │  ├─ ○ /route-intent  [I]
-  │  ├─ ○ /plan-decompose  [I]
-  │  └─ ○ /tool-select  [I]
-  ├─ ○ /route-intent  [I]  (↑ see above)
-  └─ ○ /tool-select  [I]  (↑ see above)
-
-...
-
-◆ /autonomous-data-scientist  [V]
-─────────────────────────────────────────────────────────────────
-  ├─ ◇ /data-analysis  [III]
-  │  ├─ ○ /generate-sql  [II]
-  │  ├─ ○ /data-visualize  [II]
-  │  └─ ○ /summarize  [0]
-  ├─ ○ /math-reason  [II]
-  └─ ◇ /research  [III]
-     ├─ ○ /web-search  [I]
-     ├─ ○ /summarize  [0]  (↑ see above)
-     └─ ○ /cite-sources  [I]
+  └─ ◇ /ghostwrite  [IV] ...
 
 ◆ /recursive-self-improvement  [V]
-─────────────────────────────────────────────────────────────────
   ├─ ◇ /autonomous-debug  [IV]
   │  ├─ ○ /code-generation  [I]
   │  ├─ ○ /execute-bash  [I]
   │  └─ ○ /error-interpretation  [I]
   ├─ ○ /evaluate-output  [I]
-  └─ ◇ /plan-and-execute  [IV]
-     ├─ ○ /route-intent  [I]
-     ├─ ○ /plan-decompose  [I]
-     └─ ○ /tool-select  [I]
-
-══════════════════════════════════════════════════════════════════════
-Pure / Undeveloped — basic skills not yet wired into any upgrade path.
-══════════════════════════════════════════════════════════════════════
-
-  ○ /code-execution  [II · Named]
-  ○ mattpocock/zoom-out - Code Explain  [II · Named]
-  ○ /context-compression  [III · Evolved]
-  ○ /few-shot-learning  [IV · Hardened]
-  ○ /fine-tune  [IV · Hardened]
-  ○ mattpocock/triage - Issue Triage  [IV · Hardened]
-  ○ /prompt-injection-defense  [III · Evolved]
-  ○ /self-consistency  [IV · Hardened]
-  ○ /semantic-cache  [IV · Hardened]
-  ... (21 total)
+  └─ ◇ /plan-and-execute  [IV] ...
 
 → Full graph: tree.md
 ```
@@ -135,21 +84,23 @@ Skills level up through evidence, not declaration:
 ## Quickstart
 
 ```bash
+# ── Works on Windows, macOS, and Linux — copy-paste the whole block ──────
+
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 
-# 1. Install the gaia CLI
-pip install -e .
+pip install -e ".[embeddings]"  # install CLI + semantic search support
 
-# 2. Enable semantic search (strongly recommended)
-pip install -e ".[embeddings]"
-gaia embed                      # ~30 seconds — run once, re-run when the graph changes
+gaia init                        # auto-detects your GitHub username and
+                                 # skill files (AGENTS.md, SKILLS.md,
+                                 # .gemini/, .claude/skills/, etc.)
 
-# 3. Validate the canonical graph
-gaia --registry . scan
+gaia embed                       # build vector index (~30 s, run once)
 
-# 4. Regenerate all skill pages, registry, tree, and user trees
-python3 scripts/generateProjections.py
+gaia --registry . scan           # detect skills in your repo and show
+                                 # available fusions
+
+gaia --registry . appraise       # inspect your most recent skill card
 ```
 
 ## Named Skills Browser
@@ -185,14 +136,15 @@ Then `gaia` works from any directory — no path prefix needed.
 ### Project setup
 
 ```bash
-gaia init --user your-github-username --scan AGENTS.md --scan scripts
+gaia init                        # auto-detects GitHub username and skill files
+gaia init --user your-username   # override the detected username
 ```
 
 ### Commands
 
 | Command | What it does |
 |---|---|
-| `gaia init` | Creates `.gaia/config.json` in the current project. Supports `--user`, `--registry-ref`, and repeated `--scan` flags. |
+| `gaia init` | Creates `.gaia/config.json`. Auto-detects GitHub username from git remote and skill files (AGENTS.md, SKILLS.md, .claude/skills/, .gemini/, etc.). Supports `--user`, `--registry-ref`, and `--scan` overrides. |
 | `gaia doctor` | Checks CLI/config/registry health and reports missing setup pieces. |
 | `gaia scan` | Scans configured paths and reports detected canonical skills and possible fusions. |
 | `gaia push --dry-run` | Prints the batch intake JSON without writing files. |
@@ -206,7 +158,7 @@ gaia init --user your-github-username --scan AGENTS.md --scan scripts
 | `gaia embed` | Pre-computes embeddings for all skills. Run once after `pip install -e ".[embeddings]"`, re-run when the graph changes. |
 | `gaia search <query>` | Semantic search across generic and named skills (requires embeddings). |
 | `gaia graph` | Generates `graph/gaia.svg` from the canonical registry and opens it in your browser. |
-| `gaia graph -o /tmp/gaia.svg --no-open` | Writes a graph image to a custom path without opening it. |
+| `gaia graph -o graph/gaia.svg --no-open` | Writes a graph image to a custom path without opening it. |
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
@@ -220,7 +172,7 @@ gaia init --user your-github-username --scan AGENTS.md --scan scripts
 gaia graph                                              # generate and open SVG
 gaia graph -o graph/gaia.svg --no-open                 # write to specific path
 gaia graph --format json -o graph/render/latest.json   # browser-friendly JSON
-python3 scripts/exportGexf.py                          # Gephi/Cytoscape GEXF
+python scripts/exportGexf.py                           # Gephi/Cytoscape GEXF
 ```
 
 ### Typical workflow

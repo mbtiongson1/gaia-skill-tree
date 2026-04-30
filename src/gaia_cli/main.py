@@ -39,6 +39,63 @@ from gaia_cli.hook import hook_entry
 
 DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
 
+# Known skill-convention files/dirs, in priority order
+_SKILL_CANDIDATES = [
+    'AGENTS.md',                         # OpenAI Codex
+    'SKILLS.md',                         # generic
+    'SKILL.md',                          # single named-skill file
+    'agents.md',
+    'skills.md',
+    '.claude/skills',                    # Claude Code skill directory
+    '.gemini',                           # Gemini skill directory (*.yml inside)
+    '.github/copilot-instructions.md',   # GitHub Copilot
+    'codex.yml',
+    'gemini.yml',
+    '.cursor/rules',                     # Cursor rules directory
+]
+
+
+def _detect_github_username():
+    """Detect GitHub username from git remote URL, email, or display name."""
+    import subprocess
+    import re
+    # Most reliable: parse github.com/USERNAME from origin remote URL
+    try:
+        r = subprocess.run(['git', 'remote', 'get-url', 'origin'],
+                           capture_output=True, text=True, timeout=5)
+        if r.returncode == 0:
+            m = re.search(r'github\.com[:/]([^/]+?)(?:\.git)?(?:/|$)', r.stdout.strip())
+            if m:
+                return m.group(1)
+    except Exception:
+        pass
+    # Fallback: noreply GitHub email (e.g. 12345+username@users.noreply.github.com)
+    try:
+        r = subprocess.run(['git', 'config', 'user.email'],
+                           capture_output=True, text=True, timeout=5)
+        if r.returncode == 0:
+            m = re.match(r'^(?:\d+\+)?([^@]+)@users\.noreply\.github\.com$', r.stdout.strip())
+            if m:
+                return m.group(1)
+    except Exception:
+        pass
+    # Fallback: git display name → slug
+    try:
+        r = subprocess.run(['git', 'config', 'user.name'],
+                           capture_output=True, text=True, timeout=5)
+        if r.returncode == 0:
+            slug = re.sub(r'[^a-zA-Z0-9-]', '', r.stdout.strip().lower().replace(' ', '-'))
+            if slug:
+                return slug
+    except Exception:
+        pass
+    return None
+
+
+def _detect_skill_files():
+    """Return existing skill-related paths in the current working directory."""
+    return [c for c in _SKILL_CANDIDATES if os.path.exists(c)]
+
 
 def init_command(args):
     config_dir = '.gaia'
@@ -48,16 +105,27 @@ def init_command(args):
         print("Gaia is already initialized in this repository.")
         return
 
-    scan_paths = args.scan or ["scripts", "plugin"]
+    # Auto-detect username if not provided
+    username = args.user or _detect_github_username() or "gaiabot"
+
+    # Auto-detect skill files if no --scan flags given
+    if args.scan:
+        scan_paths = args.scan
+    else:
+        detected = _detect_skill_files()
+        scan_paths = detected if detected else ["scripts", "plugin"]
+
     config = {
-        "gaiaUser": args.user or "gaiabot",
+        "gaiaUser": username,
         "gaiaRegistryRef": args.registry_ref or DEFAULT_REGISTRY_REF,
         "scanPaths": scan_paths,
         "autoPromptCombinations": args.auto_prompt_combinations,
     }
-    with open(config_path, 'w') as f:
+    with open(config_path, 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=2)
     print(f"Initialized Gaia configuration at {config_path}")
+    print(f"  user:       {username}")
+    print(f"  scanPaths:  {scan_paths}")
 
 
 def scan_command(args):

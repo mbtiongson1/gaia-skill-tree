@@ -17,6 +17,7 @@ generated_paths=(
   docs/graph/gaia.json
   docs/graph/gaia.gexf
   docs/graph/gaia.svg
+  docs/graph/named/index.json
   docs/tree.md
 )
 
