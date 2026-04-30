@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Prompt Optimization](../composite/prompt-optimization.md)
+- [Release Automation](../composite/release-automation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

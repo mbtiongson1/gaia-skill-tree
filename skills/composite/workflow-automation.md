@@ -16,7 +16,8 @@ Designs, configures, and runs trigger-based multi-step automation pipelines that
 - [API Call](../atomic/api-call.md)
 
 ## Unlocks
-_None._
+- [Release Automation](../composite/release-automation.md)
+- [Deployment Automation](../composite/deployment-automation.md)
 
 ## Fusion Condition
 _None specified._

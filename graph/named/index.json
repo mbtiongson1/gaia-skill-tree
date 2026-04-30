@@ -615,7 +615,149 @@
       }
     ]
   },
-  "awaitingClassification": [],
+  "awaitingClassification": [
+    {
+      "id": "intelligentcode-ai/database-engineer",
+      "name": "Database Engineer",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/database-engineer/SKILL.md",
+      "genericSkillRef": "schema-design",
+      "status": "awakened",
+      "level": "II",
+      "description": "Schema design and query optimization expert across relational, NoSQL, graph, time-series, and data warehouse stores with sub-second response targets.",
+      "tags": [
+        "database",
+        "schema",
+        "sql",
+        "nosql",
+        "graph-db",
+        "time-series",
+        "normalization"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/devops-engineer",
+      "name": "DevOps Engineer",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/devops-engineer/SKILL.md",
+      "genericSkillRef": "deployment-automation",
+      "status": "awakened",
+      "level": "II",
+      "description": "CI/CD pipeline design and deployment automation specialist \u2014 build systems, artifact publishing, environment promotion, and rollback strategies.",
+      "tags": [
+        "cicd",
+        "deployment",
+        "pipeline",
+        "docker",
+        "kubernetes",
+        "terraform",
+        "rollback"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/mcp-client",
+      "name": "MCP Client",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/mcp-client/SKILL.md",
+      "genericSkillRef": "mcp-integration",
+      "status": "awakened",
+      "level": "III",
+      "description": "Portable CLI tool that connects to MCP servers on-demand, enumerates available tools, displays them, and executes calls \u2014 works with any MCP-compatible backend without platform lock-in.",
+      "tags": [
+        "mcp",
+        "model-context-protocol",
+        "tool-integration",
+        "cli"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/parallel-execution",
+      "name": "Parallel Execution",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/parallel-execution/SKILL.md",
+      "genericSkillRef": "parallel-execution",
+      "status": "awakened",
+      "level": "II",
+      "description": "Manages concurrent work item execution with independence verification, queue-based state tracking, and configurable concurrency limits (default 5).",
+      "tags": [
+        "parallelism",
+        "concurrency",
+        "task-execution",
+        "queue"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/release",
+      "name": "Release",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/release/SKILL.md",
+      "genericSkillRef": "release-automation",
+      "status": "awakened",
+      "level": "II",
+      "description": "Automates the full release cycle \u2014 semantic version bump, CHANGELOG update, PR merge, git tag, and GitHub release creation with multiple verification gates.",
+      "tags": [
+        "release",
+        "semver",
+        "changelog",
+        "git-tag",
+        "github-release",
+        "automation"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/requirements-engineer",
+      "name": "Requirements Engineer",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/requirements-engineer/SKILL.md",
+      "genericSkillRef": "requirements-analysis",
+      "status": "awakened",
+      "level": "II",
+      "description": "Business analysis specialist bridging stakeholders and technical teams \u2014 requirements gathering, user story writing, acceptance criteria, and full requirements lifecycle management.",
+      "tags": [
+        "requirements",
+        "brd",
+        "user-stories",
+        "acceptance-criteria",
+        "specification"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/security-engineer",
+      "name": "Security Engineer",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/security-engineer/SKILL.md",
+      "genericSkillRef": "security-audit",
+      "status": "awakened",
+      "level": "II",
+      "description": "Security architecture specialist \u2014 vulnerability assessment, zero-trust design, compliance management, and incident response with severity-classified remediation guidance.",
+      "tags": [
+        "security",
+        "vulnerability",
+        "zero-trust",
+        "compliance",
+        "owasp",
+        "penetration-testing"
+      ]
+    },
+    {
+      "id": "intelligentcode-ai/user-tester",
+      "name": "User Tester",
+      "contributor": "intelligentcode-ai",
+      "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/user-tester/SKILL.md",
+      "genericSkillRef": "e2e-testing",
+      "status": "awakened",
+      "level": "III",
+      "description": "E2E testing specialist with Puppeteer/Playwright automation \u2014 cross-browser validation, full user journey simulation, and visual regression detection.",
+      "tags": [
+        "e2e",
+        "playwright",
+        "puppeteer",
+        "cross-browser",
+        "user-journey",
+        "visual-regression"
+      ]
+    }
+  ],
   "byContributor": {
     "0xdarkmatter": [
       "0xdarkmatter/pytest-patterns"
@@ -635,6 +777,16 @@
     ],
     "gooseworks": [
       "gooseworks/notte-browser"
+    ],
+    "intelligentcode-ai": [
+      "intelligentcode-ai/database-engineer",
+      "intelligentcode-ai/devops-engineer",
+      "intelligentcode-ai/mcp-client",
+      "intelligentcode-ai/parallel-execution",
+      "intelligentcode-ai/release",
+      "intelligentcode-ai/requirements-engineer",
+      "intelligentcode-ai/security-engineer",
+      "intelligentcode-ai/user-tester"
     ],
     "karpathy": [
       "karpathy/autoresearch"

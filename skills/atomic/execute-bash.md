@@ -17,6 +17,8 @@ _None._
 - [Automated Testing](../composite/automated-testing.md)
 - [Autonomous Debug](../composite/autonomous-debug.md)
 - [Registry Curation](../composite/registry-curation.md)
+- [Release Automation](../composite/release-automation.md)
+- [Deployment Automation](../composite/deployment-automation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

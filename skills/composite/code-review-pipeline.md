@@ -17,6 +17,7 @@ Performs automated code review by generating, diffing, and evaluating code chang
 
 ## Unlocks
 - [True Craftsman: Full-Stack Developer](../legendary/full-stack-developer.md)
+- [Security Audit](../composite/security-audit.md)
 
 ## Fusion Condition
 _None specified._
