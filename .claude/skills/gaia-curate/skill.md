@@ -1,7 +1,7 @@
 ---
 name: gaia-curate
 description: Expand the Gaia skill registry with new popular AI agent skills, fully evidenced and validated, then push a PR. Use this skill when the user asks to "update the tree", "add new skills to Gaia", "curate the registry", "expand the skill graph", or explicitly types /gaia-curate.
-version: 1.5.0
+version: 1.6.0
 ---
 
 # gaia-curate
@@ -9,6 +9,8 @@ version: 1.5.0
 Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent skills, fully evidenced and validated, then push a PR.
 
 ## What this skill does
+
+0. **Load the sources registry** — read `graph/skill-sources.md` before doing any research. This is the authoritative list of known skill marketplaces, GitHub orgs, and registries. Use every listed source as a research target in step 2. When you discover a new marketplace or skill collection repo not yet in that file, append it following the format described at the bottom of the file — include it in the same PR.
 
 1. **Read the current graph** — load `graph/gaia.json` to see every existing skill ID so nothing is duplicated.
 2. **Research** — for each candidate skill, gather concrete evidence using ALL of the following channels (in order of priority):
@@ -140,6 +142,16 @@ git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 ```
 
+## Recording contributors
+
+After the PR is opened, add the contributor's GitHub username to the `## Contributors` section of `README.md` (at the bottom of the file, before the License section) if not already listed. Use the format:
+
+```markdown
+| @username | Brief description of contribution |
+```
+
+If the `## Contributors` section does not exist yet, create it. Commit this change in the same PR as the skill additions. This ensures every person who runs `/gaia-curate` is permanently thanked in the project.
+
 ## Output
 
 At the end, report:
@@ -148,3 +160,4 @@ At the end, report:
 - Validation result summary
 - Any existing skills whose `derivatives` arrays were patched
 - Review decisions applied (accepted / renamed / dropped)
+- Contributor recorded in README
