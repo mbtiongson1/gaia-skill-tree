@@ -17,6 +17,7 @@ _None._
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tool Creation](../composite/tool-creation.md)
 - [Workflow Automation](../composite/workflow-automation.md)
+- [Tool Chaining](../composite/tool-chaining.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

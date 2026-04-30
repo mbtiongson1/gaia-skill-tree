@@ -18,7 +18,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 def main():
-    with open('graph/gaia.json', 'r') as f:
+    with open('graph/gaia.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     timestamp = data.get('generatedAt', datetime.datetime.now().isoformat() + 'Z')

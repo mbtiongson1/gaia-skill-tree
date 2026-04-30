@@ -34,6 +34,7 @@
 | ◇ Research | Extra Skill | Web Search, Summarize, Cite Sources | III |  |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | Hypothesis Generation, Research, Math Reason | V | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Text-to-SQL Pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | III | Requires schema context in prompt. |
+| ◇ Tool Chaining | Extra Skill | Tool Use, Tool Select | III | Requires at least two distinct tools whose data schemas are compatible for chaining. |
 | ◇ Tool Creation | Extra Skill | Code Generation, Tool Use | IV |  |
 | ◇ Translation Pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | III |  |
 | ◇ Tree of Thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | IV |  |

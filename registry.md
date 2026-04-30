@@ -20,6 +20,7 @@
 | ◇ Code Review Pipeline | Extra Skill | III | Uncommon | Provisional |
 | ○ Computer Use | Intrinsic Skill | II | Rare | Provisional |
 | ◇ Content Moderation | Extra Skill | III | Uncommon | Provisional |
+| ○ Context Compression | Intrinsic Skill | III | Common | Provisional |
 | ◇ Conversational Agent | Extra Skill | III | Uncommon | Provisional |
 | ◇ Data Analysis | Extra Skill | III | Uncommon | Provisional |
 | ○ Data Visualize | Intrinsic Skill | II | Common | Provisional |
@@ -63,6 +64,7 @@
 | ○ Parse PDF | Intrinsic Skill | I | Common | Provisional |
 | ◇ Plan and Execute | Extra Skill | IV | Rare | Provisional |
 | ○ Plan and Decompose | Intrinsic Skill | I | Common | Provisional |
+| ○ Prompt Injection Defense | Intrinsic Skill | III | Uncommon | Provisional |
 | ◇ Prompt Optimization | Extra Skill | IV | Uncommon | Provisional |
 | ○ Question Answer | Intrinsic Skill | 0 | Common | Provisional |
 | ◇ RAG Pipeline | Extra Skill | III | Uncommon | Provisional |
@@ -90,6 +92,7 @@
 | ○ Text to Speech | Intrinsic Skill | II | Common | Provisional |
 | ◇ Text-to-SQL Pipeline | Extra Skill | III | Uncommon | Provisional |
 | ○ Tokenize | Intrinsic Skill | 0 | Common | Provisional |
+| ◇ Tool Chaining | Extra Skill | III | Uncommon | Provisional |
 | ◇ Tool Creation | Extra Skill | IV | Rare | Provisional |
 | ○ Tool Select | Intrinsic Skill | I | Common | Provisional |
 | ○ Tool Use | Intrinsic Skill | I | Uncommon | Provisional |
@@ -97,6 +100,7 @@
 | ◇ Translation Pipeline | Extra Skill | III | Uncommon | Provisional |
 | ◇ Tree of Thought | Extra Skill | IV | Rare | Provisional |
 | ○ UX Audit | Intrinsic Skill | 0 | Uncommon | Provisional |
+| ○ Visual Question Answering | Intrinsic Skill | III | Uncommon | Provisional |
 | ◇ Voice Agent | Extra Skill | III | Uncommon | Provisional |
 | ◇ Web Scrape | Extra Skill | III | Uncommon | Provisional |
 | ○ Web Search | Intrinsic Skill | I | Common | Provisional |

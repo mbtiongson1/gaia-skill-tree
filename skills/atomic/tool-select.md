@@ -18,6 +18,7 @@ _None._
 - [ReAct Reasoning](../composite/re-act-reasoning.md)
 - [Tool Use](../atomic/tool-use.md)
 - [Function Calling](../composite/function-calling.md)
+- [Tool Chaining](../composite/tool-chaining.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
