@@ -1,7 +1,7 @@
 ---
 name: gaia-curate
 description: Expand the Gaia skill registry with new popular AI agent skills, fully evidenced and validated, then push a PR. Use this skill when the user asks to "update the tree", "add new skills to Gaia", "curate the registry", "expand the skill graph", or explicitly types /gaia-curate.
-version: 1.4.0
+version: 1.5.0
 ---
 
 # gaia-curate
@@ -19,7 +19,32 @@ Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent ski
    gh search repos --topic="<skill-topic>" --sort=stars --limit=20
    gh search repos "<skill-name> agent" --sort=stars --limit=10
    ```
-   Qualify repos: stars > 50, last commit < 1 year, has README + license. Use the repo URL as Class B evidence. Prefer repos with CI, tests, and clear documentation.
+   Qualify repos: stars > 50, last commit < 1 year, has README + license. Prefer repos with CI, tests, and clear documentation.
+
+   **2a-ii. Inspect repos for individual skill files — do not use a repo URL as evidence until you confirm what is inside it.**
+
+   A repo is often a *collection* of many skills, not a single skill. After finding a qualifying repo, check the common skill directory layouts:
+   ```bash
+   # Check each layout — only the first match that returns results matters
+   gh api repos/{owner}/{repo}/contents/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/.claude/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/codex/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/.codex/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/cursor/skills --jq '.[].name'
+   ```
+   If a skills directory exists, it will return a list of subdirectory names — each is a distinct skill.
+
+   **For each skill subdirectory found:**
+   1. Verify it contains a `SKILL.md` (or `skill.md`) file:
+      ```bash
+      gh api repos/{owner}/{repo}/contents/<skills-dir>/<skill-name>/SKILL.md --jq '.download_url'
+      ```
+   2. Fetch the SKILL.md content to read its description.
+   3. Map it to an existing or new Gaia skill ID.
+   4. Use the **raw file URL** (e.g., `https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Class B evidence `source` — never the repo root URL.
+   5. Treat each discovered skill as a **separate candidate** to evaluate independently (accept/rename/duplicate/reject it on its own merits).
+
+   If no skills directory is found, the repo itself is the evidence source and its URL may be used directly.
 
    **2b. SkillsMP search (10% — Class C evidence):**
    Query the SkillsMP public API for related community skills:

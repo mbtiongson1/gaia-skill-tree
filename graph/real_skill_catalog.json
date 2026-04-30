@@ -221,7 +221,7 @@
       "title": "The Red-Green Oath",
       "description": "Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds.",
       "sourceRepo": "addyosmani/agent-skills",
-      "url": "https://github.com/addyosmani/agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md",
       "mapsToGaia": [
         "test-driven-development"
       ],
@@ -242,7 +242,7 @@
       "title": "The Ten Laws of Sight",
       "description": "Audits a UI against Jakob Nielsen's 10 usability heuristics, scores each, and produces a prioritized remediation report.",
       "sourceRepo": "mastepanoski/claude-skills",
-      "url": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills",
+      "url": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md",
       "mapsToGaia": [
         "ux-audit"
       ],
@@ -368,7 +368,7 @@
       "title": "The Endpoint Scribe",
       "description": "Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format.",
       "sourceRepo": "spring-ai-alibaba/examples",
-      "url": "https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills",
+      "url": "https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md",
       "mapsToGaia": [
         "write-report"
       ],

@@ -10,7 +10,7 @@ catalogRef: martin-stepanoski-nielsen-heuristics-audit
 level: II
 description: Audits a UI interface against Jakob Nielsen's 10 usability heuristics step-by-step, scoring each heuristic, surfacing violations, and producing a prioritized remediation report.
 links:
-  npm: https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills
+  github: https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md
 tags:
   - ux
   - usability

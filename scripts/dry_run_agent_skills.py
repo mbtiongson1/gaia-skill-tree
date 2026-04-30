@@ -4,34 +4,37 @@ Dry-run report: parse a markdown table of agent slash commands,
 classify real vs procedural entries, and show what would be proposed
 for the Gaia skill tree. No files are written.
 """
-import json
 import re
 import sys
+from collections import Counter
 from difflib import SequenceMatcher
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+from gaia_cli.resolver import load_canonical_skills
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
-GAIA_JSON = REPO_ROOT / "graph" / "gaia.json"
 NAMED_INDEX = REPO_ROOT / "graph" / "named" / "index.json"
 
 # Procedural URL pattern — auto-generated entries all share this shape
 PROCEDURAL_URL = re.compile(
     r"https?://github\.com/[a-z]+/agent-skills/tree/main/skills/[^/]+/SKILL\.md"
 )
+MATCH_THRESHOLD = 0.55
 
 
-def load_gaia_skills():
-    with open(GAIA_JSON) as f:
-        graph = json.load(f)
-    return {s["id"] for s in graph["skills"]}
-
-
-def load_named_index():
+def load_named_ids() -> set[str]:
+    """Return the set of all known named skill IDs (contributor/skill-name)."""
+    import json
     if not NAMED_INDEX.exists():
-        return {}
+        return set()
     with open(NAMED_INDEX) as f:
         data = json.load(f)
-    return data.get("buckets", {})
+    return {
+        e["id"]
+        for entries in data.get("buckets", {}).values()
+        for e in entries
+    }
 
 
 def parse_rows(md_path: str):
@@ -57,57 +60,46 @@ def is_real(url: str) -> bool:
     return bool(url) and not PROCEDURAL_URL.match(url)
 
 
-def similarity(a: str, b: str) -> float:
-    return SequenceMatcher(None, a, b).ratio()
-
-
-def find_best_match(cmd_id: str, gaia_ids: set[str]):
-    """Return (best_id, score) for the closest existing skill, or (None, 0)."""
+def find_best_match(cmd_id: str, gaia_ids: set[str]) -> tuple[str | None, float]:
     best_id, best_score = None, 0.0
     for gid in gaia_ids:
-        s = similarity(cmd_id, gid)
+        s = SequenceMatcher(None, cmd_id, gid).ratio()
         if s > best_score:
             best_id, best_score = gid, s
     return best_id, best_score
 
 
 def contributor_slug(owner: str) -> str:
-    """Normalize owner name to a filesystem-safe slug."""
-    slug = owner.lower()
-    slug = re.sub(r"[^a-z0-9]+", "-", slug)
-    return slug.strip("-")
+    return re.sub(r"[^a-z0-9]+", "-", owner.lower()).strip("-")
 
 
 def skill_name(cmd: str) -> str:
-    """Strip leading slash."""
     return cmd.lstrip("/")
 
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python dry_run_agent_skills.py <path/to/10000_Agent_Slash_Skills.md>")
+        print("Usage: python dry_run_agent_skills.py <path/to/skills.md>")
         sys.exit(1)
 
     md_path = sys.argv[1]
-    gaia_ids = load_gaia_skills()
-    named_buckets = load_named_index()
+    gaia_ids = load_canonical_skills(str(REPO_ROOT / "graph" / "gaia.json"))
+    named_ids = load_named_ids()
 
     rows = parse_rows(md_path)
     real = [r for r in rows if is_real(r["url"])]
-    procedural_count = len(rows) - len(real)
 
     print("=" * 60)
     print("DRY RUN: Agent Skills Intake")
     print("=" * 60)
     print(f"Total rows parsed:      {len(rows):,}")
     print(f"Real entries found:     {len(real)}")
-    print(f"Procedural (skipped):   {procedural_count:,}")
+    print(f"Procedural (skipped):   {len(rows) - len(real):,}")
     print()
 
-    seen_generics: dict[str, str] = {}  # skill_id → first cmd that proposed it
+    first_cmd_for_generic: dict[str, str] = {}  # generic_id -> first cmd that claimed it
     new_generics: list[str] = []
     named_proposals: list[dict] = []
-    MATCH_THRESHOLD = 0.55
 
     print("-" * 60)
     print("REAL SKILL PROPOSALS")
@@ -117,12 +109,8 @@ def main():
         cmd_id = skill_name(r["cmd"])
         contrib = contributor_slug(r["owner"])
         named_path = f"graph/named/{contrib}/{cmd_id}.md"
-        already_named = contrib in named_buckets and any(
-            e.get("id") == f"{contrib}/{cmd_id}"
-            for e in named_buckets.get(contrib, [])
-        )
+        already_named = f"{contrib}/{cmd_id}" in named_ids
 
-        # Check exact match first
         if cmd_id in gaia_ids:
             generic_id = cmd_id
             generic_status = "EXISTS (exact match)"
@@ -131,33 +119,31 @@ def main():
             best_id, score = find_best_match(cmd_id, gaia_ids)
             if score >= MATCH_THRESHOLD:
                 generic_id = best_id
-                generic_status = "EXISTS -> maps to '{}' (score {:.2f})".format(best_id, score)
+                generic_status = f"EXISTS -> maps to '{best_id}' (score {score:.2f})"
                 is_new = False
             else:
                 generic_id = cmd_id
-                generic_status = "NEW -- not in gaia.json (closest: '{}' score {:.2f})".format(best_id, score)
+                generic_status = f"NEW -- not in gaia.json (closest: '{best_id}' score {score:.2f})"
                 is_new = True
 
-        if is_new and generic_id not in seen_generics:
-            new_generics.append(generic_id)
-        is_dup = generic_id in seen_generics
+        is_dup = generic_id in first_cmd_for_generic
         if not is_dup:
-            seen_generics[generic_id] = r["cmd"]
+            first_cmd_for_generic[generic_id] = r["cmd"]
+            if is_new:
+                new_generics.append(generic_id)
 
         named_status = "ALREADY EXISTS" if already_named else "WOULD CREATE"
-        dup_suffix = "  ** DUPE: '{}' already maps here".format(seen_generics[generic_id]) if is_dup else ""
+        dup_suffix = f"  ** DUPE of {first_cmd_for_generic[generic_id]}" if is_dup else ""
 
-        print("\n{}. {}  ({})".format(i, r["cmd"], r["owner"]))
-        print("   Source : {}".format(r["url"]))
-        print("   Desc   : {}".format(r["desc"][:90]))
-        print("   Generic: {}  [{}]".format(generic_id, generic_status))
-        print("   Named  : {}  [{}]{}".format(named_path, named_status, dup_suffix))
+        print(f"\n{i}. {r['cmd']}  ({r['owner']})")
+        print(f"   Source : {r['url']}")
+        print(f"   Desc   : {r['desc'][:90]}")
+        print(f"   Generic: {generic_id}  [{generic_status}]")
+        print(f"   Named  : {named_path}  [{named_status}]{dup_suffix}")
 
         named_proposals.append({
             "cmd": r["cmd"],
-            "cmd_id": cmd_id,
             "owner": r["owner"],
-            "contrib": contrib,
             "url": r["url"],
             "desc": r["desc"],
             "generic_id": generic_id,
@@ -166,6 +152,8 @@ def main():
             "already_named": already_named,
         })
 
+    generic_counts = Counter(p["generic_id"] for p in named_proposals)
+
     print()
     print("-" * 60)
     print("SUMMARY")
@@ -173,16 +161,14 @@ def main():
     print(f"Named skill files to create : {sum(1 for p in named_proposals if not p['already_named'])}")
     print(f"Named skills already exist  : {sum(1 for p in named_proposals if p['already_named'])}")
     print(f"New generic skills needed   : {len(new_generics)}")
-    if new_generics:
-        for ng in new_generics:
-            print(f"  + {ng}")
+    for ng in new_generics:
+        print(f"  + {ng}")
     print(f"Existing generics reused    : {len(named_proposals) - len(new_generics)}")
-    dupes = [p for p in named_proposals if p["generic_id"] in seen_generics and
-             seen_generics[p["generic_id"]] != p["cmd"]]
+    dupes = [p for p in named_proposals if generic_counts[p["generic_id"]] > 1]
     if dupes:
         print(f"Duplicate generic mappings  : {len(dupes)}")
         for d in dupes:
-            print("  {} -> same generic as another entry".format(d["cmd"]))
+            print(f"  {d['cmd']} -> generic '{d['generic_id']}' claimed by multiple entries")
     print()
     print("No files were written. Approve the above to proceed.")
 

@@ -1,7 +1,7 @@
 ---
 name: gaia-draft-curate
 description: Review pending Gaia draft skill intake batches and open draft PRs. Classifies each proposed skill (accept/rename/duplicate/needs-evidence/reject) without touching graph/gaia.json. Optionally triggers a promotion PR for accepted skills. Use when the user asks to "check drafts", "review intake batches", "triage pending skills", or explicitly types /gaia-draft-curate.
-version: 1.1.0
+version: 1.2.0
 ---
 
 # gaia-draft-curate
@@ -27,15 +27,33 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    gh search repos "<proposed-skill-name>" --sort=stars --limit=5
    gh search repos --topic="<proposed-skill-id>" --sort=stars --limit=5
    ```
-   b. If repos with >50 stars found, note as "Class B evidence available" with the repo URL.
+   b. **Inspect each qualifying repo for individual skill files.** A repo is often a *collection*, not a single skill. After finding a repo with >50 stars, check the common skill directory layouts:
+   ```bash
+   gh api repos/{owner}/{repo}/contents/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/.claude/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/codex/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/.codex/skills --jq '.[].name'
+   gh api repos/{owner}/{repo}/contents/cursor/skills --jq '.[].name'
+   ```
+   If skill subdirectories exist, for each subdirectory that matches the proposed skill name (fuzzy-match OK):
+   ```bash
+   gh api repos/{owner}/{repo}/contents/<skills-dir>/<skill-name>/SKILL.md --jq '.download_url'
+   ```
+   Fetch the SKILL.md to read its description. **Use the specific file URL** (`https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Class B evidence source — never the repo root URL.
 
-   c. Query SkillsMP for matching community skills:
+   If the repo has *multiple* skill subdirectories and several map to proposed skills in the current batch (or to unproposed skills worth adding), note each one separately in the review table — they each get their own row and decision.
+
+   If no skills directory is found, the repo URL itself is acceptable as Class B evidence.
+
+   c. If a repo-level URL was previously recorded as evidence for this skill (e.g., the `sourceRepo` in the intake batch), **re-resolve it to a specific SKILL.md path** using the steps above before accepting. Flag repo-root URLs as `needs-specific-url` if no SKILL.md can be found.
+
+   d. Query SkillsMP for matching community skills:
    ```
    WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
    ```
-   d. Note any SkillsMP matches as "Class C evidence available".
+   Note any SkillsMP matches as "Class C evidence available".
 
-   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Class B/A evidence should be favored for acceptance.
+   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Class B/A evidence and a verified SKILL.md should be favored for acceptance.
 
 5. **Display review table** — for each batch, show:
 

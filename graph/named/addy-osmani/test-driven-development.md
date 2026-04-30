@@ -10,7 +10,7 @@ catalogRef: addy-osmani-test-driven-development
 level: II
 description: Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.
 links:
-  github: https://github.com/addyosmani/agent-skills
+  github: https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md
 tags:
   - tdd
   - testing
