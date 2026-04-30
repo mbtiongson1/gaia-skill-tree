@@ -19,7 +19,7 @@ back through its full prerequisite chain.
 GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
-🟡 Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]
+🟡 Wisdom King: Autonomous Research Agent  [VI · Transcendent ⭐]
   ├─ 🟣 Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
   │  ├─ 🔵 Web Search  [I · Awakened]
   │  ├─ 🔵 Summarize  [I · Awakened]
