@@ -577,7 +577,18 @@ Storage:
 - **Repo reference**: `.gaia/named-skills/{contributor}/{skill-name}.md` (symlink on Unix, copy on Windows)
 - **Manifest**: `.gaia/install-manifest.json` (tracks id, installedAt, sourceRef, sha256)
 
-### 13.5 Semantic Search
+### 13.6 Named Skills Graph Canvas Toggle
+
+The skill graph explorer in `docs/index.html` includes a **Named Skills** highlight button overlaid on the graph canvas. When activated:
+
+- All non-named nodes are dimmed to 7 % opacity so named implementations stand out.
+- Named skill nodes receive a coloured ring glow.
+- Node labels switch from the generic skill name to `contributor/skill-name` attribution.
+- The button state is local to the page session — it does not persist across reloads.
+
+This toggle is implemented in `createSkillGraph()` as `state.redPillActive` (toggled by the `.graph-redpill` button). It reads `state.namedMap`, a lookup built from the `buckets` section of `graph/named/index.json` that maps each `genericSkillRef` to its named implementations.
+
+The Named Skills browser section below the graph provides the same data in a paginated card layout with level-filtered tabs, expandable detail cards (dependencies, derivatives, variants, tags, upstream SKILL.md link), and does not require the graph canvas.
 
 Skills are embedded using `sentence-transformers` (model: `all-MiniLM-L6-v2`, 384 dimensions). The embedding input is `"{name}: {description}"` for each skill.
 
