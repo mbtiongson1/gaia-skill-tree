@@ -8,39 +8,6 @@
 
 ---
 
-## The Tree
-
-Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
-
-The snapshot below shows the upgrade-path structure. Each legendary traces
-back through its full prerequisite chain.
-
-```
-GAIA SKILL TREE  v1.0.0
-═════════════════════════════════════════════════════════════════
-
-🟡 Wisdom King: Autonomous Research Agent  [`VI` · Transcendent ⭐]
-  ├─ 🟣 Research  [`III` · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ 🔵 Web Search  [`I` · Awakened]
-  │  ├─ 🔵 Summarize  [`I` · Awakened]
-  │  └─ 🔵 Cite Sources  [`I` · Awakened]
-  ├─ 🟣 Knowledge Harvest  [`IV` · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
-  │  ├─ 🟣 Web Scrape  [`III` · Evolved]  ← Web Search · Parse HTML · Extract Entities
-  │  │  ├─ 🔵 Web Search  [`I` · Awakened]  (↑ see above)
-  │  │  ├─ 🔵 Parse HTML  [`I` · Awakened]
-  │  │  └─ 🔵 Extract Entities  [`I` · Awakened]
-  │  ├─ 🔵 Extract Entities  [`I` · Awakened]  (↑ see above)
-  │  └─ 🔵 Embed Text  [`I` · Awakened]
-  └─ 🟣 Ghostwrite  [`IV` · Transcendent]  ← Research · Write Report · Audience Model
-     ├─ 🟣 Research  [`III` · Evolved]  (↑ see above)
-     ├─ 🔵 Write Report  [`I` · Awakened]
-     └─ 🔵 Audience Model  [`I` · Awakened]
-
-→ Full graph: tree.md
-```
-
----
-
 ## What This Means for You
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
@@ -54,9 +21,9 @@ GAIA SKILL TREE  v1.0.0
 
 | Tier | Symbol | Display Name | What it means |
 |---|---|---|---|
-| atomic | 🔵 | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
-| composite | 🟣 | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
-| legendary | 🟡 | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
+| atomic | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
+| composite | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
+| legendary | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
 ## Rank System
 
@@ -267,6 +234,105 @@ Skill, fusion recipe, or reclassification PR with evidence and rationale.
 
 For full instructions, including evidence requirements, PR templates, naming
 rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## The Tree
+
+Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
+
+The snapshot below shows the upgrade-path structure. Each legendary traces
+back through its full prerequisite chain.
+
+```
+GAIA SKILL TREE  v1.0.0
+═════════════════════════════════════════════════════════════════
+
+◆ Wisdom King: Autonomous Research Agent  [VI · Transcendent ★]  ← Research · Knowledge Harvest · Ghostwrite
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [0 · Basic]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  ├─ ◇ Knowledge Harvest  [IV · Hardened]  ← Web Scrape · Extract Entities · Embed Text
+  │  ├─ ◇ Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
+  │  │  ├─ ○ Web Search  [I · Awakened]  (↑ see above)
+  │  │  ├─ ○ Parse HTML  [I · Awakened]
+  │  │  └─ ○ Extract Entities  [I · Awakened]
+  │  ├─ ○ Extract Entities  [I · Awakened]  (↑ see above)
+  │  └─ ○ Embed Text  [I · Awakened]
+  └─ ◇ Ghostwrite  [IV · Hardened]  ← Research · Write Report · Audience Model
+     ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources  (↑ see above)
+     ├─ ○ Write Report  [I · Awakened]
+     └─ ○ Audience Model  [I · Awakened]
+
+◆ Grand Conductor: Multi-Agent Orchestration  [V · Transcendent]  ← Plan and Execute · Route Intent · Tool Select
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+  │  ├─ ○ Route Intent  [I · Awakened]
+  │  ├─ ○ Plan and Decompose  [I · Awakened]
+  │  └─ ○ Tool Select  [I · Awakened]
+  ├─ ○ Route Intent  [I · Awakened]  (↑ see above)
+  └─ ○ Tool Select  [I · Awakened]  (↑ see above)
+
+◆ True Craftsman: Full-Stack Developer  [V · Transcendent]  ← Code Review Pipeline · Automated Testing · Refactor Code
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Code Review Pipeline  [III · Evolved]  ← Code Generation · Diff Content · Evaluate Output
+  │  ├─ ○ Code Generation  [I · Awakened]
+  │  ├─ ○ Diff Content  [I · Awakened]
+  │  └─ ○ Evaluate Output  [I · Awakened]
+  ├─ ◇ Automated Testing  [III · Evolved]  ← Generate Test · Execute Bash · Error Interpretation
+  │  ├─ ○ Generate Test  [II · Named]
+  │  ├─ ○ Execute Bash  [I · Awakened]
+  │  └─ ○ Error Interpretation  [I · Awakened]
+  └─ ○ Refactor Code  [II · Named]
+
+◆ True Dragon: Autonomous Scientific Discovery  [V · Transcendent]  ← Hypothesis Generation · Research · Math Reason
+─────────────────────────────────────────────────────────────────
+  ├─ ○ Hypothesis Generation  [II · Named]
+  ├─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ ○ Web Search  [I · Awakened]
+  │  ├─ ○ Summarize  [0 · Basic]
+  │  └─ ○ Cite Sources  [I · Awakened]
+  └─ ○ Math Reason  [II · Named]
+
+◆ True Herald: Real-Time Voice Assistant  [V · Transcendent]  ← Voice Agent · Memory Manage · Plan and Execute
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Voice Agent  [III · Evolved]  ← Speech to Text · Question Answer · Text to Speech
+  │  ├─ ○ Speech to Text  [II · Named]
+  │  ├─ ○ Question Answer  [0 · Basic]
+  │  └─ ○ Text to Speech  [II · Named]
+  ├─ ○ Memory Manage  [II · Named]
+  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+     ├─ ○ Route Intent  [I · Awakened]
+     ├─ ○ Plan and Decompose  [I · Awakened]
+     └─ ○ Tool Select  [I · Awakened]
+
+◆ True Oracle: Autonomous Data Scientist  [V · Transcendent]  ← Data Analysis · Math Reason · Research
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Data Analysis  [III · Evolved]  ← Generate SQL · Data Visualize · Summarize
+  │  ├─ ○ Generate SQL  [II · Named]
+  │  ├─ ○ Data Visualize  [II · Named]
+  │  └─ ○ Summarize  [0 · Basic]
+  ├─ ○ Math Reason  [II · Named]
+  └─ ◇ Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
+     ├─ ○ Web Search  [I · Awakened]
+     ├─ ○ Summarize  [0 · Basic]  (↑ see above)
+     └─ ○ Cite Sources  [I · Awakened]
+
+◆ True Sage: Recursive Self-Improvement  [V · Transcendent]  ← Autonomous Debug · Evaluate Output · Plan and Execute
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Autonomous Debug  [IV · Hardened]  ← Code Generation · Execute Bash · Error Interpretation
+  │  ├─ ○ Code Generation  [I · Awakened]
+  │  ├─ ○ Execute Bash  [I · Awakened]
+  │  └─ ○ Error Interpretation  [I · Awakened]
+  ├─ ○ Evaluate Output  [I · Awakened]
+  └─ ◇ Plan and Execute  [IV · Hardened]  ← Route Intent · Plan and Decompose · Tool Select
+     ├─ ○ Route Intent  [I · Awakened]
+     ├─ ○ Plan and Decompose  [I · Awakened]
+     └─ ○ Tool Select  [I · Awakened]
+
+
+→ Full graph: tree.md
+```
 
 ## License
 
