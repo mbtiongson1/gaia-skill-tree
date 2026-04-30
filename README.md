@@ -16,7 +16,7 @@ The snapshot below shows the upgrade-path structure. Each legendary traces
 back through its full prerequisite chain.
 
 ```
-GAIA SKILL TREE  v1.0.0
+GAIA SKILL TREE  v2.0.0
 ═════════════════════════════════════════════════════════════════
 
 ◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
@@ -210,6 +210,9 @@ gaia init --user your-github-username --scan AGENTS.md --scan scripts
 | `gaia status` | Shows the configured user's registered skill-tree summary. |
 | `gaia tree` | Lists unlocked skills for the configured user. |
 | `gaia fuse <skillId>` | Adds a pending fusion candidate to the user's skill tree. |
+| `gaia appraise [skillId]` | Renders a skill card with prereq status, derivatives, and contextual actions. Defaults to the most recently unlocked skill. |
+| `gaia promote [skillId] [--name "Display Name"]` | Advances an eligible skill to the next level. Optionally renames your named variant. |
+| `gaia paths` | Shows a progression summary: skills ready to fuse, one prerequisite away, and all reachable paths. |
 
 ### View the skill graph
 
@@ -295,7 +298,7 @@ gaia-skill-tree/
 ├── mcp-server/                   ← TypeScript MCP server (agent-native integration)
 ├── schema/                       ← JSON Schema definitions
 ├── schema/realSkillCatalog.schema.json ← Schema for graph/real_skill_catalog.json
-├── skills/                       ← GENERATED skill pages (atomic, composite, legendary)
+├── skills/                       ← GENERATED skill pages (basic, extra, ultimate)
 ├── users/                        ← Personal skill trees by GitHub username
 ├── scripts/                      ← Validation, projection, and analysis scripts
 ├── scripts/crawlers/             ← Bot crawlers (MCP registries, npm, VS Code, HuggingFace)

@@ -174,8 +174,8 @@ Review flow for intake PRs:
 ```
 
 Examples:
-- `[atomic] parse-csv — adds CSV parsing as a primitive Intrinsic Skill`
-- `[composite] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
+- `[basic] parse-csv — adds CSV parsing as a primitive Basic Skill`
+- `[extra] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
 - `[reclassify] web-scrape — upgrade from Awakened (II) to Named (III) with new evidence`
 
 ---
