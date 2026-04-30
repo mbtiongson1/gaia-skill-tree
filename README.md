@@ -330,6 +330,24 @@ For full instructions, including evidence requirements, PR templates, naming
 rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
+## Contributors
+
+Thank you to everyone who has expanded the Gaia registry.
+
+| Contributor | Contribution |
+|---|---|
+| [@mbtiongson1](https://github.com/mbtiongson1) | Creator & maintainer — graph design, CLI, MCP server, curation pipeline |
+| [@rico-tiongson](https://github.com/rico-tiongson) | Early contributor |
+| [@karpathy](https://github.com/karpathy) | Origin named skill: `karpathy/autoresearch` (AutoResearch — The Scholar's Compass) |
+| [@mattpocock](https://github.com/mattpocock) | Named skills: diagnose, tdd, to-prd, triage, zoom-out, and 6 others |
+| [@intelligentcode-ai](https://github.com/intelligentcode-ai) | Named skills: database-engineer, devops-engineer, mcp-client, security-engineer, and 5 others |
+| [@ruvnet](https://github.com/ruvnet) | Named skill: `ruvnet/flow-nexus-swarm` (Grand Conductor: Multi-Agent Orchestration) |
+| [@GLINCKER](https://github.com/GLINCKER) | Named skill: `glincker/readme-generator` (Write Report) |
+| [@spring-ai-alibaba](https://github.com/spring-ai-alibaba) | Named skill: `spring-ai/readme-generate` |
+| [@balukosuri](https://github.com/balukosuri) | Evidence: community reproduction of Karpathy's autoresearch as a universal skill |
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
