@@ -2,8 +2,8 @@
 **ID:** framework-upgrade  
 **Type:** Intrinsic Skill  
 **Level:** 0  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Basic  
+**Skill Call:** `/framework-upgrade`
 
 ---
 

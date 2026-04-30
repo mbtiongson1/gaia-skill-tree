@@ -2,8 +2,8 @@
 **ID:** plan-and-execute  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/plan-and-execute`
 
 ---
 

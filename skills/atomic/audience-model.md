@@ -2,8 +2,8 @@
 **ID:** audience-model  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/audience-model`
 
 ---
 

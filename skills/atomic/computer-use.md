@@ -2,8 +2,8 @@
 **ID:** computer-use  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/computer-use`
 
 ---
 

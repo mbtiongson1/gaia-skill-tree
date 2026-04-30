@@ -2,8 +2,8 @@
 **ID:** vision-qa  
 **Type:** Intrinsic Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/vision-qa`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** context-compression  
 **Type:** Intrinsic Skill  
 **Level:** III  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/context-compression`
 
 ---
 

@@ -102,7 +102,7 @@ GAIA SKILL TREE  v1.0.0
 | composite | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
 | legendary | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
-## Rank System
+## Rank System — The Transcendent Line
 
 Skills level up through evidence, not declaration:
 
@@ -114,7 +114,7 @@ Skills level up through evidence, not declaration:
 | `III` | **Evolved** | Class B | Reproducible, fully documented |
 | `IV` | **Hardened** | Class B or A | Failure modes known; battle-tested |
 | `V` | **Transcendent** | Class B or A | Composable and self-improving |
-| `VI` | **Transcendent ◆** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
+| `VI` | **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
 ---
 
@@ -288,7 +288,7 @@ gaia-skill-tree/
 ├── src/gaia_cli/                 ← Python package source for the gaia CLI (pip-installable)
 ├── plugin/                       ← TypeScript CLI wrapper + GitHub Action for per-repo integration
 ├── pyproject.toml                ← Package metadata and optional dependencies (e.g. [embeddings])
-├── registry.md                   ← GENERATED flat index of all skills
+├── registry.md                   ← GENERATED flat index — connected skills + Pure/Undeveloped section
 ├── combinations.md               ← GENERATED fusion recipe matrix
 ├── tree.md                       ← GENERATED full ASCII skill graph
 ├── real-skills.html              ← GENERATED linked catalog of real named skills

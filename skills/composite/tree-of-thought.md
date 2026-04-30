@@ -2,8 +2,8 @@
 **ID:** tree-of-thought  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/tree-of-thought`
 
 ---
 

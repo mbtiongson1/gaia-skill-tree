@@ -2,8 +2,8 @@
 **ID:** object-detection  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/object-detection`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** parse-html  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/parse-html`
 
 ---
 

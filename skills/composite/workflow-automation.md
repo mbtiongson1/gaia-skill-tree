@@ -2,8 +2,8 @@
 **ID:** workflow-automation  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/workflow-automation`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** ml-pipeline  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/ml-pipeline`
 
 ---
 

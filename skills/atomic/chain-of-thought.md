@@ -2,8 +2,8 @@
 **ID:** chain-of-thought  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/chain-of-thought`
 
 ---
 

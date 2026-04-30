@@ -2,8 +2,8 @@
 **ID:** code-explain  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/code-explain`
 
 ---
 

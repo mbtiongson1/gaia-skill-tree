@@ -2,8 +2,8 @@
 **ID:** text-to-sql-pipeline  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/text-to-sql-pipeline`
 
 ---
 

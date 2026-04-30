@@ -91,6 +91,32 @@ Shared prerequisites marked (↑ see above) on second occurrence.
      ├─ ○ /plan-decompose  [I]
      └─ ○ /tool-select  [I]
 
+══════════════════════════════════════════════════════════════════════
+Pure / Undeveloped — atomic skills not yet wired into any upgrade path.
+══════════════════════════════════════════════════════════════════════
+
+  ○ /code-execution  [II · Named]
+  ○ mattpocock/zoom-out - Code Explain  [II · Named]
+  ○ /context-compression  [III · Evolved]
+  ○ /detect-anomaly  [II · Named]
+  ○ anthropic/pptx - Document Editing  [0 · Basic]
+  ○ /few-shot-learning  [IV · Hardened]
+  ○ /fine-tune  [IV · Hardened]
+  ○ laravel/upgrade-laravel-v13 - Framework Upgrade  [0 · Basic]
+  ○ /image-generate  [II · Named]
+  ○ mattpocock/triage - Issue Triage  [IV · Hardened]
+  ○ /object-detection  [II · Named]
+  ○ /ocr  [II · Named]
+  ○ /prompt-injection-defense  [III · Evolved]
+  ○ /reward-modeling  [II · Named]
+  ○ /self-consistency  [IV · Hardened]
+  ○ /semantic-cache  [IV · Hardened]
+  ○ vercel/find-skills - Skill Discovery  [0 · Basic]
+  ○ /statistical-analysis  [III · Evolved]
+  ○ addy-osmani/test-driven-development - Test-Driven Development  [0 · Basic]
+  ○ martin-stepanoski/nielsen-heuristics-audit - UX Audit  [0 · Basic]
+  ○ /vision-qa  [III · Evolved]
+
 ```
 
 *Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*

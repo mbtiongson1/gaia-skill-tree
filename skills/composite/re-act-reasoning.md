@@ -2,8 +2,8 @@
 **ID:** re-act-reasoning  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/re-act-reasoning`
 
 ---
 

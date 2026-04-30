@@ -2,8 +2,8 @@
 **ID:** data-visualize  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/data-visualize`
 
 ---
 

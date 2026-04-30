@@ -2,8 +2,8 @@
 **ID:** browser-automation  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/browser-automation`
 
 ---
 

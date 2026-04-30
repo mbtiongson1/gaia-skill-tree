@@ -2,8 +2,8 @@
 **ID:** automated-testing  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/automated-testing`
 
 ---
 

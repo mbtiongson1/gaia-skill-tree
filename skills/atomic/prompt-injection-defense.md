@@ -2,8 +2,8 @@
 **ID:** prompt-injection-defense  
 **Type:** Intrinsic Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/prompt-injection-defense`
 
 ---
 

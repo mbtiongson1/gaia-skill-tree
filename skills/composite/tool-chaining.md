@@ -2,8 +2,8 @@
 **ID:** tool-chaining  
 **Type:** Extra Skill  
 **Level:** III  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Evolved  
+**Skill Call:** `/tool-chaining`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** real-time-voice-assistant  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/real-time-voice-assistant`
 
 ---
 

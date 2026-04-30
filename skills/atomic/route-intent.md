@@ -2,8 +2,8 @@
 **ID:** route-intent  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/route-intent`
 
 ---
 

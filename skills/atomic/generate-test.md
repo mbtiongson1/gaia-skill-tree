@@ -2,8 +2,8 @@
 **ID:** generate-test  
 **Type:** Intrinsic Skill  
 **Level:** II  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Named  
+**Skill Call:** `/generate-test`
 
 ---
 

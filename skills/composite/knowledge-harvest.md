@@ -2,8 +2,8 @@
 **ID:** knowledge-harvest  
 **Type:** Extra Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/knowledge-harvest`
 
 ---
 

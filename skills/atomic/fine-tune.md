@@ -2,8 +2,8 @@
 **ID:** fine-tune  
 **Type:** Intrinsic Skill  
 **Level:** IV  
-**Rarity:** Uncommon  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/fine-tune`
 
 ---
 

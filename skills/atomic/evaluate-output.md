@@ -2,8 +2,8 @@
 **ID:** evaluate-output  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/evaluate-output`
 
 ---
 

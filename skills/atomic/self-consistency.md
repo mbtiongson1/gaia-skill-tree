@@ -2,8 +2,8 @@
 **ID:** self-consistency  
 **Type:** Intrinsic Skill  
 **Level:** IV  
-**Rarity:** Rare  
-**Status:** Provisional
+**Tier:** Hardened  
+**Skill Call:** `/self-consistency`
 
 ---
 

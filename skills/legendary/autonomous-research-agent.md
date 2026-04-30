@@ -2,8 +2,8 @@
 **ID:** autonomous-research-agent  
 **Type:** Ultimate Skill  
 **Level:** VI  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent â˜…  
+**Skill Call:** `/autonomous-research-agent`
 
 ---
 

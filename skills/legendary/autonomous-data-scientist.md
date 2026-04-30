@@ -2,8 +2,8 @@
 **ID:** autonomous-data-scientist  
 **Type:** Ultimate Skill  
 **Level:** V  
-**Rarity:** Divine  
-**Status:** Provisional
+**Tier:** Transcendent  
+**Skill Call:** `/autonomous-data-scientist`
 
 ---
 

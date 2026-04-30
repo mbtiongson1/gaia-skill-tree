@@ -2,8 +2,8 @@
 **ID:** format-output  
 **Type:** Intrinsic Skill  
 **Level:** 0  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Basic  
+**Skill Call:** `/format-output`
 
 ---
 

@@ -2,8 +2,8 @@
 **ID:** retrieve  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/retrieve`
 
 ---
 

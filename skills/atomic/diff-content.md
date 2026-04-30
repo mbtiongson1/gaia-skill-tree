@@ -2,8 +2,8 @@
 **ID:** diff-content  
 **Type:** Intrinsic Skill  
 **Level:** I  
-**Rarity:** Common  
-**Status:** Provisional
+**Tier:** Awakened  
+**Skill Call:** `/diff-content`
 
 ---
 

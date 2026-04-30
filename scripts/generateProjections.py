@@ -59,6 +59,10 @@ def get_rarity_label(meta, rarity):
     return meta.get("rarityLabels", {}).get(rarity, rarity.capitalize())
 
 
+def get_tier_label(meta, level):
+    return meta.get("levelLabels", {}).get(str(level), str(level))
+
+
 def get_tier_symbol(skill_type):
     return {"atomic": "○", "composite": "◇", "legendary": "◆"}.get(skill_type, "·")
 
@@ -143,15 +147,15 @@ def main():
 
         type_label = get_type_label(meta, skill_type)
         level_label = get_level_label(meta, level)
-        rarity_label = get_rarity_label(meta, rarity)
+        tier_label = get_tier_label(meta, level)
 
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"# [{level_label} · {type_label}] {skill_name}\n")
             f.write(f"**ID:** {skill_id}  \n")
             f.write(f"**Type:** {type_label}  \n")
             f.write(f"**Level:** {level_label}  \n")
-            f.write(f"**Rarity:** {rarity_label}  \n")
-            f.write(f"**Status:** {skill.get('status', '').capitalize()}\n\n")
+            f.write(f"**Tier:** {tier_label}  \n")
+            f.write(f"**Skill Call:** `/{skill_id}`\n\n")
             f.write("---\n\n")
 
             f.write("## Description\n")
@@ -219,16 +223,49 @@ def main():
     # generate registry.md
     with open("registry.md", "w", encoding="utf-8") as f:
         f.write("# Gaia Skill Registry\n\n")
-        f.write("| Name | Class | Rank | Rarity | Status |\n")
+        f.write("| Name | Class | Rank | Tier | Skill Call |\n")
         f.write("|---|---|---|---|---|\n")
+
+        # collect orphaned atomic IDs for the pure section
+        all_prereq_ids = set()
         for skill in skills:
+            for pid in skill.get("prerequisites", []):
+                all_prereq_ids.add(pid)
+        orphan_ids = {
+            s["id"] for s in skills
+            if s.get("type") == "atomic"
+            and s["id"] not in all_prereq_ids
+            and not s.get("prerequisites")
+        }
+
+        for skill in skills:
+            if skill["id"] in orphan_ids:
+                continue
             skill_type = skill.get("type", "atomic")
             symbol = get_tier_symbol(skill_type)
             type_label = get_type_label(meta, skill_type)
-            level_label = get_level_label(meta, skill.get("level"))
-            rarity_label = get_rarity_label(meta, skill.get("rarity"))
+            level = skill.get("level")
+            level_label = get_level_label(meta, level)
+            tier_label = get_tier_label(meta, level)
             name_display = f"{symbol} {skill.get('name')}"
-            f.write(f"| {name_display} | {type_label} | {level_label} | {rarity_label} | {skill.get('status', '').capitalize()} |\n")
+            skill_call = f"`/{skill.get('id')}`"
+            f.write(f"| {name_display} | {type_label} | {level_label} | {tier_label} | {skill_call} |\n")
+
+        f.write("\n")
+        f.write("## Pure / Undeveloped\n\n")
+        f.write("*Atomic skills with no connections to the upgrade graph — no prerequisites and not referenced as a component of any other skill.*\n\n")
+        f.write("| Name | Class | Rank | Tier | Skill Call |\n")
+        f.write("|---|---|---|---|---|\n")
+        for skill in skills:
+            if skill["id"] not in orphan_ids:
+                continue
+            level = skill.get("level")
+            level_label = get_level_label(meta, level)
+            tier_label = get_tier_label(meta, level)
+            name_display = f"○ {skill.get('name')}"
+            skill_call = f"`/{skill.get('id')}`"
+            f.write(f"| {name_display} | Intrinsic Skill | {level_label} | {tier_label} | {skill_call} |\n")
+
         f.write(f"\n*Generated from gaia.json v{version}.*\n")
 
     # generate combinations.md
@@ -287,14 +324,15 @@ def main():
                 f.write(f"**Last Updated:** {tree.get('updatedAt', 'unknown')}  \n")
                 stats = tree.get("stats", {})
                 f.write(f"**Total Skills Unlocked:** {stats.get('totalUnlocked', 0)}  \n")
-                f.write(f"**Highest Rarity:** {get_rarity_label(meta, stats.get('highestRarity', 'none'))}  \n")
+                highest_level = stats.get('highestLevel', stats.get('highestRarity', ''))
+                f.write(f"**Highest Tier:** {get_tier_label(meta, highest_level)}  \n")
                 f.write(f"**Deepest Lineage:** {stats.get('deepestLineage', 0)}\n\n")
                 f.write("---\n\n")
 
                 f.write("## Unlocked Skills\n\n")
                 unlocked = tree.get("unlockedSkills", [])
                 if unlocked:
-                    f.write("| Skill | Class | Rank | Rarity | Unlocked In | Date |\n")
+                    f.write("| Skill | Class | Rank | Tier | Unlocked In | Date |\n")
                     f.write("|---|---|---|---|---|---|\n")
                     for us in unlocked:
                         sid = us.get("skillId", "")
@@ -302,11 +340,12 @@ def main():
                         sk_type = sk.get("type", "")
                         symbol = get_tier_symbol(sk_type)
                         type_label = get_type_label(meta, sk_type)
-                        level_label = get_level_label(meta, us.get("level", ""))
-                        rarity_label = get_rarity_label(meta, sk.get("rarity", ""))
+                        level = us.get("level", sk.get("level", ""))
+                        level_label = get_level_label(meta, level)
+                        tier_label = get_tier_label(meta, level)
                         name_display = f"{symbol} {sk.get('name', sid)}"
                         f.write(f"| {name_display} | {type_label} | "
-                                f"{level_label} | {rarity_label} | "
+                                f"{level_label} | {tier_label} | "
                                 f"{us.get('unlockedIn', '')} | {us.get('unlockedAt', '')} |\n")
                 else:
                     f.write("_No skills unlocked yet._\n")
@@ -363,6 +402,19 @@ def main():
 def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
     legendaries = _sorted_legendaries(skills)
 
+    # compute orphaned atomics
+    all_prereq_ids = set()
+    for s in skills:
+        for pid in s.get("prerequisites", []):
+            all_prereq_ids.add(pid)
+    pure_skills = sorted(
+        [s for s in skills
+         if s.get("type") == "atomic"
+         and s["id"] not in all_prereq_ids
+         and not s.get("prerequisites")],
+        key=lambda s: s.get("id", "")
+    )
+
     lines = []
     lines.append("# Gaia Skill Tree")
     lines.append("")
@@ -393,6 +445,20 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
             lines.extend(_render_subtree(prereq_id, skill_map, meta, "  ", is_last, seen,
                                          named_map=named_map))
 
+        lines.append("")
+
+    if pure_skills:
+        lines.append("═" * 70)
+        lines.append("Pure / Undeveloped — atomic skills not yet wired into any upgrade path.")
+        lines.append("═" * 70)
+        lines.append("")
+        for ps in pure_skills:
+            pid = ps.get("id")
+            level_label = get_level_label(meta, ps.get("level"))
+            tier_label = get_tier_label(meta, ps.get("level"))
+            named_id = (named_map or {}).get(pid)
+            display = f"{named_id} - {ps.get('name')}" if named_id else f"/{pid}"
+            lines.append(f"  ○ {display}  [{level_label} · {tier_label}]")
         lines.append("")
 
     lines.append("```")
