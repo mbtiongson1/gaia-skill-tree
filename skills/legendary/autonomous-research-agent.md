@@ -25,6 +25,7 @@ Requires extensive multi-system validation before level advancement.
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
 | A | https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md | mbtiongson1 | 2026-04-29 |
+| B | https://github.com/balukosuri/Andrej-Karpathy-s-Autoresearch-As-a-Universal-Skill | mbtiongson1 | 2026-04-30 |
 
 ## Known Agents
 _None verified yet._
