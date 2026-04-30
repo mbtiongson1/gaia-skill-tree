@@ -7,7 +7,7 @@
 
 ## 1. Purpose
 
-Gaia is an open, graph-first registry of every AI agent skill in existence. It is both a global dataset and a gamified progression system. Skills are atomic or composite, level up through evidence, combine into new skills, and are tracked per user across every repository they own.
+Gaia is an open, graph-first registry of every AI agent skill in existence. It is both a global dataset and a gamified progression system. Skills are basic, extra, or ultimate, level up through evidence, combine into new skills, and are tracked per user across every repository they own.
 
 This document defines what Gaia is, what it must do, and what constraints govern it.
 
@@ -35,13 +35,13 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 ### 4.1 Registry (Global)
 - FR-01: The registry SHALL store every known AI agent skill as a node in a directed acyclic graph (DAG).
 - FR-02: Each skill node SHALL include: `id`, `name`, `type`, `level`, `rarity`, `description`, `prerequisites`, `derivatives`, `conditions`, `evidence`, `knownAgents`, `status`, `createdAt`, `updatedAt`, `version`.
-- FR-03: The registry SHALL support three skill types: `atomic`, `composite`, `legendary`.
+- FR-03: The registry SHALL support three skill types: `basic`, `extra`, `ultimate`.
 - FR-04: Each skill SHALL have a level between `I` and `V`.
 - FR-05: Each skill SHALL have a rarity of `common`, `uncommon`, `rare`, `epic`, or `legendary`.
-- FR-06: The registry SHALL enforce that all composite and legendary skills reference at least two valid parent skill IDs.
+- FR-06: The registry SHALL enforce that all extra and ultimate skills reference at least two valid parent skill IDs.
 - FR-07: The registry SHALL enforce DAG integrity — no cycles are permitted at any depth.
 - FR-08: Every non-`latent` (Level I) skill SHALL reference at least one evidence source.
-- FR-09: Legendary skills SHALL require a minimum of three Class A or B evidence sources and explicit maintainer approval before status can be set to `validated`.
+- FR-09: Ultimate skills SHALL require a minimum of three Class A or B evidence sources and explicit maintainer approval before status can be set to `validated`.
 - FR-10: The registry SHALL export the canonical graph in both JSON (D3/Cytoscape-compatible) and GEXF (Gephi-compatible) formats.
 - FR-11: All human-readable files (`skills/`, `registry.md`, `combinations.md`) SHALL be generated outputs — never hand-maintained as source of truth.
 
@@ -56,16 +56,16 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-17: The Gaia plugin SHALL be installable into any repository via a single command (`gaia init`) or GitHub Action.
 - FR-18: The plugin SHALL scan the repository for skill references across declared scan paths (`.gaia/`, `skills/`, `agents/`, MCP tool declarations).
 - FR-19: The plugin SHALL resolve detected skills against the Gaia registry.
-- FR-20: The plugin SHALL detect combination candidates: sets of prerequisite skills that together unlock a composite or legendary skill the user does not yet own.
+- FR-20: The plugin SHALL detect combination candidates: sets of prerequisite skills that together unlock an extra or ultimate skill the user does not yet own.
 - FR-21: When a combination is detected, the plugin SHALL prompt the user to confirm the fusion before writing it to their skill tree.
 - FR-22: On user confirmation, the plugin SHALL update the skill tree in `users/[username]/skill-tree.json` via an automated PR to the Gaia registry.
 - FR-23: The plugin SHALL expose `gaia status`, `gaia tree`, and `gaia load [username]` commands.
 
 ### 4.4 Contribution Workflow
-- FR-24: Contributors SHALL be able to propose a new atomic skill, a new composite skill, a new fusion recipe, or a reclassification (level or rarity) via pull request.
+- FR-24: Contributors SHALL be able to propose a new basic skill, a new extra skill, a new fusion recipe, or a reclassification (level or rarity) via pull request.
 - FR-25: All PRs SHALL be validated against JSON schema before merge.
 - FR-26: All PRs SHALL pass DAG integrity checks before merge.
-- FR-27: Legendary skill additions SHALL require at least two maintainer approvals.
+- FR-27: Ultimate skill additions SHALL require at least two maintainer approvals.
 - FR-28: CI SHALL fail if generated output files are stale relative to `gaia.json`.
 
 ---
@@ -88,7 +88,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 {
   "id": "webScrape",
   "name": "Web Scrape",
-  "type": "composite",
+  "type": "extra",
   "level": "III",
   "rarity": "uncommon",
   "description": "Retrieves and structures data from web pages into usable entities.",
@@ -173,9 +173,9 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 
 | Type | Description | Min Parents |
 |---|---|---|
-| `atomic` | Primitive, indivisible capability | 0 |
-| `composite` | Emerged from two or more skills | 2 |
-| `legendary` | High-complexity, rare, evidence-heavy emergent skill | 3+ |
+| `basic` | Primitive, indivisible capability | 0 |
+| `extra` | Emerged from two or more skills | 2 |
+| `ultimate` | High-complexity, rare, evidence-heavy emergent skill | 3+ |
 
 ### 7.2 Levels
 
@@ -227,16 +227,16 @@ Rarity is computed from observed agent prevalence data — it is never declared 
 - **Level III:** At least one Class B source.
 - **Level IV:** At least one Class B or A source, with documented failure modes.
 - **Level V:** At least one Class A source with composability or self-improvement evidence.
-- **Legendary type:** Minimum three Class A or B sources, two maintainer approvals, no `provisional` status permitted at merge.
+- **Ultimate type:** Minimum three Class A or B sources, two maintainer approvals, no `provisional` status permitted at merge.
 
 ---
 
 ## 9. Seed Taxonomy (MVP)
 
-### 9.1 Atomic (target: 50–80)
+### 9.1 Basic (target: 50–80)
 Examples: `tokenize`, `classify`, `retrieve`, `rank`, `parseJson`, `parseHtml`, `executeBash`, `generateText`, `summarize`, `citeSources`, `extractEntities`, `routeIntent`, `evaluateOutput`, `embedText`, `chunkDocument`
 
-### 9.2 Composite (target: 80–150)
+### 9.2 Extra (target: 80–150)
 Examples:
 - `webScrape` = `webSearch` + `parseHtml` + `extractEntities`
 - `research` = `webSearch` + `summarize` + `citeSources`
@@ -244,8 +244,28 @@ Examples:
 - `autonomousDebug` = `codeGeneration` + `executeBash` + `errorInterpretation`
 - `planAndExecute` = `routeIntent` + `taskDecompose` + `toolSelect`
 
-### 9.3 Legendary (target: 5–20, provisional stubs at launch)
+### 9.3 Ultimate (target: 5–20, provisional stubs at launch)
 Examples: `recursiveSelfImprovement`, `multiAgentOrchestrationV`, `autonomousResearchAgent`
+
+### 9.4 Unclaimed Ultimate Skills
+
+Five Ultimate skills ship with a hidden seed `title` in `gaia.json` but no contributor implementation. They appear in `registry.md` and projections as:
+
+```
+◆ /skill-id  [Unclaimed ✦]
+```
+
+The seed title is suppressed until the skill is claimed. The first contributor to push a named implementation via `gaia name` whose `genericSkillRef` points to one of these skills claims the title slot, becomes the origin contributor, and the display changes to `Ultimate Skill: contributor/skill-name`.
+
+| Skill ID | Seed Title |
+|---|---|
+| `recursive-self-improvement` | Unbound Sage |
+| `full-stack-developer` | Sovereign Craftsman |
+| `autonomous-data-scientist` | Primordial Oracle |
+| `real-time-voice-assistant` | Eternal Herald |
+| `autonomous-scientific-discovery` | The Doctor |
+
+Claiming requirements are the same as any named skill (intake review → awakened lifecycle → `gaia name` promotion). Claiming priority follows standard named skill origin rules: earlier `createdAt` wins if two contributors submit simultaneously.
 
 ---
 
@@ -271,12 +291,13 @@ Examples: `recursiveSelfImprovement`, `multiAgentOrchestrationV`, `autonomousRes
 
 | Term | Definition |
 |---|---|
-| **Atomic skill** | A primitive, indivisible AI agent capability. |
-| **Composite skill** | A skill that emerges from combining two or more parent skills. |
-| **Legendary skill** | A high-complexity emergent skill with strict evidence requirements and rarity <1%. |
-| **Fusion** | The act of combining detected prerequisite skills into a new composite or legendary skill. |
+| **Basic skill** | A primitive, indivisible AI agent capability. |
+| **Extra skill** | A skill that emerges from combining two or more parent skills. |
+| **Ultimate skill** | A high-complexity emergent skill with strict evidence requirements and rarity <1%. |
+| **Fusion** | The act of combining detected prerequisite skills into a new extra or ultimate skill. |
 | **Skill tree** | The personal record of all skills unlocked by a given user. |
-| **Lineage** | The full DAG ancestry of a skill, tracing back to atomic roots. |
+| **Lineage** | The full DAG ancestry of a skill, tracing back to basic roots. |
 | **Projection** | A generated human-readable file derived from `gaia.json`. |
 | **Plugin** | The Gaia tool installed per-repo that scans, detects, and syncs a user's skill tree. |
 | **Pending combination** | A detected prerequisite cluster awaiting user confirmation before fusion. |
+| **Unclaimed Ultimate** | An Ultimate skill in `gaia.json` with a seed title but no named contributor implementation yet. |

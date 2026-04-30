@@ -6,9 +6,9 @@
 <title>Gaia — AI Agent Skill Registry</title>
 <style>
   :root {
-    --atomic:   #38bdf8;
-    --composite:#c084fc;
-    --legendary:#f59e0b;
+    --basic:    #38bdf8;
+    --extra:    #c084fc;
+    --ultimate: #f59e0b;
     --bg:       #030712;
     --surface:  #0f172a;
     --border:   #1e293b;
@@ -36,13 +36,13 @@
   }
   .nav-logo{
     font-size:1.15rem;font-weight:700;letter-spacing:.05em;
-    background:linear-gradient(90deg,var(--atomic),var(--composite));
+    background:linear-gradient(90deg,var(--basic),var(--extra));
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
   nav ul{list-style:none;display:flex;gap:2rem}
   nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
   nav a:hover{color:var(--text)}
-  .nav-tree{color:var(--legendary)!important}
+  .nav-tree{color:var(--ultimate)!important}
   .nav-tree:hover{color:#fcd34d!important}
   /* ── HERO ── */
   #hero{
@@ -66,7 +66,7 @@
   .hero-eyebrow{
     display:inline-block;margin-bottom:1.2rem;
     font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
-    color:var(--atomic);border:1px solid var(--atomic);
+    color:var(--basic);border:1px solid var(--basic);
     padding:.45rem 1.05rem;border-radius:999px;
     background:rgba(3,7,18,.58);
     box-shadow:0 0 24px rgba(56,189,248,.18);
@@ -81,7 +81,7 @@
   }
   h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem}
   h1 span{
-    background:linear-gradient(135deg,var(--atomic) 0%,var(--composite) 50%,var(--legendary) 100%);
+    background:linear-gradient(135deg,var(--basic) 0%,var(--extra) 50%,var(--ultimate) 100%);
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
   .hero-sub{font-size:1.15rem;color:var(--muted);max-width:540px;margin:0 auto 2.4rem}
@@ -91,7 +91,7 @@
     text-decoration:none;transition:all .2s;cursor:pointer;border:none;
   }
   .btn-primary{
-    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    background:linear-gradient(135deg,var(--basic),var(--extra));
     color:#fff;box-shadow:0 0 20px rgba(56,189,248,.3);
   }
   .btn-primary:hover{box-shadow:0 0 32px rgba(56,189,248,.5);transform:translateY(-1px)}
@@ -99,7 +99,7 @@
     background:transparent;color:var(--text);
     border:1px solid var(--border);
   }
-  .btn-ghost:hover{border-color:var(--atomic);color:var(--atomic)}
+  .btn-ghost:hover{border-color:var(--basic);color:var(--basic)}
   .scroll-hint{
     position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
     color:var(--muted);font-size:.8rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;
@@ -135,12 +135,12 @@
   }
   .tier-name{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
   .tier-desc{font-size:.875rem;color:var(--muted)}
-  .atomic  {--card-glow:rgba(56,189,248,.4)}
-  .composite{--card-glow:rgba(192,132,252,.4)}
-  .legendary{--card-glow:rgba(245,158,11,.4)}
-  .badge-atomic  {background:rgba(56,189,248,.15);color:var(--atomic);border:1px solid rgba(56,189,248,.3)}
-  .badge-composite{background:rgba(192,132,252,.15);color:var(--composite);border:1px solid rgba(192,132,252,.3)}
-  .badge-legendary{background:rgba(245,158,11,.15);color:var(--legendary);border:1px solid rgba(245,158,11,.3)}
+  .basic   {--card-glow:rgba(56,189,248,.4)}
+  .extra   {--card-glow:rgba(192,132,252,.4)}
+  .ultimate{--card-glow:rgba(245,158,11,.4)}
+  .badge-basic   {background:rgba(56,189,248,.15);color:var(--basic);border:1px solid rgba(56,189,248,.3)}
+  .badge-extra   {background:rgba(192,132,252,.15);color:var(--extra);border:1px solid rgba(192,132,252,.3)}
+  .badge-ultimate{background:rgba(245,158,11,.15);color:var(--ultimate);border:1px solid rgba(245,158,11,.3)}
   /* ── STEPS ── */
   .steps{display:flex;flex-direction:column;gap:1.5rem}
   .step{
@@ -148,12 +148,12 @@
     background:var(--surface);border:1px solid var(--border);
     border-radius:14px;padding:1.5rem;transition:border-color .2s;
   }
-  .step:hover{border-color:var(--atomic)}
+  .step:hover{border-color:var(--basic)}
   .step-num{
     width:44px;height:44px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     font-weight:800;font-size:1rem;flex-shrink:0;
-    background:linear-gradient(135deg,var(--atomic),var(--composite));
+    background:linear-gradient(135deg,var(--basic),var(--extra));
     color:#fff;box-shadow:0 0 16px rgba(56,189,248,.35);
   }
   .step h3{font-size:1.05rem;font-weight:700;margin-bottom:.3rem}
@@ -187,14 +187,14 @@
     background:var(--surface);border:1px solid var(--border);
     padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;
   }
-  .flow-arrow{color:var(--atomic);font-size:1.2rem}
+  .flow-arrow{color:var(--basic);font-size:1.2rem}
   /* ── INSTALL CALLOUT ── */
   .callout{
     background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(167,139,250,.08));
     border:1px solid rgba(167,139,250,.25);border-radius:14px;
     padding:1.8rem;margin:2rem 0;
   }
-  .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--composite)}
+  .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--extra)}
   .callout p{font-size:.9rem;color:var(--muted)}
   /* ── GLOSSARY ── */
   .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
@@ -202,7 +202,7 @@
     background:var(--surface);border:1px solid var(--border);
     border-radius:10px;padding:1rem 1.2rem;
   }
-  .gloss-term{font-weight:700;font-size:.9rem;color:var(--atomic);margin-bottom:.25rem}
+  .gloss-term{font-weight:700;font-size:.9rem;color:var(--basic);margin-bottom:.25rem}
   .gloss-def{font-size:.82rem;color:var(--muted)}
   /* ── GRAPH DIALOG ── */
   .graph-dialog{
@@ -229,7 +229,7 @@
     padding:.42rem .78rem;cursor:pointer;white-space:nowrap;
   }
   .graph-download:hover,.graph-close:hover,.graph-download:focus-visible,.graph-close:focus-visible{
-    border-color:var(--atomic);color:var(--atomic);outline:none;
+    border-color:var(--basic);color:var(--basic);outline:none;
   }
   .graph-canvas-wrap{position:relative;flex:1;min-height:0;background:radial-gradient(circle at center,rgba(15,23,42,.75),#020617 68%)}
   #graphDialogCanvas{position:absolute;inset:0;width:100%;height:100%}
@@ -252,9 +252,9 @@
     opacity:.85;
   }
   .skill-tooltip-detail{color:#64748b;font-size:.72rem;font-weight:700;letter-spacing:.05em}
-  .skill-tooltip-type-atomic{color:#38bdf8}
-  .skill-tooltip-type-composite{color:#c084fc}
-  .skill-tooltip-type-legendary{color:#f59e0b}
+  .skill-tooltip-type-basic{color:#38bdf8}
+  .skill-tooltip-type-extra{color:#c084fc}
+  .skill-tooltip-type-ultimate{color:#f59e0b}
   .graph-search-wrap{position:absolute;top:.75rem;right:.75rem;z-index:10}
   .graph-search{
     background:rgba(3,7,18,.15);border:1px solid rgba(148,163,184,.15);
@@ -331,7 +331,7 @@
     border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .2s;
   }
   .ns-tab:hover{color:var(--text);border-color:rgba(148,163,184,.4)}
-  .ns-tab.active[data-level="all"]{color:var(--atomic);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.35)}
+  .ns-tab.active[data-level="all"]{color:var(--basic);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.35)}
   .ns-tab.active[data-level="II"]{color:#63cab7;background:rgba(99,202,183,.1);border-color:rgba(99,202,183,.35)}
   .ns-tab.active[data-level="III"]{color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.35)}
   .ns-tab.active[data-level="IV"]{color:#e879f9;background:rgba(232,121,249,.1);border-color:rgba(232,121,249,.35)}
@@ -367,7 +367,7 @@
   .ns-origin{
     flex-shrink:0;font-size:.65rem;font-weight:800;letter-spacing:.08em;
     padding:.16rem .48rem;border-radius:999px;
-    background:rgba(245,158,11,.12);color:var(--legendary);border:1px solid rgba(245,158,11,.3);
+    background:rgba(245,158,11,.12);color:var(--ultimate);border:1px solid rgba(245,158,11,.3);
   }
   .ns-flavor{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ns-card-right{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
@@ -393,7 +393,7 @@
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
   .ns-link-btn{
     font-size:.78rem;font-weight:600;padding:.3rem .78rem;border-radius:8px;
-    background:rgba(56,189,248,.07);color:var(--atomic);
+    background:rgba(56,189,248,.07);color:var(--basic);
     border:1px solid rgba(56,189,248,.22);text-decoration:none;transition:background .15s,border-color .15s;
   }
   .ns-link-btn:hover{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.45)}
@@ -402,7 +402,7 @@
     text-align:center;padding:3rem 1.5rem;
     border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;
   }
-  footer a{color:var(--atomic);text-decoration:none}
+  footer a{color:var(--basic);text-decoration:none}
   /* ── DIVIDER ── */
   .divider{border:none;border-top:1px solid var(--border);margin:0}
   /* ── ANIMATE ON SCROLL ── */
@@ -433,7 +433,7 @@
     <button class="hero-eyebrow graph-trigger" type="button" data-graph-trigger aria-controls="skillGraphDialog">Open Skill Graph for AI Agents</button>
     <h1 class="hero-title">Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
     <p class="hero-sub">
-      Gaia maps AI agent skills — from primitive building blocks to legendary
+      Gaia maps AI agent skills — from primitive building blocks to ultimate
       emergent capabilities — into an evidence-backed, versioned graph
       anyone can contribute to.
     </p>
@@ -479,22 +479,22 @@
   <p class="section-sub">Think of it as a Pokédex for AI agent abilities — but open, evidence-backed, and community-owned.</p>
 
   <div class="tier-grid">
-    <div class="tier-card atomic">
+    <div class="tier-card basic">
       <div class="tier-icon">○</div>
-      <span class="tier-badge badge-atomic">Intrinsic</span>
-      <div class="tier-name">Atomic Skills</div>
+      <span class="tier-badge badge-basic">Basic</span>
+      <div class="tier-name">Basic Skills</div>
       <div class="tier-desc">The genome of every agent. Primitive, indivisible capabilities — <em>Tokenize</em>, <em>Retrieve</em>, <em>Classify</em>, <em>Embed Text</em>.</div>
     </div>
-    <div class="tier-card composite">
+    <div class="tier-card extra">
       <div class="tier-icon">◇</div>
-      <span class="tier-badge badge-composite">Extra Skill</span>
-      <div class="tier-name">Composite Skills</div>
-      <div class="tier-desc">Emerge when 2+ atomics combine — <em>RAG Pipeline</em>, <em>Autonomous Debug</em>, <em>Research</em>. More than the sum of their parts.</div>
+      <span class="tier-badge badge-extra">Extra Skill</span>
+      <div class="tier-name">Extra Skills</div>
+      <div class="tier-desc">Emerge when 2+ basics combine — <em>RAG Pipeline</em>, <em>Autonomous Debug</em>, <em>Research</em>. More than the sum of their parts.</div>
     </div>
-    <div class="tier-card legendary">
+    <div class="tier-card ultimate">
       <div class="tier-icon">◆</div>
-      <span class="tier-badge badge-legendary">Ultimate Skill</span>
-      <div class="tier-name">Legendary Skills</div>
+      <span class="tier-badge badge-ultimate">Ultimate Skill</span>
+      <div class="tier-name">Ultimate Skills</div>
       <div class="tier-desc">High-complexity emergent capabilities found in &lt;1% of agents — <em>Autonomous Research Agent</em>, <em>Full-Stack Developer</em>.</div>
     </div>
   </div>
@@ -641,16 +641,16 @@
     <span class="flow-arrow">→</span>
     <div class="flow-node">📦 <strong>gaia push</strong><br><small style="color:var(--muted)">intake PR</small></div>
     <span class="flow-arrow">→</span>
-    <div class="flow-node" style="border-color:var(--atomic);color:var(--atomic)">⚡ <strong>Pending</strong><br><small>under review</small></div>
+    <div class="flow-node" style="border-color:var(--basic);color:var(--basic)">⚡ <strong>Pending</strong><br><small>under review</small></div>
     <span class="flow-arrow">→</span>
-    <div class="flow-node" style="border-color:var(--composite);color:var(--composite)">✦ <strong>Awakened</strong><br><small>Level I</small></div>
+    <div class="flow-node" style="border-color:var(--extra);color:var(--extra)">✦ <strong>Awakened</strong><br><small>Level I</small></div>
     <span class="flow-arrow">→</span>
-    <div class="flow-node" style="border-color:var(--legendary);color:var(--legendary)">◆ <strong>Named</strong><br><small>Level II+</small></div>
+    <div class="flow-node" style="border-color:var(--ultimate);color:var(--ultimate)">◆ <strong>Named</strong><br><small>Level II+</small></div>
   </div>
 
   <div class="steps">
     <div class="step">
-      <div class="step-num" style="background:linear-gradient(135deg,var(--composite),var(--legendary))">+</div>
+      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate))">+</div>
       <div>
         <h3>Install a named skill</h3>
         <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
@@ -660,12 +660,38 @@
       </div>
     </div>
     <div class="step">
-      <div class="step-num" style="background:linear-gradient(135deg,var(--legendary),#f97316)">★</div>
+      <div class="step-num" style="background:linear-gradient(135deg,var(--ultimate),#f97316)">★</div>
       <div>
         <h3>Promote your own named skill</h3>
         <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
         <pre><span class="comment"># gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</span>
 <span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--ultimate);color:#000">✦</div>
+      <div>
+        <h3>Claim an unclaimed Ultimate skill</h3>
+        <p>Five Ultimate skills show <code style="color:var(--ultimate)">◆ /skill-id [Unclaimed ✦]</code> in the registry — no contributor has implemented them yet. Build one, push it through intake review, then name it to claim the title slot and become the origin contributor:</p>
+        <pre><span class="comment"># Find unclaimed ultimates — look for [Unclaimed ✦] in registry.md</span>
+<span class="comment"># Build your implementation, then:</span>
+<span class="cmd">gaia push</span>                    <span class="comment"># submit intake record</span>
+<span class="comment"># After maintainer marks it awakened:</span>
+<span class="cmd">gaia name</span> intake/skill-batches/batch-xyz.json 0 <span class="str">yourname/skill-name</span>
+<span class="comment"># The seed title becomes visible once your PR merges</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate));font-size:.75rem">◆+</div>
+      <div>
+        <h3>Propose a new Ultimate skill</h3>
+        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
+        <pre><span class="comment"># In graph/gaia.json — add your skill with:</span>
+<span class="comment">#   "type": "ultimate"</span>
+<span class="comment">#   "prerequisites": ["skill-a", "skill-b", "skill-c"]</span>
+<span class="comment">#   "evidence": [... 3× Class A or B sources ...]</span>
+<span class="comment">#   "status": "provisional"  (maintainers set to validated at merge)</span>
+<span class="cmd">python scripts/validate.py</span>   <span class="comment"># must pass before opening PR</span></pre>
       </div>
     </div>
   </div>
@@ -702,11 +728,12 @@
     <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill lives here.</div></div>
     <div class="gloss-item"><div class="gloss-term">intake/</div><div class="gloss-def">Staging area for proposed skills before they enter the graph.</div></div>
     <div class="gloss-item"><div class="gloss-term">graph/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
-    <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before a composite or legendary can emerge.</div></div>
-    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier composite or legendary skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before an extra or ultimate skill can emerge.</div></div>
+    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier extra or ultimate skill.</div></div>
     <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
     <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
     <div class="gloss-item"><div class="gloss-term">gaia embed</div><div class="gloss-def">Pre-computes local semantic vectors so `gaia search` works by meaning.</div></div>
+    <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill with a hidden seed title but no contributor implementation yet — open for the taking.</div></div>
   </div>
 </section>
 
@@ -728,11 +755,11 @@
   const GRAPH_JSON_URL = 'graph/gaia.json';
   const GRAPH_SCALE = 1.25;
   const PALETTE = {
-    atomic:    { rgb:'56,189,248',   hex:'#38bdf8' },
-    composite: { rgb:'192,132,252',  hex:'#c084fc' },
-    legendary: { rgb:'245,158,11',   hex:'#f59e0b' },
+    basic:    { rgb:'56,189,248',   hex:'#38bdf8' },
+    extra:    { rgb:'192,132,252',  hex:'#c084fc' },
+    ultimate: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
-  const TYPE_ORDER = { atomic:0, composite:1, legendary:2 };
+  const TYPE_ORDER = { basic:0, extra:1, ultimate:2 };
   const RANK_META = {
     'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
     'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
@@ -742,25 +769,25 @@
     'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
   };
   const FALLBACK_SKILLS = [
-    { id:'tokenize', type:'atomic', name:'Tokenize', prerequisites:[] },
-    { id:'retrieve', type:'atomic', name:'Retrieve', prerequisites:[] },
-    { id:'embed-text', type:'atomic', name:'Embed Text', prerequisites:[] },
-    { id:'score-relevance', type:'atomic', name:'Score Relevance', prerequisites:[] },
-    { id:'web-search', type:'atomic', name:'Web Search', prerequisites:[] },
-    { id:'summarize', type:'atomic', name:'Summarize', prerequisites:[] },
-    { id:'cite-sources', type:'atomic', name:'Cite Sources', prerequisites:[] },
-    { id:'code-generation', type:'atomic', name:'Code Generation', prerequisites:[] },
-    { id:'execute-bash', type:'atomic', name:'Execute Bash', prerequisites:[] },
-    { id:'tool-select', type:'atomic', name:'Tool Select', prerequisites:[] },
-    { id:'chunk-document', type:'atomic', name:'Chunk Document', prerequisites:[] },
-    { id:'rank', type:'atomic', name:'Rank', prerequisites:[] },
-    { id:'rag-pipeline', type:'composite', name:'RAG Pipeline', prerequisites:['retrieve','chunk-document','embed-text','score-relevance','tokenize','rank'] },
-    { id:'research', type:'composite', name:'Research', prerequisites:['web-search','summarize','cite-sources'] },
-    { id:'error-interpretation', type:'atomic', name:'Error Interpretation', prerequisites:[] },
-    { id:'autonomous-debug', type:'composite', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','error-interpretation'] },
-    { id:'ghostwrite', type:'composite', name:'Ghostwrite', prerequisites:['research','write-report','audience-model'] },
-    { id:'knowledge-harvest', type:'composite', name:'Knowledge Harvest', prerequisites:['web-scrape','embed-text','extract-entities'] },
-    { id:'autonomous-research-agent', type:'legendary', name:'Autonomous Research Agent', prerequisites:['research','ghostwrite','knowledge-harvest'] },
+    { id:'tokenize', type:'basic', name:'Tokenize', prerequisites:[] },
+    { id:'retrieve', type:'basic', name:'Retrieve', prerequisites:[] },
+    { id:'embed-text', type:'basic', name:'Embed Text', prerequisites:[] },
+    { id:'score-relevance', type:'basic', name:'Score Relevance', prerequisites:[] },
+    { id:'web-search', type:'basic', name:'Web Search', prerequisites:[] },
+    { id:'summarize', type:'basic', name:'Summarize', prerequisites:[] },
+    { id:'cite-sources', type:'basic', name:'Cite Sources', prerequisites:[] },
+    { id:'code-generation', type:'basic', name:'Code Generation', prerequisites:[] },
+    { id:'execute-bash', type:'basic', name:'Execute Bash', prerequisites:[] },
+    { id:'tool-select', type:'basic', name:'Tool Select', prerequisites:[] },
+    { id:'chunk-document', type:'basic', name:'Chunk Document', prerequisites:[] },
+    { id:'rank', type:'basic', name:'Rank', prerequisites:[] },
+    { id:'rag-pipeline', type:'extra', name:'RAG Pipeline', prerequisites:['retrieve','chunk-document','embed-text','score-relevance','tokenize','rank'] },
+    { id:'research', type:'extra', name:'Research', prerequisites:['web-search','summarize','cite-sources'] },
+    { id:'error-interpretation', type:'basic', name:'Error Interpretation', prerequisites:[] },
+    { id:'autonomous-debug', type:'extra', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','error-interpretation'] },
+    { id:'ghostwrite', type:'extra', name:'Ghostwrite', prerequisites:['research','write-report','audience-model'] },
+    { id:'knowledge-harvest', type:'extra', name:'Knowledge Harvest', prerequisites:['web-scrape','embed-text','extract-entities'] },
+    { id:'autonomous-research-agent', type:'ultimate', name:'Autonomous Research Agent', prerequisites:['research','ghostwrite','knowledge-harvest'] },
   ];
   const FALLBACK_NAMED_MAP = {
     'automated-testing':           '0xdarkmatter/pytest-patterns',
@@ -784,7 +811,7 @@
     return skills.map(skill => ({
       id: skill.id,
       name: skill.name || skill.id,
-      type: skill.type || 'atomic',
+      type: skill.type || 'basic',
       level: skill.level || '',
       rarity: skill.rarity || '',
       prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
@@ -815,14 +842,14 @@
   }
 
   function buildPositions(skills, scale) {
-    const groups = { atomic:[], composite:[], legendary:[] };
-    skills.forEach(skill => (groups[skill.type] || groups.atomic).push(skill));
+    const groups = { basic:[], extra:[], ultimate:[] };
+    skills.forEach(skill => (groups[skill.type] || groups.basic).push(skill));
     Object.values(groups).forEach(group => group.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id)));
     const positions = {};
-    const radii = { atomic: 250 * scale, composite: 145 * scale, legendary: 44 * scale };
+    const radii = { basic: 250 * scale, extra: 145 * scale, ultimate: 44 * scale };
     Object.entries(groups).forEach(([type, group]) => {
       group.forEach((skill, index) => {
-        positions[skill.id] = spherePoint(radii[type] || radii.atomic, stableHash(skill.id), index, group.length);
+        positions[skill.id] = spherePoint(radii[type] || radii.basic, stableHash(skill.id), index, group.length);
       });
     });
     return positions;
@@ -841,7 +868,7 @@
       t: 0,
       mx: 0,
       my: 0,
-      labelMode: options.labelMode || 'legendary',
+      labelMode: options.labelMode || 'ultimate',
       scale: options.scale || GRAPH_SCALE,
       zoom: 1,
       statusEl: options.statusEl || null,
@@ -964,8 +991,8 @@
       if (state.redPillActive && state.namedMap[skill.id]) return true;
       if (state.labelMode === 'none') return false;
       if (state.labelMode === 'all') return true;
-      if (state.labelMode === 'modal') return skill.type !== 'atomic' || stableHash(skill.id) % 7 === 0;
-      return skill.type === 'legendary';
+      if (state.labelMode === 'modal') return skill.type !== 'basic' || stableHash(skill.id) % 7 === 0;
+      return skill.type === 'ultimate';
     }
     function draw() {
       if (!state.running) return;
@@ -1043,7 +1070,7 @@
       edges.sort((a,b) => a.avgZ - b.avgZ);
       edges.forEach(edge => {
         const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
-        const col = PALETTE[edge.type] || PALETTE.atomic;
+        const col = PALETTE[edge.type] || PALETTE.basic;
         const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * state.scale) / (860 * state.scale), 0.08), 1);
         const isNeighborEdge = hovering && neighborSet.has(edge.from) && neighborSet.has(edge.to);
         const fromVis = state.nodeAlphas[edge.from] !== undefined ? state.nodeAlphas[edge.from] : 1.0;
@@ -1052,7 +1079,7 @@
         const baseEdgeAlpha = isNeighborEdge ? 0.72 : 0.31;
         ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy);
         ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * baseEdgeAlpha * edgeVis).toFixed(2)})`;
-        ctx.lineWidth = isNeighborEdge ? (edge.type === 'legendary' ? 2.2 : 1.4) : (edge.type === 'legendary' ? 1.55 : 0.92);
+        ctx.lineWidth = isNeighborEdge ? (edge.type === 'ultimate' ? 2.2 : 1.4) : (edge.type === 'ultimate' ? 1.55 : 0.92);
         ctx.stroke();
       });
       const nodes = state.skills.map(skill => ({ skill, z: xf[skill.id] ? xf[skill.id].z : -9999 })).sort((a,b) => a.z - b.z);
@@ -1062,8 +1089,8 @@
         state.projectedNodes[skill.id] = pr;
         const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
         const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
-        const col = PALETTE[skill.type] || PALETTE.atomic;
-        const baseR = skill.type === 'legendary' ? 12.5 : skill.type === 'composite' ? 6.9 : 3.5;
+        const col = PALETTE[skill.type] || PALETTE.basic;
+        const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         if (skill.level === 'VI') {
           drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
@@ -1084,8 +1111,8 @@
         if (labelAlpha < 0.04) return;
         const col = (state.redPillActive && state.namedMap[skill.id])
           ? { rgb:'239,68,68' }
-          : (PALETTE[skill.type] || PALETTE.atomic);
-        const size = skill.type === 'legendary' ? 13 : skill.type === 'composite' ? 10 : 8;
+          : (PALETTE[skill.type] || PALETTE.basic);
+        const size = skill.type === 'ultimate' ? 13 : skill.type === 'extra' ? 10 : 8;
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
@@ -1107,7 +1134,7 @@
         if (state.hoveredId && pr) {
           if (state.hoveredId !== state.lastHoveredId) {
             const skill = state.skills.find(s => s.id === state.hoveredId);
-            const col = PALETTE[skill.type] || PALETTE.atomic;
+            const col = PALETTE[skill.type] || PALETTE.basic;
             const typeClass = `skill-tooltip-type-${skill.type}`;
             const rm = skill.level ? RANK_META[skill.level] : null;
             const rankPill = rm
@@ -1167,9 +1194,9 @@
       legend.className = 'graph-legend';
       legend.innerHTML =
         '<div class="graph-legend-section"><div class="graph-legend-heading">Type</div>' +
-        '<div class="graph-legend-item" data-legend-type="atomic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Atomic</div>' +
-        '<div class="graph-legend-item" data-legend-type="composite"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Composite</div>' +
-        '<div class="graph-legend-item" data-legend-type="legendary"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Legendary</div>' +
+        '<div class="graph-legend-item" data-legend-type="basic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Basic</div>' +
+        '<div class="graph-legend-item" data-legend-type="extra"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Extra</div>' +
+        '<div class="graph-legend-item" data-legend-type="ultimate"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Ultimate</div>' +
         '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
         '<div class="graph-legend-ranks">' +
         '<span class="graph-legend-rank-pill" data-legend-rank="I" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
