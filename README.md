@@ -19,22 +19,22 @@ back through its full prerequisite chain.
 GAIA SKILL TREE  v1.0.0
 ═════════════════════════════════════════════════════════════════
 
-🟡 Wisdom King: Autonomous Research Agent  [VI · Transcendent ⭐]
-  ├─ 🟣 Research  [III · Evolved]  ← Web Search · Summarize · Cite Sources
-  │  ├─ 🔵 Web Search  [I · Awakened]
-  │  ├─ 🔵 Summarize  [I · Awakened]
-  │  └─ 🔵 Cite Sources  [I · Awakened]
-  ├─ 🟣 Knowledge Harvest  [IV · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
-  │  ├─ 🟣 Web Scrape  [III · Evolved]  ← Web Search · Parse HTML · Extract Entities
-  │  │  ├─ 🔵 Web Search  [I · Awakened]  (↑ see above)
-  │  │  ├─ 🔵 Parse HTML  [I · Awakened]
-  │  │  └─ 🔵 Extract Entities  [I · Awakened]
-  │  ├─ 🔵 Extract Entities  [I · Awakened]  (↑ see above)
-  │  └─ 🔵 Embed Text  [I · Awakened]
-  └─ 🟣 Ghostwrite  [IV · Transcendent]  ← Research · Write Report · Audience Model
-     ├─ 🟣 Research  [III · Evolved]  (↑ see above)
-     ├─ 🔵 Write Report  [I · Awakened]
-     └─ 🔵 Audience Model  [I · Awakened]
+🟡 Wisdom King: Autonomous Research Agent  [`VI` · Transcendent ⭐]
+  ├─ 🟣 Research  [`III` · Evolved]  ← Web Search · Summarize · Cite Sources
+  │  ├─ 🔵 Web Search  [`I` · Awakened]
+  │  ├─ 🔵 Summarize  [`I` · Awakened]
+  │  └─ 🔵 Cite Sources  [`I` · Awakened]
+  ├─ 🟣 Knowledge Harvest  [`IV` · Transcendent]  ← Web Scrape · Extract Entities · Embed Text
+  │  ├─ 🟣 Web Scrape  [`III` · Evolved]  ← Web Search · Parse HTML · Extract Entities
+  │  │  ├─ 🔵 Web Search  [`I` · Awakened]  (↑ see above)
+  │  │  ├─ 🔵 Parse HTML  [`I` · Awakened]
+  │  │  └─ 🔵 Extract Entities  [`I` · Awakened]
+  │  ├─ 🔵 Extract Entities  [`I` · Awakened]  (↑ see above)
+  │  └─ 🔵 Embed Text  [`I` · Awakened]
+  └─ 🟣 Ghostwrite  [`IV` · Transcendent]  ← Research · Write Report · Audience Model
+     ├─ 🟣 Research  [`III` · Evolved]  (↑ see above)
+     ├─ 🔵 Write Report  [`I` · Awakened]
+     └─ 🔵 Audience Model  [`I` · Awakened]
 
 → Full graph: tree.md
 ```
