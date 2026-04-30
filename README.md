@@ -82,7 +82,7 @@ GAIA SKILL TREE  v1.0.0
 
 - **Track your agent's capabilities** — every skill your agent demonstrates gets logged to your personal skill tree, tied to your GitHub identity, portable across every repo you own.
 - **Unlock combinations** — when your agent has the prerequisites, a new composite or ultimate skill becomes available to fuse. The CLI detects it automatically.
-- **Name and share skills** — contribute named implementations of generic skills (e.g., `karpathy/autoresearch`), attributed to your GitHub identity and installable by anyone via `gaia install`. Submit with `status: awakened`; a reviewer promotes to `status: named` after confirming the real-world identity.
+- **Name and share skills** — contribute named implementations of generic skills (e.g., `karpathy/autoresearch`), attributed to your GitHub identity and installable by anyone via `gaia install`. Submit with `status: awakened`; a reviewer promotes to `status: named` after confirming the real-world identity. Browse all named skills at [`docs/index.html`](docs/index.html) or the live tutorial site.
 - **Contribute to the canon** — review draft skills, submit evidence, or create new skills from strong reviews. The graph grows with the field.
 
 ---
@@ -137,6 +137,16 @@ gaia --registry . scan
 # 4. Regenerate all skill pages, registry, tree, and user trees
 python3 scripts/generateProjections.py
 ```
+
+## Named Skills Browser
+
+The registry ships an interactive Named Skills browser at [`docs/index.html`](docs/index.html):
+
+- **Level-filtered tabs** — browse by Named (II), Evolved (III), Hardened (IV), or all levels.
+- **Expandable cards** — each card shows the contributor, title, description, `genericSkillRef`, tags, and a direct link to the upstream SKILL.md.
+- **Graph canvas toggle** — the **Named Skills** button in the graph explorer dims all non-named nodes and highlights named implementations with contributor attribution and a distinct glow.
+
+Serve locally with `python -m http.server 8080` from the repo root, then open `http://localhost:8080/docs/`.
 
 ## Real Skill Catalog
 

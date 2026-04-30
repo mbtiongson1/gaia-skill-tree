@@ -40,7 +40,7 @@ If you have [Claude Code](https://claude.ai/code) installed, this repository shi
 
 Runs the complete curation pipeline end-to-end:
 1. Reads the current graph to avoid duplicates.
-2. Researches candidate skills with Class A/B evidence.
+2. Researches candidate skills with Class A/B evidence. For each qualifying repo found on GitHub, checks common skill directory layouts (`skills/`, `.claude/skills/`, `codex/skills/`, etc.) to find individual SKILL.md files inside — each discovered skill is treated as a separate candidate with a specific file URL as evidence, not the repo root.
 3. Presents a draft review table — you classify each candidate as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject` before any file is touched.
 4. Writes and runs the generation script, validates the DAG, regenerates derived files, and opens a PR.
 
@@ -53,8 +53,9 @@ Runs the complete curation pipeline end-to-end:
 A lighter, read-only triage command for reviewing skill batches submitted via `gaia push`:
 1. Pulls latest and scans `intake/skill-batches/*.json`.
 2. Checks GitHub for open `draft-skills` PRs.
-3. Presents each proposed skill for classification: `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
-4. Optionally hands off to `/gaia-curate` to promote accepted skills into `graph/gaia.json`.
+3. For each proposed skill, searches GitHub for evidence and inspects qualifying repos for individual SKILL.md files inside common skill directories — resolves any repo-root evidence URLs to specific file paths before accepting.
+4. Presents each proposed skill for classification: `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
+5. Optionally hands off to `/gaia-curate` to promote accepted skills into `graph/gaia.json`.
 
 ```
 /gaia-draft-curate
@@ -208,7 +209,8 @@ After a named skill is merged as `awakened`, a reviewer checks whether it matche
 1. Open a classification PR using the `named_skill_classification.md` template.
 2. Add `title` (reviewer-assigned RPG epithet) and optionally `catalogRef` (back-link to `graph/real_skill_catalog.json`).
 3. Change `status: awakened` → `status: named`.
-4. If no catalog entry exists yet, add one to `graph/real_skill_catalog.json` with `promotedNamedSkillId` pointing back.
+4. Set `links.github` to the **specific SKILL.md file URL** inside the source repo (e.g., `https://github.com/owner/repo/blob/main/.claude/skills/skill-name/SKILL.md`), not the repo root or a directory listing. If no SKILL.md exists, a repo URL is acceptable but flag it as `needs-specific-url` in the classification PR.
+5. If no catalog entry exists yet, add one to `graph/real_skill_catalog.json` with `promotedNamedSkillId` pointing back.
 
 Only `status: named` skills surface as `realVariants` on abstract skill nodes and in the real-skills catalog. `awakened` skills remain in `graph/named/index.json` under `awaitingClassification` until classified.
 
