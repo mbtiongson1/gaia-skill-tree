@@ -6,17 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
-![Intrinsic](https://img.shields.io/badge/○_Intrinsic-atomic-38bdf8?style=flat-square&labelColor=0f172a)
-![Extra](https://img.shields.io/badge/◇_Extra-composite-c084fc?style=flat-square&labelColor=0f172a)
-![Ultimate](https://img.shields.io/badge/◆_Ultimate-legendary-f59e0b?style=flat-square&labelColor=0f172a)
-&nbsp;
-![Basic](https://img.shields.io/badge/0-Basic-94a3b8?style=flat-square&labelColor=0f172a)
-![Awakened](https://img.shields.io/badge/I-Awakened-38bdf8?style=flat-square&labelColor=0f172a)
-![Named](https://img.shields.io/badge/II-Named-63cab7?style=flat-square&labelColor=0f172a)
-![Evolved](https://img.shields.io/badge/III-Evolved-a78bfa?style=flat-square&labelColor=0f172a)
-![Hardened](https://img.shields.io/badge/IV-Hardened-e879f9?style=flat-square&labelColor=0f172a)
-![Transcendent](https://img.shields.io/badge/V-Transcendent-fbbf24?style=flat-square&labelColor=0f172a)
-![Transcendent★](https://img.shields.io/badge/VI-Transcendent_%E2%98%85-fbbf24?style=flat-square&labelColor=0f172a)
+🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◻ Basic &nbsp;·&nbsp; 🟦 Awakened &nbsp;·&nbsp; 🟢 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🟪 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
 
 ---
 
@@ -66,9 +56,9 @@ GAIA SKILL TREE  v1.0.0
 
 | Tier | Symbol | Display Name | What it means |
 |---|---|---|---|
-| ![](https://img.shields.io/badge/-atomic-38bdf8?style=flat-square&labelColor=0f172a) | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
-| ![](https://img.shields.io/badge/-composite-c084fc?style=flat-square&labelColor=0f172a) | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
-| ![](https://img.shields.io/badge/-legendary-f59e0b?style=flat-square&labelColor=0f172a) | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
+| 🔵 `atomic` | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
+| 🟣 `composite` | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
+| 🟡 `legendary` | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
 ## Rank System
 
@@ -76,13 +66,13 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| `0` | ![](https://img.shields.io/badge/Basic-0-94a3b8?style=flat-square&labelColor=0f172a) | None | Universal LLM primitive — any capable model does this by default |
-| `I` | ![](https://img.shields.io/badge/Awakened-I-38bdf8?style=flat-square&labelColor=0f172a) | None | Foundation tier — catalogued agent capability |
-| `II` | ![](https://img.shields.io/badge/Named-II-63cab7?style=flat-square&labelColor=0f172a) | Class C | First confirmed demonstration |
-| `III` | ![](https://img.shields.io/badge/Evolved-III-a78bfa?style=flat-square&labelColor=0f172a) | Class B | Reproducible, fully documented |
-| `IV` | ![](https://img.shields.io/badge/Hardened-IV-e879f9?style=flat-square&labelColor=0f172a) | Class B or A | Failure modes known; battle-tested |
-| `V` | ![](https://img.shields.io/badge/Transcendent-V-fbbf24?style=flat-square&labelColor=0f172a) | Class B or A | Composable and self-improving |
-| `VI` | ![](https://img.shields.io/badge/Transcendent_%E2%98%85-VI-fbbf24?style=flat-square&labelColor=1e293b) | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
+| `0` | ◻ **Basic** | None | Universal LLM primitive — any capable model does this by default |
+| `I` | 🟦 **Awakened** | None | Foundation tier — catalogued agent capability |
+| `II` | 🟢 **Named** | Class C | First confirmed demonstration |
+| `III` | 🟣 **Evolved** | Class B | Reproducible, fully documented |
+| `IV` | 🟪 **Hardened** | Class B or A | Failure modes known; battle-tested |
+| `V` | 🟡 **Transcendent** | Class B or A | Composable and self-improving |
+| `VI` | ⭐ **Transcendent ★** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
 ---
 
