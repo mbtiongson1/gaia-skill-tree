@@ -1,0 +1,29 @@
+---
+id: anthropic/skill-creator
+name: Skill Creator
+contributor: anthropic
+origin: true
+genericSkillRef: tool-creation
+status: named
+title: "The Skill Forger's Art"
+catalogRef: anthropic-skill-creator
+level: II
+description: Interviews the user through a structured dialogue to elicit the skill's purpose, trigger conditions, and step-by-step instructions, then programmatically writes a new SKILL.md file ready for use in a Claude Code or Codex CLI skills directory.
+links:
+  github: https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md
+tags:
+  - skill-authoring
+  - meta-agent
+  - claude-code
+  - tool-creation
+createdAt: "2026-04-30"
+updatedAt: "2026-04-30"
+---
+
+## Overview
+
+Skill Creator is a meta-agent skill that turns the agent into an interactive skill author. It conducts a structured interview with the user — asking about the skill's name, trigger phrase, inputs, and expected outputs — then generates a fully-formed `SKILL.md` file. The output is immediately installable in any Claude Code, Cursor, or Codex CLI skills directory.
+
+## Origin
+
+First published by @anthropic. This is the origin implementation for the `tool-creation` skill bucket under the agent-skill-authoring use case.

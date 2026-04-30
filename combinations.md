@@ -6,7 +6,7 @@
 | ◇ Automated Testing | Extra Skill | Generate Test, Execute Bash, Error Interpretation | III · Evolved |  |
 | ◆ True Oracle: Autonomous Data Scientist | Ultimate Skill | Data Analysis, Math Reason, Research | V · Transcendent | Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Autonomous Debug | Extra Skill | Code Generation, Execute Bash, Error Interpretation | IV · Hardened |  |
-| ◆ Wisdom King: Autonomous Research Agent | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | VI · Transcendent ★ | Requires extensive multi-system validation before level advancement. |
+| ◆ Wisdom King: Autonomous Research Agent | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | VI · Transcendent â˜… | Requires extensive multi-system validation before level advancement. |
 | ◇ Browser Automation | Extra Skill | Web Search, Computer Use | III · Evolved |  |
 | ◇ Code Review Pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | III · Evolved |  |
 | ◇ Content Moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III · Evolved |  |

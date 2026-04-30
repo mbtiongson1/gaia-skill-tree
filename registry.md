@@ -8,7 +8,7 @@
 | ◇ Automated Testing | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◆ True Oracle: Autonomous Data Scientist | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ◇ Autonomous Debug | Extra Skill | IV · Hardened | Rare | Provisional |
-| ◆ Wisdom King: Autonomous Research Agent | Ultimate Skill | VI · Transcendent ★ | Divine | Provisional |
+| ◆ Wisdom King: Autonomous Research Agent | Ultimate Skill | VI · Transcendent â˜… | Divine | Provisional |
 | ◇ Browser Automation | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Chain-of-Thought Reasoning | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
 | ○ Chunk Document | Intrinsic Skill | I · Awakened | Common | Provisional |
@@ -27,6 +27,7 @@
 | ○ Diff Content | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ◇ Document Analyst | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◇ Document Digitization | Extra Skill | III · Evolved | Uncommon | Provisional |
+| ○ Document Editing | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ○ Embed Text | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Error Interpretation | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Evaluate Output | Intrinsic Skill | I · Awakened | Common | Provisional |
@@ -35,6 +36,7 @@
 | ○ Few-Shot Learning | Intrinsic Skill | IV · Hardened | Common | Provisional |
 | ○ Fine-Tune | Intrinsic Skill | IV · Hardened | Uncommon | Provisional |
 | ○ Format Output | Intrinsic Skill | 0 · Basic | Common | Provisional |
+| ○ Framework Upgrade | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | V · Transcendent | Divine | Provisional |
 | ◇ Function Calling | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Generate SQL | Intrinsic Skill | II · Named | Common | Provisional |
@@ -80,9 +82,11 @@
 | ○ Self-Critique | Intrinsic Skill | I · Awakened | Uncommon | Provisional |
 | ○ Semantic Cache | Intrinsic Skill | IV · Hardened | Rare | Provisional |
 | ○ Sentiment Analysis | Intrinsic Skill | 0 · Basic | Common | Provisional |
+| ○ Skill Discovery | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ○ Speech to Text | Intrinsic Skill | II · Named | Common | Provisional |
 | ○ Structured Output Generation | Intrinsic Skill | I · Awakened | Common | Provisional |
 | ○ Summarize | Intrinsic Skill | 0 · Basic | Common | Provisional |
+| ○ Test-Driven Development | Intrinsic Skill | 0 · Basic | Uncommon | Provisional |
 | ○ Text to Speech | Intrinsic Skill | II · Named | Common | Provisional |
 | ◇ Text-to-SQL Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Tokenize | Intrinsic Skill | 0 · Basic | Common | Provisional |
@@ -92,6 +96,7 @@
 | ○ Translate | Intrinsic Skill | 0 · Basic | Common | Provisional |
 | ◇ Translation Pipeline | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◇ Tree of Thought | Extra Skill | IV · Hardened | Rare | Provisional |
+| ○ UX Audit | Intrinsic Skill | 0 · Basic | Uncommon | Provisional |
 | ◇ Voice Agent | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ◇ Web Scrape | Extra Skill | III · Evolved | Uncommon | Provisional |
 | ○ Web Search | Intrinsic Skill | I · Awakened | Common | Provisional |

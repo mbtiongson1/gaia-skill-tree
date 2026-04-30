@@ -8,10 +8,25 @@ Curated named skills from live SKILL.md ecosystems.
 |---|---|---|
 | karpathy/autoresearch | Autonomous research agent that iteratively reviews academic papers and synthesizes summaries. | https://github.com/karpathy/autoresearch |
 | cognition-labs/devin | Autonomous software engineering agent capable of end-to-end debugging and code generation. | https://github.com/cognition-labs/devin |
+| laravel/boost | Laravel Boost -- AI-assisted Laravel framework upgrade tooling. | https://github.com/laravel/boost |
+| anthropics/skills | Anthropic official Claude Code skill library. | https://github.com/anthropics/skills |
+| vercel-labs/skills | Vercel Labs skill library for Claude Code and Codex CLI. | https://github.com/vercel-labs/skills |
+| GLINCKER/claude-code-marketplace | GLINCKER community marketplace for Claude Code skills. | https://github.com/GLINCKER/claude-code-marketplace |
+| addyosmani/agent-skills | Addy Osmani collection of agent workflow enforcement skills. | https://github.com/addyosmani/agent-skills |
+| mastepanoski/claude-skills | Martin Stepanoski NPM package of UX-focused Claude skills. | https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills |
+| spring-ai-alibaba/examples | Spring AI Alibaba example projects including Claude Code skills. | https://github.com/spring-ai-alibaba/examples |
 
 ## Items
 
 - [karpathy/autoresearch](https://github.com/karpathy/autoresearch) - Autonomous research agent that iteratively searches academic databases, reads papers, extracts findings, and produces structured research summaries. Maps to: `autonomous-research-agent`.
 - [devin-ai/autonomous-swe](https://github.com/cognition-labs/devin) - Autonomous software engineering agent that combines debugging, code generation, and self-correction to resolve issues end-to-end across complex multi-file repositories. Maps to: `autonomous-debug`.
+- [laravel/upgrade-laravel-v13](https://github.com/laravel/boost/issues/698) - Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, and post-upgrade validation. Maps to: `framework-upgrade`.
+- [anthropic/skill-creator](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md) - Interviews the user to elicit skill purpose and steps, then programmatically writes a new SKILL.md file for Claude Code or Codex CLI. Maps to: `tool-creation`.
+- [vercel/find-skills](https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md) - Searches the skills.sh registry by keyword, ranks by install count, and auto-installs the chosen skill. Maps to: `skill-discovery`.
+- [glincker/readme-generator](https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md) - Analyzes project structure, manifests, and configs to generate a professional README.md with badges, install steps, and usage examples. Maps to: `write-report`.
+- [anthropic/pptx](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md) - Extracts, edits, and repacks PowerPoint (.pptx) files using markitdown, enabling agents to read, modify, and write structured presentations without a GUI. Maps to: `document-editing`.
+- [addy-osmani/test-driven-development](https://github.com/addyosmani/agent-skills) - Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds. Maps to: `test-driven-development`.
+- [martin-stepanoski/nielsen-heuristics-audit](https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills) - Audits a UI against Jakob Nielsen's 10 usability heuristics, scores each, and produces a prioritized remediation report. Maps to: `ux-audit`.
+- [spring-ai/readme-generate](https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills) - Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format. Maps to: `write-report`.
 
 *Generated from graph/real_skill_catalog.json on 2026-04-30.*

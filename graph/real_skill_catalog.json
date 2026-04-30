@@ -11,6 +11,41 @@
       "repo": "cognition-labs/devin",
       "description": "Autonomous software engineering agent capable of end-to-end debugging and code generation.",
       "url": "https://github.com/cognition-labs/devin"
+    },
+    {
+      "repo": "laravel/boost",
+      "description": "Laravel Boost -- AI-assisted Laravel framework upgrade tooling.",
+      "url": "https://github.com/laravel/boost"
+    },
+    {
+      "repo": "anthropics/skills",
+      "description": "Anthropic official Claude Code skill library.",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "repo": "vercel-labs/skills",
+      "description": "Vercel Labs skill library for Claude Code and Codex CLI.",
+      "url": "https://github.com/vercel-labs/skills"
+    },
+    {
+      "repo": "GLINCKER/claude-code-marketplace",
+      "description": "GLINCKER community marketplace for Claude Code skills.",
+      "url": "https://github.com/GLINCKER/claude-code-marketplace"
+    },
+    {
+      "repo": "addyosmani/agent-skills",
+      "description": "Addy Osmani collection of agent workflow enforcement skills.",
+      "url": "https://github.com/addyosmani/agent-skills"
+    },
+    {
+      "repo": "mastepanoski/claude-skills",
+      "description": "Martin Stepanoski NPM package of UX-focused Claude skills.",
+      "url": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills"
+    },
+    {
+      "repo": "spring-ai-alibaba/examples",
+      "description": "Spring AI Alibaba example projects including Claude Code skills.",
+      "url": "https://github.com/spring-ai-alibaba/examples"
     }
   ],
   "items": [
@@ -22,10 +57,16 @@
       "description": "Autonomous research agent that iteratively searches academic databases, reads papers, extracts findings, and produces structured research summaries.",
       "sourceRepo": "karpathy/autoresearch",
       "url": "https://github.com/karpathy/autoresearch",
-      "mapsToGaia": ["autonomous-research-agent"],
+      "mapsToGaia": [
+        "autonomous-research-agent"
+      ],
       "promotedNamedSkillId": "karpathy/autoresearch",
       "addedAt": "2026-04-30",
-      "tags": ["research", "autonomous", "paper-synthesis"]
+      "tags": [
+        "research",
+        "autonomous",
+        "paper-synthesis"
+      ]
     },
     {
       "id": "devin-ai-autonomous-swe",
@@ -35,10 +76,181 @@
       "description": "Autonomous software engineering agent that combines debugging, code generation, and self-correction to resolve issues end-to-end across complex multi-file repositories.",
       "sourceRepo": "cognition-labs/devin",
       "url": "https://github.com/cognition-labs/devin",
-      "mapsToGaia": ["autonomous-debug"],
+      "mapsToGaia": [
+        "autonomous-debug"
+      ],
       "promotedNamedSkillId": "devin-ai/autonomous-swe",
       "addedAt": "2026-04-30",
-      "tags": ["software-engineering", "autonomous", "debugging", "code-generation"]
+      "tags": [
+        "software-engineering",
+        "autonomous",
+        "debugging",
+        "code-generation"
+      ]
+    },
+    {
+      "id": "laravel-upgrade-laravel-v13",
+      "name": "laravel/upgrade-laravel-v13",
+      "contributor": "laravel",
+      "title": "The Versionist's Trial",
+      "description": "Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, and post-upgrade validation.",
+      "sourceRepo": "laravel/boost",
+      "url": "https://github.com/laravel/boost/issues/698",
+      "mapsToGaia": [
+        "framework-upgrade"
+      ],
+      "promotedNamedSkillId": "laravel/upgrade-laravel-v13",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "laravel",
+        "php",
+        "framework-upgrade",
+        "migration"
+      ]
+    },
+    {
+      "id": "anthropic-skill-creator",
+      "name": "anthropic/skill-creator",
+      "contributor": "anthropic",
+      "title": "The Skill Forger's Art",
+      "description": "Interviews the user to elicit skill purpose and steps, then programmatically writes a new SKILL.md file for Claude Code or Codex CLI.",
+      "sourceRepo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+      "mapsToGaia": [
+        "tool-creation"
+      ],
+      "promotedNamedSkillId": "anthropic/skill-creator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "skill-authoring",
+        "meta-agent",
+        "claude-code",
+        "tool-creation"
+      ]
+    },
+    {
+      "id": "vercel-find-skills",
+      "name": "vercel/find-skills",
+      "contributor": "vercel",
+      "title": "The Registry Scout",
+      "description": "Searches the skills.sh registry by keyword, ranks by install count, and auto-installs the chosen skill.",
+      "sourceRepo": "vercel-labs/skills",
+      "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md",
+      "mapsToGaia": [
+        "skill-discovery"
+      ],
+      "promotedNamedSkillId": "vercel/find-skills",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "skill-registry",
+        "discovery",
+        "skills-sh",
+        "auto-install"
+      ]
+    },
+    {
+      "id": "glincker-readme-generator",
+      "name": "glincker/readme-generator",
+      "contributor": "glincker",
+      "title": "The Document Weaver",
+      "description": "Analyzes project structure, manifests, and configs to generate a professional README.md with badges, install steps, and usage examples.",
+      "sourceRepo": "GLINCKER/claude-code-marketplace",
+      "url": "https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md",
+      "mapsToGaia": [
+        "write-report"
+      ],
+      "promotedNamedSkillId": "glincker/readme-generator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "documentation",
+        "readme",
+        "code-analysis",
+        "project-structure"
+      ]
+    },
+    {
+      "id": "anthropic-pptx",
+      "name": "anthropic/pptx",
+      "contributor": "anthropic",
+      "title": "The Slide Artisan",
+      "description": "Extracts, edits, and repacks PowerPoint (.pptx) files using markitdown, enabling agents to read, modify, and write structured presentations without a GUI.",
+      "sourceRepo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+      "mapsToGaia": [
+        "document-editing"
+      ],
+      "promotedNamedSkillId": "anthropic/pptx",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "pptx",
+        "powerpoint",
+        "document-editing",
+        "markitdown",
+        "presentations"
+      ]
+    },
+    {
+      "id": "addy-osmani-test-driven-development",
+      "name": "addy-osmani/test-driven-development",
+      "contributor": "addy-osmani",
+      "title": "The Red-Green Oath",
+      "description": "Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds.",
+      "sourceRepo": "addyosmani/agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "mapsToGaia": [
+        "test-driven-development"
+      ],
+      "promotedNamedSkillId": "addy-osmani/test-driven-development",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "tdd",
+        "testing",
+        "red-green-refactor",
+        "workflow-enforcement",
+        "software-quality"
+      ]
+    },
+    {
+      "id": "martin-stepanoski-nielsen-heuristics-audit",
+      "name": "martin-stepanoski/nielsen-heuristics-audit",
+      "contributor": "martin-stepanoski",
+      "title": "The Ten Laws of Sight",
+      "description": "Audits a UI against Jakob Nielsen's 10 usability heuristics, scores each, and produces a prioritized remediation report.",
+      "sourceRepo": "mastepanoski/claude-skills",
+      "url": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills",
+      "mapsToGaia": [
+        "ux-audit"
+      ],
+      "promotedNamedSkillId": "martin-stepanoski/nielsen-heuristics-audit",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "ux",
+        "usability",
+        "nielsen",
+        "heuristics",
+        "accessibility"
+      ]
+    },
+    {
+      "id": "spring-ai-readme-generate",
+      "name": "spring-ai/readme-generate",
+      "contributor": "spring-ai",
+      "title": "The Endpoint Scribe",
+      "description": "Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format.",
+      "sourceRepo": "spring-ai-alibaba/examples",
+      "url": "https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills",
+      "mapsToGaia": [
+        "write-report"
+      ],
+      "promotedNamedSkillId": "spring-ai/readme-generate",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "java",
+        "spring",
+        "rest-api",
+        "documentation",
+        "readme"
+      ]
     }
   ]
 }
