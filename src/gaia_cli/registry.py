@@ -8,7 +8,11 @@ from pathlib import Path
 
 WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync", "promote"}
 
-_GLOBAL_CONFIG_PATH = Path.home() / ".gaia" / "config.json"
+
+def _global_config_path() -> Path:
+    """Return ~/.gaia/config.json, honouring GAIA_HOME if set."""
+    home = os.environ.get("GAIA_HOME") or Path.home()
+    return Path(home) / ".gaia" / "config.json"
 
 
 def bundled_registry_path():
@@ -19,7 +23,7 @@ def bundled_registry_path():
 def read_global_registry():
     """Return the globally-registered registry path, or None if not set."""
     try:
-        with open(_GLOBAL_CONFIG_PATH, encoding="utf-8") as f:
+        with open(_global_config_path(), encoding="utf-8") as f:
             data = json.load(f)
         path = data.get("defaultRegistry")
         if path and Path(path).is_dir():
@@ -31,16 +35,17 @@ def read_global_registry():
 
 def write_global_registry(path: str) -> None:
     """Persist the registry path to the global ~/.gaia/config.json."""
-    _GLOBAL_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    cfg = _global_config_path()
+    cfg.parent.mkdir(parents=True, exist_ok=True)
     existing = {}
-    if _GLOBAL_CONFIG_PATH.exists():
+    if cfg.exists():
         try:
-            with open(_GLOBAL_CONFIG_PATH, encoding="utf-8") as f:
+            with open(cfg, encoding="utf-8") as f:
                 existing = json.load(f)
         except (OSError, json.JSONDecodeError):
             pass
     existing["defaultRegistry"] = str(Path(path).resolve())
-    with open(_GLOBAL_CONFIG_PATH, "w", encoding="utf-8") as f:
+    with open(cfg, "w", encoding="utf-8") as f:
         json.dump(existing, f, indent=2)
 
 
