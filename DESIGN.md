@@ -11,9 +11,9 @@ CSS custom properties defined in `docs/index.html`:
 | `--border` | `#1e293b` | Dividers, card borders |
 | `--text` | `#e2e8f0` | Primary text |
 | `--muted` | `#64748b` | Secondary / subdued text |
-| `--atomic` | `#38bdf8` | Atomic tier accent (sky blue) |
-| `--composite` | `#c084fc` | Composite tier accent (purple) |
-| `--legendary` | `#f59e0b` | Legendary tier accent (amber) |
+| `--basic`     | `#38bdf8` | Basic tier accent (sky blue) |
+| `--extra`     | `#c084fc` | Extra Skill tier accent (purple) |
+| `--ultimate`  | `#f59e0b` | Ultimate Skill tier accent (amber) |
 
 ---
 
@@ -23,16 +23,16 @@ Three tiers, each with a fixed color identity and symbolic glyph.
 
 | Tier | Symbol | Display Name | Hex | RGB |
 |---|---|---|---|---|
-| `atomic` | ○ | Intrinsic | `#38bdf8` | `56,189,248` |
-| `composite` | ◇ | Extra Skill | `#c084fc` | `192,132,252` |
-| `legendary` | ◆ | Ultimate | `#f59e0b` | `245,158,11` |
+| `basic`     | ○ | Basic        | `#38bdf8` | `56,189,248`  |
+| `extra`     | ◇ | Extra Skill  | `#c084fc` | `192,132,252` |
+| `ultimate`  | ◆ | Ultimate Skill | `#f59e0b` | `245,158,11` |
 
 Badge styles follow a consistent formula: `rgba({rgb}, .15)` background, `rgba({rgb}, .3)` border, solid hex text.
 
 Card glow per tier (radial gradient, 35% opacity):
-- Atomic: `rgba(56,189,248,.4)`
-- Composite: `rgba(192,132,252,.4)`
-- Legendary: `rgba(245,158,11,.4)`
+- Basic: `rgba(56,189,248,.4)`
+- Extra: `rgba(192,132,252,.4)`
+- Ultimate: `rgba(245,158,11,.4)`
 
 ---
 
@@ -76,21 +76,21 @@ Node radii (before depth/projection scale):
 
 | Type | Base radius |
 |---|---|
-| `legendary` | 12.5 |
-| `composite` | 6.9 |
-| `atomic` | 3.5 |
+| `ultimate`  | 12.5 |
+| `extra`     | 6.9  |
+| `basic`     | 3.5  |
 
 Edge line width:
 
-| Condition | Legendary | Other |
+| Condition | Ultimate | Other |
 |---|---|---|
 | Highlighted (hover neighbor) | 2.2 px | 1.4 px |
 | Default | 1.55 px | 0.92 px |
 
 Sphere layout radii (at scale 1.25):
-- Atomic: 250 × scale = **312 px**
-- Composite: 145 × scale = **181 px**
-- Legendary: 44 × scale = **55 px** (innermost)
+- Basic: 250 × scale = **312 px**
+- Extra: 145 × scale = **181 px**
+- Ultimate: 44 × scale = **55 px** (innermost)
 
 ---
 
@@ -109,7 +109,7 @@ Type scale:
 
 Syntax highlighting in `<pre>` blocks:
 - `.comment` — `#4b6378`
-- `.cmd` — `#38bdf8` (sky / atomic)
+- `.cmd` — `#38bdf8` (sky / basic)
 - `.str` — `#86efac` (green)
 - `.kw` — `#a78bfa` (violet)
 
@@ -125,12 +125,12 @@ linear-gradient(135deg, #38bdf8 0%, #c084fc 50%, #f59e0b 100%)
 ```
 
 **Buttons**
-- Primary: `linear-gradient(135deg, --atomic, --composite)`, white text, `box-shadow: 0 0 20px rgba(56,189,248,.3)`
-- Ghost: transparent bg, `--border` outline → `--atomic` on hover
+- Primary: `linear-gradient(135deg, --basic, --extra)`, white text, `box-shadow: 0 0 20px rgba(56,189,248,.3)`
+- Ghost: transparent bg, `--border` outline → `--basic` on hover
 
 **Cards** — `var(--surface)` background, `var(--border)` 1 px border, 14 px radius, radial glow overlay per tier (see Skill Tiers above).
 
-**Callout** — dual-gradient tint: `linear-gradient(135deg, rgba(56,189,248,.08), rgba(167,139,250,.08))`, `--composite` title.
+**Callout** — dual-gradient tint: `linear-gradient(135deg, rgba(56,189,248,.08), rgba(167,139,250,.08))`, `--extra` title.
 
 **Graph dialog** — `border: 1px solid rgba(56,189,248,.35)`, `box-shadow: 0 30px 100px rgba(0,0,0,.72), 0 0 55px rgba(56,189,248,.16)`, backdrop `rgba(0,0,0,.72) blur(6px)`.
 
