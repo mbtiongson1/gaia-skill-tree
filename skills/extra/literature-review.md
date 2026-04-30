@@ -31,4 +31,4 @@ Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent).
 _None verified yet._
 
 ---
-*Generated from gaia.json v1.0.0 on 2026-04-30. Do not edit directly.*
+*Generated from gaia.json v2.1.0 on 2026-04-30. Do not edit directly.*
