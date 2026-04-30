@@ -18,6 +18,7 @@ from gaia_cli.registry import (
     registry_graph_path,
     require_explicit_writable_registry,
     resolve_registry_path,
+    write_global_registry,
 )
 from gaia_cli.pathEngine import compute_paths, load_paths, save_paths, diff_paths
 from gaia_cli.cardRenderer import (
@@ -126,6 +127,13 @@ def init_command(args):
     print(f"Initialized Gaia configuration at {config_path}")
     print(f"  user:       {username}")
     print(f"  scanPaths:  {scan_paths}")
+
+    # If we're inside a registry clone, register its path globally so that
+    # commands like `gaia push` work from any project without --registry.
+    if os.path.exists("graph/gaia.json"):
+        registry_abs = os.path.abspath(".")
+        write_global_registry(registry_abs)
+        print(f"  registry:   {registry_abs} (saved to ~/.gaia/config.json)")
 
 
 def scan_command(args):

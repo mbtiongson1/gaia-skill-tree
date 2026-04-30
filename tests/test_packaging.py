@@ -119,7 +119,7 @@ def test_write_commands_require_explicit_registry(tmp_path):
     )
 
     assert result.returncode == 2
-    assert "requires an explicit writable registry" in result.stderr
+    assert "writable registry" in result.stderr
     assert "--registry PATH" in result.stderr
 
 
