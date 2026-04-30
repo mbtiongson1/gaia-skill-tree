@@ -12,6 +12,7 @@ on:
       - 'scripts/**'
       - 'plugin/**'
       - 'tests/**'
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'graph/**'
@@ -21,6 +22,7 @@ on:
       - 'scripts/**'
       - 'plugin/**'
       - 'tests/**'
+      - '.github/workflows/**'
   workflow_dispatch: {}
 
 jobs:
@@ -37,7 +39,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install build jsonschema pytest setuptools wheel
+        run: pip install -e ".[dev]"
 
       - name: Run validation
         run: python scripts/validate.py
