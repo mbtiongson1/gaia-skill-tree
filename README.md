@@ -83,30 +83,27 @@ Skills level up through evidence, not declaration:
 
 ## Quickstart
 
+**macOS / Linux**
 ```bash
-# ── Works on Windows, macOS, and Linux — copy-paste the whole block ──────
-
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
+pip install -e ".[embeddings]"
+gaia init
+gaia embed
+gaia --registry . scan
+gaia --registry . appraise
+```
 
-pip install -e ".[embeddings]"  # install CLI + semantic search support
-
-# ── Windows only: if `gaia` is not recognized after install ──────────────
-# Run this in PowerShell to add the user Scripts folder to your PATH:
-#   $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
-# To persist across sessions, add that path via System → Environment Variables → Path.
-# ─────────────────────────────────────────────────────────────────────────
-
-gaia init                        # auto-detects your GitHub username and
-                                 # skill files (AGENTS.md, SKILLS.md,
-                                 # .gemini/, .claude/skills/, etc.)
-
-gaia embed                       # build vector index (~30 s, run once)
-
-gaia --registry . scan           # detect skills in your repo and show
-                                 # available fusions
-
-gaia --registry . appraise       # inspect your most recent skill card
+**Windows (PowerShell)**
+```powershell
+git clone https://github.com/mbtiongson1/gaia-skill-tree.git
+cd gaia-skill-tree
+pip install -e ".[embeddings]"
+$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
+gaia init
+gaia embed
+gaia --registry . scan
+gaia --registry . appraise
 ```
 
 ## Named Skills Browser
