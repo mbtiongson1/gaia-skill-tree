@@ -309,6 +309,80 @@
     .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
   }
 
+  /* -- NAMED SKILLS -- */
+  .ns-level-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+  .ns-tab{
+    padding:.4rem .95rem;border-radius:999px;font-size:.82rem;font-weight:600;
+    background:transparent;color:var(--muted);
+    border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .2s;
+  }
+  .ns-tab:hover{color:var(--text);border-color:rgba(148,163,184,.4)}
+  .ns-tab.active[data-level="all"]{color:var(--atomic);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.35)}
+  .ns-tab.active[data-level="II"]{color:#63cab7;background:rgba(99,202,183,.1);border-color:rgba(99,202,183,.35)}
+  .ns-tab.active[data-level="III"]{color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.35)}
+  .ns-tab.active[data-level="IV"]{color:#e879f9;background:rgba(232,121,249,.1);border-color:rgba(232,121,249,.35)}
+  .ns-tab.active[data-level="V"]{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.35)}
+  .ns-tab.active[data-level="VI"]{color:#fbbf24;background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4)}
+  .ns-grid{display:flex;flex-direction:column;gap:.75rem}
+  .ns-loading,.ns-empty{
+    text-align:center;color:var(--muted);font-size:.9rem;
+    padding:3rem 1.5rem;border:1px dashed var(--border);border-radius:14px;
+  }
+  .ns-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s;
+    --ns-glow:rgba(56,189,248,.1);
+  }
+  .ns-card:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(255,255,255,.08)}
+  .ns-card[data-level="II"]{--ns-glow:rgba(99,202,183,.2)}
+  .ns-card[data-level="III"]{--ns-glow:rgba(167,139,250,.2)}
+  .ns-card[data-level="IV"]{--ns-glow:rgba(232,121,249,.2)}
+  .ns-card[data-level="V"]{--ns-glow:rgba(251,191,36,.2)}
+  .ns-card[data-level="VI"]{--ns-glow:rgba(251,191,36,.28)}
+  .ns-card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;padding:1.1rem 1.4rem;cursor:pointer;transition:background .15s;
+  }
+  .ns-card-head:hover{background:rgba(255,255,255,.025)}
+  .ns-pill{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0}
+  .ns-pill-id{
+    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.95rem;font-weight:700;color:var(--text);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .ns-origin{
+    flex-shrink:0;font-size:.65rem;font-weight:800;letter-spacing:.08em;
+    padding:.16rem .48rem;border-radius:999px;
+    background:rgba(245,158,11,.12);color:var(--legendary);border:1px solid rgba(245,158,11,.3);
+  }
+  .ns-flavor{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ns-card-right{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+  .ns-level-badge{font-size:.72rem;font-weight:700;padding:.22rem .62rem;border-radius:999px;border:1px solid;white-space:nowrap;letter-spacing:.04em}
+  .ns-toggle{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.85rem;transition:transform .28s,color .15s;font-family:inherit;padding:0 .1rem;line-height:1}
+  .ns-card.open .ns-toggle{transform:rotate(180deg)}
+  .ns-card-head:hover .ns-toggle{color:var(--text)}
+  .ns-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .ns-body-inner{opacity:0;transition:opacity .2s ease .06s;padding:0 1.4rem 1.4rem;border-top:1px solid var(--border)}
+  .ns-card.open .ns-body{max-height:1200px}
+  .ns-card.open .ns-body-inner{opacity:1}
+  .ns-desc{font-size:.88rem;color:var(--muted);padding:1rem 0 .8rem;line-height:1.6}
+  .ns-row{margin-bottom:.8rem}
+  .ns-row-label{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.38rem}
+  .ns-chip-row{display:flex;gap:.4rem;flex-wrap:wrap}
+  .ns-chip{font-size:.74rem;font-weight:600;padding:.2rem .58rem;border-radius:999px;border:1px solid;white-space:nowrap}
+  .ns-chip-prereq{color:#38bdf8;background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.25)}
+  .ns-chip-deriv{color:#c084fc;background:rgba(192,132,252,.08);border-color:rgba(192,132,252,.25)}
+  .ns-chip-variant{color:#f59e0b;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25)}
+  .ns-chip-ref{color:#63cab7;background:rgba(99,202,183,.08);border-color:rgba(99,202,183,.25)}
+  .ns-tag{font-size:.72rem;padding:.18rem .52rem;border-radius:999px;background:rgba(100,116,139,.1);color:var(--muted);border:1px solid var(--border)}
+  .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
+  .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+  .ns-link-btn{
+    font-size:.78rem;font-weight:600;padding:.3rem .78rem;border-radius:8px;
+    background:rgba(56,189,248,.07);color:var(--atomic);
+    border:1px solid rgba(56,189,248,.22);text-decoration:none;transition:background .15s,border-color .15s;
+  }
+  .ns-link-btn:hover{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.45)}
   /* ── FOOTER ── */
   footer{
     text-align:center;padding:3rem 1.5rem;
@@ -329,11 +403,12 @@
   <span class="nav-logo">◆ GAIA</span>
   <ul>
     <li><a href="#what">What</a></li>
-    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#what">Tiers</a></li>
     <li><a href="#start">Get Started</a></li>
-    <li><a href="tree.md">Tree</a></li>
+    <li><a href="../tree.md" target="_blank">Tree</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
+    <li><a href="#named">Named</a></li>
   </ul>
 </nav>
 
@@ -579,6 +654,27 @@
 <span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
       </div>
     </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ─── NAMED SKILLS ─── -->
+<section id="named" class="reveal">
+  <h2>Named Skills</h2>
+  <p class="section-sub">Contributor implementations of canonical skills — the first real agents behind every generic capability.</p>
+
+  <div class="ns-level-tabs" id="nsLevelTabs">
+    <button class="ns-tab active" type="button" data-level="all">All</button>
+    <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
+    <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
+    <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
+    <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
+    <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+  </div>
+
+  <div class="ns-grid" id="nsGrid">
+    <div class="ns-loading">Loading named skills…</div>
   </div>
 </section>
 
@@ -1149,6 +1245,135 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+<!-- ─── NAMED SKILLS DATA ─── -->
+<script>
+(function () {
+  var LEVEL_META = {
+    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.12)',  border:'rgba(99,202,183,.3)'  },
+    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.12)', border:'rgba(167,139,250,.3)' },
+    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.12)', border:'rgba(232,121,249,.3)' },
+    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.12)',  border:'rgba(251,191,36,.3)'  },
+    'VI':  { name:'Transcendent \u2605', color:'#fbbf24', bg:'rgba(251,191,36,.20)', border:'rgba(251,191,36,.4)' },
+  };
+
+  function esc(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function chips(ids, skillMap, cls) {
+    if (!ids || !ids.length) return '<span class="ns-none">\u2014</span>';
+    return ids.map(function(id) {
+      var s = skillMap[id];
+      return '<span class="ns-chip ' + cls + '">' + esc(s ? s.name : id) + '</span>';
+    }).join('');
+  }
+
+  function renderCard(ns, skillMap, buckets) {
+    var lm = LEVEL_META[ns.level] || LEVEL_META['II'];
+    var generic = skillMap[ns.genericSkillRef] || {};
+    var prereqs = Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
+    var derivs  = Array.isArray(generic.derivatives)   ? generic.derivatives   : [];
+    var variants = (buckets[ns.genericSkillRef] || []).filter(function(v){ return v.id !== ns.id; });
+    var tags  = Array.isArray(ns.tags) ? ns.tags : [];
+    var links = ns.links && typeof ns.links === 'object' ? ns.links : {};
+
+    var variantHtml = variants.length
+      ? variants.map(function(v){ return '<span class="ns-chip ns-chip-variant">' + esc(v.id) + '</span>'; }).join('')
+      : '<span class="ns-none">origin implementation</span>';
+
+    var tagHtml = tags.map(function(t){ return '<span class="ns-tag">' + esc(t) + '</span>'; }).join('');
+
+    var linkHtml = Object.keys(links).filter(function(k){ return links[k]; })
+      .map(function(k){ return '<a class="ns-link-btn" href="' + esc(links[k]) + '" target="_blank" rel="noopener">\u2197 ' + esc(k.charAt(0).toUpperCase()+k.slice(1)) + '</a>'; })
+      .join('');
+
+    return '<article class="ns-card" data-level="' + esc(ns.level) + '" data-id="' + esc(ns.id) + '">' +
+  '<div class="ns-card-head">' +
+    '<div style="flex:1;min-width:0">' +
+      '<div class="ns-pill">' +
+        '<span class="ns-pill-id">' + esc(ns.id) + '</span>' +
+        (ns.origin ? '<span class="ns-origin">\u2605 origin</span>' : '') +
+      '</div>' +
+      (ns.title ? '<div class="ns-flavor">\u201c' + esc(ns.title) + '\u201d</div>' : '') +
+    '</div>' +
+    '<div class="ns-card-right">' +
+      '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' \u00b7 ' + lm.name + '</span>' +
+      '<button class="ns-toggle" type="button" aria-label="Toggle details">\u25be</button>' +
+    '</div>' +
+  '</div>' +
+  '<div class="ns-body"><div class="ns-body-inner">' +
+    (ns.description ? '<p class="ns-desc">' + esc(ns.description) + '</p>' : '') +
+    '<div class="ns-row"><span class="ns-row-label">Generic Skill</span><div class="ns-chip-row"><span class="ns-chip ns-chip-ref">' + esc(ns.genericSkillRef) + '</span></div></div>' +
+    '<div class="ns-row"><span class="ns-row-label">Dependencies</span><div class="ns-chip-row">' + chips(prereqs, skillMap, 'ns-chip-prereq') + '</div></div>' +
+    '<div class="ns-row"><span class="ns-row-label">Derivatives</span><div class="ns-chip-row">' + chips(derivs, skillMap, 'ns-chip-deriv') + '</div></div>' +
+    '<div class="ns-row"><span class="ns-row-label">Variants</span><div class="ns-chip-row">' + variantHtml + '</div></div>' +
+    (tagHtml ? '<div class="ns-row"><span class="ns-row-label">Tags</span><div class="ns-chip-row">' + tagHtml + '</div></div>' : '') +
+    (linkHtml ? '<div class="ns-links">' + linkHtml + '</div>' : '') +
+  '</div></div>' +
+'</article>';
+  }
+
+  function initNamedSkills() {
+    var grid = document.getElementById('nsGrid');
+    var tabsEl = document.getElementById('nsLevelTabs');
+    if (!grid) return;
+
+    Promise.all([
+      fetch('graph/named/index.json').then(function(r){ if (!r.ok) throw r; return r.json(); }),
+      fetch('graph/gaia.json').then(function(r){ if (!r.ok) throw r; return r.json(); }),
+    ]).then(function(results) {
+      var indexData = results[0], fullGraph = results[1];
+      var skillMap = {};
+      (fullGraph.skills || []).forEach(function(s){ skillMap[s.id] = s; });
+
+      var buckets = indexData.buckets || {};
+      var allNamed = [];
+      Object.values(buckets).forEach(function(arr){ if (Array.isArray(arr)) Array.prototype.push.apply(allNamed, arr); });
+
+      var levelOrder = ['II','III','IV','V','VI'];
+      allNamed.sort(function(a, b) {
+        var d = levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
+        return d !== 0 ? d : String(a.id).localeCompare(String(b.id));
+      });
+
+      if (!allNamed.length) {
+        grid.innerHTML = '<div class="ns-empty">No named skills yet. Publish the first with <code>gaia name</code>.</div>';
+        return;
+      }
+
+      grid.innerHTML = allNamed.map(function(ns){ return renderCard(ns, skillMap, buckets); }).join('');
+
+      if (tabsEl) {
+        tabsEl.addEventListener('click', function(e) {
+          var btn = e.target.closest('.ns-tab');
+          if (!btn) return;
+          tabsEl.querySelectorAll('.ns-tab').forEach(function(t){ t.classList.remove('active'); });
+          btn.classList.add('active');
+          var level = btn.dataset.level;
+          grid.querySelectorAll('.ns-card').forEach(function(card) {
+            card.style.display = (level === 'all' || card.dataset.level === level) ? '' : 'none';
+          });
+        });
+      }
+
+      grid.addEventListener('click', function(e) {
+        var head = e.target.closest('.ns-card-head');
+        if (head) head.closest('.ns-card').classList.toggle('open');
+      });
+    }).catch(function() {
+      grid.innerHTML = '<div class="ns-empty">Named skills unavailable. Serve from a local server: <code>python -m http.server 8080</code> in repo root, then open <code>/docs/</code></div>';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNamedSkills);
+  } else {
+    initNamedSkills();
+  }
+})();
 </script>
 
 </body>
