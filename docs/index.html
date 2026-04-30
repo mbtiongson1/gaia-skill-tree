@@ -301,6 +301,17 @@
     cursor:pointer;transition:border-color .2s,color .2s;font-family:inherit;
   }
   .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
+  .graph-redpill{
+    position:absolute;top:.75rem;left:.75rem;z-index:10;
+    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .78rem;
+    cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
+  }
+  .graph-redpill:hover{border-color:rgba(239,68,68,.5);color:#fca5a5}
+  .graph-redpill.active{
+    background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.6);
+    color:#f87171;box-shadow:0 0 14px rgba(239,68,68,.35);
+  }
   @media (max-width:700px){
     nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
     .graph-dialog{height:88vh}
@@ -828,6 +839,7 @@
       legendHoverRank: null,
       legendEl: null,
       showSlugs: false,
+      redPillActive: false,
     };
 
     function resize() {
@@ -883,6 +895,34 @@
       ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.18, 1).toFixed(2)})`; ctx.fill();
       ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
     }
+    function drawNodeVI(sx, sy, r, alpha, t, p) {
+      const hue = (t * 45) % 360;
+      const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + (p.phase || 0));
+      const glowR = r * (4.8 + glowPulse);
+      const glow = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, glowR);
+      glow.addColorStop(0,    `hsla(${hue},100%,72%,${(alpha * 0.55).toFixed(2)})`);
+      glow.addColorStop(0.35, `hsla(${(hue + 90) % 360},100%,65%,${(alpha * 0.32).toFixed(2)})`);
+      glow.addColorStop(0.65, `hsla(45,100%,58%,${(alpha * 0.18).toFixed(2)})`);
+      glow.addColorStop(1,    'hsla(45,100%,50%,0)');
+      ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+      const coreGrad = ctx.createRadialGradient(sx - r * 0.25, sy - r * 0.25, 0, sx, sy, r * 1.05);
+      coreGrad.addColorStop(0,    `hsla(${(hue + 200) % 360},100%,88%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
+      coreGrad.addColorStop(0.45, `hsla(${hue},100%,68%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
+      coreGrad.addColorStop(0.8,  `hsla(${(hue + 60) % 360},90%,55%,${alpha.toFixed(2)})`);
+      coreGrad.addColorStop(1,    `hsla(45,100%,45%,${alpha.toFixed(2)})`);
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = coreGrad; ctx.fill();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI * 2 * i / 6) + t * 0.4;
+        const dist = r * (1.65 + 0.35 * Math.sin(t * 2.1 + i));
+        const sAlpha = alpha * (0.5 + 0.5 * Math.sin(t * 3.0 + i * 1.05));
+        ctx.beginPath();
+        ctx.arc(sx + Math.cos(angle) * dist, sy + Math.sin(angle) * dist, r * 0.2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${(hue + i * 60) % 360},100%,82%,${sAlpha.toFixed(2)})`;
+        ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
+    }
     function shouldLabel(skill) {
       if (state.labelMode === 'none') return false;
       if (state.labelMode === 'all') return true;
@@ -918,6 +958,7 @@
       const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
       const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
       const legendFiltering = Boolean(state.legendFilterType || state.legendFilterRank);
+      const NAMED_LEVELS = new Set(['II','III','IV','V','VI']);
       state.skills.forEach(skill => {
         let targetVis;
         if (hovering) {
@@ -941,6 +982,7 @@
         } else {
           targetVis = 1.0;
         }
+        if (state.redPillActive && !NAMED_LEVELS.has(skill.level)) targetVis = Math.min(targetVis, 0.07);
         if (state.nodeAlphas[skill.id] === undefined) state.nodeAlphas[skill.id] = targetVis;
         state.nodeAlphas[skill.id] += (targetVis - state.nodeAlphas[skill.id]) * 0.15;
       });
@@ -986,7 +1028,11 @@
         const col = PALETTE[skill.type] || PALETTE.atomic;
         const baseR = skill.type === 'legendary' ? 12.5 : skill.type === 'composite' ? 6.9 : 3.5;
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
-        drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
+        if (skill.level === 'VI') {
+          drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
+        } else {
+          drawNode(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, col, depthAlpha * vis);
+        }
       });
       const labelNodes = nodes.filter(({ skill }) => shouldLabel(skill));
       function drawLabel(skill, highlighted) {
@@ -1114,6 +1160,19 @@
       canvas.parentElement.appendChild(legend);
       state.legendEl = legend;
 
+      const redPill = document.createElement('button');
+      redPill.type = 'button';
+      redPill.className = 'graph-redpill';
+      redPill.textContent = '⬤ Named Only';
+      redPill.title = 'Show only Named skills (Level II+) — contributor-verified implementations';
+      redPill.addEventListener('mousedown', e => e.stopPropagation());
+      redPill.addEventListener('click', () => {
+        state.redPillActive = !state.redPillActive;
+        redPill.classList.toggle('active', state.redPillActive);
+      });
+      canvas.parentElement.appendChild(redPill);
+      state.redPillEl = redPill;
+
       const labelToggle = document.createElement('button');
       labelToggle.type = 'button';
       labelToggle.className = 'graph-label-toggle';
@@ -1181,6 +1240,8 @@
       state.legendHoverRank = null;
       state.showSlugs = false;
       state.searchText = '';
+      state.redPillActive = false;
+      if (state.redPillEl) state.redPillEl.classList.remove('active');
       if (state.legendEl) {
         state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
       }
