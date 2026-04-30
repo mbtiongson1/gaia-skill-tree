@@ -51,13 +51,13 @@ MIN_PREREQS = {
 
 def load_graph(path):
     """Load and parse the canonical graph JSON."""
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def load_schema(schema_path):
     """Load a JSON Schema file."""
-    with open(schema_path, "r") as f:
+    with open(schema_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 

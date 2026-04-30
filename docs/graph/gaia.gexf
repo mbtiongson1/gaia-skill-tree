@@ -156,6 +156,14 @@
           <attvalue for="type" value="composite" />
         </attvalues>
       </node>
+      <node id="context-compression" label="Context Compression">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="common" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
       <node id="conversational-agent" label="Conversational Agent">
         <attvalues>
           <attvalue for="level" value="III" />
@@ -500,6 +508,14 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
+      <node id="prompt-injection-defense" label="Prompt Injection Defense">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
       <node id="prompt-optimization" label="Prompt Optimization">
         <attvalues>
           <attvalue for="level" value="IV" />
@@ -716,6 +732,14 @@
           <attvalue for="type" value="atomic" />
         </attvalues>
       </node>
+      <node id="tool-chaining" label="Tool Chaining">
+        <attvalues>
+          <attvalue for="level" value="III" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="composite" />
+        </attvalues>
+      </node>
       <node id="tool-creation" label="Tool Creation">
         <attvalues>
           <attvalue for="level" value="IV" />
@@ -767,6 +791,14 @@
       <node id="ux-audit" label="UX Audit">
         <attvalues>
           <attvalue for="level" value="0" />
+          <attvalue for="rarity" value="uncommon" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="atomic" />
+        </attvalues>
+      </node>
+      <node id="vision-qa" label="Visual Question Answering">
+        <attvalues>
+          <attvalue for="level" value="III" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="atomic" />
@@ -907,22 +939,24 @@
       <edge id="e90" source="generate-sql" target="text-to-sql-pipeline" />
       <edge id="e91" source="parse-json" target="text-to-sql-pipeline" />
       <edge id="e92" source="format-output" target="text-to-sql-pipeline" />
-      <edge id="e93" source="code-generation" target="tool-creation" />
-      <edge id="e94" source="tool-use" target="tool-creation" />
-      <edge id="e95" source="translate" target="translation-pipeline" />
-      <edge id="e96" source="sentiment-analysis" target="translation-pipeline" />
-      <edge id="e97" source="audience-model" target="translation-pipeline" />
-      <edge id="e98" source="chain-of-thought" target="tree-of-thought" />
-      <edge id="e99" source="plan-decompose" target="tree-of-thought" />
-      <edge id="e100" source="speech-to-text" target="voice-agent" />
-      <edge id="e101" source="question-answer" target="voice-agent" />
-      <edge id="e102" source="text-to-speech" target="voice-agent" />
-      <edge id="e103" source="web-search" target="web-scrape" />
-      <edge id="e104" source="parse-html" target="web-scrape" />
-      <edge id="e105" source="extract-entities" target="web-scrape" />
-      <edge id="e106" source="plan-decompose" target="workflow-automation" />
-      <edge id="e107" source="tool-use" target="workflow-automation" />
-      <edge id="e108" source="api-call" target="workflow-automation" />
+      <edge id="e93" source="tool-use" target="tool-chaining" />
+      <edge id="e94" source="tool-select" target="tool-chaining" />
+      <edge id="e95" source="code-generation" target="tool-creation" />
+      <edge id="e96" source="tool-use" target="tool-creation" />
+      <edge id="e97" source="translate" target="translation-pipeline" />
+      <edge id="e98" source="sentiment-analysis" target="translation-pipeline" />
+      <edge id="e99" source="audience-model" target="translation-pipeline" />
+      <edge id="e100" source="chain-of-thought" target="tree-of-thought" />
+      <edge id="e101" source="plan-decompose" target="tree-of-thought" />
+      <edge id="e102" source="speech-to-text" target="voice-agent" />
+      <edge id="e103" source="question-answer" target="voice-agent" />
+      <edge id="e104" source="text-to-speech" target="voice-agent" />
+      <edge id="e105" source="web-search" target="web-scrape" />
+      <edge id="e106" source="parse-html" target="web-scrape" />
+      <edge id="e107" source="extract-entities" target="web-scrape" />
+      <edge id="e108" source="plan-decompose" target="workflow-automation" />
+      <edge id="e109" source="tool-use" target="workflow-automation" />
+      <edge id="e110" source="api-call" target="workflow-automation" />
     </edges>
   </graph>
 </gexf>
