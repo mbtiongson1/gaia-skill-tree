@@ -752,10 +752,15 @@
     { id:'code-generation', type:'atomic', name:'Code Generation', prerequisites:[] },
     { id:'execute-bash', type:'atomic', name:'Execute Bash', prerequisites:[] },
     { id:'tool-select', type:'atomic', name:'Tool Select', prerequisites:[] },
-    { id:'rag-pipeline', type:'composite', name:'RAG Pipeline', prerequisites:['retrieve','embed-text','score-relevance'] },
+    { id:'chunk-document', type:'atomic', name:'Chunk Document', prerequisites:[] },
+    { id:'rank', type:'atomic', name:'Rank', prerequisites:[] },
+    { id:'rag-pipeline', type:'composite', name:'RAG Pipeline', prerequisites:['retrieve','chunk-document','embed-text','score-relevance','tokenize','rank'] },
     { id:'research', type:'composite', name:'Research', prerequisites:['web-search','summarize','cite-sources'] },
-    { id:'autonomous-debug', type:'composite', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','tool-select'] },
-    { id:'autonomous-research-agent', type:'legendary', name:'Autonomous Research Agent', prerequisites:['research','rag-pipeline'] },
+    { id:'error-interpretation', type:'atomic', name:'Error Interpretation', prerequisites:[] },
+    { id:'autonomous-debug', type:'composite', name:'Autonomous Debug', prerequisites:['code-generation','execute-bash','error-interpretation'] },
+    { id:'ghostwrite', type:'composite', name:'Ghostwrite', prerequisites:['research','write-report','audience-model'] },
+    { id:'knowledge-harvest', type:'composite', name:'Knowledge Harvest', prerequisites:['web-scrape','embed-text','extract-entities'] },
+    { id:'autonomous-research-agent', type:'legendary', name:'Autonomous Research Agent', prerequisites:['research','ghostwrite','knowledge-harvest'] },
   ];
   const FALLBACK_NAMED_MAP = {
     'automated-testing':           '0xdarkmatter/pytest-patterns',

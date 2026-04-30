@@ -15,7 +15,6 @@ _None._
 
 ## Unlocks
 - [Conversational Agent](../composite/conversational-agent.md)
-- [Few-Shot Learning](../atomic/few-shot-learning.md)
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
 - [Voice Agent](../composite/voice-agent.md)
 

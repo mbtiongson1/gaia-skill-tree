@@ -18,7 +18,6 @@ Conducts multi-source information gathering, synthesis, and citation for a given
 ## Unlocks
 - [True Oracle: Autonomous Data Scientist](../legendary/autonomous-data-scientist.md)
 - [Ghostwrite](../composite/ghostwrite.md)
-- [Hypothesis Generation](../atomic/hypothesis-generate.md)
 - [Registry Curation](../composite/registry-curation.md)
 - [True Dragon: Autonomous Scientific Discovery](../legendary/scientific-discovery.md)
 

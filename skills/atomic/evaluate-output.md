@@ -18,7 +18,6 @@ _None._
 - [Grounding](../composite/grounding.md)
 - [Multi-Agent Debate](../composite/multi-agent-debate.md)
 - [Prompt Optimization](../composite/prompt-optimization.md)
-- [Self-Critique](../atomic/self-critique.md)
 - [Guardrails](../composite/guardrails.md)
 - [Agent Evaluation](../composite/agent-eval.md)
 

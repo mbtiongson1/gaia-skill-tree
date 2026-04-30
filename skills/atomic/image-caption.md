@@ -15,7 +15,6 @@ _None._
 
 ## Unlocks
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
-- [Object Detection](../atomic/object-detection.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -15,6 +15,8 @@ End-to-end retrieval-augmented generation combining document chunking, embedding
 - [Chunk Document](../atomic/chunk-document.md)
 - [Embed Text](../atomic/embed-text.md)
 - [Score Relevance](../atomic/score-relevance.md)
+- [Tokenize](../atomic/tokenize.md)
+- [Rank](../atomic/rank.md)
 
 ## Unlocks
 _None._

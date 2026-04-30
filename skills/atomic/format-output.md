@@ -16,7 +16,6 @@ _None._
 ## Unlocks
 - [Document Analyst](../composite/document-analyst.md)
 - [Document Digitization](../composite/document-digitization.md)
-- [Structured Output Generation](../atomic/structured-output.md)
 - [Text-to-SQL Pipeline](../composite/text-to-sql-pipeline.md)
 
 ## Evidence

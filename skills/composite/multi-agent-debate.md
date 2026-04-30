@@ -16,7 +16,7 @@ Runs multiple LLM agents that propose, critique, and iteratively refine answers 
 - [Chain-of-Thought Reasoning](../atomic/chain-of-thought.md)
 
 ## Unlocks
-- [True Sage: Recursive Self-Improvement](../legendary/recursive-self-improvement.md)
+_None._
 
 ## Fusion Condition
 _None specified._

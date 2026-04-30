@@ -14,7 +14,6 @@ Applies deductive, inductive, or abductive reasoning to derive valid conclusions
 _None._
 
 ## Unlocks
-- [Chain-of-Thought Reasoning](../atomic/chain-of-thought.md)
 - [Knowledge Graph Construction](../composite/knowledge-graph-build.md)
 - [Multimodal Reasoning](../composite/multimodal-reasoning.md)
 

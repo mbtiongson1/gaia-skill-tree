@@ -26,7 +26,7 @@
 | ◇ Multimodal Reasoning | Extra Skill | Image Caption, Question Answer, Logical Inference | III | Requires vision-language model capability. |
 | ◇ Plan and Execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | IV |  |
 | ◇ Prompt Optimization | Extra Skill | Evaluate Output, Generate Text | IV |  |
-| ◇ RAG Pipeline | Extra Skill | Retrieve, Chunk Document, Embed Text, Score Relevance | III |  |
+| ◇ RAG Pipeline | Extra Skill | Retrieve, Chunk Document, Embed Text, Score Relevance, Tokenize, Rank | III |  |
 | ◇ ReAct Reasoning | Extra Skill | Plan and Decompose, Tool Use | III |  |
 | ◆ True Herald: Real-Time Voice Assistant | Ultimate Skill | Voice Agent, Memory Manage, Plan and Execute | V | Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources. |
 | ◆ True Sage: Recursive Self-Improvement | Ultimate Skill | Autonomous Debug, Evaluate Output, Plan and Execute | V | Requires extensive multi-system validation before level advancement. |
