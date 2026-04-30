@@ -438,7 +438,8 @@ def tree_command(args):
         with open(graph_path, 'r', encoding='utf-8') as f:
             graph_data = json.load(f)
     tree = load_tree(config.get('gaiaUser'), registry_path=args.registry)
-    show_tree(tree, graph_data=graph_data)
+    mode = "named" if getattr(args, 'named', False) else ("title" if getattr(args, 'title', False) else "default")
+    show_tree(tree, graph_data=graph_data, registry_path=args.registry, mode=mode)
 
 def fuse_command(args):
     config = load_config()
@@ -639,7 +640,9 @@ def main():
     scan_parser.add_argument('--quiet', action='store_true', help="Suppress scan output; only show notifications")
     subparsers.add_parser('status')
     subparsers.add_parser('doctor')
-    subparsers.add_parser('tree')
+    tree_parser = subparsers.add_parser('tree')
+    tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
+    tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
     fuse_parser = subparsers.add_parser('fuse')
     fuse_parser.add_argument('skillId', help="ID of the pending skill to fuse")
     push_parser = subparsers.add_parser('push')
