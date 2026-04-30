@@ -52,8 +52,8 @@ graph TD
   - `tests/fixtures/cycle.json` — Graph with an intentional cycle (`A→B→C→A`)
   - `tests/fixtures/missing_ref.json` — Composite skill referencing a nonexistent parent
   - `tests/fixtures/bad_evidence.json` — Level III skill with only Class C evidence
-  - `tests/fixtures/orphaned_composite.json` — Composite with only 1 prerequisite
-  - `tests/fixtures/legendary_no_approval.json` — Validated legendary with <3 Class A/B sources
+  - `tests/fixtures/orphaned_extra.json` — Composite with only 1 prerequisite
+  - `tests/fixtures/ultimate_no_approval.json` — Validated legendary with <3 Class A/B sources
 - **Instructions:** Each fixture is a minimal `gaia.json` with exactly one defect. Copy structure from `graph/gaia.json` but inject the specific violation. Keep them small (3–5 skills each).
 - **Acceptance:** Each file must be valid JSON but fail exactly one validation check.
 
@@ -93,9 +93,9 @@ graph TD
 - **Depends on:** M0 (gaia.json exists)
 - **Deliverables:**
   - `scripts/generateProjections.py` — Reads `graph/gaia.json`, generates:
-    - `skills/atomic/{id}.md` for each atomic skill
-    - `skills/composite/{id}.md` for each composite skill
-    - `skills/legendary/{id}.md` for each legendary skill
+    - `skills/basic/{id}.md` for each atomic skill
+    - `skills/extra/{id}.md` for each composite skill
+    - `skills/ultimate/{id}.md` for each legendary skill
     - `registry.md` — flat sorted index (table: name, type, level, rarity, status)
     - `combinations.md` — matrix of fusion recipes (prerequisites, conditions, level floors)
   - Every generated file includes a provenance footer: `*Generated from gaia.json v{version} on {timestamp}. Do not edit directly.*`
@@ -127,7 +127,7 @@ graph TD
     3. Runs `git diff --exit-code` to detect drift between committed and freshly generated files
     4. Fails if any difference is found
 - **Instructions:** Triggers on PRs touching `graph/` or `schema/`. Runs after validation passes (`needs: validate`).
-- **Acceptance:** YAML is valid. A hand-edited `skills/atomic/tokenize.md` would cause this workflow to fail.
+- **Acceptance:** YAML is valid. A hand-edited `skills/basic/tokenize.md` would cause this workflow to fail.
 
 ### Task 2.4 — First Static Snapshot ✍️
 - **Agent:** Writer
@@ -152,7 +152,7 @@ graph TD
 - **Deliverables:**
   - `scripts/detectCombinations.py` — Shared module implementing the algorithm from `DESIGN.md` §8.1:
     ```
-    For each composite/legendary skill S in gaiaGraph:
+    For each extra/ultimate skill S in gaiaGraph:
       If S is NOT in ownedSkills:
         If all prerequisites of S are in (detectedSkills ∪ ownedSkills):
           Add S to pendingCombinations

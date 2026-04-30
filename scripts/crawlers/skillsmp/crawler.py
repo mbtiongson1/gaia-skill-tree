@@ -130,7 +130,7 @@ def main():
                 id=normalize_id(f"{skill_id}-smp-{info['name'][:20]}"),
                 name=info["name"],
                 description=info["description"] or f"SkillsMP skill: {info['name']}",
-                skill_type="atomic",
+                skill_type="basic",
                 source_url=source_url,
                 source_type="skillsmp",
                 evidence_class="C",

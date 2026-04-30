@@ -6,7 +6,7 @@ def load_canonical_skills(registry_path="graph/gaia.json"):
         pass
     canonical_skills = set()
     try:
-        with open(registry_path, 'r') as f:
+        with open(registry_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
             for skill in data.get('skills', []):
                 canonical_skills.add(skill['id'])

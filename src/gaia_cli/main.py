@@ -68,7 +68,7 @@ def scan_command(args):
     username = config.get('gaiaUser')
     tree = load_tree(username, registry_path=args.registry)
     if tree:
-        with open(graph_path, 'r') as f:
+        with open(graph_path, 'r', encoding='utf-8') as f:
             graph_data = json.load(f)
         unlocked = [s.get('skillId') for s in tree.get('unlockedSkills', [])]
         combos = get_combinations(graph_data, unlocked, resolved)
@@ -97,7 +97,7 @@ def status_command(args):
 
 
 def doctor_command(args):
-    config_path = os.path.join('.gaia', 'config.json')
+    config_path = ".gaia/config.json"
     config = load_config()
     registry_path = os.path.abspath(str(args.registry))
     print("Gaia CLI: OK")

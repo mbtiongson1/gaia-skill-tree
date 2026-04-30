@@ -10,9 +10,9 @@
 
 | Skill | Class | Rank | Tier | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Route Intent | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-20 |
-| ○ Plan and Decompose | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-21 |
-| ○ Tool Select | Intrinsic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-22 |
+| ○ Route Intent | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-20 |
+| ○ Plan and Decompose | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-21 |
+| ○ Tool Select | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-22 |
 | ◇ Plan and Execute | Extra Skill | III | Evolved | local-repo | 2026-04-26 |
 
 ---
@@ -20,79 +20,79 @@
 ## Upgrade Path
 
 ```
-· ◆ karpathy/autoresearch - Wisdom King: Autonomous Research Agent  [VI]
-  ├─ · ◇ /research  [III]
+· ◆ Ultimate Skill: karpathy/autoresearch  [VI]
+  ├─ · ◇ Extra Skill: /research  [III]
   │  ├─ · ○ /web-search  [I]
   │  ├─ · ○ /summarize  [0]
   │  └─ · ○ /cite-sources  [I]
-  ├─ · ◇ /knowledge-harvest  [IV]
-  │  ├─ · ◇ /web-scrape  [III]
+  ├─ · ◇ Extra Skill: /knowledge-harvest  [IV]
+  │  ├─ · ◇ Extra Skill: /web-scrape  [III]
   │  │  ├─ · ○ /web-search  [I]  (↑ see above)
   │  │  ├─ · ○ /parse-html  [I]
   │  │  └─ · ○ /extract-entities  [I]
   │  ├─ · ○ /extract-entities  [I]  (↑ see above)
   │  └─ · ○ /embed-text  [I]
-  └─ · ◇ /ghostwrite  [IV]
-     ├─ · ◇ /research  [III]  (↑ see above)
-     ├─ · ○ glincker/readme-generator - Write Report  [I]
+  └─ · ◇ Extra Skill: /ghostwrite  [IV]
+     ├─ · ◇ Extra Skill: /research  [III]  (↑ see above)
+     ├─ · ○ glincker/readme-generator  [I]
      └─ · ○ /audience-model  [I]
 
-· ◆ ruvnet/flow-nexus-swarm - Grand Conductor: Multi-Agent Orchestration  [V]
-  ├─ ✓ ◇ /plan-and-execute  [IV]
+· ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦]  [V]
+  ├─ · ◇ Extra Skill: /data-analysis  [III]
+  │  ├─ · ○ /generate-sql  [II]
+  │  ├─ · ○ /data-visualize  [II]
+  │  └─ · ○ /summarize  [0]
+  ├─ · ○ /math-reason  [II]
+  └─ · ◇ Extra Skill: /research  [III]
+     ├─ · ○ /web-search  [I]
+     ├─ · ○ /summarize  [0]  (↑ see above)
+     └─ · ○ /cite-sources  [I]
+
+· ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦]  [V]
+  ├─ · ○ /hypothesis-generate  [II]
+  ├─ · ◇ Extra Skill: /research  [III]
+  │  ├─ · ○ /web-search  [I]
+  │  ├─ · ○ /summarize  [0]
+  │  └─ · ○ /cite-sources  [I]
+  └─ · ○ /math-reason  [II]
+
+· ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V]
+  ├─ · ◇ Extra Skill: /code-review-pipeline  [III]
+  │  ├─ · ○ /code-generation  [I]
+  │  ├─ · ○ /diff-content  [I]
+  │  └─ · ○ /evaluate-output  [I]
+  ├─ · ◇ Extra Skill: 0xdarkmatter/pytest-patterns  [III]
+  │  ├─ · ○ upsonic/unittest-generator  [II]
+  │  ├─ · ○ /execute-bash  [I]
+  │  └─ · ○ /error-interpretation  [I]
+  └─ · ○ mattpocock/improve-codebase-architecture  [II]
+
+· ◆ Ultimate Skill: ruvnet/flow-nexus-swarm  [V]
+  ├─ ✓ ◇ Extra Skill: /plan-and-execute  [IV]
   │  ├─ ✓ ○ /route-intent  [I]
   │  ├─ ✓ ○ /plan-decompose  [I]
   │  └─ ✓ ○ /tool-select  [I]
   ├─ ✓ ○ /route-intent  [I]  (↑ see above)
   └─ ✓ ○ /tool-select  [I]  (↑ see above)
 
-· ◆ /full-stack-developer  [V]
-  ├─ · ◇ /code-review-pipeline  [III]
-  │  ├─ · ○ /code-generation  [I]
-  │  ├─ · ○ /diff-content  [I]
-  │  └─ · ○ /evaluate-output  [I]
-  ├─ · ◇ 0xdarkmatter/pytest-patterns - Automated Testing  [III]
-  │  ├─ · ○ upsonic/unittest-generator - Generate Test  [II]
-  │  ├─ · ○ /execute-bash  [I]
-  │  └─ · ○ /error-interpretation  [I]
-  └─ · ○ mattpocock/improve-codebase-architecture - Refactor Code  [II]
-
-· ◆ /scientific-discovery  [V]
-  ├─ · ○ /hypothesis-generate  [II]
-  ├─ · ◇ /research  [III]
-  │  ├─ · ○ /web-search  [I]
-  │  ├─ · ○ /summarize  [0]
-  │  └─ · ○ /cite-sources  [I]
-  └─ · ○ /math-reason  [II]
-
-· ◆ /real-time-voice-assistant  [V]
-  ├─ · ◇ /voice-agent  [III]
+· ◆ Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦]  [V]
+  ├─ · ◇ Extra Skill: /voice-agent  [III]
   │  ├─ · ○ /speech-to-text  [II]
   │  ├─ · ○ /question-answer  [0]
   │  └─ · ○ /text-to-speech  [II]
   ├─ · ○ /memory-manage  [II]
-  └─ ✓ ◇ /plan-and-execute  [IV]
+  └─ ✓ ◇ Extra Skill: /plan-and-execute  [IV]
      ├─ ✓ ○ /route-intent  [I]
      ├─ ✓ ○ /plan-decompose  [I]
      └─ ✓ ○ /tool-select  [I]
 
-· ◆ /autonomous-data-scientist  [V]
-  ├─ · ◇ /data-analysis  [III]
-  │  ├─ · ○ /generate-sql  [II]
-  │  ├─ · ○ /data-visualize  [II]
-  │  └─ · ○ /summarize  [0]
-  ├─ · ○ /math-reason  [II]
-  └─ · ◇ /research  [III]
-     ├─ · ○ /web-search  [I]
-     ├─ · ○ /summarize  [0]  (↑ see above)
-     └─ · ○ /cite-sources  [I]
-
-· ◆ /recursive-self-improvement  [V]
-  ├─ · ◇ devin-ai/autonomous-swe - Autonomous Debug  [IV]
+· ◆ Ultimate Skill: /recursive-self-improvement [Unclaimed ✦]  [V]
+  ├─ · ◇ Extra Skill: devin-ai/autonomous-swe  [IV]
   │  ├─ · ○ /code-generation  [I]
   │  ├─ · ○ /execute-bash  [I]
   │  └─ · ○ /error-interpretation  [I]
   ├─ · ○ /evaluate-output  [I]
-  └─ ✓ ◇ /plan-and-execute  [IV]
+  └─ ✓ ◇ Extra Skill: /plan-and-execute  [IV]
      ├─ ✓ ○ /route-intent  [I]
      ├─ ✓ ○ /plan-decompose  [I]
      └─ ✓ ○ /tool-select  [I]

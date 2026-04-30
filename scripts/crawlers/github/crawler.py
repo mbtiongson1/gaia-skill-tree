@@ -127,7 +127,7 @@ def main():
                 id=normalize_id(f"{default_skill_id}-gh-{repo.get('name', '')[:20]}"),
                 name=repo.get("name", ""),
                 description=assessment["description"][:200] or f"GitHub repo implementing {default_skill_id}",
-                skill_type="atomic",
+                skill_type="basic",
                 source_url=assessment["url"],
                 source_type="github",
                 evidence_class="B",

@@ -15,7 +15,7 @@ def load_existing_skills(graph_path: str = None) -> set:
     if not os.path.exists(graph_path):
         return set()
 
-    with open(graph_path, "r") as f:
+    with open(graph_path, "r", encoding="utf-8") as f:
         graph = json.load(f)
 
     return {skill["id"] for skill in graph.get("skills", [])}

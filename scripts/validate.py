@@ -6,7 +6,7 @@ Validates graph/gaia.json against:
 2. DAG cycle detection (DFS from all root nodes).
 3. Reference integrity (every parent ID resolves to an existing node).
 4. Evidence threshold by level.
-5. Legendary approval count check (placeholder).
+5. Ultimate approval count check (placeholder).
 6. Summary statistics output.
 
 Usage:
@@ -43,9 +43,9 @@ EVIDENCE_FLOOR = {
 }
 
 MIN_PREREQS = {
-    "atomic": 0,
-    "composite": 2,
-    "legendary": 3,
+    "basic": 0,
+    "extra": 2,
+    "ultimate": 3,
 }
 
 
@@ -149,8 +149,8 @@ def validate_prerequisites_count(graph):
     for skill in graph.get("skills", []):
         min_req = MIN_PREREQS.get(skill["type"], 0)
         actual = len(skill.get("prerequisites", []))
-        if skill["type"] == "atomic" and actual > 0:
-            errors.append(f"Atomic skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
+        if skill["type"] == "basic" and actual > 0:
+            errors.append(f"Basic skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
         elif actual < min_req:
             errors.append(f"{skill['type'].title()} skill '{skill['id']}' needs ≥{min_req} prerequisites (has {actual}).")
     return errors
@@ -180,23 +180,23 @@ def validate_evidence(graph):
     return errors
 
 
-def validate_legendary(graph):
-    """Check legendary-specific constraints."""
+def validate_ultimate(graph):
+    """Check ultimate-specific constraints."""
     errors = []
     for skill in graph.get("skills", []):
-        if skill["type"] != "legendary":
+        if skill["type"] != "ultimate":
             continue
 
-        # Legendary stubs at Level I are allowed without evidence
+        # Ultimate stubs at Level I are allowed without evidence
         if skill["level"] == "I" and skill["status"] == "provisional":
             continue
 
-        # Validated legendaries need 3+ Class A/B evidence
+        # Validated ultimates need 3+ Class A/B evidence
         if skill["status"] == "validated":
             ab_evidence = [e for e in skill.get("evidence", []) if e.get("class") in ("A", "B")]
             if len(ab_evidence) < 3:
                 errors.append(
-                    f"Validated legendary '{skill['id']}' needs ≥3 Class A/B evidence "
+                    f"Validated ultimate '{skill['id']}' needs ≥3 Class A/B evidence "
                     f"sources (has {len(ab_evidence)})."
                 )
     return errors
@@ -239,7 +239,7 @@ def compute_stats(graph):
     # Find orphaned composites
     orphaned = []
     for s in skills:
-        if s["type"] in ("composite", "legendary") and len(s.get("prerequisites", [])) < 2:
+        if s["type"] in ("extra", "ultimate") and len(s.get("prerequisites", [])) < 2:
             orphaned.append(s["id"])
 
     print("\n📊 Graph Statistics")
@@ -250,9 +250,9 @@ def compute_stats(graph):
     print(f"   By status: {dict(by_status)}")
     print(f"   Total edges: {len(graph.get('edges', []))}")
     print(f"   Max lineage depth: {max_depth}")
-    print(f"   Root nodes (atomics): {len(roots)}")
+    print(f"   Root nodes (basics): {len(roots)}")
     if orphaned:
-        print(f"   ⚠ Orphaned composites: {orphaned}")
+        print(f"   ⚠ Orphaned extras: {orphaned}")
 
 
 _NAMED_REQUIRED_FIELDS = [
@@ -517,9 +517,9 @@ def main():
     print("   [5/7] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
-    # 6. Legendary constraints
-    print("   [6/7] Legendary constraints...")
-    all_errors.extend(validate_legendary(graph))
+    # 6. Ultimate constraints
+    print("   [6/7] Ultimate constraints...")
+    all_errors.extend(validate_ultimate(graph))
 
     # 7. Named skills validation (includes reviewer gate + catalog cross-refs)
     print("   [7/7] Named skills validation...")

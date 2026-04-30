@@ -7,13 +7,13 @@ const mockGraph: GaiaGraph = {
   generatedAt: "2026-04-28",
   meta: { typeLabels: {}, levelLabels: {}, rarityLabels: {} },
   skills: [
-    { id: "tokenize", name: "Tokenize", type: "atomic", level: "I", rarity: "common", description: "", prerequisites: [], derivatives: ["embed-text"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "embed-text", name: "Embed Text", type: "atomic", level: "II", rarity: "common", description: "", prerequisites: ["tokenize"], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "retrieve", name: "Retrieve", type: "atomic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "chunk-document", name: "Chunk Document", type: "atomic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "score-relevance", name: "Score Relevance", type: "atomic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "rag-pipeline", name: "RAG Pipeline", type: "composite", level: "III", rarity: "rare", description: "", prerequisites: ["retrieve", "chunk-document", "embed-text", "score-relevance"], derivatives: ["true-oracle"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "true-oracle", name: "True Oracle", type: "legendary", level: "V", rarity: "legendary", description: "", prerequisites: ["rag-pipeline"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "provisional", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "tokenize", name: "Tokenize", type: "basic", level: "I", rarity: "common", description: "", prerequisites: [], derivatives: ["embed-text"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "embed-text", name: "Embed Text", type: "basic", level: "II", rarity: "common", description: "", prerequisites: ["tokenize"], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "retrieve", name: "Retrieve", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "chunk-document", name: "Chunk Document", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "score-relevance", name: "Score Relevance", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["rag-pipeline"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "rag-pipeline", name: "RAG Pipeline", type: "extra", level: "III", rarity: "rare", description: "", prerequisites: ["retrieve", "chunk-document", "embed-text", "score-relevance"], derivatives: ["true-oracle"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "true-oracle", name: "True Oracle", type: "ultimate", level: "V", rarity: "legendary", description: "", prerequisites: ["rag-pipeline"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "provisional", createdAt: "", updatedAt: "", version: "0.1.0" },
   ],
   edges: [],
 };
@@ -95,9 +95,9 @@ describe("dag", () => {
 
   describe("getSkillsByType", () => {
     it("filters by type", () => {
-      const atomics = getSkillsByType(mockGraph, "atomic");
-      expect(atomics.every((s) => s.type === "atomic")).toBe(true);
-      expect(atomics.length).toBe(5);
+      const basics = getSkillsByType(mockGraph, "basic");
+      expect(basics.every((s) => s.type === "basic")).toBe(true);
+      expect(basics.length).toBe(5);
     });
   });
 });

@@ -42,7 +42,7 @@ def write_batch(root, batch_id, proposed_id="semantic-search", similarity_target
             {
                 "id": proposed_id,
                 "name": "Semantic Search",
-                "type": "atomic",
+                "type": "basic",
                 "description": "Finds conceptually related content using meaning rather than exact keyword overlap.",
                 "sourceRepo": "tester/example",
             }

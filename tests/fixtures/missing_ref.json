@@ -6,7 +6,7 @@
     {
       "id": "skill-a",
       "name": "Skill A",
-      "type": "composite",
+      "type": "extra",
       "level": "III",
       "rarity": "common",
       "description": "Composite referencing nonexistent skill.",
@@ -31,7 +31,7 @@
     {
       "id": "skill-b",
       "name": "Skill B",
-      "type": "atomic",
+      "type": "basic",
       "level": "II",
       "rarity": "common",
       "description": "Valid atomic skill.",

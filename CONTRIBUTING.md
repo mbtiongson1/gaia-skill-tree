@@ -21,8 +21,8 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 | PR Type | Template | What You're Changing |
 |---|---|---|
-| New Intrinsic Skill (`atomic`) | `new_atomic_skill.md` | Adding a primitive capability to `gaia.json` |
-| New Extra Skill (`composite`) | `new_composite_skill.md` | Adding a skill with 2+ prerequisites to `gaia.json` |
+| New Basic Skill (`basic`) | `new_basic_skill.md` | Adding a primitive capability to `gaia.json` |
+| New Extra Skill (`extra`) | `new_extra_skill.md` | Adding a skill with 2+ prerequisites to `gaia.json` |
 | New fusion recipe | `new_fusion.md` | Adding edge records to `gaia.json` |
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
 | New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
@@ -72,9 +72,9 @@ Run `/gaia-draft-curate` first when contributors have pushed new intake batches.
 - **Skill IDs** use `kebab-case` in `gaia.json`: `web-scrape`, `parse-json`, `autonomous-debug`.
 - **Display names** use Title Case: "Web Scrape", "Parse JSON", "Autonomous Debug".
 - **Skill types** have display labels used in generated files — use the machine ID in `gaia.json`:
-  - `atomic` → **Intrinsic Skill**
-  - `composite` → **Extra Skill**
-  - `legendary` → **Ultimate Skill**
+  - `basic` → **Basic Skill**
+  - `extra` → **Extra Skill**
+  - `ultimate` → **Ultimate Skill**
 - **No vendor names** in skill IDs or definitions. Skills must be agent-agnostic.
 - **No abbreviations** unless universally understood (`html`, `json`, `api` are fine; `nlp` should be `natural-language-processing`).
 - **No duplicates.** Before submitting, search `gaia.json` for existing skills that may already cover your concept. If overlap exists, consider a reclassification PR instead.
@@ -107,7 +107,7 @@ Every skill above Level I (Awakened) must include at least one evidence entry. L
 
 ### Ultimate Skill Requirements
 
-Ultimate Skill (`legendary`) type skills have additional requirements:
+Ultimate Skill (`ultimate`) type skills have additional requirements:
 - Minimum **3 Class A or B** evidence sources.
 - **2 maintainer approvals** before merge.
 - Status must be `validated` at merge (never `provisional`).
@@ -240,7 +240,7 @@ Maintainers evaluate every PR against these criteria:
 | **Duplicate** | A skill with substantially the same definition already exists. |
 | **Vendor-specific** | The definition references a specific model or vendor as a requirement. |
 | **Insufficient evidence** | Level claim exceeds available evidence quality. |
-| **Invalid graph** | PR introduces a cycle, missing parent reference, or orphaned composite. |
+| **Invalid graph** | PR introduces a cycle, missing parent reference, or orphaned extra. |
 | **Inflated rarity** | Rarity is declared rather than computed from prevalence data. |
 | **Ambiguous definition** | The skill description is vague, overlapping, or not falsifiable. |
 | **Hand-edited generated files** | Changes were made to `skills/`, `registry.md`, or `combinations.md` instead of `gaia.json`. |

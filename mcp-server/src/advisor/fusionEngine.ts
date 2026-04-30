@@ -10,7 +10,7 @@ export function detectCombinations(
   const candidates: FusionCandidate[] = [];
 
   for (const skill of graph.skills) {
-    if (skill.type === "atomic") continue;
+    if (skill.type === "basic") continue;
     if (owned.has(skill.id)) continue;
     if (skill.prerequisites.length === 0) continue;
 
