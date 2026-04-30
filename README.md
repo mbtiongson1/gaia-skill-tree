@@ -6,8 +6,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
-🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◻ Basic &nbsp;·&nbsp; 🟦 Awakened &nbsp;·&nbsp; 🟢 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🟪 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
-
 ---
 
 ## The Tree
