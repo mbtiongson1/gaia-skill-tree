@@ -5,7 +5,7 @@ from importlib import resources
 from pathlib import Path
 
 
-WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync"}
+WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync", "promote"}
 
 
 def bundled_registry_path():

@@ -1,0 +1,13 @@
+{
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": false
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": ["gaia _hook --event file_edit 2>/dev/null || true"]
+      }
+    ]
+  }
+}

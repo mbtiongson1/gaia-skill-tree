@@ -19,6 +19,23 @@ from gaia_cli.registry import (
     require_explicit_writable_registry,
     resolve_registry_path,
 )
+from gaia_cli.pathEngine import compute_paths, load_paths, save_paths, diff_paths
+from gaia_cli.cardRenderer import (
+    render_card,
+    render_appraise_card,
+    render_unlock_card,
+    render_path_summary,
+    render_promotion_prompt,
+    load_and_render,
+)
+from gaia_cli.promotion import (
+    check_promotion_eligibility,
+    promote_skill,
+    promotion_state,
+    next_level,
+    LEVEL_NAMES,
+)
+from gaia_cli.hook import hook_entry
 
 DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
 
@@ -48,23 +65,26 @@ def scan_command(args):
     if not config:
         print("Gaia not initialized. Run `gaia init` first.")
         return
-    print("Scanning repository...")
+    quiet = getattr(args, 'quiet', False)
+    if not quiet:
+        print("Scanning repository...")
     scan_result = scan_repo_detailed()
     raw_tokens = scan_result["tokens"]
     graph_path = registry_graph_path(args.registry)
     resolved = resolve_skills(raw_tokens, registry_path=graph_path)
-    print(
-        f"Scanned {scan_result['files_scanned']} file(s) across "
-        f"{len(scan_result['paths_found'])} configured path(s)."
-    )
-    if scan_result["paths_missing"]:
-        print("Missing scan paths: " + ", ".join(scan_result["paths_missing"]))
-    print(f"Found {scan_result['candidate_count']} candidate token(s).")
-    print(f"Matched {len(resolved)} canonical skill(s).")
-    if resolved:
-        print(", ".join(resolved))
-    else:
-        print('Tip: try `gaia search "code review"` or expand scanPaths.')
+    if not quiet:
+        print(
+            f"Scanned {scan_result['files_scanned']} file(s) across "
+            f"{len(scan_result['paths_found'])} configured path(s)."
+        )
+        if scan_result["paths_missing"]:
+            print("Missing scan paths: " + ", ".join(scan_result["paths_missing"]))
+        print(f"Found {scan_result['candidate_count']} candidate token(s).")
+        print(f"Matched {len(resolved)} canonical skill(s).")
+        if resolved:
+            print(", ".join(resolved))
+        else:
+            print('Tip: try `gaia search "code review"` or expand scanPaths.')
     username = config.get('gaiaUser')
     tree = load_tree(username, registry_path=args.registry)
     if tree:
@@ -72,11 +92,42 @@ def scan_command(args):
             graph_data = json.load(f)
         unlocked = [s.get('skillId') for s in tree.get('unlockedSkills', [])]
         combos = get_combinations(graph_data, unlocked, resolved)
-        if combos:
+        if combos and not quiet:
             print("\nNew combination candidates detected:")
             for c in combos:
                 print(f"- {c['candidateResult']} (Requires: {', '.join(c['detectedSkills'])})")
             print("Run `gaia fuse [skillId]` to confirm and add to your tree.")
+
+        # Path engine integration
+        old_paths = load_paths()
+        owned_ids = [s.get('skillId') for s in tree.get('unlockedSkills', [])]
+        new_paths = compute_paths(graph_data, owned_ids, resolved)
+        new_paths["userId"] = username
+        changes = diff_paths(old_paths, new_paths)
+        save_paths(new_paths)
+
+        # Show unlock cards for newly reachable skills
+        skill_map = {s['id']: s for s in graph_data.get('skills', [])}
+        if changes.get("new_near_unlocks"):
+            print()
+            for sid in changes["new_near_unlocks"]:
+                skill = skill_map.get(sid)
+                if skill:
+                    opened = [p for p in new_paths.get("availablePaths", []) if p.get("distance", 99) <= 2]
+                    print(render_unlock_card(skill, opened[:3]))
+                    print()
+
+        # Path summary
+        if new_paths.get("nearUnlocks") or new_paths.get("oneAway"):
+            print(render_path_summary(new_paths))
+
+        # Promotion hints
+        eligible = check_promotion_eligibility(graph_data, tree)
+        if eligible:
+            for promo in eligible[:2]:
+                skill = skill_map.get(promo["skillId"])
+                if skill:
+                    print(render_promotion_prompt(skill, promo.get("nextLevel", "II")))
 
 def status_command(args):
     config = load_config()
@@ -94,6 +145,187 @@ def status_command(args):
         print(f"Or create users/{username}/skill-tree.json in the registry.")
         return
     show_status(tree)
+
+
+def appraise_command(args):
+    """Render an appraise card for a skill."""
+    config = load_config()
+    if not config:
+        print("Gaia not initialized. Run `gaia init` first.")
+        return
+
+    graph_path = registry_graph_path(args.registry)
+    if not os.path.exists(graph_path):
+        print("Registry graph not found.")
+        return
+
+    with open(graph_path, 'r', encoding='utf-8') as f:
+        graph_data = json.load(f)
+
+    skill_map = {s['id']: s for s in graph_data.get('skills', [])}
+    username = config.get('gaiaUser')
+    tree = load_tree(username, registry_path=args.registry)
+
+    # Determine which skill to appraise
+    skill_id = getattr(args, 'skillId', None)
+    if not skill_id:
+        # Default: most recently unlocked skill
+        if tree and tree.get('unlockedSkills'):
+            sorted_skills = sorted(
+                tree['unlockedSkills'],
+                key=lambda s: s.get('unlockedAt', ''),
+                reverse=True,
+            )
+            skill_id = sorted_skills[0]['skillId']
+        else:
+            # Fall back to most recent near-unlock from paths
+            paths = load_paths()
+            if paths and paths.get('nearUnlocks'):
+                skill_id = paths['nearUnlocks'][0]['skillId']
+            else:
+                print("No skill to appraise. Pass a skill ID or run `gaia scan` first.")
+                return
+
+    skill = skill_map.get(skill_id)
+    if not skill:
+        print(f"Skill '{skill_id}' not found in registry.")
+        return
+
+    # Build prereq status
+    owned_ids = set()
+    if tree:
+        owned_ids = {s['skillId'] for s in tree.get('unlockedSkills', [])}
+    # Also include detected skills from paths
+    paths = load_paths()
+    detected_ids = set()
+    if paths:
+        for nu in paths.get("nearUnlocks", []):
+            detected_ids.update(nu.get("satisfiedPrereqs", []))
+        for oa in paths.get("oneAway", []):
+            detected_ids.update(oa.get("satisfiedPrereqs", []))
+    available = owned_ids | detected_ids
+
+    prereq_status = {}
+    for p in skill.get('prerequisites', []):
+        prereq_status[p] = p in available
+
+    # Derivatives
+    derivatives = []
+    for d_id in skill.get('derivatives', []):
+        d_skill = skill_map.get(d_id)
+        if d_skill:
+            derivatives.append(d_skill)
+        else:
+            derivatives.append({"id": d_id, "name": d_id, "type": "unknown"})
+
+    # Contextual actions
+    owned = skill_id in owned_ids
+    actions = []
+    if not owned and all(prereq_status.values()) and prereq_status:
+        actions.append("[F] Fuse")
+    if owned:
+        state = promotion_state(skill_id, tree, graph_data)
+        if state == "eligible":
+            actions.append("[P] Promote")
+    actions.append("[S] Scan")
+    if derivatives:
+        actions.append("[→] Paths")
+
+    print(render_appraise_card(skill, prereq_status, derivatives, actions, owned=owned))
+
+
+def promote_command(args):
+    """Run promotion flow for an eligible skill."""
+    config = load_config()
+    if not config:
+        print("Gaia not initialized.")
+        return
+
+    username = config.get('gaiaUser')
+    graph_path = registry_graph_path(args.registry)
+
+    if not os.path.exists(graph_path):
+        print("Registry graph not found.")
+        return
+
+    with open(graph_path, 'r', encoding='utf-8') as f:
+        graph_data = json.load(f)
+
+    tree = load_tree(username, registry_path=args.registry)
+    if not tree:
+        print(f"No skill tree found for user '{username}'.")
+        return
+
+    skill_id = getattr(args, 'skillId', None)
+    display_name = getattr(args, 'name', None)
+
+    if not skill_id:
+        # Auto-select first eligible
+        eligible = check_promotion_eligibility(graph_data, tree)
+        if not eligible:
+            print("No skills eligible for promotion.")
+            return
+        skill_id = eligible[0]["skillId"]
+        print(f"Auto-selected: {skill_id}")
+
+    # Check state
+    state = promotion_state(skill_id, tree, graph_data)
+    if state == "not_unlocked":
+        print(f"Skill '{skill_id}' is not in your tree.")
+        return
+    elif state == "max_level":
+        print(f"Skill '{skill_id}' is already at maximum level.")
+        return
+    elif state == "blocked":
+        print(f"Skill '{skill_id}' cannot be promoted (evidence requirements not met).")
+        return
+
+    # Execute promotion
+    result = promote_skill(username, skill_id, args.registry, new_display_name=display_name)
+
+    # Show celebration
+    skill_map = {s['id']: s for s in graph_data.get('skills', [])}
+    skill = skill_map.get(skill_id, {"id": skill_id, "name": skill_id, "type": "basic"})
+    level_name = LEVEL_NAMES.get(result["newLevel"], result["newLevel"])
+    print(f"\n✦ {skill.get('name', skill_id)} promoted to Level {result['newLevel']} ({level_name})!")
+    if display_name:
+        print(f"  Renamed to: {display_name}")
+    print()
+
+
+def paths_command(args):
+    """Display current progression paths."""
+    paths = load_paths()
+    if not paths:
+        print("No paths computed yet. Run `gaia scan` first.")
+        return
+
+    print(render_path_summary(paths))
+    print()
+
+    near = paths.get("nearUnlocks", [])
+    if near:
+        print("Ready to fuse:")
+        for n in near:
+            print(f"  ◇ {n.get('name', n['skillId'])} ({n.get('type', '?')})")
+            prereqs = n.get('satisfiedPrereqs', [])
+            if prereqs:
+                print(f"    from: {', '.join(prereqs)}")
+        print()
+
+    one_away = paths.get("oneAway", [])
+    if one_away:
+        print("One prerequisite away:")
+        for o in one_away[:8]:
+            print(f"  ○ {o.get('name', o['skillId'])} — missing: {o.get('missingPrereq', '?')}")
+        if len(one_away) > 8:
+            print(f"  ... and {len(one_away) - 8} more")
+        print()
+
+
+def hook_command(args):
+    """Internal command invoked by Claude Code hook."""
+    hook_entry(event=getattr(args, 'event', 'file_edit'))
 
 
 def doctor_command(args):
@@ -300,6 +532,11 @@ def uninstall_command(args):
 
 
 def main():
+    # Ensure UTF-8 output on Windows (avoids cp1252 UnicodeEncodeError for box-drawing)
+    if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(prog="gaia", description="Gaia Plugin CLI")
     parser.add_argument(
         '--registry',
@@ -317,7 +554,8 @@ def main():
         action='store_true',
         help='Enable automatic prompts for detected skill combinations',
     )
-    subparsers.add_parser('scan')
+    scan_parser = subparsers.add_parser('scan')
+    scan_parser.add_argument('--quiet', action='store_true', help="Suppress scan output; only show notifications")
     subparsers.add_parser('status')
     subparsers.add_parser('doctor')
     subparsers.add_parser('tree')
@@ -357,6 +595,15 @@ def main():
     graph_parser.add_argument('--no-open', dest='open', action='store_false', help="Do not open the generated graph")
     uninstall_parser = subparsers.add_parser('uninstall', help="Uninstall a named skill")
     uninstall_parser.add_argument('skill_id', help="Named skill ID to uninstall (e.g. karpathy/autoresearch)")
+    # --- New commands ---
+    appraise_parser = subparsers.add_parser('appraise', help="Inspect a skill card with status and actions")
+    appraise_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to appraise (default: most recent)")
+    promote_parser = subparsers.add_parser('promote', help="Promote a skill eligible for level-up")
+    promote_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to promote (default: first eligible)")
+    promote_parser.add_argument('--name', help="Optional display name for the promoted skill")
+    subparsers.add_parser('paths', help="Show progression paths from current state")
+    hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
+    hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
     args = parser.parse_args()
     args.registry_explicit = args.registry is not None
     args.registry = resolve_registry_path(args.registry)
@@ -389,6 +636,14 @@ def main():
         graph_command(args)
     elif args.command == 'uninstall':
         uninstall_command(args)
+    elif args.command == 'appraise':
+        appraise_command(args)
+    elif args.command == 'promote':
+        promote_command(args)
+    elif args.command == 'paths':
+        paths_command(args)
+    elif args.command == '_hook':
+        hook_command(args)
     else:
         parser.print_help()
 
