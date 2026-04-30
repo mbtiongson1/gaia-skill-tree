@@ -21,10 +21,12 @@
 | ◇ Conversational Agent | Extra Skill | III | Evolved | `/conversational-agent` |
 | ◇ Data Analysis | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ Data Visualize | Intrinsic Skill | II | Named | `/data-visualize` |
+| ◇ Deployment Automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Design Review | Extra Skill | III | Evolved | `/design-review` |
 | ○ Diff Content | Intrinsic Skill | I | Awakened | `/diff-content` |
 | ◇ Document Analyst | Extra Skill | III | Evolved | `/document-analyst` |
 | ◇ Document Digitization | Extra Skill | III | Evolved | `/document-digitization` |
+| ◇ End-to-End Testing | Extra Skill | III | Evolved | `/e2e-testing` |
 | ○ Embed Text | Intrinsic Skill | I | Awakened | `/embed-text` |
 | ○ Error Interpretation | Intrinsic Skill | I | Awakened | `/error-interpretation` |
 | ○ Evaluate Output | Intrinsic Skill | I | Awakened | `/evaluate-output` |
@@ -66,6 +68,7 @@
 | ◆ True Sage: Recursive Self-Improvement | Ultimate Skill | V | Transcendent | `/recursive-self-improvement` |
 | ○ Refactor Code | Intrinsic Skill | II | Named | `/refactor-code` |
 | ◇ Registry Curation | Extra Skill | IV | Hardened | `/registry-curation` |
+| ◇ Release Automation | Extra Skill | II | Named | `/release-automation` |
 | ◇ Research | Extra Skill | III | Evolved | `/research` |
 | ○ Retrieve | Intrinsic Skill | I | Awakened | `/retrieve` |
 | ○ Route Intent | Intrinsic Skill | I | Awakened | `/route-intent` |
@@ -73,6 +76,7 @@
 | ○ Scientific Visualization | Intrinsic Skill | II | Named | `/scientific-visualization` |
 | ◇ Scientific Writing | Extra Skill | III | Evolved | `/scientific-writing` |
 | ○ Score Relevance | Intrinsic Skill | I | Awakened | `/score-relevance` |
+| ◇ Security Audit | Extra Skill | II | Named | `/security-audit` |
 | ○ Self-Critique | Intrinsic Skill | I | Awakened | `/self-critique` |
 | ○ Sentiment Analysis | Intrinsic Skill | 0 | Basic | `/sentiment-analysis` |
 | ○ Speech to Text | Intrinsic Skill | II | Named | `/speech-to-text` |
@@ -111,10 +115,14 @@
 | ○ Framework Upgrade | Intrinsic Skill | 0 | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | II | Named | `/image-generate` |
 | ○ Issue Triage | Intrinsic Skill | IV | Hardened | `/issue-triage` |
+| ○ MCP Integration | Intrinsic Skill | III | Evolved | `/mcp-integration` |
 | ○ Object Detection | Intrinsic Skill | II | Named | `/object-detection` |
 | ○ OCR | Intrinsic Skill | II | Named | `/ocr` |
+| ○ Parallel Execution | Intrinsic Skill | II | Named | `/parallel-execution` |
 | ○ Prompt Injection Defense | Intrinsic Skill | III | Evolved | `/prompt-injection-defense` |
+| ○ Requirements Analysis | Intrinsic Skill | II | Named | `/requirements-analysis` |
 | ○ Reward Modeling | Intrinsic Skill | II | Named | `/reward-modeling` |
+| ○ Schema Design | Intrinsic Skill | II | Named | `/schema-design` |
 | ○ Self-Consistency | Intrinsic Skill | IV | Hardened | `/self-consistency` |
 | ○ Semantic Cache | Intrinsic Skill | IV | Hardened | `/semantic-cache` |
 | ○ Skill Discovery | Intrinsic Skill | 0 | Basic | `/skill-discovery` |

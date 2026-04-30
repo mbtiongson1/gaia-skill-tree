@@ -12,9 +12,11 @@
 | ◇ Content Moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Conversational Agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
 | ◇ Data Analysis | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
+| ◇ Deployment Automation | Extra Skill | Workflow Automation, Execute Bash | II | Requires environment credentials and a configured pipeline definition. |
 | ◇ Design Review | Extra Skill | Evaluate Output, Plan and Decompose | III |  |
 | ◇ Document Analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
 | ◇ Document Digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III |  |
+| ◇ End-to-End Testing | Extra Skill | Browser Automation, Automated Testing | III | Requires a live or containerised target environment; browser automation must be available. |
 | ◆ True Craftsman: Full-Stack Developer | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
 | ◇ Function Calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV | Requires research output as input context. |
@@ -35,9 +37,11 @@
 | ◆ True Herald: Real-Time Voice Assistant | Ultimate Skill | Voice Agent, Memory Manage, Plan and Execute | V | Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources. |
 | ◆ True Sage: Recursive Self-Improvement | Ultimate Skill | Autonomous Debug, Evaluate Output, Plan and Execute | V | Requires extensive multi-system validation before level advancement. |
 | ◇ Registry Curation | Extra Skill | Research, Code Generation, Execute Bash | IV | Requires write access to the canonical graph and a passing validation suite. |
+| ◇ Release Automation | Extra Skill | Workflow Automation, Execute Bash, Generate Text | II | Requires write access to the repository and a configured release token. |
 | ◇ Research | Extra Skill | Web Search, Summarize, Cite Sources | III |  |
 | ◆ True Dragon: Autonomous Scientific Discovery | Ultimate Skill | Hypothesis Generation, Research, Math Reason | V | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Scientific Writing | Extra Skill | Write Report, Cite Sources, Scientific Visualization | III |  |
+| ◇ Security Audit | Extra Skill | Code Review Pipeline, Evaluate Output | II | Requires access to the full codebase or diff; output must include severity classification and reproduction steps. |
 | ◇ Text-to-SQL Pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | III | Requires schema context in prompt. |
 | ◇ Tool Chaining | Extra Skill | Tool Use, Tool Select | III | Requires at least two distinct tools whose data schemas are compatible for chaining. |
 | ◇ Tool Creation | Extra Skill | Code Generation, Tool Use | IV |  |

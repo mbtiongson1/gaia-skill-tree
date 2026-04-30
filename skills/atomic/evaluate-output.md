@@ -21,6 +21,7 @@ _None._
 - [Guardrails](../composite/guardrails.md)
 - [Agent Evaluation](../composite/agent-eval.md)
 - [Design Review](../composite/design-review.md)
+- [Security Audit](../composite/security-audit.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

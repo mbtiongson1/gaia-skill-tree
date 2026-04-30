@@ -16,6 +16,7 @@ Navigates web pages, fills forms, clicks elements, and extracts information by c
 
 ## Unlocks
 - [Wisdom King: Autonomous Research Agent](../legendary/autonomous-research-agent.md)
+- [End-to-End Testing](../composite/e2e-testing.md)
 
 ## Fusion Condition
 _None specified._
