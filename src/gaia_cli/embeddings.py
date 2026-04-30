@@ -66,13 +66,14 @@ def embed_skills(skills, model_name="all-MiniLM-L6-v2"):
             "Run: pip install sentence-transformers"
         )
 
+    print(f"Loading model '{model_name}'...", flush=True)
     model = SentenceTransformer(model_name)
 
     texts = [
         f"{skill['name']}: {skill['description']}" for skill in skills
     ]
 
-    print(f"Encoding {len(texts)} skills with model '{model_name}'...")
+    print(f"Encoding {len(texts)} skills...", flush=True)
     vectors = model.encode(texts, show_progress_bar=True, convert_to_numpy=True)
 
     entries = []

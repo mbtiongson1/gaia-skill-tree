@@ -1,6 +1,6 @@
 {
   "userId": "mbtiongson1",
-  "updatedAt": "2026-04-26",
+  "updatedAt": "2026-05-01",
   "unlockedSkills": [
     {
       "skillId": "web-search",
@@ -39,7 +39,7 @@
     },
     {
       "skillId": "web-scrape",
-      "level": "III",
+      "level": "IV",
       "unlockedAt": "2026-03-15",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": [
