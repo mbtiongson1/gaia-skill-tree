@@ -39,6 +39,7 @@ embeddings = [
 dev = [
     "build>=1.2.0",
     "pytest>=8.0",
+    "setuptools>=68.0",
     "twine>=5.0",
     "wheel>=0.42.0",
 ]

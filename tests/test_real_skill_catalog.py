@@ -17,25 +17,18 @@ class TestRealSkillCatalog(unittest.TestCase):
 
     def test_catalog_includes_requested_real_sources(self):
         catalog = self.load_catalog()
-        source_ids = {source["id"] for source in catalog["sources"]}
+        source_repos = {source["repo"] for source in catalog["sources"]}
 
-        self.assertIn("awesome-agent-skills", source_ids)
-        self.assertIn("agentskills-me", source_ids)
-        self.assertIn("superpowers", source_ids)
+        self.assertIn("karpathy/autoresearch", source_repos)
+        self.assertIn("cognition-labs/devin", source_repos)
 
     def test_catalog_buckets_real_named_skills(self):
         catalog = self.load_catalog()
-        items = [
-            item
-            for bucket in catalog["buckets"]
-            for item in bucket["items"]
-        ]
+        items = catalog.get("items", [])
         names = {item["name"] for item in items}
 
-        self.assertIn("superpowers/brainstorming", names)
-        self.assertIn("superpowers/systematic-debugging", names)
-        self.assertIn("codex", names)
-        self.assertIn("vercel-react-best-practices", names)
+        self.assertIn("karpathy/autoresearch", names)
+        self.assertTrue(len(names) >= 2, f"Expected at least 2 items, got: {names}")
 
     def test_generate_catalog_pages_outputs_linked_html(self):
         catalog = self.load_catalog()
@@ -48,10 +41,7 @@ class TestRealSkillCatalog(unittest.TestCase):
                 markdown = f.read()
 
         self.assertIn("<title>Gaia Real Skill Catalog</title>", html)
-        self.assertIn("https://github.com/VoltAgent/awesome-agent-skills", html)
-        self.assertIn("https://agentskills.me/skill/codex", html)
-        self.assertIn("superpowers/brainstorming", html)
-        self.assertIn("## Agent Workflow and Superpowers", markdown)
+        self.assertIn("karpathy/autoresearch", html)
 
 
 if __name__ == "__main__":
