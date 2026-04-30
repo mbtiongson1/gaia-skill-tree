@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tutorial](https://img.shields.io/badge/Tutorial-gaia.tiongson.co-38bdf8)](https://gaia.tiongson.co/)
 
-🟦 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◼ Basic &nbsp;·&nbsp; 🟦 Awakened &nbsp;·&nbsp; 🔹 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🟪 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
+🔵 Intrinsic &nbsp;·&nbsp; 🟣 Extra &nbsp;·&nbsp; 🟡 Ultimate &nbsp;&nbsp;&nbsp; ◻ Basic &nbsp;·&nbsp; 🟦 Awakened &nbsp;·&nbsp; 🟢 Named &nbsp;·&nbsp; 🟣 Evolved &nbsp;·&nbsp; 🟪 Hardened &nbsp;·&nbsp; 🟡 Transcendent &nbsp;·&nbsp; ⭐ Transcendent★
 
 ---
 
@@ -56,7 +56,7 @@ GAIA SKILL TREE  v1.0.0
 
 | Tier | Symbol | Display Name | What it means |
 |---|---|---|---|
-| 🟦 `atomic` | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
+| 🔵 `atomic` | ○ | **Intrinsic Skill** | Primitive, indivisible capability — the genome of every agent |
 | 🟣 `composite` | ◇ | **Extra Skill** | Emerges from combining 2+ intrinsic skills — transcends its parts |
 | 🟡 `legendary` | ◆ | **Ultimate Skill** | High-complexity emergent capability — strict evidence bar, <1% agent prevalence |
 
@@ -66,9 +66,9 @@ Skills level up through evidence, not declaration:
 
 | Level | Rank | Evidence Floor | What it means |
 |---|---|---|---|
-| `0` | ◼ **Basic** | None | Universal LLM primitive — any capable model does this by default |
+| `0` | ◻ **Basic** | None | Universal LLM primitive — any capable model does this by default |
 | `I` | 🟦 **Awakened** | None | Foundation tier — catalogued agent capability |
-| `II` | 🔹 **Named** | Class C | First confirmed demonstration |
+| `II` | 🟢 **Named** | Class C | First confirmed demonstration |
 | `III` | 🟣 **Evolved** | Class B | Reproducible, fully documented |
 | `IV` | 🟪 **Hardened** | Class B or A | Failure modes known; battle-tested |
 | `V` | 🟡 **Transcendent** | Class B or A | Composable and self-improving |
