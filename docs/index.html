@@ -596,6 +596,9 @@
 <span class="comment"># Strongly recommended — enables semantic search</span>
 <span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
 <span class="cmd">gaia embed</span>          <span class="comment"># ~30 sec, run once</span></pre>
+        <pre><span class="comment"># Windows only — if `gaia` is not recognized after install, run in PowerShell:</span>
+<span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)
+<span class="comment"># To persist: add that path via System → Environment Variables → Path</span></pre>
       </div>
     </div>
 

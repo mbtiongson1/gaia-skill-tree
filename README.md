@@ -91,6 +91,12 @@ cd gaia-skill-tree
 
 pip install -e ".[embeddings]"  # install CLI + semantic search support
 
+# ── Windows only: if `gaia` is not recognized after install ──────────────
+# Run this in PowerShell to add the user Scripts folder to your PATH:
+#   $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
+# To persist across sessions, add that path via System → Environment Variables → Path.
+# ─────────────────────────────────────────────────────────────────────────
+
 gaia init                        # auto-detects your GitHub username and
                                  # skill files (AGENTS.md, SKILLS.md,
                                  # .gemini/, .claude/skills/, etc.)
