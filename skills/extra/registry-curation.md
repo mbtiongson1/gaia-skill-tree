@@ -34,4 +34,4 @@ Requires write access to the canonical graph and a passing validation suite.
 _None verified yet._
 
 ---
-*Generated from gaia.json v2.1.2 on 2026-04-30. Do not edit directly.*
+*Generated from gaia.json v2.1.3 on 2026-04-30. Do not edit directly.*
