@@ -1,6 +1,32 @@
 {
   "generatedAt": "2026-04-30",
   "buckets": {
+    "automated-testing": [
+      {
+        "id": "0xdarkmatter/pytest-patterns",
+        "name": "Pytest Patterns",
+        "contributor": "0xdarkmatter",
+        "origin": true,
+        "genericSkillRef": "automated-testing",
+        "status": "named",
+        "level": "III",
+        "description": "Comprehensive pytest skill covering modern patterns for Python test automation including fixtures, parametrize, async testing, mocking, coverage strategies, integration tests, and conftest organisation for pytest 7.0+ projects.",
+        "title": "The Quality Guardian",
+        "catalogRef": "0xdarkmatter-pytest-patterns",
+        "tags": [
+          "pytest",
+          "python",
+          "test-automation",
+          "fixtures",
+          "async-testing",
+          "coverage",
+          "mocking"
+        ],
+        "links": {
+          "github": "https://github.com/aiskillstore/marketplace"
+        }
+      }
+    ],
     "test-driven-development": [
       {
         "id": "addy-osmani/test-driven-development",
@@ -141,6 +167,30 @@
         }
       }
     ],
+    "browser-automation": [
+      {
+        "id": "gooseworks/notte-browser",
+        "name": "Notte Browser",
+        "contributor": "gooseworks",
+        "origin": true,
+        "genericSkillRef": "browser-automation",
+        "status": "named",
+        "level": "III",
+        "description": "AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.",
+        "title": "The Digital Navigator",
+        "catalogRef": "gooseworks-notte-browser",
+        "tags": [
+          "browser",
+          "automation",
+          "web-agent",
+          "scraping",
+          "notte"
+        ],
+        "links": {
+          "github": "https://github.com/gooseworks-ai/goose-skills"
+        }
+      }
+    ],
     "autonomous-research-agent": [
       {
         "id": "karpathy/autoresearch",
@@ -210,6 +260,54 @@
         }
       }
     ],
+    "multi-agent-orchestration-v": [
+      {
+        "id": "ruvnet/flow-nexus-swarm",
+        "name": "Flow Nexus Swarm",
+        "contributor": "ruvnet",
+        "origin": true,
+        "genericSkillRef": "multi-agent-orchestration-v",
+        "status": "named",
+        "level": "III",
+        "description": "Cloud-based AI swarm orchestration platform supporting hierarchical, mesh, ring, and star topologies with event-driven workflows, message queue processing, and intelligent agent assignment.",
+        "title": "The Grand Conductor's Blueprint",
+        "catalogRef": "ruvnet-flow-nexus-swarm",
+        "tags": [
+          "multi-agent",
+          "swarm",
+          "orchestration",
+          "event-driven",
+          "workflow"
+        ],
+        "links": {
+          "github": "https://github.com/ruvnet/ruflo"
+        }
+      }
+    ],
+    "generate-test": [
+      {
+        "id": "upsonic/unittest-generator",
+        "name": "Unittest Generator",
+        "contributor": "upsonic",
+        "origin": true,
+        "genericSkillRef": "generate-test",
+        "status": "named",
+        "level": "II",
+        "description": "Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organising tests into concept-based subfolders under a tests/ directory with proper imports, fixtures, and edge-case coverage.",
+        "title": "The Test Weaver",
+        "catalogRef": "upsonic-unittest-generator",
+        "tags": [
+          "unit-testing",
+          "unittest",
+          "test-generation",
+          "python",
+          "autonomous-agent"
+        ],
+        "links": {
+          "github": "https://github.com/Upsonic/Upsonic"
+        }
+      }
+    ],
     "skill-discovery": [
       {
         "id": "vercel/find-skills",
@@ -232,10 +330,39 @@
           "github": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md"
         }
       }
+    ],
+    "rag-pipeline": [
+      {
+        "id": "yonatangross/orchestkit-rag",
+        "name": "OrchestrKit RAG",
+        "contributor": "yonatangross",
+        "origin": true,
+        "genericSkillRef": "rag-pipeline",
+        "status": "named",
+        "level": "III",
+        "description": "Production-grade RAG retrieval skill covering 30+ patterns including core pipeline composition, HyDE query expansion, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.",
+        "title": "The Knowledge Architect",
+        "catalogRef": "yonatangross-orchestkit-rag",
+        "tags": [
+          "rag",
+          "retrieval",
+          "hybrid-search",
+          "hyde",
+          "pgvector",
+          "reranking",
+          "agentic-rag"
+        ],
+        "links": {
+          "github": "https://github.com/yonatangross/orchestkit"
+        }
+      }
     ]
   },
   "awaitingClassification": [],
   "byContributor": {
+    "0xdarkmatter": [
+      "0xdarkmatter/pytest-patterns"
+    ],
     "addy-osmani": [
       "addy-osmani/test-driven-development"
     ],
@@ -249,6 +376,9 @@
     "glincker": [
       "glincker/readme-generator"
     ],
+    "gooseworks": [
+      "gooseworks/notte-browser"
+    ],
     "karpathy": [
       "karpathy/autoresearch"
     ],
@@ -258,11 +388,20 @@
     "martin-stepanoski": [
       "martin-stepanoski/nielsen-heuristics-audit"
     ],
+    "ruvnet": [
+      "ruvnet/flow-nexus-swarm"
+    ],
     "spring-ai": [
       "spring-ai/readme-generate"
     ],
+    "upsonic": [
+      "upsonic/unittest-generator"
+    ],
     "vercel": [
       "vercel/find-skills"
+    ],
+    "yonatangross": [
+      "yonatangross/orchestkit-rag"
     ]
   }
 }

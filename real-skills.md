@@ -15,6 +15,11 @@ Curated named skills from live SKILL.md ecosystems.
 | addyosmani/agent-skills | Addy Osmani collection of agent workflow enforcement skills. | https://github.com/addyosmani/agent-skills |
 | mastepanoski/claude-skills | Martin Stepanoski NPM package of UX-focused Claude skills. | https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills |
 | spring-ai-alibaba/examples | Spring AI Alibaba example projects including Claude Code skills. | https://github.com/spring-ai-alibaba/examples |
+| ruvnet/ruflo | Leading agent orchestration platform for Claude with multi-agent swarm deployment and event-driven workflows. | https://github.com/ruvnet/ruflo |
+| gooseworks-ai/goose-skills | Library of GTM skills for Claude Code, Codex, Cursor including AI-first browser automation via Notte. | https://github.com/gooseworks-ai/goose-skills |
+| yonatangross/orchestkit | Complete AI development toolkit for Claude Code with 103 skills including a production-grade RAG retrieval skill. | https://github.com/yonatangross/orchestkit |
+| Upsonic/Upsonic | Framework for building autonomous AI agents in Python with prebuilt agent skills. | https://github.com/Upsonic/Upsonic |
+| aiskillstore/marketplace | Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns. | https://github.com/aiskillstore/marketplace |
 
 ## Items
 
@@ -27,6 +32,11 @@ Curated named skills from live SKILL.md ecosystems.
 - [anthropic/pptx](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md) - Extracts, edits, and repacks PowerPoint (.pptx) files using markitdown, enabling agents to read, modify, and write structured presentations without a GUI. Maps to: `document-editing`.
 - [addy-osmani/test-driven-development](https://github.com/addyosmani/agent-skills) - Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds. Maps to: `test-driven-development`.
 - [martin-stepanoski/nielsen-heuristics-audit](https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills) - Audits a UI against Jakob Nielsen's 10 usability heuristics, scores each, and produces a prioritized remediation report. Maps to: `ux-audit`.
+- [ruvnet/flow-nexus-swarm](https://github.com/ruvnet/ruflo) - Cloud-based AI swarm orchestration supporting hierarchical, mesh, ring, and star topologies with event-driven workflows and intelligent agent assignment. Maps to: `multi-agent-orchestration-v`.
+- [gooseworks/notte-browser](https://github.com/gooseworks-ai/goose-skills) - AI-first browser automation using the Notte Browser API for session control, page scraping, form filling, and autonomous web agent execution. Maps to: `browser-automation`.
+- [yonatangross/orchestkit-rag](https://github.com/yonatangross/orchestkit) - Production-grade RAG retrieval skill covering 30+ patterns: HyDE, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops. Maps to: `rag-pipeline`.
+- [upsonic/unittest-generator](https://github.com/Upsonic/Upsonic) - Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organised into concept-based subfolders. Maps to: `generate-test`.
+- [0xdarkmatter/pytest-patterns](https://github.com/aiskillstore/marketplace) - Comprehensive pytest skill covering fixtures, parametrize, async testing, mocking, coverage strategies, and integration test patterns for pytest 7.0+ projects. Maps to: `automated-testing`.
 - [spring-ai/readme-generate](https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills) - Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format. Maps to: `write-report`.
 
 *Generated from graph/real_skill_catalog.json on 2026-04-30.*

@@ -1,0 +1,39 @@
+---
+id: ruvnet/flow-nexus-swarm
+name: Flow Nexus Swarm
+contributor: ruvnet
+origin: true
+genericSkillRef: multi-agent-orchestration-v
+status: named
+title: "The Grand Conductor's Blueprint"
+catalogRef: ruvnet-flow-nexus-swarm
+level: III
+description: Cloud-based AI swarm orchestration platform supporting hierarchical, mesh, ring, and star topologies with event-driven workflows, message queue processing, and intelligent agent assignment.
+links:
+  github: https://github.com/ruvnet/ruflo
+tags:
+  - multi-agent
+  - swarm
+  - orchestration
+  - event-driven
+  - workflow
+createdAt: "2026-04-30"
+updatedAt: "2026-04-30"
+---
+
+## Overview
+
+Flow Nexus Swarm is a cloud-based orchestration skill for deploying and managing AI agent swarms. It supports four network topologies (hierarchical, mesh, ring, star), event-driven workflows via message queues, and a template library of pre-built swarm configurations. The platform handles intelligent agent assignment, async execution, and multi-agent coordination across distributed environments.
+
+## Key Capabilities
+
+- **Multi-topology swarms**: hierarchical, mesh, ring, and star agent networks
+- **Event-driven execution**: message queue processing with async task dispatch
+- **Template library**: pre-built swarm configurations for common orchestration patterns
+- **Intelligent assignment**: vector-similarity-based agent routing
+
+## Origin
+
+First published by @ruvnet as part of the Ruflo orchestration platform. This is the origin implementation for the `multi-agent-orchestration-v` skill bucket.
+
+Sourced from the SkillsMP marketplace entry for `flow-nexus-swarm` (ruflo, 34k+ stars).
