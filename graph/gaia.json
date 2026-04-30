@@ -3142,7 +3142,7 @@
       "evidence": [
         {
           "class": "B",
-          "source": "https://github.com/addyosmani/agent-skills",
+          "source": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md",
           "evaluator": "mbtiongson1",
           "date": "2026-04-30",
           "notes": "Addy Osmani /test-driven-development slash command -- forces strict TDD workflow, stopping agents from skipping tests."
@@ -3167,7 +3167,7 @@
       "evidence": [
         {
           "class": "B",
-          "source": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills",
+          "source": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md",
           "evaluator": "mbtiongson1",
           "date": "2026-04-30",
           "notes": "Martin Stepanoski @mastepanoski/claude-skills -- /nielsen-heuristics-audit audits UI against Nielsen 10 usability heuristics step-by-step."

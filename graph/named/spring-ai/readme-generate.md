@@ -10,7 +10,7 @@ catalogRef: spring-ai-readme-generate
 level: II
 description: Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and automatically generates structured API documentation in README format.
 links:
-  github: https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills
+  github: https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md
 tags:
   - java
   - spring
