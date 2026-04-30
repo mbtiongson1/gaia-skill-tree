@@ -139,6 +139,7 @@ PR templates live in `.github/PULL_REQUEST_TEMPLATE/`. All canonical graph PRs e
 
 ### Slash commands (Claude Code)
 
-Two Claude Code skills ship in `.claude/skills/`:
+Three Claude Code skills ship in `.claude/skills/`:
 - `/gaia-curate` — full end-to-end curation pipeline: research → classify → write → validate → PR
 - `/gaia-draft-curate` — read-only triage of `intake/skill-batches/` and open `draft-skills` PRs
+- `/version-update` — auto-classify the current branch as patch/minor/major and bump all four version files in one commit
