@@ -37,7 +37,7 @@ Skills level up through evidence, not declaration:
 | `III` | **Evolved** | Class B | Reproducible, fully documented |
 | `IV` | **Hardened** | Class B or A | Failure modes known; battle-tested |
 | `V` | **Transcendent** | Class B or A | Composable and self-improving |
-| `VI` | **Transcendent ⭐** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
+| `VI` | **Transcendent ◆** | Class A | Apex — peer-reviewed, named to the agent who unlocked it |
 
 ---
 
