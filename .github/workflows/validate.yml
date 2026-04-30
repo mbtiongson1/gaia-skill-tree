@@ -9,6 +9,8 @@ on:
       - 'intake/**'
       - 'scripts/**'
       - 'plugin/**'
+      - 'tests/**'
+  workflow_dispatch: {}
 
 jobs:
   validate:
