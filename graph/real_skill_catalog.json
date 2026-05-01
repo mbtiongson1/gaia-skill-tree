@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-04-30",
+  "generatedAt": "2026-05-01",
   "sources": [
     {
       "repo": "karpathy/autoresearch",
@@ -71,6 +71,11 @@
       "repo": "aiskillstore/marketplace",
       "description": "Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns.",
       "url": "https://github.com/aiskillstore/marketplace"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "description": "Matt Pocock community skill library for coding workflows and meta-skills.",
+      "url": "https://github.com/mattpocock/skills"
     }
   ],
   "items": [
@@ -387,7 +392,7 @@
       "name": "mattpocock/diagnose",
       "contributor": "mattpocock",
       "title": "The Disciplined Diagnosis Loop",
-      "description": "Enforces a five-phase debugging discipline prioritising the feedback loop above all else — refuses to proceed until a fast deterministic pass/fail signal exists.",
+      "description": "Enforces a five-phase debugging discipline prioritising the feedback loop above all else \u2014 refuses to proceed until a fast deterministic pass/fail signal exists.",
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md",
       "mapsToGaia": [

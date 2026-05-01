@@ -20,6 +20,7 @@ Curated named skills from live SKILL.md ecosystems.
 | yonatangross/orchestkit | Complete AI development toolkit for Claude Code with 103 skills including a production-grade RAG retrieval skill. | https://github.com/yonatangross/orchestkit |
 | Upsonic/Upsonic | Framework for building autonomous AI agents in Python with prebuilt agent skills. | https://github.com/Upsonic/Upsonic |
 | aiskillstore/marketplace | Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns. | https://github.com/aiskillstore/marketplace |
+| mattpocock/skills | Matt Pocock community skill library for coding workflows and meta-skills. | https://github.com/mattpocock/skills |
 
 ## Items
 
@@ -50,4 +51,4 @@ Curated named skills from live SKILL.md ecosystems.
 - [mattpocock/grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) - Conducts a relentless one-question-at-a-time interview walking every branch of the decision tree with a recommended answer, substituting codebase exploration wherever empirically determinable. Maps to: `design-review`.
 - [mattpocock/improve-codebase-architecture](https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md) - Identifies shallow modules via the deletion test, presents deepening opportunities with locality/leverage analysis, then grills the developer on the chosen candidate to design a deep-module replacement. Maps to: `refactor-code`.
 
-*Generated from graph/real_skill_catalog.json on 2026-04-30.*
+*Generated from graph/real_skill_catalog.json on 2026-05-01.*
