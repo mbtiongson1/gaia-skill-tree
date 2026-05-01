@@ -37,7 +37,7 @@ def _strip_ansi(text):
     return ansi_escape.sub('', text)
 
 def _cli_help() -> str:
-    parser = get_parser()
+    parser, _ = get_parser()
     help_text = _strip_ansi(parser.format_help())
     return f"```text\n{help_text}\n```"
 

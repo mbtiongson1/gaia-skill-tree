@@ -978,7 +978,7 @@ def get_parser():
         action for action in subparsers._choices_actions if action.dest != '_hook'
     ]
     hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
-    return parser
+    return parser, skills_parser
 
 def main():
     # Ensure UTF-8 output on Windows (avoids cp1252 UnicodeEncodeError for box-drawing)
@@ -986,7 +986,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-    parser = get_parser()
+    parser, skills_parser = get_parser()
     args = parser.parse_args()
     args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
     require_explicit_writable_registry(parser, args)
