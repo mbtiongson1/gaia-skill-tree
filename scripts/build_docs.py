@@ -96,6 +96,8 @@ def build_readme(check: bool) -> bool:
         ("<!-- gaia:layout-start -->", "<!-- gaia:layout-end -->", _layout()),
     ):
         text, did_change = _replace_region(text, start, end, body)
+        if did_change and check:
+            print('diff', start, end, body)
         changed = changed or did_change
     if changed and not check:
         path.write_text(text, encoding="utf-8")
@@ -117,6 +119,8 @@ def build_docs_index(check: bool) -> bool:
         "<!-- gaia:stats-end -->",
         f"<!-- {body} -->",
     )
+    if changed and check:
+        print('diff', body)
     if changed and not check:
         path.write_text(text, encoding="utf-8")
     return changed
