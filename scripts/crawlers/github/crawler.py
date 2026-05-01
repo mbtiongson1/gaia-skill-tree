@@ -5,6 +5,8 @@ import os
 import subprocess
 import sys
 import time
+import urllib.parse
+import urllib.request
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -21,7 +23,7 @@ BATCH_SIZE = 30
 
 
 def gh_api(endpoint: str) -> dict | None:
-    """Call GitHub API via gh CLI and return parsed JSON."""
+    """Call GitHub API via gh CLI and fall back to direct HTTP if unavailable."""
     try:
         result = subprocess.run(
             ["gh", "api", endpoint, "--paginate"],
@@ -31,16 +33,39 @@ def gh_api(endpoint: str) -> dict | None:
         )
         if result.returncode != 0:
             print(f"  gh api error: {result.stderr.strip()}")
-            return None
-        return json.loads(result.stdout)
+        else:
+            return json.loads(result.stdout)
     except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError) as e:
         print(f"  gh api exception: {e}")
+
+    token = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
+    if not token:
+        print("  GitHub token not found; set GITHUB_TOKEN or GH_TOKEN for HTTP fallback")
+        return None
+
+    url = f"https://api.github.com{endpoint}"
+    if endpoint.startswith("/search/repositories") and "per_page=" not in endpoint:
+        sep = "&" if "?" in endpoint else "?"
+        url = f"{url}{sep}per_page=20"
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "gaia-skill-tree-crawler",
+    }
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except Exception as e:
+        print(f"  HTTP fallback error: {e}")
         return None
 
 
 def search_repos_by_topic(topic: str, min_stars: int = MIN_STARS, limit: int = 20) -> list[dict]:
     """Search GitHub repos by topic, sorted by stars."""
-    query = f"topic:{topic}+stars:>={min_stars}"
+    query = urllib.parse.quote_plus(f"topic:{topic} stars:>={min_stars}")
     endpoint = f"/search/repositories?q={query}&sort=stars&order=desc&per_page={limit}"
     data = gh_api(endpoint)
     if not data:
