@@ -29,5 +29,5 @@ The current curated real-skill review surface is generated from [`registry/real-
 
 - Treat star count only as a popularity heuristic, not evidence quality.
 - Before proposing any new skill, map candidate behavior to existing Gaia IDs to avoid duplicates.
-- If importing a concept from these sources, attach reproducible evidence per Gaia's level rubric (Class A/B/C) in the PR.
+- If importing a concept from these sources, attach reproducible evidence per Gaia's level rubric (Evidence Tier A/B/C) in the PR.
 - Keep named-skill curation separate from DAG promotion: add real source-backed names to `registry/real-skills.json`, then promote only durable capability concepts into `registry/gaia.json`.

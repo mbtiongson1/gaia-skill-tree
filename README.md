@@ -70,15 +70,15 @@ Personal renders: generated-output/tree.md and generated-output/tree.html
 
 Skills level up through evidence, not declaration:
 
-| Level | Rank | Evidence Floor | What it means |
-|---|---|---|---|
-| `0` | **Basic** | None | Universal LLM primitive: any capable model does this by default |
-| `I` | **Awakened** | None | Foundation tier: catalogued agent capability |
-| `II` | **Named** | Class C | First confirmed demonstration |
-| `III` | **Evolved** | Class B | Reproducible and fully documented |
-| `IV` | **Hardened** | Class B or A | Failure modes known; battle-tested |
-| `V` | **Transcendent** | Class B or A | Composable and self-improving |
-| `VI` | **Transcendent ★** | Class A | Apex: peer-reviewed, named to the agent who unlocked it |
+| Level | Class | Rank | Evidence Floor | What it means |
+|---|---|---|---|---|
+| `0` | F | **Unawakened** | None | Universal LLM primitive: any capable model does this by default |
+| `I` | D | **Awakened** | None | Foundation tier: catalogued agent capability |
+| `II` | C | **Named** | Evidence Tier C | First confirmed demonstration |
+| `III` | B | **Evolved** | Evidence Tier B | Reproducible and fully documented |
+| `IV` | A | **Hardened** | Evidence Tier B or A | Failure modes known; battle-tested |
+| `V` | S | **Transcendent** | Evidence Tier A | Composable and self-improving |
+| `VI` | SS | **Transcendent ★** | Evidence Tier A | Apex: peer-reviewed, named to the agent who unlocked it |
 
 ---
 

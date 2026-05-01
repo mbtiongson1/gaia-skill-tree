@@ -56,15 +56,15 @@ Card glow per tier (radial gradient, 35% opacity):
 
 Skills level up from 0 → VI. Each rank has a distinct RPG-inspired color.
 
-| Level | Rank | Color | Hex | Background tint |
-|---|---|---|---|---|
-| `0` | Basic | Slate | `#94a3b8` | `rgba(100,116,139,.12)` |
-| `I` | Awakened | Sky blue | `#38bdf8` | `rgba(56,189,248,.12)` |
-| `II` | Named | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
-| `III` | Evolved | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
-| `IV` | Hardened | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
-| `V` | Transcendent | Amber | `#fbbf24` | `rgba(251,191,36,.12)` |
-| `VI ★` | Transcendent ★ | Amber (bright) | `#fbbf24` | `rgba(251,191,36,.20)` |
+| Level | Class | Rank | Color | Hex | Background tint |
+|---|---|---|---|---|---|
+| `0` | F | Unawakened | Slate | `#94a3b8` | `rgba(100,116,139,.12)` |
+| `I` | D | Awakened | Sky blue | `#38bdf8` | `rgba(56,189,248,.12)` |
+| `II` | C | Named | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
+| `III` | B | Evolved | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
+| `IV` | A | Hardened | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
+| `V` | S | Transcendent | Amber | `#fbbf24` | `rgba(251,191,36,.12)` |
+| `VI ★` | SS | Transcendent ★ | Amber (bright) | `#fbbf24` | `rgba(251,191,36,.20)` |
 
 The rank color sequence intentionally mirrors an RPG rarity ramp: neutral → cold → teal → violet → pink → gold, with the apex doubling its background opacity.
 

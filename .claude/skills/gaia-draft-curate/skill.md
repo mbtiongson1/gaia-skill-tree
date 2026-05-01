@@ -39,11 +39,11 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    ```bash
    gh api repos/{owner}/{repo}/contents/<skills-dir>/<skill-name>/SKILL.md --jq '.download_url'
    ```
-   Fetch the SKILL.md to read its description. **Use the specific file URL** (`https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Class B evidence source — never the repo root URL.
+   Fetch the SKILL.md to read its description. **Use the specific file URL** (`https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Evidence Tier B source — never the repo root URL.
 
    If the repo has *multiple* skill subdirectories and several map to proposed skills in the current batch (or to unproposed skills worth adding), note each one separately in the review table — they each get their own row and decision.
 
-   If no skills directory is found, the repo URL itself is acceptable as Class B evidence.
+   If no skills directory is found, the repo URL itself is acceptable as Evidence Tier B.
 
    c. If a repo-level URL was previously recorded as evidence for this skill (e.g., the `sourceRepo` in the intake batch), **re-resolve it to a specific SKILL.md path** using the steps above before accepting. Flag repo-root URLs as `needs-specific-url` if no SKILL.md can be found.
 
@@ -51,9 +51,9 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    ```
    WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
    ```
-   Note any SkillsMP matches as "Class C evidence available".
+   Note any SkillsMP matches as "Evidence Tier C available".
 
-   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Class B/A evidence and a verified SKILL.md should be favored for acceptance.
+   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Evidence Tier B/A and a verified SKILL.md should be favored for acceptance.
 
 5. **Display review table** — for each batch, show:
 
@@ -70,7 +70,7 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    - `accept` — ready to promote into `registry/gaia.json`
    - `rename <new-id>` — change the ID, then accept
    - `duplicate <existing-id>` — already covered; drop
-   - `needs-evidence` — hold; note what Class A/B source is missing
+   - `needs-evidence` — hold; note what Evidence Tier A/B source is missing
    - `reject` — remove from consideration
 
    Present one batch at a time. Do not proceed to the next batch until the current one is fully classified.
@@ -109,7 +109,7 @@ Then stop — do not attempt any curation.
 
 - **Read-only by default** — this skill never writes to `registry/gaia.json` directly. That only happens via the `/gaia-curate` promotion path with explicit user confirmation.
 - Never modify batch files in `registry-for-review/skill-batches/` — they are immutable intake records.
-- `needs-evidence` decisions should note what evidence class is missing (Class A paper / Class B repo).
+- `needs-evidence` decisions should note what evidence tier is missing (Evidence Tier A paper / Evidence Tier B repo).
 - If `gh` is not authenticated, skip the PR listing step and work from local batch files only; note the limitation in output.
 
 ## Repo location

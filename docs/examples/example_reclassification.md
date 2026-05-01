@@ -24,7 +24,7 @@ Since the initial Level III classification, multiple independent demonstrations 
 
 **Contributor:**
 - [x] Justification references concrete evidence, not opinion.
-- [x] New evidence meets the threshold for Level IV (Class B+).
+- [x] New evidence meets the threshold for Level IV (Evidence Tier B+).
 - [x] Explanation of why previous Level III classification is now insufficient.
 - [x] Rarity unchanged (prevalence data has not shifted).
 - [x] I have run `python scripts/validate.py` locally and it passes.

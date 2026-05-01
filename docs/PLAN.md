@@ -17,7 +17,7 @@ Ship Gaia v1 — a validated, graph-first AI agent skill registry with a working
 - No custom infrastructure. Everything runs on GitHub (Actions, PRs, Pages, CODEOWNERS).
 - The canonical graph must validate before any other work continues — it is the blocker for all downstream deliverables.
 - Plugin is built after the registry and schemas are stable. Not before.
-- Legendary skills are stubs at launch. No legendary reaches `validated` status in v1 without three Class A/B evidence sources and two maintainer approvals.
+- Legendary skills are stubs at launch. No legendary reaches `validated` status in v1 without three Evidence Tier A/B sources and two maintainer approvals.
 
 ---
 
@@ -74,7 +74,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
   - JSON Schema validation for all nodes and edges.
   - DAG cycle detection (DFS from all root nodes).
   - Reference integrity (every parent ID resolves to an existing node).
-  - Evidence threshold by level (Level II needs Class C+, Level III needs Class B+, etc.).
+  - Evidence threshold by level (Level II needs Evidence Tier C+, Level III needs Evidence Tier B+, etc.).
   - Legendary approval count check (placeholder for Phase 5 enforcement).
 - [ ] Set up `.github/workflows/validate.yml`:
   - Triggers on all PRs touching `registry/`.
@@ -87,7 +87,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 
 ### Exit Criteria
 - [ ] CI passes on the seed graph with zero warnings.
-- [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Class B evidence.
+- [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Evidence Tier B source.
 - [ ] `python scripts/validate.py` runs in under 5 seconds on the seed graph.
 
 ---
@@ -318,7 +318,7 @@ autonomousResearchAgent
 | R-02 | Subjective level inflation from contributors | High | High | Mandatory evidence rubric + reviewer voting + `provisional` default |
 | R-03 | DAG cycle introduced via PR | Low | High | Automated cycle detection blocks all PRs with cycles |
 | R-04 | Vendor bias in skill definitions | Medium | Medium | Agent-agnostic definitions required; vendor-specific evidence flagged |
-| R-05 | Legendary inflation devaluing the tier | Medium | High | Higher merge bar, minimum 3 Class A/B sources, 2 maintainer approvals |
+| R-05 | Legendary inflation devaluing the tier | Medium | High | Higher merge bar, minimum 3 Evidence Tier A/B sources, 2 maintainer approvals |
 | R-06 | Username squatting or tree impersonation | Low | High | CODEOWNERS + GitHub Actions OAuth verification |
 | R-07 | Plugin false-positive skill detection | Medium | Medium | Conservative scanner — only match explicit skill ID references, not guesses |
 | R-08 | Stale registry (skills not updated as AI evolves) | High | Medium | Scheduled quarterly re-audit; stale-skill flag if not updated in 180 days |
@@ -331,7 +331,7 @@ autonomousResearchAgent
 
 ### Data Quality
 - % of skills with all required fields populated.
-- % of Level III+ skills with at least one Class B evidence source.
+- % of Level III+ skills with at least one Evidence Tier B source.
 - Number of disputed claims resolved per month.
 - Zero `validated` legendary skills with fewer than 3 evidence sources.
 

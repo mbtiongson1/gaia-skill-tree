@@ -523,42 +523,42 @@
   <div class="rank-table-wrap">
     <table>
       <thead>
-        <tr><th>Level</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
+        <tr><th>Level</th><th>Class</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="rank-badge" style="background:rgba(100,116,139,.12);color:#94a3b8">0</span></td>
-          <td><strong>Basic</strong></td><td>None</td>
+          <td>F</td><td><strong>Unawakened</strong></td><td>None</td>
           <td>Universal LLM primitive — any capable model does this by default</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span></td>
-          <td><strong>Awakened</strong></td><td>None</td>
+          <td>D</td><td><strong>Awakened</strong></td><td>None</td>
           <td>Catalogued and available — the foundation tier</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(99,202,183,.12);color:#63cab7">II</span></td>
-          <td><strong>Named</strong></td><td>Class C</td>
+          <td>C</td><td><strong>Named</strong></td><td>Evidence Tier C</td>
           <td>First confirmed demonstration by a real contributor</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span></td>
-          <td><strong>Evolved</strong></td><td>Class B</td>
+          <td>B</td><td><strong>Evolved</strong></td><td>Evidence Tier B</td>
           <td>Reproducible, fully documented</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span></td>
-          <td><strong>Hardened</strong></td><td>Class B or A</td>
+          <td>A</td><td><strong>Hardened</strong></td><td>Evidence Tier B or A</td>
           <td>Failure modes known; battle-tested</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span></td>
-          <td><strong>Transcendent</strong></td><td>Class B or A</td>
+          <td>S</td><td><strong>Transcendent</strong></td><td>Evidence Tier A</td>
           <td>Composable and self-improving</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(251,191,36,.2);color:#fbbf24">VI ★</span></td>
-          <td><strong>Transcendent ★</strong></td><td>Class A</td>
+          <td>SS</td><td><strong>Transcendent ★</strong></td><td>Evidence Tier A</td>
           <td>Apex — peer-reviewed, named to the agent who unlocked it</td>
         </tr>
       </tbody>
@@ -703,11 +703,11 @@
       <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate));font-size:.75rem">◆+</div>
       <div>
         <h3>Propose a new Ultimate skill</h3>
-        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
+        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Evidence Tier A/B sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
         <pre><span class="comment"># In registry/gaia.json — add your skill with:</span>
 <span class="comment">#   "type": "ultimate"</span>
 <span class="comment">#   "prerequisites": ["skill-a", "skill-b", "skill-c"]</span>
-<span class="comment">#   "evidence": [... 3× Class A or B sources ...]</span>
+<span class="comment">#   "evidence": [... 3× Evidence Tier A or B sources ...]</span>
 <span class="comment">#   "status": "provisional"  (maintainers set to validated at merge)</span>
 <span class="cmd">python scripts/validate.py</span>   <span class="comment"># must pass before opening PR</span></pre>
       </div>
@@ -748,7 +748,7 @@
     <div class="gloss-item"><div class="gloss-term">registry/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
     <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before an extra or ultimate skill can emerge.</div></div>
     <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier extra or ultimate skill.</div></div>
-    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
+    <div class="gloss-item"><div class="gloss-term">evidence tier</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Evidence Tier A = peer-reviewed.</div></div>
     <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
     <div class="gloss-item"><div class="gloss-term">gaia scan</div><div class="gloss-def">Runs a scan and refreshes local promotion and tree outputs.</div></div>
     <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill with a hidden seed title but no contributor implementation yet — open for the taking.</div></div>

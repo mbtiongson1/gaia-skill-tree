@@ -559,7 +559,7 @@ The `registry/named-skills.json` file produced by `generateNamedIndex.py` has th
 - `awaitingClassification` — skills with `status: awakened`, pending reviewer action
 - `byContributor` — secondary index mapping contributor username → list of named skill IDs
 
-Level 0 (Basic) and Level I (Awakened) skills are generic-only and do not accept named implementations.
+Level 0 (Unawakened) and Level I (Awakened) skills are generic-only and do not accept named implementations.
 
 ### 13.4 Install & Sync
 

@@ -15,7 +15,7 @@ Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent 
 1. **Read the current graph** — load `registry/gaia.json` to see every existing skill ID so nothing is duplicated.
 2. **Research** — for each candidate skill, gather concrete evidence using ALL of the following channels (in order of priority):
 
-   **2a. GitHub search (50% of research effort — Class B evidence):**
+   **2a. GitHub search (50% of research effort — Evidence Tier B):**
    Search for actual repos implementing the skill:
    ```bash
    gh search repos --topic="<skill-topic>" --sort=stars --limit=20
@@ -43,37 +43,37 @@ Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent 
       ```
    2. Fetch the SKILL.md content to read its description.
    3. Map it to an existing or new Gaia skill ID.
-   4. Use the **raw file URL** (e.g., `https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Class B evidence `source` — never the repo root URL.
+   4. Use the **raw file URL** (e.g., `https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Evidence Tier B `source` — never the repo root URL.
    5. Treat each discovered skill as a **separate candidate** to evaluate independently (accept/rename/duplicate/reject it on its own merits).
 
    If no skills directory is found, the repo itself is the evidence source and its URL may be used directly.
 
-   **2b. SkillsMP search (10% — Class C evidence):**
+   **2b. SkillsMP search (10% — Evidence Tier C):**
    Query the SkillsMP public API for related community skills:
    ```
    WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
    ```
-   Use matching SkillsMP entries as supplementary Class C evidence. Rate limit: 50 requests/day unauthenticated.
+   Use matching SkillsMP entries as supplementary Evidence Tier C. Rate limit: 50 requests/day unauthenticated.
 
-   **2c. Paper search (20% — Class A evidence):**
-   For skills targeting Level II+ or those with only Class C evidence:
+   **2c. Paper search (20% — Evidence Tier A):**
+   For skills targeting Level II+ or those with only Evidence Tier C:
    ```
    WebSearch: "<skill-name> arxiv 2024 2025 2026 agent benchmark"
    WebSearch: "<skill-name> survey" site:arxiv.org
    ```
-   Use arXiv abs URLs as Class A evidence. Only include papers with clear relevance and measurable benchmarks.
+   Use arXiv abs URLs as Evidence Tier A. Only include papers with clear relevance and measurable benchmarks.
 
    **2d. Existing tree audit (20%):**
    Before proposing new skills, scan `registry/gaia.json` for:
-   - Skills at level 0/I with only Class C evidence (upgrade candidates)
+   - Skills at level 0/I with only Evidence Tier C (upgrade candidates)
    - Skills with `status: "provisional"` that could be validated with better evidence
-   - Skills at level II+ missing Class A evidence
+   - Skills at level II+ missing Evidence Tier A
 
    Prioritize upgrading these with B/A evidence before proposing entirely new skills. This ensures the tree grows stronger, not just wider.
 
 3. **Design the batch** — for each candidate skill determine:
-   - Type: `atomic` (no prerequisites) / `composite` (≥2 prereqs) / `legendary` (≥3 prereqs + 3 Class A/B sources)
-   - Level: target **IV** (Proficient) minimum — requires at least 1× Class B or A evidence
+   - Type: `atomic` (no prerequisites) / `composite` (≥2 prereqs) / `legendary` (≥3 prereqs + 3 Evidence Tier A/B sources)
+   - Level: target **IV** (Hardened) minimum — requires at least 1× Evidence Tier B or A
    - Rarity: `common` / `uncommon` / `rare` / `epic` / `legendary`
    - Prerequisites and derivatives (must reference existing IDs)
 4. **Present draft for review** — before writing any code or committing, display the full proposed skills table:
@@ -86,7 +86,7 @@ Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent 
    - `accept` — proceed as designed
    - `rename <new-id>` — change the ID before generating
    - `duplicate` — already covered by an existing skill; drop it
-   - `needs-evidence` — hold until a Class A/B source is supplied
+   - `needs-evidence` — hold until an Evidence Tier A/B source is supplied
    - `reject` — remove from the batch entirely
 
    **Do not proceed to step 5 until the user has reviewed and the batch contains at least one `accept`.** Incorporate all `rename` decisions before writing the script. Drop everything that is not `accept`/`rename`.
@@ -120,7 +120,7 @@ python3 scripts/validate_intake.py
 
 - Only edit `registry/gaia.json` — never touch `skills/`, `registry.md`, or `combinations.md` (those are generated).
 - All evidence `source` values must be real, resolvable URLs (arXiv abs pages or GitHub repos).
-- Legendary skills at `status: validated` require ≥3 Class A/B entries; new legendaries should be `provisional` until the maintainer merges.
+- Legendary skills at `status: validated` require ≥3 Evidence Tier A/B entries; new legendaries should be `provisional` until the maintainer merges.
 - No cycles in the DAG. No orphaned composite nodes.
 - Skill IDs: `lowercase-dash` format (e.g., `chain-of-thought`, `web-search`). No camelCase, no vendor names, no abbreviations unless universally understood. Pattern: `^[a-z][a-z0-9]*(-[a-z0-9]+)*$`.
 - **Edge schema**: edges use `sourceSkillId`/`targetSkillId` keys (not `from`/`to`). Valid `edgeType` values are `prerequisite`, `corequisite`, `enhances` only — there is NO `derivative` edge type. Use `enhances` for skill→derivative edges.
@@ -128,7 +128,7 @@ python3 scripts/validate_intake.py
 
 ## Evidence standards (quick reference)
 
-| Class | Standard |
+| Evidence Tier | Standard |
 |---|---|
 | A | Peer-reviewed paper — use `https://arxiv.org/abs/<id>` |
 | B | Reproducible open-source demo — use the GitHub repo URL |

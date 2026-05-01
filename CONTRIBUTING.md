@@ -40,7 +40,7 @@ If you have [Claude Code](https://claude.ai/code) installed, this repository shi
 
 Runs the complete curation pipeline end-to-end:
 1. Reads the current graph to avoid duplicates.
-2. Researches candidate skills with Class A/B evidence. For each qualifying repo found on GitHub, checks common skill directory layouts (`skills/`, `.claude/skills/`, `codex/skills/`, etc.) to find individual SKILL.md files inside — each discovered skill is treated as a separate candidate with a specific file URL as evidence, not the repo root.
+2. Researches candidate skills with Evidence Tier A/B evidence. For each qualifying repo found on GitHub, checks common skill directory layouts (`skills/`, `.claude/skills/`, `codex/skills/`, etc.) to find individual SKILL.md files inside — each discovered skill is treated as a separate candidate with a specific file URL as evidence, not the repo root.
 3. Presents a draft review table — you classify each candidate as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject` before any file is touched.
 4. Writes and runs the generation script, validates the DAG, regenerates derived files, and opens a PR.
 
@@ -83,11 +83,11 @@ Run `/gaia-draft-curate` first when contributors have pushed new intake batches.
 
 ## Evidence Requirements
 
-Every skill above Level I (Awakened) must include at least one evidence entry. Level 0 (Basic) and Level I (Awakened) require no evidence.
+Every skill above Level I (Awakened) must include at least one evidence entry. Level 0 (Unawakened) and Level I (Awakened) require no evidence.
 
-### Evidence Classes
+### Evidence Tiers
 
-| Class | Standard | Example |
+| Evidence Tier | Standard | Example |
 |---|---|---|
 | **A** | Peer-reviewed paper or rigorous public benchmark with reproducible methodology | arXiv paper with code and eval |
 | **B** | Reproducible open-source demo with logs, inputs, and outputs archived | GitHub repo with demo script and output logs |
@@ -95,20 +95,20 @@ Every skill above Level I (Awakened) must include at least one evidence entry. L
 
 ### Evidence by Level
 
-| Level | Rank | Minimum Evidence |
-|---|---|---|
-| 0 | **Basic** | None |
-| I | **Awakened** | None |
-| II | **Named** | 1× Class C |
-| III | **Evolved** | 1× Class B |
-| IV | **Hardened** | 1× Class B or A |
-| V | **Transcendent** | 1× Class A |
-| VI | **Transcendent ★** | Class A + peer review |
+| Level | Class | Rank | Minimum Evidence |
+|---|---|---|---|
+| 0 | F | **Unawakened** | None |
+| I | D | **Awakened** | None |
+| II | C | **Named** | 1× Evidence Tier C |
+| III | B | **Evolved** | 1× Evidence Tier B |
+| IV | A | **Hardened** | 1× Evidence Tier B or A |
+| V | S | **Transcendent** | 1× Evidence Tier A |
+| VI | SS | **Transcendent ★** | Evidence Tier A + peer review |
 
 ### Ultimate Skill Requirements
 
 Ultimate Skill (`ultimate`) type skills have additional requirements:
-- Minimum **3 Class A or B** evidence sources.
+- Minimum **3 Evidence Tier A or B** evidence sources.
 - **2 maintainer approvals** before merge.
 - Status must be `validated` at merge (never `provisional`).
 
