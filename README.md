@@ -139,6 +139,8 @@ gaia push --dry-run
 gaia push
 ```
 Note: Make sure not to include sensitive information, otherwise it will be rejected! If found that your /skills are legit, it can be named after you!
+
+### Github CLI issues
 [!TIP] `push` command requires Github CLI authentication! Run this in your terminal:
 MacOS:
 ```bash
