@@ -706,9 +706,7 @@
   .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#ef4444; }
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
-  /* ── GROUP LAYOUT + DOCK ── */
-  .ns-layout { display:flex;gap:1rem;align-items:flex-start; }
-  .ns-layout > #nsGrid { flex:1;min-width:0; }
+  /* ── GROUP LAYOUT ── */
   .ns-group-header {
     grid-column:1/-1;width:100%;
     display:flex;align-items:center;gap:.5rem;
@@ -718,31 +716,9 @@
   }
   .ns-group-header:first-child { border-top:none;margin-top:0;padding-top:0; }
   .ns-group-glyph { font-size:1rem; }
-  .ns-dock {
-    position:sticky;top:5.5rem;flex-shrink:0;
-    display:flex;flex-direction:column;
-    width:50px;height:clamp(120px,45vh,420px);
-  }
-  .ns-dock-seg {
-    flex:1;min-height:18px;position:relative;cursor:pointer;
-    display:flex;align-items:flex-start;padding:3px 0 0 14px;
-  }
-  .ns-dock-seg::before {
-    content:'';position:absolute;left:4px;top:0;bottom:0;width:1px;
-    background:rgba(255,255,255,.07);
-  }
-  .ns-dock-seg::after {
-    content:'';position:absolute;left:0;top:5px;width:8px;height:1px;
-    background:rgba(255,255,255,.15);transition:width .16s,background .16s;
-  }
-  .ns-dock-seg:hover::after { width:16px;background:rgba(255,255,255,.5); }
-  .ns-dock-text {
-    font-size:.52rem;font-weight:400;letter-spacing:.04em;
-    color:rgba(255,255,255,.18);white-space:nowrap;
-    transition:color .16s,transform .16s;transform-origin:left top;
-  }
-  .ns-dock-seg:hover .ns-dock-text { color:rgba(255,255,255,.65);transform:scale(1.22); }
-  @media(max-width:700px){ .ns-dock { display:none; } }
+  /* grab-to-scroll cursor on grid area */
+  #nsGrid { cursor: grab; user-select: none; }
+  #named.ns-grabbing, #named.ns-grabbing * { cursor: grabbing !important; }
   .ns-link-btn{
     font-size:.78rem;font-weight:600;padding:.3rem .78rem;border-radius:8px;
     background:rgba(56,189,248,.07);color:var(--basic);
@@ -1255,16 +1231,9 @@
     </div>
   </div>
 
-  <div class="ns-layout">
-    <div class="ns-grid-tile" id="nsGrid">
+  <div class="ns-grid-tile" id="nsGrid">
       <div class="ns-loading">Loading named skills…</div>
     </div>
-    <nav class="ns-dock" id="nsDock" aria-label="Jump to skill tier">
-      <div class="ns-dock-seg" data-target="ultimate"><span class="ns-dock-text">Ultimate</span></div>
-      <div class="ns-dock-seg" data-target="extra"><span class="ns-dock-text">Extra</span></div>
-      <div class="ns-dock-seg" data-target="basic"><span class="ns-dock-text">Basic</span></div>
-    </nav>
-  </div>
 </section>
 
 <hr class="divider">
@@ -2172,15 +2141,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         '</div>';
       }
 
-      function updateDock(groups) {
-        var dock = document.getElementById('nsDock'); if (!dock) return;
-        dock.style.display = viewMode === 'flow' ? 'none' : '';
-        TYPE_ORDER.forEach(function(type) {
-          var seg = dock.querySelector('[data-target="'+type+'"]');
-          if (seg) seg.style.flexGrow = Math.max((groups[type]||[]).length, 1);
-        });
-      }
-
       function renderCurrent() {
         var q = searchQuery.toLowerCase();
         var filtered = allNamed.filter(function(ns) {
@@ -2193,13 +2153,12 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         });
         if (sortMode === 'creator') filtered.sort(function(a,b){return (a.contributor||'').localeCompare(b.contributor||'');});
         else if (sortMode === 'name') filtered.sort(function(a,b){return nsDisplayName(a).localeCompare(nsDisplayName(b));});
-        if (!filtered.length) { grid.innerHTML='<div class="ns-empty">No skills match.</div>'; updateDock({}); return; }
+        if (!filtered.length) { grid.innerHTML='<div class="ns-empty">No skills match.</div>'; return; }
         function lm(ns) { return LEVEL_META[ns.level] || LEVEL_META['II']; }
 
         if (viewMode === 'flow') {
           grid.className = 'ns-grid-flow';
           grid.innerHTML = renderFlowchartView(filtered, LEVEL_META);
-          updateDock({});
         } else {
           // Group by type: ultimate → extra → basic
           var groups = { ultimate:[], extra:[], basic:[] };
@@ -2248,20 +2207,38 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       }
 
       // Dock: click to jump to group
-      var dock = document.getElementById('nsDock');
-      if (dock) {
-        dock.querySelectorAll('.ns-dock-seg').forEach(function(seg) {
-          seg.addEventListener('click', function() {
-            var target = document.getElementById('ns-group-' + seg.dataset.target);
-            if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
-          });
-        });
-      }
-
       renderCurrent();
     }).catch(function() {
       grid.innerHTML = '<div class="ns-empty">Unable to render named skills.</div>';
     });
+
+    // Grab-to-scroll: click+drag anywhere in the Named Skills section scrolls the page
+    var named = document.getElementById('named');
+    if (named) {
+      var _startY, _startSY, _pressing = false, _dragged = false;
+      named.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        if (e.target.closest('button,input,select,a,[role="button"]')) return;
+        _pressing = true; _dragged = false;
+        _startY = e.clientY; _startSY = window.scrollY;
+      }, { passive: true });
+      window.addEventListener('mousemove', function(e) {
+        if (!_pressing) return;
+        var dy = e.clientY - _startY;
+        if (!_dragged && Math.abs(dy) > 4) { _dragged = true; named.classList.add('ns-grabbing'); }
+        if (_dragged) window.scrollTo(0, _startSY - dy);
+      });
+      window.addEventListener('mouseup', function() {
+        if (!_pressing) return;
+        _pressing = false;
+        named.classList.remove('ns-grabbing');
+        if (_dragged) {
+          named.addEventListener('click', function killClick(ev) {
+            ev.stopPropagation(); named.removeEventListener('click', killClick, true);
+          }, true);
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
