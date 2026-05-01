@@ -243,7 +243,7 @@ options:
 | `gaia promote <skill>` | Promotes only if the skill appeared in the last scan candidates; Gaia uses the scan-suggested level. |
 | `gaia promote --all` | Promotes every valid candidate from the last scan. |
 | `gaia tree` | Renders your personal tree to `generated-output/tree.html` and `generated-output/tree.md`. |
-| `gaia graph` | Re-renders `registry/gaia.svg` and `registry/gaia.gexf` from `registry/gaia.json`. |
+| `gaia graph` | Generates and opens `registry/render/gaia.html`; use `--format svg` for `registry/gaia.svg` or `--format json` for render JSON. |
 | `gaia version`, `gaia --version`, `gaia -v` | Prints the CLI version. |
 | `gaia mcp` | Runs the bundled MCP server from `packages/mcp`. |
 | `gaia release {patch|minor|major}` | Maintainer release bump across Python, npm, MCP, and registry versions. |

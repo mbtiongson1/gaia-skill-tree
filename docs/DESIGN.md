@@ -371,9 +371,9 @@ gaia embed
 gaia skills search <query>
   Semantic search across generic and named skills (requires embeddings).
 
-gaia graph [--format svg|json] [-o <path>] [--no-open]
-  Generates registry/gaia.svg and opens it in the browser.
-  Use --format json to write the D3/Cytoscape render JSON instead.
+gaia graph [--format html|svg|json] [-o <path>] [--no-open]
+  Generates registry/render/gaia.html and opens it in the browser.
+  Use --format svg for registry/gaia.svg or --format json for render JSON.
 
 gaia status
   Displays summary of the configured user's skill tree.
