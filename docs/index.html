@@ -2101,9 +2101,13 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       window._gaiaNamedBuckets = buckets;
       window._gaiaNamedAll = allNamed;
 
-      // Augment each named skill with its generic type
+      // Augment each named skill with type + level from the generic skill in gaia.json
       allNamed.forEach(function(ns) {
-        if (!ns.type) { var g = skillMap[ns.genericSkillRef]; if (g) ns.type = g.type; }
+        var g = skillMap[ns.genericSkillRef];
+        if (g) {
+          if (!ns.type) ns.type = g.type;
+          if (g.level) ns.level = g.level;
+        }
       });
 
       var levelOrder = ['II','III','IV','V','VI'];
