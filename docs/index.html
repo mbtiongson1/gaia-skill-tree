@@ -211,6 +211,9 @@
   }
   .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--extra)}
   .callout p{font-size:.9rem;color:var(--muted)}
+  .qs-tip { display:flex;align-items:flex-start;gap:.55rem;margin-top:.5rem;padding:.5rem .85rem;background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);border-left:3px solid rgba(56,189,248,.45);border-radius:0 7px 7px 0;font-size:.79rem;color:var(--muted);line-height:1.5; }
+  .qs-tip-icon { flex-shrink:0;color:var(--basic); }
+  .qs-tip code { font-family:'JetBrains Mono','Fira Code',monospace;font-size:.77rem;color:var(--text);background:rgba(255,255,255,.07);padding:.1rem .32rem;border-radius:3px; }
   /* ── GLOSSARY ── */
   .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
   .gloss-item{
@@ -341,8 +344,9 @@
   /* -- NAMED SKILLS -- */
   #named { min-height:100vh; padding-top:5rem; scroll-margin-top:0; }
   .ns-controls {
-    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem;
+    display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.6rem;
   }
+  .ns-filter-row { display:flex;align-items:center;gap:.6rem;flex-wrap:wrap; }
   .ns-level-tabs{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
   .ns-tab{
     padding:.35rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;
@@ -382,7 +386,7 @@
   .ns-tile[data-level="VI"]{--ns-glow:rgba(251,191,36,.35)}
   .ns-tile-head { display:flex;align-items:center;gap:.5rem; }
   .ns-tile-name { font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3; }
-  .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
   .ns-tile-tags { display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.2rem; }
   .ns-tile-arrow { margin-top:auto;text-align:right;color:var(--muted);font-size:.9rem;transition:color .2s; }
   .ns-tile:hover .ns-tile-arrow{color:var(--basic)}
@@ -402,7 +406,7 @@
   .ns-list-row[data-level="V"]{border-left:3px solid rgba(251,191,36,.5)}
   .ns-list-row[data-level="VI"]{border-left:3px solid rgba(251,191,36,.7)}
   .ns-lr-name { font-weight:700;font-size:.9rem;min-width:140px; }
-  .ns-lr-id { font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-lr-id { font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#ef4444;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
   .ns-lr-tags { display:flex;gap:.3rem;flex-wrap:nowrap;overflow:hidden; }
   .ns-lr-arrow { color:var(--muted);font-size:1.1rem;margin-left:auto;flex-shrink:0;transition:color .2s; }
   .ns-list-row:hover .ns-lr-arrow { color:var(--basic); }
@@ -447,10 +451,10 @@
   #named h2 { color:#ef4444; }
   /* ── search & sort controls ── */
   .ns-search {
-    flex:1;min-width:150px;max-width:300px;
+    width:100%;
     background:var(--surface);border:1px solid var(--border);border-radius:8px;
     padding:.4rem .9rem;color:var(--text);font-size:.83rem;font-family:inherit;
-    outline:none;transition:border-color .2s;
+    outline:none;transition:border-color .2s;box-sizing:border-box;
   }
   .ns-search::placeholder { color:var(--muted); }
   .ns-search:focus { border-color:rgba(56,189,248,.5); }
@@ -504,7 +508,7 @@
   .ns-fc-card[data-level="IV"]  { --fc-glow:rgba(232,121,249,.3); }
   .ns-fc-card[data-level="V"]   { --fc-glow:rgba(251,191,36,.3); }
   .ns-fc-card-name { font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.25rem; }
-  .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted); }
+  .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#ef4444; }
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
   .ns-link-btn{
@@ -549,7 +553,7 @@
     border-bottom:1px solid var(--border);
   }
   .se-topbar-actions { margin-left:auto;display:flex;gap:.6rem; }
-  #se-breadcrumb { font-size:.85rem;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .se-breadcrumb { font-size:.85rem;color:#ef4444;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
   .se-btn-ghost {
     background:transparent;border:1px solid var(--border);color:var(--text);
     padding:.38rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem;
@@ -589,7 +593,7 @@
     100%{border-color:rgba(56,189,248,.6);}
   }
   .se-skill-name { font-size:1.7rem;font-weight:800;margin-bottom:.3rem; }
-  .se-contrib { font-size:.88rem;color:var(--muted);margin-bottom:1rem; }
+  .se-contrib { font-size:.88rem;color:#ef4444;margin-bottom:1rem; }
   .se-badges { display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.2rem; }
   .se-badge {
     display:inline-block;padding:.22rem .7rem;border-radius:20px;
@@ -857,15 +861,13 @@
       <div>
         <h3>Install the CLI</h3>
         <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
-        <pre><span class="comment"># Core install</span>
-<span class="cmd">pip install</span> -e .
+        <pre><span class="cmd">pip install</span> -e .
 
-<span class="comment"># Strongly recommended — enables semantic search</span>
 <span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
-<span class="cmd">gaia embed</span>          <span class="comment"># ~30 sec, run once</span></pre>
-        <pre><span class="comment"># Windows only — if `gaia` is not recognized after install, run in PowerShell:</span>
-<span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)
-<span class="comment"># To persist: add that path via System → Environment Variables → Path</span></pre>
+<span class="cmd">gaia embed</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Embeddings unlock semantic search — <code>gaia search "autonomous research"</code> finds skills by meaning. Run <code>gaia embed</code> once after install (~30 sec).</span></div>
+        <pre><span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)</pre>
+        <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>Windows only — if <code>gaia</code> is not recognized after install, run in PowerShell. To persist: add that path via System → Environment Variables → Path.</span></div>
       </div>
     </div>
 
@@ -875,12 +877,11 @@
         <h3>Initialize your project</h3>
         <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> file, auto-detecting your GitHub username and common skill paths.</p>
         <pre><span class="cmd">gaia init</span>
-<span class="comment"># Username auto-detected from git remote / git config</span>
-<span class="comment"># Scan paths auto-detected from AGENTS.md, .claude/skills/, etc.</span>
-<span class="cmd">gaia init --user your-username</span>   <span class="comment"># override if needed</span></pre>
+<span class="cmd">gaia init --user your-username</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Username and scan paths are auto-detected from git remote, <code>git config</code>, and common paths like <code>.claude/skills/</code>. Use <code>--user</code> to override.</span></div>
         <pre>{
-  <span class="str">"gaiaUser"</span>: <span class="str">"mbtiongson1"</span>,       <span class="comment">// auto-filled</span>
-  <span class="str">"scanPaths"</span>: [<span class="str">".claude/skills"</span>]  <span class="comment">// auto-detected</span>
+  <span class="str">"gaiaUser"</span>: <span class="str">"mbtiongson1"</span>,
+  <span class="str">"scanPaths"</span>: [<span class="str">".claude/skills"</span>]
 }</pre>
       </div>
     </div>
@@ -890,8 +891,8 @@
       <div>
         <h3>Scan your repo</h3>
         <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion opportunities.</p>
-        <pre><span class="cmd">gaia scan</span>
-<span class="comment"># Prints detected skills and combination candidates</span></pre>
+        <pre><span class="cmd">gaia scan</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Prints detected skills and combination candidates based on your scan paths.</span></div>
       </div>
     </div>
 
@@ -900,8 +901,9 @@
       <div>
         <h3>Submit a batch for review</h3>
         <p>Preview what would be submitted with <code>--dry-run</code>, then push to create an intake record.</p>
-        <pre><span class="cmd">gaia push --dry-run</span>   <span class="comment"># preview the JSON</span>
-<span class="cmd">gaia push</span>             <span class="comment"># write intake + open a PR</span></pre>
+        <pre><span class="cmd">gaia push --dry-run</span>
+<span class="cmd">gaia push</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Use <code>--dry-run</code> to preview the JSON payload before writing an intake record and opening a PR.</span></div>
       </div>
     </div>
 
@@ -940,8 +942,9 @@
         <h3>Install a named skill</h3>
         <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
         <pre><span class="cmd">gaia install</span> karpathy/autoresearch
-<span class="cmd">gaia install --list</span>          <span class="comment"># see what's installed</span>
-<span class="cmd">gaia sync</span>                    <span class="comment"># pull latest versions</span></pre>
+<span class="cmd">gaia install --list</span>
+<span class="cmd">gaia sync</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span><code>--list</code> shows what's installed. <code>gaia sync</code> pulls the latest versions of all installed named skills.</span></div>
       </div>
     </div>
     <div class="step">
@@ -949,8 +952,8 @@
       <div>
         <h3>Promote your own named skill</h3>
         <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
-        <pre><span class="comment"># gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</span>
-<span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+        <pre><span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Syntax: <code>gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</code></span></div>
       </div>
     </div>
     <div class="step">
@@ -958,12 +961,9 @@
       <div>
         <h3>Claim an unclaimed Ultimate skill</h3>
         <p>Five Ultimate skills show <code style="color:var(--ultimate)">◆ /skill-id [Unclaimed ✦]</code> in the registry — no contributor has implemented them yet. Build one, push it through intake review, then name it to claim the title slot and become the origin contributor:</p>
-        <pre><span class="comment"># Find unclaimed ultimates — look for [Unclaimed ✦] in registry.md</span>
-<span class="comment"># Build your implementation, then:</span>
-<span class="cmd">gaia push</span>                    <span class="comment"># submit intake record</span>
-<span class="comment"># After maintainer marks it awakened:</span>
-<span class="cmd">gaia name</span> intake/skill-batches/batch-xyz.json 0 <span class="str">yourname/skill-name</span>
-<span class="comment"># The seed title becomes visible once your PR merges</span></pre>
+        <pre><span class="cmd">gaia push</span>
+<span class="cmd">gaia name</span> intake/skill-batches/batch-xyz.json 0 <span class="str">yourname/skill-name</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Find unclaimed ultimates — look for <code>[Unclaimed ✦]</code> in <code>registry.md</code>. Submit an intake record, wait for a maintainer to mark it awakened, then name it to claim the title slot.</span></div>
       </div>
     </div>
     <div class="step">
@@ -971,12 +971,8 @@
       <div>
         <h3>Propose a new Ultimate skill</h3>
         <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
-        <pre><span class="comment"># In graph/gaia.json — add your skill with:</span>
-<span class="comment">#   "type": "ultimate"</span>
-<span class="comment">#   "prerequisites": ["skill-a", "skill-b", "skill-c"]</span>
-<span class="comment">#   "evidence": [... 3× Class A or B sources ...]</span>
-<span class="comment">#   "status": "provisional"  (maintainers set to validated at merge)</span>
-<span class="cmd">python scripts/validate.py</span>   <span class="comment"># must pass before opening PR</span></pre>
+        <pre><span class="cmd">python scripts/validate.py</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>In <code>graph/gaia.json</code> set <code>"type": "ultimate"</code>, include ≥3 prerequisites and ≥3 Class A/B evidence sources, and <code>"status": "provisional"</code> — maintainers set it to <code>validated</code> at merge. Run <code>validate.py</code> before opening a PR.</span></div>
       </div>
     </div>
   </div>
@@ -991,33 +987,35 @@
 
   <div class="ns-controls">
     <input type="search" id="nsSearch" class="ns-search" placeholder="Search skills, tags, contributors…" autocomplete="off">
-    <div class="ns-level-tabs" id="nsLevelTabs">
-      <button class="ns-tab active" type="button" data-level="all">All</button>
-      <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
-      <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
-      <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
-      <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
-      <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+    <div class="ns-filter-row">
+      <div class="ns-level-tabs" id="nsLevelTabs">
+        <button class="ns-tab active" type="button" data-level="all">All</button>
+        <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
+        <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
+        <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
+        <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
+        <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+      </div>
+      <div class="ns-view-btns" id="nsViewBtns">
+        <button class="ns-view-btn active" data-view="tile" title="Tile view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
+          Tile
+        </button>
+        <button class="ns-view-btn" data-view="list" title="List view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="4" x2="16" y2="4"/><line x1="0" y1="8" x2="16" y2="8"/><line x1="0" y1="12" x2="16" y2="12"/></svg>
+          List
+        </button>
+        <button class="ns-view-btn" data-view="flow" title="Tree / flowchart view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="2" r="1.5"/><circle cx="3" cy="11" r="1.5"/><circle cx="13" cy="11" r="1.5"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="8" y1="7" x2="3" y2="9.5"/><line x1="8" y1="7" x2="13" y2="9.5"/></svg>
+          Tree
+        </button>
+      </div>
+      <select id="nsSort" class="ns-sort-sel" title="Sort order">
+        <option value="level">&#8597; Level</option>
+        <option value="creator">&#128100; Creator</option>
+        <option value="name">A&#8211;Z Name</option>
+      </select>
     </div>
-    <div class="ns-view-btns" id="nsViewBtns">
-      <button class="ns-view-btn active" data-view="tile" title="Tile view">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
-        Tile
-      </button>
-      <button class="ns-view-btn" data-view="list" title="List view">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="4" x2="16" y2="4"/><line x1="0" y1="8" x2="16" y2="8"/><line x1="0" y1="12" x2="16" y2="12"/></svg>
-        List
-      </button>
-      <button class="ns-view-btn" data-view="flow" title="Tree / flowchart view">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="2" r="1.5"/><circle cx="3" cy="11" r="1.5"/><circle cx="13" cy="11" r="1.5"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="8" y1="7" x2="3" y2="9.5"/><line x1="8" y1="7" x2="13" y2="9.5"/></svg>
-        Tree
-      </button>
-    </div>
-    <select id="nsSort" class="ns-sort-sel" title="Sort order">
-      <option value="level">&#8597; Level</option>
-      <option value="creator">&#128100; Creator</option>
-      <option value="name">A&#8211;Z Name</option>
-    </select>
   </div>
 
   <div class="ns-grid-tile" id="nsGrid">
@@ -1788,6 +1786,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
       '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
       '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
+      '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
       '<span style="flex:1"></span>' +
       installRow(ns.id) +
