@@ -120,7 +120,114 @@ def test_write_commands_require_explicit_registry(tmp_path):
 
     assert result.returncode == 2
     assert "writable registry" in result.stderr
-    assert "--registry PATH" in result.stderr
+
+
+def test_local_registry_auto_resolves_for_read_only_command(tmp_path):
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / ".gaia").mkdir()
+    (project / ".gaia" / "config.json").write_text(
+        json.dumps({"gaiaUser": "juno", "scanPaths": ["."], "localRegistryPath": str(REPO_ROOT)})
+    )
+
+    result = run_python(
+        ["-m", "gaia_cli", "doctor"],
+        cwd=project,
+        env={"GAIA_HOME": str(tmp_path / "home")},
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "Registry graph: found" in result.stdout
+
+
+def test_local_registry_auto_resolves_for_write_command(tmp_path):
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / ".gaia").mkdir()
+    (project / ".gaia" / "config.json").write_text(
+        json.dumps({"gaiaUser": "juno", "scanPaths": ["."], "localRegistryPath": str(REPO_ROOT)})
+    )
+    (project / "notes.md").write_text("web-search\n")
+
+    result = run_python(
+        ["-m", "gaia_cli", "push", "--dry-run"],
+        cwd=project,
+        env={"GAIA_HOME": str(tmp_path / "home")},
+    )
+
+    assert result.returncode == 0, result.stderr
+
+
+def test_global_flag_skips_local_gaia(tmp_path):
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / ".gaia").mkdir()
+    (project / ".gaia" / "config.json").write_text(
+        json.dumps({"gaiaUser": "juno", "scanPaths": ["."], "localRegistryPath": str(REPO_ROOT)})
+    )
+
+    result = run_python(
+        ["-m", "gaia_cli", "--global", "doctor"],
+        cwd=project,
+        env={"GAIA_HOME": str(tmp_path / "home")},
+    )
+
+    # No global registry configured → falls to bundled, which still has graph data
+    assert result.returncode == 0, result.stderr
+    assert "Registry graph: found" in result.stdout
+
+
+def test_local_registry_fallback_to_cwd_when_no_localRegistryPath(tmp_path):
+    # CWD is a registry clone (has graph/gaia.json), .gaia/config.json has no localRegistryPath
+    registry = tmp_path / "registry"
+    registry.mkdir()
+    (registry / "graph").mkdir()
+    (registry / "graph" / "gaia.json").write_text(json.dumps({"skills": [], "edges": []}))
+    (registry / ".gaia").mkdir()
+    (registry / ".gaia" / "config.json").write_text(
+        json.dumps({"gaiaUser": "juno", "scanPaths": ["."]})
+    )
+
+    from gaia_cli.registry import read_local_registry
+    import os
+
+    orig_cwd = os.getcwd()
+    try:
+        os.chdir(registry)
+        result = read_local_registry()
+        assert result == str(registry)
+    finally:
+        os.chdir(orig_cwd)
+
+
+def test_init_writes_local_registry_path(tmp_path):
+    result = run_python(
+        ["-m", "gaia_cli", "init", "--user", "testuser", "--yes"],
+        cwd=tmp_path,
+        env={"GAIA_HOME": str(tmp_path / "home")},
+    )
+
+    assert result.returncode == 0, result.stderr
+    cfg = json.loads((tmp_path / ".gaia" / "config.json").read_text())
+    assert cfg.get("localRegistryPath") == str(tmp_path)
+
+
+def test_gaia_home_is_data_dir_not_home_dir(tmp_path):
+    # GAIA_HOME should be treated as the gaia data dir: config at $GAIA_HOME/config.json
+    gaia_home = tmp_path / "mydata"
+    gaia_home.mkdir()
+    (gaia_home / "config.json").write_text(
+        json.dumps({"defaultRegistry": str(REPO_ROOT)})
+    )
+
+    result = run_python(
+        ["-m", "gaia_cli", "--global", "doctor"],
+        cwd=tmp_path,
+        env={"GAIA_HOME": str(gaia_home)},
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "Registry graph: found" in result.stdout
 
 
 def test_install_cache_honors_gaia_home(tmp_path, monkeypatch):

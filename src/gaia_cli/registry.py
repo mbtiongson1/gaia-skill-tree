@@ -9,10 +9,17 @@ from pathlib import Path
 WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync", "promote"}
 
 
+def _gaia_home_dir() -> Path:
+    """Return the gaia data home: $GAIA_HOME if set, else ~/.gaia."""
+    gaia_home = os.environ.get("GAIA_HOME")
+    if gaia_home:
+        return Path(gaia_home)
+    return Path.home() / ".gaia"
+
+
 def _global_config_path() -> Path:
-    """Return ~/.gaia/config.json, honouring GAIA_HOME if set."""
-    home = os.environ.get("GAIA_HOME") or Path.home()
-    return Path(home) / ".gaia" / "config.json"
+    """Return the global gaia config path, honouring GAIA_HOME if set."""
+    return _gaia_home_dir() / "config.json"
 
 
 def bundled_registry_path():
@@ -33,6 +40,22 @@ def read_global_registry():
     return None
 
 
+def read_local_registry() -> str | None:
+    """Return registry path from .gaia/config.json in CWD, or None if not found."""
+    local_cfg = Path(".gaia") / "config.json"
+    if not local_cfg.exists():
+        return None
+    try:
+        data = json.loads(local_cfg.read_text(encoding="utf-8"))
+        registry_path = data.get("localRegistryPath") or os.path.abspath(".")
+        p = Path(registry_path)
+        if p.is_dir() and (p / "graph" / "gaia.json").exists():
+            return str(p)
+    except (OSError, json.JSONDecodeError):
+        pass
+    return None
+
+
 def write_global_registry(path: str) -> None:
     """Persist the registry path to the global ~/.gaia/config.json."""
     cfg = _global_config_path()
@@ -49,10 +72,16 @@ def write_global_registry(path: str) -> None:
         json.dump(existing, f, indent=2)
 
 
-def resolve_registry_path(explicit_registry=None):
-    """Resolve the registry path: explicit → global config → bundled data."""
+def resolve_registry_path(explicit_registry=None, global_flag=False):
+    """Resolve the registry path: explicit → --global → local .gaia → global config → bundled."""
     if explicit_registry:
         return os.path.abspath(os.path.expanduser(explicit_registry))
+    if global_flag:
+        global_reg = read_global_registry()
+        return global_reg if global_reg else str(bundled_registry_path())
+    local_reg = read_local_registry()
+    if local_reg:
+        return local_reg
     global_reg = read_global_registry()
     if global_reg:
         return global_reg
@@ -73,9 +102,9 @@ def require_explicit_writable_registry(parser, args):
         return
     if registry_path == bundled:
         parser.error(
-            f"`gaia {args.command}` needs a writable registry checkout. "
-            "Run `gaia init` once from your gaia-skill-tree clone to register it globally, "
-            "or pass --registry PATH explicitly."
+            f"`gaia {args.command}` needs a writable registry. Either:\n"
+            "  • Run `gaia init` from your gaia-skill-tree clone (sets localRegistryPath automatically), or\n"
+            "  • Pass --registry PATH explicitly."
         )
     parser.error(
         f"`gaia {args.command}` requires --registry PATH to point at a writable registry directory."
