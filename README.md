@@ -91,6 +91,13 @@ cd gaia-skill-tree
 pip install -e ".[embeddings]"
 gaia embed
 ```
+If pip fails, run this:
+```bash
+brew install pipx
+pipx install ".[embeddings]"
+gaia embed
+```
+
 Windows Only (one-time setup):
 1. If `gaia` isn't recognized after install, run the command below in PowerShell.
 ```bash
