@@ -125,6 +125,17 @@ gaia skills search web
 
 Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
+## Push
+Go to your integrated terminal in your repo and run this command after scanning:
+```bash
+gaia push --dry-run
+```
+`--dry-run` will only list down your push-able skills. If you want to push it to the registry for review:
+```bash
+gaia push
+```
+Note: Make sure not to include sensitive information, otherwise it will be rejected! If found that your /skills are legit, it can be named after you!
+
 ## Named Skills Browser
 
 The registry ships an interactive Named Skills browser at [`docs/index.html`](docs/index.html):
