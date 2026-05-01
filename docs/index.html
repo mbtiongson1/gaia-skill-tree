@@ -1443,8 +1443,8 @@
         ctx.textAlign = 'center';
         const labelText = (state.redPillActive && state.namedMap && state.namedMap[skill.id])
           ? state.namedMap[skill.id]
-          : (state.showTitles && state.titleMap && state.titleMap[skill.id])
-            ? state.titleMap[skill.id]
+          : state.showTitles
+            ? ((state.titleMap && state.titleMap[skill.id]) || skill.name)
             : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
