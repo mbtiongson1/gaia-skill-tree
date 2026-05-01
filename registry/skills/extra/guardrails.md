@@ -31,4 +31,3 @@ Requires a defined policy schema and an evaluation loop.
 _None verified yet._
 
 ---
-*Generated from gaia.json v2.2.5 on 2026-04-30. Do not edit directly.*

@@ -250,7 +250,7 @@ def main():
                 f.write("\n")
 
             f.write("---\n")
-            f.write(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*\n")
+            # f.write(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*\n")
 
     # generate registry.md
     with open("registry/registry.md", "w", encoding="utf-8") as f:
