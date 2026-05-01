@@ -111,13 +111,13 @@ pip install -e .
 ## Quickstart
 
 ```bash
-gaia init --user your-username
+gaia init
 gaia pull
 gaia scan
 gaia appraise
 gaia skills search web
 ```
-
+pass `gaia init --user your-username` to override.
 `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, and renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`.
 
 Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
