@@ -92,9 +92,13 @@ pip install -e ".[embeddings]"
 gaia embed
 ```
 Windows Only (one-time setup):
-If `gaia` isn't recognized after install, run the command below in PowerShell, then try the script above again.
+1. If `gaia` isn't recognized after install, run the command below in PowerShell.
 ```bash
 $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
+```
+2. Then do this again one-time
+```bash
+gaia embed
 ```
 
 <!-- gaia:version-start -->
