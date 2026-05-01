@@ -422,6 +422,27 @@
   .ns-tile[data-level="IV"]{--ns-glow:rgba(232,121,249,.25)}
   .ns-tile[data-level="V"]{--ns-glow:rgba(251,191,36,.25)}
   .ns-tile[data-level="VI"]{--ns-glow:rgba(251,191,36,.35)}
+  /* Ultimate tier — gold glow, intensifying with rank */
+  .ns-tile[data-type="ultimate"]{box-shadow:0 0 8px rgba(245,158,11,.2),0 0 22px rgba(245,158,11,.09);border-color:rgba(245,158,11,.22)}
+  .ns-tile[data-type="ultimate"][data-level="III"]{box-shadow:0 0 12px rgba(245,158,11,.3),0 0 30px rgba(245,158,11,.15);border-color:rgba(245,158,11,.3)}
+  .ns-tile[data-type="ultimate"][data-level="IV"]{box-shadow:0 0 16px rgba(245,158,11,.42),0 0 40px rgba(245,158,11,.2);border-color:rgba(245,158,11,.4)}
+  .ns-tile[data-type="ultimate"][data-level="V"]{box-shadow:0 0 20px rgba(245,158,11,.58),0 0 52px rgba(245,158,11,.28),0 0 80px rgba(245,158,11,.1);border-color:rgba(245,158,11,.52)}
+  .ns-tile[data-type="ultimate"][data-level="VI"]{box-shadow:0 0 24px rgba(245,158,11,.7),0 0 64px rgba(245,158,11,.36),0 0 110px rgba(56,189,248,.14);border-color:rgba(245,158,11,.65)}
+  /* Extra tier — purple glow, intensifying with rank */
+  .ns-tile[data-type="extra"]{box-shadow:0 0 8px rgba(192,132,252,.2),0 0 22px rgba(192,132,252,.09);border-color:rgba(192,132,252,.22)}
+  .ns-tile[data-type="extra"][data-level="III"]{box-shadow:0 0 12px rgba(192,132,252,.3),0 0 30px rgba(192,132,252,.15);border-color:rgba(192,132,252,.3)}
+  .ns-tile[data-type="extra"][data-level="IV"]{box-shadow:0 0 16px rgba(192,132,252,.42),0 0 40px rgba(192,132,252,.2);border-color:rgba(192,132,252,.4)}
+  .ns-tile[data-type="extra"][data-level="V"]{box-shadow:0 0 20px rgba(192,132,252,.58),0 0 52px rgba(192,132,252,.28),0 0 80px rgba(192,132,252,.1);border-color:rgba(192,132,252,.52)}
+  .ns-tile[data-type="extra"][data-level="VI"]{box-shadow:0 0 24px rgba(192,132,252,.7),0 0 64px rgba(192,132,252,.36),0 0 110px rgba(56,189,248,.14);border-color:rgba(192,132,252,.65)}
+  /* List row type-based left border */
+  .ns-list-row[data-type="ultimate"]{border-left:3px solid rgba(245,158,11,.5)}
+  .ns-list-row[data-type="ultimate"][data-level="IV"]{border-left:3px solid rgba(245,158,11,.65)}
+  .ns-list-row[data-type="ultimate"][data-level="V"]{border-left:3px solid rgba(245,158,11,.8)}
+  .ns-list-row[data-type="ultimate"][data-level="VI"]{border-left:3px solid rgba(245,158,11,.95)}
+  .ns-list-row[data-type="extra"]{border-left:3px solid rgba(192,132,252,.5)}
+  .ns-list-row[data-type="extra"][data-level="IV"]{border-left:3px solid rgba(192,132,252,.65)}
+  .ns-list-row[data-type="extra"][data-level="V"]{border-left:3px solid rgba(192,132,252,.8)}
+  .ns-list-row[data-type="extra"][data-level="VI"]{border-left:3px solid rgba(192,132,252,.95)}
   .ns-tile-head { display:flex;align-items:center;gap:.5rem; }
   .ns-tile-name { font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3; }
   .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
@@ -563,20 +584,28 @@
   .ns-group-glyph { font-size:1rem; }
   .ns-dock {
     position:sticky;top:5.5rem;flex-shrink:0;
-    display:flex;flex-direction:column;align-items:center;gap:.15rem;
-    padding:.45rem .25rem;width:46px;
-    background:rgba(15,23,42,.7);backdrop-filter:blur(10px);
-    border:1px solid var(--border);border-radius:14px;
+    display:flex;flex-direction:column;
+    width:50px;height:clamp(120px,45vh,420px);
   }
-  .ns-dock-item {
-    display:flex;flex-direction:column;align-items:center;gap:.18rem;
-    padding:.38rem .3rem;border-radius:9px;cursor:pointer;width:100%;
-    transition:background .15s;transform-origin:bottom center;will-change:transform;
+  .ns-dock-seg {
+    flex:1;min-height:18px;position:relative;cursor:pointer;
+    display:flex;align-items:flex-start;padding:3px 0 0 14px;
   }
-  .ns-dock-item:hover { background:rgba(255,255,255,.06); }
-  .ns-dock-glyph { font-size:1.05rem;line-height:1;display:block; }
-  .ns-dock-label { font-size:.5rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;line-height:1; }
-  .ns-dock-count { font-size:.58rem;color:var(--muted);line-height:1;min-height:.7rem; }
+  .ns-dock-seg::before {
+    content:'';position:absolute;left:4px;top:0;bottom:0;width:1px;
+    background:rgba(255,255,255,.07);
+  }
+  .ns-dock-seg::after {
+    content:'';position:absolute;left:0;top:5px;width:8px;height:1px;
+    background:rgba(255,255,255,.15);transition:width .16s,background .16s;
+  }
+  .ns-dock-seg:hover::after { width:16px;background:rgba(255,255,255,.5); }
+  .ns-dock-text {
+    font-size:.52rem;font-weight:400;letter-spacing:.04em;
+    color:rgba(255,255,255,.18);white-space:nowrap;
+    transition:color .16s,transform .16s;transform-origin:left top;
+  }
+  .ns-dock-seg:hover .ns-dock-text { color:rgba(255,255,255,.65);transform:scale(1.22); }
   @media(max-width:700px){ .ns-dock { display:none; } }
   .ns-link-btn{
     font-size:.78rem;font-weight:600;padding:.3rem .78rem;border-radius:8px;
@@ -1076,21 +1105,9 @@
       <div class="ns-loading">Loading named skills…</div>
     </div>
     <nav class="ns-dock" id="nsDock" aria-label="Jump to skill tier">
-      <div class="ns-dock-item" data-target="ultimate" title="Jump to Ultimate skills">
-        <span class="ns-dock-glyph" style="color:#f59e0b">◆</span>
-        <span class="ns-dock-label">Ult</span>
-        <span class="ns-dock-count">–</span>
-      </div>
-      <div class="ns-dock-item" data-target="extra" title="Jump to Extra skills">
-        <span class="ns-dock-glyph" style="color:#c084fc">◇</span>
-        <span class="ns-dock-label">Xtr</span>
-        <span class="ns-dock-count">–</span>
-      </div>
-      <div class="ns-dock-item" data-target="basic" title="Jump to Basic skills">
-        <span class="ns-dock-glyph" style="color:#38bdf8">○</span>
-        <span class="ns-dock-label">Bas</span>
-        <span class="ns-dock-count">–</span>
-      </div>
+      <div class="ns-dock-seg" data-target="ultimate"><span class="ns-dock-text">Ultimate</span></div>
+      <div class="ns-dock-seg" data-target="extra"><span class="ns-dock-text">Extra</span></div>
+      <div class="ns-dock-seg" data-target="basic"><span class="ns-dock-text">Basic</span></div>
     </nav>
   </div>
 </section>
@@ -1860,7 +1877,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   function renderTile(ns, lm) {
     var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
-    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
+    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
         (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
@@ -1874,7 +1891,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   function renderListRow(ns, lm) {
     var tags = (ns.tags||[]).slice(0,2).map(tagHtml).join('');
-    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
+    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
       '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
       '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
@@ -2004,8 +2021,8 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         var dock = document.getElementById('nsDock'); if (!dock) return;
         dock.style.display = viewMode === 'flow' ? 'none' : '';
         TYPE_ORDER.forEach(function(type) {
-          var el = dock.querySelector('[data-target="'+type+'"] .ns-dock-count');
-          if (el) el.textContent = (groups[type]||[]).length || '–';
+          var seg = dock.querySelector('[data-target="'+type+'"]');
+          if (seg) seg.style.flex = Math.max((groups[type]||[]).length, 1);
         });
       }
 
@@ -2075,26 +2092,12 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         sortEl.addEventListener('change', function(){ sortMode = sortEl.value; renderCurrent(); });
       }
 
-      // Dock: proximity magnification + jump-to-group click
+      // Dock: click to jump to group
       var dock = document.getElementById('nsDock');
       if (dock) {
-        dock.addEventListener('mousemove', function(e) {
-          var items = dock.querySelectorAll('.ns-dock-item');
-          var my = e.clientY;
-          items.forEach(function(item) {
-            var r = item.getBoundingClientRect();
-            var center = r.top + r.height / 2;
-            var dist = Math.abs(my - center);
-            var scale = dist < 70 ? 1 + (1 - dist / 70) * 0.7 : 1;
-            item.style.transform = 'scale(' + scale + ')';
-          });
-        });
-        dock.addEventListener('mouseleave', function() {
-          dock.querySelectorAll('.ns-dock-item').forEach(function(item){ item.style.transform = ''; });
-        });
-        dock.querySelectorAll('.ns-dock-item').forEach(function(item) {
-          item.addEventListener('click', function() {
-            var target = document.getElementById('ns-group-' + item.dataset.target);
+        dock.querySelectorAll('.ns-dock-seg').forEach(function(seg) {
+          seg.addEventListener('click', function() {
+            var target = document.getElementById('ns-group-' + seg.dataset.target);
             if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
           });
         });
