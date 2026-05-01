@@ -2160,7 +2160,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
     Promise.all([
       fetch('graph/named/index.json').then(function(r){ if (!r.ok) throw r; return r.json(); }).catch(function(){ return FALLBACK_NAMED_INDEX; }),
-      fetch('graph/gaia.json').then(function(r){ if (!r.ok) throw r; return r.json(); }).catch(function(){ return { skills: [] }; }),
+      fetch('graph/gaia.json').then(function(r){ if (!r.ok) throw r; return r.json(); }).catch(function(){ return { skills: FALLBACK_SKILLS }; }),
     ]).then(function(results) {
       var indexData = results[0], fullGraph = results[1];
       var skillMap = {};
@@ -2179,7 +2179,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         var g = skillMap[ns.genericSkillRef];
         if (g) {
           if (!ns.type) ns.type = g.type;
-          if (g.level) ns.level = g.level;
+          if (!ns.level && g.level) ns.level = g.level;
         }
       });
 
