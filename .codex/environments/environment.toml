@@ -3,29 +3,7 @@ version = 1
 name = "gaia-skill-tree"
 
 [setup]
-script = '''
-git clone https://github.com/mbtiongson1/gaia-skill-tree.git
-cd gaia-skill-tree
-
-# 1. Install the gaia CLI
-pip install -e .
-
-# 2. Enable semantic search (strongly recommended)
-pip install -e ".[embeddings]"
-gaia embed                      # ~30 seconds — run once, re-run when the graph changes
-
-# 3. Validate the canonical graph
-gaia --registry . scan
-
-# 4. Regenerate all skill pages, registry, tree, and user trees
-python3 scripts/generateProjections.py
-
-pip install -e .
-
-gaia init --user mbtiongson1 --scan AGENTS.md --scan scripts
-
-gaia init --yes
-'''
+script = ""
 
 [[actions]]
 name = "Graph"
