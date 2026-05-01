@@ -44,6 +44,7 @@
   nav a:hover{color:var(--text)}
   .nav-tree{color:var(--ultimate)!important}
   .nav-tree:hover{color:#fcd34d!important}
+  button.nav-tree{background:none;border:none;cursor:pointer;font:inherit;font-size:.9rem;padding:0}
   .nav-named-explorer{color:#ef4444!important;font-weight:700}
   .nav-named-explorer:hover{color:#f87171!important}
   /* ── HERO ── */
@@ -294,6 +295,73 @@
     color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
     border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
   }
+  /* ── tree dialog ── */
+  .tree-dialog{
+    margin:auto;
+    width:min(840px,94vw);height:min(640px,86vh);padding:0;
+    color:var(--text);background:rgba(3,7,18,.98);
+    border:1px solid rgba(56,189,248,.45);border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.8),
+               0 0 70px rgba(56,189,248,.28),
+               0 0 30px rgba(255,255,255,.14),
+               0 0 110px rgba(192,132,252,.14);
+    overflow:hidden;
+    animation:tree-dialog-breathe 5s ease-in-out infinite;
+  }
+  @keyframes tree-dialog-breathe{
+    0%,100%{box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 70px rgba(56,189,248,.28),0 0 30px rgba(255,255,255,.14),0 0 110px rgba(192,132,252,.14)}
+    50%{box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 80px rgba(192,132,252,.32),0 0 36px rgba(255,255,255,.18),0 0 120px rgba(56,189,248,.16)}
+  }
+  .tree-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+  .tree-dialog-inner{display:flex;flex-direction:column;height:100%}
+  .tree-dialog-header{
+    display:flex;gap:1rem;align-items:center;justify-content:space-between;
+    padding:.9rem 1.2rem;border-bottom:1px solid var(--border);flex-shrink:0;
+    background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(167,139,250,.08));
+    cursor:grab;user-select:none;
+  }
+  .tree-dialog-header.dragging{cursor:grabbing}
+  .tree-dialog-title{font-weight:800;font-size:1rem}
+  .tree-dialog-actions{display:flex;align-items:center;gap:.6rem}
+  .tree-act-btn{
+    color:var(--text);background:rgba(15,23,42,.84);border:1px solid var(--border);
+    border-radius:999px;font-size:.78rem;font-weight:700;
+    padding:.42rem .78rem;cursor:pointer;white-space:nowrap;font-family:inherit;
+  }
+  .tree-act-btn:hover{border-color:var(--basic);color:var(--basic)}
+  .tree-act-btn.copied{border-color:#86efac;color:#86efac}
+  .tree-close-x{
+    display:flex;align-items:center;justify-content:center;
+    width:1.9rem;height:1.9rem;
+    color:var(--muted);background:transparent;border:1px solid var(--border);
+    border-radius:50%;font-size:.85rem;cursor:pointer;font-family:inherit;flex-shrink:0;
+  }
+  .tree-close-x:hover{border-color:var(--basic);color:var(--basic)}
+  .tree-dialog-body{flex:1;overflow:auto;padding:1.1rem 1.4rem;min-height:0}
+  .tree-dialog-body pre{
+    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.78rem;line-height:1.65;color:var(--text);
+    white-space:pre;background:transparent;border:none;margin:0;padding:0;
+  }
+  .tree-skeleton{color:var(--muted);animation:tree-skeleton-pulse 1.5s ease-in-out infinite}
+  @keyframes tree-skeleton-pulse{0%,100%{opacity:.35}50%{opacity:.7}}
+  /* syntax highlighting */
+  @keyframes tree-rainbow-glow{
+    0%  {color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
+    18% {color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.8),0 0 22px rgba(167,139,250,.4)}
+    36% {color:#f59e0b;text-shadow:0 0 10px rgba(245,158,11,.8),0 0 22px rgba(245,158,11,.4)}
+    54% {color:#ef4444;text-shadow:0 0 10px rgba(239,68,68,.8),0 0 22px rgba(239,68,68,.4)}
+    72% {color:#c084fc;text-shadow:0 0 10px rgba(192,132,252,.8),0 0 22px rgba(192,132,252,.4)}
+    90% {color:#34d399;text-shadow:0 0 10px rgba(52,211,153,.8),0 0 22px rgba(52,211,153,.4)}
+    100%{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
+  }
+  .tree-ult-line{font-weight:700;animation:tree-rainbow-glow 4s linear infinite}
+  .tree-ult-contributor{color:#ef4444;font-weight:800;text-shadow:0 0 8px rgba(239,68,68,.6)}
+  .tree-ult-slash{color:var(--muted)}
+  .tree-ult-skillname,.tree-ult-id{color:#f59e0b}
+  .tree-extra-glyph{color:var(--extra)}
+  .tree-basic-glyph{color:var(--basic)}
+  .tree-sep{color:rgba(56,189,248,.2)}
   .skill-tooltip{
     position:absolute;pointer-events:none;display:none;z-index:10;
     background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
@@ -389,15 +457,32 @@
   .ns-tab{
     padding:.35rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;
     background:transparent;color:var(--muted);
-    border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .2s;
+    border:1px solid var(--border);cursor:pointer;font-family:inherit;
+    background-size:200% 100%;background-position:0% 0%;
+    transition:color .2s,border-color .2s,background-position .45s ease,background-color .2s;
   }
   .ns-tab:hover{color:var(--text);border-color:rgba(148,163,184,.4)}
+  /* per-level resting gradient + hover shift via bg-position */
+  .ns-tab[data-level="II"]  { --tc:99,202,183;  --tcolor:#63cab7 }
+  .ns-tab[data-level="III"] { --tc:167,139,250; --tcolor:#a78bfa }
+  .ns-tab[data-level="IV"]  { --tc:232,121,249; --tcolor:#e879f9 }
+  .ns-tab[data-level="V"]   { --tc:251,191,36;  --tcolor:#fbbf24 }
+  .ns-tab[data-level="VI"]  { --tc:251,191,36;  --tcolor:#fbbf24 }
+  .ns-tab[data-level="II"],.ns-tab[data-level="III"],.ns-tab[data-level="IV"],.ns-tab[data-level="V"],.ns-tab[data-level="VI"]{
+    background-image:linear-gradient(135deg, rgba(var(--tc),.06) 0%, rgba(var(--tc),.16) 50%, rgba(var(--tc),.06) 100%);
+    border-color:rgba(var(--tc),.22);
+  }
+  .ns-tab[data-level="II"]:hover,.ns-tab[data-level="III"]:hover,.ns-tab[data-level="IV"]:hover,.ns-tab[data-level="V"]:hover,.ns-tab[data-level="VI"]:hover{
+    background-position:100% 0%;border-color:rgba(var(--tc),.45);color:var(--tcolor);
+  }
   .ns-tab.active[data-level="all"]{color:var(--basic);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.35)}
-  .ns-tab.active[data-level="II"]{color:#63cab7;background:rgba(99,202,183,.1);border-color:rgba(99,202,183,.35)}
-  .ns-tab.active[data-level="III"]{color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.35)}
-  .ns-tab.active[data-level="IV"]{color:#e879f9;background:rgba(232,121,249,.1);border-color:rgba(232,121,249,.35)}
-  .ns-tab.active[data-level="V"]{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.35)}
-  .ns-tab.active[data-level="VI"]{color:#fbbf24;background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4)}
+  .ns-tab.active[data-level="II"]  {color:#63cab7;background-image:linear-gradient(135deg,rgba(99,202,183,.2),rgba(99,202,183,.07));background-position:100% 0%;border-color:rgba(99,202,183,.45)}
+  .ns-tab.active[data-level="III"] {color:#a78bfa;background-image:linear-gradient(135deg,rgba(167,139,250,.2),rgba(167,139,250,.07));background-position:100% 0%;border-color:rgba(167,139,250,.45)}
+  .ns-tab.active[data-level="IV"]  {color:#e879f9;background-image:linear-gradient(135deg,rgba(232,121,249,.2),rgba(232,121,249,.07));background-position:100% 0%;border-color:rgba(232,121,249,.45)}
+  .ns-tab.active[data-level="V"]   {color:#fbbf24;background-image:linear-gradient(135deg,rgba(251,191,36,.2),rgba(251,191,36,.07));background-position:100% 0%;border-color:rgba(251,191,36,.45)}
+  .ns-tab.active[data-level="VI"]  {color:#fbbf24;background-image:linear-gradient(135deg,rgba(251,191,36,.25),rgba(251,191,36,.09));background-position:100% 0%;border-color:rgba(251,191,36,.5)}
+  .ns-tab:disabled{opacity:.3;cursor:not-allowed;background-image:none}
+  .ns-tab:disabled:hover{color:var(--muted);border-color:var(--border);background-position:0% 0%}
   .ns-view-btns { display:flex;gap:.3rem;border:1px solid var(--border);border-radius:8px;padding:2px; }
   .ns-view-btn {
     background:transparent;border:none;color:var(--muted);padding:.3rem .65rem;
@@ -412,37 +497,37 @@
   }
   .ns-tile {
     background:var(--surface);border:1px solid var(--border);border-radius:14px;
-    padding:1.3rem 1.2rem;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s;
+    padding:1.3rem 1.2rem;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .15s;
     display:flex;flex-direction:column;gap:.5rem;position:relative;overflow:hidden;
-    --ns-glow:rgba(56,189,248,.15);
+    --ns-glow:rgba(56,189,248,.15);--ns-gc:56,189,248;
   }
+  .ns-tile::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(circle at 20% 85%, rgba(var(--ns-gc),.08) 0%, transparent 62%);
+    opacity:.7;transform:scale(.88);
+    transition:opacity .35s,transform .42s;
+  }
+  .ns-tile:hover::before{opacity:1;transform:scale(1.18) translate(7%,-7%)}
   .ns-tile:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
-  .ns-tile[data-level="II"]{--ns-glow:rgba(99,202,183,.25)}
-  .ns-tile[data-level="III"]{--ns-glow:rgba(167,139,250,.25)}
-  .ns-tile[data-level="IV"]{--ns-glow:rgba(232,121,249,.25)}
-  .ns-tile[data-level="V"]{--ns-glow:rgba(251,191,36,.25)}
-  .ns-tile[data-level="VI"]{--ns-glow:rgba(251,191,36,.35)}
-  /* Ultimate tier — gold glow, intensifying with rank */
-  .ns-tile[data-type="ultimate"]{box-shadow:0 0 8px rgba(245,158,11,.2),0 0 22px rgba(245,158,11,.09);border-color:rgba(245,158,11,.22)}
-  .ns-tile[data-type="ultimate"][data-level="III"]{box-shadow:0 0 12px rgba(245,158,11,.3),0 0 30px rgba(245,158,11,.15);border-color:rgba(245,158,11,.3)}
-  .ns-tile[data-type="ultimate"][data-level="IV"]{box-shadow:0 0 16px rgba(245,158,11,.42),0 0 40px rgba(245,158,11,.2);border-color:rgba(245,158,11,.4)}
-  .ns-tile[data-type="ultimate"][data-level="V"]{box-shadow:0 0 20px rgba(245,158,11,.58),0 0 52px rgba(245,158,11,.28),0 0 80px rgba(245,158,11,.1);border-color:rgba(245,158,11,.52)}
-  .ns-tile[data-type="ultimate"][data-level="VI"]{box-shadow:0 0 24px rgba(245,158,11,.7),0 0 64px rgba(245,158,11,.36),0 0 110px rgba(56,189,248,.14);border-color:rgba(245,158,11,.65)}
-  /* Extra tier — purple glow, intensifying with rank */
-  .ns-tile[data-type="extra"]{box-shadow:0 0 8px rgba(192,132,252,.2),0 0 22px rgba(192,132,252,.09);border-color:rgba(192,132,252,.22)}
-  .ns-tile[data-type="extra"][data-level="III"]{box-shadow:0 0 12px rgba(192,132,252,.3),0 0 30px rgba(192,132,252,.15);border-color:rgba(192,132,252,.3)}
-  .ns-tile[data-type="extra"][data-level="IV"]{box-shadow:0 0 16px rgba(192,132,252,.42),0 0 40px rgba(192,132,252,.2);border-color:rgba(192,132,252,.4)}
-  .ns-tile[data-type="extra"][data-level="V"]{box-shadow:0 0 20px rgba(192,132,252,.58),0 0 52px rgba(192,132,252,.28),0 0 80px rgba(192,132,252,.1);border-color:rgba(192,132,252,.52)}
-  .ns-tile[data-type="extra"][data-level="VI"]{box-shadow:0 0 24px rgba(192,132,252,.7),0 0 64px rgba(192,132,252,.36),0 0 110px rgba(56,189,248,.14);border-color:rgba(192,132,252,.65)}
-  /* List row type-based left border */
-  .ns-list-row[data-type="ultimate"]{border-left:3px solid rgba(245,158,11,.5)}
-  .ns-list-row[data-type="ultimate"][data-level="IV"]{border-left:3px solid rgba(245,158,11,.65)}
-  .ns-list-row[data-type="ultimate"][data-level="V"]{border-left:3px solid rgba(245,158,11,.8)}
-  .ns-list-row[data-type="ultimate"][data-level="VI"]{border-left:3px solid rgba(245,158,11,.95)}
-  .ns-list-row[data-type="extra"]{border-left:3px solid rgba(192,132,252,.5)}
-  .ns-list-row[data-type="extra"][data-level="IV"]{border-left:3px solid rgba(192,132,252,.65)}
-  .ns-list-row[data-type="extra"][data-level="V"]{border-left:3px solid rgba(192,132,252,.8)}
-  .ns-list-row[data-type="extra"][data-level="VI"]{border-left:3px solid rgba(192,132,252,.95)}
+  .ns-tile[data-level="II"] {--ns-glow:rgba(99,202,183,.25); --ns-gc:99,202,183}
+  .ns-tile[data-level="III"]{--ns-glow:rgba(167,139,250,.25);--ns-gc:167,139,250}
+  .ns-tile[data-level="IV"] {--ns-glow:rgba(232,121,249,.25);--ns-gc:232,121,249}
+  .ns-tile[data-level="V"]  {--ns-glow:rgba(251,191,36,.25); --ns-gc:251,191,36}
+  .ns-tile[data-level="VI"] {--ns-glow:rgba(251,191,36,.35); --ns-gc:251,191,36}
+  /* Tier outer glow — external box-shadow only, no border-color override */
+  .ns-tile[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 10px rgba(245,158,11,.16),0 0 30px rgba(245,158,11,.07)}
+  .ns-tile[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 10px rgba(192,132,252,.16),0 0 30px rgba(192,132,252,.07)}
+  /* Gradient by rank: inner shadow = rank color (--ns-gc), outer = tier color (--ct) */
+  .ns-tile[data-type="ultimate"][data-level="III"],.ns-tile[data-type="extra"][data-level="III"]{box-shadow:0 0 8px rgba(var(--ns-gc),.22),0 0 22px rgba(var(--ct),.17),0 0 46px rgba(var(--ct),.07)}
+  .ns-tile[data-type="ultimate"][data-level="IV"],.ns-tile[data-type="extra"][data-level="IV"]  {box-shadow:0 0 11px rgba(var(--ns-gc),.32),0 0 28px rgba(var(--ct),.22),0 0 56px rgba(var(--ct),.1)}
+  .ns-tile[data-type="ultimate"][data-level="V"],.ns-tile[data-type="extra"][data-level="V"]    {box-shadow:0 0 15px rgba(var(--ns-gc),.42),0 0 36px rgba(var(--ct),.3),0 0 70px rgba(var(--ct),.13)}
+  .ns-tile[data-type="ultimate"][data-level="VI"],.ns-tile[data-type="extra"][data-level="VI"]  {box-shadow:0 0 19px rgba(var(--ns-gc),.52),0 0 46px rgba(var(--ct),.37),0 0 88px rgba(var(--ct),.16)}
+  /* List rows: outer glow by type, no border-color override */
+  .ns-list-row[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 12px rgba(245,158,11,.1)}
+  .ns-list-row[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 12px rgba(192,132,252,.1)}
+  .ns-list-row[data-type="ultimate"][data-level="IV"],.ns-list-row[data-type="extra"][data-level="IV"]{box-shadow:0 0 9px rgba(var(--ns-gc),.2),0 0 20px rgba(var(--ct),.14)}
+  .ns-list-row[data-type="ultimate"][data-level="V"],.ns-list-row[data-type="extra"][data-level="V"]  {box-shadow:0 0 12px rgba(var(--ns-gc),.28),0 0 26px rgba(var(--ct),.2)}
+  .ns-list-row[data-type="ultimate"][data-level="VI"],.ns-list-row[data-type="extra"][data-level="VI"]{box-shadow:0 0 16px rgba(var(--ns-gc),.36),0 0 34px rgba(var(--ct),.28)}
   .ns-tile-head { display:flex;align-items:center;gap:.5rem; }
   .ns-tile-name { font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3; }
   .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
@@ -455,10 +540,23 @@
     background:var(--surface);border:1px solid var(--border);border-radius:10px;
     padding:.75rem 1.2rem;cursor:pointer;
     display:flex;align-items:center;gap:1rem;
-    transition:border-color .2s,background .15s;
-    --ns-glow:rgba(56,189,248,.12);
+    transition:border-color .25s,box-shadow .25s;
+    position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.12);--ns-gc:56,189,248;
   }
-  .ns-list-row:hover{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.1)}
+  .ns-list-row::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(circle at 0% 50%, rgba(var(--ns-gc),.07) 0%, transparent 55%);
+    opacity:.6;transform:scaleX(.85);transform-origin:left center;
+    transition:opacity .35s,transform .42s;
+  }
+  .ns-list-row:hover::before{opacity:1;transform:scaleX(1.15) translateX(5%)}
+  .ns-list-row:hover{border-color:rgba(255,255,255,.1);box-shadow:0 0 16px rgba(var(--ns-gc),.15)}
+  .ns-list-row[data-level="II"] {--ns-glow:rgba(99,202,183,.18); --ns-gc:99,202,183}
+  .ns-list-row[data-level="III"]{--ns-glow:rgba(167,139,250,.18);--ns-gc:167,139,250}
+  .ns-list-row[data-level="IV"] {--ns-glow:rgba(232,121,249,.18);--ns-gc:232,121,249}
+  .ns-list-row[data-level="V"]  {--ns-glow:rgba(251,191,36,.18); --ns-gc:251,191,36}
+  .ns-list-row[data-level="VI"] {--ns-glow:rgba(251,191,36,.25); --ns-gc:251,191,36}
   .ns-list-row[data-level="II"]{border-left:3px solid rgba(99,202,183,.5)}
   .ns-list-row[data-level="III"]{border-left:3px solid rgba(167,139,250,.5)}
   .ns-list-row[data-level="IV"]{border-left:3px solid rgba(232,121,249,.5)}
@@ -476,19 +574,41 @@
     display:flex;align-items:center;gap:.7rem;padding:.85rem 1.2rem;
     background:rgba(255,255,255,.025);cursor:pointer;
     font-size:.82rem;font-weight:600;color:var(--muted);
-    transition:background .15s;
+    transition:background .2s,box-shadow .25s;
+    position:relative;overflow:hidden;
   }
-  .ns-tree-parent:hover{background:rgba(255,255,255,.05)}
+  .ns-tree-parent::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(56,189,248,.06) 0%,transparent 55%);
+    opacity:0;transform:translateX(-12%);
+    transition:opacity .35s,transform .42s;
+  }
+  .ns-tree-parent:hover{background:rgba(255,255,255,.04)}
+  .ns-tree-parent:hover::before{opacity:1;transform:translateX(0)}
   .ns-tree-ref { color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem; }
   .ns-tree-count { background:var(--border);color:var(--muted);padding:.1rem .45rem;border-radius:20px;font-size:.7rem; }
   .ns-tree-children { display:flex;flex-direction:column;border-top:1px solid var(--border); }
   .ns-tree-leaf {
     display:flex;align-items:center;gap:.9rem;padding:.7rem 1.4rem;cursor:pointer;
-    border-bottom:1px solid var(--border);transition:background .15s;
-    --ns-glow:rgba(56,189,248,.1);
+    border-bottom:1px solid var(--border);
+    position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.1);--ns-gc:56,189,248;
+    transition:box-shadow .25s,border-color .25s;
   }
+  .ns-tree-leaf::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 0% 50%, rgba(var(--ns-gc),.07) 0%, transparent 55%);
+    opacity:0;transform:scaleX(.8);transform-origin:left center;
+    transition:opacity .3s,transform .4s;
+  }
+  .ns-tree-leaf:hover::before{opacity:1;transform:scaleX(1.1) translateX(4%)}
+  .ns-tree-leaf:hover{box-shadow:inset 0 0 12px rgba(var(--ns-gc),.1)}
+  .ns-tree-leaf[data-level="II"] {--ns-gc:99,202,183}
+  .ns-tree-leaf[data-level="III"]{--ns-gc:167,139,250}
+  .ns-tree-leaf[data-level="IV"] {--ns-gc:232,121,249}
+  .ns-tree-leaf[data-level="V"]  {--ns-gc:251,191,36}
+  .ns-tree-leaf[data-level="VI"] {--ns-gc:251,191,36}
   .ns-tree-leaf:last-child{border-bottom:none}
-  .ns-tree-leaf:hover{background:rgba(255,255,255,.03)}
   /* shared card bits */
   .ns-loading,.ns-empty{
     text-align:center;color:var(--muted);font-size:.9rem;
@@ -559,13 +679,29 @@
   .ns-fc-card {
     background:var(--surface);border:1px solid var(--border);border-radius:10px;
     padding:.7rem .9rem;cursor:pointer;min-width:140px;max-width:200px;
-    transition:border-color .2s,box-shadow .2s,transform .15s;--fc-glow:rgba(56,189,248,.2);
+    position:relative;overflow:hidden;
+    transition:border-color .25s,box-shadow .25s,transform .15s;
+    --fc-glow:rgba(56,189,248,.2);--ns-gc:56,189,248;
   }
+  .ns-fc-card::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(circle at 20% 85%, rgba(var(--ns-gc),.08) 0%, transparent 62%);
+    opacity:.6;transform:scale(.85);
+    transition:opacity .35s,transform .42s;
+  }
+  .ns-fc-card:hover::before{opacity:1;transform:scale(1.2) translate(7%,-7%)}
   .ns-fc-card:hover { border-color:rgba(255,255,255,.12);box-shadow:0 0 18px var(--fc-glow);transform:translateY(-2px); }
-  .ns-fc-card[data-level="II"]  { --fc-glow:rgba(99,202,183,.25); }
-  .ns-fc-card[data-level="III"] { --fc-glow:rgba(167,139,250,.25); }
-  .ns-fc-card[data-level="IV"]  { --fc-glow:rgba(232,121,249,.3); }
-  .ns-fc-card[data-level="V"]   { --fc-glow:rgba(251,191,36,.3); }
+  .ns-fc-card[data-level="II"]  { --fc-glow:rgba(99,202,183,.25); --ns-gc:99,202,183 }
+  .ns-fc-card[data-level="III"] { --fc-glow:rgba(167,139,250,.25);--ns-gc:167,139,250 }
+  .ns-fc-card[data-level="IV"]  { --fc-glow:rgba(232,121,249,.3); --ns-gc:232,121,249 }
+  .ns-fc-card[data-level="V"]   { --fc-glow:rgba(251,191,36,.3);  --ns-gc:251,191,36  }
+  /* Flowchart card tier glow */
+  .ns-fc-card[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 8px rgba(245,158,11,.16),0 0 22px rgba(245,158,11,.07)}
+  .ns-fc-card[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 8px rgba(192,132,252,.16),0 0 22px rgba(192,132,252,.07)}
+  .ns-fc-card[data-type="ultimate"][data-level="III"],.ns-fc-card[data-type="extra"][data-level="III"]{box-shadow:0 0 7px rgba(var(--ns-gc),.22),0 0 18px rgba(var(--ct),.16),0 0 38px rgba(var(--ct),.07)}
+  .ns-fc-card[data-type="ultimate"][data-level="IV"],.ns-fc-card[data-type="extra"][data-level="IV"]  {box-shadow:0 0 9px rgba(var(--ns-gc),.3),0 0 22px rgba(var(--ct),.2),0 0 46px rgba(var(--ct),.09)}
+  .ns-fc-card[data-type="ultimate"][data-level="V"],.ns-fc-card[data-type="extra"][data-level="V"]    {box-shadow:0 0 12px rgba(var(--ns-gc),.4),0 0 28px rgba(var(--ct),.28),0 0 58px rgba(var(--ct),.12)}
+  .ns-fc-card[data-type="ultimate"][data-level="VI"],.ns-fc-card[data-type="extra"][data-level="VI"]  {box-shadow:0 0 16px rgba(var(--ns-gc),.5),0 0 36px rgba(var(--ct),.35),0 0 72px rgba(var(--ct),.15)}
   .ns-fc-card-name { font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.25rem; }
   .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#ef4444; }
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
@@ -802,7 +938,7 @@
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
     <li><a href="#named" class="nav-named-explorer">Named Skills Explorer</a></li>
-    <li><a href="../tree.md" target="_blank" class="nav-tree">Tree</a></li>
+    <li><button type="button" class="nav-tree" id="treeNavBtn">Tree</button></li>
   </ul>
 </nav>
 
@@ -847,6 +983,23 @@
     <div class="graph-canvas-wrap">
       <canvas id="graphDialogCanvas"></canvas>
       <div class="graph-status" data-graph-status>Loading full graph…</div>
+    </div>
+  </div>
+</dialog>
+
+<!-- ─── TREE DIALOG ─── -->
+<dialog id="treeDialog" class="tree-dialog" aria-labelledby="treeDialogTitle">
+  <div class="tree-dialog-inner">
+    <div class="tree-dialog-header">
+      <div id="treeDialogTitle" class="tree-dialog-title">Gaia Skill Tree</div>
+      <div class="tree-dialog-actions">
+        <button type="button" class="tree-act-btn" id="treeCopyBtn">Copy</button>
+        <button type="button" class="tree-act-btn" id="treeDownloadBtn">Download</button>
+        <button type="button" class="tree-close-x" id="treeCloseBtn" aria-label="Close tree">✕</button>
+      </div>
+    </div>
+    <div class="tree-dialog-body">
+      <pre id="treeDialogPre">Loading…</pre>
     </div>
   </div>
 </dialog>
@@ -1072,6 +1225,8 @@
     <div class="ns-filter-row">
       <div class="ns-level-tabs" id="nsLevelTabs">
         <button class="ns-tab active" type="button" data-level="all">All</button>
+        <button class="ns-tab" type="button" data-level="0" disabled><span style="color:#94a3b8;font-weight:800">0</span> Basic</button>
+        <button class="ns-tab" type="button" data-level="I" disabled><span style="color:#38bdf8;font-weight:800">I</span> Awakened</button>
         <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
         <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
         <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
@@ -1913,7 +2068,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       var cards = groups[ref].map(function(ns) {
         var m = lm[ns.level] || lm['II'];
         return '<div class="ns-fc-leaf-wrap">' +
-          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
+          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
             '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
             (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
             '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
@@ -2022,7 +2177,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         dock.style.display = viewMode === 'flow' ? 'none' : '';
         TYPE_ORDER.forEach(function(type) {
           var seg = dock.querySelector('[data-target="'+type+'"]');
-          if (seg) seg.style.flex = Math.max((groups[type]||[]).length, 1);
+          if (seg) seg.style.flexGrow = Math.max((groups[type]||[]).length, 1);
         });
       }
 
@@ -2686,6 +2841,190 @@ window.switchOsTab = function(btn) {
     </div>
   </div>
 </div>
+
+<script>
+(function() {
+  var treeDialog = document.getElementById('treeDialog');
+  var treeNavBtn = document.getElementById('treeNavBtn');
+  var treeCloseBtn = document.getElementById('treeCloseBtn');
+  var treeCopyBtn = document.getElementById('treeCopyBtn');
+  var treeDownloadBtn = document.getElementById('treeDownloadBtn');
+  var treeDialogPre = document.getElementById('treeDialogPre');
+  var treeHeader = treeDialog.querySelector('.tree-dialog-header');
+  var _treeContent = null;
+
+  var SKELETON = [
+    'GAIA SKILL TREE  ─────────  ·  ───────────────────────',
+    '══════════════════════════════════════════════════════',
+    '──────────────────────────────────────────────────────',
+    '══════════════════════════════════════════════════════',
+    '',
+    '◆ ──────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  ├─ ◇ ────────────────────────────  [──]',
+    '  │  ├─ ◇ ────────────  [───]',
+    '  │  │  ├─ ○ ────────────  [─]',
+    '  │  │  ├─ ○ ──────────  [─]',
+    '  │  │  └─ ○ ─────────────────────  [─]',
+    '  │  ├─ ○ ───────────────  [─]',
+    '  │  └─ ○ ──────────  [─]',
+    '  └─ ◇ ────────────────────────  [──]',
+    '     ├─ ○ ───────────────────────────  [─]',
+    '     └─ ○ ─────────────────────  [─]',
+    '',
+    '◆ ──────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ○ ─────────────────  [──]',
+    '  ├─ ◇ ─────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  └─ ○ ─────────────────  [──]',
+    '',
+    '◆ ────────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────────────  [───]',
+    '  │  ├─ ○ ─────────────────  [──]',
+    '  │  ├─ ○ ──────────────────────  [─]',
+    '  │  └─ ○ ────────────────  [─]',
+    '  ├─ ◇ ──────────────────────────  [───]',
+    '  │  ├─ ○ ──────────────────  [──]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  └─ ○ ─────────────────────  [─]',
+    '  └─ ○ ────────────────────────────────  [──]',
+  ].join('\n');
+
+  function openTreeDialog() {
+    treeDialog.style.cssText = '';
+    if (typeof treeDialog.showModal === 'function') treeDialog.showModal();
+    else treeDialog.setAttribute('open', '');
+    if (_treeContent === null) {
+      treeDialogPre.textContent = SKELETON;
+      treeDialogPre.classList.add('tree-skeleton');
+      fetch('tree.md')
+        .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function(text) {
+          _treeContent = text;
+          treeDialogPre.innerHTML = highlightTree(text);
+          treeDialogPre.classList.remove('tree-skeleton');
+        })
+        .catch(function() {
+          treeDialogPre.textContent = 'Could not load tree.md.';
+          treeDialogPre.classList.remove('tree-skeleton');
+        });
+    }
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function highlightTree(text) {
+    var ultIdx = 0;
+    return text.split('\n').map(function(line) {
+      // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [VI]
+      var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
+      if (m) {
+        var label = esc(m[1]);
+        var skillId = m[2];
+        var suffix = esc(m[3]);
+        var delay = -((ultIdx++ * 0.9) % 4);
+        var slash = skillId.indexOf('/');
+        var skillHtml;
+        if (slash > 0) {
+          // named — contributor in red, skill name in amber
+          skillHtml = '<span class="tree-ult-contributor">' + esc(skillId.slice(0, slash)) + '</span>' +
+                      '<span class="tree-ult-slash">/</span>' +
+                      '<span class="tree-ult-skillname">' + esc(skillId.slice(slash + 1)) + '</span>';
+        } else {
+          skillHtml = '<span class="tree-ult-id">' + esc(skillId) + '</span>';
+        }
+        return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
+               label + skillHtml + suffix + '</span>';
+      }
+      // Separator lines
+      if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
+      // Inline ◇ / ○ glyphs
+      var out = esc(line);
+      out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
+      out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
+      return out;
+    }).join('\n');
+  }
+
+  function closeTreeDialog() {
+    if (treeDialog.close) treeDialog.close();
+    else treeDialog.removeAttribute('open');
+  }
+
+  treeNavBtn.addEventListener('click', openTreeDialog);
+  treeCloseBtn.addEventListener('click', closeTreeDialog);
+  treeDialog.addEventListener('click', function(e) {
+    if (e.target === treeDialog) closeTreeDialog();
+  });
+
+  treeCopyBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      treeCopyBtn.textContent = 'Copied!';
+      treeCopyBtn.classList.add('copied');
+      setTimeout(function() {
+        treeCopyBtn.textContent = 'Copy';
+        treeCopyBtn.classList.remove('copied');
+      }, 1800);
+    });
+  });
+
+  treeDownloadBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    var blob = new Blob([text], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'gaia-skill-tree.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  /* ── drag ── */
+  var drag = { on: false, ox: 0, oy: 0, startL: 0, startT: 0 };
+
+  treeHeader.addEventListener('mousedown', function(e) {
+    if (e.target.closest('button')) return;
+    var rect = treeDialog.getBoundingClientRect();
+    treeDialog.style.margin = '0';
+    treeDialog.style.position = 'fixed';
+    treeDialog.style.left = rect.left + 'px';
+    treeDialog.style.top = rect.top + 'px';
+    drag.on = true;
+    drag.ox = e.clientX;
+    drag.oy = e.clientY;
+    drag.startL = rect.left;
+    drag.startT = rect.top;
+    treeHeader.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!drag.on) return;
+    var W = window.innerWidth, H = window.innerHeight;
+    var dw = treeDialog.offsetWidth, dh = treeDialog.offsetHeight;
+    var l = Math.max(0, Math.min(W - dw, drag.startL + e.clientX - drag.ox));
+    var t = Math.max(0, Math.min(H - dh, drag.startT + e.clientY - drag.oy));
+    treeDialog.style.left = l + 'px';
+    treeDialog.style.top = t + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!drag.on) return;
+    drag.on = false;
+    treeHeader.classList.remove('dragging');
+  });
+})();
+</script>
 
 </body>
 </html>
