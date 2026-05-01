@@ -151,7 +151,8 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
+            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills}
+            ...
 
 Gaia Registry CLI
 
@@ -174,10 +175,10 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to auto-
-                        resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/
-                        config.
+  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
+                        auto-resolved local or global registry.
+  --global, -g          Use global GAIA_HOME registry, ignoring any local
+                        .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
 
 Quick usage:
@@ -197,7 +198,7 @@ Quick usage:
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]
   gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
+  gaia skills install <skill> [--global | --local]
   gaia skills uninstall <skill_id>
 
 ```
