@@ -214,6 +214,11 @@
   .qs-tip { display:flex;align-items:flex-start;gap:.55rem;margin-top:.5rem;padding:.5rem .85rem;background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);border-left:3px solid rgba(56,189,248,.45);border-radius:0 7px 7px 0;font-size:.79rem;color:var(--muted);line-height:1.5; }
   .qs-tip-icon { flex-shrink:0;color:var(--basic); }
   .qs-tip code { font-family:'JetBrains Mono','Fira Code',monospace;font-size:.77rem;color:var(--text);background:rgba(255,255,255,.07);padding:.1rem .32rem;border-radius:3px; }
+  .os-tabs { display:flex;gap:.35rem;margin-bottom:.6rem; }
+  .os-tab { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.28rem .7rem;font-size:.76rem;color:var(--muted);cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s,background .15s; }
+  .os-tab.active { color:var(--basic);border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.06); }
+  .os-panel { display:none; }
+  .os-panel.active { display:block; }
   /* ── GLOSSARY ── */
   .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
   .gloss-item{
@@ -860,10 +865,22 @@
       <div class="step-num">2</div>
       <div>
         <h3>Install the CLI</h3>
-        <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
-        <pre><span class="cmd">pip install</span> -e .</pre>
-        <div class="qs-tip"><span class="qs-tip-icon">⚡</span><span>Optional but recommended: add semantic search support with <code>pip install -e ".[embeddings]"</code> then <code>gaia embed</code> (~30 sec, run once). Lets you search skills by meaning instead of exact keywords.</span></div>
-        <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>Windows only — if <code>gaia</code> is not recognized, run this in PowerShell then restart your terminal: <code>$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")</code></span></div>
+        <p>Puts the <code>gaia</code> command on your PATH with semantic search included.</p>
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="mac" onclick="switchOsTab(this)">macOS / Linux</button>
+          <button class="os-tab" data-os="win" onclick="switchOsTab(this)">Windows</button>
+        </div>
+        <div class="os-panel active" data-os="mac">
+          <pre><span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span></pre>
+          <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia embed</code> once after install (~30 sec). Skip the <code>[embeddings]</code> extra if you don't need semantic search — plain <code>pip install -e .</code> works fine.</span></div>
+        </div>
+        <div class="os-panel" data-os="win">
+          <pre><span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span></pre>
+          <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>If <code>gaia</code> isn't recognized after install, run the command below in PowerShell, then restart your terminal.</span></div>
+          <pre><span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)</pre>
+        </div>
       </div>
     </div>
 
@@ -2378,6 +2395,12 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 
 <script>
+window.switchOsTab = function(btn) {
+  var step = btn.closest('.step');
+  step.querySelectorAll('.os-tab').forEach(function(b){ b.classList.toggle('active', b === btn); });
+  step.querySelectorAll('.os-panel').forEach(function(p){ p.classList.toggle('active', p.dataset.os === btn.dataset.os); });
+};
+
 (function(){
   var CLIP='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
   var CHECK='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
