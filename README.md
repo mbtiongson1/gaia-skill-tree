@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.4`.
+Current Gaia CLI version: `2.2.5`.
 
 Python install:
 
@@ -152,116 +152,87 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 ```text
 $ gaia 
 
-usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
-
-Gaia Registry CLI
-
-positional arguments:
-  {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills}
-    help                Show command help
-    init                Create or update local Gaia config
-    scan                Scan configured paths for skill evidence
-    pull                Refresh registry data from origin
-    tree                Show your Gaia skill tree
-    push                Prepare detected skills for review
-    version             Print the Gaia CLI version
-    mcp                 Run the bundled Gaia MCP server
-    release             Bump release version files
-    graph               Generate and open the Gaia skill graph
-    appraise            Inspect a skill card with status and actions
-    promote             Promote a skill eligible for level-up
-    docs                Documentation maintenance commands
-    skills              Browse and manage named skills
-
-options:
-  -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
-                        auto-resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local
-                        .gaia/ config.
-  --version, -v         Print the Gaia CLI version and exit.
-
-Quick usage:
-  gaia init [--user <name>] [--scan <path>] [--yes]
-  gaia scan [--quiet] [--auto-promote]
-  gaia pull
-  gaia tree [--named] [--title]
-  gaia push [--dry-run] [--no-pr]
-  gaia version
-  gaia mcp
-  gaia release <patch|minor|major>
-  gaia graph [--format html|svg|json] [-o <path>] [--no-open]
-  gaia appraise [<skillId>]
-  gaia promote [<skillId>] [--all] [--name <name>]
-  gaia docs build [--check]
-  gaia skills <list|search|info|install|uninstall>
-  gaia skills list [--exclude-pending]
-  gaia skills search <query> [--exclude-pending]
-  gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
-  gaia skills uninstall <skill_id>
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 
 $ gaia skills --help
 
-usage: gaia skills [-h] {list,search,info,install,uninstall} ...
-
-positional arguments:
-  {list,search,info,install,uninstall}
-    list                List available named skills
-    search              Search named skills
-    info                Show details for a named skill
-    install             Install a named skill
-    uninstall           Uninstall a named skill
-
-options:
-  -h, --help            show this help message and exit
-
-Quick usage:
-  gaia skills list [--exclude-pending]
-  gaia skills search <query> [--exclude-pending]
-  gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
-  gaia skills uninstall <skill_id>
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 
 $ gaia skills list --help
 
-usage: gaia skills list [-h] [--exclude-pending]
-
-options:
-  -h, --help         show this help message and exit
-  --exclude-pending  Hide pending skill proposals
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 
 $ gaia skills search --help
 
-usage: gaia skills search [-h] [--exclude-pending] query
-
-positional arguments:
-  query              Search query
-
-options:
-  -h, --help         show this help message and exit
-  --exclude-pending  Hide pending skill proposals
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 
 $ gaia promote --help
 
-usage: gaia promote [-h] [--all] [--name NAME] [skillId]
-
-positional arguments:
-  skillId      Skill ID to promote
-
-options:
-  -h, --help   show this help message and exit
-  --all        Promote every candidate from the last scan
-  --name NAME  Optional display name for the promoted skill
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 
 $ gaia docs build --help
 
-usage: gaia docs build [-h] [--check]
-
-options:
-  -h, --help  show this help message and exit
-  --check     Fail if docs are stale without writing
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/__main__.py", line 1, in <module>
+    from gaia_cli.main import main
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/main.py", line 22, in <module>
+    from gaia_cli.graph import graph_command
+  File "/Users/rico/Git/gaia-skill-tree/src/gaia_cli/graph.py", line 193
+    NEW_CODE_PLACEHOLDERdef write_graph_artifact(
+                            ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
 ```
 <!-- gaia:cli-end -->
 
