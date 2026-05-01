@@ -26,7 +26,7 @@ Four principles guide every design decision:
 │                   github.com/gaia-registry/gaia                  │
 │                                                                  │
 │  ┌─────────────────┐    ┌──────────────────┐                     │
-│  │  registry/         │    │  skill-trees/          │                     │
+│  │  graph/         │    │  users/          │                     │
 │  │  gaia.json      │◄───│  mbtiongson1/    │                     │
 │  │  (canonical)    │    │  skill-tree.json │                     │
 │  └────────┬────────┘    └──────────────────┘                     │
@@ -62,15 +62,15 @@ Four principles guide every design decision:
 
 | Component | Location | Responsibility |
 |---|---|---|
-| Canonical graph | `registry/gaia.json` | Single source of truth for all skills and edges |
+| Canonical graph | `graph/gaia.json` | Single source of truth for all skills and edges |
 | Projection generator | `scripts/generateProjections.py` | Generates all `.md` and `.gexf` outputs from canonical graph |
 | Validator | `scripts/validate.py` | Schema + DAG + reference integrity checks |
 | Combination detector | `scripts/detectCombinations.py` | Core logic shared between CI and the plugin |
 | Gaia CLI | `src/gaia_cli/` | User-facing commands — pip-installable Python package (`init`, `scan`, `push`, `name`, `install`, `embed`, `search`, `graph`, …) |
-| TypeScript wrapper | `packages/cli-npm/src/` | Thin Node.js shim that delegates to the Python CLI; used in the GitHub Action |
-| GitHub Action | `packages/cli-npm/github-action/` | Runs scan + detection on push, opens PRs for tree updates |
-| User trees | `skill-trees/[username]/` | Personal skill progression records |
-| Schemas | `registry/schema/` | JSON Schema definitions for nodes, edges, user trees, plugin config |
+| TypeScript wrapper | `plugin/src/` | Thin Node.js shim that delegates to the Python CLI; used in the GitHub Action |
+| GitHub Action | `plugin/github-action/` | Runs scan + detection on push, opens PRs for tree updates |
+| User trees | `users/[username]/` | Personal skill progression records |
+| Schemas | `schema/` | JSON Schema definitions for nodes, edges, user trees, plugin config |
 
 ---
 
@@ -82,7 +82,7 @@ Four principles guide every design decision:
 Contributor writes new skill node
          │
          ▼
-Opens PR against gaia/registry/gaia.json
+Opens PR against gaia/graph/gaia.json
          │
          ▼
 CI runs:
@@ -145,7 +145,7 @@ Add to unlockedSkills    Add to pendingCombinations
          │
          ▼
   Plugin opens PR to gaia:
-  skill-trees/mbtiongson1/skill-tree.json updated
+  users/mbtiongson1/skill-tree.json updated
          │
          ▼
   User merges PR → skill tree updated
@@ -157,7 +157,7 @@ Add to unlockedSkills    Add to pendingCombinations
 gaia load mbtiongson1
          │
          ▼
-Fetch skill-trees/mbtiongson1/skill-tree.json from Gaia registry
+Fetch users/mbtiongson1/skill-tree.json from Gaia registry
          │
          ▼
 Cache locally in .gaia/skill-tree.cache.json
@@ -177,7 +177,7 @@ gaia/
 ├── README.md                        ← Project overview + quickstart
 ├── CONTRIBUTING.md                  ← Contribution rules, evidence rubric, PR templates
 │
-├── registry/
+├── graph/
 │   ├── gaia.json                    ← CANONICAL. The only file humans edit directly.
 │   ├── gaia.gexf                    ← Generated Gephi export
 │   ├── named/                       ← Named skill implementations
@@ -201,7 +201,7 @@ gaia/
 │       ├── recursiveSelfImprovement.md
 │       └── ...
 │
-├── skill-trees/                           ← Personal skill trees by GitHub username
+├── users/                           ← Personal skill trees by GitHub username
 │   ├── mbtiongson1/
 │   │   ├── skill-tree.json          ← Validated against skillTree.schema.json
 │   │   └── skill-tree.md            ← Generated human-readable projection
@@ -210,11 +210,11 @@ gaia/
 ├── registry.md                      ← GENERATED. Flat index of all skills.
 ├── combinations.md                  ← GENERATED. Fusion recipe matrix.
 │
-├── registry/schema/
+├── schema/
 │   ├── skill.schema.json            ← Validates skill nodes (includes optional realVariants array)
 │   ├── combination.schema.json      ← Validates fusion recipes / edges
-│   ├── namedSkill.schema.json       ← Validates registry/named/*.md frontmatter
-│   ├── realSkillCatalog.schema.json ← Validates registry/real-skills.json
+│   ├── namedSkill.schema.json       ← Validates graph/named/*.md frontmatter
+│   ├── realSkillCatalog.schema.json ← Validates graph/real_skill_catalog.json
 │   ├── skillTree.schema.json        ← Validates user skill trees
 │   └── pluginConfig.schema.json     ← Validates .gaia/config.json
 │
@@ -231,12 +231,12 @@ gaia/
 │   ├── install.py                   ← Named-skill install/sync/uninstall
 │   ├── name.py                      ← Promote intake entry to named skill
 │   └── data/                        ← Bundled graph data shipped with the package
-│       ├── registry/gaia.json
-│       └── registry/named/
+│       ├── graph/gaia.json
+│       └── graph/named/
 │
 ├── pyproject.toml                   ← Package metadata; optional [embeddings] extra
 │
-├── packages/cli-npm/                          ← TypeScript wrapper + GitHub Action
+├── plugin/                          ← TypeScript wrapper + GitHub Action
 │   ├── src/                         ← Node.js shim that delegates to Python CLI
 │   └── github-action/
 │       ├── action.yml
@@ -245,9 +245,9 @@ gaia/
 └── scripts/
     ├── validate.py                  ← Schema + DAG + reference checks
     ├── generateProjections.py       ← Builds all .md and .gexf from gaia.json
-    ├── generateNamedIndex.py        ← Rebuilds registry/named-skills.json
+    ├── generateNamedIndex.py        ← Rebuilds graph/named/index.json
     ├── exportGexf.py                ← GEXF serializer
-    ├── renderGraphSvg.py            ← Renders registry/gaia.svg
+    ├── renderGraphSvg.py            ← Renders graph/gaia.svg
     ├── syncDocsGraphAssets.py       ← Mirrors graph assets into docs/graph/
     ├── detectCombinations.py        ← Shared combination logic (used by plugin + CI)
     └── computeRarity.py             ← Derives rarity from user tree prevalence data
@@ -345,17 +345,17 @@ gaia scan
   Outputs: new skills detected, combination candidates flagged.
 
 gaia push [--dry-run] [--no-pr]
-  Writes a batch intake record under registry-for-review/skill-batches/.
+  Writes a batch intake record under intake/skill-batches/.
   --dry-run prints the JSON without writing files.
   --no-pr writes the intake file without opening a GitHub PR.
 
 gaia name <batch-file> <index> <contributor/skill-name>
-  Promotes an awakened skill from intake to a named skill in registry/named/.
+  Promotes an awakened skill from intake to a named skill in graph/named/.
 
-gaia skills install <contributor/skill-name>
+gaia install <contributor/skill-name>
   Downloads a named skill into the repo and global cache.
 
-gaia skills list
+gaia install --list
   Lists all installed named skills.
 
 gaia sync
@@ -368,12 +368,12 @@ gaia embed
   Pre-computes semantic embeddings for all skills (requires [embeddings] extra).
   Run once after install; re-run when graph changes.
 
-gaia skills search <query>
+gaia search <query>
   Semantic search across generic and named skills (requires embeddings).
 
-gaia graph [--format html|svg|json] [-o <path>] [--no-open]
-  Generates registry/render/gaia.html and opens it in the browser.
-  Use --format svg for registry/gaia.svg or --format json for render JSON.
+gaia graph [--format svg|json] [-o <path>] [--no-open]
+  Generates graph/gaia.svg and opens it in the browser.
+  Use --format json to write the D3/Cytoscape render JSON instead.
 
 gaia status
   Displays summary of the configured user's skill tree.
@@ -481,7 +481,7 @@ Standard GEXF 1.2 with custom attribute namespaces for `level`, `rarity`, `statu
 
 | Concern | Design Decision |
 |---|---|
-| A user writing to another user's tree | `skill-trees/[username]/` is protected by CODEOWNERS — only the owner (via OAuth-verified GitHub Actions) can open PRs against their own path |
+| A user writing to another user's tree | `users/[username]/` is protected by CODEOWNERS — only the owner (via OAuth-verified GitHub Actions) can open PRs against their own path |
 | Malicious skill definitions | All content is validated by schema + DAG checks; human reviewer required for `validated` status |
 | Legendary inflation | Legendary merges require two maintainer approvals in addition to CI pass |
 | Rarity gaming | Rarity is computed server-side from real skill tree prevalence, not declared by contributors |
@@ -510,24 +510,24 @@ Named skills are real, user-contributed implementations of generic skills. They 
 
 | Aspect | Generic Skill | Named Skill |
 |---|---|---|
-| Location | `registry/gaia.json` | `registry/named/{contributor}/{skill-name}.md` |
+| Location | `graph/gaia.json` | `graph/named/{contributor}/{skill-name}.md` |
 | Identity | Abstract capability (e.g., `autonomous-research-agent`) | Concrete implementation (e.g., `karpathy/autoresearch`) |
 | Level restriction | All levels (I–VI) | Level II ("Named") and above only |
 | Origin | Defined by taxonomy maintainers | Attributed to first contributor |
-| Edit | Direct PR to `gaia.json` | PR to `registry/named/` |
+| Edit | Direct PR to `gaia.json` | PR to `graph/named/` |
 
 ### 13.2 Bucket System
 
 Named skills are grouped into "buckets" by their `genericSkillRef` field. Each bucket has exactly one **origin** contributor — the first person to create that named implementation. Subsequent similar implementations can join the same bucket by referencing the same `genericSkillRef`.
 
-The generated `registry/named-skills.json` provides fast lookup of all named implementations for a given generic skill ID. It is regenerated by `scripts/generateNamedIndex.py` and must not be edited manually.
+The generated `graph/named/index.json` provides fast lookup of all named implementations for a given generic skill ID. It is regenerated by `scripts/generateNamedIndex.py` and must not be edited manually.
 
 ### 13.3 Lifecycle
 
 Contributors always submit named skills with `status: awakened`. Reviewer classification is a separate, subsequent step.
 
 ```
-Contributor opens PR (registry/named/{contributor}/{skill}.md)
+Contributor opens PR (graph/named/{contributor}/{skill}.md)
      status: awakened  ←  always. title/catalogRef: absent.
             │
             ▼ CI: schema valid, genericSkillRef resolves, level ≥ II
@@ -554,20 +554,20 @@ Contributor opens PR (registry/named/{contributor}/{skill}.md)
 
 **Rule:** Contributors declare skills. Reviewers classify identity.
 
-The `registry/named-skills.json` file produced by `generateNamedIndex.py` has three keys:
+The `graph/named/index.json` file produced by `generateNamedIndex.py` has three keys:
 - `buckets` — skills with `status: named`, grouped by `genericSkillRef` (feeds `realVariants` on abstract nodes)
 - `awaitingClassification` — skills with `status: awakened`, pending reviewer action
 - `byContributor` — secondary index mapping contributor username → list of named skill IDs
 
-Level 0 (Unawakened) and Level I (Awakened) skills are generic-only and do not accept named implementations.
+Level 0 (Basic) and Level I (Awakened) skills are generic-only and do not accept named implementations.
 
 ### 13.4 Install & Sync
 
 Named skills can be installed into any repository:
 
 ```bash
-gaia skills install karpathy/autoresearch   # install from registry
-gaia skills list                  # show installed skills
+gaia install karpathy/autoresearch   # install from registry
+gaia install --list                  # show installed skills
 gaia sync                            # pull latest versions
 gaia uninstall karpathy/autoresearch # remove
 ```
@@ -594,7 +594,7 @@ const labelText = (state.namedMap && state.namedMap[skill.id])
   : '/' + skill.id;
 ```
 
-`state.namedMap` is a lookup built from the `buckets` section of `registry/named-skills.json`, mapping each `genericSkillRef` to the origin named implementation's ID.
+`state.namedMap` is a lookup built from the `buckets` section of `graph/named/index.json`, mapping each `genericSkillRef` to the origin named implementation's ID.
 
 The tooltip rank pill shows the level numeral only (e.g. `VI`) — rank names (Awakened, Evolved, …) are not displayed in the UI but remain defined in `RANK_META` for colour-coding.
 
@@ -602,8 +602,68 @@ The Named Skills browser section below the graph provides the same data in a pag
 
 Skills are embedded using `sentence-transformers` (model: `all-MiniLM-L6-v2`, 384 dimensions). The embedding input is `"{name}: {description}"` for each skill.
 
-- Pre-computed embeddings: `registry/embeddings.json`
-- Pairwise similarity scores (threshold 0.3): `registry/similarity.json`
+- Pre-computed embeddings: `graph/embeddings.json`
+- Pairwise similarity scores (threshold 0.3): `graph/similarity.json`
 - The MCP server reads pre-computed data only — it does not run the model at query time
-- The CLI `gaia skills search <query>` embeds queries in real-time (requires `sentence-transformers` installed)
+- The CLI `gaia search <query>` embeds queries in real-time (requires `sentence-transformers` installed)
 - `gaia embed` regenerates the embeddings store
+
+---
+
+## Named Skills Explorer
+
+### Red section heading
+The "Named Skills Explorer" `<h2>` uses `color: #ef4444` to match the red nav link and create a distinctive brand identity for this section.
+
+### Tag Color Palette
+Tags use a deterministic 8-color palette assigned by hash of the tag name — no fixed mapping, so each tag always gets the same color across sessions.
+
+| Index | Color | Hex | Background |
+|---|---|---|---|
+| 0 | Sky | `#38bdf8` | `rgba(56,189,248,.12)` |
+| 1 | Purple | `#c084fc` | `rgba(192,132,252,.12)` |
+| 2 | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
+| 3 | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
+| 4 | Amber | `#f59e0b` | `rgba(245,158,11,.12)` |
+| 5 | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
+| 6 | Orange | `#fb923c` | `rgba(251,146,60,.12)` |
+| 7 | Green | `#4ade80` | `rgba(74,222,128,.12)` |
+
+Hash formula: `h = (h * 31 + charCode) % 8` over each character of the tag string.
+
+### Terminal Install Row
+Each skill card shows a terminal-style install command at the bottom. Class: `.ns-install-row`.
+
+```
+┌─ $ gaia install karpathy/autoresearch ─────── [📋] ─┐
+└──────────────────────────────────────────────────────┘
+```
+
+- Background: `var(--bg)` (darker than card surface)
+- Font: `JetBrains Mono` monospace, `0.7rem`
+- Prompt `$` in `var(--muted)`, command text in `var(--basic)` (sky blue)
+- Clipboard icon button: `.ns-install-copy` — shows green checkmark SVG on success
+
+### Flowchart Tree View (`.ns-grid-flow`)
+The "Tree" view renders skills as a vertical flowchart: generic skill name at top, implementation cards branching below.
+
+```
+         [◇ generic-skill-ref]
+               │
+         ──────┼──────
+         │           │
+  [Impl Card A]  [Impl Card B]
+```
+
+Layout structure:
+- `.ns-fc-group` — one group per `genericSkillRef`
+- `.ns-fc-root` — generic skill name box (sky blue border, `rgba(56,189,248,.06)` bg)
+- `.ns-fc-connector` — 2px vertical gradient line
+- `.ns-fc-hbar` — horizontal connector bar (70% width)
+- `.ns-fc-leaf-wrap::before` — 2px vertical line from hbar to each card
+- `.ns-fc-card` — implementation card; glow color matches level (teal II, violet III, fuchsia IV, amber V)
+
+### Search & Sort Controls
+Controls appear above the level-filter tabs:
+- `.ns-search` — search input; filters by name, ID, tags, contributor in real-time
+- `.ns-sort-sel` — `<select>` with options: Level (default) · Creator · A–Z Name

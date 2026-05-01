@@ -44,6 +44,9 @@
   nav a:hover{color:var(--text)}
   .nav-tree{color:var(--ultimate)!important}
   .nav-tree:hover{color:#fcd34d!important}
+  button.nav-tree{background:none;border:none;cursor:pointer;font:inherit;font-size:.9rem;padding:0}
+  .nav-named-explorer{color:#ef4444!important;font-weight:700}
+  .nav-named-explorer:hover{color:#f87171!important}
   /* ── HERO ── */
   #hero{
     position:relative;min-height:100vh;
@@ -167,8 +170,8 @@
   .pre-wrap{position:relative}
   .copy-btn{
     position:absolute;top:.45rem;right:.45rem;
-    padding:.25rem .55rem;
-    font-size:.72rem;font-family:inherit;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    width:28px;height:28px;padding:0;
     color:var(--muted);background:rgba(15,23,42,.85);
     border:1px solid var(--border);border-radius:5px;
     cursor:pointer;transition:color .15s,border-color .15s,opacity .15s;
@@ -209,6 +212,47 @@
   }
   .callout-title{font-weight:700;margin-bottom:.5rem;color:var(--extra)}
   .callout p{font-size:.9rem;color:var(--muted)}
+  .qs-tip { display:flex;align-items:flex-start;gap:.55rem;margin-top:.5rem;padding:.5rem .85rem;background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);border-left:3px solid rgba(56,189,248,.45);border-radius:0 7px 7px 0;font-size:.79rem;color:var(--muted);line-height:1.5; }
+  .qs-tip-icon { flex-shrink:0;color:var(--basic); }
+  .qs-tip code { font-family:'JetBrains Mono','Fira Code',monospace;font-size:.77rem;color:var(--text);background:rgba(255,255,255,.07);padding:.1rem .32rem;border-radius:3px; }
+  .os-tabs { display:flex;gap:.35rem;margin-bottom:.6rem; }
+  .os-tab { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.28rem .7rem;font-size:.76rem;color:var(--muted);cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s,background .15s; }
+  .os-tab.active { color:var(--basic);border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.06); }
+  .os-panel { display:none; }
+  .os-panel.active { display:block; }
+  /* ── UNNAMED SKILL POPUP ── */
+  .usp-backdrop {
+    position:fixed;inset:0;z-index:1200;
+    background:rgba(0,0,0,.65);backdrop-filter:blur(5px);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .usp-backdrop.open { opacity:1;pointer-events:auto; }
+  .usp-card {
+    position:relative;background:var(--surface);
+    border:1px solid rgba(56,189,248,.35);border-radius:16px;
+    padding:1.8rem 2rem 1.6rem;width:min(420px,92vw);
+    box-shadow:0 24px 70px rgba(0,0,0,.65),0 0 40px rgba(56,189,248,.1);
+    transform:scale(.94) translateY(10px);transition:transform .22s cubic-bezier(.4,0,.2,1);
+  }
+  .usp-backdrop.open .usp-card { transform:scale(1) translateY(0); }
+  .usp-x { position:absolute;top:.7rem;right:.9rem;background:transparent;border:none;color:var(--muted);font-size:1.05rem;cursor:pointer;padding:.25rem .45rem;transition:color .15s;line-height:1; }
+  .usp-x:hover { color:var(--text); }
+  .usp-glyph { font-size:1.9rem;margin-bottom:.55rem;line-height:1; }
+  .usp-name { font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.2rem; }
+  .usp-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;margin-bottom:.85rem; }
+  .usp-body { font-size:.87rem;color:var(--muted);line-height:1.6;margin-bottom:1.1rem; }
+  .usp-cta { color:var(--basic);font-weight:700; }
+  .usp-row {
+    display:flex;align-items:center;gap:.4rem;
+    background:var(--bg);border:1px solid rgba(56,189,248,.22);border-radius:8px;
+    padding:.42rem .75rem;
+    font-family:'JetBrains Mono','Fira Code',monospace;font-size:.78rem;color:var(--basic);
+  }
+  .usp-prompt { color:var(--muted);flex-shrink:0; }
+  .usp-cmd { flex:1; }
+  .usp-copy { background:transparent;border:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;flex-shrink:0;padding:0;transition:color .15s; }
+  .usp-copy:hover { color:var(--basic); }
   /* ── GLOSSARY ── */
   .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
   .gloss-item{
@@ -251,6 +295,73 @@
     color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
     border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
   }
+  /* ── tree dialog ── */
+  .tree-dialog{
+    margin:auto;
+    width:min(840px,94vw);height:min(640px,86vh);padding:0;
+    color:var(--text);background:rgba(3,7,18,.98);
+    border:1px solid rgba(56,189,248,.45);border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.8),
+               0 0 70px rgba(56,189,248,.28),
+               0 0 30px rgba(255,255,255,.14),
+               0 0 110px rgba(192,132,252,.14);
+    overflow:hidden;
+    animation:tree-dialog-breathe 5s ease-in-out infinite;
+  }
+  @keyframes tree-dialog-breathe{
+    0%,100%{box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 70px rgba(56,189,248,.28),0 0 30px rgba(255,255,255,.14),0 0 110px rgba(192,132,252,.14)}
+    50%{box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 80px rgba(192,132,252,.32),0 0 36px rgba(255,255,255,.18),0 0 120px rgba(56,189,248,.16)}
+  }
+  .tree-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+  .tree-dialog-inner{display:flex;flex-direction:column;height:100%}
+  .tree-dialog-header{
+    display:flex;gap:1rem;align-items:center;justify-content:space-between;
+    padding:.9rem 1.2rem;border-bottom:1px solid var(--border);flex-shrink:0;
+    background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(167,139,250,.08));
+    cursor:grab;user-select:none;
+  }
+  .tree-dialog-header.dragging{cursor:grabbing}
+  .tree-dialog-title{font-weight:800;font-size:1rem}
+  .tree-dialog-actions{display:flex;align-items:center;gap:.6rem}
+  .tree-act-btn{
+    color:var(--text);background:rgba(15,23,42,.84);border:1px solid var(--border);
+    border-radius:999px;font-size:.78rem;font-weight:700;
+    padding:.42rem .78rem;cursor:pointer;white-space:nowrap;font-family:inherit;
+  }
+  .tree-act-btn:hover{border-color:var(--basic);color:var(--basic)}
+  .tree-act-btn.copied{border-color:#86efac;color:#86efac}
+  .tree-close-x{
+    display:flex;align-items:center;justify-content:center;
+    width:1.9rem;height:1.9rem;
+    color:var(--muted);background:transparent;border:1px solid var(--border);
+    border-radius:50%;font-size:.85rem;cursor:pointer;font-family:inherit;flex-shrink:0;
+  }
+  .tree-close-x:hover{border-color:var(--basic);color:var(--basic)}
+  .tree-dialog-body{flex:1;overflow:auto;padding:1.1rem 1.4rem;min-height:0}
+  .tree-dialog-body pre{
+    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.78rem;line-height:1.65;color:var(--text);
+    white-space:pre;background:transparent;border:none;margin:0;padding:0;
+  }
+  .tree-skeleton{color:var(--muted);animation:tree-skeleton-pulse 1.5s ease-in-out infinite}
+  @keyframes tree-skeleton-pulse{0%,100%{opacity:.35}50%{opacity:.7}}
+  /* syntax highlighting */
+  @keyframes tree-rainbow-glow{
+    0%  {color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
+    18% {color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.8),0 0 22px rgba(167,139,250,.4)}
+    36% {color:#f59e0b;text-shadow:0 0 10px rgba(245,158,11,.8),0 0 22px rgba(245,158,11,.4)}
+    54% {color:#ef4444;text-shadow:0 0 10px rgba(239,68,68,.8),0 0 22px rgba(239,68,68,.4)}
+    72% {color:#c084fc;text-shadow:0 0 10px rgba(192,132,252,.8),0 0 22px rgba(192,132,252,.4)}
+    90% {color:#34d399;text-shadow:0 0 10px rgba(52,211,153,.8),0 0 22px rgba(52,211,153,.4)}
+    100%{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
+  }
+  .tree-ult-line{font-weight:700;animation:tree-rainbow-glow 4s linear infinite}
+  .tree-ult-contributor{color:#ef4444;font-weight:800;text-shadow:0 0 8px rgba(239,68,68,.6)}
+  .tree-ult-slash{color:var(--muted)}
+  .tree-ult-skillname,.tree-ult-id{color:#f59e0b}
+  .tree-extra-glyph{color:var(--extra)}
+  .tree-basic-glyph{color:var(--basic)}
+  .tree-sep{color:rgba(56,189,248,.2)}
   .skill-tooltip{
     position:absolute;pointer-events:none;display:none;z-index:10;
     background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
@@ -337,73 +448,277 @@
   }
 
   /* -- NAMED SKILLS -- */
-  .ns-level-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+  #named { min-height:100vh; padding-top:5rem; scroll-margin-top:0; }
+  .ns-controls {
+    display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.6rem;
+  }
+  .ns-filter-row { display:flex;align-items:center;gap:.6rem;flex-wrap:wrap; }
+  .ns-level-tabs{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
   .ns-tab{
-    padding:.4rem .95rem;border-radius:999px;font-size:.82rem;font-weight:600;
+    padding:.35rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;
     background:transparent;color:var(--muted);
-    border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .2s;
+    border:1px solid var(--border);cursor:pointer;font-family:inherit;
+    background-size:200% 100%;background-position:0% 0%;
+    transition:color .2s,border-color .2s,background-position .45s ease,background-color .2s;
   }
   .ns-tab:hover{color:var(--text);border-color:rgba(148,163,184,.4)}
+  /* per-level resting gradient + hover shift via bg-position */
+  .ns-tab[data-level="II"]  { --tc:99,202,183;  --tcolor:#63cab7 }
+  .ns-tab[data-level="III"] { --tc:167,139,250; --tcolor:#a78bfa }
+  .ns-tab[data-level="IV"]  { --tc:232,121,249; --tcolor:#e879f9 }
+  .ns-tab[data-level="V"]   { --tc:251,191,36;  --tcolor:#fbbf24 }
+  .ns-tab[data-level="VI"]  { --tc:251,191,36;  --tcolor:#fbbf24 }
+  .ns-tab[data-level="II"],.ns-tab[data-level="III"],.ns-tab[data-level="IV"],.ns-tab[data-level="V"],.ns-tab[data-level="VI"]{
+    background-image:linear-gradient(135deg, rgba(var(--tc),.06) 0%, rgba(var(--tc),.16) 50%, rgba(var(--tc),.06) 100%);
+    border-color:rgba(var(--tc),.22);
+  }
+  .ns-tab[data-level="II"]:hover,.ns-tab[data-level="III"]:hover,.ns-tab[data-level="IV"]:hover,.ns-tab[data-level="V"]:hover,.ns-tab[data-level="VI"]:hover{
+    background-position:100% 0%;border-color:rgba(var(--tc),.45);color:var(--tcolor);
+  }
   .ns-tab.active[data-level="all"]{color:var(--basic);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.35)}
-  .ns-tab.active[data-level="II"]{color:#63cab7;background:rgba(99,202,183,.1);border-color:rgba(99,202,183,.35)}
-  .ns-tab.active[data-level="III"]{color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.35)}
-  .ns-tab.active[data-level="IV"]{color:#e879f9;background:rgba(232,121,249,.1);border-color:rgba(232,121,249,.35)}
-  .ns-tab.active[data-level="V"]{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.35)}
-  .ns-tab.active[data-level="VI"]{color:#fbbf24;background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4)}
-  .ns-grid{display:flex;flex-direction:column;gap:.75rem}
+  .ns-tab.active[data-level="II"]  {color:#63cab7;background-image:linear-gradient(135deg,rgba(99,202,183,.2),rgba(99,202,183,.07));background-position:100% 0%;border-color:rgba(99,202,183,.45)}
+  .ns-tab.active[data-level="III"] {color:#a78bfa;background-image:linear-gradient(135deg,rgba(167,139,250,.2),rgba(167,139,250,.07));background-position:100% 0%;border-color:rgba(167,139,250,.45)}
+  .ns-tab.active[data-level="IV"]  {color:#e879f9;background-image:linear-gradient(135deg,rgba(232,121,249,.2),rgba(232,121,249,.07));background-position:100% 0%;border-color:rgba(232,121,249,.45)}
+  .ns-tab.active[data-level="V"]   {color:#fbbf24;background-image:linear-gradient(135deg,rgba(251,191,36,.2),rgba(251,191,36,.07));background-position:100% 0%;border-color:rgba(251,191,36,.45)}
+  .ns-tab.active[data-level="VI"]  {color:#fbbf24;background-image:linear-gradient(135deg,rgba(251,191,36,.25),rgba(251,191,36,.09));background-position:100% 0%;border-color:rgba(251,191,36,.5)}
+  .ns-tab:disabled{opacity:.3;cursor:not-allowed;background-image:none}
+  .ns-tab:disabled:hover{color:var(--muted);border-color:var(--border);background-position:0% 0%}
+  .ns-view-btns { display:flex;gap:.3rem;border:1px solid var(--border);border-radius:8px;padding:2px; }
+  .ns-view-btn {
+    background:transparent;border:none;color:var(--muted);padding:.3rem .65rem;
+    border-radius:6px;cursor:pointer;font-size:.78rem;transition:background .15s,color .15s;
+    display:flex;align-items:center;gap:.3rem;font-family:inherit;
+  }
+  .ns-view-btn:hover{color:var(--text)}
+  .ns-view-btn.active{background:var(--surface);color:var(--basic)}
+  /* TILE VIEW */
+  .ns-grid-tile {
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;
+  }
+  .ns-tile {
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:1.3rem 1.2rem;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .15s;
+    display:flex;flex-direction:column;gap:.5rem;position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.15);--ns-gc:56,189,248;
+  }
+  .ns-tile::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background-image:linear-gradient(135deg, rgba(var(--ns-gc),.05) 0%, rgba(var(--ns-gc),.15) 50%, rgba(var(--ns-gc),.05) 100%);
+    background-size:200% 100%;background-position:0% 0%;
+    transition:background-position .45s ease;
+  }
+  .ns-tile:hover::before{background-position:100% 0%}
+  .ns-tile:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(var(--ns-gc),.38);transform:translateY(-2px)}
+  .ns-tile[data-level="II"] {--ns-glow:rgba(99,202,183,.25); --ns-gc:99,202,183}
+  .ns-tile[data-level="III"]{--ns-glow:rgba(167,139,250,.25);--ns-gc:167,139,250}
+  .ns-tile[data-level="IV"] {--ns-glow:rgba(232,121,249,.25);--ns-gc:232,121,249}
+  .ns-tile[data-level="V"]  {--ns-glow:rgba(251,191,36,.25); --ns-gc:251,191,36}
+  .ns-tile[data-level="VI"] {--ns-glow:rgba(251,191,36,.35); --ns-gc:251,191,36}
+  /* Tier outer glow — external box-shadow only, no border-color override */
+  .ns-tile[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 10px rgba(245,158,11,.16),0 0 30px rgba(245,158,11,.07)}
+  .ns-tile[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 10px rgba(192,132,252,.16),0 0 30px rgba(192,132,252,.07)}
+  /* Gradient by rank: inner shadow = rank color (--ns-gc), outer = tier color (--ct) */
+  .ns-tile[data-type="ultimate"][data-level="III"],.ns-tile[data-type="extra"][data-level="III"]{box-shadow:0 0 8px rgba(var(--ns-gc),.22),0 0 22px rgba(var(--ct),.17),0 0 46px rgba(var(--ct),.07)}
+  .ns-tile[data-type="ultimate"][data-level="IV"],.ns-tile[data-type="extra"][data-level="IV"]  {box-shadow:0 0 11px rgba(var(--ns-gc),.32),0 0 28px rgba(var(--ct),.22),0 0 56px rgba(var(--ct),.1)}
+  .ns-tile[data-type="ultimate"][data-level="V"],.ns-tile[data-type="extra"][data-level="V"]    {box-shadow:0 0 15px rgba(var(--ns-gc),.42),0 0 36px rgba(var(--ct),.3),0 0 70px rgba(var(--ct),.13)}
+  .ns-tile[data-type="ultimate"][data-level="VI"],.ns-tile[data-type="extra"][data-level="VI"]  {box-shadow:0 0 19px rgba(var(--ns-gc),.52),0 0 46px rgba(var(--ct),.37),0 0 88px rgba(var(--ct),.16)}
+  /* List rows: outer glow by type, no border-color override */
+  .ns-list-row[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 12px rgba(245,158,11,.1)}
+  .ns-list-row[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 12px rgba(192,132,252,.1)}
+  .ns-list-row[data-type="ultimate"][data-level="IV"],.ns-list-row[data-type="extra"][data-level="IV"]{box-shadow:0 0 9px rgba(var(--ns-gc),.2),0 0 20px rgba(var(--ct),.14)}
+  .ns-list-row[data-type="ultimate"][data-level="V"],.ns-list-row[data-type="extra"][data-level="V"]  {box-shadow:0 0 12px rgba(var(--ns-gc),.28),0 0 26px rgba(var(--ct),.2)}
+  .ns-list-row[data-type="ultimate"][data-level="VI"],.ns-list-row[data-type="extra"][data-level="VI"]{box-shadow:0 0 16px rgba(var(--ns-gc),.36),0 0 34px rgba(var(--ct),.28)}
+  .ns-tile-head { display:flex;align-items:center;gap:.5rem; }
+  .ns-tile-name { font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3; }
+  .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-tile-tags { display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.2rem; }
+  .ns-tile-arrow { margin-top:auto;text-align:right;color:var(--muted);font-size:.9rem;transition:color .2s; }
+  .ns-tile:hover .ns-tile-arrow{color:var(--basic)}
+  /* LIST VIEW */
+  .ns-grid-list { display:flex;flex-direction:column;gap:.4rem; }
+  .ns-list-row {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.75rem 1.2rem;cursor:pointer;
+    display:flex;align-items:center;gap:1rem;
+    transition:border-color .25s,box-shadow .25s;
+    position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.12);--ns-gc:56,189,248;
+  }
+  .ns-list-row::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background-image:linear-gradient(90deg, rgba(var(--ns-gc),.05) 0%, rgba(var(--ns-gc),.14) 50%, rgba(var(--ns-gc),.05) 100%);
+    background-size:200% 100%;background-position:0% 0%;
+    transition:background-position .45s ease;
+  }
+  .ns-list-row:hover::before{background-position:100% 0%}
+  .ns-list-row:hover{border-color:rgba(var(--ns-gc),.35);box-shadow:0 0 16px rgba(var(--ns-gc),.15)}
+  .ns-list-row[data-level="II"] {--ns-glow:rgba(99,202,183,.18); --ns-gc:99,202,183}
+  .ns-list-row[data-level="III"]{--ns-glow:rgba(167,139,250,.18);--ns-gc:167,139,250}
+  .ns-list-row[data-level="IV"] {--ns-glow:rgba(232,121,249,.18);--ns-gc:232,121,249}
+  .ns-list-row[data-level="V"]  {--ns-glow:rgba(251,191,36,.18); --ns-gc:251,191,36}
+  .ns-list-row[data-level="VI"] {--ns-glow:rgba(251,191,36,.25); --ns-gc:251,191,36}
+  .ns-list-row[data-level="II"]{border-left:3px solid rgba(99,202,183,.5)}
+  .ns-list-row[data-level="III"]{border-left:3px solid rgba(167,139,250,.5)}
+  .ns-list-row[data-level="IV"]{border-left:3px solid rgba(232,121,249,.5)}
+  .ns-list-row[data-level="V"]{border-left:3px solid rgba(251,191,36,.5)}
+  .ns-list-row[data-level="VI"]{border-left:3px solid rgba(251,191,36,.7)}
+  .ns-lr-name { font-weight:700;font-size:.9rem;min-width:140px; }
+  .ns-lr-id { font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#ef4444;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-lr-tags { display:flex;gap:.3rem;flex-wrap:nowrap;overflow:hidden; }
+  .ns-lr-arrow { color:var(--muted);font-size:1.1rem;margin-left:auto;flex-shrink:0;transition:color .2s; }
+  .ns-list-row:hover .ns-lr-arrow { color:var(--basic); }
+  /* TREE VIEW */
+  .ns-grid-tree { display:flex;flex-direction:column;gap:.6rem; }
+  .ns-tree-group { border:1px solid var(--border);border-radius:12px;overflow:hidden; }
+  .ns-tree-parent {
+    display:flex;align-items:center;gap:.7rem;padding:.85rem 1.2rem;
+    background:rgba(255,255,255,.025);cursor:pointer;
+    font-size:.82rem;font-weight:600;color:var(--muted);
+    transition:background .2s,box-shadow .25s;
+    position:relative;overflow:hidden;
+  }
+  .ns-tree-parent::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(56,189,248,.06) 0%,transparent 55%);
+    opacity:0;transform:translateX(-12%);
+    transition:opacity .35s,transform .42s;
+  }
+  .ns-tree-parent:hover{background:rgba(255,255,255,.04)}
+  .ns-tree-parent:hover::before{opacity:1;transform:translateX(0)}
+  .ns-tree-ref { color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem; }
+  .ns-tree-count { background:var(--border);color:var(--muted);padding:.1rem .45rem;border-radius:20px;font-size:.7rem; }
+  .ns-tree-children { display:flex;flex-direction:column;border-top:1px solid var(--border); }
+  .ns-tree-leaf {
+    display:flex;align-items:center;gap:.9rem;padding:.7rem 1.4rem;cursor:pointer;
+    border-bottom:1px solid var(--border);
+    position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.1);--ns-gc:56,189,248;
+    transition:box-shadow .25s,border-color .25s;
+  }
+  .ns-tree-leaf::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 0% 50%, rgba(var(--ns-gc),.07) 0%, transparent 55%);
+    opacity:0;transform:scaleX(.8);transform-origin:left center;
+    transition:opacity .3s,transform .4s;
+  }
+  .ns-tree-leaf:hover::before{opacity:1;transform:scaleX(1.1) translateX(4%)}
+  .ns-tree-leaf:hover{box-shadow:inset 0 0 12px rgba(var(--ns-gc),.1)}
+  .ns-tree-leaf[data-level="II"] {--ns-gc:99,202,183}
+  .ns-tree-leaf[data-level="III"]{--ns-gc:167,139,250}
+  .ns-tree-leaf[data-level="IV"] {--ns-gc:232,121,249}
+  .ns-tree-leaf[data-level="V"]  {--ns-gc:251,191,36}
+  .ns-tree-leaf[data-level="VI"] {--ns-gc:251,191,36}
+  .ns-tree-leaf:last-child{border-bottom:none}
+  /* shared card bits */
   .ns-loading,.ns-empty{
     text-align:center;color:var(--muted);font-size:.9rem;
     padding:3rem 1.5rem;border:1px dashed var(--border);border-radius:14px;
   }
-  .ns-card{
-    background:var(--surface);border:1px solid var(--border);
-    border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s;
-    --ns-glow:rgba(56,189,248,.1);
-  }
-  .ns-card:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(255,255,255,.08)}
-  .ns-card[data-level="II"]{--ns-glow:rgba(99,202,183,.2)}
-  .ns-card[data-level="III"]{--ns-glow:rgba(167,139,250,.2)}
-  .ns-card[data-level="IV"]{--ns-glow:rgba(232,121,249,.2)}
-  .ns-card[data-level="V"]{--ns-glow:rgba(251,191,36,.2)}
-  .ns-card[data-level="VI"]{--ns-glow:rgba(251,191,36,.28)}
-  .ns-card-head{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:1rem;padding:1.1rem 1.4rem;cursor:pointer;transition:background .15s;
-  }
-  .ns-card-head:hover{background:rgba(255,255,255,.025)}
-  .ns-pill{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0}
-  .ns-pill-id{
-    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
-    font-size:.95rem;font-weight:700;color:var(--text);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
+  .ns-level-badge{font-size:.72rem;font-weight:700;padding:.22rem .62rem;border-radius:999px;border:1px solid;white-space:nowrap;letter-spacing:.04em}
   .ns-origin{
     flex-shrink:0;font-size:.65rem;font-weight:800;letter-spacing:.08em;
     padding:.16rem .48rem;border-radius:999px;
     background:rgba(245,158,11,.12);color:var(--ultimate);border:1px solid rgba(245,158,11,.3);
   }
-  .ns-flavor{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ns-card-right{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
-  .ns-level-badge{font-size:.72rem;font-weight:700;padding:.22rem .62rem;border-radius:999px;border:1px solid;white-space:nowrap;letter-spacing:.04em}
-  .ns-toggle{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.85rem;transition:transform .28s,color .15s;font-family:inherit;padding:0 .1rem;line-height:1}
-  .ns-card.open .ns-toggle{transform:rotate(180deg)}
-  .ns-card-head:hover .ns-toggle{color:var(--text)}
-  .ns-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .ns-body-inner{opacity:0;transition:opacity .2s ease .06s;padding:0 1.4rem 1.4rem;border-top:1px solid var(--border)}
-  .ns-card.open .ns-body{max-height:1200px}
-  .ns-card.open .ns-body-inner{opacity:1}
-  .ns-desc{font-size:.88rem;color:var(--muted);padding:1rem 0 .8rem;line-height:1.6}
-  .ns-row{margin-bottom:.8rem}
-  .ns-row-label{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.38rem}
-  .ns-chip-row{display:flex;gap:.4rem;flex-wrap:wrap}
   .ns-chip{font-size:.74rem;font-weight:600;padding:.2rem .58rem;border-radius:999px;border:1px solid;white-space:nowrap}
   .ns-chip-prereq{color:#38bdf8;background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.25)}
   .ns-chip-deriv{color:#c084fc;background:rgba(192,132,252,.08);border-color:rgba(192,132,252,.25)}
   .ns-chip-variant{color:#f59e0b;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25)}
   .ns-chip-ref{color:#63cab7;background:rgba(99,202,183,.08);border-color:rgba(99,202,183,.25)}
   .ns-tag{font-size:.72rem;padding:.18rem .52rem;border-radius:999px;background:rgba(100,116,139,.1);color:var(--muted);border:1px solid var(--border)}
+  /* ── named h2 red ── */
+  #named h2 { color:#ef4444; }
+  /* ── search & sort controls ── */
+  .ns-search {
+    width:100%;
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:.4rem .9rem;color:var(--text);font-size:.83rem;font-family:inherit;
+    outline:none;transition:border-color .2s;box-sizing:border-box;
+  }
+  .ns-search::placeholder { color:var(--muted); }
+  .ns-search:focus { border-color:rgba(56,189,248,.5); }
+  .ns-sort-sel {
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:.35rem .7rem;color:var(--muted);font-size:.78rem;font-family:inherit;
+    cursor:pointer;outline:none;transition:border-color .2s,color .15s;
+  }
+  .ns-sort-sel:hover,.ns-sort-sel:focus { border-color:rgba(56,189,248,.4);color:var(--text); }
+  /* ── terminal install row (inside cards) ── */
+  .ns-install-row {
+    display:flex;align-items:center;gap:.4rem;
+    background:var(--bg);border:1px solid var(--border);border-radius:7px;
+    padding:.38rem .7rem;margin-top:.55rem;
+    font-family:'JetBrains Mono','Fira Code',monospace;font-size:.7rem;
+    color:var(--basic);overflow:hidden;flex-shrink:0;
+  }
+  .ns-install-prompt { color:var(--muted);flex-shrink:0; }
+  .ns-install-cmd-txt { flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .ns-install-copy {
+    background:transparent;border:none;color:var(--muted);padding:0;
+    cursor:pointer;display:flex;align-items:center;flex-shrink:0;transition:color .15s;
+  }
+  .ns-install-copy:hover { color:var(--basic); }
+  /* ── flowchart (tree) view ── */
+  .ns-grid-flow { display:flex;flex-direction:column;gap:1.6rem; }
+  .ns-fc-group { display:flex;flex-direction:column;align-items:center; }
+  .ns-fc-root {
+    display:flex;align-items:center;gap:.6rem;
+    background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.3);
+    border-radius:10px;padding:.55rem 1.3rem;
+    font-size:.82rem;font-weight:700;color:var(--basic);white-space:nowrap;
+  }
+  .ns-fc-connector { width:2px;height:22px;background:linear-gradient(to bottom,rgba(56,189,248,.4),rgba(56,189,248,.1));flex-shrink:0; }
+  .ns-fc-branches-wrap { position:relative;width:100%;display:flex;flex-direction:column;align-items:center; }
+  .ns-fc-hbar { height:2px;background:rgba(56,189,248,.15);border-radius:1px;width:70%; }
+  .ns-fc-branches { display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;padding:.5rem; }
+  .ns-fc-leaf-wrap { display:flex;flex-direction:column;align-items:center;padding-top:20px;position:relative; }
+  .ns-fc-leaf-wrap::before {
+    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:2px;height:20px;background:rgba(56,189,248,.2);
+  }
+  .ns-fc-card {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.7rem .9rem;cursor:pointer;min-width:140px;max-width:200px;
+    position:relative;overflow:hidden;
+    transition:border-color .25s,box-shadow .25s,transform .15s;
+    --fc-glow:rgba(56,189,248,.2);--ns-gc:56,189,248;
+  }
+  .ns-fc-card::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background-image:linear-gradient(135deg, rgba(var(--ns-gc),.05) 0%, rgba(var(--ns-gc),.15) 50%, rgba(var(--ns-gc),.05) 100%);
+    background-size:200% 100%;background-position:0% 0%;
+    transition:background-position .45s ease;
+  }
+  .ns-fc-card:hover::before{background-position:100% 0%}
+  .ns-fc-card:hover { border-color:rgba(var(--ns-gc),.38);box-shadow:0 0 18px var(--fc-glow);transform:translateY(-2px); }
+  .ns-fc-card[data-level="II"]  { --fc-glow:rgba(99,202,183,.25); --ns-gc:99,202,183 }
+  .ns-fc-card[data-level="III"] { --fc-glow:rgba(167,139,250,.25);--ns-gc:167,139,250 }
+  .ns-fc-card[data-level="IV"]  { --fc-glow:rgba(232,121,249,.3); --ns-gc:232,121,249 }
+  .ns-fc-card[data-level="V"]   { --fc-glow:rgba(251,191,36,.3);  --ns-gc:251,191,36  }
+  /* Flowchart card tier glow */
+  .ns-fc-card[data-type="ultimate"]{--ct:245,158,11;box-shadow:0 0 8px rgba(245,158,11,.16),0 0 22px rgba(245,158,11,.07)}
+  .ns-fc-card[data-type="extra"]   {--ct:192,132,252;box-shadow:0 0 8px rgba(192,132,252,.16),0 0 22px rgba(192,132,252,.07)}
+  .ns-fc-card[data-type="ultimate"][data-level="III"],.ns-fc-card[data-type="extra"][data-level="III"]{box-shadow:0 0 7px rgba(var(--ns-gc),.22),0 0 18px rgba(var(--ct),.16),0 0 38px rgba(var(--ct),.07)}
+  .ns-fc-card[data-type="ultimate"][data-level="IV"],.ns-fc-card[data-type="extra"][data-level="IV"]  {box-shadow:0 0 9px rgba(var(--ns-gc),.3),0 0 22px rgba(var(--ct),.2),0 0 46px rgba(var(--ct),.09)}
+  .ns-fc-card[data-type="ultimate"][data-level="V"],.ns-fc-card[data-type="extra"][data-level="V"]    {box-shadow:0 0 12px rgba(var(--ns-gc),.4),0 0 28px rgba(var(--ct),.28),0 0 58px rgba(var(--ct),.12)}
+  .ns-fc-card[data-type="ultimate"][data-level="VI"],.ns-fc-card[data-type="extra"][data-level="VI"]  {box-shadow:0 0 16px rgba(var(--ns-gc),.5),0 0 36px rgba(var(--ct),.35),0 0 72px rgba(var(--ct),.15)}
+  .ns-fc-card-name { font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.25rem; }
+  .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#ef4444; }
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+  /* ── GROUP LAYOUT ── */
+  .ns-group-header {
+    grid-column:1/-1;width:100%;
+    display:flex;align-items:center;gap:.5rem;
+    padding:.7rem 0 .35rem;margin-top:.6rem;
+    font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    border-top:1px solid var(--border);color:var(--muted);
+  }
+  .ns-group-header:first-child { border-top:none;margin-top:0;padding-top:0; }
+  .ns-group-glyph { font-size:1rem; }
+  /* grab-to-scroll cursor on grid area */
+  #nsGrid { cursor: grab; user-select: none; }
+  #named.ns-grabbing, #named.ns-grabbing * { cursor: grabbing !important; }
   .ns-link-btn{
     font-size:.78rem;font-weight:600;padding:.3rem .78rem;border-radius:8px;
     background:rgba(56,189,248,.07);color:var(--basic);
@@ -421,6 +736,170 @@
   /* ── ANIMATE ON SCROLL ── */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
   .reveal.visible{opacity:1;transform:none}
+
+  /* ── SKILL EXPLORER OVERLAY ── */
+  :root {
+    --glow-II:  0 0 8px #63cab7, 0 0 22px rgba(99,202,183,.35);
+    --glow-III: 0 0 10px #a78bfa, 0 0 26px rgba(167,139,250,.4);
+    --glow-IV:  0 0 14px #e879f9, 0 0 32px rgba(232,121,249,.45);
+    --glow-V:   0 0 18px #fbbf24, 0 0 40px rgba(251,191,36,.5);
+    --glow-VI:  0 0 20px #fbbf24, 0 0 50px rgba(251,191,36,.6), 0 0 80px rgba(56,189,248,.3);
+  }
+  .skill-explorer {
+    position:fixed;top:58px;left:0;right:0;bottom:0;z-index:99;
+    background:var(--bg);overflow-y:auto;
+    transform:translateX(100%);
+    transition:transform .34s cubic-bezier(.4,0,.2,1);
+    visibility:hidden;
+  }
+  .skill-explorer.open { transform:translateX(0);visibility:visible; }
+  .se-topbar {
+    position:sticky;top:0;z-index:10;
+    display:flex;align-items:center;gap:1rem;
+    padding:.85rem 2rem;
+    background:rgba(3,7,18,.88);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .se-topbar-actions { margin-left:auto;display:flex;gap:.6rem; }
+  .se-breadcrumb { font-size:.85rem;color:#ef4444;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .se-btn-ghost {
+    background:transparent;border:1px solid var(--border);color:var(--text);
+    padding:.38rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem;
+    transition:border-color .2s,color .2s;
+  }
+  .se-btn-ghost:hover { border-color:var(--basic);color:var(--basic); }
+  .se-btn-action {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:.38rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem;
+    transition:border-color .2s,color .2s;
+  }
+  .se-btn-action:hover { border-color:var(--extra);color:var(--extra); }
+  .se-body { max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem; }
+  .se-hero {
+    display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;
+  }
+  @media(max-width:700px){.se-hero{grid-template-columns:1fr;}}
+  .se-hero-card {
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.8rem;
+    transition:box-shadow .3s;
+  }
+  .se-hero-card[data-level="II"]  { box-shadow:var(--glow-II);  }
+  .se-hero-card[data-level="III"] { box-shadow:var(--glow-III); }
+  .se-hero-card[data-level="IV"]  { box-shadow:var(--glow-IV);  }
+  .se-hero-card[data-level="V"]   { box-shadow:var(--glow-V); animation:se-pulse 2.4s ease-in-out infinite; }
+  .se-hero-card[data-level="VI"]  { animation:se-shimmer 3s linear infinite,se-pulse 2s ease-in-out infinite; }
+  @keyframes se-pulse {
+    0%,100%{box-shadow:var(--glow-V);}
+    50%{box-shadow:0 0 28px #fbbf24,0 0 60px rgba(251,191,36,.65);}
+  }
+  @keyframes se-shimmer {
+    0%{border-color:rgba(56,189,248,.6);}
+    25%{border-color:rgba(192,132,252,.6);}
+    50%{border-color:rgba(245,158,11,.6);}
+    75%{border-color:rgba(232,121,249,.6);}
+    100%{border-color:rgba(56,189,248,.6);}
+  }
+  .se-skill-name { font-size:1.7rem;font-weight:800;margin-bottom:.3rem; }
+  .se-contrib { font-size:.88rem;color:#ef4444;margin-bottom:1rem; }
+  .se-badges { display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.2rem; }
+  .se-badge {
+    display:inline-block;padding:.22rem .7rem;border-radius:20px;
+    font-size:.75rem;font-weight:600;border:1px solid;
+  }
+  .se-desc-panel { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.8rem; }
+  .se-desc-panel h3 { font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem; }
+  .se-desc-text { line-height:1.75;color:var(--text); }
+  .se-tags { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem; }
+  .se-tag { background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--basic);padding:.18rem .6rem;border-radius:20px;font-size:.75rem; }
+  .se-btn-icon {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    width:32px;height:32px;border-radius:7px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:border-color .2s,color .2s;flex-shrink:0;
+  }
+  .se-btn-icon:hover { border-color:var(--basic);color:var(--basic); }
+  .se-btn-icon.copied { border-color:var(--basic);color:var(--basic); }
+  /* sequential flow sections — no tabs */
+  .se-flow { padding:0; }
+  .se-flow-section {
+    padding:2.2rem 0;
+    border-bottom:1px solid var(--border);
+  }
+  .se-flow-section:last-child { border-bottom:none; }
+  .se-flow-h {
+    font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted);margin-bottom:1.4rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .se-flow-h svg { opacity:.7; }
+  .se-install-block {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:1.2rem 1.4rem;margin-bottom:.9rem;
+    display:flex;align-items:center;gap:1rem;
+  }
+  .se-install-block.recommended { border-color:rgba(56,189,248,.35);box-shadow:0 0 0 1px rgba(56,189,248,.12); }
+  .se-install-label { font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;min-width:120px;color:var(--muted); }
+  .se-install-label span { display:block;font-size:.65rem;color:var(--basic);margin-top:.15rem; }
+  .se-install-cmd { font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text);flex:1;word-break:break-all; }
+  .se-copy-btn {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    width:32px;height:32px;border-radius:7px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+    transition:border-color .2s,color .2s;
+  }
+  .se-copy-btn:hover,.se-copy-btn.copied { border-color:var(--basic);color:var(--basic); }
+  .se-docs-block { margin-bottom:2rem; }
+  .se-docs-block h4 { font-size:.88rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.8rem; }
+  .se-evidence-row { display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.85rem; }
+  .se-ev-class { font-weight:700;min-width:28px;color:var(--ultimate); }
+  .se-ev-link { color:var(--basic);text-decoration:none;word-break:break-all; }
+  .se-ev-link:hover { text-decoration:underline; }
+  .se-ev-date { color:var(--muted);white-space:nowrap; }
+  .se-known-agent { display:inline-block;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25);color:#c084fc;padding:.22rem .65rem;border-radius:20px;font-size:.78rem;margin:.2rem; }
+  /* FLOWCHART */
+  .se-flowchart-wrap { position:relative;overflow:auto;min-height:320px;padding:1.5rem 1rem; }
+  .se-flowchart-svg { position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible; }
+  .se-flowchart-rows { display:flex;flex-direction:column;gap:48px;align-items:center; }
+  .se-flowchart-row { display:flex;gap:28px;justify-content:center;flex-wrap:wrap; }
+  .se-flowchart-row-label { text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px; }
+  .flow-node {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.8rem 1rem;min-width:140px;max-width:180px;cursor:pointer;
+    transition:transform .2s,box-shadow .2s;text-align:center;
+    position:relative;
+  }
+  .flow-node:hover { transform:translateY(-3px); }
+  .flow-node.current { border-color:var(--basic);outline:2px solid rgba(56,189,248,.3); }
+  .flow-node[data-level="II"]  { box-shadow:var(--glow-II); }
+  .flow-node[data-level="III"] { box-shadow:var(--glow-III); }
+  .flow-node[data-level="IV"]  { box-shadow:var(--glow-IV); }
+  .flow-node[data-level="V"]   { box-shadow:var(--glow-V);animation:flow-pulse-V 2.2s ease-in-out infinite; }
+  .flow-node[data-level="VI"]  { box-shadow:var(--glow-VI);animation:flow-shimmer-VI 3s linear infinite,flow-pulse-V 2s ease-in-out infinite; }
+  @keyframes flow-pulse-V {
+    0%,100%{box-shadow:var(--glow-V);}
+    50%{box-shadow:0 0 28px #fbbf24,0 0 55px rgba(251,191,36,.7);}
+  }
+  @keyframes flow-shimmer-VI {
+    0%,100%{border-color:rgba(56,189,248,.7);}
+    33%{border-color:rgba(192,132,252,.7);}
+    66%{border-color:rgba(245,158,11,.7);}
+  }
+  .fn-level { display:inline-block;font-size:.68rem;font-weight:700;margin-bottom:.3rem;padding:.12rem .5rem;border-radius:20px; }
+  .fn-name { display:block;font-size:.88rem;font-weight:700;margin-bottom:.2rem; }
+  .fn-contrib { display:block;font-size:.72rem;color:var(--muted); }
+  .fn-type { display:block;font-size:.7rem;color:var(--muted);margin-top:.25rem; }
+  /* TIMELINE */
+  .se-timeline { position:relative;padding-left:28px; }
+  .se-timeline::before { content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border); }
+  .se-tl-event { position:relative;margin-bottom:1.4rem; }
+  .se-tl-dot { position:absolute;left:-24px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--basic);border:2px solid var(--bg); }
+  .se-tl-date { font-size:.75rem;color:var(--muted);margin-bottom:.2rem; }
+  .se-tl-msg { font-size:.88rem;color:var(--text); }
+  .se-tl-sha { font-size:.72rem;color:var(--muted);font-family:monospace; }
+  .se-empty { color:var(--muted);font-size:.9rem;padding:1rem 0; }
+  .se-repo-row { display:flex;align-items:center;gap:.7rem;margin-top:1rem;padding:.8rem 1rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:8px; }
+  .se-repo-url { font-size:.82rem;color:var(--basic);word-break:break-all; }
 </style>
 </head>
 <body>
@@ -434,8 +913,8 @@
     <li><a href="#start">Get Started</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
-    <li><a href="#named">Named</a></li>
-    <li><a href="../tree.md" target="_blank" class="nav-tree">Tree</a></li>
+    <li><a href="#named" class="nav-named-explorer">Named Skills Explorer</a></li>
+    <li><button type="button" class="nav-tree" id="treeNavBtn">Tree</button></li>
   </ul>
 </nav>
 
@@ -468,7 +947,7 @@
     <div class="graph-dialog-header">
       <div>
         <div id="skillGraphTitle" class="graph-dialog-title">Full Gaia Skill Graph</div>
-        <div class="graph-dialog-sub">Rendered from the canonical registry/gaia.json registry.</div>
+        <div class="graph-dialog-sub">Rendered from the canonical graph/gaia.json registry.</div>
       </div>
       <div class="graph-dialog-actions">
         <a class="graph-download" href="graph/gaia.json" download>Download JSON</a>
@@ -480,6 +959,23 @@
     <div class="graph-canvas-wrap">
       <canvas id="graphDialogCanvas"></canvas>
       <div class="graph-status" data-graph-status>Loading full graph…</div>
+    </div>
+  </div>
+</dialog>
+
+<!-- ─── TREE DIALOG ─── -->
+<dialog id="treeDialog" class="tree-dialog" aria-labelledby="treeDialogTitle">
+  <div class="tree-dialog-inner">
+    <div class="tree-dialog-header">
+      <div id="treeDialogTitle" class="tree-dialog-title">Gaia Skill Tree</div>
+      <div class="tree-dialog-actions">
+        <button type="button" class="tree-act-btn" id="treeCopyBtn">Copy</button>
+        <button type="button" class="tree-act-btn" id="treeDownloadBtn">Download</button>
+        <button type="button" class="tree-close-x" id="treeCloseBtn" aria-label="Close tree">✕</button>
+      </div>
+    </div>
+    <div class="tree-dialog-body">
+      <pre id="treeDialogPre">Loading…</pre>
     </div>
   </div>
 </dialog>
@@ -523,42 +1019,42 @@
   <div class="rank-table-wrap">
     <table>
       <thead>
-        <tr><th>Level</th><th>Class</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
+        <tr><th>Level</th><th>Rank</th><th>Evidence</th><th>What it means</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="rank-badge" style="background:rgba(100,116,139,.12);color:#94a3b8">0</span></td>
-          <td>F</td><td><strong>Unawakened</strong></td><td>None</td>
+          <td><strong>Basic</strong></td><td>None</td>
           <td>Universal LLM primitive — any capable model does this by default</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span></td>
-          <td>D</td><td><strong>Awakened</strong></td><td>None</td>
+          <td><strong>Awakened</strong></td><td>None</td>
           <td>Catalogued and available — the foundation tier</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(99,202,183,.12);color:#63cab7">II</span></td>
-          <td>C</td><td><strong>Named</strong></td><td>Evidence Tier C</td>
+          <td><strong>Named</strong></td><td>Class C</td>
           <td>First confirmed demonstration by a real contributor</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span></td>
-          <td>B</td><td><strong>Evolved</strong></td><td>Evidence Tier B</td>
+          <td><strong>Evolved</strong></td><td>Class B</td>
           <td>Reproducible, fully documented</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span></td>
-          <td>A</td><td><strong>Hardened</strong></td><td>Evidence Tier B or A</td>
+          <td><strong>Hardened</strong></td><td>Class B or A</td>
           <td>Failure modes known; battle-tested</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span></td>
-          <td>S</td><td><strong>Transcendent</strong></td><td>Evidence Tier A</td>
+          <td><strong>Transcendent</strong></td><td>Class B or A</td>
           <td>Composable and self-improving</td>
         </tr>
         <tr>
           <td><span class="rank-badge" style="background:rgba(251,191,36,.2);color:#fbbf24">VI ★</span></td>
-          <td>SS</td><td><strong>Transcendent ★</strong></td><td>Evidence Tier A</td>
+          <td><strong>Transcendent ★</strong></td><td>Class A</td>
           <td>Apex — peer-reviewed, named to the agent who unlocked it</td>
         </tr>
       </tbody>
@@ -571,7 +1067,7 @@
 <!-- ─── GET STARTED ─── -->
 <section id="start" class="reveal">
   <h2>Get Started</h2>
-  <p class="section-sub">Five steps from zero to your first skill scan.</p>
+  <p class="section-sub">Five steps from zero to your first skill submission.</p>
 
   <div class="steps">
 
@@ -589,16 +1085,22 @@
       <div class="step-num">2</div>
       <div>
         <h3>Install the CLI</h3>
-        <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
-        <pre><span class="comment"># Core install</span>
-<span class="cmd">pip install</span> -e .
-
-<span class="comment"># Strongly recommended — enables semantic search</span>
-<span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
-<span class="cmd">gaia scan</span>          <span class="comment"># ~30 sec, run once</span></pre>
-        <pre><span class="comment"># Windows only — if `gaia` is not recognized after install, run in PowerShell:</span>
-<span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)
-<span class="comment"># To persist: add that path via System → Environment Variables → Path</span></pre>
+        <p>Puts the <code>gaia</code> command on your PATH with semantic search included.</p>
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="mac" onclick="switchOsTab(this)">macOS / Linux</button>
+          <button class="os-tab" data-os="win" onclick="switchOsTab(this)">Windows</button>
+        </div>
+        <div class="os-panel active" data-os="mac">
+          <pre><span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span></pre>
+          <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia embed</code> once after install (~30 sec). Skip the <code>[embeddings]</code> extra if you don't need semantic search — plain <code>pip install -e .</code> works fine.</span></div>
+        </div>
+        <div class="os-panel" data-os="win">
+          <pre><span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
+<span class="cmd">gaia embed</span></pre>
+          <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>If <code>gaia</code> isn't recognized after install, run the command below in PowerShell, then restart your terminal.</span></div>
+          <pre><span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)</pre>
+        </div>
       </div>
     </div>
 
@@ -606,15 +1108,9 @@
       <div class="step-num">3</div>
       <div>
         <h3>Initialize your project</h3>
-        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> file, auto-detecting your GitHub username and common skill paths.</p>
-        <pre><span class="cmd">gaia init</span>
-<span class="comment"># Username auto-detected from git remote / git config</span>
-<span class="comment"># Scan paths auto-detected from AGENTS.md, .claude/skills/, etc.</span>
-<span class="cmd">gaia init --user your-username</span>   <span class="comment"># override if needed</span></pre>
-        <pre>{
-  <span class="str">"gaiaUser"</span>: <span class="str">"mbtiongson1"</span>,       <span class="comment">// auto-filled</span>
-  <span class="str">"scanPaths"</span>: [<span class="str">".claude/skills"</span>]  <span class="comment">// auto-detected</span>
-}</pre>
+        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It auto-detects your GitHub username and skill paths, then writes a <code>.gaia/config.json</code>.</p>
+        <pre><span class="cmd">gaia init</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Username is read from <code>git remote</code> / <code>git config</code>. Scan paths are auto-detected from common locations (<code>.claude/skills/</code>, <code>AGENTS.md</code>, etc.). Pass <code>--user your-username</code> to override.</span></div>
       </div>
     </div>
 
@@ -622,29 +1118,23 @@
       <div class="step-num">4</div>
       <div>
         <h3>Scan your repo</h3>
-        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion opportunities.</p>
-        <pre><span class="cmd">gaia scan</span>
-<span class="comment"># Prints detected skills and combination candidates</span></pre>
+        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion candidates.</p>
+        <pre><span class="cmd">gaia scan</span></pre>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">5</div>
       <div>
-        <h3>Submit a batch for review</h3>
-        <p>Preview what would be submitted with <code>--dry-run</code>, then push to create an intake record.</p>
-        <pre><span class="cmd">gaia push --dry-run</span>   <span class="comment"># preview the JSON</span>
-<span class="cmd">gaia push</span>             <span class="comment"># write intake + open a PR</span></pre>
+        <h3>Push your skills for review</h3>
+        <p>Creates an intake record and opens a GitHub PR against the canonical graph for maintainer review.</p>
+        <pre><span class="cmd">gaia push</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia push --dry-run</code> first to preview the exact JSON that would be submitted — no files written, no PR opened.</span></div>
       </div>
     </div>
 
   </div>
 
-  <div class="callout">
-    <div class="callout-title">💡 Tip — semantic search</div>
-    <p>Once embeddings are generated, <code>gaia skills search "autonomous research"</code> finds skills by
-    <em>meaning</em>, not just keywords. The model runs fully locally — no API key needed.</p>
-  </div>
 </section>
 
 <hr class="divider">
@@ -671,45 +1161,29 @@
       <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate))">+</div>
       <div>
         <h3>Install a named skill</h3>
-        <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
-        <pre><span class="cmd">gaia skills install</span> karpathy/autoresearch
-<span class="cmd">gaia skills list</span>          <span class="comment"># see what's installed</span>
-<span class="cmd">gaia pull</span>                    <span class="comment"># pull latest versions</span></pre>
+        <p>Browse and install real contributor implementations directly into your repo. Use <code>--list</code> to see what's available, then install by ID.</p>
+        <pre><span class="cmd">gaia install --list</span>
+<span class="cmd">gaia install</span> <span class="str">contributor/skill-name</span>
+<span class="cmd">gaia sync</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Browse real skill IDs in the <a href="#named" style="color:var(--basic)">Named Skills Explorer</a> below. Run <code>gaia sync</code> periodically to pull the latest versions of all installed skills.</span></div>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background:linear-gradient(135deg,var(--ultimate),#f97316)">★</div>
       <div>
-        <h3>Promote your own named skill</h3>
-        <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
-        <pre><span class="comment"># Maintainers review registry-for-review batches before updating registry/gaia.json</span>
-<span class="cmd">gaia push</span>             <span class="comment"># submit for maintainer review</span></pre>
+        <h3>Name your awakened skill</h3>
+        <p>Once a maintainer marks your pushed skill as awakened, claim it under your GitHub username to make it installable by others.</p>
+        <pre><span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Syntax: <code>gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</code>. The skill-name becomes your permanent ID in the registry.</span></div>
       </div>
     </div>
     <div class="step">
-      <div class="step-num" style="background:var(--ultimate);color:#000">✦</div>
+      <div class="step-num" style="background:var(--ultimate);color:#000">◆</div>
       <div>
-        <h3>Claim an unclaimed Ultimate skill</h3>
-        <p>Five Ultimate skills show <code style="color:var(--ultimate)">◆ /skill-id [Unclaimed ✦]</code> in the registry — no contributor has implemented them yet. Build one, push it through intake review, then name it to claim the title slot and become the origin contributor:</p>
-        <pre><span class="comment"># Find unclaimed ultimates — look for [Unclaimed ✦] in registry.md</span>
-<span class="comment"># Build your implementation, then:</span>
-<span class="cmd">gaia push</span>                    <span class="comment"># submit intake record</span>
-<span class="comment"># After maintainer marks it awakened:</span>
-<span class="cmd">gaia push</span>             <span class="comment"># submit for maintainer review</span>
-<span class="comment"># The seed title becomes visible once your PR merges</span></pre>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate));font-size:.75rem">◆+</div>
-      <div>
-        <h3>Propose a new Ultimate skill</h3>
-        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Evidence Tier A/B sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
-        <pre><span class="comment"># In registry/gaia.json — add your skill with:</span>
-<span class="comment">#   "type": "ultimate"</span>
-<span class="comment">#   "prerequisites": ["skill-a", "skill-b", "skill-c"]</span>
-<span class="comment">#   "evidence": [... 3× Evidence Tier A or B sources ...]</span>
-<span class="comment">#   "status": "provisional"  (maintainers set to validated at merge)</span>
-<span class="cmd">python scripts/validate.py</span>   <span class="comment"># must pass before opening PR</span></pre>
+        <h3>Contribute at the Ultimate tier</h3>
+        <p>Five Ultimate skills in the registry are unclaimed — no contributor has built them yet. Build an implementation, push it through intake review, then name it to become the origin contributor. New proposals require ≥3 prerequisites, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals.</p>
+        <pre><span class="cmd">python scripts/validate.py</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Find unclaimed slots with <code>[Unclaimed ✦]</code> in <code>registry.md</code>. Use the <code>new_ultimate_skill</code> PR template. Set <code>"status": "provisional"</code> — maintainers flip it to <code>validated</code> at merge.</span></div>
       </div>
     </div>
   </div>
@@ -719,21 +1193,47 @@
 
 <!-- ─── NAMED SKILLS ─── -->
 <section id="named" class="reveal">
-  <h2>Named Skills</h2>
+  <h2>Named Skills Explorer</h2>
   <p class="section-sub">Contributor implementations of canonical skills — the first real agents behind every generic capability.</p>
 
-  <div class="ns-level-tabs" id="nsLevelTabs">
-    <button class="ns-tab active" type="button" data-level="all">All</button>
-    <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
-    <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
-    <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
-    <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
-    <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+  <div class="ns-controls">
+    <input type="search" id="nsSearch" class="ns-search" placeholder="Search skills, tags, contributors…" autocomplete="off">
+    <div class="ns-filter-row">
+      <div class="ns-level-tabs" id="nsLevelTabs">
+        <button class="ns-tab active" type="button" data-level="all">All</button>
+        <button class="ns-tab" type="button" data-level="0" disabled><span style="color:#94a3b8;font-weight:800">0</span> Basic</button>
+        <button class="ns-tab" type="button" data-level="I" disabled><span style="color:#38bdf8;font-weight:800">I</span> Awakened</button>
+        <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
+        <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
+        <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
+        <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
+        <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+      </div>
+      <div class="ns-view-btns" id="nsViewBtns">
+        <button class="ns-view-btn active" data-view="tile" title="Tile view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
+          Tile
+        </button>
+        <button class="ns-view-btn" data-view="list" title="List view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="4" x2="16" y2="4"/><line x1="0" y1="8" x2="16" y2="8"/><line x1="0" y1="12" x2="16" y2="12"/></svg>
+          List
+        </button>
+        <button class="ns-view-btn" data-view="flow" title="Tree / flowchart view">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="2" r="1.5"/><circle cx="3" cy="11" r="1.5"/><circle cx="13" cy="11" r="1.5"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="8" y1="7" x2="3" y2="9.5"/><line x1="8" y1="7" x2="13" y2="9.5"/></svg>
+          Tree
+        </button>
+      </div>
+      <select id="nsSort" class="ns-sort-sel" title="Sort order">
+        <option value="level">&#8597; Level</option>
+        <option value="creator">&#128100; Creator</option>
+        <option value="name">A&#8211;Z Name</option>
+      </select>
+    </div>
   </div>
 
-  <div class="ns-grid" id="nsGrid">
-    <div class="ns-loading">Loading named skills…</div>
-  </div>
+  <div class="ns-grid-tile" id="nsGrid">
+      <div class="ns-loading">Loading named skills…</div>
+    </div>
 </section>
 
 <hr class="divider">
@@ -744,13 +1244,13 @@
   <p class="section-sub">Terms you'll see throughout the registry.</p>
   <div class="glossary">
     <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill lives here.</div></div>
-    <div class="gloss-item"><div class="gloss-term">registry-for-review/</div><div class="gloss-def">Staging area for proposed skills before they enter the graph.</div></div>
-    <div class="gloss-item"><div class="gloss-term">registry/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
+    <div class="gloss-item"><div class="gloss-term">intake/</div><div class="gloss-def">Staging area for proposed skills before they enter the graph.</div></div>
+    <div class="gloss-item"><div class="gloss-term">graph/named/</div><div class="gloss-def">Real implementations, attributed to contributors (e.g. karpathy/autoresearch).</div></div>
     <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before an extra or ultimate skill can emerge.</div></div>
     <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier extra or ultimate skill.</div></div>
-    <div class="gloss-item"><div class="gloss-term">evidence tier</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Evidence Tier A = peer-reviewed.</div></div>
+    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
     <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
-    <div class="gloss-item"><div class="gloss-term">gaia scan</div><div class="gloss-def">Runs a scan and refreshes local promotion and tree outputs.</div></div>
+    <div class="gloss-item"><div class="gloss-term">gaia embed</div><div class="gloss-def">Pre-computes local semantic vectors so `gaia search` works by meaning.</div></div>
     <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill with a hidden seed title but no contributor implementation yet — open for the taking.</div></div>
   </div>
 </section>
@@ -914,6 +1414,9 @@
       dragging: false,
       dragLastX: 0,
       dragLastY: 0,
+      dragStartX: 0,
+      dragStartY: 0,
+      dragMoved: false,
       hoveredId: null,
       lastHoveredId: null,
       projectedNodes: {},
@@ -1152,9 +1655,11 @@
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        const labelText = (state.showTitles && state.titleMap && state.titleMap[skill.id])
-          ? state.titleMap[skill.id]
-          : '/' + skill.id;
+        const labelText = (state.redPillActive && state.namedMap && state.namedMap[skill.id])
+          ? state.namedMap[skill.id]
+          : state.showTitles
+            ? ((state.titleMap && state.titleMap[skill.id]) || skill.name)
+            : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
       labelNodes.forEach(({ skill }) => {
@@ -1300,6 +1805,7 @@
         state.orbitX += (event.clientY - state.dragLastY) * 0.007;
         state.dragLastX = event.clientX;
         state.dragLastY = event.clientY;
+        if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 5) state.dragMoved = true;
         state.hoveredId = null;
       } else {
         state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
@@ -1323,14 +1829,20 @@
       canvas.addEventListener('mousedown', e => {
         e.preventDefault();
         state.dragging = true;
+        state.dragMoved = false;
+        state.dragStartX = e.clientX;
+        state.dragStartY = e.clientY;
         state.dragLastX = e.clientX;
         state.dragLastY = e.clientY;
         canvas.style.cursor = 'grabbing';
       });
-      window.addEventListener('mouseup', () => {
+      window.addEventListener('mouseup', e => {
         if (!state.dragging) return;
+        const didClick = !state.dragMoved && state.hoveredId;
         state.dragging = false;
+        state.dragMoved = false;
         canvas.style.cursor = state.hoveredId ? 'pointer' : 'grab';
+        if (didClick && options.onNodeClick) options.onNodeClick(state.hoveredId);
       });
     }
     if (options.zoomable) {
@@ -1366,7 +1878,16 @@
   const closeBtn = document.querySelector('[data-graph-close]');
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true
+    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
+    onNodeClick: function(id) {
+      var buckets = window._gaiaNamedBuckets || {};
+      if (buckets[id] && buckets[id].length) {
+        window.openSkillExplorer(buckets[id][0].id);
+      } else {
+        var skill = (window._gaiaSkillMap || {})[id] || { id: id, name: id, type: 'basic' };
+        window.openUnnamedPopup(skill);
+      }
+    }
   });
 
   function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
@@ -1439,77 +1960,113 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 <!-- ─── NAMED SKILLS DATA ─── -->
 <script>
 (function () {
-  var LEVEL_META = {
-    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.12)',  border:'rgba(99,202,183,.3)'  },
-    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.12)', border:'rgba(167,139,250,.3)' },
-    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.12)', border:'rgba(232,121,249,.3)' },
-    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.12)',  border:'rgba(251,191,36,.3)'  },
-    'VI':  { name:'Transcendent \u2605', color:'#fbbf24', bg:'rgba(251,191,36,.20)', border:'rgba(251,191,36,.4)' },
-  };
-
   function esc(str) {
     return String(str == null ? '' : str)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function chips(ids, skillMap, cls) {
-    if (!ids || !ids.length) return '<span class="ns-none">\u2014</span>';
-    return ids.map(function(id) {
-      var s = skillMap[id];
-      return '<span class="ns-chip ' + cls + '">' + esc(s ? s.name : id) + '</span>';
-    }).join('');
+  function nsClick(id) { return 'onclick="openSkillExplorer(\''+id.replace(/'/g,"\\'")+'\')\"'; }
+  function nsDisplayName(ns) { return ns.name || ns.id.split('/')[1] || ns.id; }
+
+  // ── TAG COLORS (8-color hash wheel, matches DESIGN.md palette) ──
+  var TAG_PAL=[
+    {c:'#38bdf8',bg:'rgba(56,189,248,.12)',bd:'rgba(56,189,248,.3)'},
+    {c:'#c084fc',bg:'rgba(192,132,252,.12)',bd:'rgba(192,132,252,.3)'},
+    {c:'#63cab7',bg:'rgba(99,202,183,.12)',bd:'rgba(99,202,183,.3)'},
+    {c:'#a78bfa',bg:'rgba(167,139,250,.12)',bd:'rgba(167,139,250,.3)'},
+    {c:'#f59e0b',bg:'rgba(245,158,11,.12)',bd:'rgba(245,158,11,.3)'},
+    {c:'#e879f9',bg:'rgba(232,121,249,.12)',bd:'rgba(232,121,249,.3)'},
+    {c:'#fb923c',bg:'rgba(251,146,60,.12)',bd:'rgba(251,146,60,.3)'},
+    {c:'#4ade80',bg:'rgba(74,222,128,.12)',bd:'rgba(74,222,128,.3)'},
+  ];
+  function tagStyle(t){var h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%TAG_PAL.length;var p=TAG_PAL[h];return 'style="color:'+p.c+';background:'+p.bg+';border-color:'+p.bd+'"';}
+  function tagHtml(t){return '<span class="ns-tag" '+tagStyle(t)+'>'+esc(t)+'</span>';}
+
+  // ── TERMINAL INSTALL ROW ──
+  var CLIP_SM='<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+  var CHECK_SM='<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+  function installRow(id){
+    var cmd='gaia install '+id;
+    return '<div class="ns-install-row"><span class="ns-install-prompt">$</span>'+
+      '<span class="ns-install-cmd-txt">'+esc(cmd)+'</span>'+
+      '<button class="ns-install-copy" title="Copy install command" data-cmd="'+esc(cmd)+'" onclick="event.stopPropagation();nsInstCopy(this)">'+CLIP_SM+'</button>'+
+    '</div>';
+  }
+  window.nsInstCopy = function(btn){
+    navigator.clipboard.writeText(btn.dataset.cmd).then(function(){
+      var prev=btn.innerHTML; btn.innerHTML=CHECK_SM;
+      setTimeout(function(){btn.innerHTML=prev;},1500);
+    }).catch(function(){});
+  };
+
+  function renderTile(ns, lm) {
+    var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
+    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
+      '<div class="ns-tile-head">' +
+        '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
+        (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
+      '</div>' +
+      '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
+      '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
+      (tags ? '<div class="ns-tile-tags">' + tags + '</div>' : '') +
+      installRow(ns.id) +
+    '</article>';
   }
 
-  function renderCard(ns, skillMap, buckets) {
-    var lm = LEVEL_META[ns.level] || LEVEL_META['II'];
-    var generic = skillMap[ns.genericSkillRef] || {};
-    var prereqs = Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
-    var derivs  = Array.isArray(generic.derivatives)   ? generic.derivatives   : [];
-    var variants = (buckets[ns.genericSkillRef] || []).filter(function(v){ return v.id !== ns.id; });
-    var tags  = Array.isArray(ns.tags) ? ns.tags : [];
-    var links = ns.links && typeof ns.links === 'object' ? ns.links : {};
+  function renderListRow(ns, lm) {
+    var tags = (ns.tags||[]).slice(0,2).map(tagHtml).join('');
+    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
+      '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
+      '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
+      '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
+      '<span class="ns-lr-tags">' + tags + '</span>' +
+      '<span style="flex:1"></span>' +
+      installRow(ns.id) +
+      '<span class="ns-lr-arrow">\u203a</span>' +
+    '</article>';
+  }
 
-    var variantHtml = variants.length
-      ? variants.map(function(v){ return '<span class="ns-chip ns-chip-variant">' + esc(v.id) + '</span>'; }).join('')
-      : '<span class="ns-none">origin implementation</span>';
-
-    var tagHtml = tags.map(function(t){ return '<span class="ns-tag">' + esc(t) + '</span>'; }).join('');
-
-    var linkHtml = Object.keys(links).filter(function(k){ return links[k]; })
-      .map(function(k){ return '<a class="ns-link-btn" href="' + esc(links[k]) + '" target="_blank" rel="noopener">\u2197 ' + esc(k.charAt(0).toUpperCase()+k.slice(1)) + '</a>'; })
-      .join('');
-
-    return '<article class="ns-card" data-level="' + esc(ns.level) + '" data-id="' + esc(ns.id) + '">' +
-  '<div class="ns-card-head">' +
-    '<div style="flex:1;min-width:0">' +
-      '<div class="ns-pill">' +
-        '<span class="ns-pill-id">' + esc(ns.id) + '</span>' +
-        (ns.origin ? '<span class="ns-origin">\u2605 origin</span>' : '') +
-      '</div>' +
-      (ns.title ? '<div class="ns-flavor">\u201c' + esc(ns.title) + '\u201d</div>' : '') +
-    '</div>' +
-    '<div class="ns-card-right">' +
-      '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' \u00b7 ' + lm.name + '</span>' +
-      '<button class="ns-toggle" type="button" aria-label="Toggle details">\u25be</button>' +
-    '</div>' +
-  '</div>' +
-  '<div class="ns-body"><div class="ns-body-inner">' +
-    (ns.description ? '<p class="ns-desc">' + esc(ns.description) + '</p>' : '') +
-    '<div class="ns-row"><span class="ns-row-label">Generic Skill</span><div class="ns-chip-row"><span class="ns-chip ns-chip-ref">' + esc(ns.genericSkillRef) + '</span></div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Dependencies</span><div class="ns-chip-row">' + chips(prereqs, skillMap, 'ns-chip-prereq') + '</div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Derivatives</span><div class="ns-chip-row">' + chips(derivs, skillMap, 'ns-chip-deriv') + '</div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Variants</span><div class="ns-chip-row">' + variantHtml + '</div></div>' +
-    (tagHtml ? '<div class="ns-row"><span class="ns-row-label">Tags</span><div class="ns-chip-row">' + tagHtml + '</div></div>' : '') +
-    (linkHtml ? '<div class="ns-links">' + linkHtml + '</div>' : '') +
-  '</div></div>' +
-'</article>';
+  function renderFlowchartView(allNamed, lm) {
+    var groups = {};
+    allNamed.forEach(function(ns) {
+      var ref = ns.genericSkillRef || 'other';
+      if (!groups[ref]) groups[ref] = [];
+      groups[ref].push(ns);
+    });
+    return Object.keys(groups).sort().map(function(ref) {
+      var cards = groups[ref].map(function(ns) {
+        var m = lm[ns.level] || lm['II'];
+        return '<div class="ns-fc-leaf-wrap">' +
+          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
+            '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
+            (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
+            '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
+            '<div class="ns-fc-card-id">'+esc(ns.id)+'</div>' +
+          '</article>' +
+        '</div>';
+      }).join('');
+      return '<div class="ns-fc-group">' +
+        '<div class="ns-fc-root"><span style="opacity:.5">&#9671;</span> '+esc(ref)+'</div>' +
+        '<div class="ns-fc-connector"></div>' +
+        '<div class="ns-fc-branches-wrap"><div class="ns-fc-hbar"></div>' +
+          '<div class="ns-fc-branches">'+cards+'</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
   }
 
   function initNamedSkills() {
     var grid = document.getElementById('nsGrid');
     var tabsEl = document.getElementById('nsLevelTabs');
+    var viewBtnsEl = document.getElementById('nsViewBtns');
+    var searchEl = document.getElementById('nsSearch');
+    var sortEl = document.getElementById('nsSort');
     if (!grid) return;
 
+    var viewMode = 'tile';
+    var levelFilter = 'all';
+    var searchQuery = '';
+    var sortMode = 'level';
     var FALLBACK_NAMED_INDEX = { buckets: {
       'automated-testing':           [{ id:'0xdarkmatter/pytest-patterns',            name:'Pytest Patterns',               contributor:'0xdarkmatter',       origin:true,  genericSkillRef:'automated-testing',           status:'named', level:'III', description:'Comprehensive pytest skill covering modern patterns for Python test automation including fixtures, parametrize, async testing, mocking, coverage strategies, integration tests, and conftest organisation for pytest 7.0+ projects.',            title:'The Quality Guardian',           tags:['pytest','python','test-automation','fixtures','async-testing','coverage','mocking'],                   links:{ github:'https://github.com/aiskillstore/marketplace' } }],
       'test-driven-development':     [{ id:'addy-osmani/test-driven-development',     name:'Test-Driven Development',       contributor:'addy-osmani',        origin:true,  genericSkillRef:'test-driven-development',     status:'named', level:'II',  description:'Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.', title:'The Red-Green Oath',             tags:['tdd','testing','red-green-refactor','workflow-enforcement','software-quality'],              links:{ github:'https://github.com/addyosmani/agent-skills' } }],
@@ -1519,7 +2076,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       'write-report':                [{ id:'glincker/readme-generator',               name:'README Generator',              contributor:'glincker',           origin:true,  genericSkillRef:'write-report',                status:'named', level:'II',  description:'Analyzes a project\'s directory structure, dependency manifests, and configuration files to generate a professional README.md covering installation, usage, API reference, and contributing guidelines.',                                          title:'The Document Weaver',            tags:['documentation','readme','code-analysis','project-structure'],                                links:{ github:'https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md' } },
                                       { id:'spring-ai/readme-generate',               name:'REST API README Generator',     contributor:'spring-ai',          origin:false, genericSkillRef:'write-report',                status:'named', level:'II',  description:'Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and automatically generates structured API documentation in README format.',                                                                      title:'The Endpoint Scribe',            tags:['java','spring','rest-api','documentation','readme'],                                         links:{ github:'https://github.com/spring-ai-alibaba/examples/tree/main/.claude/skills' } }],
       'browser-automation':          [{ id:'gooseworks/notte-browser',                name:'Notte Browser',                 contributor:'gooseworks',         origin:true,  genericSkillRef:'browser-automation',          status:'named', level:'III', description:'AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.',                                              title:'The Digital Navigator',          tags:['browser','automation','web-agent','scraping','notte'],                                       links:{ github:'https://github.com/gooseworks-ai/goose-skills' } }],
-      'autonomous-research-agent':   [{ id:'karpathy/autoresearch',                   name:'AutoResearch',                  contributor:'karpathy',           origin:true,  genericSkillRef:'autonomous-research-agent',   status:'named', level:'II',  description:'Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.',                                                                                                                           title:'The Scholar\'s Compass',         tags:['research','autonomous','paper-synthesis'],                                                   links:{ github:'https://github.com/karpathy/autoresearch' } }],
+      'autonomous-research-agent':   [{ id:'karpathy/autoresearch',                   name:'AutoResearch',                  contributor:'karpathy',           origin:true,  genericSkillRef:'autonomous-research-agent',   status:'named', level:'VI',  description:'Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.',                                                                                                                           title:'The Scholar\'s Compass',         tags:['research','autonomous','paper-synthesis'],                                                   links:{ github:'https://github.com/karpathy/autoresearch' } }],
       'framework-upgrade':           [{ id:'laravel/upgrade-laravel-v13',             name:'Upgrade Laravel v13',           contributor:'laravel',            origin:true,  genericSkillRef:'framework-upgrade',           status:'named', level:'II',  description:'Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, config migrations, and post-upgrade test validation.',                                                       title:'The Versionist\'s Trial',        tags:['laravel','php','framework-upgrade','migration'],                                             links:{ github:'https://github.com/laravel/boost/issues/698' } }],
       'ux-audit':                    [{ id:'martin-stepanoski/nielsen-heuristics-audit',name:'Nielsen Heuristics Audit',    contributor:'martin-stepanoski',  origin:true,  genericSkillRef:'ux-audit',                    status:'named', level:'II',  description:'Audits a UI interface against Jakob Nielsen\'s 10 usability heuristics step-by-step, scoring each heuristic, surfacing violations, and producing a prioritized remediation report.',                                                             title:'The Ten Laws of Sight',          tags:['ux','usability','nielsen','heuristics','accessibility'],                                     links:{ npm:'https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills' } }],
       'multi-agent-orchestration-v': [{ id:'ruvnet/flow-nexus-swarm',                 name:'Flow Nexus Swarm',              contributor:'ruvnet',             origin:true,  genericSkillRef:'multi-agent-orchestration-v', status:'named', level:'III', description:'Cloud-based AI swarm orchestration platform supporting hierarchical, mesh, ring, and star topologies with event-driven workflows, message queue processing, and intelligent agent assignment.',                                                  title:'The Grand Conductor\'s Blueprint',tags:['multi-agent','swarm','orchestration','event-driven','workflow'],                             links:{ github:'https://github.com/ruvnet/ruflo' } }],
@@ -1540,6 +2097,19 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       var allNamed = [];
       Object.values(buckets).forEach(function(arr){ if (Array.isArray(arr)) Array.prototype.push.apply(allNamed, arr); });
 
+      window._gaiaSkillMap = skillMap;
+      window._gaiaNamedBuckets = buckets;
+      window._gaiaNamedAll = allNamed;
+
+      // Augment each named skill with type + level from the generic skill in gaia.json
+      allNamed.forEach(function(ns) {
+        var g = skillMap[ns.genericSkillRef];
+        if (g) {
+          if (!ns.type) ns.type = g.type;
+          if (g.level) ns.level = g.level;
+        }
+      });
+
       var levelOrder = ['II','III','IV','V','VI'];
       allNamed.sort(function(a, b) {
         var d = levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
@@ -1547,11 +2117,68 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       });
 
       if (!allNamed.length) {
-        grid.innerHTML = '<div class="ns-empty">No named skills yet. Submit one through <code>gaia push</code> for maintainer review.</div>';
+        grid.innerHTML = '<div class="ns-empty">No named skills yet. Publish the first with <code>gaia name</code>.</div>';
         return;
       }
 
-      grid.innerHTML = allNamed.map(function(ns){ return renderCard(ns, skillMap, buckets); }).join('');
+      var LEVEL_META = {
+        'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+        'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+        'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+        'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+        'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+      };
+
+      var TYPE_ORDER = ['ultimate','extra','basic'];
+      var TYPE_META_G = {
+        ultimate: { glyph:'◆', label:'Ultimate', color:'#f59e0b' },
+        extra:    { glyph:'◇', label:'Extra',    color:'#c084fc' },
+        basic:    { glyph:'○', label:'Basic',    color:'#38bdf8' },
+      };
+
+      function nsType(ns) { return ns.type || 'basic'; }
+
+      function groupHeader(type, id) {
+        var tm = TYPE_META_G[type]; if (!tm) return '';
+        return '<div class="ns-group-header" id="ns-group-'+id+'">' +
+          '<span class="ns-group-glyph" style="color:'+tm.color+'">'+tm.glyph+'</span>'+tm.label+
+        '</div>';
+      }
+
+      function renderCurrent() {
+        var q = searchQuery.toLowerCase();
+        var filtered = allNamed.filter(function(ns) {
+          if (levelFilter !== 'all' && ns.level !== levelFilter) return false;
+          if (q) {
+            var hay = (nsDisplayName(ns)+' '+ns.id+' '+(ns.tags||[]).join(' ')+' '+(ns.contributor||'')).toLowerCase();
+            if (hay.indexOf(q) === -1) return false;
+          }
+          return true;
+        });
+        if (sortMode === 'creator') filtered.sort(function(a,b){return (a.contributor||'').localeCompare(b.contributor||'');});
+        else if (sortMode === 'name') filtered.sort(function(a,b){return nsDisplayName(a).localeCompare(nsDisplayName(b));});
+        if (!filtered.length) { grid.innerHTML='<div class="ns-empty">No skills match.</div>'; return; }
+        function lm(ns) { return LEVEL_META[ns.level] || LEVEL_META['II']; }
+
+        if (viewMode === 'flow') {
+          grid.className = 'ns-grid-flow';
+          grid.innerHTML = renderFlowchartView(filtered, LEVEL_META);
+        } else {
+          // Group by type: ultimate → extra → basic
+          var groups = { ultimate:[], extra:[], basic:[] };
+          filtered.forEach(function(ns){ var t=nsType(ns); (groups[t]||(groups[t]=[])).push(ns); });
+          var html = '';
+          TYPE_ORDER.forEach(function(type) {
+            var items = groups[type]; if (!items || !items.length) return;
+            html += groupHeader(type, type);
+            if (viewMode === 'list') html += items.map(function(ns){ return renderListRow(ns, lm(ns)); }).join('');
+            else html += items.map(function(ns){ return renderTile(ns, lm(ns)); }).join('');
+          });
+          grid.className = viewMode === 'list' ? 'ns-grid-list' : 'ns-grid-tile';
+          grid.innerHTML = html;
+          updateDock(groups);
+        }
+      }
 
       if (tabsEl) {
         tabsEl.addEventListener('click', function(e) {
@@ -1559,20 +2186,63 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
           if (!btn) return;
           tabsEl.querySelectorAll('.ns-tab').forEach(function(t){ t.classList.remove('active'); });
           btn.classList.add('active');
-          var level = btn.dataset.level;
-          grid.querySelectorAll('.ns-card').forEach(function(card) {
-            card.style.display = (level === 'all' || card.dataset.level === level) ? '' : 'none';
-          });
+          levelFilter = btn.dataset.level || 'all';
+          renderCurrent();
         });
       }
 
-      grid.addEventListener('click', function(e) {
-        var head = e.target.closest('.ns-card-head');
-        if (head) head.closest('.ns-card').classList.toggle('open');
-      });
+      if (viewBtnsEl) {
+        viewBtnsEl.addEventListener('click', function(e) {
+          var btn = e.target.closest('.ns-view-btn');
+          if (!btn) return;
+          viewBtnsEl.querySelectorAll('.ns-view-btn').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          viewMode = btn.dataset.view || 'tile';
+          renderCurrent();
+        });
+      }
+
+      if (searchEl) {
+        searchEl.addEventListener('input', function(){ searchQuery = searchEl.value; renderCurrent(); });
+      }
+
+      if (sortEl) {
+        sortEl.addEventListener('change', function(){ sortMode = sortEl.value; renderCurrent(); });
+      }
+
+      // Dock: click to jump to group
+      renderCurrent();
     }).catch(function() {
       grid.innerHTML = '<div class="ns-empty">Unable to render named skills.</div>';
     });
+
+    // Grab-to-scroll: click+drag anywhere in the Named Skills section scrolls the page
+    var named = document.getElementById('named');
+    if (named) {
+      var _startY, _startSY, _pressing = false, _dragged = false;
+      named.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        if (e.target.closest('button,input,select,a,[role="button"]')) return;
+        _pressing = true; _dragged = false;
+        _startY = e.clientY; _startSY = window.scrollY;
+      }, { passive: true });
+      window.addEventListener('mousemove', function(e) {
+        if (!_pressing) return;
+        var dy = e.clientY - _startY;
+        if (!_dragged && Math.abs(dy) > 4) { _dragged = true; named.classList.add('ns-grabbing'); }
+        if (_dragged) window.scrollTo(0, _startSY - dy);
+      });
+      window.addEventListener('mouseup', function() {
+        if (!_pressing) return;
+        _pressing = false;
+        named.classList.remove('ns-grabbing');
+        if (_dragged) {
+          named.addEventListener('click', function killClick(ev) {
+            ev.stopPropagation(); named.removeEventListener('click', killClick, true);
+          }, true);
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -1585,25 +2255,517 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 <script>
 (function(){
+  var LEVEL_META_SE = {
+    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+    'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+  };
+  var TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
+
+  var REPO_SLUG = (function(){
+    var m = location.hostname.match(/^(.+)\.github\.io$/);
+    if (m) return m[1] + '/gaia-skill-tree';
+    return 'mbtiongson1/gaia-skill-tree';
+  })();
+
+  function esc(v) {
+    return String(v == null ? '':''+v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function(){
+      var orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function(){ btn.textContent = orig; }, 1600);
+    }).catch(function(){ btn.textContent = 'Error'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); });
+  }
+
+  // ── DATA RESOLUTION ──────────────────────────────────────────
+  function waitForData(cb) {
+    // The named-skills IIFE exposes data on window after init
+    var tries = 0;
+    function check() {
+      if (window._gaiaSkillMap && window._gaiaNamedBuckets) { cb(); return; }
+      if (++tries > 40) { cb(); return; }
+      setTimeout(check, 150);
+    }
+    check();
+  }
+
+  function findNamedSkill(id) {
+    var buckets = window._gaiaNamedBuckets || {};
+    for (var ref in buckets) {
+      var arr = buckets[ref];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) return arr[i];
+      }
+    }
+    return null;
+  }
+
+  function findGeneric(id) {
+    return (window._gaiaSkillMap || {})[id] || null;
+  }
+
+  // ── RENDER HERO ──────────────────────────────────────────────
+  function renderHero(ns, generic) {
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
+    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
+    var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+
+    var badgesHtml = [
+      '<span class="se-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' · ' + lm.name + '</span>',
+      generic ? '<span class="se-badge" style="color:' + typeColor + ';background:rgba(0,0,0,.3);border-color:' + typeColor + '40">' + typeSymbol + ' ' + esc(generic.type || '') + '</span>' : '',
+      ns.origin ? '<span class="se-badge" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">★ origin</span>' : '',
+    ].filter(Boolean).join('');
+
+    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
+      '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
+      '<div class="se-contrib">' + esc(ns.contributor) + ' / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
+      '<div class="se-badges">' + badgesHtml + '</div>' +
+      (ns.title ? '<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.8rem">"' + esc(ns.title) + '"</div>' : '') +
+      (generic ? '<div style="font-size:.82rem;color:var(--muted)">Generic skill: <strong style="color:var(--text)">' + esc(generic.name || ns.genericSkillRef) + '</strong></div>' : '') +
+      (repoUrl ? '<div class="se-repo-row"><span class="se-repo-url">' + esc(repoUrl) + '</span></div>' : '') +
+    '</div>';
+
+    var tags = Array.isArray(ns.tags) ? ns.tags : [];
+    var heroRight = '<div class="se-desc-panel">' +
+      '<h3>Description</h3>' +
+      '<p class="se-desc-text">' + esc(ns.description || (generic && generic.description) || '') + '</p>' +
+      (tags.length ? '<div class="se-tags">' + tags.map(function(t){ return '<span class="se-tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+    '</div>';
+
+    document.getElementById('seHero').innerHTML = heroLeft + heroRight;
+
+    // wire Open Repo button
+    var openBtn = document.getElementById('seOpenRepo');
+    if (repoUrl) { openBtn.onclick = function(){ window.open(repoUrl,'_blank','noopener'); }; openBtn.style.display=''; }
+    else { openBtn.style.display = 'none'; }
+  }
+
+  // ── RENDER DESCRIPTION TAB ───────────────────────────────────
+  function renderDescription(ns, generic) {
+    var el = document.getElementById('se-description');
+    var prereqsHtml = '';
+    var derivsHtml = '';
+    if (generic) {
+      var sm = window._gaiaSkillMap || {};
+      if (Array.isArray(generic.prerequisites) && generic.prerequisites.length) {
+        prereqsHtml = '<div class="se-docs-block"><h4>Prerequisites</h4><div>' +
+          generic.prerequisites.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+      if (Array.isArray(generic.derivatives) && generic.derivatives.length) {
+        derivsHtml = '<div class="se-docs-block"><h4>Unlocks</h4><div>' +
+          generic.derivatives.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+    }
+    el.innerHTML = '<div class="se-flow-h">&#9432; About this skill</div>' +
+      '<p style="line-height:1.75;margin-bottom:1.5rem">' + esc(ns.description || '') + '</p>' +
+      prereqsHtml + derivsHtml;
+  }
+
+  // ── RENDER INSTALL TAB ───────────────────────────────────────
+  var COPY_ICON = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+
+  function renderInstall(ns) {
+    var el = document.getElementById('se-install');
+    var id = ns.id;
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var cloneUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.git$/,'') : repoUrl;
+
+    function installBlock(label, sublabel, cmd, recommended, copyable) {
+      var cls = 'se-install-block' + (recommended ? ' recommended' : '');
+      return '<div class="' + cls + '">' +
+        '<div class="se-install-label">' + label + (sublabel ? '<span>' + sublabel + '</span>' : '') + '</div>' +
+        '<code class="se-install-cmd">' + esc(cmd) + '</code>' +
+        (copyable !== false ? '<button class="se-copy-btn" title="Copy to clipboard" data-cmd="' + esc(cmd) + '">' + COPY_ICON + '</button>' : '') +
+      '</div>';
+    }
+
+    el.innerHTML = '<div class="se-flow-h">' + COPY_ICON + ' Installation</div>' +
+      installBlock('Gaia', '★ recommended', 'gaia install ' + id, true) +
+      installBlock('npx', '@gaia-registry/cli', 'npx @gaia-registry/cli install ' + id, false) +
+      (cloneUrl ? installBlock('Git Clone', '', 'git clone ' + cloneUrl, false) : '');
+
+    el.querySelectorAll('.se-copy-btn').forEach(function(btn){
+      btn.onclick = function(){
+        navigator.clipboard.writeText(btn.dataset.cmd).then(function(){
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+          setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600);
+        }).catch(function(){ btn.textContent = '!'; setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600); });
+      };
+    });
+  }
+
+  // ── RENDER DOCS TAB ──────────────────────────────────────────
+  function renderDocs(ns, generic) {
+    var el = document.getElementById('se-docs');
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var issuesUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '/issues' : '';
+    var readmeUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '#readme' : '';
+
+    var evidenceHtml = '';
+    if (generic && Array.isArray(generic.evidence) && generic.evidence.length) {
+      evidenceHtml = '<div class="se-docs-block"><h4>Evidence</h4>' +
+        generic.evidence.map(function(ev){
+          return '<div class="se-evidence-row">' +
+            '<span class="se-ev-class">'+esc(ev.class||'?')+'</span>' +
+            '<a class="se-ev-link" href="'+esc(ev.source||'#')+'" target="_blank" rel="noopener">'+esc(ev.source||'—')+'</a>' +
+            '<span class="se-ev-date">'+esc(ev.date||'')+'</span>' +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    var skillDefHtml = generic ? '<div class="se-docs-block"><h4>Generic Skill Definition</h4>' +
+      '<p style="line-height:1.75;margin-bottom:.8rem">'+esc(generic.description||'')+'</p>' +
+      '<p style="font-size:.82rem;color:var(--muted)">Status: <strong style="color:var(--text)">'+esc(generic.status||'provisional')+'</strong>  ·  Level: <strong style="color:var(--text)">'+esc(generic.level||'')+'</strong></p>' +
+    '</div>' : '';
+
+    var agentsHtml = '';
+    if (generic && Array.isArray(generic.knownAgents) && generic.knownAgents.length) {
+      agentsHtml = '<div class="se-docs-block"><h4>Known Agents</h4><div>' +
+        generic.knownAgents.map(function(a){ return '<span class="se-known-agent">'+esc(a)+'</span>'; }).join('') +
+      '</div></div>';
+    }
+
+    var linksHtml = '<div class="se-docs-block"><h4>Links</h4>' +
+      (repoUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(repoUrl)+'" target="_blank" rel="noopener">Repository ↗</a></p>' : '') +
+      (readmeUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(readmeUrl)+'" target="_blank" rel="noopener">README ↗</a></p>' : '') +
+      (issuesUrl ? '<p><a style="color:var(--basic)" href="'+esc(issuesUrl)+'" target="_blank" rel="noopener">Issues ↗</a></p>' : '') +
+    '</div>';
+
+    el.innerHTML = '<div class="se-flow-h">&#128196; Documentation</div>' + skillDefHtml + evidenceHtml + agentsHtml + linksHtml;
+  }
+
+  // ── RENDER FLOWCHART (upgrade path) ─────────────────────────
+  function renderFlowchart(ns, generic) {
+    var el = document.getElementById('se-upgrade');
+    var sm = window._gaiaSkillMap || {};
+    var buckets = window._gaiaNamedBuckets || {};
+    var lm = LEVEL_META_SE;
+
+    function makeLevelStyle(level) {
+      var m = lm[level]; if (!m) return '';
+      return 'color:' + m.color + ';background:' + m.bg + ';border-color:' + m.border;
+    }
+
+    function flowNode(id, name, contrib, level, typeStr, isCurrent, isNamed) {
+      var lmEntry = lm[level] || {};
+      var clsExtra = isCurrent ? ' current' : '';
+      var contribHtml = contrib ? '<span class="fn-contrib">' + esc(contrib) + '</span>' : '';
+      var typeHtml = typeStr ? '<span class="fn-type">' + esc(typeStr) + '</span>' : '';
+      var levelHtml = level ? '<span class="fn-level" style="' + makeLevelStyle(level) + '">' + esc(level) + '</span>' : '';
+      return '<div class="flow-node' + clsExtra + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
+        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml + typeHtml +
+      '</div>';
+    }
+
+    // Row 0: prerequisite generic skills
+    var prereqs = generic && Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
+    var prereqNodes = prereqs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    // Row 1: tier progression of current generic skill (levels from generic.level floor down to 0)
+    var LEVEL_ORDER = ['0','I','II','III','IV','V','VI'];
+    var currentLvIdx = LEVEL_ORDER.indexOf(generic ? generic.level : '');
+    var tierNodes = [];
+    for (var i = 0; i <= Math.max(currentLvIdx, 0) && i < LEVEL_ORDER.length; i++) {
+      var lvl = LEVEL_ORDER[i];
+      var isCur = (lvl === (generic && generic.level));
+      tierNodes.push('<div class="flow-node' + (isCur?' current':'') + '" data-level="' + esc(lvl) + '" data-id="' + esc(ns.genericSkillRef||'') + '">' +
+        '<span class="fn-level" style="' + makeLevelStyle(lvl) + '">' + esc(lvl||'0') + '</span>' +
+        '<span class="fn-name">' + esc((generic&&generic.name)||ns.genericSkillRef||'') + '</span>' +
+        '<span class="fn-type">' + esc(lvl === LEVEL_ORDER[0] ? 'Basic' : (LEVEL_META_SE[lvl]&&LEVEL_META_SE[lvl].name)||lvl) + '</span>' +
+      '</div>');
+    }
+
+    // Row 2: named implementations in the same bucket
+    var siblings = (buckets[ns.genericSkillRef] || []);
+    var namedNodes = siblings.map(function(sib){
+      return flowNode(sib.id, sib.name||sib.id, sib.contributor, sib.level, '', sib.id===ns.id, true);
+    });
+    if (!namedNodes.length) namedNodes = [flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true)];
+
+    // Row 3: derivative generic skills
+    var derivs = generic && Array.isArray(generic.derivatives) ? generic.derivatives : [];
+    var derivNodes = derivs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    function makeRow(label, nodes, id) {
+      if (!nodes.length) return '';
+      return '<div>' +
+        '<div class="se-flowchart-row-label">' + label + '</div>' +
+        '<div class="se-flowchart-row" id="' + id + '">' + nodes.join('') + '</div>' +
+      '</div>';
+    }
+
+    el.innerHTML = '<div class="se-flow-h">&#9650; Upgrade Path &amp; Adjacent Skills</div>' +
+      '<div class="se-flowchart-wrap" id="seFlowWrap">' +
+        '<div class="se-flowchart-rows">' +
+          makeRow('Prerequisites', prereqNodes, 'sfRow0') +
+          makeRow('Tier Progression', tierNodes, 'sfRow1') +
+          makeRow('Named Implementations', namedNodes, 'sfRow2') +
+          makeRow('Unlocks', derivNodes, 'sfRow3') +
+        '</div>' +
+        '<svg class="se-flowchart-svg" id="seFlowSvg"></svg>' +
+      '</div>';
+
+    // Draw SVG edges after a brief layout settle
+    setTimeout(function(){ drawFlowEdges(); }, 80);
+  }
+
+  function drawFlowEdges() {
+    var wrap = document.getElementById('seFlowWrap');
+    var svg = document.getElementById('seFlowSvg');
+    if (!wrap || !svg) return;
+    svg.innerHTML = '';
+    var wRect = wrap.getBoundingClientRect();
+    var rowIds = [['sfRow0','sfRow1'],['sfRow1','sfRow2'],['sfRow2','sfRow3']];
+    rowIds.forEach(function(pair){
+      var fromEl = document.getElementById(pair[0]);
+      var toEl   = document.getElementById(pair[1]);
+      if (!fromEl || !toEl) return;
+      var fromNodes = fromEl.querySelectorAll('.flow-node');
+      var toNodes   = toEl.querySelectorAll('.flow-node');
+      if (!fromNodes.length || !toNodes.length) return;
+      // connect each source to each target (for small counts); cap at 3x3
+      var froms = Array.from(fromNodes).slice(0,3);
+      var tos   = Array.from(toNodes).slice(0,3);
+      froms.forEach(function(fn){
+        var fr = fn.getBoundingClientRect();
+        var fx = fr.left + fr.width/2 - wRect.left;
+        var fy = fr.bottom - wRect.top;
+        tos.forEach(function(tn){
+          var tr = tn.getBoundingClientRect();
+          var tx = tr.left + tr.width/2 - wRect.left;
+          var ty = tr.top - wRect.top;
+          var cy = (fy + ty) / 2;
+          var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+          path.setAttribute('d','M'+fx+','+fy+' C'+fx+','+cy+' '+tx+','+cy+' '+tx+','+ty);
+          path.setAttribute('stroke','rgba(56,189,248,.22)');
+          path.setAttribute('stroke-width','1.5');
+          path.setAttribute('fill','none');
+          path.setAttribute('stroke-dasharray','4 3');
+          svg.appendChild(path);
+        });
+      });
+    });
+  }
+
+  // ── RENDER TIMELINE ──────────────────────────────────────────
+  function renderTimeline(ns) {
+    var el = document.getElementById('se-timeline');
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">Loading history…</div>';
+    var parts = ns.id.split('/');
+    var contributor = parts[0], skillName = parts[1] || '';
+    var apiUrl = 'https://api.github.com/repos/' + REPO_SLUG +
+      '/commits?path=graph%2Fnamed%2F' + contributor + '%2F' + skillName + '.md&per_page=20';
+    fetch(apiUrl)
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(commits){
+        if (!Array.isArray(commits) || !commits.length) {
+          // fallback to static dates
+          var evts = [];
+          if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+          if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+          renderTimelineEvents(el, evts);
+          return;
+        }
+        var evts = commits.map(function(c){
+          return {
+            date: (c.commit && c.commit.author && c.commit.author.date) ? c.commit.author.date.slice(0,10) : '',
+            msg: (c.commit && c.commit.message) ? c.commit.message.split('\n')[0] : '',
+            sha: c.sha ? c.sha.slice(0,7) : ''
+          };
+        });
+        renderTimelineEvents(el, evts);
+      })
+      .catch(function(){
+        var evts = [];
+        if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+        if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+        renderTimelineEvents(el, evts);
+      });
+  }
+
+  function renderTimelineEvents(el, evts) {
+    if (!evts.length) { el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">No history available.</div>'; return; }
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-timeline">' +
+      evts.map(function(ev){
+        return '<div class="se-tl-event">' +
+          '<div class="se-tl-dot"></div>' +
+          '<div class="se-tl-date">' + esc(ev.date) + '</div>' +
+          '<div class="se-tl-msg">' + esc(ev.msg) + '</div>' +
+          (ev.sha ? '<div class="se-tl-sha">' + esc(ev.sha) + '</div>' : '') +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  // ── MAIN OPEN / CLOSE ────────────────────────────────────────
+  var TYPE_GLYPH = { ultimate: '◆', extra: '◇', basic: '○' };
+
+  window.openUnnamedPopup = function(skill) {
+    var pop = document.getElementById('unnamedSkillPopup');
+    if (!pop) return;
+    var glyph = TYPE_GLYPH[skill.type] || '◇';
+    var glyphColor = skill.type === 'ultimate' ? '#f59e0b' : skill.type === 'extra' ? '#c084fc' : '#38bdf8';
+    document.getElementById('uspGlyph').textContent = glyph;
+    document.getElementById('uspGlyph').style.color = glyphColor;
+    document.getElementById('uspName').textContent = skill.name || skill.id;
+    document.getElementById('uspId').textContent = skill.id;
+    var cmd = 'gaia push';
+    document.getElementById('uspCmd').textContent = cmd;
+    document.getElementById('uspCmd').dataset.cmd = cmd;
+    pop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function openExplorer(id) {
+    waitForData(function(){
+      var ns = findNamedSkill(id);
+      if (!ns) {
+        // fallback: generic skill ref bucket
+        var buckets = window._gaiaNamedBuckets || {};
+        if (buckets[id] && buckets[id].length) { ns = buckets[id][0]; }
+      }
+      if (!ns) {
+        // no named implementation — show the "claim this skill" popup if it's a known generic skill
+        var genericSkill = (window._gaiaSkillMap || {})[id];
+        if (genericSkill) window.openUnnamedPopup(genericSkill);
+        return;
+      }
+      var generic = ns.genericSkillRef ? findGeneric(ns.genericSkillRef) : null;
+
+      document.getElementById('skillExplorer').classList.add('open');
+      document.getElementById('seBreadcrumb').textContent = ns.id;
+      document.getElementById('skillExplorer').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+
+      renderHero(ns, generic);
+      renderDescription(ns, generic);
+      renderInstall(ns);
+      renderDocs(ns, generic);
+      renderFlowchart(ns, generic);
+      renderTimeline(ns);
+
+      // Export button
+      document.getElementById('seExport').onclick = function(){
+        var data = JSON.stringify({ namedSkill: ns, generic: generic }, null, 2);
+        var blob = new Blob([data], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = ns.id.replace('/','_') + '.json';
+        a.click();
+      };
+
+      // Share button
+      document.getElementById('seShare').onclick = function(){
+        var url = location.origin + location.pathname + '#explorer/' + ns.id;
+        if (navigator.share) {
+          navigator.share({ title: ns.name || ns.id, url: url }).catch(function(){});
+        } else {
+          navigator.clipboard.writeText(url).then(function(){
+            var btn = document.getElementById('seShare');
+            var orig = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function(){ btn.textContent = orig; }, 1600);
+          });
+        }
+      };
+
+      // Push hash (skip if already correct)
+      var newHash = '#explorer/' + ns.id;
+      if (location.hash !== newHash) history.pushState(null,'',newHash);
+    });
+  }
+
+  function closeExplorer() {
+    var el = document.getElementById('skillExplorer');
+    if (el) el.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Expose globally for onclick handlers — must be synchronous, before DOMContentLoaded
+  window.openSkillExplorer = openExplorer;
+
+  // ── DOM EVENT SETUP (deferred — overlay HTML is parsed after this script) ──
+  function initExplorerDOM() {
+    var backEl = document.getElementById('seBack');
+    if (backEl) backEl.onclick = function(){ closeExplorer(); history.back(); };
+
+    // Unnamed popup close + copy
+    var pop = document.getElementById('unnamedSkillPopup');
+    function closeUnnamed() { if (pop) { pop.classList.remove('open'); document.body.style.overflow = ''; } }
+    var uspClose = document.getElementById('uspClose');
+    if (uspClose) uspClose.onclick = closeUnnamed;
+    if (pop) pop.addEventListener('click', function(e){ if (e.target === pop) closeUnnamed(); });
+    var uspCopy = document.getElementById('uspCopyBtn');
+    var CHECK_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+    var CLIP_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+    if (uspCopy) uspCopy.addEventListener('click', function(){
+      var cmd = document.getElementById('uspCmd').dataset.cmd || document.getElementById('uspCmd').textContent;
+      navigator.clipboard.writeText(cmd).then(function(){
+        uspCopy.innerHTML = CHECK_SM;
+        setTimeout(function(){ uspCopy.innerHTML = CLIP_SM; }, 1500);
+      });
+    });
+
+    function routeHash() {
+      var m = location.hash.match(/^#explorer\/(.+\/[^/?#]+)$/);
+      if (m) { openExplorer(m[1]); }
+      else { closeExplorer(); }
+    }
+    window.addEventListener('hashchange', routeHash);
+    routeHash();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExplorerDOM);
+  } else {
+    initExplorerDOM();
+  }
+})();
+</script>
+
+<script>
+window.switchOsTab = function(btn) {
+  var step = btn.closest('.step');
+  step.querySelectorAll('.os-tab').forEach(function(b){ b.classList.toggle('active', b === btn); });
+  step.querySelectorAll('.os-panel').forEach(function(p){ p.classList.toggle('active', p.dataset.os === btn.dataset.os); });
+};
+
+(function(){
+  var CLIP='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+  var CHECK='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
   function initCopyButtons(){
     document.querySelectorAll('pre').forEach(function(pre){
-      if(pre.closest('.pre-wrap')) return; // already wrapped
+      if(pre.closest('.pre-wrap')) return;
       var wrap = document.createElement('div');
       wrap.className = 'pre-wrap';
       pre.parentNode.insertBefore(wrap, pre);
       wrap.appendChild(pre);
       var btn = document.createElement('button');
       btn.className = 'copy-btn';
-      btn.textContent = 'Copy';
+      btn.innerHTML = CLIP;
+      btn.title = 'Copy';
       btn.addEventListener('click', function(){
         var text = pre.innerText;
         navigator.clipboard.writeText(text).then(function(){
-          btn.textContent = 'Copied!';
+          btn.innerHTML = CHECK;
           btn.classList.add('copied');
-          setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+          setTimeout(function(){ btn.innerHTML = CLIP; btn.classList.remove('copied'); }, 1800);
         }).catch(function(){
-          btn.textContent = 'Error';
-          setTimeout(function(){ btn.textContent = 'Copy'; }, 1800);
+          btn.innerHTML = CLIP;
+          setTimeout(function(){ btn.innerHTML = CLIP; }, 1800);
         });
       });
       wrap.appendChild(btn);
@@ -1617,9 +2779,230 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 </script>
 
+<!-- ─── SKILL EXPLORER OVERLAY ─── -->
+<div id="skillExplorer" class="skill-explorer" role="dialog" aria-modal="true" aria-label="Skill Explorer">
+  <div class="se-topbar">
+    <button id="seBack" class="se-btn-ghost"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg> Back</button>
+    <span id="seBreadcrumb" class="se-breadcrumb"></span>
+    <div class="se-topbar-actions">
+      <button id="seOpenRepo" class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M13 3h-4m4 0v4m0-4L7 9"/></svg> Repository</button>
+      <button id="seExport"   class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m-3-3l3 3 3-3"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg> Export</button>
+      <button id="seShare"    class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="3" r="1.5"/><circle cx="12" cy="13" r="1.5"/><circle cx="3" cy="8" r="1.5"/><path d="M10.5 4l-6 3m6 3l-6-3"/></svg> Share</button>
+    </div>
+  </div>
+  <div class="se-body">
+    <div id="seHero" class="se-hero"></div>
+    <div class="se-flow" id="seFlow">
+      <div id="se-upgrade"     class="se-flow-section"></div>
+      <div id="se-description" class="se-flow-section"></div>
+      <div id="se-install"     class="se-flow-section"></div>
+      <div id="se-docs"        class="se-flow-section"></div>
+      <div id="se-timeline"    class="se-flow-section"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── UNNAMED SKILL POPUP ── -->
+<div id="unnamedSkillPopup" class="usp-backdrop" role="dialog" aria-modal="true" aria-labelledby="uspName">
+  <div class="usp-card">
+    <button class="usp-x" id="uspClose" aria-label="Close">✕</button>
+    <div id="uspGlyph" class="usp-glyph">◇</div>
+    <div id="uspName" class="usp-name">Unnamed Skill</div>
+    <div id="uspId" class="usp-id"></div>
+    <p class="usp-body">This skill has no named implementation yet. <span class="usp-cta">Be the first to claim it</span> — build a real implementation, submit it for review, and your name goes on the canonical registry forever.</p>
+    <div class="usp-row">
+      <span class="usp-prompt">$</span>
+      <span id="uspCmd" class="usp-cmd">gaia push</span>
+      <button class="usp-copy" id="uspCopyBtn" title="Copy command">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var treeDialog = document.getElementById('treeDialog');
+  var treeNavBtn = document.getElementById('treeNavBtn');
+  var treeCloseBtn = document.getElementById('treeCloseBtn');
+  var treeCopyBtn = document.getElementById('treeCopyBtn');
+  var treeDownloadBtn = document.getElementById('treeDownloadBtn');
+  var treeDialogPre = document.getElementById('treeDialogPre');
+  var treeHeader = treeDialog.querySelector('.tree-dialog-header');
+  var _treeContent = null;
+
+  var SKELETON = [
+    'GAIA SKILL TREE  ─────────  ·  ───────────────────────',
+    '══════════════════════════════════════════════════════',
+    '──────────────────────────────────────────────────────',
+    '══════════════════════════════════════════════════════',
+    '',
+    '◆ ──────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  ├─ ◇ ────────────────────────────  [──]',
+    '  │  ├─ ◇ ────────────  [───]',
+    '  │  │  ├─ ○ ────────────  [─]',
+    '  │  │  ├─ ○ ──────────  [─]',
+    '  │  │  └─ ○ ─────────────────────  [─]',
+    '  │  ├─ ○ ───────────────  [─]',
+    '  │  └─ ○ ──────────  [─]',
+    '  └─ ◇ ────────────────────────  [──]',
+    '     ├─ ○ ───────────────────────────  [─]',
+    '     └─ ○ ─────────────────────  [─]',
+    '',
+    '◆ ──────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ○ ─────────────────  [──]',
+    '  ├─ ◇ ─────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  └─ ○ ─────────────────  [──]',
+    '',
+    '◆ ────────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────────────  [───]',
+    '  │  ├─ ○ ─────────────────  [──]',
+    '  │  ├─ ○ ──────────────────────  [─]',
+    '  │  └─ ○ ────────────────  [─]',
+    '  ├─ ◇ ──────────────────────────  [───]',
+    '  │  ├─ ○ ──────────────────  [──]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  └─ ○ ─────────────────────  [─]',
+    '  └─ ○ ────────────────────────────────  [──]',
+  ].join('\n');
+
+  function openTreeDialog() {
+    treeDialog.style.cssText = '';
+    if (typeof treeDialog.showModal === 'function') treeDialog.showModal();
+    else treeDialog.setAttribute('open', '');
+    if (_treeContent === null) {
+      treeDialogPre.textContent = SKELETON;
+      treeDialogPre.classList.add('tree-skeleton');
+      fetch('tree.md')
+        .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function(text) {
+          _treeContent = text;
+          treeDialogPre.innerHTML = highlightTree(text);
+          treeDialogPre.classList.remove('tree-skeleton');
+        })
+        .catch(function() {
+          treeDialogPre.textContent = 'Could not load tree.md.';
+          treeDialogPre.classList.remove('tree-skeleton');
+        });
+    }
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function highlightTree(text) {
+    var ultIdx = 0;
+    return text.split('\n').map(function(line) {
+      // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [VI]
+      var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
+      if (m) {
+        var label = esc(m[1]);
+        var skillId = m[2];
+        var suffix = esc(m[3]);
+        var delay = -((ultIdx++ * 0.9) % 4);
+        var slash = skillId.indexOf('/');
+        var skillHtml;
+        if (slash > 0) {
+          // named — contributor in red, skill name in amber
+          skillHtml = '<span class="tree-ult-contributor">' + esc(skillId.slice(0, slash)) + '</span>' +
+                      '<span class="tree-ult-slash">/</span>' +
+                      '<span class="tree-ult-skillname">' + esc(skillId.slice(slash + 1)) + '</span>';
+        } else {
+          skillHtml = '<span class="tree-ult-id">' + esc(skillId) + '</span>';
+        }
+        return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
+               label + skillHtml + suffix + '</span>';
+      }
+      // Separator lines
+      if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
+      // Inline ◇ / ○ glyphs
+      var out = esc(line);
+      out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
+      out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
+      return out;
+    }).join('\n');
+  }
+
+  function closeTreeDialog() {
+    if (treeDialog.close) treeDialog.close();
+    else treeDialog.removeAttribute('open');
+  }
+
+  treeNavBtn.addEventListener('click', openTreeDialog);
+  treeCloseBtn.addEventListener('click', closeTreeDialog);
+  treeDialog.addEventListener('click', function(e) {
+    if (e.target === treeDialog) closeTreeDialog();
+  });
+
+  treeCopyBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      treeCopyBtn.textContent = 'Copied!';
+      treeCopyBtn.classList.add('copied');
+      setTimeout(function() {
+        treeCopyBtn.textContent = 'Copy';
+        treeCopyBtn.classList.remove('copied');
+      }, 1800);
+    });
+  });
+
+  treeDownloadBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    var blob = new Blob([text], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'gaia-skill-tree.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  /* ── drag ── */
+  var drag = { on: false, ox: 0, oy: 0, startL: 0, startT: 0 };
+
+  treeHeader.addEventListener('mousedown', function(e) {
+    if (e.target.closest('button')) return;
+    var rect = treeDialog.getBoundingClientRect();
+    treeDialog.style.margin = '0';
+    treeDialog.style.position = 'fixed';
+    treeDialog.style.left = rect.left + 'px';
+    treeDialog.style.top = rect.top + 'px';
+    drag.on = true;
+    drag.ox = e.clientX;
+    drag.oy = e.clientY;
+    drag.startL = rect.left;
+    drag.startT = rect.top;
+    treeHeader.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!drag.on) return;
+    var W = window.innerWidth, H = window.innerHeight;
+    var dw = treeDialog.offsetWidth, dh = treeDialog.offsetHeight;
+    var l = Math.max(0, Math.min(W - dw, drag.startL + e.clientX - drag.ox));
+    var t = Math.max(0, Math.min(H - dh, drag.startT + e.clientY - drag.oy));
+    treeDialog.style.left = l + 'px';
+    treeDialog.style.top = t + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!drag.on) return;
+    drag.on = false;
+    treeHeader.classList.remove('dragging');
+  });
+})();
+</script>
+
 </body>
 </html>
-
-<!-- gaia:stats-start -->
-<!-- skills=121; namedSkills=26; version=2.2.11 -->
-<!-- gaia:stats-end -->
