@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
+import re
 import argparse
 import json
 import subprocess
 import sys
 from pathlib import Path
+from gaia_cli.main import get_parser
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -29,29 +31,15 @@ def _replace_region(text: str, start: str, end: str, body: str) -> tuple[str, bo
     return updated, updated != text
 
 
+def _strip_ansi(text):
+    # This regex identifies the standard ANSI escape sequences
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+    return ansi_escape.sub('', text)
+
 def _cli_help() -> str:
-    commands = [
-        [],
-        ["skills", "--help"],
-        ["skills", "list", "--help"],
-        ["skills", "search", "--help"],
-        ["promote", "--help"],
-        ["docs", "build", "--help"],
-    ]
-    chunks = []
-    env = {"PYTHONPATH": str(ROOT / "src")}
-    for args in commands:
-        result = subprocess.run(
-            [sys.executable, "-m", "gaia_cli", *args],
-            cwd=ROOT,
-            env=env,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-        )
-        chunks.append("$ gaia " + " ".join(args).strip())
-        chunks.append(result.stdout.strip() or result.stderr.strip())
-    return "```text\n" + "\n\n".join(chunks) + "\n```"
+    parser = get_parser()
+    help_text = _strip_ansi(parser.format_help())
+    return f"```text\n{help_text}\n```"
 
 
 def _layout() -> str:

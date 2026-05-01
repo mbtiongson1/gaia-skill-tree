@@ -888,13 +888,7 @@ def release_command(args):
     new_version = bump_versions(args.registry, args.release_type)
     print(f"Gaia version bumped to {new_version}.")
 
-
-def main():
-    # Ensure UTF-8 output on Windows (avoids cp1252 UnicodeEncodeError for box-drawing)
-    if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-
+def get_parser():
     parser = argparse.ArgumentParser(
         prog="gaia",
         description="Gaia Registry CLI",
@@ -984,6 +978,15 @@ def main():
         action for action in subparsers._choices_actions if action.dest != '_hook'
     ]
     hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
+    return parser
+
+def main():
+    # Ensure UTF-8 output on Windows (avoids cp1252 UnicodeEncodeError for box-drawing)
+    if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+    parser = get_parser()
     args = parser.parse_args()
     args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
     require_explicit_writable_registry(parser, args)

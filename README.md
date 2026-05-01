@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.8`.
+Current Gaia CLI version: `2.2.9`.
 
 Python install:
 
@@ -150,10 +150,7 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 
 <!-- gaia:cli-start -->
 ```text
-$ gaia 
-
-usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
+usage: gaia [-h] [--registry REGISTRY] [--global] [--version] {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
 
 Gaia Registry CLI
 
@@ -176,10 +173,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
-                        auto-resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local
-                        .gaia/ config.
+  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to auto-resolved local or global registry.
+  --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
 
 Quick usage:
@@ -202,66 +197,6 @@ Quick usage:
   gaia skills install <skill_id> [--global | --local]
   gaia skills uninstall <skill_id>
 
-$ gaia skills --help
-
-usage: gaia skills [-h] {list,search,info,install,uninstall} ...
-
-positional arguments:
-  {list,search,info,install,uninstall}
-    list                List available named skills
-    search              Search named skills
-    info                Show details for a named skill
-    install             Install a named skill
-    uninstall           Uninstall a named skill
-
-options:
-  -h, --help            show this help message and exit
-
-Quick usage:
-  gaia skills list [--exclude-pending]
-  gaia skills search <query> [--exclude-pending]
-  gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
-  gaia skills uninstall <skill_id>
-
-$ gaia skills list --help
-
-usage: gaia skills list [-h] [--exclude-pending]
-
-options:
-  -h, --help         show this help message and exit
-  --exclude-pending  Hide pending skill proposals
-
-$ gaia skills search --help
-
-usage: gaia skills search [-h] [--exclude-pending] query
-
-positional arguments:
-  query              Search query
-
-options:
-  -h, --help         show this help message and exit
-  --exclude-pending  Hide pending skill proposals
-
-$ gaia promote --help
-
-usage: gaia promote [-h] [--all] [--name NAME] [skillId]
-
-positional arguments:
-  skillId      Skill ID to promote
-
-options:
-  -h, --help   show this help message and exit
-  --all        Promote every candidate from the last scan
-  --name NAME  Optional display name for the promoted skill
-
-$ gaia docs build --help
-
-usage: gaia docs build [-h] [--check]
-
-options:
-  -h, --help  show this help message and exit
-  --check     Fail if docs are stale without writing
 ```
 <!-- gaia:cli-end -->
 
