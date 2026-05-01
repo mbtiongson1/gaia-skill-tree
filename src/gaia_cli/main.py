@@ -121,6 +121,7 @@ def init_command(args):
         "gaiaRegistryRef": args.registry_ref or DEFAULT_REGISTRY_REF,
         "scanPaths": scan_paths,
         "autoPromptCombinations": args.auto_prompt_combinations,
+        "localRegistryPath": os.path.abspath("."),
     }
     with open(config_path, 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=2)
@@ -623,7 +624,13 @@ def main():
     parser.add_argument(
         '--registry',
         default=None,
-        help="Path to a local Gaia registry checkout. Defaults to bundled read-only registry data.",
+        help="Path to a local Gaia registry checkout. Defaults to auto-resolved local or global registry.",
+    )
+    parser.add_argument(
+        '--global', '-g',
+        dest='global_flag',
+        action='store_true',
+        help="Use global GAIA_HOME registry, ignoring any local .gaia/ config.",
     )
     subparsers = parser.add_subparsers(dest='command')
     init_parser = subparsers.add_parser('init')
@@ -689,8 +696,7 @@ def main():
     hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
     hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
     args = parser.parse_args()
-    args.registry_explicit = args.registry is not None
-    args.registry = resolve_registry_path(args.registry)
+    args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
     require_explicit_writable_registry(parser, args)
     if args.command == 'init':
         init_command(args)
