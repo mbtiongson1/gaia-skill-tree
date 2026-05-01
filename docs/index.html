@@ -421,6 +421,163 @@
   /* ── ANIMATE ON SCROLL ── */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
   .reveal.visible{opacity:1;transform:none}
+
+  /* ── SKILL EXPLORER OVERLAY ── */
+  :root {
+    --glow-II:  0 0 8px #63cab7, 0 0 22px rgba(99,202,183,.35);
+    --glow-III: 0 0 10px #a78bfa, 0 0 26px rgba(167,139,250,.4);
+    --glow-IV:  0 0 14px #e879f9, 0 0 32px rgba(232,121,249,.45);
+    --glow-V:   0 0 18px #fbbf24, 0 0 40px rgba(251,191,36,.5);
+    --glow-VI:  0 0 20px #fbbf24, 0 0 50px rgba(251,191,36,.6), 0 0 80px rgba(56,189,248,.3);
+  }
+  .skill-explorer {
+    display:none;position:fixed;inset:0;z-index:200;
+    background:var(--bg);overflow-y:auto;
+  }
+  .skill-explorer.open { display:block; }
+  .se-topbar {
+    position:sticky;top:0;z-index:10;
+    display:flex;align-items:center;gap:1rem;
+    padding:.85rem 2rem;
+    background:rgba(3,7,18,.88);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .se-topbar-actions { margin-left:auto;display:flex;gap:.6rem; }
+  #se-breadcrumb { font-size:.85rem;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .se-btn-ghost {
+    background:transparent;border:1px solid var(--border);color:var(--text);
+    padding:.38rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem;
+    transition:border-color .2s,color .2s;
+  }
+  .se-btn-ghost:hover { border-color:var(--basic);color:var(--basic); }
+  .se-btn-action {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:.38rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem;
+    transition:border-color .2s,color .2s;
+  }
+  .se-btn-action:hover { border-color:var(--extra);color:var(--extra); }
+  .se-body { max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem; }
+  .se-hero {
+    display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;
+  }
+  @media(max-width:700px){.se-hero{grid-template-columns:1fr;}}
+  .se-hero-card {
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:1.8rem;
+    transition:box-shadow .3s;
+  }
+  .se-hero-card[data-level="II"]  { box-shadow:var(--glow-II);  }
+  .se-hero-card[data-level="III"] { box-shadow:var(--glow-III); }
+  .se-hero-card[data-level="IV"]  { box-shadow:var(--glow-IV);  }
+  .se-hero-card[data-level="V"]   { box-shadow:var(--glow-V); animation:se-pulse 2.4s ease-in-out infinite; }
+  .se-hero-card[data-level="VI"]  { animation:se-shimmer 3s linear infinite,se-pulse 2s ease-in-out infinite; }
+  @keyframes se-pulse {
+    0%,100%{box-shadow:var(--glow-V);}
+    50%{box-shadow:0 0 28px #fbbf24,0 0 60px rgba(251,191,36,.65);}
+  }
+  @keyframes se-shimmer {
+    0%{border-color:rgba(56,189,248,.6);}
+    25%{border-color:rgba(192,132,252,.6);}
+    50%{border-color:rgba(245,158,11,.6);}
+    75%{border-color:rgba(232,121,249,.6);}
+    100%{border-color:rgba(56,189,248,.6);}
+  }
+  .se-skill-name { font-size:1.7rem;font-weight:800;margin-bottom:.3rem; }
+  .se-contrib { font-size:.88rem;color:var(--muted);margin-bottom:1rem; }
+  .se-badges { display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.2rem; }
+  .se-badge {
+    display:inline-block;padding:.22rem .7rem;border-radius:20px;
+    font-size:.75rem;font-weight:600;border:1px solid;
+  }
+  .se-desc-panel { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.8rem; }
+  .se-desc-panel h3 { font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem; }
+  .se-desc-text { line-height:1.75;color:var(--text); }
+  .se-tags { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem; }
+  .se-tag { background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--basic);padding:.18rem .6rem;border-radius:20px;font-size:.75rem; }
+  .se-tabs {
+    display:flex;gap:.4rem;margin-bottom:2rem;
+    border-bottom:1px solid var(--border);padding-bottom:0;
+    position:sticky;top:56px;z-index:9;
+    background:var(--bg);padding-top:.6rem;
+  }
+  .se-tab {
+    background:transparent;border:none;color:var(--muted);
+    padding:.6rem 1.1rem .8rem;cursor:pointer;font-size:.9rem;
+    border-bottom:2px solid transparent;margin-bottom:-1px;
+    transition:color .2s,border-color .2s;
+  }
+  .se-tab.active { color:var(--basic);border-bottom-color:var(--basic); }
+  .se-tab:hover:not(.active) { color:var(--text); }
+  .se-section { display:none;animation:se-fadein .25s ease; }
+  .se-section.active { display:block; }
+  @keyframes se-fadein { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+  .se-section h3 { font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:var(--text); }
+  .se-install-block {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:1.2rem 1.4rem;margin-bottom:.9rem;
+    display:flex;align-items:center;gap:1rem;
+  }
+  .se-install-block.recommended { border-color:rgba(56,189,248,.35);box-shadow:0 0 0 1px rgba(56,189,248,.12); }
+  .se-install-label { font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;min-width:120px;color:var(--muted); }
+  .se-install-label span { display:block;font-size:.65rem;color:var(--basic);margin-top:.15rem; }
+  .se-install-cmd { font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text);flex:1;word-break:break-all; }
+  .se-copy-btn {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-size:.75rem;white-space:nowrap;
+    transition:border-color .2s,color .2s;
+  }
+  .se-copy-btn:hover { border-color:var(--basic);color:var(--basic); }
+  .se-docs-block { margin-bottom:2rem; }
+  .se-docs-block h4 { font-size:.88rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.8rem; }
+  .se-evidence-row { display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.85rem; }
+  .se-ev-class { font-weight:700;min-width:28px;color:var(--ultimate); }
+  .se-ev-link { color:var(--basic);text-decoration:none;word-break:break-all; }
+  .se-ev-link:hover { text-decoration:underline; }
+  .se-ev-date { color:var(--muted);white-space:nowrap; }
+  .se-known-agent { display:inline-block;background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25);color:#c084fc;padding:.22rem .65rem;border-radius:20px;font-size:.78rem;margin:.2rem; }
+  /* FLOWCHART */
+  .se-flowchart-wrap { position:relative;overflow:auto;min-height:320px;padding:1.5rem 1rem; }
+  .se-flowchart-svg { position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible; }
+  .se-flowchart-rows { display:flex;flex-direction:column;gap:48px;align-items:center; }
+  .se-flowchart-row { display:flex;gap:28px;justify-content:center;flex-wrap:wrap; }
+  .se-flowchart-row-label { text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px; }
+  .flow-node {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.8rem 1rem;min-width:140px;max-width:180px;cursor:pointer;
+    transition:transform .2s,box-shadow .2s;text-align:center;
+    position:relative;
+  }
+  .flow-node:hover { transform:translateY(-3px); }
+  .flow-node.current { border-color:var(--basic);outline:2px solid rgba(56,189,248,.3); }
+  .flow-node[data-level="II"]  { box-shadow:var(--glow-II); }
+  .flow-node[data-level="III"] { box-shadow:var(--glow-III); }
+  .flow-node[data-level="IV"]  { box-shadow:var(--glow-IV); }
+  .flow-node[data-level="V"]   { box-shadow:var(--glow-V);animation:flow-pulse-V 2.2s ease-in-out infinite; }
+  .flow-node[data-level="VI"]  { box-shadow:var(--glow-VI);animation:flow-shimmer-VI 3s linear infinite,flow-pulse-V 2s ease-in-out infinite; }
+  @keyframes flow-pulse-V {
+    0%,100%{box-shadow:var(--glow-V);}
+    50%{box-shadow:0 0 28px #fbbf24,0 0 55px rgba(251,191,36,.7);}
+  }
+  @keyframes flow-shimmer-VI {
+    0%,100%{border-color:rgba(56,189,248,.7);}
+    33%{border-color:rgba(192,132,252,.7);}
+    66%{border-color:rgba(245,158,11,.7);}
+  }
+  .fn-level { display:inline-block;font-size:.68rem;font-weight:700;margin-bottom:.3rem;padding:.12rem .5rem;border-radius:20px; }
+  .fn-name { display:block;font-size:.88rem;font-weight:700;margin-bottom:.2rem; }
+  .fn-contrib { display:block;font-size:.72rem;color:var(--muted); }
+  .fn-type { display:block;font-size:.7rem;color:var(--muted);margin-top:.25rem; }
+  /* TIMELINE */
+  .se-timeline { position:relative;padding-left:28px; }
+  .se-timeline::before { content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border); }
+  .se-tl-event { position:relative;margin-bottom:1.4rem; }
+  .se-tl-dot { position:absolute;left:-24px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--basic);border:2px solid var(--bg); }
+  .se-tl-date { font-size:.75rem;color:var(--muted);margin-bottom:.2rem; }
+  .se-tl-msg { font-size:.88rem;color:var(--text); }
+  .se-tl-sha { font-size:.72rem;color:var(--muted);font-family:monospace; }
+  .se-empty { color:var(--muted);font-size:.9rem;padding:1rem 0; }
+  .se-repo-row { display:flex;align-items:center;gap:.7rem;margin-top:1rem;padding:.8rem 1rem;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:8px; }
+  .se-repo-url { font-size:.82rem;color:var(--basic);word-break:break-all; }
 </style>
 </head>
 <body>
@@ -1479,7 +1636,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       .map(function(k){ return '<a class="ns-link-btn" href="' + esc(links[k]) + '" target="_blank" rel="noopener">\u2197 ' + esc(k.charAt(0).toUpperCase()+k.slice(1)) + '</a>'; })
       .join('');
 
-    return '<article class="ns-card" data-level="' + esc(ns.level) + '" data-id="' + esc(ns.id) + '">' +
+    return '<article class="ns-card" data-level="' + esc(ns.level) + '" data-id="' + esc(ns.id) + '" onclick="openSkillExplorer(\'' + esc(ns.id).replace(/'/g,"\\'") + '\')" style="cursor:pointer">' +
   '<div class="ns-card-head">' +
     '<div style="flex:1;min-width:0">' +
       '<div class="ns-pill">' +
@@ -1540,6 +1697,10 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       var allNamed = [];
       Object.values(buckets).forEach(function(arr){ if (Array.isArray(arr)) Array.prototype.push.apply(allNamed, arr); });
 
+      window._gaiaSkillMap = skillMap;
+      window._gaiaNamedBuckets = buckets;
+      window._gaiaNamedAll = allNamed;
+
       var levelOrder = ['II','III','IV','V','VI'];
       allNamed.sort(function(a, b) {
         var d = levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
@@ -1585,6 +1746,459 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 <script>
 (function(){
+  var LEVEL_META_SE = {
+    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+    'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+  };
+  var RARITY_COLOR = { common:'#94a3b8', uncommon:'#38bdf8', rare:'#a78bfa', epic:'#e879f9', legendary:'#fbbf24' };
+  var TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
+
+  var REPO_SLUG = (function(){
+    var m = location.hostname.match(/^(.+)\.github\.io$/);
+    if (m) return m[1] + '/gaia-skill-tree';
+    return 'mbtiongson1/gaia-skill-tree';
+  })();
+
+  function esc(v) {
+    return String(v == null ? '':''+v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function(){
+      var orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function(){ btn.textContent = orig; }, 1600);
+    }).catch(function(){ btn.textContent = 'Error'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); });
+  }
+
+  // ── DATA RESOLUTION ──────────────────────────────────────────
+  function waitForData(cb) {
+    // The named-skills IIFE exposes data on window after init
+    var tries = 0;
+    function check() {
+      if (window._gaiaSkillMap && window._gaiaNamedBuckets) { cb(); return; }
+      if (++tries > 40) { cb(); return; }
+      setTimeout(check, 150);
+    }
+    check();
+  }
+
+  function findNamedSkill(id) {
+    var buckets = window._gaiaNamedBuckets || {};
+    for (var ref in buckets) {
+      var arr = buckets[ref];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) return arr[i];
+      }
+    }
+    return null;
+  }
+
+  function findGeneric(id) {
+    return (window._gaiaSkillMap || {})[id] || null;
+  }
+
+  // ── RENDER HERO ──────────────────────────────────────────────
+  function renderHero(ns, generic) {
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
+    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
+    var rarityColor = RARITY_COLOR[(generic && generic.rarity) || 'common'];
+    var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+
+    var badgesHtml = [
+      '<span class="se-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' · ' + lm.name + '</span>',
+      generic ? '<span class="se-badge" style="color:' + typeColor + ';background:rgba(0,0,0,.3);border-color:' + typeColor + '40">' + typeSymbol + ' ' + esc(generic.type || '') + '</span>' : '',
+      generic && generic.rarity ? '<span class="se-badge" style="color:' + rarityColor + ';background:rgba(0,0,0,.3);border-color:' + rarityColor + '40">' + esc(generic.rarity) + '</span>' : '',
+      ns.origin ? '<span class="se-badge" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">★ origin</span>' : '',
+    ].filter(Boolean).join('');
+
+    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
+      '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
+      '<div class="se-contrib">' + esc(ns.contributor) + ' / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
+      '<div class="se-badges">' + badgesHtml + '</div>' +
+      (ns.title ? '<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.8rem">"' + esc(ns.title) + '"</div>' : '') +
+      (generic ? '<div style="font-size:.82rem;color:var(--muted)">Generic skill: <strong style="color:var(--text)">' + esc(generic.name || ns.genericSkillRef) + '</strong></div>' : '') +
+      (repoUrl ? '<div class="se-repo-row"><span class="se-repo-url">' + esc(repoUrl) + '</span></div>' : '') +
+    '</div>';
+
+    var tags = Array.isArray(ns.tags) ? ns.tags : [];
+    var heroRight = '<div class="se-desc-panel">' +
+      '<h3>Description</h3>' +
+      '<p class="se-desc-text">' + esc(ns.description || (generic && generic.description) || '') + '</p>' +
+      (tags.length ? '<div class="se-tags">' + tags.map(function(t){ return '<span class="se-tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+    '</div>';
+
+    document.getElementById('seHero').innerHTML = heroLeft + heroRight;
+
+    // wire Open Repo button
+    var openBtn = document.getElementById('seOpenRepo');
+    if (repoUrl) { openBtn.onclick = function(){ window.open(repoUrl,'_blank','noopener'); }; openBtn.style.display=''; }
+    else { openBtn.style.display = 'none'; }
+  }
+
+  // ── RENDER DESCRIPTION TAB ───────────────────────────────────
+  function renderDescription(ns, generic) {
+    var el = document.getElementById('se-description');
+    var prereqsHtml = '';
+    var derivsHtml = '';
+    if (generic) {
+      var sm = window._gaiaSkillMap || {};
+      if (Array.isArray(generic.prerequisites) && generic.prerequisites.length) {
+        prereqsHtml = '<div class="se-docs-block"><h4>Prerequisites</h4><div>' +
+          generic.prerequisites.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+      if (Array.isArray(generic.derivatives) && generic.derivatives.length) {
+        derivsHtml = '<div class="se-docs-block"><h4>Unlocks</h4><div>' +
+          generic.derivatives.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+    }
+    el.innerHTML = '<h3>About this skill</h3>' +
+      '<p style="line-height:1.75;margin-bottom:1.5rem">' + esc(ns.description || '') + '</p>' +
+      prereqsHtml + derivsHtml;
+  }
+
+  // ── RENDER INSTALL TAB ───────────────────────────────────────
+  function renderInstall(ns) {
+    var el = document.getElementById('se-install');
+    var id = ns.id;
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var cloneUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.git$/,'') : repoUrl;
+
+    function installBlock(label, sublabel, cmd, recommended, copyable) {
+      var cls = 'se-install-block' + (recommended ? ' recommended' : '');
+      return '<div class="' + cls + '">' +
+        '<div class="se-install-label">' + label + (sublabel ? '<span>' + sublabel + '</span>' : '') + '</div>' +
+        '<code class="se-install-cmd">' + esc(cmd) + '</code>' +
+        (copyable !== false ? '<button class="se-copy-btn" data-cmd="' + esc(cmd) + '">Copy</button>' : '') +
+      '</div>';
+    }
+
+    el.innerHTML = '<h3>Installation</h3>' +
+      installBlock('Gaia', '★ recommended', 'gaia install ' + id, true) +
+      installBlock('npx', '@gaia-registry/cli', 'npx @gaia-registry/cli install ' + id, false) +
+      (cloneUrl ? installBlock('Git Clone', '', 'git clone ' + cloneUrl, false) : '');
+
+    el.querySelectorAll('.se-copy-btn').forEach(function(btn){
+      btn.onclick = function(){ copyText(btn.dataset.cmd, btn); };
+    });
+  }
+
+  // ── RENDER DOCS TAB ──────────────────────────────────────────
+  function renderDocs(ns, generic) {
+    var el = document.getElementById('se-docs');
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var issuesUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '/issues' : '';
+    var readmeUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '#readme' : '';
+
+    var evidenceHtml = '';
+    if (generic && Array.isArray(generic.evidence) && generic.evidence.length) {
+      evidenceHtml = '<div class="se-docs-block"><h4>Evidence</h4>' +
+        generic.evidence.map(function(ev){
+          return '<div class="se-evidence-row">' +
+            '<span class="se-ev-class">'+esc(ev.class||'?')+'</span>' +
+            '<a class="se-ev-link" href="'+esc(ev.source||'#')+'" target="_blank" rel="noopener">'+esc(ev.source||'—')+'</a>' +
+            '<span class="se-ev-date">'+esc(ev.date||'')+'</span>' +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    var skillDefHtml = generic ? '<div class="se-docs-block"><h4>Generic Skill Definition</h4>' +
+      '<p style="line-height:1.75;margin-bottom:.8rem">'+esc(generic.description||'')+'</p>' +
+      '<p style="font-size:.82rem;color:var(--muted)">Status: <strong style="color:var(--text)">'+esc(generic.status||'provisional')+'</strong>  ·  Level: <strong style="color:var(--text)">'+esc(generic.level||'')+'</strong></p>' +
+    '</div>' : '';
+
+    var agentsHtml = '';
+    if (generic && Array.isArray(generic.knownAgents) && generic.knownAgents.length) {
+      agentsHtml = '<div class="se-docs-block"><h4>Known Agents</h4><div>' +
+        generic.knownAgents.map(function(a){ return '<span class="se-known-agent">'+esc(a)+'</span>'; }).join('') +
+      '</div></div>';
+    }
+
+    var linksHtml = '<div class="se-docs-block"><h4>Links</h4>' +
+      (repoUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(repoUrl)+'" target="_blank" rel="noopener">Repository ↗</a></p>' : '') +
+      (readmeUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(readmeUrl)+'" target="_blank" rel="noopener">README ↗</a></p>' : '') +
+      (issuesUrl ? '<p><a style="color:var(--basic)" href="'+esc(issuesUrl)+'" target="_blank" rel="noopener">Issues ↗</a></p>' : '') +
+    '</div>';
+
+    el.innerHTML = '<h3>Documentation</h3>' + skillDefHtml + evidenceHtml + agentsHtml + linksHtml;
+  }
+
+  // ── RENDER FLOWCHART (upgrade path) ─────────────────────────
+  function renderFlowchart(ns, generic) {
+    var el = document.getElementById('se-upgrade');
+    var sm = window._gaiaSkillMap || {};
+    var buckets = window._gaiaNamedBuckets || {};
+    var lm = LEVEL_META_SE;
+
+    function makeLevelStyle(level) {
+      var m = lm[level]; if (!m) return '';
+      return 'color:' + m.color + ';background:' + m.bg + ';border-color:' + m.border;
+    }
+
+    function flowNode(id, name, contrib, level, typeStr, isCurrent, isNamed) {
+      var lmEntry = lm[level] || {};
+      var clsExtra = isCurrent ? ' current' : '';
+      var contribHtml = contrib ? '<span class="fn-contrib">' + esc(contrib) + '</span>' : '';
+      var typeHtml = typeStr ? '<span class="fn-type">' + esc(typeStr) + '</span>' : '';
+      var levelHtml = level ? '<span class="fn-level" style="' + makeLevelStyle(level) + '">' + esc(level) + '</span>' : '';
+      return '<div class="flow-node' + clsExtra + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
+        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml + typeHtml +
+      '</div>';
+    }
+
+    // Row 0: prerequisite generic skills
+    var prereqs = generic && Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
+    var prereqNodes = prereqs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    // Row 1: tier progression of current generic skill (levels from generic.level floor down to 0)
+    var LEVEL_ORDER = ['0','I','II','III','IV','V','VI'];
+    var currentLvIdx = LEVEL_ORDER.indexOf(generic ? generic.level : '');
+    var tierNodes = [];
+    for (var i = 0; i <= Math.max(currentLvIdx, 0) && i < LEVEL_ORDER.length; i++) {
+      var lvl = LEVEL_ORDER[i];
+      var isCur = (lvl === (generic && generic.level));
+      tierNodes.push('<div class="flow-node' + (isCur?' current':'') + '" data-level="' + esc(lvl) + '" data-id="' + esc(ns.genericSkillRef||'') + '">' +
+        '<span class="fn-level" style="' + makeLevelStyle(lvl) + '">' + esc(lvl||'0') + '</span>' +
+        '<span class="fn-name">' + esc((generic&&generic.name)||ns.genericSkillRef||'') + '</span>' +
+        '<span class="fn-type">' + esc(lvl === LEVEL_ORDER[0] ? 'Basic' : (LEVEL_META_SE[lvl]&&LEVEL_META_SE[lvl].name)||lvl) + '</span>' +
+      '</div>');
+    }
+
+    // Row 2: named implementations in the same bucket
+    var siblings = (buckets[ns.genericSkillRef] || []);
+    var namedNodes = siblings.map(function(sib){
+      return flowNode(sib.id, sib.name||sib.id, sib.contributor, sib.level, '', sib.id===ns.id, true);
+    });
+    if (!namedNodes.length) namedNodes = [flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true)];
+
+    // Row 3: derivative generic skills
+    var derivs = generic && Array.isArray(generic.derivatives) ? generic.derivatives : [];
+    var derivNodes = derivs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    function makeRow(label, nodes, id) {
+      if (!nodes.length) return '';
+      return '<div>' +
+        '<div class="se-flowchart-row-label">' + label + '</div>' +
+        '<div class="se-flowchart-row" id="' + id + '">' + nodes.join('') + '</div>' +
+      '</div>';
+    }
+
+    el.innerHTML = '<h3>Upgrade Path &amp; Adjacent Skills</h3>' +
+      '<div class="se-flowchart-wrap" id="seFlowWrap">' +
+        '<div class="se-flowchart-rows">' +
+          makeRow('Prerequisites', prereqNodes, 'sfRow0') +
+          makeRow('Tier Progression', tierNodes, 'sfRow1') +
+          makeRow('Named Implementations', namedNodes, 'sfRow2') +
+          makeRow('Unlocks', derivNodes, 'sfRow3') +
+        '</div>' +
+        '<svg class="se-flowchart-svg" id="seFlowSvg"></svg>' +
+      '</div>';
+
+    // Draw SVG edges after a brief layout settle
+    setTimeout(function(){ drawFlowEdges(); }, 80);
+  }
+
+  function drawFlowEdges() {
+    var wrap = document.getElementById('seFlowWrap');
+    var svg = document.getElementById('seFlowSvg');
+    if (!wrap || !svg) return;
+    svg.innerHTML = '';
+    var wRect = wrap.getBoundingClientRect();
+    var rowIds = [['sfRow0','sfRow1'],['sfRow1','sfRow2'],['sfRow2','sfRow3']];
+    rowIds.forEach(function(pair){
+      var fromEl = document.getElementById(pair[0]);
+      var toEl   = document.getElementById(pair[1]);
+      if (!fromEl || !toEl) return;
+      var fromNodes = fromEl.querySelectorAll('.flow-node');
+      var toNodes   = toEl.querySelectorAll('.flow-node');
+      if (!fromNodes.length || !toNodes.length) return;
+      // connect each source to each target (for small counts); cap at 3x3
+      var froms = Array.from(fromNodes).slice(0,3);
+      var tos   = Array.from(toNodes).slice(0,3);
+      froms.forEach(function(fn){
+        var fr = fn.getBoundingClientRect();
+        var fx = fr.left + fr.width/2 - wRect.left;
+        var fy = fr.bottom - wRect.top;
+        tos.forEach(function(tn){
+          var tr = tn.getBoundingClientRect();
+          var tx = tr.left + tr.width/2 - wRect.left;
+          var ty = tr.top - wRect.top;
+          var cy = (fy + ty) / 2;
+          var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+          path.setAttribute('d','M'+fx+','+fy+' C'+fx+','+cy+' '+tx+','+cy+' '+tx+','+ty);
+          path.setAttribute('stroke','rgba(56,189,248,.22)');
+          path.setAttribute('stroke-width','1.5');
+          path.setAttribute('fill','none');
+          path.setAttribute('stroke-dasharray','4 3');
+          svg.appendChild(path);
+        });
+      });
+    });
+  }
+
+  // ── RENDER TIMELINE ──────────────────────────────────────────
+  function renderTimeline(ns) {
+    var el = document.getElementById('se-timeline');
+    el.innerHTML = '<h3>Update Timeline</h3><div class="se-empty">Loading history…</div>';
+    var parts = ns.id.split('/');
+    var contributor = parts[0], skillName = parts[1] || '';
+    var apiUrl = 'https://api.github.com/repos/' + REPO_SLUG +
+      '/commits?path=graph%2Fnamed%2F' + contributor + '%2F' + skillName + '.md&per_page=20';
+    fetch(apiUrl)
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(commits){
+        if (!Array.isArray(commits) || !commits.length) {
+          // fallback to static dates
+          var evts = [];
+          if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+          if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+          renderTimelineEvents(el, evts);
+          return;
+        }
+        var evts = commits.map(function(c){
+          return {
+            date: (c.commit && c.commit.author && c.commit.author.date) ? c.commit.author.date.slice(0,10) : '',
+            msg: (c.commit && c.commit.message) ? c.commit.message.split('\n')[0] : '',
+            sha: c.sha ? c.sha.slice(0,7) : ''
+          };
+        });
+        renderTimelineEvents(el, evts);
+      })
+      .catch(function(){
+        var evts = [];
+        if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+        if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+        renderTimelineEvents(el, evts);
+      });
+  }
+
+  function renderTimelineEvents(el, evts) {
+    if (!evts.length) { el.innerHTML = '<h3>Update Timeline</h3><div class="se-empty">No history available.</div>'; return; }
+    el.innerHTML = '<h3>Update Timeline</h3><div class="se-timeline">' +
+      evts.map(function(ev){
+        return '<div class="se-tl-event">' +
+          '<div class="se-tl-dot"></div>' +
+          '<div class="se-tl-date">' + esc(ev.date) + '</div>' +
+          '<div class="se-tl-msg">' + esc(ev.msg) + '</div>' +
+          (ev.sha ? '<div class="se-tl-sha">' + esc(ev.sha) + '</div>' : '') +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  // ── MAIN OPEN / CLOSE ────────────────────────────────────────
+  function openExplorer(id) {
+    waitForData(function(){
+      var ns = findNamedSkill(id);
+      if (!ns) {
+        // try fallback: maybe id is a genericSkillRef — pick first named in that bucket
+        var buckets = window._gaiaNamedBuckets || {};
+        if (buckets[id] && buckets[id].length) { ns = buckets[id][0]; }
+      }
+      if (!ns) return;
+      var generic = ns.genericSkillRef ? findGeneric(ns.genericSkillRef) : null;
+
+      document.getElementById('skillExplorer').classList.add('open');
+      document.getElementById('seBreadcrumb').textContent = ns.id;
+      document.getElementById('skillExplorer').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+
+      // set active tab to description
+      document.querySelectorAll('.se-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelector('.se-tab[data-tab="description"]').classList.add('active');
+      document.querySelectorAll('.se-section').forEach(function(s){ s.classList.remove('active'); });
+      document.getElementById('se-description').classList.add('active');
+
+      renderHero(ns, generic);
+      renderDescription(ns, generic);
+      renderInstall(ns);
+      renderDocs(ns, generic);
+      renderFlowchart(ns, generic);
+      renderTimeline(ns);
+
+      // Export button
+      document.getElementById('seExport').onclick = function(){
+        var data = JSON.stringify({ namedSkill: ns, generic: generic }, null, 2);
+        var blob = new Blob([data], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = ns.id.replace('/','_') + '.json';
+        a.click();
+      };
+
+      // Share button
+      document.getElementById('seShare').onclick = function(){
+        var url = location.origin + location.pathname + '#explorer/' + ns.id;
+        if (navigator.share) {
+          navigator.share({ title: ns.name || ns.id, url: url }).catch(function(){});
+        } else {
+          navigator.clipboard.writeText(url).then(function(){
+            var btn = document.getElementById('seShare');
+            var orig = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function(){ btn.textContent = orig; }, 1600);
+          });
+        }
+      };
+
+      // Push hash (skip if already correct)
+      var newHash = '#explorer/' + ns.id;
+      if (location.hash !== newHash) history.pushState(null,'',newHash);
+    });
+  }
+
+  function closeExplorer() {
+    document.getElementById('skillExplorer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── TAB SWITCHING ────────────────────────────────────────────
+  document.getElementById('seTabs').addEventListener('click', function(e){
+    var btn = e.target.closest('.se-tab');
+    if (!btn) return;
+    document.querySelectorAll('.se-tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.se-section').forEach(function(s){ s.classList.remove('active'); });
+    btn.classList.add('active');
+    var sec = document.getElementById('se-' + btn.dataset.tab);
+    if (sec) sec.classList.add('active');
+    // redraw flowchart edges when tab becomes visible
+    if (btn.dataset.tab === 'upgrade') setTimeout(drawFlowEdges, 60);
+  });
+
+  // Back button
+  document.getElementById('seBack').onclick = function(){
+    closeExplorer();
+    history.back();
+  };
+
+  // Hash routing
+  function routeHash() {
+    var m = location.hash.match(/^#explorer\/(.+\/[^/?#]+)$/);
+    if (m) { openExplorer(m[1]); }
+    else { closeExplorer(); }
+  }
+  window.addEventListener('hashchange', routeHash);
+  routeHash();
+
+  // Expose globally for onclick handlers
+  window.openSkillExplorer = openExplorer;
+})();
+</script>
+
+<script>
+(function(){
   function initCopyButtons(){
     document.querySelectorAll('pre').forEach(function(pre){
       if(pre.closest('.pre-wrap')) return; // already wrapped
@@ -1616,6 +2230,34 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   }
 })();
 </script>
+
+<!-- ─── SKILL EXPLORER OVERLAY ─── -->
+<div id="skillExplorer" class="skill-explorer" role="dialog" aria-modal="true" aria-label="Skill Explorer">
+  <div class="se-topbar">
+    <button id="seBack" class="se-btn-ghost">&#8592; Back</button>
+    <span id="seBreadcrumb" class="se-breadcrumb"></span>
+    <div class="se-topbar-actions">
+      <button id="seOpenRepo" class="se-btn-action">Open Repository &#8599;</button>
+      <button id="seExport"   class="se-btn-action">Export JSON</button>
+      <button id="seShare"    class="se-btn-action">Share</button>
+    </div>
+  </div>
+  <div class="se-body">
+    <div id="seHero" class="se-hero"></div>
+    <nav class="se-tabs" id="seTabs">
+      <button class="se-tab active" data-tab="description">Description</button>
+      <button class="se-tab" data-tab="install">Install</button>
+      <button class="se-tab" data-tab="docs">Docs</button>
+      <button class="se-tab" data-tab="upgrade">Upgrade Path</button>
+      <button class="se-tab" data-tab="timeline">Timeline</button>
+    </nav>
+    <div id="se-description" class="se-section active"></div>
+    <div id="se-install"     class="se-section"></div>
+    <div id="se-docs"        class="se-section"></div>
+    <div id="se-upgrade"     class="se-section"></div>
+    <div id="se-timeline"    class="se-section"></div>
+  </div>
+</div>
 
 </body>
 </html>

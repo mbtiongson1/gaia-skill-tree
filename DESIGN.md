@@ -136,6 +136,42 @@ linear-gradient(135deg, #38bdf8 0%, #c084fc 50%, #f59e0b 100%)
 
 ---
 
+## Skill Explorer
+
+The skill explorer overlay (`#skillExplorer`) introduces per-level glow tokens, a shimmer animation for Level VI nodes, and a pulse animation for Level V nodes. These augment the rank colors defined above.
+
+### Glow Tokens
+
+| Token | Value | Level | Rank |
+|---|---|---|---|
+| `--glow-II`  | `0 0 8px #63cab7, 0 0 22px rgba(99,202,183,.35)`   | II  | Named |
+| `--glow-III` | `0 0 10px #a78bfa, 0 0 26px rgba(167,139,250,.4)` | III | Evolved |
+| `--glow-IV`  | `0 0 14px #e879f9, 0 0 32px rgba(232,121,249,.45)`| IV  | Hardened |
+| `--glow-V`   | `0 0 18px #fbbf24, 0 0 40px rgba(251,191,36,.5)`  | V   | Transcendent |
+| `--glow-VI`  | `0 0 20px #fbbf24, 0 0 50px rgba(251,191,36,.6), 0 0 80px rgba(56,189,248,.3)` | VI | Transcendent ★ |
+
+Glow tokens use the same base colors as the rank system above. Tokens are applied as `box-shadow` values on `.flow-node[data-level="X"]` and `.se-hero-card[data-level="X"]`.
+
+### Animations
+
+| Animation | Element | Behavior |
+|---|---|---|
+| `se-pulse` / `flow-pulse-V` | Level V nodes | Gold `box-shadow` oscillates between `--glow-V` and a brighter `0 0 28px #fbbf24, 0 0 60px rgba(251,191,36,.65)` on a 2.4s loop |
+| `se-shimmer` / `flow-shimmer-VI` | Level VI nodes | `border-color` cycles through cyan → purple → amber → fuchsia on a 3s loop, combined with the pulse |
+
+### Explorer UI Tokens
+
+Additional tokens used only in the explorer overlay (not added to `:root` — defined inline):
+
+| Color | Hex | Use |
+|---|---|---|
+| Skill Explorer background | `rgba(3,7,18,.88)` | Topbar background (matches `--bg` + blur) |
+| Install recommended border | `rgba(56,189,248,.35)` | Gaia install block highlight |
+| Evidence class color | `#f59e0b` (`--ultimate`) | Evidence class labels (A/B/C) |
+| Flowchart edge stroke | `rgba(56,189,248,.22)` | SVG bezier curves connecting flowchart rows |
+
+---
+
 ## Rarity (computed)
 
 Rarity is derived from real agent prevalence by `scripts/computeRarity.py` — never declared by contributors. It does not have a fixed color in the UI; rarity labels are rendered in `var(--muted)` text within skill pages and tree views.
