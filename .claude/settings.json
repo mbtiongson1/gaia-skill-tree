@@ -6,7 +6,7 @@
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
-        "hooks": ["gaia _hook --event file_edit 2>/dev/null || true"]
+        "hooks": [{"type": "command", "command": "gaia _hook --event file_edit 2>/dev/null || true"}]
       }
     ]
   }
