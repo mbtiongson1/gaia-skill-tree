@@ -169,8 +169,8 @@
   .pre-wrap{position:relative}
   .copy-btn{
     position:absolute;top:.45rem;right:.45rem;
-    padding:.25rem .55rem;
-    font-size:.72rem;font-family:inherit;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    width:28px;height:28px;padding:0;
     color:var(--muted);background:rgba(15,23,42,.85);
     border:1px solid var(--border);border-radius:5px;
     cursor:pointer;transition:color .15s,border-color .15s,opacity .15s;
@@ -443,6 +443,68 @@
   .ns-chip-variant{color:#f59e0b;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25)}
   .ns-chip-ref{color:#63cab7;background:rgba(99,202,183,.08);border-color:rgba(99,202,183,.25)}
   .ns-tag{font-size:.72rem;padding:.18rem .52rem;border-radius:999px;background:rgba(100,116,139,.1);color:var(--muted);border:1px solid var(--border)}
+  /* ── named h2 red ── */
+  #named h2 { color:#ef4444; }
+  /* ── search & sort controls ── */
+  .ns-search {
+    flex:1;min-width:150px;max-width:300px;
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:.4rem .9rem;color:var(--text);font-size:.83rem;font-family:inherit;
+    outline:none;transition:border-color .2s;
+  }
+  .ns-search::placeholder { color:var(--muted); }
+  .ns-search:focus { border-color:rgba(56,189,248,.5); }
+  .ns-sort-sel {
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:.35rem .7rem;color:var(--muted);font-size:.78rem;font-family:inherit;
+    cursor:pointer;outline:none;transition:border-color .2s,color .15s;
+  }
+  .ns-sort-sel:hover,.ns-sort-sel:focus { border-color:rgba(56,189,248,.4);color:var(--text); }
+  /* ── terminal install row (inside cards) ── */
+  .ns-install-row {
+    display:flex;align-items:center;gap:.4rem;
+    background:var(--bg);border:1px solid var(--border);border-radius:7px;
+    padding:.38rem .7rem;margin-top:.55rem;
+    font-family:'JetBrains Mono','Fira Code',monospace;font-size:.7rem;
+    color:var(--basic);overflow:hidden;flex-shrink:0;
+  }
+  .ns-install-prompt { color:var(--muted);flex-shrink:0; }
+  .ns-install-cmd-txt { flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .ns-install-copy {
+    background:transparent;border:none;color:var(--muted);padding:0;
+    cursor:pointer;display:flex;align-items:center;flex-shrink:0;transition:color .15s;
+  }
+  .ns-install-copy:hover { color:var(--basic); }
+  /* ── flowchart (tree) view ── */
+  .ns-grid-flow { display:flex;flex-direction:column;gap:1.6rem; }
+  .ns-fc-group { display:flex;flex-direction:column;align-items:center; }
+  .ns-fc-root {
+    display:flex;align-items:center;gap:.6rem;
+    background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.3);
+    border-radius:10px;padding:.55rem 1.3rem;
+    font-size:.82rem;font-weight:700;color:var(--basic);white-space:nowrap;
+  }
+  .ns-fc-connector { width:2px;height:22px;background:linear-gradient(to bottom,rgba(56,189,248,.4),rgba(56,189,248,.1));flex-shrink:0; }
+  .ns-fc-branches-wrap { position:relative;width:100%;display:flex;flex-direction:column;align-items:center; }
+  .ns-fc-hbar { height:2px;background:rgba(56,189,248,.15);border-radius:1px;width:70%; }
+  .ns-fc-branches { display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;padding:.5rem; }
+  .ns-fc-leaf-wrap { display:flex;flex-direction:column;align-items:center;padding-top:20px;position:relative; }
+  .ns-fc-leaf-wrap::before {
+    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:2px;height:20px;background:rgba(56,189,248,.2);
+  }
+  .ns-fc-card {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.7rem .9rem;cursor:pointer;min-width:140px;max-width:200px;
+    transition:border-color .2s,box-shadow .2s,transform .15s;--fc-glow:rgba(56,189,248,.2);
+  }
+  .ns-fc-card:hover { border-color:rgba(255,255,255,.12);box-shadow:0 0 18px var(--fc-glow);transform:translateY(-2px); }
+  .ns-fc-card[data-level="II"]  { --fc-glow:rgba(99,202,183,.25); }
+  .ns-fc-card[data-level="III"] { --fc-glow:rgba(167,139,250,.25); }
+  .ns-fc-card[data-level="IV"]  { --fc-glow:rgba(232,121,249,.3); }
+  .ns-fc-card[data-level="V"]   { --fc-glow:rgba(251,191,36,.3); }
+  .ns-fc-card-name { font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.25rem; }
+  .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted); }
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
   .ns-link-btn{
@@ -928,6 +990,7 @@
   <p class="section-sub">Contributor implementations of canonical skills — the first real agents behind every generic capability.</p>
 
   <div class="ns-controls">
+    <input type="search" id="nsSearch" class="ns-search" placeholder="Search skills, tags, contributors…" autocomplete="off">
     <div class="ns-level-tabs" id="nsLevelTabs">
       <button class="ns-tab active" type="button" data-level="all">All</button>
       <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
@@ -945,11 +1008,16 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="4" x2="16" y2="4"/><line x1="0" y1="8" x2="16" y2="8"/><line x1="0" y1="12" x2="16" y2="12"/></svg>
         List
       </button>
-      <button class="ns-view-btn" data-view="tree" title="Tree view">
+      <button class="ns-view-btn" data-view="flow" title="Tree / flowchart view">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="2" r="1.5"/><circle cx="3" cy="11" r="1.5"/><circle cx="13" cy="11" r="1.5"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="8" y1="7" x2="3" y2="9.5"/><line x1="8" y1="7" x2="13" y2="9.5"/></svg>
         Tree
       </button>
     </div>
+    <select id="nsSort" class="ns-sort-sel" title="Sort order">
+      <option value="level">&#8597; Level</option>
+      <option value="creator">&#128100; Creator</option>
+      <option value="name">A&#8211;Z Name</option>
+    </select>
   </div>
 
   <div class="ns-grid-tile" id="nsGrid">
@@ -1670,8 +1738,39 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   function nsClick(id) { return 'onclick="openSkillExplorer(\''+id.replace(/'/g,"\\'")+'\')\"'; }
   function nsDisplayName(ns) { return ns.name || ns.id.split('/')[1] || ns.id; }
 
+  // ── TAG COLORS (8-color hash wheel, matches DESIGN.md palette) ──
+  var TAG_PAL=[
+    {c:'#38bdf8',bg:'rgba(56,189,248,.12)',bd:'rgba(56,189,248,.3)'},
+    {c:'#c084fc',bg:'rgba(192,132,252,.12)',bd:'rgba(192,132,252,.3)'},
+    {c:'#63cab7',bg:'rgba(99,202,183,.12)',bd:'rgba(99,202,183,.3)'},
+    {c:'#a78bfa',bg:'rgba(167,139,250,.12)',bd:'rgba(167,139,250,.3)'},
+    {c:'#f59e0b',bg:'rgba(245,158,11,.12)',bd:'rgba(245,158,11,.3)'},
+    {c:'#e879f9',bg:'rgba(232,121,249,.12)',bd:'rgba(232,121,249,.3)'},
+    {c:'#fb923c',bg:'rgba(251,146,60,.12)',bd:'rgba(251,146,60,.3)'},
+    {c:'#4ade80',bg:'rgba(74,222,128,.12)',bd:'rgba(74,222,128,.3)'},
+  ];
+  function tagStyle(t){var h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%TAG_PAL.length;var p=TAG_PAL[h];return 'style="color:'+p.c+';background:'+p.bg+';border-color:'+p.bd+'"';}
+  function tagHtml(t){return '<span class="ns-tag" '+tagStyle(t)+'>'+esc(t)+'</span>';}
+
+  // ── TERMINAL INSTALL ROW ──
+  var CLIP_SM='<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+  var CHECK_SM='<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+  function installRow(id){
+    var cmd='gaia install '+id;
+    return '<div class="ns-install-row"><span class="ns-install-prompt">$</span>'+
+      '<span class="ns-install-cmd-txt">'+esc(cmd)+'</span>'+
+      '<button class="ns-install-copy" title="Copy install command" data-cmd="'+esc(cmd)+'" onclick="event.stopPropagation();nsInstCopy(this)">'+CLIP_SM+'</button>'+
+    '</div>';
+  }
+  window.nsInstCopy = function(btn){
+    navigator.clipboard.writeText(btn.dataset.cmd).then(function(){
+      var prev=btn.innerHTML; btn.innerHTML=CHECK_SM;
+      setTimeout(function(){btn.innerHTML=prev;},1500);
+    }).catch(function(){});
+  };
+
   function renderTile(ns, lm) {
-    var tags = (ns.tags||[]).slice(0,3).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
+    var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
     return '<article class="ns-tile" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
@@ -1680,22 +1779,23 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
       '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
       (tags ? '<div class="ns-tile-tags">' + tags + '</div>' : '') +
-      '<div class="ns-tile-arrow">\u2192</div>' +
+      installRow(ns.id) +
     '</article>';
   }
 
   function renderListRow(ns, lm) {
-    var tags = (ns.tags||[]).slice(0,2).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
+    var tags = (ns.tags||[]).slice(0,2).map(tagHtml).join('');
     return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
       '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
       '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
-      '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
+      '<span style="flex:1"></span>' +
+      installRow(ns.id) +
       '<span class="ns-lr-arrow">\u203a</span>' +
     '</article>';
   }
 
-  function renderTreeView(allNamed, levelMeta) {
+  function renderFlowchartView(allNamed, lm) {
     var groups = {};
     allNamed.forEach(function(ns) {
       var ref = ns.genericSkillRef || 'other';
@@ -1703,19 +1803,23 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       groups[ref].push(ns);
     });
     return Object.keys(groups).sort().map(function(ref) {
-      var children = groups[ref];
-      var leavesHtml = children.map(function(ns) {
-        var lm = levelMeta[ns.level] || levelMeta['II'];
-        return '<article class="ns-tree-leaf" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
-          '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
-          '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
-          '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
-          '<span class="ns-lr-arrow">\u203a</span>' +
-        '</article>';
+      var cards = groups[ref].map(function(ns) {
+        var m = lm[ns.level] || lm['II'];
+        return '<div class="ns-fc-leaf-wrap">' +
+          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
+            '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
+            (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
+            '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
+            '<div class="ns-fc-card-id">'+esc(ns.id)+'</div>' +
+          '</article>' +
+        '</div>';
       }).join('');
-      return '<div class="ns-tree-group">' +
-        '<div class="ns-tree-parent"><span class="ns-tree-ref">'+esc(ref)+'</span><span class="ns-tree-count">'+children.length+'</span></div>' +
-        '<div class="ns-tree-children">' + leavesHtml + '</div>' +
+      return '<div class="ns-fc-group">' +
+        '<div class="ns-fc-root"><span style="opacity:.5">&#9671;</span> '+esc(ref)+'</div>' +
+        '<div class="ns-fc-connector"></div>' +
+        '<div class="ns-fc-branches-wrap"><div class="ns-fc-hbar"></div>' +
+          '<div class="ns-fc-branches">'+cards+'</div>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
@@ -1724,10 +1828,14 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     var grid = document.getElementById('nsGrid');
     var tabsEl = document.getElementById('nsLevelTabs');
     var viewBtnsEl = document.getElementById('nsViewBtns');
+    var searchEl = document.getElementById('nsSearch');
+    var sortEl = document.getElementById('nsSort');
     if (!grid) return;
 
     var viewMode = 'tile';
     var levelFilter = 'all';
+    var searchQuery = '';
+    var sortMode = 'level';
     var FALLBACK_NAMED_INDEX = { buckets: {
       'automated-testing':           [{ id:'0xdarkmatter/pytest-patterns',            name:'Pytest Patterns',               contributor:'0xdarkmatter',       origin:true,  genericSkillRef:'automated-testing',           status:'named', level:'III', description:'Comprehensive pytest skill covering modern patterns for Python test automation including fixtures, parametrize, async testing, mocking, coverage strategies, integration tests, and conftest organisation for pytest 7.0+ projects.',            title:'The Quality Guardian',           tags:['pytest','python','test-automation','fixtures','async-testing','coverage','mocking'],                   links:{ github:'https://github.com/aiskillstore/marketplace' } }],
       'test-driven-development':     [{ id:'addy-osmani/test-driven-development',     name:'Test-Driven Development',       contributor:'addy-osmani',        origin:true,  genericSkillRef:'test-driven-development',     status:'named', level:'II',  description:'Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.', title:'The Red-Green Oath',             tags:['tdd','testing','red-green-refactor','workflow-enforcement','software-quality'],              links:{ github:'https://github.com/addyosmani/agent-skills' } }],
@@ -1782,14 +1890,25 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       };
 
       function renderCurrent() {
-        var filtered = levelFilter === 'all' ? allNamed : allNamed.filter(function(ns){ return ns.level === levelFilter; });
+        var q = searchQuery.toLowerCase();
+        var filtered = allNamed.filter(function(ns) {
+          if (levelFilter !== 'all' && ns.level !== levelFilter) return false;
+          if (q) {
+            var hay = (nsDisplayName(ns)+' '+ns.id+' '+(ns.tags||[]).join(' ')+' '+(ns.contributor||'')).toLowerCase();
+            if (hay.indexOf(q) === -1) return false;
+          }
+          return true;
+        });
+        if (sortMode === 'creator') filtered.sort(function(a,b){return (a.contributor||'').localeCompare(b.contributor||'');});
+        else if (sortMode === 'name') filtered.sort(function(a,b){return nsDisplayName(a).localeCompare(nsDisplayName(b));});
+        if (!filtered.length) { grid.innerHTML='<div class="ns-empty">No skills match.</div>'; return; }
         function lm(ns) { return LEVEL_META[ns.level] || LEVEL_META['II']; }
         if (viewMode === 'list') {
           grid.className = 'ns-grid-list';
           grid.innerHTML = filtered.map(function(ns){ return renderListRow(ns, lm(ns)); }).join('');
-        } else if (viewMode === 'tree') {
-          grid.className = 'ns-grid-tree';
-          grid.innerHTML = renderTreeView(filtered, LEVEL_META);
+        } else if (viewMode === 'flow') {
+          grid.className = 'ns-grid-flow';
+          grid.innerHTML = renderFlowchartView(filtered, LEVEL_META);
         } else {
           grid.className = 'ns-grid-tile';
           grid.innerHTML = filtered.map(function(ns){ return renderTile(ns, lm(ns)); }).join('');
@@ -1816,6 +1935,14 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
           viewMode = btn.dataset.view || 'tile';
           renderCurrent();
         });
+      }
+
+      if (searchEl) {
+        searchEl.addEventListener('input', function(){ searchQuery = searchEl.value; renderCurrent(); });
+      }
+
+      if (sortEl) {
+        sortEl.addEventListener('change', function(){ sortMode = sortEl.value; renderCurrent(); });
       }
 
       renderCurrent();
@@ -2279,25 +2406,28 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 <script>
 (function(){
+  var CLIP='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+  var CHECK='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
   function initCopyButtons(){
     document.querySelectorAll('pre').forEach(function(pre){
-      if(pre.closest('.pre-wrap')) return; // already wrapped
+      if(pre.closest('.pre-wrap')) return;
       var wrap = document.createElement('div');
       wrap.className = 'pre-wrap';
       pre.parentNode.insertBefore(wrap, pre);
       wrap.appendChild(pre);
       var btn = document.createElement('button');
       btn.className = 'copy-btn';
-      btn.textContent = 'Copy';
+      btn.innerHTML = CLIP;
+      btn.title = 'Copy';
       btn.addEventListener('click', function(){
         var text = pre.innerText;
         navigator.clipboard.writeText(text).then(function(){
-          btn.textContent = 'Copied!';
+          btn.innerHTML = CHECK;
           btn.classList.add('copied');
-          setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+          setTimeout(function(){ btn.innerHTML = CLIP; btn.classList.remove('copied'); }, 1800);
         }).catch(function(){
-          btn.textContent = 'Error';
-          setTimeout(function(){ btn.textContent = 'Copy'; }, 1800);
+          btn.innerHTML = CLIP;
+          setTimeout(function(){ btn.innerHTML = CLIP; }, 1800);
         });
       });
       wrap.appendChild(btn);

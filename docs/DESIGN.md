@@ -607,3 +607,63 @@ Skills are embedded using `sentence-transformers` (model: `all-MiniLM-L6-v2`, 38
 - The MCP server reads pre-computed data only — it does not run the model at query time
 - The CLI `gaia search <query>` embeds queries in real-time (requires `sentence-transformers` installed)
 - `gaia embed` regenerates the embeddings store
+
+---
+
+## Named Skills Explorer
+
+### Red section heading
+The "Named Skills Explorer" `<h2>` uses `color: #ef4444` to match the red nav link and create a distinctive brand identity for this section.
+
+### Tag Color Palette
+Tags use a deterministic 8-color palette assigned by hash of the tag name — no fixed mapping, so each tag always gets the same color across sessions.
+
+| Index | Color | Hex | Background |
+|---|---|---|---|
+| 0 | Sky | `#38bdf8` | `rgba(56,189,248,.12)` |
+| 1 | Purple | `#c084fc` | `rgba(192,132,252,.12)` |
+| 2 | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
+| 3 | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
+| 4 | Amber | `#f59e0b` | `rgba(245,158,11,.12)` |
+| 5 | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
+| 6 | Orange | `#fb923c` | `rgba(251,146,60,.12)` |
+| 7 | Green | `#4ade80` | `rgba(74,222,128,.12)` |
+
+Hash formula: `h = (h * 31 + charCode) % 8` over each character of the tag string.
+
+### Terminal Install Row
+Each skill card shows a terminal-style install command at the bottom. Class: `.ns-install-row`.
+
+```
+┌─ $ gaia install karpathy/autoresearch ─────── [📋] ─┐
+└──────────────────────────────────────────────────────┘
+```
+
+- Background: `var(--bg)` (darker than card surface)
+- Font: `JetBrains Mono` monospace, `0.7rem`
+- Prompt `$` in `var(--muted)`, command text in `var(--basic)` (sky blue)
+- Clipboard icon button: `.ns-install-copy` — shows green checkmark SVG on success
+
+### Flowchart Tree View (`.ns-grid-flow`)
+The "Tree" view renders skills as a vertical flowchart: generic skill name at top, implementation cards branching below.
+
+```
+         [◇ generic-skill-ref]
+               │
+         ──────┼──────
+         │           │
+  [Impl Card A]  [Impl Card B]
+```
+
+Layout structure:
+- `.ns-fc-group` — one group per `genericSkillRef`
+- `.ns-fc-root` — generic skill name box (sky blue border, `rgba(56,189,248,.06)` bg)
+- `.ns-fc-connector` — 2px vertical gradient line
+- `.ns-fc-hbar` — horizontal connector bar (70% width)
+- `.ns-fc-leaf-wrap::before` — 2px vertical line from hbar to each card
+- `.ns-fc-card` — implementation card; glow color matches level (teal II, violet III, fuchsia IV, amber V)
+
+### Search & Sort Controls
+Controls appear above the level-filter tabs:
+- `.ns-search` — search input; filters by name, ID, tags, contributor in real-time
+- `.ns-sort-sel` — `<select>` with options: Level (default) · Creator · A–Z Name
