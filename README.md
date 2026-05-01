@@ -60,11 +60,11 @@ Personal renders: generated-output/tree.md and generated-output/tree.html
 
 ## The Hierarchy
 
-| Tier | Symbol | Display Name | What it means |
-|---|---|---|---|
-| basic | ○ | **Basic Skill** | Primitive, indivisible capability: the genome of every agent |
-| extra | ◇ | **Extra Skill** | Emerges from combining 2+ basic skills and transcends its parts |
-| ultimate | ◆ | **Ultimate Skill** | High-complexity emergent capability with a strict evidence bar |
+| Symbol | Tier | What it means |
+|---|---|---|
+| ○ | **Basic Skill** | Primitive, indivisible capability: the genome of every agent |
+| ◇ | **Extra Skill** | Emerges from combining 2+ basic skills and transcends its parts |
+| ◆ | **Ultimate Skill** | High-complexity emergent capability with a strict evidence bar |
 
 ## Rank System: The Transcendent Line
 
@@ -74,11 +74,11 @@ Skills level up through evidence, not declaration:
 |---|---|---|---|---|
 | `0` | F | **Unawakened** | None | Universal LLM primitive: any capable model does this by default |
 | `I` | D | **Awakened** | None | Foundation tier: catalogued agent capability |
-| `II` | C | **Named** | Evidence Tier C | First confirmed demonstration |
-| `III` | B | **Evolved** | Evidence Tier B | Reproducible and fully documented |
-| `IV` | A | **Hardened** | Evidence Tier B or A | Failure modes known; battle-tested |
-| `V` | S | **Transcendent** | Evidence Tier A | Composable and self-improving |
-| `VI` | SS | **Transcendent ★** | Evidence Tier A | Apex: peer-reviewed, named to the agent who unlocked it |
+| `II` | C | **Named** | C | First confirmed demonstration |
+| `III` | B | **Evolved** | B | Reproducible and fully documented |
+| `IV` | A | **Hardened** | B or A | Failure modes known; battle-tested |
+| `V` | S | **Transcendent** | A | Composable and self-improving |
+| `VI` | SS | **Transcendent ★** | A | Apex: peer-reviewed, named to the agent who unlocked it |
 
 ---
 
@@ -101,23 +101,32 @@ npm install -g @gaia-registry/cli
 <!-- gaia:version-end -->
 
 For registry development, use an editable install from the repo root:
-
 ```bash
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
-pip install -e .
+pip install -e ".[embeddings]"
+gaia embed
+```
+
+Windows Only (one-time setup):
+If `gaia` isn't recognized after install, run the command below in PowerShell, then try the script above again.
+```bash
+$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
 ```
 
 ## Quickstart
-
+In your terminal:
 ```bash
 gaia init
+```
+pass `gaia init --user your-username` to override.
+
+```bash
 gaia pull
 gaia scan
 gaia appraise
 gaia skills search web
 ```
-pass `gaia init --user your-username` to override.
 `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, and renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`.
 
 Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
