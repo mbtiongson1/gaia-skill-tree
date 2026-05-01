@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/realSkillCatalog.schema.json",
   "version": "0.1.0",
-  "updatedAt": "2026-04-30",
+  "updatedAt": "2026-05-01",
   "sources": [
     {
       "id": "awesome-agent-skills",
@@ -34,6 +34,14 @@
       "type": "official-skill-index",
       "reportedSkillCount": "1000+",
       "notes": "Public pages linked by the VoltAgent index for official skills from Anthropic, Vercel, Stripe, Cloudflare, OpenAI, Hugging Face, and others."
+    },
+    {
+      "id": "openai-skills",
+      "name": "OpenAI Skills",
+      "url": "https://officialskills.sh/openai/skills",
+      "type": "official-skill-pack",
+      "reportedSkillCount": "42",
+      "notes": "OfficialSkills index of OpenAI-published skills for Codex workflows, OpenAI APIs, browser testing, GitHub review loops, security analysis, and app scaffolding."
     }
   ],
   "buckets": [
@@ -89,6 +97,14 @@
           "path": "skills/session-handoff",
           "description": "Creates durable handoff documents for long-running agent sessions and context transfers.",
           "mapsToGaia": ["memory-manage", "write-report", "format-output"]
+        },
+        {
+          "name": "openai/openai-docs",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/openai-docs",
+          "path": "openai/openai-docs",
+          "description": "Fetches current OpenAI developer documentation for API and SDK implementation work.",
+          "mapsToGaia": ["retrieve", "question-answer", "cite-sources"]
         }
       ]
     },
@@ -136,6 +152,22 @@
           "path": "skills/subagent-driven-development/SKILL.md",
           "description": "Coordinates independent implementation slices across parallel coding agents.",
           "mapsToGaia": ["multi-agent-orchestration-v", "plan-decompose", "tool-select"]
+        },
+        {
+          "name": "openai/gh-fix-ci",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/gh-fix-ci",
+          "path": "openai/gh-fix-ci",
+          "description": "Debugs failing GitHub Actions checks on pull requests with the GitHub CLI.",
+          "mapsToGaia": ["error-interpretation", "execute-bash", "automated-testing"]
+        },
+        {
+          "name": "openai/yeet",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/yeet",
+          "path": "openai/yeet",
+          "description": "Automates a guarded Git workflow from staged changes through pull request creation.",
+          "mapsToGaia": ["diff-content", "format-output", "api-call"]
         }
       ]
     },
@@ -183,6 +215,22 @@
           "path": "google-labs-code/shadcn-ui",
           "description": "Guides shadcn component usage for modern web UI work.",
           "mapsToGaia": ["code-generation", "format-output", "refactor-code"]
+        },
+        {
+          "name": "openai/chatgpt-apps",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/chatgpt-apps",
+          "path": "openai/chatgpt-apps",
+          "description": "Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs.",
+          "mapsToGaia": ["code-generation", "api-call", "full-stack-developer"]
+        },
+        {
+          "name": "openai/playwright",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/playwright",
+          "path": "openai/playwright",
+          "description": "Automates real-browser testing from the terminal with Playwright.",
+          "mapsToGaia": ["computer-use", "automated-testing", "evaluate-output"]
         }
       ]
     },
@@ -277,6 +325,45 @@
           "path": "veniceai/venice-chat",
           "description": "Builds chat completions, multimodal inputs, tool calls, and streaming against Venice APIs.",
           "mapsToGaia": ["api-call", "multimodal-reasoning", "conversational-agent"]
+        },
+        {
+          "name": "openai/sentry",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/sentry",
+          "path": "openai/sentry",
+          "description": "Connects to Sentry production error data for incident and regression triage.",
+          "mapsToGaia": ["detect-anomaly", "error-interpretation", "api-call"]
+        }
+      ]
+    },
+    {
+      "id": "security-governance",
+      "name": "Security and Governance",
+      "summary": "Real named skills for threat modeling, repository risk analysis, and security-aware code review.",
+      "items": [
+        {
+          "name": "openai/security-threat-model",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/security-threat-model",
+          "path": "openai/security-threat-model",
+          "description": "Performs application security threat modeling for specific repositories or code paths.",
+          "mapsToGaia": ["code-review-pipeline", "detect-anomaly", "write-report"]
+        },
+        {
+          "name": "openai/security-ownership-map",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/security-ownership-map",
+          "path": "openai/security-ownership-map",
+          "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters.",
+          "mapsToGaia": ["data-analysis", "knowledge-graph-build", "write-report"]
+        },
+        {
+          "name": "openai/security-best-practices",
+          "sourceId": "openai-skills",
+          "detailUrl": "https://officialskills.sh/openai/skills/security-best-practices",
+          "path": "openai/security-best-practices",
+          "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities.",
+          "mapsToGaia": ["code-review-pipeline", "detect-anomaly", "evaluate-output"]
         }
       ]
     }

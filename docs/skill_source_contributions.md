@@ -1,6 +1,6 @@
 # Skill Source Contributions (Community SKILL.md Repos)
 
-_Last updated: 2026-04-30 (UTC)_
+_Last updated: 2026-05-01 (UTC)_
 
 This document records external, high-usage repositories that publish reusable `SKILL.md` files. These are candidate sources contributors can mine for evidence, taxonomy ideas, and emerging capability patterns before proposing additions to `graph/gaia.json`.
 
@@ -18,10 +18,11 @@ The current curated real-skill review surface is generated from [`graph/real_ski
 |---|---|---:|---|---|
 | 1 | https://github.com/VoltAgent/awesome-agent-skills | 19.4k | README lists official and community skills, with paths and links to official skill pages. | Best broad discovery source for current real named skills across official teams and community collections. |
 | 2 | https://agentskills.me/ | n/a | Directory reports 490 skills and exposes detail pages such as `codex`, `gemini`, `commit-work`, and `vercel-react-best-practices`. | Best scrape target for concrete names, popularity signals, source repos, and skill paths. |
-| 3 | https://github.com/addyosmani/agent-skills | 25.2k | `skills/<skill-name>/SKILL.md` directories are documented in repo structure. | Strong signal for common engineering-oriented skill definitions and decomposition patterns. |
-| 4 | https://github.com/803/skills-supply | 31 | Package layout explicitly defines subdirectories and root-level `SKILL.md` conventions. | Useful for interoperability/meta-skill proposals around distribution and discovery workflows. |
-| 5 | https://github.com/simota/agent-skills | 28 | Large, explicit list of many `<name>/SKILL.md` entries in README/docs content. | Good source for long-tail and specialized composite skill candidates. |
-| 6 | https://github.com/iliaal/ai-skills | 7 | README states skill unit is a markdown `SKILL.md` with YAML frontmatter. | Useful for schema and trigger-language consistency checks across community skills. |
+| 3 | https://officialskills.sh/openai/skills | n/a | OfficialSkills lists 42 OpenAI-published skills including `openai-docs`, `gh-fix-ci`, `playwright`, `chatgpt-apps`, and security review skills. | High-confidence source for Codex/OpenAI workflow skills and platform-specific named capabilities. |
+| 4 | https://github.com/addyosmani/agent-skills | 25.2k | `skills/<skill-name>/SKILL.md` directories are documented in repo structure. | Strong signal for common engineering-oriented skill definitions and decomposition patterns. |
+| 5 | https://github.com/803/skills-supply | 31 | Package layout explicitly defines subdirectories and root-level `SKILL.md` conventions. | Useful for interoperability/meta-skill proposals around distribution and discovery workflows. |
+| 6 | https://github.com/simota/agent-skills | 28 | Large, explicit list of many `<name>/SKILL.md` entries in README/docs content. | Good source for long-tail and specialized composite skill candidates. |
+| 7 | https://github.com/iliaal/ai-skills | 7 | README states skill unit is a markdown `SKILL.md` with YAML frontmatter. | Useful for schema and trigger-language consistency checks across community skills. |
 
 \*Stars are point-in-time values scraped from each repository landing page and may drift. AgentSkills.me is a directory rather than a GitHub repository, so its table row uses its reported skill count instead of stars.
 

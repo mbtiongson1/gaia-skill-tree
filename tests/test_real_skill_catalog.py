@@ -22,6 +22,7 @@ class TestRealSkillCatalog(unittest.TestCase):
         self.assertIn("awesome-agent-skills", source_ids)
         self.assertIn("agentskills-me", source_ids)
         self.assertIn("superpowers", source_ids)
+        self.assertIn("openai-skills", source_ids)
 
     def test_catalog_buckets_real_named_skills(self):
         catalog = self.load_catalog()
@@ -36,6 +37,8 @@ class TestRealSkillCatalog(unittest.TestCase):
         self.assertIn("superpowers/systematic-debugging", names)
         self.assertIn("codex", names)
         self.assertIn("vercel-react-best-practices", names)
+        self.assertIn("openai/openai-docs", names)
+        self.assertIn("openai/security-threat-model", names)
 
     def test_generate_catalog_pages_outputs_linked_html(self):
         catalog = self.load_catalog()
@@ -50,8 +53,11 @@ class TestRealSkillCatalog(unittest.TestCase):
         self.assertIn("<title>Gaia Real Skill Catalog</title>", html)
         self.assertIn("https://github.com/VoltAgent/awesome-agent-skills", html)
         self.assertIn("https://agentskills.me/skill/codex", html)
+        self.assertIn("https://officialskills.sh/openai/skills", html)
         self.assertIn("superpowers/brainstorming", html)
+        self.assertIn("openai/security-threat-model", html)
         self.assertIn("## Agent Workflow and Superpowers", markdown)
+        self.assertIn("## Security and Governance", markdown)
 
 
 if __name__ == "__main__":
