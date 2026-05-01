@@ -440,8 +440,58 @@
     color:#fca5a5;box-shadow:0 0 14px rgba(239,68,68,.35);
   }
   @media (max-width:700px){
-    nav{padding:.8rem 1rem} nav ul{gap:.85rem;font-size:.8rem;overflow-x:auto}
-    .graph-dialog{height:88vh}
+    html,body{overflow-x:clip}
+    nav{
+      padding:.75rem .85rem;
+      gap:.65rem;
+      align-items:flex-start;
+      background:#030712;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+    .nav-logo{font-size:1rem;line-height:1.2;white-space:nowrap}
+    nav ul{
+      gap:.75rem;font-size:.8rem;overflow-x:auto;max-width:100%;
+      padding-bottom:.2rem;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    }
+    nav ul::-webkit-scrollbar{display:none}
+    #hero{min-height:100svh;padding:5.25rem 1rem 2.25rem}
+    #canvas3d{transform:translateZ(0);will-change:transform;backface-visibility:hidden}
+    .hero-sub{font-size:1rem}
+    .scroll-hint{display:none}
+    section{padding:3.8rem 1rem}
+    .os-tab,.ns-tab,.ns-view-btn,.copy-btn,.se-copy-btn{
+      background:#0f172a;
+      box-shadow:none;
+      filter:none;
+      -webkit-filter:none;
+      transform:translateZ(0);
+      backface-visibility:hidden;
+    }
+    .pre-wrap,pre{
+      background:#0f172a;
+      filter:none;
+      -webkit-filter:none;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+    .se-topbar{
+      background:#030712;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+    .skill-explorer{
+      top:52px;
+      background:#030712;
+    }
+    .tree-dialog,.graph-dialog{
+      width:100vw;max-width:100vw;height:100svh;max-height:100svh;
+      border-radius:0;border-left:none;border-right:none;
+      animation:none;box-shadow:0 0 0 1px rgba(56,189,248,.2);
+    }
+    .tree-dialog::backdrop,.graph-dialog::backdrop{backdrop-filter:none}
+    .tree-dialog-header,.graph-dialog-header{padding:.85rem .9rem}
+    .tree-dialog-body{padding:.9rem .9rem 1.15rem}
     .graph-dialog-header{flex-direction:column}
     .graph-dialog-actions{justify-content:flex-start}
     .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
