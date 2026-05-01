@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.3`.
+Current Gaia CLI version: `2.2.4`.
 
 Python install:
 

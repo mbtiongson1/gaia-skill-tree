@@ -67,8 +67,9 @@ if printf '%s\n' "$changed" | grep -Eq '^(registry/gaia\.json|registry/named/|re
   python3 scripts/validate_intake.py
   python3 scripts/generateProjections.py
   python3 scripts/exportGexf.py
-  python3 scripts/renderGraphSvg.py --format svg --output registry/gaia.svg
-  python3 scripts/renderGraphSvg.py --format json --output registry/render/latest.json
+  gaia graph --format svg --output registry/gaia.svg --no-open
+  gaia graph --format json --output registry/render/latest.json --no-open
+  gaia graph --format html --output registry/render/gaia.html --no-open
   python3 scripts/syncDocsGraphAssets.py
 fi
 
