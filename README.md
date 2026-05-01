@@ -138,7 +138,11 @@ gaia push --dry-run
 gaia push
 ```
 Note: Make sure not to include sensitive information, otherwise it will be rejected! If found that your /skills are legit, it can be named after you!
-
+[!TIP] `push` command requires Github CLI authentication! Run this in your terminal:
+```bash
+gh auth login
+```
+Then follow the instructions from the terminal to get yourself authenticated.
 ## Named Skills Browser
 
 The registry ships an interactive Named Skills browser at [`docs/index.html`](docs/index.html):
