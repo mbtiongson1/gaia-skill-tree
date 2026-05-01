@@ -219,6 +219,39 @@
   .os-tab.active { color:var(--basic);border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.06); }
   .os-panel { display:none; }
   .os-panel.active { display:block; }
+  /* ── UNNAMED SKILL POPUP ── */
+  .usp-backdrop {
+    position:fixed;inset:0;z-index:1200;
+    background:rgba(0,0,0,.65);backdrop-filter:blur(5px);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .usp-backdrop.open { opacity:1;pointer-events:auto; }
+  .usp-card {
+    position:relative;background:var(--surface);
+    border:1px solid rgba(56,189,248,.35);border-radius:16px;
+    padding:1.8rem 2rem 1.6rem;width:min(420px,92vw);
+    box-shadow:0 24px 70px rgba(0,0,0,.65),0 0 40px rgba(56,189,248,.1);
+    transform:scale(.94) translateY(10px);transition:transform .22s cubic-bezier(.4,0,.2,1);
+  }
+  .usp-backdrop.open .usp-card { transform:scale(1) translateY(0); }
+  .usp-x { position:absolute;top:.7rem;right:.9rem;background:transparent;border:none;color:var(--muted);font-size:1.05rem;cursor:pointer;padding:.25rem .45rem;transition:color .15s;line-height:1; }
+  .usp-x:hover { color:var(--text); }
+  .usp-glyph { font-size:1.9rem;margin-bottom:.55rem;line-height:1; }
+  .usp-name { font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.2rem; }
+  .usp-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ef4444;margin-bottom:.85rem; }
+  .usp-body { font-size:.87rem;color:var(--muted);line-height:1.6;margin-bottom:1.1rem; }
+  .usp-cta { color:var(--basic);font-weight:700; }
+  .usp-row {
+    display:flex;align-items:center;gap:.4rem;
+    background:var(--bg);border:1px solid rgba(56,189,248,.22);border-radius:8px;
+    padding:.42rem .75rem;
+    font-family:'JetBrains Mono','Fira Code',monospace;font-size:.78rem;color:var(--basic);
+  }
+  .usp-prompt { color:var(--muted);flex-shrink:0; }
+  .usp-cmd { flex:1; }
+  .usp-copy { background:transparent;border:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;flex-shrink:0;padding:0;transition:color .15s; }
+  .usp-copy:hover { color:var(--basic); }
   /* ── GLOSSARY ── */
   .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
   .gloss-item{
@@ -1192,6 +1225,9 @@
       dragging: false,
       dragLastX: 0,
       dragLastY: 0,
+      dragStartX: 0,
+      dragStartY: 0,
+      dragMoved: false,
       hoveredId: null,
       lastHoveredId: null,
       projectedNodes: {},
@@ -1580,6 +1616,7 @@
         state.orbitX += (event.clientY - state.dragLastY) * 0.007;
         state.dragLastX = event.clientX;
         state.dragLastY = event.clientY;
+        if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 5) state.dragMoved = true;
         state.hoveredId = null;
       } else {
         state.mx = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
@@ -1603,14 +1640,20 @@
       canvas.addEventListener('mousedown', e => {
         e.preventDefault();
         state.dragging = true;
+        state.dragMoved = false;
+        state.dragStartX = e.clientX;
+        state.dragStartY = e.clientY;
         state.dragLastX = e.clientX;
         state.dragLastY = e.clientY;
         canvas.style.cursor = 'grabbing';
       });
-      window.addEventListener('mouseup', () => {
+      window.addEventListener('mouseup', e => {
         if (!state.dragging) return;
+        const didClick = !state.dragMoved && state.hoveredId;
         state.dragging = false;
+        state.dragMoved = false;
         canvas.style.cursor = state.hoveredId ? 'pointer' : 'grab';
+        if (didClick && options.onNodeClick) options.onNodeClick(state.hoveredId);
       });
     }
     if (options.zoomable) {
@@ -1646,7 +1689,16 @@
   const closeBtn = document.querySelector('[data-graph-close]');
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true
+    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
+    onNodeClick: function(id) {
+      var buckets = window._gaiaNamedBuckets || {};
+      if (buckets[id] && buckets[id].length) {
+        window.openSkillExplorer(buckets[id][0].id);
+      } else {
+        var skill = (window._gaiaSkillMap || {})[id] || { id: id, name: id, type: 'basic' };
+        window.openUnnamedPopup(skill);
+      }
+    }
   });
 
   function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }
@@ -2311,15 +2363,38 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   }
 
   // ── MAIN OPEN / CLOSE ────────────────────────────────────────
+  var TYPE_GLYPH = { ultimate: '◆', extra: '◇', basic: '○' };
+
+  window.openUnnamedPopup = function(skill) {
+    var pop = document.getElementById('unnamedSkillPopup');
+    if (!pop) return;
+    var glyph = TYPE_GLYPH[skill.type] || '◇';
+    var glyphColor = skill.type === 'ultimate' ? '#f59e0b' : skill.type === 'extra' ? '#c084fc' : '#38bdf8';
+    document.getElementById('uspGlyph').textContent = glyph;
+    document.getElementById('uspGlyph').style.color = glyphColor;
+    document.getElementById('uspName').textContent = skill.name || skill.id;
+    document.getElementById('uspId').textContent = skill.id;
+    var cmd = 'gaia push';
+    document.getElementById('uspCmd').textContent = cmd;
+    document.getElementById('uspCmd').dataset.cmd = cmd;
+    pop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
   function openExplorer(id) {
     waitForData(function(){
       var ns = findNamedSkill(id);
       if (!ns) {
-        // try fallback: maybe id is a genericSkillRef — pick first named in that bucket
+        // fallback: generic skill ref bucket
         var buckets = window._gaiaNamedBuckets || {};
         if (buckets[id] && buckets[id].length) { ns = buckets[id][0]; }
       }
-      if (!ns) return;
+      if (!ns) {
+        // no named implementation — show the "claim this skill" popup if it's a known generic skill
+        var genericSkill = (window._gaiaSkillMap || {})[id];
+        if (genericSkill) window.openUnnamedPopup(genericSkill);
+        return;
+      }
       var generic = ns.genericSkillRef ? findGeneric(ns.genericSkillRef) : null;
 
       document.getElementById('skillExplorer').classList.add('open');
@@ -2378,6 +2453,24 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   function initExplorerDOM() {
     var backEl = document.getElementById('seBack');
     if (backEl) backEl.onclick = function(){ closeExplorer(); history.back(); };
+
+    // Unnamed popup close + copy
+    var pop = document.getElementById('unnamedSkillPopup');
+    function closeUnnamed() { if (pop) { pop.classList.remove('open'); document.body.style.overflow = ''; } }
+    var uspClose = document.getElementById('uspClose');
+    if (uspClose) uspClose.onclick = closeUnnamed;
+    if (pop) pop.addEventListener('click', function(e){ if (e.target === pop) closeUnnamed(); });
+    var uspCopy = document.getElementById('uspCopyBtn');
+    var CHECK_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+    var CLIP_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+    if (uspCopy) uspCopy.addEventListener('click', function(){
+      var cmd = document.getElementById('uspCmd').dataset.cmd || document.getElementById('uspCmd').textContent;
+      navigator.clipboard.writeText(cmd).then(function(){
+        uspCopy.innerHTML = CHECK_SM;
+        setTimeout(function(){ uspCopy.innerHTML = CLIP_SM; }, 1500);
+      });
+    });
+
     function routeHash() {
       var m = location.hash.match(/^#explorer\/(.+\/[^/?#]+)$/);
       if (m) { openExplorer(m[1]); }
@@ -2456,6 +2549,24 @@ window.switchOsTab = function(btn) {
       <div id="se-install"     class="se-flow-section"></div>
       <div id="se-docs"        class="se-flow-section"></div>
       <div id="se-timeline"    class="se-flow-section"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── UNNAMED SKILL POPUP ── -->
+<div id="unnamedSkillPopup" class="usp-backdrop" role="dialog" aria-modal="true" aria-labelledby="uspName">
+  <div class="usp-card">
+    <button class="usp-x" id="uspClose" aria-label="Close">✕</button>
+    <div id="uspGlyph" class="usp-glyph">◇</div>
+    <div id="uspName" class="usp-name">Unnamed Skill</div>
+    <div id="uspId" class="usp-id"></div>
+    <p class="usp-body">This skill has no named implementation yet. <span class="usp-cta">Be the first to claim it</span> — build a real implementation, submit it for review, and your name goes on the canonical registry forever.</p>
+    <div class="usp-row">
+      <span class="usp-prompt">$</span>
+      <span id="uspCmd" class="usp-cmd">gaia push</span>
+      <button class="usp-copy" id="uspCopyBtn" title="Copy command">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>
+      </button>
     </div>
   </div>
 </div>
