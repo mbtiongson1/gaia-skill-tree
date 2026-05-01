@@ -287,7 +287,7 @@
         "origin": true,
         "genericSkillRef": "autonomous-research-agent",
         "status": "named",
-        "level": "II",
+        "level": "VI",
         "description": "Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",
         "title": "The Scholar's Compass",
         "catalogRef": "karpathy-autoresearch",
