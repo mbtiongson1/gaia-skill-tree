@@ -68,10 +68,63 @@ def find_named_skill_source(skill_id, registry_path):
     return None
 
 
+def _named_skill_source_for_id(skill_id, registry_path):
+    contributor, skill_name = skill_id.split("/", 1)
+    return os.path.join(named_skills_dir(registry_path), contributor, f"{skill_name}.md")
+
+
+def resolve_named_skill_reference(skill_ref, registry_path):
+    """Resolve an install reference to (canonical_id, source_path).
+
+    Accepted references, in order:
+    - exact named skill ID: contributor/skill-name
+    - exact catalogRef frontmatter slug
+    - unique bare skill-name slug
+    """
+    source = find_named_skill_source(skill_ref, registry_path)
+    if source:
+        return skill_ref, source
+
+    available = list_available(registry_path)
+    catalog_matches = [
+        (skill_id, _named_skill_source_for_id(skill_id, registry_path))
+        for skill_id, meta in available
+        if meta.get("catalogRef") == skill_ref
+    ]
+    if len(catalog_matches) == 1:
+        return catalog_matches[0]
+    if len(catalog_matches) > 1:
+        ids = ", ".join(skill_id for skill_id, _ in catalog_matches)
+        raise ValueError(f"ambiguous skill slug '{skill_ref}' matches: {ids}")
+
+    bare_matches = [
+        (skill_id, _named_skill_source_for_id(skill_id, registry_path))
+        for skill_id, _meta in available
+        if skill_id.split("/", 1)[1] == skill_ref
+    ]
+    if len(bare_matches) == 1:
+        return bare_matches[0]
+    if len(bare_matches) > 1:
+        ids = ", ".join(skill_id for skill_id, _ in bare_matches)
+        raise ValueError(f"ambiguous skill slug '{skill_ref}' matches: {ids}")
+
+    return None
+
+
 def install_skill(skill_id, registry_path):
-    source = find_named_skill_source(skill_id, registry_path)
+    try:
+        resolved = resolve_named_skill_reference(skill_id, registry_path)
+    except ValueError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return False
+
+    if not resolved:
+        print(f"Error: Named skill or slug '{skill_id}' not found in registry.", file=sys.stderr)
+        return False
+
+    skill_id, source = resolved
     if not source:
-        print(f"Error: Named skill '{skill_id}' not found in registry.", file=sys.stderr)
+        print(f"Error: Named skill or slug '{skill_id}' not found in registry.", file=sys.stderr)
         return False
 
     parts = skill_id.split("/", 1)

@@ -131,7 +131,7 @@ def test_skills_help_shows_subcommands_with_usage(monkeypatch, capsys):
     for command in ["list", "search", "info", "install", "uninstall"]:
         assert command in output
     assert "gaia skills list [--exclude-pending]" in output
-    assert "gaia skills install <skill_id> [--global | --local]" in output
+    assert "gaia skills install <skill> [--global | --local]" in output
 
 
 def test_bare_skills_command_prints_skills_help(monkeypatch, capsys):
