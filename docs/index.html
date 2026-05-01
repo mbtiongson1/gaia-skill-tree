@@ -1189,7 +1189,7 @@
         <pre><span class="cmd">gaia install --list</span>
 <span class="cmd">gaia install</span> <span class="str">contributor/skill-name</span>
 <span class="cmd">gaia sync</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>For example: <code>gaia install karpathy/autoresearch</code>. Run <code>gaia sync</code> periodically to pull the latest versions of all installed skills.</span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Browse real skill IDs in the <a href="#named" style="color:var(--basic)">Named Skills Explorer</a> below. Run <code>gaia sync</code> periodically to pull the latest versions of all installed skills.</span></div>
       </div>
     </div>
     <div class="step">
@@ -2281,7 +2281,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
     'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
   };
-  var RARITY_COLOR = { common:'#94a3b8', uncommon:'#38bdf8', rare:'#a78bfa', epic:'#e879f9', legendary:'#fbbf24' };
   var TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
 
   var REPO_SLUG = (function(){
@@ -2334,7 +2333,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   function renderHero(ns, generic) {
     var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
     var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
-    var rarityColor = RARITY_COLOR[(generic && generic.rarity) || 'common'];
     var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
     var links = ns.links || {};
     var repoUrl = links.github || links.npm || '';
@@ -2342,7 +2340,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     var badgesHtml = [
       '<span class="se-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' · ' + lm.name + '</span>',
       generic ? '<span class="se-badge" style="color:' + typeColor + ';background:rgba(0,0,0,.3);border-color:' + typeColor + '40">' + typeSymbol + ' ' + esc(generic.type || '') + '</span>' : '',
-      generic && generic.rarity ? '<span class="se-badge" style="color:' + rarityColor + ';background:rgba(0,0,0,.3);border-color:' + rarityColor + '40">' + esc(generic.rarity) + '</span>' : '',
       ns.origin ? '<span class="se-badge" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">★ origin</span>' : '',
     ].filter(Boolean).join('');
 
