@@ -3,7 +3,7 @@ name: CLI Wrapper
 on:
   pull_request:
     paths:
-      - 'plugin/**'
+      - 'packages/cli-npm/**'
       - '.github/workflows/cli-wrapper.yml'
   workflow_dispatch: {}
 
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '20'
           cache: npm
-          cache-dependency-path: plugin/package-lock.json
+          cache-dependency-path: packages/cli-npm/package-lock.json
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,15 +28,15 @@ jobs:
           python-version: '3.12'
 
       - name: Install npm dependencies
-        working-directory: plugin
+        working-directory: packages/cli-npm
         run: npm ci
 
       - name: Run wrapper unit tests
-        working-directory: plugin
+        working-directory: packages/cli-npm
         run: npm test
 
       - name: Verify package can be installed
-        working-directory: plugin
+        working-directory: packages/cli-npm
         run: |
           set -euo pipefail
           TARBALL="$(npm pack --silent | tail -n 1)"

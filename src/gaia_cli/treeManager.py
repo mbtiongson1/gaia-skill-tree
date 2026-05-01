@@ -2,6 +2,8 @@ import json
 import os
 import re
 
+from gaia_cli.registry import named_skills_index_path, user_tree_path
+
 _USERNAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
 _TRANSCENDENT_LEVELS = {"V", "VI"}
 
@@ -18,7 +20,7 @@ def _check_username(username: str) -> None:
 
 def load_tree(username, registry_path="."):
     _check_username(username)
-    tree_path = os.path.join(registry_path, "users", username, "skill-tree.json")
+    tree_path = user_tree_path(registry_path, username)
     if not os.path.exists(tree_path):
         return None
     with open(tree_path, 'r') as f:
@@ -26,7 +28,7 @@ def load_tree(username, registry_path="."):
 
 def save_tree(username, tree_data, registry_path="."):
     _check_username(username)
-    tree_path = os.path.join(registry_path, "users", username, "skill-tree.json")
+    tree_path = user_tree_path(registry_path, username)
     os.makedirs(os.path.dirname(tree_path), exist_ok=True)
     with open(tree_path, 'w') as f:
         json.dump(tree_data, f, indent=2)
@@ -50,7 +52,7 @@ def show_status(tree_data):
 # ─── named / local lookups ────────────────────────────────────────────────────
 
 def _load_named_lookup(registry_path):
-    index_path = os.path.join(registry_path, "graph", "named", "index.json")
+    index_path = named_skills_index_path(registry_path)
     if not os.path.exists(index_path):
         return {}
     with open(index_path, "r", encoding="utf-8") as f:

@@ -10,6 +10,8 @@ try:
 except ModuleNotFoundError:
     from gaia_cli.resolver import load_canonical_skills
 
+from gaia_cli.registry import named_skills_dir, registry_graph_path, skill_batches_dir
+
 
 SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 MIN_PROPOSED_TOKEN_LENGTH = 3
@@ -95,7 +97,7 @@ def build_proposed_skill(skill_id, source_repo):
 
 
 def find_named_skill_suggestions(proposed_id, named_dir, limit=3):
-    """Return named skills from graph/named/ that are lexically similar to proposed_id."""
+    """Return named skills from registry/named/ that are lexically similar to proposed_id."""
     if not os.path.isdir(named_dir):
         return []
     suggestions = []
@@ -166,7 +168,7 @@ def filter_proposed_ids(valid_tokens, canonical_ids):
 
 
 def build_skill_batch(raw_tokens, config, registry_root, now=None):
-    graph_path = os.path.join(registry_root, "graph", "gaia.json")
+    graph_path = registry_graph_path(registry_root)
     canonical_ids = load_canonical_skills(graph_path)
     canonical_map = load_canonical_skill_map(graph_path)
     source_repo = detect_source_repo(config)
@@ -181,7 +183,7 @@ def build_skill_batch(raw_tokens, config, registry_root, now=None):
         f"{config.get('gaiaUser', 'unknown')}-{source_repo.split('/')[-1]}"
     )
 
-    named_dir = os.path.join(registry_root, "graph", "named")
+    named_dir = named_skills_dir(registry_root)
     proposed_skills = []
     for skill_id in proposed_ids:
         skill = build_proposed_skill(skill_id, source_repo)
@@ -200,7 +202,7 @@ def build_skill_batch(raw_tokens, config, registry_root, now=None):
 
 
 def write_skill_batch(batch, registry_root):
-    intake_dir = os.path.join(registry_root, "intake", "skill-batches")
+    intake_dir = skill_batches_dir(registry_root)
     os.makedirs(intake_dir, exist_ok=True)
     batch_path = os.path.join(intake_dir, f"{batch['batchId']}.json")
     with open(batch_path, "w") as f:

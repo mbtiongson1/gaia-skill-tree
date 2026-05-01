@@ -23,7 +23,7 @@ Contributors do not open classification PRs. If you are a contributor, your skil
 - `title:` `"The Assigned Epithet"` _(required)_
 - `catalogRef:` `catalog-item-id` _(optional — set if a catalog entry exists or is being added)_
 
-If no catalog entry exists yet for this real-world skill, also add an item to `graph/real_skill_catalog.json` with `promotedNamedSkillId` pointing back to this named skill.
+If no catalog entry exists yet for this real-world skill, also add an item to `registry/real-skills.json` with `promotedNamedSkillId` pointing back to this named skill.
 
 ---
 
@@ -34,7 +34,7 @@ If no catalog entry exists yet for this real-world skill, also add an item to `g
 - [ ] I have personally verified this named skill matches a real-world published implementation (a SKILL.md, repo, or documented tool).
 - [ ] The `title` is an original reviewer-assigned RPG epithet — not copied verbatim from the source.
 - [ ] `status` is changed from `awakened` to `named`.
-- [ ] If `catalogRef` is set: the catalog item `id` exists in `graph/real_skill_catalog.json`.
-- [ ] If no catalog entry exists: I have added one to `graph/real_skill_catalog.json` with `promotedNamedSkillId` set.
+- [ ] If `catalogRef` is set: the catalog item `id` exists in `registry/real-skills.json`.
+- [ ] If no catalog entry exists: I have added one to `registry/real-skills.json` with `promotedNamedSkillId` set.
 - [ ] `python scripts/validate.py` passes with the new status.
 - [ ] I am a maintainer or have maintainer approval for this classification.

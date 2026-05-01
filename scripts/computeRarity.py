@@ -18,8 +18,8 @@ def get_rarity(percentage):
 
 def main():
     parser = argparse.ArgumentParser(description="Compute skill rarity based on user trees")
-    parser.add_argument('--users-dir', default="users", help="Directory containing user trees")
-    parser.add_argument('--graph', default="graph/gaia.json", help="Path to gaia.json")
+    parser.add_argument('--users-dir', default="skill-trees", help="Directory containing user trees")
+    parser.add_argument('--graph', default="registry/gaia.json", help="Path to gaia.json")
     parser.add_argument('--apply', action='store_true', help="Apply changes to gaia.json")
     
     args = parser.parse_args()

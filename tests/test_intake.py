@@ -7,7 +7,7 @@ import unittest
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VALIDATE_INTAKE_SCRIPT = os.path.join(REPO_ROOT, "scripts", "validate_intake.py")
-GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
+GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
 
 
 def run_validate_intake(intake_dir):

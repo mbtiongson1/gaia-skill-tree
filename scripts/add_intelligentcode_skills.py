@@ -1,5 +1,5 @@
 """
-Add 8 skills sourced from intelligentcode-ai/skills to graph/gaia.json.
+Add 8 skills sourced from intelligentcode-ai/skills to registry/gaia.json.
 
 New skills:
   atomic  : mcp-integration, parallel-execution, requirements-analysis, schema-design

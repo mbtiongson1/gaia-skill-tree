@@ -1,8 +1,8 @@
-"""Add 11 mattpocock catalog entries to real_skill_catalog.json."""
+"""Add 11 mattpocock catalog entries to real-skills.json."""
 import json
 from pathlib import Path
 
-CATALOG = Path("graph/real_skill_catalog.json")
+CATALOG = Path("registry/real-skills.json")
 
 NEW_ITEMS = [
     {

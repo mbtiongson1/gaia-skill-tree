@@ -28,7 +28,7 @@ The individual skills (`parseCsv`, `summarize`, `formatOutput`, `evaluateOutput`
 - [x] Skill ID uses `camelCase` with no vendor references.
 - [x] Description describes an emergent capability, not just "all parents at once."
 - [x] At least 2 prerequisites listed, all referencing existing skill IDs.
-- [x] Evidence meets the minimum threshold (Level III = Class B+).
+- [x] Evidence meets the minimum threshold (Level III = Evidence Tier B+).
 - [x] Fusion condition is specified.
 - [x] I have run `python scripts/validate.py` locally and it passes.
 - [x] I have NOT edited any files in `skills/`, `registry.md`, or `combinations.md`.

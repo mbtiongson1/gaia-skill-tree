@@ -34,7 +34,7 @@ A named skill is a real-world implementation of an abstract Gaia skill, attribut
 
 - [ ] `genericSkillRef` resolves to a valid skill in `gaia.json`.
 - [ ] Level is appropriate for the implementation's evidence and capability.
-- [ ] Origin flag is correct — check `graph/named/index.json` for existing origin entries in this bucket.
+- [ ] Origin flag is correct — check `registry/named/index.json` for existing origin entries in this bucket.
 - [ ] **Classification check** — does this match a real-world SKILL.md or named implementation in the ecosystem?
   - If **YES** → merge as `awakened`, then open a classification PR using the `named_skill_classification` template.
   - If **NO** → merge as `awakened`. The skill sits in `awaitingClassification` until a future classification PR.

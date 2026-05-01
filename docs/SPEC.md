@@ -36,17 +36,17 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-01: The registry SHALL store every known AI agent skill as a node in a directed acyclic graph (DAG).
 - FR-02: Each skill node SHALL include: `id`, `name`, `type`, `level`, `rarity`, `description`, `prerequisites`, `derivatives`, `conditions`, `evidence`, `knownAgents`, `status`, `createdAt`, `updatedAt`, `version`.
 - FR-03: The registry SHALL support three skill types: `basic`, `extra`, `ultimate`.
-- FR-04: Each skill SHALL have a level between `I` and `V`.
+- FR-04: Each skill SHALL have a level between `0` and `VI`.
 - FR-05: Each skill SHALL have a rarity of `common`, `uncommon`, `rare`, `epic`, or `legendary`.
 - FR-06: The registry SHALL enforce that all extra and ultimate skills reference at least two valid parent skill IDs.
 - FR-07: The registry SHALL enforce DAG integrity — no cycles are permitted at any depth.
-- FR-08: Every non-`latent` (Level I) skill SHALL reference at least one evidence source.
-- FR-09: Ultimate skills SHALL require a minimum of three Class A or B evidence sources and explicit maintainer approval before status can be set to `validated`.
+- FR-08: Every non-Unawakened (Level 0) and non-Awakened (Level I) skill SHALL reference at least one evidence source.
+- FR-09: Ultimate skills SHALL require a minimum of three Evidence Tier A or B sources and explicit maintainer approval before status can be set to `validated`.
 - FR-10: The registry SHALL export the canonical graph in both JSON (D3/Cytoscape-compatible) and GEXF (Gephi-compatible) formats.
 - FR-11: All human-readable files (`skills/`, `registry.md`, `combinations.md`) SHALL be generated outputs — never hand-maintained as source of truth.
 
 ### 4.2 User Skill Trees
-- FR-12: Each GitHub user SHALL have at most one canonical skill tree stored at `users/[username]/skill-tree.json`.
+- FR-12: Each GitHub user SHALL have at most one canonical skill tree stored at `skill-trees/[username]/skill-tree.json`.
 - FR-13: A skill tree SHALL record: which skills are unlocked, at what level, when they were unlocked, and in which repository they were detected.
 - FR-14: A skill tree SHALL record pending combinations — detected prerequisite clusters that have not yet been confirmed by the user.
 - FR-15: A user's skill tree SHALL be loadable and queryable from any repository they own via the Gaia plugin.
@@ -58,7 +58,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-19: The plugin SHALL resolve detected skills against the Gaia registry.
 - FR-20: The plugin SHALL detect combination candidates: sets of prerequisite skills that together unlock an extra or ultimate skill the user does not yet own.
 - FR-21: When a combination is detected, the plugin SHALL prompt the user to confirm the fusion before writing it to their skill tree.
-- FR-22: On user confirmation, the plugin SHALL update the skill tree in `users/[username]/skill-tree.json` via an automated PR to the Gaia registry.
+- FR-22: On user confirmation, the plugin SHALL update the skill tree in `skill-trees/[username]/skill-tree.json` via an automated PR to the Gaia registry.
 - FR-23: The plugin SHALL expose `gaia status`, `gaia tree`, and `gaia load [username]` commands.
 
 ### 4.4 Contribution Workflow
@@ -179,13 +179,15 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 
 ### 7.2 Levels
 
-| Level | Name | Description | Evidence Floor |
-|---|---|---|---|
-| I | Latent | Conceptual only, no verified run | None |
-| II | Emerging | Constrained demo success | Class C |
-| III | Competent | Repeatable across standard tasks | Class B |
-| IV | Proficient | Handles edge cases and failures | Class B or A |
-| V | Mastered | Self-improving, teachable, composable | Class A |
+| Level | Class | Name | Description | Evidence Floor |
+|---|---|---|---|---|
+| 0 | F | Unawakened | Universal LLM primitive: any capable model does this by default | None |
+| I | D | Awakened | Foundation tier: catalogued agent capability | None |
+| II | C | Named | First confirmed demonstration | Evidence Tier C |
+| III | B | Evolved | Reproducible and fully documented | Evidence Tier B |
+| IV | A | Hardened | Failure modes known; battle-tested | Evidence Tier B or A |
+| V | S | Transcendent | Composable and self-improving | Evidence Tier A |
+| VI | SS | Transcendent ★ | Apex: peer-reviewed, named to the agent who unlocked it | Evidence Tier A + peer review |
 
 ### 7.3 Rarity
 
@@ -212,9 +214,9 @@ Rarity is computed from observed agent prevalence data — it is never declared 
 
 ## 8. Evidence Policy
 
-### 8.1 Evidence Classes
+### 8.1 Evidence Tiers
 
-| Class | Standard |
+| Evidence Tier | Standard |
 |---|---|
 | A | Peer-reviewed paper or rigorous public benchmark with reproducible methodology |
 | B | Reproducible open-source demo with logs, inputs, and outputs archived |
@@ -222,12 +224,13 @@ Rarity is computed from observed agent prevalence data — it is never declared 
 
 ### 8.2 Evidence Requirements by Level
 
-- **Level I:** No evidence required.
-- **Level II:** At least one Class C source.
-- **Level III:** At least one Class B source.
-- **Level IV:** At least one Class B or A source, with documented failure modes.
-- **Level V:** At least one Class A source with composability or self-improvement evidence.
-- **Ultimate type:** Minimum three Class A or B sources, two maintainer approvals, no `provisional` status permitted at merge.
+- **Level 0 (Unawakened):** No evidence required.
+- **Level I (Awakened):** No evidence required.
+- **Level II (Named):** At least one Evidence Tier C source.
+- **Level III (Evolved):** At least one Evidence Tier B source.
+- **Level IV (Hardened):** At least one Evidence Tier B or A source, with documented failure modes.
+- **Level V (Transcendent):** At least one Evidence Tier A source with composability or self-improvement evidence.
+- **Ultimate type:** Minimum three Evidence Tier A or B sources, two maintainer approvals, no `provisional` status permitted at merge.
 
 ---
 

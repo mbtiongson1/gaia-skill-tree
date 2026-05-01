@@ -1,5 +1,21 @@
 # DESIGN.md — Gaia Visual Design Language
 
+## Repository Layout
+
+The visual system below applies to the public site, generated registry pages, and skill tree renders. Source files now live in the refactored Gaia layout:
+
+| Zone | Path | Purpose |
+|---|---|---|
+| Curated registry | `registry/` | Maintainer-reviewed graph, named skills, schemas, and public generated catalog artifacts |
+| Review intake | `registry-for-review/` | Draft skill batches created by `gaia push` |
+| User skill trees | `skill-trees/` | Durable per-user `skill-tree.json` records |
+| Local output | `generated-output/` | Gitignored scan artifacts and personal tree renders |
+| Python CLI | `src/gaia_cli/` | Core lifecycle behavior and path resolution |
+| npm wrapper | `packages/cli-npm/` | Thin Node wrapper around the Python CLI |
+| MCP server | `packages/mcp/` | Agent-native integration package |
+
+Public curated outputs, such as `registry/gaia.svg`, `registry/gaia.gexf`, `registry/real-skills.html`, and `registry/combinations.md`, inherit this design language. `docs/graph/*` remains a generated GitHub Pages mirror so the docs site can load graph assets when served from the `docs/` directory.
+
 ## Color Palette
 
 CSS custom properties defined in `docs/index.html`:
@@ -40,15 +56,15 @@ Card glow per tier (radial gradient, 35% opacity):
 
 Skills level up from 0 → VI. Each rank has a distinct RPG-inspired color.
 
-| Level | Rank | Color | Hex | Background tint |
-|---|---|---|---|---|
-| `0` | Basic | Slate | `#94a3b8` | `rgba(100,116,139,.12)` |
-| `I` | Awakened | Sky blue | `#38bdf8` | `rgba(56,189,248,.12)` |
-| `II` | Named | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
-| `III` | Evolved | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
-| `IV` | Hardened | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
-| `V` | Transcendent | Amber | `#fbbf24` | `rgba(251,191,36,.12)` |
-| `VI ★` | Transcendent ★ | Amber (bright) | `#fbbf24` | `rgba(251,191,36,.20)` |
+| Level | Class | Rank | Color | Hex | Background tint |
+|---|---|---|---|---|---|
+| `0` | F | Unawakened | Slate | `#94a3b8` | `rgba(100,116,139,.12)` |
+| `I` | D | Awakened | Sky blue | `#38bdf8` | `rgba(56,189,248,.12)` |
+| `II` | C | Named | Teal | `#63cab7` | `rgba(99,202,183,.12)` |
+| `III` | B | Evolved | Violet | `#a78bfa` | `rgba(167,139,250,.12)` |
+| `IV` | A | Hardened | Fuchsia | `#e879f9` | `rgba(232,121,249,.12)` |
+| `V` | S | Transcendent | Amber | `#fbbf24` | `rgba(251,191,36,.12)` |
+| `VI ★` | SS | Transcendent ★ | Amber (bright) | `#fbbf24` | `rgba(251,191,36,.20)` |
 
 The rank color sequence intentionally mirrors an RPG rarity ramp: neutral → cold → teal → violet → pink → gold, with the apex doubling its background opacity.
 

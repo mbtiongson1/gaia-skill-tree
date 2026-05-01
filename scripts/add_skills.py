@@ -1,5 +1,5 @@
 """
-Adds 5 new skills to graph/gaia.json:
+Adds 5 new skills to registry/gaia.json:
   fine-tune, guardrails, agent-eval, semantic-cache, workflow-automation
 
 Run from repo root:
@@ -8,7 +8,7 @@ Run from repo root:
 import json
 from datetime import date
 
-GRAPH_PATH = "graph/gaia.json"
+GRAPH_PATH = "registry/gaia.json"
 TODAY = str(date.today())
 
 NEW_SKILLS = [

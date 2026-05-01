@@ -74,7 +74,7 @@ def _make_unlocked(skill_id, level="I"):
 
 def _write_tree(tmp_path, username, tree_data):
     """Write tree_data to the expected file path under tmp_path."""
-    tree_dir = tmp_path / "users" / username
+    tree_dir = tmp_path / "skill-trees" / username
     tree_dir.mkdir(parents=True, exist_ok=True)
     tree_path = tree_dir / "skill-tree.json"
     tree_path.write_text(json.dumps(tree_data, indent=2))
@@ -213,7 +213,7 @@ class TestPromoteSkill:
         _write_tree(tmp_path, "bob", tree_data)
         promote_skill("bob", "classify", str(tmp_path), new_display_name="Classify")
         # Re-read from disk
-        tree_path = tmp_path / "users" / "bob" / "skill-tree.json"
+        tree_path = tmp_path / "skill-trees" / "bob" / "skill-tree.json"
         saved = json.loads(tree_path.read_text())
         entry = next(s for s in saved["unlockedSkills"] if s["skillId"] == "classify")
         assert entry["level"] == "III"
@@ -222,7 +222,7 @@ class TestPromoteSkill:
         tree_data = _make_tree("carol", [_make_unlocked("tokenize", "0")])
         _write_tree(tmp_path, "carol", tree_data)
         promote_skill("carol", "tokenize", str(tmp_path), new_display_name="Tokenize")
-        tree_path = tmp_path / "users" / "carol" / "skill-tree.json"
+        tree_path = tmp_path / "skill-trees" / "carol" / "skill-tree.json"
         saved = json.loads(tree_path.read_text())
         assert saved["updatedAt"] == date.today().isoformat()
 
@@ -246,7 +246,7 @@ class TestPromoteSkill:
         tree_data = _make_tree("alice", [_make_unlocked("tokenize", "I")])
         _write_tree(tmp_path, "alice", tree_data)
         # Write a graph file
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir(parents=True, exist_ok=True)
         graph_data = _make_graph(_make_skill("tokenize", name="Tokenize"))
         (graph_dir / "gaia.json").write_text(json.dumps(graph_data))

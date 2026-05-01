@@ -8,10 +8,10 @@ import unittest
 
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CLI_PATH = os.path.join(REPO_ROOT, "plugin", "cli", "main.py")
+CLI_PATH = os.path.join(REPO_ROOT, "packages", "cli-npm", "cli", "main.py")
 sys.path.insert(0, REPO_ROOT)
 
-from plugin.cli.push import build_skill_batch
+from gaia_cli.push import build_skill_batch
 
 
 class TestGaiaPush(unittest.TestCase):
@@ -61,9 +61,9 @@ class TestGaiaPush(unittest.TestCase):
     def test_push_no_pr_writes_batch_file(self):
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
-            os.makedirs(os.path.join(registry, "intake", "skill-batches"), exist_ok=True)
-            shutil.copyfile(os.path.join(REPO_ROOT, "graph", "gaia.json"), os.path.join(registry, "graph", "gaia.json"))
+            os.makedirs(os.path.join(registry, "registry"), exist_ok=True)
+            os.makedirs(os.path.join(registry, "registry-for-review", "skill-batches"), exist_ok=True)
+            shutil.copyfile(os.path.join(REPO_ROOT, "registry", "gaia.json"), os.path.join(registry, "registry", "gaia.json"))
             os.makedirs(os.path.join(tmp, ".gaia"))
             os.makedirs(os.path.join(tmp, "src"))
             with open(os.path.join(tmp, ".gaia", "config.json"), "w") as f:
@@ -100,13 +100,13 @@ class TestGaiaPush(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("Skipped PR creation (--no-pr).", result.stdout)
             self.assertIn("Wrote skill batch intake record:", result.stdout)
-            self.assertTrue(os.listdir(os.path.join(registry, "intake", "skill-batches")))
+            self.assertTrue(os.listdir(os.path.join(registry, "registry-for-review", "skill-batches")))
 
     def test_proposed_filtering_keeps_known_and_removes_noise(self):
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
-            shutil.copyfile(os.path.join(REPO_ROOT, "graph", "gaia.json"), os.path.join(registry, "graph", "gaia.json"))
+            os.makedirs(os.path.join(registry, "registry"), exist_ok=True)
+            shutil.copyfile(os.path.join(REPO_ROOT, "registry", "gaia.json"), os.path.join(registry, "registry", "gaia.json"))
             batch = build_skill_batch(
                 {"web-search", "a", "and", "semantic-search"},
                 {"gaiaUser": "tester"},
@@ -120,10 +120,10 @@ class TestGaiaPush(unittest.TestCase):
         """build_skill_batch sets lifecycle: 'pending' on all proposed skills."""
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
+            os.makedirs(os.path.join(registry, "registry"), exist_ok=True)
             shutil.copyfile(
-                os.path.join(REPO_ROOT, "graph", "gaia.json"),
-                os.path.join(registry, "graph", "gaia.json"),
+                os.path.join(REPO_ROOT, "registry", "gaia.json"),
+                os.path.join(registry, "registry", "gaia.json"),
             )
             batch = build_skill_batch(
                 {"semantic-search", "web-search"},
@@ -144,10 +144,10 @@ class TestGaiaPush(unittest.TestCase):
         """build_skill_batch does not add a lifecycle field to known skills."""
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph"), exist_ok=True)
+            os.makedirs(os.path.join(registry, "registry"), exist_ok=True)
             shutil.copyfile(
-                os.path.join(REPO_ROOT, "graph", "gaia.json"),
-                os.path.join(registry, "graph", "gaia.json"),
+                os.path.join(REPO_ROOT, "registry", "gaia.json"),
+                os.path.join(registry, "registry", "gaia.json"),
             )
             batch = build_skill_batch(
                 {"web-search"},

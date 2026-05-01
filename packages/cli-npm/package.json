@@ -1,0 +1,46 @@
+{
+  "name": "@gaia-registry/cli",
+  "version": "2.2.11",
+  "description": "Gaia CLI - Integrate your AI agent skills with the Gaia registry",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "gaia": "dist/bin/gaia.js"
+  },
+  "files": [
+    "dist",
+    "cli/**/*.py",
+    "gaia_cli/**/*.py",
+    "gaia_cli/data/**/*",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack:legacy": "cp -r ../../src/gaia_cli ./gaia_cli 2>/dev/null || xcopy /E /I /Y ..\\..\\src\\gaia_cli .\\gaia_cli >nul 2>&1",
+    "postpack": "rm -rf gaia_cli",
+    "test": "npm run build && npm run prepack && node --test test/*.test.mjs; npm run postpack",
+    "prepare": "npm run build",
+    "prepack": "rm -rf gaia_cli && cp -R ../../src/gaia_cli gaia_cli",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "gaia",
+    "skills",
+    "ai",
+    "agents",
+    "registry",
+    "cli"
+  ],
+  "author": "Gaia Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "python-shell": "^5.0.0"
+  }
+}

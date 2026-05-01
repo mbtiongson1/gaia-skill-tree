@@ -1,7 +1,7 @@
-"""Compute pairwise cosine similarity for all skills in graph/embeddings.json.
+"""Compute pairwise cosine similarity for all skills in registry/embeddings.json.
 
-Reads graph/embeddings.json, computes pairwise cosine similarity for all skill
-pairs above a configurable threshold, and writes graph/similarity.json.
+Reads registry/embeddings.json, computes pairwise cosine similarity for all skill
+pairs above a configurable threshold, and writes registry/similarity.json.
 """
 
 import argparse
@@ -39,14 +39,14 @@ def compute_similarity(embeddings_path, output_path, threshold=0.3):
     """Read embeddings, compute pairwise similarity, and write similarity.json.
 
     Args:
-        embeddings_path: path to graph/embeddings.json
-        output_path:     path to write graph/similarity.json
+        embeddings_path: path to registry/embeddings.json
+        output_path:     path to write registry/similarity.json
         threshold:       minimum cosine similarity score to include a pair
     """
     if not os.path.exists(embeddings_path):
         print(
             f"Error: embeddings file not found at {embeddings_path}\n"
-            "Run `gaia embed` (or `python -m plugin.cli.embeddings`) first."
+            "Run the embeddings generator before computing similarity."
         )
         sys.exit(1)
 
@@ -90,13 +90,13 @@ def main():
     )
     parser.add_argument(
         "--embeddings",
-        default="graph/embeddings.json",
-        help="Path to embeddings JSON file (default: graph/embeddings.json)",
+        default="registry/embeddings.json",
+        help="Path to embeddings JSON file (default: registry/embeddings.json)",
     )
     parser.add_argument(
         "--output",
-        default="graph/similarity.json",
-        help="Path to write similarity JSON file (default: graph/similarity.json)",
+        default="registry/similarity.json",
+        help="Path to write similarity JSON file (default: registry/similarity.json)",
     )
     parser.add_argument(
         "--threshold",

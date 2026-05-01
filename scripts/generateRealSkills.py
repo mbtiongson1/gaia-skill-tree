@@ -4,7 +4,7 @@ import os
 from typing import Dict, Iterable, List, Tuple
 
 
-CATALOG_PATH = os.path.join("graph", "real_skill_catalog.json")
+CATALOG_PATH = os.path.join("registry", "real-skills.json")
 
 
 def _escape(value):
@@ -224,7 +224,7 @@ def _render_html(catalog):
     </table>
     {content}
   </main>
-  <footer>Generated from graph/real_skill_catalog.json on {generated_at}. Edit the JSON source, then run python3 scripts/generateProjections.py.</footer>
+  <footer>Generated from registry/real-skills.json on {generated_at}. Edit the JSON source, then run python3 scripts/generateProjections.py.</footer>
 </body>
 </html>
 """
@@ -266,11 +266,11 @@ def _render_markdown(catalog):
             lines.append(f"- [{name}]({link}) - {desc} Maps to: {maps_to}.")
 
     generated_at = catalog.get("generatedAt", catalog.get("updatedAt", "unknown"))
-    lines.extend(["", f"*Generated from graph/real_skill_catalog.json on {generated_at}.*", ""])
+    lines.extend(["", f"*Generated from registry/real-skills.json on {generated_at}.*", ""])
     return "\n".join(lines)
 
 
-def generate_catalog_pages(catalog: Dict, output_dir: str = ".") -> Tuple[str, str]:
+def generate_catalog_pages(catalog: Dict, output_dir: str = "registry") -> Tuple[str, str]:
     os.makedirs(output_dir, exist_ok=True)
     html_path = os.path.join(output_dir, "real-skills.html")
     md_path = os.path.join(output_dir, "real-skills.md")

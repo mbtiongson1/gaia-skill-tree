@@ -2,7 +2,7 @@
 """Copy generated graph artifacts into docs/ for GitHub Pages.
 
 GitHub Pages commonly serves the docs/ directory as the site root. Keep the
-canonical graph files in graph/, then mirror only the public artifacts that the
+canonical graph files in registry/, then mirror only the public artifacts that the
 static page needs to fetch or download.
 """
 
@@ -18,7 +18,7 @@ def sync_docs_graph_assets(root: Path = ROOT) -> None:
     docs_graph = root / "docs" / "graph"
     docs_graph.mkdir(parents=True, exist_ok=True)
 
-    required = ("graph/gaia.json", "graph/gaia.gexf", "graph/gaia.svg")
+    required = ("registry/gaia.json", "registry/gaia.gexf", "registry/gaia.svg")
     missing = [rel for rel in required if not (root / rel).exists()]
     if missing:
         raise FileNotFoundError(
@@ -32,19 +32,19 @@ def sync_docs_graph_assets(root: Path = ROOT) -> None:
         shutil.copyfile(src, dst)
         print(f"Synced {src.relative_to(root)} -> {dst.relative_to(root)}")
 
-    tree_src = root / "tree.md"
+    tree_src = root / "generated-output" / "tree.md"
     if not tree_src.exists():
-        raise FileNotFoundError("Missing tree.md. Run scripts/generateProjections.py first.")
+        raise FileNotFoundError("Missing generated-output/tree.md. Run scripts/generateProjections.py first.")
     tree_dst = root / "docs" / "tree.md"
     shutil.copyfile(tree_src, tree_dst)
-    print(f"Synced tree.md -> {tree_dst.relative_to(root)}")
+    print(f"Synced generated-output/tree.md -> {tree_dst.relative_to(root)}")
 
-    named_index_src = root / "graph" / "named" / "index.json"
+    named_index_src = root / "registry" / "named-skills.json"
     if named_index_src.exists():
         named_index_dst = docs_graph / "named" / "index.json"
         named_index_dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(named_index_src, named_index_dst)
-        print(f"Synced graph/named/index.json -> {named_index_dst.relative_to(root)}")
+        print(f"Synced registry/named-skills.json -> {named_index_dst.relative_to(root)}")
 
 
 def main() -> None:
