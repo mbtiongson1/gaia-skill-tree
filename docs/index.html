@@ -842,7 +842,7 @@
 <!-- ─── GET STARTED ─── -->
 <section id="start" class="reveal">
   <h2>Get Started</h2>
-  <p class="section-sub">Five steps from zero to your first skill scan.</p>
+  <p class="section-sub">Five steps from zero to your first skill submission.</p>
 
   <div class="steps">
 
@@ -861,13 +861,9 @@
       <div>
         <h3>Install the CLI</h3>
         <p>One pip install puts the <code>gaia</code> command on your PATH.</p>
-        <pre><span class="cmd">pip install</span> -e .
-
-<span class="cmd">pip install</span> -e <span class="str">".[embeddings]"</span>
-<span class="cmd">gaia embed</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Embeddings unlock semantic search — <code>gaia search "autonomous research"</code> finds skills by meaning. Run <code>gaia embed</code> once after install (~30 sec).</span></div>
-        <pre><span class="kw">$env:PATH</span> += <span class="str">";"</span> + (<span class="cmd">python</span> -c <span class="str">"import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))"</span>)</pre>
-        <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>Windows only — if <code>gaia</code> is not recognized after install, run in PowerShell. To persist: add that path via System → Environment Variables → Path.</span></div>
+        <pre><span class="cmd">pip install</span> -e .</pre>
+        <div class="qs-tip"><span class="qs-tip-icon">⚡</span><span>Optional but recommended: add semantic search support with <code>pip install -e ".[embeddings]"</code> then <code>gaia embed</code> (~30 sec, run once). Lets you search skills by meaning instead of exact keywords.</span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">🪟</span><span>Windows only — if <code>gaia</code> is not recognized, run this in PowerShell then restart your terminal: <code>$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")</code></span></div>
       </div>
     </div>
 
@@ -875,14 +871,9 @@
       <div class="step-num">3</div>
       <div>
         <h3>Initialize your project</h3>
-        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It creates a <code>.gaia/config.json</code> file, auto-detecting your GitHub username and common skill paths.</p>
-        <pre><span class="cmd">gaia init</span>
-<span class="cmd">gaia init --user your-username</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Username and scan paths are auto-detected from git remote, <code>git config</code>, and common paths like <code>.claude/skills/</code>. Use <code>--user</code> to override.</span></div>
-        <pre>{
-  <span class="str">"gaiaUser"</span>: <span class="str">"mbtiongson1"</span>,
-  <span class="str">"scanPaths"</span>: [<span class="str">".claude/skills"</span>]
-}</pre>
+        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It auto-detects your GitHub username and skill paths, then writes a <code>.gaia/config.json</code>.</p>
+        <pre><span class="cmd">gaia init</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Username is read from <code>git remote</code> / <code>git config</code>. Scan paths are auto-detected from common locations (<code>.claude/skills/</code>, <code>AGENTS.md</code>, etc.). Pass <code>--user your-username</code> to override.</span></div>
       </div>
     </div>
 
@@ -890,30 +881,23 @@
       <div class="step-num">4</div>
       <div>
         <h3>Scan your repo</h3>
-        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion opportunities.</p>
+        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion candidates.</p>
         <pre><span class="cmd">gaia scan</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Prints detected skills and combination candidates based on your scan paths.</span></div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">5</div>
       <div>
-        <h3>Submit a batch for review</h3>
-        <p>Preview what would be submitted with <code>--dry-run</code>, then push to create an intake record.</p>
-        <pre><span class="cmd">gaia push --dry-run</span>
-<span class="cmd">gaia push</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Use <code>--dry-run</code> to preview the JSON payload before writing an intake record and opening a PR.</span></div>
+        <h3>Push your skills for review</h3>
+        <p>Creates an intake record and opens a GitHub PR against the canonical graph for maintainer review.</p>
+        <pre><span class="cmd">gaia push</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia push --dry-run</code> first to preview the exact JSON that would be submitted — no files written, no PR opened.</span></div>
       </div>
     </div>
 
   </div>
 
-  <div class="callout">
-    <div class="callout-title">💡 Tip — semantic search</div>
-    <p>Once embeddings are generated, <code>gaia search "autonomous research"</code> finds skills by
-    <em>meaning</em>, not just keywords. The model runs fully locally — no API key needed.</p>
-  </div>
 </section>
 
 <hr class="divider">
@@ -940,39 +924,29 @@
       <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate))">+</div>
       <div>
         <h3>Install a named skill</h3>
-        <p>Other contributors publish real implementations of generic skills. Install one directly into your repo:</p>
-        <pre><span class="cmd">gaia install</span> karpathy/autoresearch
-<span class="cmd">gaia install --list</span>
+        <p>Browse and install real contributor implementations directly into your repo. Use <code>--list</code> to see what's available, then install by ID.</p>
+        <pre><span class="cmd">gaia install --list</span>
+<span class="cmd">gaia install</span> <span class="str">contributor/skill-name</span>
 <span class="cmd">gaia sync</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span><code>--list</code> shows what's installed. <code>gaia sync</code> pulls the latest versions of all installed named skills.</span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>For example: <code>gaia install karpathy/autoresearch</code>. Run <code>gaia sync</code> periodically to pull the latest versions of all installed skills.</span></div>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background:linear-gradient(135deg,var(--ultimate),#f97316)">★</div>
       <div>
-        <h3>Promote your own named skill</h3>
-        <p>Once your pushed skill is awakened, claim it under your GitHub username:</p>
+        <h3>Name your awakened skill</h3>
+        <p>Once a maintainer marks your pushed skill as awakened, claim it under your GitHub username to make it installable by others.</p>
         <pre><span class="cmd">gaia name</span> intake/skill-batches/batch-abc.json 0 <span class="str">yourname/my-skill</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Syntax: <code>gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</code></span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Syntax: <code>gaia name &lt;batch-file&gt; &lt;skill-index&gt; &lt;contributor/skill-name&gt;</code>. The skill-name becomes your permanent ID in the registry.</span></div>
       </div>
     </div>
     <div class="step">
-      <div class="step-num" style="background:var(--ultimate);color:#000">✦</div>
+      <div class="step-num" style="background:var(--ultimate);color:#000">◆</div>
       <div>
-        <h3>Claim an unclaimed Ultimate skill</h3>
-        <p>Five Ultimate skills show <code style="color:var(--ultimate)">◆ /skill-id [Unclaimed ✦]</code> in the registry — no contributor has implemented them yet. Build one, push it through intake review, then name it to claim the title slot and become the origin contributor:</p>
-        <pre><span class="cmd">gaia push</span>
-<span class="cmd">gaia name</span> intake/skill-batches/batch-xyz.json 0 <span class="str">yourname/skill-name</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Find unclaimed ultimates — look for <code>[Unclaimed ✦]</code> in <code>registry.md</code>. Submit an intake record, wait for a maintainer to mark it awakened, then name it to claim the title slot.</span></div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate));font-size:.75rem">◆+</div>
-      <div>
-        <h3>Propose a new Ultimate skill</h3>
-        <p>The highest tier. Requires ≥3 prerequisite skills, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals. Use the <code>new_ultimate_skill</code> PR template and validate locally first:</p>
+        <h3>Contribute at the Ultimate tier</h3>
+        <p>Five Ultimate skills in the registry are unclaimed — no contributor has built them yet. Build an implementation, push it through intake review, then name it to become the origin contributor. New proposals require ≥3 prerequisites, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals.</p>
         <pre><span class="cmd">python scripts/validate.py</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>In <code>graph/gaia.json</code> set <code>"type": "ultimate"</code>, include ≥3 prerequisites and ≥3 Class A/B evidence sources, and <code>"status": "provisional"</code> — maintainers set it to <code>validated</code> at merge. Run <code>validate.py</code> before opening a PR.</span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Find unclaimed slots with <code>[Unclaimed ✦]</code> in <code>registry.md</code>. Use the <code>new_ultimate_skill</code> PR template. Set <code>"status": "provisional"</code> — maintainers flip it to <code>validated</code> at merge.</span></div>
       </div>
     </div>
   </div>
