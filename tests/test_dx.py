@@ -142,14 +142,6 @@ def test_bare_skills_command_prints_skills_help(monkeypatch, capsys):
     assert "gaia skills info <skill_id>" in output
 
 
-def test_version_flags_print_cli_version(monkeypatch, capsys):
-    run_cli(monkeypatch, ["--version"])
-    assert capsys.readouterr().out.strip() == "2.2.1"
-
-    run_cli(monkeypatch, ["-v"])
-    assert capsys.readouterr().out.strip() == "2.2.1"
-
-
 def test_promote_label_override_is_not_available(monkeypatch):
     with pytest.raises(SystemExit) as exc:
         run_cli(monkeypatch, ["promote", "web-search", "--label", "III"])

@@ -210,6 +210,15 @@ def init_command(args):
         registry_abs = os.path.abspath(".")
         write_global_registry(registry_abs)
         print(f"  registry:   {registry_abs} (saved to ~/.gaia/config.json)")
+        
+        # Auto-install git hooks
+        hook_script = os.path.join(registry_abs, "scripts", "install-git-hooks.sh")
+        if os.path.exists(hook_script):
+            try:
+                subprocess.run(["bash", hook_script], check=True)
+                print("  git hooks:  installed automatically")
+            except subprocess.CalledProcessError:
+                print("  git hooks:  failed to install automatically")
 
 
 def scan_command(args):

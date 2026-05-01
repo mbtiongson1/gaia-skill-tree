@@ -52,4 +52,4 @@
 | ◇ Extra Skill: /web-scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III | Structured output mode required. |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | Plan and Decompose, Tool Use, API Call | IV |  |
 
-*Generated from gaia.json v2.2.4.*
+*Generated from gaia.json v2.2.5.*

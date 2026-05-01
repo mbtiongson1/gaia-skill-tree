@@ -31,4 +31,4 @@ Requires access to a container orchestration environment and model registry.
 _None verified yet._
 
 ---
-*Generated from gaia.json v2.2.4 on 2026-04-30. Do not edit directly.*
+*Generated from gaia.json v2.2.5 on 2026-04-30. Do not edit directly.*
