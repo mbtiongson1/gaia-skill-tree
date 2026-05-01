@@ -95,6 +95,53 @@ def test_flat_skill_verbs_are_removed(monkeypatch):
     assert exc.value.code == 2
 
 
+def test_top_level_help_shows_all_public_commands_with_usage(monkeypatch, capsys):
+    with pytest.raises(SystemExit) as exc:
+        run_cli(monkeypatch, ["--help"])
+
+    assert exc.value.code == 0
+    output = capsys.readouterr().out
+    for command in [
+        "init",
+        "scan",
+        "pull",
+        "tree",
+        "push",
+        "version",
+        "mcp",
+        "release",
+        "graph",
+        "appraise",
+        "promote",
+        "docs",
+        "skills",
+    ]:
+        assert command in output
+    assert "_hook" not in output
+    assert "gaia scan [--quiet] [--auto-promote]" in output
+    assert "gaia skills search <query>" in output
+
+
+def test_skills_help_shows_subcommands_with_usage(monkeypatch, capsys):
+    with pytest.raises(SystemExit) as exc:
+        run_cli(monkeypatch, ["skills", "--help"])
+
+    assert exc.value.code == 0
+    output = capsys.readouterr().out
+    for command in ["list", "search", "info", "install", "uninstall"]:
+        assert command in output
+    assert "gaia skills list [--exclude-pending]" in output
+    assert "gaia skills install <skill_id> [--global | --local]" in output
+
+
+def test_bare_skills_command_prints_skills_help(monkeypatch, capsys):
+    run_cli(monkeypatch, ["skills"])
+
+    output = capsys.readouterr().out
+    assert "usage: gaia skills" in output
+    assert "gaia skills info <skill_id>" in output
+
+
 def test_version_flags_print_cli_version(monkeypatch, capsys):
     run_cli(monkeypatch, ["--version"])
     assert capsys.readouterr().out.strip() == "2.2.1"

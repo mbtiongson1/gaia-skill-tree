@@ -56,6 +56,54 @@ from gaia_cli.hook import hook_entry
 
 DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
 
+COMMAND_USAGE = """\
+Quick usage:
+  gaia init [--user <name>] [--scan <path>] [--yes]
+  gaia scan [--quiet] [--auto-promote]
+  gaia pull
+  gaia tree [--named] [--title]
+  gaia push [--dry-run] [--no-pr]
+  gaia version
+  gaia mcp
+  gaia release <patch|minor|major>
+  gaia graph [--format html|svg|json] [-o <path>] [--no-open]
+  gaia appraise [<skillId>]
+  gaia promote [<skillId>] [--all] [--name <name>]
+  gaia docs build [--check]
+  gaia skills <list|search|info|install|uninstall>
+  gaia skills list [--exclude-pending]
+  gaia skills search <query> [--exclude-pending]
+  gaia skills info <skill_id> [--exclude-pending]
+  gaia skills install <skill_id> [--global | --local]
+  gaia skills uninstall <skill_id>
+"""
+
+SKILLS_USAGE = """\
+Quick usage:
+  gaia skills list [--exclude-pending]
+  gaia skills search <query> [--exclude-pending]
+  gaia skills info <skill_id> [--exclude-pending]
+  gaia skills install <skill_id> [--global | --local]
+  gaia skills uninstall <skill_id>
+"""
+
+PUBLIC_COMMANDS = (
+    "help",
+    "init",
+    "scan",
+    "pull",
+    "tree",
+    "push",
+    "version",
+    "mcp",
+    "release",
+    "graph",
+    "appraise",
+    "promote",
+    "docs",
+    "skills",
+)
+
 # Known skill-convention files/dirs, in priority order
 _SKILL_CANDIDATES = [
     'AGENTS.md',                         # OpenAI Codex
@@ -838,7 +886,12 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-    parser = argparse.ArgumentParser(prog="gaia", description="Gaia Registry CLI")
+    parser = argparse.ArgumentParser(
+        prog="gaia",
+        description="Gaia Registry CLI",
+        epilog=COMMAND_USAGE,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument(
         '--registry',
         default=None,
@@ -855,9 +908,9 @@ def main():
         action='store_true',
         help="Print the Gaia CLI version and exit.",
     )
-    subparsers = parser.add_subparsers(dest='command')
+    subparsers = parser.add_subparsers(dest='command', metavar="{" + ",".join(PUBLIC_COMMANDS) + "}")
     subparsers.add_parser('help', help="Show command help")
-    init_parser = subparsers.add_parser('init')
+    init_parser = subparsers.add_parser('init', help="Create or update local Gaia config")
     init_parser.add_argument('--user', help='Gaia username to write into .gaia/config.toml')
     init_parser.add_argument('--registry-ref', help='Gaia registry URL to write into .gaia/config.toml')
     init_parser.add_argument('--scan', action='append', help='Path to scan; repeat for multiple paths')
@@ -867,14 +920,14 @@ def main():
         action='store_true',
         help='Enable automatic prompts for detected skill combinations',
     )
-    scan_parser = subparsers.add_parser('scan')
+    scan_parser = subparsers.add_parser('scan', help="Scan configured paths for skill evidence")
     scan_parser.add_argument('--quiet', action='store_true', help="Suppress scan output; only show notifications")
     scan_parser.add_argument('--auto-promote', action='store_true', help="Promote every scan-recommended candidate after scanning")
     subparsers.add_parser('pull', help="Refresh registry data from origin")
-    tree_parser = subparsers.add_parser('tree')
+    tree_parser = subparsers.add_parser('tree', help="Show your Gaia skill tree")
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
-    push_parser = subparsers.add_parser('push')
+    push_parser = subparsers.add_parser('push', help="Prepare detected skills for review")
     push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
     push_parser.add_argument('--no-pr', action='store_true', help="Write intake record without creating a PR")
     subparsers.add_parser('version', help="Print the Gaia CLI version")
@@ -896,23 +949,31 @@ def main():
     docs_sub = docs_parser.add_subparsers(dest='docs_command')
     docs_build = docs_sub.add_parser('build', help="Regenerate generated documentation regions")
     docs_build.add_argument('--check', action='store_true', help="Fail if docs are stale without writing")
-    skills_parser = subparsers.add_parser('skills', help="Browse and manage named skills")
+    skills_parser = subparsers.add_parser(
+        'skills',
+        help="Browse and manage named skills",
+        epilog=SKILLS_USAGE,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     skills_sub = skills_parser.add_subparsers(dest='skills_command')
-    skills_list = skills_sub.add_parser('list')
-    skills_list.add_argument('--exclude-pending', action='store_true')
-    skills_search = skills_sub.add_parser('search')
-    skills_search.add_argument('query')
-    skills_search.add_argument('--exclude-pending', action='store_true')
-    skills_info = skills_sub.add_parser('info')
-    skills_info.add_argument('skill_id')
-    skills_info.add_argument('--exclude-pending', action='store_true')
-    skills_install = skills_sub.add_parser('install')
-    skills_install.add_argument('skill_id')
+    skills_list = skills_sub.add_parser('list', help="List available named skills")
+    skills_list.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_search = skills_sub.add_parser('search', help="Search named skills")
+    skills_search.add_argument('query', help="Search query")
+    skills_search.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_info = skills_sub.add_parser('info', help="Show details for a named skill")
+    skills_info.add_argument('skill_id', help="Skill ID to inspect")
+    skills_info.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_install = skills_sub.add_parser('install', help="Install a named skill")
+    skills_install.add_argument('skill_id', help="Skill ID to install")
     skills_install.add_argument('--global', dest='install_global', action='store_true', help='Install to ~/.gaia/skills')
     skills_install.add_argument('--local', dest='install_local', action='store_true', help='Install to project .gaia/skills')
-    skills_uninstall = skills_sub.add_parser('uninstall')
-    skills_uninstall.add_argument('skill_id')
+    skills_uninstall = skills_sub.add_parser('uninstall', help="Uninstall a named skill")
+    skills_uninstall.add_argument('skill_id', help="Skill ID to uninstall")
     hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
+    subparsers._choices_actions = [
+        action for action in subparsers._choices_actions if action.dest != '_hook'
+    ]
     hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
     args = parser.parse_args()
     args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
@@ -948,7 +1009,8 @@ def main():
         docs_command(args)
     elif args.command == 'skills':
         if not getattr(args, 'skills_command', None):
-            parser.error("gaia skills requires a verb: list, search, install, uninstall, or info")
+            skills_parser.print_help()
+            return
         skills_command(args)
     elif args.command == '_hook':
         hook_command(args)
