@@ -121,12 +121,13 @@ pass `gaia init --user your-username` to override.
 ```bash
 gaia pull
 gaia scan
-gaia appraise
-gaia skills search web
+gaia tree
 ```
 `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, and renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`.
-
-Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
+```bash
+gaia appraise skill-name
+```
+Replace `skill-name` with the actual skill listed in the tree. Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
 ## Push
 Go to your integrated terminal in your repo and run this command after scanning:
