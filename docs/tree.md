@@ -12,7 +12,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: /research  [III]
   │  ├─ ○ /web-search  [I]
   │  ├─ ○ /summarize  [0]
-  │  └─ ○ /cite-sources  [I]
+  │  └─ ○ openai/openai-docs  [I]
   ├─ ◇ Extra Skill: /knowledge-harvest  [IV]
   │  ├─ ◇ Extra Skill: /web-scrape  [III]
   │  │  ├─ ○ /web-search  [I]  (↑ see above)
@@ -35,7 +35,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   └─ ◇ Extra Skill: /research  [III]
      ├─ ○ /web-search  [I]
      ├─ ○ /summarize  [0]  (↑ see above)
-     └─ ○ /cite-sources  [I]
+     └─ ○ openai/openai-docs  [I]
 
 ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
@@ -43,19 +43,19 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: /research  [III]
   │  ├─ ○ /web-search  [I]
   │  ├─ ○ /summarize  [0]
-  │  └─ ○ /cite-sources  [I]
+  │  └─ ○ openai/openai-docs  [I]
   └─ ○ /math-reason  [II]
 
-◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V]
+◆ Ultimate Skill: openai/chatgpt-apps  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Extra Skill: /code-review-pipeline  [III]
+  ├─ ◇ Extra Skill: openai/security-best-practices  [III]
   │  ├─ ○ /code-generation  [I]
-  │  ├─ ○ /diff-content  [I]
+  │  ├─ ○ openai/yeet  [I]
   │  └─ ○ /evaluate-output  [I]
   ├─ ◇ Extra Skill: 0xdarkmatter/pytest-patterns  [III]
   │  ├─ ○ upsonic/unittest-generator  [II]
   │  ├─ ○ /execute-bash  [I]
-  │  └─ ○ /error-interpretation  [I]
+  │  └─ ○ openai/gh-fix-ci  [I]
   └─ ○ mattpocock/improve-codebase-architecture  [II]
 
 ◆ Ultimate Skill: ruvnet/flow-nexus-swarm  [V]
@@ -84,7 +84,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: devin-ai/autonomous-swe  [IV]
   │  ├─ ○ /code-generation  [I]
   │  ├─ ○ /execute-bash  [I]
-  │  └─ ○ /error-interpretation  [I]
+  │  └─ ○ openai/gh-fix-ci  [I]
   ├─ ○ /evaluate-output  [I]
   └─ ◇ Extra Skill: /plan-and-execute  [IV]
      ├─ ○ /route-intent  [I]
@@ -98,7 +98,7 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /code-execution  [II · Named]
   ○ mattpocock/zoom-out - Code Explain  [II · Named]
   ○ /context-compression  [III · Evolved]
-  ○ /detect-anomaly  [II · Named]
+  ○ openai/sentry - Detect Anomaly  [II · Named]
   ○ anthropic/pptx - Document Editing  [0 · Basic]
   ○ /few-shot-learning  [IV · Hardened]
   ○ /fine-tune  [IV · Hardened]

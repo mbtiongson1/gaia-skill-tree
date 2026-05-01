@@ -1,4 +1,4 @@
-# /diff-content  [I · Awakened]
+# openai/yeet  [I · Awakened]
 **ID:** diff-content  
 **Type:** Basic  
 **Level:** I  

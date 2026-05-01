@@ -1,4 +1,4 @@
-# Extra Skill: /knowledge-graph-build  [III · Evolved]
+# Extra Skill: openai/security-ownership-map  [III · Evolved]
 **ID:** knowledge-graph-build  
 **Type:** Extra Skill  
 **Level:** III  

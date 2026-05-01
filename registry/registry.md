@@ -12,28 +12,28 @@
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | III | Evolved | `/browser-automation` |
 | ○ /chain-of-thought | Basic | I | Awakened | `/chain-of-thought` |
 | ○ /chunk-document | Basic | I | Awakened | `/chunk-document` |
-| ○ /cite-sources | Basic | I | Awakened | `/cite-sources` |
+| ○ openai/openai-docs | Basic | I | Awakened | `/cite-sources` |
 | ○ /classify | Basic | 0 | Basic | `/classify` |
 | ○ /code-generation | Basic | I | Awakened | `/code-generation` |
-| ◇ Extra Skill: /code-review-pipeline | Extra Skill | III | Evolved | `/code-review-pipeline` |
-| ○ /computer-use | Basic | II | Named | `/computer-use` |
+| ◇ Extra Skill: openai/security-best-practices | Extra Skill | III | Evolved | `/code-review-pipeline` |
+| ○ openai/playwright | Basic | II | Named | `/computer-use` |
 | ◇ Extra Skill: /content-moderation | Extra Skill | III | Evolved | `/content-moderation` |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | III | Evolved | `/conversational-agent` |
 | ◇ Extra Skill: /data-analysis | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic | II | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
-| ○ /diff-content | Basic | I | Awakened | `/diff-content` |
+| ○ openai/yeet | Basic | I | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | III | Evolved | `/document-analyst` |
 | ◇ Extra Skill: /document-digitization | Extra Skill | III | Evolved | `/document-digitization` |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | III | Evolved | `/e2e-testing` |
 | ○ /embed-text | Basic | I | Awakened | `/embed-text` |
-| ○ /error-interpretation | Basic | I | Awakened | `/error-interpretation` |
+| ○ openai/gh-fix-ci | Basic | I | Awakened | `/error-interpretation` |
 | ○ /evaluate-output | Basic | I | Awakened | `/evaluate-output` |
 | ○ /execute-bash | Basic | I | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic | I | Awakened | `/extract-entities` |
 | ○ /format-output | Basic | 0 | Basic | `/format-output` |
-| ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/full-stack-developer` |
+| ◆ Ultimate Skill: openai/chatgpt-apps | Ultimate Skill | V | Transcendent | `/full-stack-developer` |
 | ◇ Extra Skill: /function-calling | Extra Skill | III | Evolved | `/function-calling` |
 | ○ /generate-sql | Basic | II | Named | `/generate-sql` |
 | ○ upsonic/unittest-generator | Basic | II | Named | `/generate-test` |
@@ -43,7 +43,7 @@
 | ◇ Extra Skill: /guardrails | Extra Skill | III | Evolved | `/guardrails` |
 | ○ /hypothesis-generate | Basic | II | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic | II | Named | `/image-caption` |
-| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | III | Evolved | `/knowledge-graph-build` |
+| ◇ Extra Skill: openai/security-ownership-map | Extra Skill | III | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | IV | Hardened | `/knowledge-harvest` |
 | ◇ Extra Skill: /literature-review | Extra Skill | IV | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic | I | Awakened | `/logical-inference` |
@@ -138,7 +138,6 @@
 | Skill Call | Level | Prerequisites |
 |---|---|---|
 | `/autonomous-data-scientist` | Transcendent | `/data-analysis`, `/math-reason`, `/research` |
-| `/full-stack-developer` | Transcendent | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
 | `/real-time-voice-assistant` | Transcendent | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
 | `/recursive-self-improvement` | Transcendent | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
 | `/scientific-discovery` | Transcendent | `/hypothesis-generate`, `/research`, `/math-reason` |

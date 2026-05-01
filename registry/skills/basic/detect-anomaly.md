@@ -1,4 +1,4 @@
-# /detect-anomaly  [II · Named]
+# openai/sentry  [II · Named]
 **ID:** detect-anomaly  
 **Type:** Basic  
 **Level:** II  
