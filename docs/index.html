@@ -44,6 +44,8 @@
   nav a:hover{color:var(--text)}
   .nav-tree{color:var(--ultimate)!important}
   .nav-tree:hover{color:#fcd34d!important}
+  .nav-named-explorer{color:#ef4444!important;font-weight:700}
+  .nav-named-explorer:hover{color:#f87171!important}
   /* ── HERO ── */
   #hero{
     position:relative;min-height:100vh;
@@ -337,9 +339,13 @@
   }
 
   /* -- NAMED SKILLS -- */
-  .ns-level-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+  #named { min-height:100vh; padding-top:5rem; scroll-margin-top:0; }
+  .ns-controls {
+    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem;
+  }
+  .ns-level-tabs{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
   .ns-tab{
-    padding:.4rem .95rem;border-radius:999px;font-size:.82rem;font-weight:600;
+    padding:.35rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;
     background:transparent;color:var(--muted);
     border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .2s;
   }
@@ -350,52 +356,87 @@
   .ns-tab.active[data-level="IV"]{color:#e879f9;background:rgba(232,121,249,.1);border-color:rgba(232,121,249,.35)}
   .ns-tab.active[data-level="V"]{color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.35)}
   .ns-tab.active[data-level="VI"]{color:#fbbf24;background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4)}
-  .ns-grid{display:flex;flex-direction:column;gap:.75rem}
+  .ns-view-btns { display:flex;gap:.3rem;border:1px solid var(--border);border-radius:8px;padding:2px; }
+  .ns-view-btn {
+    background:transparent;border:none;color:var(--muted);padding:.3rem .65rem;
+    border-radius:6px;cursor:pointer;font-size:.78rem;transition:background .15s,color .15s;
+    display:flex;align-items:center;gap:.3rem;font-family:inherit;
+  }
+  .ns-view-btn:hover{color:var(--text)}
+  .ns-view-btn.active{background:var(--surface);color:var(--basic)}
+  /* TILE VIEW */
+  .ns-grid-tile {
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;
+  }
+  .ns-tile {
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:1.3rem 1.2rem;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s;
+    display:flex;flex-direction:column;gap:.5rem;position:relative;overflow:hidden;
+    --ns-glow:rgba(56,189,248,.15);
+  }
+  .ns-tile:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
+  .ns-tile[data-level="II"]{--ns-glow:rgba(99,202,183,.25)}
+  .ns-tile[data-level="III"]{--ns-glow:rgba(167,139,250,.25)}
+  .ns-tile[data-level="IV"]{--ns-glow:rgba(232,121,249,.25)}
+  .ns-tile[data-level="V"]{--ns-glow:rgba(251,191,36,.25)}
+  .ns-tile[data-level="VI"]{--ns-glow:rgba(251,191,36,.35)}
+  .ns-tile-head { display:flex;align-items:center;gap:.5rem; }
+  .ns-tile-name { font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3; }
+  .ns-tile-id { font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-tile-tags { display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.2rem; }
+  .ns-tile-arrow { margin-top:auto;text-align:right;color:var(--muted);font-size:.9rem;transition:color .2s; }
+  .ns-tile:hover .ns-tile-arrow{color:var(--basic)}
+  /* LIST VIEW */
+  .ns-grid-list { display:flex;flex-direction:column;gap:.4rem; }
+  .ns-list-row {
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:.75rem 1.2rem;cursor:pointer;
+    display:flex;align-items:center;gap:1rem;
+    transition:border-color .2s,background .15s;
+    --ns-glow:rgba(56,189,248,.12);
+  }
+  .ns-list-row:hover{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.1)}
+  .ns-list-row[data-level="II"]{border-left:3px solid rgba(99,202,183,.5)}
+  .ns-list-row[data-level="III"]{border-left:3px solid rgba(167,139,250,.5)}
+  .ns-list-row[data-level="IV"]{border-left:3px solid rgba(232,121,249,.5)}
+  .ns-list-row[data-level="V"]{border-left:3px solid rgba(251,191,36,.5)}
+  .ns-list-row[data-level="VI"]{border-left:3px solid rgba(251,191,36,.7)}
+  .ns-lr-name { font-weight:700;font-size:.9rem;min-width:140px; }
+  .ns-lr-id { font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ns-lr-tags { display:flex;gap:.3rem;flex-wrap:nowrap;overflow:hidden; }
+  .ns-lr-arrow { color:var(--muted);font-size:1.1rem;margin-left:auto;flex-shrink:0;transition:color .2s; }
+  .ns-list-row:hover .ns-lr-arrow { color:var(--basic); }
+  /* TREE VIEW */
+  .ns-grid-tree { display:flex;flex-direction:column;gap:.6rem; }
+  .ns-tree-group { border:1px solid var(--border);border-radius:12px;overflow:hidden; }
+  .ns-tree-parent {
+    display:flex;align-items:center;gap:.7rem;padding:.85rem 1.2rem;
+    background:rgba(255,255,255,.025);cursor:pointer;
+    font-size:.82rem;font-weight:600;color:var(--muted);
+    transition:background .15s;
+  }
+  .ns-tree-parent:hover{background:rgba(255,255,255,.05)}
+  .ns-tree-ref { color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem; }
+  .ns-tree-count { background:var(--border);color:var(--muted);padding:.1rem .45rem;border-radius:20px;font-size:.7rem; }
+  .ns-tree-children { display:flex;flex-direction:column;border-top:1px solid var(--border); }
+  .ns-tree-leaf {
+    display:flex;align-items:center;gap:.9rem;padding:.7rem 1.4rem;cursor:pointer;
+    border-bottom:1px solid var(--border);transition:background .15s;
+    --ns-glow:rgba(56,189,248,.1);
+  }
+  .ns-tree-leaf:last-child{border-bottom:none}
+  .ns-tree-leaf:hover{background:rgba(255,255,255,.03)}
+  /* shared card bits */
   .ns-loading,.ns-empty{
     text-align:center;color:var(--muted);font-size:.9rem;
     padding:3rem 1.5rem;border:1px dashed var(--border);border-radius:14px;
   }
-  .ns-card{
-    background:var(--surface);border:1px solid var(--border);
-    border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s;
-    --ns-glow:rgba(56,189,248,.1);
-  }
-  .ns-card:hover{box-shadow:0 0 28px var(--ns-glow);border-color:rgba(255,255,255,.08)}
-  .ns-card[data-level="II"]{--ns-glow:rgba(99,202,183,.2)}
-  .ns-card[data-level="III"]{--ns-glow:rgba(167,139,250,.2)}
-  .ns-card[data-level="IV"]{--ns-glow:rgba(232,121,249,.2)}
-  .ns-card[data-level="V"]{--ns-glow:rgba(251,191,36,.2)}
-  .ns-card[data-level="VI"]{--ns-glow:rgba(251,191,36,.28)}
-  .ns-card-head{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:1rem;padding:1.1rem 1.4rem;cursor:pointer;transition:background .15s;
-  }
-  .ns-card-head:hover{background:rgba(255,255,255,.025)}
-  .ns-pill{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0}
-  .ns-pill-id{
-    font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
-    font-size:.95rem;font-weight:700;color:var(--text);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
+  .ns-level-badge{font-size:.72rem;font-weight:700;padding:.22rem .62rem;border-radius:999px;border:1px solid;white-space:nowrap;letter-spacing:.04em}
   .ns-origin{
     flex-shrink:0;font-size:.65rem;font-weight:800;letter-spacing:.08em;
     padding:.16rem .48rem;border-radius:999px;
     background:rgba(245,158,11,.12);color:var(--ultimate);border:1px solid rgba(245,158,11,.3);
   }
-  .ns-flavor{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ns-card-right{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
-  .ns-level-badge{font-size:.72rem;font-weight:700;padding:.22rem .62rem;border-radius:999px;border:1px solid;white-space:nowrap;letter-spacing:.04em}
-  .ns-toggle{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.85rem;transition:transform .28s,color .15s;font-family:inherit;padding:0 .1rem;line-height:1}
-  .ns-card.open .ns-toggle{transform:rotate(180deg)}
-  .ns-card-head:hover .ns-toggle{color:var(--text)}
-  .ns-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .ns-body-inner{opacity:0;transition:opacity .2s ease .06s;padding:0 1.4rem 1.4rem;border-top:1px solid var(--border)}
-  .ns-card.open .ns-body{max-height:1200px}
-  .ns-card.open .ns-body-inner{opacity:1}
-  .ns-desc{font-size:.88rem;color:var(--muted);padding:1rem 0 .8rem;line-height:1.6}
-  .ns-row{margin-bottom:.8rem}
-  .ns-row-label{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.38rem}
-  .ns-chip-row{display:flex;gap:.4rem;flex-wrap:wrap}
   .ns-chip{font-size:.74rem;font-weight:600;padding:.2rem .58rem;border-radius:999px;border:1px solid;white-space:nowrap}
   .ns-chip-prereq{color:#38bdf8;background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.25)}
   .ns-chip-deriv{color:#c084fc;background:rgba(192,132,252,.08);border-color:rgba(192,132,252,.25)}
@@ -431,10 +472,13 @@
     --glow-VI:  0 0 20px #fbbf24, 0 0 50px rgba(251,191,36,.6), 0 0 80px rgba(56,189,248,.3);
   }
   .skill-explorer {
-    display:none;position:fixed;inset:0;z-index:200;
+    position:fixed;top:58px;left:0;right:0;bottom:0;z-index:99;
     background:var(--bg);overflow-y:auto;
+    transform:translateX(100%);
+    transition:transform .34s cubic-bezier(.4,0,.2,1);
+    visibility:hidden;
   }
-  .skill-explorer.open { display:block; }
+  .skill-explorer.open { transform:translateX(0);visibility:visible; }
   .se-topbar {
     position:sticky;top:0;z-index:10;
     display:flex;align-items:center;gap:1rem;
@@ -494,24 +538,27 @@
   .se-desc-text { line-height:1.75;color:var(--text); }
   .se-tags { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem; }
   .se-tag { background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--basic);padding:.18rem .6rem;border-radius:20px;font-size:.75rem; }
-  .se-tabs {
-    display:flex;gap:.4rem;margin-bottom:2rem;
-    border-bottom:1px solid var(--border);padding-bottom:0;
-    position:sticky;top:56px;z-index:9;
-    background:var(--bg);padding-top:.6rem;
+  .se-btn-icon {
+    background:transparent;border:1px solid var(--border);color:var(--muted);
+    width:32px;height:32px;border-radius:7px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:border-color .2s,color .2s;flex-shrink:0;
   }
-  .se-tab {
-    background:transparent;border:none;color:var(--muted);
-    padding:.6rem 1.1rem .8rem;cursor:pointer;font-size:.9rem;
-    border-bottom:2px solid transparent;margin-bottom:-1px;
-    transition:color .2s,border-color .2s;
+  .se-btn-icon:hover { border-color:var(--basic);color:var(--basic); }
+  .se-btn-icon.copied { border-color:var(--basic);color:var(--basic); }
+  /* sequential flow sections — no tabs */
+  .se-flow { padding:0; }
+  .se-flow-section {
+    padding:2.2rem 0;
+    border-bottom:1px solid var(--border);
   }
-  .se-tab.active { color:var(--basic);border-bottom-color:var(--basic); }
-  .se-tab:hover:not(.active) { color:var(--text); }
-  .se-section { display:none;animation:se-fadein .25s ease; }
-  .se-section.active { display:block; }
-  @keyframes se-fadein { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-  .se-section h3 { font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:var(--text); }
+  .se-flow-section:last-child { border-bottom:none; }
+  .se-flow-h {
+    font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted);margin-bottom:1.4rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .se-flow-h svg { opacity:.7; }
   .se-install-block {
     background:var(--surface);border:1px solid var(--border);border-radius:10px;
     padding:1.2rem 1.4rem;margin-bottom:.9rem;
@@ -523,10 +570,11 @@
   .se-install-cmd { font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text);flex:1;word-break:break-all; }
   .se-copy-btn {
     background:transparent;border:1px solid var(--border);color:var(--muted);
-    padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-size:.75rem;white-space:nowrap;
+    width:32px;height:32px;border-radius:7px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
     transition:border-color .2s,color .2s;
   }
-  .se-copy-btn:hover { border-color:var(--basic);color:var(--basic); }
+  .se-copy-btn:hover,.se-copy-btn.copied { border-color:var(--basic);color:var(--basic); }
   .se-docs-block { margin-bottom:2rem; }
   .se-docs-block h4 { font-size:.88rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.8rem; }
   .se-evidence-row { display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.85rem; }
@@ -591,7 +639,7 @@
     <li><a href="#start">Get Started</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
-    <li><a href="#named">Named</a></li>
+    <li><a href="#named" class="nav-named-explorer">Named Skills Explorer</a></li>
     <li><a href="../tree.md" target="_blank" class="nav-tree">Tree</a></li>
   </ul>
 </nav>
@@ -876,19 +924,35 @@
 
 <!-- ─── NAMED SKILLS ─── -->
 <section id="named" class="reveal">
-  <h2>Named Skills</h2>
+  <h2>Named Skills Explorer</h2>
   <p class="section-sub">Contributor implementations of canonical skills — the first real agents behind every generic capability.</p>
 
-  <div class="ns-level-tabs" id="nsLevelTabs">
-    <button class="ns-tab active" type="button" data-level="all">All</button>
-    <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
-    <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
-    <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
-    <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
-    <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+  <div class="ns-controls">
+    <div class="ns-level-tabs" id="nsLevelTabs">
+      <button class="ns-tab active" type="button" data-level="all">All</button>
+      <button class="ns-tab" type="button" data-level="II"><span style="color:#63cab7;font-weight:800">II</span> Named</button>
+      <button class="ns-tab" type="button" data-level="III"><span style="color:#a78bfa;font-weight:800">III</span> Evolved</button>
+      <button class="ns-tab" type="button" data-level="IV"><span style="color:#e879f9;font-weight:800">IV</span> Hardened</button>
+      <button class="ns-tab" type="button" data-level="V"><span style="color:#fbbf24;font-weight:800">V</span> Transcendent</button>
+      <button class="ns-tab" type="button" data-level="VI"><span style="color:#fbbf24;font-weight:800">VI ★</span></button>
+    </div>
+    <div class="ns-view-btns" id="nsViewBtns">
+      <button class="ns-view-btn active" data-view="tile" title="Tile view">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
+        Tile
+      </button>
+      <button class="ns-view-btn" data-view="list" title="List view">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="4" x2="16" y2="4"/><line x1="0" y1="8" x2="16" y2="8"/><line x1="0" y1="12" x2="16" y2="12"/></svg>
+        List
+      </button>
+      <button class="ns-view-btn" data-view="tree" title="Tree view">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="2" r="1.5"/><circle cx="3" cy="11" r="1.5"/><circle cx="13" cy="11" r="1.5"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="8" y1="7" x2="3" y2="9.5"/><line x1="8" y1="7" x2="13" y2="9.5"/></svg>
+        Tree
+      </button>
+    </div>
   </div>
 
-  <div class="ns-grid" id="nsGrid">
+  <div class="ns-grid-tile" id="nsGrid">
     <div class="ns-loading">Loading named skills…</div>
   </div>
 </section>
@@ -1309,9 +1373,11 @@
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
-        const labelText = (state.showTitles && state.titleMap && state.titleMap[skill.id])
-          ? state.titleMap[skill.id]
-          : '/' + skill.id;
+        const labelText = (state.redPillActive && state.namedMap && state.namedMap[skill.id])
+          ? state.namedMap[skill.id]
+          : (state.showTitles && state.titleMap && state.titleMap[skill.id])
+            ? state.titleMap[skill.id]
+            : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
       }
       labelNodes.forEach(({ skill }) => {
@@ -1609,64 +1675,65 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function chips(ids, skillMap, cls) {
-    if (!ids || !ids.length) return '<span class="ns-none">\u2014</span>';
-    return ids.map(function(id) {
-      var s = skillMap[id];
-      return '<span class="ns-chip ' + cls + '">' + esc(s ? s.name : id) + '</span>';
-    }).join('');
+
+  function renderTile(ns, lm) {
+    var tags = (ns.tags||[]).slice(0,3).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
+    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+      '<div class="ns-tile-head">' +
+        '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
+        (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
+      '</div>' +
+      '<div class="ns-tile-name">' + esc(ns.name || ns.id.split('/')[1] || ns.id) + '</div>' +
+      '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
+      (tags ? '<div class="ns-tile-tags">' + tags + '</div>' : '') +
+      '<div class="ns-tile-arrow">\u2192</div>' +
+    '</article>';
   }
 
-  function renderCard(ns, skillMap, buckets) {
-    var lm = LEVEL_META[ns.level] || LEVEL_META['II'];
-    var generic = skillMap[ns.genericSkillRef] || {};
-    var prereqs = Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
-    var derivs  = Array.isArray(generic.derivatives)   ? generic.derivatives   : [];
-    var variants = (buckets[ns.genericSkillRef] || []).filter(function(v){ return v.id !== ns.id; });
-    var tags  = Array.isArray(ns.tags) ? ns.tags : [];
-    var links = ns.links && typeof ns.links === 'object' ? ns.links : {};
+  function renderListRow(ns, lm) {
+    var tags = (ns.tags||[]).slice(0,2).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
+    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+      '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
+      '<span class="ns-lr-name">' + esc(ns.name || ns.id.split('/')[1] || ns.id) + '</span>' +
+      '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
+      '<span class="ns-lr-tags">' + tags + '</span>' +
+      '<span class="ns-lr-arrow">\u203a</span>' +
+    '</article>';
+  }
 
-    var variantHtml = variants.length
-      ? variants.map(function(v){ return '<span class="ns-chip ns-chip-variant">' + esc(v.id) + '</span>'; }).join('')
-      : '<span class="ns-none">origin implementation</span>';
-
-    var tagHtml = tags.map(function(t){ return '<span class="ns-tag">' + esc(t) + '</span>'; }).join('');
-
-    var linkHtml = Object.keys(links).filter(function(k){ return links[k]; })
-      .map(function(k){ return '<a class="ns-link-btn" href="' + esc(links[k]) + '" target="_blank" rel="noopener">\u2197 ' + esc(k.charAt(0).toUpperCase()+k.slice(1)) + '</a>'; })
-      .join('');
-
-    return '<article class="ns-card" data-level="' + esc(ns.level) + '" data-id="' + esc(ns.id) + '" onclick="openSkillExplorer(\'' + esc(ns.id).replace(/'/g,"\\'") + '\')" style="cursor:pointer">' +
-  '<div class="ns-card-head">' +
-    '<div style="flex:1;min-width:0">' +
-      '<div class="ns-pill">' +
-        '<span class="ns-pill-id">' + esc(ns.id) + '</span>' +
-        (ns.origin ? '<span class="ns-origin">\u2605 origin</span>' : '') +
-      '</div>' +
-      (ns.title ? '<div class="ns-flavor">\u201c' + esc(ns.title) + '\u201d</div>' : '') +
-    '</div>' +
-    '<div class="ns-card-right">' +
-      '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' \u00b7 ' + lm.name + '</span>' +
-      '<button class="ns-toggle" type="button" aria-label="Toggle details">\u25be</button>' +
-    '</div>' +
-  '</div>' +
-  '<div class="ns-body"><div class="ns-body-inner">' +
-    (ns.description ? '<p class="ns-desc">' + esc(ns.description) + '</p>' : '') +
-    '<div class="ns-row"><span class="ns-row-label">Generic Skill</span><div class="ns-chip-row"><span class="ns-chip ns-chip-ref">' + esc(ns.genericSkillRef) + '</span></div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Dependencies</span><div class="ns-chip-row">' + chips(prereqs, skillMap, 'ns-chip-prereq') + '</div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Derivatives</span><div class="ns-chip-row">' + chips(derivs, skillMap, 'ns-chip-deriv') + '</div></div>' +
-    '<div class="ns-row"><span class="ns-row-label">Variants</span><div class="ns-chip-row">' + variantHtml + '</div></div>' +
-    (tagHtml ? '<div class="ns-row"><span class="ns-row-label">Tags</span><div class="ns-chip-row">' + tagHtml + '</div></div>' : '') +
-    (linkHtml ? '<div class="ns-links">' + linkHtml + '</div>' : '') +
-  '</div></div>' +
-'</article>';
+  function renderTreeView(allNamed) {
+    var groups = {};
+    allNamed.forEach(function(ns) {
+      var ref = ns.genericSkillRef || 'other';
+      if (!groups[ref]) groups[ref] = [];
+      groups[ref].push(ns);
+    });
+    return Object.keys(groups).sort().map(function(ref) {
+      var children = groups[ref];
+      var leavesHtml = children.map(function(ns) {
+        var lm = LEVEL_META[ns.level] || LEVEL_META['II'];
+        return '<article class="ns-tree-leaf" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+          '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
+          '<span class="ns-lr-name">' + esc(ns.name || ns.id) + '</span>' +
+          '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
+          '<span class="ns-lr-arrow">\u203a</span>' +
+        '</article>';
+      }).join('');
+      return '<div class="ns-tree-group">' +
+        '<div class="ns-tree-parent"><span class="ns-tree-ref">'+esc(ref)+'</span><span class="ns-tree-count">'+children.length+'</span></div>' +
+        '<div class="ns-tree-children">' + leavesHtml + '</div>' +
+      '</div>';
+    }).join('');
   }
 
   function initNamedSkills() {
     var grid = document.getElementById('nsGrid');
     var tabsEl = document.getElementById('nsLevelTabs');
+    var viewBtnsEl = document.getElementById('nsViewBtns');
     if (!grid) return;
 
+    var viewMode = 'tile';
+    var levelFilter = 'all';
     var FALLBACK_NAMED_INDEX = { buckets: {
       'automated-testing':           [{ id:'0xdarkmatter/pytest-patterns',            name:'Pytest Patterns',               contributor:'0xdarkmatter',       origin:true,  genericSkillRef:'automated-testing',           status:'named', level:'III', description:'Comprehensive pytest skill covering modern patterns for Python test automation including fixtures, parametrize, async testing, mocking, coverage strategies, integration tests, and conftest organisation for pytest 7.0+ projects.',            title:'The Quality Guardian',           tags:['pytest','python','test-automation','fixtures','async-testing','coverage','mocking'],                   links:{ github:'https://github.com/aiskillstore/marketplace' } }],
       'test-driven-development':     [{ id:'addy-osmani/test-driven-development',     name:'Test-Driven Development',       contributor:'addy-osmani',        origin:true,  genericSkillRef:'test-driven-development',     status:'named', level:'II',  description:'Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.', title:'The Red-Green Oath',             tags:['tdd','testing','red-green-refactor','workflow-enforcement','software-quality'],              links:{ github:'https://github.com/addyosmani/agent-skills' } }],
@@ -1712,7 +1779,27 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         return;
       }
 
-      grid.innerHTML = allNamed.map(function(ns){ return renderCard(ns, skillMap, buckets); }).join('');
+      var LEVEL_META = {
+        'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+        'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+        'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+        'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+        'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+      };
+
+      function renderCurrent() {
+        var filtered = levelFilter === 'all' ? allNamed : allNamed.filter(function(ns){ return ns.level === levelFilter; });
+        if (viewMode === 'list') {
+          grid.className = 'ns-grid-list';
+          grid.innerHTML = filtered.map(function(ns){ return renderListRow(ns, LEVEL_META[ns.level]||LEVEL_META['II']); }).join('');
+        } else if (viewMode === 'tree') {
+          grid.className = 'ns-grid-tree';
+          grid.innerHTML = renderTreeView(filtered);
+        } else {
+          grid.className = 'ns-grid-tile';
+          grid.innerHTML = filtered.map(function(ns){ return renderTile(ns, LEVEL_META[ns.level]||LEVEL_META['II']); }).join('');
+        }
+      }
 
       if (tabsEl) {
         tabsEl.addEventListener('click', function(e) {
@@ -1720,17 +1807,23 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
           if (!btn) return;
           tabsEl.querySelectorAll('.ns-tab').forEach(function(t){ t.classList.remove('active'); });
           btn.classList.add('active');
-          var level = btn.dataset.level;
-          grid.querySelectorAll('.ns-card').forEach(function(card) {
-            card.style.display = (level === 'all' || card.dataset.level === level) ? '' : 'none';
-          });
+          levelFilter = btn.dataset.level || 'all';
+          renderCurrent();
         });
       }
 
-      grid.addEventListener('click', function(e) {
-        var head = e.target.closest('.ns-card-head');
-        if (head) head.closest('.ns-card').classList.toggle('open');
-      });
+      if (viewBtnsEl) {
+        viewBtnsEl.addEventListener('click', function(e) {
+          var btn = e.target.closest('.ns-view-btn');
+          if (!btn) return;
+          viewBtnsEl.querySelectorAll('.ns-view-btn').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          viewMode = btn.dataset.view || 'tile';
+          renderCurrent();
+        });
+      }
+
+      renderCurrent();
     }).catch(function() {
       grid.innerHTML = '<div class="ns-empty">Unable to render named skills.</div>';
     });
@@ -1858,12 +1951,14 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
           generic.derivatives.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
       }
     }
-    el.innerHTML = '<h3>About this skill</h3>' +
+    el.innerHTML = '<div class="se-flow-h">&#9432; About this skill</div>' +
       '<p style="line-height:1.75;margin-bottom:1.5rem">' + esc(ns.description || '') + '</p>' +
       prereqsHtml + derivsHtml;
   }
 
   // ── RENDER INSTALL TAB ───────────────────────────────────────
+  var COPY_ICON = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+
   function renderInstall(ns) {
     var el = document.getElementById('se-install');
     var id = ns.id;
@@ -1876,17 +1971,22 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       return '<div class="' + cls + '">' +
         '<div class="se-install-label">' + label + (sublabel ? '<span>' + sublabel + '</span>' : '') + '</div>' +
         '<code class="se-install-cmd">' + esc(cmd) + '</code>' +
-        (copyable !== false ? '<button class="se-copy-btn" data-cmd="' + esc(cmd) + '">Copy</button>' : '') +
+        (copyable !== false ? '<button class="se-copy-btn" title="Copy to clipboard" data-cmd="' + esc(cmd) + '">' + COPY_ICON + '</button>' : '') +
       '</div>';
     }
 
-    el.innerHTML = '<h3>Installation</h3>' +
+    el.innerHTML = '<div class="se-flow-h">' + COPY_ICON + ' Installation</div>' +
       installBlock('Gaia', '★ recommended', 'gaia install ' + id, true) +
       installBlock('npx', '@gaia-registry/cli', 'npx @gaia-registry/cli install ' + id, false) +
       (cloneUrl ? installBlock('Git Clone', '', 'git clone ' + cloneUrl, false) : '');
 
     el.querySelectorAll('.se-copy-btn').forEach(function(btn){
-      btn.onclick = function(){ copyText(btn.dataset.cmd, btn); };
+      btn.onclick = function(){
+        navigator.clipboard.writeText(btn.dataset.cmd).then(function(){
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+          setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600);
+        }).catch(function(){ btn.textContent = '!'; setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600); });
+      };
     });
   }
 
@@ -1928,7 +2028,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       (issuesUrl ? '<p><a style="color:var(--basic)" href="'+esc(issuesUrl)+'" target="_blank" rel="noopener">Issues ↗</a></p>' : '') +
     '</div>';
 
-    el.innerHTML = '<h3>Documentation</h3>' + skillDefHtml + evidenceHtml + agentsHtml + linksHtml;
+    el.innerHTML = '<div class="se-flow-h">&#128196; Documentation</div>' + skillDefHtml + evidenceHtml + agentsHtml + linksHtml;
   }
 
   // ── RENDER FLOWCHART (upgrade path) ─────────────────────────
@@ -1995,7 +2095,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       '</div>';
     }
 
-    el.innerHTML = '<h3>Upgrade Path &amp; Adjacent Skills</h3>' +
+    el.innerHTML = '<div class="se-flow-h">&#9650; Upgrade Path &amp; Adjacent Skills</div>' +
       '<div class="se-flowchart-wrap" id="seFlowWrap">' +
         '<div class="se-flowchart-rows">' +
           makeRow('Prerequisites', prereqNodes, 'sfRow0') +
@@ -2051,7 +2151,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   // ── RENDER TIMELINE ──────────────────────────────────────────
   function renderTimeline(ns) {
     var el = document.getElementById('se-timeline');
-    el.innerHTML = '<h3>Update Timeline</h3><div class="se-empty">Loading history…</div>';
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">Loading history…</div>';
     var parts = ns.id.split('/');
     var contributor = parts[0], skillName = parts[1] || '';
     var apiUrl = 'https://api.github.com/repos/' + REPO_SLUG +
@@ -2085,8 +2185,8 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   }
 
   function renderTimelineEvents(el, evts) {
-    if (!evts.length) { el.innerHTML = '<h3>Update Timeline</h3><div class="se-empty">No history available.</div>'; return; }
-    el.innerHTML = '<h3>Update Timeline</h3><div class="se-timeline">' +
+    if (!evts.length) { el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">No history available.</div>'; return; }
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-timeline">' +
       evts.map(function(ev){
         return '<div class="se-tl-event">' +
           '<div class="se-tl-dot"></div>' +
@@ -2114,12 +2214,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       document.getElementById('seBreadcrumb').textContent = ns.id;
       document.getElementById('skillExplorer').scrollTop = 0;
       document.body.style.overflow = 'hidden';
-
-      // set active tab to description
-      document.querySelectorAll('.se-tab').forEach(function(t){ t.classList.remove('active'); });
-      document.querySelector('.se-tab[data-tab="description"]').classList.add('active');
-      document.querySelectorAll('.se-section').forEach(function(s){ s.classList.remove('active'); });
-      document.getElementById('se-description').classList.add('active');
 
       renderHero(ns, generic);
       renderDescription(ns, generic);
@@ -2170,18 +2264,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   // ── DOM EVENT SETUP (deferred — overlay HTML is parsed after this script) ──
   function initExplorerDOM() {
-    var tabsEl = document.getElementById('seTabs');
     var backEl = document.getElementById('seBack');
-    if (tabsEl) tabsEl.addEventListener('click', function(e){
-      var btn = e.target.closest('.se-tab');
-      if (!btn) return;
-      document.querySelectorAll('.se-tab').forEach(function(t){ t.classList.remove('active'); });
-      document.querySelectorAll('.se-section').forEach(function(s){ s.classList.remove('active'); });
-      btn.classList.add('active');
-      var sec = document.getElementById('se-' + btn.dataset.tab);
-      if (sec) sec.classList.add('active');
-      if (btn.dataset.tab === 'upgrade') setTimeout(drawFlowEdges, 60);
-    });
     if (backEl) backEl.onclick = function(){ closeExplorer(); history.back(); };
     function routeHash() {
       var m = location.hash.match(/^#explorer\/(.+\/[^/?#]+)$/);
@@ -2236,28 +2319,23 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 <!-- ─── SKILL EXPLORER OVERLAY ─── -->
 <div id="skillExplorer" class="skill-explorer" role="dialog" aria-modal="true" aria-label="Skill Explorer">
   <div class="se-topbar">
-    <button id="seBack" class="se-btn-ghost">&#8592; Back</button>
+    <button id="seBack" class="se-btn-ghost"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg> Back</button>
     <span id="seBreadcrumb" class="se-breadcrumb"></span>
     <div class="se-topbar-actions">
-      <button id="seOpenRepo" class="se-btn-action">Open Repository &#8599;</button>
-      <button id="seExport"   class="se-btn-action">Export JSON</button>
-      <button id="seShare"    class="se-btn-action">Share</button>
+      <button id="seOpenRepo" class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M13 3h-4m4 0v4m0-4L7 9"/></svg> Repository</button>
+      <button id="seExport"   class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m-3-3l3 3 3-3"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg> Export</button>
+      <button id="seShare"    class="se-btn-action"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="3" r="1.5"/><circle cx="12" cy="13" r="1.5"/><circle cx="3" cy="8" r="1.5"/><path d="M10.5 4l-6 3m6 3l-6-3"/></svg> Share</button>
     </div>
   </div>
   <div class="se-body">
     <div id="seHero" class="se-hero"></div>
-    <nav class="se-tabs" id="seTabs">
-      <button class="se-tab active" data-tab="description">Description</button>
-      <button class="se-tab" data-tab="install">Install</button>
-      <button class="se-tab" data-tab="docs">Docs</button>
-      <button class="se-tab" data-tab="upgrade">Upgrade Path</button>
-      <button class="se-tab" data-tab="timeline">Timeline</button>
-    </nav>
-    <div id="se-description" class="se-section active"></div>
-    <div id="se-install"     class="se-section"></div>
-    <div id="se-docs"        class="se-section"></div>
-    <div id="se-upgrade"     class="se-section"></div>
-    <div id="se-timeline"    class="se-section"></div>
+    <div class="se-flow" id="seFlow">
+      <div id="se-upgrade"     class="se-flow-section"></div>
+      <div id="se-description" class="se-flow-section"></div>
+      <div id="se-install"     class="se-flow-section"></div>
+      <div id="se-docs"        class="se-flow-section"></div>
+      <div id="se-timeline"    class="se-flow-section"></div>
+    </div>
   </div>
 </div>
 
