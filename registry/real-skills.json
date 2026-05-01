@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-04-30",
+  "generatedAt": "2026-05-01",
   "sources": [
     {
       "repo": "karpathy/autoresearch",
@@ -71,6 +71,16 @@
       "repo": "aiskillstore/marketplace",
       "description": "Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns.",
       "url": "https://github.com/aiskillstore/marketplace"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "description": "Matt Pocock community skill library for coding workflows and meta-skills.",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "repo": "openai/skills",
+      "description": "OpenAI-published Codex skills for API implementation, browser testing, GitHub workflows, security analysis, and app scaffolding.",
+      "url": "https://officialskills.sh/openai/skills"
     }
   ],
   "items": [
@@ -614,6 +624,205 @@
         "locality",
         "testability",
         "deletion-test"
+      ]
+    },
+    {
+      "id": "openai-openai-docs",
+      "name": "openai/openai-docs",
+      "contributor": "openai",
+      "title": "The Living API Codex",
+      "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/openai-docs",
+      "mapsToGaia": [
+        "retrieve",
+        "question-answer",
+        "cite-sources"
+      ],
+      "promotedNamedSkillId": "openai/openai-docs",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "openai",
+        "docs",
+        "api-reference",
+        "sdk",
+        "citation"
+      ]
+    },
+    {
+      "id": "openai-gh-fix-ci",
+      "name": "openai/gh-fix-ci",
+      "contributor": "openai",
+      "title": "The Checkrunner Surgeon",
+      "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/gh-fix-ci",
+      "mapsToGaia": [
+        "error-interpretation",
+        "execute-bash",
+        "automated-testing"
+      ],
+      "promotedNamedSkillId": "openai/gh-fix-ci",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "github-actions",
+        "ci",
+        "debugging",
+        "pull-requests"
+      ]
+    },
+    {
+      "id": "openai-yeet",
+      "name": "openai/yeet",
+      "contributor": "openai",
+      "title": "The Guarded Shipwright",
+      "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/yeet",
+      "mapsToGaia": [
+        "diff-content",
+        "format-output",
+        "api-call"
+      ],
+      "promotedNamedSkillId": "openai/yeet",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "git",
+        "pull-requests",
+        "commit-workflow",
+        "release-flow"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-apps",
+      "name": "openai/chatgpt-apps",
+      "contributor": "openai",
+      "title": "The Embedded Appwright",
+      "description": "Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/chatgpt-apps",
+      "mapsToGaia": [
+        "code-generation",
+        "api-call",
+        "full-stack-developer"
+      ],
+      "promotedNamedSkillId": "openai/chatgpt-apps",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "chatgpt-apps",
+        "mcp",
+        "widgets",
+        "full-stack"
+      ]
+    },
+    {
+      "id": "openai-playwright",
+      "name": "openai/playwright",
+      "contributor": "openai",
+      "title": "The Browser Witness",
+      "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/playwright",
+      "mapsToGaia": [
+        "computer-use",
+        "automated-testing",
+        "evaluate-output"
+      ],
+      "promotedNamedSkillId": "openai/playwright",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "playwright",
+        "browser-testing",
+        "automation",
+        "screenshots"
+      ]
+    },
+    {
+      "id": "openai-sentry",
+      "name": "openai/sentry",
+      "contributor": "openai",
+      "title": "The Incident Lens",
+      "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/sentry",
+      "mapsToGaia": [
+        "detect-anomaly",
+        "error-interpretation",
+        "api-call"
+      ],
+      "promotedNamedSkillId": "openai/sentry",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "sentry",
+        "incident-response",
+        "observability",
+        "errors"
+      ]
+    },
+    {
+      "id": "openai-security-threat-model",
+      "name": "openai/security-threat-model",
+      "contributor": "openai",
+      "title": "The Threat Cartographer",
+      "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-threat-model",
+      "mapsToGaia": [
+        "code-review-pipeline",
+        "detect-anomaly",
+        "write-report"
+      ],
+      "promotedNamedSkillId": "openai/security-threat-model",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "threat-modeling",
+        "risk-analysis",
+        "code-review"
+      ]
+    },
+    {
+      "id": "openai-security-ownership-map",
+      "name": "openai/security-ownership-map",
+      "contributor": "openai",
+      "title": "The Ownership Mapper",
+      "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-ownership-map",
+      "mapsToGaia": [
+        "data-analysis",
+        "knowledge-graph-build",
+        "write-report"
+      ],
+      "promotedNamedSkillId": "openai/security-ownership-map",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "ownership",
+        "bus-factor",
+        "repository-analysis"
+      ]
+    },
+    {
+      "id": "openai-security-best-practices",
+      "name": "openai/security-best-practices",
+      "contributor": "openai",
+      "title": "The Secure Code Sentinel",
+      "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-best-practices",
+      "mapsToGaia": [
+        "code-review-pipeline",
+        "detect-anomaly",
+        "evaluate-output"
+      ],
+      "promotedNamedSkillId": "openai/security-best-practices",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "secure-coding",
+        "code-review",
+        "vulnerability-analysis"
       ]
     }
   ]

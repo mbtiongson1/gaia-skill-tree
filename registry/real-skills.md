@@ -20,6 +20,8 @@ Curated named skills from live SKILL.md ecosystems.
 | yonatangross/orchestkit | Complete AI development toolkit for Claude Code with 103 skills including a production-grade RAG retrieval skill. | https://github.com/yonatangross/orchestkit |
 | Upsonic/Upsonic | Framework for building autonomous AI agents in Python with prebuilt agent skills. | https://github.com/Upsonic/Upsonic |
 | aiskillstore/marketplace | Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns. | https://github.com/aiskillstore/marketplace |
+| mattpocock/skills | Matt Pocock community skill library for coding workflows and meta-skills. | https://github.com/mattpocock/skills |
+| openai/skills | OpenAI-published Codex skills for API implementation, browser testing, GitHub workflows, security analysis, and app scaffolding. | https://officialskills.sh/openai/skills |
 
 ## Items
 
@@ -49,5 +51,14 @@ Curated named skills from live SKILL.md ecosystems.
 - [mattpocock/grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md) - Stress-tests a plan against the project's domain model, challenging language against CONTEXT.md, cross-referencing code, and persisting resolved decisions as inline glossary updates and ADRs. Maps to: `design-review`.
 - [mattpocock/grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) - Conducts a relentless one-question-at-a-time interview walking every branch of the decision tree with a recommended answer, substituting codebase exploration wherever empirically determinable. Maps to: `design-review`.
 - [mattpocock/improve-codebase-architecture](https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md) - Identifies shallow modules via the deletion test, presents deepening opportunities with locality/leverage analysis, then grills the developer on the chosen candidate to design a deep-module replacement. Maps to: `refactor-code`.
+- [openai/openai-docs](https://officialskills.sh/openai/skills/openai-docs) - Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material. Maps to: `retrieve`, `question-answer`, `cite-sources`.
+- [openai/gh-fix-ci](https://officialskills.sh/openai/skills/gh-fix-ci) - Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps. Maps to: `error-interpretation`, `execute-bash`, `automated-testing`.
+- [openai/yeet](https://officialskills.sh/openai/skills/yeet) - Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation. Maps to: `diff-content`, `format-output`, `api-call`.
+- [openai/chatgpt-apps](https://officialskills.sh/openai/skills/chatgpt-apps) - Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration. Maps to: `code-generation`, `api-call`, `full-stack-developer`.
+- [openai/playwright](https://officialskills.sh/openai/skills/playwright) - Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence. Maps to: `computer-use`, `automated-testing`, `evaluate-output`.
+- [openai/sentry](https://officialskills.sh/openai/skills/sentry) - Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis. Maps to: `detect-anomaly`, `error-interpretation`, `api-call`.
+- [openai/security-threat-model](https://officialskills.sh/openai/skills/security-threat-model) - Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings. Maps to: `code-review-pipeline`, `detect-anomaly`, `write-report`.
+- [openai/security-ownership-map](https://officialskills.sh/openai/skills/security-ownership-map) - Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning. Maps to: `data-analysis`, `knowledge-graph-build`, `write-report`.
+- [openai/security-best-practices](https://officialskills.sh/openai/skills/security-best-practices) - Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities. Maps to: `code-review-pipeline`, `detect-anomaly`, `evaluate-output`.
 
-*Generated from registry/real-skills.json on 2026-04-30.*
+*Generated from registry/real-skills.json on 2026-05-01.*

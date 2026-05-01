@@ -8,7 +8,7 @@
 | ◇ Extra Skill: devin-ai/autonomous-swe | Extra Skill | Code Generation, Execute Bash, Error Interpretation | IV |  |
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | VI | Requires extensive multi-system validation before level advancement. |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | Web Search, Computer Use | III |  |
-| ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
+| ◇ Extra Skill: openai/security-best-practices | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
 | ◇ Extra Skill: /data-analysis | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
@@ -17,12 +17,12 @@
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
 | ◇ Extra Skill: /document-digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III |  |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | Browser Automation, Automated Testing | III | Requires a live or containerised target environment; browser automation must be available. |
-| ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
+| ◆ Ultimate Skill: openai/chatgpt-apps | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
 | ◇ Extra Skill: /function-calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV | Requires research output as input context. |
 | ◇ Extra Skill: /grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | III |  |
 | ◇ Extra Skill: /guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | III | Requires a defined policy schema and an evaluation loop. |
-| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | Extract Entities, Logical Inference | III |  |
+| ◇ Extra Skill: openai/security-ownership-map | Extra Skill | Extract Entities, Logical Inference | III |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV |  |
 | ◇ Extra Skill: /literature-review | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |

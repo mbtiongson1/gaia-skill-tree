@@ -21,6 +21,8 @@ class TestRealSkillCatalog(unittest.TestCase):
 
         self.assertIn("karpathy/autoresearch", source_repos)
         self.assertIn("cognition-labs/devin", source_repos)
+        self.assertIn("mattpocock/skills", source_repos)
+        self.assertIn("openai/skills", source_repos)
 
     def test_catalog_buckets_real_named_skills(self):
         catalog = self.load_catalog()
@@ -28,6 +30,9 @@ class TestRealSkillCatalog(unittest.TestCase):
         names = {item["name"] for item in items}
 
         self.assertIn("karpathy/autoresearch", names)
+        self.assertIn("mattpocock/write-a-skill", names)
+        self.assertIn("openai/openai-docs", names)
+        self.assertIn("openai/security-best-practices", names)
         self.assertTrue(len(names) >= 2, f"Expected at least 2 items, got: {names}")
 
     def test_generate_catalog_pages_outputs_linked_html(self):
@@ -42,6 +47,8 @@ class TestRealSkillCatalog(unittest.TestCase):
 
         self.assertIn("<title>Gaia Real Skill Catalog</title>", html)
         self.assertIn("karpathy/autoresearch", html)
+        self.assertIn("openai/openai-docs", html)
+        self.assertIn("openai/security-best-practices", markdown)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V · Transcendent]
+# Ultimate Skill: openai/chatgpt-apps  [V · Transcendent]
 **ID:** full-stack-developer  
 **Type:** Ultimate Skill  
 **Level:** V  
