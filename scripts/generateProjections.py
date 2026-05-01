@@ -318,7 +318,7 @@ def main():
                 f.write(f"| `/{s['id']}` | {level_lbl} | {prereq_names} |\n")
             f.write("\n")
 
-        f.write(f"*Generated from gaia.json v{version}.*\n")
+        # f.write(f"*Generated from gaia.json v{version}.*\n")
 
     # generate combinations.md
     with open("registry/combinations.md", "w", encoding="utf-8") as f:
@@ -336,7 +336,7 @@ def main():
                 combo_display = _build_skill_display(skill.get('id'), skill_type, named_map)
                 name_display = f"{symbol} {combo_display}"
                 f.write(f"| {name_display} | {type_label} | {prereq_str} | {level_label} | {skill.get('conditions', '')} |\n")
-        f.write(f"\n*Generated from gaia.json v{version}.*\n")
+        # f.write(f"\n*Generated from gaia.json v{version}.*\n")
 
     # generate tree.md
     _generate_tree(skills, skill_map, meta, version, date_str, named_map)
@@ -502,7 +502,7 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
 
     lines.append("```")
     lines.append("")
-    lines.append(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*")
+    lines.append(f"*Generated from gaia.json on {date_str}. Do not edit directly.*")
 
     os.makedirs("generated-output", exist_ok=True)
     with open("generated-output/tree.md", "w", encoding="utf-8") as f:
