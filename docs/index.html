@@ -1662,28 +1662,22 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 <!-- ─── NAMED SKILLS DATA ─── -->
 <script>
 (function () {
-  var LEVEL_META = {
-    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.12)',  border:'rgba(99,202,183,.3)'  },
-    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.12)', border:'rgba(167,139,250,.3)' },
-    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.12)', border:'rgba(232,121,249,.3)' },
-    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.12)',  border:'rgba(251,191,36,.3)'  },
-    'VI':  { name:'Transcendent \u2605', color:'#fbbf24', bg:'rgba(251,191,36,.20)', border:'rgba(251,191,36,.4)' },
-  };
-
   function esc(str) {
     return String(str == null ? '' : str)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function nsClick(id) { return 'onclick="openSkillExplorer(\''+id.replace(/'/g,"\\'")+'\')\"'; }
+  function nsDisplayName(ns) { return ns.name || ns.id.split('/')[1] || ns.id; }
 
   function renderTile(ns, lm) {
     var tags = (ns.tags||[]).slice(0,3).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
-    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+    return '<article class="ns-tile" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
         (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
       '</div>' +
-      '<div class="ns-tile-name">' + esc(ns.name || ns.id.split('/')[1] || ns.id) + '</div>' +
+      '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
       '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
       (tags ? '<div class="ns-tile-tags">' + tags + '</div>' : '') +
       '<div class="ns-tile-arrow">\u2192</div>' +
@@ -1692,16 +1686,16 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   function renderListRow(ns, lm) {
     var tags = (ns.tags||[]).slice(0,2).map(function(t){ return '<span class="ns-tag">'+esc(t)+'</span>'; }).join('');
-    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+    return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
       '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
-      '<span class="ns-lr-name">' + esc(ns.name || ns.id.split('/')[1] || ns.id) + '</span>' +
+      '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
       '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
       '<span class="ns-lr-arrow">\u203a</span>' +
     '</article>';
   }
 
-  function renderTreeView(allNamed) {
+  function renderTreeView(allNamed, levelMeta) {
     var groups = {};
     allNamed.forEach(function(ns) {
       var ref = ns.genericSkillRef || 'other';
@@ -1711,10 +1705,10 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     return Object.keys(groups).sort().map(function(ref) {
       var children = groups[ref];
       var leavesHtml = children.map(function(ns) {
-        var lm = LEVEL_META[ns.level] || LEVEL_META['II'];
-        return '<article class="ns-tree-leaf" data-level="'+esc(ns.level)+'" onclick="openSkillExplorer(\''+ns.id.replace(/'/g,"\\'")+'\')">' +
+        var lm = levelMeta[ns.level] || levelMeta['II'];
+        return '<article class="ns-tree-leaf" data-level="'+esc(ns.level)+'" '+nsClick(ns.id)+'>' +
           '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
-          '<span class="ns-lr-name">' + esc(ns.name || ns.id) + '</span>' +
+          '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
           '<span class="ns-lr-id">' + esc(ns.id) + (ns.origin ? ' \u2605' : '') + '</span>' +
           '<span class="ns-lr-arrow">\u203a</span>' +
         '</article>';
@@ -1789,15 +1783,16 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
       function renderCurrent() {
         var filtered = levelFilter === 'all' ? allNamed : allNamed.filter(function(ns){ return ns.level === levelFilter; });
+        function lm(ns) { return LEVEL_META[ns.level] || LEVEL_META['II']; }
         if (viewMode === 'list') {
           grid.className = 'ns-grid-list';
-          grid.innerHTML = filtered.map(function(ns){ return renderListRow(ns, LEVEL_META[ns.level]||LEVEL_META['II']); }).join('');
+          grid.innerHTML = filtered.map(function(ns){ return renderListRow(ns, lm(ns)); }).join('');
         } else if (viewMode === 'tree') {
           grid.className = 'ns-grid-tree';
-          grid.innerHTML = renderTreeView(filtered);
+          grid.innerHTML = renderTreeView(filtered, LEVEL_META);
         } else {
           grid.className = 'ns-grid-tile';
-          grid.innerHTML = filtered.map(function(ns){ return renderTile(ns, LEVEL_META[ns.level]||LEVEL_META['II']); }).join('');
+          grid.innerHTML = filtered.map(function(ns){ return renderTile(ns, lm(ns)); }).join('');
         }
       }
 
