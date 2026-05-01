@@ -2,6 +2,8 @@
 
 import sys
 import os
+import json
+import subprocess
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts", "crawlers"))
 
@@ -9,6 +11,7 @@ from common.taxonomy_mapper import map_to_skills
 from common.evidence_scorer import compute_score
 from common.candidate_builder import build_candidate, normalize_id
 from common.dedup import load_existing_skills, deduplicate
+from github.crawler import gh_api
 
 
 class TestTaxonomyMapper:
@@ -84,3 +87,41 @@ class TestDedup:
         result = deduplicate(candidates)
         assert len(result) == 1
         assert result[0]["id"] == "brand-new-skill-xyz"
+
+
+class TestGithubCrawler:
+    def test_gh_api_http_fallback_without_token(self, monkeypatch):
+        def raise_fnf(*_args, **_kwargs):
+            raise FileNotFoundError("gh")
+
+        monkeypatch.setattr(subprocess, "run", raise_fnf)
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.delenv("GH_TOKEN", raising=False)
+
+        assert gh_api("/search/repositories?q=test") is None
+
+    def test_gh_api_http_fallback_with_token(self, monkeypatch):
+        class DummyResponse:
+            def read(self):
+                return json.dumps({"items": [{"id": 1}]}).encode("utf-8")
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+        def raise_fnf(*_args, **_kwargs):
+            raise FileNotFoundError("gh")
+
+        def fake_urlopen(_req, timeout=30):
+            assert timeout == 30
+            return DummyResponse()
+
+        monkeypatch.setattr(subprocess, "run", raise_fnf)
+        monkeypatch.setenv("GITHUB_TOKEN", "test-token")
+        monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+
+        data = gh_api("/search/repositories?q=test")
+        assert data is not None
+        assert data["items"][0]["id"] == 1
