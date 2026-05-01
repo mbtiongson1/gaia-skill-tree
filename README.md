@@ -89,39 +89,23 @@ For registry development, use an editable install from the repo root:
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
 cd gaia-skill-tree
 pip install -e ".[embeddings]"
-gaia embed
+pip install gaia-cli
 ```
 If pip fails, run this:
 ```bash
 brew install pipx
 pipx install ".[embeddings]"
-gaia embed
+pipx install gaia-cli
 ```
 
 Windows Only (one-time setup):
-1. If `gaia` isn't recognized after install, run the command below in PowerShell.
+If `gaia` isn't recognized after install, run the command below in PowerShell.
 ```bash
 $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
-```
-2. Then do this again one-time
-```bash
-gaia embed
 ```
 
 <!-- gaia:version-start -->
 Current Gaia CLI version: `2.4.0`.
-
-Python install (in your repo):
-
-```bash
-pip install gaia-cli
-```
-
-Alternative npm install:
-
-```bash
-npm install -g @gaia-registry/cli
-```
 <!-- gaia:version-end -->
 
 ## Quickstart
