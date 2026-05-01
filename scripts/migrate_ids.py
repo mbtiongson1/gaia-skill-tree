@@ -2,8 +2,8 @@
 """One-time migration: convert all skill IDs from camelCase to lowercase-dash.
 
 Transforms every ID reference across:
-  - graph/gaia.json (skill.id, prerequisites, derivatives, edges)
-  - users/*/skill-tree.json (skillId, combinedFrom, detectedSkills, candidateResult)
+  - registry/gaia.json (skill.id, prerequisites, derivatives, edges)
+  - skill-trees/*/skill-tree.json (skillId, combinedFrom, detectedSkills, candidateResult)
 
 Usage:
     python3 scripts/migrate_ids.py [--dry-run]
@@ -15,8 +15,8 @@ import re
 import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
-USERS_DIR = os.path.join(REPO_ROOT, "users")
+GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
+USERS_DIR = os.path.join(REPO_ROOT, "skill-trees")
 
 
 def camel_to_dash(name: str) -> str:
@@ -85,7 +85,7 @@ def main():
     with open(GRAPH_PATH, "w", encoding="utf-8") as f:
         json.dump(graph, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"✅ Migrated graph/gaia.json ({len(graph['skills'])} skills, {len(graph['edges'])} edges)")
+    print(f"✅ Migrated registry/gaia.json ({len(graph['skills'])} skills, {len(graph['edges'])} edges)")
 
     # Migrate user skill trees
     if os.path.isdir(USERS_DIR):

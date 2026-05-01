@@ -1,6 +1,6 @@
 """Semantic search over pre-computed Gaia skill embeddings.
 
-Loads graph/embeddings.json and ranks skills by cosine similarity to a query.
+Loads registry/embeddings.json and ranks skills by cosine similarity to a query.
 """
 
 import json
@@ -9,7 +9,7 @@ import os
 
 
 def load_embeddings(embeddings_path):
-    """Load graph/embeddings.json.
+    """Load registry/embeddings.json.
 
     Returns the full parsed dict:
     {
@@ -76,7 +76,7 @@ def search(query, embeddings_path, top_k=10):
 
     Args:
         query: plain-text search query
-        embeddings_path: path to graph/embeddings.json
+        embeddings_path: path to registry/embeddings.json
         top_k: number of results to return
 
     Returns:
@@ -93,7 +93,7 @@ def search_precomputed(query_vector, embeddings, top_k=10):
 
     Args:
         query_vector: list of floats representing the query embedding
-        embeddings: dict loaded from graph/embeddings.json
+        embeddings: dict loaded from registry/embeddings.json
         top_k: number of results to return
 
     Returns:

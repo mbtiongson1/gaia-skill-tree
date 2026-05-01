@@ -9,6 +9,8 @@ from __future__ import annotations
 import json
 import os
 import sys
+
+from gaia_cli.registry import registry_graph_path
 import textwrap
 from typing import Optional
 
@@ -189,6 +191,19 @@ def _fit_list(items: list[str], max_width: int, prefix: str = "") -> str:
     return prefix + result
 
 
+def _name_from_slug(slug: str) -> str:
+    """Convert a kebab-case skill slug into a human display name."""
+    small_words = {"and", "or", "of", "the", "to", "for", "in", "on", "with"}
+    words = []
+    for index, part in enumerate(piece for piece in slug.split("-") if piece):
+        word = part.lower()
+        if index > 0 and word in small_words:
+            words.append(word)
+        else:
+            words.append(word.capitalize())
+    return " ".join(words)
+
+
 def _separator(width: int = CARD_WIDTH) -> str:
     """Return a horizontal separator line."""
     inner = width - 2
@@ -355,7 +370,7 @@ def load_and_render(
     Returns:
         Rendered card string, or None if skill not found.
     """
-    graph_path = os.path.join(registry_path, "graph", "gaia.json")
+    graph_path = registry_graph_path(registry_path)
     if not os.path.exists(graph_path):
         return None
 
@@ -569,6 +584,7 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
     """Prompt shown when a skill is eligible for promotion."""
     name = skill_data.get("name", skill_data.get("id", "?"))
     skill_id = skill_data.get("id", "?")
+    suggested_name = _name_from_slug(skill_id) or name
     gc = fg(*COLOR_GOLD)
     r = reset()
     b = bold()
@@ -581,7 +597,7 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
         f"  {gc}┌─ Promotion Available ─────────────────────┐{r}",
         f"  {gc}│{r}  {b}{name}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
         f"  {gc}│{r}  Run: {b}gaia promote {skill_id}{r}",
-        f"  {gc}│{r}  Rename? {dim()}gaia promote {skill_id} --name \"My Name\"{r}",
+        f"  {gc}│{r}  Rename? {dim()}gaia promote {skill_id} --name \"{suggested_name}\"{r}",
         f"  {gc}└───────────────────────────────────────────┘{r}",
         f"",
     ])

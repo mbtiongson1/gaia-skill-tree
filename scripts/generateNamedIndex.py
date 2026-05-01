@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Gaia Skill Registry — Named Skill Index Generator.
 
-Scans all graph/named/*/*.md files, parses YAML frontmatter, validates each
-named skill, groups them by genericSkillRef, and writes graph/named/index.json.
+Scans all registry/named/*/*.md files, parses YAML frontmatter, validates each
+named skill, groups them by genericSkillRef, and writes registry/named-skills.json.
 
 Validation rules:
   - Each named skill has all required fields.
-  - genericSkillRef resolves to a skill ID in graph/gaia.json.
+  - genericSkillRef resolves to a skill ID in registry/gaia.json.
   - At most one origin: true per genericSkillRef bucket.
   - level is II or above (not I).
 
@@ -358,16 +358,16 @@ def write_index(buckets, awaiting_classification, by_contributor, output_path, t
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate graph/named/index.json.")
-    parser.add_argument("--named-dir", default=None, help="Path to graph/named/")
+    parser = argparse.ArgumentParser(description="Generate registry/named-skills.json.")
+    parser.add_argument("--named-dir", default=None, help="Path to registry/named/")
     parser.add_argument("--graph", default=None, help="Path to gaia.json")
     parser.add_argument("--out", default=None, help="Output path for index.json")
     args = parser.parse_args()
 
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    named_dir = args.named_dir or os.path.join(repo_root, "graph", "named")
-    graph_path = args.graph or os.path.join(repo_root, "graph", "gaia.json")
-    output_path = args.out or os.path.join(named_dir, "index.json")
+    named_dir = args.named_dir or os.path.join(repo_root, "registry", "named")
+    graph_path = args.graph or os.path.join(repo_root, "registry", "gaia.json")
+    output_path = args.out or os.path.join(repo_root, "registry", "named-skills.json")
 
     if not os.path.isdir(named_dir):
         print(f"Named skills directory not found: {named_dir}")

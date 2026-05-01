@@ -10,7 +10,7 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class TestNamePromotion(unittest.TestCase):
-    """Test gaia name promotion from intake batch to graph/named/."""
+    """Test gaia name promotion from intake batch to registry/named/."""
 
     def _make_batch(self, tmp, skill_id="new-skill"):
         batch = {
@@ -38,7 +38,7 @@ class TestNamePromotion(unittest.TestCase):
 
     def test_find_awakened_skill_found(self):
         """find_awakened_skill returns skill data for a known skill ID."""
-        from plugin.cli.name import find_awakened_skill
+        from gaia_cli.name import find_awakened_skill
         with tempfile.TemporaryDirectory() as tmp:
             batch_path = self._make_batch(tmp, "new-skill")
             skill = find_awakened_skill(batch_path, "new-skill")
@@ -47,18 +47,18 @@ class TestNamePromotion(unittest.TestCase):
 
     def test_find_awakened_skill_not_found_raises(self):
         """find_awakened_skill raises ValueError for unknown skill ID."""
-        from plugin.cli.name import find_awakened_skill
+        from gaia_cli.name import find_awakened_skill
         with tempfile.TemporaryDirectory() as tmp:
             batch_path = self._make_batch(tmp, "new-skill")
             with self.assertRaises(ValueError):
                 find_awakened_skill(batch_path, "nonexistent-skill")
 
     def test_promote_to_named_creates_file(self):
-        """promote_to_named creates graph/named/{contributor}/{skill_name}.md."""
-        from plugin.cli.name import promote_to_named
+        """promote_to_named creates registry/named/{contributor}/{skill_name}.md."""
+        from gaia_cli.name import promote_to_named
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph", "named"), exist_ok=True)
+            os.makedirs(os.path.join(registry, "registry", "named"), exist_ok=True)
             skill_data = {
                 "id": "new-skill",
                 "name": "New Skill",
@@ -66,22 +66,22 @@ class TestNamePromotion(unittest.TestCase):
                 "lifecycle": "awakened",
             }
             promote_to_named(skill_data, "alice", "new-skill", registry)
-            expected = os.path.join(registry, "graph", "named", "alice", "new-skill.md")
+            expected = os.path.join(registry, "registry", "named", "alice", "new-skill.md")
             self.assertTrue(os.path.exists(expected), f"Expected file at {expected}")
 
     def test_promote_to_named_file_contains_frontmatter(self):
         """promote_to_named writes valid YAML frontmatter."""
-        from plugin.cli.name import promote_to_named
+        from gaia_cli.name import promote_to_named
         with tempfile.TemporaryDirectory() as tmp:
             registry = os.path.join(tmp, "registry")
-            os.makedirs(os.path.join(registry, "graph", "named"), exist_ok=True)
+            os.makedirs(os.path.join(registry, "registry", "named"), exist_ok=True)
             skill_data = {
                 "id": "new-skill",
                 "name": "New Skill",
                 "description": "A brand new skill for testing.",
             }
             promote_to_named(skill_data, "alice", "new-skill", registry)
-            md_path = os.path.join(registry, "graph", "named", "alice", "new-skill.md")
+            md_path = os.path.join(registry, "registry", "named", "alice", "new-skill.md")
             content = open(md_path).read()
             self.assertIn("contributor: alice", content)
             self.assertIn("origin: true", content)
@@ -89,7 +89,7 @@ class TestNamePromotion(unittest.TestCase):
 
     def test_update_batch_lifecycle(self):
         """update_batch_lifecycle changes the lifecycle field in the batch file."""
-        from plugin.cli.name import update_batch_lifecycle
+        from gaia_cli.name import update_batch_lifecycle
         with tempfile.TemporaryDirectory() as tmp:
             batch_path = self._make_batch(tmp, "new-skill")
             update_batch_lifecycle(batch_path, "new-skill", "named")

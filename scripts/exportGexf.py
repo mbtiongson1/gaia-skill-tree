@@ -18,7 +18,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 def main():
-    with open('graph/gaia.json', 'r', encoding='utf-8') as f:
+    with open('registry/gaia.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     timestamp = data.get('generatedAt', datetime.datetime.now().isoformat() + 'Z')
@@ -65,7 +65,7 @@ def main():
             
     indent(gexf)
     tree = ET.ElementTree(gexf)
-    tree.write("graph/gaia.gexf", encoding="UTF-8", xml_declaration=True)
+    tree.write("registry/gaia.gexf", encoding="UTF-8", xml_declaration=True)
 
 if __name__ == '__main__':
     main()

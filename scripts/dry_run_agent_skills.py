@@ -108,7 +108,7 @@ def main():
     for i, r in enumerate(real, 1):
         cmd_id = skill_name(r["cmd"])
         contrib = contributor_slug(r["owner"])
-        named_path = f"graph/named/{contrib}/{cmd_id}.md"
+        named_path = f"registry/named/{contrib}/{cmd_id}.md"
         already_named = f"{contrib}/{cmd_id}" in named_ids
 
         if cmd_id in gaia_ids:

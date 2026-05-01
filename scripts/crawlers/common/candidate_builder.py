@@ -14,7 +14,7 @@ def build_candidate(
     evidence_class: str = "C",
     score: int = 0,
 ) -> dict:
-    """Build a skill candidate matching schema/skill.schema.json."""
+    """Build a skill candidate matching registry/schema/skill.schema.json."""
     return {
         "id": id,
         "name": name,

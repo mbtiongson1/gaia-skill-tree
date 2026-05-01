@@ -13,7 +13,7 @@ from gaia_cli.treeManager import load_tree, save_tree, show_tree
 
 
 def _write_tree(tmp_path, username, data):
-    user_dir = tmp_path / "users" / username
+    user_dir = tmp_path / "skill-trees" / username
     user_dir.mkdir(parents=True, exist_ok=True)
     (user_dir / "skill-tree.json").write_text(json.dumps(data))
 
@@ -78,14 +78,14 @@ class TestLoadTreeInvalid:
 class TestSaveTreeValid:
     def test_writes_tree_to_correct_path(self, tmp_path):
         save_tree("alice", _SAMPLE_TREE, registry_path=str(tmp_path))
-        expected = tmp_path / "users" / "alice" / "skill-tree.json"
+        expected = tmp_path / "skill-trees" / "alice" / "skill-tree.json"
         assert expected.exists()
         data = json.loads(expected.read_text())
         assert data["userId"] == "alice"
 
     def test_creates_parent_directories(self, tmp_path):
         save_tree("newuser", _SAMPLE_TREE, registry_path=str(tmp_path))
-        assert (tmp_path / "users" / "newuser" / "skill-tree.json").exists()
+        assert (tmp_path / "skill-trees" / "newuser" / "skill-tree.json").exists()
 
 
 # ---------------------------------------------------------------------------
@@ -132,9 +132,9 @@ _TREE_DATA = {
 
 
 def _make_named_index(tmp_path, buckets):
-    named_dir = tmp_path / "graph" / "named"
+    named_dir = tmp_path / "registry"
     named_dir.mkdir(parents=True, exist_ok=True)
-    (named_dir / "index.json").write_text(json.dumps({"generatedAt": "2026-01-01", "buckets": buckets, "awaitingClassification": [], "byContributor": {}}))
+    (named_dir / "named-skills.json").write_text(json.dumps({"generatedAt": "2026-01-01", "buckets": buckets, "awaitingClassification": [], "byContributor": {}}))
 
 
 class TestShowTreeModes:

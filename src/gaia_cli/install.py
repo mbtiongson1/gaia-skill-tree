@@ -13,6 +13,8 @@ import shutil
 import sys
 from datetime import datetime, timezone
 
+from gaia_cli.registry import named_skills_dir
+
 
 def get_gaia_home():
     return os.path.abspath(
@@ -60,7 +62,7 @@ def find_named_skill_source(skill_id, registry_path):
     if len(parts) != 2:
         return None
     contributor, skill_name = parts
-    source = os.path.join(registry_path, "graph", "named", contributor, f"{skill_name}.md")
+    source = os.path.join(named_skills_dir(registry_path), contributor, f"{skill_name}.md")
     if os.path.exists(source):
         return source
     return None
@@ -101,7 +103,7 @@ def install_skill(skill_id, registry_path):
         manifest["installed"].append({
             "id": skill_id,
             "installedAt": datetime.now(timezone.utc).isoformat(),
-            "sourceRef": f"graph/named/{contributor}/{skill_name}.md",
+            "sourceRef": f"registry/named/{contributor}/{skill_name}.md",
             "sha256": sha,
         })
     save_manifest(manifest)
@@ -167,7 +169,7 @@ def _parse_frontmatter(path):
 
 def list_available(registry_path):
     """Return a sorted list of (skill_id, meta_dict) for all named skills in the registry."""
-    named_dir = os.path.join(registry_path, "graph", "named")
+    named_dir = named_skills_dir(registry_path)
     if not os.path.isdir(named_dir):
         return []
     skills = []

@@ -1,22 +1,24 @@
 """Embedding generation for Gaia semantic search.
 
 Uses sentence-transformers (all-MiniLM-L6-v2) to embed skill descriptions.
-Outputs to graph/embeddings.json for use by search and similarity tools.
+Outputs to registry/embeddings.json for use by search and similarity tools.
 """
 
 import json
 import os
 from datetime import date
 
+from gaia_cli.registry import embeddings_path, named_skills_dir, registry_graph_path
+
 def load_skills(registry_path="."):
-    """Load skills from gaia.json plus any named skills from graph/named/.
+    """Load skills from gaia.json plus any named skills from registry/named/.
 
     Returns a list of dicts with at least 'id', 'name', and 'description'.
     """
     skills = []
 
     # Load canonical skills from gaia.json
-    gaia_path = os.path.join(registry_path, "graph", "gaia.json")
+    gaia_path = registry_graph_path(registry_path)
     if os.path.exists(gaia_path):
         try:
             with open(gaia_path, "r", encoding="utf-8") as f:
@@ -30,8 +32,8 @@ def load_skills(registry_path="."):
         except Exception as e:
             print(f"Warning: could not load {gaia_path}: {e}")
 
-    # Load named skills from graph/named/*.json
-    named_dir = os.path.join(registry_path, "graph", "named")
+    # Load named skills from registry/named/*.json
+    named_dir = named_skills_dir(registry_path)
     if os.path.isdir(named_dir):
         for fname in os.listdir(named_dir):
             if not fname.endswith(".json"):
@@ -87,7 +89,7 @@ def embed_skills(skills, model_name="all-MiniLM-L6-v2"):
 
 
 def save_embeddings(entries, output_path, model_name, dimensions):
-    """Write embeddings to graph/embeddings.json.
+    """Write embeddings to registry/embeddings.json.
 
     Args:
         entries: list of {"id": ..., "vector": [...]}
@@ -110,7 +112,7 @@ def save_embeddings(entries, output_path, model_name, dimensions):
 def generate_embeddings(registry_path=".", model_name="all-MiniLM-L6-v2"):
     """Orchestrate the full embedding generation flow.
 
-    Loads skills, embeds them, and writes graph/embeddings.json.
+    Loads skills, embeds them, and writes registry/embeddings.json.
     """
     try:
         from sentence_transformers import SentenceTransformer  # noqa: F401
@@ -130,5 +132,5 @@ def generate_embeddings(registry_path=".", model_name="all-MiniLM-L6-v2"):
 
     entries, dimensions = embed_skills(skills, model_name=model_name)
 
-    output_path = os.path.join(registry_path, "graph", "embeddings.json")
+    output_path = embeddings_path(registry_path)
     save_embeddings(entries, output_path, model_name=model_name, dimensions=dimensions)

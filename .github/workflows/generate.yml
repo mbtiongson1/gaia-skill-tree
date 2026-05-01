@@ -3,8 +3,8 @@ name: Gaia Generation Check
 on:
   pull_request:
     paths:
-      - 'graph/**'
-      - 'schema/**'
+      - 'registry/**'
+      - 'registry/schema/**'
 
 jobs:
   generate:

@@ -74,8 +74,8 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
         from scripts.generateNamedIndex import validate_and_group
 
         named_skills = [
-            ("graph/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice's version."}),
-            ("graph/named/bob/skill.md",   {"id": "bob/skill",   "name": "Skill", "contributor": "bob",   "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob's version."}),
+            ("registry/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice's version."}),
+            ("registry/named/bob/skill.md",   {"id": "bob/skill",   "name": "Skill", "contributor": "bob",   "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob's version."}),
         ]
         valid_ids = {"web-search"}
         errors, *_ = validate_and_group(named_skills, valid_ids)
@@ -86,9 +86,9 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
         from scripts.generateNamedIndex import validate_and_group
 
         named_skills = [
-            ("graph/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice version."}),
-            ("graph/named/bob/skill-b.md",   {"id": "bob/skill-b",   "name": "Skill B", "contributor": "bob",   "origin": False, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob version."}),
-            ("graph/named/carol/code.md",     {"id": "carol/code",    "name": "Carol Code", "contributor": "carol", "origin": True, "genericSkillRef": "code-generation", "status": "named", "level": "II", "description": "Carol version."}),
+            ("registry/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice version."}),
+            ("registry/named/bob/skill-b.md",   {"id": "bob/skill-b",   "name": "Skill B", "contributor": "bob",   "origin": False, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Bob version."}),
+            ("registry/named/carol/code.md",     {"id": "carol/code",    "name": "Carol Code", "contributor": "carol", "origin": True, "genericSkillRef": "code-generation", "status": "named", "level": "II", "description": "Carol version."}),
         ]
         valid_ids = {"web-search", "code-generation"}
         errors, buckets, *_ = validate_and_group(named_skills, valid_ids)
@@ -99,10 +99,10 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
         self.assertEqual(len(buckets["code-generation"]), 1)
 
     def test_seed_index_json_is_valid(self):
-        """The committed graph/named/index.json is valid JSON with expected structure."""
-        index_path = os.path.join(REPO_ROOT, "graph", "named", "index.json")
+        """The committed registry/named-skills.json is valid JSON with expected structure."""
+        index_path = os.path.join(REPO_ROOT, "registry", "named-skills.json")
         if not os.path.exists(index_path):
-            self.skipTest("graph/named/index.json not present.")
+            self.skipTest("registry/named-skills.json not present.")
         with open(index_path) as f:
             index = json.load(f)
         self.assertIn("buckets", index)
@@ -117,7 +117,7 @@ class TestInstallModule(unittest.TestCase):
         self.tmp = tempfile.mkdtemp()
         # Create a fake registry with a named skill
         self.registry = os.path.join(self.tmp, "registry")
-        named_dir = os.path.join(self.registry, "graph", "named", "alice")
+        named_dir = os.path.join(self.registry, "registry", "named", "alice")
         os.makedirs(named_dir, exist_ok=True)
         self.skill_path = os.path.join(named_dir, "my-skill.md")
         with open(self.skill_path, "w") as f:
@@ -135,7 +135,7 @@ class TestInstallModule(unittest.TestCase):
 
     def test_install_creates_manifest(self):
         """install_skill creates .gaia/install-manifest.json."""
-        from plugin.cli.install import install_skill, get_manifest_path, load_manifest
+        from gaia_cli.install import install_skill, get_manifest_path, load_manifest
         result = install_skill("alice/my-skill", self.registry)
         self.assertTrue(result)
         self.assertTrue(os.path.exists(get_manifest_path()))
@@ -145,7 +145,7 @@ class TestInstallModule(unittest.TestCase):
 
     def test_uninstall_removes_from_manifest(self):
         """uninstall_skill removes entry from manifest."""
-        from plugin.cli.install import install_skill, uninstall_skill, load_manifest
+        from gaia_cli.install import install_skill, uninstall_skill, load_manifest
         install_skill("alice/my-skill", self.registry)
         uninstall_skill("alice/my-skill")
         manifest = load_manifest()
@@ -154,7 +154,7 @@ class TestInstallModule(unittest.TestCase):
 
     def test_install_nonexistent_skill_fails(self):
         """install_skill returns False for unknown skill."""
-        from plugin.cli.install import install_skill
+        from gaia_cli.install import install_skill
         result = install_skill("nobody/fake-skill", self.registry)
         self.assertFalse(result)
 
@@ -162,7 +162,7 @@ class TestInstallModule(unittest.TestCase):
         """sync_skills reports up-to-date when source unchanged."""
         import io
         from contextlib import redirect_stdout
-        from plugin.cli.install import install_skill, sync_skills
+        from gaia_cli.install import install_skill, sync_skills
         install_skill("alice/my-skill", self.registry)
         buf = io.StringIO()
         with redirect_stdout(buf):

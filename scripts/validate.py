@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gaia Skill Registry — Canonical Graph Validator.
 
-Validates graph/gaia.json against:
+Validates registry/gaia.json against:
 1. JSON Schema validation for all skill nodes and edges.
 2. DAG cycle detection (DFS from all root nodes).
 3. Reference integrity (every parent ID resolves to an existing node).
@@ -359,7 +359,7 @@ def _parse_named_frontmatter(text):
 
 
 def validate_named_skills(graph, named_dir=None, catalog_path=None):
-    """Validate all named skill .md files in graph/named/.
+    """Validate all named skill .md files in registry/named/.
 
     Checks:
       - All required fields are present.
@@ -376,11 +376,11 @@ def validate_named_skills(graph, named_dir=None, catalog_path=None):
 
     if named_dir is None:
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        named_dir = os.path.join(repo_root, "graph", "named")
+        named_dir = os.path.join(repo_root, "registry", "named")
 
     if catalog_path is None:
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        catalog_path = os.path.join(repo_root, "graph", "real_skill_catalog.json")
+        catalog_path = os.path.join(repo_root, "registry", "real-skills.json")
 
     if not os.path.isdir(named_dir):
         # Not an error — directory simply doesn't exist yet.
@@ -485,8 +485,8 @@ def main():
 
     # Resolve paths
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    graph_path = args.graph or os.path.join(repo_root, "graph", "gaia.json")
-    schema_dir = args.schema_dir or os.path.join(repo_root, "schema")
+    graph_path = args.graph or os.path.join(repo_root, "registry", "gaia.json")
+    schema_dir = args.schema_dir or os.path.join(repo_root, "registry", "schema")
 
     if not os.path.exists(graph_path):
         print(f"❌ Graph file not found: {graph_path}")

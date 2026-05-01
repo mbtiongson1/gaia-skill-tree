@@ -1,0 +1,2026 @@
+{
+  "version": "2.2.10",
+  "generatedAt": "2026-04-30T00:00:00Z",
+  "width": 1280,
+  "height": 880,
+  "nodes": [
+    {
+      "id": "api-call",
+      "label": "API Call",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Constructs, executes, and handles responses from HTTP APIs by interpreting documentation and selecting appropriate endpoints and parameters.",
+      "x": 566.038,
+      "y": 715.236,
+      "radius": 6
+    },
+    {
+      "id": "audience-model",
+      "label": "Audience Model",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Adapts tone, complexity, and framing of output to match a target audience profile.",
+      "x": 898.259,
+      "y": 319.471,
+      "radius": 6
+    },
+    {
+      "id": "chain-of-thought",
+      "label": "Chain-of-Thought Reasoning",
+      "type": "basic",
+      "level": "I",
+      "rarity": "uncommon",
+      "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
+      "x": 908.962,
+      "y": 345.743,
+      "radius": 6
+    },
+    {
+      "id": "chunk-document",
+      "label": "Chunk Document",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Splits a document into semantically meaningful segments optimized for embedding and retrieval.",
+      "x": 914.249,
+      "y": 362.461,
+      "radius": 6
+    },
+    {
+      "id": "cite-sources",
+      "label": "Cite Sources",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
+      "x": 920.238,
+      "y": 388.117,
+      "radius": 6
+    },
+    {
+      "id": "classify",
+      "label": "Classify",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
+      "x": 644.047,
+      "y": 155.029,
+      "radius": 6
+    },
+    {
+      "id": "code-execution",
+      "label": "Code Execution",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
+      "x": 545.661,
+      "y": 708.933,
+      "radius": 6
+    },
+    {
+      "id": "code-explain",
+      "label": "Code Explain",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Generates accurate natural-language explanations of source code, describing intent, logic flow, and key decisions at function or module level.",
+      "x": 523.249,
+      "y": 699.989,
+      "radius": 6
+    },
+    {
+      "id": "code-generation",
+      "label": "Code Generation",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
+      "x": 923.968,
+      "y": 415.765,
+      "radius": 6
+    },
+    {
+      "id": "computer-use",
+      "label": "Computer Use",
+      "type": "basic",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Controls desktop GUIs and web browsers by interpreting screenshots, issuing mouse/keyboard actions, and verifying visual state to complete open-ended computer tasks.",
+      "x": 500.737,
+      "y": 688.658,
+      "radius": 6
+    },
+    {
+      "id": "context-compression",
+      "label": "Context Compression",
+      "type": "basic",
+      "level": "III",
+      "rarity": "common",
+      "description": "Reduces the length of prompts or retrieved context to fit token limits while preserving semantic content, using techniques such as selective token removal, summarization, or token-classification-based pruning (e.g. LLMLingua).",
+      "x": 421.405,
+      "y": 257.13,
+      "radius": 6
+    },
+    {
+      "id": "data-visualize",
+      "label": "Data Visualize",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
+      "x": 479.234,
+      "y": 675.328,
+      "radius": 6
+    },
+    {
+      "id": "detect-anomaly",
+      "label": "Detect Anomaly",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
+      "x": 453.955,
+      "y": 655.899,
+      "radius": 6
+    },
+    {
+      "id": "diff-content",
+      "label": "Diff Content",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
+      "x": 924.986,
+      "y": 437.219,
+      "radius": 6
+    },
+    {
+      "id": "document-editing",
+      "label": "Document Editing",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Reads, edits, repacks, and applies styling or design principles to structured binary document formats such as PPTX, DOCX, and XLSX.",
+      "x": 660.753,
+      "y": 155.757,
+      "radius": 6
+    },
+    {
+      "id": "embed-text",
+      "label": "Embed Text",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Converts text into dense vector representations suitable for similarity search and clustering.",
+      "x": 923.788,
+      "y": 466.261,
+      "radius": 6
+    },
+    {
+      "id": "error-interpretation",
+      "label": "Error Interpretation",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
+      "x": 920.442,
+      "y": 490.766,
+      "radius": 6
+    },
+    {
+      "id": "evaluate-output",
+      "label": "Evaluate Output",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
+      "x": 914.335,
+      "y": 517.236,
+      "radius": 6
+    },
+    {
+      "id": "execute-bash",
+      "label": "Execute Bash",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Runs shell commands in a sandboxed environment, captures stdout/stderr, and handles exit codes.",
+      "x": 906.98,
+      "y": 539.733,
+      "radius": 6
+    },
+    {
+      "id": "extract-entities",
+      "label": "Extract Entities",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Identifies and extracts named entities such as people, organizations, dates, and locations from text.",
+      "x": 898.967,
+      "y": 559.0,
+      "radius": 6
+    },
+    {
+      "id": "few-shot-learning",
+      "label": "Few-Shot Learning",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Conditions a language model on a small number of input-output demonstrations within the prompt, enabling task adaptation without weight updates.",
+      "x": 520.817,
+      "y": 181.117,
+      "radius": 6
+    },
+    {
+      "id": "fine-tune",
+      "label": "Fine-Tune",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Adapts a pre-trained model to a new task or domain by updating model weights using parameter-efficient methods such as LoRA, QLoRA, or full supervised fine-tuning, without retraining from scratch.",
+      "x": 543.251,
+      "y": 171.924,
+      "radius": 6
+    },
+    {
+      "id": "format-output",
+      "label": "Format Output",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
+      "x": 692.681,
+      "y": 159.911,
+      "radius": 6
+    },
+    {
+      "id": "framework-upgrade",
+      "label": "Framework Upgrade",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Guides an agent through upgrading a project from one major framework version to another, including breaking-change detection, migration steps, and post-upgrade validation.",
+      "x": 715.975,
+      "y": 165.313,
+      "radius": 6
+    },
+    {
+      "id": "generate-sql",
+      "label": "Generate SQL",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
+      "x": 435.853,
+      "y": 638.869,
+      "radius": 6
+    },
+    {
+      "id": "generate-test",
+      "label": "Generate Test",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Produces unit tests, integration tests, and edge-case test cases from source code or natural-language specifications.",
+      "x": 422.22,
+      "y": 623.839,
+      "radius": 6
+    },
+    {
+      "id": "generate-text",
+      "label": "Generate Text",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
+      "x": 737.176,
+      "y": 172.079,
+      "radius": 6
+    },
+    {
+      "id": "hypothesis-generate",
+      "label": "Hypothesis Generation",
+      "type": "basic",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
+      "x": 405.597,
+      "y": 602.111,
+      "radius": 6
+    },
+    {
+      "id": "image-caption",
+      "label": "Image Caption",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
+      "x": 393.693,
+      "y": 583.38,
+      "radius": 6
+    },
+    {
+      "id": "image-generate",
+      "label": "Image Generate",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Creates photorealistic or stylized images from text prompts using diffusion-based or autoregressive generative models.",
+      "x": 380.964,
+      "y": 558.849,
+      "radius": 6
+    },
+    {
+      "id": "issue-triage",
+      "label": "Issue Triage",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Classifies incoming issue reports through a structured state machine, assigns triage roles (bug/enhancement, needs-info/ready-for-agent/wontfix), reproduces bugs, requests missing detail, and produces structured resolution briefs for agent or human handoff.",
+      "x": 569.865,
+      "y": 163.764,
+      "radius": 6
+    },
+    {
+      "id": "logical-inference",
+      "label": "Logical Inference",
+      "type": "basic",
+      "level": "I",
+      "rarity": "uncommon",
+      "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
+      "x": 886.71,
+      "y": 582.685,
+      "radius": 6
+    },
+    {
+      "id": "mcp-integration",
+      "label": "MCP Integration",
+      "type": "basic",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Connect to and invoke tools exposed by Model Context Protocol (MCP) servers \u2014 enumerate available tools, execute calls, and handle responses across any MCP-compatible backend.",
+      "x": 440.089,
+      "y": 236.873,
+      "radius": 6
+    },
+    {
+      "id": "math-reason",
+      "label": "Math Reason",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
+      "x": 371.206,
+      "y": 534.735,
+      "radius": 6
+    },
+    {
+      "id": "memory-manage",
+      "label": "Memory Manage",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Maintains, indexes, and retrieves conversational and long-term memory across sessions, managing context window constraints.",
+      "x": 365.442,
+      "y": 516.438,
+      "radius": 6
+    },
+    {
+      "id": "ocr",
+      "label": "OCR",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Extracts machine-readable text from raster images, scanned pages, and photo documents using optical character recognition, preserving layout and handling skew, noise, and varied fonts.",
+      "x": 359.102,
+      "y": 488.178,
+      "radius": 6
+    },
+    {
+      "id": "object-detection",
+      "label": "Object Detection",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Locates and classifies multiple objects within images by producing bounding boxes, confidence scores, and category labels in a single forward pass.",
+      "x": 356.368,
+      "y": 467.886,
+      "radius": 6
+    },
+    {
+      "id": "parallel-execution",
+      "label": "Parallel Execution",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Decompose a task into independent sub-tasks and execute them concurrently, merging results with configurable concurrency limits and queue-based state tracking.",
+      "x": 355.032,
+      "y": 444.282,
+      "radius": 6
+    },
+    {
+      "id": "parse-html",
+      "label": "Parse HTML",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Extracts structured content from raw HTML, navigating DOM trees and handling malformed markup.",
+      "x": 872.873,
+      "y": 604.301,
+      "radius": 6
+    },
+    {
+      "id": "parse-json",
+      "label": "Parse JSON",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
+      "x": 857.419,
+      "y": 624.266,
+      "radius": 6
+    },
+    {
+      "id": "parse-pdf",
+      "label": "Parse PDF",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
+      "x": 842.151,
+      "y": 640.898,
+      "radius": 6
+    },
+    {
+      "id": "plan-decompose",
+      "label": "Plan and Decompose",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Breaks a complex objective into an ordered sequence of executable sub-tasks.",
+      "x": 819.988,
+      "y": 660.974,
+      "radius": 6
+    },
+    {
+      "id": "prompt-injection-defense",
+      "label": "Prompt Injection Defense",
+      "type": "basic",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Detects and neutralizes adversarial instructions injected into agent context from untrusted external sources (indirect prompt injection), using techniques such as context isolation, hierarchical intent verification, or semantic consistency checks.",
+      "x": 456.789,
+      "y": 221.691,
+      "radius": 6
+    },
+    {
+      "id": "question-answer",
+      "label": "Question Answer",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Produces accurate, context-grounded answers to natural-language questions, handling unanswerable cases.",
+      "x": 761.636,
+      "y": 182.26,
+      "radius": 6
+    },
+    {
+      "id": "rank",
+      "label": "Rank",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Orders a set of candidate items by relevance, quality, or fitness for a given objective.",
+      "x": 806.527,
+      "y": 671.287,
+      "radius": 6
+    },
+    {
+      "id": "refactor-code",
+      "label": "Refactor Code",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
+      "x": 355.767,
+      "y": 419.099,
+      "radius": 6
+    },
+    {
+      "id": "requirements-analysis",
+      "label": "Requirements Analysis",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Elicit and structure requirements from stakeholder inputs into formal specifications \u2014 user stories, acceptance criteria, and traceability matrices.",
+      "x": 359.343,
+      "y": 390.437,
+      "radius": 6
+    },
+    {
+      "id": "retrieve",
+      "label": "Retrieve",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
+      "x": 779.499,
+      "y": 688.526,
+      "radius": 6
+    },
+    {
+      "id": "reward-modeling",
+      "label": "Reward Modeling",
+      "type": "basic",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Learns a scalar reward signal from human preference comparisons between model outputs, enabling reinforcement learning from human feedback (RLHF) to align model behavior with human values.",
+      "x": 364.29,
+      "y": 367.828,
+      "radius": 6
+    },
+    {
+      "id": "route-intent",
+      "label": "Route Intent",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
+      "x": 762.638,
+      "y": 697.264,
+      "radius": 6
+    },
+    {
+      "id": "schema-design",
+      "label": "Schema Design",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Design database schemas across relational, NoSQL, graph, and time-series stores \u2014 entity modelling, normalization, indexing strategies, and migration planning.",
+      "x": 371.243,
+      "y": 345.158,
+      "radius": 6
+    },
+    {
+      "id": "scientific-visualization",
+      "label": "Scientific Visualization",
+      "type": "basic",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Creates publication-ready scientific figures with multi-panel layouts, statistical annotations, colorblind-safe palettes, and journal-specific formatting (Nature, Science, Cell) using matplotlib, seaborn, and plotly.",
+      "x": 383.48,
+      "y": 315.812,
+      "radius": 6
+    },
+    {
+      "id": "score-relevance",
+      "label": "Score Relevance",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Assigns a numerical relevance score to candidate items relative to a query or objective.",
+      "x": 739.152,
+      "y": 707.196,
+      "radius": 6
+    },
+    {
+      "id": "self-consistency",
+      "label": "Self-Consistency",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Samples multiple independent reasoning paths for the same problem and selects the answer by majority vote, improving robustness without any additional training.",
+      "x": 591.237,
+      "y": 159.203,
+      "radius": 6
+    },
+    {
+      "id": "self-critique",
+      "label": "Self-Critique",
+      "type": "basic",
+      "level": "I",
+      "rarity": "uncommon",
+      "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
+      "x": 713.017,
+      "y": 715.488,
+      "radius": 6
+    },
+    {
+      "id": "semantic-cache",
+      "label": "Semantic Cache",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Stores LLM responses keyed by embedding similarity so that semantically equivalent queries are served from cache, reducing inference latency and token cost without sacrificing answer quality.",
+      "x": 613.009,
+      "y": 156.281,
+      "radius": 6
+    },
+    {
+      "id": "sentiment-analysis",
+      "label": "Sentiment Analysis",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
+      "x": 779.438,
+      "y": 191.44,
+      "radius": 6
+    },
+    {
+      "id": "skill-discovery",
+      "label": "Skill Discovery",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Searches a skill or tool registry, ranks results by relevance and install count, and surfaces candidates for the agent to adopt or invoke.",
+      "x": 805.96,
+      "y": 208.305,
+      "radius": 6
+    },
+    {
+      "id": "speech-to-text",
+      "label": "Speech to Text",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
+      "x": 393.447,
+      "y": 297.043,
+      "radius": 6
+    },
+    {
+      "id": "statistical-analysis",
+      "label": "Statistical Analysis",
+      "type": "basic",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Performs hypothesis testing, regression analysis, and Bayesian modelling with effect size calculation and APA-formatted statistical reporting using scipy, statsmodels, and PyMC.",
+      "x": 473.197,
+      "y": 208.912,
+      "radius": 6
+    },
+    {
+      "id": "structured-output",
+      "label": "Structured Output Generation",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
+      "x": 689.202,
+      "y": 720.721,
+      "radius": 6
+    },
+    {
+      "id": "summarize",
+      "label": "Summarize",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Condenses longer input into a shorter representation that preserves key information and intent.",
+      "x": 825.952,
+      "y": 224.021,
+      "radius": 6
+    },
+    {
+      "id": "test-driven-development",
+      "label": "Test-Driven Development",
+      "type": "basic",
+      "level": "0",
+      "rarity": "uncommon",
+      "description": "Enforces a strict red-green-refactor TDD loop: writes failing tests before implementation, blocks code generation that skips the test step, and validates coverage thresholds before marking tasks complete.",
+      "x": 844.275,
+      "y": 241.262,
+      "radius": 6
+    },
+    {
+      "id": "text-to-speech",
+      "label": "Text to Speech",
+      "type": "basic",
+      "level": "II",
+      "rarity": "common",
+      "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
+      "x": 406.304,
+      "y": 276.871,
+      "radius": 6
+    },
+    {
+      "id": "tokenize",
+      "label": "Tokenize",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
+      "x": 860.637,
+      "y": 259.599,
+      "radius": 6
+    },
+    {
+      "id": "tool-select",
+      "label": "Tool Select",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
+      "x": 662.373,
+      "y": 724.121,
+      "radius": 6
+    },
+    {
+      "id": "tool-use",
+      "label": "Tool Use",
+      "type": "basic",
+      "level": "I",
+      "rarity": "uncommon",
+      "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
+      "x": 638.66,
+      "y": 724.997,
+      "radius": 6
+    },
+    {
+      "id": "translate",
+      "label": "Translate",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
+      "x": 875.087,
+      "y": 278.881,
+      "radius": 6
+    },
+    {
+      "id": "ux-audit",
+      "label": "UX Audit",
+      "type": "basic",
+      "level": "0",
+      "rarity": "uncommon",
+      "description": "Systematically evaluates a user interface against established usability heuristics or accessibility standards, producing a scored finding report with remediation recommendations.",
+      "x": 887.852,
+      "y": 299.307,
+      "radius": 6
+    },
+    {
+      "id": "vision-qa",
+      "label": "Visual Question Answering",
+      "type": "basic",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Answers natural-language questions grounded in a specific image or screenshot by combining visual perception with language reasoning, enabling visual debugging, UI analysis, and document-image Q&A.",
+      "x": 496.846,
+      "y": 193.561,
+      "radius": 6
+    },
+    {
+      "id": "web-search",
+      "label": "Web Search",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Queries external search engines or APIs and retrieves relevant result sets.",
+      "x": 615.034,
+      "y": 723.904,
+      "radius": 6
+    },
+    {
+      "id": "write-report",
+      "label": "Write Report",
+      "type": "basic",
+      "level": "I",
+      "rarity": "common",
+      "description": "Produces structured, multi-section written output with headings, citations, and coherent narrative.",
+      "x": 592.261,
+      "y": 720.973,
+      "radius": 6
+    },
+    {
+      "id": "agent-eval",
+      "label": "Agent Evaluation",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Holistically evaluates an AI agent's performance on multi-step tasks by running standardised benchmarks, scoring full interaction trajectories, and producing reproducible capability reports.",
+      "x": 713.893,
+      "y": 286.899,
+      "radius": 10
+    },
+    {
+      "id": "automated-testing",
+      "label": "Automated Testing",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
+      "x": 739.126,
+      "y": 301.891,
+      "radius": 10
+    },
+    {
+      "id": "autonomous-debug",
+      "label": "Autonomous Debug",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
+      "x": 483.369,
+      "y": 506.081,
+      "radius": 10
+    },
+    {
+      "id": "browser-automation",
+      "label": "Browser Automation",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
+      "x": 753.934,
+      "y": 313.829,
+      "radius": 10
+    },
+    {
+      "id": "code-review-pipeline",
+      "label": "Code Review Pipeline",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
+      "x": 772.975,
+      "y": 334.087,
+      "radius": 10
+    },
+    {
+      "id": "content-moderation",
+      "label": "Content Moderation",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
+      "x": 785.117,
+      "y": 351.449,
+      "radius": 10
+    },
+    {
+      "id": "conversational-agent",
+      "label": "Conversational Agent",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
+      "x": 798.481,
+      "y": 378.487,
+      "radius": 10
+    },
+    {
+      "id": "data-analysis",
+      "label": "Data Analysis",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
+      "x": 805.96,
+      "y": 403.16,
+      "radius": 10
+    },
+    {
+      "id": "deployment-automation",
+      "label": "Deployment Automation",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Automate CI/CD pipeline execution and deployment to target environments \u2014 build, test, artifact publishing, environment promotion, and rollback strategies.",
+      "x": 641.076,
+      "y": 270.003,
+      "radius": 10
+    },
+    {
+      "id": "design-review",
+      "label": "Design Review",
+      "type": "extra",
+      "level": "III",
+      "rarity": "rare",
+      "description": "Stress-tests a plan or design through relentless targeted questioning, walking the decision tree branch-by-branch, resolving concept dependencies, surfacing contradictions against the existing codebase, and crystallising ubiquitous language \u2014 optionally persisting resolved decisions to CONTEXT.md and ADRs.",
+      "x": 809.525,
+      "y": 427.3,
+      "radius": 10
+    },
+    {
+      "id": "document-analyst",
+      "label": "Document Analyst",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
+      "x": 809.584,
+      "y": 451.88,
+      "radius": 10
+    },
+    {
+      "id": "document-digitization",
+      "label": "Document Digitization",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
+      "x": 805.57,
+      "y": 478.555,
+      "radius": 10
+    },
+    {
+      "id": "e2e-testing",
+      "label": "End-to-End Testing",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Execute full end-to-end user journey tests using browser automation frameworks (Playwright/Puppeteer), validating complete workflows from UI to backend across real environments.",
+      "x": 797.249,
+      "y": 504.598,
+      "radius": 10
+    },
+    {
+      "id": "function-calling",
+      "label": "Function Calling",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
+      "x": 785.409,
+      "y": 528.07,
+      "radius": 10
+    },
+    {
+      "id": "ghostwrite",
+      "label": "Ghostwrite",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Produces audience-tailored, research-backed long-form written content.",
+      "x": 475.073,
+      "y": 481.219,
+      "radius": 10
+    },
+    {
+      "id": "grounding",
+      "label": "Grounding",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
+      "x": 771.012,
+      "y": 548.332,
+      "radius": 10
+    },
+    {
+      "id": "guardrails",
+      "label": "Guardrails",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Wraps LLM outputs with programmatic safety rules, content filters, and topical constraints that detect policy violations and enforce compliant, on-policy responses before they reach the user.",
+      "x": 752.816,
+      "y": 567.171,
+      "radius": 10
+    },
+    {
+      "id": "knowledge-graph-build",
+      "label": "Knowledge Graph Construction",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
+      "x": 733.021,
+      "y": 582.292,
+      "radius": 10
+    },
+    {
+      "id": "knowledge-harvest",
+      "label": "Knowledge Harvest",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
+      "x": 470.209,
+      "y": 448.423,
+      "radius": 10
+    },
+    {
+      "id": "literature-review",
+      "label": "Literature Review",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Conducts systematic multi-database academic literature searches following PRISMA/SWARM protocols, screens and synthesises findings, verifies all citations, and generates a structured review report.",
+      "x": 470.245,
+      "y": 430.882,
+      "radius": 10
+    },
+    {
+      "id": "ml-pipeline",
+      "label": "ML Pipeline",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Designs and implements production ML pipelines with experiment tracking (MLflow, W&B), feature stores (Feast), orchestration (Kubeflow, Airflow), and automated retraining workflows including model evaluation gates and A/B deployment.",
+      "x": 474.989,
+      "y": 399.119,
+      "radius": 10
+    },
+    {
+      "id": "multi-agent-debate",
+      "label": "Multi-Agent Debate",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
+      "x": 482.85,
+      "y": 375.163,
+      "radius": 10
+    },
+    {
+      "id": "multimodal-reasoning",
+      "label": "Multimodal Reasoning",
+      "type": "extra",
+      "level": "III",
+      "rarity": "rare",
+      "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
+      "x": 710.937,
+      "y": 594.493,
+      "radius": 10
+    },
+    {
+      "id": "prd-generation",
+      "label": "PRD Generation",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Synthesizes conversation context and codebase knowledge into a structured Product Requirements Document containing a problem statement, extensive user stories, implementation decisions, module boundaries, testing decisions, and out-of-scope items.",
+      "x": 490.887,
+      "y": 358.358,
+      "radius": 10
+    },
+    {
+      "id": "plan-and-execute",
+      "label": "Plan and Execute",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
+      "x": 508.235,
+      "y": 332.585,
+      "radius": 10
+    },
+    {
+      "id": "prompt-optimization",
+      "label": "Prompt Optimization",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
+      "x": 524.485,
+      "y": 315.275,
+      "radius": 10
+    },
+    {
+      "id": "rag-pipeline",
+      "label": "RAG Pipeline",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
+      "x": 693.946,
+      "y": 601.214,
+      "radius": 10
+    },
+    {
+      "id": "re-act-reasoning",
+      "label": "ReAct Reasoning",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
+      "x": 661.167,
+      "y": 608.677,
+      "radius": 10
+    },
+    {
+      "id": "registry-curation",
+      "label": "Registry Curation",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
+      "x": 542.674,
+      "y": 300.617,
+      "radius": 10
+    },
+    {
+      "id": "release-automation",
+      "label": "Release Automation",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Automate the full software release cycle: determine semantic version bump, update CHANGELOG, commit, create a git tag, and publish a GitHub release with release notes.",
+      "x": 661.398,
+      "y": 271.352,
+      "radius": 10
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
+      "x": 637.594,
+      "y": 609.983,
+      "radius": 10
+    },
+    {
+      "id": "scientific-writing",
+      "label": "Scientific Writing",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Composes research manuscripts in IMRAD structure with reporting-guideline compliance (CONSORT, STROBE, PRISMA), citation management, publication-quality figures, and LaTeX/PDF formatting.",
+      "x": 611.705,
+      "y": 607.629,
+      "radius": 10
+    },
+    {
+      "id": "security-audit",
+      "label": "Security Audit",
+      "type": "extra",
+      "level": "II",
+      "rarity": "rare",
+      "description": "Systematically identify security vulnerabilities, assess attack surface, and produce actionable remediation guidance across code, dependencies, and infrastructure.",
+      "x": 693.887,
+      "y": 278.767,
+      "radius": 10
+    },
+    {
+      "id": "text-to-sql-pipeline",
+      "label": "Text-to-SQL Pipeline",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
+      "x": 592.324,
+      "y": 603.178,
+      "radius": 10
+    },
+    {
+      "id": "tool-chaining",
+      "label": "Tool Chaining",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Sequences multiple tool invocations into a dependency graph where the output of each tool feeds as structured input to the next, handling state propagation, intermediate result validation, and error recovery across multi-step execution pipelines.",
+      "x": 567.743,
+      "y": 593.88,
+      "radius": 10
+    },
+    {
+      "id": "tool-creation",
+      "label": "Tool Creation",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
+      "x": 566.292,
+      "y": 286.81,
+      "radius": 10
+    },
+    {
+      "id": "translation-pipeline",
+      "label": "Translation Pipeline",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
+      "x": 541.798,
+      "y": 578.767,
+      "radius": 10
+    },
+    {
+      "id": "tree-of-thought",
+      "label": "Tree of Thought",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Frames problem solving as a search over a tree of partial solutions, using LLM-generated evaluations to prune unpromising branches and backtrack, dramatically improving success on complex reasoning tasks.",
+      "x": 588.167,
+      "y": 278.095,
+      "radius": 10
+    },
+    {
+      "id": "vertical-slice-planning",
+      "label": "Vertical Slice Planning",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Decomposes a product plan into independently-demoable vertical slices that each cut through all integration layers end-to-end. Classifies each slice as HITL (human-in-the-loop) or AFK (autonomous), identifies dependency ordering, and publishes structured issues with acceptance criteria.",
+      "x": 521.73,
+      "y": 562.116,
+      "radius": 10
+    },
+    {
+      "id": "voice-agent",
+      "label": "Voice Agent",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
+      "x": 506.349,
+      "y": 545.059,
+      "radius": 10
+    },
+    {
+      "id": "web-scrape",
+      "label": "Web Scrape",
+      "type": "extra",
+      "level": "III",
+      "rarity": "uncommon",
+      "description": "Retrieves and structures data from web pages into usable entities.",
+      "x": 492.453,
+      "y": 524.439,
+      "radius": 10
+    },
+    {
+      "id": "workflow-automation",
+      "label": "Workflow Automation",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Designs, configures, and runs trigger-based multi-step automation pipelines that connect external services, schedule jobs, and orchestrate tool sequences without continuous human supervision.",
+      "x": 612.603,
+      "y": 272.222,
+      "radius": 10
+    },
+    {
+      "id": "autonomous-data-scientist",
+      "label": "Autonomous Data Scientist",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
+      "x": 644.037,
+      "y": 386.151,
+      "radius": 15
+    },
+    {
+      "id": "autonomous-research-agent",
+      "label": "Autonomous Research Agent",
+      "type": "ultimate",
+      "level": "VI",
+      "rarity": "legendary",
+      "description": "Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.",
+      "x": 602.416,
+      "y": 401.226,
+      "radius": 15
+    },
+    {
+      "id": "scientific-discovery",
+      "label": "Autonomous Scientific Discovery",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report \u00e2\u20ac\u201d completing a full research cycle without human intervention.",
+      "x": 678.526,
+      "y": 402.162,
+      "radius": 15
+    },
+    {
+      "id": "full-stack-developer",
+      "label": "Full-Stack Developer",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
+      "x": 692.13,
+      "y": 454.088,
+      "radius": 15
+    },
+    {
+      "id": "multi-agent-orchestration-v",
+      "label": "Multi-Agent Orchestration",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Coordinates multiple specialized agents across complex workflows with dynamic task allocation and conflict resolution.",
+      "x": 661.846,
+      "y": 489.384,
+      "radius": 15
+    },
+    {
+      "id": "real-time-voice-assistant",
+      "label": "Real-Time Voice Assistant",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
+      "x": 618.356,
+      "y": 489.473,
+      "radius": 15
+    },
+    {
+      "id": "recursive-self-improvement",
+      "label": "Recursive Self-Improvement",
+      "type": "ultimate",
+      "level": "V",
+      "rarity": "legendary",
+      "description": "Agent iteratively refines its own prompts, tools, or strategies based on performance feedback loops.",
+      "x": 586.445,
+      "y": 446.917,
+      "radius": 15
+    }
+  ],
+  "edges": [
+    {
+      "source": "web-search",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "parse-html",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "web-search",
+      "target": "research",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "research",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "research",
+      "type": "extra"
+    },
+    {
+      "source": "research",
+      "target": "ghostwrite",
+      "type": "extra"
+    },
+    {
+      "source": "write-report",
+      "target": "ghostwrite",
+      "type": "extra"
+    },
+    {
+      "source": "audience-model",
+      "target": "ghostwrite",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "error-interpretation",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "route-intent",
+      "target": "plan-and-execute",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "plan-and-execute",
+      "type": "extra"
+    },
+    {
+      "source": "tool-select",
+      "target": "plan-and-execute",
+      "type": "extra"
+    },
+    {
+      "source": "web-scrape",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "embed-text",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "chunk-document",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "embed-text",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "score-relevance",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "tokenize",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "rank",
+      "target": "rag-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "parse-json",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "autonomous-debug",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
+      "source": "plan-and-execute",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
+      "source": "plan-and-execute",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "route-intent",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "tool-select",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "research",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "knowledge-harvest",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "ghostwrite",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "question-answer",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "memory-manage",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "route-intent",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "generate-sql",
+      "target": "text-to-sql-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "parse-json",
+      "target": "text-to-sql-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "text-to-sql-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "diff-content",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "generate-sql",
+      "target": "data-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "data-visualize",
+      "target": "data-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "data-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "speech-to-text",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "question-answer",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "text-to-speech",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "generate-test",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "error-interpretation",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "classify",
+      "target": "content-moderation",
+      "type": "extra"
+    },
+    {
+      "source": "sentiment-analysis",
+      "target": "content-moderation",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "content-moderation",
+      "type": "extra"
+    },
+    {
+      "source": "image-caption",
+      "target": "multimodal-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "question-answer",
+      "target": "multimodal-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "logical-inference",
+      "target": "multimodal-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "translate",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "sentiment-analysis",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "audience-model",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "parse-pdf",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "code-review-pipeline",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "automated-testing",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "refactor-code",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "data-analysis",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "math-reason",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "research",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "voice-agent",
+      "target": "real-time-voice-assistant",
+      "type": "ultimate"
+    },
+    {
+      "source": "memory-manage",
+      "target": "real-time-voice-assistant",
+      "type": "ultimate"
+    },
+    {
+      "source": "plan-and-execute",
+      "target": "real-time-voice-assistant",
+      "type": "ultimate"
+    },
+    {
+      "source": "research",
+      "target": "registry-curation",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "registry-curation",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "registry-curation",
+      "type": "extra"
+    },
+    {
+      "source": "structured-output",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "api-call",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "tool-select",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "re-act-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "re-act-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "web-search",
+      "target": "browser-automation",
+      "type": "extra"
+    },
+    {
+      "source": "computer-use",
+      "target": "browser-automation",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "knowledge-graph-build",
+      "type": "extra"
+    },
+    {
+      "source": "logical-inference",
+      "target": "knowledge-graph-build",
+      "type": "extra"
+    },
+    {
+      "source": "hypothesis-generate",
+      "target": "scientific-discovery",
+      "type": "ultimate"
+    },
+    {
+      "source": "research",
+      "target": "scientific-discovery",
+      "type": "ultimate"
+    },
+    {
+      "source": "math-reason",
+      "target": "scientific-discovery",
+      "type": "ultimate"
+    },
+    {
+      "source": "chain-of-thought",
+      "target": "tree-of-thought",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "tree-of-thought",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "prompt-optimization",
+      "type": "extra"
+    },
+    {
+      "source": "generate-text",
+      "target": "prompt-optimization",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "tool-creation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "tool-creation",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "self-critique",
+      "target": "multi-agent-debate",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "multi-agent-debate",
+      "type": "extra"
+    },
+    {
+      "source": "chain-of-thought",
+      "target": "multi-agent-debate",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "classify",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "structured-output",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "agent-eval",
+      "type": "extra"
+    },
+    {
+      "source": "score-relevance",
+      "target": "agent-eval",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "workflow-automation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "workflow-automation",
+      "type": "extra"
+    },
+    {
+      "source": "api-call",
+      "target": "workflow-automation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "tool-chaining",
+      "type": "extra"
+    },
+    {
+      "source": "tool-select",
+      "target": "tool-chaining",
+      "type": "extra"
+    },
+    {
+      "source": "write-report",
+      "target": "prd-generation",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "prd-generation",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "vertical-slice-planning",
+      "type": "extra"
+    },
+    {
+      "source": "route-intent",
+      "target": "vertical-slice-planning",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "design-review",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "design-review",
+      "type": "extra"
+    },
+    {
+      "source": "research",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "write-report",
+      "target": "scientific-writing",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "scientific-writing",
+      "type": "extra"
+    },
+    {
+      "source": "scientific-visualization",
+      "target": "scientific-writing",
+      "type": "extra"
+    },
+    {
+      "source": "data-analysis",
+      "target": "ml-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "automated-testing",
+      "target": "ml-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "ml-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "browser-automation",
+      "target": "e2e-testing",
+      "type": "extra"
+    },
+    {
+      "source": "automated-testing",
+      "target": "e2e-testing",
+      "type": "extra"
+    },
+    {
+      "source": "code-review-pipeline",
+      "target": "security-audit",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "security-audit",
+      "type": "extra"
+    },
+    {
+      "source": "workflow-automation",
+      "target": "release-automation",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "release-automation",
+      "type": "extra"
+    },
+    {
+      "source": "generate-text",
+      "target": "release-automation",
+      "type": "extra"
+    },
+    {
+      "source": "workflow-automation",
+      "target": "deployment-automation",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "deployment-automation",
+      "type": "extra"
+    }
+  ]
+}

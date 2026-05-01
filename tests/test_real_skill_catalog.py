@@ -7,7 +7,7 @@ from scripts.generateRealSkills import generate_catalog_pages
 
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CATALOG_PATH = os.path.join(REPO_ROOT, "graph", "real_skill_catalog.json")
+CATALOG_PATH = os.path.join(REPO_ROOT, "registry", "real-skills.json")
 
 
 class TestRealSkillCatalog(unittest.TestCase):

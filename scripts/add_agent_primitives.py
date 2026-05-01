@@ -1,5 +1,5 @@
 """
-Adds 4 new AI-agent primitive skills to graph/gaia.json:
+Adds 4 new AI-agent primitive skills to registry/gaia.json:
   context-compression, prompt-injection-defense, vision-qa, tool-chaining
 
 Run from repo root:
@@ -8,7 +8,7 @@ Run from repo root:
 import json
 from datetime import date
 
-GRAPH_PATH = "graph/gaia.json"
+GRAPH_PATH = "registry/gaia.json"
 TODAY = str(date.today())
 
 NEW_SKILLS = [

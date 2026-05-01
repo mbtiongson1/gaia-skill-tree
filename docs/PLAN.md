@@ -17,7 +17,7 @@ Ship Gaia v1 — a validated, graph-first AI agent skill registry with a working
 - No custom infrastructure. Everything runs on GitHub (Actions, PRs, Pages, CODEOWNERS).
 - The canonical graph must validate before any other work continues — it is the blocker for all downstream deliverables.
 - Plugin is built after the registry and schemas are stable. Not before.
-- Legendary skills are stubs at launch. No legendary reaches `validated` status in v1 without three Class A/B evidence sources and two maintainer approvals.
+- Legendary skills are stubs at launch. No legendary reaches `validated` status in v1 without three Evidence Tier A/B sources and two maintainer approvals.
 
 ---
 
@@ -44,11 +44,11 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 
 ### Deliverables
 - [ ] Initialize repository structure exactly matching the target layout in DESIGN.md.
-- [ ] Write `schema/skill.schema.json` — validates skill nodes including type, level, rarity enums, evidence array shape.
-- [ ] Write `schema/combination.schema.json` — validates edge records.
-- [ ] Write `schema/skillTree.schema.json` — validates user skill tree records.
-- [ ] Write `schema/pluginConfig.schema.json` — validates `.gaia/config.json`.
-- [ ] Seed `graph/gaia.json` with:
+- [ ] Write `registry/schema/skill.schema.json` — validates skill nodes including type, level, rarity enums, evidence array shape.
+- [ ] Write `registry/schema/combination.schema.json` — validates edge records.
+- [ ] Write `registry/schema/skillTree.schema.json` — validates user skill tree records.
+- [ ] Write `registry/schema/pluginConfig.schema.json` — validates `.gaia/config.json`.
+- [ ] Seed `registry/gaia.json` with:
   - 25–30 atomic skills (primitives: tokenize, classify, retrieve, rank, parseJson, parseHtml, executeBash, generateText, summarize, citeSources, extractEntities, routeIntent, evaluateOutput, embedText, chunkDocument, planDecompose, writeReport, audienceModel, toolSelect, errorInterpretation, codeGeneration, webSearch, scoreRelevance, formatOutput, diffContent).
   - 10–15 composite skills with full prerequisite chains traceable to atomics.
   - 2–3 legendary stubs (clearly `provisional`, Level I only).
@@ -74,10 +74,10 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
   - JSON Schema validation for all nodes and edges.
   - DAG cycle detection (DFS from all root nodes).
   - Reference integrity (every parent ID resolves to an existing node).
-  - Evidence threshold by level (Level II needs Class C+, Level III needs Class B+, etc.).
+  - Evidence threshold by level (Level II needs Evidence Tier C+, Level III needs Evidence Tier B+, etc.).
   - Legendary approval count check (placeholder for Phase 5 enforcement).
 - [ ] Set up `.github/workflows/validate.yml`:
-  - Triggers on all PRs touching `graph/` or `schema/`.
+  - Triggers on all PRs touching `registry/`.
   - Runs `validate.py` and fails with descriptive output on any violation.
 - [ ] Write DAG utility in `scripts/validate.py` that outputs:
   - Total nodes by type.
@@ -87,7 +87,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 
 ### Exit Criteria
 - [ ] CI passes on the seed graph with zero warnings.
-- [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Class B evidence.
+- [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Evidence Tier B source.
 - [ ] `python scripts/validate.py` runs in under 5 seconds on the seed graph.
 
 ---
@@ -107,11 +107,11 @@ All human-readable files are generated from `gaia.json`. No manual file editing 
   - Generates `combinations.md` — matrix of all fusion recipes with prerequisite lists, conditions, level floors.
   - Includes provenance footer on every generated file (timestamp + graph version).
 - [ ] Implement `scripts/exportGexf.py`:
-  - Exports `graph/gaia.gexf` in GEXF 1.2 with custom attribute namespaces for `level`, `rarity`, `status`, `type`.
+  - Exports `registry/gaia.gexf` in GEXF 1.2 with custom attribute namespaces for `level`, `rarity`, `status`, `type`.
 - [ ] Extend CI with `generate.yml`:
   - Runs `generateProjections.py` after validation.
   - Fails if committed generated files differ from freshly generated output (drift detection).
-- [ ] Create first static snapshot: `graph/render/v0.1.0.json`.
+- [ ] Create first static snapshot: `registry/render/v0.1.0.json`.
 
 ### Exit Criteria
 - [ ] `python scripts/generateProjections.py` is deterministic — identical input produces identical output on any machine.
@@ -127,17 +127,17 @@ All human-readable files are generated from `gaia.json`. No manual file editing 
 User skill trees exist, validate, and are portable across repositories by username.
 
 ### Deliverables
-- [ ] Create `users/` directory with `README.md` explaining the identity model and CODEOWNERS protection.
-- [ ] Set up `CODEOWNERS` so `users/[username]/` can only be modified by PRs opened under that username's verified GitHub Actions context.
-- [ ] Seed 2–3 example user skill trees (`users/mbtiongson1/`, etc.) that validate against `skillTree.schema.json`.
+- [ ] Create `skill-trees/` directory with `README.md` explaining the identity model and CODEOWNERS protection.
+- [ ] Set up `CODEOWNERS` so `skill-trees/[username]/` can only be modified by PRs opened under that username's verified GitHub Actions context.
+- [ ] Seed 2–3 example user skill trees (`skill-trees/mbtiongson1/`, etc.) that validate against `skillTree.schema.json`.
 - [ ] Implement `scripts/generateProjections.py` extension for user trees:
-  - Generates `users/[username]/skill-tree.md` matching DESIGN.md §6 structure.
+  - Generates `skill-trees/[username]/skill-tree.md` matching DESIGN.md §6 structure.
 - [ ] Write `scripts/detectCombinations.py`:
   - Accepts a set of detected skill IDs + a user's current skill tree.
   - Returns a list of combination candidates (each with candidate skill ID, prerequisites met, level floor).
   - Shared module — used by both the plugin (Phase 4) and CI checks.
 - [ ] Add `computeRarity.py`:
-  - Reads all user skill trees in `users/`.
+  - Reads all user skill trees in `skill-trees/`.
   - Computes prevalence percentages per skill.
   - Outputs a rarity override table — used to auto-update rarity fields in `gaia.json` if prevalence data moves a skill across thresholds.
 
@@ -156,29 +156,29 @@ User skill trees exist, validate, and are portable across repositories by userna
 A developer can install the Gaia plugin into any repo, scan it, and receive combination prompts that update their skill tree via PR.
 
 ### Deliverables
-- [ ] Implement `plugin/cli/scanner.py`:
+- [ ] Implement `packages/cli-npm/cli/scanner.py`:
   - Reads `.gaia/config.json` for `scanPaths`.
   - Scans declared paths for skill ID references (skill `.md` files, MCP tool declarations, agent configs).
   - Returns a set of resolved Gaia skill IDs.
-- [ ] Implement `plugin/cli/resolver.py`:
+- [ ] Implement `packages/cli-npm/cli/resolver.py`:
   - Fetches or reads `gaia.json` from the configured `gaiaRegistryRef`.
   - Resolves raw detected tokens to canonical skill IDs.
-- [ ] Implement `plugin/cli/combinator.py`:
+- [ ] Implement `packages/cli-npm/cli/combinator.py`:
   - Wraps `scripts/detectCombinations.py` as a callable module.
   - Returns ranked combination candidates (prioritize higher rarity unlocks).
-- [ ] Implement `plugin/cli/treeManager.py`:
-  - Load: fetches `users/[username]/skill-tree.json` from registry, caches locally.
+- [ ] Implement `packages/cli-npm/cli/treeManager.py`:
+  - Load: fetches `skill-trees/[username]/skill-tree.json` from registry, caches locally.
   - Save: diffs current tree against incoming changes, prepares patch.
   - Status: renders summary to stdout.
   - Tree: renders lineage-aware tree view with optional depth and type filters.
-- [ ] Implement `plugin/cli/prWriter.py`:
+- [ ] Implement `packages/cli-npm/cli/prWriter.py`:
   - Uses GitHub API to open a PR against `gaia` repo with updated `skill-tree.json`.
   - PR body includes: detected skills, combination confirmed, repo where detected, timestamp.
-- [ ] Implement `plugin/cli/main.py` — CLI entrypoint with commands: `init`, `scan`, `status`, `tree`, `load`, `fuse`, `diff`.
-- [ ] Implement `plugin/github-action/action.yml`:
+- [ ] Implement `packages/cli-npm/cli/main.py` — CLI entrypoint with commands: `init`, `scan`, `status`, `tree`, `load`, `fuse`, `diff`.
+- [ ] Implement `packages/cli-npm/github-action/action.yml`:
   - Runs `gaia scan` on push.
   - Posts combination candidates as a PR comment if any are found.
-- [ ] Write `plugin/README.md` with installation instructions, command reference, and config options.
+- [ ] Write `packages/cli-npm/README.md` with installation instructions, command reference, and config options.
 
 ### Exit Criteria
 - [ ] `gaia init` creates a valid `.gaia/config.json`.
@@ -256,7 +256,7 @@ Gaia v1 is a living system with real analytics, quarterly reporting, and a defen
 ### Deliverables
 - [ ] Implement `scripts/graphAnalytics.py`:
   - Most central prerequisite skills (betweenness centrality).
-  - Underexplored fusion opportunities (prerequisites owned by many users but composite not yet defined).
+  - Underexplored fusion opportunities (prerequisites owned by many skill-trees but composite not yet defined).
   - Lineage depth distribution across all composite/legendary skills.
 - [ ] Publish `docs/frontier-v1.md` — first frontier report using graph analytics output.
 - [ ] Reclassify provisional legendary candidates using evidence accumulated since launch.
@@ -318,7 +318,7 @@ autonomousResearchAgent
 | R-02 | Subjective level inflation from contributors | High | High | Mandatory evidence rubric + reviewer voting + `provisional` default |
 | R-03 | DAG cycle introduced via PR | Low | High | Automated cycle detection blocks all PRs with cycles |
 | R-04 | Vendor bias in skill definitions | Medium | Medium | Agent-agnostic definitions required; vendor-specific evidence flagged |
-| R-05 | Legendary inflation devaluing the tier | Medium | High | Higher merge bar, minimum 3 Class A/B sources, 2 maintainer approvals |
+| R-05 | Legendary inflation devaluing the tier | Medium | High | Higher merge bar, minimum 3 Evidence Tier A/B sources, 2 maintainer approvals |
 | R-06 | Username squatting or tree impersonation | Low | High | CODEOWNERS + GitHub Actions OAuth verification |
 | R-07 | Plugin false-positive skill detection | Medium | Medium | Conservative scanner — only match explicit skill ID references, not guesses |
 | R-08 | Stale registry (skills not updated as AI evolves) | High | Medium | Scheduled quarterly re-audit; stale-skill flag if not updated in 180 days |
@@ -331,7 +331,7 @@ autonomousResearchAgent
 
 ### Data Quality
 - % of skills with all required fields populated.
-- % of Level III+ skills with at least one Class B evidence source.
+- % of Level III+ skills with at least one Evidence Tier B source.
 - Number of disputed claims resolved per month.
 - Zero `validated` legendary skills with fewer than 3 evidence sources.
 

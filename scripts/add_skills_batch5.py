@@ -2,7 +2,7 @@
 """Batch 5: Add 5 scientific-domain skills sourced from GitHub /skills repos."""
 import json
 
-GRAPH_PATH = "graph/gaia.json"
+GRAPH_PATH = "registry/gaia.json"
 
 NEW_SKILLS = [
     {
@@ -252,7 +252,7 @@ def main():
         json.dump(graph, f, indent=2, ensure_ascii=False)
         f.write('\n')
 
-    print("\nDone — graph/gaia.json updated.")
+    print("\nDone — registry/gaia.json updated.")
 
 
 if __name__ == "__main__":
