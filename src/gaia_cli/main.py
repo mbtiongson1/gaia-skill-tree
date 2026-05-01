@@ -74,7 +74,7 @@ Quick usage:
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]
   gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
+  gaia skills install <skill> [--global | --local]
   gaia skills uninstall <skill_id>
 """
 
@@ -83,7 +83,7 @@ Quick usage:
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]
   gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
+  gaia skills install <skill> [--global | --local]
   gaia skills uninstall <skill_id>
 """
 
@@ -739,7 +739,7 @@ def install_command(args):
         interactive_install(args.registry)
         return
     if not args.skill_id:
-        print("Error: provide a skill ID (contributor/skill-name) or use --list to browse.", file=sys.stderr)
+        print("Error: provide a skill ID or slug, or use --list to browse.", file=sys.stderr)
         sys.exit(1)
     success = install_skill(args.skill_id, args.registry)
     if not success:
@@ -968,7 +968,7 @@ def get_parser():
     skills_info.add_argument('skill_id', help="Skill ID to inspect")
     skills_info.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
     skills_install = skills_sub.add_parser('install', help="Install a named skill")
-    skills_install.add_argument('skill_id', help="Skill ID to install")
+    skills_install.add_argument('skill_id', metavar='skill', help="Skill ID, catalogRef, or unique bare slug to install")
     skills_install.add_argument('--global', dest='install_global', action='store_true', help='Install to ~/.gaia/skills')
     skills_install.add_argument('--local', dest='install_local', action='store_true', help='Install to project .gaia/skills')
     skills_uninstall = skills_sub.add_parser('uninstall', help="Uninstall a named skill")

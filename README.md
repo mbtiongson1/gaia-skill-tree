@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.12`.
+Current Gaia CLI version: `2.4.0`.
 
 Python install:
 
@@ -174,10 +174,10 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
-                        auto-resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local
-                        .gaia/ config.
+  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to auto-
+                        resolved local or global registry.
+  --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/
+                        config.
   --version, -v         Print the Gaia CLI version and exit.
 
 Quick usage:
