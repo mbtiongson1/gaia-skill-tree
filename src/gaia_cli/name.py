@@ -1,13 +1,15 @@
 """Named skill promotion logic.
 
 Promotes an awakened skill from intake batch to a full named skill
-in graph/named/{contributor}/{skill-name}.md
+in registry/named/{contributor}/{skill-name}.md
 """
 
 import datetime
 import json
 import os
 import re
+
+from gaia_cli.registry import named_skills_dir
 
 _CONTRIBUTOR_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
 _SKILL_NAME_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
@@ -48,7 +50,7 @@ def find_awakened_skill(batch_path, skill_id):
 
 
 def promote_to_named(skill_data, contributor, skill_name, registry_path):
-    """Create a named skill .md file in graph/named/{contributor}/{skill-name}.md.
+    """Create a named skill .md file in registry/named/{contributor}/{skill-name}.md.
 
     Parameters
     ----------
@@ -73,7 +75,7 @@ def promote_to_named(skill_data, contributor, skill_name, registry_path):
     if not _SKILL_NAME_RE.match(skill_name):
         raise ValueError(f"Invalid skill_name: {skill_name!r}")
     named_id = f"{contributor}/{skill_name}"
-    dest_dir = os.path.join(registry_path, "graph", "named", contributor)
+    dest_dir = os.path.join(named_skills_dir(registry_path), contributor)
     os.makedirs(dest_dir, exist_ok=True)
     dest_path = os.path.join(dest_dir, f"{skill_name}.md")
 

@@ -1,6 +1,6 @@
 """Graph rendering helpers for the Gaia CLI.
 
-The registry source of truth is graph/gaia.json. This module deliberately uses
+The registry source of truth is registry/gaia.json. This module deliberately uses
 only the Python standard library so graph viewing remains available in a fresh
 clone without Graphviz, Matplotlib, or a browser automation dependency.
 """
@@ -17,6 +17,8 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+from gaia_cli.registry import registry_graph_path
+
 PALETTE = {
     "basic": {"fill": "#38bdf8", "stroke": "#7dd3fc", "label": "Basic"},
     "extra": {"fill": "#a78bfa", "stroke": "#c4b5fd", "label": "Extra"},
@@ -32,7 +34,7 @@ def _registry_root(registry_path: str | os.PathLike[str]) -> Path:
 
 
 def load_graph(registry_path: str | os.PathLike[str] = ".") -> dict[str, Any]:
-    graph_path = _registry_root(registry_path) / "graph" / "gaia.json"
+    graph_path = Path(registry_graph_path(_registry_root(registry_path)))
     with graph_path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -110,7 +112,7 @@ def render_svg(render_graph: dict[str, Any]) -> str:
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
         '<title id="title">Gaia AI Agent Skill Graph</title>',
-        '<desc id="desc">Canonical Gaia skill graph rendered from graph/gaia.json, with basic skills on the outer ring, extra skills in the middle ring, and ultimate skills at the core.</desc>',
+        '<desc id="desc">Canonical Gaia skill graph rendered from registry/gaia.json, with basic skills on the outer ring, extra skills in the middle ring, and ultimate skills at the core.</desc>',
         "<defs>",
         '<radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#172554"/><stop offset="55%" stop-color="#06111f"/><stop offset="100%" stop-color="#030712"/></radialGradient>',
         '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>',
@@ -187,9 +189,9 @@ def write_graph_artifact(
     fmt = fmt.lower()
     if output is None:
         if fmt == "svg":
-            output = root / "graph" / "gaia.svg"
+            output = root / "registry" / "gaia.svg"
         else:
-            output = root / "graph" / "render" / "latest.json"
+            output = root / "registry" / "render" / "latest.json"
     out_path = Path(output)
     if not out_path.is_absolute():
         out_path = root / out_path

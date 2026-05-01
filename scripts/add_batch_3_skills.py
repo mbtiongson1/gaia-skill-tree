@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Batch 3 — inject 5 new skills into graph/gaia.json.
+"""Batch 3 — inject 5 new skills into registry/gaia.json.
 
 New skills added:
   Atomic  (2): self-consistency, few-shot-learning

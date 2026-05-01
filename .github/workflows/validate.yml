@@ -5,22 +5,22 @@ on:
     branches:
       - main
     paths:
-      - 'graph/**'
-      - 'schema/**'
-      - 'users/**'
-      - 'intake/**'
+      - 'registry/**'
+      - 'registry/schema/**'
+      - 'skill-trees/**'
+      - 'registry-for-review/**'
       - 'scripts/**'
-      - 'plugin/**'
+      - 'packages/cli-npm/**'
       - 'tests/**'
       - '.github/workflows/**'
   pull_request:
     paths:
-      - 'graph/**'
-      - 'schema/**'
-      - 'users/**'
-      - 'intake/**'
+      - 'registry/**'
+      - 'registry/schema/**'
+      - 'skill-trees/**'
+      - 'registry-for-review/**'
       - 'scripts/**'
-      - 'plugin/**'
+      - 'packages/cli-npm/**'
       - 'tests/**'
       - '.github/workflows/**'
   workflow_dispatch: {}
@@ -46,6 +46,9 @@ jobs:
 
       - name: Run intake validation
         run: python scripts/validate_intake.py
+
+      - name: Check generated docs
+        run: python scripts/build_docs.py --check
 
       - name: Run tests
         run: pytest tests/

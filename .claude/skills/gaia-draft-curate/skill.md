@@ -1,18 +1,18 @@
 ---
 name: gaia-draft-curate
-description: Review pending Gaia draft skill intake batches and open draft PRs. Classifies each proposed skill (accept/rename/duplicate/needs-evidence/reject) without touching graph/gaia.json. Optionally triggers a promotion PR for accepted skills. Use when the user asks to "check drafts", "review intake batches", "triage pending skills", or explicitly types /gaia-draft-curate.
+description: Review pending Gaia draft skill intake batches and open draft PRs. Classifies each proposed skill (accept/rename/duplicate/needs-evidence/reject) without touching registry/gaia.json. Optionally triggers a promotion PR for accepted skills. Use when the user asks to "check drafts", "review intake batches", "triage pending skills", or explicitly types /gaia-draft-curate.
 version: 1.2.0
 ---
 
 # gaia-draft-curate
 
-Review pending Gaia draft skill intake batches and open draft PRs. This skill is read-only with respect to `graph/gaia.json` — it classifies proposals and, after user confirmation, may hand off to `/gaia-curate` for promotion.
+Review pending Gaia draft skill intake batches and open draft PRs. This skill is read-only with respect to `registry/gaia.json` — it classifies proposals and, after user confirmation, may hand off to `/gaia-curate` for promotion.
 
 ## What this skill does
 
 1. **Pull latest** — `git pull --ff-only` so local state matches remote.
 
-2. **Scan intake batches** — glob `intake/skill-batches/*.json` (skip `.gitkeep`). For each batch file, parse and validate against `schema/skillBatch.schema.json` using `python3 scripts/validate_intake.py`. Report any schema errors immediately.
+2. **Scan intake batches** — glob `registry-for-review/skill-batches/*.json` (skip `.gitkeep`). For each batch file, parse and validate against `registry/schema/skillBatch.schema.json` using `python3 scripts/validate_intake.py`. Report any schema errors immediately.
 
 3. **Check open draft PRs** — run:
    ```bash
@@ -67,7 +67,7 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    Also show `knownSkills` count (already in registry — informational only, no action needed).
 
 6. **Collect decisions** — ask the user to classify each proposed skill:
-   - `accept` — ready to promote into `graph/gaia.json`
+   - `accept` — ready to promote into `registry/gaia.json`
    - `rename <new-id>` — change the ID, then accept
    - `duplicate <existing-id>` — already covered; drop
    - `needs-evidence` — hold; note what Class A/B source is missing
@@ -82,16 +82,16 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    - Dropped (duplicate/reject): N (list IDs)
 
 8. **Offer promotion** — if there are any accepted/renamed skills, ask the user:
-   > "Promote accepted skills to `graph/gaia.json` now? This will invoke `/gaia-curate` for the accepted batch."
+   > "Promote accepted skills to `registry/gaia.json` now? This will invoke `/gaia-curate` for the accepted batch."
 
    - If **yes**: hand off to the `gaia-curate` workflow starting at step 4, pre-populating all decisions as `accept`. The promotion PR must link back to the originating intake PR(s).
    - If **no**: print the manual promotion steps and exit:
      ```
-     # For each accepted skill, add to graph/gaia.json, then:
+     # For each accepted skill, add to registry/gaia.json, then:
      python3 scripts/validate.py
      python3 scripts/generateProjections.py
      python3 scripts/exportGexf.py
-     git commit -am "[atomic|composite] <name> — promote from intake/<batchId>"
+     git commit -am "[atomic|composite] <name> — promote from registry-for-review/<batchId>"
      gh pr create --title "[promote] <slug>" --body "Promotes accepted skills from intake PR #<N>"
      ```
 
@@ -99,7 +99,7 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
 
 ## When there are no pending drafts
 
-If `intake/skill-batches/` is empty and no open `draft-skills` PRs exist, report:
+If `registry-for-review/skill-batches/` is empty and no open `draft-skills` PRs exist, report:
 
 > No pending draft intake batches found. Use `gaia push` to generate a new batch, or run `/gaia-curate` to add skills directly to the canonical graph.
 
@@ -107,8 +107,8 @@ Then stop — do not attempt any curation.
 
 ## Constraints
 
-- **Read-only by default** — this skill never writes to `graph/gaia.json` directly. That only happens via the `/gaia-curate` promotion path with explicit user confirmation.
-- Never modify batch files in `intake/skill-batches/` — they are immutable intake records.
+- **Read-only by default** — this skill never writes to `registry/gaia.json` directly. That only happens via the `/gaia-curate` promotion path with explicit user confirmation.
+- Never modify batch files in `registry-for-review/skill-batches/` — they are immutable intake records.
 - `needs-evidence` decisions should note what evidence class is missing (Class A paper / Class B repo).
 - If `gh` is not authenticated, skip the PR listing step and work from local batch files only; note the limitation in output.
 

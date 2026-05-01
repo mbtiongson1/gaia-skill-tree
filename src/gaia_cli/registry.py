@@ -6,7 +6,7 @@ from importlib import resources
 from pathlib import Path
 
 
-WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync", "promote"}
+WRITE_COMMANDS = {"push", "name", "fuse", "embed", "sync", "promote", "graph", "release", "docs"}
 
 
 def _gaia_home_dir() -> Path:
@@ -27,6 +27,58 @@ def bundled_registry_path():
     return resources.files("gaia_cli").joinpath("data")
 
 
+def registry_dir(registry_path) -> str:
+    return os.path.join(str(registry_path), "registry")
+
+
+def registry_graph_path(registry_path):
+    return os.path.join(registry_dir(registry_path), "gaia.json")
+
+
+def registry_schema_dir(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "schema")
+
+
+def named_skills_dir(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "named")
+
+
+def named_skills_index_path(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "named-skills.json")
+
+
+def registry_for_review_dir(registry_path) -> str:
+    return os.path.join(str(registry_path), "registry-for-review")
+
+
+def skill_batches_dir(registry_path) -> str:
+    return os.path.join(registry_for_review_dir(registry_path), "skill-batches")
+
+
+def skill_trees_dir(registry_path) -> str:
+    return os.path.join(str(registry_path), "skill-trees")
+
+
+def user_tree_path(registry_path, username: str) -> str:
+    return os.path.join(skill_trees_dir(registry_path), username, "skill-tree.json")
+
+
+def generated_output_dir(registry_path) -> str:
+    return os.path.join(str(registry_path), "generated-output")
+
+
+def promotion_candidates_path(registry_path) -> str:
+    return os.path.join(generated_output_dir(registry_path), "promotion-candidates.json")
+
+
+def embeddings_path(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "embeddings.json")
+
+
+def real_skill_catalog_path(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "real-skills.json")
+
+
 def read_global_registry():
     """Return the globally-registered registry path, or None if not set."""
     try:
@@ -41,15 +93,26 @@ def read_global_registry():
 
 
 def read_local_registry() -> str | None:
-    """Return registry path from .gaia/config.json in CWD, or None if not found."""
-    local_cfg = Path(".gaia") / "config.json"
-    if not local_cfg.exists():
+    """Return registry path from .gaia config in CWD, or None if not found."""
+    local_cfg = Path(".gaia") / "config.toml"
+    legacy_cfg = Path(".gaia") / "config.json"
+    cfg_path = local_cfg if local_cfg.exists() else legacy_cfg
+    if not cfg_path.exists():
         return None
     try:
-        data = json.loads(local_cfg.read_text(encoding="utf-8"))
+        raw = cfg_path.read_text(encoding="utf-8")
+        if cfg_path.suffix == ".toml":
+            data = {}
+            for line in raw.splitlines():
+                if "=" not in line or line.strip().startswith("#"):
+                    continue
+                key, _, value = line.partition("=")
+                data[key.strip()] = value.strip().strip('"')
+        else:
+            data = json.loads(raw)
         registry_path = data.get("localRegistryPath") or os.path.abspath(".")
         p = Path(registry_path)
-        if p.is_dir() and (p / "graph" / "gaia.json").exists():
+        if p.is_dir() and (p / "registry" / "gaia.json").exists():
             return str(p)
     except (OSError, json.JSONDecodeError):
         pass
@@ -88,13 +151,10 @@ def resolve_registry_path(explicit_registry=None, global_flag=False):
     return str(bundled_registry_path())
 
 
-def registry_graph_path(registry_path):
-    return os.path.join(str(registry_path), "graph", "gaia.json")
-
-
 def require_explicit_writable_registry(parser, args):
     """Reject mutating commands unless the registry resolves to a writable checkout."""
-    if args.command not in WRITE_COMMANDS:
+    command = getattr(args, "command", None)
+    if command not in WRITE_COMMANDS:
         return
     registry_path = Path(args.registry)
     bundled = Path(str(bundled_registry_path()))

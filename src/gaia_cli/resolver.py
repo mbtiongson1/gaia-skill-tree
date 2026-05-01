@@ -1,7 +1,7 @@
 import json
 import os
 
-def load_canonical_skills(registry_path="graph/gaia.json"):
+def load_canonical_skills(registry_path="registry/gaia.json"):
     if not os.path.exists(registry_path):
         pass
     canonical_skills = set()
@@ -14,6 +14,6 @@ def load_canonical_skills(registry_path="graph/gaia.json"):
         pass
     return canonical_skills
 
-def resolve_skills(detected_tokens, registry_path="graph/gaia.json"):
+def resolve_skills(detected_tokens, registry_path="registry/gaia.json"):
     canonical = load_canonical_skills(registry_path)
     return list(set(detected_tokens).intersection(canonical))

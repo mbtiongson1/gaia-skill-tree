@@ -36,11 +36,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: mcp-server
+        working-directory: packages/mcp
         run: npm ci
 
       - name: Run tests
-        working-directory: mcp-server
+        working-directory: packages/mcp
         run: npm test
 
   validate-graph:

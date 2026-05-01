@@ -6,13 +6,13 @@ version: 1.6.0
 
 # gaia-curate
 
-Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent skills, fully evidenced and validated, then push a PR.
+Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent skills, fully evidenced and validated, then push a PR.
 
 ## What this skill does
 
-0. **Load the sources registry** — read `graph/skill-sources.md` before doing any research. This is the authoritative list of known skill marketplaces, GitHub orgs, and registries. Use every listed source as a research target in step 2. When you discover a new marketplace or skill collection repo not yet in that file, append it following the format described at the bottom of the file — include it in the same PR.
+0. **Load the sources registry** — read `registry/skill-sources.md` before doing any research. This is the authoritative list of known skill marketplaces, GitHub orgs, and registries. Use every listed source as a research target in step 2. When you discover a new marketplace or skill collection repo not yet in that file, append it following the format described at the bottom of the file — include it in the same PR.
 
-1. **Read the current graph** — load `graph/gaia.json` to see every existing skill ID so nothing is duplicated.
+1. **Read the current graph** — load `registry/gaia.json` to see every existing skill ID so nothing is duplicated.
 2. **Research** — for each candidate skill, gather concrete evidence using ALL of the following channels (in order of priority):
 
    **2a. GitHub search (50% of research effort — Class B evidence):**
@@ -64,7 +64,7 @@ Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent ski
    Use arXiv abs URLs as Class A evidence. Only include papers with clear relevance and measurable benchmarks.
 
    **2d. Existing tree audit (20%):**
-   Before proposing new skills, scan `graph/gaia.json` for:
+   Before proposing new skills, scan `registry/gaia.json` for:
    - Skills at level 0/I with only Class C evidence (upgrade candidates)
    - Skills with `status: "provisional"` that could be validated with better evidence
    - Skills at level II+ missing Class A evidence
@@ -93,21 +93,21 @@ Expand the Gaia skill registry (`graph/gaia.json`) with new popular AI agent ski
 
 5. **Write a generation script** (`scripts/add_skills.py` or equivalent) that patches `gaia.json` in place — only for the accepted skills from step 4.
 6. **Run validation** — `PYTHONIOENCODING=utf-8 python3 scripts/validate.py` must exit 0 before any commit.
-7. **Regenerate derived files** — run `python3 scripts/generateProjections.py` and `python3 scripts/exportGexf.py` so that `registry.md`, `combinations.md`, `skills/**/*.md`, `graph/gaia.gexf`, and `users/*/skill-tree.md` stay in sync. Commit these alongside `gaia.json` to pass CI drift detection.
+7. **Regenerate derived files** — run `python3 scripts/generateProjections.py` and `python3 scripts/exportGexf.py` so that `registry.md`, `combinations.md`, `skills/**/*.md`, `registry/gaia.gexf`, and `skill-trees/*/skill-tree.md` stay in sync. Commit these alongside `gaia.json` to pass CI drift detection.
 8. **Commit on a feature branch** — branch name `feat/add-<slug>-skills`, commit message follows `[type] Title — brief description`.
 9. **Push and open a PR** via the GitHub API using stored git credentials. The auto-triage CI classifies the PR:
-   - PRs touching `graph/` from a bot with evidence score ≥ 60 are auto-merged.
+   - PRs touching `registry/` from a bot with evidence score ≥ 60 are auto-merged.
    - PRs flagged `draft-skills` or `needs-review` are routed to the `route-review` job — a human must approve before merge.
    - Legendary skill proposals always require maintainer approval.
 10. **Register the batch itself** as a `registryCuration` evidence entry if new demonstrations were produced.
 
 ## Two-phase intake workflow (gaia push)
 
-For contributors who use the `gaia push` CLI, a separate **draft intake** path exists that does NOT directly modify `graph/gaia.json`:
+For contributors who use the `gaia push` CLI, a separate **draft intake** path exists that does NOT directly modify `registry/gaia.json`:
 
-1. **`gaia push`** — scans the source repo for skill-shaped tokens, builds `intake/skill-batches/<batchId>.json`, and opens a draft PR with labels `draft-skills` and `needs-review`.
+1. **`gaia push`** — scans the source repo for skill-shaped tokens, builds `registry-for-review/skill-batches/<batchId>.json`, and opens a draft PR with labels `draft-skills` and `needs-review`.
 2. **Reviewer classification** — maintainers review the draft PR and mark each proposed skill: `accept` / `rename` / `duplicate` / `needs-evidence` / `reject`.
-3. **Promotion PR** — accepted skills are promoted into `graph/gaia.json` in a separate follow-up PR. That PR must run `python3 scripts/validate.py` and `python3 scripts/validate_intake.py` and must link back to the intake PR.
+3. **Promotion PR** — accepted skills are promoted into `registry/gaia.json` in a separate follow-up PR. That PR must run `python3 scripts/validate.py` and `python3 scripts/validate_intake.py` and must link back to the intake PR.
 
 Use `/gaia-draft-curate` to triage pending intake batches before running this skill.
 
@@ -118,7 +118,7 @@ python3 scripts/validate_intake.py
 
 ## Constraints
 
-- Only edit `graph/gaia.json` — never touch `skills/`, `registry.md`, or `combinations.md` (those are generated).
+- Only edit `registry/gaia.json` — never touch `skills/`, `registry.md`, or `combinations.md` (those are generated).
 - All evidence `source` values must be real, resolvable URLs (arXiv abs pages or GitHub repos).
 - Legendary skills at `status: validated` require ≥3 Class A/B entries; new legendaries should be `provisional` until the maintainer merges.
 - No cycles in the DAG. No orphaned composite nodes.

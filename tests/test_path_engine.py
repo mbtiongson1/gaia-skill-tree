@@ -297,7 +297,7 @@ class TestRegeneratePaths:
         (gaia_dir / "config.json").write_text(json.dumps(config))
 
         # Setup user tree
-        user_dir = tmp_path / "users" / "alice"
+        user_dir = tmp_path / "skill-trees" / "alice"
         user_dir.mkdir(parents=True)
         tree = {
             "userId": "alice",
@@ -309,7 +309,7 @@ class TestRegeneratePaths:
         (user_dir / "skill-tree.json").write_text(json.dumps(tree))
 
         # Setup graph
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir()
         graph_data = {
             "skills": [

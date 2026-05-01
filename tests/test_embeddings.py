@@ -16,14 +16,14 @@ class TestCosineSimilarity:
 
     def test_identical_vectors(self):
         """Cosine similarity of a vector with itself is 1.0."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         v = [1.0, 0.0, 0.0]
         assert abs(cosine_similarity(v, v) - 1.0) < 1e-6
 
     def test_orthogonal_vectors(self):
         """Cosine similarity of orthogonal vectors is 0.0."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         a = [1.0, 0.0, 0.0]
         b = [0.0, 1.0, 0.0]
@@ -31,7 +31,7 @@ class TestCosineSimilarity:
 
     def test_opposite_vectors(self):
         """Cosine similarity of anti-parallel vectors is -1.0."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         a = [1.0, 0.0]
         b = [-1.0, 0.0]
@@ -39,7 +39,7 @@ class TestCosineSimilarity:
 
     def test_zero_vector_returns_zero(self):
         """Cosine similarity returns 0.0 when either vector is zero."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         a = [0.0, 0.0, 0.0]
         b = [1.0, 2.0, 3.0]
@@ -47,13 +47,13 @@ class TestCosineSimilarity:
 
     def test_both_zero_vectors_returns_zero(self):
         """Cosine similarity returns 0.0 when both vectors are zero."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         assert cosine_similarity([0.0, 0.0], [0.0, 0.0]) == 0.0
 
     def test_similar_vectors_high_score(self):
         """Nearly-parallel vectors have a score close to 1.0."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         a = [1.0, 0.1, 0.0]
         b = [0.9, 0.1, 0.0]
@@ -62,7 +62,7 @@ class TestCosineSimilarity:
 
     def test_symmetry(self):
         """cosine_similarity(a, b) == cosine_similarity(b, a)."""
-        from plugin.cli.semantic_search import cosine_similarity
+        from gaia_cli.semantic_search import cosine_similarity
 
         a = [0.3, 0.7, 0.1]
         b = [0.8, 0.2, 0.4]
@@ -88,7 +88,7 @@ class TestSearchPrecomputed:
 
     def test_returns_top_k_results(self, sample_embeddings):
         """search_precomputed returns at most top_k results."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         query_vector = [1.0, 0.0, 0.0]
         results = search_precomputed(query_vector, sample_embeddings, top_k=2)
@@ -96,7 +96,7 @@ class TestSearchPrecomputed:
 
     def test_results_sorted_by_score_descending(self, sample_embeddings):
         """Results are ordered highest score first."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         query_vector = [1.0, 0.0, 0.0]
         results = search_precomputed(query_vector, sample_embeddings, top_k=4)
@@ -105,7 +105,7 @@ class TestSearchPrecomputed:
 
     def test_best_match_is_correct(self, sample_embeddings):
         """The closest skill to the query is ranked first."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         query_vector = [1.0, 0.0, 0.0]
         results = search_precomputed(query_vector, sample_embeddings, top_k=4)
@@ -113,7 +113,7 @@ class TestSearchPrecomputed:
 
     def test_result_structure(self, sample_embeddings):
         """Each result has 'id' and 'score' keys."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         results = search_precomputed([1.0, 0.0, 0.0], sample_embeddings, top_k=2)
         for r in results:
@@ -123,7 +123,7 @@ class TestSearchPrecomputed:
 
     def test_empty_embeddings_returns_empty(self):
         """search_precomputed returns [] when there are no entries."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         embeddings = {
             "model": "test",
@@ -136,7 +136,7 @@ class TestSearchPrecomputed:
 
     def test_top_k_larger_than_entries(self, sample_embeddings):
         """search_precomputed returns all entries when top_k exceeds count."""
-        from plugin.cli.semantic_search import search_precomputed
+        from gaia_cli.semantic_search import search_precomputed
 
         results = search_precomputed([1.0, 0.0, 0.0], sample_embeddings, top_k=100)
         assert len(results) == 4  # only 4 entries exist
@@ -147,7 +147,7 @@ class TestLoadEmbeddings:
 
     def test_loads_valid_embeddings_file(self, tmp_path):
         """load_embeddings successfully reads a valid embeddings JSON file."""
-        from plugin.cli.semantic_search import load_embeddings
+        from gaia_cli.semantic_search import load_embeddings
 
         data = {
             "model": "all-MiniLM-L6-v2",
@@ -164,7 +164,7 @@ class TestLoadEmbeddings:
 
     def test_raises_file_not_found(self, tmp_path):
         """load_embeddings raises FileNotFoundError for a missing file."""
-        from plugin.cli.semantic_search import load_embeddings
+        from gaia_cli.semantic_search import load_embeddings
 
         with pytest.raises(FileNotFoundError):
             load_embeddings(str(tmp_path / "nonexistent.json"))
@@ -293,13 +293,13 @@ class TestComputeSimilarityScript:
 
 
 class TestEmbeddingsLoader:
-    """Tests for load_skills in plugin/cli/embeddings.py."""
+    """Tests for load_skills in src/gaia_cli/embeddings.py."""
 
     def test_load_skills_from_gaia_json(self, tmp_path):
-        """load_skills reads skills from graph/gaia.json."""
-        from plugin.cli.embeddings import load_skills
+        """load_skills reads skills from registry/gaia.json."""
+        from gaia_cli.embeddings import load_skills
 
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir()
         gaia_data = {
             "skills": [
@@ -316,7 +316,7 @@ class TestEmbeddingsLoader:
 
     def test_load_skills_returns_empty_on_missing_gaia(self, tmp_path):
         """load_skills returns an empty list when gaia.json does not exist."""
-        from plugin.cli.embeddings import load_skills
+        from gaia_cli.embeddings import load_skills
 
         skills = load_skills(str(tmp_path))
         assert isinstance(skills, list)
@@ -324,13 +324,13 @@ class TestEmbeddingsLoader:
 
     def test_save_embeddings_creates_valid_json(self, tmp_path):
         """save_embeddings writes a correctly structured embeddings JSON file."""
-        from plugin.cli.embeddings import save_embeddings
+        from gaia_cli.embeddings import save_embeddings
 
         entries = [
             {"id": "web-search", "vector": [0.1, 0.2, 0.3]},
             {"id": "code-gen", "vector": [0.4, 0.5, 0.6]},
         ]
-        output_path = str(tmp_path / "graph" / "embeddings.json")
+        output_path = str(tmp_path / "registry" / "embeddings.json")
         save_embeddings(entries, output_path, model_name="test-model", dimensions=3)
 
         assert os.path.exists(output_path)

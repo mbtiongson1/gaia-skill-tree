@@ -8,22 +8,22 @@ on:
       - 'pyproject.toml'
       - 'README.md'
       - 'src/**'
-      - 'plugin/cli/**'
+      - 'packages/cli-npm/cli/**'
       - 'tests/**'
-      - 'graph/gaia.json'
-      - 'graph/named/**'
-      - 'schema/**'
+      - 'registry/gaia.json'
+      - 'registry/named/**'
+      - 'registry/schema/**'
       - '.github/workflows/python-package.yml'
   pull_request:
     paths:
       - 'pyproject.toml'
       - 'README.md'
       - 'src/**'
-      - 'plugin/cli/**'
+      - 'packages/cli-npm/cli/**'
       - 'tests/**'
-      - 'graph/gaia.json'
-      - 'graph/named/**'
-      - 'schema/**'
+      - 'registry/gaia.json'
+      - 'registry/named/**'
+      - 'registry/schema/**'
       - '.github/workflows/python-package.yml'
   workflow_dispatch: {}
 
@@ -61,6 +61,6 @@ jobs:
           python -m venv "$RUNNER_TEMP/gaia-wheel-venv"
           "$RUNNER_TEMP/gaia-wheel-venv/bin/python" -m pip install dist/*.whl
           "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" --help
-          "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" doctor
+          "$RUNNER_TEMP/gaia-wheel-venv/bin/gaia" version
         env:
           GAIA_HOME: ${{ runner.temp }}/gaia-home

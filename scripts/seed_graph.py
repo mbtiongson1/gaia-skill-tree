@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Seed graph generator for Gaia Skill Registry.
 
-Produces graph/gaia.json with the canonical seed taxonomy:
+Produces registry/gaia.json with the canonical seed taxonomy:
 - 25 atomic skills
 - 8 composite skills
 - 3 legendary stubs (Level I, provisional)
@@ -252,7 +252,7 @@ def main():
         "edges": edges,
     }
 
-    # Write to graph/gaia.json
+    # Write to registry/gaia.json
     out_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "graph", "gaia.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as f:

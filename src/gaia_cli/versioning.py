@@ -1,0 +1,87 @@
+"""Version synchronization helpers for Gaia release tooling."""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+from gaia_cli.registry import registry_graph_path
+
+
+VERSION_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+
+
+def bump_version(version: str, bump: str) -> str:
+    match = VERSION_RE.match(version)
+    if not match:
+        raise ValueError(f"Invalid semantic version: {version}")
+    major, minor, patch = (int(part) for part in match.groups())
+    if bump == "major":
+        return f"{major + 1}.0.0"
+    if bump == "minor":
+        return f"{major}.{minor + 1}.0"
+    if bump == "patch":
+        return f"{major}.{minor}.{patch + 1}"
+    raise ValueError(f"Unknown version bump: {bump}")
+
+
+def _read_pyproject_version(path: Path) -> str:
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("version = "):
+            return line.split("=", 1)[1].strip().strip('"')
+    raise ValueError(f"No version field found in {path}")
+
+
+def read_versions(root: str | Path) -> dict[str, str]:
+    root = Path(root)
+    files = {
+        "pyproject": root / "pyproject.toml",
+        "cli_npm": root / "packages" / "cli-npm" / "package.json",
+        "mcp": root / "packages" / "mcp" / "package.json",
+        "registry": Path(registry_graph_path(root)),
+    }
+    return {
+        "pyproject": _read_pyproject_version(files["pyproject"]),
+        "cli_npm": json.loads(files["cli_npm"].read_text(encoding="utf-8"))["version"],
+        "mcp": json.loads(files["mcp"].read_text(encoding="utf-8"))["version"],
+        "registry": json.loads(files["registry"].read_text(encoding="utf-8"))["version"],
+    }
+
+
+def ensure_versions_in_sync(root: str | Path) -> str:
+    versions = read_versions(root)
+    unique = set(versions.values())
+    if len(unique) != 1:
+        details = ", ".join(f"{name}={version}" for name, version in versions.items())
+        raise ValueError(f"Version files disagree before bump: {details}")
+    return unique.pop()
+
+
+def _replace_pyproject_version(path: Path, new_version: str) -> None:
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r'^version = "[^"]+"$', f'version = "{new_version}"', text, count=1, flags=re.MULTILINE)
+    path.write_text(text, encoding="utf-8")
+
+
+def _replace_package_version(path: Path, new_version: str) -> None:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["version"] = new_version
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def _replace_registry_version(path: Path, new_version: str) -> None:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["version"] = new_version
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def bump_versions(root: str | Path, bump: str) -> str:
+    root = Path(root)
+    current = ensure_versions_in_sync(root)
+    new_version = bump_version(current, bump)
+    _replace_pyproject_version(root / "pyproject.toml", new_version)
+    _replace_package_version(root / "packages" / "cli-npm" / "package.json", new_version)
+    _replace_package_version(root / "packages" / "mcp" / "package.json", new_version)
+    _replace_registry_version(Path(registry_graph_path(root)), new_version)
+    return new_version

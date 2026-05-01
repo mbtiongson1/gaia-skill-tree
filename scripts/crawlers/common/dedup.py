@@ -8,7 +8,7 @@ def load_existing_skills(graph_path: str = None) -> set:
     """Load all existing skill IDs from gaia.json."""
     if graph_path is None:
         graph_path = os.path.join(
-            os.path.dirname(__file__), "..", "..", "..", "graph", "gaia.json"
+            os.path.dirname(__file__), "..", "..", "..", "registry", "gaia.json"
         )
 
     graph_path = os.path.abspath(graph_path)

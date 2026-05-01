@@ -13,6 +13,7 @@ from gaia_cli.cardRenderer import (
     render_card,
     render_card_compact,
     render_cards,
+    render_promotion_prompt,
     load_and_render,
     _pad,
     _wrap_lines,
@@ -344,6 +345,23 @@ class TestRenderCards:
         assert result == ""
 
 
+class TestRenderPromotionPrompt:
+    def test_rename_suggestion_derives_name_from_skill_slug(self):
+        prompt = render_promotion_prompt(
+            {"id": "plan-and-execute", "name": "Different Registry Name"},
+            "IV",
+        )
+
+        assert 'gaia promote plan-and-execute --name "Plan and Execute"' in prompt
+        assert '"Different Registry Name"' not in prompt
+        assert '"My Name"' not in prompt
+
+    def test_rename_suggestion_title_cases_other_slugs(self):
+        prompt = render_promotion_prompt({"id": "research-agent"}, "III")
+
+        assert 'gaia promote research-agent --name "Research Agent"' in prompt
+
+
 # ---------------------------------------------------------------------------
 # load_and_render tests
 # ---------------------------------------------------------------------------
@@ -352,7 +370,7 @@ class TestRenderCards:
 class TestLoadAndRender:
     def test_load_existing_skill(self, tmp_path):
         """Should load and render a skill from gaia.json."""
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir()
         graph_data = {
             "skills": [
@@ -379,7 +397,7 @@ class TestLoadAndRender:
 
     def test_load_nonexistent_skill_returns_none(self, tmp_path):
         """Should return None for a skill not in the registry."""
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir()
         (graph_dir / "gaia.json").write_text(json.dumps({"skills": []}))
 
@@ -393,7 +411,7 @@ class TestLoadAndRender:
 
     def test_load_compact_mode(self, tmp_path):
         """Should render in compact mode when requested."""
-        graph_dir = tmp_path / "graph"
+        graph_dir = tmp_path / "registry"
         graph_dir.mkdir()
         graph_data = {
             "skills": [

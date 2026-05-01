@@ -6,9 +6,10 @@ and inspect the current promotion state for a given skill.
 
 import json
 import os
-from datetime import date
+from datetime import date, datetime, timezone
 
 from .treeManager import load_tree, save_tree
+from .registry import promotion_candidates_path, registry_graph_path
 
 LEVEL_ORDER = ["0", "I", "II", "III", "IV", "V", "VI"]
 LEVEL_NAMES = {
@@ -96,9 +97,124 @@ def check_promotion_eligibility(graph_data: dict, tree_data: dict) -> list[dict]
                 "skillId": skill_id,
                 "currentLevel": current,
                 "nextLevel": target,
+                "suggestedLevel": target,
                 "name": graph_skill.get("name", skill_id),
+                "evidence": graph_skill.get("evidence", []),
             })
     return eligible
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _parse_scanned_at(value: str) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def write_promotion_candidates(registry_path: str, username: str, candidates: list[dict]) -> str:
+    path = promotion_candidates_path(registry_path)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    normalized = []
+    for candidate in candidates:
+        suggested = candidate.get("suggestedLevel") or candidate.get("nextLevel")
+        normalized.append({
+            "skillId": candidate.get("skillId"),
+            "currentLevel": candidate.get("currentLevel"),
+            "suggestedLevel": suggested,
+            "evidence": candidate.get("evidence", []),
+        })
+    payload = {
+        "scannedAt": _utc_now().replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "username": username,
+        "candidates": normalized,
+    }
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+        f.write("\n")
+    return path
+
+
+def load_promotion_candidates(registry_path: str, max_age_hours: int = 24) -> dict:
+    path = promotion_candidates_path(registry_path)
+    if not os.path.exists(path):
+        raise ValueError("Run `gaia scan` first before promoting skills.")
+    with open(path, "r", encoding="utf-8") as f:
+        payload = json.load(f)
+    scanned_at = _parse_scanned_at(payload.get("scannedAt", ""))
+    if scanned_at is None:
+        raise ValueError("Run `gaia scan` again before promoting skills.")
+    age_seconds = (_utc_now() - scanned_at).total_seconds()
+    if age_seconds > max_age_hours * 60 * 60:
+        raise ValueError("Run `gaia scan` again before promoting skills.")
+    return payload
+
+
+def _candidate_for(payload: dict, skill_id: str) -> dict | None:
+    for candidate in payload.get("candidates", []):
+        if candidate.get("skillId") != skill_id:
+            continue
+        return candidate
+    return None
+
+
+def promotable_candidates(registry_path: str, username: str | None = None) -> list[dict]:
+    payload = load_promotion_candidates(registry_path)
+    if username and payload.get("username") != username:
+        raise ValueError("Run `gaia scan` first for the current user before promoting skills.")
+    return payload.get("candidates", [])
+
+
+def promote_from_candidates(
+    username: str,
+    skill_id: str,
+    registry_path: str,
+    new_display_name: str | None = None,
+) -> dict:
+    payload = load_promotion_candidates(registry_path)
+    if payload.get("username") != username:
+        raise ValueError("Run `gaia scan` first for the current user before promoting skills.")
+    candidate = _candidate_for(payload, skill_id)
+    if candidate is None:
+        raise ValueError("only promotable skills could be promoted")
+    suggested_level = candidate.get("suggestedLevel")
+    if suggested_level not in LEVEL_ORDER:
+        raise ValueError("Run `gaia scan` again before promoting skills.")
+
+    tree_data = load_tree(username, registry_path)
+    if tree_data is None:
+        raise ValueError(f"No skill tree found for user '{username}'.")
+    entry = _get_skill_from_tree(tree_data, skill_id)
+    if entry is None:
+        raise ValueError("only promotable skills could be promoted")
+    if entry.get("level") != candidate.get("currentLevel"):
+        raise ValueError("Run `gaia scan` again before promoting skills.")
+
+    previous = entry.get("level")
+    entry["level"] = suggested_level
+    tree_data["updatedAt"] = date.today().isoformat()
+    save_tree(username, tree_data, registry_path)
+
+    display_name = new_display_name
+    if display_name is None:
+        graph_path = registry_graph_path(registry_path)
+        if os.path.exists(graph_path):
+            with open(graph_path, "r", encoding="utf-8") as f:
+                graph_data = json.load(f)
+            graph_skill = _get_skill_from_graph(graph_data, skill_id)
+            if graph_skill:
+                display_name = graph_skill.get("name", skill_id)
+    return {
+        "skillId": skill_id,
+        "previousLevel": previous,
+        "newLevel": suggested_level,
+        "displayName": display_name or skill_id,
+    }
 
 
 def promote_skill(
@@ -112,7 +228,7 @@ def promote_skill(
     Args:
         username: GitHub username.
         skill_id: The skill ID to promote.
-        registry_path: Path to the registry root (where users/ lives).
+        registry_path: Path to the registry root (where skill-trees/ lives).
         new_display_name: Optional new display name (unused in tree storage
             but returned in the result dict for downstream consumers).
 
@@ -148,7 +264,7 @@ def promote_skill(
     # Load graph to get display name if not provided
     display_name = new_display_name
     if display_name is None:
-        graph_path = os.path.join(registry_path, "graph", "gaia.json")
+        graph_path = registry_graph_path(registry_path)
         if os.path.exists(graph_path):
             with open(graph_path, "r", encoding="utf-8") as f:
                 graph_data = json.load(f)

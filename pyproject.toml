@@ -60,10 +60,11 @@ include = ["gaia_cli*"]
 
 [tool.setuptools.package-data]
 gaia_cli = [
-    "data/graph/gaia.json",
-    "data/graph/named/**/*.md",
-    "data/graph/named/**/*.json",
-    "data/schema/*.json",
+    "data/registry/gaia.json",
+    "data/registry/named-skills.json",
+    "data/registry/named/**/*.md",
+    "data/registry/named/**/*.json",
+    "data/registry/schema/*.json",
 ]
 
 [tool.pytest.ini_options]

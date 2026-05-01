@@ -46,7 +46,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-11: All human-readable files (`skills/`, `registry.md`, `combinations.md`) SHALL be generated outputs — never hand-maintained as source of truth.
 
 ### 4.2 User Skill Trees
-- FR-12: Each GitHub user SHALL have at most one canonical skill tree stored at `users/[username]/skill-tree.json`.
+- FR-12: Each GitHub user SHALL have at most one canonical skill tree stored at `skill-trees/[username]/skill-tree.json`.
 - FR-13: A skill tree SHALL record: which skills are unlocked, at what level, when they were unlocked, and in which repository they were detected.
 - FR-14: A skill tree SHALL record pending combinations — detected prerequisite clusters that have not yet been confirmed by the user.
 - FR-15: A user's skill tree SHALL be loadable and queryable from any repository they own via the Gaia plugin.
@@ -58,7 +58,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-19: The plugin SHALL resolve detected skills against the Gaia registry.
 - FR-20: The plugin SHALL detect combination candidates: sets of prerequisite skills that together unlock an extra or ultimate skill the user does not yet own.
 - FR-21: When a combination is detected, the plugin SHALL prompt the user to confirm the fusion before writing it to their skill tree.
-- FR-22: On user confirmation, the plugin SHALL update the skill tree in `users/[username]/skill-tree.json` via an automated PR to the Gaia registry.
+- FR-22: On user confirmation, the plugin SHALL update the skill tree in `skill-trees/[username]/skill-tree.json` via an automated PR to the Gaia registry.
 - FR-23: The plugin SHALL expose `gaia status`, `gaia tree`, and `gaia load [username]` commands.
 
 ### 4.4 Contribution Workflow

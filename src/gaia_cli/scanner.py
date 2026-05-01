@@ -1,4 +1,3 @@
-import json
 import os
 import re
 
@@ -38,10 +37,34 @@ DEFAULT_EXCLUDED_EXTENSIONS = (
 
 
 def load_config():
-    config_path = '.gaia/config.json'
+    toml_path = '.gaia/config.toml'
+    json_path = '.gaia/config.json'
+    if os.path.exists(toml_path):
+        data = {}
+        with open(toml_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if "=" not in line or line.strip().startswith("#"):
+                    continue
+                key, _, raw = line.partition("=")
+                value = raw.strip()
+                if value.startswith("[") and value.endswith("]"):
+                    data[key.strip()] = [
+                        item.strip().strip('"')
+                        for item in value[1:-1].split(",")
+                        if item.strip()
+                    ]
+                elif value.lower() in ("true", "false"):
+                    data[key.strip()] = value.lower() == "true"
+                else:
+                    data[key.strip()] = value.strip('"')
+        if "username" in data and "gaiaUser" not in data:
+            data["gaiaUser"] = data["username"]
+        return data
+    config_path = json_path
     if not os.path.exists(config_path):
         return None
-    with open(config_path, 'r') as f:
+    import json
+    with open(config_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 

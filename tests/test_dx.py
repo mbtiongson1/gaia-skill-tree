@@ -1,11 +1,12 @@
-import json
 import os
 import sys
 
+import pytest
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from plugin.cli.main import main
-from plugin.cli.scanner import scan_repo, scan_repo_detailed
+from gaia_cli.main import main
+from gaia_cli.scanner import scan_repo, scan_repo_detailed
 
 
 def run_cli(monkeypatch, argv):
@@ -29,8 +30,8 @@ def test_init_accepts_flags_and_uses_current_registry_default(tmp_path, monkeypa
         ],
     )
 
-    config = json.loads((tmp_path / ".gaia" / "config.json").read_text())
-    assert config["gaiaUser"] == "juno"
+    config = parse_config(tmp_path / ".gaia" / "config.toml")
+    assert config["username"] == "juno"
     assert config["gaiaRegistryRef"] == "https://github.com/mbtiongson1/gaia-skill-tree"
     assert config["scanPaths"] == ["AGENTS.md", "scripts"]
     assert config["autoPromptCombinations"] is False
@@ -44,17 +45,17 @@ def test_init_yes_mode_preserves_non_interactive_defaults(tmp_path, monkeypatch)
 
     run_cli(monkeypatch, ["init", "--yes"])
 
-    config = json.loads((tmp_path / ".gaia" / "config.json").read_text())
-    assert config["gaiaUser"] == "gaiabot"
+    config = parse_config(tmp_path / ".gaia" / "config.toml")
+    assert config["username"] == "gaiabot"
     assert config["gaiaRegistryRef"] == "https://github.com/mbtiongson1/gaia-skill-tree"
-    assert config["scanPaths"] == ["scripts", "plugin"]
+    assert config["scanPaths"] == ["scripts", "packages/cli-npm"]
 
 
 def test_scan_repo_skips_generated_and_vendor_directories(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     (tmp_path / ".gaia").mkdir()
     (tmp_path / ".gaia" / "config.json").write_text(
-        json.dumps({"scanPaths": ["."], "gaiaUser": "juno"})
+        '{"scanPaths": ["."], "gaiaUser": "juno"}'
     )
     (tmp_path / "src").mkdir()
     (tmp_path / "src" / "app.py").write_text("web-search\n")
@@ -74,7 +75,7 @@ def test_scan_repo_detailed_reports_file_and_candidate_counts(tmp_path, monkeypa
     monkeypatch.chdir(tmp_path)
     (tmp_path / ".gaia").mkdir()
     (tmp_path / ".gaia" / "config.json").write_text(
-        json.dumps({"scanPaths": ["docs"], "gaiaUser": "juno"})
+        '{"scanPaths": ["docs"], "gaiaUser": "juno"}'
     )
     (tmp_path / "docs").mkdir()
     (tmp_path / "docs" / "one.md").write_text("web-search and code-generation")
@@ -88,40 +89,37 @@ def test_scan_repo_detailed_reports_file_and_candidate_counts(tmp_path, monkeypa
     assert detailed["candidate_count"] >= 2
 
 
-def test_status_missing_tree_prints_next_steps(tmp_path, monkeypatch, capsys):
-    monkeypatch.chdir(tmp_path)
-    (tmp_path / ".gaia").mkdir()
-    (tmp_path / ".gaia" / "config.json").write_text(
-        json.dumps({"scanPaths": ["."], "gaiaUser": "juno"})
-    )
-    registry = tmp_path / "registry"
-    registry.mkdir()
-
-    run_cli(monkeypatch, ["--registry", str(registry), "status"])
-
-    out = capsys.readouterr().out
-    assert 'No skill tree found for user "juno".' in out
-    assert "gaia scan" in out
-    assert "gaia push --dry-run" in out
+def test_flat_skill_verbs_are_removed(monkeypatch):
+    with pytest.raises(SystemExit) as exc:
+        run_cli(monkeypatch, ["install", "--help"])
+    assert exc.value.code == 2
 
 
-def test_doctor_reports_installation_state(tmp_path, monkeypatch, capsys):
-    monkeypatch.chdir(tmp_path)
-    (tmp_path / ".gaia").mkdir()
-    (tmp_path / ".gaia" / "config.json").write_text(
-        json.dumps({"scanPaths": ["AGENTS.md"], "gaiaUser": "juno"})
-    )
-    (tmp_path / "AGENTS.md").write_text("tool-use")
-    registry = tmp_path / "registry"
-    (registry / "graph").mkdir(parents=True)
-    (registry / "graph" / "gaia.json").write_text(json.dumps({"skills": []}))
+def test_version_flags_print_cli_version(monkeypatch, capsys):
+    run_cli(monkeypatch, ["--version"])
+    assert capsys.readouterr().out.strip() == "2.2.1"
 
-    run_cli(monkeypatch, ["--registry", str(registry), "doctor"])
+    run_cli(monkeypatch, ["-v"])
+    assert capsys.readouterr().out.strip() == "2.2.1"
 
-    out = capsys.readouterr().out
-    assert "Gaia CLI: OK" in out
-    assert f"Registry path: {registry}" in out
-    assert "Config: .gaia/config.json" in out
-    assert "User: juno" in out
-    assert "Skill tree: missing" in out
-    assert "AGENTS.md exists" in out
+
+def test_promote_label_override_is_not_available(monkeypatch):
+    with pytest.raises(SystemExit) as exc:
+        run_cli(monkeypatch, ["promote", "web-search", "--label", "III"])
+    assert exc.value.code == 2
+
+
+def parse_config(path):
+    data = {}
+    for line in path.read_text().splitlines():
+        if "=" not in line:
+            continue
+        key, _, raw = line.partition("=")
+        value = raw.strip()
+        if value.startswith("["):
+            data[key.strip()] = [item.strip().strip('"') for item in value[1:-1].split(",") if item.strip()]
+        elif value in ("true", "false"):
+            data[key.strip()] = value == "true"
+        else:
+            data[key.strip()] = value.strip('"')
+    return data

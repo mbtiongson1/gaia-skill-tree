@@ -6,10 +6,10 @@ on:
   pull_request_target:
     types: [opened, synchronize]
     paths:
-      - "graph/**"
+      - "registry/**"
       - "proposals/**"
-      - "users/**"
-      - "intake/**"
+      - "skill-trees/**"
+      - "registry-for-review/**"
 
 jobs:
   classify:
@@ -33,7 +33,7 @@ jobs:
           else
             echo "is_bot=false" >> $GITHUB_OUTPUT
           fi
-          if echo "$FILES" | grep -q "^intake/"; then
+          if echo "$FILES" | grep -q "^registry-for-review/"; then
             echo "is_intake=true" >> $GITHUB_OUTPUT
           else
             echo "is_intake=false" >> $GITHUB_OUTPUT
@@ -147,7 +147,7 @@ jobs:
         id: named-check
         run: |
           FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path' 2>/dev/null || echo "")
-          NAMED_FILES=$(echo "$FILES" | grep "^graph/named/.*\.md$" || true)
+          NAMED_FILES=$(echo "$FILES" | grep "^registry/named/.*\.md$" || true)
 
           if [ -z "$NAMED_FILES" ]; then
             echo "No named skill files changed — skipping."

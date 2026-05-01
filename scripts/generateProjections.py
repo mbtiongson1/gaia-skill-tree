@@ -6,7 +6,7 @@ import importlib.util
 
 
 def _run_generate_named_index():
-    """Invoke generateNamedIndex as a module to produce graph/named/index.json."""
+    """Invoke generateNamedIndex as a module to produce registry/named-skills.json."""
     scripts_dir = os.path.dirname(os.path.abspath(__file__))
     module_path = os.path.join(scripts_dir, "generateNamedIndex.py")
     if not os.path.isfile(module_path):
@@ -17,9 +17,9 @@ def _run_generate_named_index():
     try:
         spec.loader.exec_module(mod)
         repo_root = os.path.dirname(scripts_dir)
-        named_dir = os.path.join(repo_root, "graph", "named")
-        graph_path = os.path.join(repo_root, "graph", "gaia.json")
-        output_path = os.path.join(named_dir, "index.json")
+        named_dir = os.path.join(repo_root, "registry", "named")
+        graph_path = os.path.join(repo_root, "registry", "gaia.json")
+        output_path = os.path.join(repo_root, "registry", "named-skills.json")
         if os.path.isdir(named_dir) and os.path.isfile(graph_path):
             with open(graph_path, "r", encoding="utf-8") as gf:
                 gdata = json.load(gf)
@@ -139,7 +139,7 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
 
 
 def main():
-    with open("graph/gaia.json", "r", encoding="utf-8") as f:
+    with open("registry/gaia.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     version = data.get("version", "0.1.0")
@@ -152,7 +152,7 @@ def main():
     # Build named_map early so skill pages and registry can use it
     _run_generate_named_index()
     named_map = {}
-    named_index_path = os.path.join("graph", "named", "index.json")
+    named_index_path = os.path.join("registry", "named-skills.json")
     if os.path.isfile(named_index_path):
         with open(named_index_path, "r", encoding="utf-8") as nf:
             nidx = json.load(nf)
@@ -161,9 +161,9 @@ def main():
                 origin = next((e for e in entries if e.get("origin")), entries[0])
                 named_map[_sid] = origin.get("id", "")
 
-    os.makedirs("skills/basic", exist_ok=True)
-    os.makedirs("skills/extra", exist_ok=True)
-    os.makedirs("skills/ultimate", exist_ok=True)
+    os.makedirs("registry/skills/basic", exist_ok=True)
+    os.makedirs("registry/skills/extra", exist_ok=True)
+    os.makedirs("registry/skills/ultimate", exist_ok=True)
 
     skill_map = {s["id"]: s for s in skills}
     date_str = timestamp.split("T")[0] if "T" in timestamp else timestamp
@@ -174,7 +174,7 @@ def main():
         skill_name = skill.get("name")
         level = skill.get("level")
         rarity = skill.get("rarity")
-        file_path = f"skills/{skill_type}/{skill_id}.md"
+        file_path = f"registry/skills/{skill_type}/{skill_id}.md"
 
         type_label = get_type_label(meta, skill_type)
         level_label = get_level_label(meta, level)
@@ -253,7 +253,7 @@ def main():
             f.write(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*\n")
 
     # generate registry.md
-    with open("registry.md", "w", encoding="utf-8") as f:
+    with open("registry/registry.md", "w", encoding="utf-8") as f:
         f.write("# Gaia Skill Registry\n\n")
         f.write("| Name | Class | Rank | Tier | Skill Call |\n")
         f.write("|---|---|---|---|---|\n")
@@ -321,7 +321,7 @@ def main():
         f.write(f"*Generated from gaia.json v{version}.*\n")
 
     # generate combinations.md
-    with open("combinations.md", "w", encoding="utf-8") as f:
+    with open("registry/combinations.md", "w", encoding="utf-8") as f:
         f.write("# Combinations\n\n")
         f.write("| Skill | Class | Prerequisites | Level Floor | Conditions |\n")
         f.write("|---|---|---|---|---|\n")
@@ -341,13 +341,13 @@ def main():
     # generate tree.md
     _generate_tree(skills, skill_map, meta, version, date_str, named_map)
 
-    catalog_path = 'graph/real_skill_catalog.json'
+    catalog_path = 'registry/real-skills.json'
     if os.path.isfile(catalog_path):
         with open(catalog_path, 'r', encoding='utf-8') as cf:
             generate_catalog_pages(json.load(cf))
 
     # generate user skill tree markdown projections
-    users_dir = "users"
+    users_dir = "skill-trees"
     legendaries = _sorted_ultimates(skills)
     if os.path.isdir(users_dir):
         for username in sorted(os.listdir(users_dir)):
@@ -504,7 +504,8 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
     lines.append("")
     lines.append(f"*Generated from gaia.json v{version} on {date_str}. Do not edit directly.*")
 
-    with open("tree.md", "w", encoding="utf-8") as f:
+    os.makedirs("generated-output", exist_ok=True)
+    with open("generated-output/tree.md", "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
 

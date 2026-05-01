@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VALIDATE_SCRIPT = os.path.join(REPO_ROOT, "scripts", "validate.py")
 FIXTURES_DIR = os.path.join(REPO_ROOT, "tests", "fixtures")
-REAL_GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
+REAL_GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
 
 def run_validate(graph_path):
     """Helper to run validate.py and return (exit_code, stdout)."""
@@ -75,7 +75,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         """All seed named skills have a level in the valid set (II–VI)."""
         from scripts.generateNamedIndex import load_named_skills, validate_and_group, load_gaia_skill_ids
 
-        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        named_dir = os.path.join(REPO_ROOT, "registry", "named")
         if not os.path.isdir(named_dir):
             self.skipTest("Named skills directory not present.")
 
@@ -95,7 +95,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         """No seed named skill uses level I (which is forbidden for named skills)."""
         from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
 
-        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        named_dir = os.path.join(REPO_ROOT, "registry", "named")
         if not os.path.isdir(named_dir):
             self.skipTest("Named skills directory not present.")
 
@@ -116,7 +116,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/skill.md",
+                "registry/named/fake/skill.md",
                 {
                     "id": "fake/skill",
                     "name": "Fake",
@@ -142,7 +142,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/incomplete.md",
+                "registry/named/fake/incomplete.md",
                 {
                     "id": "fake/incomplete",
                     # Missing: name, contributor, origin, genericSkillRef, status, level, description
@@ -158,7 +158,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/skill.md",
+                "registry/named/fake/skill.md",
                 {
                     "id": "fake/skill",
                     "name": "Fake Skill",

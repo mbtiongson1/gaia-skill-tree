@@ -7,7 +7,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from plugin.cli.install import (
+from gaia_cli.install import (
     compute_sha256,
     find_named_skill_source,
     install_skill,
@@ -52,7 +52,7 @@ class TestInstallInfra:
 
     def test_find_named_skill_source_exists(self, tmp_path):
         """find_named_skill_source returns the path when the file exists."""
-        skill_dir = tmp_path / "graph" / "named" / "contributor"
+        skill_dir = tmp_path / "registry" / "named" / "contributor"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text("---\nid: contributor/my-skill\n---\n")
 
@@ -80,7 +80,7 @@ class TestInstallInfra:
                 {
                     "id": "foo/bar",
                     "installedAt": "2026-04-29T00:00:00Z",
-                    "sourceRef": "graph/named/foo/bar.md",
+                    "sourceRef": "registry/named/foo/bar.md",
                     "sha256": "a" * 64,
                 }
             ]
@@ -112,7 +112,7 @@ class TestInstallFlow:
         monkeypatch.chdir(tmp_path)
 
         # Create a mock registry with a named skill
-        skill_dir = tmp_path / "graph" / "named" / "testuser"
+        skill_dir = tmp_path / "registry" / "named" / "testuser"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text(
             "---\nid: testuser/my-skill\n---\nContent here."
@@ -138,7 +138,7 @@ class TestInstallFlow:
         """Installing the same skill twice updates the sha256, not duplicates."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         skill_file = skill_dir / "skill.md"
         skill_file.write_text("version 1")
@@ -164,7 +164,7 @@ class TestInstallFlow:
                 {
                     "id": "foo/bar",
                     "installedAt": "2026-04-29T00:00:00Z",
-                    "sourceRef": "graph/named/foo/bar.md",
+                    "sourceRef": "registry/named/foo/bar.md",
                     "sha256": "z" * 64,
                 }
             ]
@@ -191,7 +191,7 @@ class TestInstallFlow:
         """uninstall_skill removes the local repo copy of the skill."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         (skill_dir / "skill.md").write_text("content")
 
@@ -222,7 +222,7 @@ class TestInstallFlow:
         """list_installed prints installed skill IDs."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "contrib"
+        skill_dir = tmp_path / "registry" / "named" / "contrib"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text("content")
 
@@ -246,7 +246,7 @@ class TestSyncFlow:
         """sync_skills reports up-to-date for an unchanged skill."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         skill_file = skill_dir / "skill.md"
         skill_file.write_text("original content")
@@ -284,7 +284,7 @@ Content here.
 class TestListAvailable:
     def _make_registry(self, tmp_path, skill_id="contrib/my-skill", content=_FRONTMATTER):
         contributor, name = skill_id.split("/", 1)
-        d = tmp_path / "graph" / "named" / contributor
+        d = tmp_path / "registry" / "named" / contributor
         d.mkdir(parents=True, exist_ok=True)
         (d / f"{name}.md").write_text(content, encoding="utf-8")
 
@@ -310,7 +310,7 @@ class TestListAvailable:
         assert ids == sorted(ids)
 
     def test_ignores_non_md_files(self, tmp_path):
-        d = tmp_path / "graph" / "named" / "contrib"
+        d = tmp_path / "registry" / "named" / "contrib"
         d.mkdir(parents=True, exist_ok=True)
         (d / "index.json").write_text("{}")
         result = list_available(str(tmp_path))

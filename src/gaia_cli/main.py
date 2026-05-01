@@ -2,6 +2,12 @@ import argparse
 import sys
 import os
 import json
+import subprocess
+from datetime import date
+from contextlib import redirect_stdout
+from io import StringIO
+from importlib.metadata import PackageNotFoundError, version as package_version
+from pathlib import Path
 
 from gaia_cli.scanner import scan_repo, scan_repo_detailed, load_config
 from gaia_cli.resolver import resolve_skills
@@ -12,10 +18,16 @@ from gaia_cli.push import build_skill_batch, write_skill_batch
 from gaia_cli.embeddings import generate_embeddings
 from gaia_cli.semantic_search import search as semantic_search, load_embeddings
 from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
-from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed, interactive_install
+from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed, interactive_install, list_available
 from gaia_cli.graph import graph_command
 from gaia_cli.registry import (
+    generated_output_dir,
+    embeddings_path,
+    named_skills_dir,
+    promotion_candidates_path,
     registry_graph_path,
+    skill_batches_dir,
+    user_tree_path,
     require_explicit_writable_registry,
     resolve_registry_path,
     write_global_registry,
@@ -31,8 +43,12 @@ from gaia_cli.cardRenderer import (
 )
 from gaia_cli.promotion import (
     check_promotion_eligibility,
+    load_promotion_candidates,
+    promote_from_candidates,
     promote_skill,
+    promotable_candidates,
     promotion_state,
+    write_promotion_candidates,
     next_level,
     LEVEL_NAMES,
 )
@@ -101,37 +117,48 @@ def _detect_skill_files():
 def init_command(args):
     config_dir = '.gaia'
     os.makedirs(config_dir, exist_ok=True)
-    config_path = os.path.join(config_dir, 'config.json')
+    config_path = os.path.join(config_dir, 'config.toml')
     if os.path.exists(config_path):
         print("Gaia is already initialized in this repository.")
         return
 
-    # Auto-detect username if not provided
-    username = args.user or _detect_github_username() or "gaiabot"
+    username = args.user or _detect_github_username()
+    if not username and sys.stdin.isatty() and not getattr(args, "yes", False):
+        username = input("Gaia username: ").strip()
+    username = username or "gaiabot"
 
     # Auto-detect skill files if no --scan flags given
     if args.scan:
         scan_paths = args.scan
     else:
         detected = _detect_skill_files()
-        scan_paths = detected if detected else ["scripts", "plugin"]
+        scan_paths = detected if detected else ["scripts", "packages/cli-npm"]
 
-    config = {
-        "gaiaUser": username,
-        "gaiaRegistryRef": args.registry_ref or DEFAULT_REGISTRY_REF,
-        "scanPaths": scan_paths,
-        "autoPromptCombinations": args.auto_prompt_combinations,
-        "localRegistryPath": os.path.abspath("."),
-    }
+    local_registry_path = os.path.abspath(".")
     with open(config_path, 'w', encoding='utf-8') as f:
-        json.dump(config, f, indent=2)
+        f.write(f'username = "{username}"\n')
+        f.write(f'gaiaRegistryRef = "{args.registry_ref or DEFAULT_REGISTRY_REF}"\n')
+        f.write(f'localRegistryPath = "{local_registry_path}"\n')
+        f.write(f'autoPromptCombinations = {"true" if args.auto_prompt_combinations else "false"}\n')
+        f.write("scanPaths = [" + ", ".join(json.dumps(path) for path in scan_paths) + "]\n")
     print(f"Initialized Gaia configuration at {config_path}")
     print(f"  user:       {username}")
     print(f"  scanPaths:  {scan_paths}")
 
     # If we're inside a registry clone, register its path globally so that
     # commands like `gaia push` work from any project without --registry.
-    if os.path.exists("graph/gaia.json"):
+    tree_path = user_tree_path(".", username)
+    if os.path.exists("registry/gaia.json") and not os.path.exists(tree_path):
+        save_tree(username, {
+            "userId": username,
+            "updatedAt": date.today().isoformat(),
+            "unlockedSkills": [],
+            "pendingCombinations": [],
+            "stats": {"totalUnlocked": 0, "highestRarity": "common", "deepestLineage": 0},
+        }, registry_path=".")
+        print(f"  skill tree: {tree_path}")
+
+    if os.path.exists("registry/gaia.json"):
         registry_abs = os.path.abspath(".")
         write_global_registry(registry_abs)
         print(f"  registry:   {registry_abs} (saved to ~/.gaia/config.json)")
@@ -161,7 +188,7 @@ def scan_command(args):
         if resolved:
             print(", ".join(resolved))
         else:
-            print('Tip: try `gaia search "code review"` or expand scanPaths.')
+            print('Tip: try `gaia skills search "code review"` or expand scanPaths.')
     username = config.get('gaiaUser')
     tree = load_tree(username, registry_path=args.registry)
     if tree:
@@ -200,11 +227,66 @@ def scan_command(args):
 
         # Promotion hints
         eligible = check_promotion_eligibility(graph_data, tree)
+        candidate_path = write_promotion_candidates(args.registry, username, eligible)
+        if not quiet:
+            print(f"Wrote promotion candidates: {candidate_path}")
         if eligible:
             for promo in eligible[:2]:
                 skill = skill_map.get(promo["skillId"])
                 if skill:
-                    print(render_promotion_prompt(skill, promo.get("nextLevel", "II")))
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "II")))
+        render_user_tree_outputs(username, tree, graph_data, args.registry, quiet=quiet)
+        if getattr(args, "auto_promote", False) and eligible:
+            promoted = promote_all_candidates(username, args.registry)
+            if promoted and not quiet:
+                print(f"Auto-promoted {len(promoted)} skill(s).")
+            tree = load_tree(username, registry_path=args.registry)
+            render_user_tree_outputs(username, tree, graph_data, args.registry, quiet=quiet)
+
+
+def render_user_tree_outputs(username: str, tree: dict | None, graph_data: dict | None, registry_path: str, quiet: bool = False) -> tuple[str, str] | None:
+    if not tree:
+        return None
+    mode = "default"
+    buf = StringIO()
+    with redirect_stdout(buf):
+        show_tree(tree, graph_data=graph_data, registry_path=registry_path, mode=mode)
+    text = buf.getvalue()
+    out_dir = generated_output_dir(registry_path)
+    os.makedirs(out_dir, exist_ok=True)
+    md_path = os.path.join(out_dir, "tree.md")
+    html_path = os.path.join(out_dir, "tree.html")
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write("# Gaia Skill Tree\n\n```text\n")
+        f.write(text)
+        f.write("```\n")
+    html = (
+        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+        f"<title>Gaia Skill Tree - {username}</title>"
+        "<style>body{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:2rem;line-height:1.45}"
+        "pre{white-space:pre-wrap}</style></head><body>"
+        f"<h1>Gaia Skill Tree - {username}</h1><pre>"
+        + text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        + "</pre></body></html>\n"
+    )
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    if not quiet:
+        print(f"Wrote tree render: {html_path}")
+        print(f"Wrote tree render: {md_path}")
+    return html_path, md_path
+
+
+def promote_all_candidates(username: str, registry_path: str) -> list[dict]:
+    promoted = []
+    for candidate in promotable_candidates(registry_path, username=username):
+        promoted.append(promote_from_candidates(
+            username,
+            candidate["skillId"],
+            registry_path,
+        ))
+    return promoted
 
 def status_command(args):
     config = load_config()
@@ -219,7 +301,7 @@ def status_command(args):
         print("  gaia scan")
         print("  gaia push --dry-run")
         print("  gaia push --no-pr")
-        print(f"Or create users/{username}/skill-tree.json in the registry.")
+        print(f"Or create skill-trees/{username}/skill-tree.json in the registry.")
         return
     show_status(tree)
 
@@ -309,6 +391,14 @@ def appraise_command(args):
         actions.append("[→] Paths")
 
     print(render_appraise_card(skill, prereq_status, derivatives, actions, owned=owned))
+    try:
+        candidates = load_promotion_candidates(args.registry).get("candidates", [])
+        matching = [c for c in candidates if c.get("skillId") == skill_id]
+        if matching:
+            labels = ", ".join(c.get("suggestedLevel", "?") for c in matching)
+            print(f"\nLast scan flagged this skill as promotable to: {labels}")
+    except ValueError:
+        pass
 
 
 def promote_command(args):
@@ -336,29 +426,22 @@ def promote_command(args):
     skill_id = getattr(args, 'skillId', None)
     display_name = getattr(args, 'name', None)
 
-    if not skill_id:
-        # Auto-select first eligible
-        eligible = check_promotion_eligibility(graph_data, tree)
-        if not eligible:
-            print("No skills eligible for promotion.")
+    try:
+        if getattr(args, "all", False):
+            results = promote_all_candidates(username, args.registry)
+            if not results:
+                print("No skills eligible for promotion.")
+                return
+            for result in results:
+                print(f"Promoted {result['skillId']} to Level {result['newLevel']}.")
             return
-        skill_id = eligible[0]["skillId"]
-        print(f"Auto-selected: {skill_id}")
-
-    # Check state
-    state = promotion_state(skill_id, tree, graph_data)
-    if state == "not_unlocked":
-        print(f"Skill '{skill_id}' is not in your tree.")
-        return
-    elif state == "max_level":
-        print(f"Skill '{skill_id}' is already at maximum level.")
-        return
-    elif state == "blocked":
-        print(f"Skill '{skill_id}' cannot be promoted (evidence requirements not met).")
-        return
-
-    # Execute promotion
-    result = promote_skill(username, skill_id, args.registry, new_display_name=display_name)
+        if not skill_id:
+            print("Usage: gaia promote <skill> or gaia promote --all", file=sys.stderr)
+            sys.exit(2)
+        result = promote_from_candidates(username, skill_id, args.registry, new_display_name=display_name)
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        sys.exit(1)
 
     # Show celebration
     skill_map = {s['id']: s for s in graph_data.get('skills', [])}
@@ -394,7 +477,7 @@ def paths_command(args):
     if one_away:
         print("One prerequisite away:")
         for o in one_away[:8]:
-            print(f"  ○ {o.get('name', o['skillId'])} — missing: {o.get('missingPrereq', '?')}")
+            print(f"  ○ {o.get('name', o['skillId'])} - missing: {o.get('missingPrereq', '?')}")
         if len(one_away) > 8:
             print(f"  ... and {len(one_away) - 8} more")
         print()
@@ -406,7 +489,7 @@ def hook_command(args):
 
 
 def doctor_command(args):
-    config_path = ".gaia/config.json"
+    config_path = ".gaia/config.toml"
     config = load_config()
     registry_path = os.path.abspath(str(args.registry))
     print("Gaia CLI: OK")
@@ -420,10 +503,10 @@ def doctor_command(args):
 
     username = config.get('gaiaUser')
     print(f"User: {username}")
-    tree_path = os.path.join(registry_path, 'users', username or '', 'skill-tree.json')
+    tree_path = user_tree_path(registry_path, username or '')
     print(f"Skill tree: {'found' if os.path.exists(tree_path) else 'missing'}")
-    embeddings_path = os.path.join(registry_path, 'graph', 'embeddings.json')
-    print(f"Embeddings: {'found' if os.path.exists(embeddings_path) else 'missing'}")
+    emb_path = embeddings_path(registry_path)
+    print(f"Embeddings: {'found' if os.path.exists(emb_path) else 'missing'}")
     print("Scan paths:")
     for path in config.get('scanPaths', []):
         print(f"  - {path} {'exists' if os.path.exists(path) else 'missing'}")
@@ -441,6 +524,8 @@ def tree_command(args):
     tree = load_tree(config.get('gaiaUser'), registry_path=args.registry)
     mode = "named" if getattr(args, 'named', False) else ("title" if getattr(args, 'title', False) else "default")
     show_tree(tree, graph_data=graph_data, registry_path=args.registry, mode=mode)
+    if tree:
+        render_user_tree_outputs(config.get('gaiaUser'), tree, graph_data, args.registry, quiet=False)
 
 def fuse_command(args):
     config = load_config()
@@ -484,7 +569,7 @@ _EMBEDDINGS_INSTALL_STEPS = """\
             gaia embed
 
   Step 3 -- Search:
-            gaia search "<your query>"
+            gaia skills search "<your query>"
 
   Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
 """
@@ -499,7 +584,7 @@ _EMBEDDINGS_MISSING_STEPS = """\
     gaia embed
 
   Then retry:
-    gaia search "{query}"
+    gaia skills search "{query}"
 
   Tip: Re-run `gaia embed` whenever new skills are added to the registry.\
 """
@@ -514,9 +599,9 @@ def embed_command(args):
     generate_embeddings(registry_path=args.registry)
 
 def search_command(args):
-    embeddings_path = os.path.join(args.registry, 'graph', 'embeddings.json')
+    emb_path = embeddings_path(args.registry)
     try:
-        results = semantic_search(args.query, embeddings_path, top_k=args.top_k)
+        results = semantic_search(args.query, emb_path, top_k=args.top_k)
     except FileNotFoundError:
         print(_EMBEDDINGS_MISSING_STEPS.format(query=args.query))
         return
@@ -614,13 +699,146 @@ def uninstall_command(args):
         sys.exit(1)
 
 
+def _load_json_file(path: str, default=None):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def _pending_skills(registry_path: str, username: str | None = None) -> list[dict]:
+    batches_root = Path(skill_batches_dir(registry_path))
+    paths = []
+    if batches_root.is_dir():
+        paths.extend(batches_root.glob("*.json"))
+        paths.extend(batches_root.glob("*/*.json"))
+    pending = []
+    for path in sorted(paths):
+        batch = _load_json_file(str(path), default={}) or {}
+        if username and batch.get("userId") not in (None, username):
+            continue
+        for skill in batch.get("proposedSkills", []):
+            if skill.get("lifecycle", "pending") == "pending":
+                pending.append({
+                    "id": skill.get("id"),
+                    "name": skill.get("name", skill.get("id")),
+                    "description": skill.get("description", ""),
+                    "level": skill.get("level", "I"),
+                    "pending": True,
+                })
+    return pending
+
+
+def skills_command(args):
+    config = load_config() or {}
+    username = config.get("gaiaUser") or config.get("username")
+    pending = [] if getattr(args, "exclude_pending", False) else _pending_skills(args.registry, username)
+    verb = getattr(args, "skills_command", None)
+    if verb == "install":
+        success = install_skill(args.skill_id, args.registry)
+        if not success:
+            sys.exit(1)
+        return
+    if verb == "uninstall":
+        success = uninstall_skill(args.skill_id)
+        if not success:
+            sys.exit(1)
+        return
+
+    available = [
+        {"id": sid, "name": meta.get("name") or sid, "level": meta.get("level", "?"), "description": meta.get("description", "")}
+        for sid, meta in list_available(args.registry)
+    ]
+    items = available + pending
+    query = getattr(args, "query", None)
+    if verb == "search" and query:
+        q = query.lower()
+        items = [
+            item for item in items
+            if q in str(item.get("id", "")).lower()
+            or q in str(item.get("name", "")).lower()
+            or q in str(item.get("description", "")).lower()
+        ]
+    if verb == "info":
+        q = args.skill_id
+        match = next((item for item in items if item.get("id") == q), None)
+        if not match:
+            print(f"Skill '{q}' not found.", file=sys.stderr)
+            sys.exit(1)
+        suffix = " (pending)" if match.get("pending") else ""
+        print(f"{match['id']}{suffix}")
+        print(f"Name: {match.get('name', match['id'])}")
+        print(f"Level: {match.get('level', '?')}")
+        if match.get("description"):
+            print(match["description"])
+        return
+    if not items:
+        print("No skills found.")
+        return
+    width = max(5, *(len(str(item.get("id", ""))) for item in items))
+    print(f"{'Skill':<{width}}  Level  Name")
+    print("-" * (width + 14))
+    for item in items:
+        suffix = " (pending)" if item.get("pending") else ""
+        print(f"{item.get('id', ''):<{width}}  {item.get('level', '?'):<5}  {item.get('name', '')}{suffix}")
+
+
+def pull_command(args):
+    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+
+
+def version_command(args):
+    pyproject = Path(args.registry) / "pyproject.toml"
+    if pyproject.exists():
+        text = pyproject.read_text(encoding="utf-8")
+        for line in text.splitlines():
+            if line.startswith("version = "):
+                print(line.split("=", 1)[1].strip().strip('"'))
+                return
+    try:
+        print(package_version("gaia-cli"))
+    except PackageNotFoundError:
+        pyproject = Path(__file__).resolve().parents[2] / "pyproject.toml"
+        text = pyproject.read_text(encoding="utf-8") if pyproject.exists() else ""
+        for line in text.splitlines():
+            if line.startswith("version = "):
+                print(line.split("=", 1)[1].strip().strip('"'))
+                return
+        print("unknown")
+
+
+def mcp_command(args):
+    script = Path(args.registry) / "packages" / "mcp" / "dist" / "bin" / "gaia-mcp.js"
+    if not script.exists():
+        print(f"MCP server build not found: {script}", file=sys.stderr)
+        print("Run `npm run build` in packages/mcp first.", file=sys.stderr)
+        sys.exit(1)
+    raise SystemExit(subprocess.call(["node", str(script)]))
+
+
+def docs_command(args):
+    script = Path(args.registry) / "scripts" / "build_docs.py"
+    cmd = [sys.executable, str(script)]
+    if getattr(args, "check", False):
+        cmd.append("--check")
+    raise SystemExit(subprocess.call(cmd))
+
+
+def release_command(args):
+    from gaia_cli.versioning import bump_versions
+
+    new_version = bump_versions(args.registry, args.release_type)
+    print(f"Gaia version bumped to {new_version}.")
+
+
 def main():
     # Ensure UTF-8 output on Windows (avoids cp1252 UnicodeEncodeError for box-drawing)
     if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-    parser = argparse.ArgumentParser(prog="gaia", description="Gaia Plugin CLI")
+    parser = argparse.ArgumentParser(prog="gaia", description="Gaia Registry CLI")
     parser.add_argument(
         '--registry',
         default=None,
@@ -632,10 +850,16 @@ def main():
         action='store_true',
         help="Use global GAIA_HOME registry, ignoring any local .gaia/ config.",
     )
+    parser.add_argument(
+        '--version', '-v',
+        action='store_true',
+        help="Print the Gaia CLI version and exit.",
+    )
     subparsers = parser.add_subparsers(dest='command')
+    subparsers.add_parser('help', help="Show command help")
     init_parser = subparsers.add_parser('init')
-    init_parser.add_argument('--user', help='Gaia username to write into .gaia/config.json')
-    init_parser.add_argument('--registry-ref', help='Gaia registry URL to write into .gaia/config.json')
+    init_parser.add_argument('--user', help='Gaia username to write into .gaia/config.toml')
+    init_parser.add_argument('--registry-ref', help='Gaia registry URL to write into .gaia/config.toml')
     init_parser.add_argument('--scan', action='append', help='Path to scan; repeat for multiple paths')
     init_parser.add_argument('--yes', action='store_true', help='Use non-interactive defaults')
     init_parser.add_argument(
@@ -645,93 +869,87 @@ def main():
     )
     scan_parser = subparsers.add_parser('scan')
     scan_parser.add_argument('--quiet', action='store_true', help="Suppress scan output; only show notifications")
-    subparsers.add_parser('status')
-    subparsers.add_parser('doctor')
+    scan_parser.add_argument('--auto-promote', action='store_true', help="Promote every scan-recommended candidate after scanning")
+    subparsers.add_parser('pull', help="Refresh registry data from origin")
     tree_parser = subparsers.add_parser('tree')
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
-    fuse_parser = subparsers.add_parser('fuse')
-    fuse_parser.add_argument('skillId', help="ID of the pending skill to fuse")
     push_parser = subparsers.add_parser('push')
     push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
     push_parser.add_argument('--no-pr', action='store_true', help="Write intake record without creating a PR")
-    subparsers.add_parser('embed')
-    search_parser = subparsers.add_parser('search')
-    search_parser.add_argument('query', help="Search query string")
-    search_parser.add_argument('--top-k', type=int, default=10, help="Number of results to return (default: 10)")
-    name_parser = subparsers.add_parser(
-        'name',
-        help="Promote an awakened skill to a named skill",
-    )
-    name_parser.add_argument('batch_file', help="Path to the intake batch JSON file")
-    name_parser.add_argument('skill_index', type=int, help="0-based index of the proposed skill in the batch")
-    name_parser.add_argument(
-        'named_id',
-        metavar='contributor/skill-name',
-        help="Named skill ID to create (e.g. karpathy/autoresearch)",
-    )
-    install_parser = subparsers.add_parser('install', help="Install a named skill from the registry")
-    install_parser.add_argument(
-        'skill_id',
-        nargs='?',
-        default=None,
-        help="Named skill ID to install (e.g. karpathy/autoresearch)",
-    )
-    install_parser.add_argument('--list', action='store_true', help="List all installed named skills")
-    subparsers.add_parser('sync', help="Sync installed named skills with the registry")
+    subparsers.add_parser('version', help="Print the Gaia CLI version")
+    subparsers.add_parser('mcp', help="Run the bundled Gaia MCP server")
+    release_parser = subparsers.add_parser('release', help="Bump release version files")
+    release_parser.add_argument('release_type', choices=('patch', 'minor', 'major'))
     graph_parser = subparsers.add_parser('graph', help="Generate and open the Gaia skill graph")
     graph_parser.add_argument('--format', choices=('svg', 'json'), default='svg', help="Graph artifact format (default: svg)")
-    graph_parser.add_argument('-o', '--output', help="Output path (default: graph/gaia.svg)")
+    graph_parser.add_argument('-o', '--output', help="Output path (default: registry/gaia.svg)")
     graph_parser.add_argument('--open', dest='open', action='store_true', default=True, help="Open the generated graph (default)")
     graph_parser.add_argument('--no-open', dest='open', action='store_false', help="Do not open the generated graph")
-    uninstall_parser = subparsers.add_parser('uninstall', help="Uninstall a named skill")
-    uninstall_parser.add_argument('skill_id', help="Named skill ID to uninstall (e.g. karpathy/autoresearch)")
-    # --- New commands ---
     appraise_parser = subparsers.add_parser('appraise', help="Inspect a skill card with status and actions")
     appraise_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to appraise (default: most recent)")
     promote_parser = subparsers.add_parser('promote', help="Promote a skill eligible for level-up")
-    promote_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to promote (default: first eligible)")
+    promote_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to promote")
+    promote_parser.add_argument('--all', action='store_true', help="Promote every candidate from the last scan")
     promote_parser.add_argument('--name', help="Optional display name for the promoted skill")
-    subparsers.add_parser('paths', help="Show progression paths from current state")
+    docs_parser = subparsers.add_parser('docs', help="Documentation maintenance commands")
+    docs_sub = docs_parser.add_subparsers(dest='docs_command')
+    docs_build = docs_sub.add_parser('build', help="Regenerate generated documentation regions")
+    docs_build.add_argument('--check', action='store_true', help="Fail if docs are stale without writing")
+    skills_parser = subparsers.add_parser('skills', help="Browse and manage named skills")
+    skills_sub = skills_parser.add_subparsers(dest='skills_command')
+    skills_list = skills_sub.add_parser('list')
+    skills_list.add_argument('--exclude-pending', action='store_true')
+    skills_search = skills_sub.add_parser('search')
+    skills_search.add_argument('query')
+    skills_search.add_argument('--exclude-pending', action='store_true')
+    skills_info = skills_sub.add_parser('info')
+    skills_info.add_argument('skill_id')
+    skills_info.add_argument('--exclude-pending', action='store_true')
+    skills_install = skills_sub.add_parser('install')
+    skills_install.add_argument('skill_id')
+    skills_install.add_argument('--global', dest='install_global', action='store_true', help='Install to ~/.gaia/skills')
+    skills_install.add_argument('--local', dest='install_local', action='store_true', help='Install to project .gaia/skills')
+    skills_uninstall = skills_sub.add_parser('uninstall')
+    skills_uninstall.add_argument('skill_id')
     hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
     hook_parser.add_argument('--event', default='file_edit', help=argparse.SUPPRESS)
     args = parser.parse_args()
     args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
     require_explicit_writable_registry(parser, args)
+    if args.version:
+        version_command(args)
+        return
     if args.command == 'init':
         init_command(args)
+    elif args.command == 'help':
+        parser.print_help()
     elif args.command == 'scan':
         scan_command(args)
-    elif args.command == 'status':
-        status_command(args)
-    elif args.command == 'doctor':
-        doctor_command(args)
+    elif args.command == 'pull':
+        pull_command(args)
     elif args.command == 'tree':
         tree_command(args)
-    elif args.command == 'fuse':
-        fuse_command(args)
     elif args.command == 'push':
         push_command(args)
-    elif args.command == 'embed':
-        embed_command(args)
-    elif args.command == 'search':
-        search_command(args)
-    elif args.command == 'name':
-        name_command(args)
-    elif args.command == 'install':
-        install_command(args)
-    elif args.command == 'sync':
-        sync_command(args)
+    elif args.command == 'version':
+        version_command(args)
+    elif args.command == 'mcp':
+        mcp_command(args)
+    elif args.command == 'release':
+        release_command(args)
     elif args.command == 'graph':
         graph_command(args)
-    elif args.command == 'uninstall':
-        uninstall_command(args)
     elif args.command == 'appraise':
         appraise_command(args)
     elif args.command == 'promote':
         promote_command(args)
-    elif args.command == 'paths':
-        paths_command(args)
+    elif args.command == 'docs' and getattr(args, 'docs_command', None) == 'build':
+        docs_command(args)
+    elif args.command == 'skills':
+        if not getattr(args, 'skills_command', None):
+            parser.error("gaia skills requires a verb: list, search, install, uninstall, or info")
+        skills_command(args)
     elif args.command == '_hook':
         hook_command(args)
     else:
