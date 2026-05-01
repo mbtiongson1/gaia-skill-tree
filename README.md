@@ -84,22 +84,6 @@ Skills level up through evidence, not declaration:
 
 ## Install
 
-<!-- gaia:version-start -->
-Current Gaia CLI version: `2.4.0`.
-
-Python install:
-
-```bash
-pip install gaia-cli
-```
-
-npm wrapper alternative:
-
-```bash
-npm install -g @gaia-registry/cli
-```
-<!-- gaia:version-end -->
-
 For registry development, use an editable install from the repo root:
 ```bash
 git clone https://github.com/mbtiongson1/gaia-skill-tree.git
@@ -107,12 +91,27 @@ cd gaia-skill-tree
 pip install -e ".[embeddings]"
 gaia embed
 ```
-
 Windows Only (one-time setup):
 If `gaia` isn't recognized after install, run the command below in PowerShell, then try the script above again.
 ```bash
 $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
 ```
+
+<!-- gaia:version-start -->
+Current Gaia CLI version: `2.4.0`.
+
+Python install (in your repo):
+
+```bash
+pip install gaia-cli
+```
+
+Alternative npm install:
+
+```bash
+npm install -g @gaia-registry/cli
+```
+<!-- gaia:version-end -->
 
 ## Quickstart
 In your terminal:
