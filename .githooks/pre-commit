@@ -73,7 +73,7 @@ if printf '%s\n' "$changed" | grep -Eq '^(registry/gaia\.json|registry/named/|re
 fi
 
 printf 'Gaia pre-commit: rebuilding generated docs regions...\n'
-python3 scripts/build_docs.py
+gaia docs build
 
 git add "${generated_paths[@]}" 2>/dev/null || true
 

@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.1`.
+Current Gaia CLI version: `2.2.3`.
 
 Python install:
 
@@ -153,14 +153,18 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 $ gaia 
 
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills,_hook} ...
+            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills,_hook}
+  {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills}
     help                Show command help
+    init                Create or update local Gaia config
+    scan                Scan configured paths for skill evidence
     pull                Refresh registry data from origin
+    tree                Show your Gaia skill tree
+    push                Prepare detected skills for review
     version             Print the Gaia CLI version
     mcp                 Run the bundled Gaia MCP server
     release             Bump release version files
@@ -169,7 +173,6 @@ positional arguments:
     promote             Promote a skill eligible for level-up
     docs                Documentation maintenance commands
     skills              Browse and manage named skills
-    _hook               ==SUPPRESS==
 
 options:
   -h, --help            show this help message and exit
@@ -179,15 +182,47 @@ options:
                         .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
 
+Quick usage:
+  gaia init [--user <name>] [--scan <path>] [--yes]
+  gaia scan [--quiet] [--auto-promote]
+  gaia pull
+  gaia tree [--named] [--title]
+  gaia push [--dry-run] [--no-pr]
+  gaia version
+  gaia mcp
+  gaia release <patch|minor|major>
+  gaia graph [--format html|svg|json] [-o <path>] [--no-open]
+  gaia appraise [<skillId>]
+  gaia promote [<skillId>] [--all] [--name <name>]
+  gaia docs build [--check]
+  gaia skills <list|search|info|install|uninstall>
+  gaia skills list [--exclude-pending]
+  gaia skills search <query> [--exclude-pending]
+  gaia skills info <skill_id> [--exclude-pending]
+  gaia skills install <skill_id> [--global | --local]
+  gaia skills uninstall <skill_id>
+
 $ gaia skills --help
 
 usage: gaia skills [-h] {list,search,info,install,uninstall} ...
 
 positional arguments:
   {list,search,info,install,uninstall}
+    list                List available named skills
+    search              Search named skills
+    info                Show details for a named skill
+    install             Install a named skill
+    uninstall           Uninstall a named skill
 
 options:
   -h, --help            show this help message and exit
+
+Quick usage:
+  gaia skills list [--exclude-pending]
+  gaia skills search <query> [--exclude-pending]
+  gaia skills info <skill_id> [--exclude-pending]
+  gaia skills install <skill_id> [--global | --local]
+  gaia skills uninstall <skill_id>
 
 $ gaia skills list --help
 
@@ -195,18 +230,18 @@ usage: gaia skills list [-h] [--exclude-pending]
 
 options:
   -h, --help         show this help message and exit
-  --exclude-pending
+  --exclude-pending  Hide pending skill proposals
 
 $ gaia skills search --help
 
 usage: gaia skills search [-h] [--exclude-pending] query
 
 positional arguments:
-  query
+  query              Search query
 
 options:
   -h, --help         show this help message and exit
-  --exclude-pending
+  --exclude-pending  Hide pending skill proposals
 
 $ gaia promote --help
 
@@ -384,3 +419,4 @@ MIT: see [LICENSE](LICENSE).
 ---
 
 *Graph is canonical. Everything else is a shadow.*
+ 

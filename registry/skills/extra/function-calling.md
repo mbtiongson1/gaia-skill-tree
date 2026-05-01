@@ -31,4 +31,4 @@ Requires an available function or tool catalog with machine-readable argument sc
 _None verified yet._
 
 ---
-*Generated from gaia.json v2.2.1 on 2026-04-30. Do not edit directly.*
+*Generated from gaia.json v2.2.3 on 2026-04-30. Do not edit directly.*
