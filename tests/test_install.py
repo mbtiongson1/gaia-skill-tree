@@ -134,6 +134,72 @@ class TestInstallFlow:
         result = install_skill("nobody/nothing", str(tmp_path))
         assert result is False
 
+    def test_install_accepts_catalog_ref_slug(self, tmp_path, monkeypatch):
+        """install_skill accepts an exact catalogRef slug from the registry."""
+        monkeypatch.chdir(tmp_path)
+
+        skill_dir = tmp_path / "registry" / "named" / "karpathy"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "autoresearch.md").write_text(
+            "---\n"
+            "id: karpathy/autoresearch\n"
+            "name: AutoResearch\n"
+            "catalogRef: karpathy-autoresearch\n"
+            "---\n"
+            "Content here."
+        )
+
+        result = install_skill("karpathy-autoresearch", str(tmp_path))
+        assert result is True
+
+        manifest = load_manifest()
+        assert manifest["installed"][0]["id"] == "karpathy/autoresearch"
+
+    def test_install_accepts_unique_bare_skill_slug(self, tmp_path, monkeypatch):
+        """install_skill accepts a unique skill-name slug without contributor."""
+        monkeypatch.chdir(tmp_path)
+
+        skill_dir = tmp_path / "registry" / "named" / "karpathy"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "autoresearch.md").write_text(
+            "---\n"
+            "id: karpathy/autoresearch\n"
+            "name: AutoResearch\n"
+            "catalogRef: karpathy-autoresearch\n"
+            "---\n"
+            "Content here."
+        )
+
+        result = install_skill("autoresearch", str(tmp_path))
+        assert result is True
+
+        manifest = load_manifest()
+        assert manifest["installed"][0]["id"] == "karpathy/autoresearch"
+
+    def test_install_rejects_ambiguous_bare_skill_slug(self, tmp_path, monkeypatch, capsys):
+        """install_skill rejects a bare slug shared by multiple contributors."""
+        monkeypatch.chdir(tmp_path)
+
+        for contributor in ("alice", "bob"):
+            skill_dir = tmp_path / "registry" / "named" / contributor
+            skill_dir.mkdir(parents=True)
+            (skill_dir / "autoresearch.md").write_text(
+                "---\n"
+                f"id: {contributor}/autoresearch\n"
+                f"name: {contributor.title()} AutoResearch\n"
+                f"catalogRef: {contributor}-autoresearch\n"
+                "---\n"
+                "Content here."
+            )
+
+        result = install_skill("autoresearch", str(tmp_path))
+        captured = capsys.readouterr()
+
+        assert result is False
+        assert "ambiguous" in captured.err
+        assert "alice/autoresearch" in captured.err
+        assert "bob/autoresearch" in captured.err
+
     def test_install_idempotent_updates_sha(self, tmp_path, monkeypatch):
         """Installing the same skill twice updates the sha256, not duplicates."""
         monkeypatch.chdir(tmp_path)

@@ -85,7 +85,7 @@ Skills level up through evidence, not declaration:
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.2.12`.
+Current Gaia CLI version: `2.4.0`.
 
 Python install:
 
@@ -151,7 +151,8 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
+            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills}
+            ...
 
 Gaia Registry CLI
 
@@ -197,7 +198,7 @@ Quick usage:
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]
   gaia skills info <skill_id> [--exclude-pending]
-  gaia skills install <skill_id> [--global | --local]
+  gaia skills install <skill> [--global | --local]
   gaia skills uninstall <skill_id>
 
 ```

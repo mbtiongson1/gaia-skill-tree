@@ -19,72 +19,113 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
   body { overflow: hidden; }
-  .shell { position: fixed; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(15, 23, 42, .88), #020617 72%); }
+  .shell { position: fixed; inset: 0; }
   #gaiaGraphCanvas { display: block; width: 100%; height: 100%; }
-  .toolbar {
-    position: fixed; top: 16px; left: 16px; right: 16px; z-index: 2;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px; pointer-events: none;
-  }
-  .panel {
-    pointer-events: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  .title-panel {
+    position: fixed; top: 16px; left: 16px; z-index: 2;
     background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, .28); backdrop-filter: blur(16px); padding: 10px 12px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .28); backdrop-filter: blur(16px);
+    padding: 10px 12px; pointer-events: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
   h1 { margin: 0; font-size: 15px; line-height: 1.15; letter-spacing: 0; }
   .meta { color: var(--muted); font-size: 12px; }
-  .search {
-    width: min(320px, 46vw); height: 36px; border: 1px solid rgba(148, 163, 184, .28); border-radius: 7px;
-    background: rgba(2, 6, 23, .7); color: var(--text); padding: 0 11px; outline: none;
+  #resetView {
+    height: 36px; border: 1px solid rgba(148, 163, 184, .28); border-radius: 7px;
+    background: rgba(15, 23, 42, .72); color: var(--text); padding: 0 11px; cursor: pointer;
   }
-  .search:focus { border-color: rgba(56, 189, 248, .7); box-shadow: 0 0 0 3px rgba(56, 189, 248, .12); }
-  .button {
-    height: 36px; border: 1px solid rgba(148, 163, 184, .28); border-radius: 7px; background: rgba(15, 23, 42, .72);
-    color: var(--text); padding: 0 11px; cursor: pointer;
+  .skill-tooltip{
+    position:absolute;pointer-events:none;display:none;z-index:10;
+    background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
+    border-radius:.6rem;padding:.6rem .85rem;min-width:148px;max-width:230px;
+    backdrop-filter:blur(8px);
   }
-  .button.active { border-color: rgba(56, 189, 248, .7); color: #bae6fd; background: rgba(56, 189, 248, .12); }
-  .legend { position: fixed; right: 16px; bottom: 16px; z-index: 2; display: grid; gap: 7px; pointer-events: none; }
-  .legend-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
-  .swatch { width: 9px; height: 9px; border-radius: 50%; }
-  .tooltip {
-    position: fixed; z-index: 3; display: none; max-width: min(340px, calc(100vw - 32px));
-    background: rgba(2, 6, 23, .92); border: 1px solid rgba(148, 163, 184, .28); border-radius: 8px;
-    padding: 10px 12px; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); pointer-events: none;
+  .skill-tooltip-name{font-weight:800;font-size:1rem;line-height:1.2;margin-bottom:.38rem}
+  .skill-tooltip-row{display:flex;align-items:center;gap:.4rem .5rem;flex-wrap:wrap}
+  .skill-tooltip-badge{
+    font-size:.65rem;font-weight:800;letter-spacing:.06em;
+    padding:.14rem .42rem;border-radius:999px;border:1px solid currentColor;
+    opacity:.85;
   }
-  .tooltip strong { display: block; margin-bottom: 4px; font-size: 13px; }
-  .tooltip span { color: var(--muted); font-size: 12px; line-height: 1.35; }
-  @media (max-width: 720px) {
-    .toolbar { align-items: stretch; flex-direction: column; }
-    .panel { align-items: stretch; }
-    .search { width: 100%; }
+  .skill-tooltip-type-basic{color:#38bdf8}
+  .skill-tooltip-type-extra{color:#c084fc}
+  .skill-tooltip-type-ultimate{color:#f59e0b}
+  .graph-search-wrap{position:absolute;top:.75rem;right:.75rem;z-index:10}
+  .graph-search{
+    background:rgba(3,7,18,.15);border:1px solid rgba(148,163,184,.15);
+    border-radius:999px;padding:.28rem .72rem;font-size:.74rem;
+    color:#e2e8f0;outline:none;width:130px;font-family:inherit;
+    transition:background .2s,border-color .2s,width .2s;
+  }
+  .graph-search::placeholder{color:rgba(148,163,184,.38)}
+  .graph-search:hover,.graph-search:focus{
+    background:rgba(3,7,18,.72);border-color:rgba(148,163,184,.5);width:175px;
+  }
+  .graph-legend{
+    position:absolute;top:50%;right:.75rem;transform:translateY(-50%);z-index:10;
+    display:flex;flex-direction:column;gap:.55rem;
+    background:rgba(3,7,18,.78);border:none;
+    border-radius:.6rem;padding:.5rem .65rem;backdrop-filter:blur(8px);
+    max-height:calc(100% - 3.5rem);overflow-y:auto;user-select:none;
+  }
+  .graph-legend-section{display:flex;flex-direction:column;gap:.18rem}
+  .graph-legend-heading{
+    font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#64748b;margin-bottom:.1rem;
+  }
+  .graph-legend-item{
+    display:flex;align-items:center;gap:.38rem;
+    font-size:.7rem;font-weight:600;color:#94a3b8;
+    padding:.18rem .38rem;border-radius:4px;cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .graph-legend-item:hover{background:rgba(255,255,255,.06);color:#e2e8f0}
+  .graph-legend-item.active{background:rgba(56,189,248,.12);color:#e2e8f0;box-shadow:inset 0 0 0 1px rgba(56,189,248,.3)}
+  .graph-legend-swatch{border-radius:50%;flex-shrink:0}
+  .graph-legend-ranks{display:flex;flex-wrap:wrap;gap:.28rem;padding:.1rem 0}
+  .graph-legend-rank-pill{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    font-size:.6rem;font-weight:700;cursor:pointer;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .graph-legend-rank-pill:hover{transform:scale(1.18);box-shadow:0 0 8px currentColor}
+  .graph-legend-rank-pill.active{transform:scale(1.18);box-shadow:0 0 10px currentColor,inset 0 0 0 1.5px currentColor}
+  .graph-label-toggle{
+    position:absolute;right:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .7rem;
+    cursor:pointer;transition:border-color .2s,color .2s,background .2s;font-family:inherit;
+  }
+  .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
+  .graph-label-toggle.active{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.45);color:#e2e8f0}
+  .graph-redpill{
+    position:absolute;bottom:3.4rem;right:.75rem;z-index:10;
+    color:#f87171;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(239,68,68,.45);border-radius:999px;padding:.3rem .78rem;
+    cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
+  }
+  .graph-redpill:hover{border-color:rgba(239,68,68,.75);color:#fca5a5;background:rgba(239,68,68,.08)}
+  .graph-redpill.active{
+    background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.7);
+    color:#fca5a5;box-shadow:0 0 14px rgba(239,68,68,.35);
+  }
+  @media (max-width:700px){
+    .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
   }
 </style>
 </head>
 <body>
-<main class="shell" aria-label="Interactive Gaia skill graph">
+<main class="shell" id="graphShell">
   <canvas id="gaiaGraphCanvas"></canvas>
 </main>
-<div class="toolbar">
-  <div class="panel">
-    <div>
-      <h1>Gaia Skill Graph</h1>
-      <div class="meta" id="graphMeta">Loading graph</div>
-    </div>
-  </div>
-  <div class="panel">
-    <input class="search" id="graphSearch" type="search" placeholder="Search skills" aria-label="Search skills">
-    <button class="button" id="namedToggle" type="button">Named Skills</button>
-    <button class="button" id="resetView" type="button">Reset</button>
-  </div>
+<div class="title-panel">
+  <h1>Gaia Skill Graph</h1>
+  <div class="meta" id="graphMeta">Loading…</div>
+  <button id="resetView" type="button">Reset</button>
 </div>
-<div class="panel legend" aria-hidden="true">
-  <div class="legend-item"><span class="swatch" style="background: var(--basic)"></span>Basic</div>
-  <div class="legend-item"><span class="swatch" style="background: var(--extra)"></span>Extra</div>
-  <div class="legend-item"><span class="swatch" style="background: var(--ultimate)"></span>Ultimate</div>
-</div>
-<div class="tooltip" id="graphTooltip"></div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "2.2.10",
+  "version": "2.4.0",
   "generatedAt": "2026-04-30T00:00:00Z",
   "meta": {
     "typeLabels": {
@@ -5784,7 +5825,7 @@
         "origin": true,
         "genericSkillRef": "autonomous-research-agent",
         "status": "named",
-        "level": "II",
+        "level": "VI",
         "description": "Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",
         "title": "The Scholar's Compass",
         "catalogRef": "karpathy-autoresearch",
@@ -6330,262 +6371,540 @@
   const namedIndex = JSON.parse(document.getElementById('gaia-named-skills').textContent);
   const canvas = document.getElementById('gaiaGraphCanvas');
   const ctx = canvas.getContext('2d');
-  const search = document.getElementById('graphSearch');
-  const namedToggle = document.getElementById('namedToggle');
-  const resetView = document.getElementById('resetView');
   const meta = document.getElementById('graphMeta');
-  const tooltip = document.getElementById('graphTooltip');
-  const palette = {
-    basic: '#38bdf8',
-    extra: '#c084fc',
-    ultimate: '#f59e0b'
+  const resetView = document.getElementById('resetView');
+
+  const PALETTE = {
+    basic:    { rgb:'56,189,248',   hex:'#38bdf8' },
+    extra:    { rgb:'192,132,252',  hex:'#c084fc' },
+    ultimate: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
-  const typeRadius = { basic: 330, extra: 205, ultimate: 70 };
-  const typeSize = { basic: 4.5, extra: 7, ultimate: 11 };
-  const buckets = namedIndex.buckets || {};
-  const namedMap = {};
-  const titleMap = {};
+  const RANK_META = {
+    'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
+    'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
+    'III':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
+    'IV': { name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' },
+    'V':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
+    'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
+  };
+   const SCALE = 1.25;
 
-  Object.entries(buckets).forEach(([skillId, entries]) => {
+  const namedMap = {}, titleMap = {};
+  Object.entries(namedIndex.buckets || {}).forEach(([skillId, entries]) => {
     if (!Array.isArray(entries) || !entries.length) return;
-    const origin = entries.find(entry => entry.origin) || entries[0];
-    if (origin && origin.id) namedMap[skillId] = origin.id;
-    if (origin && origin.title) titleMap[skillId] = origin.title;
+    const origin = entries.find(e => e.origin) || entries[0];
+    if (origin?.id) namedMap[skillId] = origin.id;
+    if (origin?.title) titleMap[skillId] = origin.title;
   });
 
-  const skills = (graph.skills || []).filter(skill => skill.id).map(skill => ({
-    id: skill.id,
-    name: skill.name || skill.id,
-    type: skill.type || 'basic',
-    level: skill.level || '',
-    rarity: skill.rarity || '',
-    description: skill.description || '',
-    prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
-    named: namedMap[skill.id] || '',
-    namedTitle: titleMap[skill.id] || ''
-  }));
-  const nodeById = new Map(skills.map(skill => [skill.id, skill]));
-  const edges = [];
-  skills.forEach(target => {
-    target.prerequisites.forEach(sourceId => {
-      const source = nodeById.get(sourceId);
-      if (source) edges.push({ source, target });
-    });
-  });
-
-  let width = 0;
-  let height = 0;
-  let dpr = 1;
-  let view = { x: 0, y: 0, scale: 1 };
-  let dragging = false;
-  let dragStart = { x: 0, y: 0, viewX: 0, viewY: 0 };
-  let pointer = { x: 0, y: 0 };
-  let hovered = null;
-  let query = '';
-  let namedOnly = false;
+   function normalizeSkills(graph) {
+     const TYPE_ALIASES = { atomic: 'basic', composite: 'extra', legendary: 'ultimate' };
+     const skills = (graph && graph.skills) ? graph.skills : [];
+     return skills.map(skill => ({
+       id: skill.id,
+       name: skill.name || skill.id,
+       type: TYPE_ALIASES[skill.type] || skill.type || 'basic',
+       level: skill.level || '',
+       rarity: skill.rarity || '',
+       description: skill.description || '',
+       prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
+       named: namedMap[skill.id] || '',
+       namedTitle: titleMap[skill.id] || '',
+     })).filter(skill => skill.id);
+   }
 
   function stableHash(str) {
-    let hash = 2166136261;
+    let h = 2166136261;
     for (let i = 0; i < str.length; i += 1) {
-      hash ^= str.charCodeAt(i);
-      hash = Math.imul(hash, 16777619);
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
     }
-    return hash >>> 0;
+    return Math.abs(h >>> 0);
   }
 
-  function placeNodes() {
-    const groups = { basic: [], extra: [], ultimate: [] };
-    skills.forEach(skill => (groups[skill.type] || groups.basic).push(skill));
-    Object.entries(groups).forEach(([type, list]) => {
-      list.sort((a, b) => `${a.level} ${a.name}`.localeCompare(`${b.level} ${b.name}`));
-      list.forEach((skill, index) => {
-        const seed = stableHash(skill.id);
-        const angle = Math.PI * 2 * index / Math.max(list.length, 1) - Math.PI / 2 + ((seed % 997) / 997 - .5) * .18;
-        const radius = typeRadius[type] || 250;
-        skill.x = Math.cos(angle) * radius;
-        skill.y = Math.sin(angle) * radius;
-        skill.size = typeSize[type] || 5;
-      });
-    });
-  }
-
-  function resize() {
-    dpr = window.devicePixelRatio || 1;
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    draw();
-  }
-
-  function screenPoint(node) {
+  function spherePoint(radius, seed, index, count) {
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const i = index + (seed % 17) / 17;
+    const y = 1 - (i / Math.max(count - 1, 1)) * 2;
+    const ring = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = golden * i + (seed % 360) * Math.PI / 180;
     return {
-      x: width / 2 + view.x + node.x * view.scale,
-      y: height / 2 + view.y + node.y * view.scale
+      x: Math.cos(theta) * ring * radius,
+      y: y * radius,
+      z: Math.sin(theta) * ring * radius,
+      phase: (seed % 628) / 100,
     };
   }
 
-  function isVisible(node) {
-    const text = `${node.id} ${node.name} ${node.named} ${node.namedTitle}`.toLowerCase();
-    if (query && !text.includes(query)) return false;
-    if (namedOnly && !node.named) return false;
-    return true;
+  function buildPositions(skills, scale) {
+    const groups = { basic:[], extra:[], ultimate:[] };
+    skills.forEach(skill => (groups[skill.type] || groups.basic).push(skill));
+    Object.values(groups).forEach(group => group.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id)));
+    const positions = {};
+    const radii = { basic: 250 * scale, extra: 145 * scale, ultimate: 44 * scale };
+    Object.entries(groups).forEach(([type, group]) => {
+      group.forEach((skill, index) => {
+        positions[skill.id] = spherePoint(radii[type] || radii.basic, stableHash(skill.id), index, group.length);
+      });
+    });
+    return positions;
+  }
+
+  const skills = normalizeSkills(graph);
+  const positions = buildPositions(skills, SCALE);
+
+  const state = {
+    skills,
+    positions,
+    stars: [],
+    width: 0,
+    height: 0,
+    t: 0,
+    orbitX: 0,
+    orbitY: 0,
+    zoom: 1,
+    dragging: false,
+    dragLastX: 0,
+    dragLastY: 0,
+    dragStartX: 0,
+    dragStartY: 0,
+    dragMoved: false,
+    hoveredId: null,
+    projectedNodes: {},
+    nodeAlphas: {},
+    searchText: '',
+    legendFilterType: null,
+    legendFilterRank: null,
+    legendHoverType: null,
+    legendHoverRank: null,
+    legendEl: null,
+    showTitles: false,
+    redPillActive: false,
+    namedMap,
+    titleMap,
+    tooltipEl: null,
+    searchInputEl: null,
+    redPillEl: null,
+    labelToggleEl: null,
+  };
+
+  function rotX(p, a) {
+    const c = Math.cos(a), s = Math.sin(a);
+    return { x: p.x, y: c*p.y - s*p.z, z: s*p.y + c*p.z, phase: p.phase };
+  }
+  function rotY(p, a) {
+    const c = Math.cos(a), s = Math.sin(a);
+    return { x: c*p.x + s*p.z, y: p.y, z: -s*p.x + c*p.z, phase: p.phase };
+  }
+  function project(p) {
+    const fov = Math.min(state.width, state.height) * 0.75;
+    const dist = fov / (fov + p.z + 360 * SCALE);
+    const z = state.zoom;
+    return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
+  }
+  function drawNode(sx, sy, r, color, alpha) {
+    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
+    grad.addColorStop(0, `rgba(${color.rgb},${Math.min(alpha * 0.68, 1).toFixed(2)})`);
+    grad.addColorStop(0.42, `rgba(${color.rgb},${Math.min(alpha * 0.24, 1).toFixed(2)})`);
+    grad.addColorStop(1, `rgba(${color.rgb},0)`);
+    ctx.beginPath(); ctx.arc(sx, sy, r * 3.9, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+    ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${color.rgb},${Math.min(alpha * 1.18, 1).toFixed(2)})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
+  }
+  function drawNodeNamed(sx, sy, r, alpha) {
+    const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 4.2);
+    glow.addColorStop(0,   `rgba(239,68,68,${Math.min(alpha * 0.7, 1).toFixed(2)})`);
+    glow.addColorStop(0.4, `rgba(239,68,68,${Math.min(alpha * 0.25, 1).toFixed(2)})`);
+    glow.addColorStop(1,   'rgba(239,68,68,0)');
+    ctx.beginPath(); ctx.arc(sx, sy, r * 4.2, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+    ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(239,68,68,${Math.min(alpha * 1.2, 1).toFixed(2)})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
+  }
+  function drawNodeVI(sx, sy, r, alpha, t, p) {
+    const hue = (t * 45) % 360;
+    const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + (p.phase || 0));
+    const glowR = r * (4.8 + glowPulse);
+    const glow = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, glowR);
+    glow.addColorStop(0,    `hsla(${hue},100%,72%,${(alpha * 0.55).toFixed(2)})`);
+    glow.addColorStop(0.35, `hsla(${(hue + 90) % 360},100%,65%,${(alpha * 0.32).toFixed(2)})`);
+    glow.addColorStop(0.65, `hsla(45,100%,58%,${(alpha * 0.18).toFixed(2)})`);
+    glow.addColorStop(1,    'hsla(45,100%,50%,0)');
+    ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+    const coreGrad = ctx.createRadialGradient(sx - r * 0.25, sy - r * 0.25, 0, sx, sy, r * 1.05);
+    coreGrad.addColorStop(0,    `hsla(${(hue + 200) % 360},100%,88%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
+    coreGrad.addColorStop(0.45, `hsla(${hue},100%,68%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
+    coreGrad.addColorStop(0.8,  `hsla(${(hue + 60) % 360},90%,55%,${alpha.toFixed(2)})`);
+    coreGrad.addColorStop(1,    `hsla(45,100%,45%,${alpha.toFixed(2)})`);
+    ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = coreGrad; ctx.fill();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI * 2 * i / 6) + t * 0.4;
+      const dist = r * (1.65 + 0.35 * Math.sin(t * 2.1 + i));
+      const sAlpha = alpha * (0.5 + 0.5 * Math.sin(t * 3.0 + i * 1.05));
+      ctx.beginPath();
+      ctx.arc(sx + Math.cos(angle) * dist, sy + Math.sin(angle) * dist, r * 0.2, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${(hue + i * 60) % 360},100%,82%,${sAlpha.toFixed(2)})`; ctx.fill();
+    }
+    ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
+  }
+
+  function shouldLabel(skill) {
+    if (state.redPillActive && state.namedMap[skill.id]) return true;
+    if (state.showTitles) return true;
+    return skill.type === 'ultimate';
+  }
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    state.width = canvas.parentElement.clientWidth;
+    state.height = canvas.parentElement.clientHeight;
+    canvas.width = Math.floor(state.width * dpr);
+    canvas.height = Math.floor(state.height * dpr);
+    canvas.style.width = state.width + 'px';
+    canvas.style.height = state.height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    state.stars = Array.from({ length: 260 }, (_, i) => {
+      const seed = i * 7919 + 97;
+      const point = spherePoint((500 + (seed % 280)) * SCALE, seed, i, 260);
+      return { ...point, size: 0.4 + (seed % 13) / 10, alpha: 0.22 + (seed % 55) / 100 };
+    });
   }
 
   function draw() {
-    if (!ctx) return;
-    ctx.clearRect(0, 0, width, height);
-    const visible = new Set(skills.filter(isVisible));
-    const dimmed = query || namedOnly;
+    state.t += 0.006;
+    ctx.clearRect(0, 0, state.width, state.height);
+    state.projectedNodes = {};
 
-    ctx.save();
-    ctx.translate(width / 2 + view.x, height / 2 + view.y);
-    ctx.scale(view.scale, view.scale);
-    [typeRadius.basic, typeRadius.extra, typeRadius.ultimate].forEach(radius => {
-      ctx.beginPath();
-      ctx.arc(0, 0, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(148, 163, 184, .12)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+     const ry = state.orbitY;
+     const rx = state.orbitX;
+
+    const xf = {};
+    state.skills.forEach(skill => {
+      const p0 = state.positions[skill.id];
+      if (!p0) return;
+      xf[skill.id] = rotX(rotY(p0, ry), rx);
     });
-    ctx.restore();
 
+    const neighborSet = new Set();
+    if (state.hoveredId) {
+      neighborSet.add(state.hoveredId);
+      const hoveredSkill = state.skills.find(s => s.id === state.hoveredId);
+      if (hoveredSkill) {
+        hoveredSkill.prerequisites.forEach(pid => neighborSet.add(pid));
+        state.skills.forEach(s => { if (s.prerequisites.includes(state.hoveredId)) neighborSet.add(s.id); });
+      }
+    }
+
+    const hovering = Boolean(state.hoveredId);
+    const isSearchActive = Boolean(state.searchText);
+    const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
+    const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
+    const legendFiltering = Boolean(state.legendFilterType || state.legendFilterRank);
+
+    state.skills.forEach(skill => {
+      let targetVis;
+      if (hovering) {
+        targetVis = skill.id === state.hoveredId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
+      } else if (legendHovering) {
+        const mt = !state.legendHoverType || skill.type === state.legendHoverType;
+        const mr = !state.legendHoverRank || skill.level === state.legendHoverRank;
+        targetVis = (mt && mr) ? 1.0 : 0.12;
+      } else if (legendFiltering) {
+        const mt = !state.legendFilterType || skill.type === state.legendFilterType;
+        const mr = !state.legendFilterRank || skill.level === state.legendFilterRank;
+        const matchesLegend = mt && mr;
+        if (isSearchActive) {
+          const matchesSearch = (skill.name || skill.id).toLowerCase().includes(searchQuery);
+          targetVis = (matchesLegend && matchesSearch) ? 1.0 : 0.12;
+        } else {
+          targetVis = matchesLegend ? 1.0 : 0.12;
+        }
+      } else if (isSearchActive) {
+        targetVis = (skill.name || skill.id).toLowerCase().includes(searchQuery) ? 1.0 : 0.12;
+      } else {
+        targetVis = 1.0;
+      }
+      if (state.redPillActive && !state.namedMap[skill.id]) targetVis = Math.min(targetVis, 0.07);
+      if (state.nodeAlphas[skill.id] === undefined) state.nodeAlphas[skill.id] = targetVis;
+      state.nodeAlphas[skill.id] += (targetVis - state.nodeAlphas[skill.id]) * 0.15;
+    });
+
+    state.stars.forEach(star => {
+      const p = rotX(rotY(star, ry), rx);
+      const pr = project(p);
+      if (pr.scale < 0.01) return;
+      ctx.beginPath();
+      ctx.arc(pr.sx, pr.sy, star.size * pr.scale * 1.55, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${(star.alpha * Math.min(pr.scale * 2, 1)).toFixed(2)})`; ctx.fill();
+    });
+
+    const edges = [];
+    state.skills.forEach(skill => {
+      if (!xf[skill.id]) return;
+      skill.prerequisites.forEach(pid => {
+        if (!xf[pid]) return;
+        edges.push({ from: pid, to: skill.id, type: skill.type, avgZ: (xf[skill.id].z + xf[pid].z) / 2 });
+      });
+    });
+    edges.sort((a,b) => a.avgZ - b.avgZ);
     edges.forEach(edge => {
-      const sourceVisible = visible.has(edge.source);
-      const targetVisible = visible.has(edge.target);
-      if (dimmed && (!sourceVisible || !targetVisible)) return;
-      const source = screenPoint(edge.source);
-      const target = screenPoint(edge.target);
-      ctx.beginPath();
-      ctx.moveTo(source.x, source.y);
-      ctx.lineTo(target.x, target.y);
-      ctx.strokeStyle = `${palette[edge.target.type] || palette.basic}66`;
-      ctx.lineWidth = 1;
+      const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
+      const col = PALETTE[edge.type] || PALETTE.basic;
+      const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * SCALE) / (860 * SCALE), 0.08), 1);
+      const isNeighborEdge = hovering && neighborSet.has(edge.from) && neighborSet.has(edge.to);
+      const fromVis = state.nodeAlphas[edge.from] ?? 1.0;
+      const toVis   = state.nodeAlphas[edge.to]   ?? 1.0;
+      const edgeVis = (fromVis + toVis) / 2;
+      const baseEdgeAlpha = isNeighborEdge ? 0.72 : 0.31;
+      ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy);
+      ctx.strokeStyle = `rgba(${col.rgb},${(depthAlpha * baseEdgeAlpha * edgeVis).toFixed(2)})`; 
+      ctx.lineWidth = isNeighborEdge ? (edge.type === 'ultimate' ? 2.2 : 1.4) : (edge.type === 'ultimate' ? 1.55 : 0.92);
       ctx.stroke();
     });
 
-    skills.forEach(node => {
-      const visibleNode = visible.has(node);
-      const point = screenPoint(node);
-      const color = palette[node.type] || palette.basic;
-      ctx.globalAlpha = dimmed && !visibleNode ? .1 : 1;
-      ctx.beginPath();
-      ctx.arc(point.x, point.y, Math.max(3, node.size * view.scale), 0, Math.PI * 2);
-      ctx.fillStyle = color;
-      ctx.shadowColor = color;
-      ctx.shadowBlur = visibleNode ? 14 : 0;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-      if (node === hovered) {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#f8fafc';
-        ctx.stroke();
-      }
-      if ((node.type !== 'basic' || node.named || node === hovered) && visibleNode) {
-        ctx.font = `${node.type === 'ultimate' ? 700 : 600} 12px Inter, system-ui, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#e2e8f0';
-        ctx.fillText(node.named || node.name, point.x, point.y - node.size * view.scale - 9);
+    const nodes = state.skills.map(skill => ({ skill, z: xf[skill.id] ? xf[skill.id].z : -9999 })).sort((a,b) => a.z - b.z);
+    nodes.forEach(({ skill }) => {
+      const p = xf[skill.id]; if (!p) return;
+      const pr = project(p);
+      state.projectedNodes[skill.id] = pr;
+      const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
+      const depthAlpha = Math.min(Math.max((p.z + 430 * SCALE) / (860 * SCALE), 0.16), 1);
+      const col = PALETTE[skill.type] || PALETTE.basic;
+      const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
+      const vis = state.nodeAlphas[skill.id] ?? 1.0;
+      if (skill.level === 'VI') {
+        drawNodeVI(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, depthAlpha * vis, state.t, p);
+      } else if (state.redPillActive && state.namedMap[skill.id]) {
+        drawNodeNamed(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, depthAlpha * vis);
+      } else {
+        drawNode(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, col, depthAlpha * vis);
       }
     });
-    ctx.globalAlpha = 1;
-  }
 
-  function findNode(x, y) {
-    let best = null;
-    let bestDistance = Infinity;
-    skills.forEach(node => {
-      if (!isVisible(node)) return;
-      const point = screenPoint(node);
-      const distance = Math.hypot(point.x - x, point.y - y);
-      if (distance < Math.max(11, node.size * view.scale + 6) && distance < bestDistance) {
-        best = node;
-        bestDistance = distance;
-      }
+    const labelNodes = nodes.filter(({ skill }) => shouldLabel(skill));
+    function drawLabel(skill, highlighted) {
+      const p = xf[skill.id]; if (!p) return;
+      const pr = project(p);
+      const depthAlpha = Math.min(Math.max((p.z + 430 * SCALE) / (860 * SCALE), 0), 1);
+      if (!highlighted && depthAlpha < 0.22) return;
+      const vis = state.nodeAlphas[skill.id] ?? 1.0;
+      const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
+      if (labelAlpha < 0.04) return;
+      const col = (state.redPillActive && state.namedMap[skill.id])
+        ? { rgb:'239,68,68' }
+        : (PALETTE[skill.type] || PALETTE.basic);
+      const size = skill.type === 'ultimate' ? 13 : skill.type === 'extra' ? 10 : 8;
+      ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
+      ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`; ctx.textAlign = 'center';
+      const labelText = (state.redPillActive && state.namedMap && state.namedMap[skill.id])
+        ? state.namedMap[skill.id]
+        : state.showTitles
+          ? ((state.titleMap && state.titleMap[skill.id]) || skill.name)
+          : '/' + skill.id;
+      ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
+    }
+    labelNodes.forEach(({ skill }) => {
+      const vis = state.nodeAlphas[skill.id] ?? 1.0;
+      if (vis <= 0.95) drawLabel(skill, false);
     });
-    return best;
+    labelNodes.forEach(({ skill }) => {
+      const vis = state.nodeAlphas[skill.id] ?? 1.0;
+      if (vis > 0.95) drawLabel(skill, true);
+    });
+
+    if (state.tooltipEl) {
+      const pr = state.projectedNodes[state.hoveredId];
+      if (state.hoveredId && pr) {
+        if (state.hoveredId !== state.lastHoveredId) {
+          const skill = state.skills.find(s => s.id === state.hoveredId);
+          const col = PALETTE[skill.type] || PALETTE.basic;
+          const typeClass = `skill-tooltip-type-${skill.type}`;
+          const rm = skill.level ? RANK_META[skill.level] : null;
+          const rankPill = rm
+            ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level}</span>`
+            : '';
+          state.tooltipEl.innerHTML =
+            `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +
+            `<div style="color:#64748b;font-size:.68rem;font-weight:500;margin-bottom:.3rem;font-family:monospace">${skill.id}</div>` +
+            `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}</div>` +
+            `<div style="color:#94a3b8;font-size:.72rem;margin-top:.18rem;line-height:1.35">${skill.description || ''}</div>`;
+          state.lastHoveredId = state.hoveredId;
+        }
+        let tx = pr.sx + 18, ty = pr.sy - 34;
+        tx = Math.min(tx, state.width - 240); ty = Math.max(ty, 8);
+        state.tooltipEl.style.left = tx + 'px';
+        state.tooltipEl.style.top  = ty + 'px';
+        state.tooltipEl.style.display = 'block';
+      } else {
+        state.tooltipEl.style.display = 'none';
+        state.lastHoveredId = null;
+      }
+    }
+
+    state.frame = requestAnimationFrame(draw);
   }
 
-  function escapeHtml(value) {
-    return String(value || '').replace(/[&<>"']/g, char => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    }[char]));
+  function initDOM() {
+    const tip = document.createElement('div');
+    tip.className = 'skill-tooltip';
+    canvas.parentElement.appendChild(tip);
+    state.tooltipEl = tip;
+
+    const searchWrap = document.createElement('div');
+    searchWrap.className = 'graph-search-wrap';
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'graph-search';
+    searchInput.placeholder = 'Search skills…';
+    searchInput.setAttribute('aria-label', 'Filter skill graph');
+    searchInput.addEventListener('input', () => { state.searchText = searchInput.value.trim(); });
+    searchInput.addEventListener('mousedown', e => e.stopPropagation());
+    searchWrap.appendChild(searchInput);
+    canvas.parentElement.appendChild(searchWrap);
+    state.searchInputEl = searchInput;
+
+    const legend = document.createElement('div');
+    legend.className = 'graph-legend';
+    legend.innerHTML =
+      '<div class="graph-legend-section"><div class="graph-legend-heading">Type</div>' +
+      '<div class="graph-legend-item" data-legend-type="basic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Basic</div>' +
+      '<div class="graph-legend-item" data-legend-type="extra"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Extra</div>' +
+      '<div class="graph-legend-item" data-legend-type="ultimate"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Ultimate</div>' +
+      '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
+      '<div class="graph-legend-ranks">' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="I"  style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="II" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="III"style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="IV" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="V"  style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="VI" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+      '</div></div>';
+    legend.addEventListener('mousedown', e => e.stopPropagation());
+    legend.querySelectorAll('.graph-legend-item[data-legend-type]').forEach(item => {
+      item.addEventListener('mouseenter', () => { state.legendHoverType = item.dataset.legendType; });
+      item.addEventListener('mouseleave', () => { state.legendHoverType = null; });
+      item.addEventListener('click', () => {
+        const val = state.legendFilterType === item.dataset.legendType ? null : item.dataset.legendType;
+        state.legendFilterType = val;
+        legend.querySelectorAll('[data-legend-type]').forEach(el => el.classList.remove('active'));
+        if (val) item.classList.add('active');
+      });
+    });
+    legend.querySelectorAll('.graph-legend-rank-pill').forEach(pill => {
+      pill.addEventListener('mouseenter', () => { state.legendHoverRank = pill.dataset.legendRank; });
+      pill.addEventListener('mouseleave', () => { state.legendHoverRank = null; });
+      pill.addEventListener('click', () => {
+        const val = state.legendFilterRank === pill.dataset.legendRank ? null : pill.dataset.legendRank;
+        state.legendFilterRank = val;
+        legend.querySelectorAll('.graph-legend-rank-pill').forEach(el => el.classList.remove('active'));
+        if (val) pill.classList.add('active');
+      });
+    });
+    canvas.parentElement.appendChild(legend);
+    state.legendEl = legend;
+
+    const redPill = document.createElement('button');
+    redPill.type = 'button';
+    redPill.className = 'graph-redpill';
+    redPill.textContent = 'Named Skills';
+    redPill.title = 'Highlight Named skills (Level II+) with contributor attribution and red glow';
+    redPill.addEventListener('mousedown', e => e.stopPropagation());
+    redPill.addEventListener('click', () => {
+      state.redPillActive = !state.redPillActive;
+      redPill.classList.toggle('active', state.redPillActive);
+    });
+    canvas.parentElement.appendChild(redPill);
+    state.redPillEl = redPill;
+
+    const labelToggle = document.createElement('button');
+    labelToggle.type = 'button';
+    labelToggle.className = 'graph-label-toggle';
+    labelToggle.textContent = 'Show Title';
+    labelToggle.addEventListener('mousedown', e => e.stopPropagation());
+    labelToggle.addEventListener('click', () => {
+      state.showTitles = !state.showTitles;
+      labelToggle.classList.toggle('active', state.showTitles);
+    });
+    canvas.parentElement.appendChild(labelToggle);
+    state.labelToggleEl = labelToggle;
   }
 
-  function updateTooltip(node, x, y) {
-    if (!node) {
-      tooltip.style.display = 'none';
+  function resetFilters() {
+    state.legendFilterType = null;
+    state.legendFilterRank = null;
+    state.legendHoverType = null;
+    state.legendHoverRank = null;
+    state.showTitles = false;
+    state.searchText = '';
+    state.redPillActive = false;
+    if (state.redPillEl) state.redPillEl.classList.remove('active');
+    if (state.legendEl) {
+      state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+    }
+    if (state.searchInputEl) state.searchInputEl.value = '';
+    if (state.labelToggleEl) state.labelToggleEl.classList.remove('active');
+  }
+
+  function handlePointerMove(event) {
+    const rect = canvas.getBoundingClientRect();
+    if (state.dragging) {
+      state.orbitY += (event.clientX - state.dragLastX) * 0.007;
+      state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+      state.dragLastX = event.clientX;
+      state.dragLastY = event.clientY;
+      if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 5) state.dragMoved = true;
+      state.hoveredId = null;
       return;
     }
-    const title = node.namedTitle || node.name;
-    const label = node.named ? `${node.named} | ${node.level || node.type}` : `${node.id} | ${node.level || node.type}`;
-    tooltip.innerHTML = `<strong>${escapeHtml(title)}</strong><span>${escapeHtml(label)}</span><br><span>${escapeHtml(node.description)}</span>`;
-    tooltip.style.left = `${Math.min(x + 14, window.innerWidth - tooltip.offsetWidth - 16)}px`;
-    tooltip.style.top = `${Math.min(y + 14, window.innerHeight - tooltip.offsetHeight - 16)}px`;
-    tooltip.style.display = 'block';
+
+    const mxScreen = event.clientX - rect.left;
+    const myScreen = event.clientY - rect.top;
+    let closest = null, closestDist = 22;
+    Object.entries(state.projectedNodes).forEach(([id, pr]) => {
+      const d = Math.hypot(pr.sx - mxScreen, pr.sy - myScreen);
+      if (d < closestDist) { closestDist = d; closest = id; }
+    });
+    state.hoveredId = closest;
+    canvas.style.cursor = closest ? 'pointer' : 'default';
   }
 
-  function reset() {
-    view = { x: 0, y: 0, scale: 1 };
-    draw();
-  }
-
-  canvas.addEventListener('pointerdown', event => {
-    dragging = true;
-    pointer = { x: event.clientX, y: event.clientY };
-    dragStart = { x: event.clientX, y: event.clientY, viewX: view.x, viewY: view.y };
-    canvas.setPointerCapture(event.pointerId);
-  });
-  canvas.addEventListener('pointermove', event => {
-    pointer = { x: event.clientX, y: event.clientY };
-    if (dragging) {
-      view.x = dragStart.viewX + event.clientX - dragStart.x;
-      view.y = dragStart.viewY + event.clientY - dragStart.y;
-      draw();
-      return;
-    }
-    hovered = findNode(event.clientX, event.clientY);
-    updateTooltip(hovered, event.clientX, event.clientY);
-    draw();
-  });
-  canvas.addEventListener('pointerup', event => {
-    dragging = false;
-    canvas.releasePointerCapture(event.pointerId);
-  });
-  canvas.addEventListener('wheel', event => {
+  function handleMouseDown(event) {
     event.preventDefault();
-    const nextScale = Math.max(.45, Math.min(2.7, view.scale * (event.deltaY > 0 ? .9 : 1.1)));
-    view.scale = nextScale;
-    hovered = findNode(pointer.x, pointer.y);
-    updateTooltip(hovered, pointer.x, pointer.y);
-    draw();
-  }, { passive: false });
-  search.addEventListener('input', () => {
-    query = search.value.trim().toLowerCase();
-    hovered = null;
-    updateTooltip(null);
-    draw();
-  });
-  namedToggle.addEventListener('click', () => {
-    namedOnly = !namedOnly;
-    namedToggle.classList.toggle('active', namedOnly);
-    hovered = null;
-    updateTooltip(null);
-    draw();
-  });
-  resetView.addEventListener('click', reset);
-  window.addEventListener('resize', resize);
+    state.dragging = true;
+    state.dragMoved = false;
+    state.dragStartX = event.clientX;
+    state.dragStartY = event.clientY;
+    state.dragLastX = event.clientX;
+    state.dragLastY = event.clientY;
+    canvas.style.cursor = 'grabbing';
+    state.hoveredId = null;
+  }
 
-  placeNodes();
-  meta.textContent = `${skills.length} skills, ${edges.length} prerequisites, version ${graph.version || 'unknown'}`;
+  function handleMouseUp() {
+    if (!state.dragging) return;
+    const didClick = !state.dragMoved && state.hoveredId;
+    state.dragging = false;
+    state.dragMoved = false;
+    canvas.style.cursor = state.hoveredId ? 'pointer' : 'default';
+  }
+
+  function handleWheel(event) {
+    event.preventDefault();
+    state.zoom = Math.max(0.3, Math.min(3.0, state.zoom * (1 - event.deltaY * 0.001)));
+  }
+
   resize();
+  initDOM();
+  meta.textContent = `${skills.length} skills, ${skills.reduce((sum, s) => sum + s.prerequisites.length, 0)} prerequisites, version ${graph.version || 'unknown'}`;
+  resetView.addEventListener('click', resetFilters);
+  canvas.addEventListener('mousemove', handlePointerMove);
+  canvas.addEventListener('mousedown', handleMouseDown);
+  window.addEventListener('mouseup', handleMouseUp);
+  canvas.addEventListener('wheel', handleWheel, { passive: false });
+  window.addEventListener('resize', resize);
+  draw();
 })();
 </script>
 </body>
