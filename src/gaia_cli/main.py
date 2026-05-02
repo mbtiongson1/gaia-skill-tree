@@ -14,7 +14,7 @@ from gaia_cli.resolver import resolve_skills
 from gaia_cli.combinator import get_combinations
 from gaia_cli.treeManager import load_tree, save_tree, show_status, show_tree
 from gaia_cli.prWriter import open_pr, open_intake_pr
-from gaia_cli.push import build_skill_batch, write_skill_batch
+from gaia_cli.push import build_skill_batch, write_skill_batch, build_proposed_skill, detect_source_repo
 from gaia_cli.embeddings import generate_embeddings
 from gaia_cli.semantic_search import search as semantic_search, load_embeddings
 from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
@@ -94,6 +94,7 @@ PUBLIC_COMMANDS = (
     "pull",
     "tree",
     "push",
+    "propose",
     "version",
     "mcp",
     "release",
@@ -508,6 +509,68 @@ def promote_command(args):
     if display_name:
         print(f"  Renamed to: {display_name}")
     print()
+
+
+def propose_command(args):
+    """Propose a single canonical skill as a named skill intake."""
+    config = load_config()
+    if not config:
+        print("Gaia not initialized.")
+        return
+    skill_id = (getattr(args, "skillId", "") or "").lstrip("/")
+    graph_path = registry_graph_path(args.registry)
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = json.load(f)
+    skill_map = {s["id"]: s for s in graph_data.get("skills", [])}
+    skill = skill_map.get(skill_id)
+    if not skill:
+        print(f"Skill '{skill_id}' not found in canonical graph.")
+        return
+    if getattr(args, "ultimate", False) and skill.get("type") != "ultimate":
+        print(f"Skill '{skill_id}' is not an ultimate skill. Use --ultimate only for ultimate skills.")
+        return
+    if not getattr(args, "ultimate", False) and skill.get("type") == "ultimate":
+        print("Tip: this is an ultimate skill. Re-run with `gaia propose /<skill> --ultimate`.")
+
+    print(f"Appraisal: /{skill['id']} ({skill.get('type', 'unknown')})")
+    print(f"Name: {skill.get('name', skill['id'])}")
+    print(f"Description: {skill.get('description', '')}")
+
+    suggested = f"{config.get('gaiaUser', 'gaiabot')}/{skill_id}"
+    target_named = getattr(args, "target", None)
+    if not target_named:
+        if sys.stdin.isatty() and not getattr(args, "yes", False):
+            target_named = input(f"Name this skill as [{suggested}]: ").strip() or suggested
+        else:
+            target_named = suggested
+    if "/" not in target_named:
+        print("Named skill must be in '<contributor>/<name>' format.")
+        return
+    contributor, skill_name = target_named.split("/", 1)
+
+    proposed_skill = build_proposed_skill(skill_id, detect_source_repo(config))
+    proposed_skill["name"] = skill.get("name", proposed_skill["name"])
+    proposed_skill["description"] = skill.get("description", proposed_skill["description"])
+    proposed_skill["type"] = skill.get("type", "basic")
+    batch = {
+        "batchId": f"proposal-{skill_id}-{date.today().isoformat()}",
+        "userId": config.get("gaiaUser", "unknown"),
+        "sourceRepo": detect_source_repo(config),
+        "generatedAt": f"{date.today().isoformat()}T00:00:00Z",
+        "knownSkills": [{"skillId": skill_id}],
+        "proposedSkills": [proposed_skill],
+        "similarity": [],
+    }
+    batch_path = write_skill_batch(batch, args.registry)
+    promote_to_named(proposed_skill, contributor, skill_name, args.registry)
+    update_batch_lifecycle(batch_path, skill_id, "named")
+    print(f"Proposed named skill: {target_named}")
+    print(f"Wrote proposal batch: {batch_path}")
+
+    if getattr(args, "no_pr", False):
+        print("Skipped PR creation (--no-pr).")
+        return
+    open_intake_pr(config.get("gaiaUser", "unknown"), batch, batch_path=batch_path, repo_root=args.registry)
 
 
 def paths_command(args):
@@ -933,6 +996,12 @@ def get_parser():
     push_parser = subparsers.add_parser('push', help="Prepare detected skills for review")
     push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
     push_parser.add_argument('--no-pr', action='store_true', help="Write intake record without creating a PR")
+    propose_parser = subparsers.add_parser('propose', help="Propose a single canonical skill as a named PR")
+    propose_parser.add_argument('skillId', help="Canonical skill ID (accepts /skill-id form)")
+    propose_parser.add_argument('--target', help="Named skill target in contributor/skill-name format")
+    propose_parser.add_argument('--ultimate', action='store_true', help="Require that the selected skill is ultimate")
+    propose_parser.add_argument('--yes', action='store_true', help="Use defaults without interactive prompts")
+    propose_parser.add_argument('--no-pr', action='store_true', help="Write intake proposal without opening a PR")
     subparsers.add_parser('version', help="Print the Gaia CLI version")
     subparsers.add_parser('mcp', help="Run the bundled Gaia MCP server")
     release_parser = subparsers.add_parser('release', help="Bump release version files")
@@ -1005,6 +1074,8 @@ def main():
         tree_command(args)
     elif args.command == 'push':
         push_command(args)
+    elif args.command == 'propose':
+        propose_command(args)
     elif args.command == 'version':
         version_command(args)
     elif args.command == 'mcp':
