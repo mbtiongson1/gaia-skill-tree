@@ -2754,7 +2754,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     document.getElementById('uspGlyph').style.color = glyphColor;
     document.getElementById('uspName').textContent = skill.name || skill.id;
     document.getElementById('uspId').textContent = skill.id;
-    var cmd = 'gaia push';
+    var cmd = 'gaia propose /' + skill.id + (skill.type === 'ultimate' ? ' --ultimate' : '');
     document.getElementById('uspCmd').textContent = cmd;
     document.getElementById('uspCmd').dataset.cmd = cmd;
     pop.classList.add('open');
@@ -2943,7 +2943,7 @@ window.switchOsTab = function(btn) {
     <p class="usp-body">This skill has no named implementation yet. <span class="usp-cta">Be the first to claim it</span> — build a real implementation, submit it for review, and your name goes on the canonical registry forever.</p>
     <div class="usp-row">
       <span class="usp-prompt">$</span>
-      <span id="uspCmd" class="usp-cmd">gaia push</span>
+      <span id="uspCmd" class="usp-cmd">gaia propose /web-search</span>
       <button class="usp-copy" id="uspCopyBtn" title="Copy command">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>
       </button>
