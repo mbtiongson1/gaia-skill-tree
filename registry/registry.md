@@ -23,6 +23,7 @@
 | ○ /data-visualize | Basic | II | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
+| ○ openai/sentry | Basic | II | Named | `/detect-anomaly` |
 | ○ openai/yeet | Basic | I | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | III | Evolved | `/document-analyst` |
 | ◇ Extra Skill: /document-digitization | Extra Skill | III | Evolved | `/document-digitization` |
@@ -35,6 +36,8 @@
 | ○ /format-output | Basic | 0 | Basic | `/format-output` |
 | ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/full-stack-developer` |
 | ◇ Extra Skill: /function-calling | Extra Skill | III | Evolved | `/function-calling` |
+| ◇ Extra Skill: /gaia-audit | Extra Skill | II | Named | `/gaia-audit` |
+| ◇ Extra Skill: /gaia-meta-audit | Extra Skill | III | Evolved | `/gaia-meta-audit` |
 | ○ /generate-sql | Basic | II | Named | `/generate-sql` |
 | ○ upsonic/unittest-generator | Basic | II | Named | `/generate-test` |
 | ○ /generate-text | Basic | 0 | Basic | `/generate-text` |
@@ -108,7 +111,6 @@
 | ○ Code Execution | Intrinsic Skill | II | Named | `/code-execution` |
 | ○ Code Explain | Intrinsic Skill | II | Named | `/code-explain` |
 | ○ Context Compression | Intrinsic Skill | III | Evolved | `/context-compression` |
-| ○ Detect Anomaly | Intrinsic Skill | II | Named | `/detect-anomaly` |
 | ○ Document Editing | Intrinsic Skill | 0 | Basic | `/document-editing` |
 | ○ Few-Shot Learning | Intrinsic Skill | IV | Hardened | `/few-shot-learning` |
 | ○ Fine-Tune | Intrinsic Skill | IV | Hardened | `/fine-tune` |

@@ -2,6 +2,7 @@ import subprocess
 import os
 import sys
 import unittest
+import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -67,6 +68,44 @@ class TestValidate(unittest.TestCase):
         code, out = run_validate(os.path.join(FIXTURES_DIR, "basic_with_prereqs.json"))
         self.assertEqual(code, 1, "Expected basic-with-prereqs to fail validation.")
         self.assertIn("must have 0 prerequisites", out)
+
+    def test_gaia_audit_skills_are_modeled(self):
+        """Ensure Gaia audit workflows are represented as canonical skills."""
+        with open(REAL_GRAPH_PATH, encoding="utf-8") as f:
+            graph = json.load(f)
+        skills = {skill["id"]: skill for skill in graph.get("skills", [])}
+
+        self.assertIn("gaia-audit", skills)
+        self.assertIn("gaia-meta-audit", skills)
+        self.assertEqual(
+            skills["gaia-audit"]["prerequisites"],
+            ["retrieve", "cite-sources", "evaluate-output"],
+        )
+        self.assertIn("gaia-audit", skills["gaia-meta-audit"]["prerequisites"])
+        self.assertIn("registry-curation", skills["gaia-meta-audit"]["prerequisites"])
+
+    def test_contributing_documents_demotion_criteria(self):
+        """Ensure review policy documents when skills should be demoted."""
+        path = os.path.join(REPO_ROOT, "CONTRIBUTING.md")
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        normalized = text.lower()
+
+        self.assertIn("Demotion and Reclassification Criteria", text)
+        self.assertIn("outdated", normalized)
+        self.assertIn("superseded", normalized)
+        self.assertIn("overpromoted", normalized)
+        self.assertIn("insufficient usage evidence", normalized)
+
+    def test_claude_audit_skills_exist(self):
+        """Ensure the repo-local audit slash skills are present."""
+        for skill_name in ("gaia-audit", "gaia-meta-audit"):
+            path = os.path.join(REPO_ROOT, ".claude", "skills", skill_name, "skill.md")
+            self.assertTrue(os.path.exists(path), f"Missing {path}")
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+            self.assertIn(f"name: {skill_name}", text)
+            self.assertIn("description:", text)
 
 class TestNamedSkillValidation(unittest.TestCase):
     """Tests that verify named skill files pass validate_and_group rules."""

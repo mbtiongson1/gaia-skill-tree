@@ -85,6 +85,7 @@
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
       "derivatives": [
+        "gaia-audit",
         "grounding",
         "rag-pipeline"
       ],
@@ -284,6 +285,7 @@
       "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
       "prerequisites": [],
       "derivatives": [
+        "gaia-audit",
         "grounding",
         "research",
         "literature-review",
@@ -376,6 +378,7 @@
       "prerequisites": [],
       "derivatives": [
         "code-review-pipeline",
+        "gaia-audit",
         "grounding",
         "multi-agent-debate",
         "prompt-optimization",
@@ -1515,7 +1518,9 @@
       "rarity": "uncommon",
       "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -2005,7 +2010,9 @@
         "code-generation",
         "execute-bash"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
       "conditions": "Requires write access to the canonical graph and a passing validation suite.",
       "evidence": [
         {
@@ -2049,6 +2056,66 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-30",
       "version": "0.2.0"
+    },
+    {
+      "id": "gaia-audit",
+      "name": "Gaia Audit",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
+      "prerequisites": [
+        "retrieve",
+        "cite-sources",
+        "evaluate-output"
+      ],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
+      "conditions": "Requires a specific Gaia skill ID, named skill ID, or real-skill catalog item plus access to the registry source files and current public evidence sources.",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-03",
+          "notes": "Codified from a source-backed review that kept openai/chatgpt-apps in the real-skill catalog while removing its unsupported claim on the full-stack-developer Ultimate skill."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-03",
+      "updatedAt": "2026-05-03",
+      "version": "0.1.0"
+    },
+    {
+      "id": "gaia-meta-audit",
+      "name": "Gaia Meta Audit",
+      "type": "extra",
+      "level": "III",
+      "rarity": "rare",
+      "description": "Scans Gaia registry and real-skill catalog entries for review candidates whose evidence may be outdated, superseded, overpromoted, unmapped, stale, or insufficient for their current level or named-skill claim.",
+      "prerequisites": [
+        "gaia-audit",
+        "registry-curation",
+        "detect-anomaly"
+      ],
+      "derivatives": [],
+      "conditions": "Requires the current registry, named-skill index, real-skill catalog, and permission to compare against current source URLs or discovery indexes.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-03",
+          "notes": "Derived from registry hygiene work that audits source-backed named skills, generated projections, and demotion candidates across canonical and real-skill review surfaces."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-03",
+      "updatedAt": "2026-05-03",
+      "version": "0.1.0"
     },
     {
       "id": "tool-use",
@@ -5408,6 +5475,66 @@
       "condition": "",
       "levelFloor": "II",
       "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "retrieve",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "cite-sources",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "gaia-audit",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "registry-curation",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "detect-anomaly",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
     }
   ]
 }
