@@ -16,7 +16,7 @@ Systematically discovers, evaluates, and ingests new skill definitions into a st
 - [Execute Bash](../basic/execute-bash.md)
 
 ## Unlocks
-_None._
+- [Gaia Meta Audit](../extra/gaia-meta-audit.md)
 
 ## Fusion Condition
 Requires write access to the canonical graph and a passing validation suite.

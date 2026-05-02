@@ -697,22 +697,20 @@
       "id": "openai-chatgpt-apps",
       "name": "openai/chatgpt-apps",
       "contributor": "openai",
-      "title": "The Embedded Appwright",
       "description": "Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration.",
       "sourceRepo": "openai/skills",
       "url": "https://officialskills.sh/openai/skills/chatgpt-apps",
       "mapsToGaia": [
         "code-generation",
         "api-call",
-        "full-stack-developer"
+        "mcp-integration"
       ],
-      "promotedNamedSkillId": "openai/chatgpt-apps",
       "addedAt": "2026-05-01",
       "tags": [
         "chatgpt-apps",
+        "apps-sdk",
         "mcp",
-        "widgets",
-        "full-stack"
+        "widgets"
       ]
     },
     {
