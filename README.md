@@ -108,7 +108,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.4.0`.
+Current Gaia CLI version: `2.4.1`.
 
 Python install:
 
@@ -200,18 +200,20 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills} ...
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills}
+            ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,version,mcp,release,graph,appraise,promote,docs,skills}
+  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
     pull                Refresh registry data from origin
     tree                Show your Gaia skill tree
     push                Prepare detected skills for review
+    propose             Propose a single canonical skill as a named PR
     version             Print the Gaia CLI version
     mcp                 Run the bundled Gaia MCP server
     release             Bump release version files
@@ -223,10 +225,9 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
-                        auto-resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local
-                        .gaia/ config.
+  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to auto-resolved local or
+                        global registry.
+  --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
 
 Quick usage:

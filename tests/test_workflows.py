@@ -4,6 +4,7 @@ import unittest
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUTO_TRIAGE_PATH = os.path.join(REPO_ROOT, ".github", "workflows", "auto-triage.yml")
+DOCS_REMINDER_PATH = os.path.join(REPO_ROOT, ".github", "workflows", "pr-docs-reminder.yml")
 
 
 class TestWorkflowConfig(unittest.TestCase):
@@ -18,6 +19,16 @@ class TestWorkflowConfig(unittest.TestCase):
             content = f.read()
         self.assertIn("pull_request_target", content)
         self.assertNotIn("on:\n  pull_request:\n", content)
+
+    def test_pr_docs_reminder_shows_copyable_docs_check(self):
+        with open(DOCS_REMINDER_PATH, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        self.assertIn("pull_request:", content)
+        self.assertIn("Repo Docs Before PR reminder", content)
+        self.assertIn("python scripts/build_docs.py --check", content)
+        self.assertIn("GITHUB_STEP_SUMMARY", content)
+        self.assertNotIn("actions/checkout", content)
 
 
 if __name__ == "__main__":

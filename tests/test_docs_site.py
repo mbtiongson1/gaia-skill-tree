@@ -1,0 +1,37 @@
+from pathlib import Path
+
+from scripts import build_docs
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DOCS_DIR = REPO_ROOT / "docs"
+
+
+def test_how_we_do_things_page_is_linked_from_site_home():
+    home = (DOCS_DIR / "index.html").read_text(encoding="utf-8")
+
+    assert 'href="how-we-do-things.html"' in home
+    assert "How We Work" in home
+
+
+def test_how_we_do_things_page_covers_curation_and_review():
+    page = DOCS_DIR / "how-we-do-things.html"
+
+    assert page.exists()
+    content = page.read_text(encoding="utf-8")
+    assert "<h1>How We Work</h1>" in content
+    assert "curation" in content.lower()
+    assert "automation" in content.lower()
+    assert "reviewer" in content.lower()
+
+
+def test_build_docs_check_message_uses_copyable_python_command(monkeypatch, capsys):
+    monkeypatch.setattr(build_docs, "build_readme", lambda check: True)
+    monkeypatch.setattr(build_docs, "build_docs_index", lambda check: False)
+
+    assert build_docs.main(["--check"]) == 1
+
+    output = capsys.readouterr().out
+    assert "python scripts/build_docs.py --check" in output
+    assert "python scripts/build_docs.py" in output
+    assert "gaia docs build" not in output
