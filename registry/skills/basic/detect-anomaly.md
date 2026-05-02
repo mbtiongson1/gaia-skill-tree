@@ -14,7 +14,7 @@ Identifies statistical outliers, novel patterns, or deviations from expected beh
 _None._
 
 ## Unlocks
-_None._
+- [Gaia Meta Audit](../extra/gaia-meta-audit.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -46,7 +46,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   │  └─ ○ openai/openai-docs  [I]
   └─ ○ /math-reason  [II]
 
-◆ Ultimate Skill: openai/chatgpt-apps  [V]
+◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
   ├─ ◇ Extra Skill: openai/security-best-practices  [III]
   │  ├─ ○ /code-generation  [I]
@@ -98,7 +98,6 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /code-execution  [II · Named]
   ○ mattpocock/zoom-out - Code Explain  [II · Named]
   ○ /context-compression  [III · Evolved]
-  ○ openai/sentry - Detect Anomaly  [II · Named]
   ○ anthropic/pptx - Document Editing  [0 · Basic]
   ○ /few-shot-learning  [IV · Hardened]
   ○ /fine-tune  [IV · Hardened]

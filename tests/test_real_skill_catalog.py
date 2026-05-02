@@ -35,6 +35,16 @@ class TestRealSkillCatalog(unittest.TestCase):
         self.assertIn("openai/security-best-practices", names)
         self.assertTrue(len(names) >= 2, f"Expected at least 2 items, got: {names}")
 
+    def test_chatgpt_apps_is_not_promoted_without_usage_evidence(self):
+        catalog = self.load_catalog()
+        item = next(
+            item for item in catalog.get("items", [])
+            if item["id"] == "openai-chatgpt-apps"
+        )
+
+        self.assertNotIn("promotedNamedSkillId", item)
+        self.assertNotIn("full-stack-developer", item["mapsToGaia"])
+
     def test_generate_catalog_pages_outputs_linked_html(self):
         catalog = self.load_catalog()
         with tempfile.TemporaryDirectory() as tmp:

@@ -12,8 +12,9 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 4. [Evidence Requirements](#evidence-requirements)
 5. [How to Submit a PR](#how-to-submit-a-pr)
 6. [Named Skills](#named-skills)
-7. [Reviewer Rubric](#reviewer-rubric)
-8. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+7. [Demotion and Reclassification Criteria](#demotion-and-reclassification-criteria)
+8. [Reviewer Rubric](#reviewer-rubric)
+9. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
 
 ---
 
@@ -34,7 +35,7 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 ## Automated Workflow (Claude Code)
 
-If you have [Claude Code](https://claude.ai/code) installed, this repository ships two slash commands that automate the full contribution and review cycle.
+If you have [Claude Code](https://claude.ai/code) installed, this repository ships slash commands that automate contribution, review, and audit workflows.
 
 ### `/gaia-curate` — add new skills to the registry
 
@@ -62,6 +63,36 @@ A lighter, read-only triage command for reviewing skill batches submitted via `g
 ```
 
 Run `/gaia-draft-curate` first when contributors have pushed new intake batches. Use `/gaia-curate` when you are adding skills from your own research.
+
+### `/gaia-audit` — review one skill or catalog item
+
+Audits a single Gaia skill ID, named skill ID, or real-skill catalog item:
+1. Reads the relevant source-of-truth files (`registry/gaia.json`, `registry/named/`, `registry/real-skills.json`, and generated projections as needed).
+2. Checks current public source URLs without assuming prior classifications are still correct.
+3. Compares the item against evidence, taxonomy mapping, promotion, demotion, and named-skill criteria.
+4. Presents findings and, when warranted, makes the smallest source-level correction plus regenerated outputs.
+
+```
+/gaia-audit openai/chatgpt-apps
+```
+
+Use `/gaia-audit` when a specific skill may be outdated, superseded, overpromoted, weakly sourced, or mapped to the wrong Gaia node.
+
+Reviewer expectation: Reviewers should use `/gaia-audit` before approving any PR that demotes, declassifies, remaps, disputes, or re-promotes a specific skill, named skill, or real-skill catalog item.
+
+### `/gaia-meta-audit` — find skills needing review
+
+Scans for review candidates before running focused audits:
+1. Searches named skills and real-skill catalog entries for stale URLs, repo-root evidence, missing SKILL.md links, unsupported `promotedNamedSkillId` claims, and outdated mappings.
+2. Flags likely superseded or duplicate entries where a newer official skill, source path, or canonical Gaia node appears to cover the same behavior better.
+3. Prioritizes candidates by blast radius: Ultimate claims first, then named origins, then high-level mappings and stale catalog links.
+4. Produces a review queue; each accepted candidate should then be handled with `/gaia-audit`.
+
+```
+/gaia-meta-audit
+```
+
+Reviewer expectation: Reviewers should use `/gaia-meta-audit` to build review queues when auditing stale source links, unsupported named-skill promotions, possible duplicates, superseded implementations, or broad high-level mappings across the registry.
 
 > **Note:** These skills live in `.claude/skills/` at the root of this repo. Claude Code loads them automatically when you open the repo.
 
@@ -228,6 +259,34 @@ After a named skill is merged as `awakened`, a reviewer checks whether it matche
 Only `status: named` skills surface as `realVariants` on abstract skill nodes and in the real-skills catalog. `awakened` skills remain in `registry/named-skills.json` under `awaitingClassification` until classified.
 
 **Key rule:** Contributors declare skills. Reviewers classify identity.
+
+---
+
+## Demotion and Reclassification Criteria
+
+Demotion is a source-of-truth correction, not a penalty. Use it when current evidence no longer supports a skill's level, rarity, named identity, or catalog promotion.
+
+### When to demote or declassify
+
+| Trigger | Correction |
+|---|---|
+| **Outdated evidence** | Lower the level or mark the skill `disputed`/`deprecated` if the cited source is stale, unreachable, contradicted by newer evidence, or no longer describes the current implementation. |
+| **Superseded implementation** | Move origin or catalog emphasis to the newer maintained skill when an official, maintained, or more specific implementation replaces the older one. Preserve the old item only if it still has independent value. |
+| **Overpromoted named skill** | Remove `status: named`, `title`, `catalogRef`, or `promotedNamedSkillId` when the source proves the skill exists but does not justify claiming that Gaia node. Keep the item in `registry/real-skills.json` if it remains a real source-backed skill. |
+| **Insufficient usage evidence** | Do not use installability, directory presence, marketing copy, or a single source listing as proof of high-level adoption. Downgrade Legendary/Ultimate claims unless there are enough independent Class A/B sources or maintainer approvals. |
+| **Wrong taxonomy mapping** | Replace broad mappings with the narrowest accurate Gaia IDs when the source supports a smaller capability than the current node suggests. |
+| **Duplicate or merged concept** | Reclassify to the existing canonical skill and remove duplicate graph nodes or named-origin claims. |
+
+### Demotion workflow
+
+1. Start from the source of truth: `registry/gaia.json`, `registry/named/`, or `registry/real-skills.json`.
+2. Re-check current external evidence and cite direct URLs. Prefer a specific `SKILL.md`, paper, benchmark, release note, or reproducible repo path over a directory or homepage.
+3. Separate existence from rank: a skill may be real and useful while still not being Evolved, Hardened, Ultimate, or the named implementation of a broader Gaia node.
+4. Make the smallest correction: adjust `mapsToGaia`, remove `promotedNamedSkillId`, declassify a named skill, lower level/status, or mark `deprecated` only when the evidence warrants it.
+5. Use `/gaia-audit` for the focused correction. Use `/gaia-meta-audit` first when the review starts from a broad stale/superseded-skill scan rather than one named target.
+6. Regenerate projections and docs, then run validation.
+
+Demotion PRs should explain what changed in the evidence, why the previous classification is no longer supported, and what remains valid after the correction.
 
 ---
 
