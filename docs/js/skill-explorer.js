@@ -1,0 +1,663 @@
+(function(){
+  var LEVEL_META_SE = {
+    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+    'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+  };
+  var TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
+
+  var REPO_SLUG = (function(){
+    var m = location.hostname.match(/^(.+)\.github\.io$/);
+    if (m) return m[1] + '/gaia-skill-tree';
+    return 'mbtiongson1/gaia-skill-tree';
+  })();
+
+  function esc(v) {
+    return String(v == null ? '':''+v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function(){
+      var orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function(){ btn.textContent = orig; }, 1600);
+    }).catch(function(){ btn.textContent = 'Error'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); });
+  }
+
+  // ── DATA RESOLUTION ──────────────────────────────────────────
+  function waitForData(cb) {
+    // The named-skills IIFE exposes data on window after init
+    var tries = 0;
+    function check() {
+      if (window._gaiaSkillMap && window._gaiaNamedBuckets) { cb(); return; }
+      if (++tries > 40) { cb(); return; }
+      setTimeout(check, 150);
+    }
+    check();
+  }
+
+  function findNamedSkill(id) {
+    var buckets = window._gaiaNamedBuckets || {};
+    for (var ref in buckets) {
+      var arr = buckets[ref];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) return arr[i];
+      }
+    }
+    return null;
+  }
+
+  function findGeneric(id) {
+    return (window._gaiaSkillMap || {})[id] || null;
+  }
+
+  // ── RENDER HERO ──────────────────────────────────────────────
+  function renderHero(ns, generic) {
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
+    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
+    var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+
+    var badgesHtml = [
+      '<span class="se-badge" style="color:' + lm.color + ';background:' + lm.bg + ';border-color:' + lm.border + '">' + esc(ns.level) + ' · ' + lm.name + '</span>',
+      generic ? '<span class="se-badge" style="color:' + typeColor + ';background:rgba(0,0,0,.3);border-color:' + typeColor + '40">' + typeSymbol + ' ' + esc(generic.type || '') + '</span>' : '',
+      ns.origin ? '<span class="se-badge" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">★ origin</span>' : '',
+    ].filter(Boolean).join('');
+
+    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
+      '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
+      '<div class="se-contrib">' + esc(ns.contributor) + ' / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
+      '<div class="se-badges">' + badgesHtml + '</div>' +
+      (ns.title ? '<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.8rem">"' + esc(ns.title) + '"</div>' : '') +
+      (generic ? '<div style="font-size:.82rem;color:var(--muted)">Generic skill: <strong style="color:var(--text)">' + esc(generic.name || ns.genericSkillRef) + '</strong></div>' : '') +
+      (repoUrl ? '<div class="se-repo-row"><span class="se-repo-url">' + esc(repoUrl) + '</span></div>' : '') +
+    '</div>';
+
+    var tags = Array.isArray(ns.tags) ? ns.tags : [];
+    var heroRight = '<div class="se-desc-panel">' +
+      '<h3>Description</h3>' +
+      '<p class="se-desc-text">' + esc(ns.description || (generic && generic.description) || '') + '</p>' +
+      (tags.length ? '<div class="se-tags">' + tags.map(function(t){ return '<span class="se-tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+    '</div>';
+
+    document.getElementById('seHero').innerHTML = heroLeft + heroRight;
+
+    // wire Open Repo button
+    var openBtn = document.getElementById('seOpenRepo');
+    if (repoUrl) { openBtn.onclick = function(){ window.open(repoUrl,'_blank','noopener'); }; openBtn.style.display=''; }
+    else { openBtn.style.display = 'none'; }
+  }
+
+  // ── RENDER DESCRIPTION TAB ───────────────────────────────────
+  function renderDescription(ns, generic) {
+    var el = document.getElementById('se-description');
+    var prereqsHtml = '';
+    var derivsHtml = '';
+    if (generic) {
+      var sm = window._gaiaSkillMap || {};
+      if (Array.isArray(generic.prerequisites) && generic.prerequisites.length) {
+        prereqsHtml = '<div class="se-docs-block"><h4>Prerequisites</h4><div>' +
+          generic.prerequisites.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+      if (Array.isArray(generic.derivatives) && generic.derivatives.length) {
+        derivsHtml = '<div class="se-docs-block"><h4>Unlocks</h4><div>' +
+          generic.derivatives.map(function(id){ var s=sm[id]||{name:id}; return '<span class="se-known-agent">' + esc(s.name||id) + '</span>'; }).join('') + '</div></div>';
+      }
+    }
+    el.innerHTML = '<div class="se-flow-h">&#9432; About this skill</div>' +
+      '<p style="line-height:1.75;margin-bottom:1.5rem">' + esc(ns.description || '') + '</p>' +
+      prereqsHtml + derivsHtml;
+  }
+
+  // ── RENDER INSTALL TAB ───────────────────────────────────────
+  var COPY_ICON = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+
+  function renderInstall(ns) {
+    var el = document.getElementById('se-install');
+    var id = ns.id;
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var cloneUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.git$/,'') : repoUrl;
+
+    function installBlock(label, sublabel, cmd, recommended, copyable) {
+      var cls = 'se-install-block' + (recommended ? ' recommended' : '');
+      return '<div class="' + cls + '">' +
+        '<div class="se-install-label">' + label + (sublabel ? '<span>' + sublabel + '</span>' : '') + '</div>' +
+        '<code class="se-install-cmd">' + esc(cmd) + '</code>' +
+        (copyable !== false ? '<button class="se-copy-btn" title="Copy to clipboard" data-cmd="' + esc(cmd) + '">' + COPY_ICON + '</button>' : '') +
+      '</div>';
+    }
+
+    el.innerHTML = '<div class="se-flow-h">' + COPY_ICON + ' Installation</div>' +
+      installBlock('Gaia', '★ recommended', 'gaia install ' + id, true) +
+      installBlock('npx', '@gaia-registry/cli', 'npx @gaia-registry/cli install ' + id, false) +
+      (cloneUrl ? installBlock('Git Clone', '', 'git clone ' + cloneUrl, false) : '');
+
+    el.querySelectorAll('.se-copy-btn').forEach(function(btn){
+      btn.onclick = function(){
+        navigator.clipboard.writeText(btn.dataset.cmd).then(function(){
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+          setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600);
+        }).catch(function(){ btn.textContent = '!'; setTimeout(function(){ btn.innerHTML = COPY_ICON; }, 1600); });
+      };
+    });
+  }
+
+  // ── RENDER DOCS TAB ──────────────────────────────────────────
+  function renderDocs(ns, generic) {
+    var el = document.getElementById('se-docs');
+    var links = ns.links || {};
+    var repoUrl = links.github || links.npm || '';
+    var issuesUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '/issues' : '';
+    var readmeUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.(git|\/?)$/,'') + '#readme' : '';
+
+    var evidenceHtml = '';
+    if (generic && Array.isArray(generic.evidence) && generic.evidence.length) {
+      evidenceHtml = '<div class="se-docs-block"><h4>Evidence</h4>' +
+        generic.evidence.map(function(ev){
+          return '<div class="se-evidence-row">' +
+            '<span class="se-ev-class">'+esc(ev.class||'?')+'</span>' +
+            '<a class="se-ev-link" href="'+esc(ev.source||'#')+'" target="_blank" rel="noopener">'+esc(ev.source||'—')+'</a>' +
+            '<span class="se-ev-date">'+esc(ev.date||'')+'</span>' +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    var skillDefHtml = generic ? '<div class="se-docs-block"><h4>Generic Skill Definition</h4>' +
+      '<p style="line-height:1.75;margin-bottom:.8rem">'+esc(generic.description||'')+'</p>' +
+      '<p style="font-size:.82rem;color:var(--muted)">Status: <strong style="color:var(--text)">'+esc(generic.status||'provisional')+'</strong>  ·  Level: <strong style="color:var(--text)">'+esc(generic.level||'')+'</strong></p>' +
+    '</div>' : '';
+
+    var agentsHtml = '';
+    if (generic && Array.isArray(generic.knownAgents) && generic.knownAgents.length) {
+      agentsHtml = '<div class="se-docs-block"><h4>Known Agents</h4><div>' +
+        generic.knownAgents.map(function(a){ return '<span class="se-known-agent">'+esc(a)+'</span>'; }).join('') +
+      '</div></div>';
+    }
+
+    var linksHtml = '<div class="se-docs-block"><h4>Links</h4>' +
+      (repoUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(repoUrl)+'" target="_blank" rel="noopener">Repository ↗</a></p>' : '') +
+      (readmeUrl ? '<p style="margin-bottom:.5rem"><a style="color:var(--basic)" href="'+esc(readmeUrl)+'" target="_blank" rel="noopener">README ↗</a></p>' : '') +
+      (issuesUrl ? '<p><a style="color:var(--basic)" href="'+esc(issuesUrl)+'" target="_blank" rel="noopener">Issues ↗</a></p>' : '') +
+    '</div>';
+
+    el.innerHTML = '<div class="se-flow-h">&#128196; Documentation</div>' + skillDefHtml + evidenceHtml + agentsHtml + linksHtml;
+  }
+
+  // ── RENDER FLOWCHART (upgrade path) ─────────────────────────
+  function renderFlowchart(ns, generic) {
+    var el = document.getElementById('se-upgrade');
+    var sm = window._gaiaSkillMap || {};
+    var buckets = window._gaiaNamedBuckets || {};
+    var lm = LEVEL_META_SE;
+
+    function makeLevelStyle(level) {
+      var m = lm[level]; if (!m) return '';
+      return 'color:' + m.color + ';background:' + m.bg + ';border-color:' + m.border;
+    }
+
+    function flowNode(id, name, contrib, level, typeStr, isCurrent, isNamed) {
+      var lmEntry = lm[level] || {};
+      var clsExtra = isCurrent ? ' current' : '';
+      var contribHtml = contrib ? '<span class="fn-contrib">' + esc(contrib) + '</span>' : '';
+      var typeHtml = typeStr ? '<span class="fn-type">' + esc(typeStr) + '</span>' : '';
+      var levelHtml = level ? '<span class="fn-level" style="' + makeLevelStyle(level) + '">' + esc(level) + '</span>' : '';
+      return '<div class="flow-node' + clsExtra + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
+        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml + typeHtml +
+      '</div>';
+    }
+
+    // Row 0: prerequisite generic skills
+    var prereqs = generic && Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
+    var prereqNodes = prereqs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    // Row 1: tier progression of current generic skill (levels from generic.level floor down to 0)
+    var LEVEL_ORDER = ['0','I','II','III','IV','V','VI'];
+    var currentLvIdx = LEVEL_ORDER.indexOf(generic ? generic.level : '');
+    var tierNodes = [];
+    for (var i = 0; i <= Math.max(currentLvIdx, 0) && i < LEVEL_ORDER.length; i++) {
+      var lvl = LEVEL_ORDER[i];
+      var isCur = (lvl === (generic && generic.level));
+      tierNodes.push('<div class="flow-node' + (isCur?' current':'') + '" data-level="' + esc(lvl) + '" data-id="' + esc(ns.genericSkillRef||'') + '">' +
+        '<span class="fn-level" style="' + makeLevelStyle(lvl) + '">' + esc(lvl||'0') + '</span>' +
+        '<span class="fn-name">' + esc((generic&&generic.name)||ns.genericSkillRef||'') + '</span>' +
+        '<span class="fn-type">' + esc(lvl === LEVEL_ORDER[0] ? 'Basic' : (LEVEL_META_SE[lvl]&&LEVEL_META_SE[lvl].name)||lvl) + '</span>' +
+      '</div>');
+    }
+
+    // Row 2: named implementations in the same bucket
+    var siblings = (buckets[ns.genericSkillRef] || []);
+    var namedNodes = siblings.map(function(sib){
+      return flowNode(sib.id, sib.name||sib.id, sib.contributor, sib.level, '', sib.id===ns.id, true);
+    });
+    if (!namedNodes.length) namedNodes = [flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true)];
+
+    // Row 3: derivative generic skills
+    var derivs = generic && Array.isArray(generic.derivatives) ? generic.derivatives : [];
+    var derivNodes = derivs.map(function(id){
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+    });
+
+    function makeRow(label, nodes, id) {
+      if (!nodes.length) return '';
+      return '<div>' +
+        '<div class="se-flowchart-row-label">' + label + '</div>' +
+        '<div class="se-flowchart-row" id="' + id + '">' + nodes.join('') + '</div>' +
+      '</div>';
+    }
+
+    el.innerHTML = '<div class="se-flow-h">&#9650; Upgrade Path &amp; Adjacent Skills</div>' +
+      '<div class="se-flowchart-wrap" id="seFlowWrap">' +
+        '<div class="se-flowchart-rows">' +
+          makeRow('Prerequisites', prereqNodes, 'sfRow0') +
+          makeRow('Tier Progression', tierNodes, 'sfRow1') +
+          makeRow('Named Implementations', namedNodes, 'sfRow2') +
+          makeRow('Unlocks', derivNodes, 'sfRow3') +
+        '</div>' +
+        '<svg class="se-flowchart-svg" id="seFlowSvg"></svg>' +
+      '</div>';
+
+    // Draw SVG edges after a brief layout settle
+    setTimeout(function(){ drawFlowEdges(); }, 80);
+  }
+
+  function drawFlowEdges() {
+    var wrap = document.getElementById('seFlowWrap');
+    var svg = document.getElementById('seFlowSvg');
+    if (!wrap || !svg) return;
+    svg.innerHTML = '';
+    var wRect = wrap.getBoundingClientRect();
+    var rowIds = [['sfRow0','sfRow1'],['sfRow1','sfRow2'],['sfRow2','sfRow3']];
+    rowIds.forEach(function(pair){
+      var fromEl = document.getElementById(pair[0]);
+      var toEl   = document.getElementById(pair[1]);
+      if (!fromEl || !toEl) return;
+      var fromNodes = fromEl.querySelectorAll('.flow-node');
+      var toNodes   = toEl.querySelectorAll('.flow-node');
+      if (!fromNodes.length || !toNodes.length) return;
+      // connect each source to each target (for small counts); cap at 3x3
+      var froms = Array.from(fromNodes).slice(0,3);
+      var tos   = Array.from(toNodes).slice(0,3);
+      froms.forEach(function(fn){
+        var fr = fn.getBoundingClientRect();
+        var fx = fr.left + fr.width/2 - wRect.left;
+        var fy = fr.bottom - wRect.top;
+        tos.forEach(function(tn){
+          var tr = tn.getBoundingClientRect();
+          var tx = tr.left + tr.width/2 - wRect.left;
+          var ty = tr.top - wRect.top;
+          var cy = (fy + ty) / 2;
+          var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+          path.setAttribute('d','M'+fx+','+fy+' C'+fx+','+cy+' '+tx+','+cy+' '+tx+','+ty);
+          path.setAttribute('stroke','rgba(56,189,248,.22)');
+          path.setAttribute('stroke-width','1.5');
+          path.setAttribute('fill','none');
+          path.setAttribute('stroke-dasharray','4 3');
+          svg.appendChild(path);
+        });
+      });
+    });
+  }
+
+  // ── RENDER TIMELINE ──────────────────────────────────────────
+  function renderTimeline(ns) {
+    var el = document.getElementById('se-timeline');
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">Loading history…</div>';
+    var parts = ns.id.split('/');
+    var contributor = parts[0], skillName = parts[1] || '';
+    var apiUrl = 'https://api.github.com/repos/' + REPO_SLUG +
+      '/commits?path=graph%2Fnamed%2F' + contributor + '%2F' + skillName + '.md&per_page=20';
+    fetch(apiUrl)
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(commits){
+        if (!Array.isArray(commits) || !commits.length) {
+          // fallback to static dates
+          var evts = [];
+          if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+          if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+          renderTimelineEvents(el, evts);
+          return;
+        }
+        var evts = commits.map(function(c){
+          return {
+            date: (c.commit && c.commit.author && c.commit.author.date) ? c.commit.author.date.slice(0,10) : '',
+            msg: (c.commit && c.commit.message) ? c.commit.message.split('\n')[0] : '',
+            sha: c.sha ? c.sha.slice(0,7) : ''
+          };
+        });
+        renderTimelineEvents(el, evts);
+      })
+      .catch(function(){
+        var evts = [];
+        if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
+        if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
+        renderTimelineEvents(el, evts);
+      });
+  }
+
+  function renderTimelineEvents(el, evts) {
+    if (!evts.length) { el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">No history available.</div>'; return; }
+    el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-timeline">' +
+      evts.map(function(ev){
+        return '<div class="se-tl-event">' +
+          '<div class="se-tl-dot"></div>' +
+          '<div class="se-tl-date">' + esc(ev.date) + '</div>' +
+          '<div class="se-tl-msg">' + esc(ev.msg) + '</div>' +
+          (ev.sha ? '<div class="se-tl-sha">' + esc(ev.sha) + '</div>' : '') +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  // ── MAIN OPEN / CLOSE ────────────────────────────────────────
+  var TYPE_GLYPH = { ultimate: '◆', extra: '◇', basic: '○' };
+
+  window.openUnnamedPopup = function(skill) {
+    var pop = document.getElementById('unnamedSkillPopup');
+    if (!pop) return;
+    var glyph = TYPE_GLYPH[skill.type] || '◇';
+    var glyphColor = skill.type === 'ultimate' ? '#f59e0b' : skill.type === 'extra' ? '#c084fc' : '#38bdf8';
+    document.getElementById('uspGlyph').textContent = glyph;
+    document.getElementById('uspGlyph').style.color = glyphColor;
+    document.getElementById('uspName').textContent = skill.name || skill.id;
+    document.getElementById('uspId').textContent = skill.id;
+    var cmd = 'gaia push';
+    document.getElementById('uspCmd').textContent = cmd;
+    document.getElementById('uspCmd').dataset.cmd = cmd;
+    pop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function openExplorer(id) {
+    waitForData(function(){
+      var ns = findNamedSkill(id);
+      if (!ns) {
+        // fallback: generic skill ref bucket
+        var buckets = window._gaiaNamedBuckets || {};
+        if (buckets[id] && buckets[id].length) { ns = buckets[id][0]; }
+      }
+      if (!ns) {
+        // no named implementation — show the "claim this skill" popup if it's a known generic skill
+        var genericSkill = (window._gaiaSkillMap || {})[id];
+        if (genericSkill) window.openUnnamedPopup(genericSkill);
+        return;
+      }
+      var generic = ns.genericSkillRef ? findGeneric(ns.genericSkillRef) : null;
+
+      document.getElementById('skillExplorer').classList.add('open');
+      document.getElementById('seBreadcrumb').textContent = ns.id;
+      document.getElementById('skillExplorer').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+
+      renderHero(ns, generic);
+      renderDescription(ns, generic);
+      renderInstall(ns);
+      renderDocs(ns, generic);
+      renderFlowchart(ns, generic);
+      renderTimeline(ns);
+
+      // Export button
+      document.getElementById('seExport').onclick = function(){
+        var data = JSON.stringify({ namedSkill: ns, generic: generic }, null, 2);
+        var blob = new Blob([data], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = ns.id.replace('/','_') + '.json';
+        a.click();
+      };
+
+      // Share button
+      document.getElementById('seShare').onclick = function(){
+        var url = location.origin + location.pathname + '#explorer/' + ns.id;
+        if (navigator.share) {
+          navigator.share({ title: ns.name || ns.id, url: url }).catch(function(){});
+        } else {
+          navigator.clipboard.writeText(url).then(function(){
+            var btn = document.getElementById('seShare');
+            var orig = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function(){ btn.textContent = orig; }, 1600);
+          });
+        }
+      };
+
+      // Push hash (skip if already correct)
+      var newHash = '#explorer/' + ns.id;
+      if (location.hash !== newHash) history.pushState(null,'',newHash);
+    });
+  }
+
+  function closeExplorer() {
+    var el = document.getElementById('skillExplorer');
+    if (el) el.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Expose globally for onclick handlers — must be synchronous, before DOMContentLoaded
+  window.openSkillExplorer = openExplorer;
+
+  // ── DOM EVENT SETUP (deferred — overlay HTML is parsed after this script) ──
+  function initExplorerDOM() {
+    var backEl = document.getElementById('seBack');
+    if (backEl) backEl.onclick = function(){ closeExplorer(); history.back(); };
+
+    // Unnamed popup close + copy
+    var pop = document.getElementById('unnamedSkillPopup');
+    function closeUnnamed() { if (pop) { pop.classList.remove('open'); document.body.style.overflow = ''; } }
+    var uspClose = document.getElementById('uspClose');
+    if (uspClose) uspClose.onclick = closeUnnamed;
+    if (pop) pop.addEventListener('click', function(e){ if (e.target === pop) closeUnnamed(); });
+    var uspCopy = document.getElementById('uspCopyBtn');
+    var CHECK_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+    var CLIP_SM = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
+    if (uspCopy) uspCopy.addEventListener('click', function(){
+      var cmd = document.getElementById('uspCmd').dataset.cmd || document.getElementById('uspCmd').textContent;
+      navigator.clipboard.writeText(cmd).then(function(){
+        uspCopy.innerHTML = CHECK_SM;
+        setTimeout(function(){ uspCopy.innerHTML = CLIP_SM; }, 1500);
+      });
+    });
+
+    function routeHash() {
+      var m = location.hash.match(/^#explorer\/(.+\/[^/?#]+)$/);
+      if (m) { openExplorer(m[1]); }
+      else { closeExplorer(); }
+    }
+    window.addEventListener('hashchange', routeHash);
+    routeHash();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExplorerDOM);
+  } else {
+    initExplorerDOM();
+  }
+})();
+
+/* ─── SKILL EXPLORER OVERLAY ─── */
+(function() {
+  var treeDialog = document.getElementById('treeDialog');
+  var treeNavBtn = document.getElementById('treeNavBtn');
+  var treeCloseBtn = document.getElementById('treeCloseBtn');
+  var treeCopyBtn = document.getElementById('treeCopyBtn');
+  var treeDownloadBtn = document.getElementById('treeDownloadBtn');
+  var treeDialogPre = document.getElementById('treeDialogPre');
+  var treeHeader = treeDialog.querySelector('.tree-dialog-header');
+  var _treeContent = null;
+
+  var SKELETON = [
+    'GAIA SKILL TREE  ─────────  ·  ───────────────────────',
+    '══════════════════════════════════════════════════════',
+    '──────────────────────────────────────────────────────',
+    '══════════════════════════════════════════════════════',
+    '',
+    '◆ ──────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  ├─ ◇ ────────────────────────────  [──]',
+    '  │  ├─ ◇ ────────────  [───]',
+    '  │  │  ├─ ○ ────────────  [─]',
+    '  │  │  ├─ ○ ──────────  [─]',
+    '  │  │  └─ ○ ─────────────────────  [─]',
+    '  │  ├─ ○ ───────────────  [─]',
+    '  │  └─ ○ ──────────  [─]',
+    '  └─ ◇ ────────────────────────  [──]',
+    '     ├─ ○ ───────────────────────────  [─]',
+    '     └─ ○ ─────────────────────  [─]',
+    '',
+    '◆ ──────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ○ ─────────────────  [──]',
+    '  ├─ ◇ ─────────────────  [───]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  ├─ ○ ──────────  [0]',
+    '  │  └─ ○ ──────────────────  [─]',
+    '  └─ ○ ─────────────────  [──]',
+    '',
+    '◆ ────────────────────────────────────────────  [──]',
+    '──────────────────────────────────────────────────────',
+    '  ├─ ◇ ────────────────────────────  [───]',
+    '  │  ├─ ○ ─────────────────  [──]',
+    '  │  ├─ ○ ──────────────────────  [─]',
+    '  │  └─ ○ ────────────────  [─]',
+    '  ├─ ◇ ──────────────────────────  [───]',
+    '  │  ├─ ○ ──────────────────  [──]',
+    '  │  ├─ ○ ────────────  [─]',
+    '  │  └─ ○ ─────────────────────  [─]',
+    '  └─ ○ ────────────────────────────────  [──]',
+  ].join('\n');
+
+  function openTreeDialog() {
+    treeDialog.style.cssText = '';
+    if (typeof treeDialog.showModal === 'function') treeDialog.showModal();
+    else treeDialog.setAttribute('open', '');
+    if (_treeContent === null) {
+      treeDialogPre.textContent = SKELETON;
+      treeDialogPre.classList.add('tree-skeleton');
+      fetch('tree.md')
+        .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function(text) {
+          _treeContent = text;
+          treeDialogPre.innerHTML = highlightTree(text);
+          treeDialogPre.classList.remove('tree-skeleton');
+        })
+        .catch(function() {
+          treeDialogPre.textContent = 'Could not load tree.md.';
+          treeDialogPre.classList.remove('tree-skeleton');
+        });
+    }
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function highlightTree(text) {
+    var ultIdx = 0;
+    return text.split('\n').map(function(line) {
+      // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [VI]
+      var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
+      if (m) {
+        var label = esc(m[1]);
+        var skillId = m[2];
+        var suffix = esc(m[3]);
+        var delay = -((ultIdx++ * 0.9) % 4);
+        var slash = skillId.indexOf('/');
+        var skillHtml;
+        if (slash > 0) {
+          // named — contributor in red, skill name in amber
+          skillHtml = '<span class="tree-ult-contributor">' + esc(skillId.slice(0, slash)) + '</span>' +
+                      '<span class="tree-ult-slash">/</span>' +
+                      '<span class="tree-ult-skillname">' + esc(skillId.slice(slash + 1)) + '</span>';
+        } else {
+          skillHtml = '<span class="tree-ult-id">' + esc(skillId) + '</span>';
+        }
+        return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
+               label + skillHtml + suffix + '</span>';
+      }
+      // Separator lines
+      if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
+      // Inline ◇ / ○ glyphs
+      var out = esc(line);
+      out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
+      out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
+      return out;
+    }).join('\n');
+  }
+
+  function closeTreeDialog() {
+    if (treeDialog.close) treeDialog.close();
+    else treeDialog.removeAttribute('open');
+  }
+
+  treeNavBtn.addEventListener('click', openTreeDialog);
+  treeCloseBtn.addEventListener('click', closeTreeDialog);
+  treeDialog.addEventListener('click', function(e) {
+    if (e.target === treeDialog) closeTreeDialog();
+  });
+
+  treeCopyBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      treeCopyBtn.textContent = 'Copied!';
+      treeCopyBtn.classList.add('copied');
+      setTimeout(function() {
+        treeCopyBtn.textContent = 'Copy';
+        treeCopyBtn.classList.remove('copied');
+      }, 1800);
+    });
+  });
+
+  treeDownloadBtn.addEventListener('click', function() {
+    var text = _treeContent || treeDialogPre.textContent;
+    var blob = new Blob([text], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'gaia-skill-tree.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  /* ── drag ── */
+  var drag = { on: false, ox: 0, oy: 0, startL: 0, startT: 0 };
+
+  treeHeader.addEventListener('mousedown', function(e) {
+    if (e.target.closest('button')) return;
+    var rect = treeDialog.getBoundingClientRect();
+    treeDialog.style.margin = '0';
+    treeDialog.style.position = 'fixed';
+    treeDialog.style.left = rect.left + 'px';
+    treeDialog.style.top = rect.top + 'px';
+    drag.on = true;
+    drag.ox = e.clientX;
+    drag.oy = e.clientY;
+    drag.startL = rect.left;
+    drag.startT = rect.top;
+    treeHeader.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!drag.on) return;
+    var W = window.innerWidth, H = window.innerHeight;
+    var dw = treeDialog.offsetWidth, dh = treeDialog.offsetHeight;
+    var l = Math.max(0, Math.min(W - dw, drag.startL + e.clientX - drag.ox));
+    var t = Math.max(0, Math.min(H - dh, drag.startT + e.clientY - drag.oy));
+    treeDialog.style.left = l + 'px';
+    treeDialog.style.top = t + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!drag.on) return;
+    drag.on = false;
+    treeHeader.classList.remove('dragging');
+  });
+})();
