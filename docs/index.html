@@ -441,6 +441,7 @@
   }
   @media (max-width:700px){
     html,body{overflow-x:clip}
+    body{font-size:.95rem;line-height:1.58}
     nav{
       padding:.75rem .85rem;
       gap:.65rem;
@@ -451,9 +452,12 @@
     }
     .nav-logo{font-size:1rem;line-height:1.2;white-space:nowrap}
     nav ul{
-      gap:.75rem;font-size:.8rem;overflow-x:auto;max-width:100%;
+      gap:.55rem;font-size:.77rem;overflow-x:visible;max-width:100%;
       padding-bottom:.2rem;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
+    nav a,button.nav-tree{font-size:.77rem}
     nav ul::-webkit-scrollbar{display:none}
     #hero{min-height:100svh;padding:5.25rem 1rem 2.25rem}
     #canvas3d{transform:translateZ(0);will-change:transform;backface-visibility:hidden}
@@ -475,6 +479,12 @@
       backdrop-filter:none;
       -webkit-backdrop-filter:none;
     }
+    pre{
+      font-size:.76rem;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
     .se-topbar{
       background:#030712;
       backdrop-filter:none;
@@ -490,8 +500,8 @@
       animation:none;box-shadow:0 0 0 1px rgba(56,189,248,.2);
     }
     .tree-dialog::backdrop,.graph-dialog::backdrop{backdrop-filter:none}
-    .tree-dialog-header,.graph-dialog-header{padding:.85rem .9rem}
-    .tree-dialog-body{padding:.9rem .9rem 1.15rem}
+    .tree-dialog-header,.graph-dialog-header{padding:.85rem 1.05rem}
+    .tree-dialog-body{padding:1rem 1.15rem 1.25rem}
     .graph-dialog-header{flex-direction:column}
     .graph-dialog-actions{justify-content:flex-start}
     .graph-legend{top:auto;bottom:2.8rem;right:.5rem;transform:none;padding:.4rem .5rem;font-size:.65rem}
@@ -1034,11 +1044,10 @@
   <span class="nav-logo">◆ GAIA</span>
   <ul>
     <li><a href="#what">What</a></li>
-    <li><a href="#what">Tiers</a></li>
-    <li><a href="#start">Get Started</a></li>
-    <li><a href="#workflow">Workflow</a></li>
     <li><a href="#ranks">Ranks</a></li>
-    <li><a href="#named" class="nav-named-explorer">Named Skills Explorer</a></li>
+    <li><a href="#start">Start</a></li>
+    <li><a href="#workflow">Flow</a></li>
+    <li><a href="#named" class="nav-named-explorer">Named Skills</a></li>
     <li><button type="button" class="nav-tree" id="treeNavBtn">Tree</button></li>
   </ul>
 </nav>
@@ -2078,6 +2087,16 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function revealHashTarget() {
+  if (!location.hash) return;
+  const target = document.querySelector(location.hash);
+  if (target && target.classList && target.classList.contains('reveal')) {
+    target.classList.add('visible');
+  }
+}
+window.addEventListener('hashchange', revealHashTarget);
+window.addEventListener('load', revealHashTarget);
 </script>
 
 <!-- ─── NAMED SKILLS DATA ─── -->
