@@ -33,7 +33,7 @@
 | ○ /execute-bash | Basic | I | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic | I | Awakened | `/extract-entities` |
 | ○ /format-output | Basic | 0 | Basic | `/format-output` |
-| ◆ Ultimate Skill: openai/chatgpt-apps | Ultimate Skill | V | Transcendent | `/full-stack-developer` |
+| ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/full-stack-developer` |
 | ◇ Extra Skill: /function-calling | Extra Skill | III | Evolved | `/function-calling` |
 | ○ /generate-sql | Basic | II | Named | `/generate-sql` |
 | ○ upsonic/unittest-generator | Basic | II | Named | `/generate-test` |
@@ -138,6 +138,7 @@
 | Skill Call | Level | Prerequisites |
 |---|---|---|
 | `/autonomous-data-scientist` | Transcendent | `/data-analysis`, `/math-reason`, `/research` |
+| `/full-stack-developer` | Transcendent | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
 | `/real-time-voice-assistant` | Transcendent | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
 | `/recursive-self-improvement` | Transcendent | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
 | `/scientific-discovery` | Transcendent | `/hypothesis-generate`, `/research`, `/math-reason` |

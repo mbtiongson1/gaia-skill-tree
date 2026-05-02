@@ -17,7 +17,7 @@
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
 | ◇ Extra Skill: /document-digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III |  |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | Browser Automation, Automated Testing | III | Requires a live or containerised target environment; browser automation must be available. |
-| ◆ Ultimate Skill: openai/chatgpt-apps | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
+| ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | Code Review Pipeline, Automated Testing, Refactor Code | V | Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources. |
 | ◇ Extra Skill: /function-calling | Extra Skill | Structured Output Generation, API Call, Tool Select | III | Requires an available function or tool catalog with machine-readable argument schemas and result contracts. |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV | Requires research output as input context. |
 | ◇ Extra Skill: /grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | III |  |

@@ -46,7 +46,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   │  └─ ○ openai/openai-docs  [I]
   └─ ○ /math-reason  [II]
 
-◆ Ultimate Skill: openai/chatgpt-apps  [V]
+◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
   ├─ ◇ Extra Skill: openai/security-best-practices  [III]
   │  ├─ ○ /code-generation  [I]

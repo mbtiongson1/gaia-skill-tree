@@ -517,29 +517,6 @@
         }
       }
     ],
-    "full-stack-developer": [
-      {
-        "id": "openai/chatgpt-apps",
-        "name": "ChatGPT Apps",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "full-stack-developer",
-        "status": "named",
-        "level": "III",
-        "description": "Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration.",
-        "title": "The Embedded Appwright",
-        "catalogRef": "openai-chatgpt-apps",
-        "tags": [
-          "chatgpt-apps",
-          "mcp",
-          "widgets",
-          "full-stack"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/chatgpt-apps"
-        }
-      }
-    ],
     "error-interpretation": [
       {
         "id": "openai/gh-fix-ci",
@@ -1040,7 +1017,6 @@
       "mattpocock/zoom-out"
     ],
     "openai": [
-      "openai/chatgpt-apps",
       "openai/gh-fix-ci",
       "openai/openai-docs",
       "openai/playwright",
