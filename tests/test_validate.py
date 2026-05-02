@@ -96,6 +96,8 @@ class TestValidate(unittest.TestCase):
         self.assertIn("superseded", normalized)
         self.assertIn("overpromoted", normalized)
         self.assertIn("insufficient usage evidence", normalized)
+        self.assertIn("Reviewers should use `/gaia-audit`", text)
+        self.assertIn("Reviewers should use `/gaia-meta-audit`", text)
 
     def test_claude_audit_skills_exist(self):
         """Ensure the repo-local audit slash skills are present."""

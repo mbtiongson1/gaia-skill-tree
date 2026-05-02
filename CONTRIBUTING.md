@@ -78,6 +78,8 @@ Audits a single Gaia skill ID, named skill ID, or real-skill catalog item:
 
 Use `/gaia-audit` when a specific skill may be outdated, superseded, overpromoted, weakly sourced, or mapped to the wrong Gaia node.
 
+Reviewer expectation: Reviewers should use `/gaia-audit` before approving any PR that demotes, declassifies, remaps, disputes, or re-promotes a specific skill, named skill, or real-skill catalog item.
+
 ### `/gaia-meta-audit` — find skills needing review
 
 Scans for review candidates before running focused audits:
@@ -89,6 +91,8 @@ Scans for review candidates before running focused audits:
 ```
 /gaia-meta-audit
 ```
+
+Reviewer expectation: Reviewers should use `/gaia-meta-audit` to build review queues when auditing stale source links, unsupported named-skill promotions, possible duplicates, superseded implementations, or broad high-level mappings across the registry.
 
 > **Note:** These skills live in `.claude/skills/` at the root of this repo. Claude Code loads them automatically when you open the repo.
 
@@ -279,7 +283,8 @@ Demotion is a source-of-truth correction, not a penalty. Use it when current evi
 2. Re-check current external evidence and cite direct URLs. Prefer a specific `SKILL.md`, paper, benchmark, release note, or reproducible repo path over a directory or homepage.
 3. Separate existence from rank: a skill may be real and useful while still not being Evolved, Hardened, Ultimate, or the named implementation of a broader Gaia node.
 4. Make the smallest correction: adjust `mapsToGaia`, remove `promotedNamedSkillId`, declassify a named skill, lower level/status, or mark `deprecated` only when the evidence warrants it.
-5. Regenerate projections and docs, then run validation.
+5. Use `/gaia-audit` for the focused correction. Use `/gaia-meta-audit` first when the review starts from a broad stale/superseded-skill scan rather than one named target.
+6. Regenerate projections and docs, then run validation.
 
 Demotion PRs should explain what changed in the evidence, why the previous classification is no longer supported, and what remains valid after the correction.
 
