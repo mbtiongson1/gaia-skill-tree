@@ -107,7 +107,6 @@ def test_top_level_help_shows_all_public_commands_with_usage(monkeypatch, capsys
         "pull",
         "tree",
         "push",
-        "propose",
         "version",
         "mcp",
         "release",
