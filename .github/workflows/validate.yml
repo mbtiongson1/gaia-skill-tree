@@ -50,7 +50,7 @@ jobs:
       - name: Check generated docs
         run: |
           echo "Equivalent python command for local use: python scripts/build_docs.py --check"
-          gaia docs build --check
+          gaia --registry . docs build --check
 
       - name: Run tests
         run: pytest tests/
