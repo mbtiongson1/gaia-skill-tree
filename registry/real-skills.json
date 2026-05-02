@@ -1,0 +1,829 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-01",
+  "sources": [
+    {
+      "repo": "karpathy/autoresearch",
+      "description": "Autonomous research agent that iteratively reviews academic papers and synthesizes summaries.",
+      "url": "https://github.com/karpathy/autoresearch"
+    },
+    {
+      "repo": "cognition-labs/devin",
+      "description": "Autonomous software engineering agent capable of end-to-end debugging and code generation.",
+      "url": "https://github.com/cognition-labs/devin"
+    },
+    {
+      "repo": "laravel/boost",
+      "description": "Laravel Boost -- AI-assisted Laravel framework upgrade tooling.",
+      "url": "https://github.com/laravel/boost"
+    },
+    {
+      "repo": "anthropics/skills",
+      "description": "Anthropic official Claude Code skill library.",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "repo": "vercel-labs/skills",
+      "description": "Vercel Labs skill library for Claude Code and Codex CLI.",
+      "url": "https://github.com/vercel-labs/skills"
+    },
+    {
+      "repo": "GLINCKER/claude-code-marketplace",
+      "description": "GLINCKER community marketplace for Claude Code skills.",
+      "url": "https://github.com/GLINCKER/claude-code-marketplace"
+    },
+    {
+      "repo": "addyosmani/agent-skills",
+      "description": "Addy Osmani collection of agent workflow enforcement skills.",
+      "url": "https://github.com/addyosmani/agent-skills"
+    },
+    {
+      "repo": "mastepanoski/claude-skills",
+      "description": "Martin Stepanoski NPM package of UX-focused Claude skills.",
+      "url": "https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills"
+    },
+    {
+      "repo": "spring-ai-alibaba/examples",
+      "description": "Spring AI Alibaba example projects including Claude Code skills.",
+      "url": "https://github.com/spring-ai-alibaba/examples"
+    },
+    {
+      "repo": "ruvnet/ruflo",
+      "description": "Leading agent orchestration platform for Claude with multi-agent swarm deployment and event-driven workflows.",
+      "url": "https://github.com/ruvnet/ruflo"
+    },
+    {
+      "repo": "gooseworks-ai/goose-skills",
+      "description": "Library of GTM skills for Claude Code, Codex, Cursor including AI-first browser automation via Notte.",
+      "url": "https://github.com/gooseworks-ai/goose-skills"
+    },
+    {
+      "repo": "yonatangross/orchestkit",
+      "description": "Complete AI development toolkit for Claude Code with 103 skills including a production-grade RAG retrieval skill.",
+      "url": "https://github.com/yonatangross/orchestkit"
+    },
+    {
+      "repo": "Upsonic/Upsonic",
+      "description": "Framework for building autonomous AI agents in Python with prebuilt agent skills.",
+      "url": "https://github.com/Upsonic/Upsonic"
+    },
+    {
+      "repo": "aiskillstore/marketplace",
+      "description": "Security-audited skills marketplace for Claude Code and Codex CLI with quality-verified patterns.",
+      "url": "https://github.com/aiskillstore/marketplace"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "description": "Matt Pocock community skill library for coding workflows and meta-skills.",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "repo": "openai/skills",
+      "description": "OpenAI-published Codex skills for API implementation, browser testing, GitHub workflows, security analysis, and app scaffolding.",
+      "url": "https://officialskills.sh/openai/skills"
+    }
+  ],
+  "items": [
+    {
+      "id": "karpathy-autoresearch",
+      "name": "karpathy/autoresearch",
+      "contributor": "karpathy",
+      "title": "The Scholar's Compass",
+      "description": "Autonomous research agent that iteratively searches academic databases, reads papers, extracts findings, and produces structured research summaries.",
+      "sourceRepo": "karpathy/autoresearch",
+      "url": "https://github.com/karpathy/autoresearch",
+      "mapsToGaia": [
+        "autonomous-research-agent"
+      ],
+      "promotedNamedSkillId": "karpathy/autoresearch",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "research",
+        "autonomous",
+        "paper-synthesis"
+      ]
+    },
+    {
+      "id": "devin-ai-autonomous-swe",
+      "name": "devin-ai/autonomous-swe",
+      "contributor": "devin-ai",
+      "title": "The Codebreaker's Will",
+      "description": "Autonomous software engineering agent that combines debugging, code generation, and self-correction to resolve issues end-to-end across complex multi-file repositories.",
+      "sourceRepo": "cognition-labs/devin",
+      "url": "https://github.com/cognition-labs/devin",
+      "mapsToGaia": [
+        "autonomous-debug"
+      ],
+      "promotedNamedSkillId": "devin-ai/autonomous-swe",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "software-engineering",
+        "autonomous",
+        "debugging",
+        "code-generation"
+      ]
+    },
+    {
+      "id": "laravel-upgrade-laravel-v13",
+      "name": "laravel/upgrade-laravel-v13",
+      "contributor": "laravel",
+      "title": "The Versionist's Trial",
+      "description": "Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, and post-upgrade validation.",
+      "sourceRepo": "laravel/boost",
+      "url": "https://github.com/laravel/boost/issues/698",
+      "mapsToGaia": [
+        "framework-upgrade"
+      ],
+      "promotedNamedSkillId": "laravel/upgrade-laravel-v13",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "laravel",
+        "php",
+        "framework-upgrade",
+        "migration"
+      ]
+    },
+    {
+      "id": "anthropic-skill-creator",
+      "name": "anthropic/skill-creator",
+      "contributor": "anthropic",
+      "title": "The Skill Forger's Art",
+      "description": "Interviews the user to elicit skill purpose and steps, then programmatically writes a new SKILL.md file for Claude Code or Codex CLI.",
+      "sourceRepo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+      "mapsToGaia": [
+        "tool-creation"
+      ],
+      "promotedNamedSkillId": "anthropic/skill-creator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "skill-authoring",
+        "meta-agent",
+        "claude-code",
+        "tool-creation"
+      ]
+    },
+    {
+      "id": "vercel-find-skills",
+      "name": "vercel/find-skills",
+      "contributor": "vercel",
+      "title": "The Registry Scout",
+      "description": "Searches the skills.sh registry by keyword, ranks by install count, and auto-installs the chosen skill.",
+      "sourceRepo": "vercel-labs/skills",
+      "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md",
+      "mapsToGaia": [
+        "skill-discovery"
+      ],
+      "promotedNamedSkillId": "vercel/find-skills",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "skill-registry",
+        "discovery",
+        "skills-sh",
+        "auto-install"
+      ]
+    },
+    {
+      "id": "glincker-readme-generator",
+      "name": "glincker/readme-generator",
+      "contributor": "glincker",
+      "title": "The Document Weaver",
+      "description": "Analyzes project structure, manifests, and configs to generate a professional README.md with badges, install steps, and usage examples.",
+      "sourceRepo": "GLINCKER/claude-code-marketplace",
+      "url": "https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md",
+      "mapsToGaia": [
+        "write-report"
+      ],
+      "promotedNamedSkillId": "glincker/readme-generator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "documentation",
+        "readme",
+        "code-analysis",
+        "project-structure"
+      ]
+    },
+    {
+      "id": "anthropic-pptx",
+      "name": "anthropic/pptx",
+      "contributor": "anthropic",
+      "title": "The Slide Artisan",
+      "description": "Extracts, edits, and repacks PowerPoint (.pptx) files using markitdown, enabling agents to read, modify, and write structured presentations without a GUI.",
+      "sourceRepo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+      "mapsToGaia": [
+        "document-editing"
+      ],
+      "promotedNamedSkillId": "anthropic/pptx",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "pptx",
+        "powerpoint",
+        "document-editing",
+        "markitdown",
+        "presentations"
+      ]
+    },
+    {
+      "id": "addy-osmani-test-driven-development",
+      "name": "addy-osmani/test-driven-development",
+      "contributor": "addy-osmani",
+      "title": "The Red-Green Oath",
+      "description": "Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds.",
+      "sourceRepo": "addyosmani/agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md",
+      "mapsToGaia": [
+        "test-driven-development"
+      ],
+      "promotedNamedSkillId": "addy-osmani/test-driven-development",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "tdd",
+        "testing",
+        "red-green-refactor",
+        "workflow-enforcement",
+        "software-quality"
+      ]
+    },
+    {
+      "id": "martin-stepanoski-nielsen-heuristics-audit",
+      "name": "martin-stepanoski/nielsen-heuristics-audit",
+      "contributor": "martin-stepanoski",
+      "title": "The Ten Laws of Sight",
+      "description": "Audits a UI against Jakob Nielsen's 10 usability heuristics, scores each, and produces a prioritized remediation report.",
+      "sourceRepo": "mastepanoski/claude-skills",
+      "url": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md",
+      "mapsToGaia": [
+        "ux-audit"
+      ],
+      "promotedNamedSkillId": "martin-stepanoski/nielsen-heuristics-audit",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "ux",
+        "usability",
+        "nielsen",
+        "heuristics",
+        "accessibility"
+      ]
+    },
+    {
+      "id": "ruvnet-flow-nexus-swarm",
+      "name": "ruvnet/flow-nexus-swarm",
+      "contributor": "ruvnet",
+      "title": "The Grand Conductor's Blueprint",
+      "description": "Cloud-based AI swarm orchestration supporting hierarchical, mesh, ring, and star topologies with event-driven workflows and intelligent agent assignment.",
+      "sourceRepo": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "mapsToGaia": [
+        "multi-agent-orchestration-v"
+      ],
+      "promotedNamedSkillId": "ruvnet/flow-nexus-swarm",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "multi-agent",
+        "swarm",
+        "orchestration",
+        "event-driven",
+        "workflow"
+      ]
+    },
+    {
+      "id": "gooseworks-notte-browser",
+      "name": "gooseworks/notte-browser",
+      "contributor": "gooseworks",
+      "title": "The Digital Navigator",
+      "description": "AI-first browser automation using the Notte Browser API for session control, page scraping, form filling, and autonomous web agent execution.",
+      "sourceRepo": "gooseworks-ai/goose-skills",
+      "url": "https://github.com/gooseworks-ai/goose-skills",
+      "mapsToGaia": [
+        "browser-automation"
+      ],
+      "promotedNamedSkillId": "gooseworks/notte-browser",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "browser",
+        "automation",
+        "web-agent",
+        "scraping",
+        "notte"
+      ]
+    },
+    {
+      "id": "yonatangross-orchestkit-rag",
+      "name": "yonatangross/orchestkit-rag",
+      "contributor": "yonatangross",
+      "title": "The Knowledge Architect",
+      "description": "Production-grade RAG retrieval skill covering 30+ patterns: HyDE, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.",
+      "sourceRepo": "yonatangross/orchestkit",
+      "url": "https://github.com/yonatangross/orchestkit",
+      "mapsToGaia": [
+        "rag-pipeline"
+      ],
+      "promotedNamedSkillId": "yonatangross/orchestkit-rag",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "rag",
+        "retrieval",
+        "hybrid-search",
+        "hyde",
+        "pgvector",
+        "reranking"
+      ]
+    },
+    {
+      "id": "upsonic-unittest-generator",
+      "name": "upsonic/unittest-generator",
+      "contributor": "upsonic",
+      "title": "The Test Weaver",
+      "description": "Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organised into concept-based subfolders.",
+      "sourceRepo": "Upsonic/Upsonic",
+      "url": "https://github.com/Upsonic/Upsonic",
+      "mapsToGaia": [
+        "generate-test"
+      ],
+      "promotedNamedSkillId": "upsonic/unittest-generator",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "unit-testing",
+        "unittest",
+        "test-generation",
+        "python"
+      ]
+    },
+    {
+      "id": "0xdarkmatter-pytest-patterns",
+      "name": "0xdarkmatter/pytest-patterns",
+      "contributor": "0xdarkmatter",
+      "title": "The Quality Guardian",
+      "description": "Comprehensive pytest skill covering fixtures, parametrize, async testing, mocking, coverage strategies, and integration test patterns for pytest 7.0+ projects.",
+      "sourceRepo": "aiskillstore/marketplace",
+      "url": "https://github.com/aiskillstore/marketplace",
+      "mapsToGaia": [
+        "automated-testing"
+      ],
+      "promotedNamedSkillId": "0xdarkmatter/pytest-patterns",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "pytest",
+        "python",
+        "test-automation",
+        "fixtures",
+        "coverage"
+      ]
+    },
+    {
+      "id": "spring-ai-readme-generate",
+      "name": "spring-ai/readme-generate",
+      "contributor": "spring-ai",
+      "title": "The Endpoint Scribe",
+      "description": "Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format.",
+      "sourceRepo": "spring-ai-alibaba/examples",
+      "url": "https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md",
+      "mapsToGaia": [
+        "write-report"
+      ],
+      "promotedNamedSkillId": "spring-ai/readme-generate",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "java",
+        "spring",
+        "rest-api",
+        "documentation",
+        "readme"
+      ]
+    },
+    {
+      "id": "mattpocock-diagnose",
+      "name": "mattpocock/diagnose",
+      "contributor": "mattpocock",
+      "title": "The Disciplined Diagnosis Loop",
+      "description": "Enforces a five-phase debugging discipline prioritising the feedback loop above all else — refuses to proceed until a fast deterministic pass/fail signal exists.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md",
+      "mapsToGaia": [
+        "autonomous-debug"
+      ],
+      "promotedNamedSkillId": "mattpocock/diagnose",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "debugging",
+        "diagnosis",
+        "feedback-loop",
+        "regression",
+        "root-cause-analysis"
+      ]
+    },
+    {
+      "id": "mattpocock-tdd",
+      "name": "mattpocock/tdd",
+      "contributor": "mattpocock",
+      "title": "Vertical-Slice TDD",
+      "description": "Enforces strict vertical-slice TDD, blocking horizontal slicing (all tests first, then all code) and requiring tests against public interfaces only.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md",
+      "mapsToGaia": [
+        "test-driven-development"
+      ],
+      "promotedNamedSkillId": "mattpocock/tdd",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "tdd",
+        "red-green-refactor",
+        "vertical-slicing",
+        "tracer-bullet",
+        "public-interface-testing"
+      ]
+    },
+    {
+      "id": "mattpocock-zoom-out",
+      "name": "mattpocock/zoom-out",
+      "contributor": "mattpocock",
+      "title": "The Abstraction Lift",
+      "description": "Signals the agent to ascend one layer of abstraction and produce a map of all relevant modules, callers, and domain-glossary terms.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/zoom-out/SKILL.md",
+      "mapsToGaia": [
+        "code-explain"
+      ],
+      "promotedNamedSkillId": "mattpocock/zoom-out",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "code-navigation",
+        "abstraction",
+        "module-map",
+        "domain-glossary",
+        "codebase-orientation"
+      ]
+    },
+    {
+      "id": "mattpocock-edit-article",
+      "name": "mattpocock/edit-article",
+      "contributor": "mattpocock",
+      "title": "The Section-by-Section Rewrite",
+      "description": "Edits articles by modelling them as a DAG of information dependencies, confirming section order, then rewriting each section with a 240-character-per-paragraph constraint.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/personal/edit-article/SKILL.md",
+      "mapsToGaia": [
+        "document-editing"
+      ],
+      "promotedNamedSkillId": "mattpocock/edit-article",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "article-editing",
+        "prose-rewrite",
+        "information-dag",
+        "section-structure",
+        "clarity"
+      ]
+    },
+    {
+      "id": "mattpocock-write-a-skill",
+      "name": "mattpocock/write-a-skill",
+      "contributor": "mattpocock",
+      "title": "The Skill Scaffolder",
+      "description": "Guides creation of new agent skills via structured interview, producing a SKILL.md with trigger-aware description, progressive-disclosure layout, and optional bundled scripts.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md",
+      "mapsToGaia": [
+        "tool-creation"
+      ],
+      "promotedNamedSkillId": "mattpocock/write-a-skill",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "skill-authoring",
+        "meta-agent",
+        "claude-code",
+        "skill-scaffolding",
+        "progressive-disclosure"
+      ]
+    },
+    {
+      "id": "mattpocock-triage",
+      "name": "mattpocock/triage",
+      "contributor": "mattpocock",
+      "title": "The State-Machine Triager",
+      "description": "Moves GitHub issues through a two-category x five-state machine with bug reproduction, agent-brief writing, and structured triage notes bearing an AI-generation disclaimer.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md",
+      "mapsToGaia": [
+        "issue-triage"
+      ],
+      "promotedNamedSkillId": "mattpocock/triage",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "issue-triage",
+        "state-machine",
+        "bug-reproduction",
+        "agent-brief",
+        "github-issues"
+      ]
+    },
+    {
+      "id": "mattpocock-to-prd",
+      "name": "mattpocock/to-prd",
+      "contributor": "mattpocock",
+      "title": "The PRD Synthesiser",
+      "description": "Synthesises conversation context and codebase knowledge into a fully-structured PRD with user stories, implementation decisions, and testing decisions, then publishes to the issue tracker.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md",
+      "mapsToGaia": [
+        "prd-generation"
+      ],
+      "promotedNamedSkillId": "mattpocock/to-prd",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "prd",
+        "requirements",
+        "user-stories",
+        "product-management",
+        "issue-tracker"
+      ]
+    },
+    {
+      "id": "mattpocock-to-issues",
+      "name": "mattpocock/to-issues",
+      "contributor": "mattpocock",
+      "title": "The Vertical Slicer",
+      "description": "Breaks a plan into independently-demoable vertical slices, classifies each HITL or AFK, maps dependency chains, and publishes structured GitHub issues with acceptance criteria in dependency order.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md",
+      "mapsToGaia": [
+        "vertical-slice-planning"
+      ],
+      "promotedNamedSkillId": "mattpocock/to-issues",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "vertical-slicing",
+        "issue-decomposition",
+        "tracer-bullet",
+        "hitl",
+        "afk",
+        "acceptance-criteria"
+      ]
+    },
+    {
+      "id": "mattpocock-grill-with-docs",
+      "name": "mattpocock/grill-with-docs",
+      "contributor": "mattpocock",
+      "title": "The Domain-Aware Interrogator",
+      "description": "Stress-tests a plan against the project's domain model, challenging language against CONTEXT.md, cross-referencing code, and persisting resolved decisions as inline glossary updates and ADRs.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md",
+      "mapsToGaia": [
+        "design-review"
+      ],
+      "promotedNamedSkillId": "mattpocock/grill-with-docs",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "design-review",
+        "domain-model",
+        "ubiquitous-language",
+        "adr",
+        "context-md",
+        "socratic-method"
+      ]
+    },
+    {
+      "id": "mattpocock-grill-me",
+      "name": "mattpocock/grill-me",
+      "contributor": "mattpocock",
+      "title": "The Relentless Interviewer",
+      "description": "Conducts a relentless one-question-at-a-time interview walking every branch of the decision tree with a recommended answer, substituting codebase exploration wherever empirically determinable.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
+      "mapsToGaia": [
+        "design-review"
+      ],
+      "promotedNamedSkillId": "mattpocock/grill-me",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "design-review",
+        "decision-tree",
+        "socratic-method",
+        "plan-stress-test",
+        "one-question-at-a-time"
+      ]
+    },
+    {
+      "id": "mattpocock-improve-codebase-architecture",
+      "name": "mattpocock/improve-codebase-architecture",
+      "contributor": "mattpocock",
+      "title": "The Depth Seeker",
+      "description": "Identifies shallow modules via the deletion test, presents deepening opportunities with locality/leverage analysis, then grills the developer on the chosen candidate to design a deep-module replacement.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md",
+      "mapsToGaia": [
+        "refactor-code"
+      ],
+      "promotedNamedSkillId": "mattpocock/improve-codebase-architecture",
+      "addedAt": "2026-04-30",
+      "tags": [
+        "architecture-review",
+        "deep-modules",
+        "refactoring",
+        "locality",
+        "testability",
+        "deletion-test"
+      ]
+    },
+    {
+      "id": "openai-openai-docs",
+      "name": "openai/openai-docs",
+      "contributor": "openai",
+      "title": "The Living API Codex",
+      "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/openai-docs",
+      "mapsToGaia": [
+        "retrieve",
+        "question-answer",
+        "cite-sources"
+      ],
+      "promotedNamedSkillId": "openai/openai-docs",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "openai",
+        "docs",
+        "api-reference",
+        "sdk",
+        "citation"
+      ]
+    },
+    {
+      "id": "openai-gh-fix-ci",
+      "name": "openai/gh-fix-ci",
+      "contributor": "openai",
+      "title": "The Checkrunner Surgeon",
+      "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/gh-fix-ci",
+      "mapsToGaia": [
+        "error-interpretation",
+        "execute-bash",
+        "automated-testing"
+      ],
+      "promotedNamedSkillId": "openai/gh-fix-ci",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "github-actions",
+        "ci",
+        "debugging",
+        "pull-requests"
+      ]
+    },
+    {
+      "id": "openai-yeet",
+      "name": "openai/yeet",
+      "contributor": "openai",
+      "title": "The Guarded Shipwright",
+      "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/yeet",
+      "mapsToGaia": [
+        "diff-content",
+        "format-output",
+        "api-call"
+      ],
+      "promotedNamedSkillId": "openai/yeet",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "git",
+        "pull-requests",
+        "commit-workflow",
+        "release-flow"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-apps",
+      "name": "openai/chatgpt-apps",
+      "contributor": "openai",
+      "title": "The Embedded Appwright",
+      "description": "Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/chatgpt-apps",
+      "mapsToGaia": [
+        "code-generation",
+        "api-call",
+        "full-stack-developer"
+      ],
+      "promotedNamedSkillId": "openai/chatgpt-apps",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "chatgpt-apps",
+        "mcp",
+        "widgets",
+        "full-stack"
+      ]
+    },
+    {
+      "id": "openai-playwright",
+      "name": "openai/playwright",
+      "contributor": "openai",
+      "title": "The Browser Witness",
+      "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/playwright",
+      "mapsToGaia": [
+        "computer-use",
+        "automated-testing",
+        "evaluate-output"
+      ],
+      "promotedNamedSkillId": "openai/playwright",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "playwright",
+        "browser-testing",
+        "automation",
+        "screenshots"
+      ]
+    },
+    {
+      "id": "openai-sentry",
+      "name": "openai/sentry",
+      "contributor": "openai",
+      "title": "The Incident Lens",
+      "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/sentry",
+      "mapsToGaia": [
+        "detect-anomaly",
+        "error-interpretation",
+        "api-call"
+      ],
+      "promotedNamedSkillId": "openai/sentry",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "sentry",
+        "incident-response",
+        "observability",
+        "errors"
+      ]
+    },
+    {
+      "id": "openai-security-threat-model",
+      "name": "openai/security-threat-model",
+      "contributor": "openai",
+      "title": "The Threat Cartographer",
+      "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-threat-model",
+      "mapsToGaia": [
+        "code-review-pipeline",
+        "detect-anomaly",
+        "write-report"
+      ],
+      "promotedNamedSkillId": "openai/security-threat-model",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "threat-modeling",
+        "risk-analysis",
+        "code-review"
+      ]
+    },
+    {
+      "id": "openai-security-ownership-map",
+      "name": "openai/security-ownership-map",
+      "contributor": "openai",
+      "title": "The Ownership Mapper",
+      "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-ownership-map",
+      "mapsToGaia": [
+        "data-analysis",
+        "knowledge-graph-build",
+        "write-report"
+      ],
+      "promotedNamedSkillId": "openai/security-ownership-map",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "ownership",
+        "bus-factor",
+        "repository-analysis"
+      ]
+    },
+    {
+      "id": "openai-security-best-practices",
+      "name": "openai/security-best-practices",
+      "contributor": "openai",
+      "title": "The Secure Code Sentinel",
+      "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
+      "sourceRepo": "openai/skills",
+      "url": "https://officialskills.sh/openai/skills/security-best-practices",
+      "mapsToGaia": [
+        "code-review-pipeline",
+        "detect-anomaly",
+        "evaluate-output"
+      ],
+      "promotedNamedSkillId": "openai/security-best-practices",
+      "addedAt": "2026-05-01",
+      "tags": [
+        "security",
+        "secure-coding",
+        "code-review",
+        "vulnerability-analysis"
+      ]
+    }
+  ]
+}

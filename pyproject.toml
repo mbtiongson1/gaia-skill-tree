@@ -1,14 +1,35 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "gaia-cli"
-version = "1.0.0"
+version = "2.4.0"
 description = "Gaia AI Agent Skill Registry CLI"
+readme = "README.md"
 requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Gaia contributors" },
+]
+keywords = ["ai", "agents", "cli", "skills", "registry"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
 dependencies = [
     "jsonschema>=4.17.0",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -16,10 +37,38 @@ embeddings = [
     "sentence-transformers>=2.2.0",
     "numpy>=1.21.0",
 ]
+dev = [
+    "build>=1.2.0",
+    "pytest>=8.0",
+    "setuptools>=68.0",
+    "twine>=5.0",
+    "wheel>=0.42.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mbtiongson1/gaia-skill-tree"
+Repository = "https://github.com/mbtiongson1/gaia-skill-tree"
+Issues = "https://github.com/mbtiongson1/gaia-skill-tree/issues"
+Documentation = "https://gaia.tiongson.co/"
 
 [project.scripts]
-gaia = "plugin.cli.main:main"
+gaia = "gaia_cli.main:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["plugin*"]
+where = ["src"]
+include = ["gaia_cli*"]
+
+[tool.setuptools.package-data]
+gaia_cli = [
+    "data/registry/gaia.json",
+    "data/registry/named-skills.json",
+    "data/registry/named/**/*.md",
+    "data/registry/named/**/*.json",
+    "data/registry/schema/*.json",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+markers = [
+    "packaging: package build and wheel installation checks",
+]

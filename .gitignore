@@ -28,7 +28,10 @@ build/
 # Plugin local cache
 .gaia/
 .gaia/skill-tree.cache.json
+generated-output/
 
 # Temp files
 *.tmp
 *.bak
+scratch/
+.hermes

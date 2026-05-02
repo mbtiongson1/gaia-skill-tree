@@ -2,7 +2,7 @@
 
 ### User Details
 - **GitHub Username:** `username`
-- **Directory:** `users/username/`
+- **Directory:** `skill-trees/username/`
 
 ### Initial Skills
 List the skills you are claiming with evidence of detection:
@@ -14,7 +14,7 @@ List the skills you are claiming with evidence of detection:
 ### Checklist
 
 **Contributor:**
-- [ ] `skill-tree.json` validates against `schema/skillTree.schema.json`.
+- [ ] `skill-tree.json` validates against `registry/schema/skillTree.schema.json`.
 - [ ] GitHub username matches the PR author.
 - [ ] All claimed skill IDs exist in `gaia.json`.
 - [ ] Stats fields (`totalUnlocked`, `highestRarity`, `deepestLineage`) are accurate.

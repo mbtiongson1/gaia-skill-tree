@@ -16,11 +16,11 @@ except ImportError:
 
 
 SKILL_ID_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
-VALID_TYPES = {"atomic", "composite", "legendary"}
+VALID_TYPES = {"basic", "extra", "ultimate"}
 
 
 def load_json(path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -155,9 +155,9 @@ def validate_intake(intake_dir, graph_path, schema_path=None):
 def main():
     parser = argparse.ArgumentParser(description="Validate Gaia intake skill batches.")
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    parser.add_argument("--intake-dir", default=os.path.join(repo_root, "intake"))
-    parser.add_argument("--graph", default=os.path.join(repo_root, "graph", "gaia.json"))
-    parser.add_argument("--schema", default=os.path.join(repo_root, "schema", "skillBatch.schema.json"))
+    parser.add_argument("--intake-dir", default=os.path.join(repo_root, "registry-for-review"))
+    parser.add_argument("--graph", default=os.path.join(repo_root, "registry", "gaia.json"))
+    parser.add_argument("--schema", default=os.path.join(repo_root, "registry", "schema", "skillBatch.schema.json"))
     args = parser.parse_args()
 
     if not HAS_JSONSCHEMA:

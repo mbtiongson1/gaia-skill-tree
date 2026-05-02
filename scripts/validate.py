@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Gaia Skill Registry — Canonical Graph Validator.
 
-Validates graph/gaia.json against:
+Validates registry/gaia.json against:
 1. JSON Schema validation for all skill nodes and edges.
 2. DAG cycle detection (DFS from all root nodes).
 3. Reference integrity (every parent ID resolves to an existing node).
 4. Evidence threshold by level.
-5. Legendary approval count check (placeholder).
+5. Ultimate approval count check (placeholder).
 6. Summary statistics output.
 
 Usage:
@@ -33,6 +33,7 @@ except ImportError:
 
 
 EVIDENCE_FLOOR = {
+    "0": None,       # No evidence required (Basic tier — universal LLM primitives)
     "I": None,       # No evidence required (foundation tier)
     "II": {"C", "B", "A"},
     "III": {"B", "A"},
@@ -42,21 +43,21 @@ EVIDENCE_FLOOR = {
 }
 
 MIN_PREREQS = {
-    "atomic": 0,
-    "composite": 2,
-    "legendary": 3,
+    "basic": 0,
+    "extra": 2,
+    "ultimate": 3,
 }
 
 
 def load_graph(path):
     """Load and parse the canonical graph JSON."""
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def load_schema(schema_path):
     """Load a JSON Schema file."""
-    with open(schema_path, "r") as f:
+    with open(schema_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -148,8 +149,8 @@ def validate_prerequisites_count(graph):
     for skill in graph.get("skills", []):
         min_req = MIN_PREREQS.get(skill["type"], 0)
         actual = len(skill.get("prerequisites", []))
-        if skill["type"] == "atomic" and actual > 0:
-            errors.append(f"Atomic skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
+        if skill["type"] == "basic" and actual > 0:
+            errors.append(f"Basic skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
         elif actual < min_req:
             errors.append(f"{skill['type'].title()} skill '{skill['id']}' needs ≥{min_req} prerequisites (has {actual}).")
     return errors
@@ -179,23 +180,23 @@ def validate_evidence(graph):
     return errors
 
 
-def validate_legendary(graph):
-    """Check legendary-specific constraints."""
+def validate_ultimate(graph):
+    """Check ultimate-specific constraints."""
     errors = []
     for skill in graph.get("skills", []):
-        if skill["type"] != "legendary":
+        if skill["type"] != "ultimate":
             continue
 
-        # Legendary stubs at Level I are allowed without evidence
+        # Ultimate stubs at Level I are allowed without evidence
         if skill["level"] == "I" and skill["status"] == "provisional":
             continue
 
-        # Validated legendaries need 3+ Class A/B evidence
+        # Validated ultimates need 3+ Class A/B evidence
         if skill["status"] == "validated":
             ab_evidence = [e for e in skill.get("evidence", []) if e.get("class") in ("A", "B")]
             if len(ab_evidence) < 3:
                 errors.append(
-                    f"Validated legendary '{skill['id']}' needs ≥3 Class A/B evidence "
+                    f"Validated ultimate '{skill['id']}' needs ≥3 Class A/B evidence "
                     f"sources (has {len(ab_evidence)})."
                 )
     return errors
@@ -238,7 +239,7 @@ def compute_stats(graph):
     # Find orphaned composites
     orphaned = []
     for s in skills:
-        if s["type"] in ("composite", "legendary") and len(s.get("prerequisites", [])) < 2:
+        if s["type"] in ("extra", "ultimate") and len(s.get("prerequisites", [])) < 2:
             orphaned.append(s["id"])
 
     print("\n📊 Graph Statistics")
@@ -249,9 +250,9 @@ def compute_stats(graph):
     print(f"   By status: {dict(by_status)}")
     print(f"   Total edges: {len(graph.get('edges', []))}")
     print(f"   Max lineage depth: {max_depth}")
-    print(f"   Root nodes (atomics): {len(roots)}")
+    print(f"   Root nodes (basics): {len(roots)}")
     if orphaned:
-        print(f"   ⚠ Orphaned composites: {orphaned}")
+        print(f"   ⚠ Orphaned extras: {orphaned}")
 
 
 _NAMED_REQUIRED_FIELDS = [
@@ -357,14 +358,17 @@ def _parse_named_frontmatter(text):
     return data
 
 
-def validate_named_skills(graph, named_dir=None):
-    """Validate all named skill .md files in graph/named/.
+def validate_named_skills(graph, named_dir=None, catalog_path=None):
+    """Validate all named skill .md files in registry/named/.
 
     Checks:
       - All required fields are present.
       - level is II or above.
       - genericSkillRef resolves to a skill ID in graph (gaia.json).
       - At most one origin: true per genericSkillRef bucket.
+      - status 'named' requires title OR catalogRef (reviewer gate).
+      - title/catalogRef requires status 'named' (prevents contributor bypassing).
+      - catalogRef (if set) resolves to an item id in real_skill_catalog.json.
 
     Returns a list of error strings.
     """
@@ -372,11 +376,25 @@ def validate_named_skills(graph, named_dir=None):
 
     if named_dir is None:
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        named_dir = os.path.join(repo_root, "graph", "named")
+        named_dir = os.path.join(repo_root, "registry", "named")
+
+    if catalog_path is None:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        catalog_path = os.path.join(repo_root, "registry", "real-skills.json")
 
     if not os.path.isdir(named_dir):
         # Not an error — directory simply doesn't exist yet.
         return errors
+
+    # Load catalog item IDs for catalogRef resolution check
+    catalog_ids = set()
+    if os.path.isfile(catalog_path):
+        try:
+            with open(catalog_path, "r", encoding="utf-8") as f:
+                catalog_data = json.load(f)
+            catalog_ids = {item["id"] for item in catalog_data.get("items", []) if "id" in item}
+        except (OSError, json.JSONDecodeError):
+            pass  # Catalog missing or malformed — skip resolution checks
 
     valid_ids = {s["id"] for s in graph.get("skills", [])}
 
@@ -420,6 +438,29 @@ def validate_named_skills(graph, named_dir=None):
                 f"does not match any skill ID in gaia.json."
             )
 
+        # Reviewer gate: status 'named' requires title OR catalogRef
+        status = fm.get("status", "")
+        has_title = bool(fm.get("title", "").strip() if isinstance(fm.get("title"), str) else fm.get("title"))
+        has_catalog_ref = bool(fm.get("catalogRef", "").strip() if isinstance(fm.get("catalogRef"), str) else fm.get("catalogRef"))
+        if status == "named" and not has_title and not has_catalog_ref:
+            errors.append(
+                f"Named skill {rel}: status 'named' requires a reviewer-assigned "
+                f"'title' or 'catalogRef'. Submit with status: awakened first."
+            )
+        # Inverse: title/catalogRef are only valid on named status
+        if (has_title or has_catalog_ref) and status != "named":
+            errors.append(
+                f"Named skill {rel}: 'title' and 'catalogRef' are only valid on "
+                f"status: named skills (got '{status}'). These fields are reviewer-only."
+            )
+        # catalogRef must resolve to a known catalog item
+        catalog_ref = fm.get("catalogRef", "")
+        if catalog_ref and catalog_ids and catalog_ref not in catalog_ids:
+            errors.append(
+                f"Named skill {rel}: 'catalogRef' value '{catalog_ref}' does not "
+                f"match any item id in real_skill_catalog.json."
+            )
+
         if not missing and level in _NAMED_VALID_LEVELS:
             buckets[ref].append(fm)
 
@@ -444,8 +485,8 @@ def main():
 
     # Resolve paths
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    graph_path = args.graph or os.path.join(repo_root, "graph", "gaia.json")
-    schema_dir = args.schema_dir or os.path.join(repo_root, "schema")
+    graph_path = args.graph or os.path.join(repo_root, "registry", "gaia.json")
+    schema_dir = args.schema_dir or os.path.join(repo_root, "registry", "schema")
 
     if not os.path.exists(graph_path):
         print(f"❌ Graph file not found: {graph_path}")
@@ -476,11 +517,11 @@ def main():
     print("   [5/7] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
-    # 6. Legendary constraints
-    print("   [6/7] Legendary constraints...")
-    all_errors.extend(validate_legendary(graph))
+    # 6. Ultimate constraints
+    print("   [6/7] Ultimate constraints...")
+    all_errors.extend(validate_ultimate(graph))
 
-    # 7. Named skills validation
+    # 7. Named skills validation (includes reviewer gate + catalog cross-refs)
     print("   [7/7] Named skills validation...")
     all_errors.extend(validate_named_skills(graph))
 

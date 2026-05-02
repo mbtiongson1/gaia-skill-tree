@@ -11,8 +11,9 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 3. [Naming Conventions](#naming-conventions)
 4. [Evidence Requirements](#evidence-requirements)
 5. [How to Submit a PR](#how-to-submit-a-pr)
-6. [Reviewer Rubric](#reviewer-rubric)
-7. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+6. [Named Skills](#named-skills)
+7. [Reviewer Rubric](#reviewer-rubric)
+8. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
 
 ---
 
@@ -20,12 +21,14 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 | PR Type | Template | What You're Changing |
 |---|---|---|
-| New Intrinsic Skill (`atomic`) | `new_atomic_skill.md` | Adding a primitive capability to `gaia.json` |
-| New Extra Skill (`composite`) | `new_composite_skill.md` | Adding a skill with 2+ prerequisites to `gaia.json` |
-| New fusion recipe | `new_fusion.md` | Adding edge records to `gaia.json` |
+| New Basic Skill (`basic`) | `new_basic_skill.md` | Adding a primitive capability to `registry/gaia.json` |
+| New Extra Skill (`extra`) | `new_extra_skill.md` | Adding a skill with 2+ prerequisites to `registry/gaia.json` |
+| New fusion recipe | `new_fusion.md` | Adding edge records to `registry/gaia.json` |
 | Reclassification | `reclassification.md` | Changing level or rarity of an existing skill |
-| New user tree | `new_user_tree.md` | Registering your first skill tree in `users/` |
+| New user tree | `new_user_tree.md` | Registering your first skill tree in `skill-trees/` |
 | Batch skill intake | `gaia push` / `/gaia-draft-curate` | Submitting known and proposed skills detected from agent usage |
+| New named skill | `new_named_skill.md` | Adding a real-world implementation to `registry/named/` |
+| Named skill classification | `named_skill_classification.md` | Reviewer-only: promoting an `awakened` named skill to `named` status |
 
 ---
 
@@ -37,7 +40,7 @@ If you have [Claude Code](https://claude.ai/code) installed, this repository shi
 
 Runs the complete curation pipeline end-to-end:
 1. Reads the current graph to avoid duplicates.
-2. Researches candidate skills with Class A/B evidence.
+2. Researches candidate skills with Evidence Tier A/B evidence. For each qualifying repo found on GitHub, checks common skill directory layouts (`skills/`, `.claude/skills/`, `codex/skills/`, etc.) to find individual SKILL.md files inside — each discovered skill is treated as a separate candidate with a specific file URL as evidence, not the repo root.
 3. Presents a draft review table — you classify each candidate as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject` before any file is touched.
 4. Writes and runs the generation script, validates the DAG, regenerates derived files, and opens a PR.
 
@@ -48,10 +51,11 @@ Runs the complete curation pipeline end-to-end:
 ### `/gaia-draft-curate` — triage pending intake batches
 
 A lighter, read-only triage command for reviewing skill batches submitted via `gaia push`:
-1. Pulls latest and scans `intake/skill-batches/*.json`.
+1. Pulls latest and scans `registry-for-review/skill-batches/*.json`.
 2. Checks GitHub for open `draft-skills` PRs.
-3. Presents each proposed skill for classification: `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
-4. Optionally hands off to `/gaia-curate` to promote accepted skills into `graph/gaia.json`.
+3. For each proposed skill, searches GitHub for evidence and inspects qualifying repos for individual SKILL.md files inside common skill directories — resolves any repo-root evidence URLs to specific file paths before accepting.
+4. Presents each proposed skill for classification: `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
+5. Optionally hands off to `/gaia-curate` to promote accepted skills into `registry/gaia.json`.
 
 ```
 /gaia-draft-curate
@@ -65,25 +69,25 @@ Run `/gaia-draft-curate` first when contributors have pushed new intake batches.
 
 ## Naming Conventions
 
-- **Skill IDs** use `kebab-case` in `gaia.json`: `web-scrape`, `parse-json`, `autonomous-debug`.
+- **Skill IDs** use `kebab-case` in `registry/gaia.json`: `web-scrape`, `parse-json`, `autonomous-debug`.
 - **Display names** use Title Case: "Web Scrape", "Parse JSON", "Autonomous Debug".
-- **Skill types** have display labels used in generated files — use the machine ID in `gaia.json`:
-  - `atomic` → **Intrinsic Skill**
-  - `composite` → **Extra Skill**
-  - `legendary` → **Ultimate Skill**
+- **Skill types** have display labels used in generated files — use the machine ID in `registry/gaia.json`:
+  - `basic` → **Basic Skill**
+  - `extra` → **Extra Skill**
+  - `ultimate` → **Ultimate Skill**
 - **No vendor names** in skill IDs or definitions. Skills must be agent-agnostic.
 - **No abbreviations** unless universally understood (`html`, `json`, `api` are fine; `nlp` should be `natural-language-processing`).
-- **No duplicates.** Before submitting, search `gaia.json` for existing skills that may already cover your concept. If overlap exists, consider a reclassification PR instead.
+- **No duplicates.** Before submitting, search `registry/gaia.json` for existing skills that may already cover your concept. If overlap exists, consider a reclassification PR instead.
 
 ---
 
 ## Evidence Requirements
 
-Every skill above Level I must include at least one evidence entry.
+Every skill above Level I (Awakened) must include at least one evidence entry. Level 0 (Unawakened) and Level I (Awakened) require no evidence.
 
-### Evidence Classes
+### Evidence Tiers
 
-| Class | Standard | Example |
+| Evidence Tier | Standard | Example |
 |---|---|---|
 | **A** | Peer-reviewed paper or rigorous public benchmark with reproducible methodology | arXiv paper with code and eval |
 | **B** | Reproducible open-source demo with logs, inputs, and outputs archived | GitHub repo with demo script and output logs |
@@ -91,18 +95,20 @@ Every skill above Level I must include at least one evidence entry.
 
 ### Evidence by Level
 
-| Level | Rank | Minimum Evidence |
-|---|---|---|
-| I | Dormant | None |
-| II | Awakened | 1× Class C |
-| III | Named | 1× Class B |
-| IV | Evolved | 1× Class B or A |
-| V | Transcendent | 1× Class A |
+| Level | Class | Rank | Minimum Evidence |
+|---|---|---|---|
+| 0 | F | **Unawakened** | None |
+| I | D | **Awakened** | None |
+| II | C | **Named** | 1× Evidence Tier C |
+| III | B | **Evolved** | 1× Evidence Tier B |
+| IV | A | **Hardened** | 1× Evidence Tier B or A |
+| V | S | **Transcendent** | 1× Evidence Tier A |
+| VI | SS | **Transcendent ★** | Evidence Tier A + peer review |
 
 ### Ultimate Skill Requirements
 
-Ultimate Skill (`legendary`) type skills have additional requirements:
-- Minimum **3 Class A or B** evidence sources.
+Ultimate Skill (`ultimate`) type skills have additional requirements:
+- Minimum **3 Evidence Tier A or B** evidence sources.
 - **2 maintainer approvals** before merge.
 - Status must be `validated` at merge (never `provisional`).
 
@@ -119,10 +125,10 @@ demonstrates the skills:
 gaia push
 ```
 
-This creates a reviewable batch under `intake/skill-batches/` with detected
+This creates a reviewable batch under `registry-for-review/skill-batches/` with detected
 canonical skills, proposed new skills, and similarity hints. These batch records
 are canonical intake records, but they are not DAG nodes until maintainers
-promote accepted skills into `graph/gaia.json`.
+promote accepted skills into `registry/gaia.json`.
 
 To preview the batch without writing files:
 
@@ -143,17 +149,30 @@ python3 scripts/validate_intake.py
 ```
 
 Review flow for intake PRs:
-1. Contributor opens a draft intake PR containing `intake/skill-batches/<batchId>.json`.
+1. Contributor opens a draft intake PR containing `registry-for-review/skill-batches/<batchId>.json`.
 2. Reviewers mark each proposed skill as `accept`, `rename`, `duplicate`, `needs-evidence`, or `reject`.
-3. Maintainers promote accepted draft skills into `graph/gaia.json` in a separate canonical graph PR.
+3. Maintainers promote accepted draft skills into `registry/gaia.json` in a separate canonical graph PR.
+
+### Personal Skill Tree Progression
+
+`gaia scan` is the source of promotion recommendations. It writes `generated-output/promotion-candidates.json` and renders `generated-output/tree.html` plus `generated-output/tree.md`.
+
+Promotion is gated by that scan artifact:
+
+```bash
+gaia promote web-search
+gaia promote --all
+```
+
+If the candidate file is missing, stale, or does not contain the skill, Gaia refuses the promotion. The target level comes from the scan recommendation, not from user input. This keeps the user's skill tree tied to observed evidence instead of manual level edits.
 
 ### Canonical Graph Changes
 
 1. **Fork** this repository.
-2. **Edit `graph/gaia.json`** directly — this is the only source of truth.
+2. **Edit `registry/gaia.json`** directly — this is the only source of truth.
    - Add your skill node to the `skills` array.
    - Add any edge records to the `edges` array.
-3. **Do NOT** edit files in `skills/`, `registry.md`, or `combinations.md` — these are generated.
+3. **Do NOT** edit files in `registry/skills/`, `registry/registry.md`, or `registry/combinations.md` — these are generated.
 4. **Run validation locally:**
    ```bash
    python3 scripts/validate.py
@@ -168,9 +187,47 @@ Review flow for intake PRs:
 ```
 
 Examples:
-- `[atomic] parse-csv — adds CSV parsing as a primitive Intrinsic Skill`
-- `[composite] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
+- `[basic] parse-csv — adds CSV parsing as a primitive Basic Skill`
+- `[extra] autonomous-debug — combines code-generation + execute-bash + error-interpretation`
 - `[reclassify] web-scrape — upgrade from Awakened (II) to Named (III) with new evidence`
+
+---
+
+## Named Skills
+
+Named skills are real-world implementations of abstract Gaia skills, attributed to a specific contributor. They live at `registry/named/{contributor}/{skill-name}.md`.
+
+### Contributor: submitting a named skill
+
+Always submit with `status: awakened`. Never set `title`, `catalogRef`, or `status: named` — these fields are reviewer-only. CI will fail if you attempt to set them.
+
+Use the `new_named_skill.md` PR template, which contains the full contributor and reviewer checklists.
+
+```bash
+# Example named skill frontmatter (contributor submits this)
+id: karpathy/autoresearch
+name: AutoResearch
+contributor: karpathy
+genericSkillRef: autonomous-research-agent
+status: awakened          # <-- always awakened at submission
+level: II
+origin: true
+description: "..."
+```
+
+### Reviewer: classifying a named skill
+
+After a named skill is merged as `awakened`, a reviewer checks whether it matches a real-world published implementation (a SKILL.md, open-source repo, or documented tool). If yes:
+
+1. Open a classification PR using the `named_skill_classification.md` template.
+2. Add `title` (reviewer-assigned RPG epithet) and optionally `catalogRef` (back-link to `registry/real-skills.json`).
+3. Change `status: awakened` → `status: named`.
+4. Set `links.github` to the **specific SKILL.md file URL** inside the source repo (e.g., `https://github.com/owner/repo/blob/main/.claude/skills/skill-name/SKILL.md`), not the repo root or a directory listing. If no SKILL.md exists, a repo URL is acceptable but flag it as `needs-specific-url` in the classification PR.
+5. If no catalog entry exists yet, add one to `registry/real-skills.json` with `promotedNamedSkillId` pointing back.
+
+Only `status: named` skills surface as `realVariants` on abstract skill nodes and in the real-skills catalog. `awakened` skills remain in `registry/named-skills.json` under `awaitingClassification` until classified.
+
+**Key rule:** Contributors declare skills. Reviewers classify identity.
 
 ---
 
@@ -196,10 +253,10 @@ Maintainers evaluate every PR against these criteria:
 | **Duplicate** | A skill with substantially the same definition already exists. |
 | **Vendor-specific** | The definition references a specific model or vendor as a requirement. |
 | **Insufficient evidence** | Level claim exceeds available evidence quality. |
-| **Invalid graph** | PR introduces a cycle, missing parent reference, or orphaned composite. |
+| **Invalid graph** | PR introduces a cycle, missing parent reference, or orphaned extra. |
 | **Inflated rarity** | Rarity is declared rather than computed from prevalence data. |
 | **Ambiguous definition** | The skill description is vague, overlapping, or not falsifiable. |
-| **Hand-edited generated files** | Changes were made to `skills/`, `registry.md`, or `combinations.md` instead of `gaia.json`. |
+| **Hand-edited generated files** | Changes were made to `registry/skills/`, `registry/registry.md`, or `registry/combinations.md` instead of `registry/gaia.json`. |
 | **Legendary without approval** | Ultimate Skill submitted without meeting the 3-source / 2-approval bar. |
 
 ---

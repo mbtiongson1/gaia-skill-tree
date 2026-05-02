@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VALIDATE_SCRIPT = os.path.join(REPO_ROOT, "scripts", "validate.py")
 FIXTURES_DIR = os.path.join(REPO_ROOT, "tests", "fixtures")
-REAL_GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
+REAL_GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
 
 def run_validate(graph_path):
     """Helper to run validate.py and return (exit_code, stdout)."""
@@ -50,17 +50,23 @@ class TestValidate(unittest.TestCase):
         self.assertIn("needs evidence class", out)
 
     def test_orphaned_composite(self):
-        """Ensure composites with < 2 prerequisites are caught."""
-        code, out = run_validate(os.path.join(FIXTURES_DIR, "orphaned_composite.json"))
-        self.assertEqual(code, 1, "Expected orphaned composite to fail validation.")
+        """Ensure extras with < 2 prerequisites are caught."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "orphaned_extra.json"))
+        self.assertEqual(code, 1, "Expected orphaned extra to fail validation.")
         self.assertIn("needs ≥2 prerequisites", out)
 
     def test_legendary_no_approval(self):
-        """Ensure validated legendary with < 3 Class A/B evidence is caught."""
-        code, out = run_validate(os.path.join(FIXTURES_DIR, "legendary_no_approval.json"))
-        self.assertEqual(code, 1, "Expected legendary with no approval to fail validation.")
-        self.assertIn("Validated legendary", out)
+        """Ensure validated ultimate with < 3 Class A/B evidence is caught."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "ultimate_no_approval.json"))
+        self.assertEqual(code, 1, "Expected ultimate with no approval to fail validation.")
+        self.assertIn("Validated ultimate", out)
         self.assertIn("needs ≥3 Class A/B evidence", out)
+
+    def test_atomic_with_prerequisites(self):
+        """Ensure a basic skill that declares prerequisites is rejected."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "basic_with_prereqs.json"))
+        self.assertEqual(code, 1, "Expected basic-with-prereqs to fail validation.")
+        self.assertIn("must have 0 prerequisites", out)
 
 class TestNamedSkillValidation(unittest.TestCase):
     """Tests that verify named skill files pass validate_and_group rules."""
@@ -69,7 +75,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         """All seed named skills have a level in the valid set (II–VI)."""
         from scripts.generateNamedIndex import load_named_skills, validate_and_group, load_gaia_skill_ids
 
-        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        named_dir = os.path.join(REPO_ROOT, "registry", "named")
         if not os.path.isdir(named_dir):
             self.skipTest("Named skills directory not present.")
 
@@ -77,7 +83,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         named_skills = [(fp, fm) for fp, fm in named_skills if not fp.endswith("index.json")]
 
         valid_ids = load_gaia_skill_ids(REAL_GRAPH_PATH)
-        errors, buckets = validate_and_group(named_skills, valid_ids)
+        errors, buckets, *_ = validate_and_group(named_skills, valid_ids)
 
         self.assertEqual(
             errors,
@@ -89,7 +95,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         """No seed named skill uses level I (which is forbidden for named skills)."""
         from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
 
-        named_dir = os.path.join(REPO_ROOT, "graph", "named")
+        named_dir = os.path.join(REPO_ROOT, "registry", "named")
         if not os.path.isdir(named_dir):
             self.skipTest("Named skills directory not present.")
 
@@ -110,7 +116,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/skill.md",
+                "registry/named/fake/skill.md",
                 {
                     "id": "fake/skill",
                     "name": "Fake",
@@ -123,7 +129,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, {"web-search"})
+        errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
             any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
                 for e in errors),
@@ -136,14 +142,14 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/incomplete.md",
+                "registry/named/fake/incomplete.md",
                 {
                     "id": "fake/incomplete",
                     # Missing: name, contributor, origin, genericSkillRef, status, level, description
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, set())
+        errors, *_ = validate_and_group(named_skills, set())
         self.assertGreater(len(errors), 0, "Expected errors for missing required fields.")
 
     def test_unresolved_generic_ref_fails_validation(self):
@@ -152,7 +158,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
         named_skills = [
             (
-                "graph/named/fake/skill.md",
+                "registry/named/fake/skill.md",
                 {
                     "id": "fake/skill",
                     "name": "Fake Skill",
@@ -165,7 +171,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                 },
             )
         ]
-        errors, _ = validate_and_group(named_skills, {"web-search"})
+        errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
             any("definitely-not-a-real-skill-id" in e for e in errors),
             f"Expected unresolved-ref error, got: {errors}",

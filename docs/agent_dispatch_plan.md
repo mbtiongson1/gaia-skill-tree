@@ -51,10 +51,10 @@ graph TD
 - **Deliverables:**
   - `tests/fixtures/cycle.json` — Graph with an intentional cycle (`A→B→C→A`)
   - `tests/fixtures/missing_ref.json` — Composite skill referencing a nonexistent parent
-  - `tests/fixtures/bad_evidence.json` — Level III skill with only Class C evidence
-  - `tests/fixtures/orphaned_composite.json` — Composite with only 1 prerequisite
-  - `tests/fixtures/legendary_no_approval.json` — Validated legendary with <3 Class A/B sources
-- **Instructions:** Each fixture is a minimal `gaia.json` with exactly one defect. Copy structure from `graph/gaia.json` but inject the specific violation. Keep them small (3–5 skills each).
+  - `tests/fixtures/bad_evidence.json` — Level III skill with only Evidence Tier C
+  - `tests/fixtures/orphaned_extra.json` — Composite with only 1 prerequisite
+  - `tests/fixtures/ultimate_no_approval.json` — Validated legendary with <3 Evidence Tier A/B sources
+- **Instructions:** Each fixture is a minimal `gaia.json` with exactly one defect. Copy structure from `registry/gaia.json` but inject the specific violation. Keep them small (3–5 skills each).
 - **Acceptance:** Each file must be valid JSON but fail exactly one validation check.
 
 ### Task 1.2 — Test Runner Script 🔧
@@ -62,7 +62,7 @@ graph TD
 - **Compute:** Yes — must run `validate.py` against each fixture
 - **Depends on:** Task 1.1
 - **Deliverables:**
-  - `tests/test_validate.py` — Runs `validate.py` against each fixture, asserts the correct error is caught and the correct exit code is returned. Also runs against the real `graph/gaia.json` and asserts exit code 0.
+  - `tests/test_validate.py` — Runs `validate.py` against each fixture, asserts the correct error is caught and the correct exit code is returned. Also runs against the real `registry/gaia.json` and asserts exit code 0.
 - **Instructions:** Use `subprocess.run()` to invoke `validate.py` per fixture. Parse stdout for expected error strings. Framework: plain `unittest` or `pytest` (no exotic deps).
 - **Acceptance:** `python -m pytest tests/` passes. Each fixture triggers its intended failure. Clean graph passes.
 
@@ -89,13 +89,13 @@ graph TD
 
 ### Task 2.1 — generateProjections.py 🔧
 - **Agent:** Coder
-- **Compute:** Yes — must run against `graph/gaia.json` and verify output files
+- **Compute:** Yes — must run against `registry/gaia.json` and verify output files
 - **Depends on:** M0 (gaia.json exists)
 - **Deliverables:**
-  - `scripts/generateProjections.py` — Reads `graph/gaia.json`, generates:
-    - `skills/atomic/{id}.md` for each atomic skill
-    - `skills/composite/{id}.md` for each composite skill
-    - `skills/legendary/{id}.md` for each legendary skill
+  - `scripts/generateProjections.py` — Reads `registry/gaia.json`, generates:
+    - `skills/basic/{id}.md` for each atomic skill
+    - `skills/extra/{id}.md` for each composite skill
+    - `skills/ultimate/{id}.md` for each legendary skill
     - `registry.md` — flat sorted index (table: name, type, level, rarity, status)
     - `combinations.md` — matrix of fusion recipes (prerequisites, conditions, level floors)
   - Every generated file includes a provenance footer: `*Generated from gaia.json v{version} on {timestamp}. Do not edit directly.*`
@@ -111,7 +111,7 @@ graph TD
 - **Depends on:** M0 (gaia.json exists)
 - **Parallel with:** Task 2.1
 - **Deliverables:**
-  - `scripts/exportGexf.py` — Reads `graph/gaia.json`, outputs `graph/gaia.gexf` in GEXF 1.2 format.
+  - `scripts/exportGexf.py` — Reads `registry/gaia.json`, outputs `registry/gaia.gexf` in GEXF 1.2 format.
   - Custom attribute namespaces for: `level`, `rarity`, `status`, `type`.
 - **Instructions:** Use Python `xml.etree.ElementTree` (stdlib only, no deps). Follow GEXF 1.2 spec. Include all skills as nodes and all edges.
 - **Acceptance:** Output is well-formed XML. Openable in Gephi (or passes XML schema validation).
@@ -126,14 +126,14 @@ graph TD
     2. Runs `exportGexf.py`
     3. Runs `git diff --exit-code` to detect drift between committed and freshly generated files
     4. Fails if any difference is found
-- **Instructions:** Triggers on PRs touching `graph/` or `schema/`. Runs after validation passes (`needs: validate`).
-- **Acceptance:** YAML is valid. A hand-edited `skills/atomic/tokenize.md` would cause this workflow to fail.
+- **Instructions:** Triggers on PRs touching `registry/`. Runs after validation passes (`needs: validate`).
+- **Acceptance:** YAML is valid. A hand-edited `skills/basic/tokenize.md` would cause this workflow to fail.
 
 ### Task 2.4 — First Static Snapshot ✍️
 - **Agent:** Writer
 - **Compute:** None (just a file copy)
 - **Depends on:** Task 2.1
-- **Deliverables:** `graph/render/v0.1.0.json` — A D3/Cytoscape-compatible export matching `DESIGN.md` §10.1 structure (nodes array + edges array + meta object).
+- **Deliverables:** `registry/render/v0.1.0.json` — A D3/Cytoscape-compatible export matching `DESIGN.md` §10.1 structure (nodes array + edges array + meta object).
 - **Instructions:** Can be generated as part of `generateProjections.py` or as a standalone step. Structure:
   ```json
   { "nodes": [...], "edges": [...], "meta": { "version": "0.1.0", "generatedAt": "...", "totalNodes": N, "totalEdges": M } }
@@ -152,23 +152,23 @@ graph TD
 - **Deliverables:**
   - `scripts/detectCombinations.py` — Shared module implementing the algorithm from `DESIGN.md` §8.1:
     ```
-    For each composite/legendary skill S in gaiaGraph:
+    For each extra/ultimate skill S in gaiaGraph:
       If S is NOT in ownedSkills:
         If all prerequisites of S are in (detectedSkills ∪ ownedSkills):
           Add S to pendingCombinations
     ```
   - Must be importable as a module (used by plugin in Phase 4) AND runnable as CLI.
-  - CLI: `python scripts/detectCombinations.py --graph graph/gaia.json --detected skillA,skillB --owned users/mbtiongson1/skill-tree.json`
+  - CLI: `python scripts/detectCombinations.py --graph registry/gaia.json --detected skillA,skillB --owned skill-trees/mbtiongson1/skill-tree.json`
 - **Instructions:** Handle edge cases from `DESIGN.md` §8.2 (already-owned at lower level = level-up candidate; legendary = flagged for review).
 - **Acceptance:** Given `detectedSkills = {codeGeneration, executeBash, errorInterpretation}` and the seed user tree, returns `autonomousDebug` as a candidate.
 
 ### Task 3.2 — computeRarity.py 🔧
 - **Agent:** Coder
-- **Compute:** Yes — reads all user trees in `users/`
+- **Compute:** Yes — reads all user trees in `skill-trees/`
 - **Depends on:** M0
 - **Parallel with:** Task 3.1
 - **Deliverables:**
-  - `scripts/computeRarity.py` — Reads all `users/*/skill-tree.json`, computes prevalence % per skill, outputs a rarity override table.
+  - `scripts/computeRarity.py` — Reads all `skill-trees/*/skill-tree.json`, computes prevalence % per skill, outputs a rarity override table.
   - Thresholds from `SPEC.md` §7.3: >40% = common, 20–40% = uncommon, 5–20% = rare, 1–5% = epic, <1% = legendary.
 - **Instructions:** Output as JSON to stdout. Optional `--apply` flag to write rarity updates back into `gaia.json`.
 - **Acceptance:** With 1 seed user tree, all 7 unlocked skills show 100% prevalence → common.
@@ -177,15 +177,15 @@ graph TD
 - **Agent:** Writer (or extend Task 2.1)
 - **Compute:** None if template only; Yes if generating
 - **Depends on:** Task 2.1
-- **Deliverables:** Extend `generateProjections.py` to also generate `users/{username}/skill-tree.md` for each user tree, matching `DESIGN.md` §6 structure (lines 281–307).
-- **Acceptance:** `users/mbtiongson1/skill-tree.md` is generated with correct stats, unlocked skills table, and pending combinations block.
+- **Deliverables:** Extend `generateProjections.py` to also generate `skill-trees/{username}/skill-tree.md` for each user tree, matching `DESIGN.md` §6 structure (lines 281–307).
+- **Acceptance:** `skill-trees/mbtiongson1/skill-tree.md` is generated with correct stats, unlocked skills table, and pending combinations block.
 
 ### Task 3.4 — Second Seed User Tree ✍️
 - **Agent:** Writer
 - **Compute:** None
 - **Depends on:** Nothing
 - **Parallel with:** Everything
-- **Deliverables:** `users/gaiabot/skill-tree.json` — A second example user tree (3–5 atomic skills, no composites yet, 1 pending combination). Must validate against `schema/skillTree.schema.json`.
+- **Deliverables:** `skill-trees/gaiabot/skill-tree.json` — A second example user tree (3–5 atomic skills, no composites yet, 1 pending combination). Must validate against `registry/schema/skillTree.schema.json`.
 - **Acceptance:** Valid JSON matching the schema. Different skill set from mbtiongson1.
 
 ---
@@ -198,47 +198,47 @@ graph TD
 - **Agent:** Coder
 - **Compute:** Yes
 - **Depends on:** M0
-- **Deliverables:** `plugin/cli/scanner.py` — Reads `.gaia/config.json`, scans declared `scanPaths` for skill ID references (in `.md` files, MCP tool declarations, agent configs). Returns a set of resolved Gaia skill IDs.
+- **Deliverables:** `packages/cli-npm/cli/scanner.py` — Reads `.gaia/config.json`, scans declared `scanPaths` for skill ID references (in `.md` files, MCP tool declarations, agent configs). Returns a set of resolved Gaia skill IDs.
 - **Acceptance:** Scanning this repo's `skills/` dir (after projections exist) returns known skill IDs.
 
 ### Task 4.2 — resolver.py 🔧
 - **Agent:** Coder
 - **Compute:** Yes
 - **Depends on:** Task 4.1
-- **Deliverables:** `plugin/cli/resolver.py` — Fetches or reads `gaia.json` from the configured `gaiaRegistryRef`. Resolves raw detected tokens to canonical skill IDs.
+- **Deliverables:** `packages/cli-npm/cli/resolver.py` — Fetches or reads `gaia.json` from the configured `gaiaRegistryRef`. Resolves raw detected tokens to canonical skill IDs.
 
 ### Task 4.3 — combinator.py 🔧
 - **Agent:** Coder
 - **Compute:** Yes
 - **Depends on:** Task 3.1 (imports `detectCombinations`)
-- **Deliverables:** `plugin/cli/combinator.py` — Wraps `scripts/detectCombinations.py`. Returns ranked combination candidates (prioritize higher rarity unlocks).
+- **Deliverables:** `packages/cli-npm/cli/combinator.py` — Wraps `scripts/detectCombinations.py`. Returns ranked combination candidates (prioritize higher rarity unlocks).
 
 ### Task 4.4 — treeManager.py 🔧
 - **Agent:** Coder
 - **Compute:** Yes
 - **Depends on:** M0
-- **Deliverables:** `plugin/cli/treeManager.py` — Load/save/diff/status/tree commands for user skill trees.
+- **Deliverables:** `packages/cli-npm/cli/treeManager.py` — Load/save/diff/status/tree commands for user skill trees.
 
 ### Task 4.5 — prWriter.py 🔧
 - **Agent:** Coder
 - **Compute:** Yes (needs GitHub API mocking)
 - **Depends on:** Task 4.4
-- **Deliverables:** `plugin/cli/prWriter.py` — Opens a PR against the Gaia registry with updated `skill-tree.json`. PR body includes detected skills, combination confirmed, source repo, timestamp.
+- **Deliverables:** `packages/cli-npm/cli/prWriter.py` — Opens a PR against the Gaia registry with updated `skill-tree.json`. PR body includes detected skills, combination confirmed, source repo, timestamp.
 
 ### Task 4.6 — main.py + CLI 🔧
 - **Agent:** Coder
 - **Compute:** Yes
 - **Depends on:** Tasks 4.1–4.5
-- **Deliverables:** `plugin/cli/main.py` — CLI entrypoint with commands: `init`, `scan`, `status`, `tree`, `load`, `fuse`, `diff`. Uses `argparse`.
+- **Deliverables:** `packages/cli-npm/cli/main.py` — CLI entrypoint with commands: `init`, `scan`, `status`, `tree`, `load`, `fuse`, `diff`. Uses `argparse`.
 
 ### Task 4.7 — GitHub Action ✍️
 - **Agent:** Writer (Ops)
 - **Compute:** None
 - **Depends on:** Task 4.6
 - **Deliverables:**
-  - `plugin/github-action/action.yml` — Composite action that runs `gaia scan` on push
-  - `plugin/github-action/entrypoint.sh` — Shell entrypoint
-  - `plugin/README.md` — Installation instructions, command reference, config options
+  - `packages/cli-npm/github-action/action.yml` — Composite action that runs `gaia scan` on push
+  - `packages/cli-npm/github-action/entrypoint.sh` — Shell entrypoint
+  - `packages/cli-npm/README.md` — Installation instructions, command reference, config options
 
 ---
 

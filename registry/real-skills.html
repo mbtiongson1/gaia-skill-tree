@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gaia Real Skill Catalog</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --ink: #1d2430;
+      --muted: #5d6878;
+      --line: #d9dee7;
+      --panel: #ffffff;
+      --accent: #1967d2;
+      --chip: #eef4ff;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    header, main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+    header {
+      padding-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .source-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 32px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 650;
+      background: #f0f3f8;
+    }
+    .bucket {
+      margin: 0 0 34px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .skill-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 185px;
+    }
+    .source, .path {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: #3f4a5a;
+      overflow-wrap: anywhere;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .chips span {
+      border-radius: 999px;
+      background: var(--chip);
+      color: #174ea6;
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 8px 20px 36px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gaia Real Skill Catalog</h1>
+    <p>Curated named skills from live SKILL.md ecosystems, grouped into Gaia-friendly buckets for review before promotion into the canonical graph.</p>
+  </header>
+  <main>
+    <h2>Sources</h2>
+    <table class="source-table">
+      <thead>
+        <tr><th>Source</th><th>Type</th><th>Reported skills</th><th>Why it matters</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://github.com/karpathy/autoresearch"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/cognition-labs/devin"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/laravel/boost"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/anthropics/skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/vercel-labs/skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/GLINCKER/claude-code-marketplace"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/addyosmani/agent-skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://classic.yarnpkg.com/en/package/@mastepanoski/claude-skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/spring-ai-alibaba/examples"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/ruvnet/ruflo"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/gooseworks-ai/goose-skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/yonatangross/orchestkit"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/Upsonic/Upsonic"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/aiskillstore/marketplace"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://github.com/mattpocock/skills"></a></td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://officialskills.sh/openai/skills"></a></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <section class="bucket"><h2>Skills</h2><div class="grid"><article class="skill-card"><h3><a href="https://github.com/karpathy/autoresearch">karpathy/autoresearch</a></h3><p>Autonomous research agent that iteratively searches academic databases, reads papers, extracts findings, and produces structured research summaries.</p><div class="chips"><span>autonomous-research-agent</span></div></article><article class="skill-card"><h3><a href="https://github.com/cognition-labs/devin">devin-ai/autonomous-swe</a></h3><p>Autonomous software engineering agent that combines debugging, code generation, and self-correction to resolve issues end-to-end across complex multi-file repositories.</p><div class="chips"><span>autonomous-debug</span></div></article><article class="skill-card"><h3><a href="https://github.com/laravel/boost/issues/698">laravel/upgrade-laravel-v13</a></h3><p>Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, and post-upgrade validation.</p><div class="chips"><span>framework-upgrade</span></div></article><article class="skill-card"><h3><a href="https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md">anthropic/skill-creator</a></h3><p>Interviews the user to elicit skill purpose and steps, then programmatically writes a new SKILL.md file for Claude Code or Codex CLI.</p><div class="chips"><span>tool-creation</span></div></article><article class="skill-card"><h3><a href="https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md">vercel/find-skills</a></h3><p>Searches the skills.sh registry by keyword, ranks by install count, and auto-installs the chosen skill.</p><div class="chips"><span>skill-discovery</span></div></article><article class="skill-card"><h3><a href="https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md">glincker/readme-generator</a></h3><p>Analyzes project structure, manifests, and configs to generate a professional README.md with badges, install steps, and usage examples.</p><div class="chips"><span>write-report</span></div></article><article class="skill-card"><h3><a href="https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md">anthropic/pptx</a></h3><p>Extracts, edits, and repacks PowerPoint (.pptx) files using markitdown, enabling agents to read, modify, and write structured presentations without a GUI.</p><div class="chips"><span>document-editing</span></div></article><article class="skill-card"><h3><a href="https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md">addy-osmani/test-driven-development</a></h3><p>Forces a strict red-green-refactor TDD workflow, blocking code generation that skips the test step and enforcing coverage thresholds.</p><div class="chips"><span>test-driven-development</span></div></article><article class="skill-card"><h3><a href="https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md">martin-stepanoski/nielsen-heuristics-audit</a></h3><p>Audits a UI against Jakob Nielsen&#x27;s 10 usability heuristics, scores each, and produces a prioritized remediation report.</p><div class="chips"><span>ux-audit</span></div></article><article class="skill-card"><h3><a href="https://github.com/ruvnet/ruflo">ruvnet/flow-nexus-swarm</a></h3><p>Cloud-based AI swarm orchestration supporting hierarchical, mesh, ring, and star topologies with event-driven workflows and intelligent agent assignment.</p><div class="chips"><span>multi-agent-orchestration-v</span></div></article><article class="skill-card"><h3><a href="https://github.com/gooseworks-ai/goose-skills">gooseworks/notte-browser</a></h3><p>AI-first browser automation using the Notte Browser API for session control, page scraping, form filling, and autonomous web agent execution.</p><div class="chips"><span>browser-automation</span></div></article><article class="skill-card"><h3><a href="https://github.com/yonatangross/orchestkit">yonatangross/orchestkit-rag</a></h3><p>Production-grade RAG retrieval skill covering 30+ patterns: HyDE, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.</p><div class="chips"><span>rag-pipeline</span></div></article><article class="skill-card"><h3><a href="https://github.com/Upsonic/Upsonic">upsonic/unittest-generator</a></h3><p>Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organised into concept-based subfolders.</p><div class="chips"><span>generate-test</span></div></article><article class="skill-card"><h3><a href="https://github.com/aiskillstore/marketplace">0xdarkmatter/pytest-patterns</a></h3><p>Comprehensive pytest skill covering fixtures, parametrize, async testing, mocking, coverage strategies, and integration test patterns for pytest 7.0+ projects.</p><div class="chips"><span>automated-testing</span></div></article><article class="skill-card"><h3><a href="https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md">spring-ai/readme-generate</a></h3><p>Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and generates structured API documentation in README format.</p><div class="chips"><span>write-report</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md">mattpocock/diagnose</a></h3><p>Enforces a five-phase debugging discipline prioritising the feedback loop above all else — refuses to proceed until a fast deterministic pass/fail signal exists.</p><div class="chips"><span>autonomous-debug</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">mattpocock/tdd</a></h3><p>Enforces strict vertical-slice TDD, blocking horizontal slicing (all tests first, then all code) and requiring tests against public interfaces only.</p><div class="chips"><span>test-driven-development</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/zoom-out/SKILL.md">mattpocock/zoom-out</a></h3><p>Signals the agent to ascend one layer of abstraction and produce a map of all relevant modules, callers, and domain-glossary terms.</p><div class="chips"><span>code-explain</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/personal/edit-article/SKILL.md">mattpocock/edit-article</a></h3><p>Edits articles by modelling them as a DAG of information dependencies, confirming section order, then rewriting each section with a 240-character-per-paragraph constraint.</p><div class="chips"><span>document-editing</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md">mattpocock/write-a-skill</a></h3><p>Guides creation of new agent skills via structured interview, producing a SKILL.md with trigger-aware description, progressive-disclosure layout, and optional bundled scripts.</p><div class="chips"><span>tool-creation</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md">mattpocock/triage</a></h3><p>Moves GitHub issues through a two-category x five-state machine with bug reproduction, agent-brief writing, and structured triage notes bearing an AI-generation disclaimer.</p><div class="chips"><span>issue-triage</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md">mattpocock/to-prd</a></h3><p>Synthesises conversation context and codebase knowledge into a fully-structured PRD with user stories, implementation decisions, and testing decisions, then publishes to the issue tracker.</p><div class="chips"><span>prd-generation</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md">mattpocock/to-issues</a></h3><p>Breaks a plan into independently-demoable vertical slices, classifies each HITL or AFK, maps dependency chains, and publishes structured GitHub issues with acceptance criteria in dependency order.</p><div class="chips"><span>vertical-slice-planning</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md">mattpocock/grill-with-docs</a></h3><p>Stress-tests a plan against the project&#x27;s domain model, challenging language against CONTEXT.md, cross-referencing code, and persisting resolved decisions as inline glossary updates and ADRs.</p><div class="chips"><span>design-review</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md">mattpocock/grill-me</a></h3><p>Conducts a relentless one-question-at-a-time interview walking every branch of the decision tree with a recommended answer, substituting codebase exploration wherever empirically determinable.</p><div class="chips"><span>design-review</span></div></article><article class="skill-card"><h3><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md">mattpocock/improve-codebase-architecture</a></h3><p>Identifies shallow modules via the deletion test, presents deepening opportunities with locality/leverage analysis, then grills the developer on the chosen candidate to design a deep-module replacement.</p><div class="chips"><span>refactor-code</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/openai-docs">openai/openai-docs</a></h3><p>Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.</p><div class="chips"><span>retrieve</span><span>question-answer</span><span>cite-sources</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/gh-fix-ci">openai/gh-fix-ci</a></h3><p>Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.</p><div class="chips"><span>error-interpretation</span><span>execute-bash</span><span>automated-testing</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/yeet">openai/yeet</a></h3><p>Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.</p><div class="chips"><span>diff-content</span><span>format-output</span><span>api-call</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/chatgpt-apps">openai/chatgpt-apps</a></h3><p>Scaffolds and refactors ChatGPT Apps SDK projects that combine MCP servers with widget UIs and OpenAI platform integration.</p><div class="chips"><span>code-generation</span><span>api-call</span><span>full-stack-developer</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/playwright">openai/playwright</a></h3><p>Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.</p><div class="chips"><span>computer-use</span><span>automated-testing</span><span>evaluate-output</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/sentry">openai/sentry</a></h3><p>Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.</p><div class="chips"><span>detect-anomaly</span><span>error-interpretation</span><span>api-call</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/security-threat-model">openai/security-threat-model</a></h3><p>Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.</p><div class="chips"><span>code-review-pipeline</span><span>detect-anomaly</span><span>write-report</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/security-ownership-map">openai/security-ownership-map</a></h3><p>Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.</p><div class="chips"><span>data-analysis</span><span>knowledge-graph-build</span><span>write-report</span></div></article><article class="skill-card"><h3><a href="https://officialskills.sh/openai/skills/security-best-practices">openai/security-best-practices</a></h3><p>Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.</p><div class="chips"><span>code-review-pipeline</span><span>detect-anomaly</span><span>evaluate-output</span></div></article></div></section>
+  </main>
+  <footer>Generated from registry/real-skills.json on 2026-05-01. Edit the JSON source, then run python3 scripts/generateProjections.py.</footer>
+</body>
+</html>

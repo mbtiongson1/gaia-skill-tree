@@ -1,0 +1,232 @@
+import json
+import os
+import re
+
+from gaia_cli.registry import named_skills_index_path, user_tree_path
+
+_USERNAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+_TRANSCENDENT_LEVELS = {"V", "VI"}
+
+# Named-skill red and gradient endpoints
+_COLOR_NAMED = (239, 68, 68)
+_GRAD_GOLD = (245, 180, 30)
+_GRAD_RED = (220, 38, 38)
+
+
+def _check_username(username: str) -> None:
+    if not username or not _USERNAME_RE.match(username):
+        raise ValueError(f"Invalid username: {username!r}")
+
+
+def load_tree(username, registry_path="."):
+    _check_username(username)
+    tree_path = user_tree_path(registry_path, username)
+    if not os.path.exists(tree_path):
+        return None
+    with open(tree_path, 'r') as f:
+        return json.load(f)
+
+def save_tree(username, tree_data, registry_path="."):
+    _check_username(username)
+    tree_path = user_tree_path(registry_path, username)
+    os.makedirs(os.path.dirname(tree_path), exist_ok=True)
+    with open(tree_path, 'w') as f:
+        json.dump(tree_data, f, indent=2)
+
+def show_status(tree_data):
+    if not tree_data:
+        print("No skill tree found.")
+        return
+    print(f"User: {tree_data.get('userId')}")
+    print(f"Last Updated: {tree_data.get('updatedAt')}")
+    stats = tree_data.get('stats', {})
+    print(f"Total Unlocked: {stats.get('totalUnlocked', 0)}")
+    print(f"Highest Rarity: {stats.get('highestRarity', 'common').capitalize()}")
+    pending = tree_data.get('pendingCombinations', [])
+    if pending:
+        print("\nPending Combinations:")
+        for p in pending:
+            print(f"- {p.get('candidateResult')} (Floor: {p.get('levelFloor')})")
+
+
+# ─── named / local lookups ────────────────────────────────────────────────────
+
+def _load_named_lookup(registry_path):
+    index_path = named_skills_index_path(registry_path)
+    if not os.path.exists(index_path):
+        return {}
+    with open(index_path, "r", encoding="utf-8") as f:
+        index = json.load(f)
+    result = {}
+    for ref, entries in index.get("buckets", {}).items():
+        if entries:
+            origin = next((e for e in entries if e.get("origin")), entries[0])
+            result[ref] = origin
+    return result
+
+
+def _load_local_lookup(registry_path):
+    manifest_path = os.path.join(".gaia", "install-manifest.json")
+    if not os.path.exists(manifest_path):
+        return {}
+    with open(manifest_path, "r", encoding="utf-8") as f:
+        manifest = json.load(f)
+    result = {}
+    for entry in manifest.get("installed", []):
+        source_ref = entry.get("sourceRef", "")
+        source_path = os.path.join(registry_path, source_ref)
+        if not os.path.exists(source_path):
+            continue
+        try:
+            with open(source_path, "r", encoding="utf-8") as sf:
+                text = sf.read()
+            m = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
+            if m:
+                import yaml
+                fm = yaml.safe_load(m.group(1)) or {}
+                ref = fm.get("genericSkillRef")
+                if ref:
+                    result[ref] = entry
+        except Exception:
+            pass
+    return result
+
+
+# ─── color helpers ────────────────────────────────────────────────────────────
+
+def _gradient_text(text, start_rgb, end_rgb):
+    from gaia_cli.cardRenderer import fg, reset, _use_color
+    if not _use_color():
+        return text
+    n = max(len(text) - 1, 1)
+    parts = []
+    for i, ch in enumerate(text):
+        t = i / n
+        r = int(start_rgb[0] + t * (end_rgb[0] - start_rgb[0]))
+        g = int(start_rgb[1] + t * (end_rgb[1] - start_rgb[1]))
+        b = int(start_rgb[2] + t * (end_rgb[2] - start_rgb[2]))
+        parts.append(fg(r, g, b) + ch)
+    return "".join(parts) + reset()
+
+
+def _color_entry(symbol, plain_label, tier, is_named, level):
+    from gaia_cli.cardRenderer import fg, reset, bold, _use_color, TIER_COLORS
+    if not _use_color():
+        return f"{symbol} {plain_label}"
+    if is_named:
+        if level in _TRANSCENDENT_LEVELS:
+            colored = _gradient_text(f"{symbol} {plain_label}", _GRAD_GOLD, _GRAD_RED)
+            return f"{bold()}{colored}{reset()}"
+        r, g, b = _COLOR_NAMED
+        return f"{bold()}{fg(r, g, b)}{symbol} {plain_label}{reset()}"
+    r, g, b = TIER_COLORS.get(tier, (56, 189, 248))
+    return f"{fg(r, g, b)}{symbol} {plain_label}{reset()}"
+
+
+def _dim(text):
+    from gaia_cli.cardRenderer import _use_color
+    return f"\033[2m{text}\033[22m" if _use_color() else text
+
+
+# ─── label helpers ────────────────────────────────────────────────────────────
+
+_TYPE_SYMBOL = {"basic": "○", "extra": "◇", "ultimate": "◆"}
+
+
+def _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode):
+    level = skill_map.get(skill_id, {}).get("level", "?")
+    if mode == "title":
+        name = skill_map.get(skill_id, {}).get("name", skill_id)
+        return f"{name}  [{level}]"
+    local = local_by_ref.get(skill_id)
+    named = named_by_ref.get(skill_id)
+    if local:
+        return f"{local['id']}  [{level}]  (/{skill_id})"
+    if named:
+        return f"{named['id']}  [{level}]"
+    return f"/{skill_id}  [{level}]"
+
+
+def _is_named(skill_id, named_by_ref, local_by_ref):
+    return skill_id in named_by_ref or skill_id in local_by_ref
+
+
+# ─── recursive renderer ───────────────────────────────────────────────────────
+
+def _render_subtree(skill_id, skill_map, display_ids, named_by_ref, local_by_ref, mode, prefix, is_last, seen):
+    skill = skill_map.get(skill_id, {})
+    tier = skill.get("type", "basic")
+    level = skill.get("level", "?")
+    symbol = _TYPE_SYMBOL.get(tier, "○")
+    named = _is_named(skill_id, named_by_ref, local_by_ref)
+    label = _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode)
+    connector = "└── " if is_last else "├── "
+    lines = [_dim(prefix + connector) + _color_entry(symbol, label, tier, named, level)]
+    seen.add(skill_id)
+
+    child_prefix = prefix + ("    " if is_last else "│   ")
+    prereqs = [p for p in skill.get("prerequisites", []) if p in display_ids]
+    for i, child_id in enumerate(prereqs):
+        child_is_last = i == len(prereqs) - 1
+        child_skill = skill_map.get(child_id, {})
+        child_tier = child_skill.get("type", "basic")
+        child_level = child_skill.get("level", "?")
+        child_sym = _TYPE_SYMBOL.get(child_tier, "○")
+        child_named = _is_named(child_id, named_by_ref, local_by_ref)
+        child_label = _plain_label(child_id, skill_map, named_by_ref, local_by_ref, mode)
+        if child_id in seen:
+            conn2 = "└── " if child_is_last else "├── "
+            lines.append(
+                _dim(child_prefix + conn2)
+                + _color_entry(child_sym, child_label + " ...", child_tier, child_named, child_level)
+            )
+        else:
+            lines.extend(
+                _render_subtree(
+                    child_id, skill_map, display_ids, named_by_ref, local_by_ref,
+                    mode, child_prefix, child_is_last, seen,
+                )
+            )
+    return lines
+
+
+# ─── public entry point ───────────────────────────────────────────────────────
+
+def show_tree(tree_data, graph_data=None, registry_path=".", mode="default"):
+    if not tree_data:
+        print("No skill tree found.")
+        return
+
+    unlocked = tree_data.get("unlockedSkills", [])
+    username = tree_data.get("userId", "unknown")
+
+    skill_map = {}
+    if graph_data:
+        skill_map = {s["id"]: s for s in graph_data.get("skills", [])}
+
+    named_by_ref = _load_named_lookup(registry_path)
+    local_by_ref = _load_local_lookup(registry_path)
+
+    unlocked_ids = {s["skillId"] for s in unlocked}
+    if mode == "named":
+        display_ids = {sid for sid in unlocked_ids if _is_named(sid, named_by_ref, local_by_ref)}
+    else:
+        display_ids = unlocked_ids
+
+    all_prereqs = set()
+    for sid in display_ids:
+        for p in skill_map.get(sid, {}).get("prerequisites", []):
+            if p in display_ids:
+                all_prereqs.add(p)
+
+    roots = [s for s in unlocked if s["skillId"] in display_ids and s["skillId"] not in all_prereqs]
+    tier_order = {"ultimate": 0, "extra": 1, "basic": 2}
+    roots.sort(key=lambda s: (tier_order.get(skill_map.get(s["skillId"], {}).get("type", "basic"), 2), s["skillId"]))
+
+    print(username)
+    seen: set[str] = set()
+    for i, entry in enumerate(roots):
+        sid = entry["skillId"]
+        is_last = i == len(roots) - 1
+        for line in _render_subtree(sid, skill_map, display_ids, named_by_ref, local_by_ref, mode, "", is_last, seen):
+            print(line)

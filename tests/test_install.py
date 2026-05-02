@@ -7,7 +7,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from plugin.cli.install import (
+from gaia_cli.install import (
     compute_sha256,
     find_named_skill_source,
     install_skill,
@@ -52,7 +52,7 @@ class TestInstallInfra:
 
     def test_find_named_skill_source_exists(self, tmp_path):
         """find_named_skill_source returns the path when the file exists."""
-        skill_dir = tmp_path / "graph" / "named" / "contributor"
+        skill_dir = tmp_path / "registry" / "named" / "contributor"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text("---\nid: contributor/my-skill\n---\n")
 
@@ -80,7 +80,7 @@ class TestInstallInfra:
                 {
                     "id": "foo/bar",
                     "installedAt": "2026-04-29T00:00:00Z",
-                    "sourceRef": "graph/named/foo/bar.md",
+                    "sourceRef": "registry/named/foo/bar.md",
                     "sha256": "a" * 64,
                 }
             ]
@@ -112,7 +112,7 @@ class TestInstallFlow:
         monkeypatch.chdir(tmp_path)
 
         # Create a mock registry with a named skill
-        skill_dir = tmp_path / "graph" / "named" / "testuser"
+        skill_dir = tmp_path / "registry" / "named" / "testuser"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text(
             "---\nid: testuser/my-skill\n---\nContent here."
@@ -134,11 +134,77 @@ class TestInstallFlow:
         result = install_skill("nobody/nothing", str(tmp_path))
         assert result is False
 
+    def test_install_accepts_catalog_ref_slug(self, tmp_path, monkeypatch):
+        """install_skill accepts an exact catalogRef slug from the registry."""
+        monkeypatch.chdir(tmp_path)
+
+        skill_dir = tmp_path / "registry" / "named" / "karpathy"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "autoresearch.md").write_text(
+            "---\n"
+            "id: karpathy/autoresearch\n"
+            "name: AutoResearch\n"
+            "catalogRef: karpathy-autoresearch\n"
+            "---\n"
+            "Content here."
+        )
+
+        result = install_skill("karpathy-autoresearch", str(tmp_path))
+        assert result is True
+
+        manifest = load_manifest()
+        assert manifest["installed"][0]["id"] == "karpathy/autoresearch"
+
+    def test_install_accepts_unique_bare_skill_slug(self, tmp_path, monkeypatch):
+        """install_skill accepts a unique skill-name slug without contributor."""
+        monkeypatch.chdir(tmp_path)
+
+        skill_dir = tmp_path / "registry" / "named" / "karpathy"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "autoresearch.md").write_text(
+            "---\n"
+            "id: karpathy/autoresearch\n"
+            "name: AutoResearch\n"
+            "catalogRef: karpathy-autoresearch\n"
+            "---\n"
+            "Content here."
+        )
+
+        result = install_skill("autoresearch", str(tmp_path))
+        assert result is True
+
+        manifest = load_manifest()
+        assert manifest["installed"][0]["id"] == "karpathy/autoresearch"
+
+    def test_install_rejects_ambiguous_bare_skill_slug(self, tmp_path, monkeypatch, capsys):
+        """install_skill rejects a bare slug shared by multiple contributors."""
+        monkeypatch.chdir(tmp_path)
+
+        for contributor in ("alice", "bob"):
+            skill_dir = tmp_path / "registry" / "named" / contributor
+            skill_dir.mkdir(parents=True)
+            (skill_dir / "autoresearch.md").write_text(
+                "---\n"
+                f"id: {contributor}/autoresearch\n"
+                f"name: {contributor.title()} AutoResearch\n"
+                f"catalogRef: {contributor}-autoresearch\n"
+                "---\n"
+                "Content here."
+            )
+
+        result = install_skill("autoresearch", str(tmp_path))
+        captured = capsys.readouterr()
+
+        assert result is False
+        assert "ambiguous" in captured.err
+        assert "alice/autoresearch" in captured.err
+        assert "bob/autoresearch" in captured.err
+
     def test_install_idempotent_updates_sha(self, tmp_path, monkeypatch):
         """Installing the same skill twice updates the sha256, not duplicates."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         skill_file = skill_dir / "skill.md"
         skill_file.write_text("version 1")
@@ -164,7 +230,7 @@ class TestInstallFlow:
                 {
                     "id": "foo/bar",
                     "installedAt": "2026-04-29T00:00:00Z",
-                    "sourceRef": "graph/named/foo/bar.md",
+                    "sourceRef": "registry/named/foo/bar.md",
                     "sha256": "z" * 64,
                 }
             ]
@@ -191,7 +257,7 @@ class TestInstallFlow:
         """uninstall_skill removes the local repo copy of the skill."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         (skill_dir / "skill.md").write_text("content")
 
@@ -222,7 +288,7 @@ class TestInstallFlow:
         """list_installed prints installed skill IDs."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "contrib"
+        skill_dir = tmp_path / "registry" / "named" / "contrib"
         skill_dir.mkdir(parents=True)
         (skill_dir / "my-skill.md").write_text("content")
 
@@ -246,7 +312,7 @@ class TestSyncFlow:
         """sync_skills reports up-to-date for an unchanged skill."""
         monkeypatch.chdir(tmp_path)
 
-        skill_dir = tmp_path / "graph" / "named" / "user"
+        skill_dir = tmp_path / "registry" / "named" / "user"
         skill_dir.mkdir(parents=True)
         skill_file = skill_dir / "skill.md"
         skill_file.write_text("original content")
@@ -258,3 +324,60 @@ class TestSyncFlow:
         sync_skills(str(tmp_path))
         captured = capsys.readouterr()
         assert "Up to date" in captured.out or "updated" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# list_available — from gaia_cli.install
+# ---------------------------------------------------------------------------
+
+from gaia_cli.install import list_available
+
+_FRONTMATTER = """\
+---
+id: contrib/my-skill
+name: My Skill
+contributor: contrib
+origin: true
+genericSkillRef: web-search
+status: named
+level: II
+description: A test skill.
+---
+Content here.
+"""
+
+
+class TestListAvailable:
+    def _make_registry(self, tmp_path, skill_id="contrib/my-skill", content=_FRONTMATTER):
+        contributor, name = skill_id.split("/", 1)
+        d = tmp_path / "registry" / "named" / contributor
+        d.mkdir(parents=True, exist_ok=True)
+        (d / f"{name}.md").write_text(content, encoding="utf-8")
+
+    def test_returns_empty_when_no_named_dir(self, tmp_path):
+        result = list_available(str(tmp_path))
+        assert result == []
+
+    def test_returns_skill_with_parsed_meta(self, tmp_path):
+        self._make_registry(tmp_path)
+        result = list_available(str(tmp_path))
+        assert len(result) == 1
+        sid, meta = result[0]
+        assert sid == "contrib/my-skill"
+        assert meta["name"] == "My Skill"
+        assert meta["level"] == "II"
+        assert meta["genericSkillRef"] == "web-search"
+
+    def test_lists_multiple_contributors_sorted(self, tmp_path):
+        self._make_registry(tmp_path, "zeta/skill-z")
+        self._make_registry(tmp_path, "alpha/skill-a")
+        result = list_available(str(tmp_path))
+        ids = [r[0] for r in result]
+        assert ids == sorted(ids)
+
+    def test_ignores_non_md_files(self, tmp_path):
+        d = tmp_path / "registry" / "named" / "contrib"
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.json").write_text("{}")
+        result = list_available(str(tmp_path))
+        assert result == []

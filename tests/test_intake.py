@@ -7,7 +7,7 @@ import unittest
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VALIDATE_INTAKE_SCRIPT = os.path.join(REPO_ROOT, "scripts", "validate_intake.py")
-GRAPH_PATH = os.path.join(REPO_ROOT, "graph", "gaia.json")
+GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
 
 
 def run_validate_intake(intake_dir):
@@ -42,7 +42,7 @@ def write_batch(root, batch_id, proposed_id="semantic-search", similarity_target
             {
                 "id": proposed_id,
                 "name": "Semantic Search",
-                "type": "atomic",
+                "type": "basic",
                 "description": "Finds conceptually related content using meaning rather than exact keyword overlap.",
                 "sourceRepo": "tester/example",
             }

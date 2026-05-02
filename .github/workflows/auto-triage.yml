@@ -1,19 +1,21 @@
 name: "Auto-Triage"
 
+# pull_request_target runs with the base-repo token (full write permissions)
+# even for fork PRs. We never checkout or execute PR code here, so this is safe.
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
     paths:
-      - "graph/**"
+      - "registry/**"
       - "proposals/**"
-      - "users/**"
-      - "intake/**"
+      - "skill-trees/**"
+      - "registry-for-review/**"
 
 jobs:
   classify:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
+      pull-requests: read
       contents: read
     outputs:
       is_bot: ${{ steps.classify.outputs.is_bot }}
@@ -21,8 +23,6 @@ jobs:
       evidence_score: ${{ steps.score.outputs.score }}
       has_legendary: ${{ steps.check_legendary.outputs.has_legendary }}
     steps:
-      - uses: actions/checkout@v4
-
       - name: Classify PR source
         id: classify
         run: |
@@ -33,24 +33,13 @@ jobs:
           else
             echo "is_bot=false" >> $GITHUB_OUTPUT
           fi
-          if echo "$FILES" | grep -q "^intake/"; then
+          if echo "$FILES" | grep -q "^registry-for-review/"; then
             echo "is_intake=true" >> $GITHUB_OUTPUT
           else
             echo "is_intake=false" >> $GITHUB_OUTPUT
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: pip install jsonschema
-
-      - name: Validate schema + DAG
-        id: validate
-        run: python scripts/validate.py
 
       - name: Extract evidence score
         id: score
@@ -65,17 +54,23 @@ jobs:
       - name: Check for legendary proposals
         id: check_legendary
         run: |
-          if git diff origin/main --name-only | grep -q "proposals/"; then
-            # Check if any proposal has type "legendary"
-            LEGENDARY=$(find proposals/ -name "*.json" -newer .git/refs/heads/main -exec grep -l '"type": "legendary"' {} \; 2>/dev/null | wc -l)
-            if [ "$LEGENDARY" -gt 0 ]; then
-              echo "has_legendary=true" >> $GITHUB_OUTPUT
-            else
-              echo "has_legendary=false" >> $GITHUB_OUTPUT
+          FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path' 2>/dev/null || echo "")
+          LEGENDARY=0
+          while IFS= read -r file; do
+            if [[ "$file" == proposals/*.json ]]; then
+              CONTENT=$(gh api "repos/${{ github.repository }}/contents/$file?ref=${{ github.event.pull_request.head.sha }}" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || echo "")
+              if echo "$CONTENT" | grep -q '"type": "ultimate"'; then
+                LEGENDARY=$((LEGENDARY + 1))
+              fi
             fi
+          done <<< "$FILES"
+          if [ "$LEGENDARY" -gt 0 ]; then
+            echo "has_legendary=true" >> $GITHUB_OUTPUT
           else
             echo "has_legendary=false" >> $GITHUB_OUTPUT
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   auto-merge:
     needs: classify
@@ -85,8 +80,6 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-
       - name: Check evidence threshold
         id: gate
         run: |
@@ -108,35 +101,93 @@ jobs:
       - name: Label for review
         if: steps.gate.outputs.pass == 'false'
         run: |
+          gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
           gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   route-review:
     needs: classify
-    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true' || needs.classify.outputs.is_intake == 'true'
+    if: needs.classify.outputs.is_bot == 'false' || needs.classify.outputs.has_legendary == 'true'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Request reviewers
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Label and route
         run: |
-          if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
-            gh label create "draft-skills" --color "5319e7" --force 2>/dev/null || true
+          if [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
+            gh label create "ultimate" --color "d4a017" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "draft-skills" --add-label "needs-review"
-          elif [ "${{ needs.classify.outputs.has_legendary }}" == "true" ]; then
-            gh label create "legendary" --color "d4a017" --force 2>/dev/null || true
-            gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "legendary" --add-label "needs-review"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "ultimate" --add-label "needs-review"
             gh pr edit ${{ github.event.pull_request.number }} --add-reviewer mbtiongson1
             echo "Legendary skill proposed — requires 2 maintainer approvals"
           else
             gh label create "human-proposal" --color "1d76db" --force 2>/dev/null || true
             gh label create "needs-review" --color "0e8a16" --force 2>/dev/null || true
             gh pr edit ${{ github.event.pull_request.number }} --add-label "human-proposal" --add-label "needs-review"
+          fi
+
+          if [ "${{ needs.classify.outputs.is_intake }}" == "true" ]; then
+            gh label create "draft-skills" --color "5319e7" --force 2>/dev/null || true
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "draft-skills"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  check-named-skills:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Detect named skill PRs and enforce reviewer gate
+        id: named-check
+        run: |
+          FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path' 2>/dev/null || echo "")
+          NAMED_FILES=$(echo "$FILES" | grep "^registry/named/.*\.md$" || true)
+
+          if [ -z "$NAMED_FILES" ]; then
+            echo "No named skill files changed — skipping."
+            exit 0
+          fi
+
+          # Label all named-skill PRs for reviewer attention
+          gh label create "named-skill" --color "c5def5" --force 2>/dev/null || true
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "named-skill"
+
+          # Check for premature status:named (set by contributor, not reviewer)
+          PREMATURE=0
+          IS_CLASSIFICATION=0
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            CONTENT=$(gh api "repos/${{ github.repository }}/contents/$file?ref=${{ github.event.pull_request.head.sha }}" --jq '.content' 2>/dev/null | base64 -d 2>/dev/null || echo "")
+            if echo "$CONTENT" | grep -qE "^status: named"; then
+              HAS_TITLE=$(echo "$CONTENT" | grep -cE "^title:" || true)
+              HAS_REF=$(echo "$CONTENT" | grep -cE "^catalogRef:" || true)
+              if [ "${HAS_TITLE:-0}" -gt 0 ] || [ "${HAS_REF:-0}" -gt 0 ]; then
+                # Has both status:named and reviewer fields → this is a classification PR
+                IS_CLASSIFICATION=$((IS_CLASSIFICATION + 1))
+              else
+                # status:named without reviewer fields → contributor bypass attempt
+                PREMATURE=$((PREMATURE + 1))
+              fi
+            fi
+          done <<< "$NAMED_FILES"
+
+          if [ "$PREMATURE" -gt 0 ]; then
+            gh label create "needs-classification" --color "e4e669" --force 2>/dev/null || true
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-classification"
+            echo "::error::status: named found without 'title' or 'catalogRef'. This is a reviewer-only action. Contributors must submit with status: awakened."
+            exit 1
+          fi
+
+          if [ "$IS_CLASSIFICATION" -gt 0 ]; then
+            gh label create "skill-classification" --color "0075ca" --force 2>/dev/null || true
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "skill-classification"
+            echo "Classification PR detected — reviewer fields present. Routing for maintainer review."
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

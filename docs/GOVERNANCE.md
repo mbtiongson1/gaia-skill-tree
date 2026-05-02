@@ -22,13 +22,13 @@ Core Maintainers have final approval authority and manage:
 - Project vision and roadmap.
 - Repository settings and branch protection.
 - Dispute resolution.
-- Legendary skill validation (requires two Core Maintainer approvals).
+- Ultimate skill validation (requires two Core Maintainer approvals).
 
 ## 2. Decision Making
 
 Decisions are made through Pull Requests. Most PRs require one Maintainer approval.
-- **Atomic/Composite Skills**: 1 Maintainer approval.
-- **Legendary Skills**: 2 Core Maintainer approvals.
+- **Basic/Extra Skills**: 1 Maintainer approval.
+- **Ultimate Skills**: 2 Core Maintainer approvals.
 - **Schema Changes**: 2 Core Maintainer approvals.
 - **Named Skills**: 1 Maintainer approval (standard intake process, then `gaia name` promotion).
 
@@ -48,13 +48,19 @@ Decisions are made through Pull Requests. Most PRs require one Maintainer approv
 - If two contributors claim origin status for the same bucket, priority goes to the earlier `createdAt` date.
 - Disputes follow the same 14-day resolution process as generic skill disputes (see § 3).
 
+### Unclaimed Ultimate Claiming
+- Unclaimed Ultimate skills appear as `◆ /skill-id [Unclaimed ✦]` in the registry — no named implementation exists yet.
+- The first contributor to run `gaia name` against an awakened intake record whose `genericSkillRef` points to an unclaimed Ultimate automatically becomes the origin contributor and the seed title stored in `gaia.json` becomes visible in projections.
+- Claiming priority follows the same rule as named skill origin status: the earlier `createdAt` date wins if two contributors submit simultaneously.
+- Once claimed, the display changes from `[Unclaimed ✦]` to `Ultimate Skill: contributor/skill-name`.
+
 ## 3. Dispute Resolution
 
 If a skill's definition, level, or evidence is disputed:
 1. A GitHub Issue is opened with the label `disputed`.
 2. Both sides present evidence and rationale.
 3. The skill status is set to `disputed` in `gaia.json`.
-4. If no consensus is reached after 14 days, a Core Maintainer makes a final determination based on the **Evidence Hierarchy** (Class A > B > C).
+4. If no consensus is reached after 14 days, a Core Maintainer makes a final determination based on the **Evidence Hierarchy** (Evidence Tier A > B > C).
 
 ## 4. Audit Schedule
 
@@ -62,13 +68,13 @@ If a skill's definition, level, or evidence is disputed:
 Every 90 days, the maintainers will conduct a full re-audit of the registry to:
 - Review `provisional` skills for potential validation.
 - Re-assess `disputed` skills.
-- Verify legendary status requirements.
+- Verify ultimate status requirements.
 - Identify stale skills (not updated or referenced in 180 days).
 
 ## 5. Release Cadence
 
 ### 5.1 Registry Snapshots
-The registry is updated continuously as PRs are merged. Every month, a new version (e.g., `v1.1.0`) is tagged as a **Frontier Release**, including:
+The registry is updated continuously as PRs are merged. Every month, a new version (e.g., `v2.1.0`) is tagged as a **Frontier Release**, including:
 - A summary of all new skills.
 - Updated rarity scores based on real user tree data.
 - The **Frontier Report** (graph analytics and gaps).
