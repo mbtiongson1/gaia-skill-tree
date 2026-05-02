@@ -48,7 +48,9 @@ jobs:
         run: python scripts/validate_intake.py
 
       - name: Check generated docs
-        run: python scripts/build_docs.py --check
+        run: |
+          echo "Equivalent python command for local use: python scripts/build_docs.py --check"
+          gaia --registry . docs build --check
 
       - name: Run tests
         run: pytest tests/

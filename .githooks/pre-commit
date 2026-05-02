@@ -47,6 +47,7 @@ classify_bump() {
   fi
 }
 
+export PYTHONPATH="src:${PYTHONPATH:-}"
 printf 'Gaia pre-commit: checking version lockstep...\n'
 python3 - <<'PY'
 from gaia_cli.versioning import ensure_versions_in_sync

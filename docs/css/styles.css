@@ -254,6 +254,54 @@
   }
   .gloss-term{font-weight:700;font-size:.9rem;color:var(--basic);margin-bottom:.25rem}
   .gloss-def{font-size:.82rem;color:var(--muted)}
+  /* ── PROCESS PAGE ── */
+  .nav-logo{text-decoration:none}
+  .process-page main{padding-top:4.5rem}
+  .process-hero{
+    min-height:70vh;display:flex;flex-direction:column;justify-content:center;
+    max-width:1000px;padding-top:5rem;padding-bottom:3rem;
+  }
+  .process-kicker{
+    color:var(--basic);font-size:.78rem;font-weight:800;letter-spacing:.16em;
+    text-transform:uppercase;margin-bottom:1rem;
+  }
+  .process-hero h1{
+    font-size:clamp(2.5rem,8vw,5.4rem);line-height:.95;margin-bottom:1.4rem;
+  }
+  .process-lede{max-width:760px;color:var(--muted);font-size:1.1rem;line-height:1.75}
+  .process-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+  .process-section{max-width:1000px}
+  .process-section h3{font-size:1.02rem;margin-bottom:.45rem}
+  .process-section p,.process-section li{color:var(--muted);font-size:.92rem}
+  .process-lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .process-lane,.review-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:1.2rem;
+  }
+  .process-step-label{
+    color:var(--basic);font-size:.72rem;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:.7rem;
+  }
+  .process-band{
+    display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+    gap:2rem;align-items:start;
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  }
+  .process-checklist{display:grid;gap:.8rem}
+  .process-check{
+    display:grid;grid-template-columns:128px 1fr;gap:1rem;
+    padding:.9rem 0;border-bottom:1px solid var(--border);
+  }
+  .process-check:last-child{border-bottom:none}
+  .process-check span{color:var(--extra);font-weight:800}
+  .review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+  .review-card ul{padding-left:1.1rem}
+  .review-card li+li{margin-top:.55rem}
+  .process-final{
+    display:flex;align-items:center;justify-content:space-between;gap:2rem;
+    border-top:1px solid var(--border);
+  }
+  .process-final p{max-width:690px}
   /* ── GRAPH DIALOG ── */
   .graph-dialog{
     margin:auto;
@@ -1042,6 +1090,11 @@
   /* ── Tablet & below (≤768px): collapse multi-column grids ── */
   @media (max-width:768px){
     section{padding-left:1rem;padding-right:1rem}
+    .process-page main{padding-top:6.2rem}
+    .process-lanes,.process-band,.review-grid{grid-template-columns:1fr}
+    .process-check{grid-template-columns:1fr;gap:.2rem}
+    .process-final{display:block}
+    .process-final .btn{margin-top:1.2rem}
     .tier-grid,.glossary,.steps{grid-template-columns:1fr}
     .step{grid-template-columns:auto 1fr}
     .hero-cta{flex-direction:column;align-items:stretch}

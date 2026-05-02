@@ -108,7 +108,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.4.0`.
+Current Gaia CLI version: `2.4.5`.
 
 Python install:
 
@@ -200,7 +200,8 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills} ...
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills}
+            ...
 
 Gaia Registry CLI
 
@@ -224,10 +225,9 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to
-                        auto-resolved local or global registry.
-  --global, -g          Use global GAIA_HOME registry, ignoring any local
-                        .gaia/ config.
+  --registry REGISTRY   Path to a local Gaia registry checkout. Defaults to auto-resolved local or
+                        global registry.
+  --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
 
 Quick usage:

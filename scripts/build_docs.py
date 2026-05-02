@@ -8,8 +8,9 @@ import argparse
 import json
 import subprocess
 import sys
+from functools import partial
 from pathlib import Path
-from gaia_cli.main import get_parser
+from gaia_cli.main import PUBLIC_COMMANDS, get_parser
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -38,6 +39,12 @@ def _strip_ansi(text):
 
 def _cli_help() -> str:
     parser, _ = get_parser()
+    parser.formatter_class = partial(argparse.RawDescriptionHelpFormatter, width=100)
+    parser.usage = (
+        "%(prog)s [-h] [--registry REGISTRY] [--global] [--version]\n"
+        f"            {{{','.join(PUBLIC_COMMANDS)}}}\n"
+        "            ..."
+    )
     help_text = _strip_ansi(parser.format_help())
     return f"```text\n{help_text}\n```"
 
@@ -114,16 +121,17 @@ def build_docs_index(check: bool) -> bool:
     return changed
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build generated Gaia docs regions.")
     parser.add_argument("--check", action="store_true", help="Fail if generated docs are stale")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     readme_changed = build_readme(args.check)
     docs_index_changed = build_docs_index(args.check)
     changed = readme_changed or docs_index_changed
     if args.check and changed:
-        print("Generated documentation is stale. Run `gaia docs build`.")
+        print("Generated documentation is stale. Run `python scripts/build_docs.py --check` locally.")
+        print("If it reports drift, run `python scripts/build_docs.py` and commit the updated files.")
         return 1
     print("Documentation is up to date." if not changed else "Documentation regenerated.")
     return 0

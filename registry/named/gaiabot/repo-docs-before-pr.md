@@ -6,7 +6,7 @@ origin: false
 genericSkillRef: write-report
 status: awakened
 level: II
-description: Builds and validates repository documentation as a pre-PR guardrail by running the local docs pipeline (including stale-doc checks), then surfaces actionable diffs so pull requests do not fail CI on documentation freshness.
+description: Builds and validates repository documentation as a pre-PR guardrail by reminding contributors to run the local docs drift check, then surfaces actionable regeneration commands so pull requests do not fail CI on documentation freshness.
 links:
   docs: https://github.com/mbtiongson1/gaia-skill-tree#docs
 tags:
@@ -16,13 +16,25 @@ tags:
   - quality-gate
   - repo-maintenance
 createdAt: "2026-05-01"
-updatedAt: "2026-05-01"
+updatedAt: "2026-05-03"
 ---
 
 ## Overview
 
-Repo Docs Before PR is a repository hygiene skill that enforces docs freshness before opening a pull request. It runs the project's local docs build command, checks whether generated documentation is stale, and asks the agent to stage regenerated files as part of the same change set.
+Repo Docs Before PR is a repository hygiene skill that enforces docs freshness before opening or reviewing a pull request. It reminds contributors to run the project's local docs drift check, checks whether generated documentation is stale, and asks the agent to stage regenerated files as part of the same change set.
 
 ## Notes
 
-This implementation targets repositories that expose a dedicated docs build command (for Gaia: `gaia docs build`), and is intended to prevent avoidable CI failures caused by stale generated docs.
+This implementation targets repositories that expose a dedicated docs build command. In Gaia, the copyable pre-review check is:
+
+```bash
+python scripts/build_docs.py --check
+```
+
+If the check reports drift, regenerate with:
+
+```bash
+python scripts/build_docs.py
+```
+
+The repository reminder workflow surfaces this command on every PR so contributors do not need to infer it from a failed CI log.
