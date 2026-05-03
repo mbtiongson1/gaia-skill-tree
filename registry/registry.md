@@ -3,7 +3,7 @@
 | Name | Class | Rank | Tier | Skill Call |
 |---|---|---|---|---|
 | ◇ Extra Skill: /agent-eval | Extra Skill | III | Evolved | `/agent-eval` |
-| ○ /api-call | Basic | II | Named | `/api-call` |
+| ○ huggingface/hf-cli | Basic | II | Named | `/api-call` |
 | ○ /audience-model | Basic | I | Awakened | `/audience-model` |
 | ◇ Extra Skill: 0xdarkmatter/pytest-patterns | Extra Skill | III | Evolved | `/automated-testing` |
 | ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/autonomous-data-scientist` |
@@ -19,7 +19,7 @@
 | ○ openai/playwright | Basic | II | Named | `/computer-use` |
 | ◇ Extra Skill: /content-moderation | Extra Skill | III | Evolved | `/content-moderation` |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | III | Evolved | `/conversational-agent` |
-| ◇ Extra Skill: /data-analysis | Extra Skill | III | Evolved | `/data-analysis` |
+| ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic | II | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
@@ -48,14 +48,14 @@
 | ○ /image-caption | Basic | II | Named | `/image-caption` |
 | ◇ Extra Skill: openai/security-ownership-map | Extra Skill | III | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | IV | Hardened | `/knowledge-harvest` |
-| ◇ Extra Skill: /literature-review | Extra Skill | IV | Hardened | `/literature-review` |
+| ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | IV | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic | I | Awakened | `/logical-inference` |
 | ○ /math-reason | Basic | II | Named | `/math-reason` |
 | ○ /memory-manage | Basic | II | Named | `/memory-manage` |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | IV | Hardened | `/ml-pipeline` |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | IV | Hardened | `/multi-agent-debate` |
 | ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | V | Transcendent | `/multi-agent-orchestration-v` |
-| ◇ Extra Skill: /multimodal-reasoning | Extra Skill | III | Evolved | `/multimodal-reasoning` |
+| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | III | Evolved | `/multimodal-reasoning` |
 | ○ /parse-html | Basic | I | Awakened | `/parse-html` |
 | ○ /parse-json | Basic | I | Awakened | `/parse-json` |
 | ○ /parse-pdf | Basic | I | Awakened | `/parse-pdf` |

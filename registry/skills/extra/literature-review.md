@@ -1,4 +1,4 @@
-# Extra Skill: /literature-review  [IV · Hardened]
+# Extra Skill: huggingface/huggingface-papers  [IV · Hardened]
 **ID:** literature-review  
 **Type:** Extra Skill  
 **Level:** IV  

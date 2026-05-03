@@ -1,4 +1,4 @@
-# /object-detection  [II · Named]
+# huggingface/huggingface-vision-trainer  [II · Named]
 **ID:** object-detection  
 **Type:** Basic  
 **Level:** II  

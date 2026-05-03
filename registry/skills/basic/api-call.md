@@ -1,4 +1,4 @@
-# /api-call  [II · Named]
+# huggingface/hf-cli  [II · Named]
 **ID:** api-call  
 **Type:** Basic  
 **Level:** II  

@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.4.7",
   "generatedAt": "2026-04-30T00:00:00Z",
   "width": 1280,
   "height": 880,
@@ -803,8 +803,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Holistically evaluates an AI agent's performance on multi-step tasks by running standardised benchmarks, scoring full interaction trajectories, and producing reproducible capability reports.",
-      "x": 713.893,
-      "y": 286.899,
+      "x": 732.027,
+      "y": 297.063,
       "radius": 10
     },
     {
@@ -814,8 +814,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
-      "x": 739.126,
-      "y": 301.891,
+      "x": 754.256,
+      "y": 314.121,
       "radius": 10
     },
     {
@@ -825,8 +825,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
-      "x": 483.369,
-      "y": 506.081,
+      "x": 478.087,
+      "y": 491.809,
       "radius": 10
     },
     {
@@ -836,8 +836,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
-      "x": 753.934,
-      "y": 313.829,
+      "x": 767.03,
+      "y": 327.025,
       "radius": 10
     },
     {
@@ -847,8 +847,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
-      "x": 772.975,
-      "y": 334.087,
+      "x": 783.066,
+      "y": 348.174,
       "radius": 10
     },
     {
@@ -858,8 +858,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
-      "x": 785.117,
-      "y": 351.449,
+      "x": 792.959,
+      "y": 365.813,
       "radius": 10
     },
     {
@@ -869,8 +869,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
-      "x": 798.481,
-      "y": 378.487,
+      "x": 803.284,
+      "y": 392.69,
       "radius": 10
     },
     {
@@ -880,8 +880,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
-      "x": 805.96,
-      "y": 403.16,
+      "x": 808.405,
+      "y": 416.764,
       "radius": 10
     },
     {
@@ -891,7 +891,7 @@
       "level": "II",
       "rarity": "uncommon",
       "description": "Automate CI/CD pipeline execution and deployment to target environments \u2014 build, test, artifact publishing, environment promotion, and rollback strategies.",
-      "x": 641.076,
+      "x": 641.027,
       "y": 270.003,
       "radius": 10
     },
@@ -902,8 +902,8 @@
       "level": "III",
       "rarity": "rare",
       "description": "Stress-tests a plan or design through relentless targeted questioning, walking the decision tree branch-by-branch, resolving concept dependencies, surfacing contradictions against the existing codebase, and crystallising ubiquitous language \u2014 optionally persisting resolved decisions to CONTEXT.md and ADRs.",
-      "x": 809.525,
-      "y": 427.3,
+      "x": 810.0,
+      "y": 440.004,
       "radius": 10
     },
     {
@@ -913,8 +913,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
-      "x": 809.584,
-      "y": 451.88,
+      "x": 808.38,
+      "y": 463.413,
       "radius": 10
     },
     {
@@ -924,8 +924,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
-      "x": 805.57,
-      "y": 478.555,
+      "x": 802.912,
+      "y": 488.577,
       "radius": 10
     },
     {
@@ -935,8 +935,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Execute full end-to-end user journey tests using browser automation frameworks (Playwright/Puppeteer), validating complete workflows from UI to backend across real environments.",
-      "x": 797.249,
-      "y": 504.598,
+      "x": 793.556,
+      "y": 512.942,
       "radius": 10
     },
     {
@@ -946,8 +946,30 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
-      "x": 785.409,
-      "y": 528.07,
+      "x": 781.144,
+      "y": 534.754,
+      "radius": 10
+    },
+    {
+      "id": "gaia-audit",
+      "label": "Gaia Audit",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
+      "x": 664.594,
+      "y": 271.788,
+      "radius": 10
+    },
+    {
+      "id": "gaia-meta-audit",
+      "label": "Gaia Meta Audit",
+      "type": "extra",
+      "level": "III",
+      "rarity": "rare",
+      "description": "Scans Gaia registry and real-skill catalog entries for review candidates whose evidence may be outdated, superseded, overpromoted, unmapped, stale, or insufficient for their current level or named-skill claim.",
+      "x": 766.49,
+      "y": 553.579,
       "radius": 10
     },
     {
@@ -957,8 +979,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Produces audience-tailored, research-backed long-form written content.",
-      "x": 475.073,
-      "y": 481.219,
+      "x": 472.236,
+      "y": 467.483,
       "radius": 10
     },
     {
@@ -968,8 +990,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
-      "x": 771.012,
-      "y": 548.332,
+      "x": 749.137,
+      "y": 570.342,
       "radius": 10
     },
     {
@@ -979,8 +1001,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Wraps LLM outputs with programmatic safety rules, content filters, and topical constraints that detect policy violations and enforce compliant, on-policy responses before they reach the user.",
-      "x": 752.816,
-      "y": 567.171,
+      "x": 728.838,
+      "y": 584.941,
       "radius": 10
     },
     {
@@ -990,8 +1012,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
-      "x": 733.021,
-      "y": 582.292,
+      "x": 707.744,
+      "y": 595.919,
       "radius": 10
     },
     {
@@ -1001,8 +1023,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
-      "x": 470.209,
-      "y": 448.423,
+      "x": 470.049,
+      "y": 435.906,
       "radius": 10
     },
     {
@@ -1012,8 +1034,8 @@
       "level": "IV",
       "rarity": "uncommon",
       "description": "Conducts systematic multi-database academic literature searches following PRISMA/SWARM protocols, screens and synthesises findings, verifies all citations, and generates a structured review report.",
-      "x": 470.245,
-      "y": 430.882,
+      "x": 471.276,
+      "y": 419.206,
       "radius": 10
     },
     {
@@ -1023,8 +1045,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Designs and implements production ML pipelines with experiment tracking (MLflow, W&B), feature stores (Feast), orchestration (Kubeflow, Airflow), and automated retraining workflows including model evaluation gates and A/B deployment.",
-      "x": 474.989,
-      "y": 399.119,
+      "x": 477.755,
+      "y": 389.239,
       "radius": 10
     },
     {
@@ -1034,8 +1056,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
-      "x": 482.85,
-      "y": 375.163,
+      "x": 486.55,
+      "y": 366.835,
       "radius": 10
     },
     {
@@ -1045,8 +1067,8 @@
       "level": "III",
       "rarity": "rare",
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
-      "x": 710.937,
-      "y": 594.493,
+      "x": 685.029,
+      "y": 603.928,
       "radius": 10
     },
     {
@@ -1056,8 +1078,8 @@
       "level": "IV",
       "rarity": "uncommon",
       "description": "Synthesizes conversation context and codebase knowledge into a structured Product Requirements Document containing a problem statement, extensive user stories, implementation decisions, module boundaries, testing decisions, and out-of-scope items.",
-      "x": 490.887,
-      "y": 358.358,
+      "x": 495.032,
+      "y": 351.206,
       "radius": 10
     },
     {
@@ -1067,8 +1089,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
-      "x": 508.235,
-      "y": 332.585,
+      "x": 512.671,
+      "y": 327.362,
       "radius": 10
     },
     {
@@ -1078,8 +1100,8 @@
       "level": "IV",
       "rarity": "uncommon",
       "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
-      "x": 524.485,
-      "y": 315.275,
+      "x": 528.786,
+      "y": 311.425,
       "radius": 10
     },
     {
@@ -1089,8 +1111,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
-      "x": 693.946,
-      "y": 601.214,
+      "x": 667.996,
+      "y": 607.679,
       "radius": 10
     },
     {
@@ -1100,8 +1122,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
-      "x": 661.167,
-      "y": 608.677,
+      "x": 635.982,
+      "y": 609.953,
       "radius": 10
     },
     {
@@ -1111,8 +1133,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
-      "x": 542.674,
-      "y": 300.617,
+      "x": 546.573,
+      "y": 297.974,
       "radius": 10
     },
     {
@@ -1122,8 +1144,8 @@
       "level": "II",
       "rarity": "uncommon",
       "description": "Automate the full software release cycle: determine semantic version bump, update CHANGELOG, commit, create a git tag, and publish a GitHub release with release notes.",
-      "x": 661.398,
-      "y": 271.352,
+      "x": 684.24,
+      "y": 275.857,
       "radius": 10
     },
     {
@@ -1133,8 +1155,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
-      "x": 637.594,
-      "y": 609.983,
+      "x": 613.535,
+      "y": 607.927,
       "radius": 10
     },
     {
@@ -1144,8 +1166,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Composes research manuscripts in IMRAD structure with reporting-guideline compliance (CONSORT, STROBE, PRISMA), citation management, publication-quality figures, and LaTeX/PDF formatting.",
-      "x": 611.705,
-      "y": 607.629,
+      "x": 589.369,
+      "y": 602.285,
       "radius": 10
     },
     {
@@ -1155,8 +1177,8 @@
       "level": "II",
       "rarity": "rare",
       "description": "Systematically identify security vulnerabilities, assess attack surface, and produce actionable remediation guidance across code, dependencies, and infrastructure.",
-      "x": 693.887,
-      "y": 278.767,
+      "x": 714.049,
+      "y": 286.974,
       "radius": 10
     },
     {
@@ -1166,8 +1188,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
-      "x": 592.324,
-      "y": 603.178,
+      "x": 571.592,
+      "y": 595.629,
       "radius": 10
     },
     {
@@ -1177,8 +1199,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Sequences multiple tool invocations into a dependency graph where the output of each tool feeds as structured input to the next, handling state propagation, intermediate result validation, and error recovery across multi-step execution pipelines.",
-      "x": 567.743,
-      "y": 593.88,
+      "x": 549.432,
+      "y": 583.866,
       "radius": 10
     },
     {
@@ -1188,8 +1210,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
-      "x": 566.292,
-      "y": 286.81,
+      "x": 569.43,
+      "y": 285.34,
       "radius": 10
     },
     {
@@ -1199,8 +1221,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
-      "x": 541.798,
-      "y": 578.767,
+      "x": 526.548,
+      "y": 566.604,
       "radius": 10
     },
     {
@@ -1210,8 +1232,8 @@
       "level": "IV",
       "rarity": "rare",
       "description": "Frames problem solving as a search over a tree of partial solutions, using LLM-generated evaluations to prune unpromising branches and backtrack, dramatically improving success on complex reasoning tasks.",
-      "x": 588.167,
-      "y": 278.095,
+      "x": 590.452,
+      "y": 277.381,
       "radius": 10
     },
     {
@@ -1221,8 +1243,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Decomposes a product plan into independently-demoable vertical slices that each cut through all integration layers end-to-end. Classifies each slice as HITL (human-in-the-loop) or AFK (autonomous), identifies dependency ordering, and publishes structured issues with acceptance criteria.",
-      "x": 521.73,
-      "y": 562.116,
+      "x": 509.275,
+      "y": 548.679,
       "radius": 10
     },
     {
@@ -1232,8 +1254,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
-      "x": 506.349,
-      "y": 545.059,
+      "x": 496.375,
+      "y": 530.95,
       "radius": 10
     },
     {
@@ -1243,8 +1265,8 @@
       "level": "III",
       "rarity": "uncommon",
       "description": "Retrieves and structures data from web pages into usable entities.",
-      "x": 492.453,
-      "y": 524.439,
+      "x": 485.107,
+      "y": 510.058,
       "radius": 10
     },
     {
@@ -1254,8 +1276,8 @@
       "level": "IV",
       "rarity": "uncommon",
       "description": "Designs, configures, and runs trigger-based multi-step automation pipelines that connect external services, schedule jobs, and orchestrate tool sequences without continuous human supervision.",
-      "x": 612.603,
-      "y": 272.222,
+      "x": 613.839,
+      "y": 272.025,
       "radius": 10
     },
     {
@@ -1730,6 +1752,36 @@
     {
       "source": "execute-bash",
       "target": "registry-curation",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "gaia-audit",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "gaia-audit",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "gaia-audit",
+      "type": "extra"
+    },
+    {
+      "source": "gaia-audit",
+      "target": "gaia-meta-audit",
+      "type": "extra"
+    },
+    {
+      "source": "registry-curation",
+      "target": "gaia-meta-audit",
+      "type": "extra"
+    },
+    {
+      "source": "detect-anomaly",
+      "target": "gaia-meta-audit",
       "type": "extra"
     },
     {

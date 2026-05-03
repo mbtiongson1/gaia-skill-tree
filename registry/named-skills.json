@@ -279,6 +279,150 @@
         }
       }
     ],
+    "api-call": [
+      {
+        "id": "huggingface/hf-cli",
+        "name": "HF CLI",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "api-call",
+        "status": "named",
+        "level": "II",
+        "description": "Guides Hugging Face Hub CLI operations for downloading, uploading, managing repos, running Jobs, querying datasets, configuring Spaces, and handling Hub authentication.",
+        "title": "The Hub Operator",
+        "catalogRef": "huggingface-hf-cli",
+        "tags": [
+          "huggingface",
+          "hub",
+          "cli",
+          "jobs",
+          "datasets"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/hf-cli/SKILL.md"
+        }
+      }
+    ],
+    "data-analysis": [
+      {
+        "id": "huggingface/huggingface-datasets",
+        "name": "Hugging Face Datasets",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "data-analysis",
+        "status": "named",
+        "level": "II",
+        "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
+        "title": "The Dataset Cartographer",
+        "catalogRef": "huggingface-datasets",
+        "tags": [
+          "huggingface",
+          "datasets",
+          "dataset-viewer",
+          "parquet",
+          "data-analysis"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"
+        }
+      }
+    ],
+    "fine-tune": [
+      {
+        "id": "huggingface/huggingface-llm-trainer",
+        "name": "Hugging Face LLM Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "fine-tune",
+        "status": "named",
+        "level": "III",
+        "description": "Runs LLM fine-tuning on Hugging Face Jobs using TRL or Unsloth, covering SFT, DPO, GRPO, reward modeling, dataset validation, hardware selection, Trackio monitoring, and Hub persistence.",
+        "title": "The Cloud Fine-Tuner",
+        "catalogRef": "huggingface-llm-trainer",
+        "tags": [
+          "huggingface",
+          "fine-tuning",
+          "trl",
+          "jobs",
+          "trackio"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-llm-trainer/SKILL.md"
+        }
+      }
+    ],
+    "literature-review": [
+      {
+        "id": "huggingface/huggingface-papers",
+        "name": "Hugging Face Papers",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "literature-review",
+        "status": "named",
+        "level": "II",
+        "description": "Looks up Hugging Face paper pages and arXiv IDs, fetching markdown paper content and structured metadata such as authors, linked models, datasets, Spaces, GitHub repos, and project pages.",
+        "title": "The Paper Indexer",
+        "catalogRef": "huggingface-papers",
+        "tags": [
+          "huggingface",
+          "papers",
+          "arxiv",
+          "metadata",
+          "research"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-papers/SKILL.md"
+        }
+      }
+    ],
+    "object-detection": [
+      {
+        "id": "huggingface/huggingface-vision-trainer",
+        "name": "Hugging Face Vision Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "object-detection",
+        "status": "named",
+        "level": "III",
+        "description": "Trains and fine-tunes object detection, image classification, and SAM/SAM2 segmentation models on Hugging Face Jobs or locally with dataset validation, metrics, Trackio, and Hub persistence.",
+        "title": "The Vision Forge",
+        "catalogRef": "huggingface-vision-trainer",
+        "tags": [
+          "huggingface",
+          "vision",
+          "object-detection",
+          "segmentation",
+          "fine-tuning"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-vision-trainer/SKILL.md"
+        }
+      }
+    ],
+    "multimodal-reasoning": [
+      {
+        "id": "huggingface/transformers-js",
+        "name": "Transformers.js",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "multimodal-reasoning",
+        "status": "named",
+        "level": "II",
+        "description": "Runs Hugging Face Transformers.js models directly in JavaScript and TypeScript across browser and server runtimes for NLP, vision, audio, and multimodal inference with WebGPU or WASM.",
+        "title": "The Browser Modelwright",
+        "catalogRef": "huggingface-transformers-js",
+        "tags": [
+          "huggingface",
+          "transformers-js",
+          "javascript",
+          "webgpu",
+          "inference"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/transformers-js/SKILL.md"
+        }
+      }
+    ],
     "autonomous-research-agent": [
       {
         "id": "karpathy/autoresearch",
@@ -983,6 +1127,14 @@
     ],
     "gooseworks": [
       "gooseworks/notte-browser"
+    ],
+    "huggingface": [
+      "huggingface/hf-cli",
+      "huggingface/huggingface-datasets",
+      "huggingface/huggingface-llm-trainer",
+      "huggingface/huggingface-papers",
+      "huggingface/huggingface-vision-trainer",
+      "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
       "intelligentcode-ai/database-engineer",

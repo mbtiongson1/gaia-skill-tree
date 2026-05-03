@@ -11,7 +11,7 @@
 | ◇ Extra Skill: openai/security-best-practices | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
-| ◇ Extra Skill: /data-analysis | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
+| ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | II | Requires environment credentials and a configured pipeline definition. |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | Evaluate Output, Plan and Decompose | III |  |
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
@@ -26,11 +26,11 @@
 | ◇ Extra Skill: /guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | III | Requires a defined policy schema and an evaluation loop. |
 | ◇ Extra Skill: openai/security-ownership-map | Extra Skill | Extract Entities, Logical Inference | III |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV |  |
-| ◇ Extra Skill: /literature-review | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
+| ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV |  |
 | ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V | Requires extensive multi-system validation before level advancement. |
-| ◇ Extra Skill: /multimodal-reasoning | Extra Skill | Image Caption, Question Answer, Logical Inference | III | Requires vision-language model capability. |
+| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | Image Caption, Question Answer, Logical Inference | III | Requires vision-language model capability. |
 | ◇ Extra Skill: /plan-and-execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | IV |  |
 | ◇ Extra Skill: mattpocock/to-prd | Extra Skill | Write Report, Plan and Decompose | IV |  |
 | ◇ Extra Skill: /prompt-optimization | Extra Skill | Evaluate Output, Generate Text | IV |  |
