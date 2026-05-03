@@ -70,6 +70,7 @@ Quick usage:
   gaia graph [--format html|svg|json] [-o <path>] [--no-open]
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
+  gaia fuse <skillId> [--name <name>]
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
@@ -102,6 +103,7 @@ PUBLIC_COMMANDS = (
     "graph",
     "appraise",
     "promote",
+    "fuse",
     "docs",
     "skills",
 )
@@ -288,7 +290,7 @@ def scan_command(args):
         eligible = check_promotion_eligibility(graph_data, tree)
         candidate_path = write_promotion_candidates(args.registry, username, eligible)
         if not quiet:
-            print(f"Wrote promotion candidates: {candidate_path}")
+            print(f"  saved {os.path.basename(candidate_path)}")
         if eligible:
             for promo in eligible[:2]:
                 skill = skill_map.get(promo["skillId"])
@@ -332,8 +334,7 @@ def render_user_tree_outputs(username: str, tree: dict | None, graph_data: dict 
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)
     if not quiet:
-        print(f"Wrote tree render: {html_path}")
-        print(f"Wrote tree render: {md_path}")
+        print(f"  saved {os.path.basename(html_path)} & {os.path.basename(md_path)}")
     return html_path, md_path
 
 
@@ -566,7 +567,7 @@ def propose_command(args):
     promote_to_named(proposed_skill, contributor, skill_name, args.registry)
     update_batch_lifecycle(batch_path, skill_id, "named")
     print(f"Proposed named skill: {target_named}")
-    print(f"Wrote proposal batch: {batch_path}")
+    print(f"  saved {os.path.basename(batch_path)}")
 
     if getattr(args, "no_pr", False):
         print("Skipped PR creation (--no-pr).")
@@ -656,26 +657,44 @@ def fuse_command(args):
     tree = load_tree(username, registry_path=args.registry)
     if not tree:
         return
-    pending = tree.get('pendingCombinations', [])
+    
     target = args.skillId
-    match = next((p for p in pending if p.get('candidateResult') == target), None)
-    if not match:
-        print(f"Skill {target} is not in your pending combinations.")
+    display_name = getattr(args, 'name', None)
+    
+    # Check combinations first
+    pending_combos = tree.get('pendingCombinations', [])
+    combo_match = next((p for p in pending_combos if p.get('candidateResult') == target), None)
+    
+    if combo_match:
+        print(f"Fusing combination {target}...")
+        tree.setdefault('unlockedSkills', []).append({
+            "skillId": target,
+            "level": combo_match.get('levelFloor'),
+            "unlockedAt": date.today().isoformat(),
+            "unlockedIn": "local-repo",
+            "combinedFrom": combo_match.get('detectedSkills', [])
+        })
+        tree['pendingCombinations'] = [p for p in pending_combos if p.get('candidateResult') != target]
+        stats = tree.get('stats', {})
+        stats['totalUnlocked'] = stats.get('totalUnlocked', 0) + 1
+        tree['stats'] = stats
+        save_tree(username, tree, registry_path=args.registry)
+        open_pr(username, tree, candidate_result=target)
         return
-    print(f"Fusing {target}...")
-    tree.setdefault('unlockedSkills', []).append({
-        "skillId": target,
-        "level": match.get('levelFloor'),
-        "unlockedAt": "2026-04-26",
-        "unlockedIn": "local-repo",
-        "combinedFrom": match.get('detectedSkills', [])
-    })
-    tree['pendingCombinations'] = [p for p in pending if p.get('candidateResult') != target]
-    stats = tree.get('stats', {})
-    stats['totalUnlocked'] = stats.get('totalUnlocked', 0) + 1
-    tree['stats'] = stats
-    save_tree(username, tree, registry_path=args.registry)
-    open_pr(username, tree, candidate_result=target)
+
+    # Check promotions next
+    try:
+        payload = load_promotion_candidates(args.registry)
+        if any(c.get('skillId') == target for c in payload.get('candidates', [])):
+            print(f"Fusing promotion for {target}...")
+            result = promote_from_candidates(username, target, args.registry, new_display_name=display_name)
+            print(f"Promoted {result['skillId']} to Level {result['newLevel']}.")
+            return
+    except Exception:
+        pass
+
+    print(f"Skill {target} is not a valid combination or promotion candidate.")
+    print("Run `gaia scan` to refresh candidates.")
 
 _EMBEDDINGS_INSTALL_STEPS = """\
 
@@ -754,7 +773,7 @@ def push_command(args):
         return
 
     batch_path = write_skill_batch(batch, args.registry)
-    print(f"Wrote skill batch intake record: {batch_path}")
+    print(f"  saved {os.path.basename(batch_path)}")
     if args.no_pr:
         print("Skipped PR creation (--no-pr).")
         return
@@ -1018,6 +1037,9 @@ def get_parser():
     promote_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to promote")
     promote_parser.add_argument('--all', action='store_true', help="Promote every candidate from the last scan")
     promote_parser.add_argument('--name', help="Optional display name for the promoted skill")
+    fuse_parser = subparsers.add_parser('fuse', help="Confirm a skill combination or promotion candidate")
+    fuse_parser.add_argument('skillId', help="Skill ID to fuse or promote")
+    fuse_parser.add_argument('--name', help="Optional display name for the skill")
     docs_parser = subparsers.add_parser('docs', help="Documentation maintenance commands")
     docs_sub = docs_parser.add_subparsers(dest='docs_command')
     docs_build = docs_sub.add_parser('build', help="Regenerate generated documentation regions")
@@ -1089,6 +1111,8 @@ def main():
         appraise_command(args)
     elif args.command == 'promote':
         promote_command(args)
+    elif args.command == 'fuse':
+        fuse_command(args)
     elif args.command == 'docs' and getattr(args, 'docs_command', None) == 'build':
         docs_command(args)
     elif args.command == 'skills':

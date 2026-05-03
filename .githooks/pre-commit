@@ -68,14 +68,14 @@ if printf '%s\n' "$changed" | grep -Eq '^(registry/gaia\.json|registry/named/|re
   python3 scripts/validate_intake.py
   python3 scripts/generateProjections.py
   python3 scripts/exportGexf.py
-  gaia graph --format svg --output registry/gaia.svg --no-open
-  gaia graph --format json --output registry/render/latest.json --no-open
-  gaia graph --format html --output registry/render/gaia.html --no-open
+  python3 -m gaia_cli.main graph --format svg --output registry/gaia.svg --no-open
+  python3 -m gaia_cli.main graph --format json --output registry/render/latest.json --no-open
+  python3 -m gaia_cli.main graph --format html --output registry/render/gaia.html --no-open
   python3 scripts/syncDocsGraphAssets.py
 fi
 
 printf 'Gaia pre-commit: rebuilding generated docs regions...\n'
-gaia docs build
+python3 -m gaia_cli.main docs build
 
 git add "${generated_paths[@]}" 2>/dev/null || true
 
