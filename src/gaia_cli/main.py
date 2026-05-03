@@ -63,6 +63,7 @@ Quick usage:
   gaia pull
   gaia tree [--named] [--title]
   gaia push [--dry-run] [--no-pr]
+  gaia propose [<skillId>] [--ultimate] [--target <name>] [--no-pr]
   gaia version
   gaia mcp
   gaia release <patch|minor|major>

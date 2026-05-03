@@ -135,7 +135,7 @@
 
 ## Ultimate Skills Awaiting Name
 
-*These Ultimate skills have no named implementation yet. The first contributor to submit a valid named implementation claims the title slot.  Submit with `gaia push` and open a PR.*
+*These Ultimate skills have no named implementation yet. The first contributor to submit a valid named implementation claims the title slot.  Submit with `gaia propose /<skill_id> --ultimate` and open a PR.*
 
 | Skill Call | Level | Prerequisites |
 |---|---|---|
