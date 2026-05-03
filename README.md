@@ -97,10 +97,6 @@ brew install pipx
 pipx install ".[embeddings]"
 pipx install gaia-cli
 ```
-Alternative (npm):
-```bash
-npm install -g @gaia-registry/cli
-```
 Windows Only (one-time setup):
 If `gaia` isn't recognized after install, run the command below in PowerShell.
 ```bash
