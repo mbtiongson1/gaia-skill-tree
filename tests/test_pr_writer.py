@@ -1,12 +1,14 @@
 import os
 import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, REPO_ROOT)
 
-from gaia_cli.prWriter import build_intake_pr_body
+from gaia_cli.prWriter import _run, build_intake_pr_body
 
 
 class TestPrWriter(unittest.TestCase):
@@ -40,6 +42,22 @@ class TestPrWriter(unittest.TestCase):
         self.assertIn("`web-search` (0.730)", body)
         self.assertIn("### Reviewer Checklist", body)
         self.assertIn("### Maintainer Promotion Checklist", body)
+
+    def test_run_exposes_gaia_cli_to_subprocesses_outside_repo_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.dict(os.environ, {}, clear=True):
+                result = _run(
+                    [
+                        sys.executable,
+                        "-S",
+                        "-c",
+                        "import gaia_cli; print(gaia_cli.__name__)",
+                    ],
+                    cwd=tmp,
+                )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("gaia_cli", result.stdout)
 
 
 if __name__ == "__main__":

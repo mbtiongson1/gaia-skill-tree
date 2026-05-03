@@ -2,6 +2,7 @@ import os
 import re
 import shutil
 import subprocess
+from pathlib import Path
 
 
 def open_pr(username, tree_data, candidate_result=None):
@@ -98,8 +99,26 @@ def build_intake_pr_body(batch_data):
     return "\n".join(lines)
 
 
+def _subprocess_env():
+    env = os.environ.copy()
+    package_parent = str(Path(__file__).resolve().parent.parent)
+    pythonpath = [package_parent]
+    existing = env.get("PYTHONPATH")
+    if existing:
+        pythonpath.extend(existing.split(os.pathsep))
+    env["PYTHONPATH"] = os.pathsep.join(dict.fromkeys(path for path in pythonpath if path))
+    return env
+
+
 def _run(cmd, cwd):
-    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=False)
+    return subprocess.run(
+        cmd,
+        cwd=cwd,
+        env=_subprocess_env(),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
 
 
 def _gh_ready(cwd):
