@@ -122,6 +122,13 @@
     var links = ns.links || {};
     var repoUrl = links.github || links.npm || '';
     var cloneUrl = repoUrl && repoUrl.includes('github.com') ? repoUrl.replace(/\.git$/,'') : repoUrl;
+    var skillsAddRef = repoUrl || id;
+    if (repoUrl && repoUrl.includes('github.com')) {
+      skillsAddRef = repoUrl
+        .replace('/blob/', '/tree/')
+        .replace(/\/SKILL\.md$/i, '')
+        .replace(/\.git$/, '');
+    }
 
     function installBlock(label, sublabel, cmd, recommended, copyable) {
       var cls = 'se-install-block' + (recommended ? ' recommended' : '');
@@ -134,7 +141,7 @@
 
     el.innerHTML = '<div class="se-flow-h">' + COPY_ICON + ' Installation</div>' +
       installBlock('Gaia', '★ recommended', 'gaia install ' + id, true) +
-      installBlock('npx', '@gaia-registry/cli', 'npx @gaia-registry/cli install ' + id, false) +
+      installBlock('npx', 'skills package', 'npx skills add ' + skillsAddRef, false) +
       (cloneUrl ? installBlock('Git Clone', '', 'git clone ' + cloneUrl, false) : '');
 
     el.querySelectorAll('.se-copy-btn').forEach(function(btn){
