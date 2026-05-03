@@ -104,7 +104,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.4.7`.
+Current Gaia CLI version: `2.4.8`.
 
 Python install:
 

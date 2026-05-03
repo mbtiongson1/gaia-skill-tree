@@ -349,6 +349,11 @@ gaia push [--dry-run] [--no-pr]
   --dry-run prints the JSON without writing files.
   --no-pr writes the intake file without opening a GitHub PR.
 
+gaia propose /<skillId> [--ultimate] [--target <contributor/name>] [--no-pr]
+  Proposes a named implementation for a specific canonical skill.
+  Creates a proposal batch and opens an intake PR.
+  Use --ultimate for Level V/VI skills.
+
 gaia name <batch-file> <index> <contributor/skill-name>
   Promotes an awakened skill from intake to a named skill in graph/named/.
 

@@ -374,7 +374,7 @@
     document.getElementById('uspGlyph').style.color = glyphColor;
     document.getElementById('uspName').textContent = skill.name || skill.id;
     document.getElementById('uspId').textContent = skill.id;
-    var cmd = 'gaia push';
+    var cmd = 'gaia propose /' + skill.id + (skill.type === 'ultimate' ? ' --ultimate' : '');
     document.getElementById('uspCmd').textContent = cmd;
     document.getElementById('uspCmd').dataset.cmd = cmd;
     pop.classList.add('open');
