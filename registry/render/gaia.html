@@ -125,7 +125,7 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "2.4.0",
+  "version": "2.4.7",
   "generatedAt": "2026-04-30T00:00:00Z",
   "meta": {
     "typeLabels": {
@@ -210,6 +210,7 @@
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
       "derivatives": [
+        "gaia-audit",
         "grounding",
         "rag-pipeline"
       ],
@@ -409,6 +410,7 @@
       "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
       "prerequisites": [],
       "derivatives": [
+        "gaia-audit",
         "grounding",
         "research",
         "literature-review",
@@ -501,6 +503,7 @@
       "prerequisites": [],
       "derivatives": [
         "code-review-pipeline",
+        "gaia-audit",
         "grounding",
         "multi-agent-debate",
         "prompt-optimization",
@@ -1640,7 +1643,9 @@
       "rarity": "uncommon",
       "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -2130,7 +2135,9 @@
         "code-generation",
         "execute-bash"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
       "conditions": "Requires write access to the canonical graph and a passing validation suite.",
       "evidence": [
         {
@@ -2174,6 +2181,66 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-30",
       "version": "0.2.0"
+    },
+    {
+      "id": "gaia-audit",
+      "name": "Gaia Audit",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
+      "prerequisites": [
+        "retrieve",
+        "cite-sources",
+        "evaluate-output"
+      ],
+      "derivatives": [
+        "gaia-meta-audit"
+      ],
+      "conditions": "Requires a specific Gaia skill ID, named skill ID, or real-skill catalog item plus access to the registry source files and current public evidence sources.",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-03",
+          "notes": "Codified from a source-backed review that kept openai/chatgpt-apps in the real-skill catalog while removing its unsupported claim on the full-stack-developer Ultimate skill."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-03",
+      "updatedAt": "2026-05-03",
+      "version": "0.1.0"
+    },
+    {
+      "id": "gaia-meta-audit",
+      "name": "Gaia Meta Audit",
+      "type": "extra",
+      "level": "III",
+      "rarity": "rare",
+      "description": "Scans Gaia registry and real-skill catalog entries for review candidates whose evidence may be outdated, superseded, overpromoted, unmapped, stale, or insufficient for their current level or named-skill claim.",
+      "prerequisites": [
+        "gaia-audit",
+        "registry-curation",
+        "detect-anomaly"
+      ],
+      "derivatives": [],
+      "conditions": "Requires the current registry, named-skill index, real-skill catalog, and permission to compare against current source URLs or discovery indexes.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-03",
+          "notes": "Derived from registry hygiene work that audits source-backed named skills, generated projections, and demotion candidates across canonical and real-skill review surfaces."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-03",
+      "updatedAt": "2026-05-03",
+      "version": "0.1.0"
     },
     {
       "id": "tool-use",
@@ -5533,6 +5600,66 @@
       "condition": "",
       "levelFloor": "II",
       "evidenceRefs": []
+    },
+    {
+      "sourceSkillId": "retrieve",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "cite-sources",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "evaluate-output",
+      "targetSkillId": "gaia-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "I",
+      "evidenceRefs": [
+        "gaia-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "gaia-audit",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "registry-curation",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "detect-anomaly",
+      "targetSkillId": "gaia-meta-audit",
+      "edgeType": "prerequisite",
+      "condition": "",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "gaia-meta-audit#evidence[0]"
+      ]
     }
   ]
 }</script>
@@ -5817,6 +5944,150 @@
         }
       }
     ],
+    "api-call": [
+      {
+        "id": "huggingface/hf-cli",
+        "name": "HF CLI",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "api-call",
+        "status": "named",
+        "level": "II",
+        "description": "Guides Hugging Face Hub CLI operations for downloading, uploading, managing repos, running Jobs, querying datasets, configuring Spaces, and handling Hub authentication.",
+        "title": "The Hub Operator",
+        "catalogRef": "huggingface-hf-cli",
+        "tags": [
+          "huggingface",
+          "hub",
+          "cli",
+          "jobs",
+          "datasets"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/hf-cli/SKILL.md"
+        }
+      }
+    ],
+    "data-analysis": [
+      {
+        "id": "huggingface/huggingface-datasets",
+        "name": "Hugging Face Datasets",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "data-analysis",
+        "status": "named",
+        "level": "II",
+        "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
+        "title": "The Dataset Cartographer",
+        "catalogRef": "huggingface-datasets",
+        "tags": [
+          "huggingface",
+          "datasets",
+          "dataset-viewer",
+          "parquet",
+          "data-analysis"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"
+        }
+      }
+    ],
+    "fine-tune": [
+      {
+        "id": "huggingface/huggingface-llm-trainer",
+        "name": "Hugging Face LLM Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "fine-tune",
+        "status": "named",
+        "level": "III",
+        "description": "Runs LLM fine-tuning on Hugging Face Jobs using TRL or Unsloth, covering SFT, DPO, GRPO, reward modeling, dataset validation, hardware selection, Trackio monitoring, and Hub persistence.",
+        "title": "The Cloud Fine-Tuner",
+        "catalogRef": "huggingface-llm-trainer",
+        "tags": [
+          "huggingface",
+          "fine-tuning",
+          "trl",
+          "jobs",
+          "trackio"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-llm-trainer/SKILL.md"
+        }
+      }
+    ],
+    "literature-review": [
+      {
+        "id": "huggingface/huggingface-papers",
+        "name": "Hugging Face Papers",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "literature-review",
+        "status": "named",
+        "level": "II",
+        "description": "Looks up Hugging Face paper pages and arXiv IDs, fetching markdown paper content and structured metadata such as authors, linked models, datasets, Spaces, GitHub repos, and project pages.",
+        "title": "The Paper Indexer",
+        "catalogRef": "huggingface-papers",
+        "tags": [
+          "huggingface",
+          "papers",
+          "arxiv",
+          "metadata",
+          "research"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-papers/SKILL.md"
+        }
+      }
+    ],
+    "object-detection": [
+      {
+        "id": "huggingface/huggingface-vision-trainer",
+        "name": "Hugging Face Vision Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "object-detection",
+        "status": "named",
+        "level": "III",
+        "description": "Trains and fine-tunes object detection, image classification, and SAM/SAM2 segmentation models on Hugging Face Jobs or locally with dataset validation, metrics, Trackio, and Hub persistence.",
+        "title": "The Vision Forge",
+        "catalogRef": "huggingface-vision-trainer",
+        "tags": [
+          "huggingface",
+          "vision",
+          "object-detection",
+          "segmentation",
+          "fine-tuning"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-vision-trainer/SKILL.md"
+        }
+      }
+    ],
+    "multimodal-reasoning": [
+      {
+        "id": "huggingface/transformers-js",
+        "name": "Transformers.js",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "multimodal-reasoning",
+        "status": "named",
+        "level": "II",
+        "description": "Runs Hugging Face Transformers.js models directly in JavaScript and TypeScript across browser and server runtimes for NLP, vision, audio, and multimodal inference with WebGPU or WASM.",
+        "title": "The Browser Modelwright",
+        "catalogRef": "huggingface-transformers-js",
+        "tags": [
+          "huggingface",
+          "transformers-js",
+          "javascript",
+          "webgpu",
+          "inference"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/transformers-js/SKILL.md"
+        }
+      }
+    ],
     "autonomous-research-agent": [
       {
         "id": "karpathy/autoresearch",
@@ -6055,6 +6326,189 @@
         }
       }
     ],
+    "error-interpretation": [
+      {
+        "id": "openai/gh-fix-ci",
+        "name": "GH Fix CI",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "error-interpretation",
+        "status": "named",
+        "level": "II",
+        "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
+        "title": "The Checkrunner Surgeon",
+        "catalogRef": "openai-gh-fix-ci",
+        "tags": [
+          "github-actions",
+          "ci",
+          "debugging",
+          "pull-requests"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/gh-fix-ci"
+        }
+      }
+    ],
+    "cite-sources": [
+      {
+        "id": "openai/openai-docs",
+        "name": "OpenAI Docs",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "cite-sources",
+        "status": "named",
+        "level": "II",
+        "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
+        "title": "The Living API Codex",
+        "catalogRef": "openai-openai-docs",
+        "tags": [
+          "openai",
+          "docs",
+          "api-reference",
+          "sdk",
+          "citation"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/openai-docs"
+        }
+      }
+    ],
+    "computer-use": [
+      {
+        "id": "openai/playwright",
+        "name": "Playwright",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "computer-use",
+        "status": "named",
+        "level": "II",
+        "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
+        "title": "The Browser Witness",
+        "catalogRef": "openai-playwright",
+        "tags": [
+          "playwright",
+          "browser-testing",
+          "automation",
+          "screenshots"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/playwright"
+        }
+      }
+    ],
+    "code-review-pipeline": [
+      {
+        "id": "openai/security-best-practices",
+        "name": "Security Best Practices",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "code-review-pipeline",
+        "status": "named",
+        "level": "III",
+        "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
+        "title": "The Secure Code Sentinel",
+        "catalogRef": "openai-security-best-practices",
+        "tags": [
+          "security",
+          "secure-coding",
+          "code-review",
+          "vulnerability-analysis"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/security-best-practices"
+        }
+      },
+      {
+        "id": "openai/security-threat-model",
+        "name": "Security Threat Model",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "code-review-pipeline",
+        "status": "named",
+        "level": "III",
+        "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
+        "title": "The Threat Cartographer",
+        "catalogRef": "openai-security-threat-model",
+        "tags": [
+          "security",
+          "threat-modeling",
+          "risk-analysis",
+          "code-review"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/security-threat-model"
+        }
+      }
+    ],
+    "knowledge-graph-build": [
+      {
+        "id": "openai/security-ownership-map",
+        "name": "Security Ownership Map",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "knowledge-graph-build",
+        "status": "named",
+        "level": "III",
+        "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
+        "title": "The Ownership Mapper",
+        "catalogRef": "openai-security-ownership-map",
+        "tags": [
+          "security",
+          "ownership",
+          "bus-factor",
+          "repository-analysis"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/security-ownership-map"
+        }
+      }
+    ],
+    "detect-anomaly": [
+      {
+        "id": "openai/sentry",
+        "name": "Sentry",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "detect-anomaly",
+        "status": "named",
+        "level": "II",
+        "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
+        "title": "The Incident Lens",
+        "catalogRef": "openai-sentry",
+        "tags": [
+          "sentry",
+          "incident-response",
+          "observability",
+          "errors"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/sentry"
+        }
+      }
+    ],
+    "diff-content": [
+      {
+        "id": "openai/yeet",
+        "name": "Yeet",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "diff-content",
+        "status": "named",
+        "level": "II",
+        "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
+        "title": "The Guarded Shipwright",
+        "catalogRef": "openai-yeet",
+        "tags": [
+          "git",
+          "pull-requests",
+          "commit-workflow",
+          "release-flow"
+        ],
+        "links": {
+          "docs": "https://officialskills.sh/openai/skills/yeet"
+        }
+      }
+    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -6154,6 +6608,26 @@
     ]
   },
   "awaitingClassification": [
+    {
+      "id": "gaiabot/repo-docs-before-pr",
+      "name": "Repo Docs Before PR",
+      "contributor": "gaiabot",
+      "origin": false,
+      "genericSkillRef": "write-report",
+      "status": "awakened",
+      "level": "II",
+      "description": "Builds and validates repository documentation as a pre-PR guardrail by reminding contributors to run the local docs drift check, then surfaces actionable regeneration commands so pull requests do not fail CI on documentation freshness.",
+      "tags": [
+        "documentation",
+        "ci",
+        "pre-pr",
+        "quality-gate",
+        "repo-maintenance"
+      ],
+      "links": {
+        "docs": "https://github.com/mbtiongson1/gaia-skill-tree#docs"
+      }
+    },
     {
       "id": "intelligentcode-ai/database-engineer",
       "name": "Database Engineer",
@@ -6310,11 +6784,22 @@
     "devin-ai": [
       "devin-ai/autonomous-swe"
     ],
+    "gaiabot": [
+      "gaiabot/repo-docs-before-pr"
+    ],
     "glincker": [
       "glincker/readme-generator"
     ],
     "gooseworks": [
       "gooseworks/notte-browser"
+    ],
+    "huggingface": [
+      "huggingface/hf-cli",
+      "huggingface/huggingface-datasets",
+      "huggingface/huggingface-llm-trainer",
+      "huggingface/huggingface-papers",
+      "huggingface/huggingface-vision-trainer",
+      "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
       "intelligentcode-ai/database-engineer",
@@ -6347,6 +6832,16 @@
       "mattpocock/triage",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
+    ],
+    "openai": [
+      "openai/gh-fix-ci",
+      "openai/openai-docs",
+      "openai/playwright",
+      "openai/security-best-practices",
+      "openai/security-ownership-map",
+      "openai/security-threat-model",
+      "openai/sentry",
+      "openai/yeet"
     ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"
@@ -6460,17 +6955,21 @@
     width: 0,
     height: 0,
     t: 0,
-    orbitX: 0,
-    orbitY: 0,
-    zoom: 1,
-    dragging: false,
+     orbitX: 0,
+     orbitY: 0,
+     zoom: 1,
+     panX: 0,
+     panY: 0,
+     dragging: false,
     dragLastX: 0,
     dragLastY: 0,
     dragStartX: 0,
     dragStartY: 0,
-    dragMoved: false,
-    hoveredId: null,
-    projectedNodes: {},
+     dragMoved: false,
+     hoveredId: null,
+     focusedId: null,
+     potentialClickId: null,
+     projectedNodes: {},
     nodeAlphas: {},
     searchText: '',
     legendFilterType: null,
@@ -6500,7 +6999,7 @@
     const fov = Math.min(state.width, state.height) * 0.75;
     const dist = fov / (fov + p.z + 360 * SCALE);
     const z = state.zoom;
-    return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
+    return { sx: state.width / 2 + p.x * dist * z + state.panX, sy: state.height / 2 + p.y * dist * z + state.panY, scale: dist * z };
   }
   function drawNode(sx, sy, r, color, alpha) {
     const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
@@ -6556,6 +7055,49 @@
     return skill.type === 'ultimate';
   }
 
+  function getNeighborSet(nodeId) {
+    const set = new Set([nodeId]);
+    const skill = state.skills.find(s => s.id === nodeId);
+    if (skill) {
+      skill.prerequisites.forEach(pid => set.add(pid));
+      state.skills.forEach(s => {
+        if (s.prerequisites.includes(nodeId)) set.add(s.id);
+      });
+    }
+    return set;
+  }
+
+  function fitBoundingBoxForFocusedNode() {
+    if (!state.focusedId) return;
+    const ids = Array.from(getNeighborSet(state.focusedId));
+    const fov = Math.min(state.width, state.height) * 0.75;
+    const points = ids.map(id => {
+      const p0 = state.positions[id];
+      if (!p0) return null;
+      const p = rotX(rotY(p0, state.orbitY), state.orbitX);
+      const dist = fov / (fov + p.z + 360 * SCALE);
+      return { x: p.x * dist, y: p.y * dist };
+    }).filter(Boolean);
+    if (!points.length) return;
+
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    points.forEach(p => {
+      minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
+      minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
+    });
+
+    const minSize = 80;
+    const contentW = Math.max(maxX - minX, minSize);
+    const contentH = Math.max(maxY - minY, minSize);
+    const targetZoom = Math.max(0.3, Math.min(3.0, Math.min(
+      state.width * 0.88 / contentW,
+      state.height * 0.88 / contentH
+    )));
+    state.zoom = targetZoom;
+    state.panX = -((minX + maxX) / 2) * targetZoom;
+    state.panY = -((minY + maxY) / 2) * targetZoom;
+  }
+
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     state.width = canvas.parentElement.clientWidth;
@@ -6587,17 +7129,9 @@
       xf[skill.id] = rotX(rotY(p0, ry), rx);
     });
 
-    const neighborSet = new Set();
-    if (state.hoveredId) {
-      neighborSet.add(state.hoveredId);
-      const hoveredSkill = state.skills.find(s => s.id === state.hoveredId);
-      if (hoveredSkill) {
-        hoveredSkill.prerequisites.forEach(pid => neighborSet.add(pid));
-        state.skills.forEach(s => { if (s.prerequisites.includes(state.hoveredId)) neighborSet.add(s.id); });
-      }
-    }
-
-    const hovering = Boolean(state.hoveredId);
+    const highlightRoot = state.focusedId !== null ? state.focusedId : state.hoveredId;
+    const isHighlighting = Boolean(highlightRoot);
+    const neighborSet = highlightRoot ? getNeighborSet(highlightRoot) : new Set();
     const isSearchActive = Boolean(state.searchText);
     const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
     const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
@@ -6605,8 +7139,8 @@
 
     state.skills.forEach(skill => {
       let targetVis;
-      if (hovering) {
-        targetVis = skill.id === state.hoveredId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
+      if (isHighlighting) {
+        targetVis = skill.id === highlightRoot ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
       } else if (legendHovering) {
         const mt = !state.legendHoverType || skill.type === state.legendHoverType;
         const mr = !state.legendHoverRank || skill.level === state.legendHoverRank;
@@ -6653,7 +7187,7 @@
       const pa = project(xf[edge.from]), pb = project(xf[edge.to]);
       const col = PALETTE[edge.type] || PALETTE.basic;
       const depthAlpha = Math.min(Math.max((xf[edge.to].z + 430 * SCALE) / (860 * SCALE), 0.08), 1);
-      const isNeighborEdge = hovering && neighborSet.has(edge.from) && neighborSet.has(edge.to);
+      const isNeighborEdge = isHighlighting && neighborSet.has(edge.from) && neighborSet.has(edge.to);
       const fromVis = state.nodeAlphas[edge.from] ?? 1.0;
       const toVis   = state.nodeAlphas[edge.to]   ?? 1.0;
       const edgeVis = (fromVis + toVis) / 2;
@@ -6682,6 +7216,22 @@
         drawNode(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, col, depthAlpha * vis);
       }
     });
+
+    if (state.focusedId) {
+      const skill = state.skills.find(s => s.id === state.focusedId);
+      const pr = state.projectedNodes[state.focusedId];
+      if (skill && pr) {
+        const p0 = state.positions[skill.id];
+        const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + (p0 ? p0.phase : 0));
+        const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
+        const r = baseR * SCALE * pr.scale * pulse + 5;
+        ctx.beginPath();
+        ctx.arc(pr.sx, pr.sy, r, 0, Math.PI * 2);
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+      }
+    }
 
     const labelNodes = nodes.filter(({ skill }) => shouldLabel(skill));
     function drawLabel(skill, highlighted) {
@@ -6872,6 +7422,7 @@
 
   function handleMouseDown(event) {
     event.preventDefault();
+    state.potentialClickId = state.hoveredId;
     state.dragging = true;
     state.dragMoved = false;
     state.dragStartX = event.clientX;
@@ -6884,9 +7435,20 @@
 
   function handleMouseUp() {
     if (!state.dragging) return;
-    const didClick = !state.dragMoved && state.hoveredId;
+    const wasDrag = state.dragMoved;
     state.dragging = false;
     state.dragMoved = false;
+    if (!wasDrag) {
+      if (state.potentialClickId) {
+        state.focusedId = state.potentialClickId;
+        fitBoundingBoxForFocusedNode();
+      } else {
+        state.focusedId = null;
+        state.panX = 0;
+        state.panY = 0;
+      }
+    }
+    state.potentialClickId = null;
     canvas.style.cursor = state.hoveredId ? 'pointer' : 'default';
   }
 

@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v2.4.0  ·  generated 2026-04-30
+GAIA SKILL TREE  v2.4.7  ·  generated 2026-04-30
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -27,7 +27,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
 
 ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Extra Skill: /data-analysis  [III]
+  ├─ ◇ Extra Skill: huggingface/huggingface-datasets  [III]
   │  ├─ ○ /generate-sql  [II]
   │  ├─ ○ /data-visualize  [II]
   │  └─ ○ /summarize  [0]
@@ -100,12 +100,12 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /context-compression  [III · Evolved]
   ○ anthropic/pptx - Document Editing  [0 · Basic]
   ○ /few-shot-learning  [IV · Hardened]
-  ○ /fine-tune  [IV · Hardened]
+  ○ huggingface/huggingface-llm-trainer - Fine-Tune  [IV · Hardened]
   ○ laravel/upgrade-laravel-v13 - Framework Upgrade  [0 · Basic]
   ○ /image-generate  [II · Named]
   ○ mattpocock/triage - Issue Triage  [IV · Hardened]
   ○ /mcp-integration  [III · Evolved]
-  ○ /object-detection  [II · Named]
+  ○ huggingface/huggingface-vision-trainer - Object Detection  [II · Named]
   ○ /ocr  [II · Named]
   ○ /parallel-execution  [II · Named]
   ○ /prompt-injection-defense  [III · Evolved]
