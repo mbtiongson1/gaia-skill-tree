@@ -352,14 +352,14 @@ class TestRenderPromotionPrompt:
             "IV",
         )
 
-        assert 'gaia promote plan-and-execute --name "Plan and Execute"' in prompt
+        assert 'gaia fuse plan-and-execute --name "Plan and Execute"' in prompt
         assert '"Different Registry Name"' not in prompt
         assert '"My Name"' not in prompt
 
     def test_rename_suggestion_title_cases_other_slugs(self):
         prompt = render_promotion_prompt({"id": "research-agent"}, "III")
 
-        assert 'gaia promote research-agent --name "Research Agent"' in prompt
+        assert 'gaia fuse research-agent --name "Research Agent"' in prompt
 
 
 # ---------------------------------------------------------------------------

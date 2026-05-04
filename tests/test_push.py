@@ -99,7 +99,7 @@ class TestGaiaPush(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("Skipped PR creation (--no-pr).", result.stdout)
-            self.assertIn("Wrote skill batch intake record:", result.stdout)
+            self.assertIn("saved ", result.stdout)
             self.assertTrue(os.listdir(os.path.join(registry, "registry-for-review", "skill-batches")))
 
     def test_proposed_filtering_keeps_known_and_removes_noise(self):
