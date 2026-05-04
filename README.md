@@ -379,7 +379,7 @@ You can contribute by **reviewing skill drafts**: read a proposed skill, check w
 
 You can also contribute by **creating skills directly from reviews**: turn a well-supported review into a concrete Basic Skill, Extra Skill, Ultimate Skill, fusion recipe, or reclassification PR with evidence and rationale.
 
-For quickstart contribution steps, see [CONTRIBUTING.md](CONTRIBUTING.md). For the full long-form guide (reviewer rubric, deep policy, and extended workflow details), see the Wiki companion at [`docs/wiki/contributing-full.md`](docs/wiki/contributing-full.md) and the GitHub Wiki landing page.
+For quickstart contribution steps, see [CONTRIBUTING.md](CONTRIBUTING.md). For the full long-form guide (reviewer rubric, deep policy, and extended workflow details), use the GitHub Wiki: <https://github.com/mbtiongson1/gaia-skill-tree/wiki> (backed by <https://github.com/mbtiongson1/gaia-skill-tree.wiki.git>).
 
 ## Contributors
 
