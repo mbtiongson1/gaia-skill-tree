@@ -379,7 +379,7 @@ You can contribute by **reviewing skill drafts**: read a proposed skill, check w
 
 You can also contribute by **creating skills directly from reviews**: turn a well-supported review into a concrete Basic Skill, Extra Skill, Ultimate Skill, fusion recipe, or reclassification PR with evidence and rationale.
 
-For full instructions, including evidence requirements, PR templates, naming rules, and reviewer criteria, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For quickstart contribution steps, see [CONTRIBUTING.md](CONTRIBUTING.md). For the full long-form guide (reviewer rubric, deep policy, and extended workflow details), see the Wiki companion at [`docs/wiki/contributing-full.md`](docs/wiki/contributing-full.md) and the GitHub Wiki landing page.
 
 ## Contributors
 

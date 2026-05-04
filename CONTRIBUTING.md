@@ -2,7 +2,7 @@
 
 Thanks for helping improve the Gaia skill graph.
 
-This page is now a **contributor quickstart**. Detailed policy, reviewer playbooks, and deep troubleshooting should live in the Wiki and be linked from here.
+This page is now a **contributor quickstart**. Detailed policy, reviewer playbooks, and deep troubleshooting now live in the Wiki companion document.
 
 ---
 
@@ -126,4 +126,5 @@ Keep actual quickstarts, CLI reference, sample tree, and docs scripted from `gai
 - Docs site entry: `docs/index.html`
 - Maintainer governance/process: `docs/GOVERNANCE.md`
 - Website workflow notes: `docs/how-we-do-things.html`
-- Wiki (long-form policies/troubleshooting): <https://github.com/mbtiongson1/gaia-skill-tree/wiki>
+- Wiki landing page: <https://github.com/mbtiongson1/gaia-skill-tree/wiki>
+- Wiki companion (full legacy guide mirrored in-repo): `docs/wiki/contributing-full.md`
