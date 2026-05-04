@@ -191,3 +191,70 @@ Additional tokens used only in the explorer overlay (not added to `:root` — de
 ## Rarity (computed)
 
 Rarity is derived from real agent prevalence by `scripts/computeRarity.py` — never declared by contributors. It does not have a fixed color in the UI; rarity labels are rendered in `var(--muted)` text within skill pages and tree views.
+
+---
+
+## Skill Type Color Cycling
+
+Skill types (Ultimate, Extra) get animated color-cycling effects wherever they appear. Basic skills remain static.
+
+### Ultimate Skill Cycle (6-stop, ~4s loop)
+
+Sequence: **blue → purple → gold → red → purple → green → (loop)**
+
+```css
+@keyframes tree-rainbow-glow{
+  0%,100% { color:#38bdf8 }   /* blue */
+  18%     { color:#a78bfa }   /* purple */
+  36%     { color:#f59e0b }   /* gold */
+  54%     { color:#ef4444 }   /* red */
+  72%     { color:#c084fc }   /* purple */
+  90%     { color:#34d399 }   /* green */
+}
+```
+
+Each color step also carries a matching `text-shadow` glow at 80% opacity inner / 40% outer.
+
+### Extra Skill Cycle (5-stop, ~4s loop, NO gold)
+
+Sequence: **blue → purple → red → purple → green → (loop)**
+
+```css
+@keyframes tree-extra-glow{
+  0%,100% { color:#38bdf8 }   /* blue */
+  20%     { color:#a78bfa }   /* purple */
+  40%     { color:#ef4444 }   /* red */
+  60%     { color:#c084fc }   /* purple */
+  80%     { color:#34d399 }   /* green */
+}
+```
+
+### Application Rules
+
+| Area | Ultimate | Extra | Basic |
+|------|----------|-------|-------|
+| Tree dialog lines | `tree-rainbow-glow` on `◆ Ultimate Skill:` label | `tree-extra-glow` on `◇ Extra Skill:` label | Static cyan glyph |
+| Named Skills cards | Name text cycles `tree-rainbow-glow` | Name text cycles `tree-extra-glow` | No animation |
+| Skill Graph labels | Canvas `cycleColor()` with `ULT_STOPS` | Canvas `cycleColor()` with `EXTRA_STOPS` | Static `PALETTE.basic` |
+| Skill Graph nodes | Existing `drawNodeVI` (rainbow hue rotation) | New `drawNodeExtra` (subtle cycling glow) | Standard `drawNode` |
+
+### Naming Conventions
+
+- **Contributor names** (e.g., `karpathy`, `anthropic`): always red `#ef4444` everywhere
+- **Skill names** after the slash: colored by rank level from `meta.json` level colors
+- **Stagger**: each skill instance gets a unique `animation-delay` offset to avoid lockstep cycling
+
+### Canvas Implementation (Skill Graph)
+
+For canvas-drawn elements, a `cycleColor(stops, t)` utility interpolates between color-stop arrays using the shared `state.t` animation clock plus per-node phase offset:
+
+```
+ULT_STOPS  = [[56,189,248],[167,139,250],[245,158,11],[239,68,68],[192,132,252],[52,211,153]]
+EXTRA_STOPS = [[56,189,248],[167,139,250],[239,68,68],[192,132,252],[52,211,153]]
+```
+
+Canvas glow via `ctx.shadowColor` / `ctx.shadowBlur = 8` on ultimate/extra labels.
+
+### Implementation Branch
+
+This design ships on branch **`design/skill-color-cycling`** (per branch naming convention: `design/` prefix for website design changes touching `docs/` HTML/CSS/JS).

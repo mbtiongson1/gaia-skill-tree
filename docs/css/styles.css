@@ -302,6 +302,10 @@
     border-top:1px solid var(--border);
   }
   .process-final p{max-width:690px}
+  .branch-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:1rem}
+  .branch-table th,.branch-table td{padding:.55rem .8rem;border:1px solid var(--border);text-align:left}
+  .branch-table th{background:var(--surface);color:var(--basic);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+  .branch-table td code{color:var(--extra);font-size:.8rem}
   /* ── GRAPH DIALOG ── */
   .graph-dialog{
     margin:auto;
