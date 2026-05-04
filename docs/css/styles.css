@@ -400,13 +400,17 @@
     90% {color:#34d399;text-shadow:0 0 10px rgba(52,211,153,.8),0 0 22px rgba(52,211,153,.4)}
     100%{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
   }
-  .tree-ult-line{font-weight:700;animation:tree-rainbow-glow 4s linear infinite}
+  .tree-ult-line{font-weight:700}
   .tree-ult-contributor{color:#ef4444;font-weight:800;text-shadow:0 0 8px rgba(239,68,68,.6)}
   .tree-ult-slash{color:var(--muted)}
   .tree-ult-skillname,.tree-ult-id{color:#f59e0b}
   .tree-extra-glyph{color:var(--extra)}
   .tree-basic-glyph{color:var(--basic)}
   .tree-sep{color:rgba(56,189,248,.2)}
+  .tree-extra-line{font-weight:600}
+  .tree-extra-contributor{color:#ef4444;font-weight:700;text-shadow:0 0 6px rgba(239,68,68,.5)}
+  .tree-extra-slash{color:var(--muted)}
+  .tree-extra-skillname,.tree-extra-id{color:var(--extra)}
   .skill-tooltip{
     position:absolute;pointer-events:none;display:none;z-index:10;
     background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
@@ -824,6 +828,48 @@
     border:1px solid rgba(56,189,248,.22);text-decoration:none;transition:background .15s,border-color .15s;
   }
   .ns-link-btn:hover{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.45)}
+  /* ── DAG flow view ── */
+  .ns-dag-container{position:relative;overflow-x:auto;overflow-y:visible;padding:2rem 1rem}
+  .ns-dag-rank{display:flex;justify-content:center;gap:1.2rem;margin-bottom:3.5rem;position:relative;z-index:1;flex-wrap:wrap}
+  .ns-dag-card{
+    position:relative;padding:.6rem .9rem;border-radius:10px;
+    background:var(--surface);border:1px solid var(--border);
+    cursor:pointer;min-width:110px;max-width:160px;text-align:center;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .ns-dag-card:hover{border-color:var(--basic);box-shadow:0 0 12px rgba(56,189,248,.2)}
+  .ns-dag-card[data-type="ultimate"]{border-color:rgba(245,158,11,.4)}
+  .ns-dag-card[data-type="extra"]{border-color:rgba(192,132,252,.3)}
+  .ns-dag-card-name{font-weight:600;font-size:.78rem;margin:.25rem 0}
+  .ns-dag-glyph{font-size:.9rem}
+  .ns-dag-ghost{opacity:.45;border-style:dashed}
+  .ns-dag-svg{position:absolute;top:0;left:0;pointer-events:none;z-index:0}
+  .ns-dag-arrow{stroke:var(--muted);stroke-width:1.5;fill:none;marker-end:url(#ns-arrowhead)}
+  /* ── flow-node ghost + stacked cards + close button ── */
+  .flow-node-ghost{opacity:.5;border-style:dashed}
+  .fn-contrib{color:#ef4444!important;font-weight:700}
+  .se-close-x{margin-left:auto;font-size:1.2rem;font-weight:700;padding:.3rem .6rem;border-radius:6px}
+  .se-stack-deck{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:90px;min-width:150px}
+  .se-stack-card{
+    position:absolute;padding:.6rem .9rem;border-radius:10px;
+    background:var(--surface);border:1px solid var(--border);
+    text-align:center;transition:transform .3s,z-index .3s,box-shadow .3s;
+    min-width:120px;cursor:pointer;
+  }
+  .se-stack-card:hover{transform:rotate(0deg)!important;z-index:100!important;box-shadow:0 4px 20px rgba(56,189,248,.3)}
+  .se-stack-current{transform:rotate(0deg)!important;border-color:rgba(56,189,248,.5);box-shadow:0 0 12px rgba(56,189,248,.2)}
+  .usp-details-link{margin-top:.8rem;text-align:center}
+  .usp-details-link a{color:var(--basic);text-decoration:none;font-size:.85rem;font-weight:600}
+  .usp-details-link a:hover{text-decoration:underline}
+  /* ── hero install terminal ── */
+  .se-hero-card{position:relative}
+  .se-github-link{position:absolute;top:.6rem;right:.6rem;color:var(--basic);font-size:.75rem;font-weight:600;text-decoration:none;opacity:.7;transition:opacity .2s}
+  .se-github-link:hover{opacity:1;text-decoration:underline}
+  .se-hero-install{margin-top:.8rem;display:flex;align-items:center;gap:.5rem;background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:8px;padding:.45rem .7rem;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.78rem}
+  .se-hero-prompt{color:var(--muted);user-select:none}
+  .se-hero-cmd{color:var(--basic);flex:1}
+  .se-hero-copy{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s}
+  .se-hero-copy:hover{border-color:var(--basic);color:var(--basic)}
   /* ── FOOTER ── */
   footer a{color:var(--basic);text-decoration:none}
   /* ── SECTION DIVIDERS (redesigned) ── */

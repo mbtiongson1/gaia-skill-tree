@@ -65,33 +65,97 @@
     '</article>';
   }
 
-  function renderFlowchartView(allNamed, lm) {
-    var groups = {};
-    allNamed.forEach(function(ns) {
-      var ref = ns.genericSkillRef || 'other';
-      if (!groups[ref]) groups[ref] = [];
-      groups[ref].push(ns);
+  function renderFlowchartView(filteredNamed, LEVEL_META) {
+    var skillMap = window._gaiaSkillMap || {};
+    var namedIds = {};
+    filteredNamed.forEach(function(ns) { namedIds[ns.genericSkillRef || ns.id] = ns; });
+
+    var dagNodes = {};
+    Object.values(skillMap).forEach(function(s) {
+      if (s.type === 'extra' || s.type === 'ultimate') dagNodes[s.id] = s;
     });
-    return Object.keys(groups).sort().map(function(ref) {
-      var cards = groups[ref].map(function(ns) {
-        var m = lm[ns.level] || lm['II'];
-        return '<div class="ns-fc-leaf-wrap">' +
-          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
-            '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
-            (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
-            '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
-            '<div class="ns-fc-card-id">'+esc(ns.id)+'</div>' +
-          '</article>' +
+
+    var edges = [];
+    Object.values(dagNodes).forEach(function(s) {
+      (s.prerequisites || []).forEach(function(pid) {
+        if (dagNodes[pid]) edges.push({from: pid, to: s.id});
+      });
+    });
+
+    var depth = {};
+    function getDepth(id) {
+      if (depth[id] !== undefined) return depth[id];
+      depth[id] = -1;
+      var maxPre = 0;
+      (dagNodes[id].prerequisites || []).forEach(function(pid) {
+        if (dagNodes[pid]) maxPre = Math.max(maxPre, getDepth(pid) + 1);
+      });
+      depth[id] = maxPre;
+      return maxPre;
+    }
+    Object.keys(dagNodes).forEach(getDepth);
+
+    var maxD = 0;
+    Object.values(depth).forEach(function(d) { if (d > maxD) maxD = d; });
+    var ranks = [];
+    for (var r = 0; r <= maxD; r++) ranks.push([]);
+    Object.keys(dagNodes).forEach(function(id) { if (depth[id] >= 0) ranks[depth[id]].push(id); });
+
+    var html = '<div class="ns-dag-container" id="nsDag">';
+    html += '<svg class="ns-dag-svg" id="nsDagSvg"><defs>' +
+      '<marker id="ns-arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">' +
+      '<polygon points="0 0, 8 3, 0 6" fill="currentColor" style="color:var(--muted)"/></marker></defs></svg>';
+
+    ranks.forEach(function(rank, ri) {
+      html += '<div class="ns-dag-rank" data-rank="' + ri + '">';
+      rank.sort(function(a,b){ return (dagNodes[a].name||a).localeCompare(dagNodes[b].name||b); });
+      rank.forEach(function(id) {
+        var s = dagNodes[id];
+        var ns = namedIds[id];
+        var isGhost = !ns;
+        var lm = LEVEL_META[s.level] || LEVEL_META['II'];
+        var glyph = s.type === 'ultimate' ? '\u25c6' : '\u25c7';
+        var clickAttr = ns ? nsClick(ns.id) : 'onclick="openSkillExplorer(\'' + id.replace(/'/g, "\\'") + '\')"';
+        html += '<div class="ns-dag-card' + (isGhost ? ' ns-dag-ghost' : '') +
+          '" data-id="' + esc(id) + '" data-type="' + esc(s.type) + '" ' +
+          clickAttr + '>' +
+          '<span class="ns-dag-glyph" style="color:' + lm.color + '">' + glyph + '</span>' +
+          '<div class="ns-dag-card-name">' + esc(s.name || id) + '</div>' +
+          '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg +
+          ';border-color:' + lm.border + '">' + esc(s.level) + '</span>' +
         '</div>';
-      }).join('');
-      return '<div class="ns-fc-group">' +
-        '<div class="ns-fc-root"><span style="opacity:.5">&#9671;</span> '+esc(ref)+'</div>' +
-        '<div class="ns-fc-connector"></div>' +
-        '<div class="ns-fc-branches-wrap"><div class="ns-fc-hbar"></div>' +
-          '<div class="ns-fc-branches">'+cards+'</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+
+    setTimeout(function() {
+      var container = document.getElementById('nsDag');
+      var svg = document.getElementById('nsDagSvg');
+      if (!container || !svg) return;
+      var cRect = container.getBoundingClientRect();
+      svg.style.width = container.scrollWidth + 'px';
+      svg.style.height = container.scrollHeight + 'px';
+      var paths = '';
+      edges.forEach(function(e) {
+        var fromEl = container.querySelector('[data-id="' + e.from + '"]');
+        var toEl = container.querySelector('[data-id="' + e.to + '"]');
+        if (!fromEl || !toEl) return;
+        var fr = fromEl.getBoundingClientRect();
+        var tr = toEl.getBoundingClientRect();
+        var x1 = fr.left + fr.width / 2 - cRect.left + container.scrollLeft;
+        var y1 = fr.top + fr.height - cRect.top + container.scrollTop;
+        var x2 = tr.left + tr.width / 2 - cRect.left + container.scrollLeft;
+        var y2 = tr.top - cRect.top + container.scrollTop;
+        var cy1 = y1 + (y2 - y1) * 0.35;
+        var cy2 = y1 + (y2 - y1) * 0.65;
+        paths += '<path class="ns-dag-arrow" d="M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + cy1 + ' ' + x2 + ' ' + cy2 + ' ' + x2 + ' ' + y2 + '"/>';
+      });
+      var defs = svg.querySelector('defs');
+      if (defs) defs.insertAdjacentHTML('afterend', paths);
+    }, 60);
+
+    return html;
   }
 
   function initNamedSkills() {
@@ -151,7 +215,7 @@
 
       var levelOrder = ['II','III','IV','V','VI'];
       allNamed.sort(function(a, b) {
-        var d = levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
+        var d = levelOrder.indexOf(b.level) - levelOrder.indexOf(a.level);
         return d !== 0 ? d : String(a.id).localeCompare(String(b.id));
       });
 
