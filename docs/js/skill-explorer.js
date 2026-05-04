@@ -74,15 +74,13 @@
       ns.origin ? '<span class="se-badge" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">★ origin</span>' : '',
     ].filter(Boolean).join('');
 
-    var installCmd = 'gaia install ' + ns.id;
     var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
-      (repoUrl ? '<a class="se-github-link" href="' + esc(repoUrl) + '" target="_blank" rel="noopener">Show in GitHub ↗</a>' : '') +
       '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
-      '<div class="se-contrib"><span style="color:#ef4444;font-weight:700">' + esc(ns.contributor) + '</span> / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
+      '<div class="se-contrib">' + esc(ns.contributor) + ' / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
       '<div class="se-badges">' + badgesHtml + '</div>' +
       (ns.title ? '<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.8rem">"' + esc(ns.title) + '"</div>' : '') +
       (generic ? '<div style="font-size:.82rem;color:var(--muted)">Generic skill: <strong style="color:var(--text)">' + esc(generic.name || ns.genericSkillRef) + '</strong></div>' : '') +
-      '<div class="se-hero-install"><span class="se-hero-prompt">$</span><span class="se-hero-cmd">' + esc(installCmd) + '</span><button class="se-hero-copy" data-cmd="' + esc(installCmd) + '" onclick="event.stopPropagation();navigator.clipboard.writeText(this.dataset.cmd).then(function(){})">Copy</button></div>' +
+      (repoUrl ? '<div class="se-repo-row"><span class="se-repo-url">' + esc(repoUrl) + '</span></div>' : '') +
     '</div>';
 
     var tags = Array.isArray(ns.tags) ? ns.tags : [];
@@ -218,68 +216,46 @@
     function flowNode(id, name, contrib, level, typeStr, isCurrent, isNamed) {
       var lmEntry = lm[level] || {};
       var clsExtra = isCurrent ? ' current' : '';
-      var ghostCls = isNamed ? '' : ' flow-node-ghost';
-      var contribHtml = contrib ? '<span class="fn-contrib" style="color:#ef4444">' + esc(contrib) + '</span>' : '';
+      var contribHtml = contrib ? '<span class="fn-contrib">' + esc(contrib) + '</span>' : '';
+      var typeHtml = typeStr ? '<span class="fn-type">' + esc(typeStr) + '</span>' : '';
       var levelHtml = level ? '<span class="fn-level" style="' + makeLevelStyle(level) + '">' + esc(level) + '</span>' : '';
-      return '<div class="flow-node' + clsExtra + ghostCls + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
-        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml +
+      return '<div class="flow-node' + clsExtra + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
+        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml + typeHtml +
       '</div>';
     }
 
-    // Row 0: prerequisite generic skills (show named if available)
+    // Row 0: prerequisite generic skills
     var prereqs = generic && Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
     var prereqNodes = prereqs.map(function(id){
-      var s = sm[id] || {};
-      var namedBucket = buckets[id];
-      if (namedBucket && namedBucket.length) {
-        var nb = namedBucket[0];
-        return flowNode(nb.id, nb.name||nb.id, nb.contributor, nb.level, '', false, true);
-      }
-      return flowNode(id, s.name||id, '', s.level||'', '', false, false);
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
     });
 
-    // Row 1: named implementations — stacked card deck
-    var siblings = (buckets[ns.genericSkillRef] || []);
-    var namedHtml = '';
-    if (siblings.length > 1) {
-      namedHtml = '<div class="se-stack-deck" data-count="' + siblings.length + '">';
-      siblings.forEach(function(sib, idx) {
-        var isCur = sib.id === ns.id;
-        var zIdx = isCur ? siblings.length : siblings.length - idx;
-        var rot = isCur ? 0 : (idx % 2 === 0 ? -3 : 3) * (idx + 1) * 0.5;
-        namedHtml += '<div class="se-stack-card' + (isCur ? ' se-stack-current' : '') +
-          '" style="z-index:' + zIdx + ';transform:rotate(' + rot + 'deg)" ' +
-          'onclick="openSkillExplorer(\'' + sib.id.replace(/'/g,"\\'") + '\')">' +
-          '<span class="fn-level" style="' + makeLevelStyle(sib.level) + '">' + esc(sib.level) + '</span>' +
-          '<span class="fn-name">' + esc(sib.name || sib.id) + '</span>' +
-          '<span class="fn-contrib" style="color:#ef4444">' + esc(sib.contributor) + '</span>' +
-        '</div>';
-      });
-      namedHtml += '</div>';
-    } else {
-      namedHtml = flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true);
+    // Row 1: tier progression of current generic skill (levels from generic.level floor down to 0)
+    var LEVEL_ORDER = ['0','I','II','III','IV','V','VI'];
+    var currentLvIdx = LEVEL_ORDER.indexOf(generic ? generic.level : '');
+    var tierNodes = [];
+    for (var i = 0; i <= Math.max(currentLvIdx, 0) && i < LEVEL_ORDER.length; i++) {
+      var lvl = LEVEL_ORDER[i];
+      var isCur = (lvl === (generic && generic.level));
+      tierNodes.push('<div class="flow-node' + (isCur?' current':'') + '" data-level="' + esc(lvl) + '" data-id="' + esc(ns.genericSkillRef||'') + '">' +
+        '<span class="fn-level" style="' + makeLevelStyle(lvl) + '">' + esc(lvl||'0') + '</span>' +
+        '<span class="fn-name">' + esc((generic&&generic.name)||ns.genericSkillRef||'') + '</span>' +
+        '<span class="fn-type">' + esc(lvl === LEVEL_ORDER[0] ? 'Basic' : (LEVEL_META_SE[lvl]&&LEVEL_META_SE[lvl].name)||lvl) + '</span>' +
+      '</div>');
     }
 
-    // Row 2: derivative generic skills (show named if available, with lock icon for unnamed)
+    // Row 2: named implementations in the same bucket
+    var siblings = (buckets[ns.genericSkillRef] || []);
+    var namedNodes = siblings.map(function(sib){
+      return flowNode(sib.id, sib.name||sib.id, sib.contributor, sib.level, '', sib.id===ns.id, true);
+    });
+    if (!namedNodes.length) namedNodes = [flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true)];
+
+    // Row 3: derivative generic skills
     var derivs = generic && Array.isArray(generic.derivatives) ? generic.derivatives : [];
     var derivNodes = derivs.map(function(id){
-      var s = sm[id] || {};
-      var namedBucket = buckets[id];
-      if (namedBucket && namedBucket.length) {
-        var nb = namedBucket[0];
-        return flowNode(nb.id, nb.name||nb.id, nb.contributor, nb.level, '', false, true);
-      }
-      return '<div class="flow-node flow-node-ghost flow-node-locked" data-level="' + esc(s.level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
-        '<span class="fn-lock">&#x1F512;</span>' +
-        '<span class="fn-name">' + esc(s.name||id) + '</span>' +
-      '</div>';
+      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
     });
-
-    // Fusion requirements label
-    var fusionHtml = '';
-    if (prereqs.length >= 2) {
-      fusionHtml = '<div class="se-fusion-label">&#x2728; Fuses from ' + prereqs.length + ' prerequisites</div>';
-    }
 
     function makeRow(label, nodes, id) {
       if (!nodes.length) return '';
@@ -289,21 +265,13 @@
       '</div>';
     }
 
-    function makeRowHtml(label, html, id) {
-      if (!html) return '';
-      return '<div>' +
-        '<div class="se-flowchart-row-label">' + label + '</div>' +
-        '<div class="se-flowchart-row" id="' + id + '">' + html + '</div>' +
-      '</div>';
-    }
-
     el.innerHTML = '<div class="se-flow-h">&#9650; Upgrade Path &amp; Adjacent Skills</div>' +
-      fusionHtml +
       '<div class="se-flowchart-wrap" id="seFlowWrap">' +
         '<div class="se-flowchart-rows">' +
           makeRow('Prerequisites', prereqNodes, 'sfRow0') +
-          makeRowHtml('Named Implementations', namedHtml, 'sfRow1') +
-          makeRow('Unlocks', derivNodes, 'sfRow2') +
+          makeRow('Tier Progression', tierNodes, 'sfRow1') +
+          makeRow('Named Implementations', namedNodes, 'sfRow2') +
+          makeRow('Unlocks', derivNodes, 'sfRow3') +
         '</div>' +
         '<svg class="se-flowchart-svg" id="seFlowSvg"></svg>' +
       '</div>';
@@ -318,7 +286,7 @@
     if (!wrap || !svg) return;
     svg.innerHTML = '';
     var wRect = wrap.getBoundingClientRect();
-    var rowIds = [['sfRow0','sfRow1'],['sfRow1','sfRow2']];
+    var rowIds = [['sfRow0','sfRow1'],['sfRow1','sfRow2'],['sfRow2','sfRow3']];
     rowIds.forEach(function(pair){
       var fromEl = document.getElementById(pair[0]);
       var toEl   = document.getElementById(pair[1]);
@@ -415,36 +383,6 @@
     var cmd = 'gaia propose /' + skill.id + (skill.type === 'ultimate' ? ' --ultimate' : '');
     document.getElementById('uspCmd').textContent = cmd;
     document.getElementById('uspCmd').dataset.cmd = cmd;
-    var bodyEl = pop.querySelector('.usp-body');
-    if (bodyEl) bodyEl.innerHTML = 'This skill has no named implementation yet. <span class="usp-cta">Be the first to claim it</span> — build a real implementation, submit it for review, and your name goes on the canonical registry forever.';
-    var existingLink = pop.querySelector('.usp-details-link');
-    if (existingLink) existingLink.remove();
-    pop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.openNamedPopup = function(ns) {
-    var pop = document.getElementById('unnamedSkillPopup');
-    if (!pop) return;
-    var lmEntry = (LEVEL_META_SE && LEVEL_META_SE[ns.level]) || {};
-    document.getElementById('uspGlyph').textContent = TYPE_GLYPH[ns.type] || '◇';
-    document.getElementById('uspGlyph').style.color = lmEntry.color || '#38bdf8';
-    document.getElementById('uspName').innerHTML = '<span style="color:#ef4444;font-weight:700">' + esc(ns.contributor || '') + '</span> / ' + esc(ns.name || ns.id.split('/')[1] || ns.id);
-    document.getElementById('uspId').textContent = ns.id;
-    var bodyEl = pop.querySelector('.usp-body');
-    if (bodyEl) bodyEl.innerHTML = 'Named implementation by <span style="color:#ef4444;font-weight:700">' + esc(ns.contributor || '') + '</span>. Select an install method:';
-    var cmd = 'gaia install ' + ns.id;
-    document.getElementById('uspCmd').textContent = cmd;
-    document.getElementById('uspCmd').dataset.cmd = cmd;
-    var existingLink = pop.querySelector('.usp-details-link');
-    if (!existingLink) {
-      var link = document.createElement('div');
-      link.className = 'usp-details-link';
-      link.innerHTML = '<a href="#" onclick="document.getElementById(\'unnamedSkillPopup\').classList.remove(\'open\');document.body.style.overflow=\'\';openSkillExplorer(\'' + ns.id.replace(/'/g,"\\'") + '\');return false;">View full details →</a>';
-      pop.querySelector('.usp-card').appendChild(link);
-    } else {
-      existingLink.innerHTML = '<a href="#" onclick="document.getElementById(\'unnamedSkillPopup\').classList.remove(\'open\');document.body.style.overflow=\'\';openSkillExplorer(\'' + ns.id.replace(/'/g,"\\'") + '\');return false;">View full details →</a>';
-    }
     pop.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -537,9 +475,6 @@
   function initExplorerDOM() {
     var backEl = document.getElementById('seBack');
     if (backEl) backEl.onclick = function(){ closeExplorer(); history.back(); };
-
-    var closeEl = document.getElementById('seClose');
-    if (closeEl) closeEl.onclick = function(){ closeExplorer(); history.pushState(null, '', location.pathname); };
 
     // Unnamed popup close + copy
     var pop = document.getElementById('unnamedSkillPopup');
