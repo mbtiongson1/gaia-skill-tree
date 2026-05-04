@@ -1,6 +1,6 @@
 # /prompt-injection-defense  [III · Evolved]
 **ID:** prompt-injection-defense  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** III  
 **Tier:** Evolved  
 **Skill Call:** `/prompt-injection-defense`

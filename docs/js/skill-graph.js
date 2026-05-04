@@ -1,13 +1,15 @@
 (function () {
   const GRAPH_JSON_URL = 'graph/gaia.json';
   const GRAPH_SCALE = 1.25;
-  const PALETTE = {
+
+  // Defaults — overwritten from meta once data loads
+  let PALETTE = {
     basic:    { rgb:'56,189,248',   hex:'#38bdf8' },
     extra:    { rgb:'192,132,252',  hex:'#c084fc' },
     ultimate: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
-  const TYPE_ORDER = { basic:0, extra:1, ultimate:2 };
-  const RANK_META = {
+  let TYPE_ORDER = { basic:0, extra:1, ultimate:2 };
+  let RANK_META = {
     'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
     'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
     'III':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
@@ -15,6 +17,24 @@
     'V':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
     'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
   };
+
+  function _initMetaGraph(meta) {
+    if (!meta) return;
+    if (meta.typeColors) {
+      PALETTE = {};
+      Object.keys(meta.typeColors).forEach(function(t) {
+        PALETTE[t] = { rgb: meta.typeColors[t].rgb, hex: meta.typeColors[t].hex };
+      });
+    }
+    if (meta.levelColors && meta.levelLabels) {
+      RANK_META = {};
+      Object.keys(meta.levelColors).forEach(function(k) {
+        if (k === '0') return;
+        RANK_META[k] = { name: meta.levelLabels[k] || k, hex: meta.levelColors[k].hex, bg: meta.levelColors[k].bg };
+      });
+    }
+  }
+
   const FALLBACK_SKILLS = [
     { id:'tokenize', type:'basic', name:'Tokenize', prerequisites:[] },
     { id:'retrieve', type:'basic', name:'Retrieve', prerequisites:[] },
@@ -648,7 +668,10 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json();
     })
-    .then(graph => normalizeSkills(graph))
+    .then(graph => {
+      _initMetaGraph(graph.meta);
+      return normalizeSkills(graph);
+    })
     .then(skills => { heroGraph.setSkills(skills); modalGraph.setSkills(skills); })
     .catch(error => {
       console.warn('Using embedded fallback skill graph:', error);

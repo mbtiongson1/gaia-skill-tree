@@ -1,6 +1,6 @@
 # /rank  [I · Awakened]
 **ID:** rank  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/rank`

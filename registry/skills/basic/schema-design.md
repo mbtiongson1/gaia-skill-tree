@@ -1,6 +1,6 @@
 # /schema-design  [II · Named]
 **ID:** schema-design  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/schema-design`

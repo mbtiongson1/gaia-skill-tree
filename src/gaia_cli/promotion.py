@@ -11,27 +11,25 @@ from datetime import date, datetime, timezone
 from .treeManager import load_tree, save_tree
 from .registry import promotion_candidates_path, registry_graph_path
 
-LEVEL_ORDER = ["0", "I", "II", "III", "IV", "V", "VI"]
-LEVEL_NAMES = {
-    "0": "Basic",
-    "I": "Awakened",
-    "II": "Named",
-    "III": "Evolved",
-    "IV": "Hardened",
-    "V": "Transcendent",
-    "VI": "Transcendent ★",
-}
 
-# Evidence class floors per level — None means no evidence required.
-EVIDENCE_FLOOR = {
-    "0": None,
-    "I": None,
-    "II": {"C", "B", "A"},
-    "III": {"B", "A"},
-    "IV": {"B", "A"},
-    "V": {"B", "A"},
-    "VI": {"A"},
-}
+def _load_meta():
+    """Load registry/schema/meta.json from repo root or bundled fallback."""
+    candidates = [
+        os.path.join(os.path.dirname(__file__), "..", "..", "registry", "schema", "meta.json"),
+        os.path.join(os.path.dirname(__file__), "data", "registry", "schema", "meta.json"),
+    ]
+    for p in candidates:
+        resolved = os.path.normpath(p)
+        if os.path.isfile(resolved):
+            with open(resolved, "r", encoding="utf-8") as f:
+                return json.load(f)
+    raise FileNotFoundError("Cannot find registry/schema/meta.json")
+
+
+_META = _load_meta()
+LEVEL_ORDER = _META["levels"]["order"]
+LEVEL_NAMES = _META["levels"]["labels"]
+EVIDENCE_FLOOR = {k: set(v) if v else None for k, v in _META["levels"]["evidenceFloors"].items()}
 
 
 def next_level(current: str) -> str | None:

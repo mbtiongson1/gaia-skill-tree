@@ -1,6 +1,6 @@
 # /mcp-integration  [III · Evolved]
 **ID:** mcp-integration  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** III  
 **Tier:** Evolved  
 **Skill Call:** `/mcp-integration`

@@ -1,6 +1,6 @@
 # /semantic-cache  [IV · Hardened]
 **ID:** semantic-cache  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** IV  
 **Tier:** Hardened  
 **Skill Call:** `/semantic-cache`

@@ -1,6 +1,6 @@
 # /math-reason  [II · Named]
 **ID:** math-reason  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/math-reason`

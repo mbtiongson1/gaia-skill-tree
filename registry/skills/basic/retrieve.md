@@ -1,6 +1,6 @@
 # /retrieve  [I · Awakened]
 **ID:** retrieve  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/retrieve`

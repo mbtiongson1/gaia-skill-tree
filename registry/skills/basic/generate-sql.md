@@ -1,6 +1,6 @@
 # /generate-sql  [II · Named]
 **ID:** generate-sql  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/generate-sql`

@@ -1,6 +1,6 @@
 # openai/gh-fix-ci  [I · Awakened]
 **ID:** error-interpretation  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/error-interpretation`

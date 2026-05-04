@@ -1,6 +1,6 @@
 # /self-critique  [I · Awakened]
 **ID:** self-critique  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/self-critique`

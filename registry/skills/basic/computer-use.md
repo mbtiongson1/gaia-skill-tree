@@ -1,6 +1,6 @@
 # openai/playwright  [II · Named]
 **ID:** computer-use  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/computer-use`

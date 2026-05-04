@@ -1,6 +1,6 @@
 # openai/sentry  [II · Named]
 **ID:** detect-anomaly  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/detect-anomaly`

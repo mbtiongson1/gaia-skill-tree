@@ -160,20 +160,55 @@
         return;
       }
 
-      var LEVEL_META = {
-        'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
-        'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
-        'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
-        'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
-        'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
-      };
+      var LEVEL_META = null;
+      var TYPE_ORDER = null;
+      var TYPE_META_G = null;
 
-      var TYPE_ORDER = ['ultimate','extra','basic'];
-      var TYPE_META_G = {
-        ultimate: { glyph:'◆', label:'Ultimate', color:'#f59e0b' },
-        extra:    { glyph:'◇', label:'Extra',    color:'#c084fc' },
-        basic:    { glyph:'○', label:'Basic',    color:'#38bdf8' },
-      };
+      // Construct meta from gaia.json data if available
+      var _meta = fullGraph.meta;
+      if (_meta && _meta.levelColors && _meta.levelLabels) {
+        LEVEL_META = {};
+        var _lc = _meta.levelColors;
+        var _ll = _meta.levelLabels;
+        Object.keys(_lc).forEach(function(k) {
+          if (k === '0' || k === 'I') return;
+          LEVEL_META[k] = { name: _ll[k] || k, color: _lc[k].hex, bg: _lc[k].bg, border: _lc[k].border };
+        });
+      }
+      if (_meta && _meta.typeColors && _meta.typeSymbols && _meta.typeLabels) {
+        TYPE_META_G = {};
+        Object.keys(_meta.typeColors).forEach(function(t) {
+          TYPE_META_G[t] = { glyph: _meta.typeSymbols[t] || '', label: _meta.typeLabels[t] || t, color: _meta.typeColors[t].hex };
+        });
+        TYPE_ORDER = Object.keys(_meta.typeColors).sort(function(a, b) {
+          var order = { ultimate: 0, extra: 1, basic: 2 };
+          return (order[a] !== undefined ? order[a] : 99) - (order[b] !== undefined ? order[b] : 99);
+        });
+      }
+
+      // Expose meta globally so skill-explorer.js can use it
+      window._gaiaMeta = _meta || null;
+
+      // Fallbacks if meta not present
+      if (!LEVEL_META) {
+        LEVEL_META = {
+          'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
+          'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
+          'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+        };
+      }
+      if (!TYPE_ORDER) {
+        TYPE_ORDER = ['ultimate','extra','basic'];
+      }
+      if (!TYPE_META_G) {
+        TYPE_META_G = {
+          ultimate: { glyph:'◆', label:'Ultimate', color:'#f59e0b' },
+          extra:    { glyph:'◇', label:'Extra',    color:'#c084fc' },
+          basic:    { glyph:'○', label:'Basic',    color:'#38bdf8' },
+        };
+      }
 
       function nsType(ns) { return ns.type || 'basic'; }
 

@@ -1,6 +1,6 @@
 # /code-generation  [I · Awakened]
 **ID:** code-generation  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/code-generation`

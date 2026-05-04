@@ -1,6 +1,6 @@
 # /tool-use  [I · Awakened]
 **ID:** tool-use  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/tool-use`

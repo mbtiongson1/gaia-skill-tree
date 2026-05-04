@@ -1,6 +1,6 @@
 # /data-visualize  [II · Named]
 **ID:** data-visualize  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/data-visualize`

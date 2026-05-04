@@ -32,21 +32,17 @@ except ImportError:
     HAS_JSONSCHEMA = False
 
 
-EVIDENCE_FLOOR = {
-    "0": None,       # No evidence required (Basic tier — universal LLM primitives)
-    "I": None,       # No evidence required (foundation tier)
-    "II": {"C", "B", "A"},
-    "III": {"B", "A"},
-    "IV": {"B", "A"},
-    "V": {"B", "A"},
-    "VI": {"A"},
-}
+def _load_meta():
+    """Load registry/schema/meta.json relative to this script's location."""
+    meta_path = os.path.join(os.path.dirname(__file__), "..", "registry", "schema", "meta.json")
+    meta_path = os.path.normpath(meta_path)
+    with open(meta_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
-MIN_PREREQS = {
-    "basic": 0,
-    "extra": 2,
-    "ultimate": 3,
-}
+
+_META = _load_meta()
+EVIDENCE_FLOOR = {k: set(v) if v else None for k, v in _META["levels"]["evidenceFloors"].items()}
+MIN_PREREQS = _META["types"]["minPrereqs"]
 
 
 def load_graph(path):
@@ -477,11 +473,87 @@ def validate_named_skills(graph, named_dir=None, catalog_path=None):
     return errors
 
 
+def check_meta_sync():
+    """Verify meta.json is in sync with gaia.json and bundled copies."""
+    import filecmp
+
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    meta_path = os.path.join(repo_root, "registry", "schema", "meta.json")
+    gaia_path = os.path.join(repo_root, "registry", "gaia.json")
+
+    errors = []
+
+    # Load meta.json
+    with open(meta_path, "r", encoding="utf-8") as f:
+        meta = json.load(f)
+
+    # Load gaia.json
+    with open(gaia_path, "r", encoding="utf-8") as f:
+        gaia = json.load(f)
+
+    gaia_meta = gaia.get("meta", {})
+
+    # Check levelLabels match
+    meta_level_labels = meta.get("levels", {}).get("labels", {})
+    gaia_level_labels = gaia_meta.get("levelLabels", {})
+    for key, value in gaia_level_labels.items():
+        if key not in meta_level_labels:
+            errors.append(f"gaia.json meta.levelLabels has key '{key}' not in meta.json levels.labels")
+        elif meta_level_labels[key] != value:
+            errors.append(
+                f"levelLabels mismatch for '{key}': gaia.json has '{value}', "
+                f"meta.json has '{meta_level_labels[key]}'"
+            )
+
+    # Check typeLabels match (gaia.json may be a subset)
+    meta_type_labels = meta.get("types", {}).get("labels", {})
+    gaia_type_labels = gaia_meta.get("typeLabels", {})
+    for key, value in gaia_type_labels.items():
+        if key not in meta_type_labels:
+            errors.append(f"gaia.json meta.typeLabels has key '{key}' not in meta.json types.labels")
+        elif meta_type_labels[key] != value:
+            errors.append(
+                f"typeLabels mismatch for '{key}': gaia.json has '{value}', "
+                f"meta.json has '{meta_type_labels[key]}'"
+            )
+
+    # Check bundled schema copies match canonical
+    bundled_dir = os.path.join(repo_root, "src", "gaia_cli", "data", "registry", "schema")
+    canonical_dir = os.path.join(repo_root, "registry", "schema")
+    if os.path.isdir(bundled_dir):
+        for fname in os.listdir(bundled_dir):
+            bundled_file = os.path.join(bundled_dir, fname)
+            canonical_file = os.path.join(canonical_dir, fname)
+            if not os.path.isfile(bundled_file):
+                continue
+            if not os.path.isfile(canonical_file):
+                errors.append(f"Bundled file '{fname}' has no canonical counterpart in registry/schema/")
+            elif not filecmp.cmp(bundled_file, canonical_file, shallow=False):
+                errors.append(f"Bundled file '{fname}' differs from canonical registry/schema/{fname}")
+
+    if errors:
+        print(f"❌ Meta sync check failed with {len(errors)} error(s):")
+        for i, err in enumerate(errors, 1):
+            print(f"   {i}. {err}")
+        sys.exit(1)
+    else:
+        print("✅ Meta sync check passed.")
+        sys.exit(0)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate the Gaia canonical graph.")
     parser.add_argument("--graph", default=None, help="Path to gaia.json")
     parser.add_argument("--schema-dir", default=None, help="Path to schema directory")
+    parser.add_argument(
+        "--check-meta-sync", action="store_true",
+        help="Verify meta.json is in sync with gaia.json and bundled copies"
+    )
     args = parser.parse_args()
+
+    if args.check_meta_sync:
+        check_meta_sync()
+        return
 
     # Resolve paths
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

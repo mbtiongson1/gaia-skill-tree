@@ -10,11 +10,11 @@
 
 | Skill | Class | Rank | Tier | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Web Search | Basic | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-01 |
-| ○ Parse HTML | Basic | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-05 |
-| ○ Extract Entities | Basic | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-08 |
-| ○ Summarize | Basic | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-10 |
-| ○ Cite Sources | Basic | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-12 |
+| ○ Web Search | Basic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-01 |
+| ○ Parse HTML | Basic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-05 |
+| ○ Extract Entities | Basic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-08 |
+| ○ Summarize | Basic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-10 |
+| ○ Cite Sources | Basic Skill | II | Named | mbtiongson1/gaia-skill-tree | 2026-03-12 |
 | ◇ Web Scrape | Extra Skill | IV | Hardened | mbtiongson1/gaia-skill-tree | 2026-03-15 |
 | ◇ Research | Extra Skill | III | Evolved | mbtiongson1/gaia-skill-tree | 2026-04-01 |
 

@@ -1,12 +1,18 @@
 (function(){
-  var LEVEL_META_SE = {
-    'II':  { name:'Named',          color:'#63cab7', bg:'rgba(99,202,183,.15)',  border:'rgba(99,202,183,.4)'  },
-    'III': { name:'Evolved',        color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
-    'IV':  { name:'Hardened',       color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
-    'V':   { name:'Transcendent',   color:'#fbbf24', bg:'rgba(251,191,36,.15)',  border:'rgba(251,191,36,.4)'  },
-    'VI':  { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
-  };
-  var TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
+  var LEVEL_META_SE = null;
+  var TYPE_SYMBOL = null;
+
+  function _initMeta(meta) {
+    if (!meta) return;
+    var lc = meta.levelColors || {};
+    var ll = meta.levelLabels || {};
+    LEVEL_META_SE = {};
+    Object.keys(lc).forEach(function(k) {
+      if (k === '0' || k === 'I') return; // explorer only shows II+
+      LEVEL_META_SE[k] = { name: ll[k] || k, color: lc[k].hex, bg: lc[k].bg, border: lc[k].border };
+    });
+    TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', ultimate:'◆' };
+  }
 
   var REPO_SLUG = (function(){
     var m = location.hostname.match(/^(.+)\.github\.io$/);
@@ -383,6 +389,22 @@
 
   function openExplorer(id) {
     waitForData(function(){
+      // Initialize meta from loaded data (set by named-skills.js)
+      _initMeta(window._gaiaMeta);
+      // fallback if meta not in data
+      if (!LEVEL_META_SE) {
+        LEVEL_META_SE = {
+          'II':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
+          'III': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          'IV':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          'V':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
+          'VI': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+        };
+      }
+      if (!TYPE_SYMBOL) {
+        TYPE_SYMBOL = { basic:'○', extra:'◇', ultimate:'◆' };
+      }
+
       var ns = findNamedSkill(id);
       if (!ns) {
         // fallback: generic skill ref bucket

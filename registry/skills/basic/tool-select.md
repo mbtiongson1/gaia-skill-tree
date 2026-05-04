@@ -1,6 +1,6 @@
 # /tool-select  [I · Awakened]
 **ID:** tool-select  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/tool-select`

@@ -1,6 +1,6 @@
 # mattpocock/zoom-out  [II · Named]
 **ID:** code-explain  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/code-explain`

@@ -1,6 +1,6 @@
 # /embed-text  [I · Awakened]
 **ID:** embed-text  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/embed-text`

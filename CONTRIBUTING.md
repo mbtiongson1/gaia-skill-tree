@@ -6,15 +6,45 @@ Thank you for helping map the frontier of AI agent capability. This guide covers
 
 ## Table of Contents
 
-1. [Contribution Types](#contribution-types)
-2. [Automated Workflow (Claude Code)](#automated-workflow-claude-code)
-3. [Naming Conventions](#naming-conventions)
-4. [Evidence Requirements](#evidence-requirements)
-5. [How to Submit a PR](#how-to-submit-a-pr)
-6. [Named Skills](#named-skills)
-7. [Demotion and Reclassification Criteria](#demotion-and-reclassification-criteria)
-8. [Reviewer Rubric](#reviewer-rubric)
-9. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+1. [Branch Naming Convention](#branch-naming-convention)
+2. [Contribution Types](#contribution-types)
+3. [Automated Workflow (Claude Code)](#automated-workflow-claude-code)
+4. [Naming Conventions](#naming-conventions)
+5. [Evidence Requirements](#evidence-requirements)
+6. [How to Submit a PR](#how-to-submit-a-pr)
+7. [Named Skills](#named-skills)
+8. [Demotion and Reclassification Criteria](#demotion-and-reclassification-criteria)
+9. [Reviewer Rubric](#reviewer-rubric)
+10. [Why a PR Gets Rejected](#why-a-pr-gets-rejected)
+
+---
+
+## Branch Naming Convention
+
+This repository uses prefix-based branch naming to enforce modularity. CI automatically validates that file changes match the branch prefix.
+
+| Prefix | Purpose | Allowed File Scope |
+|---|---|---|
+| `schema/...` | Nomenclature, terminology, rank definitions | `registry/schema/` only |
+| `cli/...` | CLI feature development | `src/gaia_cli/`, `packages/`, `tests/` |
+| `docs/...` | User-facing documentation | `docs/`, `*.md` |
+| `design/...` | Website/UI design | `docs/` (HTML/CSS/JS assets) |
+| `review/gaia-push/...` | Intake PRs from `gaia push` | `registry-for-review/` |
+| `review/meta/...` | Registry curation and promotion | `registry/` (excluding `registry/schema/`) |
+| `dev/...` | Experimental features | Unrestricted (escape hatch) |
+| `infra/...` | CI, tooling, repo infrastructure | `.github/`, `scripts/`, config files |
+| `feat/...`, `fix/...` | General features and bugfixes | No forward restriction (reverse checks apply) |
+
+### Key rules
+
+- **Schema changes are strictly gated:** Any change to `registry/schema/` MUST come from a `schema/` branch. CI will hard-fail otherwise.
+- **`dev/` is unrestricted:** Use this prefix for prototyping when you need to touch multiple areas without scope enforcement.
+- **Emergency bypass:** Add the label `skip-scope-check` to a PR to bypass scope enforcement. Use sparingly.
+- **Reverse checks always apply:** Even on `feat/` or `fix/` branches, touching schema files triggers the schema-branch requirement.
+
+### Why this exists
+
+Schema changes (level names, evidence tiers, type definitions) automatically propagate to documentation and the website via the build pipeline. Isolating these changes to dedicated branches ensures consistency and enables automated doc regeneration without cross-contaminating unrelated work.
 
 ---
 

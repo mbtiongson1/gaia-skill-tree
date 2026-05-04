@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://gaia-registry.github.io/registry/schema/skillTree.schema.json",
+  "$id": "https://gaia-registry.github.io/schema/skillTree.schema.json",
   "title": "Gaia User Skill Tree",
   "description": "Schema for a user's personal skill tree record in the Gaia registry.",
   "type": "object",
@@ -73,7 +73,7 @@
             "type": "string",
             "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
           },
-          "description": "Parent skill IDs used in fusion (for composite/legendary skills)."
+          "description": "Parent skill IDs used in fusion (for extra/ultimate skills)."
         }
       }
     },
@@ -94,7 +94,7 @@
         "candidateResult": {
           "type": "string",
           "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
-          "description": "The composite/legendary skill that would be unlocked."
+          "description": "The extra/ultimate skill that would be unlocked."
         },
         "levelFloor": {
           "type": "string",

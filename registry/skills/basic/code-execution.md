@@ -1,6 +1,6 @@
 # /code-execution  [II · Named]
 **ID:** code-execution  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/code-execution`

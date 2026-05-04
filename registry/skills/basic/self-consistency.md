@@ -1,6 +1,6 @@
 # /self-consistency  [IV · Hardened]
 **ID:** self-consistency  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** IV  
 **Tier:** Hardened  
 **Skill Call:** `/self-consistency`

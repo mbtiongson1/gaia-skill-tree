@@ -1,0 +1,152 @@
+name: Branch Scope Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  scope-check:
+    name: Verify branch scope matches changed files
+    runs-on: ubuntu-latest
+    if: >-
+      !contains(github.event.pull_request.labels.*.name, 'skip-scope-check')
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check branch scope
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.head_ref }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          FILES=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json files -q '.files[].path')
+          if [ -z "$FILES" ]; then
+            echo "No changed files detected."
+            exit 0
+          fi
+
+          VIOLATIONS=""
+          PREFIX=""
+
+          # Determine branch prefix
+          case "$BRANCH" in
+            schema/*)  PREFIX="schema" ;;
+            cli/*)     PREFIX="cli" ;;
+            docs/*)    PREFIX="docs" ;;
+            design/*)  PREFIX="design" ;;
+            review/gaia-push*) PREFIX="review-push" ;;
+            review/meta*)      PREFIX="review-meta" ;;
+            dev/*)     PREFIX="dev" ;;
+            infra/*)   PREFIX="infra" ;;
+            *)         PREFIX="other" ;;
+          esac
+
+          echo "Branch: $BRANCH"
+          echo "Detected prefix: $PREFIX"
+          echo ""
+
+          # Forward check: verify files match allowed scope
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$PREFIX" in
+              schema)
+                case "$file" in
+                  registry/schema/*) ;; # allowed
+                  *) VIOLATIONS="$VIOLATIONS\n  ❌ $file (schema/ branches may only touch registry/schema/)" ;;
+                esac
+                ;;
+              cli)
+                case "$file" in
+                  src/gaia_cli/*|packages/*|tests/*|pyproject.toml) ;; # allowed
+                  registry/schema/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (cli/ branches may not touch registry/schema/)" ;;
+                  *) ;; # allow other files for cli branches (tests may need fixtures)
+                esac
+                ;;
+              docs)
+                case "$file" in
+                  docs/*|*.md|scripts/build_docs.py|scripts/syncDocsGraphAssets.py) ;; # allowed
+                  registry/schema/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (docs/ branches may not touch registry/schema/)" ;;
+                  src/gaia_cli/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (docs/ branches may not touch src/)" ;;
+                  *) ;; # allow
+                esac
+                ;;
+              design)
+                case "$file" in
+                  docs/*) ;; # allowed
+                  registry/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (design/ branches may not touch registry/)" ;;
+                  src/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (design/ branches may not touch src/)" ;;
+                  packages/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (design/ branches may not touch packages/)" ;;
+                  *) ;; # allow
+                esac
+                ;;
+              review-push)
+                case "$file" in
+                  registry-for-review/*) ;; # allowed
+                  registry/schema/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (review/gaia-push branches may not touch registry/schema/)" ;;
+                  src/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (review/gaia-push branches may not touch src/)" ;;
+                  *) ;; # allow
+                esac
+                ;;
+              review-meta)
+                case "$file" in
+                  registry/*) # allowed, but not schema
+                    case "$file" in
+                      registry/schema/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (review/meta branches may not touch registry/schema/)" ;;
+                      *) ;; # allowed
+                    esac
+                    ;;
+                  src/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (review/meta branches may not touch src/)" ;;
+                  packages/*) VIOLATIONS="$VIOLATIONS\n  ❌ $file (review/meta branches may not touch packages/)" ;;
+                  *) ;; # allow
+                esac
+                ;;
+              infra)
+                # infra branches: allow .github/, scripts/, docs config, CLAUDE.md, CONTRIBUTING.md, pyproject.toml
+                ;;
+              dev|other)
+                # No forward restriction for dev/ and unrecognized prefixes
+                ;;
+            esac
+          done <<< "$FILES"
+
+          # Reverse check: schema changes MUST be on schema/ branch
+          SCHEMA_CHANGED=""
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$file" in
+              registry/schema/*)
+                SCHEMA_CHANGED="$SCHEMA_CHANGED $file"
+                ;;
+            esac
+          done <<< "$FILES"
+
+          if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ]; then
+            echo "::error::Schema files changed on a non-schema branch. Use a schema/ branch for nomenclature changes."
+            echo ""
+            echo "Files touching registry/schema/:"
+            for f in $SCHEMA_CHANGED; do
+              echo "  - $f"
+            done
+            echo ""
+            echo "Create your branch as: schema/<description>"
+            exit 1
+          fi
+
+          # Report
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error::Branch scope violations detected."
+            echo ""
+            echo "Branch '$BRANCH' (prefix: $PREFIX) has out-of-scope file changes:"
+            echo -e "$VIOLATIONS"
+            echo ""
+            echo "Either move these changes to the appropriate branch prefix, or add the 'skip-scope-check' label to bypass."
+            exit 1
+          fi
+
+          echo "✓ All changed files are within scope for branch prefix '$PREFIX'."

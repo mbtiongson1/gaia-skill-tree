@@ -145,7 +145,7 @@ def open_intake_pr(username, batch_data, batch_path=None, repo_root="."):
 
     user_component = _sanitize_branch_component(username)
     batch_component = _sanitize_branch_component(batch_data.get("batchId"))
-    branch_name = f"intake/{user_component}/{batch_component}"
+    branch_name = f"review/gaia-push/{batch_component}"
     title = f"[intake] {username} skill batch - {batch_data.get('sourceRepo')}"
     body = build_intake_pr_body(batch_data)
     body_path = os.path.join(repo_root, ".gaia-intake-pr-body.md")

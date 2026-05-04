@@ -11,6 +11,10 @@ jobs:
   test:
     name: Build, Test, and Package
     runs-on: ubuntu-latest
+    if: >-
+      !startsWith(github.head_ref || '', 'docs/') &&
+      !startsWith(github.head_ref || '', 'design/') &&
+      !startsWith(github.head_ref || '', 'schema/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4

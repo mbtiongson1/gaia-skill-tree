@@ -1,6 +1,6 @@
 # vercel/find-skills  [0 · Basic]
 **ID:** skill-discovery  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/skill-discovery`

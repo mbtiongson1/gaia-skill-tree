@@ -1,6 +1,6 @@
 # glincker/readme-generator  [I · Awakened]
 **ID:** write-report  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/write-report`
