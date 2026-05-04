@@ -984,6 +984,6 @@ def graph_command(args: Any) -> None:
     fmt = getattr(args, "format", "html") or "html"
     output = getattr(args, "output", None)
     out_path = write_graph_artifact(getattr(args, "registry", "."), output=output, fmt=fmt)
-    print(f"Wrote Gaia graph {fmt.upper()}: {out_path}")
+    print(f"  saved {os.path.basename(out_path)}")
     if getattr(args, "open", True):
         open_path(out_path)

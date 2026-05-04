@@ -104,7 +104,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `2.5.0`.
+Current Gaia CLI version: `2.13.1`.
 
 Python install:
 
@@ -196,13 +196,13 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills}
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
             ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,docs,skills}
+  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
@@ -216,6 +216,7 @@ positional arguments:
     graph               Generate and open the Gaia skill graph
     appraise            Inspect a skill card with status and actions
     promote             Promote a skill eligible for level-up
+    fuse                Confirm a skill combination or promotion candidate
     docs                Documentation maintenance commands
     skills              Browse and manage named skills
 
@@ -239,6 +240,7 @@ Quick usage:
   gaia graph [--format html|svg|json] [-o <path>] [--no-open]
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
+  gaia fuse <skillId> [--name <name>]
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
