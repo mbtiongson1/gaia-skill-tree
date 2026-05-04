@@ -38,25 +38,27 @@
     }).catch(function(){});
   };
 
-  function renderTile(ns, lm) {
+  function renderTile(ns, lm, idx) {
     var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
+    var animStyle = (ns.type === 'ultimate' || ns.type === 'extra') ? ' style="animation-delay:-' + ((idx * 0.4) % 4).toFixed(1) + 's"' : '';
     return '<article class="ns-tile" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
         (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
       '</div>' +
-      '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
+      '<div class="ns-tile-name"' + animStyle + '>' + esc(nsDisplayName(ns)) + '</div>' +
       '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
       (tags ? '<div class="ns-tile-tags">' + tags + '</div>' : '') +
       installRow(ns.id) +
     '</article>';
   }
 
-  function renderListRow(ns, lm) {
+  function renderListRow(ns, lm, idx) {
     var tags = (ns.tags||[]).slice(0,2).map(tagHtml).join('');
+    var animStyle = (ns.type === 'ultimate' || ns.type === 'extra') ? ' style="animation-delay:-' + ((idx * 0.4) % 4).toFixed(1) + 's"' : '';
     return '<article class="ns-list-row" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
-      '<span class="ns-lr-name">' + esc(nsDisplayName(ns)) + '</span>' +
+      '<span class="ns-lr-name"' + animStyle + '>' + esc(nsDisplayName(ns)) + '</span>' +
       '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
       '<span style="flex:1"></span>' +
@@ -67,6 +69,7 @@
 
   function renderFlowchartView(allNamed, lm) {
     var groups = {};
+    var fcIdx = 0;
     allNamed.forEach(function(ns) {
       var ref = ns.genericSkillRef || 'other';
       if (!groups[ref]) groups[ref] = [];
@@ -75,11 +78,13 @@
     return Object.keys(groups).sort().map(function(ref) {
       var cards = groups[ref].map(function(ns) {
         var m = lm[ns.level] || lm['II'];
+        var animStyle = (ns.type === 'ultimate' || ns.type === 'extra') ? ' style="animation-delay:-' + ((fcIdx * 0.4) % 4).toFixed(1) + 's"' : '';
+        fcIdx++;
         return '<div class="ns-fc-leaf-wrap">' +
           '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
             '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
             (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
-            '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
+            '<div class="ns-fc-card-name"' + animStyle + '>'+esc(nsDisplayName(ns))+'</div>' +
             '<div class="ns-fc-card-id">'+esc(ns.id)+'</div>' +
           '</article>' +
         '</div>';
@@ -245,8 +250,8 @@
           TYPE_ORDER.forEach(function(type) {
             var items = groups[type]; if (!items || !items.length) return;
             html += groupHeader(type, type);
-            if (viewMode === 'list') html += items.map(function(ns){ return renderListRow(ns, lm(ns)); }).join('');
-            else html += items.map(function(ns){ return renderTile(ns, lm(ns)); }).join('');
+            if (viewMode === 'list') html += items.map(function(ns, i){ return renderListRow(ns, lm(ns), i); }).join('');
+            else html += items.map(function(ns, i){ return renderTile(ns, lm(ns), i); }).join('');
           });
           grid.className = viewMode === 'list' ? 'ns-grid-list' : 'ns-grid-tile';
           grid.innerHTML = html;
