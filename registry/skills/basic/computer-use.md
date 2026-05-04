@@ -1,4 +1,4 @@
-# openai/playwright  [II · Named]
+# /computer-use  [II · Named]
 **ID:** computer-use  
 **Type:** Basic Skill  
 **Level:** II  

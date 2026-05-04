@@ -1,4 +1,4 @@
-# Extra Skill: openai/security-best-practices  [III · Evolved]
+# Extra Skill: /code-review-pipeline  [III · Evolved]
 **ID:** code-review-pipeline  
 **Type:** Extra Skill  
 **Level:** III  
