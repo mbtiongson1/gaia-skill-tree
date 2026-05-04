@@ -1,6 +1,6 @@
 # /evaluate-output  [I · Awakened]
 **ID:** evaluate-output  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/evaluate-output`

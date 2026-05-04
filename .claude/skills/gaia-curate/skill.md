@@ -94,7 +94,7 @@ Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent 
 5. **Write a generation script** (`scripts/add_skills.py` or equivalent) that patches `gaia.json` in place — only for the accepted skills from step 4.
 6. **Run validation** — `PYTHONIOENCODING=utf-8 python3 scripts/validate.py` must exit 0 before any commit.
 7. **Regenerate derived files** — run `python3 scripts/generateProjections.py` and `python3 scripts/exportGexf.py` so that `registry.md`, `combinations.md`, `skills/**/*.md`, `registry/gaia.gexf`, and `skill-trees/*/skill-tree.md` stay in sync. Commit these alongside `gaia.json` to pass CI drift detection.
-8. **Commit on a feature branch** — branch name `feat/add-<slug>-skills`, commit message follows `[type] Title — brief description`.
+8. **Commit on a review branch** — branch name `review/meta/<slug>`, commit message follows `[type] Title — brief description`.
 9. **Push and open a PR** via the GitHub API using stored git credentials. The auto-triage CI classifies the PR:
    - PRs touching `registry/` from a bot with evidence score ≥ 60 are auto-merged.
    - PRs flagged `draft-skills` or `needs-review` are routed to the `route-review` job — a human must approve before merge.

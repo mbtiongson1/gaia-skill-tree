@@ -54,3 +54,6 @@ jobs:
 
       - name: Run tests
         run: pytest tests/
+
+      - name: Check schema meta sync
+        run: python scripts/validate.py --check-meta-sync

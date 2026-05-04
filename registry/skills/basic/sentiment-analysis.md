@@ -1,6 +1,6 @@
 # /sentiment-analysis  [0 · Basic]
 **ID:** sentiment-analysis  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/sentiment-analysis`

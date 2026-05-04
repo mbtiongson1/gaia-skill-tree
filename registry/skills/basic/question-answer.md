@@ -1,6 +1,6 @@
 # /question-answer  [0 · Basic]
 **ID:** question-answer  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/question-answer`

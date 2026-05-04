@@ -10,6 +10,10 @@ jobs:
   generate:
     name: Projection Generation + Drift Detection
     runs-on: ubuntu-latest
+    if: >-
+      !startsWith(github.head_ref || '', 'cli/') &&
+      !startsWith(github.head_ref || '', 'docs/') &&
+      !startsWith(github.head_ref || '', 'design/')
     steps:
       - name: Checkout
         uses: actions/checkout@v4

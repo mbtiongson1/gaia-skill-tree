@@ -1,6 +1,6 @@
 # /chunk-document  [I · Awakened]
 **ID:** chunk-document  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/chunk-document`

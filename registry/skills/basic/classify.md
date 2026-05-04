@@ -1,6 +1,6 @@
 # /classify  [0 · Basic]
 **ID:** classify  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/classify`

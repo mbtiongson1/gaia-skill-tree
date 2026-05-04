@@ -45,6 +45,21 @@ Top-level commands are lifecycle-oriented: `init`, `scan`, `pull`, `push`, `appr
 
 Named skill actions live under `gaia skills`: `list`, `search`, `install`, `uninstall`, and `info`. The old flat verbs are intentionally removed.
 
+## Branch Naming
+
+| Prefix | Purpose | Scope |
+|---|---|---|
+| `schema/...` | Nomenclature/terminology changes | `registry/schema/` only |
+| `cli/...` | CLI source changes | `src/`, `packages/`, `tests/` |
+| `docs/...` | Documentation | `docs/`, `*.md` |
+| `design/...` | Website design | `docs/` (HTML/CSS/JS) |
+| `review/gaia-push/...` | Intake layer (`gaia push`) | `registry-for-review/` |
+| `review/meta/...` | Registry curation/promotion | `registry/` (not schema) |
+| `dev/...` | Experimental (unrestricted) | any |
+| `infra/...` | CI/tooling changes | `.github/`, `scripts/` |
+
+CI enforces scope via `.github/workflows/branch-scope.yml`. Schema changes (`registry/schema/`) MUST use a `schema/` branch. Add label `skip-scope-check` to bypass in emergencies.
+
 ## Promotion Rule
 
 `gaia scan` writes `generated-output/promotion-candidates.json` and renders the user's tree. `gaia promote <skill> --label <level>` may only promote a pair listed in that file, and stale candidate files are rejected after 24 hours.

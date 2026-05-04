@@ -1,6 +1,6 @@
 # /requirements-analysis  [II · Named]
 **ID:** requirements-analysis  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/requirements-analysis`

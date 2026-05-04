@@ -1,6 +1,6 @@
 # upsonic/unittest-generator  [II · Named]
 **ID:** generate-test  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/generate-test`

@@ -1,6 +1,6 @@
 # /execute-bash  [I · Awakened]
 **ID:** execute-bash  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/execute-bash`

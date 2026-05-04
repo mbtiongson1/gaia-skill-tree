@@ -1,11 +1,31 @@
 # CODEOWNERS — Gaia Skill Registry
 #
-# Protects user skill tree directories so that only the owner
-# can modify their own tree. Combined with branch protection
-# and GitHub Actions OAuth verification.
+# Enforces review requirements by path. Combined with branch protection
+# and the branch-scope CI workflow for modular enforcement.
 
-# Global ownership — maintainers can review all changes
+# Global ownership — maintainer can review all changes
 * @mbtiongson1
 
-# User skill tree directories — only the owner can modify
+# Schema (nomenclature, terminology) — owner approval required
+registry/schema/ @mbtiongson1
+
+# CLI source
+src/gaia_cli/ @mbtiongson1
+packages/cli-npm/ @mbtiongson1
+packages/mcp/ @mbtiongson1
+
+# Registry data (canonical graph + named skills)
+registry/gaia.json @mbtiongson1
+registry/named/ @mbtiongson1 @rico-favor
+
+# Intake layer (reviewers)
+registry-for-review/ @mbtiongson1 @rico-favor
+
+# CI workflows
+.github/workflows/ @mbtiongson1
+
+# Documentation and website
+docs/ @mbtiongson1 @rico-favor
+
+# User skill tree directories — only the owner can modify their own
 skill-trees/mbtiongson1/ @mbtiongson1

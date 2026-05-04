@@ -1,6 +1,6 @@
 # /plan-decompose  [I · Awakened]
 **ID:** plan-decompose  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/plan-decompose`

@@ -1,6 +1,6 @@
 # /route-intent  [I · Awakened]
 **ID:** route-intent  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/route-intent`

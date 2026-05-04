@@ -1,6 +1,6 @@
 # /translate  [0 · Basic]
 **ID:** translate  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/translate`

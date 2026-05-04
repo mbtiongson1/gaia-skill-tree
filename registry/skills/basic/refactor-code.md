@@ -1,6 +1,6 @@
 # mattpocock/improve-codebase-architecture  [II · Named]
 **ID:** refactor-code  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/refactor-code`

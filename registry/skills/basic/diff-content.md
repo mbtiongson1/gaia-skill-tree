@@ -1,6 +1,6 @@
 # openai/yeet  [I · Awakened]
 **ID:** diff-content  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/diff-content`

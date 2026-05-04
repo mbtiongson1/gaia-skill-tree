@@ -1,6 +1,6 @@
 # laravel/upgrade-laravel-v13  [0 · Basic]
 **ID:** framework-upgrade  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/framework-upgrade`

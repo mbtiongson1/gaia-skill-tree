@@ -1,6 +1,6 @@
 # anthropic/pptx  [0 · Basic]
 **ID:** document-editing  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/document-editing`

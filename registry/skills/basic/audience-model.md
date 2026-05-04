@@ -1,6 +1,6 @@
 # /audience-model  [I · Awakened]
 **ID:** audience-model  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/audience-model`

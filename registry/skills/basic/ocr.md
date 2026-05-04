@@ -1,6 +1,6 @@
 # /ocr  [II · Named]
 **ID:** ocr  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/ocr`

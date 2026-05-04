@@ -1,6 +1,6 @@
 # martin-stepanoski/nielsen-heuristics-audit  [0 · Basic]
 **ID:** ux-audit  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/ux-audit`

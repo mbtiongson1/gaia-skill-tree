@@ -1,6 +1,6 @@
 # /summarize  [0 · Basic]
 **ID:** summarize  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** 0  
 **Tier:** Basic  
 **Skill Call:** `/summarize`

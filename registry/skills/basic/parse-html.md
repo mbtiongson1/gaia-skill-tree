@@ -1,6 +1,6 @@
 # /parse-html  [I · Awakened]
 **ID:** parse-html  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** I  
 **Tier:** Awakened  
 **Skill Call:** `/parse-html`

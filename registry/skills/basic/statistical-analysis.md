@@ -1,6 +1,6 @@
 # /statistical-analysis  [III · Evolved]
 **ID:** statistical-analysis  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** III  
 **Tier:** Evolved  
 **Skill Call:** `/statistical-analysis`

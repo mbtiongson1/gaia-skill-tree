@@ -1,6 +1,6 @@
 # huggingface/hf-cli  [II · Named]
 **ID:** api-call  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** II  
 **Tier:** Named  
 **Skill Call:** `/api-call`

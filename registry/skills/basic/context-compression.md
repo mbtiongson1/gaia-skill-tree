@@ -1,6 +1,6 @@
 # /context-compression  [III · Evolved]
 **ID:** context-compression  
-**Type:** Basic  
+**Type:** Basic Skill  
 **Level:** III  
 **Tier:** Evolved  
 **Skill Call:** `/context-compression`

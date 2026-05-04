@@ -10,9 +10,9 @@
 
 | Skill | Class | Rank | Tier | Unlocked In | Date |
 |---|---|---|---|---|---|
-| ○ Route Intent | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-20 |
-| ○ Plan and Decompose | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-21 |
-| ○ Tool Select | Basic | II | Named | gaia-registry/gaiabot-core | 2026-04-22 |
+| ○ Route Intent | Basic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-20 |
+| ○ Plan and Decompose | Basic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-21 |
+| ○ Tool Select | Basic Skill | II | Named | gaia-registry/gaiabot-core | 2026-04-22 |
 | ◇ Plan and Execute | Extra Skill | III | Evolved | local-repo | 2026-04-26 |
 
 ---
