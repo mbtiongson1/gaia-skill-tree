@@ -658,7 +658,8 @@
     onNodeClick: function(id) {
       var buckets = window._gaiaNamedBuckets || {};
       if (buckets[id] && buckets[id].length) {
-        window.openSkillExplorer(buckets[id][0].id);
+        if (window.openNamedPopup) window.openNamedPopup(buckets[id][0]);
+        else window.openSkillExplorer(buckets[id][0].id);
       } else {
         var skill = (window._gaiaSkillMap || {})[id] || { id: id, name: id, type: 'basic' };
         window.openUnnamedPopup(skill);
