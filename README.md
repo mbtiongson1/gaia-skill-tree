@@ -373,13 +373,14 @@ The pre-commit hook checks version lockstep, applies a semantic bump from the co
 
 ## Contributing
 
-Gaia is meant to be a shared map of agent capabilities, and there are a few good ways to help even if you are not ready to edit the graph directly.
+Gaia is a shared map of agent capabilities.
 
-You can contribute by **reviewing skill drafts**: read a proposed skill, check whether the definition is clear, compare it against existing skills, evaluate the cited evidence, and submit peer review analysis that helps maintainers decide whether the skill should be accepted, renamed, merged, or reclassified.
+Common ways to help:
+- Review draft skills for clarity, overlap, and evidence quality.
+- Turn accepted reviews into concrete PRs (new skill, fusion, or reclassification).
 
-You can also contribute by **creating skills directly from reviews**: turn a well-supported review into a concrete Basic Skill, Extra Skill, Ultimate Skill, fusion recipe, or reclassification PR with evidence and rationale.
-
-For quickstart contribution steps, see [CONTRIBUTING.md](CONTRIBUTING.md). For the full long-form guide (reviewer rubric, deep policy, and extended workflow details), use the GitHub Wiki: <https://github.com/mbtiongson1/gaia-skill-tree/wiki> (backed by <https://github.com/mbtiongson1/gaia-skill-tree.wiki.git>).
+Quickstart contribution steps: [CONTRIBUTING.md](CONTRIBUTING.md).
+Full policy/reviewer guidance: <https://github.com/mbtiongson1/gaia-skill-tree/wiki> (repo: <https://github.com/mbtiongson1/gaia-skill-tree.wiki.git>).
 
 ## Contributors
 
