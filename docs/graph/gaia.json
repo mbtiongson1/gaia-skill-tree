@@ -1,6 +1,14 @@
 {
   "$schema": "./schema/skill.schema.json",
+<<<<<<< ours
+<<<<<<< ours
   "version": "2.13.0",
+=======
+  "version": "2.5.0",
+>>>>>>> theirs
+=======
+  "version": "2.5.0",
+>>>>>>> theirs
   "generatedAt": "2026-04-30T00:00:00Z",
   "meta": {
     "typeLabels": {

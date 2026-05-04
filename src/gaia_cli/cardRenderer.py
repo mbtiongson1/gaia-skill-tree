@@ -594,7 +594,7 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
 
     return "\n".join([
         f"",
-        f"  {gc}┌─ Fusion Readyt ─────────────────────┐{r}",
+        f"  {gc}┌─ Fusion Ready ─────────────────────┐{r}",
         f"  {gc}│{r}  {b}{name}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
         f"  {gc}│{r}  Run: {b}gaia fuse {skill_id}{r}",
         f"  {gc}│{r}  Rename? {dim()}gaia fuse {skill_id} --name \"{suggested_name}\"{r}",
