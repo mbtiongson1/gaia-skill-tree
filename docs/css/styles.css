@@ -870,6 +870,15 @@
   .se-hero-cmd{color:var(--basic);flex:1}
   .se-hero-copy{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s}
   .se-hero-copy:hover{border-color:var(--basic);color:var(--basic)}
+  /* ── fusion + lock + GitHub link on cards ── */
+  .se-fusion-label{color:var(--muted);font-size:.8rem;margin-bottom:.8rem;padding-left:.2rem}
+  .fn-lock{font-size:.7rem;margin-right:.3rem;opacity:.6}
+  .flow-node-locked{border-color:rgba(100,116,139,.3)}
+  .ns-gh-link{position:absolute;top:.45rem;right:.5rem;color:var(--basic);font-size:.68rem;font-weight:600;text-decoration:none;opacity:.6;transition:opacity .2s;z-index:2}
+  .ns-gh-link:hover{opacity:1;text-decoration:underline}
+  .ns-tile{position:relative}
+  .ns-list-row .ns-gh-link{position:static;margin-right:.5rem;white-space:nowrap}
+  .ns-dag-card .ns-gh-link{position:absolute;top:.3rem;right:.3rem;font-size:.6rem}
   /* ── FOOTER ── */
   footer a{color:var(--basic);text-decoration:none}
   /* ── SECTION DIVIDERS (redesigned) ── */

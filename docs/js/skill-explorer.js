@@ -220,17 +220,22 @@
       var clsExtra = isCurrent ? ' current' : '';
       var ghostCls = isNamed ? '' : ' flow-node-ghost';
       var contribHtml = contrib ? '<span class="fn-contrib" style="color:#ef4444">' + esc(contrib) + '</span>' : '';
-      var typeHtml = typeStr ? '<span class="fn-type">' + esc(typeStr) + '</span>' : '';
       var levelHtml = level ? '<span class="fn-level" style="' + makeLevelStyle(level) + '">' + esc(level) + '</span>' : '';
       return '<div class="flow-node' + clsExtra + ghostCls + '" data-level="' + esc(level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
-        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml + typeHtml +
+        levelHtml + '<span class="fn-name">' + esc(name||id) + '</span>' + contribHtml +
       '</div>';
     }
 
-    // Row 0: prerequisite generic skills
+    // Row 0: prerequisite generic skills (show named if available)
     var prereqs = generic && Array.isArray(generic.prerequisites) ? generic.prerequisites : [];
     var prereqNodes = prereqs.map(function(id){
-      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+      var s = sm[id] || {};
+      var namedBucket = buckets[id];
+      if (namedBucket && namedBucket.length) {
+        var nb = namedBucket[0];
+        return flowNode(nb.id, nb.name||nb.id, nb.contributor, nb.level, '', false, true);
+      }
+      return flowNode(id, s.name||id, '', s.level||'', '', false, false);
     });
 
     // Row 1: named implementations — stacked card deck
@@ -255,11 +260,26 @@
       namedHtml = flowNode(ns.id, ns.name||ns.id, ns.contributor, ns.level, '', true, true);
     }
 
-    // Row 2: derivative generic skills
+    // Row 2: derivative generic skills (show named if available, with lock icon for unnamed)
     var derivs = generic && Array.isArray(generic.derivatives) ? generic.derivatives : [];
     var derivNodes = derivs.map(function(id){
-      var s = sm[id] || {}; return flowNode(id, s.name||id, '', s.level||'', TYPE_SYMBOL[s.type||'']+(s.type?(' '+s.type):''), false, false);
+      var s = sm[id] || {};
+      var namedBucket = buckets[id];
+      if (namedBucket && namedBucket.length) {
+        var nb = namedBucket[0];
+        return flowNode(nb.id, nb.name||nb.id, nb.contributor, nb.level, '', false, true);
+      }
+      return '<div class="flow-node flow-node-ghost flow-node-locked" data-level="' + esc(s.level||'') + '" data-id="' + esc(id) + '" onclick="openSkillExplorer(\'' + id.replace(/'/g,"\\'") + '\')">' +
+        '<span class="fn-lock">&#x1F512;</span>' +
+        '<span class="fn-name">' + esc(s.name||id) + '</span>' +
+      '</div>';
     });
+
+    // Fusion requirements label
+    var fusionHtml = '';
+    if (prereqs.length >= 2) {
+      fusionHtml = '<div class="se-fusion-label">&#x2728; Fuses from ' + prereqs.length + ' prerequisites</div>';
+    }
 
     function makeRow(label, nodes, id) {
       if (!nodes.length) return '';
@@ -278,6 +298,7 @@
     }
 
     el.innerHTML = '<div class="se-flow-h">&#9650; Upgrade Path &amp; Adjacent Skills</div>' +
+      fusionHtml +
       '<div class="se-flowchart-wrap" id="seFlowWrap">' +
         '<div class="se-flowchart-rows">' +
           makeRow('Prerequisites', prereqNodes, 'sfRow0') +

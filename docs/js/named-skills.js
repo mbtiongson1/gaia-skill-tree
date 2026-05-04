@@ -38,12 +38,20 @@
     }).catch(function(){});
   };
 
+  function ghLink(ns) {
+    var links = ns.links || {};
+    var url = links.github || links.npm || '';
+    if (!url) return '';
+    return '<a class="ns-gh-link" href="' + esc(url) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">GitHub \u2197</a>';
+  }
+
   function renderTile(ns, lm) {
     var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
     return '<article class="ns-tile" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
         (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
+        ghLink(ns) +
       '</div>' +
       '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
       '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
@@ -60,6 +68,7 @@
       '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
       '<span style="flex:1"></span>' +
+      ghLink(ns) +
       installRow(ns.id) +
       '<span class="ns-lr-arrow">\u203a</span>' +
     '</article>';
@@ -119,6 +128,7 @@
         html += '<div class="ns-dag-card' + (isGhost ? ' ns-dag-ghost' : '') +
           '" data-id="' + esc(id) + '" data-type="' + esc(s.type) + '" ' +
           clickAttr + '>' +
+          (ns ? ghLink(ns) : '') +
           '<span class="ns-dag-glyph" style="color:' + lm.color + '">' + glyph + '</span>' +
           '<div class="ns-dag-card-name">' + esc(s.name || id) + '</div>' +
           '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg +
