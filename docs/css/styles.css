@@ -400,21 +400,10 @@
     90% {color:#34d399;text-shadow:0 0 10px rgba(52,211,153,.8),0 0 22px rgba(52,211,153,.4)}
     100%{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
   }
-  @keyframes tree-extra-glow{
-    0%,100%{color:#38bdf8;text-shadow:0 0 8px rgba(56,189,248,.7),0 0 18px rgba(56,189,248,.35)}
-    20%{color:#a78bfa;text-shadow:0 0 8px rgba(167,139,250,.7),0 0 18px rgba(167,139,250,.35)}
-    40%{color:#ef4444;text-shadow:0 0 8px rgba(239,68,68,.7),0 0 18px rgba(239,68,68,.35)}
-    60%{color:#c084fc;text-shadow:0 0 8px rgba(192,132,252,.7),0 0 18px rgba(192,132,252,.35)}
-    80%{color:#34d399;text-shadow:0 0 8px rgba(52,211,153,.7),0 0 18px rgba(52,211,153,.35)}
-  }
   .tree-ult-line{font-weight:700;animation:tree-rainbow-glow 4s linear infinite}
   .tree-ult-contributor{color:#ef4444;font-weight:800;text-shadow:0 0 8px rgba(239,68,68,.6)}
   .tree-ult-slash{color:var(--muted)}
   .tree-ult-skillname,.tree-ult-id{color:#f59e0b}
-  .tree-extra-line{font-weight:600;animation:tree-extra-glow 4s linear infinite}
-  .tree-extra-contributor{color:#ef4444;font-weight:700;text-shadow:0 0 6px rgba(239,68,68,.5)}
-  .tree-extra-slash{color:var(--muted)}
-  .tree-extra-skillname,.tree-extra-id{color:var(--extra)}
   .tree-extra-glyph{color:var(--extra)}
   .tree-basic-glyph{color:var(--basic)}
   .tree-sep{color:rgba(56,189,248,.2)}
@@ -814,12 +803,6 @@
   .ns-fc-card[data-type="ultimate"][data-level="VI"],.ns-fc-card[data-type="extra"][data-level="VI"]  {box-shadow:0 0 16px rgba(var(--ns-gc),.5),0 0 36px rgba(var(--ct),.35),0 0 72px rgba(var(--ct),.15)}
   .ns-fc-card-name { font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.25rem; }
   .ns-fc-card-id   { font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#ef4444; }
-  .ns-tile[data-type="ultimate"] .ns-tile-name,
-  .ns-list-row[data-type="ultimate"] .ns-lr-name,
-  .ns-fc-card[data-type="ultimate"] .ns-fc-card-name{animation:tree-rainbow-glow 4s linear infinite}
-  .ns-tile[data-type="extra"] .ns-tile-name,
-  .ns-list-row[data-type="extra"] .ns-lr-name,
-  .ns-fc-card[data-type="extra"] .ns-fc-card-name{animation:tree-extra-glow 4s linear infinite}
   .ns-none{color:var(--muted);font-size:.78rem;font-style:italic}
   .ns-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
   /* ── GROUP LAYOUT ── */

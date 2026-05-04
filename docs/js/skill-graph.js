@@ -35,20 +35,6 @@
     }
   }
 
-  // Color cycling for canvas labels
-  const ULT_STOPS = [[56,189,248],[167,139,250],[245,158,11],[239,68,68],[192,132,252],[52,211,153]];
-  const EXTRA_STOPS = [[56,189,248],[167,139,250],[239,68,68],[192,132,252],[52,211,153]];
-  function cycleColor(stops, t) {
-    var progress = ((t * 0.25) % 1 + 1) % 1;
-    var seg = progress * stops.length;
-    var i = Math.floor(seg) % stops.length;
-    var next = (i + 1) % stops.length;
-    var f = seg - Math.floor(seg);
-    return Math.round(stops[i][0]+(stops[next][0]-stops[i][0])*f)+','+
-           Math.round(stops[i][1]+(stops[next][1]-stops[i][1])*f)+','+
-           Math.round(stops[i][2]+(stops[next][2]-stops[i][2])*f);
-  }
-
   const FALLBACK_SKILLS = [
     { id:'tokenize', type:'basic', name:'Tokenize', prerequisites:[] },
     { id:'retrieve', type:'basic', name:'Retrieve', prerequisites:[] },
@@ -411,22 +397,11 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         const labelAlpha = highlighted ? 1.0 : depthAlpha * Math.max(0.22, vis) * 0.9;
         if (labelAlpha < 0.04) return;
-        let col;
-        if (state.redPillActive && state.namedMap[skill.id]) {
-          col = { rgb:'239,68,68' };
-        } else if (skill.type === 'ultimate') {
-          col = { rgb: cycleColor(ULT_STOPS, state.t + (p.phase || 0)) };
-        } else if (skill.type === 'extra') {
-          col = { rgb: cycleColor(EXTRA_STOPS, state.t + (p.phase || 0)) };
-        } else {
-          col = PALETTE[skill.type] || PALETTE.basic;
-        }
+        const col = (state.redPillActive && state.namedMap[skill.id])
+          ? { rgb:'239,68,68' }
+          : (PALETTE[skill.type] || PALETTE.basic);
         const size = skill.type === 'ultimate' ? 13 : skill.type === 'extra' ? 10 : 8;
         ctx.font = `bold ${Math.max(6, Math.round(size * pr.scale * 1.16))}px Inter,system-ui,sans-serif`;
-        if (skill.type === 'ultimate' || skill.type === 'extra') {
-          ctx.shadowColor = `rgba(${col.rgb},0.5)`;
-          ctx.shadowBlur = 8;
-        }
         ctx.fillStyle = `rgba(${col.rgb},${labelAlpha.toFixed(2)})`;
         ctx.textAlign = 'center';
         const labelText = (state.redPillActive && state.namedMap && state.namedMap[skill.id])
@@ -435,8 +410,6 @@
             ? ((state.titleMap && state.titleMap[skill.id]) || skill.name)
             : '/' + skill.id;
         ctx.fillText(labelText, pr.sx, pr.sy + 18 * pr.scale);
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
       }
       labelNodes.forEach(({ skill }) => {
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
