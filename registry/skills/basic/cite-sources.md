@@ -1,4 +1,4 @@
-# openai/openai-docs  [I · Awakened]
+# /cite-sources  [I · Awakened]
 **ID:** cite-sources  
 **Type:** Basic Skill  
 **Level:** I  

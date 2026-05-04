@@ -8,7 +8,7 @@
 | ◇ Extra Skill: devin-ai/autonomous-swe | Extra Skill | Code Generation, Execute Bash, Error Interpretation | IV |  |
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | VI | Requires extensive multi-system validation before level advancement. |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | Web Search, Computer Use | III |  |
-| ◇ Extra Skill: openai/security-best-practices | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
+| ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
@@ -24,7 +24,7 @@
 | ◇ Extra Skill: /ghostwrite | Extra Skill | Research, Write Report, Audience Model | IV | Requires research output as input context. |
 | ◇ Extra Skill: /grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | III |  |
 | ◇ Extra Skill: /guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | III | Requires a defined policy schema and an evaluation loop. |
-| ◇ Extra Skill: openai/security-ownership-map | Extra Skill | Extract Entities, Logical Inference | III |  |
+| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | Extract Entities, Logical Inference | III |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV |  |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |

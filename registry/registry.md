@@ -12,24 +12,24 @@
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | III | Evolved | `/browser-automation` |
 | ○ /chain-of-thought | Basic Skill | I | Awakened | `/chain-of-thought` |
 | ○ /chunk-document | Basic Skill | I | Awakened | `/chunk-document` |
-| ○ openai/openai-docs | Basic Skill | I | Awakened | `/cite-sources` |
+| ○ /cite-sources | Basic Skill | I | Awakened | `/cite-sources` |
 | ○ /classify | Basic Skill | 0 | Basic | `/classify` |
 | ○ /code-generation | Basic Skill | I | Awakened | `/code-generation` |
-| ◇ Extra Skill: openai/security-best-practices | Extra Skill | III | Evolved | `/code-review-pipeline` |
-| ○ openai/playwright | Basic Skill | II | Named | `/computer-use` |
+| ◇ Extra Skill: /code-review-pipeline | Extra Skill | III | Evolved | `/code-review-pipeline` |
+| ○ /computer-use | Basic Skill | II | Named | `/computer-use` |
 | ◇ Extra Skill: /content-moderation | Extra Skill | III | Evolved | `/content-moderation` |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | III | Evolved | `/conversational-agent` |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic Skill | II | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
-| ○ openai/sentry | Basic Skill | II | Named | `/detect-anomaly` |
-| ○ openai/yeet | Basic Skill | I | Awakened | `/diff-content` |
+| ○ /detect-anomaly | Basic Skill | II | Named | `/detect-anomaly` |
+| ○ /diff-content | Basic Skill | I | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | III | Evolved | `/document-analyst` |
 | ◇ Extra Skill: /document-digitization | Extra Skill | III | Evolved | `/document-digitization` |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | III | Evolved | `/e2e-testing` |
 | ○ /embed-text | Basic Skill | I | Awakened | `/embed-text` |
-| ○ openai/gh-fix-ci | Basic Skill | I | Awakened | `/error-interpretation` |
+| ○ /error-interpretation | Basic Skill | I | Awakened | `/error-interpretation` |
 | ○ /evaluate-output | Basic Skill | I | Awakened | `/evaluate-output` |
 | ○ /execute-bash | Basic Skill | I | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic Skill | I | Awakened | `/extract-entities` |
@@ -46,7 +46,7 @@
 | ◇ Extra Skill: /guardrails | Extra Skill | III | Evolved | `/guardrails` |
 | ○ /hypothesis-generate | Basic Skill | II | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic Skill | II | Named | `/image-caption` |
-| ◇ Extra Skill: openai/security-ownership-map | Extra Skill | III | Evolved | `/knowledge-graph-build` |
+| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | III | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | IV | Hardened | `/knowledge-harvest` |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | IV | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic Skill | I | Awakened | `/logical-inference` |
