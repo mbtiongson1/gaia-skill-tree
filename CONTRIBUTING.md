@@ -128,3 +128,20 @@ Keep actual quickstarts, CLI reference, sample tree, and docs scripted from `gai
 - Website workflow notes: `docs/how-we-do-things.html`
 - Wiki landing page: <https://github.com/mbtiongson1/gaia-skill-tree/wiki>
 - Wiki git repo (edit here for long-form docs): `https://github.com/mbtiongson1/gaia-skill-tree.wiki.git`
+
+
+---
+
+## 8) Demotion and Reclassification Criteria
+
+Use this section for reviewer decisions when a skill should be demoted, remapped, or declassified.
+
+A review is required when evidence shows a skill is:
+- **outdated** (implementation or evidence no longer reflects current behavior),
+- **superseded** (a better canonical mapping or replacement now exists),
+- **overpromoted** (current level exceeds demonstrated evidence tier), or
+- supported by **insufficient usage evidence** for its assigned rank.
+
+Reviewer workflow:
+- Reviewers should use `/gaia-audit` before approving PRs that demote, declassify, remap, dispute, or re-promote a specific skill.
+- Reviewers should use `/gaia-meta-audit` to build queues for stale links, unsupported promotions, possible duplicates, and broad mapping quality checks.
