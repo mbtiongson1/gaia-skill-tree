@@ -591,6 +591,7 @@
 
   function highlightTree(text) {
     var ultIdx = 0;
+    var extIdx = 0;
     return text.split('\n').map(function(line) {
       // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [VI]
       var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
@@ -602,7 +603,6 @@
         var slash = skillId.indexOf('/');
         var skillHtml;
         if (slash > 0) {
-          // named — contributor in red, skill name in amber
           skillHtml = '<span class="tree-ult-contributor">' + esc(skillId.slice(0, slash)) + '</span>' +
                       '<span class="tree-ult-slash">/</span>' +
                       '<span class="tree-ult-skillname">' + esc(skillId.slice(slash + 1)) + '</span>';
@@ -611,6 +611,27 @@
         }
         return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
                label + skillHtml + suffix + '</span>';
+      }
+      // Extra skill lines: ◇ Extra Skill: skillId  [level]
+      var e = line.match(/^(.*)(◇ Extra Skill: )(\S+)(.*)$/);
+      if (e) {
+        var prefix = esc(e[1]);
+        var eLabel = esc(e[2]);
+        var eSkillId = e[3];
+        var eSuffix = esc(e[4]);
+        var eDelay = -((extIdx++ * 0.7) % 4);
+        var eSlash = eSkillId.indexOf('/');
+        var eSkillHtml;
+        if (eSlash > 0) {
+          eSkillHtml = '<span class="tree-extra-contributor">' + esc(eSkillId.slice(0, eSlash)) + '</span>' +
+                       '<span class="tree-extra-slash">/</span>' +
+                       '<span class="tree-extra-skillname">' + esc(eSkillId.slice(eSlash + 1)) + '</span>';
+        } else {
+          eSkillHtml = '<span class="tree-extra-id">' + esc(eSkillId) + '</span>';
+        }
+        return prefix +
+               '<span class="tree-extra-line" style="animation-delay:' + eDelay + 's">' +
+               eLabel + eSkillHtml + eSuffix + '</span>';
       }
       // Separator lines
       if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
