@@ -38,12 +38,20 @@
     }).catch(function(){});
   };
 
+  function ghLink(ns) {
+    var links = ns.links || {};
+    var url = links.github || links.npm || '';
+    if (!url) return '';
+    return '<a class="ns-gh-link" href="' + esc(url) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on GitHub"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>';
+  }
+
   function renderTile(ns, lm) {
     var tags = (ns.tags||[]).slice(0,3).map(tagHtml).join('');
     return '<article class="ns-tile" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
       '<div class="ns-tile-head">' +
         '<span class="ns-level-badge" style="color:'+lm.color+';background:'+lm.bg+';border-color:'+lm.border+'">'+esc(ns.level)+'</span>' +
         (ns.origin ? '<span class="ns-origin">\u2605</span>' : '') +
+        ghLink(ns) +
       '</div>' +
       '<div class="ns-tile-name">' + esc(nsDisplayName(ns)) + '</div>' +
       '<div class="ns-tile-id">' + esc(ns.id) + '</div>' +
@@ -60,38 +68,104 @@
       '<span class="ns-lr-id">' + esc(ns.id) + '</span>' +
       '<span class="ns-lr-tags">' + tags + '</span>' +
       '<span style="flex:1"></span>' +
+      ghLink(ns) +
       installRow(ns.id) +
       '<span class="ns-lr-arrow">\u203a</span>' +
     '</article>';
   }
 
-  function renderFlowchartView(allNamed, lm) {
-    var groups = {};
-    allNamed.forEach(function(ns) {
-      var ref = ns.genericSkillRef || 'other';
-      if (!groups[ref]) groups[ref] = [];
-      groups[ref].push(ns);
+  function renderFlowchartView(filteredNamed, LEVEL_META) {
+    var skillMap = window._gaiaSkillMap || {};
+    var namedIds = {};
+    filteredNamed.forEach(function(ns) { namedIds[ns.genericSkillRef || ns.id] = ns; });
+
+    var dagNodes = {};
+    Object.values(skillMap).forEach(function(s) {
+      if (s.type === 'extra' || s.type === 'ultimate') dagNodes[s.id] = s;
     });
-    return Object.keys(groups).sort().map(function(ref) {
-      var cards = groups[ref].map(function(ns) {
-        var m = lm[ns.level] || lm['II'];
-        return '<div class="ns-fc-leaf-wrap">' +
-          '<article class="ns-fc-card" data-level="'+esc(ns.level)+'" data-type="'+esc(ns.type||'basic')+'" '+nsClick(ns.id)+'>' +
-            '<div style="margin-bottom:.3rem"><span class="ns-level-badge" style="color:'+m.color+';background:'+m.bg+';border-color:'+m.border+'">'+esc(ns.level)+'</span>' +
-            (ns.origin ? ' <span class="ns-origin">\u2605</span>' : '') + '</div>' +
-            '<div class="ns-fc-card-name">'+esc(nsDisplayName(ns))+'</div>' +
-            '<div class="ns-fc-card-id">'+esc(ns.id)+'</div>' +
-          '</article>' +
+
+    var edges = [];
+    Object.values(dagNodes).forEach(function(s) {
+      (s.prerequisites || []).forEach(function(pid) {
+        if (dagNodes[pid]) edges.push({from: pid, to: s.id});
+      });
+    });
+
+    var depth = {};
+    function getDepth(id) {
+      if (depth[id] !== undefined) return depth[id];
+      depth[id] = -1;
+      var maxPre = 0;
+      (dagNodes[id].prerequisites || []).forEach(function(pid) {
+        if (dagNodes[pid]) maxPre = Math.max(maxPre, getDepth(pid) + 1);
+      });
+      depth[id] = maxPre;
+      return maxPre;
+    }
+    Object.keys(dagNodes).forEach(getDepth);
+
+    var maxD = 0;
+    Object.values(depth).forEach(function(d) { if (d > maxD) maxD = d; });
+    var ranks = [];
+    for (var r = 0; r <= maxD; r++) ranks.push([]);
+    Object.keys(dagNodes).forEach(function(id) { if (depth[id] >= 0) ranks[depth[id]].push(id); });
+
+    var html = '<div class="ns-dag-container" id="nsDag">';
+    html += '<svg class="ns-dag-svg" id="nsDagSvg"><defs>' +
+      '<marker id="ns-arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">' +
+      '<polygon points="0 0, 8 3, 0 6" fill="currentColor" style="color:var(--muted)"/></marker></defs></svg>';
+
+    ranks.forEach(function(rank, ri) {
+      html += '<div class="ns-dag-rank" data-rank="' + ri + '">';
+      rank.sort(function(a,b){ return (dagNodes[a].name||a).localeCompare(dagNodes[b].name||b); });
+      rank.forEach(function(id) {
+        var s = dagNodes[id];
+        var ns = namedIds[id];
+        var isGhost = !ns;
+        var lm = LEVEL_META[s.level] || LEVEL_META['II'];
+        var glyph = s.type === 'ultimate' ? '\u25c6' : '\u25c7';
+        var clickAttr = ns ? nsClick(ns.id) : 'onclick="openSkillExplorer(\'' + id.replace(/'/g, "\\'") + '\')"';
+        html += '<div class="ns-dag-card' + (isGhost ? ' ns-dag-ghost' : '') +
+          '" data-id="' + esc(id) + '" data-type="' + esc(s.type) + '" ' +
+          clickAttr + '>' +
+          (ns ? ghLink(ns) : '') +
+          '<span class="ns-dag-glyph" style="color:' + lm.color + '">' + glyph + '</span>' +
+          '<div class="ns-dag-card-name">' + esc(s.name || id) + '</div>' +
+          '<span class="ns-level-badge" style="color:' + lm.color + ';background:' + lm.bg +
+          ';border-color:' + lm.border + '">' + esc(s.level) + '</span>' +
         '</div>';
-      }).join('');
-      return '<div class="ns-fc-group">' +
-        '<div class="ns-fc-root"><span style="opacity:.5">&#9671;</span> '+esc(ref)+'</div>' +
-        '<div class="ns-fc-connector"></div>' +
-        '<div class="ns-fc-branches-wrap"><div class="ns-fc-hbar"></div>' +
-          '<div class="ns-fc-branches">'+cards+'</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+
+    setTimeout(function() {
+      var container = document.getElementById('nsDag');
+      var svg = document.getElementById('nsDagSvg');
+      if (!container || !svg) return;
+      var cRect = container.getBoundingClientRect();
+      svg.style.width = container.scrollWidth + 'px';
+      svg.style.height = container.scrollHeight + 'px';
+      var paths = '';
+      edges.forEach(function(e) {
+        var fromEl = container.querySelector('[data-id="' + e.from + '"]');
+        var toEl = container.querySelector('[data-id="' + e.to + '"]');
+        if (!fromEl || !toEl) return;
+        var fr = fromEl.getBoundingClientRect();
+        var tr = toEl.getBoundingClientRect();
+        var x1 = fr.left + fr.width / 2 - cRect.left + container.scrollLeft;
+        var y1 = fr.top + fr.height - cRect.top + container.scrollTop;
+        var x2 = tr.left + tr.width / 2 - cRect.left + container.scrollLeft;
+        var y2 = tr.top - cRect.top + container.scrollTop;
+        var cy1 = y1 + (y2 - y1) * 0.35;
+        var cy2 = y1 + (y2 - y1) * 0.65;
+        paths += '<path class="ns-dag-arrow" d="M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + cy1 + ' ' + x2 + ' ' + cy2 + ' ' + x2 + ' ' + y2 + '"/>';
+      });
+      var defs = svg.querySelector('defs');
+      if (defs) defs.insertAdjacentHTML('afterend', paths);
+    }, 60);
+
+    return html;
   }
 
   function initNamedSkills() {
@@ -151,7 +225,7 @@
 
       var levelOrder = ['II','III','IV','V','VI'];
       allNamed.sort(function(a, b) {
-        var d = levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level);
+        var d = levelOrder.indexOf(b.level) - levelOrder.indexOf(a.level);
         return d !== 0 ? d : String(a.id).localeCompare(String(b.id));
       });
 
