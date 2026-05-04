@@ -30,18 +30,18 @@ Decisions are made through Pull Requests. Most PRs require one Maintainer approv
 - **Basic/Extra Skills**: 1 Maintainer approval.
 - **Ultimate Skills**: 2 Core Maintainer approvals.
 - **Schema Changes**: 2 Core Maintainer approvals.
-- **Named Skills**: 1 Maintainer approval (standard intake process, then `gaia name` promotion).
+- **Named Skills**: 1 Maintainer approval (standard intake process, then `gaia propose` promotion).
 
 ## 2.1 Named Skill Governance
 
 ### Naming Rights
-- The **origin** contributor is the first to promote a skill in a bucket via `gaia name`.
+- The **origin** contributor is the first to promote a skill in a bucket via `gaia propose`.
 - Origin status is permanent unless the contributor explicitly transfers it via a PR.
 - Additional contributors can add implementations to the same bucket without affecting origin status.
 
 ### Promotion Process
 - A skill must first be accepted via the standard intake review process (lifecycle: "awakened").
-- Promotion from "awakened" to "named" requires a contributor to run `gaia name` and open a PR.
+- Promotion from "awakened" to "named" requires a contributor to run `gaia propose` and open a PR.
 - Named skills inherit their generic parent's level floor (minimum Level II).
 
 ### Named Skill Disputes
@@ -50,7 +50,7 @@ Decisions are made through Pull Requests. Most PRs require one Maintainer approv
 
 ### Unclaimed Ultimate Claiming
 - Unclaimed Ultimate skills appear as `◆ /skill-id [Unclaimed ✦]` in the registry — no named implementation exists yet.
-- The first contributor to run `gaia name` against an awakened intake record whose `genericSkillRef` points to an unclaimed Ultimate automatically becomes the origin contributor and the seed title stored in `gaia.json` becomes visible in projections.
+- The first contributor to run `gaia propose` against an awakened intake record whose `genericSkillRef` points to an unclaimed Ultimate automatically becomes the origin contributor and the seed title stored in `gaia.json` becomes visible in projections.
 - Claiming priority follows the same rule as named skill origin status: the earlier `createdAt` date wins if two contributors submit simultaneously.
 - Once claimed, the display changes from `[Unclaimed ✦]` to `Ultimate Skill: contributor/skill-name`.
 
