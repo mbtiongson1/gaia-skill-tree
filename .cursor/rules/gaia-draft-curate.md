@@ -1,0 +1,1 @@
+../../.agents/skills/gaia-draft-curate/skill.md

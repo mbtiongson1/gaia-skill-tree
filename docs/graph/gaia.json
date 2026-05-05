@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "generatedAt": "2026-04-30T00:00:00Z",
   "meta": {
     "typeLabels": {
@@ -21,20 +21,61 @@
       "legendary": "Divine"
     },
     "levelColors": {
-      "0": { "hex": "#94a3b8", "bg": "rgba(148,163,184,.12)", "border": "rgba(148,163,184,.4)" },
-      "I": { "hex": "#38bdf8", "bg": "rgba(56,189,248,.12)", "border": "rgba(56,189,248,.4)" },
-      "II": { "hex": "#63cab7", "bg": "rgba(99,202,183,.15)", "border": "rgba(99,202,183,.4)" },
-      "III": { "hex": "#a78bfa", "bg": "rgba(167,139,250,.15)", "border": "rgba(167,139,250,.4)" },
-      "IV": { "hex": "#e879f9", "bg": "rgba(232,121,249,.15)", "border": "rgba(232,121,249,.4)" },
-      "V": { "hex": "#fbbf24", "bg": "rgba(251,191,36,.15)", "border": "rgba(251,191,36,.4)" },
-      "VI": { "hex": "#fbbf24", "bg": "rgba(251,191,36,.22)", "border": "rgba(251,191,36,.55)" }
+      "0": {
+        "hex": "#94a3b8",
+        "bg": "rgba(148,163,184,.12)",
+        "border": "rgba(148,163,184,.4)"
+      },
+      "I": {
+        "hex": "#38bdf8",
+        "bg": "rgba(56,189,248,.12)",
+        "border": "rgba(56,189,248,.4)"
+      },
+      "II": {
+        "hex": "#63cab7",
+        "bg": "rgba(99,202,183,.15)",
+        "border": "rgba(99,202,183,.4)"
+      },
+      "III": {
+        "hex": "#a78bfa",
+        "bg": "rgba(167,139,250,.15)",
+        "border": "rgba(167,139,250,.4)"
+      },
+      "IV": {
+        "hex": "#e879f9",
+        "bg": "rgba(232,121,249,.15)",
+        "border": "rgba(232,121,249,.4)"
+      },
+      "V": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.15)",
+        "border": "rgba(251,191,36,.4)"
+      },
+      "VI": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.22)",
+        "border": "rgba(251,191,36,.55)"
+      }
     },
     "typeColors": {
-      "basic": { "hex": "#38bdf8", "rgb": "56,189,248" },
-      "extra": { "hex": "#c084fc", "rgb": "192,132,252" },
-      "ultimate": { "hex": "#f59e0b", "rgb": "245,158,11" }
+      "basic": {
+        "hex": "#38bdf8",
+        "rgb": "56,189,248"
+      },
+      "extra": {
+        "hex": "#c084fc",
+        "rgb": "192,132,252"
+      },
+      "ultimate": {
+        "hex": "#f59e0b",
+        "rgb": "245,158,11"
+      }
     },
-    "typeSymbols": { "basic": "\u25cb", "extra": "\u25c7", "ultimate": "\u25c6" }
+    "typeSymbols": {
+      "basic": "\u25cb",
+      "extra": "\u25c7",
+      "ultimate": "\u25c6"
+    }
   },
   "skills": [
     {

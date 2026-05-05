@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rm -rf \"C:/Users/C5396183/.claude/skills/gaia-curate\")",
-      "Read(//c/Users/C5396183/.claude/skills/**)"
+      "Bash(rm -rf \"/Users/marcotiongson/Documents/GAIA-skill-tree/gaia-skill-tree/.agents/skills/gaia-curate\")",
+      "Read(/Users/marcotiongson/Documents/GAIA-skill-tree/gaia-skill-tree/.agents/skills/**)"
     ]
   }
 }
