@@ -40,6 +40,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global user.name "mbtiongson1"
+          git config --global user.email "marco.tngsn@gmail.com"
+
           DATE=$(date +%Y-%m-%d)
           BRANCH="bot/github/$DATE"
           git checkout -b "$BRANCH"
