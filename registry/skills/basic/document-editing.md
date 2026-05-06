@@ -14,7 +14,7 @@ Reads, edits, repacks, and applies styling or design principles to structured bi
 _None._
 
 ## Unlocks
-_None._
+- [Humanize Prose](../extra/humanize-prose.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
