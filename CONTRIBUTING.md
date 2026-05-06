@@ -6,6 +6,24 @@ This page is now a **contributor quickstart**. Detailed policy, reviewer playboo
 
 ---
 
+## Table of Contents
+
+- [1) Pick your workflow](#1-pick-your-workflow)
+  - [A) Submit discovered skills (recommended)](#a-submit-discovered-skills-recommended)
+  - [B) Update the canonical graph directly](#b-update-the-canonical-graph-directly)
+- [2) What files are source-of-truth?](#2-what-files-are-source-of-truth)
+- [3) Branch naming (copy/paste)](#3-branch-naming-copypaste)
+- [4) Naming + evidence minimums](#4-naming--evidence-minimums)
+  - [Naming](#naming)
+  - [Evidence by level](#evidence-by-level)
+  - [Ultimate (`ultimate`) requirements](#ultimate-ultimate-requirements)
+- [5) PR checklist (copy/paste)](#5-pr-checklist-copypaste)
+- [6) FAQ](#6-faq)
+- [7) Helpful links](#7-helpful-links)
+- [8) Demotion and Reclassification Criteria](#8-demotion-and-reclassification-criteria)
+
+---
+
 ## 1) Pick your workflow
 
 ### A) Submit discovered skills (recommended)
