@@ -140,10 +140,12 @@
   /* ── STEPS ── */
   .steps{display:flex;flex-direction:column;gap:1.5rem}
   .step{
-    display:grid;grid-template-columns:56px 1fr;gap:1.2rem;align-items:start;
+    display:grid;grid-template-columns:56px minmax(0,1fr);gap:1.2rem;align-items:start;
     background:var(--surface);border:1px solid var(--border);
     border-radius:14px;padding:1.5rem;transition:border-color .2s;
+    min-width:0;
   }
+  .step > div{min-width:0}
   .step:hover{border-color:var(--basic)}
   .step-num{
     width:44px;height:44px;border-radius:50%;
@@ -1155,13 +1157,14 @@
     .process-final{display:block}
     .process-final .btn{margin-top:1.2rem}
     .tier-grid,.glossary,.steps{grid-template-columns:1fr}
-    .step{grid-template-columns:auto 1fr}
+    .step{grid-template-columns:auto minmax(0,1fr)}
     .hero-cta{flex-direction:column;align-items:stretch}
     .hero-cta .btn{text-align:center}
     .rank-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
     table{font-size:.85rem}
     pre,code{font-size:.82rem}
     pre{padding:.75rem}
+    .step pre{white-space:pre-wrap;word-break:break-word}
     /* Named Skills: keep the full explorer visible and usable on narrow screens. */
     #named{min-height:auto;padding:3rem 1rem 1.5rem;scroll-margin-top:7rem}
     .ns-filter-row{align-items:stretch}
@@ -1181,6 +1184,7 @@
     h2{font-size:clamp(1.35rem,6.5vw,2rem)}
     section{padding:3.2rem .9rem}
     pre{font-size:.76rem;padding:.65rem .7rem}
+    .step pre{margin-left:0;margin-right:0}
     code{font-size:.78rem}
     .step{grid-template-columns:1fr;gap:.4rem}
     .step-num{margin-bottom:.25rem}
