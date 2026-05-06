@@ -321,19 +321,15 @@ Intake PRs are draft review artifacts. Accepted candidates are promoted later in
 
 ## MCP Server (Agent-Native Integration)
 
-`@gaia-registry/mcp-server` connects Gaia directly to MCP-compatible agents such as Claude Code, Cursor, VS Code, and others:
+`@gaia-registry/mcp-server` connects Gaia directly to MCP-compatible agents such as Claude Code, Cursor, VS Code, and others. The README intentionally keeps this to install methods only; copy the command for your agent and use [`packages/mcp/`](packages/mcp/) for agent-specific config-file examples.
 
-```json
-{
-  "mcpServers": {
-    "gaia": {
-      "command": "npx",
-      "args": ["@gaia-registry/mcp-server"],
-      "env": { "GAIA_USER": "your-github-username" }
-    }
-  }
-}
-```
+| Agent | Install method |
+|---|---|
+| Claude Code | `claude mcp add gaia -- npx @gaia-registry/mcp-server` |
+| Any MCP client with a command picker | Command: `npx`; args: `@gaia-registry/mcp-server` |
+| Local smoke test | `npx @gaia-registry/mcp-server` |
+
+Optional environment variables: set `GAIA_USER=your-github-username` to load your tree by default and `GITHUB_TOKEN` if you want proposal tools to open PRs.
 
 Once connected, your agent gets these tools:
 
