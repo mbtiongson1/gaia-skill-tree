@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Ghostwrite](../extra/ghostwrite.md)
 - [Translation Pipeline](../extra/translation-pipeline.md)
+- [Humanize Prose](../extra/humanize-prose.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

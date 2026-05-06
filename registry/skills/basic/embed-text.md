@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [RAG Pipeline](../extra/rag-pipeline.md)
 - [Knowledge Harvest](../extra/knowledge-harvest.md)
+- [Wiki Search](../extra/wiki-search.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -17,6 +17,7 @@ _None._
 - [Browser Automation](../extra/browser-automation.md)
 - [Research](../extra/research.md)
 - [Web Scrape](../extra/web-scrape.md)
+- [Prediction Market Analysis](../extra/prediction-market-analysis.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
