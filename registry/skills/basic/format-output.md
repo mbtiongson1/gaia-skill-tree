@@ -17,6 +17,8 @@ _None._
 - [Document Analyst](../extra/document-analyst.md)
 - [Document Digitization](../extra/document-digitization.md)
 - [Text-to-SQL Pipeline](../extra/text-to-sql-pipeline.md)
+- [Humanize Prose](../extra/humanize-prose.md)
+- [Architecture Diagram](../extra/architecture-diagram.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

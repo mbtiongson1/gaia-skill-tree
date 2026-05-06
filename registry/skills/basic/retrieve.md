@@ -17,6 +17,7 @@ _None._
 - [Gaia Audit](../extra/gaia-audit.md)
 - [Grounding](../extra/grounding.md)
 - [RAG Pipeline](../extra/rag-pipeline.md)
+- [Wiki Search](../extra/wiki-search.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

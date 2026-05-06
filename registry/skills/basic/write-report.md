@@ -17,6 +17,7 @@ _None._
 - [Ghostwrite](../extra/ghostwrite.md)
 - [PRD Generation](../extra/prd-generation.md)
 - [Scientific Writing](../extra/scientific-writing.md)
+- [Architecture Diagram](../extra/architecture-diagram.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Data Analysis](../extra/data-analysis.md)
+- [Architecture Diagram](../extra/architecture-diagram.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
