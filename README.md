@@ -8,6 +8,32 @@
 
 ---
 
+## Table of Contents
+
+- [The Tree](#the-tree)
+- [What This Means for You](#what-this-means-for-you)
+- [Tutorial](#tutorial)
+- [The Hierarchy](#the-hierarchy)
+- [Rank System: The Transcendent Line](#rank-system-the-transcendent-line)
+- [Install](#install)
+- [Quickstart](#quickstart)
+- [Push](#push)
+  - [Github CLI issues](#github-cli-issues)
+- [Named Skills Browser](#named-skills-browser)
+- [Real Skill Catalog](#real-skill-catalog)
+- [CLI Usage](#cli-usage)
+  - [Command Reference](#command-reference)
+  - [Commands](#commands)
+  - [Typical Workflow](#typical-workflow)
+- [MCP Server (Agent-Native Integration)](#mcp-server-agent-native-integration)
+- [Repository Structure](#repository-structure)
+- [Maintainer Hooks](#maintainer-hooks)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+- [License](#license)
+
+---
+
 ## The Tree
 
 Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
