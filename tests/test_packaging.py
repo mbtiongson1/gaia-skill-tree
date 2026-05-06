@@ -199,6 +199,33 @@ def test_local_registry_fallback_to_cwd_when_no_localRegistryPath(tmp_path):
         os.chdir(orig_cwd)
 
 
+def test_registry_clone_auto_resolves_without_gaia_config(tmp_path):
+    registry = tmp_path / "registry"
+    registry.mkdir()
+    (registry / "registry").mkdir()
+    (registry / "registry" / "gaia.json").write_text(json.dumps({"skills": [], "edges": []}))
+
+    from gaia_cli.registry import resolve_registry_path
+
+    orig_cwd = os.getcwd()
+    try:
+        os.chdir(registry)
+        result = resolve_registry_path()
+        assert result == str(registry)
+    finally:
+        os.chdir(orig_cwd)
+
+
+def test_docs_build_can_run_from_registry_clone_without_registry_flag(tmp_path):
+    result = run_python(
+        ["-m", "gaia_cli", "docs", "build", "--check"],
+        cwd=REPO_ROOT,
+        env={"GAIA_HOME": str(tmp_path / "home")},
+    )
+
+    assert result.returncode == 0, result.stderr
+
+
 def test_init_writes_local_registry_path(tmp_path):
     result = run_python(
         ["-m", "gaia_cli", "init", "--user", "testuser", "--yes"],
