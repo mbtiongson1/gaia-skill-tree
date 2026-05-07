@@ -20,6 +20,7 @@ from gaia_cli.semantic_search import search as semantic_search, load_embeddings
 from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
 from gaia_cli.install import install_skill, sync_skills, uninstall_skill, list_installed, interactive_install, list_available
 from gaia_cli.graph import graph_command
+from gaia_cli.commands.stats import stats_command
 from gaia_cli.registry import (
     generated_output_dir,
     embeddings_path,
@@ -71,6 +72,7 @@ Quick usage:
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
   gaia fuse <skillId> [--name <name>]
+  gaia stats
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
@@ -101,6 +103,7 @@ PUBLIC_COMMANDS = (
     "mcp",
     "release",
     "graph",
+    "stats",
     "appraise",
     "promote",
     "fuse",
@@ -1031,6 +1034,7 @@ def get_parser():
     graph_parser.add_argument('-o', '--output', help="Output path (default: registry/render/gaia.html)")
     graph_parser.add_argument('--open', dest='open', action='store_true', default=True, help="Open the generated graph (default)")
     graph_parser.add_argument('--no-open', dest='open', action='store_false', help="Do not open the generated graph")
+    subparsers.add_parser('stats', help="Show registry health at a glance")
     appraise_parser = subparsers.add_parser('appraise', help="Inspect a skill card with status and actions")
     appraise_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to appraise (default: most recent)")
     promote_parser = subparsers.add_parser('promote', help="Promote a skill eligible for level-up")
@@ -1107,6 +1111,8 @@ def main():
         release_command(args)
     elif args.command == 'graph':
         graph_command(args)
+    elif args.command == 'stats':
+        stats_command(args)
     elif args.command == 'appraise':
         appraise_command(args)
     elif args.command == 'promote':

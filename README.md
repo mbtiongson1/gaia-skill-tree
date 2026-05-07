@@ -222,13 +222,13 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,skills}
             ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
+  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
@@ -240,6 +240,7 @@ positional arguments:
     mcp                 Run the bundled Gaia MCP server
     release             Bump release version files
     graph               Generate and open the Gaia skill graph
+    stats               Show registry health at a glance
     appraise            Inspect a skill card with status and actions
     promote             Promote a skill eligible for level-up
     fuse                Confirm a skill combination or promotion candidate
@@ -267,6 +268,7 @@ Quick usage:
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
   gaia fuse <skillId> [--name <name>]
+  gaia stats
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
