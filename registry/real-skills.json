@@ -800,7 +800,6 @@
         "question-answer",
         "cite-sources"
       ],
-      "promotedNamedSkillId": "openai/openai-docs",
       "addedAt": "2026-05-01",
       "tags": [
         "openai",
@@ -808,6 +807,9 @@
         "api-reference",
         "sdk",
         "citation"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -823,13 +825,15 @@
         "execute-bash",
         "automated-testing"
       ],
-      "promotedNamedSkillId": "openai/gh-fix-ci",
       "addedAt": "2026-05-01",
       "tags": [
         "github-actions",
         "ci",
         "debugging",
         "pull-requests"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -845,13 +849,15 @@
         "format-output",
         "api-call"
       ],
-      "promotedNamedSkillId": "openai/yeet",
       "addedAt": "2026-05-01",
       "tags": [
         "git",
         "pull-requests",
         "commit-workflow",
         "release-flow"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -872,6 +878,9 @@
         "apps-sdk",
         "mcp",
         "widgets"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -887,13 +896,15 @@
         "automated-testing",
         "evaluate-output"
       ],
-      "promotedNamedSkillId": "openai/playwright",
       "addedAt": "2026-05-01",
       "tags": [
         "playwright",
         "browser-testing",
         "automation",
         "screenshots"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -909,13 +920,15 @@
         "error-interpretation",
         "api-call"
       ],
-      "promotedNamedSkillId": "openai/sentry",
       "addedAt": "2026-05-01",
       "tags": [
         "sentry",
         "incident-response",
         "observability",
         "errors"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -931,13 +944,15 @@
         "detect-anomaly",
         "write-report"
       ],
-      "promotedNamedSkillId": "openai/security-threat-model",
       "addedAt": "2026-05-01",
       "tags": [
         "security",
         "threat-modeling",
         "risk-analysis",
         "code-review"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -953,13 +968,15 @@
         "knowledge-graph-build",
         "write-report"
       ],
-      "promotedNamedSkillId": "openai/security-ownership-map",
       "addedAt": "2026-05-01",
       "tags": [
         "security",
         "ownership",
         "bus-factor",
         "repository-analysis"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
@@ -975,13 +992,15 @@
         "detect-anomaly",
         "evaluate-output"
       ],
-      "promotedNamedSkillId": "openai/security-best-practices",
       "addedAt": "2026-05-01",
       "tags": [
         "security",
         "secure-coding",
         "code-review",
         "vulnerability-analysis"
+      ],
+      "reviewNotes": [
+        "2026-05-07 gaia-audit: retained as a real-skill catalog item only; named-skill promotion removed because officialskills.sh pages describe skills but do not provide independently reviewable usage evidence or a registry/named source file."
       ]
     },
     {
