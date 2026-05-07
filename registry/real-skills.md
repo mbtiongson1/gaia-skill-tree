@@ -23,6 +23,9 @@ Curated named skills from live SKILL.md ecosystems.
 | mattpocock/skills | Matt Pocock community skill library for coding workflows and meta-skills. | https://github.com/mattpocock/skills |
 | huggingface/skills | Hugging Face official skill library for Hub operations, datasets, model training, evaluation, Gradio apps, papers, and Transformers.js workflows. | https://github.com/huggingface/skills |
 | openai/skills | OpenAI-published Codex skills for API implementation, browser testing, GitHub workflows, security analysis, and app scaffolding. | https://officialskills.sh/openai/skills |
+| github/web-scrape-crawl | Bot-curated GitHub crawl of active web scraping, browser automation, and MCP repositories. | https://github.com/topics/web-scraping |
+| vscode-marketplace/agent-extensions | Bot-curated VS Code Marketplace crawl of agent, MCP, and AI coding extensions. | https://marketplace.visualstudio.com/search?term=agent%20mcp&target=VSCode |
+| huggingface/model-capabilities | Bot-curated Hugging Face model crawl filtered to concrete safety, reranking, compression, and moderation capabilities. | https://huggingface.co/models |
 
 ## Items
 
@@ -67,5 +70,25 @@ Curated named skills from live SKILL.md ecosystems.
 - [openai/security-threat-model](https://officialskills.sh/openai/skills/security-threat-model) - Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings. Maps to: `code-review-pipeline`, `detect-anomaly`, `write-report`.
 - [openai/security-ownership-map](https://officialskills.sh/openai/skills/security-ownership-map) - Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning. Maps to: `data-analysis`, `knowledge-graph-build`, `write-report`.
 - [openai/security-best-practices](https://officialskills.sh/openai/skills/security-best-practices) - Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities. Maps to: `code-review-pipeline`, `detect-anomaly`, `evaluate-output`.
+- [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) - Open-source API for AI-oriented web search, scraping, crawling, and structured extraction from websites. Maps to: `web-scrape`, `web-search`, `retrieve`.
+- [scrapy/scrapy](https://github.com/scrapy/scrapy) - Mature Python framework for building web crawlers and extracting structured data from websites. Maps to: `web-scrape`.
+- [apify/crawlee](https://github.com/apify/crawlee) - Crawling and browser automation library for reliable extraction with HTTP, Playwright, Puppeteer, and Cheerio workflows. Maps to: `web-scrape`, `browser-automation`.
+- [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling) - Adaptive web scraping framework with browser and stealth support for resilient page extraction. Maps to: `web-scrape`, `browser-automation`.
+- [ScrapeGraphAI/Scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) - LLM-assisted scraping framework that converts websites into structured outputs through graph-style extraction pipelines. Maps to: `web-scrape`, `structured-output`, `rag-pipeline`.
+- [getmaxun/maxun](https://github.com/getmaxun/maxun) - Open-source no-code platform for scraping, crawling, search, and AI data extraction from websites. Maps to: `web-scrape`, `browser-automation`.
+- [seleniumbase/SeleniumBase](https://github.com/seleniumbase/SeleniumBase) - Browser automation and testing framework for web workflows, UI testing, and bot-detection-resistant automation. Maps to: `browser-automation`, `automated-testing`.
+- [browser-use/browser-use](https://github.com/browser-use/browser-use) - AI browser-agent framework that lets language models inspect and operate websites through browser automation. Maps to: `browser-automation`, `computer-use`.
+- [Skyvern-AI/skyvern](https://github.com/Skyvern-AI/skyvern) - AI workflow automation system for navigating websites, completing browser tasks, and executing web processes. Maps to: `browser-automation`, `computer-use`, `plan-and-execute`.
+- [browserbase/stagehand](https://github.com/browserbase/stagehand) - SDK for browser agents that combines deterministic browser automation with AI-assisted page interaction. Maps to: `browser-automation`, `tool-use`.
+- [mishushakov/llm-scraper](https://github.com/mishushakov/llm-scraper) - LLM-backed webpage extraction library that converts page content into typed structured outputs. Maps to: `web-scrape`, `structured-output`.
+- [JustinBeckwith/linkinator](https://github.com/JustinBeckwith/linkinator) - Crawler-based link checker for validating website links in local and CI workflows. Maps to: `web-scrape`, `automated-testing`.
+- [Qodo: AI Code Review](https://marketplace.visualstudio.com/items?itemName=Qodo%20(formerly%20Codium).codium) - VS Code extension for AI-assisted code review, bug detection, and code-quality feedback inside the editor. Maps to: `code-review-pipeline`, `detect-anomaly`.
+- [Vexp - Context Engine for AI Coding Agents](https://marketplace.visualstudio.com/items?itemName=Vexp.vexp-vscode) - VS Code context engine that indexes codebases and delivers relevant project context to AI coding agents. Maps to: `retrieve`, `rank`, `context-compression`.
+- [meta-llama/Prompt-Guard-86M](https://huggingface.co/meta-llama/Prompt-Guard-86M) - Hugging Face model for detecting prompt injection and jailbreak attempts in agent inputs. Maps to: `prompt-injection-defense`, `guardrails`.
+- [protectai/deberta-v3-base-prompt-injection-v2](https://huggingface.co/protectai/deberta-v3-base-prompt-injection-v2) - Hugging Face classifier dedicated to prompt-injection detection for LLM and agent safety pipelines. Maps to: `prompt-injection-defense`, `guardrails`.
+- [microsoft/llmlingua-2-xlm-roberta-large-meetingbank](https://huggingface.co/microsoft/llmlingua-2-xlm-roberta-large-meetingbank) - Hugging Face model supporting LLMLingua-style prompt and context compression workflows. Maps to: `context-compression`, `tokenize`.
+- [BAAI/bge-reranker-v2-m3](https://huggingface.co/BAAI/bge-reranker-v2-m3) - Hugging Face reranker model for improving retrieval and RAG result ordering. Maps to: `rank`, `score-relevance`, `rag-pipeline`.
+- [StanfordAIMI/stanford-deidentifier-base](https://huggingface.co/StanfordAIMI/stanford-deidentifier-base) - Hugging Face model for clinical text de-identification and privacy-preserving entity removal. Maps to: `extract-entities`, `content-moderation`.
+- [s-nlp/roberta_toxicity_classifier](https://huggingface.co/s-nlp/roberta_toxicity_classifier) - Hugging Face toxicity classifier for moderation and guardrail pipelines. Maps to: `content-moderation`, `classify`, `guardrails`.
 
-*Generated from registry/real-skills.json on 2026-05-03.*
+*Generated from registry/real-skills.json on 2026-05-08.*
