@@ -125,10 +125,11 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "2.13.0",
+  "version": "3.1.0",
   "generatedAt": "2026-04-30T00:00:00Z",
   "meta": {
     "typeLabels": {
+      "basic": "Basic Skill",
       "extra": "Extra Skill",
       "ultimate": "Ultimate Skill"
     },
@@ -139,10 +140,66 @@
       "III": "Evolved",
       "IV": "Hardened",
       "V": "Transcendent",
-      "VI": "Transcendent â˜…"
+      "VI": "Transcendent ★"
     },
     "rarityLabels": {
       "legendary": "Divine"
+    },
+    "levelColors": {
+      "0": {
+        "hex": "#94a3b8",
+        "bg": "rgba(148,163,184,.12)",
+        "border": "rgba(148,163,184,.4)"
+      },
+      "I": {
+        "hex": "#38bdf8",
+        "bg": "rgba(56,189,248,.12)",
+        "border": "rgba(56,189,248,.4)"
+      },
+      "II": {
+        "hex": "#63cab7",
+        "bg": "rgba(99,202,183,.15)",
+        "border": "rgba(99,202,183,.4)"
+      },
+      "III": {
+        "hex": "#a78bfa",
+        "bg": "rgba(167,139,250,.15)",
+        "border": "rgba(167,139,250,.4)"
+      },
+      "IV": {
+        "hex": "#e879f9",
+        "bg": "rgba(232,121,249,.15)",
+        "border": "rgba(232,121,249,.4)"
+      },
+      "V": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.15)",
+        "border": "rgba(251,191,36,.4)"
+      },
+      "VI": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.22)",
+        "border": "rgba(251,191,36,.55)"
+      }
+    },
+    "typeColors": {
+      "basic": {
+        "hex": "#38bdf8",
+        "rgb": "56,189,248"
+      },
+      "extra": {
+        "hex": "#c084fc",
+        "rgb": "192,132,252"
+      },
+      "ultimate": {
+        "hex": "#f59e0b",
+        "rgb": "245,158,11"
+      }
+    },
+    "typeSymbols": {
+      "basic": "○",
+      "extra": "◇",
+      "ultimate": "◆"
     }
   },
   "skills": [
@@ -5968,13 +6025,13 @@
         }
       }
     ],
-    "data-analysis": [
+    "retrieve": [
       {
         "id": "huggingface/huggingface-datasets",
         "name": "Hugging Face Datasets",
         "contributor": "huggingface",
         "origin": false,
-        "genericSkillRef": "data-analysis",
+        "genericSkillRef": "retrieve",
         "status": "named",
         "level": "II",
         "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
@@ -5985,7 +6042,7 @@
           "datasets",
           "dataset-viewer",
           "parquet",
-          "data-analysis"
+          "retrieve"
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"
@@ -6326,189 +6383,6 @@
         }
       }
     ],
-    "error-interpretation": [
-      {
-        "id": "openai/gh-fix-ci",
-        "name": "GH Fix CI",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "error-interpretation",
-        "status": "named",
-        "level": "II",
-        "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
-        "title": "The Checkrunner Surgeon",
-        "catalogRef": "openai-gh-fix-ci",
-        "tags": [
-          "github-actions",
-          "ci",
-          "debugging",
-          "pull-requests"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/gh-fix-ci"
-        }
-      }
-    ],
-    "cite-sources": [
-      {
-        "id": "openai/openai-docs",
-        "name": "OpenAI Docs",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "cite-sources",
-        "status": "named",
-        "level": "II",
-        "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
-        "title": "The Living API Codex",
-        "catalogRef": "openai-openai-docs",
-        "tags": [
-          "openai",
-          "docs",
-          "api-reference",
-          "sdk",
-          "citation"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/openai-docs"
-        }
-      }
-    ],
-    "computer-use": [
-      {
-        "id": "openai/playwright",
-        "name": "Playwright",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "computer-use",
-        "status": "named",
-        "level": "II",
-        "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
-        "title": "The Browser Witness",
-        "catalogRef": "openai-playwright",
-        "tags": [
-          "playwright",
-          "browser-testing",
-          "automation",
-          "screenshots"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/playwright"
-        }
-      }
-    ],
-    "code-review-pipeline": [
-      {
-        "id": "openai/security-best-practices",
-        "name": "Security Best Practices",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
-        "title": "The Secure Code Sentinel",
-        "catalogRef": "openai-security-best-practices",
-        "tags": [
-          "security",
-          "secure-coding",
-          "code-review",
-          "vulnerability-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-best-practices"
-        }
-      },
-      {
-        "id": "openai/security-threat-model",
-        "name": "Security Threat Model",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
-        "title": "The Threat Cartographer",
-        "catalogRef": "openai-security-threat-model",
-        "tags": [
-          "security",
-          "threat-modeling",
-          "risk-analysis",
-          "code-review"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-threat-model"
-        }
-      }
-    ],
-    "knowledge-graph-build": [
-      {
-        "id": "openai/security-ownership-map",
-        "name": "Security Ownership Map",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "knowledge-graph-build",
-        "status": "named",
-        "level": "III",
-        "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
-        "title": "The Ownership Mapper",
-        "catalogRef": "openai-security-ownership-map",
-        "tags": [
-          "security",
-          "ownership",
-          "bus-factor",
-          "repository-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-ownership-map"
-        }
-      }
-    ],
-    "detect-anomaly": [
-      {
-        "id": "openai/sentry",
-        "name": "Sentry",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "detect-anomaly",
-        "status": "named",
-        "level": "II",
-        "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
-        "title": "The Incident Lens",
-        "catalogRef": "openai-sentry",
-        "tags": [
-          "sentry",
-          "incident-response",
-          "observability",
-          "errors"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/sentry"
-        }
-      }
-    ],
-    "diff-content": [
-      {
-        "id": "openai/yeet",
-        "name": "Yeet",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "diff-content",
-        "status": "named",
-        "level": "II",
-        "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
-        "title": "The Guarded Shipwright",
-        "catalogRef": "openai-yeet",
-        "tags": [
-          "git",
-          "pull-requests",
-          "commit-workflow",
-          "release-flow"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/yeet"
-        }
-      }
-    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -6832,16 +6706,6 @@
       "mattpocock/triage",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
-    ],
-    "openai": [
-      "openai/gh-fix-ci",
-      "openai/openai-docs",
-      "openai/playwright",
-      "openai/security-best-practices",
-      "openai/security-ownership-map",
-      "openai/security-threat-model",
-      "openai/sentry",
-      "openai/yeet"
     ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"

@@ -127,8 +127,14 @@ class TestInstallModule(unittest.TestCase):
         os.makedirs(self.repo_dir, exist_ok=True)
         self.orig_dir = os.getcwd()
         os.chdir(self.repo_dir)
+        self.orig_gaia_home = os.environ.get("GAIA_HOME")
+        os.environ["GAIA_HOME"] = os.path.join(self.tmp, ".gaia")
 
     def tearDown(self):
+        if self.orig_gaia_home is not None:
+            os.environ["GAIA_HOME"] = self.orig_gaia_home
+        else:
+            os.environ.pop("GAIA_HOME", None)
         os.chdir(self.orig_dir)
         import shutil
         shutil.rmtree(self.tmp, ignore_errors=True)

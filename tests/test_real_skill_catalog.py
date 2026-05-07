@@ -20,7 +20,7 @@ class TestRealSkillCatalog(unittest.TestCase):
         source_repos = {source["repo"] for source in catalog["sources"]}
 
         self.assertIn("karpathy/autoresearch", source_repos)
-        self.assertIn("cognition-labs/devin", source_repos)
+        self.assertIn("CognitionAI/devin-swebench-results", source_repos)
         self.assertIn("mattpocock/skills", source_repos)
         self.assertIn("huggingface/skills", source_repos)
         self.assertIn("openai/skills", source_repos)

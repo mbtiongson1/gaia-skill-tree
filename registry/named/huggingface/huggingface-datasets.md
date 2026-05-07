@@ -3,7 +3,7 @@ id: huggingface/huggingface-datasets
 name: Hugging Face Datasets
 contributor: huggingface
 origin: false
-genericSkillRef: data-analysis
+genericSkillRef: retrieve
 status: named
 title: "The Dataset Cartographer"
 catalogRef: huggingface-datasets
@@ -16,7 +16,7 @@ tags:
   - datasets
   - dataset-viewer
   - parquet
-  - data-analysis
+  - retrieve
 createdAt: "2026-05-03"
 updatedAt: "2026-05-03"
 ---
@@ -27,4 +27,4 @@ Hugging Face Datasets makes dataset exploration reproducible through read-only D
 
 ## Origin
 
-Curated from Hugging Face's official `huggingface/skills` repository. This is a named implementation of the `data-analysis` bucket with additional catalog mappings to retrieval and web scraping.
+Curated from Hugging Face's official `huggingface/skills` repository. This is a named implementation of the `retrieve` bucket with an additional catalog mapping to web scraping.

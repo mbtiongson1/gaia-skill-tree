@@ -11,7 +11,7 @@
 | ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | III |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
-| ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
+| ◇ Extra Skill: /data-analysis | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | II | Requires environment credentials and a configured pipeline definition. |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | Evaluate Output, Plan and Decompose | III |  |
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |

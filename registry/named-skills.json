@@ -303,13 +303,13 @@
         }
       }
     ],
-    "data-analysis": [
+    "retrieve": [
       {
         "id": "huggingface/huggingface-datasets",
         "name": "Hugging Face Datasets",
         "contributor": "huggingface",
         "origin": false,
-        "genericSkillRef": "data-analysis",
+        "genericSkillRef": "retrieve",
         "status": "named",
         "level": "II",
         "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
@@ -320,7 +320,7 @@
           "datasets",
           "dataset-viewer",
           "parquet",
-          "data-analysis"
+          "retrieve"
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"

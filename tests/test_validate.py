@@ -99,10 +99,10 @@ class TestValidate(unittest.TestCase):
         self.assertIn("Reviewers should use `/gaia-audit`", text)
         self.assertIn("Reviewers should use `/gaia-meta-audit`", text)
 
-    def test_claude_audit_skills_exist(self):
+    def test_agent_audit_skills_exist(self):
         """Ensure the repo-local audit slash skills are present."""
         for skill_name in ("gaia-audit", "gaia-meta-audit"):
-            path = os.path.join(REPO_ROOT, ".claude", "skills", skill_name, "skill.md")
+            path = os.path.join(REPO_ROOT, ".agents", "skills", skill_name, "skill.md")
             self.assertTrue(os.path.exists(path), f"Missing {path}")
             with open(path, encoding="utf-8") as f:
                 text = f.read()

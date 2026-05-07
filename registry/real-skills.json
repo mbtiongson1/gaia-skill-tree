@@ -8,9 +8,9 @@
       "url": "https://github.com/karpathy/autoresearch"
     },
     {
-      "repo": "cognition-labs/devin",
-      "description": "Autonomous software engineering agent capable of end-to-end debugging and code generation.",
-      "url": "https://github.com/cognition-labs/devin"
+      "repo": "CognitionAI/devin-swebench-results",
+      "description": "Autonomous software engineering agent methodology and results.",
+      "url": "https://github.com/CognitionAI/devin-swebench-results"
     },
     {
       "repo": "laravel/boost",
@@ -115,7 +115,7 @@
       "title": "The Codebreaker's Will",
       "description": "Autonomous software engineering agent that combines debugging, code generation, and self-correction to resolve issues end-to-end across complex multi-file repositories.",
       "sourceRepo": "cognition-labs/devin",
-      "url": "https://github.com/cognition-labs/devin",
+      "url": "https://github.com/CognitionAI/devin-swebench-results",
       "mapsToGaia": [
         "autonomous-debug"
       ],
@@ -362,7 +362,7 @@
       "title": "The Quality Guardian",
       "description": "Comprehensive pytest skill covering fixtures, parametrize, async testing, mocking, coverage strategies, and integration test patterns for pytest 7.0+ projects.",
       "sourceRepo": "aiskillstore/marketplace",
-      "url": "https://github.com/aiskillstore/marketplace",
+      "url": "https://github.com/aiskillstore/marketplace/blob/main/skills/0xdarkmatter/python-pytest-patterns/SKILL.md",
       "mapsToGaia": [
         "automated-testing"
       ],
@@ -664,7 +664,6 @@
       "url": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md",
       "mapsToGaia": [
         "retrieve",
-        "data-analysis",
         "web-scrape"
       ],
       "promotedNamedSkillId": "huggingface/huggingface-datasets",

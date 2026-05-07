@@ -1,4 +1,4 @@
-# Extra Skill: huggingface/huggingface-datasets  [III · Evolved]
+# Extra Skill: /data-analysis  [III · Evolved]
 **ID:** data-analysis  
 **Type:** Extra Skill  
 **Level:** III  

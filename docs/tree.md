@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v2.13.1  ·  generated 2026-04-30
+GAIA SKILL TREE  v3.1.0  ·  generated 2026-04-30
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -12,7 +12,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: /research  [III]
   │  ├─ ○ /web-search  [I]
   │  ├─ ○ /summarize  [0]
-  │  └─ ○ openai/openai-docs  [I]
+  │  └─ ○ /cite-sources  [I]
   ├─ ◇ Extra Skill: /knowledge-harvest  [IV]
   │  ├─ ◇ Extra Skill: /web-scrape  [III]
   │  │  ├─ ○ /web-search  [I]  (↑ see above)
@@ -27,7 +27,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
 
 ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Extra Skill: huggingface/huggingface-datasets  [III]
+  ├─ ◇ Extra Skill: /data-analysis  [III]
   │  ├─ ○ /generate-sql  [II]
   │  ├─ ○ /data-visualize  [II]
   │  └─ ○ /summarize  [0]
@@ -35,7 +35,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   └─ ◇ Extra Skill: /research  [III]
      ├─ ○ /web-search  [I]
      ├─ ○ /summarize  [0]  (↑ see above)
-     └─ ○ openai/openai-docs  [I]
+     └─ ○ /cite-sources  [I]
 
 ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
@@ -43,19 +43,19 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: /research  [III]
   │  ├─ ○ /web-search  [I]
   │  ├─ ○ /summarize  [0]
-  │  └─ ○ openai/openai-docs  [I]
+  │  └─ ○ /cite-sources  [I]
   └─ ○ /math-reason  [II]
 
 ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Extra Skill: openai/security-best-practices  [III]
+  ├─ ◇ Extra Skill: /code-review-pipeline  [III]
   │  ├─ ○ /code-generation  [I]
-  │  ├─ ○ openai/yeet  [I]
+  │  ├─ ○ /diff-content  [I]
   │  └─ ○ /evaluate-output  [I]
   ├─ ◇ Extra Skill: 0xdarkmatter/pytest-patterns  [III]
   │  ├─ ○ upsonic/unittest-generator  [II]
   │  ├─ ○ /execute-bash  [I]
-  │  └─ ○ openai/gh-fix-ci  [I]
+  │  └─ ○ /error-interpretation  [I]
   └─ ○ mattpocock/improve-codebase-architecture  [II]
 
 ◆ Ultimate Skill: ruvnet/flow-nexus-swarm  [V]
@@ -84,7 +84,7 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   ├─ ◇ Extra Skill: devin-ai/autonomous-swe  [IV]
   │  ├─ ○ /code-generation  [I]
   │  ├─ ○ /execute-bash  [I]
-  │  └─ ○ openai/gh-fix-ci  [I]
+  │  └─ ○ /error-interpretation  [I]
   ├─ ○ /evaluate-output  [I]
   └─ ◇ Extra Skill: /plan-and-execute  [IV]
      ├─ ○ /route-intent  [I]
