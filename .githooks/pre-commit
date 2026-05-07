@@ -6,6 +6,14 @@ if [ -z "$changed" ]; then
   exit 0
 fi
 
+branch="$(git branch --show-current)"
+case "$branch" in
+  review/*)
+    printf 'Gaia pre-commit: skipping generated artifact/version automation on review branch %s.\n' "$branch"
+    exit 0
+    ;;
+esac
+
 version_files=(
   pyproject.toml
   packages/cli-npm/package.json
