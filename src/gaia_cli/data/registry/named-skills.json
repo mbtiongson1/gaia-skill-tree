@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-30",
+  "generatedAt": "2026-05-06",
   "buckets": {
     "automated-testing": [
       {
@@ -279,6 +279,150 @@
         }
       }
     ],
+    "api-call": [
+      {
+        "id": "huggingface/hf-cli",
+        "name": "HF CLI",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "api-call",
+        "status": "named",
+        "level": "II",
+        "description": "Guides Hugging Face Hub CLI operations for downloading, uploading, managing repos, running Jobs, querying datasets, configuring Spaces, and handling Hub authentication.",
+        "title": "The Hub Operator",
+        "catalogRef": "huggingface-hf-cli",
+        "tags": [
+          "huggingface",
+          "hub",
+          "cli",
+          "jobs",
+          "datasets"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/hf-cli/SKILL.md"
+        }
+      }
+    ],
+    "data-analysis": [
+      {
+        "id": "huggingface/huggingface-datasets",
+        "name": "Hugging Face Datasets",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "data-analysis",
+        "status": "named",
+        "level": "II",
+        "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
+        "title": "The Dataset Cartographer",
+        "catalogRef": "huggingface-datasets",
+        "tags": [
+          "huggingface",
+          "datasets",
+          "dataset-viewer",
+          "parquet",
+          "data-analysis"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"
+        }
+      }
+    ],
+    "fine-tune": [
+      {
+        "id": "huggingface/huggingface-llm-trainer",
+        "name": "Hugging Face LLM Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "fine-tune",
+        "status": "named",
+        "level": "III",
+        "description": "Runs LLM fine-tuning on Hugging Face Jobs using TRL or Unsloth, covering SFT, DPO, GRPO, reward modeling, dataset validation, hardware selection, Trackio monitoring, and Hub persistence.",
+        "title": "The Cloud Fine-Tuner",
+        "catalogRef": "huggingface-llm-trainer",
+        "tags": [
+          "huggingface",
+          "fine-tuning",
+          "trl",
+          "jobs",
+          "trackio"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-llm-trainer/SKILL.md"
+        }
+      }
+    ],
+    "literature-review": [
+      {
+        "id": "huggingface/huggingface-papers",
+        "name": "Hugging Face Papers",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "literature-review",
+        "status": "named",
+        "level": "II",
+        "description": "Looks up Hugging Face paper pages and arXiv IDs, fetching markdown paper content and structured metadata such as authors, linked models, datasets, Spaces, GitHub repos, and project pages.",
+        "title": "The Paper Indexer",
+        "catalogRef": "huggingface-papers",
+        "tags": [
+          "huggingface",
+          "papers",
+          "arxiv",
+          "metadata",
+          "research"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-papers/SKILL.md"
+        }
+      }
+    ],
+    "object-detection": [
+      {
+        "id": "huggingface/huggingface-vision-trainer",
+        "name": "Hugging Face Vision Trainer",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "object-detection",
+        "status": "named",
+        "level": "III",
+        "description": "Trains and fine-tunes object detection, image classification, and SAM/SAM2 segmentation models on Hugging Face Jobs or locally with dataset validation, metrics, Trackio, and Hub persistence.",
+        "title": "The Vision Forge",
+        "catalogRef": "huggingface-vision-trainer",
+        "tags": [
+          "huggingface",
+          "vision",
+          "object-detection",
+          "segmentation",
+          "fine-tuning"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-vision-trainer/SKILL.md"
+        }
+      }
+    ],
+    "multimodal-reasoning": [
+      {
+        "id": "huggingface/transformers-js",
+        "name": "Transformers.js",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "multimodal-reasoning",
+        "status": "named",
+        "level": "II",
+        "description": "Runs Hugging Face Transformers.js models directly in JavaScript and TypeScript across browser and server runtimes for NLP, vision, audio, and multimodal inference with WebGPU or WASM.",
+        "title": "The Browser Modelwright",
+        "catalogRef": "huggingface-transformers-js",
+        "tags": [
+          "huggingface",
+          "transformers-js",
+          "javascript",
+          "webgpu",
+          "inference"
+        ],
+        "links": {
+          "github": "https://github.com/huggingface/skills/blob/main/skills/transformers-js/SKILL.md"
+        }
+      }
+    ],
     "autonomous-research-agent": [
       {
         "id": "karpathy/autoresearch",
@@ -517,189 +661,6 @@
         }
       }
     ],
-    "error-interpretation": [
-      {
-        "id": "openai/gh-fix-ci",
-        "name": "GH Fix CI",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "error-interpretation",
-        "status": "named",
-        "level": "II",
-        "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
-        "title": "The Checkrunner Surgeon",
-        "catalogRef": "openai-gh-fix-ci",
-        "tags": [
-          "github-actions",
-          "ci",
-          "debugging",
-          "pull-requests"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/gh-fix-ci"
-        }
-      }
-    ],
-    "cite-sources": [
-      {
-        "id": "openai/openai-docs",
-        "name": "OpenAI Docs",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "cite-sources",
-        "status": "named",
-        "level": "II",
-        "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
-        "title": "The Living API Codex",
-        "catalogRef": "openai-openai-docs",
-        "tags": [
-          "openai",
-          "docs",
-          "api-reference",
-          "sdk",
-          "citation"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/openai-docs"
-        }
-      }
-    ],
-    "computer-use": [
-      {
-        "id": "openai/playwright",
-        "name": "Playwright",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "computer-use",
-        "status": "named",
-        "level": "II",
-        "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
-        "title": "The Browser Witness",
-        "catalogRef": "openai-playwright",
-        "tags": [
-          "playwright",
-          "browser-testing",
-          "automation",
-          "screenshots"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/playwright"
-        }
-      }
-    ],
-    "code-review-pipeline": [
-      {
-        "id": "openai/security-best-practices",
-        "name": "Security Best Practices",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
-        "title": "The Secure Code Sentinel",
-        "catalogRef": "openai-security-best-practices",
-        "tags": [
-          "security",
-          "secure-coding",
-          "code-review",
-          "vulnerability-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-best-practices"
-        }
-      },
-      {
-        "id": "openai/security-threat-model",
-        "name": "Security Threat Model",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
-        "title": "The Threat Cartographer",
-        "catalogRef": "openai-security-threat-model",
-        "tags": [
-          "security",
-          "threat-modeling",
-          "risk-analysis",
-          "code-review"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-threat-model"
-        }
-      }
-    ],
-    "knowledge-graph-build": [
-      {
-        "id": "openai/security-ownership-map",
-        "name": "Security Ownership Map",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "knowledge-graph-build",
-        "status": "named",
-        "level": "III",
-        "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
-        "title": "The Ownership Mapper",
-        "catalogRef": "openai-security-ownership-map",
-        "tags": [
-          "security",
-          "ownership",
-          "bus-factor",
-          "repository-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-ownership-map"
-        }
-      }
-    ],
-    "detect-anomaly": [
-      {
-        "id": "openai/sentry",
-        "name": "Sentry",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "detect-anomaly",
-        "status": "named",
-        "level": "II",
-        "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
-        "title": "The Incident Lens",
-        "catalogRef": "openai-sentry",
-        "tags": [
-          "sentry",
-          "incident-response",
-          "observability",
-          "errors"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/sentry"
-        }
-      }
-    ],
-    "diff-content": [
-      {
-        "id": "openai/yeet",
-        "name": "Yeet",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "diff-content",
-        "status": "named",
-        "level": "II",
-        "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
-        "title": "The Guarded Shipwright",
-        "catalogRef": "openai-yeet",
-        "tags": [
-          "git",
-          "pull-requests",
-          "commit-workflow",
-          "release-flow"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/yeet"
-        }
-      }
-    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -807,7 +768,7 @@
       "genericSkillRef": "write-report",
       "status": "awakened",
       "level": "II",
-      "description": "Builds and validates repository documentation as a pre-PR guardrail by running the local docs pipeline (including stale-doc checks), then surfaces actionable diffs so pull requests do not fail CI on documentation freshness.",
+      "description": "Builds and validates repository documentation as a pre-PR guardrail by reminding contributors to run the local docs drift check, then surfaces actionable regeneration commands so pull requests do not fail CI on documentation freshness.",
       "tags": [
         "documentation",
         "ci",
@@ -984,6 +945,14 @@
     "gooseworks": [
       "gooseworks/notte-browser"
     ],
+    "huggingface": [
+      "huggingface/hf-cli",
+      "huggingface/huggingface-datasets",
+      "huggingface/huggingface-llm-trainer",
+      "huggingface/huggingface-papers",
+      "huggingface/huggingface-vision-trainer",
+      "huggingface/transformers-js"
+    ],
     "intelligentcode-ai": [
       "intelligentcode-ai/database-engineer",
       "intelligentcode-ai/devops-engineer",
@@ -1015,16 +984,6 @@
       "mattpocock/triage",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
-    ],
-    "openai": [
-      "openai/gh-fix-ci",
-      "openai/openai-docs",
-      "openai/playwright",
-      "openai/security-best-practices",
-      "openai/security-ownership-map",
-      "openai/security-threat-model",
-      "openai/sentry",
-      "openai/yeet"
     ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"
