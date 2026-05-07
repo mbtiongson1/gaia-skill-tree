@@ -1,0 +1,103 @@
+import json
+import sys
+from pathlib import Path
+
+
+from gaia_cli.commands.stats import collect_stats, render_stats
+from gaia_cli.main import main
+
+
+def write_fixture_registry(root: Path) -> None:
+    registry = root / "registry"
+    named = registry / "named" / "alice"
+    named.mkdir(parents=True)
+    (registry / "gaia.json").write_text(
+        json.dumps(
+            {
+                "skills": [
+                    {"id": "tokenize", "type": "basic", "level": "0", "evidence": []},
+                    {"id": "web-search", "type": "basic", "level": "I", "evidence": [{"class": "C"}]},
+                    {"id": "automated-testing", "type": "extra", "level": "II", "evidence": [{"class": "B"}]},
+                    {"id": "autonomous-swe", "type": "ultimate", "level": "V", "evidence": [{"class": "B"}, {"class": "A"}]},
+                ],
+                "edges": [{"source": "web-search", "target": "automated-testing"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (named / "pytest-patterns.md").write_text(
+        "---\n"
+        "id: alice/pytest-patterns\n"
+        "genericSkillRef: automated-testing\n"
+        "status: named\n"
+        "---\n",
+        encoding="utf-8",
+    )
+
+
+def test_collect_stats_matches_fixture_graph(tmp_path):
+    write_fixture_registry(tmp_path)
+
+    stats = collect_stats(tmp_path)
+
+    assert stats["total_skills"] == 4
+    assert stats["total_edges"] == 1
+    assert stats["type_counts"] == {"basic": 2, "extra": 1, "ultimate": 1}
+    assert stats["level_counts"] == {"0": 1, "I": 1, "II": 1, "V": 1}
+    assert stats["skills_with_evidence"] == 3
+    assert stats["evidence_counts"] == {"A": 1, "B": 1, "C": 1}
+    assert stats["named_implemented"] == 1
+    assert stats["named_eligible"] == 3
+
+
+def test_collect_stats_supports_legacy_graph_layout(tmp_path):
+    graph = tmp_path / "graph"
+    named = graph / "named" / "alice"
+    named.mkdir(parents=True)
+    (graph / "gaia.json").write_text(
+        json.dumps(
+            {
+                "skills": [
+                    {"id": "plan", "type": "basic", "level": "I", "prerequisites": [], "evidence": [{"class": "C"}]},
+                    {"id": "execute", "type": "extra", "level": "II", "prerequisites": ["plan"], "evidence": []},
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    (named / "execute.md").write_text(
+        "---\nid: alice/execute\ngenericSkillRef: execute\nstatus: named\n---\n",
+        encoding="utf-8",
+    )
+
+    stats = collect_stats(tmp_path)
+
+    assert stats["total_skills"] == 2
+    assert stats["total_edges"] == 1
+    assert stats["named_implemented"] == 1
+
+
+def test_render_stats_includes_registry_health_sections(tmp_path):
+    write_fixture_registry(tmp_path)
+
+    output = render_stats(collect_stats(tmp_path))
+
+    assert "Gaia Registry — 4 skills  1 edges" in output
+    assert "Type breakdown" in output
+    assert "Atomic" in output
+    assert "Level breakdown" in output
+    assert "Evidence coverage" in output
+    assert "With evidence    3 / 4" in output
+    assert "Named skills" in output
+    assert "Implemented     1 / 3 eligible (33%)" in output
+
+
+def test_stats_cli_prints_summary(tmp_path, monkeypatch, capsys):
+    write_fixture_registry(tmp_path)
+    monkeypatch.setattr(sys, "argv", ["gaia", "--registry", str(tmp_path), "stats"])
+
+    main()
+
+    output = capsys.readouterr().out
+    assert "Gaia Registry — 4 skills  1 edges" in output
+    assert "Class A" in output
