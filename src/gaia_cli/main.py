@@ -118,7 +118,9 @@ _SKILL_CANDIDATES = [
     'SKILL.md',                          # single named-skill file
     'agents.md',
     'skills.md',
-    '.claude/skills',                    # Claude Code skill directory
+    '.agents/skills',                    # Agent-agnostic skill directory
+    '.claude/skills',                    # Claude Code skill directory (legacy)
+    '.antigravity/skills',               # Antigravity skill directory (legacy)
     '.gemini',                           # Gemini skill directory (*.yml inside)
     '.github/copilot-instructions.md',   # GitHub Copilot
     'codex.yml',
