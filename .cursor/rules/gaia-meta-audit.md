@@ -1,0 +1,1 @@
+../../.agents/skills/gaia-meta-audit/skill.md
