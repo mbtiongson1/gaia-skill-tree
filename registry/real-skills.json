@@ -664,7 +664,6 @@
       "url": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md",
       "mapsToGaia": [
         "retrieve",
-        "data-analysis",
         "web-scrape"
       ],
       "promotedNamedSkillId": "huggingface/huggingface-datasets",
