@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-03",
+  "generatedAt": "2026-05-08",
   "sources": [
     {
       "repo": "karpathy/autoresearch",
@@ -86,6 +86,24 @@
       "repo": "openai/skills",
       "description": "OpenAI-published Codex skills for API implementation, browser testing, GitHub workflows, security analysis, and app scaffolding.",
       "url": "https://officialskills.sh/openai/skills"
+    },
+    {
+      "repo": "github/web-scrape-crawl",
+      "description": "Bot-curated GitHub crawl of active web scraping, browser automation, and MCP repositories.",
+      "url": "https://github.com/topics/web-scraping",
+      "crawledAt": "2026-05-08"
+    },
+    {
+      "repo": "vscode-marketplace/agent-extensions",
+      "description": "Bot-curated VS Code Marketplace crawl of agent, MCP, and AI coding extensions.",
+      "url": "https://marketplace.visualstudio.com/search?term=agent%20mcp&target=VSCode",
+      "crawledAt": "2026-05-08"
+    },
+    {
+      "repo": "huggingface/model-capabilities",
+      "description": "Bot-curated Hugging Face model crawl filtered to concrete safety, reranking, compression, and moderation capabilities.",
+      "url": "https://huggingface.co/models",
+      "crawledAt": "2026-05-08"
     }
   ],
   "items": [
@@ -964,6 +982,371 @@
         "secure-coding",
         "code-review",
         "vulnerability-analysis"
+      ]
+    },
+    {
+      "id": "firecrawl-firecrawl",
+      "name": "firecrawl/firecrawl",
+      "contributor": "firecrawl",
+      "description": "Open-source API for AI-oriented web search, scraping, crawling, and structured extraction from websites.",
+      "sourceRepo": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "mapsToGaia": [
+        "web-scrape",
+        "web-search",
+        "retrieve"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "search",
+        "extraction",
+        "crawler"
+      ]
+    },
+    {
+      "id": "scrapy-scrapy",
+      "name": "scrapy/scrapy",
+      "contributor": "scrapy",
+      "description": "Mature Python framework for building web crawlers and extracting structured data from websites.",
+      "sourceRepo": "scrapy/scrapy",
+      "url": "https://github.com/scrapy/scrapy",
+      "mapsToGaia": [
+        "web-scrape"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "crawler",
+        "python"
+      ]
+    },
+    {
+      "id": "apify-crawlee",
+      "name": "apify/crawlee",
+      "contributor": "apify",
+      "description": "Crawling and browser automation library for reliable extraction with HTTP, Playwright, Puppeteer, and Cheerio workflows.",
+      "sourceRepo": "apify/crawlee",
+      "url": "https://github.com/apify/crawlee",
+      "mapsToGaia": [
+        "web-scrape",
+        "browser-automation"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "browser-automation",
+        "crawler"
+      ]
+    },
+    {
+      "id": "d4vinci-scrapling",
+      "name": "D4Vinci/Scrapling",
+      "contributor": "D4Vinci",
+      "description": "Adaptive web scraping framework with browser and stealth support for resilient page extraction.",
+      "sourceRepo": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "mapsToGaia": [
+        "web-scrape",
+        "browser-automation"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "browser-automation",
+        "crawler"
+      ]
+    },
+    {
+      "id": "scrapegraphai-scrapegraph-ai",
+      "name": "ScrapeGraphAI/Scrapegraph-ai",
+      "contributor": "ScrapeGraphAI",
+      "description": "LLM-assisted scraping framework that converts websites into structured outputs through graph-style extraction pipelines.",
+      "sourceRepo": "ScrapeGraphAI/Scrapegraph-ai",
+      "url": "https://github.com/ScrapeGraphAI/Scrapegraph-ai",
+      "mapsToGaia": [
+        "web-scrape",
+        "structured-output",
+        "rag-pipeline"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "structured-output",
+        "rag"
+      ]
+    },
+    {
+      "id": "getmaxun-maxun",
+      "name": "getmaxun/maxun",
+      "contributor": "getmaxun",
+      "description": "Open-source no-code platform for scraping, crawling, search, and AI data extraction from websites.",
+      "sourceRepo": "getmaxun/maxun",
+      "url": "https://github.com/getmaxun/maxun",
+      "mapsToGaia": [
+        "web-scrape",
+        "browser-automation"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "browser-automation",
+        "data-extraction"
+      ]
+    },
+    {
+      "id": "seleniumbase-seleniumbase",
+      "name": "seleniumbase/SeleniumBase",
+      "contributor": "seleniumbase",
+      "description": "Browser automation and testing framework for web workflows, UI testing, and bot-detection-resistant automation.",
+      "sourceRepo": "seleniumbase/SeleniumBase",
+      "url": "https://github.com/seleniumbase/SeleniumBase",
+      "mapsToGaia": [
+        "browser-automation",
+        "automated-testing"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "browser-automation",
+        "testing",
+        "selenium"
+      ]
+    },
+    {
+      "id": "browser-use-browser-use",
+      "name": "browser-use/browser-use",
+      "contributor": "browser-use",
+      "description": "AI browser-agent framework that lets language models inspect and operate websites through browser automation.",
+      "sourceRepo": "browser-use/browser-use",
+      "url": "https://github.com/browser-use/browser-use",
+      "mapsToGaia": [
+        "browser-automation",
+        "computer-use"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "browser-automation",
+        "computer-use",
+        "agent"
+      ]
+    },
+    {
+      "id": "skyvern-ai-skyvern",
+      "name": "Skyvern-AI/skyvern",
+      "contributor": "Skyvern-AI",
+      "description": "AI workflow automation system for navigating websites, completing browser tasks, and executing web processes.",
+      "sourceRepo": "Skyvern-AI/skyvern",
+      "url": "https://github.com/Skyvern-AI/skyvern",
+      "mapsToGaia": [
+        "browser-automation",
+        "computer-use",
+        "plan-and-execute"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "browser-automation",
+        "workflow",
+        "agent"
+      ]
+    },
+    {
+      "id": "browserbase-stagehand",
+      "name": "browserbase/stagehand",
+      "contributor": "browserbase",
+      "description": "SDK for browser agents that combines deterministic browser automation with AI-assisted page interaction.",
+      "sourceRepo": "browserbase/stagehand",
+      "url": "https://github.com/browserbase/stagehand",
+      "mapsToGaia": [
+        "browser-automation",
+        "tool-use"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "browser-automation",
+        "agent",
+        "sdk"
+      ]
+    },
+    {
+      "id": "mishushakov-llm-scraper",
+      "name": "mishushakov/llm-scraper",
+      "contributor": "mishushakov",
+      "description": "LLM-backed webpage extraction library that converts page content into typed structured outputs.",
+      "sourceRepo": "mishushakov/llm-scraper",
+      "url": "https://github.com/mishushakov/llm-scraper",
+      "mapsToGaia": [
+        "web-scrape",
+        "structured-output"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "structured-output"
+      ]
+    },
+    {
+      "id": "justinbeckwith-linkinator",
+      "name": "JustinBeckwith/linkinator",
+      "contributor": "JustinBeckwith",
+      "description": "Crawler-based link checker for validating website links in local and CI workflows.",
+      "sourceRepo": "JustinBeckwith/linkinator",
+      "url": "https://github.com/JustinBeckwith/linkinator",
+      "mapsToGaia": [
+        "web-scrape",
+        "automated-testing"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "web-scrape",
+        "testing",
+        "links"
+      ]
+    },
+    {
+      "id": "qodo-ai-code-review",
+      "name": "Qodo: AI Code Review",
+      "contributor": "qodo",
+      "description": "VS Code extension for AI-assisted code review, bug detection, and code-quality feedback inside the editor.",
+      "sourceRepo": "vscode-marketplace/Qodo.codium",
+      "url": "https://marketplace.visualstudio.com/items?itemName=Qodo%20(formerly%20Codium).codium",
+      "mapsToGaia": [
+        "code-review-pipeline",
+        "detect-anomaly"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "code-review",
+        "vscode",
+        "quality"
+      ]
+    },
+    {
+      "id": "vexp-context-engine",
+      "name": "Vexp - Context Engine for AI Coding Agents",
+      "contributor": "Vexp",
+      "description": "VS Code context engine that indexes codebases and delivers relevant project context to AI coding agents.",
+      "sourceRepo": "vscode-marketplace/Vexp.vexp-vscode",
+      "url": "https://marketplace.visualstudio.com/items?itemName=Vexp.vexp-vscode",
+      "mapsToGaia": [
+        "retrieve",
+        "rank",
+        "context-compression"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "vscode",
+        "retrieval",
+        "context"
+      ]
+    },
+    {
+      "id": "meta-llama-prompt-guard-86m",
+      "name": "meta-llama/Prompt-Guard-86M",
+      "contributor": "meta-llama",
+      "description": "Hugging Face model for detecting prompt injection and jailbreak attempts in agent inputs.",
+      "sourceRepo": "huggingface/meta-llama/Prompt-Guard-86M",
+      "url": "https://huggingface.co/meta-llama/Prompt-Guard-86M",
+      "mapsToGaia": [
+        "prompt-injection-defense",
+        "guardrails"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "security",
+        "guardrails"
+      ]
+    },
+    {
+      "id": "protectai-deberta-prompt-injection-v2",
+      "name": "protectai/deberta-v3-base-prompt-injection-v2",
+      "contributor": "protectai",
+      "description": "Hugging Face classifier dedicated to prompt-injection detection for LLM and agent safety pipelines.",
+      "sourceRepo": "huggingface/protectai/deberta-v3-base-prompt-injection-v2",
+      "url": "https://huggingface.co/protectai/deberta-v3-base-prompt-injection-v2",
+      "mapsToGaia": [
+        "prompt-injection-defense",
+        "guardrails"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "security",
+        "classification"
+      ]
+    },
+    {
+      "id": "microsoft-llmlingua-2-meetingbank",
+      "name": "microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
+      "contributor": "microsoft",
+      "description": "Hugging Face model supporting LLMLingua-style prompt and context compression workflows.",
+      "sourceRepo": "huggingface/microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
+      "url": "https://huggingface.co/microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
+      "mapsToGaia": [
+        "context-compression",
+        "tokenize"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "compression",
+        "context"
+      ]
+    },
+    {
+      "id": "baai-bge-reranker-v2-m3",
+      "name": "BAAI/bge-reranker-v2-m3",
+      "contributor": "BAAI",
+      "description": "Hugging Face reranker model for improving retrieval and RAG result ordering.",
+      "sourceRepo": "huggingface/BAAI/bge-reranker-v2-m3",
+      "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "mapsToGaia": [
+        "rank",
+        "score-relevance",
+        "rag-pipeline"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "reranking",
+        "rag"
+      ]
+    },
+    {
+      "id": "stanfordaimi-stanford-deidentifier-base",
+      "name": "StanfordAIMI/stanford-deidentifier-base",
+      "contributor": "StanfordAIMI",
+      "description": "Hugging Face model for clinical text de-identification and privacy-preserving entity removal.",
+      "sourceRepo": "huggingface/StanfordAIMI/stanford-deidentifier-base",
+      "url": "https://huggingface.co/StanfordAIMI/stanford-deidentifier-base",
+      "mapsToGaia": [
+        "extract-entities",
+        "content-moderation"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "privacy",
+        "entity-extraction"
+      ]
+    },
+    {
+      "id": "s-nlp-roberta-toxicity-classifier",
+      "name": "s-nlp/roberta_toxicity_classifier",
+      "contributor": "s-nlp",
+      "description": "Hugging Face toxicity classifier for moderation and guardrail pipelines.",
+      "sourceRepo": "huggingface/s-nlp/roberta_toxicity_classifier",
+      "url": "https://huggingface.co/s-nlp/roberta_toxicity_classifier",
+      "mapsToGaia": [
+        "content-moderation",
+        "classify",
+        "guardrails"
+      ],
+      "addedAt": "2026-05-08",
+      "tags": [
+        "huggingface",
+        "moderation",
+        "classification"
       ]
     }
   ]
