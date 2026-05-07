@@ -20,7 +20,7 @@
 | ○ /computer-use | Basic Skill | II | Named | `/computer-use` |
 | ◇ Extra Skill: /content-moderation | Extra Skill | III | Evolved | `/content-moderation` |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | III | Evolved | `/conversational-agent` |
-| ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | III | Evolved | `/data-analysis` |
+| ◇ Extra Skill: /data-analysis | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic Skill | II | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
@@ -77,7 +77,7 @@
 | ◇ Extra Skill: /registry-curation | Extra Skill | IV | Hardened | `/registry-curation` |
 | ◇ Extra Skill: /release-automation | Extra Skill | II | Named | `/release-automation` |
 | ◇ Extra Skill: /research | Extra Skill | III | Evolved | `/research` |
-| ○ /retrieve | Basic Skill | I | Awakened | `/retrieve` |
+| ○ huggingface/huggingface-datasets | Basic Skill | I | Awakened | `/retrieve` |
 | ○ /route-intent | Basic Skill | I | Awakened | `/route-intent` |
 | ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/scientific-discovery` |
 | ○ /scientific-visualization | Basic Skill | II | Named | `/scientific-visualization` |

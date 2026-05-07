@@ -41,7 +41,7 @@
      └─ · ○ /audience-model  [I]
 
 · ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦]  [V]
-  ├─ · ◇ Extra Skill: huggingface/huggingface-datasets  [III]
+  ├─ · ◇ Extra Skill: /data-analysis  [III]
   │  ├─ · ○ /generate-sql  [II]
   │  ├─ · ○ /data-visualize  [II]
   │  └─ ✓ ○ /summarize  [0]
