@@ -14,7 +14,7 @@ Performs hypothesis testing, regression analysis, and Bayesian modelling with ef
 _None._
 
 ## Unlocks
-_None._
+- [Prediction Market Analysis](../extra/prediction-market-analysis.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

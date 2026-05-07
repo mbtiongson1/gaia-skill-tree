@@ -8,6 +8,32 @@
 
 ---
 
+## Table of Contents
+
+- [The Tree](#the-tree)
+- [What This Means for You](#what-this-means-for-you)
+- [Tutorial](#tutorial)
+- [The Hierarchy](#the-hierarchy)
+- [Rank System: The Transcendent Line](#rank-system-the-transcendent-line)
+- [Install](#install)
+- [Quickstart](#quickstart)
+- [Push](#push)
+  - [Github CLI issues](#github-cli-issues)
+- [Named Skills Browser](#named-skills-browser)
+- [Real Skill Catalog](#real-skill-catalog)
+- [CLI Usage](#cli-usage)
+  - [Command Reference](#command-reference)
+  - [Commands](#commands)
+  - [Typical Workflow](#typical-workflow)
+- [MCP Server (Agent-Native Integration)](#mcp-server-agent-native-integration)
+- [Repository Structure](#repository-structure)
+- [Maintainer Hooks](#maintainer-hooks)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+- [License](#license)
+
+---
+
 ## The Tree
 
 Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
@@ -196,13 +222,13 @@ Use this catalog to bucket popular named skills from sources such as VoltAgent's
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,skills}
             ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,appraise,promote,fuse,docs,skills}
+  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
@@ -214,6 +240,7 @@ positional arguments:
     mcp                 Run the bundled Gaia MCP server
     release             Bump release version files
     graph               Generate and open the Gaia skill graph
+    stats               Show registry health at a glance
     appraise            Inspect a skill card with status and actions
     promote             Promote a skill eligible for level-up
     fuse                Confirm a skill combination or promotion candidate
@@ -241,6 +268,7 @@ Quick usage:
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
   gaia fuse <skillId> [--name <name>]
+  gaia stats
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
@@ -295,19 +323,15 @@ Intake PRs are draft review artifacts. Accepted candidates are promoted later in
 
 ## MCP Server (Agent-Native Integration)
 
-`@gaia-registry/mcp-server` connects Gaia directly to MCP-compatible agents such as Claude Code, Cursor, VS Code, and others:
+`@gaia-registry/mcp-server` connects Gaia directly to MCP-compatible agents such as Claude Code, Cursor, VS Code, and others. The README intentionally keeps this to install methods only; copy the command for your agent and use [`packages/mcp/`](packages/mcp/) for agent-specific config-file examples.
 
-```json
-{
-  "mcpServers": {
-    "gaia": {
-      "command": "npx",
-      "args": ["@gaia-registry/mcp-server"],
-      "env": { "GAIA_USER": "your-github-username" }
-    }
-  }
-}
-```
+| Agent | Install method |
+|---|---|
+| Claude Code | `claude mcp add gaia -- npx @gaia-registry/mcp-server` |
+| Any MCP client with a command picker | Command: `npx`; args: `@gaia-registry/mcp-server` |
+| Local smoke test | `npx @gaia-registry/mcp-server` |
+
+Optional environment variables: set `GAIA_USER=your-github-username` to load your tree by default and `GITHUB_TOKEN` if you want proposal tools to open PRs.
 
 Once connected, your agent gets these tools:
 

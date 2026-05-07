@@ -18,6 +18,7 @@ Conducts end-to-end quantitative analysis: queries data via SQL, computes statis
 ## Unlocks
 - [Autonomous Data Scientist](../ultimate/autonomous-data-scientist.md)
 - [ML Pipeline](../extra/ml-pipeline.md)
+- [Prediction Market Analysis](../extra/prediction-market-analysis.md)
 
 ## Fusion Condition
 _None specified._

@@ -4,6 +4,7 @@
 |---|---|---|---|---|
 | ◇ Extra Skill: /agent-eval | Extra Skill | III | Evolved | `/agent-eval` |
 | ○ huggingface/hf-cli | Basic Skill | II | Named | `/api-call` |
+| ◇ Extra Skill: /architecture-diagram | Extra Skill | IV | Hardened | `/architecture-diagram` |
 | ○ /audience-model | Basic Skill | I | Awakened | `/audience-model` |
 | ◇ Extra Skill: 0xdarkmatter/pytest-patterns | Extra Skill | III | Evolved | `/automated-testing` |
 | ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦] | Ultimate Skill | V | Transcendent | `/autonomous-data-scientist` |
@@ -27,6 +28,7 @@
 | ○ /diff-content | Basic Skill | I | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | III | Evolved | `/document-analyst` |
 | ◇ Extra Skill: /document-digitization | Extra Skill | III | Evolved | `/document-digitization` |
+| ○ anthropic/pptx | Basic Skill | 0 | Basic | `/document-editing` |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | III | Evolved | `/e2e-testing` |
 | ○ /embed-text | Basic Skill | I | Awakened | `/embed-text` |
 | ○ /error-interpretation | Basic Skill | I | Awakened | `/error-interpretation` |
@@ -44,6 +46,7 @@
 | ◇ Extra Skill: /ghostwrite | Extra Skill | IV | Hardened | `/ghostwrite` |
 | ◇ Extra Skill: /grounding | Extra Skill | III | Evolved | `/grounding` |
 | ◇ Extra Skill: /guardrails | Extra Skill | III | Evolved | `/guardrails` |
+| ◇ Extra Skill: /humanize-prose | Extra Skill | IV | Hardened | `/humanize-prose` |
 | ○ /hypothesis-generate | Basic Skill | II | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic Skill | II | Named | `/image-caption` |
 | ◇ Extra Skill: /knowledge-graph-build | Extra Skill | III | Evolved | `/knowledge-graph-build` |
@@ -62,6 +65,7 @@
 | ◇ Extra Skill: /plan-and-execute | Extra Skill | IV | Hardened | `/plan-and-execute` |
 | ○ /plan-decompose | Basic Skill | I | Awakened | `/plan-decompose` |
 | ◇ Extra Skill: mattpocock/to-prd | Extra Skill | IV | Hardened | `/prd-generation` |
+| ◇ Extra Skill: /prediction-market-analysis | Extra Skill | IV | Hardened | `/prediction-market-analysis` |
 | ◇ Extra Skill: /prompt-optimization | Extra Skill | IV | Hardened | `/prompt-optimization` |
 | ○ /question-answer | Basic Skill | 0 | Basic | `/question-answer` |
 | ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | III | Evolved | `/rag-pipeline` |
@@ -83,6 +87,7 @@
 | ○ /self-critique | Basic Skill | I | Awakened | `/self-critique` |
 | ○ /sentiment-analysis | Basic Skill | 0 | Basic | `/sentiment-analysis` |
 | ○ /speech-to-text | Basic Skill | II | Named | `/speech-to-text` |
+| ○ /statistical-analysis | Basic Skill | III | Evolved | `/statistical-analysis` |
 | ○ /structured-output | Basic Skill | I | Awakened | `/structured-output` |
 | ○ /summarize | Basic Skill | 0 | Basic | `/summarize` |
 | ○ /text-to-speech | Basic Skill | II | Named | `/text-to-speech` |
@@ -99,6 +104,7 @@
 | ◇ Extra Skill: /voice-agent | Extra Skill | III | Evolved | `/voice-agent` |
 | ◇ Extra Skill: /web-scrape | Extra Skill | III | Evolved | `/web-scrape` |
 | ○ /web-search | Basic Skill | I | Awakened | `/web-search` |
+| ◇ Extra Skill: /wiki-search | Extra Skill | IV | Hardened | `/wiki-search` |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | IV | Hardened | `/workflow-automation` |
 | ○ glincker/readme-generator | Basic Skill | I | Awakened | `/write-report` |
 
@@ -111,7 +117,7 @@
 | ○ Code Execution | Intrinsic Skill | II | Named | `/code-execution` |
 | ○ Code Explain | Intrinsic Skill | II | Named | `/code-explain` |
 | ○ Context Compression | Intrinsic Skill | III | Evolved | `/context-compression` |
-| ○ Document Editing | Intrinsic Skill | 0 | Basic | `/document-editing` |
+| ○ Feed Monitoring | Intrinsic Skill | IV | Hardened | `/feed-monitoring` |
 | ○ Few-Shot Learning | Intrinsic Skill | IV | Hardened | `/few-shot-learning` |
 | ○ Fine-Tune | Intrinsic Skill | IV | Hardened | `/fine-tune` |
 | ○ Framework Upgrade | Intrinsic Skill | 0 | Basic | `/framework-upgrade` |
@@ -128,7 +134,6 @@
 | ○ Self-Consistency | Intrinsic Skill | IV | Hardened | `/self-consistency` |
 | ○ Semantic Cache | Intrinsic Skill | IV | Hardened | `/semantic-cache` |
 | ○ Skill Discovery | Intrinsic Skill | 0 | Basic | `/skill-discovery` |
-| ○ Statistical Analysis | Intrinsic Skill | III | Evolved | `/statistical-analysis` |
 | ○ Test-Driven Development | Intrinsic Skill | 0 | Basic | `/test-driven-development` |
 | ○ UX Audit | Intrinsic Skill | 0 | Basic | `/ux-audit` |
 | ○ Visual Question Answering | Intrinsic Skill | III | Evolved | `/vision-qa` |

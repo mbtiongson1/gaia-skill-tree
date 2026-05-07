@@ -140,10 +140,12 @@
   /* ── STEPS ── */
   .steps{display:flex;flex-direction:column;gap:1.5rem}
   .step{
-    display:grid;grid-template-columns:56px 1fr;gap:1.2rem;align-items:start;
+    display:grid;grid-template-columns:56px minmax(0,1fr);gap:1.2rem;align-items:start;
     background:var(--surface);border:1px solid var(--border);
     border-radius:14px;padding:1.5rem;transition:border-color .2s;
+    min-width:0;
   }
+  .step > div{min-width:0}
   .step:hover{border-color:var(--basic)}
   .step-num{
     width:44px;height:44px;border-radius:50%;
@@ -551,7 +553,7 @@
   }
 
   /* -- NAMED SKILLS -- */
-  #named { min-height:100vh; padding-top:4rem; scroll-margin-top:0; max-width:none; }
+  #named { min-height:100vh; padding-top:4rem; scroll-margin-top:5rem; max-width:none; }
   .ns-controls {
     display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.6rem;
   }
@@ -1155,15 +1157,22 @@
     .process-final{display:block}
     .process-final .btn{margin-top:1.2rem}
     .tier-grid,.glossary,.steps{grid-template-columns:1fr}
-    .step{grid-template-columns:auto 1fr}
+    .step{grid-template-columns:auto minmax(0,1fr)}
     .hero-cta{flex-direction:column;align-items:stretch}
     .hero-cta .btn{text-align:center}
     .rank-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
     table{font-size:.85rem}
     pre,code{font-size:.82rem}
     pre{padding:.75rem}
-    /* Named Skills: don't reserve a full viewport when contents are short */
-    #named{min-height:auto;padding-top:3rem;padding-bottom:1.5rem}
+    .step pre{white-space:pre-wrap;word-break:break-word}
+    /* Named Skills: keep the full explorer visible and usable on narrow screens. */
+    #named{min-height:auto;padding:3rem 1rem 1.5rem;scroll-margin-top:7rem}
+    .ns-filter-row{align-items:stretch}
+    .ns-level-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.2rem;-webkit-overflow-scrolling:touch}
+    .ns-level-tabs .ns-tab{flex:0 0 auto}
+    .ns-view-btns,.ns-sort-sel{width:100%}
+    .ns-view-btns{justify-content:space-between}
+    .ns-sort-sel{min-height:2.35rem}
     .ns-grid-tile{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
     .flow{flex-direction:column;align-items:stretch}
     .flow-arrow{transform:rotate(90deg);align-self:center}
@@ -1175,13 +1184,16 @@
     h2{font-size:clamp(1.35rem,6.5vw,2rem)}
     section{padding:3.2rem .9rem}
     pre{font-size:.76rem;padding:.65rem .7rem}
+    .step pre{margin-left:0;margin-right:0}
     code{font-size:.78rem}
     .step{grid-template-columns:1fr;gap:.4rem}
     .step-num{margin-bottom:.25rem}
     .btn{width:100%;text-align:center}
     .ns-grid-tile{grid-template-columns:1fr}
+    #named{padding-left:.9rem;padding-right:.9rem}
     .ns-controls{gap:.55rem}
     .ns-search{font-size:.85rem}
+    .ns-view-btn{flex:1;justify-content:center;padding:.35rem .45rem}
     /* Always keep loading/empty state visible above the fold */
     .ns-loading,.ns-empty{padding:2rem 1rem;font-size:.88rem}
   }

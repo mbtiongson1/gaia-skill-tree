@@ -18,6 +18,7 @@ _None._
 - [Document Analyst](../extra/document-analyst.md)
 - [Data Analysis](../extra/data-analysis.md)
 - [Literature Review](../extra/literature-review.md)
+- [Wiki Search](../extra/wiki-search.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

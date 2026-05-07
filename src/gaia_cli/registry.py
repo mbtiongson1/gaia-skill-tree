@@ -135,8 +135,16 @@ def write_global_registry(path: str) -> None:
         json.dump(existing, f, indent=2)
 
 
+def read_cwd_registry() -> str | None:
+    """Return CWD when it looks like a Gaia registry checkout."""
+    cwd = Path.cwd()
+    if (cwd / "registry" / "gaia.json").exists():
+        return str(cwd)
+    return None
+
+
 def resolve_registry_path(explicit_registry=None, global_flag=False):
-    """Resolve the registry path: explicit → --global → local .gaia → global config → bundled."""
+    """Resolve the registry path: explicit → --global → local .gaia → CWD clone → global config → bundled."""
     if explicit_registry:
         return os.path.abspath(os.path.expanduser(explicit_registry))
     if global_flag:
@@ -145,6 +153,9 @@ def resolve_registry_path(explicit_registry=None, global_flag=False):
     local_reg = read_local_registry()
     if local_reg:
         return local_reg
+    cwd_reg = read_cwd_registry()
+    if cwd_reg:
+        return cwd_reg
     global_reg = read_global_registry()
     if global_reg:
         return global_reg

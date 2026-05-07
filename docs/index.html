@@ -15,6 +15,7 @@
     <li><a href="#what">What</a></li>
     <li><a href="#ranks">Ranks</a></li>
     <li><a href="#start">Start</a></li>
+    <li><a href="#mcp">Agent MCP</a></li>
     <li><a href="#workflow">Flow</a></li>
     <li><a href="how-we-do-things.html">How We Work</a></li>
     <li><a href="#named" class="nav-named-explorer">Named Skills</a></li>
@@ -235,6 +236,34 @@
 
   </div>
 
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─── MCP ─── -->
+<section id="mcp" class="reveal" data-section="mcp">
+  <h2>Connect Gaia to Your Agent</h2>
+  <p class="section-sub">Install the MCP server with copy-paste commands; keep agent-specific JSON in the MCP package docs.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--basic),var(--extra))">M</div>
+      <div>
+        <h3>Claude Code</h3>
+        <p>Add Gaia as an MCP server from the CLI.</p>
+        <pre><span class="cmd">claude mcp add</span> <span class="str">gaia</span> -- <span class="cmd">npx</span> <span class="str">@gaia-registry/mcp-server</span></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate))">*</div>
+      <div>
+        <h3>Any MCP-compatible agent</h3>
+        <p>Use command <code>npx</code> with argument <code>@gaia-registry/mcp-server</code>. Set <code>GAIA_USER</code> to your GitHub username if your client supports environment variables.</p>
+        <pre><span class="cmd">npx</span> <span class="str">@gaia-registry/mcp-server</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Need Claude Desktop, Cursor, VS Code, Codex CLI, Gemini, or OpenClaw config-file examples? Open <a href="https://github.com/mbtiongson1/gaia-skill-tree/tree/main/packages/mcp" target="_blank" style="color:var(--basic)">packages/mcp</a>.</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="section-divider"></div>
