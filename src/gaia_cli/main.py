@@ -72,6 +72,7 @@ Quick usage:
   gaia appraise [<skillId>]
   gaia promote [<skillId>] [--all] [--name <name>]
   gaia fuse <skillId> [--name <name>]
+  gaia update
   gaia stats
   gaia docs build [--check]
   gaia skills <list|search|info|install|uninstall>
@@ -108,6 +109,7 @@ PUBLIC_COMMANDS = (
     "promote",
     "fuse",
     "docs",
+    "update",
     "skills",
 )
 
@@ -933,6 +935,27 @@ def pull_command(args):
     subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
 
 
+def update_command(args):
+    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+    registry_pyproject = Path(args.registry) / "pyproject.toml"
+    if registry_pyproject.exists():
+        # Editable source install — pipx doesn't support -e, so pip only
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "-e", f"{args.registry}[embeddings]"],
+            check=True,
+        )
+        return
+    # Non-editable: try pip first, fall back to pipx
+    pip_ok = subprocess.run(
+        [sys.executable, "-m", "pip", "install", "gaia-cli[embeddings]", "--upgrade"],
+    ).returncode == 0
+    if not pip_ok:
+        pipx = subprocess.run(["pipx", "upgrade", "gaia-cli"]).returncode
+        if pipx != 0:
+            print("Update failed: pip and pipx both returned non-zero.", file=sys.stderr)
+            sys.exit(1)
+
+
 def version_command(args):
     pyproject = Path(args.registry) / "pyproject.toml"
     if pyproject.exists():
@@ -1015,6 +1038,7 @@ def get_parser():
     scan_parser.add_argument('--quiet', action='store_true', help="Suppress scan output; only show notifications")
     scan_parser.add_argument('--auto-promote', action='store_true', help="Promote every scan-recommended candidate after scanning")
     subparsers.add_parser('pull', help="Refresh registry data from origin")
+    subparsers.add_parser('update', help="Pull latest registry and reinstall the CLI")
     tree_parser = subparsers.add_parser('tree', help="Show your Gaia skill tree")
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
@@ -1099,6 +1123,8 @@ def main():
         scan_command(args)
     elif args.command == 'pull':
         pull_command(args)
+    elif args.command == 'update':
+        update_command(args)
     elif args.command == 'tree':
         tree_command(args)
     elif args.command == 'push':
