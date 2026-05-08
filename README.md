@@ -130,7 +130,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `3.0.1`.
+Current Gaia CLI version: `3.1.0`.
 
 Python install:
 
@@ -153,15 +153,16 @@ gaia init
 pass `gaia init --user your-username` to override.
 
 ```bash
+gaia update
 gaia pull
 gaia scan
 gaia tree
 ```
-`gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, and renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`.
+`gaia update` pulls the latest registry and reinstalls the CLI to make sure you're on the current version. `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`, and prints matched skills as `/skill-id` with Unicode fusion diagrams for combination candidates.
 ```bash
-gaia appraise skill-name
+gaia appraise skill-id
 ```
-Replace `skill-name` with the actual skill listed in the tree. Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
+Replace `skill-id` with the `/skill-id` shown in your tree (without the leading slash). Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
 ## Push
 Go to your integrated terminal in your repo and run this command after scanning:
@@ -288,13 +289,15 @@ Quick usage:
 | Command | What it does |
 |---|---|
 | `gaia init` | Creates `.gaia/config.toml`, asks for or accepts `--user`, and creates a stub user tree when run inside a registry clone. |
-| `gaia scan` | Scans configured paths, writes `generated-output/promotion-candidates.json`, and renders `generated-output/tree.{html,md}`. |
+| `gaia scan` | Scans configured paths, writes `generated-output/promotion-candidates.json`, renders `generated-output/tree.{html,md}`, and shows detected skills as `/skill-id` with Unicode fusion diagrams for combination candidates. |
 | `gaia scan --auto-promote` | Runs scan, promotes every scan-approved candidate, and re-renders the tree. |
 | `gaia pull` | Refreshes registry data from `origin`. |
 | `gaia push` | Writes a batch intake record under `registry-for-review/skill-batches/` and opens a PR when possible. |
-| `gaia appraise [skillId]` | Renders a skill card and shows what the last scan flagged as promotable. |
+| `gaia appraise [skillId]` | Renders a local-first skill card (your level, named form when available) showing prereqs, unlocks, and promotion status. |
 | `gaia promote <skill>` | Promotes only if the skill appeared in the last scan candidates; Gaia uses the scan-suggested level. |
 | `gaia promote --all` | Promotes every valid candidate from the last scan. |
+| `gaia fuse <skillId>` | Confirms a fusion combination or promotion candidate. |
+| `gaia stats` | Shows registry health: skill counts by type (○ Basic Skill / ◇ Extra Skill / ◆ Ultimate Skill) with colored bars and level breakdown. |
 | `gaia tree` | Renders your personal tree to `generated-output/tree.html` and `generated-output/tree.md`. |
 | `gaia graph` | Generates and opens `registry/render/gaia.html`; use `--format svg` for `registry/gaia.svg` or `--format json` for render JSON. |
 | `gaia version`, `gaia --version`, `gaia -v` | Prints the CLI version. |
@@ -302,7 +305,7 @@ Quick usage:
 | `gaia release {patch|minor|major}` | Maintainer release bump across Python, npm, MCP, and registry versions. |
 | `gaia docs build` | Regenerates marker-owned docs sections and docs-site stats. |
 | `gaia docs build --check` | Fails if generated docs have drifted. |
-| `gaia skills list/search/info/install/uninstall` | Browses and manages named skills, overlaying your pending intake by default. |
+| `gaia skills list/search/info/install/uninstall` | Browses and manages named skills with provenance-aware coloring: `contributor/skill` in red for named, `/skill-id` in rank color for canon. |
 
 ### Typical Workflow
 
