@@ -110,17 +110,26 @@ def _gradient_text(text, start_rgb, end_rgb):
 
 
 def _color_entry(symbol, plain_label, tier, is_named, level):
-    from gaia_cli.cardRenderer import fg, reset, bold, _use_color, TIER_COLORS
+    from gaia_cli.cardRenderer import fg, reset, bold, _use_color, TIER_COLORS, RANK_COLORS, COLOR_CONTRIBUTOR, COLOR_LOCAL_USER
     if not _use_color():
         return f"{symbol} {plain_label}"
     if is_named:
         if level in _TRANSCENDENT_LEVELS:
             colored = _gradient_text(f"{symbol} {plain_label}", _GRAD_GOLD, _GRAD_RED)
             return f"{bold()}{colored}{reset()}"
-        r, g, b = _COLOR_NAMED
-        return f"{bold()}{fg(r, g, b)}{symbol} {plain_label}{reset()}"
-    r, g, b = TIER_COLORS.get(tier, (56, 189, 248))
-    return f"{fg(r, g, b)}{symbol} {plain_label}{reset()}"
+        # Named skills: contributor in red, rest in rank color
+        rc = RANK_COLORS.get(level, (148, 163, 184))
+        cr, cg, cb = COLOR_CONTRIBUTOR
+        # Check if label has contributor prefix (contains / before [)
+        if "/" in plain_label.split("[")[0]:
+            parts = plain_label.split("/", 1)
+            contrib_part = parts[0]
+            rest = parts[1]
+            return f"{fg(cr, cg, cb)}{symbol} {contrib_part}{reset()}/{fg(*rc)}{rest}{reset()}"
+        return f"{bold()}{fg(cr, cg, cb)}{symbol} {plain_label}{reset()}"
+    # Canon skills: rank color for entire label
+    rc = RANK_COLORS.get(level, (148, 163, 184))
+    return f"{fg(*rc)}{symbol} {plain_label}{reset()}"
 
 
 def _dim(text):

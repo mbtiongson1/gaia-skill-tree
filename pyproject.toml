@@ -37,6 +37,9 @@ embeddings = [
     "sentence-transformers>=2.2.0",
     "numpy>=1.21.0",
 ]
+interactive = [
+    "questionary>=2.0.0",
+]
 dev = [
     "build>=1.2.0",
     "pytest>=8.0",
