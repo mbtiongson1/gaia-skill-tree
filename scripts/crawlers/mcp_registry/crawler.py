@@ -11,7 +11,7 @@ from common.taxonomy_mapper import map_to_skills
 from common.evidence_scorer import compute_score
 from common.candidate_builder import build_candidate, normalize_id
 from common.dedup import deduplicate
-from common.proposer import open_proposal_pr
+from common.proposer import write_proposals
 
 
 def crawl_mcp_so() -> list[dict]:
@@ -108,7 +108,7 @@ def main():
     print(f"After dedup: {len(candidates)} new candidates")
 
     if candidates:
-        open_proposal_pr(candidates, source_name="mcp-registry")
+        write_proposals(candidates, source_name="mcp-registry")
 
 
 if __name__ == "__main__":

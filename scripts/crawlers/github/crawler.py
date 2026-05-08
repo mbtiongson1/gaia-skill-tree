@@ -14,7 +14,7 @@ from common.taxonomy_mapper import GITHUB_TOPIC_TO_SKILL, map_github_topics, map
 from common.evidence_scorer import compute_github_score
 from common.candidate_builder import build_candidate, normalize_id
 from common.dedup import deduplicate
-from common.proposer import open_proposal_pr
+from common.proposer import write_proposals
 
 SCORE_THRESHOLD = 30
 MIN_STARS = 50
@@ -178,7 +178,7 @@ def main():
     print(f"  After dedup: {len(final)}")
 
     if final:
-        output = open_proposal_pr(final, "github")
+        output = write_proposals(final, "github")
         print(f"\n  Output: {output}")
     else:
         print("\n  No new candidates to propose.")
