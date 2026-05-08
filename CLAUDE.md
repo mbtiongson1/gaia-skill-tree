@@ -36,14 +36,18 @@ cd packages/mcp && npm run build && npm test
 | User trees | `skill-trees/<username>/skill-tree.json` | User-owned progression state |
 | Local output | `generated-output/` | Gitignored scan/render artifacts |
 | Python CLI | `src/gaia_cli/` | Main CLI implementation |
+| Slash-naming helpers | `src/gaia_cli/formatting.py` | Centralized slash-naming formatters, RANK_COLORS, tier colors |
+| Local-first context | `src/gaia_cli/localContext.py` | Merges user tree + scan results + named skill map into `LocalContext` |
 | npm wrapper | `packages/cli-npm/` | `@gaia-registry/cli` |
 | MCP server | `packages/mcp/` | `@gaia-registry/mcp-server` |
 
 ## CLI Shape
 
-Top-level commands are lifecycle-oriented: `init`, `scan`, `pull`, `push`, `appraise`, `promote`, `release`, `version`, `mcp`, `tree`, `graph`, `docs`, and `help`.
+Top-level commands are lifecycle-oriented: `init`, `scan`, `pull`, `push`, `appraise`, `promote`, `release`, `version`, `mcp`, `tree`, `graph`, `docs`, `update`, and `help`.
 
 Named skill actions live under `gaia skills`: `list`, `search`, `install`, `uninstall`, and `info`. The old flat verbs are intentionally removed.
+
+All commands default to **local-first** output — showing the user's own skill levels, detected skills, and named forms when available. Pass `--canon` to any command to view canonical registry data instead.
 
 ## Branch Naming
 

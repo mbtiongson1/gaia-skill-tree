@@ -288,13 +288,15 @@ Quick usage:
 | Command | What it does |
 |---|---|
 | `gaia init` | Creates `.gaia/config.toml`, asks for or accepts `--user`, and creates a stub user tree when run inside a registry clone. |
-| `gaia scan` | Scans configured paths, writes `generated-output/promotion-candidates.json`, and renders `generated-output/tree.{html,md}`. |
+| `gaia scan` | Scans configured paths, writes `generated-output/promotion-candidates.json`, renders `generated-output/tree.{html,md}`, and shows detected skills as `/skill-id` with Unicode fusion diagrams for combination candidates. |
 | `gaia scan --auto-promote` | Runs scan, promotes every scan-approved candidate, and re-renders the tree. |
 | `gaia pull` | Refreshes registry data from `origin`. |
 | `gaia push` | Writes a batch intake record under `registry-for-review/skill-batches/` and opens a PR when possible. |
-| `gaia appraise [skillId]` | Renders a skill card and shows what the last scan flagged as promotable. |
+| `gaia appraise [skillId]` | Renders a local-first skill card (your level, named form when available) showing prereqs, unlocks, and promotion status. Pass `--canon` to view the canonical registry entry. |
 | `gaia promote <skill>` | Promotes only if the skill appeared in the last scan candidates; Gaia uses the scan-suggested level. |
 | `gaia promote --all` | Promotes every valid candidate from the last scan. |
+| `gaia fuse [skillId]` | Confirms a fusion combination or promotion candidate; omit `skillId` for an interactive arrow-key picker (requires `pip install ".[interactive]"`). |
+| `gaia stats` | Shows registry health: skill counts by type (○ Basic Skill / ◇ Extra Skill / ◆ Ultimate Skill) with colored bars and level breakdown. |
 | `gaia tree` | Renders your personal tree to `generated-output/tree.html` and `generated-output/tree.md`. |
 | `gaia graph` | Generates and opens `registry/render/gaia.html`; use `--format svg` for `registry/gaia.svg` or `--format json` for render JSON. |
 | `gaia version`, `gaia --version`, `gaia -v` | Prints the CLI version. |
@@ -302,7 +304,7 @@ Quick usage:
 | `gaia release {patch|minor|major}` | Maintainer release bump across Python, npm, MCP, and registry versions. |
 | `gaia docs build` | Regenerates marker-owned docs sections and docs-site stats. |
 | `gaia docs build --check` | Fails if generated docs have drifted. |
-| `gaia skills list/search/info/install/uninstall` | Browses and manages named skills, overlaying your pending intake by default. |
+| `gaia skills list/search/info/install/uninstall` | Browses and manages named skills with provenance-aware coloring: `contributor/skill` in red for named, `/skill-id` in rank color for canon. |
 
 ### Typical Workflow
 
