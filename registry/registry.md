@@ -22,7 +22,7 @@
 | ◇ Extra Skill: /conversational-agent | Extra Skill | III | Evolved | `/conversational-agent` |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | III | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic Skill | II | Named | `/data-visualize` |
-| ◇ Extra Skill: /deployment-automation | Extra Skill | II | Named | `/deployment-automation` |
+| ◇ Extra Skill: /deployment-automation | Extra Skill | II → I | Named | `/deployment-automation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | III | Evolved | `/design-review` |
 | ○ /detect-anomaly | Basic Skill | II | Named | `/detect-anomaly` |
 | ○ /diff-content | Basic Skill | I | Awakened | `/diff-content` |
@@ -58,7 +58,7 @@
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | IV | Hardened | `/ml-pipeline` |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | IV | Hardened | `/multi-agent-debate` |
 | ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | V | Transcendent | `/multi-agent-orchestration-v` |
-| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | III | Evolved | `/multimodal-reasoning` |
+| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | III → II | Evolved | `/multimodal-reasoning` |
 | ○ /parse-html | Basic Skill | I | Awakened | `/parse-html` |
 | ○ /parse-json | Basic Skill | I | Awakened | `/parse-json` |
 | ○ /parse-pdf | Basic Skill | I | Awakened | `/parse-pdf` |
@@ -101,7 +101,7 @@
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | III | Evolved | `/translation-pipeline` |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | IV | Hardened | `/tree-of-thought` |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | III | Evolved | `/vertical-slice-planning` |
-| ◇ Extra Skill: /voice-agent | Extra Skill | III | Evolved | `/voice-agent` |
+| ◇ Extra Skill: /voice-agent | Extra Skill | III → II | Evolved | `/voice-agent` |
 | ◇ Extra Skill: /web-scrape | Extra Skill | III | Evolved | `/web-scrape` |
 | ○ /web-search | Basic Skill | I | Awakened | `/web-search` |
 | ◇ Extra Skill: /wiki-search | Extra Skill | IV | Hardened | `/wiki-search` |
@@ -123,7 +123,7 @@
 | ○ Framework Upgrade | Intrinsic Skill | 0 | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | II | Named | `/image-generate` |
 | ○ Issue Triage | Intrinsic Skill | IV | Hardened | `/issue-triage` |
-| ○ MCP Integration | Intrinsic Skill | III | Evolved | `/mcp-integration` |
+| ○ MCP Integration | Intrinsic Skill | III → II | Evolved | `/mcp-integration` |
 | ○ Object Detection | Intrinsic Skill | II | Named | `/object-detection` |
 | ○ OCR | Intrinsic Skill | II | Named | `/ocr` |
 | ○ Parallel Execution | Intrinsic Skill | II | Named | `/parallel-execution` |
@@ -144,9 +144,9 @@
 
 | Skill Call | Level | Prerequisites |
 |---|---|---|
-| `/autonomous-data-scientist` | Transcendent | `/data-analysis`, `/math-reason`, `/research` |
-| `/full-stack-developer` | Transcendent | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
-| `/real-time-voice-assistant` | Transcendent | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
-| `/recursive-self-improvement` | Transcendent | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
-| `/scientific-discovery` | Transcendent | `/hypothesis-generate`, `/research`, `/math-reason` |
+| `/autonomous-data-scientist` | V | `/data-analysis`, `/math-reason`, `/research` |
+| `/full-stack-developer` | V | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
+| `/real-time-voice-assistant` | V | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
+| `/recursive-self-improvement` | V | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
+| `/scientific-discovery` | V | `/hypothesis-generate`, `/research`, `/math-reason` |
 

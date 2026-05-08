@@ -97,6 +97,8 @@
       name: skill.name || skill.id,
       type: TYPE_ALIASES[skill.type] || skill.type || 'basic',
       level: skill.level || '',
+      effectiveLevel: skill.effectiveLevel || (skill.level || ''),
+      demerits: Array.isArray(skill.demerits) ? skill.demerits : [],
       rarity: skill.rarity || '',
       prerequisites: Array.isArray(skill.prerequisites) ? skill.prerequisites : [],
     })).filter(skill => skill.id);
@@ -430,10 +432,16 @@
             const rankPill = rm
               ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level}</span>`
               : '';
+            const effectivePill = (skill.effectiveLevel && skill.effectiveLevel !== skill.level)
+              ? `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:rgba(251,191,36,.16);color:#fbbf24">effective ${skill.effectiveLevel}</span>`
+              : '';
+            const demeritNote = skill.demerits && skill.demerits.length
+              ? `<div style="color:#fbbf24;font-size:.66rem;margin-top:.26rem">${skill.demerits.length} demerit${skill.demerits.length === 1 ? '' : 's'}</div>`
+              : '';
             state.tooltipEl.innerHTML =
               `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +
               `<div style="color:#64748b;font-size:.68rem;font-weight:500;margin-bottom:.3rem;font-family:monospace">${skill.id}</div>` +
-              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}</div>`;
+              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}${effectivePill}</div>${demeritNote}`;
             state.lastHoveredId = state.hoveredId;
           }
           let tx = pr.sx + 18, ty = pr.sy - 34;

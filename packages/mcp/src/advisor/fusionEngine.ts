@@ -1,4 +1,5 @@
 import type { GaiaGraph, FusionCandidate } from "../graph/types.js";
+import { effectiveLevel } from "../graph/levels.js";
 
 export function detectCombinations(
   graph: GaiaGraph,
@@ -20,7 +21,7 @@ export function detectCombinations(
     if (missing.length === 0) {
       candidates.push({
         candidateResult: skill.id,
-        levelFloor: skill.level,
+        levelFloor: effectiveLevel(skill),
         detectedSkills: met,
         missingSkills: [],
         status: "ready",
@@ -28,7 +29,7 @@ export function detectCombinations(
     } else if (missing.length === 1) {
       candidates.push({
         candidateResult: skill.id,
-        levelFloor: skill.level,
+        levelFloor: effectiveLevel(skill),
         detectedSkills: met,
         missingSkills: missing,
         status: "one_away",

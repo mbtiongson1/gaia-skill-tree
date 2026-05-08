@@ -43,6 +43,8 @@ def _load_meta():
 _META = _load_meta()
 EVIDENCE_FLOOR = {k: set(v) if v else None for k, v in _META["levels"]["evidenceFloors"].items()}
 MIN_PREREQS = _META["types"]["minPrereqs"]
+DEMERIT_IDS = set(_META.get("demerits", {}).get("order", []))
+DEMERIT_ELIGIBLE_LEVELS = set(_META.get("demerits", {}).get("eligibleLevels", []))
 
 
 def load_graph(path):
@@ -195,6 +197,29 @@ def validate_ultimate(graph):
                     f"Validated ultimate '{skill['id']}' needs ≥3 Class A/B evidence "
                     f"sources (has {len(ab_evidence)})."
                 )
+    return errors
+
+
+def validate_demerits(graph):
+    """Check demerit ids are canonical and only apply to eligible levels."""
+    errors = []
+    for skill in graph.get("skills", []):
+        demerits = skill.get("demerits", []) or []
+        if not demerits:
+            continue
+
+        level = skill.get("level", "I")
+        if level not in DEMERIT_ELIGIBLE_LEVELS:
+            errors.append(
+                f"Skill '{skill['id']}' has demerits but claimed level "
+                f"'{level}' is not eligible (must be one of {sorted(DEMERIT_ELIGIBLE_LEVELS)})."
+            )
+
+        unknown = [item for item in demerits if item not in DEMERIT_IDS]
+        if unknown:
+            errors.append(
+                f"Skill '{skill['id']}' declares unknown demerit(s): {unknown}."
+            )
     return errors
 
 
@@ -517,6 +542,18 @@ def check_meta_sync():
                 f"meta.json has '{meta_type_labels[key]}'"
             )
 
+    # Check demeritLabels match (gaia.json may be a subset)
+    meta_demerit_labels = meta.get("demerits", {}).get("labels", {})
+    gaia_demerit_labels = gaia_meta.get("demeritLabels", {})
+    for key, value in gaia_demerit_labels.items():
+        if key not in meta_demerit_labels:
+            errors.append(f"gaia.json meta.demeritLabels has key '{key}' not in meta.json demerits.labels")
+        elif meta_demerit_labels[key] != value:
+            errors.append(
+                f"demeritLabels mismatch for '{key}': gaia.json has '{value}', "
+                f"meta.json has '{meta_demerit_labels[key]}'"
+            )
+
     # Check bundled schema copies match canonical
     bundled_dir = os.path.join(repo_root, "src", "gaia_cli", "data", "registry", "schema")
     canonical_dir = os.path.join(repo_root, "registry", "schema")
@@ -570,31 +607,35 @@ def main():
     all_errors = []
 
     # 1. Schema validation
-    print("   [1/7] Schema validation...")
+    print("   [1/8] Schema validation...")
     all_errors.extend(validate_schema(graph, schema_dir))
 
     # 2. DAG cycle detection
-    print("   [2/7] DAG cycle detection...")
+    print("   [2/8] DAG cycle detection...")
     all_errors.extend(validate_dag(graph))
 
     # 3. Reference integrity
-    print("   [3/7] Reference integrity...")
+    print("   [3/8] Reference integrity...")
     all_errors.extend(validate_references(graph))
 
     # 4. Prerequisite count
-    print("   [4/7] Prerequisite count...")
+    print("   [4/8] Prerequisite count...")
     all_errors.extend(validate_prerequisites_count(graph))
 
     # 5. Evidence threshold
-    print("   [5/7] Evidence thresholds...")
+    print("   [5/8] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
     # 6. Ultimate constraints
-    print("   [6/7] Ultimate constraints...")
+    print("   [6/8] Ultimate constraints...")
     all_errors.extend(validate_ultimate(graph))
 
     # 7. Named skills validation (includes reviewer gate + catalog cross-refs)
-    print("   [7/7] Named skills validation...")
+    print("   [7/8] Demerit constraints...")
+    all_errors.extend(validate_demerits(graph))
+
+    # 8. Named skills validation (includes reviewer gate + catalog cross-refs)
+    print("   [8/8] Named skills validation...")
     all_errors.extend(validate_named_skills(graph))
 
     # Stats

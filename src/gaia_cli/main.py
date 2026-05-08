@@ -630,6 +630,8 @@ def paths_command(args):
         print("Ready to fuse:")
         for n in near:
             print(f"  ◇ {n.get('name', n['skillId'])} ({n.get('type', '?')})")
+            if n.get("levelFloor") and n.get("effectiveLevelFloor"):
+                print(f"    level: {n.get('levelFloor')} (effective: {n.get('effectiveLevelFloor')})")
             prereqs = n.get('satisfiedPrereqs', [])
             if prereqs:
                 print(f"    from: {', '.join(prereqs)}")
@@ -640,6 +642,8 @@ def paths_command(args):
         print("One prerequisite away:")
         for o in one_away[:8]:
             print(f"  ○ {o.get('name', o['skillId'])} - missing: {o.get('missingPrereq', '?')}")
+            if o.get("levelFloor") and o.get("effectiveLevelFloor"):
+                print(f"    level: {o.get('levelFloor')} (effective: {o.get('effectiveLevelFloor')})")
         if len(one_away) > 8:
             print(f"  ... and {len(one_away) - 8} more")
         print()

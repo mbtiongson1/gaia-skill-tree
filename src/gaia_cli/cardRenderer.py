@@ -10,6 +10,7 @@ import json
 import os
 import sys
 
+from gaia_cli.leveling import level_summary
 from gaia_cli.registry import registry_graph_path
 import textwrap
 from typing import Optional
@@ -261,6 +262,10 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
     level = skill.get("level", "0")
     level_label = LEVEL_LABELS.get(level, f"Lv.{level}")
+    level_meta = level_summary(skill)
+    effective = level_meta["effectiveLevel"]
+    effective_label = LEVEL_LABELS.get(effective, f"Lv.{effective}")
+    demerits = level_meta["demerits"]
     description = skill.get("description", "")
     prereqs = skill.get("prerequisites", [])
     derivatives = skill.get("derivatives", [])
@@ -286,6 +291,11 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     sub_right = f"{tier.capitalize()} Skill"
     sub_line = f"{sub_left}{' ' * (inner - len(sub_left) - len(sub_right))}{sub_right}"
     lines.append(f"{V} {sub_line} {V}")
+    if effective != level:
+        demerit_note = ", ".join(demerits[:2])
+        if len(demerits) > 2:
+            demerit_note += f" +{len(demerits) - 2}"
+        lines.append(_line(f"Potential: {effective_label} (claimed {level}; {demerit_note})", width))
 
     # Separator
     lines.append(_separator(width))
@@ -342,9 +352,12 @@ def render_card_compact(skill: dict) -> str:
     skill_id = skill.get("id", skill.get("name", "unknown"))
     name = f"/{skill_id}"
     level = skill.get("level", "0")
+    effective = level_summary(skill)["effectiveLevel"]
     rarity = skill.get("rarity", "common")
     desc = skill.get("description", "")
     short_desc = desc[:60] + "…" if len(desc) > 60 else desc
+    if effective != level:
+        return f"{glyph} {name} (Lv.{level}→{effective}) [{rarity}] — {short_desc}"
     return f"{glyph} {name} (Lv.{level}) [{rarity}] — {short_desc}"
 
 

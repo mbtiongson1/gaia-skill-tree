@@ -10,6 +10,7 @@ from datetime import date, datetime, timezone
 
 from .treeManager import load_tree, save_tree
 from .registry import promotion_candidates_path, registry_graph_path
+from .leveling import level_index, effective_level
 
 
 def _load_meta():
@@ -89,6 +90,9 @@ def check_promotion_eligibility(graph_data: dict, tree_data: dict) -> list[dict]
             continue
         graph_skill = _get_skill_from_graph(graph_data, skill_id)
         if graph_skill is None:
+            continue
+        # Demerits define an explicit progression ceiling for this skill.
+        if graph_skill.get("demerits") and level_index(target) > level_index(effective_level(graph_skill)):
             continue
         if _meets_evidence_floor(graph_skill, target):
             eligible.append({

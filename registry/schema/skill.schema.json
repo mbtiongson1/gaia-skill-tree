@@ -94,6 +94,18 @@
       "type": "string",
       "description": "Optional free-text conditions required for fusion or level-up."
     },
+    "demerits": {
+      "type": "array",
+      "description": "Optional canonical demerit IDs that lower effective progression ceiling.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "niche-integration",
+          "experimental-feature",
+          "heavyweight-dependency"
+        ]
+      }
+    },
     "realVariants": {
       "type": "array",
       "description": "Named real-world implementations of this abstract skill. Populated by generateNamedIndex.py from status:named entries — do not hand-edit.",

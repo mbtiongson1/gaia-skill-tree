@@ -1,6 +1,13 @@
 import json
 import argparse
 import sys
+from pathlib import Path
+
+try:
+    from gaia_cli.leveling import effective_level
+except ModuleNotFoundError:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+    from gaia_cli.leveling import effective_level
 
 def detect_combinations(graph_data, owned_skills, detected_skills):
     combinations = []
@@ -24,7 +31,8 @@ def detect_combinations(graph_data, owned_skills, detected_skills):
                 if skill['id'] not in owned_skill_ids:
                     combinations.append({
                         'candidateResult': skill['id'],
-                        'levelFloor': skill.get('level'),
+                        'levelFloor': effective_level(skill),
+                        'baseLevelFloor': skill.get('level'),
                         'detectedSkills': [p for p in prereqs if p in detected_skills] or prereqs,
                         'status': 'new_fusion'
                     })

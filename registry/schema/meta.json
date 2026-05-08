@@ -64,5 +64,15 @@
     "classes": ["A", "B", "C"],
     "ultimateMinSources": 3,
     "ultimateRequiredClasses": ["A", "B"]
+  },
+  "demerits": {
+    "order": ["niche-integration", "experimental-feature", "heavyweight-dependency"],
+    "labels": {
+      "niche-integration": "Niche integrations",
+      "experimental-feature": "Experimental features",
+      "heavyweight-dependency": "Heavyweight dependencies"
+    },
+    "eligibleLevels": ["II", "III", "IV", "V", "VI"],
+    "minimumEffectiveLevel": "I"
   }
 }

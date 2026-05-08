@@ -104,6 +104,13 @@ Hard rule: any schema file change must come from a `schema/...` branch.
 - 2 maintainer approvals
 - Must be `validated` at merge
 
+### Demerits and effective level
+
+- Demerits are allowed only on claimed levels `II` and above.
+- Allowed demerit IDs are canonical and schema-validated: `niche-integration`, `experimental-feature`, `heavyweight-dependency`.
+- Each demerit lowers runtime potential by one level (effective level), floored at `I`.
+- Named skill claims stay constrained by canonical level requirements; demerits do not bypass evidence floors.
+
 ---
 
 ## 5) PR checklist (copy/paste)

@@ -13,7 +13,7 @@
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | III |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | III | Requires persistent memory store across turns. |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | III |  |
-| ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | II | Requires environment credentials and a configured pipeline definition. |
+| ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | II → I | Requires environment credentials and a configured pipeline definition. |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | Evaluate Output, Plan and Decompose | III |  |
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | III |  |
 | ◇ Extra Skill: /document-digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | III |  |
@@ -32,7 +32,7 @@
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV |  |
 | ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V | Requires extensive multi-system validation before level advancement. |
-| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | Image Caption, Question Answer, Logical Inference | III | Requires vision-language model capability. |
+| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | Image Caption, Question Answer, Logical Inference | III → II | Requires vision-language model capability. |
 | ◇ Extra Skill: /plan-and-execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | IV |  |
 | ◇ Extra Skill: mattpocock/to-prd | Extra Skill | Write Report, Plan and Decompose | IV |  |
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | Data Analysis, Web Search, Statistical Analysis | IV | Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution. |
@@ -53,7 +53,7 @@
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | III |  |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | IV |  |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | Plan and Decompose, Route Intent | III |  |
-| ◇ Extra Skill: /voice-agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III | Requires real-time audio I/O or audio file access. |
+| ◇ Extra Skill: /voice-agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | III → II | Requires real-time audio I/O or audio file access. |
 | ◇ Extra Skill: /web-scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | III | Structured output mode required. |
 | ◇ Extra Skill: /wiki-search | Extra Skill | Retrieve, Embed Text, Summarize | IV | Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention. |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | Plan and Decompose, Tool Use, API Call | IV |  |

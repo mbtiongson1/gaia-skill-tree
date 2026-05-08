@@ -4,6 +4,13 @@ import datetime
 import sys
 import importlib.util
 
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC_DIR = os.path.join(REPO_ROOT, "src")
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+from gaia_cli.leveling import effective_level
+
 
 def _run_generate_named_index():
     """Invoke generateNamedIndex as a module to produce registry/named-skills.json."""
@@ -53,6 +60,21 @@ def get_type_label(meta, skill_type):
 
 def get_level_label(meta, level):
     return str(level)
+
+
+def get_effective_level_label(meta, skill):
+    claimed = str(skill.get("level", ""))
+    effective = effective_level(skill)
+    if effective == claimed:
+        return claimed
+    return f"{claimed} → {effective}"
+
+
+def get_demerit_suffix(skill):
+    demerits = list(skill.get("demerits", []) or [])
+    if not demerits:
+        return ""
+    return f"  (demerits: {', '.join(demerits)})"
 
 
 def get_rarity_label(meta, rarity):
@@ -276,9 +298,8 @@ def main():
             skill_type = skill.get("type", "basic")
             symbol = get_tier_symbol(skill_type)
             type_label = get_type_label(meta, skill_type)
-            level = skill.get("level")
-            level_label = get_level_label(meta, level)
-            tier_label = get_tier_label(meta, level)
+            level_label = get_effective_level_label(meta, skill)
+            tier_label = get_tier_label(meta, skill.get("level"))
             reg_display = _build_skill_display(skill.get('id'), skill_type, named_map)
             name_display = f"{symbol} {reg_display}"
             skill_call = f"`/{skill.get('id')}`"
@@ -292,9 +313,8 @@ def main():
         for skill in skills:
             if skill["id"] not in orphan_ids:
                 continue
-            level = skill.get("level")
-            level_label = get_level_label(meta, level)
-            tier_label = get_tier_label(meta, level)
+            level_label = get_effective_level_label(meta, skill)
+            tier_label = get_tier_label(meta, skill.get("level"))
             name_display = f"○ {skill.get('name')}"
             skill_call = f"`/{skill.get('id')}`"
             f.write(f"| {name_display} | Intrinsic Skill | {level_label} | {tier_label} | {skill_call} |\n")
@@ -314,7 +334,7 @@ def main():
             f.write("|---|---|---|\n")
             for s in unclaimed:
                 prereq_names = ", ".join(f"`/{p}`" for p in s.get("prerequisites", []))
-                level_lbl = get_tier_label(meta, s.get("level"))
+                level_lbl = get_effective_level_label(meta, s)
                 f.write(f"| `/{s['id']}` | {level_lbl} | {prereq_names} |\n")
             f.write("\n")
 
@@ -330,7 +350,7 @@ def main():
                 skill_type = skill.get("type")
                 symbol = get_tier_symbol(skill_type)
                 type_label = get_type_label(meta, skill_type)
-                level_label = get_level_label(meta, skill.get("level"))
+                level_label = get_effective_level_label(meta, skill)
                 prereqs = [skill_map.get(pid, {}).get("name", pid) for pid in skill.get("prerequisites", [])]
                 prereq_str = ", ".join(prereqs)
                 combo_display = _build_skill_display(skill.get('id'), skill_type, named_map)
@@ -402,11 +422,12 @@ def main():
                     llevel = legendary.get("level")
                     prereq_ids = legendary.get("prerequisites", [])
 
-                    level_label = get_level_label(meta, llevel)
+                    level_label = get_effective_level_label(meta, legendary)
                     display = _build_skill_display(lid, "ultimate", named_map)
+                    demerit_suffix = get_demerit_suffix(legendary)
 
                     check = "✓ " if lid in unlocked_ids else "· "
-                    f.write(f"{check}◆ {display}  [{level_label}]\n")
+                    f.write(f"{check}◆ {display}  [{level_label}]{demerit_suffix}\n")
 
                     seen = {lid}
                     for i, prereq_id in enumerate(prereq_ids):
@@ -470,12 +491,13 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
         lid = legendary.get("id")
         lname = legendary.get("name")
         llevel = legendary.get("level")
-        level_label = get_level_label(meta, llevel)
+        level_label = get_effective_level_label(meta, legendary)
         prereq_ids = legendary.get("prerequisites", [])
+        demerit_suffix = get_demerit_suffix(legendary)
 
         display = _build_skill_display(lid, "ultimate", named_map)
 
-        lines.append(f"◆ {display}  [{level_label}]")
+        lines.append(f"◆ {display}  [{level_label}]{demerit_suffix}")
         lines.append("─" * 65)
 
         seen = {lid}
