@@ -15,7 +15,7 @@ def detect_combinations(graph_data, owned_skills, detected_skills):
     combined_available = owned_skill_ids.union(set(detected_skills))
     
     for skill in graph_data.get('skills', []):
-        if skill.get('type') in ['composite', 'legendary']:
+        if skill.get('type') in ['extra', 'ultimate']:
             prereqs = skill.get('prerequisites', [])
             if not prereqs:
                 continue

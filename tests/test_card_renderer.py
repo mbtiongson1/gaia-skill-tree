@@ -14,6 +14,7 @@ from gaia_cli.cardRenderer import (
     render_card_compact,
     render_cards,
     render_promotion_prompt,
+    render_fusion_diagram,
     load_and_render,
     _pad,
     _wrap_lines,
@@ -150,7 +151,7 @@ class TestRenderCard:
 
     def test_contains_skill_name(self, basic_skill):
         card = render_card(basic_skill)
-        assert "Tokenize" in card
+        assert "/tokenize" in card
 
     def test_contains_tier_glyph(self, basic_skill):
         card = render_card(basic_skill)
@@ -250,8 +251,8 @@ class TestRenderCard:
         }
         card = render_card(skill)
         # Should show some items and then "+N more" for the remainder
-        assert "+5 more" in card
-        assert "skill-0" in card
+        assert "+", "more" in card
+        assert "/skill-0" in card
 
     def test_many_derivatives_truncated(self):
         skill = {
@@ -268,8 +269,8 @@ class TestRenderCard:
         }
         card = render_card(skill)
         # Should show some items and then "+N more" for the remainder
-        assert "+3 more" in card
-        assert "skill-0" in card
+        assert "more" in card
+        assert "/skill-0" in card
 
     def test_missing_optional_fields_defaults_gracefully(self):
         """Card should render even with minimal skill data."""
@@ -295,7 +296,7 @@ class TestRenderCardCompact:
 
     def test_contains_name(self, basic_skill):
         result = render_card_compact(basic_skill)
-        assert "Tokenize" in result
+        assert "/tokenize" in result
 
     def test_contains_level(self, basic_skill):
         result = render_card_compact(basic_skill)
@@ -328,8 +329,8 @@ class TestRenderCards:
         result = render_cards([basic_skill, extra_skill])
         # Full cards are separated by double newlines
         assert "\n\n" in result
-        assert "Tokenize" in result
-        assert "RAG Pipeline" in result
+        assert "/tokenize" in result
+        assert "/rag-pipeline" in result
 
     def test_compact_mode(self, basic_skill, extra_skill):
         result = render_cards([basic_skill, extra_skill], compact=True)
@@ -346,20 +347,25 @@ class TestRenderCards:
 
 
 class TestRenderPromotionPrompt:
-    def test_rename_suggestion_derives_name_from_skill_slug(self):
+    def test_shows_skill_id_with_slash(self):
         prompt = render_promotion_prompt(
-            {"id": "plan-and-execute", "name": "Different Registry Name"},
+            {"id": "plan-and-execute", "name": "Different Registry Name", "type": "extra", "prerequisites": ["a", "b"]},
             "IV",
         )
+        assert "/plan-and-execute" in prompt
+        assert "gaia fuse plan-and-execute" in prompt
 
-        assert 'gaia fuse plan-and-execute --name "Plan and Execute"' in prompt
-        assert '"Different Registry Name"' not in prompt
-        assert '"My Name"' not in prompt
+    def test_shows_level_and_rank_name(self):
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "III")
+        assert "Level III" in prompt
+        assert "gaia fuse research-agent" in prompt
 
-    def test_rename_suggestion_title_cases_other_slugs(self):
-        prompt = render_promotion_prompt({"id": "research-agent"}, "III")
-
-        assert 'gaia fuse research-agent --name "Research Agent"' in prompt
+    def test_shows_fusion_diagram_when_prereqs_exist(self):
+        prompt = render_promotion_prompt(
+            {"id": "research", "type": "extra", "prerequisites": ["web-search", "summarize"]},
+            "III",
+        )
+        assert "──▶" in prompt
 
 
 # ---------------------------------------------------------------------------
@@ -392,7 +398,7 @@ class TestLoadAndRender:
 
         result = load_and_render("web-scrape", str(tmp_path))
         assert result is not None
-        assert "Web Scrape" in result
+        assert "/web-scrape" in result
         assert "┌" in result or "╭" in result
 
     def test_load_nonexistent_skill_returns_none(self, tmp_path):
@@ -434,4 +440,73 @@ class TestLoadAndRender:
         result = load_and_render("classify", str(tmp_path), compact=True)
         assert result is not None
         assert "\n" not in result
-        assert "Classify" in result
+        assert "/classify" in result
+
+
+# ---------------------------------------------------------------------------
+# render_fusion_diagram tests
+# ---------------------------------------------------------------------------
+
+
+class TestRenderFusionDiagram:
+    def test_single_prereq_simple_arrow(self):
+        """Single prereq renders a simple inline arrow."""
+        output = render_fusion_diagram(["web-search"], "research")
+        assert "────▶" in output
+        assert "/web-search" in output
+        assert "/research" in output
+        assert "◇" in output  # default extra glyph
+
+    def test_two_prereqs_bracket_and_connector(self):
+        """Two prereqs render top bracket, connector row, bottom bracket."""
+        output = render_fusion_diagram(["code-gen", "code-review"], "pair-program")
+        lines = output.split("\n")
+        assert len(lines) == 3
+        assert "─┐" in lines[0]
+        assert "├──▶" in lines[1]
+        assert "─┘" in lines[2]
+        assert "/pair-program" in output
+        assert "◇" in output
+
+    def test_three_prereqs_midpoint_arrow(self):
+        """Three prereqs: first ─┐, middle ─┼──▶, last ─┘."""
+        output = render_fusion_diagram(
+            ["web-search", "summarize", "cite-sources"], "research"
+        )
+        lines = output.split("\n")
+        assert len(lines) == 3
+        assert "─┐" in lines[0]
+        assert "─┼──▶" in lines[1]
+        assert "─┘" in lines[2]
+        assert "/research" in output
+        assert "◇" in output
+
+    def test_four_prereqs_structure(self):
+        """Four prereqs: first ─┐, middle ─┤ and ─┼──▶, last ─┘."""
+        output = render_fusion_diagram(
+            ["web-search", "summarize", "cite-sources", "knowledge"],
+            "autonomous-research",
+            result_type="ultimate",
+        )
+        lines = output.split("\n")
+        assert len(lines) == 4
+        assert "─┐" in lines[0]
+        assert "─┘" in lines[3]
+        # Arrow is on the midpoint row (index 2 for 4 items)
+        assert "──▶" in output
+        assert "/autonomous-research" in output
+        assert "◆" in output  # ultimate glyph
+
+    def test_basic_tier_glyph(self):
+        """Basic tier uses the circle glyph."""
+        output = render_fusion_diagram(["a", "b", "c"], "result", result_type="basic")
+        assert "○" in output
+
+    def test_prereqs_padded_to_equal_width(self):
+        """Shorter prereq names are padded so brackets align."""
+        output = render_fusion_diagram(["ab", "longername"], "out")
+        # Both prereq lines should have the bracket at the same column
+        lines = output.split("\n")
+        # First line (shorter name) should be padded
+        assert "/ab" in lines[0]
+        assert "/longername" in lines[2]

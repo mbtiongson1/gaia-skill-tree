@@ -78,11 +78,22 @@ TIER_COLORS = {
     "extra": (192, 132, 252),
     "ultimate": (245, 158, 11),
 }
+RANK_COLORS = {
+    "0":  (148, 163, 184),   # Slate
+    "I":  (56, 189, 248),    # Sky
+    "II": (99, 202, 183),    # Teal
+    "III": (167, 139, 250),  # Violet
+    "IV": (232, 121, 249),   # Fuchsia
+    "V":  (251, 191, 36),    # Amber
+    "VI": (251, 191, 36),    # Amber bright
+}
 COLOR_SUCCESS = (134, 239, 172)
 COLOR_MISSING = (100, 116, 139)
 COLOR_TEXT = (226, 232, 240)
 COLOR_MUTED = (148, 163, 184)
 COLOR_GOLD = (251, 191, 36)
+COLOR_CONTRIBUTOR = (239, 68, 68)    # Red for named skill contributors
+COLOR_LOCAL_USER = (134, 239, 172)   # Bright green for local/user skills
 
 
 # ─── Style constants ────────────────────────────────────────────────────────
@@ -244,7 +255,8 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
 
     tier = skill.get("type", "basic")
     glyph = TIER_GLYPHS.get(tier, "○")
-    name = skill.get("name", skill.get("id", "Unknown"))
+    skill_id = skill.get("id", "unknown")
+    name = f"/{skill_id}"
     rarity = skill.get("rarity", "common")
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
     level = skill.get("level", "0")
@@ -254,7 +266,6 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     derivatives = skill.get("derivatives", [])
     status = skill.get("status", "provisional")
     evidence_count = len(skill.get("evidence", []))
-    skill_id = skill.get("id", "unknown")
 
     lines: list[str] = []
 
@@ -289,16 +300,18 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     # Separator
     lines.append(_separator(width))
 
-    # Prerequisites
+    # Prerequisites (slash-named)
     if prereqs:
-        prereq_str = _fit_list(prereqs, inner, prefix="Prereqs: ")
+        prereq_list = [f"/{p}" for p in prereqs]
+        prereq_str = _fit_list(prereq_list, inner, prefix="Prereqs: ")
         lines.append(_line(prereq_str, width))
     else:
         lines.append(_line("Prereqs: (none)", width))
 
-    # Derivatives
+    # Derivatives (slash-named)
     if derivatives:
-        deriv_str = _fit_list(derivatives, inner, prefix="Unlocks: ")
+        deriv_list = [f"/{d}" for d in derivatives]
+        deriv_str = _fit_list(deriv_list, inner, prefix="Unlocks: ")
         lines.append(_line(deriv_str, width))
     else:
         lines.append(_line("Unlocks: (none)", width))
@@ -322,11 +335,12 @@ def render_card_compact(skill: dict) -> str:
     """
     Render a compact single-line card summary.
 
-    Format: [glyph] name (level) [rarity] — first 60 chars of description
+    Format: [glyph] /skill-id (level) [rarity] — first 60 chars of description
     """
     tier = skill.get("type", "basic")
     glyph = TIER_GLYPHS.get(tier, "○")
-    name = skill.get("name", skill.get("id", "Unknown"))
+    skill_id = skill.get("id", skill.get("name", "unknown"))
+    name = f"/{skill_id}"
     level = skill.get("level", "0")
     rarity = skill.get("rarity", "common")
     desc = skill.get("description", "")
@@ -412,8 +426,10 @@ def render_appraise_card(
 
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
+    rc = RANK_COLORS.get(skill_data.get("level", "0"), (148, 163, 184))
     glyph = TIER_GLYPHS.get(tier, "○")
-    name = skill_data.get("name", skill_data.get("id", "?"))
+    skill_id = skill_data.get("id", "?")
+    name = f"/{skill_id}"
     level = skill_data.get("level", "0")
     rarity = skill_data.get("rarity", "common")
     desc = skill_data.get("description", "")
@@ -426,20 +442,21 @@ def render_appraise_card(
     # Top border
     lines.append(f"{bc}{TL}{H * (width - 2)}{TR}{r}")
 
-    # Header line: glyph + name + level
+    # Header line: glyph + name + level (rank-colored)
     level_str = f"Level {level}"
     header_left = f"{glyph} {name}"
     space = inner - len(header_left) - len(level_str)
     if space < 1:
         header_left = header_left[: inner - len(level_str) - 2] + "…"
         space = 1
-    lines.append(f"{bc}{V}{r} {bold()}{fg(*tc)}{header_left}{r}{' ' * space}{dim()}{level_str}{r} {bc}{V}{r}")
+    lines.append(f"{bc}{V}{r} {bold()}{fg(*tc)}{header_left}{r}{' ' * space}{fg(*rc)}{level_str}{r} {bc}{V}{r}")
 
     # Thin divider
     lines.append(f"{bc}{V}{r} {fg(*COLOR_MUTED)}{H * inner}{r} {bc}{V}{r}")
 
-    # Type + rarity
-    type_str = f"Type: {tier.capitalize()}"
+    # Type + rarity (using proper type labels)
+    type_labels = {"basic": "Basic Skill", "extra": "Extra Skill", "ultimate": "Ultimate Skill"}
+    type_str = f"Type: {type_labels.get(tier, tier.capitalize())}"
     rarity_str = f"Rarity: {rarity}"
     meta = f"{type_str}    {rarity_str}"
     lines.append(f"{bc}{V}{r} {fg(*COLOR_MUTED)}{_pad(meta, inner)}{r} {bc}{V}{r}")
@@ -460,7 +477,7 @@ def render_appraise_card(
         prereq_items = []
         for pid, has in prereq_status.items():
             icon = f"{fg(*COLOR_SUCCESS)}✓{r}" if has else f"{fg(*COLOR_MISSING)}○{r}"
-            prereq_items.append(f"  {icon} {pid}")
+            prereq_items.append(f"  {icon} /{pid}")
         # Two-column layout
         col_w = inner // 2
         for i in range(0, len(prereq_items), 2):
@@ -479,9 +496,9 @@ def render_appraise_card(
     # Blank
     lines.append(f"{bc}{V}{r} {' ' * inner} {bc}{V}{r}")
 
-    # Derivatives (unlocks)
+    # Derivatives (unlocks) — slash-named
     if derivatives:
-        deriv_line = "Unlocks: " + ", ".join(d.get("id", d) if isinstance(d, dict) else d for d in derivatives[:4])
+        deriv_line = "Unlocks: " + ", ".join("/" + (d.get("id", d) if isinstance(d, dict) else d) for d in derivatives[:4])
         if len(derivatives) > 4:
             deriv_line += f" +{len(derivatives) - 4} more"
         lines.append(f"{bc}{V}{r} {fg(*COLOR_MUTED)}{_pad(deriv_line, inner)}{r} {bc}{V}{r}")
@@ -515,7 +532,8 @@ def render_unlock_card(skill_data: dict, new_paths: list) -> str:
     """Celebratory unlock card with ASCII art."""
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
-    name = skill_data.get("name", skill_data.get("id", "?"))
+    skill_id = skill_data.get("id", "?")
+    name = f"/{skill_id}"
     glyph = TIER_GLYPHS.get(tier, "○")
     level = skill_data.get("level", "0")
     rarity = skill_data.get("rarity", "common")
@@ -582,22 +600,82 @@ def render_path_summary(paths: dict) -> str:
 
 def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
     """Prompt shown when a skill is eligible for promotion."""
-    name = skill_data.get("name", skill_data.get("id", "?"))
     skill_id = skill_data.get("id", "?")
-    suggested_name = _name_from_slug(skill_id) or name
+    skill_type = skill_data.get("type", "extra")
+    prereqs = skill_data.get("prerequisites", [])
     gc = fg(*COLOR_GOLD)
+    tc = fg(*TIER_COLORS.get(skill_type, COLOR_GOLD))
     r = reset()
     b = bold()
 
     from gaia_cli.promotion import LEVEL_NAMES
     level_name = LEVEL_NAMES.get(proposed_level, proposed_level)
 
-    return "\n".join([
-        f"",
-        f"  {gc}┌─ Fusion Ready ─────────────────────┐{r}",
-        f"  {gc}│{r}  {b}{name}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
+    lines = [""]
+    # Show fusion diagram if skill has prerequisites
+    if prereqs:
+        lines.append(render_fusion_diagram(prereqs, skill_id, skill_type))
+    lines.extend([
+        f"  {gc}┌─ Fusion ──────────────────────────────┐{r}",
+        f"  {gc}│{r}  {tc}{b}/{skill_id}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
         f"  {gc}│{r}  Run: {b}gaia fuse {skill_id}{r}",
-        f"  {gc}│{r}  Rename? {dim()}gaia fuse {skill_id} --name \"{suggested_name}\"{r}",
         f"  {gc}└───────────────────────────────────────────┘{r}",
-        f"",
+        "",
     ])
+    return "\n".join(lines)
+
+
+# ─── Fusion diagram ───────────────────────────────────────────────────────
+
+
+def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "extra") -> str:
+    """Render a Unicode fusion flow diagram showing skill combination."""
+    tier_color = TIER_COLORS.get(result_type, TIER_COLORS["extra"])
+    glyph = TIER_GLYPHS.get(result_type, "◇")
+
+    mc = fg(*COLOR_MUTED)
+    tc = fg(*tier_color)
+    tb = bold() + fg(*tier_color)
+    r = reset()
+
+    # Format skill names with slash prefix
+    prereq_names = [f"/{p}" for p in prereqs]
+    result_name = f"/{result}"
+
+    # Single prereq: simple arrow
+    if len(prereqs) == 1:
+        return f"  {mc}{prereq_names[0]} ────▶{r} {tb}{result_name} {glyph}{r}"
+
+    # Pad prereq names to equal width
+    max_len = max(len(n) for n in prereq_names)
+    padded = [n.ljust(max_len) for n in prereq_names]
+
+    n = len(padded)
+    lines = []
+
+    if n == 2:
+        # Two prereqs: bracket rows with a connector row in between
+        padding = " " * max_len
+        lines.append(f"  {mc}{padded[0]} ─┐{r}")
+        lines.append(f"  {mc}{padding}  {r}{tc}├──▶{r} {tb}{result_name} {glyph}{r}")
+        lines.append(f"  {mc}{padded[1]} ─┘{r}")
+    else:
+        # 3+ prereqs: arrow on the vertical midpoint row
+        mid = n // 2
+        for i, name in enumerate(padded):
+            if i == 0:
+                bracket = "─┐"
+            elif i == n - 1:
+                bracket = "─┘"
+            elif i == mid:
+                bracket = "─┼──▶"
+            else:
+                bracket = "─┤"
+
+            if i == mid:
+                line = f"  {mc}{name} {r}{tc}─┼──▶{r} {tb}{result_name} {glyph}{r}"
+            else:
+                line = f"  {mc}{name} {bracket}{r}"
+            lines.append(line)
+
+    return "\n".join(lines)

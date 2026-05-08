@@ -254,6 +254,7 @@ options:
                         global registry.
   --global, -g          Use global GAIA_HOME registry, ignoring any local .gaia/ config.
   --version, -v         Print the Gaia CLI version and exit.
+  --canon               Show canonical registry data instead of local-first view.
 
 Quick usage:
   gaia init [--user <name>] [--scan <path>] [--yes]
