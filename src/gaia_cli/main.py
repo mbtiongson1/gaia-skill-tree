@@ -72,6 +72,7 @@ from gaia_cli.formatting import (
 )
 from gaia_cli.localContext import LocalContext
 from gaia_cli.cardRenderer import render_fusion_diagram
+from gaia_cli.interactive import select_skill, select_fusion_candidate, select_promotion_candidate
 
 DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
 
@@ -428,8 +429,13 @@ def appraise_command(args):
     # Determine which skill to appraise
     skill_id = getattr(args, 'skillId', None)
     if not skill_id:
-        # Default: most recently unlocked skill
-        if tree and tree.get('unlockedSkills'):
+        # Try interactive picker first
+        all_skills = list(skill_map.values())
+        picked = select_skill(all_skills, "Select a skill to appraise:")
+        if picked:
+            skill_id = picked
+        elif tree and tree.get('unlockedSkills'):
+            # Fallback: most recently unlocked skill
             sorted_skills = sorted(
                 tree['unlockedSkills'],
                 key=lambda s: s.get('unlockedAt', ''),
@@ -533,11 +539,18 @@ def promote_command(args):
                 print("No skills eligible for promotion.")
                 return
             for result in results:
-                print(f"Promoted {result['skillId']} to Level {result['newLevel']}.")
+                print(f"Promoted /{result['skillId']} to Level {result['newLevel']}.")
             return
         if not skill_id:
-            print("Usage: gaia promote <skill> or gaia promote --all", file=sys.stderr)
-            sys.exit(2)
+            # Try interactive picker
+            candidates = promotable_candidates(username, args.registry)
+            if candidates:
+                picked = select_promotion_candidate(candidates, "Select skill to promote:")
+                if picked:
+                    skill_id = picked
+            if not skill_id:
+                print("Usage: gaia promote <skill> or gaia promote --all", file=sys.stderr)
+                sys.exit(2)
         result = promote_from_candidates(username, skill_id, args.registry, new_display_name=display_name)
     except ValueError as exc:
         print(str(exc), file=sys.stderr)
@@ -697,16 +710,28 @@ def fuse_command(args):
     tree = load_tree(username, registry_path=args.registry)
     if not tree:
         return
-    
-    target = args.skillId
+
+    target = getattr(args, 'skillId', None)
     display_name = getattr(args, 'name', None)
-    
+
+    # Interactive picker when no target specified
+    if not target:
+        pending_combos = tree.get('pendingCombinations', [])
+        if pending_combos:
+            picked = select_fusion_candidate(pending_combos, "Select fusion candidate:")
+            if picked:
+                target = picked
+        if not target:
+            print("Usage: gaia fuse <skill>", file=sys.stderr)
+            print("Run `gaia scan` to detect fusion candidates.")
+            return
+
     # Check combinations first
     pending_combos = tree.get('pendingCombinations', [])
     combo_match = next((p for p in pending_combos if p.get('candidateResult') == target), None)
     
     if combo_match:
-        print(f"Fusing combination {target}...")
+        print(f"Fusing combination /{target}...")
         tree.setdefault('unlockedSkills', []).append({
             "skillId": target,
             "level": combo_match.get('levelFloor'),
@@ -726,14 +751,14 @@ def fuse_command(args):
     try:
         payload = load_promotion_candidates(args.registry)
         if any(c.get('skillId') == target for c in payload.get('candidates', [])):
-            print(f"Fusing promotion for {target}...")
+            print(f"Fusing promotion for /{target}...")
             result = promote_from_candidates(username, target, args.registry, new_display_name=display_name)
-            print(f"Promoted {result['skillId']} to Level {result['newLevel']}.")
+            print(f"Promoted /{result['skillId']} to Level {result['newLevel']}.")
             return
     except Exception:
         pass
 
-    print(f"Skill {target} is not a valid combination or promotion candidate.")
+    print(f"Skill /{target} is not a valid combination or promotion candidate.")
     print("Run `gaia scan` to refresh candidates.")
 
 _EMBEDDINGS_INSTALL_STEPS = """\
@@ -1150,7 +1175,7 @@ def get_parser():
     promote_parser.add_argument('--all', action='store_true', help="Promote every candidate from the last scan")
     promote_parser.add_argument('--name', help="Optional display name for the promoted skill")
     fuse_parser = subparsers.add_parser('fuse', help="Confirm a skill combination or promotion candidate")
-    fuse_parser.add_argument('skillId', help="Skill ID to fuse or promote")
+    fuse_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to fuse or promote")
     fuse_parser.add_argument('--name', help="Optional display name for the skill")
     docs_parser = subparsers.add_parser('docs', help="Documentation maintenance commands")
     docs_sub = docs_parser.add_subparsers(dest='docs_command')
