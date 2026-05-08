@@ -153,15 +153,16 @@ gaia init
 pass `gaia init --user your-username` to override.
 
 ```bash
+gaia update
 gaia pull
 gaia scan
 gaia tree
 ```
-`gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, and renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`.
+`gaia update` pulls the latest registry and reinstalls the CLI to make sure you're on the current version. `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`, and prints matched skills as `/skill-id` with Unicode fusion diagrams for combination candidates.
 ```bash
-gaia appraise skill-name
+gaia appraise skill-id
 ```
-Replace `skill-name` with the actual skill listed in the tree. Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
+Replace `skill-id` with the `/skill-id` shown in your tree (without the leading slash). All output defaults to your local skill levels; pass `--canon` to view the canonical registry card instead. Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
 ## Push
 Go to your integrated terminal in your repo and run this command after scanning:
