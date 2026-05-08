@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import requests
 
 from common.candidate_builder import build_evidence_upgrade
-from common.proposer import open_evidence_upgrade_pr
+from common.proposer import write_evidence_upgrades
 
 MIN_CITATIONS = 10
 MAX_AGE_YEARS = 3
@@ -256,7 +256,7 @@ def main():
     print(f"\n  Evidence upgrades found: {len(upgrades)}")
 
     if upgrades:
-        output = open_evidence_upgrade_pr(upgrades, "papers")
+        output = write_evidence_upgrades(upgrades, "papers")
         print(f"  Output: {output}")
     else:
         print("  No papers met the quality threshold.")

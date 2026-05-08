@@ -13,7 +13,7 @@ from common.taxonomy_mapper import KEYWORD_TO_SKILL, map_to_skills
 from common.evidence_scorer import compute_skillsmp_score
 from common.candidate_builder import build_candidate, normalize_id
 from common.dedup import deduplicate
-from common.proposer import open_proposal_pr
+from common.proposer import write_proposals
 
 BASE_URL = "https://skillsmp.com/api/v1"
 DAILY_BUDGET = 50
@@ -156,7 +156,7 @@ def main():
     print(f"  After dedup: {len(final)}")
 
     if final:
-        output = open_proposal_pr(final, "skillsmp")
+        output = write_proposals(final, "skillsmp")
         print(f"\n  Output: {output}")
     else:
         print("\n  No new candidates to propose.")
