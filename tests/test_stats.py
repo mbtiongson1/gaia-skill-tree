@@ -84,7 +84,7 @@ def test_render_stats_includes_registry_health_sections(tmp_path):
 
     assert "Gaia Registry — 4 skills  1 edges" in output
     assert "Type breakdown" in output
-    assert "Atomic" in output
+    assert "Basic Skill" in output
     assert "Level breakdown" in output
     assert "Evidence coverage" in output
     assert "With evidence    3 / 4" in output

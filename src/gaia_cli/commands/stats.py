@@ -7,12 +7,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Iterable
 
+from gaia_cli.formatting import TIER_COLORS, RANK_COLORS, TYPE_SYMBOLS, _use_color, _fg, _reset
 from gaia_cli.registry import named_skills_dir, registry_graph_path
 
 TYPE_LABELS = {
-    "basic": "Atomic",
-    "extra": "Composite",
-    "ultimate": "Legendary",
+    "basic": "Basic Skill",
+    "extra": "Extra Skill",
+    "ultimate": "Ultimate Skill",
 }
 
 LEVEL_LABELS = {
@@ -153,16 +154,24 @@ def _percent(count: int, total: int) -> int:
 def render_stats(stats: dict) -> str:
     """Render a human-readable stats report."""
     total = stats["total_skills"]
+    use_color = _use_color()
+    rst = _reset() if use_color else ""
     lines = [f"Gaia Registry — {total} skills  {stats['total_edges']} edges", ""]
 
     lines.append("Type breakdown")
     for skill_type in TYPE_ORDER:
         label = TYPE_LABELS[skill_type]
+        glyph = TYPE_SYMBOLS.get(skill_type, " ")
         count = stats["type_counts"].get(skill_type, 0)
-        lines.append(f"  {label:<9} {count:>4}  {_bar(count, total)}  {_percent(count, total):>3}%")
+        bar = _bar(count, total)
+        if use_color:
+            color = _fg(*TIER_COLORS[skill_type])
+            lines.append(f"  {color}{glyph} {label:<14}{rst} {count:>4}  {color}{bar}{rst}  {_percent(count, total):>3}%")
+        else:
+            lines.append(f"  {glyph} {label:<14} {count:>4}  {bar}  {_percent(count, total):>3}%")
     for skill_type, count in sorted(stats["type_counts"].items()):
         if skill_type not in TYPE_LABELS:
-            lines.append(f"  {skill_type:<9} {count:>4}  {_bar(count, total)}  {_percent(count, total):>3}%")
+            lines.append(f"  {skill_type:<14} {count:>4}  {_bar(count, total)}  {_percent(count, total):>3}%")
 
     lines.extend(["", "Level breakdown"])
     for level in LEVEL_ORDER:
@@ -171,7 +180,11 @@ def render_stats(stats: dict) -> str:
         suffix = ""
         if level == "II" and stats.get("named_unclaimed", 0):
             suffix = f"  ({stats['named_unclaimed']} slots unclaimed)"
-        lines.append(f"  {level:<3} {label:<14} {count:>4}{suffix}")
+        if use_color:
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0"]))
+            lines.append(f"  {color}{level:<3} {label:<14}{rst} {count:>4}{suffix}")
+        else:
+            lines.append(f"  {level:<3} {label:<14} {count:>4}{suffix}")
     for level, count in sorted(stats["level_counts"].items()):
         if level not in LEVEL_LABELS:
             lines.append(f"  {level:<3} {'Unknown':<14} {count:>4}")

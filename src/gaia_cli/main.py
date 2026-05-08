@@ -54,6 +54,24 @@ from gaia_cli.promotion import (
     LEVEL_NAMES,
 )
 from gaia_cli.hook import hook_entry
+from gaia_cli.formatting import (
+    format_skill_plain,
+    format_skill_colored,
+    format_type_label,
+    format_type_colored,
+    format_level_colored,
+    fusion_equation,
+    TIER_COLORS,
+    RANK_COLORS,
+    TYPE_SYMBOLS,
+    COLOR_CONTRIBUTOR,
+    COLOR_LOCAL_USER,
+    _fg,
+    _reset,
+    _use_color,
+)
+from gaia_cli.localContext import LocalContext
+from gaia_cli.cardRenderer import render_fusion_diagram
 
 DEFAULT_REGISTRY_REF = "https://github.com/mbtiongson1/gaia-skill-tree"
 
@@ -254,7 +272,18 @@ def scan_command(args):
         print(f"Found {scan_result['candidate_count']} candidate token(s).")
         print(f"Matched {len(resolved)} canonical skill(s).")
         if resolved:
-            print(", ".join(resolved))
+            # Colored skill list with type glyphs
+            graph_path_file = registry_graph_path(args.registry)
+            with open(graph_path_file, 'r', encoding='utf-8') as gf:
+                gdata = json.load(gf)
+            smap = {s['id']: s for s in gdata.get('skills', [])}
+            skill_parts = []
+            for sid in sorted(resolved):
+                sk = smap.get(sid, {})
+                glyph = TYPE_SYMBOLS.get(sk.get('type', 'basic'), '○')
+                colored_name = format_skill_colored(sid, sk.get('level', '0'))
+                skill_parts.append(f"  {glyph} {colored_name}")
+            print("\n".join(skill_parts))
         else:
             print('Tip: try `gaia skills search "code review"` or expand scanPaths.')
     username = config.get('gaiaUser')
@@ -265,10 +294,14 @@ def scan_command(args):
         unlocked = [s.get('skillId') for s in tree.get('unlockedSkills', [])]
         combos = get_combinations(graph_data, unlocked, resolved)
         if combos and not quiet:
-            print("\nNew combination candidates detected:")
+            print("\nNew fusion candidates:")
             for c in combos:
-                print(f"- {c['candidateResult']} (Requires: {', '.join(c['detectedSkills'])})")
-            print("Run `gaia fuse [skillId]` to confirm and add to your tree.")
+                result_skill = skill_map.get(c['candidateResult'], {})
+                result_type = result_skill.get('type', 'extra')
+                print(render_fusion_diagram(
+                    c['detectedSkills'], c['candidateResult'], result_type
+                ))
+            print("Run `gaia fuse <skill>` to confirm.")
 
         # Path engine integration
         old_paths = load_paths()
@@ -907,28 +940,72 @@ def skills_command(args):
             or q in str(item.get("name", "")).lower()
             or q in str(item.get("description", "")).lower()
         ]
+
+    # Build local context for named-first display
+    config = load_config() or {}
+    ctx_user = config.get("gaiaUser") or config.get("username") or ""
+    try:
+        ctx = LocalContext.load(args.registry, ctx_user, include_scan=False)
+    except Exception:
+        ctx = None
+
     if verb == "info":
         q = args.skill_id
         match = next((item for item in items if item.get("id") == q), None)
         if not match:
-            print(f"Skill '{q}' not found.", file=sys.stderr)
+            print(f"Skill '/{q}' not found.", file=sys.stderr)
             sys.exit(1)
+        sid = match.get("id", q)
+        level = match.get("level", "?")
+        skill_type = match.get("type", "basic")
+        named_contrib = ctx.named_contributor(sid) if ctx and ctx.is_named(sid) else None
+        is_local = ctx.is_local(sid) if ctx else False
+        display = format_skill_colored(sid, level, named_contributor=named_contrib,
+                                       is_local=is_local, local_user=ctx_user)
         suffix = " (pending)" if match.get("pending") else ""
-        print(f"{match['id']}{suffix}")
-        print(f"Name: {match.get('name', match['id'])}")
-        print(f"Level: {match.get('level', '?')}")
+        print(f"{display}{suffix}")
+        print(f"  Type:  {format_type_colored(skill_type)}")
+        print(f"  Level: {format_level_colored(level)}")
         if match.get("description"):
-            print(match["description"])
+            print(f"  {match['description']}")
         return
     if not items:
         print("No skills found.")
         return
-    width = max(5, *(len(str(item.get("id", ""))) for item in items))
-    print(f"{'Skill':<{width}}  Level  Name")
-    print("-" * (width + 14))
+
+    width = max(5, *(len(format_skill_plain(
+        item.get("id", ""),
+        named_contributor=ctx.named_contributor(item.get("id", "")) if ctx and ctx.is_named(item.get("id", "")) else None,
+        is_local=ctx.is_local(item.get("id", "")) if ctx else False,
+        local_user=ctx_user,
+    )) for item in items))
+    print(f"{'Skill':<{width}}  Level  Type")
+    print("─" * (width + 22))
     for item in items:
+        sid = item.get("id", "")
+        level = item.get("level", "?")
+        skill_type = item.get("type", "basic")
+        named_contrib = ctx.named_contributor(sid) if ctx and ctx.is_named(sid) else None
+        is_local = ctx.is_local(sid) if ctx else False
+
+        display = format_skill_colored(
+            sid, level,
+            named_contributor=named_contrib,
+            is_local=is_local,
+            local_user=ctx_user,
+        )
+        plain_display = format_skill_plain(
+            sid,
+            named_contributor=named_contrib,
+            is_local=is_local,
+            local_user=ctx_user,
+        )
+        level_col = format_level_colored(level)
+        type_col = format_type_colored(skill_type)
         suffix = " (pending)" if item.get("pending") else ""
-        print(f"{item.get('id', ''):<{width}}  {item.get('level', '?'):<5}  {item.get('name', '')}{suffix}")
+        # Use plain width for padding since ANSI codes don't count
+        pad = width - len(plain_display)
+        print(f"{display}{' ' * max(0, pad)}  {level_col:<5}  {type_col}{suffix}")
 
 
 def pull_command(args):
@@ -1021,6 +1098,11 @@ def get_parser():
         '--version', '-v',
         action='store_true',
         help="Print the Gaia CLI version and exit.",
+    )
+    parser.add_argument(
+        '--canon',
+        action='store_true',
+        help="Show canonical registry data instead of local-first view.",
     )
     subparsers = parser.add_subparsers(dest='command', metavar="{" + ",".join(PUBLIC_COMMANDS) + "}")
     subparsers.add_parser('help', help="Show command help")
