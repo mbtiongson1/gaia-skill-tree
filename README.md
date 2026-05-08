@@ -162,7 +162,7 @@ gaia tree
 ```bash
 gaia appraise skill-id
 ```
-Replace `skill-id` with the `/skill-id` shown in your tree (without the leading slash). All output defaults to your local skill levels; pass `--canon` to view the canonical registry card instead. Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
+Replace `skill-id` with the `/skill-id` shown in your tree (without the leading slash). Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
 ## Push
 Go to your integrated terminal in your repo and run this command after scanning:
@@ -293,10 +293,10 @@ Quick usage:
 | `gaia scan --auto-promote` | Runs scan, promotes every scan-approved candidate, and re-renders the tree. |
 | `gaia pull` | Refreshes registry data from `origin`. |
 | `gaia push` | Writes a batch intake record under `registry-for-review/skill-batches/` and opens a PR when possible. |
-| `gaia appraise [skillId]` | Renders a local-first skill card (your level, named form when available) showing prereqs, unlocks, and promotion status. Pass `--canon` to view the canonical registry entry. |
+| `gaia appraise [skillId]` | Renders a local-first skill card (your level, named form when available) showing prereqs, unlocks, and promotion status. |
 | `gaia promote <skill>` | Promotes only if the skill appeared in the last scan candidates; Gaia uses the scan-suggested level. |
 | `gaia promote --all` | Promotes every valid candidate from the last scan. |
-| `gaia fuse [skillId]` | Confirms a fusion combination or promotion candidate; omit `skillId` for an interactive arrow-key picker (requires `pip install ".[interactive]"`). |
+| `gaia fuse <skillId>` | Confirms a fusion combination or promotion candidate. |
 | `gaia stats` | Shows registry health: skill counts by type (○ Basic Skill / ◇ Extra Skill / ◆ Ultimate Skill) with colored bars and level breakdown. |
 | `gaia tree` | Renders your personal tree to `generated-output/tree.html` and `generated-output/tree.md`. |
 | `gaia graph` | Generates and opens `registry/render/gaia.html`; use `--format svg` for `registry/gaia.svg` or `--format json` for render JSON. |
