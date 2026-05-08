@@ -6,13 +6,16 @@ from __future__ import annotations
 import re
 import argparse
 import json
-import subprocess
 import sys
 from functools import partial
 from pathlib import Path
-from gaia_cli.main import PUBLIC_COMMANDS, get_parser
 
 ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from gaia_cli.main import PUBLIC_COMMANDS, get_parser  # noqa: E402
 
 
 def _read_version() -> str:
