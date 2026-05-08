@@ -125,10 +125,11 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "2.13.0",
-  "generatedAt": "2026-04-30T00:00:00Z",
+  "version": "3.0.1",
+  "generatedAt": "2026-05-06T00:00:00Z",
   "meta": {
     "typeLabels": {
+      "basic": "Basic Skill",
       "extra": "Extra Skill",
       "ultimate": "Ultimate Skill"
     },
@@ -139,10 +140,66 @@
       "III": "Evolved",
       "IV": "Hardened",
       "V": "Transcendent",
-      "VI": "Transcendent â˜…"
+      "VI": "Transcendent ★"
     },
     "rarityLabels": {
       "legendary": "Divine"
+    },
+    "levelColors": {
+      "0": {
+        "hex": "#94a3b8",
+        "bg": "rgba(148,163,184,.12)",
+        "border": "rgba(148,163,184,.4)"
+      },
+      "I": {
+        "hex": "#38bdf8",
+        "bg": "rgba(56,189,248,.12)",
+        "border": "rgba(56,189,248,.4)"
+      },
+      "II": {
+        "hex": "#63cab7",
+        "bg": "rgba(99,202,183,.15)",
+        "border": "rgba(99,202,183,.4)"
+      },
+      "III": {
+        "hex": "#a78bfa",
+        "bg": "rgba(167,139,250,.15)",
+        "border": "rgba(167,139,250,.4)"
+      },
+      "IV": {
+        "hex": "#e879f9",
+        "bg": "rgba(232,121,249,.15)",
+        "border": "rgba(232,121,249,.4)"
+      },
+      "V": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.15)",
+        "border": "rgba(251,191,36,.4)"
+      },
+      "VI": {
+        "hex": "#fbbf24",
+        "bg": "rgba(251,191,36,.22)",
+        "border": "rgba(251,191,36,.55)"
+      }
+    },
+    "typeColors": {
+      "basic": {
+        "hex": "#38bdf8",
+        "rgb": "56,189,248"
+      },
+      "extra": {
+        "hex": "#c084fc",
+        "rgb": "192,132,252"
+      },
+      "ultimate": {
+        "hex": "#f59e0b",
+        "rgb": "245,158,11"
+      }
+    },
+    "typeSymbols": {
+      "basic": "○",
+      "extra": "◇",
+      "ultimate": "◆"
     }
   },
   "skills": [
@@ -212,7 +269,8 @@
       "derivatives": [
         "gaia-audit",
         "grounding",
-        "rag-pipeline"
+        "rag-pipeline",
+        "wiki-search"
       ],
       "conditions": "",
       "evidence": [
@@ -227,7 +285,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -383,7 +441,8 @@
         "research",
         "document-analyst",
         "data-analysis",
-        "literature-review"
+        "literature-review",
+        "wiki-search"
       ],
       "conditions": "",
       "evidence": [
@@ -398,7 +457,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -538,7 +597,8 @@
       "prerequisites": [],
       "derivatives": [
         "rag-pipeline",
-        "knowledge-harvest"
+        "knowledge-harvest",
+        "wiki-search"
       ],
       "conditions": "",
       "evidence": [
@@ -553,7 +613,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -627,7 +687,8 @@
       "derivatives": [
         "ghostwrite",
         "prd-generation",
-        "scientific-writing"
+        "scientific-writing",
+        "architecture-diagram"
       ],
       "conditions": "",
       "evidence": [
@@ -642,7 +703,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -655,7 +716,8 @@
       "prerequisites": [],
       "derivatives": [
         "ghostwrite",
-        "translation-pipeline"
+        "translation-pipeline",
+        "humanize-prose"
       ],
       "conditions": "",
       "evidence": [
@@ -670,7 +732,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-26",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -772,7 +834,8 @@
       "derivatives": [
         "browser-automation",
         "research",
-        "web-scrape"
+        "web-scrape",
+        "prediction-market-analysis"
       ],
       "conditions": "",
       "evidence": [
@@ -787,7 +850,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -829,7 +892,9 @@
       "derivatives": [
         "document-analyst",
         "document-digitization",
-        "text-to-sql-pipeline"
+        "text-to-sql-pipeline",
+        "humanize-prose",
+        "architecture-diagram"
       ],
       "conditions": "",
       "evidence": [
@@ -844,7 +909,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -1671,7 +1736,8 @@
       "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
       "prerequisites": [],
       "derivatives": [
-        "data-analysis"
+        "data-analysis",
+        "architecture-diagram"
       ],
       "conditions": "",
       "evidence": [
@@ -1686,7 +1752,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-05-06",
       "version": "0.2.0"
     },
     {
@@ -1793,7 +1859,8 @@
       ],
       "derivatives": [
         "autonomous-data-scientist",
-        "ml-pipeline"
+        "ml-pipeline",
+        "prediction-market-analysis"
       ],
       "conditions": "",
       "evidence": [
@@ -1808,7 +1875,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.2.0"
     },
     {
@@ -3332,7 +3399,9 @@
       "rarity": "common",
       "description": "Reads, edits, repacks, and applies styling or design principles to structured binary document formats such as PPTX, DOCX, and XLSX.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "humanize-prose"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3346,7 +3415,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -3689,7 +3758,9 @@
       "rarity": "uncommon",
       "description": "Performs hypothesis testing, regression analysis, and Bayesian modelling with effect size calculation and APA-formatted statistical reporting using scipy, statsmodels, and PyMC.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "prediction-market-analysis"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3710,7 +3781,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-06",
       "version": "0.1.0"
     },
     {
@@ -4088,6 +4159,157 @@
       "createdAt": "2026-04-30",
       "updatedAt": "2026-04-30",
       "version": "0.2.0"
+    },
+    {
+      "id": "feed-monitoring",
+      "name": "Feed Monitoring",
+      "type": "basic",
+      "level": "IV",
+      "rarity": "common",
+      "description": "Monitors RSS, Atom, blog, or other recurring content feeds, discovers updates, tracks read state, and surfaces new signals for downstream agent workflows.",
+      "prerequisites": [],
+      "derivatives": [],
+      "conditions": "Requires configured feed sources and a repeatable polling or discovery mechanism.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/research/blogwatcher/SKILL.md",
+          "evaluator": "openai-codex",
+          "date": "2026-05-06",
+          "notes": "Hermes Agent blogwatcher skill monitors blogs and RSS/Atom feeds with feed discovery, scraping fallback, OPML import, and read/unread article management."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-06",
+      "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "wiki-search",
+      "name": "Wiki Search",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Builds, maintains, and queries an interlinked markdown or wiki-style knowledge base so an agent can retrieve durable local context across research sessions.",
+      "prerequisites": [
+        "retrieve",
+        "embed-text",
+        "summarize"
+      ],
+      "derivatives": [],
+      "conditions": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/research/llm-wiki/SKILL.md",
+          "evaluator": "openai-codex",
+          "date": "2026-05-06",
+          "notes": "Hermes Agent llm-wiki skill documents a persistent interlinked markdown knowledge base pattern for compounding research notes and retrieval."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-06",
+      "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "prediction-market-analysis",
+      "name": "Prediction Market Analysis",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Queries prediction-market data, compares market probabilities and price history, and summarizes probabilistic signals for forecasting or decision-support workflows.",
+      "prerequisites": [
+        "data-analysis",
+        "web-search",
+        "statistical-analysis"
+      ],
+      "derivatives": [],
+      "conditions": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/research/polymarket/SKILL.md",
+          "evaluator": "openai-codex",
+          "date": "2026-05-06",
+          "notes": "Hermes Agent polymarket skill queries markets, prices, order books, and historical prediction-market data through public read-only APIs."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-06",
+      "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "humanize-prose",
+      "name": "Humanize Prose",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Audits and rewrites prose to remove generic AI-writing patterns, preserve author intent, and adapt tone toward a more natural human voice.",
+      "prerequisites": [
+        "document-editing",
+        "audience-model",
+        "format-output"
+      ],
+      "derivatives": [],
+      "conditions": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/humanizer/SKILL.md",
+          "evaluator": "openai-codex",
+          "date": "2026-05-06",
+          "notes": "Hermes Agent humanizer skill identifies AI-generated writing patterns and rewrites text to sound more natural while retaining meaning."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-06",
+      "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "architecture-diagram",
+      "name": "Architecture Diagram",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "uncommon",
+      "description": "Generates technical architecture, infrastructure, or cloud diagrams as structured visual artifacts from natural-language system descriptions.",
+      "prerequisites": [
+        "data-visualize",
+        "format-output",
+        "write-report"
+      ],
+      "derivatives": [],
+      "conditions": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/architecture-diagram/SKILL.md",
+          "evaluator": "openai-codex",
+          "date": "2026-05-06",
+          "notes": "Hermes Agent architecture-diagram skill generates standalone HTML files with inline SVG architecture diagrams from system descriptions."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-06",
+      "updatedAt": "2026-05-06",
+      "version": "0.1.0"
     }
   ],
   "edges": [
@@ -5660,11 +5882,131 @@
       "evidenceRefs": [
         "gaia-meta-audit#evidence[0]"
       ]
+    },
+    {
+      "sourceSkillId": "retrieve",
+      "targetSkillId": "wiki-search",
+      "edgeType": "prerequisite",
+      "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "wiki-search#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "embed-text",
+      "targetSkillId": "wiki-search",
+      "edgeType": "prerequisite",
+      "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "wiki-search#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "summarize",
+      "targetSkillId": "wiki-search",
+      "edgeType": "prerequisite",
+      "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "wiki-search#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "data-analysis",
+      "targetSkillId": "prediction-market-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "prediction-market-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "web-search",
+      "targetSkillId": "prediction-market-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "prediction-market-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "statistical-analysis",
+      "targetSkillId": "prediction-market-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "prediction-market-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "document-editing",
+      "targetSkillId": "humanize-prose",
+      "edgeType": "prerequisite",
+      "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "humanize-prose#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "audience-model",
+      "targetSkillId": "humanize-prose",
+      "edgeType": "prerequisite",
+      "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "humanize-prose#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "format-output",
+      "targetSkillId": "humanize-prose",
+      "edgeType": "prerequisite",
+      "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "humanize-prose#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "data-visualize",
+      "targetSkillId": "architecture-diagram",
+      "edgeType": "prerequisite",
+      "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "architecture-diagram#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "format-output",
+      "targetSkillId": "architecture-diagram",
+      "edgeType": "prerequisite",
+      "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "architecture-diagram#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "write-report",
+      "targetSkillId": "architecture-diagram",
+      "edgeType": "prerequisite",
+      "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "architecture-diagram#evidence[0]"
+      ]
     }
   ]
 }</script>
 <script type="application/json" id="gaia-named-skills">{
-  "generatedAt": "2026-04-30",
+  "generatedAt": "2026-05-06",
   "buckets": {
     "automated-testing": [
       {
@@ -6326,189 +6668,6 @@
         }
       }
     ],
-    "error-interpretation": [
-      {
-        "id": "openai/gh-fix-ci",
-        "name": "GH Fix CI",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "error-interpretation",
-        "status": "named",
-        "level": "II",
-        "description": "Debugs failing GitHub Actions checks on pull requests using GitHub CLI evidence, logs, and focused remediation steps.",
-        "title": "The Checkrunner Surgeon",
-        "catalogRef": "openai-gh-fix-ci",
-        "tags": [
-          "github-actions",
-          "ci",
-          "debugging",
-          "pull-requests"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/gh-fix-ci"
-        }
-      }
-    ],
-    "cite-sources": [
-      {
-        "id": "openai/openai-docs",
-        "name": "OpenAI Docs",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "cite-sources",
-        "status": "named",
-        "level": "II",
-        "description": "Fetches current OpenAI developer documentation for API and SDK implementation work, grounding code changes in official reference material.",
-        "title": "The Living API Codex",
-        "catalogRef": "openai-openai-docs",
-        "tags": [
-          "openai",
-          "docs",
-          "api-reference",
-          "sdk",
-          "citation"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/openai-docs"
-        }
-      }
-    ],
-    "computer-use": [
-      {
-        "id": "openai/playwright",
-        "name": "Playwright",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "computer-use",
-        "status": "named",
-        "level": "II",
-        "description": "Automates real-browser testing from the terminal with Playwright, collecting screenshots, DOM state, and interaction evidence.",
-        "title": "The Browser Witness",
-        "catalogRef": "openai-playwright",
-        "tags": [
-          "playwright",
-          "browser-testing",
-          "automation",
-          "screenshots"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/playwright"
-        }
-      }
-    ],
-    "code-review-pipeline": [
-      {
-        "id": "openai/security-best-practices",
-        "name": "Security Best Practices",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities.",
-        "title": "The Secure Code Sentinel",
-        "catalogRef": "openai-security-best-practices",
-        "tags": [
-          "security",
-          "secure-coding",
-          "code-review",
-          "vulnerability-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-best-practices"
-        }
-      },
-      {
-        "id": "openai/security-threat-model",
-        "name": "Security Threat Model",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "code-review-pipeline",
-        "status": "named",
-        "level": "III",
-        "description": "Performs application security threat modeling for specific repositories, flows, and code paths, producing prioritized risk findings.",
-        "title": "The Threat Cartographer",
-        "catalogRef": "openai-security-threat-model",
-        "tags": [
-          "security",
-          "threat-modeling",
-          "risk-analysis",
-          "code-review"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-threat-model"
-        }
-      }
-    ],
-    "knowledge-graph-build": [
-      {
-        "id": "openai/security-ownership-map",
-        "name": "Security Ownership Map",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "knowledge-graph-build",
-        "status": "named",
-        "level": "III",
-        "description": "Analyzes repository history to map ownership, bus factor, and sensitive-code clusters for security review planning.",
-        "title": "The Ownership Mapper",
-        "catalogRef": "openai-security-ownership-map",
-        "tags": [
-          "security",
-          "ownership",
-          "bus-factor",
-          "repository-analysis"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/security-ownership-map"
-        }
-      }
-    ],
-    "detect-anomaly": [
-      {
-        "id": "openai/sentry",
-        "name": "Sentry",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "detect-anomaly",
-        "status": "named",
-        "level": "II",
-        "description": "Connects to Sentry production error data for incident triage, regression investigation, and release-health analysis.",
-        "title": "The Incident Lens",
-        "catalogRef": "openai-sentry",
-        "tags": [
-          "sentry",
-          "incident-response",
-          "observability",
-          "errors"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/sentry"
-        }
-      }
-    ],
-    "diff-content": [
-      {
-        "id": "openai/yeet",
-        "name": "Yeet",
-        "contributor": "openai",
-        "origin": false,
-        "genericSkillRef": "diff-content",
-        "status": "named",
-        "level": "II",
-        "description": "Automates a guarded Git workflow from scoped diffs through staging, committing, pushing, and pull request creation.",
-        "title": "The Guarded Shipwright",
-        "catalogRef": "openai-yeet",
-        "tags": [
-          "git",
-          "pull-requests",
-          "commit-workflow",
-          "release-flow"
-        ],
-        "links": {
-          "docs": "https://officialskills.sh/openai/skills/yeet"
-        }
-      }
-    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -6832,16 +6991,6 @@
       "mattpocock/triage",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
-    ],
-    "openai": [
-      "openai/gh-fix-ci",
-      "openai/openai-docs",
-      "openai/playwright",
-      "openai/security-best-practices",
-      "openai/security-ownership-map",
-      "openai/security-threat-model",
-      "openai/sentry",
-      "openai/yeet"
     ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"
