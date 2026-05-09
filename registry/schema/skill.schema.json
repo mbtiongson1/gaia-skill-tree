@@ -97,6 +97,7 @@
     "demerits": {
       "type": "array",
       "description": "Optional canonical demerit IDs that lower effective progression ceiling.",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "enum": [

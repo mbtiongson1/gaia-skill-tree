@@ -3,6 +3,8 @@
 **Type:** Extra Skill  
 **Level:** III  
 **Tier:** Evolved  
+**Potential:** II  
+**Demerits:** heavyweight-dependency  
 **Skill Call:** `/voice-agent`
 
 ---

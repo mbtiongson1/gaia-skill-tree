@@ -218,14 +218,16 @@ class TestComputePaths:
         }
         result = compute_paths(graph, ["skill-a"], [])
         one_away = result["oneAway"][0]
-        assert one_away["levelFloor"] == "III"
+        assert one_away["levelFloor"] == "II"
+        assert one_away["baseLevelFloor"] == "III"
         assert one_away["effectiveLevelFloor"] == "II"
         assert one_away["levelMeta"]["baseLevel"] == "III"
         assert one_away["levelMeta"]["effectiveLevel"] == "II"
 
         result = compute_paths(graph, ["skill-a", "skill-b"], [])
         entry = result["nearUnlocks"][0]
-        assert entry["levelFloor"] == "III"
+        assert entry["levelFloor"] == "II"
+        assert entry["baseLevelFloor"] == "III"
         assert entry["effectiveLevelFloor"] == "II"
         assert entry["levelMeta"]["baseLevel"] == "III"
         assert entry["levelMeta"]["effectiveLevel"] == "II"

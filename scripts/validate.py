@@ -215,6 +215,12 @@ def validate_demerits(graph):
                 f"'{level}' is not eligible (must be one of {sorted(DEMERIT_ELIGIBLE_LEVELS)})."
             )
 
+        duplicates = sorted({item for item in demerits if demerits.count(item) > 1})
+        if duplicates:
+            errors.append(
+                f"Skill '{skill['id']}' declares duplicate demerit(s): {duplicates}."
+            )
+
         unknown = [item for item in demerits if item not in DEMERIT_IDS]
         if unknown:
             errors.append(
