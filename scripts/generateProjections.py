@@ -201,6 +201,9 @@ def main():
         type_label = get_type_label(meta, skill_type)
         level_label = get_level_label(meta, level)
         tier_label = get_tier_label(meta, level)
+        effective_level_value = effective_level(skill)
+        effective_level_label = get_level_label(meta, effective_level_value)
+        demerits = list(skill.get("demerits", []) or [])
 
         with open(file_path, "w", encoding="utf-8") as f:
             page_display = _build_skill_display(skill_id, skill_type, named_map)
@@ -209,6 +212,9 @@ def main():
             f.write(f"**Type:** {type_label or 'Basic Skill'}  \n")
             f.write(f"**Level:** {level_label}  \n")
             f.write(f"**Tier:** {tier_label}  \n")
+            if effective_level_value != str(level):
+                f.write(f"**Potential:** {effective_level_label}  \n")
+                f.write(f"**Demerits:** {', '.join(demerits)}  \n")
             f.write(f"**Skill Call:** `/{skill_id}`\n\n")
             f.write("---\n\n")
 

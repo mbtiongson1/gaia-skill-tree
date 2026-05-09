@@ -81,6 +81,12 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(code, 1, "Expected unknown demerits to fail validation.")
         self.assertIn("unknown demerit", out)
 
+    def test_demerits_reject_duplicate_ids(self):
+        """Ensure each demerit ID can only be declared once per skill."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_duplicate_id.json"))
+        self.assertEqual(code, 1, "Expected duplicate demerits to fail validation.")
+        self.assertIn("duplicate demerit", out)
+
     def test_seeded_skill_demerits_match_policy(self):
         """Ensure the seeded demerit assignments stay aligned with policy."""
         with open(REAL_GRAPH_PATH, encoding="utf-8") as f:
