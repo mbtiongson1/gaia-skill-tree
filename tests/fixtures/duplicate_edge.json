@@ -1,0 +1,79 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "version": "0.1.0",
+  "generatedAt": "2026-04-26T00:00:00Z",
+  "skills": [
+    {
+      "id": "source-skill",
+      "name": "Source Skill",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "A source skill for duplicate edge validation.",
+      "prerequisites": [],
+      "derivatives": ["target-skill"],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-26",
+      "updatedAt": "2026-04-26",
+      "version": "0.1.0"
+    },
+    {
+      "id": "helper-skill",
+      "name": "Helper Skill",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "A helper skill that satisfies the target prerequisite count.",
+      "prerequisites": [],
+      "derivatives": ["target-skill"],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-26",
+      "updatedAt": "2026-04-26",
+      "version": "0.1.0"
+    },
+    {
+      "id": "target-skill",
+      "name": "Target Skill",
+      "type": "extra",
+      "level": "II",
+      "rarity": "uncommon",
+      "description": "A target skill reached through duplicated edges.",
+      "prerequisites": ["source-skill", "helper-skill"],
+      "derivatives": [],
+      "evidence": [
+        {
+          "class": "C",
+          "source": "http://example.com/target-skill",
+          "evaluator": "test",
+          "date": "2026-04-26"
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-26",
+      "updatedAt": "2026-04-26",
+      "version": "0.1.0"
+    }
+  ],
+  "edges": [
+    {
+      "sourceSkillId": "source-skill",
+      "targetSkillId": "target-skill",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "source-skill",
+      "targetSkillId": "target-skill",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "helper-skill",
+      "targetSkillId": "target-skill",
+      "edgeType": "prerequisite"
+    }
+  ]
+}

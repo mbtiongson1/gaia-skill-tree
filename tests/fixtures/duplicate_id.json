@@ -1,0 +1,40 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "version": "0.1.0",
+  "generatedAt": "2026-04-26T00:00:00Z",
+  "skills": [
+    {
+      "id": "duplicate-skill",
+      "name": "Duplicate Skill One",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "First skill with a duplicate identifier.",
+      "prerequisites": [],
+      "derivatives": [],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-26",
+      "updatedAt": "2026-04-26",
+      "version": "0.1.0"
+    },
+    {
+      "id": "duplicate-skill",
+      "name": "Duplicate Skill Two",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Second skill with the same duplicate identifier.",
+      "prerequisites": [],
+      "derivatives": [],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-04-26",
+      "updatedAt": "2026-04-26",
+      "version": "0.1.0"
+    }
+  ],
+  "edges": []
+}
