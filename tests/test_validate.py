@@ -44,6 +44,18 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(code, 1, "Expected missing ref graph to fail validation.")
         self.assertIn("references missing prerequisite", out)
 
+    def test_duplicate_skill_id(self):
+        """Ensure duplicate skill IDs are rejected."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "duplicate_id.json"))
+        self.assertEqual(code, 1, "Expected duplicate skill ID graph to fail validation.")
+        self.assertIn("Duplicate skill id", out)
+
+    def test_duplicate_edge(self):
+        """Ensure duplicate graph edges are rejected."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "duplicate_edge.json"))
+        self.assertEqual(code, 1, "Expected duplicate edge graph to fail validation.")
+        self.assertIn("Duplicate edge", out)
+
     def test_bad_evidence(self):
         """Ensure insufficient evidence is caught."""
         code, out = run_validate(os.path.join(FIXTURES_DIR, "bad_evidence.json"))

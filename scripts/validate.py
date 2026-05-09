@@ -3,11 +3,15 @@
 
 Validates registry/gaia.json against:
 1. JSON Schema validation for all skill nodes and edges.
-2. DAG cycle detection (DFS from all root nodes).
-3. Reference integrity (every parent ID resolves to an existing node).
-4. Evidence threshold by level.
-5. Ultimate approval count check (placeholder).
-6. Summary statistics output.
+2. Unique skill IDs and edge declarations.
+3. DAG cycle detection (DFS from all root nodes).
+4. Reference integrity (every parent ID resolves to an existing node).
+5. Prerequisite minimums by skill type.
+6. Evidence threshold by level.
+7. Ultimate approval count check (placeholder).
+8. Demerit constraints.
+9. Named skill frontmatter consistency.
+10. Summary statistics output.
 
 Usage:
     python scripts/validate.py [--graph PATH]
@@ -81,6 +85,41 @@ def validate_schema(graph, schema_dir):
             jsonschema.validate(instance=edge, schema=combo_schema)
         except jsonschema.ValidationError as e:
             errors.append(f"Schema error in edge '{edge.get('sourceSkillId', '?')}->{edge.get('targetSkillId', '?')}': {e.message}")
+
+    return errors
+
+
+def validate_unique_ids(graph):
+    """Check that skill IDs and edges are unique within the graph."""
+    errors = []
+
+    seen_skill_ids = set()
+    duplicate_skill_ids = set()
+    for skill in graph.get("skills", []):
+        skill_id = skill.get("id")
+        if skill_id in seen_skill_ids:
+            duplicate_skill_ids.add(skill_id)
+        seen_skill_ids.add(skill_id)
+
+    for skill_id in sorted(duplicate_skill_ids):
+        errors.append(f"Duplicate skill id '{skill_id}' found in skills.")
+
+    seen_edges = set()
+    duplicate_edges = set()
+    for edge in graph.get("edges", []):
+        edge_key = (
+            edge.get("sourceSkillId"),
+            edge.get("targetSkillId"),
+            edge.get("edgeType", "prerequisite"),
+        )
+        if edge_key in seen_edges:
+            duplicate_edges.add(edge_key)
+        seen_edges.add(edge_key)
+
+    for source, target, edge_type in sorted(duplicate_edges):
+        errors.append(
+            f"Duplicate edge '{source}->{target}' with edgeType '{edge_type}' found in edges."
+        )
 
     return errors
 
@@ -613,35 +652,39 @@ def main():
     all_errors = []
 
     # 1. Schema validation
-    print("   [1/8] Schema validation...")
+    print("   [1/9] Schema validation...")
     all_errors.extend(validate_schema(graph, schema_dir))
 
-    # 2. DAG cycle detection
-    print("   [2/8] DAG cycle detection...")
+    # 2. Unique identifiers
+    print("   [2/9] Unique identifiers...")
+    all_errors.extend(validate_unique_ids(graph))
+
+    # 3. DAG cycle detection
+    print("   [3/9] DAG cycle detection...")
     all_errors.extend(validate_dag(graph))
 
-    # 3. Reference integrity
-    print("   [3/8] Reference integrity...")
+    # 4. Reference integrity
+    print("   [4/9] Reference integrity...")
     all_errors.extend(validate_references(graph))
 
-    # 4. Prerequisite count
-    print("   [4/8] Prerequisite count...")
+    # 5. Prerequisite count
+    print("   [5/9] Prerequisite count...")
     all_errors.extend(validate_prerequisites_count(graph))
 
-    # 5. Evidence threshold
-    print("   [5/8] Evidence thresholds...")
+    # 6. Evidence threshold
+    print("   [6/9] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
-    # 6. Ultimate constraints
-    print("   [6/8] Ultimate constraints...")
+    # 7. Ultimate constraints
+    print("   [7/9] Ultimate constraints...")
     all_errors.extend(validate_ultimate(graph))
 
-    # 7. Named skills validation (includes reviewer gate + catalog cross-refs)
-    print("   [7/8] Demerit constraints...")
+    # 8. Demerit constraints
+    print("   [8/9] Demerit constraints...")
     all_errors.extend(validate_demerits(graph))
 
-    # 8. Named skills validation (includes reviewer gate + catalog cross-refs)
-    print("   [8/8] Named skills validation...")
+    # 9. Named skills validation (includes reviewer gate + catalog cross-refs)
+    print("   [9/9] Named skills validation...")
     all_errors.extend(validate_named_skills(graph))
 
     # Stats
