@@ -17,6 +17,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+from gaia_cli.leveling import level_summary
 from gaia_cli.registry import named_skills_index_path, registry_graph_path
 
 PALETTE = {
@@ -74,12 +75,16 @@ def build_render_graph(graph: dict[str, Any], width: int = 1280, height: int = 8
             local_radius = radius if len(bucket) > 1 else 0
             x = cx + math.cos(angle) * local_radius
             y = cy + math.sin(angle) * local_radius
+            level_meta = level_summary(skill)
             nodes.append(
                 {
                     "id": skill.get("id"),
                     "label": skill.get("name") or skill.get("id"),
                     "type": skill_type,
                     "level": skill.get("level"),
+                    "effectiveLevel": level_meta["effectiveLevel"],
+                    "levelMeta": level_meta,
+                    "demerits": level_meta["demerits"],
                     "rarity": skill.get("rarity"),
                     "description": skill.get("description", ""),
                     "x": round(x, 3),

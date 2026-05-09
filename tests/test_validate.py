@@ -69,6 +69,44 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(code, 1, "Expected basic-with-prereqs to fail validation.")
         self.assertIn("must have 0 prerequisites", out)
 
+    def test_demerits_reject_level_i_skills(self):
+        """Ensure demerits are rejected on Level I and below."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
+        self.assertEqual(code, 1, "Expected Level I demerits to fail validation.")
+        self.assertIn("has demerits but claimed level", out)
+
+    def test_demerits_reject_unknown_catalog_keys(self):
+        """Ensure only canonical demerit IDs are accepted."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_unknown_id.json"))
+        self.assertEqual(code, 1, "Expected unknown demerits to fail validation.")
+        self.assertIn("unknown demerit", out)
+
+    def test_demerits_reject_duplicate_ids(self):
+        """Ensure each demerit ID can only be declared once per skill."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_duplicate_id.json"))
+        self.assertEqual(code, 1, "Expected duplicate demerits to fail validation.")
+        self.assertIn("duplicate demerit", out)
+
+    def test_seeded_skill_demerits_match_policy(self):
+        """Ensure the seeded demerit assignments stay aligned with policy."""
+        with open(REAL_GRAPH_PATH, encoding="utf-8") as f:
+            graph = json.load(f)
+
+        self.assertEqual(
+            graph.get("meta", {}).get("demeritLabels", {}),
+            {
+                "niche-integration": "Niche integrations",
+                "experimental-feature": "Experimental features",
+                "heavyweight-dependency": "Heavyweight dependencies",
+            },
+        )
+
+        skills = {skill["id"]: skill for skill in graph.get("skills", [])}
+        self.assertEqual(skills["mcp-integration"].get("demerits"), ["niche-integration"])
+        self.assertEqual(skills["multimodal-reasoning"].get("demerits"), ["experimental-feature"])
+        self.assertEqual(skills["voice-agent"].get("demerits"), ["heavyweight-dependency"])
+        self.assertEqual(skills["deployment-automation"].get("demerits"), ["heavyweight-dependency"])
+
     def test_gaia_audit_skills_are_modeled(self):
         """Ensure Gaia audit workflows are represented as canonical skills."""
         with open(REAL_GRAPH_PATH, encoding="utf-8") as f:

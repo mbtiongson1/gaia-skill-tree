@@ -25,6 +25,13 @@
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function effectiveLabel(skill) {
+    if (!skill) return '';
+    var level = skill.level || '';
+    var effective = skill.effectiveLevel || level;
+    return effective && effective !== level ? (level + ' → ' + effective) : level;
+  }
+
   function copyText(text, btn) {
     navigator.clipboard.writeText(text).then(function(){
       var orig = btn.textContent;
@@ -82,6 +89,7 @@
       '<div class="se-badges">' + badgesHtml + '</div>' +
       (ns.title ? '<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.8rem">"' + esc(ns.title) + '"</div>' : '') +
       (generic ? '<div style="font-size:.82rem;color:var(--muted)">Generic skill: <strong style="color:var(--text)">' + esc(generic.name || ns.genericSkillRef) + '</strong></div>' : '') +
+      (generic ? '<div style="font-size:.8rem;color:var(--muted);margin-top:.2rem">Claimed/effective level: <strong style="color:var(--text)">' + esc(effectiveLabel(generic)) + '</strong></div>' : '') +
       '<div class="se-hero-install"><span class="se-hero-prompt">$</span><span class="se-hero-cmd">' + esc(installCmd) + '</span><button class="se-hero-copy" data-cmd="' + esc(installCmd) + '" onclick="event.stopPropagation();navigator.clipboard.writeText(this.dataset.cmd).then(function(){})">Copy</button></div>' +
     '</div>';
 
@@ -182,9 +190,12 @@
         }).join('') + '</div>';
     }
 
+    var demeritText = (generic && Array.isArray(generic.demerits) && generic.demerits.length)
+      ? ('  ·  Demerits: <strong style="color:#fbbf24">' + esc(generic.demerits.join(', ')) + '</strong>')
+      : '';
     var skillDefHtml = generic ? '<div class="se-docs-block"><h4>Generic Skill Definition</h4>' +
       '<p style="line-height:1.75;margin-bottom:.8rem">'+esc(generic.description||'')+'</p>' +
-      '<p style="font-size:.82rem;color:var(--muted)">Status: <strong style="color:var(--text)">'+esc(generic.status||'provisional')+'</strong>  ·  Level: <strong style="color:var(--text)">'+esc(generic.level||'')+'</strong></p>' +
+      '<p style="font-size:.82rem;color:var(--muted)">Status: <strong style="color:var(--text)">'+esc(generic.status||'provisional')+'</strong>  ·  Level: <strong style="color:var(--text)">'+esc(effectiveLabel(generic)||'')+'</strong>' + demeritText + '</p>' +
     '</div>' : '';
 
     var agentsHtml = '';

@@ -12,7 +12,7 @@ const mockGraph: GaiaGraph = {
     { id: "extract-entities", name: "Extract Entities", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
     { id: "summarize", name: "Summarize", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
     { id: "cite-sources", name: "Cite Sources", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "III", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "III", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
     { id: "research", name: "Research", type: "extra", level: "III", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
   ],
   edges: [],
@@ -45,6 +45,16 @@ describe("fusionEngine", () => {
       ["web-search", "parse-html", "extract-entities"]
     );
     expect(result.find((c) => c.candidateResult === "web-scrape")).toBeUndefined();
+  });
+
+  it("uses effective levelFloor when demerits exist", () => {
+    const result = detectCombinations(
+      mockGraph,
+      [],
+      ["web-search", "parse-html", "extract-entities"]
+    );
+    const ready = result.find((c) => c.candidateResult === "web-scrape");
+    expect(ready?.levelFloor).toBe("II");
   });
 
   it("combines owned and detected skills for fusion detection", () => {

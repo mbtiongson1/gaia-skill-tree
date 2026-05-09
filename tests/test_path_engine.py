@@ -200,6 +200,38 @@ class TestComputePaths:
         from datetime import datetime
         datetime.fromisoformat(result["computedAt"])
 
+    def test_path_entries_include_effective_level_metadata(self):
+        graph = {
+            "skills": [
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+                {
+                    "id": "skill-fusion",
+                    "name": "Skill Fusion",
+                    "type": "extra",
+                    "level": "III",
+                    "demerits": ["experimental-feature"],
+                    "prerequisites": ["skill-a", "skill-b"],
+                    "derivatives": [],
+                },
+            ]
+        }
+        result = compute_paths(graph, ["skill-a"], [])
+        one_away = result["oneAway"][0]
+        assert one_away["levelFloor"] == "II"
+        assert one_away["baseLevelFloor"] == "III"
+        assert one_away["effectiveLevelFloor"] == "II"
+        assert one_away["levelMeta"]["baseLevel"] == "III"
+        assert one_away["levelMeta"]["effectiveLevel"] == "II"
+
+        result = compute_paths(graph, ["skill-a", "skill-b"], [])
+        entry = result["nearUnlocks"][0]
+        assert entry["levelFloor"] == "II"
+        assert entry["baseLevelFloor"] == "III"
+        assert entry["effectiveLevelFloor"] == "II"
+        assert entry["levelMeta"]["baseLevel"] == "III"
+        assert entry["levelMeta"]["effectiveLevel"] == "II"
+
 
 # ---------------------------------------------------------------------------
 # diff_paths tests

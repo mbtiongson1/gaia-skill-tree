@@ -17,7 +17,13 @@ def write_fixture_registry(root: Path) -> None:
                 "skills": [
                     {"id": "tokenize", "type": "basic", "level": "0", "evidence": []},
                     {"id": "web-search", "type": "basic", "level": "I", "evidence": [{"class": "C"}]},
-                    {"id": "automated-testing", "type": "extra", "level": "II", "evidence": [{"class": "B"}]},
+                    {
+                        "id": "automated-testing",
+                        "type": "extra",
+                        "level": "II",
+                        "demerits": ["niche-integration"],
+                        "evidence": [{"class": "B"}],
+                    },
                     {"id": "autonomous-swe", "type": "ultimate", "level": "V", "evidence": [{"class": "B"}, {"class": "A"}]},
                 ],
                 "edges": [{"source": "web-search", "target": "automated-testing"}],
@@ -44,6 +50,10 @@ def test_collect_stats_matches_fixture_graph(tmp_path):
     assert stats["total_edges"] == 1
     assert stats["type_counts"] == {"basic": 2, "extra": 1, "ultimate": 1}
     assert stats["level_counts"] == {"0": 1, "I": 1, "II": 1, "V": 1}
+    assert stats["effective_level_counts"] == {"0": 1, "I": 2, "V": 1}
+    assert stats["skills_with_demerits"] == 1
+    assert stats["skills_with_effective_drop"] == 1
+    assert stats["demerit_penalty_total"] == 1
     assert stats["skills_with_evidence"] == 3
     assert stats["evidence_counts"] == {"A": 1, "B": 1, "C": 1}
     assert stats["named_implemented"] == 1
@@ -86,6 +96,8 @@ def test_render_stats_includes_registry_health_sections(tmp_path):
     assert "Type breakdown" in output
     assert "Basic Skill" in output
     assert "Level breakdown" in output
+    assert "Effective level breakdown" in output
+    assert "Demerits" in output
     assert "Evidence coverage" in output
     assert "With evidence    3 / 4" in output
     assert "Named skills" in output
@@ -101,3 +113,4 @@ def test_stats_cli_prints_summary(tmp_path, monkeypatch, capsys):
     output = capsys.readouterr().out
     assert "Gaia Registry — 4 skills  1 edges" in output
     assert "Class A" in output
+    assert "Effective level breakdown" in output

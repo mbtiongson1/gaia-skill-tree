@@ -53,6 +53,7 @@ def extra_skill():
         "name": "RAG Pipeline",
         "type": "extra",
         "level": "II",
+        "demerits": ["experimental-feature"],
         "rarity": "uncommon",
         "description": "Retrieval-augmented generation pipeline combining retrieval, ranking, and synthesis.",
         "prerequisites": ["tokenize", "retrieve", "rank"],
@@ -165,6 +166,11 @@ class TestRenderCard:
         card = render_card(basic_skill)
         assert "Lv.0 Basic" in card
 
+    def test_shows_claimed_and_effective_when_demerited(self, extra_skill):
+        card = render_card(extra_skill)
+        assert "Potential:" in card
+        assert "claimed II" in card
+
     def test_contains_description(self, basic_skill):
         card = render_card(basic_skill)
         # At least the first word of the description
@@ -271,6 +277,10 @@ class TestRenderCard:
         # Should show some items and then "+N more" for the remainder
         assert "more" in card
         assert "/skill-0" in card
+
+    def test_compact_card_shows_effective_arrow_when_demerited(self, extra_skill):
+        compact = render_card_compact(extra_skill)
+        assert "Lv.II→I" in compact
 
     def test_missing_optional_fields_defaults_gracefully(self):
         """Card should render even with minimal skill data."""

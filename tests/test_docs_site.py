@@ -35,3 +35,16 @@ def test_build_docs_check_message_uses_copyable_python_command(monkeypatch, caps
     assert "python scripts/build_docs.py --check" in output
     assert "python scripts/build_docs.py" in output
     assert "gaia docs build" not in output
+
+
+def test_readme_documents_claimed_vs_effective_levels():
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    assert "Claimed level" in readme
+    assert "Effective level" in readme
+    assert "demerits" in readme.lower()
+
+
+def test_governance_documents_demerit_constraints():
+    governance = (DOCS_DIR / "GOVERNANCE.md").read_text(encoding="utf-8")
+    assert "Demerits are valid only for Level `II+`" in governance
+    assert "effective level" in governance.lower()

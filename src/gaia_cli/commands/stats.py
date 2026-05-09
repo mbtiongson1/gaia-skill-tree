@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Iterable
 
 from gaia_cli.formatting import TIER_COLORS, RANK_COLORS, TYPE_SYMBOLS, _use_color, _fg, _reset
+from gaia_cli.leveling import demerit_penalty, effective_level
 from gaia_cli.registry import named_skills_dir, registry_graph_path
 
 TYPE_LABELS = {
@@ -30,6 +31,7 @@ LEVEL_ORDER = ("0", "I", "II", "III", "IV", "V", "VI")
 TYPE_ORDER = ("basic", "extra", "ultimate")
 EVIDENCE_ORDER = ("A", "B", "C")
 _EVIDENCE_RANK = {klass: rank for rank, klass in enumerate(reversed(EVIDENCE_ORDER), start=1)}
+_LEVEL_INDEX = {level: idx for idx, level in enumerate(LEVEL_ORDER)}
 
 
 def _load_json(path: str | Path) -> dict:
@@ -106,12 +108,22 @@ def collect_stats(registry_path: str | Path) -> dict:
 
     type_counts = Counter(skill.get("type", "unknown") for skill in skills)
     level_counts = Counter(skill.get("level", "?") for skill in skills)
+    effective_level_counts = Counter()
+    demerit_counts: Counter[str] = Counter()
+    skills_with_demerits = 0
 
     best_evidence_counts: Counter[str] = Counter()
     for skill in skills:
         best = _best_evidence_class(skill)
         if best:
             best_evidence_counts[best] += 1
+        eff = effective_level(skill)
+        effective_level_counts[eff] += 1
+        raw_demerits = list(skill.get("demerits", []) or [])
+        if raw_demerits:
+            skills_with_demerits += 1
+            for demerit in raw_demerits:
+                demerit_counts[demerit] += 1
 
     named_items = [
         item for item in _iter_named_skill_metadata(registry_path)
@@ -129,6 +141,15 @@ def collect_stats(registry_path: str | Path) -> dict:
         "total_edges": len(edges),
         "type_counts": dict(type_counts),
         "level_counts": dict(level_counts),
+        "effective_level_counts": dict(effective_level_counts),
+        "demerit_counts": dict(demerit_counts),
+        "skills_with_demerits": skills_with_demerits,
+        "skills_with_effective_drop": sum(
+            1
+            for skill in skills
+            if _LEVEL_INDEX.get(effective_level(skill), -1) < _LEVEL_INDEX.get(skill.get("level"), -1)
+        ),
+        "demerit_penalty_total": sum(demerit_penalty(skill) for skill in skills),
         "evidence_counts": {klass: best_evidence_counts.get(klass, 0) for klass in EVIDENCE_ORDER},
         "skills_with_evidence": sum(best_evidence_counts.values()),
         "named_implemented": len(named_items),
@@ -188,6 +209,26 @@ def render_stats(stats: dict) -> str:
     for level, count in sorted(stats["level_counts"].items()):
         if level not in LEVEL_LABELS:
             lines.append(f"  {level:<3} {'Unknown':<14} {count:>4}")
+
+    lines.extend(["", "Effective level breakdown"])
+    for level in LEVEL_ORDER:
+        label = LEVEL_LABELS[level]
+        count = stats.get("effective_level_counts", {}).get(level, 0)
+        if use_color:
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0"]))
+            lines.append(f"  {color}{level:<3} {label:<14}{rst} {count:>4}")
+        else:
+            lines.append(f"  {level:<3} {label:<14} {count:>4}")
+    for level, count in sorted(stats.get("effective_level_counts", {}).items()):
+        if level not in LEVEL_LABELS:
+            lines.append(f"  {level:<3} {'Unknown':<14} {count:>4}")
+
+    lines.extend(["", "Demerits"])
+    lines.append(f"  Skills with demerits      {stats.get('skills_with_demerits', 0):>4}")
+    lines.append(f"  Effective level drops     {stats.get('skills_with_effective_drop', 0):>4}")
+    lines.append(f"  Total demerit penalties   {stats.get('demerit_penalty_total', 0):>4}")
+    for demerit, count in sorted(stats.get("demerit_counts", {}).items()):
+        lines.append(f"  {demerit:<24} {count:>4}")
 
     lines.extend(["", "Evidence coverage"])
     lines.append(f"  With evidence {stats['skills_with_evidence']:>4} / {total}")

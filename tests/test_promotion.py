@@ -26,7 +26,7 @@ def _make_graph(*skills):
     return {"skills": list(skills), "edges": []}
 
 
-def _make_skill(skill_id, name=None, level="0", evidence=None):
+def _make_skill(skill_id, name=None, level="0", evidence=None, demerits=None):
     """Build a minimal skill node."""
     return {
         "id": skill_id,
@@ -44,6 +44,7 @@ def _make_skill(skill_id, name=None, level="0", evidence=None):
         "createdAt": "2026-01-01",
         "updatedAt": "2026-01-01",
         "version": "0.1.0",
+        "demerits": demerits or [],
     }
 
 
@@ -189,6 +190,21 @@ class TestCheckPromotionEligibility:
         """If a tree skill doesn't exist in the graph, it's skipped."""
         graph = _make_graph()  # empty graph
         tree = _make_tree("alice", [_make_unlocked("phantom", "I")])
+        eligible = check_promotion_eligibility(graph, tree)
+        assert len(eligible) == 0
+
+    def test_promotion_blocked_by_demerit_ceiling(self):
+        """One demerit can lower effective ceiling so next level is blocked."""
+        ev_b = [{"class": "B", "source": "http://x.com", "evaluator": "x", "date": "2026-01-01", "notes": ""}]
+        graph = _make_graph(
+            _make_skill(
+                "tokenize",
+                level="III",
+                evidence=ev_b,
+                demerits=["heavyweight-dependency"],
+            )
+        )
+        tree = _make_tree("alice", [_make_unlocked("tokenize", "II")])
         eligible = check_promotion_eligibility(graph, tree)
         assert len(eligible) == 0
 

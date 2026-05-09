@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "version": "0.1.0",
+  "generatedAt": "2026-05-09T00:00:00Z",
+  "skills": [
+    {
+      "id": "skill-a",
+      "name": "Skill A",
+      "type": "extra",
+      "level": "II",
+      "rarity": "common",
+      "description": "Level II skill with an unknown demerit id.",
+      "prerequisites": [
+        "skill-b",
+        "skill-c"
+      ],
+      "derivatives": [],
+      "demerits": [
+        "unknown-demerit-id"
+      ],
+      "evidence": [
+        {
+          "class": "C",
+          "source": "http://example.com",
+          "evaluator": "test",
+          "date": "2026-05-09"
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-09",
+      "updatedAt": "2026-05-09",
+      "version": "0.1.0"
+    },
+    {
+      "id": "skill-b",
+      "name": "Skill B",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Valid prerequisite skill.",
+      "prerequisites": [],
+      "derivatives": [
+        "skill-a"
+      ],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-09",
+      "updatedAt": "2026-05-09",
+      "version": "0.1.0"
+    },
+    {
+      "id": "skill-c",
+      "name": "Skill C",
+      "type": "basic",
+      "level": "0",
+      "rarity": "common",
+      "description": "Valid prerequisite skill.",
+      "prerequisites": [],
+      "derivatives": [
+        "skill-a"
+      ],
+      "evidence": [],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-09",
+      "updatedAt": "2026-05-09",
+      "version": "0.1.0"
+    }
+  ],
+  "meta": {
+    "demeritLabels": {
+      "unknown-demerit-id": "Unknown"
+    }
+  }
+}

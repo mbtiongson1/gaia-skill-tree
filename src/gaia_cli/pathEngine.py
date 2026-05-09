@@ -9,6 +9,7 @@ from gaia_cli.registry import registry_graph_path, resolve_registry_path
 from gaia_cli.resolver import resolve_skills
 from gaia_cli.scanner import load_config, scan_repo_detailed
 from gaia_cli.treeManager import load_tree
+from gaia_cli.leveling import level_summary
 
 PATHS_FILE = ".gaia/paths.json"
 MAX_BFS_DISTANCE = 5
@@ -44,17 +45,27 @@ def compute_paths(graph_data: dict, owned_ids: list, detected_ids: list) -> dict
         prereqs = skill.get("prerequisites", [])
         missing = [p for p in prereqs if p not in available]
         if len(missing) == 0:
+            summary = level_summary(skill)
             near_unlocks.append({
                 "skillId": sid,
                 "name": skill.get("name", sid),
                 "type": skill.get("type"),
+                "levelFloor": summary["effectiveLevel"],
+                "baseLevelFloor": summary["baseLevel"],
+                "effectiveLevelFloor": summary["effectiveLevel"],
+                "levelMeta": summary,
                 "satisfiedPrereqs": prereqs,
             })
         elif len(missing) == 1:
+            summary = level_summary(skill)
             one_away.append({
                 "skillId": sid,
                 "name": skill.get("name", sid),
                 "type": skill.get("type"),
+                "levelFloor": summary["effectiveLevel"],
+                "baseLevelFloor": summary["baseLevel"],
+                "effectiveLevelFloor": summary["effectiveLevel"],
+                "levelMeta": summary,
                 "missingPrereq": missing[0],
                 "satisfiedPrereqs": [p for p in prereqs if p in available],
             })

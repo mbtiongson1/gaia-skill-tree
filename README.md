@@ -106,6 +106,10 @@ Skills level up through evidence, not declaration:
 | `V` | S | **Transcendent** | A | Composable and self-improving |
 | `VI` | SS | **Transcendent ★** | A | Apex: peer-reviewed, named to the agent who unlocked it |
 
+Level visibility now has two views:
+- **Claimed level** is the canonical registry level in `registry/gaia.json`.
+- **Effective level** is runtime potential after demerits. Demerits are only valid for `II+`; each demerit lowers potential by exactly one level, floored at `I`.
+
 ---
 
 ## Install
@@ -130,7 +134,7 @@ $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scrip
 ```
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `3.1.0`.
+Current Gaia CLI version: `3.1.1`.
 
 Python install:
 
@@ -200,7 +204,7 @@ The registry ships an interactive Named Skills browser at [`docs/index.html`](do
 
 - **Level-filtered tabs**: browse by Named (II), Evolved (III), Hardened (IV), or all levels.
 - **Expandable cards**: each card shows the contributor, title, description, `genericSkillRef`, tags, and a direct link to the upstream `SKILL.md`.
-- **Graph canvas**: node labels show `contributor/skill-name` for named implementations and `/slug` for anonymous skills by default. The **Named Skills** button dims all non-named nodes and highlights named implementations.
+- **Graph canvas**: node labels show `contributor/skill-name` for named implementations and `/slug` for anonymous skills by default. Hover details include claimed/effective level when demerits apply. The **Named Skills** button dims all non-named nodes and highlights named implementations.
 
 Serve locally with `python -m http.server 8080` from the repo root, then open `http://localhost:8080/docs/`.
 

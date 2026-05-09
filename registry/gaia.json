@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "generatedAt": "2026-05-06T00:00:00Z",
   "meta": {
     "typeLabels": {
@@ -75,6 +75,11 @@
       "basic": "\u25cb",
       "extra": "\u25c7",
       "ultimate": "\u25c6"
+    },
+    "demeritLabels": {
+      "niche-integration": "Niche integrations",
+      "experimental-feature": "Experimental features",
+      "heavyweight-dependency": "Heavyweight dependencies"
     }
   },
   "skills": [
@@ -1779,6 +1784,9 @@
         }
       ],
       "knownAgents": [],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
       "status": "provisional",
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
@@ -1870,6 +1878,9 @@
         }
       ],
       "knownAgents": [],
+      "demerits": [
+        "experimental-feature"
+      ],
       "status": "provisional",
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
@@ -3828,6 +3839,9 @@
         }
       ],
       "knownAgents": [],
+      "demerits": [
+        "niche-integration"
+      ],
       "status": "provisional",
       "createdAt": "2026-04-30",
       "updatedAt": "2026-04-30",
@@ -4030,6 +4044,9 @@
         }
       ],
       "knownAgents": [],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
       "status": "provisional",
       "createdAt": "2026-04-30",
       "updatedAt": "2026-04-30",

@@ -14,7 +14,13 @@ export interface Skill {
   createdAt: string;
   updatedAt: string;
   version: string;
+  demerits?: DemeritId[];
 }
+
+export type DemeritId =
+  | "niche-integration"
+  | "experimental-feature"
+  | "heavyweight-dependency";
 
 export interface EvidenceEntry {
   class: "A" | "B" | "C";
