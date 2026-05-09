@@ -3,6 +3,8 @@
 **Type:** Extra Skill  
 **Level:** II  
 **Tier:** Named  
+**Potential:** I  
+**Demerits:** heavyweight-dependency  
 **Skill Call:** `/deployment-automation`
 
 ---

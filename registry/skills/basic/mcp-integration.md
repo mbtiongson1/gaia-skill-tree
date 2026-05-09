@@ -3,6 +3,8 @@
 **Type:** Basic Skill  
 **Level:** III  
 **Tier:** Evolved  
+**Potential:** II  
+**Demerits:** niche-integration  
 **Skill Call:** `/mcp-integration`
 
 ---
