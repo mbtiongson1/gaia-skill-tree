@@ -7,7 +7,7 @@ genericSkillRef: design-review
 status: named
 title: "The Domain-Aware Interrogator"
 catalogRef: mattpocock-grill-with-docs
-level: "III"
+level: "3⭐"
 description: Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md

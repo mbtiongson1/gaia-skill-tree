@@ -1,7 +1,7 @@
-# Extra Skill: /gaia-audit  [II · Named]
+# Extra Skill: /gaia-audit  [2⭐ · Named]
 **ID:** gaia-audit  
 **Type:** Extra Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/gaia-audit`
 

@@ -7,7 +7,7 @@ genericSkillRef: write-report
 status: named
 title: "The Document Weaver"
 catalogRef: glincker-readme-generator
-level: II
+level: "2⭐"
 description: Analyzes a project's directory structure, dependency manifests, and configuration files to generate a professional README.md covering installation, usage, API reference, and contributing guidelines.
 links:
   github: https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md

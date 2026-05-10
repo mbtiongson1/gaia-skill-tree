@@ -1,7 +1,7 @@
-# Extra Skill: /agent-eval  [III · Evolved]
+# Extra Skill: /agent-eval  [3⭐ · Evolved]
 **ID:** agent-eval  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/agent-eval`
 

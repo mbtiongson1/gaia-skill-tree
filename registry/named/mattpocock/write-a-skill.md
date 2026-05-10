@@ -7,7 +7,7 @@ genericSkillRef: tool-creation
 status: named
 title: "The Skill Scaffolder"
 catalogRef: mattpocock-write-a-skill
-level: "III"
+level: "3⭐"
 description: Guides creation of new agent skills through a structured requirements interview, then produces a SKILL.md with a trigger-aware description, progressive-disclosure layout, and optional bundled scripts or reference files — ready for installation in any Claude Code, Cursor, or Codex CLI skills directory.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md

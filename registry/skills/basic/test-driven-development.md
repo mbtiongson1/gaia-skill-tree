@@ -1,7 +1,7 @@
-# addy-osmani/test-driven-development  [0 · Basic]
+# addy-osmani/test-driven-development  [0⭐ · Basic]
 **ID:** test-driven-development  
 **Type:** Basic Skill  
-**Level:** 0  
+**Level:** 0⭐  
 **Tier:** Basic  
 **Skill Call:** `/test-driven-development`
 

@@ -1,7 +1,7 @@
-# /logical-inference  [I · Awakened]
+# /logical-inference  [1⭐ · Awakened]
 **ID:** logical-inference  
 **Type:** Basic Skill  
-**Level:** I  
+**Level:** 1⭐  
 **Tier:** Awakened  
 **Skill Call:** `/logical-inference`
 

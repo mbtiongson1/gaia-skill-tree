@@ -1,7 +1,7 @@
-# Extra Skill: /ml-pipeline  [IV · Hardened]
+# Extra Skill: /ml-pipeline  [4⭐ · Hardened]
 **ID:** ml-pipeline  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/ml-pipeline`
 

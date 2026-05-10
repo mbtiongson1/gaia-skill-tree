@@ -1,7 +1,7 @@
-# huggingface/hf-cli  [II · Named]
+# huggingface/hf-cli  [2⭐ · Named]
 **ID:** api-call  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/api-call`
 

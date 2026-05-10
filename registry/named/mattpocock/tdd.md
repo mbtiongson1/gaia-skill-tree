@@ -7,7 +7,7 @@ genericSkillRef: test-driven-development
 status: named
 title: "Vertical-Slice TDD"
 catalogRef: mattpocock-tdd
-level: "III"
+level: "3⭐"
 description: Enforces strict vertical-slice TDD — one test then one implementation at a time — explicitly blocking horizontal slicing (all tests first, then all code). Tests verify behaviour through public interfaces only; mocking internal collaborators is treated as an anti-pattern.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md

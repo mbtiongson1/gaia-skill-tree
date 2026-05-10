@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/requirements-engineer/SKILL.md
 genericSkillRef: requirements-analysis
 status: awakened
-level: II
+level: "2⭐"
 description: Business analysis specialist bridging stakeholders and technical teams — requirements gathering, user story writing, acceptance criteria, and full requirements lifecycle management.
 tags: [requirements, brd, user-stories, acceptance-criteria, specification]
 ---

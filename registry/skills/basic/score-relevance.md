@@ -1,7 +1,7 @@
-# /score-relevance  [I · Awakened]
+# /score-relevance  [1⭐ · Awakened]
 **ID:** score-relevance  
 **Type:** Basic Skill  
-**Level:** I  
+**Level:** 1⭐  
 **Tier:** Awakened  
 **Skill Call:** `/score-relevance`
 

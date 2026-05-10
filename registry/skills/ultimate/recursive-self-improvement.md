@@ -1,7 +1,7 @@
-# Ultimate Skill: /recursive-self-improvement [Unclaimed ✦]  [V · Transcendent]
+# Ultimate Skill: /recursive-self-improvement [Unclaimed ✦]  [5⭐ · Transcendent]
 **ID:** recursive-self-improvement  
 **Type:** Ultimate Skill  
-**Level:** V  
+**Level:** 5⭐  
 **Tier:** Transcendent  
 **Skill Call:** `/recursive-self-improvement`
 

@@ -1,7 +1,7 @@
-# Extra Skill: /architecture-diagram  [IV · Hardened]
+# Extra Skill: /architecture-diagram  [4⭐ · Hardened]
 **ID:** architecture-diagram  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/architecture-diagram`
 

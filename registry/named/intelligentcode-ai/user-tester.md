@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/user-tester/SKILL.md
 genericSkillRef: e2e-testing
 status: awakened
-level: III
+level: "3⭐"
 description: E2E testing specialist with Puppeteer/Playwright automation — cross-browser validation, full user journey simulation, and visual regression detection.
 tags: [e2e, playwright, puppeteer, cross-browser, user-journey, visual-regression]
 ---

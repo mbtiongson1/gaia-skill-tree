@@ -59,8 +59,8 @@
     },
     "level": {
       "type": "string",
-      "enum": ["II", "III", "IV", "V", "VI"],
-      "description": "Minimum level (Named and above only; Level I is generic-only)."
+      "enum": ["2⭐", "3⭐", "4⭐", "5⭐", "6⭐"],
+      "description": "Minimum level (Named and above only; 1⭐ is generic-only)."
     },
     "description": {
       "type": "string",

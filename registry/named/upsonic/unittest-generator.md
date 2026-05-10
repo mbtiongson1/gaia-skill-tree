@@ -7,7 +7,7 @@ genericSkillRef: generate-test
 status: named
 title: "The Test Weaver"
 catalogRef: upsonic-unittest-generator
-level: II
+level: "2⭐"
 description: Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organising tests into concept-based subfolders under a tests/ directory with proper imports, fixtures, and edge-case coverage.
 links:
   github: https://github.com/Upsonic/Upsonic

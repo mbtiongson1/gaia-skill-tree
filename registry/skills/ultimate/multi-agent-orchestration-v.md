@@ -1,7 +1,7 @@
-# Ultimate Skill: ruvnet/flow-nexus-swarm  [V · Transcendent]
+# Ultimate Skill: ruvnet/flow-nexus-swarm  [5⭐ · Transcendent]
 **ID:** multi-agent-orchestration-v  
 **Type:** Ultimate Skill  
-**Level:** V  
+**Level:** 5⭐  
 **Tier:** Transcendent  
 **Skill Call:** `/multi-agent-orchestration-v`
 

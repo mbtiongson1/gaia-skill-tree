@@ -1,7 +1,7 @@
-# Extra Skill: gooseworks/notte-browser  [III · Evolved]
+# Extra Skill: gooseworks/notte-browser  [3⭐ · Evolved]
 **ID:** browser-automation  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/browser-automation`
 

@@ -1,7 +1,7 @@
-# /format-output  [0 · Basic]
+# /format-output  [0⭐ · Basic]
 **ID:** format-output  
 **Type:** Basic Skill  
-**Level:** 0  
+**Level:** 0⭐  
 **Tier:** Basic  
 **Skill Call:** `/format-output`
 

@@ -1,7 +1,7 @@
-# Extra Skill: /gaia-triage  [II · Named]
+# Extra Skill: /gaia-triage  [2⭐ · Named]
 **ID:** gaia-triage  
 **Type:** Extra Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/gaia-triage`
 
