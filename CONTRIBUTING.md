@@ -6,22 +6,6 @@ This page is now a **contributor quickstart**. Detailed policy, reviewer playboo
 
 ---
 
-## Table of Contents
-
-- [1) Pick your workflow](#1-pick-your-workflow)
-  - [A) Submit discovered skills (recommended)](#a-submit-discovered-skills-recommended)
-  - [B) Update the canonical graph directly](#b-update-the-canonical-graph-directly)
-- [2) What files are source-of-truth?](#2-what-files-are-source-of-truth)
-- [3) Branch naming (copy/paste)](#3-branch-naming-copypaste)
-- [4) Naming + evidence minimums](#4-naming--evidence-minimums)
-  - [Naming](#naming)
-  - [Evidence by level](#evidence-by-level)
-  - [Ultimate (`ultimate`) requirements](#ultimate-ultimate-requirements)
-- [5) PR checklist (copy/paste)](#5-pr-checklist-copypaste)
-- [6) FAQ](#6-faq)
-- [7) Helpful links](#7-helpful-links)
-- [8) Demotion and Reclassification Criteria](#8-demotion-and-reclassification-criteria)
-
 ---
 
 ## 1) Pick your workflow
@@ -138,21 +122,16 @@ Examples:
 No. Intake batches are review artifacts until accepted skills are promoted into `registry/gaia.json`.
 
 **Q: Where should long-form guidance go?**  
-In the Wiki (review standards, curation heuristics, edge cases, troubleshooting).
-
-**Q: What should not change in this simplification effort?**  
-Keep actual quickstarts, CLI reference, sample tree, and docs scripted from `gaia docs build` intact.
+In the [Wiki](https://github.com/mbtiongson1/gaia-skill-tree/wiki) (review standards, curation heuristics, edge cases, troubleshooting).
 
 ---
 
 ## 7) Helpful links
 
-- README quickstart: `README.md`
-- Docs site entry: `docs/index.html`
-- Maintainer governance/process: `docs/GOVERNANCE.md`
-- Website workflow notes: `docs/how-we-do-things.html`
-- Wiki landing page: <https://github.com/mbtiongson1/gaia-skill-tree/wiki>
-- Wiki git repo (edit here for long-form docs): `https://github.com/mbtiongson1/gaia-skill-tree.wiki.git`
+- [README quickstart](../README.md)
+- [Docs site](docs/index.html)
+- [Governance](docs/GOVERNANCE.md)
+- [Wiki](https://github.com/mbtiongson1/gaia-skill-tree/wiki) · [Wiki git repo](https://github.com/mbtiongson1/gaia-skill-tree.wiki.git)
 
 
 ---
