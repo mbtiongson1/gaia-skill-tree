@@ -112,9 +112,21 @@ class TestSaveTreeInvalid:
 
 _GRAPH_DATA = {
     "skills": [
+<<<<<<< HEAD
         {"id": "web-search", "name": "Web Search", "type": "basic", "level": "1⭐", "prerequisites": []},
         {"id": "summarize",  "name": "Summarize",  "type": "basic", "level": "0⭐", "prerequisites": []},
         {"id": "research",   "name": "Research",   "type": "extra", "level": "3⭐", "prerequisites": ["web-search", "summarize"]},
+=======
+<<<<<<< Updated upstream
+        {"id": "web-search", "name": "Web Search", "type": "basic", "level": "I", "prerequisites": []},
+        {"id": "summarize",  "name": "Summarize",  "type": "basic", "level": "0", "prerequisites": []},
+        {"id": "research",   "name": "Research",   "type": "extra", "level": "III", "prerequisites": ["web-search", "summarize"]},
+=======
+        {"id": "web-search", "name": "Web Search", "type": "basic", "level": "1★", "prerequisites": []},
+        {"id": "summarize",  "name": "Summarize",  "type": "basic", "level": "0★", "prerequisites": []},
+        {"id": "research",   "name": "Research",   "type": "extra", "level": "3★", "prerequisites": ["web-search", "summarize"]},
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     ]
 }
 
@@ -122,9 +134,21 @@ _TREE_DATA = {
     "userId": "testuser",
     "updatedAt": "2026-01-01",
     "unlockedSkills": [
+<<<<<<< HEAD
         {"skillId": "web-search", "level": "1⭐"},
         {"skillId": "summarize",  "level": "0⭐"},
         {"skillId": "research",   "level": "3⭐"},
+=======
+<<<<<<< Updated upstream
+        {"skillId": "web-search", "level": "I"},
+        {"skillId": "summarize",  "level": "0"},
+        {"skillId": "research",   "level": "III"},
+=======
+        {"skillId": "web-search", "level": "1★"},
+        {"skillId": "summarize",  "level": "0★"},
+        {"skillId": "research",   "level": "3★"},
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     ],
     "pendingCombinations": [],
     "stats": {},
@@ -159,7 +183,15 @@ class TestShowTreeModes:
         _make_named_index(tmp_path, {
             "research": [{"id": "alice/deep-research", "name": "Deep Research", "contributor": "alice",
                           "origin": True, "genericSkillRef": "research", "status": "named",
+<<<<<<< HEAD
                           "level": "3⭐", "description": ""}]
+=======
+<<<<<<< Updated upstream
+                          "level": "III", "description": ""}]
+=======
+                          "level": "3★", "description": ""}]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         })
         show_tree(_TREE_DATA, graph_data=_GRAPH_DATA, registry_path=str(tmp_path), mode="default")
         out = capsys.readouterr().out
@@ -172,7 +204,15 @@ class TestShowTreeModes:
         _make_named_index(tmp_path, {
             "research": [{"id": "alice/deep-research", "name": "Deep Research", "contributor": "alice",
                           "origin": True, "genericSkillRef": "research", "status": "named",
+<<<<<<< HEAD
                           "level": "3⭐", "description": ""}]
+=======
+<<<<<<< Updated upstream
+                          "level": "III", "description": ""}]
+=======
+                          "level": "3★", "description": ""}]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         })
         show_tree(_TREE_DATA, graph_data=_GRAPH_DATA, registry_path=str(tmp_path), mode="named")
         out = capsys.readouterr().out

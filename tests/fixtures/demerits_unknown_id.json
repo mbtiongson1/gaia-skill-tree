@@ -7,9 +7,21 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
+<<<<<<< HEAD
       "level": "2⭐",
       "rarity": "common",
       "description": "2⭐ skill with an unknown demerit id.",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+      "rarity": "common",
+      "description": "Level II skill with an unknown demerit id.",
+=======
+      "level": "2★",
+      "rarity": "common",
+      "description": "2★ skill with an unknown demerit id.",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "prerequisites": [
         "skill-b",
         "skill-c"
@@ -36,7 +48,15 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid prerequisite skill.",
       "prerequisites": [],
@@ -54,7 +74,15 @@
       "id": "skill-c",
       "name": "Skill C",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid prerequisite skill.",
       "prerequisites": [],

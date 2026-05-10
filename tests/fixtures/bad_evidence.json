@@ -7,9 +7,21 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
       "rarity": "common",
       "description": "3⭐ skill with only Class C evidence.",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+      "rarity": "common",
+      "description": "Level III skill with only Class C evidence.",
+=======
+      "level": "3★",
+      "rarity": "common",
+      "description": "3★ skill with only Class C evidence.",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "prerequisites": [
         "skill-b",
         "skill-c"
@@ -21,7 +33,15 @@
           "source": "http://example.com",
           "evaluator": "test",
           "date": "2026-04-26",
+<<<<<<< HEAD
           "notes": "Insufficient evidence for 3⭐."
+=======
+<<<<<<< Updated upstream
+          "notes": "Insufficient evidence for Level III."
+=======
+          "notes": "Insufficient evidence for 3★."
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         }
       ],
       "status": "provisional",
@@ -33,7 +53,15 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],
@@ -57,7 +85,15 @@
       "id": "skill-c",
       "name": "Skill C",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

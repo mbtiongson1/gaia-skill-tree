@@ -197,11 +197,27 @@ def validate_evidence(graph):
     """Check that evidence meets the minimum threshold for each skill's level."""
     errors = []
     for skill in graph.get("skills", []):
+<<<<<<< HEAD
         level = skill.get("level", "1⭐")
         required_classes = EVIDENCE_FLOOR.get(level)
 
         if required_classes is None:
             continue  # 1⭐ needs no evidence
+=======
+<<<<<<< Updated upstream
+        level = skill.get("level", "I")
+        required_classes = EVIDENCE_FLOOR.get(level)
+
+        if required_classes is None:
+            continue  # Level I needs no evidence
+=======
+        level = skill.get("level", "1★")
+        required_classes = EVIDENCE_FLOOR.get(level)
+
+        if required_classes is None:
+            continue  # 1★ needs no evidence
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
         evidence = skill.get("evidence", [])
         if not evidence:
@@ -224,8 +240,18 @@ def validate_ultimate(graph):
         if skill["type"] != "ultimate":
             continue
 
+<<<<<<< HEAD
         # Ultimate stubs at 1⭐ are allowed without evidence
         if skill["level"] == "1⭐" and skill["status"] == "provisional":
+=======
+<<<<<<< Updated upstream
+        # Ultimate stubs at Level I are allowed without evidence
+        if skill["level"] == "I" and skill["status"] == "provisional":
+=======
+        # Ultimate stubs at 1★ are allowed without evidence
+        if skill["level"] == "1★" and skill["status"] == "provisional":
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             continue
 
         # Validated ultimates need 3+ Class A/B evidence
@@ -247,7 +273,15 @@ def validate_demerits(graph):
         if not demerits:
             continue
 
+<<<<<<< HEAD
         level = skill.get("level", "1⭐")
+=======
+<<<<<<< Updated upstream
+        level = skill.get("level", "I")
+=======
+        level = skill.get("level", "1★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         if level not in DEMERIT_ELIGIBLE_LEVELS:
             errors.append(
                 f"Skill '{skill['id']}' has demerits but claimed level "
@@ -332,7 +366,15 @@ _NAMED_REQUIRED_FIELDS = [
     "description",
 ]
 
+<<<<<<< HEAD
 _NAMED_VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+=======
+<<<<<<< Updated upstream
+_NAMED_VALID_LEVELS = {"II", "III", "IV", "V", "VI"}
+=======
+_NAMED_VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
 
 def _parse_named_frontmatter(text):

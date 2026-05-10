@@ -28,7 +28,15 @@ def mini_graph():
                 "id": "skill-a",
                 "name": "Skill A",
                 "type": "basic",
+<<<<<<< HEAD
                 "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+                "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "prerequisites": [],
                 "derivatives": ["skill-d"],
             },
@@ -36,7 +44,15 @@ def mini_graph():
                 "id": "skill-b",
                 "name": "Skill B",
                 "type": "basic",
+<<<<<<< HEAD
                 "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+                "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "prerequisites": [],
                 "derivatives": ["skill-d", "skill-e"],
             },
@@ -44,7 +60,15 @@ def mini_graph():
                 "id": "skill-c",
                 "name": "Skill C",
                 "type": "basic",
+<<<<<<< HEAD
                 "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+                "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "prerequisites": [],
                 "derivatives": ["skill-e"],
             },
@@ -52,7 +76,15 @@ def mini_graph():
                 "id": "skill-d",
                 "name": "Skill D",
                 "type": "extra",
+<<<<<<< HEAD
                 "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+                "level": "I",
+=======
+                "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "prerequisites": ["skill-a", "skill-b"],
                 "derivatives": [],
             },
@@ -60,7 +92,15 @@ def mini_graph():
                 "id": "skill-e",
                 "name": "Skill E",
                 "type": "extra",
+<<<<<<< HEAD
                 "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+                "level": "I",
+=======
+                "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "prerequisites": ["skill-b", "skill-c"],
                 "derivatives": [],
             },
@@ -203,13 +243,31 @@ class TestComputePaths:
     def test_path_entries_include_effective_level_metadata(self):
         graph = {
             "skills": [
+<<<<<<< HEAD
                 {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
                 {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
+=======
+<<<<<<< Updated upstream
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+=======
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 {
                     "id": "skill-fusion",
                     "name": "Skill Fusion",
                     "type": "extra",
+<<<<<<< HEAD
                     "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+                    "level": "III",
+=======
+                    "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                     "demerits": ["experimental-feature"],
                     "prerequisites": ["skill-a", "skill-b"],
                     "derivatives": [],
@@ -218,6 +276,7 @@ class TestComputePaths:
         }
         result = compute_paths(graph, ["skill-a"], [])
         one_away = result["oneAway"][0]
+<<<<<<< HEAD
         assert one_away["levelFloor"] == "2⭐"
         assert one_away["baseLevelFloor"] == "3⭐"
         assert one_away["effectiveLevelFloor"] == "2⭐"
@@ -231,6 +290,37 @@ class TestComputePaths:
         assert entry["effectiveLevelFloor"] == "2⭐"
         assert entry["levelMeta"]["baseLevel"] == "3⭐"
         assert entry["levelMeta"]["effectiveLevel"] == "2⭐"
+=======
+<<<<<<< Updated upstream
+        assert one_away["levelFloor"] == "II"
+        assert one_away["baseLevelFloor"] == "III"
+        assert one_away["effectiveLevelFloor"] == "II"
+        assert one_away["levelMeta"]["baseLevel"] == "III"
+        assert one_away["levelMeta"]["effectiveLevel"] == "II"
+
+        result = compute_paths(graph, ["skill-a", "skill-b"], [])
+        entry = result["nearUnlocks"][0]
+        assert entry["levelFloor"] == "II"
+        assert entry["baseLevelFloor"] == "III"
+        assert entry["effectiveLevelFloor"] == "II"
+        assert entry["levelMeta"]["baseLevel"] == "III"
+        assert entry["levelMeta"]["effectiveLevel"] == "II"
+=======
+        assert one_away["levelFloor"] == "2★"
+        assert one_away["baseLevelFloor"] == "3★"
+        assert one_away["effectiveLevelFloor"] == "2★"
+        assert one_away["levelMeta"]["baseLevel"] == "3★"
+        assert one_away["levelMeta"]["effectiveLevel"] == "2★"
+
+        result = compute_paths(graph, ["skill-a", "skill-b"], [])
+        entry = result["nearUnlocks"][0]
+        assert entry["levelFloor"] == "2★"
+        assert entry["baseLevelFloor"] == "3★"
+        assert entry["effectiveLevelFloor"] == "2★"
+        assert entry["levelMeta"]["baseLevel"] == "3★"
+        assert entry["levelMeta"]["effectiveLevel"] == "2★"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
 
 # ---------------------------------------------------------------------------
@@ -334,8 +424,18 @@ class TestRegeneratePaths:
         tree = {
             "userId": "alice",
             "unlockedSkills": [
+<<<<<<< HEAD
                 {"skillId": "web-scrape", "level": "0⭐"},
                 {"skillId": "parse-json", "level": "0⭐"},
+=======
+<<<<<<< Updated upstream
+                {"skillId": "web-scrape", "level": "0"},
+                {"skillId": "parse-json", "level": "0"},
+=======
+                {"skillId": "web-scrape", "level": "0★"},
+                {"skillId": "parse-json", "level": "0★"},
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             ],
         }
         (user_dir / "skill-tree.json").write_text(json.dumps(tree))

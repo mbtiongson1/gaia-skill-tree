@@ -9,6 +9,7 @@
       "ultimate": "Ultimate Skill"
     },
     "levelLabels": {
+<<<<<<< HEAD
       "0⭐": "Basic",
       "1⭐": "Awakened",
       "2⭐": "Named",
@@ -16,42 +17,117 @@
       "4⭐": "Hardened",
       "5⭐": "Transcendent",
       "6⭐": "Transcendent \u2605"
+=======
+<<<<<<< Updated upstream
+      "0": "Basic",
+      "I": "Awakened",
+      "II": "Named",
+      "III": "Evolved",
+      "IV": "Hardened",
+      "V": "Transcendent",
+      "VI": "Transcendent \u2605"
+=======
+      "0★": "Basic",
+      "1★": "Awakened",
+      "2★": "Named",
+      "3★": "Evolved",
+      "4★": "Hardened",
+      "5★": "Transcendent",
+      "6★": "Transcendent \u2605"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     },
     "rarityLabels": {
       "legendary": "Divine"
     },
     "levelColors": {
+<<<<<<< HEAD
       "0⭐": {
+=======
+<<<<<<< Updated upstream
+      "0": {
+=======
+      "0★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#94a3b8",
         "bg": "rgba(148,163,184,.12)",
         "border": "rgba(148,163,184,.4)"
       },
+<<<<<<< HEAD
       "1⭐": {
+=======
+<<<<<<< Updated upstream
+      "I": {
+=======
+      "1★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#38bdf8",
         "bg": "rgba(56,189,248,.12)",
         "border": "rgba(56,189,248,.4)"
       },
+<<<<<<< HEAD
       "2⭐": {
+=======
+<<<<<<< Updated upstream
+      "II": {
+=======
+      "2★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#63cab7",
         "bg": "rgba(99,202,183,.15)",
         "border": "rgba(99,202,183,.4)"
       },
+<<<<<<< HEAD
       "3⭐": {
+=======
+<<<<<<< Updated upstream
+      "III": {
+=======
+      "3★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#a78bfa",
         "bg": "rgba(167,139,250,.15)",
         "border": "rgba(167,139,250,.4)"
       },
+<<<<<<< HEAD
       "4⭐": {
+=======
+<<<<<<< Updated upstream
+      "IV": {
+=======
+      "4★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#e879f9",
         "bg": "rgba(232,121,249,.15)",
         "border": "rgba(232,121,249,.4)"
       },
+<<<<<<< HEAD
       "5⭐": {
+=======
+<<<<<<< Updated upstream
+      "V": {
+=======
+      "5★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#fbbf24",
         "bg": "rgba(251,191,36,.15)",
         "border": "rgba(251,191,36,.4)"
       },
+<<<<<<< HEAD
       "6⭐": {
+=======
+<<<<<<< Updated upstream
+      "VI": {
+=======
+      "6★": {
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "hex": "#fbbf24",
         "bg": "rgba(251,191,36,.22)",
         "border": "rgba(251,191,36,.55)"
@@ -87,7 +163,15 @@
       "id": "tokenize",
       "name": "Tokenize",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
       "prerequisites": [],
@@ -114,7 +198,15 @@
       "id": "classify",
       "name": "Classify",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Assigns one or more categorical labels to an input based on learned or rule-based criteria.",
       "prerequisites": [],
@@ -142,7 +234,15 @@
       "id": "retrieve",
       "name": "Retrieve",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Fetches relevant documents or passages from an indexed corpus given a query.",
       "prerequisites": [],
@@ -172,7 +272,15 @@
       "id": "rank",
       "name": "Rank",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Orders a set of candidate items by relevance, quality, or fitness for a given objective.",
       "prerequisites": [],
@@ -199,7 +307,15 @@
       "id": "parse-json",
       "name": "Parse JSON",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
       "prerequisites": [],
@@ -227,7 +343,15 @@
       "id": "parse-html",
       "name": "Parse HTML",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Extracts structured content from raw HTML, navigating DOM trees and handling malformed markup.",
       "prerequisites": [],
@@ -254,7 +378,15 @@
       "id": "execute-bash",
       "name": "Execute Bash",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Runs shell commands in a sandboxed environment, captures stdout/stderr, and handles exit codes.",
       "prerequisites": [],
@@ -285,7 +417,15 @@
       "id": "generate-text",
       "name": "Generate Text",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
       "prerequisites": [],
@@ -313,7 +453,15 @@
       "id": "summarize",
       "name": "Summarize",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Condenses longer input into a shorter representation that preserves key information and intent.",
       "prerequisites": [],
@@ -344,7 +492,15 @@
       "id": "cite-sources",
       "name": "Cite Sources",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
       "prerequisites": [],
@@ -375,7 +531,15 @@
       "id": "extract-entities",
       "name": "Extract Entities",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Identifies and extracts named entities such as people, organizations, dates, and locations from text.",
       "prerequisites": [],
@@ -407,7 +571,15 @@
       "id": "route-intent",
       "name": "Route Intent",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
       "prerequisites": [],
@@ -436,7 +608,15 @@
       "id": "evaluate-output",
       "name": "Evaluate Output",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
       "prerequisites": [],
@@ -471,7 +651,15 @@
       "id": "embed-text",
       "name": "Embed Text",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Converts text into dense vector representations suitable for similarity search and clustering.",
       "prerequisites": [],
@@ -500,7 +688,15 @@
       "id": "chunk-document",
       "name": "Chunk Document",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Splits a document into semantically meaningful segments optimized for embedding and retrieval.",
       "prerequisites": [],
@@ -527,7 +723,15 @@
       "id": "plan-decompose",
       "name": "Plan and Decompose",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Breaks a complex objective into an ordered sequence of executable sub-tasks.",
       "prerequisites": [],
@@ -560,7 +764,15 @@
       "id": "write-report",
       "name": "Write Report",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Produces structured, multi-section written output with headings, citations, and coherent narrative.",
       "prerequisites": [],
@@ -590,7 +802,15 @@
       "id": "audience-model",
       "name": "Audience Model",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Adapts tone, complexity, and framing of output to match a target audience profile.",
       "prerequisites": [],
@@ -619,7 +839,15 @@
       "id": "tool-select",
       "name": "Tool Select",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
       "prerequisites": [],
@@ -648,7 +876,15 @@
       "id": "error-interpretation",
       "name": "Error Interpretation",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
       "prerequisites": [],
@@ -676,7 +912,15 @@
       "id": "code-generation",
       "name": "Code Generation",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
       "prerequisites": [],
@@ -707,7 +951,15 @@
       "id": "web-search",
       "name": "Web Search",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Queries external search engines or APIs and retrieves relevant result sets.",
       "prerequisites": [],
@@ -737,7 +989,15 @@
       "id": "score-relevance",
       "name": "Score Relevance",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Assigns a numerical relevance score to candidate items relative to a query or objective.",
       "prerequisites": [],
@@ -765,7 +1025,15 @@
       "id": "format-output",
       "name": "Format Output",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
       "prerequisites": [],
@@ -796,7 +1064,15 @@
       "id": "diff-content",
       "name": "Diff Content",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
       "prerequisites": [],
@@ -823,7 +1099,15 @@
       "id": "web-scrape",
       "name": "Web Scrape",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Retrieves and structures data from web pages into usable entities.",
       "prerequisites": [
@@ -854,7 +1138,15 @@
       "id": "research",
       "name": "Research",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
       "prerequisites": [
@@ -889,7 +1181,15 @@
       "id": "ghostwrite",
       "name": "Ghostwrite",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Produces audience-tailored, research-backed long-form written content.",
       "prerequisites": [
@@ -918,7 +1218,15 @@
       "id": "autonomous-debug",
       "name": "Autonomous Debug",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
       "prerequisites": [
@@ -947,7 +1255,15 @@
       "id": "plan-and-execute",
       "name": "Plan and Execute",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
       "prerequisites": [
@@ -978,7 +1294,15 @@
       "id": "knowledge-harvest",
       "name": "Knowledge Harvest",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
       "prerequisites": [
@@ -1007,7 +1331,15 @@
       "id": "rag-pipeline",
       "name": "RAG Pipeline",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
       "prerequisites": [
@@ -1046,7 +1378,15 @@
       "id": "document-analyst",
       "name": "Document Analyst",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
       "prerequisites": [
@@ -1076,7 +1416,15 @@
       "id": "recursive-self-improvement",
       "name": "Recursive Self-Improvement",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Agent iteratively refines its own prompts, tools, or strategies based on performance feedback loops.",
       "prerequisites": [
@@ -1106,7 +1454,15 @@
       "id": "multi-agent-orchestration-v",
       "name": "Multi-Agent Orchestration",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Coordinates multiple specialized agents across complex workflows with dynamic task allocation and conflict resolution.",
       "prerequisites": [
@@ -1136,7 +1492,15 @@
       "id": "autonomous-research-agent",
       "name": "Autonomous Research Agent",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "6⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "VI",
+=======
+      "level": "6★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Independently conducts end-to-end research cycles including hypothesis generation, evidence gathering, synthesis, and reporting.",
       "prerequisites": [
@@ -1173,7 +1537,15 @@
       "id": "translate",
       "name": "Translate",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
       "prerequisites": [],
@@ -1200,7 +1572,15 @@
       "id": "sentiment-analysis",
       "name": "Sentiment Analysis",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
       "prerequisites": [],
@@ -1228,7 +1608,15 @@
       "id": "image-caption",
       "name": "Image Caption",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
       "prerequisites": [],
@@ -1255,7 +1643,15 @@
       "id": "speech-to-text",
       "name": "Speech to Text",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
       "prerequisites": [],
@@ -1282,7 +1678,15 @@
       "id": "text-to-speech",
       "name": "Text to Speech",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
       "prerequisites": [],
@@ -1309,7 +1713,15 @@
       "id": "generate-sql",
       "name": "Generate SQL",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
       "prerequisites": [],
@@ -1337,7 +1749,15 @@
       "id": "question-answer",
       "name": "Question Answer",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Produces accurate, context-grounded answers to natural-language questions, handling unanswerable cases.",
       "prerequisites": [],
@@ -1366,7 +1786,15 @@
       "id": "image-generate",
       "name": "Image Generate",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Creates photorealistic or stylized images from text prompts using diffusion-based or autoregressive generative models.",
       "prerequisites": [],
@@ -1391,7 +1819,15 @@
       "id": "math-reason",
       "name": "Math Reason",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
       "prerequisites": [],
@@ -1419,7 +1855,15 @@
       "id": "logical-inference",
       "name": "Logical Inference",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Applies deductive, inductive, or abductive reasoning to derive valid conclusions from premises and structured knowledge.",
       "prerequisites": [],
@@ -1447,7 +1891,15 @@
       "id": "memory-manage",
       "name": "Memory Manage",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Maintains, indexes, and retrieves conversational and long-term memory across sessions, managing context window constraints.",
       "prerequisites": [],
@@ -1475,7 +1927,15 @@
       "id": "api-call",
       "name": "API Call",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Constructs, executes, and handles responses from HTTP APIs by interpreting documentation and selecting appropriate endpoints and parameters.",
       "prerequisites": [],
@@ -1503,7 +1963,15 @@
       "id": "refactor-code",
       "name": "Refactor Code",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
       "prerequisites": [],
@@ -1530,7 +1998,15 @@
       "id": "generate-test",
       "name": "Generate Test",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Produces unit tests, integration tests, and edge-case test cases from source code or natural-language specifications.",
       "prerequisites": [],
@@ -1557,7 +2033,15 @@
       "id": "parse-pdf",
       "name": "Parse PDF",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
       "prerequisites": [],
@@ -1584,7 +2068,15 @@
       "id": "detect-anomaly",
       "name": "Detect Anomaly",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Identifies statistical outliers, novel patterns, or deviations from expected behavior in structured or unstructured data.",
       "prerequisites": [],
@@ -1611,7 +2103,15 @@
       "id": "data-visualize",
       "name": "Data Visualize",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
       "prerequisites": [],
@@ -1639,7 +2139,15 @@
       "id": "conversational-agent",
       "name": "Conversational Agent",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
       "prerequisites": [
@@ -1668,7 +2176,15 @@
       "id": "text-to-sql-pipeline",
       "name": "Text-to-SQL Pipeline",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
       "prerequisites": [
@@ -1697,7 +2213,15 @@
       "id": "code-review-pipeline",
       "name": "Code Review Pipeline",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
       "prerequisites": [
@@ -1729,7 +2253,15 @@
       "id": "data-analysis",
       "name": "Data Analysis",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
       "prerequisites": [
@@ -1762,7 +2294,15 @@
       "id": "voice-agent",
       "name": "Voice Agent",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
       "prerequisites": [
@@ -1796,7 +2336,15 @@
       "id": "automated-testing",
       "name": "Automated Testing",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
       "prerequisites": [
@@ -1829,7 +2377,15 @@
       "id": "content-moderation",
       "name": "Content Moderation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
       "prerequisites": [
@@ -1858,7 +2414,15 @@
       "id": "multimodal-reasoning",
       "name": "Multimodal Reasoning",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
       "prerequisites": [
@@ -1890,7 +2454,15 @@
       "id": "translation-pipeline",
       "name": "Translation Pipeline",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
       "prerequisites": [
@@ -1919,7 +2491,15 @@
       "id": "document-digitization",
       "name": "Document Digitization",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
       "prerequisites": [
@@ -1948,7 +2528,15 @@
       "id": "full-stack-developer",
       "name": "Full-Stack Developer",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Autonomously implements, reviews, tests, and refactors complete software features across the full development lifecycle from specification to merged PR.",
       "prerequisites": [
@@ -1992,7 +2580,15 @@
       "id": "autonomous-data-scientist",
       "name": "Autonomous Data Scientist",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Conducts end-to-end data science workflows autonomously: hypothesis generation, data analysis, statistical modeling, and insight reporting.",
       "prerequisites": [
@@ -2036,7 +2632,15 @@
       "id": "real-time-voice-assistant",
       "name": "Real-Time Voice Assistant",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Provides low-latency spoken interactions combining real-time speech I/O, persistent memory, and goal-directed task execution across multi-session conversations.",
       "prerequisites": [
@@ -2080,7 +2684,15 @@
       "id": "registry-curation",
       "name": "Registry Curation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
       "prerequisites": [
@@ -2139,7 +2751,15 @@
       "id": "gaia-audit",
       "name": "Gaia Audit",
       "type": "extra",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
       "prerequisites": [
@@ -2170,7 +2790,15 @@
       "id": "gaia-meta-audit",
       "name": "Gaia Meta Audit",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Scans Gaia registry and real-skill catalog entries for review candidates whose evidence may be outdated, superseded, overpromoted, unmapped, stale, or insufficient for their current level or named-skill claim.",
       "prerequisites": [
@@ -2199,7 +2827,15 @@
       "id": "tool-use",
       "name": "Tool Use",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Invokes external functions or APIs by generating well-formed call signatures, parsing results, and incorporating them into reasoning.",
       "prerequisites": [],
@@ -2236,7 +2872,15 @@
       "id": "function-calling",
       "name": "Function Calling",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
       "prerequisites": [
@@ -2272,7 +2916,15 @@
       "id": "chain-of-thought",
       "name": "Chain-of-Thought Reasoning",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
       "prerequisites": [],
@@ -2309,7 +2961,15 @@
       "id": "self-critique",
       "name": "Self-Critique",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
       "prerequisites": [],
@@ -2344,7 +3004,15 @@
       "id": "structured-output",
       "name": "Structured Output Generation",
       "type": "basic",
+<<<<<<< HEAD
       "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "I",
+=======
+      "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
       "prerequisites": [],
@@ -2381,7 +3049,15 @@
       "id": "code-execution",
       "name": "Code Execution",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
       "prerequisites": [],
@@ -2417,7 +3093,15 @@
       "id": "computer-use",
       "name": "Computer Use",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Controls desktop GUIs and web browsers by interpreting screenshots, issuing mouse/keyboard actions, and verifying visual state to complete open-ended computer tasks.",
       "prerequisites": [],
@@ -2451,7 +3135,15 @@
       "id": "hypothesis-generate",
       "name": "Hypothesis Generation",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
       "prerequisites": [],
@@ -2492,7 +3184,15 @@
       "id": "re-act-reasoning",
       "name": "ReAct Reasoning",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
       "prerequisites": [
@@ -2530,7 +3230,15 @@
       "id": "browser-automation",
       "name": "Browser Automation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
       "prerequisites": [
@@ -2568,7 +3276,15 @@
       "id": "knowledge-graph-build",
       "name": "Knowledge Graph Construction",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
       "prerequisites": [
@@ -2606,7 +3322,15 @@
       "id": "scientific-discovery",
       "name": "Autonomous Scientific Discovery",
       "type": "ultimate",
+<<<<<<< HEAD
       "level": "5⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Autonomously generates novel scientific hypotheses, designs and executes experiments, analyses results, and produces a written report \u00e2\u20ac\u201d completing a full research cycle without human intervention.",
       "prerequisites": [
@@ -2650,7 +3374,15 @@
       "id": "self-consistency",
       "name": "Self-Consistency",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Samples multiple independent reasoning paths for the same problem and selects the answer by majority vote, improving robustness without any additional training.",
       "prerequisites": [],
@@ -2678,7 +3410,15 @@
       "id": "few-shot-learning",
       "name": "Few-Shot Learning",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Conditions a language model on a small number of input-output demonstrations within the prompt, enabling task adaptation without weight updates.",
       "prerequisites": [],
@@ -2706,7 +3446,15 @@
       "id": "tree-of-thought",
       "name": "Tree of Thought",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Frames problem solving as a search over a tree of partial solutions, using LLM-generated evaluations to prune unpromising branches and backtrack, dramatically improving success on complex reasoning tasks.",
       "prerequisites": [
@@ -2743,7 +3491,15 @@
       "id": "prompt-optimization",
       "name": "Prompt Optimization",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
       "prerequisites": [
@@ -2780,7 +3536,15 @@
       "id": "tool-creation",
       "name": "Tool Creation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
       "prerequisites": [
@@ -2818,7 +3582,15 @@
       "id": "ocr",
       "name": "OCR",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Extracts machine-readable text from raster images, scanned pages, and photo documents using optical character recognition, preserving layout and handling skew, noise, and varied fonts.",
       "prerequisites": [],
@@ -2852,7 +3624,15 @@
       "id": "object-detection",
       "name": "Object Detection",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Locates and classifies multiple objects within images by producing bounding boxes, confidence scores, and category labels in a single forward pass.",
       "prerequisites": [],
@@ -2887,7 +3667,15 @@
       "id": "code-explain",
       "name": "Code Explain",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Generates accurate natural-language explanations of source code, describing intent, logic flow, and key decisions at function or module level.",
       "prerequisites": [],
@@ -2922,7 +3710,15 @@
       "id": "reward-modeling",
       "name": "Reward Modeling",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Learns a scalar reward signal from human preference comparisons between model outputs, enabling reinforcement learning from human feedback (RLHF) to align model behavior with human values.",
       "prerequisites": [],
@@ -2957,7 +3753,15 @@
       "id": "grounding",
       "name": "Grounding",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
       "prerequisites": [
@@ -2993,7 +3797,15 @@
       "id": "multi-agent-debate",
       "name": "Multi-Agent Debate",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
       "prerequisites": [
@@ -3029,7 +3841,15 @@
       "id": "fine-tune",
       "name": "Fine-Tune",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Adapts a pre-trained model to a new task or domain by updating model weights using parameter-efficient methods such as LoRA, QLoRA, or full supervised fine-tuning, without retraining from scratch.",
       "prerequisites": [],
@@ -3068,7 +3888,15 @@
       "id": "guardrails",
       "name": "Guardrails",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Wraps LLM outputs with programmatic safety rules, content filters, and topical constraints that detect policy violations and enforce compliant, on-policy responses before they reach the user.",
       "prerequisites": [
@@ -3104,7 +3932,15 @@
       "id": "agent-eval",
       "name": "Agent Evaluation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Holistically evaluates an AI agent's performance on multi-step tasks by running standardised benchmarks, scoring full interaction trajectories, and producing reproducible capability reports.",
       "prerequisites": [
@@ -3146,7 +3982,15 @@
       "id": "semantic-cache",
       "name": "Semantic Cache",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Stores LLM responses keyed by embedding similarity so that semantically equivalent queries are served from cache, reducing inference latency and token cost without sacrificing answer quality.",
       "prerequisites": [],
@@ -3185,7 +4029,15 @@
       "id": "workflow-automation",
       "name": "Workflow Automation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Designs, configures, and runs trigger-based multi-step automation pipelines that connect external services, schedule jobs, and orchestrate tool sequences without continuous human supervision.",
       "prerequisites": [
@@ -3231,7 +4083,15 @@
       "id": "framework-upgrade",
       "name": "Framework Upgrade",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Guides an agent through upgrading a project from one major framework version to another, including breaking-change detection, migration steps, and post-upgrade validation.",
       "prerequisites": [],
@@ -3256,7 +4116,15 @@
       "id": "skill-discovery",
       "name": "Skill Discovery",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Searches a skill or tool registry, ranks results by relevance and install count, and surfaces candidates for the agent to adopt or invoke.",
       "prerequisites": [],
@@ -3281,7 +4149,15 @@
       "id": "document-editing",
       "name": "Document Editing",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Reads, edits, repacks, and applies styling or design principles to structured binary document formats such as PPTX, DOCX, and XLSX.",
       "prerequisites": [],
@@ -3308,7 +4184,15 @@
       "id": "test-driven-development",
       "name": "Test-Driven Development",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Enforces a strict red-green-refactor TDD loop: writes failing tests before implementation, blocks code generation that skips the test step, and validates coverage thresholds before marking tasks complete.",
       "prerequisites": [],
@@ -3333,7 +4217,15 @@
       "id": "ux-audit",
       "name": "UX Audit",
       "type": "basic",
+<<<<<<< HEAD
       "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Systematically evaluates a user interface against established usability heuristics or accessibility standards, producing a scored finding report with remediation recommendations.",
       "prerequisites": [],
@@ -3358,7 +4250,15 @@
       "id": "context-compression",
       "name": "Context Compression",
       "type": "basic",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Reduces the length of prompts or retrieved context to fit token limits while preserving semantic content, using techniques such as selective token removal, summarization, or token-classification-based pruning (e.g. LLMLingua).",
       "prerequisites": [],
@@ -3397,7 +4297,15 @@
       "id": "prompt-injection-defense",
       "name": "Prompt Injection Defense",
       "type": "basic",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Detects and neutralizes adversarial instructions injected into agent context from untrusted external sources (indirect prompt injection), using techniques such as context isolation, hierarchical intent verification, or semantic consistency checks.",
       "prerequisites": [],
@@ -3436,7 +4344,15 @@
       "id": "vision-qa",
       "name": "Visual Question Answering",
       "type": "basic",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Answers natural-language questions grounded in a specific image or screenshot by combining visual perception with language reasoning, enabling visual debugging, UI analysis, and document-image Q&A.",
       "prerequisites": [],
@@ -3468,7 +4384,15 @@
       "id": "tool-chaining",
       "name": "Tool Chaining",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Sequences multiple tool invocations into a dependency graph where the output of each tool feeds as structured input to the next, handling state propagation, intermediate result validation, and error recovery across multi-step execution pipelines.",
       "prerequisites": [
@@ -3503,7 +4427,15 @@
       "id": "issue-triage",
       "name": "Issue Triage",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Classifies incoming issue reports through a structured state machine, assigns triage roles (bug/enhancement, needs-info/ready-for-agent/wontfix), reproduces bugs, requests missing detail, and produces structured resolution briefs for agent or human handoff.",
       "prerequisites": [],
@@ -3542,7 +4474,15 @@
       "id": "prd-generation",
       "name": "PRD Generation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Synthesizes conversation context and codebase knowledge into a structured Product Requirements Document containing a problem statement, extensive user stories, implementation decisions, module boundaries, testing decisions, and out-of-scope items.",
       "prerequisites": [
@@ -3577,7 +4517,15 @@
       "id": "vertical-slice-planning",
       "name": "Vertical Slice Planning",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Decomposes a product plan into independently-demoable vertical slices that each cut through all integration layers end-to-end. Classifies each slice as HITL (human-in-the-loop) or AFK (autonomous), identifies dependency ordering, and publishes structured issues with acceptance criteria.",
       "prerequisites": [
@@ -3605,7 +4553,15 @@
       "id": "design-review",
       "name": "Design Review",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Stress-tests a plan or design through relentless targeted questioning, walking the decision tree branch-by-branch, resolving concept dependencies, surfacing contradictions against the existing codebase, and crystallising ubiquitous language \u2014 optionally persisting resolved decisions to CONTEXT.md and ADRs.",
       "prerequisites": [
@@ -3640,7 +4596,15 @@
       "id": "statistical-analysis",
       "name": "Statistical Analysis",
       "type": "basic",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Performs hypothesis testing, regression analysis, and Bayesian modelling with effect size calculation and APA-formatted statistical reporting using scipy, statsmodels, and PyMC.",
       "prerequisites": [],
@@ -3674,7 +4638,15 @@
       "id": "scientific-visualization",
       "name": "Scientific Visualization",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Creates publication-ready scientific figures with multi-panel layouts, statistical annotations, colorblind-safe palettes, and journal-specific formatting (Nature, Science, Cell) using matplotlib, seaborn, and plotly.",
       "prerequisites": [],
@@ -3701,7 +4673,15 @@
       "id": "literature-review",
       "name": "Literature Review",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Conducts systematic multi-database academic literature searches following PRISMA/SWARM protocols, screens and synthesises findings, verifies all citations, and generates a structured review report.",
       "prerequisites": [
@@ -3737,7 +4717,15 @@
       "id": "scientific-writing",
       "name": "Scientific Writing",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Composes research manuscripts in IMRAD structure with reporting-guideline compliance (CONSORT, STROBE, PRISMA), citation management, publication-quality figures, and LaTeX/PDF formatting.",
       "prerequisites": [
@@ -3773,7 +4761,15 @@
       "id": "ml-pipeline",
       "name": "ML Pipeline",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Designs and implements production ML pipelines with experiment tracking (MLflow, W&B), feature stores (Feast), orchestration (Kubeflow, Airflow), and automated retraining workflows including model evaluation gates and A/B deployment.",
       "prerequisites": [
@@ -3809,7 +4805,15 @@
       "id": "mcp-integration",
       "name": "MCP Integration",
       "type": "basic",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Connect to and invoke tools exposed by Model Context Protocol (MCP) servers \u2014 enumerate available tools, execute calls, and handle responses across any MCP-compatible backend.",
       "prerequisites": [],
@@ -3851,7 +4855,15 @@
       "id": "parallel-execution",
       "name": "Parallel Execution",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Decompose a task into independent sub-tasks and execute them concurrently, merging results with configurable concurrency limits and queue-based state tracking.",
       "prerequisites": [],
@@ -3876,7 +4888,15 @@
       "id": "requirements-analysis",
       "name": "Requirements Analysis",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Elicit and structure requirements from stakeholder inputs into formal specifications \u2014 user stories, acceptance criteria, and traceability matrices.",
       "prerequisites": [],
@@ -3901,7 +4921,15 @@
       "id": "schema-design",
       "name": "Schema Design",
       "type": "basic",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Design database schemas across relational, NoSQL, graph, and time-series stores \u2014 entity modelling, normalization, indexing strategies, and migration planning.",
       "prerequisites": [],
@@ -3926,7 +4954,15 @@
       "id": "e2e-testing",
       "name": "End-to-End Testing",
       "type": "extra",
+<<<<<<< HEAD
       "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Execute full end-to-end user journey tests using browser automation frameworks (Playwright/Puppeteer), validating complete workflows from UI to backend across real environments.",
       "prerequisites": [
@@ -3961,7 +4997,15 @@
       "id": "security-audit",
       "name": "Security Audit",
       "type": "extra",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Systematically identify security vulnerabilities, assess attack surface, and produce actionable remediation guidance across code, dependencies, and infrastructure.",
       "prerequisites": [
@@ -3996,7 +5040,15 @@
       "id": "release-automation",
       "name": "Release Automation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Automate the full software release cycle: determine semantic version bump, update CHANGELOG, commit, create a git tag, and publish a GitHub release with release notes.",
       "prerequisites": [
@@ -4025,7 +5077,15 @@
       "id": "deployment-automation",
       "name": "Deployment Automation",
       "type": "extra",
+<<<<<<< HEAD
       "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Automate CI/CD pipeline execution and deployment to target environments \u2014 build, test, artifact publishing, environment promotion, and rollback strategies.",
       "prerequisites": [
@@ -4056,7 +5116,15 @@
       "id": "feed-monitoring",
       "name": "Feed Monitoring",
       "type": "basic",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Monitors RSS, Atom, blog, or other recurring content feeds, discovers updates, tracks read state, and surfaces new signals for downstream agent workflows.",
       "prerequisites": [],
@@ -4083,7 +5151,15 @@
       "id": "wiki-search",
       "name": "Wiki Search",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Builds, maintains, and queries an interlinked markdown or wiki-style knowledge base so an agent can retrieve durable local context across research sessions.",
       "prerequisites": [
@@ -4114,7 +5190,15 @@
       "id": "prediction-market-analysis",
       "name": "Prediction Market Analysis",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "rare",
       "description": "Queries prediction-market data, compares market probabilities and price history, and summarizes probabilistic signals for forecasting or decision-support workflows.",
       "prerequisites": [
@@ -4145,7 +5229,15 @@
       "id": "humanize-prose",
       "name": "Humanize Prose",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Audits and rewrites prose to remove generic AI-writing patterns, preserve author intent, and adapt tone toward a more natural human voice.",
       "prerequisites": [
@@ -4176,7 +5268,15 @@
       "id": "architecture-diagram",
       "name": "Architecture Diagram",
       "type": "extra",
+<<<<<<< HEAD
       "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+      "level": "IV",
+=======
+      "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "Generates technical architecture, infrastructure, or cloud diagrams as structured visual artifacts from natural-language system descriptions.",
       "prerequisites": [
@@ -4210,7 +5310,15 @@
       "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "webScrape#evidence[0]"
       ]
@@ -4220,7 +5328,15 @@
       "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "webScrape#evidence[0]"
       ]
@@ -4230,7 +5346,15 @@
       "targetSkillId": "web-scrape",
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "webScrape#evidence[0]"
       ]
@@ -4240,7 +5364,15 @@
       "targetSkillId": "research",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "research#evidence[0]"
       ]
@@ -4250,7 +5382,15 @@
       "targetSkillId": "research",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "research#evidence[0]"
       ]
@@ -4260,7 +5400,15 @@
       "targetSkillId": "research",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "research#evidence[0]"
       ]
@@ -4270,7 +5418,15 @@
       "targetSkillId": "ghostwrite",
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ghostwrite#evidence[0]"
       ]
@@ -4280,7 +5436,15 @@
       "targetSkillId": "ghostwrite",
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ghostwrite#evidence[0]"
       ]
@@ -4290,7 +5454,15 @@
       "targetSkillId": "ghostwrite",
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ghostwrite#evidence[0]"
       ]
@@ -4300,7 +5472,15 @@
       "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDebug#evidence[0]"
       ]
@@ -4310,7 +5490,15 @@
       "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDebug#evidence[0]"
       ]
@@ -4320,7 +5508,15 @@
       "targetSkillId": "autonomous-debug",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDebug#evidence[0]"
       ]
@@ -4330,7 +5526,15 @@
       "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "planAndExecute#evidence[0]"
       ]
@@ -4340,7 +5544,15 @@
       "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "planAndExecute#evidence[0]"
       ]
@@ -4350,7 +5562,15 @@
       "targetSkillId": "plan-and-execute",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "planAndExecute#evidence[0]"
       ]
@@ -4360,7 +5580,15 @@
       "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "knowledgeHarvest#evidence[0]"
       ]
@@ -4370,7 +5598,15 @@
       "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "knowledgeHarvest#evidence[0]"
       ]
@@ -4380,7 +5616,15 @@
       "targetSkillId": "knowledge-harvest",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "knowledgeHarvest#evidence[0]"
       ]
@@ -4390,7 +5634,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ragPipeline#evidence[0]"
       ]
@@ -4400,7 +5652,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ragPipeline#evidence[0]"
       ]
@@ -4410,7 +5670,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ragPipeline#evidence[0]"
       ]
@@ -4420,7 +5688,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ragPipeline#evidence[0]"
       ]
@@ -4430,7 +5706,15 @@
       "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentAnalyst#evidence[0]"
       ]
@@ -4440,7 +5724,15 @@
       "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentAnalyst#evidence[0]"
       ]
@@ -4450,7 +5742,15 @@
       "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentAnalyst#evidence[0]"
       ]
@@ -4460,7 +5760,15 @@
       "targetSkillId": "document-analyst",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentAnalyst#evidence[0]"
       ]
@@ -4470,7 +5778,15 @@
       "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4478,7 +5794,15 @@
       "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4486,7 +5810,15 @@
       "targetSkillId": "recursive-self-improvement",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4494,7 +5826,15 @@
       "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4502,7 +5842,15 @@
       "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4510,7 +5858,15 @@
       "targetSkillId": "multi-agent-orchestration-v",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4518,7 +5874,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4526,7 +5890,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4534,7 +5906,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4542,7 +5922,15 @@
       "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "conversationalAgent#evidence[0]"
       ]
@@ -4552,7 +5940,15 @@
       "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "conversationalAgent#evidence[0]"
       ]
@@ -4562,7 +5958,15 @@
       "targetSkillId": "conversational-agent",
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "conversationalAgent#evidence[0]"
       ]
@@ -4572,7 +5976,15 @@
       "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "textToSqlPipeline#evidence[0]"
       ]
@@ -4582,7 +5994,15 @@
       "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "textToSqlPipeline#evidence[0]"
       ]
@@ -4592,7 +6012,15 @@
       "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "textToSqlPipeline#evidence[0]"
       ]
@@ -4602,7 +6030,15 @@
       "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "codeReviewPipeline#evidence[0]"
       ]
@@ -4612,7 +6048,15 @@
       "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "codeReviewPipeline#evidence[0]"
       ]
@@ -4622,7 +6066,15 @@
       "targetSkillId": "code-review-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "codeReviewPipeline#evidence[0]"
       ]
@@ -4632,7 +6084,15 @@
       "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "dataAnalysis#evidence[0]"
       ]
@@ -4642,7 +6102,15 @@
       "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "dataAnalysis#evidence[0]"
       ]
@@ -4652,7 +6120,15 @@
       "targetSkillId": "data-analysis",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "dataAnalysis#evidence[0]"
       ]
@@ -4662,7 +6138,15 @@
       "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "voiceAgent#evidence[0]"
       ]
@@ -4672,7 +6156,15 @@
       "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "voiceAgent#evidence[0]"
       ]
@@ -4682,7 +6174,15 @@
       "targetSkillId": "voice-agent",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "voiceAgent#evidence[0]"
       ]
@@ -4692,7 +6192,15 @@
       "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "automatedTesting#evidence[0]"
       ]
@@ -4702,7 +6210,15 @@
       "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "automatedTesting#evidence[0]"
       ]
@@ -4712,7 +6228,15 @@
       "targetSkillId": "automated-testing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "automatedTesting#evidence[0]"
       ]
@@ -4722,7 +6246,15 @@
       "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "contentModeration#evidence[0]"
       ]
@@ -4732,7 +6264,15 @@
       "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "contentModeration#evidence[0]"
       ]
@@ -4742,7 +6282,15 @@
       "targetSkillId": "content-moderation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "contentModeration#evidence[0]"
       ]
@@ -4752,7 +6300,15 @@
       "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "multimodalReasoning#evidence[0]"
       ]
@@ -4762,7 +6318,15 @@
       "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "multimodalReasoning#evidence[0]"
       ]
@@ -4772,7 +6336,15 @@
       "targetSkillId": "multimodal-reasoning",
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "multimodalReasoning#evidence[0]"
       ]
@@ -4782,7 +6354,15 @@
       "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "translationPipeline#evidence[0]"
       ]
@@ -4792,7 +6372,15 @@
       "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "translationPipeline#evidence[0]"
       ]
@@ -4802,7 +6390,15 @@
       "targetSkillId": "translation-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "translationPipeline#evidence[0]"
       ]
@@ -4812,7 +6408,15 @@
       "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentDigitization#evidence[0]"
       ]
@@ -4822,7 +6426,15 @@
       "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentDigitization#evidence[0]"
       ]
@@ -4832,7 +6444,15 @@
       "targetSkillId": "document-digitization",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "documentDigitization#evidence[0]"
       ]
@@ -4842,7 +6462,15 @@
       "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "fullStackDeveloper#evidence[0]"
       ]
@@ -4852,7 +6480,15 @@
       "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "fullStackDeveloper#evidence[0]"
       ]
@@ -4862,7 +6498,15 @@
       "targetSkillId": "full-stack-developer",
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "fullStackDeveloper#evidence[0]"
       ]
@@ -4872,7 +6516,15 @@
       "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDataScientist#evidence[0]"
       ]
@@ -4882,7 +6534,15 @@
       "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDataScientist#evidence[0]"
       ]
@@ -4892,7 +6552,15 @@
       "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "autonomousDataScientist#evidence[0]"
       ]
@@ -4902,7 +6570,15 @@
       "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "realTimeVoiceAssistant#evidence[0]"
       ]
@@ -4912,7 +6588,15 @@
       "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "realTimeVoiceAssistant#evidence[0]"
       ]
@@ -4922,7 +6606,15 @@
       "targetSkillId": "real-time-voice-assistant",
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "realTimeVoiceAssistant#evidence[0]"
       ]
@@ -4932,7 +6624,15 @@
       "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "registryCuration#evidence[0]"
       ]
@@ -4942,7 +6642,15 @@
       "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "registryCuration#evidence[0]"
       ]
@@ -4952,7 +6660,15 @@
       "targetSkillId": "registry-curation",
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "registryCuration#evidence[0]"
       ]
@@ -4962,7 +6678,15 @@
       "targetSkillId": "re-act-reasoning",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4970,7 +6694,15 @@
       "targetSkillId": "re-act-reasoning",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4978,7 +6710,15 @@
       "targetSkillId": "scientific-discovery",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4986,7 +6726,15 @@
       "targetSkillId": "recursive-self-improvement",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -4994,7 +6742,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5002,7 +6758,15 @@
       "targetSkillId": "text-to-sql-pipeline",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5010,7 +6774,15 @@
       "targetSkillId": "autonomous-debug",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5018,7 +6790,15 @@
       "targetSkillId": "code-review-pipeline",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5026,7 +6806,15 @@
       "targetSkillId": "automated-testing",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5034,7 +6822,15 @@
       "targetSkillId": "browser-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5042,7 +6838,15 @@
       "targetSkillId": "scientific-discovery",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5050,7 +6854,15 @@
       "targetSkillId": "re-act-reasoning",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5058,7 +6870,15 @@
       "targetSkillId": "plan-and-execute",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5066,7 +6886,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5074,7 +6902,15 @@
       "targetSkillId": "browser-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5082,7 +6918,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5090,7 +6934,15 @@
       "targetSkillId": "knowledge-graph-build",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5098,7 +6950,15 @@
       "targetSkillId": "knowledge-graph-build",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5106,7 +6966,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5114,7 +6982,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5122,7 +6998,15 @@
       "targetSkillId": "scientific-discovery",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5130,7 +7014,15 @@
       "targetSkillId": "scientific-discovery",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5138,7 +7030,15 @@
       "targetSkillId": "tree-of-thought",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5146,7 +7046,15 @@
       "targetSkillId": "re-act-reasoning",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5154,7 +7062,15 @@
       "targetSkillId": "chain-of-thought",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5162,7 +7078,15 @@
       "targetSkillId": "conversational-agent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5170,7 +7094,15 @@
       "targetSkillId": "tree-of-thought",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5178,7 +7110,15 @@
       "targetSkillId": "tree-of-thought",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5186,7 +7126,15 @@
       "targetSkillId": "scientific-discovery",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5194,7 +7142,15 @@
       "targetSkillId": "prompt-optimization",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5202,7 +7158,15 @@
       "targetSkillId": "prompt-optimization",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5210,7 +7174,15 @@
       "targetSkillId": "registry-curation",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5218,7 +7190,15 @@
       "targetSkillId": "tool-creation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5226,7 +7206,15 @@
       "targetSkillId": "tool-creation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5234,7 +7222,15 @@
       "targetSkillId": "full-stack-developer",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5242,7 +7238,15 @@
       "targetSkillId": "autonomous-research-agent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5250,7 +7254,15 @@
       "targetSkillId": "function-calling",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5258,7 +7270,15 @@
       "targetSkillId": "function-calling",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5266,7 +7286,15 @@
       "targetSkillId": "function-calling",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5274,7 +7302,15 @@
       "targetSkillId": "document-digitization",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5282,7 +7318,15 @@
       "targetSkillId": "multimodal-reasoning",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5290,7 +7334,15 @@
       "targetSkillId": "browser-automation",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5298,7 +7350,15 @@
       "targetSkillId": "code-review-pipeline",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5306,7 +7366,15 @@
       "targetSkillId": "autonomous-debug",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5314,7 +7382,15 @@
       "targetSkillId": "recursive-self-improvement",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5322,7 +7398,15 @@
       "targetSkillId": "prompt-optimization",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5330,7 +7414,15 @@
       "targetSkillId": "grounding",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5338,7 +7430,15 @@
       "targetSkillId": "grounding",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5346,7 +7446,15 @@
       "targetSkillId": "grounding",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5354,7 +7462,15 @@
       "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5362,7 +7478,15 @@
       "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5370,7 +7494,15 @@
       "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5378,7 +7510,15 @@
       "targetSkillId": "guardrails",
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "guardrails#evidence[0]"
       ]
@@ -5388,7 +7528,15 @@
       "targetSkillId": "guardrails",
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "guardrails#evidence[0]"
       ]
@@ -5398,7 +7546,15 @@
       "targetSkillId": "guardrails",
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "guardrails#evidence[0]"
       ]
@@ -5408,7 +7564,15 @@
       "targetSkillId": "agent-eval",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "agent-eval#evidence[0]"
       ]
@@ -5418,7 +7582,15 @@
       "targetSkillId": "agent-eval",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "agent-eval#evidence[0]"
       ]
@@ -5428,7 +7600,15 @@
       "targetSkillId": "workflow-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "workflow-automation#evidence[0]"
       ]
@@ -5438,7 +7618,15 @@
       "targetSkillId": "workflow-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "workflow-automation#evidence[0]"
       ]
@@ -5448,7 +7636,15 @@
       "targetSkillId": "workflow-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "workflow-automation#evidence[0]"
       ]
@@ -5458,7 +7654,15 @@
       "targetSkillId": "tool-chaining",
       "edgeType": "prerequisite",
       "condition": "Requires at least two distinct tools whose data schemas are compatible for chaining.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "tool-chaining#evidence[0]"
       ]
@@ -5468,7 +7672,15 @@
       "targetSkillId": "tool-chaining",
       "edgeType": "prerequisite",
       "condition": "Requires at least two distinct tools whose data schemas are compatible for chaining.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "tool-chaining#evidence[0]"
       ]
@@ -5478,7 +7690,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5486,7 +7706,15 @@
       "targetSkillId": "rag-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5494,7 +7722,15 @@
       "targetSkillId": "prd-generation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "III",
+=======
+      "levelFloor": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5502,7 +7738,15 @@
       "targetSkillId": "prd-generation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "III",
+=======
+      "levelFloor": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5510,7 +7754,15 @@
       "targetSkillId": "vertical-slice-planning",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5518,7 +7770,15 @@
       "targetSkillId": "vertical-slice-planning",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5526,7 +7786,15 @@
       "targetSkillId": "design-review",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5534,7 +7802,15 @@
       "targetSkillId": "design-review",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5542,7 +7818,15 @@
       "targetSkillId": "route-intent",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "III",
+=======
+      "levelFloor": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5550,7 +7834,15 @@
       "targetSkillId": "vertical-slice-planning",
       "edgeType": "enhances",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "3⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "III",
+=======
+      "levelFloor": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5558,7 +7850,15 @@
       "targetSkillId": "literature-review",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "literature-review#evidence[0]"
       ]
@@ -5568,7 +7868,15 @@
       "targetSkillId": "literature-review",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "literature-review#evidence[0]"
       ]
@@ -5578,7 +7886,15 @@
       "targetSkillId": "literature-review",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "literature-review#evidence[0]"
       ]
@@ -5588,7 +7904,15 @@
       "targetSkillId": "scientific-writing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "scientific-writing#evidence[0]"
       ]
@@ -5598,7 +7922,15 @@
       "targetSkillId": "scientific-writing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "scientific-writing#evidence[0]"
       ]
@@ -5608,7 +7940,15 @@
       "targetSkillId": "scientific-writing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "scientific-writing#evidence[0]"
       ]
@@ -5618,7 +7958,15 @@
       "targetSkillId": "ml-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ml-pipeline#evidence[0]"
       ]
@@ -5628,7 +7976,15 @@
       "targetSkillId": "ml-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ml-pipeline#evidence[0]"
       ]
@@ -5638,7 +7994,15 @@
       "targetSkillId": "ml-pipeline",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "ml-pipeline#evidence[0]"
       ]
@@ -5648,7 +8012,15 @@
       "targetSkillId": "e2e-testing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5656,7 +8028,15 @@
       "targetSkillId": "e2e-testing",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5664,7 +8044,15 @@
       "targetSkillId": "security-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5672,7 +8060,15 @@
       "targetSkillId": "security-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5680,7 +8076,15 @@
       "targetSkillId": "release-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5688,7 +8092,15 @@
       "targetSkillId": "release-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5696,7 +8108,15 @@
       "targetSkillId": "release-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5704,7 +8124,15 @@
       "targetSkillId": "deployment-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5712,7 +8140,15 @@
       "targetSkillId": "deployment-automation",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": []
     },
     {
@@ -5720,7 +8156,15 @@
       "targetSkillId": "gaia-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-audit#evidence[0]"
       ]
@@ -5730,7 +8174,15 @@
       "targetSkillId": "gaia-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-audit#evidence[0]"
       ]
@@ -5740,7 +8192,15 @@
       "targetSkillId": "gaia-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "1⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "I",
+=======
+      "levelFloor": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-audit#evidence[0]"
       ]
@@ -5750,7 +8210,15 @@
       "targetSkillId": "gaia-meta-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-meta-audit#evidence[0]"
       ]
@@ -5760,7 +8228,15 @@
       "targetSkillId": "gaia-meta-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-meta-audit#evidence[0]"
       ]
@@ -5770,7 +8246,15 @@
       "targetSkillId": "gaia-meta-audit",
       "edgeType": "prerequisite",
       "condition": "",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "gaia-meta-audit#evidence[0]"
       ]
@@ -5780,7 +8264,15 @@
       "targetSkillId": "wiki-search",
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "wiki-search#evidence[0]"
       ]
@@ -5790,7 +8282,15 @@
       "targetSkillId": "wiki-search",
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "wiki-search#evidence[0]"
       ]
@@ -5800,7 +8300,15 @@
       "targetSkillId": "wiki-search",
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "wiki-search#evidence[0]"
       ]
@@ -5810,7 +8318,15 @@
       "targetSkillId": "prediction-market-analysis",
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "prediction-market-analysis#evidence[0]"
       ]
@@ -5820,7 +8336,15 @@
       "targetSkillId": "prediction-market-analysis",
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "prediction-market-analysis#evidence[0]"
       ]
@@ -5830,7 +8354,15 @@
       "targetSkillId": "prediction-market-analysis",
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "prediction-market-analysis#evidence[0]"
       ]
@@ -5840,7 +8372,15 @@
       "targetSkillId": "humanize-prose",
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "humanize-prose#evidence[0]"
       ]
@@ -5850,7 +8390,15 @@
       "targetSkillId": "humanize-prose",
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "humanize-prose#evidence[0]"
       ]
@@ -5860,7 +8408,15 @@
       "targetSkillId": "humanize-prose",
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "humanize-prose#evidence[0]"
       ]
@@ -5870,7 +8426,15 @@
       "targetSkillId": "architecture-diagram",
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "architecture-diagram#evidence[0]"
       ]
@@ -5880,7 +8444,15 @@
       "targetSkillId": "architecture-diagram",
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "architecture-diagram#evidence[0]"
       ]
@@ -5890,7 +8462,15 @@
       "targetSkillId": "architecture-diagram",
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+<<<<<<< HEAD
       "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+      "levelFloor": "II",
+=======
+      "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "evidenceRefs": [
         "architecture-diagram#evidence[0]"
       ]

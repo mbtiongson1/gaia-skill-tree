@@ -33,7 +33,15 @@ def basic_skill():
         "id": "tokenize",
         "name": "Tokenize",
         "type": "basic",
+<<<<<<< HEAD
         "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "0",
+=======
+        "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "common",
         "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
         "prerequisites": [],
@@ -52,7 +60,15 @@ def extra_skill():
         "id": "rag-pipeline",
         "name": "RAG Pipeline",
         "type": "extra",
+<<<<<<< HEAD
         "level": "2⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "II",
+=======
+        "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "demerits": ["experimental-feature"],
         "rarity": "uncommon",
         "description": "Retrieval-augmented generation pipeline combining retrieval, ranking, and synthesis.",
@@ -73,7 +89,15 @@ def ultimate_skill():
         "id": "autonomous-research-agent",
         "name": "Autonomous Research Agent",
         "type": "ultimate",
+<<<<<<< HEAD
         "level": "3⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "III",
+=======
+        "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "legendary",
         "description": "Fully autonomous agent that formulates hypotheses, designs experiments, collects evidence, and synthesizes findings.",
         "prerequisites": ["rag-pipeline", "code-generation", "tool-use", "planning"],
@@ -164,12 +188,28 @@ class TestRenderCard:
 
     def test_contains_level_label(self, basic_skill):
         card = render_card(basic_skill)
+<<<<<<< HEAD
         assert "0⭐ Basic" in card
+=======
+<<<<<<< Updated upstream
+        assert "Lv.0 Basic" in card
+=======
+        assert "0★ Basic" in card
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_shows_claimed_and_effective_when_demerited(self, extra_skill):
         card = render_card(extra_skill)
         assert "Potential:" in card
+<<<<<<< HEAD
         assert "claimed 2⭐" in card
+=======
+<<<<<<< Updated upstream
+        assert "claimed II" in card
+=======
+        assert "claimed 2★" in card
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_contains_description(self, basic_skill):
         card = render_card(basic_skill)
@@ -228,7 +268,15 @@ class TestRenderCard:
             "id": "verbose-skill",
             "name": "Verbose",
             "type": "basic",
+<<<<<<< HEAD
             "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+            "level": "0",
+=======
+            "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             "rarity": "common",
             "description": " ".join(["word"] * 100),
             "prerequisites": [],
@@ -247,7 +295,15 @@ class TestRenderCard:
             "id": "many-prereqs",
             "name": "Many Prereqs",
             "type": "ultimate",
+<<<<<<< HEAD
             "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+            "level": "IV",
+=======
+            "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             "rarity": "epic",
             "description": "A skill with many prerequisites.",
             "prerequisites": [f"skill-{i}" for i in range(8)],
@@ -265,7 +321,15 @@ class TestRenderCard:
             "id": "many-derivs",
             "name": "Many Derivs",
             "type": "basic",
+<<<<<<< HEAD
             "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+            "level": "0",
+=======
+            "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             "rarity": "common",
             "description": "A skill with many derivatives.",
             "prerequisites": [],
@@ -280,7 +344,15 @@ class TestRenderCard:
 
     def test_compact_card_shows_effective_arrow_when_demerited(self, extra_skill):
         compact = render_card_compact(extra_skill)
+<<<<<<< HEAD
         assert "2⭐→1⭐" in compact
+=======
+<<<<<<< Updated upstream
+        assert "Lv.II→I" in compact
+=======
+        assert "2★→1★" in compact
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_missing_optional_fields_defaults_gracefully(self):
         """Card should render even with minimal skill data."""
@@ -310,7 +382,15 @@ class TestRenderCardCompact:
 
     def test_contains_level(self, basic_skill):
         result = render_card_compact(basic_skill)
+<<<<<<< HEAD
         assert "(0⭐)" in result
+=======
+<<<<<<< Updated upstream
+        assert "(Lv.0)" in result
+=======
+        assert "(0★)" in result
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_contains_rarity(self, basic_skill):
         result = render_card_compact(basic_skill)
@@ -321,7 +401,15 @@ class TestRenderCardCompact:
             "id": "x",
             "name": "X",
             "type": "basic",
+<<<<<<< HEAD
             "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+            "level": "0",
+=======
+            "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             "rarity": "common",
             "description": "A" * 100,
         }
@@ -360,20 +448,46 @@ class TestRenderPromotionPrompt:
     def test_shows_skill_id_with_slash(self):
         prompt = render_promotion_prompt(
             {"id": "plan-and-execute", "name": "Different Registry Name", "type": "extra", "prerequisites": ["a", "b"]},
+<<<<<<< HEAD
             "4⭐",
+=======
+<<<<<<< Updated upstream
+            "IV",
+=======
+            "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         )
         assert "/plan-and-execute" in prompt
         assert "gaia fuse plan-and-execute" in prompt
 
     def test_shows_level_and_rank_name(self):
+<<<<<<< HEAD
         prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3⭐")
         assert "3⭐" in prompt
+=======
+<<<<<<< Updated upstream
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "III")
+        assert "Level III" in prompt
+=======
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3★")
+        assert "3★" in prompt
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert "gaia fuse research-agent" in prompt
 
     def test_shows_fusion_diagram_when_prereqs_exist(self):
         prompt = render_promotion_prompt(
             {"id": "research", "type": "extra", "prerequisites": ["web-search", "summarize"]},
+<<<<<<< HEAD
             "3⭐",
+=======
+<<<<<<< Updated upstream
+            "III",
+=======
+            "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         )
         assert "──▶" in prompt
 
@@ -394,7 +508,15 @@ class TestLoadAndRender:
                     "id": "web-scrape",
                     "name": "Web Scrape",
                     "type": "basic",
+<<<<<<< HEAD
                     "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+                    "level": "0",
+=======
+                    "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                     "rarity": "common",
                     "description": "Scrapes data from web pages.",
                     "prerequisites": [],
@@ -435,7 +557,15 @@ class TestLoadAndRender:
                     "id": "classify",
                     "name": "Classify",
                     "type": "basic",
+<<<<<<< HEAD
                     "level": "0⭐",
+=======
+<<<<<<< Updated upstream
+                    "level": "0",
+=======
+                    "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                     "rarity": "common",
                     "description": "Assigns labels.",
                     "prerequisites": [],

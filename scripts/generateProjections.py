@@ -109,7 +109,15 @@ def _build_skill_display(skill_id, skill_type, named_map=None):
     return named_id if named_id else f"/{skill_id}"
 
 def _sorted_ultimates(skills):
+<<<<<<< HEAD
     order = {"6⭐": 0, "5⭐": 1, "4⭐": 2, "3⭐": 3, "2⭐": 4, "1⭐": 5, "0⭐": 6}
+=======
+<<<<<<< Updated upstream
+    order = {"VI": 0, "V": 1, "IV": 2, "III": 3, "II": 4, "I": 5, "0": 6}
+=======
+    order = {"6★": 0, "5★": 1, "4★": 2, "3★": 3, "2★": 4, "1★": 5, "0★": 6}
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     return sorted(
         [s for s in skills if s.get("type") == "ultimate"],
         key=lambda s: (order.get(s.get("level"), 9), s.get("name", ""))

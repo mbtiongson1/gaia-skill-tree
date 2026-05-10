@@ -14,7 +14,15 @@
     <nodes>
       <node id="agent-eval" label="Agent Evaluation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -22,7 +30,15 @@
       </node>
       <node id="api-call" label="API Call">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -30,7 +46,15 @@
       </node>
       <node id="architecture-diagram" label="Architecture Diagram">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -38,7 +62,15 @@
       </node>
       <node id="audience-model" label="Audience Model">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -46,7 +78,15 @@
       </node>
       <node id="automated-testing" label="Automated Testing">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -54,7 +94,15 @@
       </node>
       <node id="autonomous-data-scientist" label="Autonomous Data Scientist">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -62,7 +110,15 @@
       </node>
       <node id="autonomous-debug" label="Autonomous Debug">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -70,7 +126,15 @@
       </node>
       <node id="autonomous-research-agent" label="Autonomous Research Agent">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="6⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="VI" />
+=======
+          <attvalue for="level" value="6★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -78,7 +142,15 @@
       </node>
       <node id="browser-automation" label="Browser Automation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -86,7 +158,15 @@
       </node>
       <node id="chain-of-thought" label="Chain-of-Thought Reasoning">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -94,7 +174,15 @@
       </node>
       <node id="chunk-document" label="Chunk Document">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -102,7 +190,15 @@
       </node>
       <node id="cite-sources" label="Cite Sources">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -110,7 +206,15 @@
       </node>
       <node id="classify" label="Classify">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -118,7 +222,15 @@
       </node>
       <node id="code-execution" label="Code Execution">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -126,7 +238,15 @@
       </node>
       <node id="code-explain" label="Code Explain">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -134,7 +254,15 @@
       </node>
       <node id="code-generation" label="Code Generation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -142,7 +270,15 @@
       </node>
       <node id="code-review-pipeline" label="Code Review Pipeline">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -150,7 +286,15 @@
       </node>
       <node id="computer-use" label="Computer Use">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -158,7 +302,15 @@
       </node>
       <node id="content-moderation" label="Content Moderation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -166,7 +318,15 @@
       </node>
       <node id="context-compression" label="Context Compression">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -174,7 +334,15 @@
       </node>
       <node id="conversational-agent" label="Conversational Agent">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -182,7 +350,15 @@
       </node>
       <node id="data-analysis" label="Data Analysis">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -190,7 +366,15 @@
       </node>
       <node id="data-visualize" label="Data Visualize">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -198,7 +382,15 @@
       </node>
       <node id="deployment-automation" label="Deployment Automation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -206,7 +398,15 @@
       </node>
       <node id="design-review" label="Design Review">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -214,7 +414,15 @@
       </node>
       <node id="detect-anomaly" label="Detect Anomaly">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -222,7 +430,15 @@
       </node>
       <node id="diff-content" label="Diff Content">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -230,7 +446,15 @@
       </node>
       <node id="document-analyst" label="Document Analyst">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -238,7 +462,15 @@
       </node>
       <node id="document-digitization" label="Document Digitization">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -246,7 +478,15 @@
       </node>
       <node id="document-editing" label="Document Editing">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -254,7 +494,15 @@
       </node>
       <node id="e2e-testing" label="End-to-End Testing">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -262,7 +510,15 @@
       </node>
       <node id="embed-text" label="Embed Text">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -270,7 +526,15 @@
       </node>
       <node id="error-interpretation" label="Error Interpretation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -278,7 +542,15 @@
       </node>
       <node id="evaluate-output" label="Evaluate Output">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -286,7 +558,15 @@
       </node>
       <node id="execute-bash" label="Execute Bash">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -294,7 +574,15 @@
       </node>
       <node id="extract-entities" label="Extract Entities">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -302,7 +590,15 @@
       </node>
       <node id="feed-monitoring" label="Feed Monitoring">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -310,7 +606,15 @@
       </node>
       <node id="few-shot-learning" label="Few-Shot Learning">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -318,7 +622,15 @@
       </node>
       <node id="fine-tune" label="Fine-Tune">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -326,7 +638,15 @@
       </node>
       <node id="format-output" label="Format Output">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -334,7 +654,15 @@
       </node>
       <node id="framework-upgrade" label="Framework Upgrade">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -342,7 +670,15 @@
       </node>
       <node id="full-stack-developer" label="Full-Stack Developer">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -350,7 +686,15 @@
       </node>
       <node id="function-calling" label="Function Calling">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -358,7 +702,15 @@
       </node>
       <node id="gaia-audit" label="Gaia Audit">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -366,7 +718,15 @@
       </node>
       <node id="gaia-meta-audit" label="Gaia Meta Audit">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -374,7 +734,15 @@
       </node>
       <node id="generate-sql" label="Generate SQL">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -382,7 +750,15 @@
       </node>
       <node id="generate-test" label="Generate Test">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -390,7 +766,15 @@
       </node>
       <node id="generate-text" label="Generate Text">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -398,7 +782,15 @@
       </node>
       <node id="ghostwrite" label="Ghostwrite">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -406,7 +798,15 @@
       </node>
       <node id="grounding" label="Grounding">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -414,7 +814,15 @@
       </node>
       <node id="guardrails" label="Guardrails">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -422,7 +830,15 @@
       </node>
       <node id="humanize-prose" label="Humanize Prose">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -430,7 +846,15 @@
       </node>
       <node id="hypothesis-generate" label="Hypothesis Generation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -438,7 +862,15 @@
       </node>
       <node id="image-caption" label="Image Caption">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -446,7 +878,15 @@
       </node>
       <node id="image-generate" label="Image Generate">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -454,7 +894,15 @@
       </node>
       <node id="issue-triage" label="Issue Triage">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -462,7 +910,15 @@
       </node>
       <node id="knowledge-graph-build" label="Knowledge Graph Construction">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -470,7 +926,15 @@
       </node>
       <node id="knowledge-harvest" label="Knowledge Harvest">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -478,7 +942,15 @@
       </node>
       <node id="literature-review" label="Literature Review">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -486,7 +958,15 @@
       </node>
       <node id="logical-inference" label="Logical Inference">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -494,7 +974,15 @@
       </node>
       <node id="math-reason" label="Math Reason">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -502,7 +990,15 @@
       </node>
       <node id="mcp-integration" label="MCP Integration">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -510,7 +1006,15 @@
       </node>
       <node id="memory-manage" label="Memory Manage">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -518,7 +1022,15 @@
       </node>
       <node id="ml-pipeline" label="ML Pipeline">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -526,7 +1038,15 @@
       </node>
       <node id="multi-agent-debate" label="Multi-Agent Debate">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -534,7 +1054,15 @@
       </node>
       <node id="multi-agent-orchestration-v" label="Multi-Agent Orchestration">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -542,7 +1070,15 @@
       </node>
       <node id="multimodal-reasoning" label="Multimodal Reasoning">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -550,7 +1086,15 @@
       </node>
       <node id="object-detection" label="Object Detection">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -558,7 +1102,15 @@
       </node>
       <node id="ocr" label="OCR">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -566,7 +1118,15 @@
       </node>
       <node id="parallel-execution" label="Parallel Execution">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -574,7 +1134,15 @@
       </node>
       <node id="parse-html" label="Parse HTML">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -582,7 +1150,15 @@
       </node>
       <node id="parse-json" label="Parse JSON">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -590,7 +1166,15 @@
       </node>
       <node id="parse-pdf" label="Parse PDF">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -598,7 +1182,15 @@
       </node>
       <node id="plan-and-execute" label="Plan and Execute">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -606,7 +1198,15 @@
       </node>
       <node id="plan-decompose" label="Plan and Decompose">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -614,7 +1214,15 @@
       </node>
       <node id="prd-generation" label="PRD Generation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -622,7 +1230,15 @@
       </node>
       <node id="prediction-market-analysis" label="Prediction Market Analysis">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -630,7 +1246,15 @@
       </node>
       <node id="prompt-injection-defense" label="Prompt Injection Defense">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -638,7 +1262,15 @@
       </node>
       <node id="prompt-optimization" label="Prompt Optimization">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -646,7 +1278,15 @@
       </node>
       <node id="question-answer" label="Question Answer">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -654,7 +1294,15 @@
       </node>
       <node id="rag-pipeline" label="RAG Pipeline">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -662,7 +1310,15 @@
       </node>
       <node id="rank" label="Rank">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -670,7 +1326,15 @@
       </node>
       <node id="re-act-reasoning" label="ReAct Reasoning">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -678,7 +1342,15 @@
       </node>
       <node id="real-time-voice-assistant" label="Real-Time Voice Assistant">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -686,7 +1358,15 @@
       </node>
       <node id="recursive-self-improvement" label="Recursive Self-Improvement">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -694,7 +1374,15 @@
       </node>
       <node id="refactor-code" label="Refactor Code">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -702,7 +1390,15 @@
       </node>
       <node id="registry-curation" label="Registry Curation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -710,7 +1406,15 @@
       </node>
       <node id="release-automation" label="Release Automation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -718,7 +1422,15 @@
       </node>
       <node id="requirements-analysis" label="Requirements Analysis">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -726,7 +1438,15 @@
       </node>
       <node id="research" label="Research">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -734,7 +1454,15 @@
       </node>
       <node id="retrieve" label="Retrieve">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -742,7 +1470,15 @@
       </node>
       <node id="reward-modeling" label="Reward Modeling">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -750,7 +1486,15 @@
       </node>
       <node id="route-intent" label="Route Intent">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -758,7 +1502,15 @@
       </node>
       <node id="schema-design" label="Schema Design">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -766,7 +1518,15 @@
       </node>
       <node id="scientific-discovery" label="Autonomous Scientific Discovery">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="5⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="V" />
+=======
+          <attvalue for="level" value="5★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="legendary" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="ultimate" />
@@ -774,7 +1534,15 @@
       </node>
       <node id="scientific-visualization" label="Scientific Visualization">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -782,7 +1550,15 @@
       </node>
       <node id="scientific-writing" label="Scientific Writing">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -790,7 +1566,15 @@
       </node>
       <node id="score-relevance" label="Score Relevance">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -798,7 +1582,15 @@
       </node>
       <node id="security-audit" label="Security Audit">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -806,7 +1598,15 @@
       </node>
       <node id="self-consistency" label="Self-Consistency">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -814,7 +1614,15 @@
       </node>
       <node id="self-critique" label="Self-Critique">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -822,7 +1630,15 @@
       </node>
       <node id="semantic-cache" label="Semantic Cache">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -830,7 +1646,15 @@
       </node>
       <node id="sentiment-analysis" label="Sentiment Analysis">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -838,7 +1662,15 @@
       </node>
       <node id="skill-discovery" label="Skill Discovery">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -846,7 +1678,15 @@
       </node>
       <node id="speech-to-text" label="Speech to Text">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -854,7 +1694,15 @@
       </node>
       <node id="statistical-analysis" label="Statistical Analysis">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -862,7 +1710,15 @@
       </node>
       <node id="structured-output" label="Structured Output Generation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -870,7 +1726,15 @@
       </node>
       <node id="summarize" label="Summarize">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -878,7 +1742,15 @@
       </node>
       <node id="test-driven-development" label="Test-Driven Development">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -886,7 +1758,15 @@
       </node>
       <node id="text-to-speech" label="Text to Speech">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="2⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="II" />
+=======
+          <attvalue for="level" value="2★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -894,7 +1774,15 @@
       </node>
       <node id="text-to-sql-pipeline" label="Text-to-SQL Pipeline">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -902,7 +1790,15 @@
       </node>
       <node id="tokenize" label="Tokenize">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -910,7 +1806,15 @@
       </node>
       <node id="tool-chaining" label="Tool Chaining">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -918,7 +1822,15 @@
       </node>
       <node id="tool-creation" label="Tool Creation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -926,7 +1838,15 @@
       </node>
       <node id="tool-select" label="Tool Select">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -934,7 +1854,15 @@
       </node>
       <node id="tool-use" label="Tool Use">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -942,7 +1870,15 @@
       </node>
       <node id="translate" label="Translate">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -950,7 +1886,15 @@
       </node>
       <node id="translation-pipeline" label="Translation Pipeline">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -958,7 +1902,15 @@
       </node>
       <node id="tree-of-thought" label="Tree of Thought">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="rare" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -966,7 +1918,15 @@
       </node>
       <node id="ux-audit" label="UX Audit">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="0⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="0" />
+=======
+          <attvalue for="level" value="0★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -974,7 +1934,15 @@
       </node>
       <node id="vertical-slice-planning" label="Vertical Slice Planning">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -982,7 +1950,15 @@
       </node>
       <node id="vision-qa" label="Visual Question Answering">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -990,7 +1966,15 @@
       </node>
       <node id="voice-agent" label="Voice Agent">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -998,7 +1982,15 @@
       </node>
       <node id="web-scrape" label="Web Scrape">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="3⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="III" />
+=======
+          <attvalue for="level" value="3★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -1006,7 +1998,15 @@
       </node>
       <node id="web-search" label="Web Search">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />
@@ -1014,7 +2014,15 @@
       </node>
       <node id="wiki-search" label="Wiki Search">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -1022,7 +2030,15 @@
       </node>
       <node id="workflow-automation" label="Workflow Automation">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="4⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="IV" />
+=======
+          <attvalue for="level" value="4★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="extra" />
@@ -1030,7 +2046,15 @@
       </node>
       <node id="write-report" label="Write Report">
         <attvalues>
+<<<<<<< HEAD
           <attvalue for="level" value="1⭐" />
+=======
+<<<<<<< Updated upstream
+          <attvalue for="level" value="I" />
+=======
+          <attvalue for="level" value="1★" />
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
           <attvalue for="rarity" value="common" />
           <attvalue for="status" value="provisional" />
           <attvalue for="type" value="basic" />

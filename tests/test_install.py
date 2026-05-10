@@ -340,7 +340,15 @@ contributor: contrib
 origin: true
 genericSkillRef: web-search
 status: named
+<<<<<<< HEAD
 level: "2⭐"
+=======
+<<<<<<< Updated upstream
+level: II
+=======
+level: "2★"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 description: A test skill.
 ---
 Content here.
@@ -365,7 +373,15 @@ class TestListAvailable:
         sid, meta = result[0]
         assert sid == "contrib/my-skill"
         assert meta["name"] == "My Skill"
+<<<<<<< HEAD
         assert meta["level"] == "2⭐"
+=======
+<<<<<<< Updated upstream
+        assert meta["level"] == "II"
+=======
+        assert meta["level"] == "2★"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert meta["genericSkillRef"] == "web-search"
 
     def test_lists_multiple_contributors_sorted(self, tmp_path):

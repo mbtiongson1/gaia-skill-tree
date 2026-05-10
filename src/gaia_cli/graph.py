@@ -339,12 +339,30 @@ def render_html(graph: dict[str, Any], named_skills: dict[str, Any] | None = Non
     ultimate: {{ rgb:'245,158,11',   hex:'#f59e0b' }},
   }};
   const RANK_META = {{
+<<<<<<< HEAD
     '1⭐':  {{ name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' }},
     '2⭐': {{ name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' }},
     '3⭐':{{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' }},
     '4⭐': {{ name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' }},
     '5⭐':  {{ name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' }},
     '6⭐': {{ name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' }},
+=======
+<<<<<<< Updated upstream
+    'I':  {{ name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' }},
+    'II': {{ name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' }},
+    'III':{{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' }},
+    'IV': {{ name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' }},
+    'V':  {{ name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' }},
+    'VI': {{ name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' }},
+=======
+    '1★':  {{ name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' }},
+    '2★': {{ name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' }},
+    '3★':{{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' }},
+    '4★': {{ name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' }},
+    '5★':  {{ name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' }},
+    '6★': {{ name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' }},
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   }};
    const SCALE = 1.25;
 
@@ -672,7 +690,15 @@ def render_html(graph: dict[str, Any], named_skills: dict[str, Any] | None = Non
       const col = PALETTE[skill.type] || PALETTE.basic;
       const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
       const vis = state.nodeAlphas[skill.id] ?? 1.0;
+<<<<<<< HEAD
       if (skill.level === '6⭐') {{
+=======
+<<<<<<< Updated upstream
+      if (skill.level === 'VI') {{
+=======
+      if (skill.level === '6★') {{
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         drawNodeVI(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, depthAlpha * vis, state.t, p);
       }} else if (state.redPillActive && state.namedMap[skill.id]) {{
         drawNodeNamed(pr.sx, pr.sy, baseR * SCALE * pr.scale * pulse, depthAlpha * vis);
@@ -788,12 +814,30 @@ def render_html(graph: dict[str, Any], named_skills: dict[str, Any] | None = Non
       '<div class="graph-legend-item" data-legend-type="ultimate"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Ultimate</div>' +
       '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
       '<div class="graph-legend-ranks">' +
+<<<<<<< HEAD
       '<span class="graph-legend-rank-pill" data-legend-rank="1⭐"  style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
       '<span class="graph-legend-rank-pill" data-legend-rank="2⭐" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
       '<span class="graph-legend-rank-pill" data-legend-rank="3⭐"style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
       '<span class="graph-legend-rank-pill" data-legend-rank="4⭐" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
       '<span class="graph-legend-rank-pill" data-legend-rank="5⭐"  style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
       '<span class="graph-legend-rank-pill" data-legend-rank="6⭐" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+=======
+<<<<<<< Updated upstream
+      '<span class="graph-legend-rank-pill" data-legend-rank="I"  style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="II" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="III"style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="IV" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="V"  style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="VI" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+=======
+      '<span class="graph-legend-rank-pill" data-legend-rank="1★"  style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="2★" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="3★"style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="4★" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="5★"  style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+      '<span class="graph-legend-rank-pill" data-legend-rank="6★" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       '</div></div>';
     legend.addEventListener('mousedown', e => e.stopPropagation());
     legend.querySelectorAll('.graph-legend-item[data-legend-type]').forEach(item => {{
@@ -823,7 +867,15 @@ def render_html(graph: dict[str, Any], named_skills: dict[str, Any] | None = Non
     redPill.type = 'button';
     redPill.className = 'graph-redpill';
     redPill.textContent = 'Named Skills';
+<<<<<<< HEAD
     redPill.title = 'Highlight Named skills (2⭐+) with contributor attribution and red glow';
+=======
+<<<<<<< Updated upstream
+    redPill.title = 'Highlight Named skills (Level II+) with contributor attribution and red glow';
+=======
+    redPill.title = 'Highlight Named skills (2★+) with contributor attribution and red glow';
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     redPill.addEventListener('mousedown', e => e.stopPropagation());
     redPill.addEventListener('click', () => {{
       state.redPillActive = !state.redPillActive;

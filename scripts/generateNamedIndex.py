@@ -36,7 +36,15 @@ REQUIRED_FIELDS = [
     "description",
 ]
 
+<<<<<<< HEAD
 VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+=======
+<<<<<<< Updated upstream
+VALID_LEVELS = {"II", "III", "IV", "V", "VI"}
+=======
+VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
 INDEX_SKILL_FIELDS = [
     "id",

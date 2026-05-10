@@ -16,7 +16,15 @@ NEW_SKILLS = [
         "id": "feed-monitoring",
         "name": "Feed Monitoring",
         "type": "basic",
+<<<<<<< HEAD
         "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "IV",
+=======
+        "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "common",
         "description": "Monitors RSS, Atom, blog, or other recurring content feeds, discovers updates, tracks read state, and surfaces new signals for downstream agent workflows.",
         "prerequisites": [],
@@ -41,7 +49,15 @@ NEW_SKILLS = [
         "id": "wiki-search",
         "name": "Wiki Search",
         "type": "extra",
+<<<<<<< HEAD
         "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "IV",
+=======
+        "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "uncommon",
         "description": "Builds, maintains, and queries an interlinked markdown or wiki-style knowledge base so an agent can retrieve durable local context across research sessions.",
         "prerequisites": ["retrieve", "embed-text", "summarize"],
@@ -66,7 +82,15 @@ NEW_SKILLS = [
         "id": "prediction-market-analysis",
         "name": "Prediction Market Analysis",
         "type": "extra",
+<<<<<<< HEAD
         "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "IV",
+=======
+        "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "rare",
         "description": "Queries prediction-market data, compares market probabilities and price history, and summarizes probabilistic signals for forecasting or decision-support workflows.",
         "prerequisites": ["data-analysis", "web-search", "statistical-analysis"],
@@ -91,7 +115,15 @@ NEW_SKILLS = [
         "id": "humanize-prose",
         "name": "Humanize Prose",
         "type": "extra",
+<<<<<<< HEAD
         "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "IV",
+=======
+        "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "uncommon",
         "description": "Audits and rewrites prose to remove generic AI-writing patterns, preserve author intent, and adapt tone toward a more natural human voice.",
         "prerequisites": ["document-editing", "audience-model", "format-output"],
@@ -116,7 +148,15 @@ NEW_SKILLS = [
         "id": "architecture-diagram",
         "name": "Architecture Diagram",
         "type": "extra",
+<<<<<<< HEAD
         "level": "4⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "IV",
+=======
+        "level": "4★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "uncommon",
         "description": "Generates technical architecture, infrastructure, or cloud diagrams as structured visual artifacts from natural-language system descriptions.",
         "prerequisites": ["data-visualize", "format-output", "write-report"],
@@ -148,7 +188,15 @@ for skill in NEW_SKILLS:
                 "targetSkillId": skill["id"],
                 "edgeType": "prerequisite",
                 "condition": skill["conditions"],
+<<<<<<< HEAD
                 "levelFloor": "2⭐",
+=======
+<<<<<<< Updated upstream
+                "levelFloor": "II",
+=======
+                "levelFloor": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 "evidenceRefs": [f"{skill['id']}#evidence[0]"],
             }
         )

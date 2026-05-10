@@ -19,7 +19,15 @@ def build_candidate(
         "id": id,
         "name": name,
         "type": skill_type,
+<<<<<<< HEAD
         "level": "1⭐",
+=======
+<<<<<<< Updated upstream
+        "level": "I",
+=======
+        "level": "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "rarity": "common",
         "description": description,
         "prerequisites": [],

@@ -44,5 +44,13 @@ def test_readme_documents_claimed_vs_effective_levels():
 
 def test_governance_documents_demerit_constraints():
     governance = (DOCS_DIR / "GOVERNANCE.md").read_text(encoding="utf-8")
+<<<<<<< HEAD
     assert "Demerits are valid only for 2⭐+" in governance
+=======
+<<<<<<< Updated upstream
+    assert "Demerits are valid only for Level `II+`" in governance
+=======
+    assert "Demerits are valid only for 2★+" in governance
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     assert "effective level" in governance.lower()

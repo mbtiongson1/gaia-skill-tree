@@ -22,7 +22,15 @@ const TEST_SKILL_A: NamedSkill = {
   origin: true,
   genericSkillRef: "autonomous-research-agent",
   status: "named",
+<<<<<<< HEAD
   level: "2⭐",
+=======
+<<<<<<< Updated upstream
+  level: "II",
+=======
+  level: "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   description: "Autonomous research agent that synthesizes academic papers.",
   tags: ["research", "autonomous", "paper-synthesis"],
   createdAt: "2026-04-29",
@@ -36,7 +44,15 @@ const TEST_SKILL_B: NamedSkill = {
   origin: true,
   genericSkillRef: "autonomous-debug",
   status: "named",
+<<<<<<< HEAD
   level: "3⭐",
+=======
+<<<<<<< Updated upstream
+  level: "III",
+=======
+  level: "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   description: "Autonomous software engineering agent for end-to-end debugging.",
   tags: ["software-engineering", "autonomous", "debugging"],
   createdAt: "2026-04-29",
@@ -144,7 +160,15 @@ describe("namedLoader", () => {
       const [skill] = getNamedSkillsForGeneric("autonomous-research-agent", indexPath);
       expect(skill.contributor).toBe("karpathy");
       expect(skill.origin).toBe(true);
+<<<<<<< HEAD
       expect(skill.level).toBe("2⭐");
+=======
+<<<<<<< Updated upstream
+      expect(skill.level).toBe("II");
+=======
+      expect(skill.level).toBe("2★");
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       expect(skill.status).toBe("named");
     });
   });
@@ -240,7 +264,15 @@ describe("namedLoader", () => {
               origin: true,
               genericSkillRef: "web-search",
               status: "named",
+<<<<<<< HEAD
               level: "2⭐",
+=======
+<<<<<<< Updated upstream
+              level: "II",
+=======
+              level: "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
               description: "A web search skill.",
               createdAt: "2026-05-01",
               updatedAt: "2026-05-01",

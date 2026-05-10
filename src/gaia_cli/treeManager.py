@@ -5,7 +5,15 @@ import re
 from gaia_cli.registry import named_skills_index_path, user_tree_path
 
 _USERNAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+<<<<<<< HEAD
 _TRANSCENDENT_LEVELS = {"5⭐", "6⭐"}
+=======
+<<<<<<< Updated upstream
+_TRANSCENDENT_LEVELS = {"V", "VI"}
+=======
+_TRANSCENDENT_LEVELS = {"5★", "6★"}
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
 # Named-skill red and gradient endpoints
 _COLOR_NAMED = (239, 68, 68)
