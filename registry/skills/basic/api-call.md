@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Function Calling](../extra/function-calling.md)
 - [Workflow Automation](../extra/workflow-automation.md)
+- [MCP Server Creation](../extra/mcp-server-creation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

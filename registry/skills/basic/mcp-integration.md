@@ -16,7 +16,7 @@ Connect to and invoke tools exposed by Model Context Protocol (MCP) servers — 
 _None._
 
 ## Unlocks
-_None._
+- [MCP Server Creation](../extra/mcp-server-creation.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

@@ -54,6 +54,8 @@
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | IV | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic Skill | I | Awakened | `/logical-inference` |
 | ○ /math-reason | Basic Skill | II | Named | `/math-reason` |
+| ○ /mcp-integration | Basic Skill | III → II | Evolved | `/mcp-integration` |
+| ◇ Extra Skill: /mcp-server-creation | Extra Skill | IV | Hardened | `/mcp-server-creation` |
 | ○ /memory-manage | Basic Skill | II | Named | `/memory-manage` |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | IV | Hardened | `/ml-pipeline` |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | IV | Hardened | `/multi-agent-debate` |
@@ -66,6 +68,7 @@
 | ○ /plan-decompose | Basic Skill | I | Awakened | `/plan-decompose` |
 | ◇ Extra Skill: mattpocock/to-prd | Extra Skill | IV | Hardened | `/prd-generation` |
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | IV | Hardened | `/prediction-market-analysis` |
+| ○ /prompt-injection-defense | Basic Skill | III | Evolved | `/prompt-injection-defense` |
 | ◇ Extra Skill: /prompt-optimization | Extra Skill | IV | Hardened | `/prompt-optimization` |
 | ○ /question-answer | Basic Skill | 0 | Basic | `/question-answer` |
 | ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | III | Evolved | `/rag-pipeline` |
@@ -86,6 +89,10 @@
 | ◇ Extra Skill: /security-audit | Extra Skill | II | Named | `/security-audit` |
 | ○ /self-critique | Basic Skill | I | Awakened | `/self-critique` |
 | ○ /sentiment-analysis | Basic Skill | 0 | Basic | `/sentiment-analysis` |
+| ◇ Extra Skill: /skill-authoring | Extra Skill | IV | Hardened | `/skill-authoring` |
+| ○ vercel/find-skills | Basic Skill | 0 | Basic | `/skill-discovery` |
+| ◇ Extra Skill: /skill-performance-benchmarking | Extra Skill | IV | Hardened | `/skill-performance-benchmarking` |
+| ◇ Extra Skill: /skill-security-analysis | Extra Skill | IV | Hardened | `/skill-security-analysis` |
 | ○ /speech-to-text | Basic Skill | II | Named | `/speech-to-text` |
 | ○ /statistical-analysis | Basic Skill | III | Evolved | `/statistical-analysis` |
 | ○ /structured-output | Basic Skill | I | Awakened | `/structured-output` |
@@ -123,17 +130,14 @@
 | ○ Framework Upgrade | Intrinsic Skill | 0 | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | II | Named | `/image-generate` |
 | ○ Issue Triage | Intrinsic Skill | IV | Hardened | `/issue-triage` |
-| ○ MCP Integration | Intrinsic Skill | III → II | Evolved | `/mcp-integration` |
 | ○ Object Detection | Intrinsic Skill | II | Named | `/object-detection` |
 | ○ OCR | Intrinsic Skill | II | Named | `/ocr` |
 | ○ Parallel Execution | Intrinsic Skill | II | Named | `/parallel-execution` |
-| ○ Prompt Injection Defense | Intrinsic Skill | III | Evolved | `/prompt-injection-defense` |
 | ○ Requirements Analysis | Intrinsic Skill | II | Named | `/requirements-analysis` |
 | ○ Reward Modeling | Intrinsic Skill | II | Named | `/reward-modeling` |
 | ○ Schema Design | Intrinsic Skill | II | Named | `/schema-design` |
 | ○ Self-Consistency | Intrinsic Skill | IV | Hardened | `/self-consistency` |
 | ○ Semantic Cache | Intrinsic Skill | IV | Hardened | `/semantic-cache` |
-| ○ Skill Discovery | Intrinsic Skill | 0 | Basic | `/skill-discovery` |
 | ○ Test-Driven Development | Intrinsic Skill | 0 | Basic | `/test-driven-development` |
 | ○ UX Audit | Intrinsic Skill | 0 | Basic | `/ux-audit` |
 | ○ Visual Question Answering | Intrinsic Skill | III | Evolved | `/vision-qa` |

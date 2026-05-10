@@ -15,7 +15,7 @@ Holistically evaluates an AI agent's performance on multi-step tasks by running 
 - [Score Relevance](../basic/score-relevance.md)
 
 ## Unlocks
-_None._
+- [Skill Performance Benchmarking](../extra/skill-performance-benchmarking.md)
 
 ## Fusion Condition
 _None specified._

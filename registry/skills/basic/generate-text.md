@@ -16,6 +16,7 @@ _None._
 ## Unlocks
 - [Prompt Optimization](../extra/prompt-optimization.md)
 - [Release Automation](../extra/release-automation.md)
+- [Skill Authoring](../extra/skill-authoring.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

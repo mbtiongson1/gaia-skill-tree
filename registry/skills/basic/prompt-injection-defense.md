@@ -14,7 +14,7 @@ Detects and neutralizes adversarial instructions injected into agent context fro
 _None._
 
 ## Unlocks
-_None._
+- [Skill Security Analysis](../extra/skill-security-analysis.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
