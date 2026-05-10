@@ -32,7 +32,7 @@
     },
     "levelFloor": {
       "type": "string",
-      "enum": ["1⭐", "2⭐", "3⭐", "4⭐", "5⭐"],
+      "enum": ["1★", "2★", "3★", "4★", "5★"],
       "description": "Minimum level the source skill must be at for this edge to apply."
     },
     "evidenceRefs": {

@@ -1,7 +1,7 @@
-# /plan-decompose  [1⭐ · Awakened]
+# /plan-decompose  [1★ · Awakened]
 **ID:** plan-decompose  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/plan-decompose`
 

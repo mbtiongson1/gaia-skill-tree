@@ -1,7 +1,7 @@
-# /semantic-cache  [4⭐ · Hardened]
+# /semantic-cache  [4★ · Hardened]
 **ID:** semantic-cache  
 **Type:** Basic Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/semantic-cache`
 

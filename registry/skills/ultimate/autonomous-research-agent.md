@@ -1,7 +1,7 @@
-# Ultimate Skill: karpathy/autoresearch  [6⭐ · Transcendent ★]
+# Ultimate Skill: karpathy/autoresearch  [6★ · Transcendent ★]
 **ID:** autonomous-research-agent  
 **Type:** Ultimate Skill  
-**Level:** 6⭐  
+**Level:** 6★  
 **Tier:** Transcendent ★  
 **Skill Call:** `/autonomous-research-agent`
 

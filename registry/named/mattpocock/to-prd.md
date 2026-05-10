@@ -7,7 +7,7 @@ genericSkillRef: prd-generation
 status: named
 title: "The PRD Synthesiser"
 catalogRef: mattpocock-to-prd
-level: "2⭐"
+level: "2★"
 description: Synthesises the current conversation context and codebase knowledge into a fully-structured PRD — problem statement, extensive numbered user stories, implementation decisions (modules, interfaces, schema), testing decisions, and out-of-scope items — then publishes it to the project issue tracker.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md

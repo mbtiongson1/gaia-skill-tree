@@ -1,7 +1,7 @@
-# /tool-use  [1⭐ · Awakened]
+# /tool-use  [1★ · Awakened]
 **ID:** tool-use  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/tool-use`
 

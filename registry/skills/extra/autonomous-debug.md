@@ -1,7 +1,7 @@
-# Extra Skill: devin-ai/autonomous-swe  [4⭐ · Hardened]
+# Extra Skill: devin-ai/autonomous-swe  [4★ · Hardened]
 **ID:** autonomous-debug  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/autonomous-debug`
 

@@ -1,9 +1,9 @@
-# Extra Skill: /voice-agent  [3⭐ · Evolved]
+# Extra Skill: /voice-agent  [3★ · Evolved]
 **ID:** voice-agent  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
-**Potential:** 2⭐  
+**Potential:** 2★  
 **Demerits:** heavyweight-dependency  
 **Skill Call:** `/voice-agent`
 

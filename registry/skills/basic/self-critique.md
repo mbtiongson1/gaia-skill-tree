@@ -1,7 +1,7 @@
-# /self-critique  [1⭐ · Awakened]
+# /self-critique  [1★ · Awakened]
 **ID:** self-critique  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/self-critique`
 

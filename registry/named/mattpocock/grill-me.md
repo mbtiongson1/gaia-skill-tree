@@ -7,7 +7,7 @@ genericSkillRef: design-review
 status: named
 title: "The Relentless Interviewer"
 catalogRef: mattpocock-grill-me
-level: "2⭐"
+level: "2★"
 description: Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md

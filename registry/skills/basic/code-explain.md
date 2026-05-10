@@ -1,7 +1,7 @@
-# mattpocock/zoom-out  [2⭐ · Named]
+# mattpocock/zoom-out  [2★ · Named]
 **ID:** code-explain  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/code-explain`
 

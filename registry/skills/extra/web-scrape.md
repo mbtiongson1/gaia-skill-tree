@@ -1,7 +1,7 @@
-# Extra Skill: /web-scrape  [3⭐ · Evolved]
+# Extra Skill: /web-scrape  [3★ · Evolved]
 **ID:** web-scrape  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/web-scrape`
 

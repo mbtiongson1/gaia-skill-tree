@@ -1,7 +1,7 @@
-# /memory-manage  [2⭐ · Named]
+# /memory-manage  [2★ · Named]
 **ID:** memory-manage  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/memory-manage`
 
