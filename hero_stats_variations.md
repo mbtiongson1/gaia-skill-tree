@@ -3,7 +3,7 @@
 Three layout options for the hero stats bar. All use DESIGN.md colors:
 - Total skills → `#e2e8f0` (primary text)  
 - Named count → `#ef4444` (contributor red)  
-- Legendary count → `#fbbf24` (Level VI amber)
+- Legendary count → `#fbbf24` (Level 6⭐ amber)
 
 Data: **133 skills · 32 named · 1 ★ legendary**
 

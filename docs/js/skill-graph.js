@@ -532,7 +532,7 @@
       redPill.type = 'button';
       redPill.className = 'graph-redpill';
       redPill.textContent = 'Named Skills';
-      redPill.title = 'Highlight Named skills (Level II+) with contributor attribution and red glow';
+      redPill.title = 'Highlight Named skills (Level 2⭐+) with contributor attribution and red glow';
       redPill.addEventListener('mousedown', e => e.stopPropagation());
       redPill.addEventListener('click', () => {
         state.redPillActive = !state.redPillActive;

@@ -75,12 +75,12 @@ Hard rule: any schema file change must come from a `schema/...` branch.
 
 ### Evidence by level
 
-- Level 0–I: no evidence required
-- Level II (Named): ≥ 1 Tier C
-- Level III (Evolved): ≥ 1 Tier B
-- Level IV (Hardened): ≥ 1 Tier B/A
-- Level V (Transcendent): ≥ 1 Tier A
-- Level VI (Transcendent ★): Tier A + peer review
+- Level 0⭐⭐–1⭐: no evidence required
+- Level 2⭐ (Named): ≥ 1 Tier C
+- Level 3⭐ (Evolved): ≥ 1 Tier B
+- Level 4⭐ (Hardened): ≥ 1 Tier B/A
+- Level 5⭐ (Transcendent): ≥ 1 Tier A
+- Level 6⭐ (Transcendent ★): Tier A + peer review
 
 ### Ultimate (`ultimate`) requirements
 

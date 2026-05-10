@@ -352,7 +352,7 @@ gaia push [--dry-run] [--no-pr]
 gaia propose /<skillId> [--ultimate] [--target <contributor/name>] [--no-pr]
   Proposes a named implementation for a specific canonical skill.
   Creates a proposal batch and opens an intake PR.
-  Use --ultimate for Level V/VI skills.
+  Use --ultimate for Level 5⭐/6⭐ skills.
 
 gaia name <batch-file> <index> <contributor/skill-name>
   Promotes an awakened skill from intake to a named skill in graph/named/.
@@ -463,7 +463,7 @@ jobs:
 ```json
 {
   "nodes": [
-    { "id": "webScrape", "label": "Web Scrape", "type": "extra", "level": "III", "rarity": "uncommon" }
+    { "id": "webScrape", "label": "Web Scrape", "type": "extra", "level": "3⭐", "rarity": "uncommon" }
   ],
   "edges": [
     { "source": "webSearch", "target": "webScrape", "type": "prerequisite" }
@@ -517,7 +517,7 @@ Named skills are real, user-contributed implementations of generic skills. They 
 |---|---|---|
 | Location | `graph/gaia.json` | `graph/named/{contributor}/{skill-name}.md` |
 | Identity | Abstract capability (e.g., `autonomous-research-agent`) | Concrete implementation (e.g., `karpathy/autoresearch`) |
-| Level restriction | All levels (I–VI) | Level II ("Named") and above only |
+| Level restriction | All levels (I–VI) | Level 2⭐ ("Named") and above only |
 | Origin | Defined by taxonomy maintainers | Attributed to first contributor |
 | Edit | Direct PR to `gaia.json` | PR to `graph/named/` |
 
@@ -564,7 +564,7 @@ The `graph/named/index.json` file produced by `generateNamedIndex.py` has three 
 - `awaitingClassification` — skills with `status: awakened`, pending reviewer action
 - `byContributor` — secondary index mapping contributor username → list of named skill IDs
 
-Level 0 (Basic) and Level I (Awakened) skills are generic-only and do not accept named implementations.
+Level 0⭐ (Basic) and Level 1⭐ (Awakened) skills are generic-only and do not accept named implementations.
 
 ### 13.4 Install & Sync
 

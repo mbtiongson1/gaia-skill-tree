@@ -16,23 +16,23 @@ Every AI agent capability exists somewhere on this graph. Skills start at the fo
 GAIA SKILL TREE
 =======================================================
 
-◆ karpathy/autoresearch - Wisdom King  [VI]
-  ├─ ◇ /research  [III]
-  │  ├─ ○ /web-search  [I]
-  │  ├─ ○ /summarize  [0]
-  │  └─ ○ /cite-sources  [I]
-  ├─ ◇ /knowledge-harvest  [IV]
-  │  ├─ ◇ /web-scrape  [III] ...
-  │  └─ ○ /embed-text  [I]
-  └─ ◇ /ghostwrite  [IV] ...
+◆ karpathy/autoresearch - Wisdom King  [6⭐]
+  ├─ ◇ /research  [3⭐]
+  │  ├─ ○ /web-search  [1⭐]
+  │  ├─ ○ /summarize  [0⭐]
+  │  └─ ○ /cite-sources  [1⭐]
+  ├─ ◇ /knowledge-harvest  [4⭐]
+  │  ├─ ◇ /web-scrape  [3⭐] ...
+  │  └─ ○ /embed-text  [1⭐]
+  └─ ◇ /ghostwrite  [4⭐] ...
 
-◆ /recursive-self-improvement  [V]
-  ├─ ◇ /autonomous-debug  [IV]
-  │  ├─ ○ /code-generation  [I]
-  │  ├─ ○ /execute-bash  [I]
-  │  └─ ○ /error-interpretation  [I]
-  ├─ ○ /evaluate-output  [I]
-  └─ ◇ /plan-and-execute  [IV] ...
+◆ /recursive-self-improvement  [5⭐]
+  ├─ ◇ /autonomous-debug  [4⭐]
+  │  ├─ ○ /code-generation  [1⭐]
+  │  ├─ ○ /execute-bash  [1⭐]
+  │  └─ ○ /error-interpretation  [1⭐]
+  ├─ ○ /evaluate-output  [1⭐]
+  └─ ◇ /plan-and-execute  [4⭐] ...
 
 Full graph: registry/registry.md
 Personal renders: generated-output/tree.md and generated-output/tree.html
