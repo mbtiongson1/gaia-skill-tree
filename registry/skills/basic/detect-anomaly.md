@@ -1,7 +1,7 @@
-# /detect-anomaly  [II · Named]
+# /detect-anomaly  [2⭐ · Named]
 **ID:** detect-anomaly  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/detect-anomaly`
 

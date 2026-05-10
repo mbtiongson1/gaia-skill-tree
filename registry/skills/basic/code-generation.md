@@ -1,7 +1,7 @@
-# /code-generation  [I · Awakened]
+# /code-generation  [1⭐ · Awakened]
 **ID:** code-generation  
 **Type:** Basic Skill  
-**Level:** I  
+**Level:** 1⭐  
 **Tier:** Awakened  
 **Skill Call:** `/code-generation`
 

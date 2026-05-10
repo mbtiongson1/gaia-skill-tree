@@ -1,7 +1,7 @@
-# Extra Skill: mattpocock/grill-with-docs  [III · Evolved]
+# Extra Skill: mattpocock/grill-with-docs  [3⭐ · Evolved]
 **ID:** design-review  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/design-review`
 

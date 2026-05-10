@@ -1,7 +1,7 @@
-# /parallel-execution  [II · Named]
+# /parallel-execution  [2⭐ · Named]
 **ID:** parallel-execution  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/parallel-execution`
 

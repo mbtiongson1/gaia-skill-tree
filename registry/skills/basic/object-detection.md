@@ -1,7 +1,7 @@
-# huggingface/huggingface-vision-trainer  [II · Named]
+# huggingface/huggingface-vision-trainer  [2⭐ · Named]
 **ID:** object-detection  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/object-detection`
 

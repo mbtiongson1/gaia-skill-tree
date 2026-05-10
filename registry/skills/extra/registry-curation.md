@@ -1,7 +1,7 @@
-# Extra Skill: /registry-curation  [IV · Hardened]
+# Extra Skill: /registry-curation  [4⭐ · Hardened]
 **ID:** registry-curation  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/registry-curation`
 

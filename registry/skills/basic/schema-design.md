@@ -1,7 +1,7 @@
-# /schema-design  [II · Named]
+# /schema-design  [2⭐ · Named]
 **ID:** schema-design  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/schema-design`
 

@@ -1,7 +1,7 @@
-# /generate-text  [0 · Basic]
+# /generate-text  [0⭐ · Basic]
 **ID:** generate-text  
 **Type:** Basic Skill  
-**Level:** 0  
+**Level:** 0⭐  
 **Tier:** Basic  
 **Skill Call:** `/generate-text`
 

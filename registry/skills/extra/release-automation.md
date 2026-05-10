@@ -1,7 +1,7 @@
-# Extra Skill: /release-automation  [II · Named]
+# Extra Skill: /release-automation  [2⭐ · Named]
 **ID:** release-automation  
 **Type:** Extra Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/release-automation`
 

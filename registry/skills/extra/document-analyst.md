@@ -1,7 +1,7 @@
-# Extra Skill: /document-analyst  [III · Evolved]
+# Extra Skill: /document-analyst  [3⭐ · Evolved]
 **ID:** document-analyst  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/document-analyst`
 

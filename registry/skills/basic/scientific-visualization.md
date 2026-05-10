@@ -1,7 +1,7 @@
-# /scientific-visualization  [II · Named]
+# /scientific-visualization  [2⭐ · Named]
 **ID:** scientific-visualization  
 **Type:** Basic Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/scientific-visualization`
 

@@ -1,7 +1,7 @@
-# /error-interpretation  [I · Awakened]
+# /error-interpretation  [1⭐ · Awakened]
 **ID:** error-interpretation  
 **Type:** Basic Skill  
-**Level:** I  
+**Level:** 1⭐  
 **Tier:** Awakened  
 **Skill Call:** `/error-interpretation`
 
