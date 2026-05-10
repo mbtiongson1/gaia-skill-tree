@@ -9,13 +9,35 @@ This skill provides a standardized workflow for auditing and pruning issues in t
 
 ## Workflow
 
+### 1. Issue Management
 1.  **Identify Issues**: List open issues using `gh issue list --repo mbtiongson1/gaia-skill-tree`.
-2.  **Audit State**: For each issue, verify if the requested feature or bug fix is already present in the codebase.
-    - Check `src/gaia_cli/commands/` for CLI features.
-    - Check `tests/` for existing coverage.
-    - Check `docs/` or `README.md` for documented behavior.
-3.  **Gather Evidence**: Document specific files or test runs that prove the issue is resolved or outdated.
-4.  **Execute Action**: Use the `gh` CLI to post a "Triage update" comment and optionally close the issue.
+2.  **Audit State**: Verify if the issue is already addressed in the current main branch.
+3.  **Execute Action**: Update or close the issue via `gh` CLI.
+
+### 2. Repo Hygiene & Guardrails
+Before pushing any changes to the registry or code, verify the repository state:
+
+1.  **Documentation Drift**:
+    ```bash
+    uv run python scripts/build_docs.py --check
+    # If stale:
+    uv run python scripts/build_docs.py
+    ```
+2.  **Registry Projections**:
+    ```bash
+    uv run python scripts/generateProjections.py
+    uv run python scripts/exportGexf.py
+    ```
+3.  **Environment Readiness**:
+    Ensure build tools are present for packaging tests:
+    ```bash
+    uv pip install pytest build setuptools wheel
+    ```
+4.  **Verification**:
+    Run the full suite to catch regressions:
+    ```bash
+    uv run pytest
+    ```
 
 ## Evidence Checkpoints
 
