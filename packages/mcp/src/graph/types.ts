@@ -2,7 +2,7 @@ export interface Skill {
   id: string;
   name: string;
   type: "basic" | "extra" | "ultimate";
-  level: "0⭐" | "I" | "II" | "III" | "IV" | "V" | "VI";
+  level: "0⭐" | "1⭐" | "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;
   prerequisites: string[];
@@ -104,7 +104,7 @@ export interface NamedSkill {
   origin: boolean;
   genericSkillRef: string;
   status: "awakened" | "named";
-  level: "2⭐" | "III" | "IV" | "V" | "VI";
+  level: "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
   description: string;
   links?: {
     github?: string;

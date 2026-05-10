@@ -103,7 +103,7 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
         index_path = os.path.join(REPO_ROOT, "registry", "named-skills.json")
         if not os.path.exists(index_path):
             self.skipTest("registry/named-skills.json not present.")
-        with open(index_path) as f:
+        with open(index_path, encoding="utf-8") as f:
             index = json.load(f)
         self.assertIn("buckets", index)
         self.assertIn("generatedAt", index)

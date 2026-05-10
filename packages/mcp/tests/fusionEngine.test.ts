@@ -54,7 +54,7 @@ describe("fusionEngine", () => {
       ["web-search", "parse-html", "extract-entities"]
     );
     const ready = result.find((c) => c.candidateResult === "web-scrape");
-    expect(ready?.levelFloor).toBe("II");
+    expect(ready?.levelFloor).toBe("2⭐");
   });
 
   it("combines owned and detected skills for fusion detection", () => {

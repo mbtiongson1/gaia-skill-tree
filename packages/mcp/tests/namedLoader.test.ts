@@ -144,7 +144,7 @@ describe("namedLoader", () => {
       const [skill] = getNamedSkillsForGeneric("autonomous-research-agent", indexPath);
       expect(skill.contributor).toBe("karpathy");
       expect(skill.origin).toBe(true);
-      expect(skill.level).toBe("II");
+      expect(skill.level).toBe("2⭐");
       expect(skill.status).toBe("named");
     });
   });

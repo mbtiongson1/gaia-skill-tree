@@ -169,7 +169,7 @@ class TestRenderCard:
     def test_shows_claimed_and_effective_when_demerited(self, extra_skill):
         card = render_card(extra_skill)
         assert "Potential:" in card
-        assert "claimed II" in card
+        assert "claimed 2⭐" in card
 
     def test_contains_description(self, basic_skill):
         card = render_card(basic_skill)

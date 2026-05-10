@@ -340,7 +340,7 @@ contributor: contrib
 origin: true
 genericSkillRef: web-search
 status: named
-level: II
+level: "2⭐"
 description: A test skill.
 ---
 Content here.
