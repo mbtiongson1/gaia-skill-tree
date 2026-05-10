@@ -170,32 +170,21 @@
 <!-- ─── GET STARTED ─── -->
 <section id="start" class="reveal" data-section="start">
   <h2>Get Started</h2>
-  <p class="section-sub">Five steps from zero to your first skill submission.</p>
+  <p class="section-sub">Three steps from zero to your first skill tree.</p>
 
   <div class="steps">
 
     <div class="step">
       <div class="step-num">1</div>
       <div>
-        <h3>Clone the registry</h3>
-        <p>Grab your local copy of the canonical skill graph.</p>
-        <pre><span class="cmd">git clone</span> <span class="str">https://github.com/mbtiongson1/gaia-skill-tree.git</span>
-<span class="cmd">cd</span> gaia-skill-tree</pre>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">2</div>
-      <div>
         <h3>Install the CLI</h3>
-        <p>Puts the <code>gaia</code> command on your PATH with semantic search included.</p>
+        <p>Puts the <code>gaia</code> command on your PATH.</p>
         <div class="os-tabs">
           <button class="os-tab active" data-os="mac" onclick="switchOsTab(this)">macOS / Linux</button>
           <button class="os-tab" data-os="win" onclick="switchOsTab(this)">Windows</button>
         </div>
         <div class="os-panel active" data-os="mac">
           <pre><span class="cmd">pip install</span> gaia-cli</pre>
-          <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Working in a registry clone? Use <code>pip install -e ".[embeddings]"</code> for an editable install with semantic search. The <code>[embeddings]</code> extra enables meaning-based matching in <code>gaia skills search</code>.</span></div>
         </div>
         <div class="os-panel" data-os="win">
           <pre><span class="cmd">pip install</span> gaia-cli</pre>
@@ -206,31 +195,23 @@
     </div>
 
     <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Initialize &amp; scan</h3>
+        <p>Inside any project repo, run <code>gaia init</code> to set up tracking, then <code>gaia scan</code> to detect which skills your agent demonstrates.</p>
+        <pre><span class="cmd">gaia init</span>
+<span class="cmd">gaia scan</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Your GitHub username and scan paths are auto-detected. Pass <code>--user your-username</code> to override.</span></div>
+      </div>
+    </div>
+
+    <div class="step">
       <div class="step-num">3</div>
       <div>
-        <h3>Initialize your project</h3>
-        <p>Inside the repo you want Gaia to track, run <code>gaia init</code>. It auto-detects your GitHub username and skill paths, then writes a <code>.gaia/config.toml</code>.</p>
-        <pre><span class="cmd">gaia init</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Username is read from <code>git remote</code> / <code>git config</code>. Scan paths are auto-detected from common locations (<code>.claude/skills/</code>, <code>AGENTS.md</code>, etc.). Pass <code>--user your-username</code> to override.</span></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">4</div>
-      <div>
-        <h3>Scan your repo</h3>
-        <p>Gaia scans your configured paths and reports which canonical skills your agent demonstrates, plus any fusion candidates.</p>
-        <pre><span class="cmd">gaia scan</span></pre>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">5</div>
-      <div>
-        <h3>Push your skills for review</h3>
-        <p>Writes a batch under <code>registry-for-review/skill-batches/</code> and opens a GitHub PR against the canonical graph for maintainer review.</p>
+        <h3>Submit your skills</h3>
+        <p>Push your detected skills to the registry for maintainer review. A GitHub PR is opened automatically.</p>
         <pre><span class="cmd">gaia push</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia push --dry-run</code> first to preview the exact JSON that would be submitted — no files written, no PR opened.</span></div>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Run <code>gaia push --dry-run</code> first to preview what would be submitted.</span></div>
       </div>
     </div>
 
@@ -290,30 +271,27 @@
       <div class="step-num" style="background:linear-gradient(135deg,var(--extra),var(--ultimate))">+</div>
       <div>
         <h3>Install a named skill</h3>
-        <p>Browse and install real contributor implementations directly into your repo. List what's available, then install by ID.</p>
+        <p>Browse and install real contributor implementations directly into your repo.</p>
         <pre><span class="cmd">gaia skills list</span>
-<span class="cmd">gaia skills install</span> <span class="str">contributor/skill-name</span>
-<span class="cmd">gaia pull</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Browse real skill IDs in the <a href="#named" style="color:var(--basic)">Named Skills Explorer</a> below. Run <code>gaia pull</code> periodically to refresh registry data from origin.</span></div>
+<span class="cmd">gaia skills install</span> <span class="str">contributor/skill-name</span></pre>
+        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Browse skill IDs in the <a href="#named" style="color:var(--basic)">Named Skills Explorer</a> below.</span></div>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background:linear-gradient(135deg,var(--ultimate),#f97316)">★</div>
       <div>
-        <h3>Promote your scanned skill</h3>
-        <p>Promotion is scan-gated: appraise to see what the last <code>gaia scan</code> flagged, then promote. The CLI uses the level recommended by the most recent <code>generated-output/promotion-candidates.json</code>.</p>
+        <h3>Level up a skill</h3>
+        <p>After scanning, appraise your detected skills to see which ones are eligible for promotion, then promote them.</p>
         <pre><span class="cmd">gaia appraise</span> <span class="str">your-skill</span>
 <span class="cmd">gaia promote</span> <span class="str">your-skill</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Use <code>gaia promote --all</code> to promote every valid candidate from the last scan, or <code>--name yourname/my-skill</code> to claim it under a contributor handle in one shot.</span></div>
       </div>
     </div>
     <div class="step">
       <div class="step-num" style="background:var(--ultimate);color:#000">◆</div>
       <div>
-        <h3>Contribute at the Ultimate tier</h3>
-        <p>Five Ultimate skills in the registry are unclaimed — no contributor has built them yet. Build an implementation, push it through review, then promote it to become the origin contributor. New proposals require ≥3 prerequisites, ≥3 Class A/B evidence sources, and 2 Core Maintainer approvals.</p>
-        <pre><span class="cmd">gaia propose /&lt;skill_id&gt; --ultimate</span></pre>
-        <div class="qs-tip"><span class="qs-tip-icon">💡</span><span>Find unclaimed slots with <code>[Unclaimed ✦]</code> in <code>registry/registry.md</code>. Use the <code>new_ultimate_skill</code> PR template. Set <code>"status": "provisional"</code> — maintainers flip it to <code>validated</code> at merge.</span></div>
+        <h3>Claim an Ultimate skill</h3>
+        <p>Several Ultimate skills are unclaimed — no contributor has built them yet. Build a real implementation, submit it for review, and your name goes on the registry permanently.</p>
+        <pre><span class="cmd">gaia propose</span> <span class="str">/skill-id</span></pre>
       </div>
     </div>
   </div>
@@ -373,17 +351,13 @@
   <h2>Quick Glossary</h2>
   <p class="section-sub">Terms you'll see throughout the registry.</p>
   <div class="glossary">
-    <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill lives here.</div></div>
-    <div class="gloss-item"><div class="gloss-term">registry-for-review/</div><div class="gloss-def">Pending skill batch intake records, overlaid in <code>gaia skills</code> by default until promoted.</div></div>
-    <div class="gloss-item"><div class="gloss-term">registry/named/</div><div class="gloss-def">Curated named implementations attributed to contributors (e.g. karpathy/autoresearch).</div></div>
-    <div class="gloss-item"><div class="gloss-term">skill-trees/</div><div class="gloss-def">Per-user skill-tree.json files indexed by Gaia username.</div></div>
-    <div class="gloss-item"><div class="gloss-term">generated-output/</div><div class="gloss-def">Local scan and render output (<code>tree.html</code>, <code>tree.md</code>, <code>promotion-candidates.json</code>). Gitignored.</div></div>
+    <div class="gloss-item"><div class="gloss-term">gaia.json</div><div class="gloss-def">The canonical source of truth. Every skill and its connections live here.</div></div>
+    <div class="gloss-item"><div class="gloss-term">named skill</div><div class="gloss-def">A real contributor implementation of a canonical skill (e.g. <code>karpathy/autoresearch</code>).</div></div>
     <div class="gloss-item"><div class="gloss-term">prerequisites</div><div class="gloss-def">Skills that must be present before an extra or ultimate skill can emerge.</div></div>
-    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier extra or ultimate skill.</div></div>
-    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. Class A = peer-reviewed.</div></div>
-    <div class="gloss-item"><div class="gloss-term">origin: true</div><div class="gloss-def">Marks the first contributor to publish a named implementation of a skill.</div></div>
-    <div class="gloss-item"><div class="gloss-term">gaia skills search</div><div class="gloss-def">Semantic search over named skills — runs fully locally when the <code>[embeddings]</code> extra is installed.</div></div>
-    <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill with a hidden seed title but no contributor implementation yet — open for the taking.</div></div>
+    <div class="gloss-item"><div class="gloss-term">fusion</div><div class="gloss-def">When a set of prerequisites unlocks a higher-tier skill.</div></div>
+    <div class="gloss-item"><div class="gloss-term">evidence class</div><div class="gloss-def">A–C quality tiers for skill demonstrations. A = peer-reviewed, B = reproducible demo, C = credible demo.</div></div>
+    <div class="gloss-item"><div class="gloss-term">skill tree</div><div class="gloss-def">Your personal record of skills — tied to your GitHub username and portable across repos.</div></div>
+    <div class="gloss-item"><div class="gloss-term">[Unclaimed ✦]</div><div class="gloss-def">An Ultimate skill no one has built yet — open for the taking.</div></div>
   </div>
 </section>
 
