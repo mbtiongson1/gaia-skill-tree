@@ -9,7 +9,7 @@
       "type": "extra",
       "level": "3⭐",
       "rarity": "common",
-      "description": "Level 3⭐ skill with only Class C evidence.",
+      "description": "3⭐ skill with only Class C evidence.",
       "prerequisites": [
         "skill-b",
         "skill-c"
@@ -21,7 +21,7 @@
           "source": "http://example.com",
           "evaluator": "test",
           "date": "2026-04-26",
-          "notes": "Insufficient evidence for Level 3⭐."
+          "notes": "Insufficient evidence for 3⭐."
         }
       ],
       "status": "provisional",

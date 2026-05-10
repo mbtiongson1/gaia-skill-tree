@@ -9,49 +9,49 @@
       "ultimate": "Ultimate Skill"
     },
     "levelLabels": {
-      "0": "Basic",
-      "I": "Awakened",
-      "II": "Named",
-      "III": "Evolved",
-      "IV": "Hardened",
-      "V": "Transcendent",
-      "VI": "Transcendent \u2605"
+      "0⭐": "Basic",
+      "1⭐": "Awakened",
+      "2⭐": "Named",
+      "3⭐": "Evolved",
+      "4⭐": "Hardened",
+      "5⭐": "Transcendent",
+      "6⭐": "Transcendent \u2605"
     },
     "rarityLabels": {
       "legendary": "Divine"
     },
     "levelColors": {
-      "0": {
+      "0⭐": {
         "hex": "#94a3b8",
         "bg": "rgba(148,163,184,.12)",
         "border": "rgba(148,163,184,.4)"
       },
-      "I": {
+      "1⭐": {
         "hex": "#38bdf8",
         "bg": "rgba(56,189,248,.12)",
         "border": "rgba(56,189,248,.4)"
       },
-      "II": {
+      "2⭐": {
         "hex": "#63cab7",
         "bg": "rgba(99,202,183,.15)",
         "border": "rgba(99,202,183,.4)"
       },
-      "III": {
+      "3⭐": {
         "hex": "#a78bfa",
         "bg": "rgba(167,139,250,.15)",
         "border": "rgba(167,139,250,.4)"
       },
-      "IV": {
+      "4⭐": {
         "hex": "#e879f9",
         "bg": "rgba(232,121,249,.15)",
         "border": "rgba(232,121,249,.4)"
       },
-      "V": {
+      "5⭐": {
         "hex": "#fbbf24",
         "bg": "rgba(251,191,36,.15)",
         "border": "rgba(251,191,36,.4)"
       },
-      "VI": {
+      "6⭐": {
         "hex": "#fbbf24",
         "bg": "rgba(251,191,36,.22)",
         "border": "rgba(251,191,36,.55)"

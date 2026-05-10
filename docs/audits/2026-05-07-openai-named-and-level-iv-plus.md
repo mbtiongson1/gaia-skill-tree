@@ -1,8 +1,8 @@
-# Gaia audit: OpenAI named skills and Level 4⭐+ meta-audit
+# Gaia audit: OpenAI named skills and 4⭐+ meta-audit
 
 **Date:** 2026-05-07  
 **Auditors:** openai-codex  
-**Scope:** `/gaia-audit` on all `openai/*` real-skill catalog items and generated named-skill projections; `/gaia-meta-audit` on every canonical Gaia skill at Level 4⭐ or above.
+**Scope:** `/gaia-audit` on all `openai/*` real-skill catalog items and generated named-skill projections; `/gaia-meta-audit` on every canonical Gaia skill at 4⭐ or above.
 
 ## `/gaia-audit`: OpenAI named-skill claims
 
@@ -28,11 +28,11 @@ Retain every OpenAI item in `registry/real-skills.json` as a catalog item, remov
 | `openai-security-ownership-map` | `openai/security-ownership-map` | Demoted to catalog-only |
 | `openai-security-best-practices` | `openai/security-best-practices` | Demoted to catalog-only |
 
-## `/gaia-meta-audit`: Level 4⭐+ skills
+## `/gaia-meta-audit`: 4⭐+ skills
 
 ### Summary
 
-The registry validates structurally, but the Level 4⭐+ audit found a recurring evidence-hygiene issue: several high-level skills depend on old `gaia-registry/gaia` seed evidence URLs that currently resolve as missing GitHub pages. Those entries should be prioritized for replacement with current evidence or demotion in a follow-up source-of-truth change.
+The registry validates structurally, but the 4⭐+ audit found a recurring evidence-hygiene issue: several high-level skills depend on old `gaia-registry/gaia` seed evidence URLs that currently resolve as missing GitHub pages. Those entries should be prioritized for replacement with current evidence or demotion in a follow-up source-of-truth change.
 
 ### Priority review candidates
 
@@ -42,10 +42,10 @@ The registry validates structurally, but the Level 4⭐+ audit found a recurring
 | `autonomous-debug` | IV | Only listed evidence is a `gaia-registry/gaia` seed document URL that resolves as missing. | Replace with live evidence or demote below Hardened. |
 | `plan-and-execute` | IV | Only listed evidence is a `gaia-registry/gaia` seed document URL that resolves as missing. | Replace with live evidence or demote below Hardened. |
 | `knowledge-harvest` | IV | Only listed evidence is a `gaia-registry/gaia` seed document URL that resolves as missing. | Replace with live evidence or demote below Hardened. |
-| `recursive-self-improvement` | V | Uses `gaia-registry/gaia` seed evidence for a Transcendent Ultimate claim. | Require live, composable evidence before retaining Level 5⭐. |
-| `multi-agent-orchestration-v` | V | Uses `gaia-registry/gaia` seed evidence for a Transcendent Ultimate claim. | Require live, composable evidence before retaining Level 5⭐. |
+| `recursive-self-improvement` | V | Uses `gaia-registry/gaia` seed evidence for a Transcendent Ultimate claim. | Require live, composable evidence before retaining 5⭐. |
+| `multi-agent-orchestration-v` | V | Uses `gaia-registry/gaia` seed evidence for a Transcendent Ultimate claim. | Require live, composable evidence before retaining 5⭐. |
 | `autonomous-research-agent` | VI | One evidence source is `gaia-registry/gaia` seed evidence; the named external repo is reachable. | Replace seed evidence with current primary evidence before retaining apex confidence. |
 
-### Lower-risk Level 4⭐+ entries
+### Lower-risk 4⭐+ entries
 
-The remaining Level 4⭐+ entries have at least one live or externally identifiable source in the local registry metadata, such as arXiv papers, active GitHub projects, or specific skill-library `SKILL.md` files. They remain candidates for future freshness checks, but this pass did not identify the same immediate source-of-truth break as the seed-evidence entries above.
+The remaining 4⭐+ entries have at least one live or externally identifiable source in the local registry metadata, such as arXiv papers, active GitHub projects, or specific skill-library `SKILL.md` files. They remain candidates for future freshness checks, but this pass did not identify the same immediate source-of-truth break as the seed-evidence entries above.

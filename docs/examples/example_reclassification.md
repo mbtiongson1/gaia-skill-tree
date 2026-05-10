@@ -12,7 +12,7 @@ This is a filled-out example of a `reclassification.md` PR for reference.
 - **Current Rarity:** Uncommon → **Proposed Rarity:** Uncommon (no change)
 
 ### Justification
-Since the initial Level 3⭐ classification, multiple independent demonstrations have shown `webScrape` handling dynamic JavaScript-rendered pages, pagination, and anti-bot measures — failure modes that were previously undocumented. The skill now meets the Level 4⭐ bar: "Handles edge cases and failures."
+Since the initial 3⭐ classification, multiple independent demonstrations have shown `webScrape` handling dynamic JavaScript-rendered pages, pagination, and anti-bot measures — failure modes that were previously undocumented. The skill now meets the 4⭐ bar: "Handles edge cases and failures."
 
 ### New Evidence
 | Class | Source | Evaluator | Date | Notes |
@@ -24,7 +24,7 @@ Since the initial Level 3⭐ classification, multiple independent demonstrations
 
 **Contributor:**
 - [x] Justification references concrete evidence, not opinion.
-- [x] New evidence meets the threshold for Level 4⭐ (Evidence Tier B+).
-- [x] Explanation of why previous Level 3⭐ classification is now insufficient.
+- [x] New evidence meets the threshold for 4⭐ (Evidence Tier B+).
+- [x] Explanation of why previous 3⭐ classification is now insufficient.
 - [x] Rarity unchanged (prevalence data has not shifted).
 - [x] I have run `python scripts/validate.py` locally and it passes.

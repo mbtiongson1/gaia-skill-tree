@@ -49,8 +49,8 @@ def test_collect_stats_matches_fixture_graph(tmp_path):
     assert stats["total_skills"] == 4
     assert stats["total_edges"] == 1
     assert stats["type_counts"] == {"basic": 2, "extra": 1, "ultimate": 1}
-    assert stats["level_counts"] == {"0": 1, "I": 1, "II": 1, "V": 1}
-    assert stats["effective_level_counts"] == {"0": 1, "I": 2, "V": 1}
+    assert stats["level_counts"] == {"0⭐": 1, "1⭐": 1, "2⭐": 1, "5⭐": 1}
+    assert stats["effective_level_counts"] == {"0⭐": 1, "1⭐": 2, "5⭐": 1}
     assert stats["skills_with_demerits"] == 1
     assert stats["skills_with_effective_drop"] == 1
     assert stats["demerit_penalty_total"] == 1

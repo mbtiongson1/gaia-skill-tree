@@ -70,7 +70,7 @@ The rank color sequence intentionally mirrors an RPG rarity ramp: neutral → co
 
 ---
 
-## Level 6⭐ — Transcendent ★ Special Rendering
+## 6⭐ — Transcendent ★ Special Rendering
 
 VI nodes bypass `drawNode` entirely and use `drawNodeVI`, which runs every animation frame using the shared `state.t` clock:
 
@@ -154,7 +154,7 @@ linear-gradient(135deg, #38bdf8 0%, #c084fc 50%, #f59e0b 100%)
 
 ## Skill Explorer
 
-The skill explorer overlay (`#skillExplorer`) introduces per-level glow tokens, a shimmer animation for Level 6⭐ nodes, and a pulse animation for Level 5⭐ nodes. These augment the rank colors defined above.
+The skill explorer overlay (`#skillExplorer`) introduces per-level glow tokens, a shimmer animation for 6⭐ nodes, and a pulse animation for 5⭐ nodes. These augment the rank colors defined above.
 
 ### Glow Tokens
 
@@ -172,8 +172,8 @@ Glow tokens use the same base colors as the rank system above. Tokens are applie
 
 | Animation | Element | Behavior |
 |---|---|---|
-| `se-pulse` / `flow-pulse-V` | Level 5⭐ nodes | Gold `box-shadow` oscillates between `--glow-V` and a brighter `0 0 28px #fbbf24, 0 0 60px rgba(251,191,36,.65)` on a 2.4s loop |
-| `se-shimmer` / `flow-shimmer-VI` | Level 6⭐ nodes | `border-color` cycles through cyan → purple → amber → fuchsia on a 3s loop, combined with the pulse |
+| `se-pulse` / `flow-pulse-V` | 5⭐ nodes | Gold `box-shadow` oscillates between `--glow-V` and a brighter `0 0 28px #fbbf24, 0 0 60px rgba(251,191,36,.65)` on a 2.4s loop |
+| `se-shimmer` / `flow-shimmer-VI` | 6⭐ nodes | `border-color` cycles through cyan → purple → amber → fuchsia on a 3s loop, combined with the pulse |
 
 ### Explorer UI Tokens
 

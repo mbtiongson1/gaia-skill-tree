@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/devops-engineer/SKILL.md
 genericSkillRef: deployment-automation
 status: awakened
-level: II
+level: "2⭐"
 description: CI/CD pipeline design and deployment automation specialist — build systems, artifact publishing, environment promotion, and rollback strategies.
 tags: [cicd, deployment, pipeline, docker, kubernetes, terraform, rollback]
 ---

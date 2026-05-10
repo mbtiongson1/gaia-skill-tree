@@ -7,7 +7,7 @@ genericSkillRef: skill-discovery
 status: named
 title: "The Registry Scout"
 catalogRef: vercel-find-skills
-level: II
+level: "2⭐"
 description: Searches the skills.sh registry by keyword or category, queries install counts to surface popular skills, and auto-installs the selected skill into the current project's skills directory.
 links:
   github: https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md

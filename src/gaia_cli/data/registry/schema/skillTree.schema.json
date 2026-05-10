@@ -55,7 +55,7 @@
         },
         "level": {
           "type": "string",
-          "enum": ["I", "II", "III", "IV", "V"],
+          "enum": ["1⭐", "2⭐", "3⭐", "4⭐", "5⭐"],
           "description": "The level at which this skill was unlocked."
         },
         "unlockedAt": {
@@ -98,7 +98,7 @@
         },
         "levelFloor": {
           "type": "string",
-          "enum": ["I", "II", "III", "IV", "V"],
+          "enum": ["1⭐", "2⭐", "3⭐", "4⭐", "5⭐"],
           "description": "Minimum level required for the fusion."
         },
         "promptedAt": {

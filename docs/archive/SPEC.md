@@ -40,7 +40,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-05: Each skill SHALL have a rarity of `common`, `uncommon`, `rare`, `epic`, or `legendary`.
 - FR-06: The registry SHALL enforce that all extra and ultimate skills reference at least two valid parent skill IDs.
 - FR-07: The registry SHALL enforce DAG integrity — no cycles are permitted at any depth.
-- FR-08: Every non-Unawakened (Level 0⭐) and non-Awakened (Level 1⭐) skill SHALL reference at least one evidence source.
+- FR-08: Every non-Unawakened (0⭐) and non-Awakened (1⭐) skill SHALL reference at least one evidence source.
 - FR-09: Ultimate skills SHALL require a minimum of three Evidence Tier A or B sources and explicit maintainer approval before status can be set to `validated`.
 - FR-10: The registry SHALL export the canonical graph in both JSON (D3/Cytoscape-compatible) and GEXF (Gephi-compatible) formats.
 - FR-11: All human-readable files (`skills/`, `registry.md`, `combinations.md`) SHALL be generated outputs — never hand-maintained as source of truth.
@@ -224,12 +224,12 @@ Rarity is computed from observed agent prevalence data — it is never declared 
 
 ### 8.2 Evidence Requirements by Level
 
-- **Level 0⭐ (Unawakened):** No evidence required.
-- **Level 1⭐ (Awakened):** No evidence required.
-- **Level 2⭐ (Named):** At least one Evidence Tier C source.
-- **Level 3⭐ (Evolved):** At least one Evidence Tier B source.
-- **Level 4⭐ (Hardened):** At least one Evidence Tier B or A source, with documented failure modes.
-- **Level 5⭐ (Transcendent):** At least one Evidence Tier A source with composability or self-improvement evidence.
+- **0⭐ (Unawakened):** No evidence required.
+- **1⭐ (Awakened):** No evidence required.
+- **2⭐ (Named):** At least one Evidence Tier C source.
+- **3⭐ (Evolved):** At least one Evidence Tier B source.
+- **4⭐ (Hardened):** At least one Evidence Tier B or A source, with documented failure modes.
+- **5⭐ (Transcendent):** At least one Evidence Tier A source with composability or self-improvement evidence.
 - **Ultimate type:** Minimum three Evidence Tier A or B sources, two maintainer approvals, no `provisional` status permitted at merge.
 
 ---

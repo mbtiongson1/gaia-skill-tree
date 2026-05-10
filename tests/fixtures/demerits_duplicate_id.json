@@ -9,7 +9,7 @@
       "type": "extra",
       "level": "2⭐",
       "rarity": "common",
-      "description": "Level 2⭐ skill with a duplicate demerit id.",
+      "description": "2⭐ skill with a duplicate demerit id.",
       "prerequisites": [
         "skill-b",
         "skill-c"

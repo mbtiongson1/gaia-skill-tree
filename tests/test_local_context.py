@@ -299,7 +299,7 @@ class TestAllSkills:
         novel_entry = next(s for s in skills if s["id"] == "my-novel-skill")
         assert novel_entry["local"] is True
         assert novel_entry["type"] == "basic"
-        assert novel_entry["level"] == "0"
+        assert novel_entry["level"] == "0⭐"
 
     def test_no_duplicate_for_canon_novel_overlap(self, mock_registry, monkeypatch):
         """If a novel_id also exists in canon (edge case), it should not duplicate."""
@@ -323,19 +323,19 @@ class TestSkillLevelAndType:
         """User's tree level takes priority."""
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
-        assert ctx.skill_level("python-basics") == "III"
+        assert ctx.skill_level("python-basics") == "3⭐"
 
     def test_skill_level_from_canon(self, mock_registry, monkeypatch):
         """Falls back to canon level when not in user tree."""
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
-        assert ctx.skill_level("web-frameworks") == "II"
+        assert ctx.skill_level("web-frameworks") == "2⭐"
 
     def test_skill_level_unknown(self, mock_registry, monkeypatch):
-        """Returns '0' for unknown skills."""
+        """Returns '0⭐' for unknown skills."""
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
-        assert ctx.skill_level("nonexistent") == "0"
+        assert ctx.skill_level("nonexistent") == "0⭐"
 
     def test_skill_type(self, mock_registry, monkeypatch):
         monkeypatch.chdir(mock_registry)

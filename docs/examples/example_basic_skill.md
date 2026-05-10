@@ -22,7 +22,7 @@ This is a filled-out example of a `new_basic_skill.md` PR for reference.
 **Contributor:**
 - [x] Skill ID uses `camelCase` with no vendor references.
 - [x] Description is precise, falsifiable, and non-overlapping with existing skills.
-- [x] Evidence meets the minimum threshold for the claimed level (Level 2⭐ = Evidence Tier C+).
+- [x] Evidence meets the minimum threshold for the claimed level (2⭐ = Evidence Tier C+).
 - [x] `prerequisites` array is empty (basic skills have no parents).
 - [x] `derivatives` array lists known child skills: `documentAnalyst`.
 - [x] I have run `python scripts/validate.py` locally and it passes.

@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/parallel-execution/SKILL.md
 genericSkillRef: parallel-execution
 status: awakened
-level: II
+level: "2⭐"
 description: Manages concurrent work item execution with independence verification, queue-based state tracking, and configurable concurrency limits (default 5).
 tags: [parallelism, concurrency, task-execution, queue]
 ---

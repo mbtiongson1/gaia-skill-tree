@@ -9,7 +9,7 @@
       "type": "extra",
       "level": "2⭐",
       "rarity": "common",
-      "description": "Level 2⭐ skill with an unknown demerit id.",
+      "description": "2⭐ skill with an unknown demerit id.",
       "prerequisites": [
         "skill-b",
         "skill-c"

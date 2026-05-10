@@ -10,12 +10,12 @@
   };
   let TYPE_ORDER = { basic:0, extra:1, ultimate:2 };
   let RANK_META = {
-    'I':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
-    'II': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
-    'III':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
-    'IV': { name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' },
-    'V':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
-    'VI': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
+    '1⭐':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
+    '2⭐': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
+    '3⭐':{ name:'Evolved',        hex:'#a78bfa', bg:'rgba(167,139,250,.12)' },
+    '4⭐': { name:'Hardened',       hex:'#e879f9', bg:'rgba(232,121,249,.12)' },
+    '5⭐':  { name:'Transcendent',   hex:'#fbbf24', bg:'rgba(251,191,36,.12)' },
+    '6⭐': { name:'Transcendent ★', hex:'#fbbf24', bg:'rgba(251,191,36,.20)' },
   };
 
   function _initMetaGraph(meta) {
@@ -29,7 +29,7 @@
     if (meta.levelColors && meta.levelLabels) {
       RANK_META = {};
       Object.keys(meta.levelColors).forEach(function(k) {
-        if (k === '0') return;
+        if (k === '0⭐') return;
         RANK_META[k] = { name: meta.levelLabels[k] || k, hex: meta.levelColors[k].hex, bg: meta.levelColors[k].bg };
       });
     }
@@ -144,7 +144,7 @@
   function createSkillGraph(canvas, options) {
     const ctx = canvas.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const NAMED_LEVELS = new Set(['II','III','IV','V','VI']);
+    const NAMED_LEVELS = new Set(['2⭐','3⭐','4⭐','5⭐','6⭐']);
     const state = {
       skills: FALLBACK_SKILLS,
       positions: buildPositions(FALLBACK_SKILLS, GRAPH_SCALE),
@@ -382,7 +382,7 @@
         const col = PALETTE[skill.type] || PALETTE.basic;
         const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
-        if (skill.level === 'VI') {
+        if (skill.level === '6⭐') {
           drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
         } else if (state.redPillActive && state.namedMap[skill.id]) {
           drawNodeNamed(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis);
@@ -497,12 +497,12 @@
         '<div class="graph-legend-item" data-legend-type="ultimate"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Ultimate</div>' +
         '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
         '<div class="graph-legend-ranks">' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="I" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="II" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="III" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="IV" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="V" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
-        '<span class="graph-legend-rank-pill" data-legend-rank="VI" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="1⭐" style="background:rgba(56,189,248,.12);color:#38bdf8">I</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="2⭐" style="background:rgba(99,202,183,.12);color:#63cab7">II</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="3⭐" style="background:rgba(167,139,250,.12);color:#a78bfa">III</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="4⭐" style="background:rgba(232,121,249,.12);color:#e879f9">IV</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="5⭐" style="background:rgba(251,191,36,.12);color:#fbbf24">V</span>' +
+        '<span class="graph-legend-rank-pill" data-legend-rank="6⭐" style="background:rgba(251,191,36,.20);color:#fbbf24">VI</span>' +
         '</div></div>';
       legend.addEventListener('mousedown', e => e.stopPropagation());
       legend.querySelectorAll('.graph-legend-item[data-legend-type]').forEach(item => {
@@ -532,7 +532,7 @@
       redPill.type = 'button';
       redPill.className = 'graph-redpill';
       redPill.textContent = 'Named Skills';
-      redPill.title = 'Highlight Named skills (Level 2⭐+) with contributor attribution and red glow';
+      redPill.title = 'Highlight Named skills (2⭐+) with contributor attribution and red glow';
       redPill.addEventListener('mousedown', e => e.stopPropagation());
       redPill.addEventListener('click', () => {
         state.redPillActive = !state.redPillActive;

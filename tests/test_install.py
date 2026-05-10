@@ -365,7 +365,7 @@ class TestListAvailable:
         sid, meta = result[0]
         assert sid == "contrib/my-skill"
         assert meta["name"] == "My Skill"
-        assert meta["level"] == "II"
+        assert meta["level"] == "2⭐"
         assert meta["genericSkillRef"] == "web-search"
 
     def test_lists_multiple_contributors_sorted(self, tmp_path):

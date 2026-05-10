@@ -7,7 +7,7 @@ genericSkillRef: code-explain
 status: named
 title: "The Abstraction Lift"
 catalogRef: mattpocock-zoom-out
-level: "II"
+level: "2⭐"
 description: Signals the agent to ascend one layer of abstraction and produce a map of all relevant modules, callers, and domain-glossary terms in the unfamiliar code area, without explaining implementation details.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/zoom-out/SKILL.md

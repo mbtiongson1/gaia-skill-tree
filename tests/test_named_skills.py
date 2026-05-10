@@ -21,7 +21,7 @@ contributor: karpathy
 origin: true
 genericSkillRef: autonomous-research-agent
 status: named
-level: II
+level: "2⭐"
 description: Autonomous paper search and synthesis.
 createdAt: "2026-04-29"
 updatedAt: "2026-04-29"
@@ -34,7 +34,7 @@ Body text here.
         self.assertEqual(fm.get("id"), "karpathy/autoresearch")
         self.assertEqual(fm.get("contributor"), "karpathy")
         self.assertTrue(fm.get("origin"))
-        self.assertEqual(fm.get("level"), "II")
+        self.assertEqual(fm.get("level"), "2⭐")
 
     def test_parse_missing_frontmatter_returns_empty(self):
         """parse_frontmatter raises ValueError when no --- delimiters exist."""
@@ -53,7 +53,7 @@ contributor: test
 origin: false
 genericSkillRef: web-search
 status: named
-level: II
+level: "2⭐"
 description: A test skill.
 links:
   github: https://github.com/test/skill

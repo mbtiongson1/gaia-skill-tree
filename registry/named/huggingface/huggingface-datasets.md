@@ -7,7 +7,7 @@ genericSkillRef: data-analysis
 status: named
 title: "The Dataset Cartographer"
 catalogRef: huggingface-datasets
-level: II
+level: "2⭐"
 description: Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.
 links:
   github: https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md

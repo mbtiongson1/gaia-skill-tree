@@ -164,7 +164,7 @@ class TestRenderCard:
 
     def test_contains_level_label(self, basic_skill):
         card = render_card(basic_skill)
-        assert "Lv.0 Basic" in card
+        assert "0⭐ Basic" in card
 
     def test_shows_claimed_and_effective_when_demerited(self, extra_skill):
         card = render_card(extra_skill)
@@ -280,7 +280,7 @@ class TestRenderCard:
 
     def test_compact_card_shows_effective_arrow_when_demerited(self, extra_skill):
         compact = render_card_compact(extra_skill)
-        assert "Lv.2⭐→1⭐" in compact
+        assert "2⭐→1⭐" in compact
 
     def test_missing_optional_fields_defaults_gracefully(self):
         """Card should render even with minimal skill data."""
@@ -310,7 +310,7 @@ class TestRenderCardCompact:
 
     def test_contains_level(self, basic_skill):
         result = render_card_compact(basic_skill)
-        assert "(Lv.0)" in result
+        assert "(0⭐)" in result
 
     def test_contains_rarity(self, basic_skill):
         result = render_card_compact(basic_skill)
@@ -360,20 +360,20 @@ class TestRenderPromotionPrompt:
     def test_shows_skill_id_with_slash(self):
         prompt = render_promotion_prompt(
             {"id": "plan-and-execute", "name": "Different Registry Name", "type": "extra", "prerequisites": ["a", "b"]},
-            "IV",
+            "4⭐",
         )
         assert "/plan-and-execute" in prompt
         assert "gaia fuse plan-and-execute" in prompt
 
     def test_shows_level_and_rank_name(self):
-        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "III")
-        assert "Level 3⭐" in prompt
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3⭐")
+        assert "3⭐" in prompt
         assert "gaia fuse research-agent" in prompt
 
     def test_shows_fusion_diagram_when_prereqs_exist(self):
         prompt = render_promotion_prompt(
             {"id": "research", "type": "extra", "prerequisites": ["web-search", "summarize"]},
-            "III",
+            "3⭐",
         )
         assert "──▶" in prompt
 
