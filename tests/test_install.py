@@ -50,6 +50,16 @@ class TestInstallInfra:
         f2.write_text("content B")
         assert compute_sha256(str(f1)) != compute_sha256(str(f2))
 
+    def test_find_named_skill_source_accepts_leading_slash(self, tmp_path):
+        """find_named_skill_source accepts slash-prefixed display IDs."""
+        skill_dir = tmp_path / "registry" / "named" / "contributor"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "my-skill.md").write_text("---\nid: contributor/my-skill\n---\n")
+
+        result = find_named_skill_source("/contributor/my-skill", str(tmp_path))
+        assert result is not None
+        assert result.endswith("my-skill.md")
+
     def test_find_named_skill_source_exists(self, tmp_path):
         """find_named_skill_source returns the path when the file exists."""
         skill_dir = tmp_path / "registry" / "named" / "contributor"
@@ -106,6 +116,22 @@ class TestInstallInfra:
 
 class TestInstallFlow:
     """Tests for the full install / uninstall flow."""
+
+    def test_install_accepts_leading_slash_id(self, tmp_path, monkeypatch):
+        """install_skill normalizes slash-prefixed named skill IDs."""
+        monkeypatch.chdir(tmp_path)
+
+        skill_dir = tmp_path / "registry" / "named" / "testuser"
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "my-skill.md").write_text(
+            "---\nid: testuser/my-skill\n---\nContent here."
+        )
+
+        result = install_skill("/testuser/my-skill", str(tmp_path))
+        assert result is True
+
+        manifest = load_manifest()
+        assert manifest["installed"][0]["id"] == "testuser/my-skill"
 
     def test_install_creates_manifest_entry(self, tmp_path, monkeypatch):
         """install_skill adds an entry to the manifest."""

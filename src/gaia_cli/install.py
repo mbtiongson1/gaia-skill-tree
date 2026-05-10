@@ -57,7 +57,13 @@ def compute_sha256(filepath):
     return h.hexdigest()
 
 
+def normalize_named_skill_reference(skill_ref):
+    """Return a named-skill reference without a display-only leading slash."""
+    return str(skill_ref).strip().lstrip("/")
+
+
 def find_named_skill_source(skill_id, registry_path):
+    skill_id = normalize_named_skill_reference(skill_id)
     parts = skill_id.split("/", 1)
     if len(parts) != 2:
         return None
@@ -69,6 +75,7 @@ def find_named_skill_source(skill_id, registry_path):
 
 
 def _named_skill_source_for_id(skill_id, registry_path):
+    skill_id = normalize_named_skill_reference(skill_id)
     contributor, skill_name = skill_id.split("/", 1)
     return os.path.join(named_skills_dir(registry_path), contributor, f"{skill_name}.md")
 
@@ -81,6 +88,7 @@ def resolve_named_skill_reference(skill_ref, registry_path):
     - exact catalogRef frontmatter slug
     - unique bare skill-name slug
     """
+    skill_ref = normalize_named_skill_reference(skill_ref)
     source = find_named_skill_source(skill_ref, registry_path)
     if source:
         return skill_ref, source
@@ -112,6 +120,7 @@ def resolve_named_skill_reference(skill_ref, registry_path):
 
 
 def install_skill(skill_id, registry_path):
+    skill_id = normalize_named_skill_reference(skill_id)
     try:
         resolved = resolve_named_skill_reference(skill_id, registry_path)
     except ValueError as exc:
@@ -189,6 +198,7 @@ def sync_skills(registry_path):
 
 
 def uninstall_skill(skill_id):
+    skill_id = normalize_named_skill_reference(skill_id)
     parts = skill_id.split("/", 1)
     if len(parts) != 2:
         print("Error: Invalid skill ID format. Expected 'contributor/skill-name'.", file=sys.stderr)

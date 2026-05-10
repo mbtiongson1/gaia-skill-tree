@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import os
 import shutil
@@ -30,7 +31,16 @@ def run_python(args, *, cwd=None, env=None):
     )
 
 
+def require_build_module():
+    if importlib.util.find_spec("build") is None:
+        pytest.skip(
+            'python -m build is required for packaging tests; '
+            'install the dev extra with pip install -e ".[dev]"'
+        )
+
+
 def build_wheel(dist_dir):
+    require_build_module()
     shutil.rmtree(REPO_ROOT / "build", ignore_errors=True)
     return subprocess.run(
         [

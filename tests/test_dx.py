@@ -8,6 +8,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from gaia_cli.main import main
 from gaia_cli.scanner import scan_repo, scan_repo_detailed
 
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 
 def run_cli(monkeypatch, argv):
     monkeypatch.setattr(sys, "argv", ["gaia", *argv])
@@ -133,6 +135,17 @@ def test_skills_help_shows_subcommands_with_usage(monkeypatch, capsys):
         assert command in output
     assert "gaia skills list [--exclude-pending]" in output
     assert "gaia skills install <skill> [--global | --local]" in output
+
+
+def test_skills_info_accepts_leading_slash(monkeypatch, capsys):
+    run_cli(
+        monkeypatch,
+        ["--registry", str(REPO_ROOT), "skills", "info", "/huggingface/hf-cli"],
+    )
+
+    output = capsys.readouterr().out
+    assert "huggingface/hf-cli" in output
+    assert "Skill '//huggingface/hf-cli'" not in output
 
 
 def test_bare_skills_command_prints_skills_help(monkeypatch, capsys):
