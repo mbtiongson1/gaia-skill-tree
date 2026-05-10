@@ -47,11 +47,11 @@ Personal renders: generated-output/tree.md and generated-output/tree.html
 
 | Symbol | Tier | Levels | Evidence floor |
 |--------|------|--------|---------------|
-| ○ Basic | Primitive, indivisible capability | 0 (F) Unawakened → I (D) Awakened | None |
-| ◇ Extra | Emerges from combining 2+ basic skills | II (C) Named → III (B) Evolved → IV (A) Hardened | C → B → B/A |
-| ◆ Ultimate | High-complexity emergent capability | V (S) Transcendent → VI (SS) Transcendent ★ | A → A + peer review |
+| ○ Basic | Primitive, indivisible capability | 0⭐ (F) Unawakened → 1⭐ (D) Awakened | None |
+| ◇ Extra | Emerges from combining 2+ basic skills | 2⭐ (C) Named → 3⭐ (B) Evolved → 4⭐ (A) Hardened | C → B → B/A |
+| ◆ Ultimate | High-complexity emergent capability | 5⭐ (S) Transcendent → 6⭐ (SS) Transcendent ★ | A → A + peer review |
 
-Skills level up through evidence, not declaration. Each demerit lowers effective level by one (floored at I, valid for II+ only).
+Skills level up through evidence, not declaration. Each demerit lowers effective level by one (floored at 1⭐, valid for 2⭐+ only).
 
 ---
 
