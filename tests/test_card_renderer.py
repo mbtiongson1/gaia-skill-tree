@@ -33,7 +33,7 @@ def basic_skill():
         "id": "tokenize",
         "name": "Tokenize",
         "type": "basic",
-        "level": "0",
+        "level": "0⭐",
         "rarity": "common",
         "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
         "prerequisites": [],
@@ -52,7 +52,7 @@ def extra_skill():
         "id": "rag-pipeline",
         "name": "RAG Pipeline",
         "type": "extra",
-        "level": "II",
+        "level": "2⭐",
         "demerits": ["experimental-feature"],
         "rarity": "uncommon",
         "description": "Retrieval-augmented generation pipeline combining retrieval, ranking, and synthesis.",
@@ -73,7 +73,7 @@ def ultimate_skill():
         "id": "autonomous-research-agent",
         "name": "Autonomous Research Agent",
         "type": "ultimate",
-        "level": "III",
+        "level": "3⭐",
         "rarity": "legendary",
         "description": "Fully autonomous agent that formulates hypotheses, designs experiments, collects evidence, and synthesizes findings.",
         "prerequisites": ["rag-pipeline", "code-generation", "tool-use", "planning"],
@@ -164,12 +164,12 @@ class TestRenderCard:
 
     def test_contains_level_label(self, basic_skill):
         card = render_card(basic_skill)
-        assert "Lv.0 Basic" in card
+        assert "0⭐ Basic" in card
 
     def test_shows_claimed_and_effective_when_demerited(self, extra_skill):
         card = render_card(extra_skill)
         assert "Potential:" in card
-        assert "claimed II" in card
+        assert "claimed 2⭐" in card
 
     def test_contains_description(self, basic_skill):
         card = render_card(basic_skill)
@@ -228,7 +228,7 @@ class TestRenderCard:
             "id": "verbose-skill",
             "name": "Verbose",
             "type": "basic",
-            "level": "0",
+            "level": "0⭐",
             "rarity": "common",
             "description": " ".join(["word"] * 100),
             "prerequisites": [],
@@ -247,7 +247,7 @@ class TestRenderCard:
             "id": "many-prereqs",
             "name": "Many Prereqs",
             "type": "ultimate",
-            "level": "IV",
+            "level": "4⭐",
             "rarity": "epic",
             "description": "A skill with many prerequisites.",
             "prerequisites": [f"skill-{i}" for i in range(8)],
@@ -265,7 +265,7 @@ class TestRenderCard:
             "id": "many-derivs",
             "name": "Many Derivs",
             "type": "basic",
-            "level": "0",
+            "level": "0⭐",
             "rarity": "common",
             "description": "A skill with many derivatives.",
             "prerequisites": [],
@@ -280,7 +280,7 @@ class TestRenderCard:
 
     def test_compact_card_shows_effective_arrow_when_demerited(self, extra_skill):
         compact = render_card_compact(extra_skill)
-        assert "Lv.II→I" in compact
+        assert "2⭐→1⭐" in compact
 
     def test_missing_optional_fields_defaults_gracefully(self):
         """Card should render even with minimal skill data."""
@@ -310,7 +310,7 @@ class TestRenderCardCompact:
 
     def test_contains_level(self, basic_skill):
         result = render_card_compact(basic_skill)
-        assert "(Lv.0)" in result
+        assert "(0⭐)" in result
 
     def test_contains_rarity(self, basic_skill):
         result = render_card_compact(basic_skill)
@@ -321,7 +321,7 @@ class TestRenderCardCompact:
             "id": "x",
             "name": "X",
             "type": "basic",
-            "level": "0",
+            "level": "0⭐",
             "rarity": "common",
             "description": "A" * 100,
         }
@@ -360,20 +360,20 @@ class TestRenderPromotionPrompt:
     def test_shows_skill_id_with_slash(self):
         prompt = render_promotion_prompt(
             {"id": "plan-and-execute", "name": "Different Registry Name", "type": "extra", "prerequisites": ["a", "b"]},
-            "IV",
+            "4⭐",
         )
         assert "/plan-and-execute" in prompt
         assert "gaia fuse plan-and-execute" in prompt
 
     def test_shows_level_and_rank_name(self):
-        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "III")
-        assert "Level III" in prompt
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3⭐")
+        assert "3⭐" in prompt
         assert "gaia fuse research-agent" in prompt
 
     def test_shows_fusion_diagram_when_prereqs_exist(self):
         prompt = render_promotion_prompt(
             {"id": "research", "type": "extra", "prerequisites": ["web-search", "summarize"]},
-            "III",
+            "3⭐",
         )
         assert "──▶" in prompt
 
@@ -394,7 +394,7 @@ class TestLoadAndRender:
                     "id": "web-scrape",
                     "name": "Web Scrape",
                     "type": "basic",
-                    "level": "0",
+                    "level": "0⭐",
                     "rarity": "common",
                     "description": "Scrapes data from web pages.",
                     "prerequisites": [],
@@ -435,7 +435,7 @@ class TestLoadAndRender:
                     "id": "classify",
                     "name": "Classify",
                     "type": "basic",
-                    "level": "0",
+                    "level": "0⭐",
                     "rarity": "common",
                     "description": "Assigns labels.",
                     "prerequisites": [],

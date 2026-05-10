@@ -51,7 +51,7 @@ graph TD
 - **Deliverables:**
   - `tests/fixtures/cycle.json` — Graph with an intentional cycle (`A→B→C→A`)
   - `tests/fixtures/missing_ref.json` — Composite skill referencing a nonexistent parent
-  - `tests/fixtures/bad_evidence.json` — Level III skill with only Evidence Tier C
+  - `tests/fixtures/bad_evidence.json` — 3⭐ skill with only Evidence Tier C
   - `tests/fixtures/orphaned_extra.json` — Composite with only 1 prerequisite
   - `tests/fixtures/ultimate_no_approval.json` — Validated legendary with <3 Evidence Tier A/B sources
 - **Instructions:** Each fixture is a minimal `gaia.json` with exactly one defect. Copy structure from `registry/gaia.json` but inject the specific violation. Keep them small (3–5 skills each).
