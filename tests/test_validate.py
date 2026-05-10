@@ -82,9 +82,9 @@ class TestValidate(unittest.TestCase):
         self.assertIn("must have 0 prerequisites", out)
 
     def test_demerits_reject_level_i_skills(self):
-        """Ensure demerits are rejected on Level I and below."""
+        """Ensure demerits are rejected on Level 1⭐ and below."""
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
-        self.assertEqual(code, 1, "Expected Level I demerits to fail validation.")
+        self.assertEqual(code, 1, "Expected Level 1⭐ demerits to fail validation.")
         self.assertIn("has demerits but claimed level", out)
 
     def test_demerits_reject_unknown_catalog_keys(self):
@@ -183,7 +183,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         )
 
     def test_seed_skills_have_no_level_i(self):
-        """No seed named skill uses level I (which is forbidden for named skills)."""
+        """No seed named skill uses level 1⭐ (which is forbidden for named skills)."""
         from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
 
         named_dir = os.path.join(REPO_ROOT, "registry", "named")
@@ -215,14 +215,14 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "web-search",
                     "status": "named",
-                    "level": "I",
-                    "description": "A fake skill at level I.",
+                    "level": "1⭐",
+                    "description": "A fake skill at level 1⭐.",
                 },
             )
         ]
         errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
-            any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
+            any("level" in e.lower() or "'I'" in e or "level 1⭐" in e or "II or above" in e
                 for e in errors),
             f"Expected a level error, got: {errors}",
         )
@@ -257,7 +257,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "definitely-not-a-real-skill-id",
                     "status": "named",
-                    "level": "II",
+                    "level": "2⭐",
                     "description": "A skill that references a nonexistent generic skill.",
                 },
             )

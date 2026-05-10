@@ -4,7 +4,7 @@ from gaia_cli.leveling import demerit_penalty, effective_level, level_summary
 def test_effective_level_drops_one_rank_per_demerit():
     skill = {
         "id": "voice-agent",
-        "level": "III",
+        "level": "3⭐",
         "demerits": ["heavyweight-dependency"],
     }
     assert demerit_penalty(skill) == 1
@@ -14,7 +14,7 @@ def test_effective_level_drops_one_rank_per_demerit():
 def test_effective_level_floors_at_level_i():
     skill = {
         "id": "workflow-orchestration",
-        "level": "II",
+        "level": "2⭐",
         "demerits": ["niche-integration", "experimental-feature"],
     }
     assert demerit_penalty(skill) == 2
@@ -24,7 +24,7 @@ def test_effective_level_floors_at_level_i():
 def test_level_summary_uses_base_and_effective_levels():
     skill = {
         "id": "mcp-integration",
-        "level": "III",
+        "level": "3⭐",
         "demerits": ["niche-integration"],
     }
     assert level_summary(skill) == {
@@ -37,7 +37,7 @@ def test_level_summary_uses_base_and_effective_levels():
 def test_level_i_skips_demerit_reduction():
     skill = {
         "id": "tokenize",
-        "level": "I",
+        "level": "1⭐",
         "demerits": ["niche-integration"],
     }
     assert effective_level(skill) == "I"

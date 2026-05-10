@@ -15,16 +15,16 @@ def write_fixture_registry(root: Path) -> None:
         json.dumps(
             {
                 "skills": [
-                    {"id": "tokenize", "type": "basic", "level": "0", "evidence": []},
-                    {"id": "web-search", "type": "basic", "level": "I", "evidence": [{"class": "C"}]},
+                    {"id": "tokenize", "type": "basic", "level": "0⭐", "evidence": []},
+                    {"id": "web-search", "type": "basic", "level": "1⭐", "evidence": [{"class": "C"}]},
                     {
                         "id": "automated-testing",
                         "type": "extra",
-                        "level": "II",
+                        "level": "2⭐",
                         "demerits": ["niche-integration"],
                         "evidence": [{"class": "B"}],
                     },
-                    {"id": "autonomous-swe", "type": "ultimate", "level": "V", "evidence": [{"class": "B"}, {"class": "A"}]},
+                    {"id": "autonomous-swe", "type": "ultimate", "level": "5⭐", "evidence": [{"class": "B"}, {"class": "A"}]},
                 ],
                 "edges": [{"source": "web-search", "target": "automated-testing"}],
             }
@@ -68,8 +68,8 @@ def test_collect_stats_supports_legacy_graph_layout(tmp_path):
         json.dumps(
             {
                 "skills": [
-                    {"id": "plan", "type": "basic", "level": "I", "prerequisites": [], "evidence": [{"class": "C"}]},
-                    {"id": "execute", "type": "extra", "level": "II", "prerequisites": ["plan"], "evidence": []},
+                    {"id": "plan", "type": "basic", "level": "1⭐", "prerequisites": [], "evidence": [{"class": "C"}]},
+                    {"id": "execute", "type": "extra", "level": "2⭐", "prerequisites": ["plan"], "evidence": []},
                 ]
             }
         ),

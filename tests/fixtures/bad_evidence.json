@@ -7,9 +7,9 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "common",
-      "description": "Level III skill with only Class C evidence.",
+      "description": "Level 3⭐ skill with only Class C evidence.",
       "prerequisites": [
         "skill-b",
         "skill-c"
@@ -21,7 +21,7 @@
           "source": "http://example.com",
           "evaluator": "test",
           "date": "2026-04-26",
-          "notes": "Insufficient evidence for Level III."
+          "notes": "Insufficient evidence for Level 3⭐."
         }
       ],
       "status": "provisional",
@@ -33,7 +33,7 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],
@@ -57,7 +57,7 @@
       "id": "skill-c",
       "name": "Skill C",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

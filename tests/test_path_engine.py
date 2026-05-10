@@ -28,7 +28,7 @@ def mini_graph():
                 "id": "skill-a",
                 "name": "Skill A",
                 "type": "basic",
-                "level": "0",
+                "level": "0⭐",
                 "prerequisites": [],
                 "derivatives": ["skill-d"],
             },
@@ -36,7 +36,7 @@ def mini_graph():
                 "id": "skill-b",
                 "name": "Skill B",
                 "type": "basic",
-                "level": "0",
+                "level": "0⭐",
                 "prerequisites": [],
                 "derivatives": ["skill-d", "skill-e"],
             },
@@ -44,7 +44,7 @@ def mini_graph():
                 "id": "skill-c",
                 "name": "Skill C",
                 "type": "basic",
-                "level": "0",
+                "level": "0⭐",
                 "prerequisites": [],
                 "derivatives": ["skill-e"],
             },
@@ -52,7 +52,7 @@ def mini_graph():
                 "id": "skill-d",
                 "name": "Skill D",
                 "type": "extra",
-                "level": "I",
+                "level": "1⭐",
                 "prerequisites": ["skill-a", "skill-b"],
                 "derivatives": [],
             },
@@ -60,7 +60,7 @@ def mini_graph():
                 "id": "skill-e",
                 "name": "Skill E",
                 "type": "extra",
-                "level": "I",
+                "level": "1⭐",
                 "prerequisites": ["skill-b", "skill-c"],
                 "derivatives": [],
             },
@@ -203,13 +203,13 @@ class TestComputePaths:
     def test_path_entries_include_effective_level_metadata(self):
         graph = {
             "skills": [
-                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
-                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
                 {
                     "id": "skill-fusion",
                     "name": "Skill Fusion",
                     "type": "extra",
-                    "level": "III",
+                    "level": "3⭐",
                     "demerits": ["experimental-feature"],
                     "prerequisites": ["skill-a", "skill-b"],
                     "derivatives": [],
@@ -334,8 +334,8 @@ class TestRegeneratePaths:
         tree = {
             "userId": "alice",
             "unlockedSkills": [
-                {"skillId": "web-scrape", "level": "0"},
-                {"skillId": "parse-json", "level": "0"},
+                {"skillId": "web-scrape", "level": "0⭐"},
+                {"skillId": "parse-json", "level": "0⭐"},
             ],
         }
         (user_dir / "skill-tree.json").write_text(json.dumps(tree))

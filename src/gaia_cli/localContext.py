@@ -139,7 +139,7 @@ class LocalContext:
                     "id": novel_id,
                     "name": novel_id,
                     "type": "basic",
-                    "level": "0",
+                    "level": "0⭐",
                     "rarity": "common",
                     "prerequisites": [],
                     "derivatives": [],

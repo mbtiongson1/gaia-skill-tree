@@ -122,7 +122,7 @@ class TestNextLevel:
 
 class TestCheckPromotionEligibility:
     def test_basic_skill_eligible_no_evidence_needed(self):
-        """Level 0 -> I requires no evidence, so skill is eligible."""
+        """Level 0⭐⭐ -> 1⭐ requires no evidence, so skill is eligible."""
         graph = _make_graph(_make_skill("tokenize"))
         tree = _make_tree("alice", [_make_unlocked("tokenize", "0")])
         eligible = check_promotion_eligibility(graph, tree)
@@ -132,7 +132,7 @@ class TestCheckPromotionEligibility:
         assert eligible[0]["nextLevel"] == "I"
 
     def test_level_I_to_II_eligible_with_class_C_evidence(self):
-        """Level I -> II requires class C/B/A evidence."""
+        """Level 1⭐ -> II requires class C/B/A evidence."""
         ev = [{"class": "C", "source": "http://example.com", "evaluator": "x", "date": "2026-01-01", "notes": ""}]
         graph = _make_graph(_make_skill("tokenize", evidence=ev))
         tree = _make_tree("alice", [_make_unlocked("tokenize", "I")])
@@ -141,14 +141,14 @@ class TestCheckPromotionEligibility:
         assert eligible[0]["nextLevel"] == "II"
 
     def test_level_I_to_II_not_eligible_without_evidence(self):
-        """Level I -> II blocked if no evidence at all."""
+        """Level 1⭐ -> II blocked if no evidence at all."""
         graph = _make_graph(_make_skill("tokenize"))
         tree = _make_tree("alice", [_make_unlocked("tokenize", "I")])
         eligible = check_promotion_eligibility(graph, tree)
         assert len(eligible) == 0
 
     def test_level_II_to_III_requires_class_B(self):
-        """Level II -> III requires class B or A evidence."""
+        """Level 2⭐ -> III requires class B or A evidence."""
         ev_c_only = [{"class": "C", "source": "http://x.com", "evaluator": "x", "date": "2026-01-01", "notes": ""}]
         graph = _make_graph(_make_skill("tokenize", evidence=ev_c_only))
         tree = _make_tree("alice", [_make_unlocked("tokenize", "II")])
@@ -164,7 +164,7 @@ class TestCheckPromotionEligibility:
         assert eligible[0]["nextLevel"] == "III"
 
     def test_max_level_not_eligible(self):
-        """A skill at level VI cannot be promoted further."""
+        """A skill at level 6⭐ cannot be promoted further."""
         ev = [{"class": "A", "source": "http://x.com", "evaluator": "x", "date": "2026-01-01", "notes": ""}]
         graph = _make_graph(_make_skill("tokenize", evidence=ev))
         tree = _make_tree("alice", [_make_unlocked("tokenize", "VI")])

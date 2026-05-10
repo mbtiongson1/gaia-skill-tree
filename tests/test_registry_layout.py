@@ -94,8 +94,8 @@ def test_promote_from_candidates_uses_scan_suggested_level(tmp_path):
             "userId": "alice",
             "updatedAt": "2026-05-01",
             "unlockedSkills": [
-                {"skillId": "web-search", "level": "II", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
-                {"skillId": "parse-html", "level": "II", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "web-search", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "parse-html", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
             ],
         },
         registry_path=str(tmp_path),

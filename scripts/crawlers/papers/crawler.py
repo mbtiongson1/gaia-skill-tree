@@ -29,8 +29,8 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
     """Find skills in the graph that could benefit from better evidence.
 
     Targets:
-      - Skills at level II+ with only Class C evidence (need B/A)
-      - Skills at level 0/I with no evidence at all
+      - Skills at level 2⭐+ with only Class C evidence (need B/A)
+      - Skills at level 0⭐⭐/1⭐ with no evidence at all
       - Skills with status "provisional"
     """
     if graph_path is None:

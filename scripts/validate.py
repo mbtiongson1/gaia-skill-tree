@@ -201,7 +201,7 @@ def validate_evidence(graph):
         required_classes = EVIDENCE_FLOOR.get(level)
 
         if required_classes is None:
-            continue  # Level I needs no evidence
+            continue  # Level 1⭐ needs no evidence
 
         evidence = skill.get("evidence", [])
         if not evidence:
@@ -224,7 +224,7 @@ def validate_ultimate(graph):
         if skill["type"] != "ultimate":
             continue
 
-        # Ultimate stubs at Level I are allowed without evidence
+        # Ultimate stubs at Level 1⭐ are allowed without evidence
         if skill["level"] == "I" and skill["status"] == "provisional":
             continue
 
