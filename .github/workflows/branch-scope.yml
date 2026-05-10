@@ -126,6 +126,8 @@ jobs:
             esac
           done <<< "$FILES"
 
+          # dev/* branches are consolidation branches and may include schema changes
+          # alongside docs, UI, tests, and generated artifacts.
           if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ] && [ "$PREFIX" != "dev" ]; then
             echo "::error::Schema files changed on a non-schema branch. Use a schema/ branch for nomenclature changes."
             echo ""
