@@ -1,7 +1,7 @@
-# /code-execution  [2⭐ · Named]
+# /code-execution  [2★ · Named]
 **ID:** code-execution  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/code-execution`
 

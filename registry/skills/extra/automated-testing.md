@@ -1,7 +1,7 @@
-# Extra Skill: 0xdarkmatter/pytest-patterns  [3⭐ · Evolved]
+# Extra Skill: 0xdarkmatter/pytest-patterns  [3★ · Evolved]
 **ID:** automated-testing  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/automated-testing`
 

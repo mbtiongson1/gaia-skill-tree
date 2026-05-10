@@ -1,7 +1,7 @@
-# /evaluate-output  [1⭐ · Awakened]
+# /evaluate-output  [1★ · Awakened]
 **ID:** evaluate-output  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/evaluate-output`
 

@@ -1,7 +1,7 @@
-# Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦]  [5⭐ · Transcendent]
+# Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦]  [5★ · Transcendent]
 **ID:** real-time-voice-assistant  
 **Type:** Ultimate Skill  
-**Level:** 5⭐  
+**Level:** 5★  
 **Tier:** Transcendent  
 **Skill Call:** `/real-time-voice-assistant`
 

@@ -1,7 +1,7 @@
-# /math-reason  [2⭐ · Named]
+# /math-reason  [2★ · Named]
 **ID:** math-reason  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/math-reason`
 

@@ -1,7 +1,7 @@
-# Extra Skill: /e2e-testing  [3⭐ · Evolved]
+# Extra Skill: /e2e-testing  [3★ · Evolved]
 **ID:** e2e-testing  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/e2e-testing`
 

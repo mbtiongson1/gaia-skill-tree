@@ -7,7 +7,7 @@ genericSkillRef: issue-triage
 status: named
 title: "The State-Machine Triager"
 catalogRef: mattpocock-triage
-level: "3⭐"
+level: "3★"
 description: Moves GitHub issues through a two-category (bug/enhancement) × five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md

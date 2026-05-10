@@ -1,7 +1,7 @@
-# /context-compression  [3⭐ · Evolved]
+# /context-compression  [3★ · Evolved]
 **ID:** context-compression  
 **Type:** Basic Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/context-compression`
 

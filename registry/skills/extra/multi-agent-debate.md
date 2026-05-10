@@ -1,7 +1,7 @@
-# Extra Skill: /multi-agent-debate  [4⭐ · Hardened]
+# Extra Skill: /multi-agent-debate  [4★ · Hardened]
 **ID:** multi-agent-debate  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/multi-agent-debate`
 

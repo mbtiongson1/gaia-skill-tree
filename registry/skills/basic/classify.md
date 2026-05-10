@@ -1,7 +1,7 @@
-# /classify  [0⭐ · Basic]
+# /classify  [0★ · Basic]
 **ID:** classify  
 **Type:** Basic Skill  
-**Level:** 0⭐  
+**Level:** 0★  
 **Tier:** Basic  
 **Skill Call:** `/classify`
 
