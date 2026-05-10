@@ -36,7 +36,11 @@ REQUIRED_FIELDS = [
     "description",
 ]
 
+<<<<<<< Updated upstream
 VALID_LEVELS = {"II", "III", "IV", "V", "VI"}
+=======
+VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
+>>>>>>> Stashed changes
 
 INDEX_SKILL_FIELDS = [
     "id",

@@ -7,7 +7,11 @@
       "id": "duplicate-skill",
       "name": "Duplicate Skill One",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "First skill with a duplicate identifier.",
       "prerequisites": [],
@@ -23,7 +27,11 @@
       "id": "duplicate-skill",
       "name": "Duplicate Skill Two",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "Second skill with the same duplicate identifier.",
       "prerequisites": [],

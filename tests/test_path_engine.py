@@ -28,7 +28,11 @@ def mini_graph():
                 "id": "skill-a",
                 "name": "Skill A",
                 "type": "basic",
+<<<<<<< Updated upstream
                 "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
                 "prerequisites": [],
                 "derivatives": ["skill-d"],
             },
@@ -36,7 +40,11 @@ def mini_graph():
                 "id": "skill-b",
                 "name": "Skill B",
                 "type": "basic",
+<<<<<<< Updated upstream
                 "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
                 "prerequisites": [],
                 "derivatives": ["skill-d", "skill-e"],
             },
@@ -44,7 +52,11 @@ def mini_graph():
                 "id": "skill-c",
                 "name": "Skill C",
                 "type": "basic",
+<<<<<<< Updated upstream
                 "level": "0",
+=======
+                "level": "0★",
+>>>>>>> Stashed changes
                 "prerequisites": [],
                 "derivatives": ["skill-e"],
             },
@@ -52,7 +64,11 @@ def mini_graph():
                 "id": "skill-d",
                 "name": "Skill D",
                 "type": "extra",
+<<<<<<< Updated upstream
                 "level": "I",
+=======
+                "level": "1★",
+>>>>>>> Stashed changes
                 "prerequisites": ["skill-a", "skill-b"],
                 "derivatives": [],
             },
@@ -60,7 +76,11 @@ def mini_graph():
                 "id": "skill-e",
                 "name": "Skill E",
                 "type": "extra",
+<<<<<<< Updated upstream
                 "level": "I",
+=======
+                "level": "1★",
+>>>>>>> Stashed changes
                 "prerequisites": ["skill-b", "skill-c"],
                 "derivatives": [],
             },
@@ -203,13 +223,22 @@ class TestComputePaths:
     def test_path_entries_include_effective_level_metadata(self):
         graph = {
             "skills": [
+<<<<<<< Updated upstream
                 {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
                 {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
+=======
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
+>>>>>>> Stashed changes
                 {
                     "id": "skill-fusion",
                     "name": "Skill Fusion",
                     "type": "extra",
+<<<<<<< Updated upstream
                     "level": "III",
+=======
+                    "level": "3★",
+>>>>>>> Stashed changes
                     "demerits": ["experimental-feature"],
                     "prerequisites": ["skill-a", "skill-b"],
                     "derivatives": [],
@@ -218,6 +247,7 @@ class TestComputePaths:
         }
         result = compute_paths(graph, ["skill-a"], [])
         one_away = result["oneAway"][0]
+<<<<<<< Updated upstream
         assert one_away["levelFloor"] == "II"
         assert one_away["baseLevelFloor"] == "III"
         assert one_away["effectiveLevelFloor"] == "II"
@@ -231,6 +261,21 @@ class TestComputePaths:
         assert entry["effectiveLevelFloor"] == "II"
         assert entry["levelMeta"]["baseLevel"] == "III"
         assert entry["levelMeta"]["effectiveLevel"] == "II"
+=======
+        assert one_away["levelFloor"] == "2★"
+        assert one_away["baseLevelFloor"] == "3★"
+        assert one_away["effectiveLevelFloor"] == "2★"
+        assert one_away["levelMeta"]["baseLevel"] == "3★"
+        assert one_away["levelMeta"]["effectiveLevel"] == "2★"
+
+        result = compute_paths(graph, ["skill-a", "skill-b"], [])
+        entry = result["nearUnlocks"][0]
+        assert entry["levelFloor"] == "2★"
+        assert entry["baseLevelFloor"] == "3★"
+        assert entry["effectiveLevelFloor"] == "2★"
+        assert entry["levelMeta"]["baseLevel"] == "3★"
+        assert entry["levelMeta"]["effectiveLevel"] == "2★"
+>>>>>>> Stashed changes
 
 
 # ---------------------------------------------------------------------------
@@ -334,8 +379,13 @@ class TestRegeneratePaths:
         tree = {
             "userId": "alice",
             "unlockedSkills": [
+<<<<<<< Updated upstream
                 {"skillId": "web-scrape", "level": "0"},
                 {"skillId": "parse-json", "level": "0"},
+=======
+                {"skillId": "web-scrape", "level": "0★"},
+                {"skillId": "parse-json", "level": "0★"},
+>>>>>>> Stashed changes
             ],
         }
         (user_dir / "skill-tree.json").write_text(json.dumps(tree))

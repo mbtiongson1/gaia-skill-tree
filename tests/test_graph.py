@@ -17,14 +17,22 @@ def make_registry(root):
                         "id": "tokenize",
                         "name": "Tokenize",
                         "type": "basic",
+<<<<<<< Updated upstream
                         "level": "I",
+=======
+                        "level": "1★",
+>>>>>>> Stashed changes
                         "prerequisites": [],
                     },
                     {
                         "id": "research",
                         "name": "Research",
                         "type": "extra",
+<<<<<<< Updated upstream
                         "level": "III",
+=======
+                        "level": "3★",
+>>>>>>> Stashed changes
                         "demerits": ["experimental-feature"],
                         "prerequisites": ["tokenize"],
                     },
@@ -85,9 +93,15 @@ def test_write_graph_artifact_keeps_render_json_default_path(tmp_path):
     data = json.loads(out_path.read_text(encoding="utf-8"))
     assert data["nodes"][0]["id"] == "tokenize"
     research_node = next(node for node in data["nodes"] if node["id"] == "research")
+<<<<<<< Updated upstream
     assert research_node["effectiveLevel"] == "II"
     assert research_node["levelMeta"]["baseLevel"] == "III"
     assert research_node["levelMeta"]["effectiveLevel"] == "II"
+=======
+    assert research_node["effectiveLevel"] == "2★"
+    assert research_node["levelMeta"]["baseLevel"] == "3★"
+    assert research_node["levelMeta"]["effectiveLevel"] == "2★"
+>>>>>>> Stashed changes
     assert research_node["demerits"] == ["experimental-feature"]
     assert data["edges"] == [{"source": "tokenize", "target": "research", "type": "extra"}]
 

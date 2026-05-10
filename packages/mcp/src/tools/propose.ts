@@ -113,7 +113,11 @@ async function proposeNovel(
     id,
     name: input.name!,
     type: input.type ?? "basic",
+<<<<<<< Updated upstream
     level: "I",
+=======
+    level: "1★",
+>>>>>>> Stashed changes
     rarity: "common",
     description: input.description!,
     prerequisites: input.prerequisites ?? [],

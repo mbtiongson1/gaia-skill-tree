@@ -7,9 +7,15 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "I",
       "rarity": "common",
       "description": "Level I skill that incorrectly declares a demerit.",
+=======
+      "level": "1★",
+      "rarity": "common",
+      "description": "1★ skill that incorrectly declares a demerit.",
+>>>>>>> Stashed changes
       "prerequisites": [],
       "derivatives": [],
       "demerits": [

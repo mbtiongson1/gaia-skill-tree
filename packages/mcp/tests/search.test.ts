@@ -7,9 +7,15 @@ const mockGraph: GaiaGraph = {
   generatedAt: "2026-04-28",
   meta: { typeLabels: {}, levelLabels: {}, rarityLabels: {} },
   skills: [
+<<<<<<< Updated upstream
     { id: "web-search", name: "Web Search", type: "basic", level: "II", rarity: "common", description: "Searches the web", prerequisites: [], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
     { id: "web-scrape", name: "Web Scrape", type: "extra", level: "III", rarity: "uncommon", description: "Scrapes websites for data", prerequisites: ["web-search"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
     { id: "code-generation", name: "Code Generation", type: "basic", level: "III", rarity: "common", description: "Generates source code", prerequisites: [], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+=======
+    { id: "web-search", name: "Web Search", type: "basic", level: "2★", rarity: "common", description: "Searches the web", prerequisites: [], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3★", rarity: "uncommon", description: "Scrapes websites for data", prerequisites: ["web-search"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "code-generation", name: "Code Generation", type: "basic", level: "3★", rarity: "common", description: "Generates source code", prerequisites: [], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+>>>>>>> Stashed changes
   ],
   edges: [],
 };

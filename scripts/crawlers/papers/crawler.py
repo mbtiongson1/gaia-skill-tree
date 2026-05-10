@@ -29,8 +29,13 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
     """Find skills in the graph that could benefit from better evidence.
 
     Targets:
+<<<<<<< Updated upstream
       - Skills at level II+ with only Class C evidence (need B/A)
       - Skills at level 0/I with no evidence at all
+=======
+      - Skills at 2★+ with only Class C evidence (need B/A)
+      - Skills at 0★★/1★ with no evidence at all
+>>>>>>> Stashed changes
       - Skills with status "provisional"
     """
     if graph_path is None:
@@ -50,7 +55,11 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
     for skill in graph.get("skills", []):
         evidence = skill.get("evidence", [])
         evidence_classes = {e.get("class") for e in evidence}
+<<<<<<< Updated upstream
         level = skill.get("level", "0")
+=======
+        level = skill.get("level", "0★")
+>>>>>>> Stashed changes
         status = skill.get("status", "")
 
         is_upgrade_candidate = False
@@ -60,7 +69,11 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
             is_upgrade_candidate = True
 
         # Only Class C evidence but at a level that needs B/A
+<<<<<<< Updated upstream
         elif evidence_classes == {"C"} and level in ("II", "III", "IV", "V", "VI"):
+=======
+        elif evidence_classes == {"C"} and level in ("2★", "3★", "4★", "5★", "6★"):
+>>>>>>> Stashed changes
             is_upgrade_candidate = True
 
         # Provisional status (could be validated with better evidence)
@@ -68,7 +81,11 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
             is_upgrade_candidate = True
 
         # Has no Class A evidence (paper search could add one)
+<<<<<<< Updated upstream
         elif "A" not in evidence_classes and level in ("III", "IV", "V", "VI"):
+=======
+        elif "A" not in evidence_classes and level in ("3★", "4★", "5★", "6★"):
+>>>>>>> Stashed changes
             is_upgrade_candidate = True
 
         if is_upgrade_candidate:

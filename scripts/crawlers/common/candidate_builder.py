@@ -19,7 +19,11 @@ def build_candidate(
         "id": id,
         "name": name,
         "type": skill_type,
+<<<<<<< Updated upstream
         "level": "I",
+=======
+        "level": "1★",
+>>>>>>> Stashed changes
         "rarity": "common",
         "description": description,
         "prerequisites": [],

@@ -2,7 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+<<<<<<< Updated upstream
 **Goal:** Add canonical skill demerit criteria that lower a Level II+ skill's progression ceiling by one level per demerit, while preserving the existing evidence-backed `level` field as the source-of-truth claim.
+=======
+**Goal:** Add canonical skill demerit criteria that lower a 2★+ skill's progression ceiling by one level per demerit, while preserving the existing evidence-backed `level` field as the source-of-truth claim.
+>>>>>>> Stashed changes
 
 **Architecture:** Keep `level` as the claimed canonical tier in `registry/gaia.json`, add an optional `demerits` array on canonical skill nodes, and derive an `effectiveLevel` in shared helpers. Use the derived level for fusion floors, promotion ceilings, stats, and generated projections; use the claimed level for evidence requirements and named-skill governance text. Seed only a short list of obvious examples in the first pass so the meta shifts without a broad reclassification sweep.
 
@@ -16,16 +20,27 @@
 - `demerits` is canonical and applies only to `registry/gaia.json` skills in this PR, not `registry/named/**/*.md`.
 - Each demerit lowers the derived `effectiveLevel` by exactly one rank.
 - Demerits are only valid on claimed levels `II` through `VI`.
+<<<<<<< Updated upstream
 - Derived level is floored at `I` so a Level II+ skill can be held back but never pushed below the awakened floor.
 - Promotion, fusion, pending-combination `levelFloor`, stats, render JSON, and generated docs use `effectiveLevel`.
 - Evidence validation continues to evaluate the claimed `level`, not the reduced `effectiveLevel`.
 - Named skills still require claimed Level II+; demerits do not legalize Level I named skills.
+=======
+- Derived level is floored at `I` so a 2★+ skill can be held back but never pushed below the awakened floor.
+- Promotion, fusion, pending-combination `levelFloor`, stats, render JSON, and generated docs use `effectiveLevel`.
+- Evidence validation continues to evaluate the claimed `level`, not the reduced `effectiveLevel`.
+- Named skills still require claimed 2★+; demerits do not legalize 1★ named skills.
+>>>>>>> Stashed changes
 
 ## File Map
 
 - Create: `src/gaia_cli/leveling.py` — single source of truth for demerit math in Python.
 - Create: `tests/test_leveling.py` — unit coverage for penalty math and level flooring.
+<<<<<<< Updated upstream
 - Create: `tests/fixtures/demerits_level_i.json` — invalid fixture proving demerits are rejected on Level I.
+=======
+- Create: `tests/fixtures/demerits_level_i.json` — invalid fixture proving demerits are rejected on 1★.
+>>>>>>> Stashed changes
 - Create: `tests/fixtures/demerits_unknown_id.json` — invalid fixture proving only canonical demerit ids are accepted.
 - Create: `packages/mcp/src/graph/levels.ts` — TypeScript mirror of effective-level math for MCP fusion suggestions.
 - Modify: `registry/schema/meta.json` — canonical demerit catalog, labels, eligible levels, and floor.
@@ -63,7 +78,11 @@ from gaia_cli.leveling import demerit_penalty, effective_level, level_summary
 def test_effective_level_drops_one_rank_per_demerit():
     skill = {
         "id": "voice-agent",
+<<<<<<< Updated upstream
         "level": "III",
+=======
+        "level": "3★",
+>>>>>>> Stashed changes
         "demerits": ["heavyweight-dependency"],
     }
     assert demerit_penalty(skill) == 1
@@ -73,7 +92,11 @@ def test_effective_level_drops_one_rank_per_demerit():
 def test_effective_level_floors_at_awakened():
     skill = {
         "id": "deployment-automation",
+<<<<<<< Updated upstream
         "level": "II",
+=======
+        "level": "2★",
+>>>>>>> Stashed changes
         "demerits": ["niche-integration", "experimental-feature"],
     }
     assert demerit_penalty(skill) == 2
@@ -83,7 +106,11 @@ def test_effective_level_floors_at_awakened():
 def test_level_summary_keeps_claimed_and_effective_levels():
     skill = {
         "id": "mcp-integration",
+<<<<<<< Updated upstream
         "level": "III",
+=======
+        "level": "3★",
+>>>>>>> Stashed changes
         "demerits": ["niche-integration"],
     }
     assert level_summary(skill) == {
@@ -98,8 +125,13 @@ def test_level_summary_keeps_claimed_and_effective_levels():
 # tests/test_validate.py additions inside TestValidate
     def test_demerits_reject_level_i_skills(self):
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
+<<<<<<< Updated upstream
         self.assertEqual(code, 1, "Expected Level I demerits to fail validation.")
         self.assertIn("only allowed on Level II or above", out)
+=======
+        self.assertEqual(code, 1, "Expected 1★ demerits to fail validation.")
+        self.assertIn("only allowed on 2★ or above", out)
+>>>>>>> Stashed changes
 
     def test_demerits_reject_unknown_catalog_keys(self):
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_unknown_id.json"))
@@ -152,7 +184,11 @@ Expected: FAIL with `ModuleNotFoundError: No module named 'gaia_cli.leveling'` p
     ]
   },
   "uniqueItems": true,
+<<<<<<< Updated upstream
   "description": "Optional Level II+ progression penalties. Each entry lowers the derived effective level by one rank."
+=======
+  "description": "Optional 2★+ progression penalties. Each entry lowers the derived effective level by one rank."
+>>>>>>> Stashed changes
 },
 ```
 
@@ -233,7 +269,11 @@ def validate_demerits(graph):
         if skill.get("level") not in eligible_levels:
             errors.append(
                 f"Skill '{skill['id']}' has demerits but claimed level "
+<<<<<<< Updated upstream
                 f"{skill.get('level')} is only allowed on Level II or above."
+=======
+                f"{skill.get('level')} is only allowed on 2★ or above."
+>>>>>>> Stashed changes
             )
 
         unknown = [item for item in demerits if item not in allowed]
@@ -632,7 +672,11 @@ export interface Skill {
   id: string;
   name: string;
   type: "basic" | "extra" | "ultimate";
+<<<<<<< Updated upstream
   level: "0" | "I" | "II" | "III" | "IV" | "V" | "VI";
+=======
+  level: "0★" | "I" | "II" | "III" | "IV" | "V" | "VI";
+>>>>>>> Stashed changes
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;
   prerequisites: string[];
@@ -730,7 +774,11 @@ def test_render_card_shows_demerit_adjusted_ceiling(extra_skill):
     extra_skill["level"] = "III"
     extra_skill["demerits"] = ["experimental-feature"]
     rendered = render_card(extra_skill)
+<<<<<<< Updated upstream
     assert "Claimed Level III" in rendered
+=======
+    assert "Claimed 3★" in rendered
+>>>>>>> Stashed changes
     assert "Potential II" in rendered
     assert "experimental-feature" in rendered
 ```
@@ -842,10 +890,17 @@ def _effective_level_note(skill):
 
 ```markdown
 <!-- README.md / CONTRIBUTING.md / docs/GOVERNANCE.md -->
+<<<<<<< Updated upstream
 - Level II+ skills may carry canonical demerits: `niche-integration`, `experimental-feature`, and `heavyweight-dependency`.
 - Each demerit lowers the skill's derived progression ceiling by one level, floored at Level I.
 - Demerits do not reduce the evidence requirement of the claimed level; they only keep progression meta in a lower tier.
 - Named skills still require claimed Level II+ even if the generic skill's effective level is lower.
+=======
+- 2★+ skills may carry canonical demerits: `niche-integration`, `experimental-feature`, and `heavyweight-dependency`.
+- Each demerit lowers the skill's derived progression ceiling by one level, floored at 1★.
+- Demerits do not reduce the evidence requirement of the claimed level; they only keep progression meta in a lower tier.
+- Named skills still require claimed 2★+ even if the generic skill's effective level is lower.
+>>>>>>> Stashed changes
 ```
 
 ```javascript

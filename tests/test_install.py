@@ -340,7 +340,11 @@ contributor: contrib
 origin: true
 genericSkillRef: web-search
 status: named
+<<<<<<< Updated upstream
 level: II
+=======
+level: "2★"
+>>>>>>> Stashed changes
 description: A test skill.
 ---
 Content here.
@@ -365,7 +369,11 @@ class TestListAvailable:
         sid, meta = result[0]
         assert sid == "contrib/my-skill"
         assert meta["name"] == "My Skill"
+<<<<<<< Updated upstream
         assert meta["level"] == "II"
+=======
+        assert meta["level"] == "2★"
+>>>>>>> Stashed changes
         assert meta["genericSkillRef"] == "web-search"
 
     def test_lists_multiple_contributors_sorted(self, tmp_path):

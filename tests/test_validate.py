@@ -82,9 +82,15 @@ class TestValidate(unittest.TestCase):
         self.assertIn("must have 0 prerequisites", out)
 
     def test_demerits_reject_level_i_skills(self):
+<<<<<<< Updated upstream
         """Ensure demerits are rejected on Level I and below."""
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
         self.assertEqual(code, 1, "Expected Level I demerits to fail validation.")
+=======
+        """Ensure demerits are rejected on 1★ and below."""
+        code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
+        self.assertEqual(code, 1, "Expected 1★ demerits to fail validation.")
+>>>>>>> Stashed changes
         self.assertIn("has demerits but claimed level", out)
 
     def test_demerits_reject_unknown_catalog_keys(self):
@@ -183,7 +189,11 @@ class TestNamedSkillValidation(unittest.TestCase):
         )
 
     def test_seed_skills_have_no_level_i(self):
+<<<<<<< Updated upstream
         """No seed named skill uses level I (which is forbidden for named skills)."""
+=======
+        """No seed named skill uses 1★ (which is forbidden for named skills)."""
+>>>>>>> Stashed changes
         from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
 
         named_dir = os.path.join(REPO_ROOT, "registry", "named")
@@ -197,12 +207,21 @@ class TestNamedSkillValidation(unittest.TestCase):
             level = fm.get("level", "")
             self.assertNotEqual(
                 level,
+<<<<<<< Updated upstream
                 "I",
                 f"Seed skill {fp} has forbidden level 'I'.",
             )
 
     def test_bad_level_fails_validation(self):
         """validate_and_group reports an error when level is 'I'."""
+=======
+                "1★",
+                f"Seed skill {fp} has forbidden level '1★'.",
+            )
+
+    def test_bad_level_fails_validation(self):
+        """validate_and_group reports an error when level is '1★'."""
+>>>>>>> Stashed changes
         from scripts.generateNamedIndex import validate_and_group
 
         named_skills = [
@@ -215,14 +234,23 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "web-search",
                     "status": "named",
+<<<<<<< Updated upstream
                     "level": "I",
                     "description": "A fake skill at level I.",
+=======
+                    "level": "1★",
+                    "description": "A fake skill at 1★.",
+>>>>>>> Stashed changes
                 },
             )
         ]
         errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
+<<<<<<< Updated upstream
             any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
+=======
+            any("level" in e.lower() or "'1★'" in e or "1★" in e or "II or above" in e
+>>>>>>> Stashed changes
                 for e in errors),
             f"Expected a level error, got: {errors}",
         )
@@ -257,7 +285,11 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "definitely-not-a-real-skill-id",
                     "status": "named",
+<<<<<<< Updated upstream
                     "level": "II",
+=======
+                    "level": "2★",
+>>>>>>> Stashed changes
                     "description": "A skill that references a nonexistent generic skill.",
                 },
             )

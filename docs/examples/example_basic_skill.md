@@ -22,7 +22,11 @@ This is a filled-out example of a `new_basic_skill.md` PR for reference.
 **Contributor:**
 - [x] Skill ID uses `camelCase` with no vendor references.
 - [x] Description is precise, falsifiable, and non-overlapping with existing skills.
+<<<<<<< Updated upstream
 - [x] Evidence meets the minimum threshold for the claimed level (Level II = Evidence Tier C+).
+=======
+- [x] Evidence meets the minimum threshold for the claimed level (2★ = Evidence Tier C+).
+>>>>>>> Stashed changes
 - [x] `prerequisites` array is empty (basic skills have no parents).
 - [x] `derivatives` array lists known child skills: `documentAnalyst`.
 - [x] I have run `python scripts/validate.py` locally and it passes.
@@ -37,7 +41,11 @@ Added to `skills` array:
   "id": "parseCsv",
   "name": "Parse CSV",
   "type": "basic",
+<<<<<<< Updated upstream
   "level": "II",
+=======
+  "level": "2★",
+>>>>>>> Stashed changes
   "rarity": "common",
   "description": "Extracts structured tabular data from CSV-formatted input, handling delimiters, quoted fields, headers, and encoding variants.",
   "prerequisites": [],

@@ -7,9 +7,15 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
+<<<<<<< Updated upstream
       "level": "III",
       "rarity": "common",
       "description": "Level III skill with only Class C evidence.",
+=======
+      "level": "3★",
+      "rarity": "common",
+      "description": "3★ skill with only Class C evidence.",
+>>>>>>> Stashed changes
       "prerequisites": [
         "skill-b",
         "skill-c"
@@ -21,7 +27,11 @@
           "source": "http://example.com",
           "evaluator": "test",
           "date": "2026-04-26",
+<<<<<<< Updated upstream
           "notes": "Insufficient evidence for Level III."
+=======
+          "notes": "Insufficient evidence for 3★."
+>>>>>>> Stashed changes
         }
       ],
       "status": "provisional",
@@ -33,7 +43,11 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],
@@ -57,7 +71,11 @@
       "id": "skill-c",
       "name": "Skill C",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

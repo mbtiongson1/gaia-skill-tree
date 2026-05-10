@@ -16,6 +16,7 @@ Every AI agent capability exists somewhere on this graph. Skills start at the fo
 GAIA SKILL TREE
 =======================================================
 
+<<<<<<< Updated upstream
 ◆ karpathy/autoresearch - Wisdom King  [VI]
   ├─ ◇ /research  [III]
   │  ├─ ○ /web-search  [I]
@@ -33,6 +34,25 @@ GAIA SKILL TREE
   │  └─ ○ /error-interpretation  [I]
   ├─ ○ /evaluate-output  [I]
   └─ ◇ /plan-and-execute  [IV] ...
+=======
+◆ karpathy/autoresearch - Wisdom King  [6★]
+  ├─ ◇ /research  [3★]
+  │  ├─ ○ /web-search  [1★]
+  │  ├─ ○ /summarize  [0★]
+  │  └─ ○ /cite-sources  [1★]
+  ├─ ◇ /knowledge-harvest  [4★]
+  │  ├─ ◇ /web-scrape  [3★] ...
+  │  └─ ○ /embed-text  [1★]
+  └─ ◇ /ghostwrite  [4★] ...
+
+◆ /recursive-self-improvement  [5★]
+  ├─ ◇ /autonomous-debug  [4★]
+  │  ├─ ○ /code-generation  [1★]
+  │  ├─ ○ /execute-bash  [1★]
+  │  └─ ○ /error-interpretation  [1★]
+  ├─ ○ /evaluate-output  [1★]
+  └─ ◇ /plan-and-execute  [4★] ...
+>>>>>>> Stashed changes
 
 Full graph: registry/registry.md
 Personal renders: generated-output/tree.md and generated-output/tree.html
@@ -47,11 +67,19 @@ Personal renders: generated-output/tree.md and generated-output/tree.html
 
 | Symbol | Tier | Levels | Evidence floor |
 |--------|------|--------|---------------|
+<<<<<<< Updated upstream
 | ○ Basic | Primitive, indivisible capability | 0 (F) Unawakened → I (D) Awakened | None |
 | ◇ Extra | Emerges from combining 2+ basic skills | II (C) Named → III (B) Evolved → IV (A) Hardened | C → B → B/A |
 | ◆ Ultimate | High-complexity emergent capability | V (S) Transcendent → VI (SS) Transcendent ★ | A → A + peer review |
 
 Skills level up through evidence, not declaration. Each demerit lowers effective level by one (floored at I, valid for II+ only).
+=======
+| ○ Basic | Primitive, indivisible capability | 0★ (F) Unawakened → 1★ (D) Awakened | None |
+| ◇ Extra | Emerges from combining 2+ basic skills | 2★ (C) Named → 3★ (B) Evolved → 4★ (A) Hardened | C → B → B/A |
+| ◆ Ultimate | High-complexity emergent capability | 5★ (S) Transcendent → 6★ (SS) Transcendent ★ | A → A + peer review |
+
+Skills level up through evidence, not declaration. Each demerit lowers effective level by one (floored at 1★, valid for 2★+ only).
+>>>>>>> Stashed changes
 
 ---
 

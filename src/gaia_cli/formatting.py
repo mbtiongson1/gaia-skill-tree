@@ -45,6 +45,7 @@ TIER_COLORS = {
 }
 
 RANK_COLORS = {
+<<<<<<< Updated upstream
     "0":   (148, 163, 184),   # Slate
     "I":   (56, 189, 248),    # Sky
     "II":  (99, 202, 183),    # Teal
@@ -52,6 +53,15 @@ RANK_COLORS = {
     "IV":  (232, 121, 249),   # Fuchsia
     "V":   (251, 191, 36),    # Amber
     "VI":  (251, 191, 36),    # Amber bright
+=======
+    "0★":   (148, 163, 184),   # Slate
+    "1★":   (56, 189, 248),    # Sky
+    "2★":  (99, 202, 183),    # Teal
+    "3★": (167, 139, 250),   # Violet
+    "4★":  (232, 121, 249),   # Fuchsia
+    "5★":   (251, 191, 36),    # Amber
+    "6★":  (251, 191, 36),    # Amber bright
+>>>>>>> Stashed changes
 }
 
 TYPE_SYMBOLS = {"basic": "○", "extra": "◇", "ultimate": "◆"}
@@ -72,7 +82,11 @@ def format_skill_plain(skill_id: str, *, named_contributor: str | None = None,
     return f"/{skill_id}"
 
 
+<<<<<<< Updated upstream
 def format_skill_colored(skill_id: str, level: str = "0", *,
+=======
+def format_skill_colored(skill_id: str, level: str = "0★", *,
+>>>>>>> Stashed changes
                          named_contributor: str | None = None,
                          is_local: bool = False, local_user: str | None = None) -> str:
     """Return ANSI-colored display string.
@@ -82,7 +96,11 @@ def format_skill_colored(skill_id: str, level: str = "0", *,
     - Canon: rank-colored /skill-id
     """
     r = _reset()
+<<<<<<< Updated upstream
     rank_color = RANK_COLORS.get(level, RANK_COLORS["0"])
+=======
+    rank_color = RANK_COLORS.get(level, RANK_COLORS["0★"])
+>>>>>>> Stashed changes
     skill_colored = f"{_fg(*rank_color)}{skill_id}{r}"
 
     if named_contributor:
@@ -111,7 +129,11 @@ def format_type_colored(skill_type: str) -> str:
 
 def format_level_colored(level: str) -> str:
     """Return level badge colored by rank."""
+<<<<<<< Updated upstream
     rank_color = RANK_COLORS.get(level, RANK_COLORS["0"])
+=======
+    rank_color = RANK_COLORS.get(level, RANK_COLORS["0★"])
+>>>>>>> Stashed changes
     return f"{_fg(*rank_color)}{level}{_reset()}"
 
 

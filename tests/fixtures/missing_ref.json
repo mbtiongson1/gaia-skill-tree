@@ -7,7 +7,11 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
+<<<<<<< Updated upstream
       "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "Composite referencing nonexistent skill.",
       "prerequisites": [
@@ -32,7 +36,11 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

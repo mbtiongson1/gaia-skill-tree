@@ -7,7 +7,11 @@
       "id": "source-skill",
       "name": "Source Skill",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "A source skill for duplicate edge validation.",
       "prerequisites": [],
@@ -23,7 +27,11 @@
       "id": "helper-skill",
       "name": "Helper Skill",
       "type": "basic",
+<<<<<<< Updated upstream
       "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
       "rarity": "common",
       "description": "A helper skill that satisfies the target prerequisite count.",
       "prerequisites": [],
@@ -39,7 +47,11 @@
       "id": "target-skill",
       "name": "Target Skill",
       "type": "extra",
+<<<<<<< Updated upstream
       "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
       "rarity": "uncommon",
       "description": "A target skill reached through duplicated edges.",
       "prerequisites": ["source-skill", "helper-skill"],
