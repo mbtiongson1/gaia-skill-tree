@@ -113,7 +113,7 @@ async function proposeNovel(
     id,
     name: input.name!,
     type: input.type ?? "basic",
-    level: "I",
+    level: "1⭐",
     rarity: "common",
     description: input.description!,
     prerequisites: input.prerequisites ?? [],
