@@ -761,6 +761,26 @@
   },
   "awaitingClassification": [
     {
+      "id": "gaiabot/gaia-triage",
+      "name": "Gaia Triage (Internal)",
+      "contributor": "gaiabot",
+      "origin": false,
+      "genericSkillRef": "gaia-triage",
+      "status": "awakened",
+      "level": "II",
+      "description": "Automates repository triage for the Gaia Skill Tree, including fixing documentation drift, managing build dependencies (build, setuptools, wheel), and synchronizing generated graph projections and GEXF exports.",
+      "tags": [
+        "maintenance",
+        "triage",
+        "automation",
+        "ci-fix",
+        "packaging"
+      ],
+      "links": {
+        "repo": "https://github.com/mbtiongson1/gaia-skill-tree"
+      }
+    },
+    {
       "id": "gaiabot/repo-docs-before-pr",
       "name": "Repo Docs Before PR",
       "contributor": "gaiabot",
@@ -937,6 +957,7 @@
       "devin-ai/autonomous-swe"
     ],
     "gaiabot": [
+      "gaiabot/gaia-triage",
       "gaiabot/repo-docs-before-pr"
     ],
     "glincker": [
