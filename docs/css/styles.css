@@ -111,6 +111,44 @@
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
   .section-sub{color:var(--muted);margin-bottom:2.5rem;font-size:1rem}
+  /* ── REGISTRY STATS ── */
+  .registry-stats{
+    display:flex;align-items:center;justify-content:center;
+    gap:0;margin-top:2.8rem;
+    border:1px solid var(--border);border-radius:14px;
+    background:var(--surface);overflow:hidden;
+  }
+  .rs-stat{
+    flex:1;text-align:center;padding:1.6rem 1.2rem;
+  }
+  .rs-divider{
+    width:1px;align-self:stretch;
+    background:var(--border);flex-shrink:0;
+  }
+  .rs-num{
+    font-size:2.4rem;font-weight:800;line-height:1;
+    margin-bottom:.35rem;color:var(--text);
+  }
+  .rs-label{
+    font-size:.78rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .rs-named{color:#ef4444}
+  .rs-legendary{
+    color:#fbbf24;
+    animation:rs-legendary-pulse 3.2s ease-in-out infinite;
+  }
+  @keyframes rs-legendary-pulse{
+    0%,100%{text-shadow:0 0 12px rgba(251,191,36,.25)}
+    50%{text-shadow:0 0 24px rgba(251,191,36,.6),0 0 48px rgba(251,191,36,.2)}
+  }
+  .rs-legendary-link{
+    text-decoration:none;display:block;
+    transition:opacity .2s;
+  }
+  .rs-legendary-link:hover{opacity:.8}
+  .rs-legendary-link .rs-label{color:#fbbf24;opacity:.7}
+  .rs-legendary-link:hover .rs-label{opacity:1}
   /* ── TIER CARDS ── */
   .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
   .tier-card{

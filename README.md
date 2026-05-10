@@ -8,37 +8,9 @@
 
 ---
 
-## Table of Contents
-
-- [The Tree](#the-tree)
-- [What This Means for You](#what-this-means-for-you)
-- [Tutorial](#tutorial)
-- [The Hierarchy](#the-hierarchy)
-- [Rank System: The Transcendent Line](#rank-system-the-transcendent-line)
-- [Install](#install)
-- [Quickstart](#quickstart)
-- [Push](#push)
-  - [Github CLI issues](#github-cli-issues)
-- [Named Skills Browser](#named-skills-browser)
-- [Real Skill Catalog](#real-skill-catalog)
-- [CLI Usage](#cli-usage)
-  - [Command Reference](#command-reference)
-  - [Commands](#commands)
-  - [Typical Workflow](#typical-workflow)
-- [MCP Server (Agent-Native Integration)](#mcp-server-agent-native-integration)
-- [Repository Structure](#repository-structure)
-- [Maintainer Hooks](#maintainer-hooks)
-- [Contributing](#contributing)
-- [Contributors](#contributors)
-- [License](#license)
-
----
-
 ## The Tree
 
 Every AI agent capability exists somewhere on this graph. Skills start at the foundation tier, awaken through evidence, evolve through use, and fuse into things greater than the sum of their parts.
-
-The snapshot below shows two example upgrade paths from the full graph.
 
 ```text
 GAIA SKILL TREE
@@ -66,72 +38,24 @@ Full graph: registry/registry.md
 Personal renders: generated-output/tree.md and generated-output/tree.html
 ```
 
----
-
-## What This Means for You
-
-- **Track your agent's capabilities**: every skill your agent demonstrates gets logged to your personal skill tree, tied to your configured Gaia username, and portable across every repo you own.
-- **Unlock combinations**: when your agent has the prerequisites, a new extra or ultimate skill becomes available to fuse. `gaia scan` detects recommendations and writes promotion candidates for you to review.
-- **Name and share skills**: contribute named implementations of generic skills, such as `karpathy/autoresearch`, attributed to your identity and installable by anyone via `gaia skills install`. Pending intakes are overlaid in `gaia skills list/search/info` by default.
-- **Contribute to the canon**: review draft skills, submit evidence, or create new skills from strong reviews. Curated registry changes live in `registry/`; draft intake lives in `registry-for-review/`.
-
----
-
-## Tutorial
-
 > [!TIP]
 > **New here?** The interactive tutorial at **[gaia.tiongson.co](https://gaia.tiongson.co/)** covers everything visually: skill tiers, the rank system, the full get-started workflow, and copy-paste commands.
 
 ---
 
-## The Hierarchy
+## Skill Tiers & Ranks
 
-| Symbol | Tier | What it means |
-|---|---|---|
-| ○ | **Basic Skill** | Primitive, indivisible capability: the genome of every agent |
-| ◇ | **Extra Skill** | Emerges from combining 2+ basic skills and transcends its parts |
-| ◆ | **Ultimate Skill** | High-complexity emergent capability with a strict evidence bar |
+| Symbol | Tier | Levels | Evidence floor |
+|--------|------|--------|---------------|
+| ○ Basic | Primitive, indivisible capability | 0 (F) Unawakened → I (D) Awakened | None |
+| ◇ Extra | Emerges from combining 2+ basic skills | II (C) Named → III (B) Evolved → IV (A) Hardened | C → B → B/A |
+| ◆ Ultimate | High-complexity emergent capability | V (S) Transcendent → VI (SS) Transcendent ★ | A → A + peer review |
 
-## Rank System: The Transcendent Line
-
-Skills level up through evidence, not declaration:
-
-| Level | Class | Rank | Evidence Floor | What it means |
-|---|---|---|---|---|
-| `0` | F | **Unawakened** | None | Universal LLM primitive: any capable model does this by default |
-| `I` | D | **Awakened** | None | Foundation tier: catalogued agent capability |
-| `II` | C | **Named** | C | First confirmed demonstration |
-| `III` | B | **Evolved** | B | Reproducible and fully documented |
-| `IV` | A | **Hardened** | B or A | Failure modes known; battle-tested |
-| `V` | S | **Transcendent** | A | Composable and self-improving |
-| `VI` | SS | **Transcendent ★** | A | Apex: peer-reviewed, named to the agent who unlocked it |
-
-Level visibility now has two views:
-- **Claimed level** is the canonical registry level in `registry/gaia.json`.
-- **Effective level** is runtime potential after demerits. Demerits are only valid for `II+`; each demerit lowers potential by exactly one level, floored at `I`.
+Skills level up through evidence, not declaration. Each demerit lowers effective level by one (floored at I, valid for II+ only).
 
 ---
 
 ## Install
-
-For registry development, use an editable install from the repo root:
-```bash
-git clone https://github.com/mbtiongson1/gaia-skill-tree.git
-cd gaia-skill-tree
-pip install -e ".[embeddings]"
-pip install gaia-cli
-```
-If pip fails, run this:
-```bash
-brew install pipx
-pipx install ".[embeddings]"
-pipx install gaia-cli
-```
-Windows Only (one-time setup):
-If `gaia` isn't recognized after install, run the command below in PowerShell.
-```bash
-$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
-```
 
 <!-- gaia:version-start -->
 Current Gaia CLI version: `3.1.1`.
@@ -149,80 +73,45 @@ npm install -g @gaia-registry/cli
 ```
 <!-- gaia:version-end -->
 
+For registry development, clone and install editable:
+```bash
+git clone https://github.com/mbtiongson1/gaia-skill-tree.git
+cd gaia-skill-tree
+pip install -e ".[embeddings]"
+```
+
+<details>
+<summary>Troubleshooting</summary>
+
+If pip fails, try pipx:
+```bash
+brew install pipx        # macOS
+pipx install gaia-cli
+```
+
+Windows — if `gaia` isn't recognized after install:
+```powershell
+$env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
+```
+</details>
+
 ## Quickstart
-In your terminal:
-```bash
-gaia init
-```
-pass `gaia init --user your-username` to override.
 
 ```bash
-gaia update
-gaia pull
-gaia scan
-gaia tree
+gaia init --user your-username
+gaia update          # pull latest registry + CLI
+gaia scan            # detect skills, render tree
+gaia appraise        # inspect a skill card
+gaia promote web-search   # promote scan-approved candidates
+gaia push --dry-run  # preview intake submission
+gaia push            # submit for maintainer review
 ```
-`gaia update` pulls the latest registry and reinstalls the CLI to make sure you're on the current version. `gaia scan` detects skills, writes `generated-output/promotion-candidates.json`, renders your local tree to `generated-output/tree.html` and `generated-output/tree.md`, and prints matched skills as `/skill-id` with Unicode fusion diagrams for combination candidates.
-```bash
-gaia appraise skill-id
-```
-Replace `skill-id` with the `/skill-id` shown in your tree (without the leading slash). Promotion is scan-gated. `gaia promote <skill>` uses the level recommended by the most recent `generated-output/promotion-candidates.json`, and the scan must be less than 24 hours old.
 
-## Push
-Go to your integrated terminal in your repo and run this command after scanning:
-```bash
-gaia push --dry-run
-```
-`--dry-run` will only list down your push-able skills. If you want to push it to the registry for review:
-```bash
-gaia push
-```
-Note: Make sure not to include sensitive information, otherwise it will be rejected! If found that your /skills are legit, it can be named after you!
+`gaia scan` writes `generated-output/promotion-candidates.json`, renders your tree to `generated-output/tree.{html,md}`, and prints detected skills with fusion diagrams.
 
-### Github CLI issues
-[!TIP] `push` command requires Github CLI authentication! Run this in your terminal:
-MacOS:
-```bash
-brew install gh
-```
-Ubuntu/Debian:
-```bash
-sudo apt install gh
-```
-Windows:
-```bash
-winget install --id GitHub.cli
-```
-Once installed, run:
-```bash
-gh auth login
-```
-Then follow the instructions from the terminal to get yourself authenticated. (Use HTTPS + Browser for easy set up).
-## Named Skills Browser
+---
 
-The registry ships an interactive Named Skills browser at [`docs/index.html`](docs/index.html):
-
-- **Level-filtered tabs**: browse by Named (II), Evolved (III), Hardened (IV), or all levels.
-- **Expandable cards**: each card shows the contributor, title, description, `genericSkillRef`, tags, and a direct link to the upstream `SKILL.md`.
-- **Graph canvas**: node labels show `contributor/skill-name` for named implementations and `/slug` for anonymous skills by default. Hover details include claimed/effective level when demerits apply. The **Named Skills** button dims all non-named nodes and highlights named implementations.
-
-Serve locally with `python -m http.server 8080` from the repo root, then open `http://localhost:8080/docs/`.
-
-`docs/graph/*` is a generated GitHub Pages mirror so the `docs/` site can run as a self-contained static site. The canonical files live in `registry/`.
-
-## Real Skill Catalog
-
-Gaia also keeps a curated catalog of real-world named `SKILL.md` entries before they are promoted into the canonical graph:
-
-- Source data: [`registry/real-skills.json`](registry/real-skills.json)
-- Generated HTML: [`registry/real-skills.html`](registry/real-skills.html)
-- Generated Markdown: [`registry/real-skills.md`](registry/real-skills.md)
-
-Use this catalog to bucket popular named skills from sources such as VoltAgent's Awesome Agent Skills, AgentSkills.me, official skill pages, and Superpowers. The canonical DAG lives in `registry/gaia.json`; the real skill catalog is a review surface for source-backed names and Gaia mappings.
-
-## CLI Usage
-
-### Command Reference
+## CLI Reference
 
 <!-- gaia:cli-start -->
 ```text
@@ -288,74 +177,18 @@ Quick usage:
 ```
 <!-- gaia:cli-end -->
 
-### Commands
+---
 
-| Command | What it does |
-|---|---|
-| `gaia init` | Creates `.gaia/config.toml`, asks for or accepts `--user`, and creates a stub user tree when run inside a registry clone. |
-| `gaia scan` | Scans configured paths, writes `generated-output/promotion-candidates.json`, renders `generated-output/tree.{html,md}`, and shows detected skills as `/skill-id` with Unicode fusion diagrams for combination candidates. |
-| `gaia scan --auto-promote` | Runs scan, promotes every scan-approved candidate, and re-renders the tree. |
-| `gaia pull` | Refreshes registry data from `origin`. |
-| `gaia push` | Writes a batch intake record under `registry-for-review/skill-batches/` and opens a PR when possible. |
-| `gaia appraise [skillId]` | Renders a local-first skill card (your level, named form when available) showing prereqs, unlocks, and promotion status. |
-| `gaia promote <skill>` | Promotes only if the skill appeared in the last scan candidates; Gaia uses the scan-suggested level. |
-| `gaia promote --all` | Promotes every valid candidate from the last scan. |
-| `gaia fuse <skillId>` | Confirms a fusion combination or promotion candidate. |
-| `gaia stats` | Shows registry health: skill counts by type (○ Basic Skill / ◇ Extra Skill / ◆ Ultimate Skill) with colored bars and level breakdown. |
-| `gaia tree` | Renders your personal tree to `generated-output/tree.html` and `generated-output/tree.md`. |
-| `gaia graph` | Generates and opens `registry/render/gaia.html`; use `--format svg` for `registry/gaia.svg` or `--format json` for render JSON. |
-| `gaia version`, `gaia --version`, `gaia -v` | Prints the CLI version. |
-| `gaia mcp` | Runs the bundled MCP server from `packages/mcp`. |
-| `gaia release {patch|minor|major}` | Maintainer release bump across Python, npm, MCP, and registry versions. |
-| `gaia docs build` | Regenerates marker-owned docs sections and docs-site stats. |
-| `gaia docs build --check` | Fails if generated docs have drifted. |
-| `gaia skills list/search/info/install/uninstall` | Browses and manages named skills with provenance-aware coloring: `contributor/skill` in red for named, `/skill-id` in rank color for canon. |
+## MCP Server
 
-### Typical Workflow
+`@gaia-registry/mcp-server` connects Gaia to MCP-compatible agents (Claude Code, Cursor, VS Code, etc.).
 
-```bash
-# In the project repo you want Gaia to scan
-gaia init --user your-username
-
-# Detect skills and render your tree
-gaia scan
-gaia appraise
-
-# Promote only scan-approved candidates
-gaia promote web-search
-
-# Submit draft skill intake for maintainer review
-gaia push --dry-run
-gaia push
-```
-
-Intake PRs are draft review artifacts. Accepted candidates are promoted later into canonical `registry/gaia.json` updates.
-
-## MCP Server (Agent-Native Integration)
-
-`@gaia-registry/mcp-server` connects Gaia directly to MCP-compatible agents such as Claude Code, Cursor, VS Code, and others. The README intentionally keeps this to install methods only; copy the command for your agent and use [`packages/mcp/`](packages/mcp/) for agent-specific config-file examples.
-
-| Agent | Install method |
-|---|---|
+| Agent | Install |
+|-------|---------|
 | Claude Code | `claude mcp add gaia -- npx @gaia-registry/mcp-server` |
-| Any MCP client with a command picker | Command: `npx`; args: `@gaia-registry/mcp-server` |
-| Local smoke test | `npx @gaia-registry/mcp-server` |
+| Any MCP client | Command: `npx`, args: `@gaia-registry/mcp-server` |
 
-Optional environment variables: set `GAIA_USER=your-github-username` to load your tree by default and `GITHUB_TOKEN` if you want proposal tools to open PRs.
-
-Once connected, your agent gets these tools:
-
-| Tool | What it does |
-|------|-------------|
-| `gaia_lookup` | Search skills by ID or fuzzy name |
-| `gaia_suggest` | Get fusion recommendations from your current context |
-| `gaia_scan_context` | Detect skills from connected tools and project signals |
-| `gaia_my_tree` | View your skill tree and stats |
-| `gaia_propose` | Claim a fusion or propose a novel skill |
-
-The MCP server also exposes resources at `gaia://registry` and `gaia://tree/{username}`.
-
-See [`packages/mcp/`](packages/mcp/) for full documentation.
+Set `GAIA_USER=your-github-username` and optionally `GITHUB_TOKEN` for PR tools. See [`packages/mcp/`](packages/mcp/) for full docs and agent-specific config examples.
 
 ---
 
@@ -375,23 +208,6 @@ scripts/                  validation, rendering, docs, and release helpers
 tests/                    Python test suite
 ```
 <!-- gaia:layout-end -->
-
-Important files:
-
-```text
-registry/gaia.json               canonical source graph
-registry/named/                  named skill implementations
-registry/named-skills.json       generated named skill index
-registry/real-skills.json        upstream catalog of real-world named skills
-registry/skills/                 generated skill pages
-registry/schema/                 JSON Schema definitions
-registry-for-review/             draft batch proposals from gaia push
-skill-trees/                     personal skill trees by username
-generated-output/                local scan output and personal renders, gitignored
-docs/graph/                     GitHub Pages mirror of registry graph assets
-packages/cli-npm/                npm wrapper and GitHub Action package
-packages/mcp/                    TypeScript MCP server
-```
 
 ---
 
