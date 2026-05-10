@@ -113,15 +113,15 @@ class LocalContext:
         return skill_id in self.owned_ids
 
     def skill_level(self, skill_id: str) -> str:
-        """Get the user's level for a skill, or canon level, or '0⭐'."""
+        """Get the user's level for a skill, or canon level, or '0★'."""
         if self.tree_data:
             for s in self.tree_data.get('unlockedSkills', []):
                 if s.get('skillId') == skill_id:
-                    return s.get('level', '0⭐')
+                    return s.get('level', '0★')
         skill = self._skill_map.get(skill_id)
         if skill:
-            return skill.get('level', '0⭐')
-        return "0⭐"
+            return skill.get('level', '0★')
+        return "0★"
 
     def skill_type(self, skill_id: str) -> str:
         """Get skill type (basic/extra/ultimate)."""
@@ -139,7 +139,7 @@ class LocalContext:
                     "id": novel_id,
                     "name": novel_id,
                     "type": "basic",
-                    "level": "0⭐",
+                    "level": "0★",
                     "rarity": "common",
                     "prerequisites": [],
                     "derivatives": [],

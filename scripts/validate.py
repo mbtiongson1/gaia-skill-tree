@@ -26,6 +26,11 @@ import sys
 import os
 import glob
 import argparse
+
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 from collections import defaultdict
 
 # Optional: jsonschema for full schema validation
@@ -197,11 +202,11 @@ def validate_evidence(graph):
     """Check that evidence meets the minimum threshold for each skill's level."""
     errors = []
     for skill in graph.get("skills", []):
-        level = skill.get("level", "1⭐")
+        level = skill.get("level", "1★")
         required_classes = EVIDENCE_FLOOR.get(level)
 
         if required_classes is None:
-            continue  # 1⭐ needs no evidence
+            continue  # 1★ needs no evidence
 
         evidence = skill.get("evidence", [])
         if not evidence:
@@ -224,8 +229,8 @@ def validate_ultimate(graph):
         if skill["type"] != "ultimate":
             continue
 
-        # Ultimate stubs at 1⭐ are allowed without evidence
-        if skill["level"] == "1⭐" and skill["status"] == "provisional":
+        # Ultimate stubs at 1★ are allowed without evidence
+        if skill["level"] == "1★" and skill["status"] == "provisional":
             continue
 
         # Validated ultimates need 3+ Class A/B evidence
@@ -247,7 +252,7 @@ def validate_demerits(graph):
         if not demerits:
             continue
 
-        level = skill.get("level", "1⭐")
+        level = skill.get("level", "1★")
         if level not in DEMERIT_ELIGIBLE_LEVELS:
             errors.append(
                 f"Skill '{skill['id']}' has demerits but claimed level "
@@ -332,7 +337,7 @@ _NAMED_REQUIRED_FIELDS = [
     "description",
 ]
 
-_NAMED_VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+_NAMED_VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
 
 
 def _parse_named_frontmatter(text):

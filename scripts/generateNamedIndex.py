@@ -36,7 +36,7 @@ REQUIRED_FIELDS = [
     "description",
 ]
 
-VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
 
 INDEX_SKILL_FIELDS = [
     "id",

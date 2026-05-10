@@ -82,9 +82,9 @@ class TestValidate(unittest.TestCase):
         self.assertIn("must have 0 prerequisites", out)
 
     def test_demerits_reject_level_i_skills(self):
-        """Ensure demerits are rejected on 1⭐ and below."""
+        """Ensure demerits are rejected on 1★ and below."""
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
-        self.assertEqual(code, 1, "Expected 1⭐ demerits to fail validation.")
+        self.assertEqual(code, 1, "Expected 1★ demerits to fail validation.")
         self.assertIn("has demerits but claimed level", out)
 
     def test_demerits_reject_unknown_catalog_keys(self):
@@ -183,7 +183,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         )
 
     def test_seed_skills_have_no_level_i(self):
-        """No seed named skill uses 1⭐ (which is forbidden for named skills)."""
+        """No seed named skill uses 1★ (which is forbidden for named skills)."""
         from scripts.generateNamedIndex import load_named_skills, parse_frontmatter
 
         named_dir = os.path.join(REPO_ROOT, "registry", "named")
@@ -197,12 +197,12 @@ class TestNamedSkillValidation(unittest.TestCase):
             level = fm.get("level", "")
             self.assertNotEqual(
                 level,
-                "1⭐",
-                f"Seed skill {fp} has forbidden level '1⭐'.",
+                "1★",
+                f"Seed skill {fp} has forbidden level '1★'.",
             )
 
     def test_bad_level_fails_validation(self):
-        """validate_and_group reports an error when level is '1⭐'."""
+        """validate_and_group reports an error when level is '1★'."""
         from scripts.generateNamedIndex import validate_and_group
 
         named_skills = [
@@ -215,14 +215,14 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "web-search",
                     "status": "named",
-                    "level": "1⭐",
-                    "description": "A fake skill at 1⭐.",
+                    "level": "1★",
+                    "description": "A fake skill at 1★.",
                 },
             )
         ]
         errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
-            any("level" in e.lower() or "'1⭐'" in e or "1⭐" in e or "II or above" in e
+            any("level" in e.lower() or "'1★'" in e or "1★" in e or "II or above" in e
                 for e in errors),
             f"Expected a level error, got: {errors}",
         )
@@ -257,7 +257,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "origin": True,
                     "genericSkillRef": "definitely-not-a-real-skill-id",
                     "status": "named",
-                    "level": "2⭐",
+                    "level": "2★",
                     "description": "A skill that references a nonexistent generic skill.",
                 },
             )

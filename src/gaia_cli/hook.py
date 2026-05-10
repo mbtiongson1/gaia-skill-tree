@@ -117,7 +117,7 @@ def hook_entry(event: str = "file_edit", registry_path: str | None = None) -> No
             for promo in eligible[:2]:
                 skill = skill_map.get(promo["skillId"])
                 if skill:
-                    print(render_promotion_prompt(skill, promo.get("nextLevel", "2⭐")))
+                    print(render_promotion_prompt(skill, promo.get("nextLevel", "2★")))
 
     # Persist
     save_paths(new_paths)
