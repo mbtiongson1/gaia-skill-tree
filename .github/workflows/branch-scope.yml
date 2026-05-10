@@ -9,8 +9,7 @@ jobs:
     name: Verify branch scope matches changed files
     runs-on: ubuntu-latest
     if: >-
-      !contains(github.event.pull_request.labels.*.name, 'skip-scope-check') &&
-      !startsWith(github.head_ref || '', 'dev/')
+      !contains(github.event.pull_request.labels.*.name, 'skip-scope-check')
     permissions:
       pull-requests: read
       contents: read
@@ -127,7 +126,7 @@ jobs:
             esac
           done <<< "$FILES"
 
-          if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ]; then
+          if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ] && [ "$PREFIX" != "dev" ]; then
             echo "::error::Schema files changed on a non-schema branch. Use a schema/ branch for nomenclature changes."
             echo ""
             echo "Files touching registry/schema/:"
@@ -135,7 +134,7 @@ jobs:
               echo "  - $f"
             done
             echo ""
-            echo "Create your branch as: schema/<description>"
+            echo "Create your branch as: schema/<description>, use a dev/* consolidation branch, or add the 'skip-scope-check' label."
             exit 1
           fi
 
