@@ -1,7 +1,7 @@
-# /parse-pdf  [1⭐ · Awakened]
+# /parse-pdf  [1★ · Awakened]
 **ID:** parse-pdf  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/parse-pdf`
 

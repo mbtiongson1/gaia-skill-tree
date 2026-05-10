@@ -8,7 +8,7 @@ Validation rules:
   - Each named skill has all required fields.
   - genericSkillRef resolves to a skill ID in registry/gaia.json.
   - At most one origin: true per genericSkillRef bucket.
-  - level is II or above (not I).
+  - level is 2★ or above (not 1★).
 
 Usage:
     python scripts/generateNamedIndex.py [--named-dir PATH] [--graph PATH]
@@ -36,7 +36,7 @@ REQUIRED_FIELDS = [
     "description",
 ]
 
-VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
 
 INDEX_SKILL_FIELDS = [
     "id",
@@ -290,11 +290,11 @@ def validate_and_group(named_skills, valid_ids):
         if missing:
             errors.append(f"{rel}: missing required field(s): {', '.join(missing)}")
 
-        # level >= II
+        # level >= 2★
         level = fm.get("level", "")
         if level not in VALID_LEVELS:
             errors.append(
-                f"{rel}: 'level' must be II or above (got '{level}'). "
+                f"{rel}: 'level' must be 2★ or above (got '{level}'). "
                 f"Valid values: {sorted(VALID_LEVELS)}"
             )
 

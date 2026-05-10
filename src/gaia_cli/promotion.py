@@ -289,7 +289,7 @@ def promotion_state(skill_id: str, tree_data: dict, graph_data: dict) -> str:
 
     Possible return values:
         - "not_unlocked" — skill is not in the user's tree
-        - "max_level" — skill is already at max level (VI)
+        - "max_level" — skill is already at max level (6★)
         - "eligible" — skill can be promoted (evidence requirement met)
         - "blocked" — next level requires evidence the graph skill lacks
     """

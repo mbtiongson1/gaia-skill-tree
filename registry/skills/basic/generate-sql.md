@@ -1,7 +1,7 @@
-# /generate-sql  [2⭐ · Named]
+# /generate-sql  [2★ · Named]
 **ID:** generate-sql  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/generate-sql`
 

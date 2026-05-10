@@ -1,7 +1,7 @@
-# /tool-select  [1⭐ · Awakened]
+# /tool-select  [1★ · Awakened]
 **ID:** tool-select  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/tool-select`
 

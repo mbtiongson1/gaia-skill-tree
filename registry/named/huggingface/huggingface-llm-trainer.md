@@ -7,7 +7,7 @@ genericSkillRef: fine-tune
 status: named
 title: "The Cloud Fine-Tuner"
 catalogRef: huggingface-llm-trainer
-level: "3⭐"
+level: "3★"
 description: Runs LLM fine-tuning on Hugging Face Jobs using TRL or Unsloth, covering SFT, DPO, GRPO, reward modeling, dataset validation, hardware selection, Trackio monitoring, and Hub persistence.
 links:
   github: https://github.com/huggingface/skills/blob/main/skills/huggingface-llm-trainer/SKILL.md

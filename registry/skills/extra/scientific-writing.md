@@ -1,7 +1,7 @@
-# Extra Skill: /scientific-writing  [3⭐ · Evolved]
+# Extra Skill: /scientific-writing  [3★ · Evolved]
 **ID:** scientific-writing  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/scientific-writing`
 

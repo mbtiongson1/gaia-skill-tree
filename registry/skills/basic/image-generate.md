@@ -1,7 +1,7 @@
-# /image-generate  [2⭐ · Named]
+# /image-generate  [2★ · Named]
 **ID:** image-generate  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/image-generate`
 

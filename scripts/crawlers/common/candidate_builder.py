@@ -19,7 +19,7 @@ def build_candidate(
         "id": id,
         "name": name,
         "type": skill_type,
-        "level": "1⭐",
+        "level": "1★",
         "rarity": "common",
         "description": description,
         "prerequisites": [],

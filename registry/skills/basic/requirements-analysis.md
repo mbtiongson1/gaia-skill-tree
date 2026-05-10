@@ -1,7 +1,7 @@
-# /requirements-analysis  [2⭐ · Named]
+# /requirements-analysis  [2★ · Named]
 **ID:** requirements-analysis  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/requirements-analysis`
 

@@ -1,7 +1,7 @@
-# upsonic/unittest-generator  [2⭐ · Named]
+# upsonic/unittest-generator  [2★ · Named]
 **ID:** generate-test  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/generate-test`
 

@@ -1,7 +1,7 @@
-# /diff-content  [1⭐ · Awakened]
+# /diff-content  [1★ · Awakened]
 **ID:** diff-content  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/diff-content`
 

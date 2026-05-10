@@ -1,7 +1,7 @@
-# /image-caption  [2⭐ · Named]
+# /image-caption  [2★ · Named]
 **ID:** image-caption  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/image-caption`
 

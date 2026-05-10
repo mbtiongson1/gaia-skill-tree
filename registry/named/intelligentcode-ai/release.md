@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/release/SKILL.md
 genericSkillRef: release-automation
 status: awakened
-level: "2⭐"
+level: "2★"
 description: Automates the full release cycle — semantic version bump, CHANGELOG update, PR merge, git tag, and GitHub release creation with multiple verification gates.
 tags: [release, semver, changelog, git-tag, github-release, automation]
 ---

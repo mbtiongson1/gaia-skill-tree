@@ -1,7 +1,7 @@
-# /self-consistency  [4⭐ · Hardened]
+# /self-consistency  [4★ · Hardened]
 **ID:** self-consistency  
 **Type:** Basic Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/self-consistency`
 

@@ -1,7 +1,7 @@
-# /ocr  [2⭐ · Named]
+# /ocr  [2★ · Named]
 **ID:** ocr  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/ocr`
 

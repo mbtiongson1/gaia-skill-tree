@@ -340,7 +340,7 @@ contributor: contrib
 origin: true
 genericSkillRef: web-search
 status: named
-level: "2⭐"
+level: "2★"
 description: A test skill.
 ---
 Content here.
@@ -365,7 +365,7 @@ class TestListAvailable:
         sid, meta = result[0]
         assert sid == "contrib/my-skill"
         assert meta["name"] == "My Skill"
-        assert meta["level"] == "2⭐"
+        assert meta["level"] == "2★"
         assert meta["genericSkillRef"] == "web-search"
 
     def test_lists_multiple_contributors_sorted(self, tmp_path):
