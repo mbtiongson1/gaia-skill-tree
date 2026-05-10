@@ -43,9 +43,9 @@ Decisions are made through Pull Requests. Most PRs require one Maintainer approv
 - A skill must first be accepted via the standard intake review process (lifecycle: "awakened").
 - Promotion from "awakened" to "named" requires a contributor to run `gaia propose` and open a PR.
 <<<<<<< HEAD
-- Named skills inherit their generic parent's level floor (minimum 2⭐).
+- Named skills inherit their generic parent's level floor (minimum 2★).
 - Canonical level remains the source of truth for promotion gates; effective level is a visibility signal used by runtime projections and advisor surfaces.
-- Demerits are valid only for 2⭐+ canonical skills. Each demerit lowers effective potential by one level, floored at 1⭐.
+- Demerits are valid only for 2★+ canonical skills. Each demerit lowers effective potential by one level, floored at 1★.
 =======
 <<<<<<< Updated upstream
 - Named skills inherit their generic parent's level floor (minimum Level II).

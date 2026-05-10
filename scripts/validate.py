@@ -198,11 +198,11 @@ def validate_evidence(graph):
     errors = []
     for skill in graph.get("skills", []):
 <<<<<<< HEAD
-        level = skill.get("level", "1⭐")
+        level = skill.get("level", "1★")
         required_classes = EVIDENCE_FLOOR.get(level)
 
         if required_classes is None:
-            continue  # 1⭐ needs no evidence
+            continue  # 1★ needs no evidence
 =======
 <<<<<<< Updated upstream
         level = skill.get("level", "I")
@@ -241,8 +241,8 @@ def validate_ultimate(graph):
             continue
 
 <<<<<<< HEAD
-        # Ultimate stubs at 1⭐ are allowed without evidence
-        if skill["level"] == "1⭐" and skill["status"] == "provisional":
+        # Ultimate stubs at 1★ are allowed without evidence
+        if skill["level"] == "1★" and skill["status"] == "provisional":
 =======
 <<<<<<< Updated upstream
         # Ultimate stubs at Level I are allowed without evidence
@@ -274,7 +274,7 @@ def validate_demerits(graph):
             continue
 
 <<<<<<< HEAD
-        level = skill.get("level", "1⭐")
+        level = skill.get("level", "1★")
 =======
 <<<<<<< Updated upstream
         level = skill.get("level", "I")
@@ -367,7 +367,7 @@ _NAMED_REQUIRED_FIELDS = [
 ]
 
 <<<<<<< HEAD
-_NAMED_VALID_LEVELS = {"2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+_NAMED_VALID_LEVELS = {"2★", "3★", "4★", "5★", "6★"}
 =======
 <<<<<<< Updated upstream
 _NAMED_VALID_LEVELS = {"II", "III", "IV", "V", "VI"}

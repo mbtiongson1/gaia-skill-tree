@@ -29,7 +29,7 @@ The individual skills (`parseCsv`, `summarize`, `formatOutput`, `evaluateOutput`
 - [x] Description describes an emergent capability, not just "all parents at once."
 - [x] At least 2 prerequisites listed, all referencing existing skill IDs.
 <<<<<<< HEAD
-- [x] Evidence meets the minimum threshold (3⭐ = Evidence Tier B+).
+- [x] Evidence meets the minimum threshold (3★ = Evidence Tier B+).
 =======
 <<<<<<< Updated upstream
 - [x] Evidence meets the minimum threshold (Level III = Evidence Tier B+).

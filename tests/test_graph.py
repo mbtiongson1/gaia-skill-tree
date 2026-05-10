@@ -18,7 +18,7 @@ def make_registry(root):
                         "name": "Tokenize",
                         "type": "basic",
 <<<<<<< HEAD
-                        "level": "1⭐",
+                        "level": "1★",
 =======
 <<<<<<< Updated upstream
                         "level": "I",
@@ -33,7 +33,7 @@ def make_registry(root):
                         "name": "Research",
                         "type": "extra",
 <<<<<<< HEAD
-                        "level": "3⭐",
+                        "level": "3★",
 =======
 <<<<<<< Updated upstream
                         "level": "III",
@@ -102,9 +102,9 @@ def test_write_graph_artifact_keeps_render_json_default_path(tmp_path):
     assert data["nodes"][0]["id"] == "tokenize"
     research_node = next(node for node in data["nodes"] if node["id"] == "research")
 <<<<<<< HEAD
-    assert research_node["effectiveLevel"] == "2⭐"
-    assert research_node["levelMeta"]["baseLevel"] == "3⭐"
-    assert research_node["levelMeta"]["effectiveLevel"] == "2⭐"
+    assert research_node["effectiveLevel"] == "2★"
+    assert research_node["levelMeta"]["baseLevel"] == "3★"
+    assert research_node["levelMeta"]["effectiveLevel"] == "2★"
 =======
 <<<<<<< Updated upstream
     assert research_node["effectiveLevel"] == "II"

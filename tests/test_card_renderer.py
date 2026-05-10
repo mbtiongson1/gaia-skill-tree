@@ -34,7 +34,7 @@ def basic_skill():
         "name": "Tokenize",
         "type": "basic",
 <<<<<<< HEAD
-        "level": "0⭐",
+        "level": "0★",
 =======
 <<<<<<< Updated upstream
         "level": "0",
@@ -61,7 +61,7 @@ def extra_skill():
         "name": "RAG Pipeline",
         "type": "extra",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -90,7 +90,7 @@ def ultimate_skill():
         "name": "Autonomous Research Agent",
         "type": "ultimate",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -189,7 +189,7 @@ class TestRenderCard:
     def test_contains_level_label(self, basic_skill):
         card = render_card(basic_skill)
 <<<<<<< HEAD
-        assert "0⭐ Basic" in card
+        assert "0★ Basic" in card
 =======
 <<<<<<< Updated upstream
         assert "Lv.0 Basic" in card
@@ -202,7 +202,7 @@ class TestRenderCard:
         card = render_card(extra_skill)
         assert "Potential:" in card
 <<<<<<< HEAD
-        assert "claimed 2⭐" in card
+        assert "claimed 2★" in card
 =======
 <<<<<<< Updated upstream
         assert "claimed II" in card
@@ -269,7 +269,7 @@ class TestRenderCard:
             "name": "Verbose",
             "type": "basic",
 <<<<<<< HEAD
-            "level": "0⭐",
+            "level": "0★",
 =======
 <<<<<<< Updated upstream
             "level": "0",
@@ -296,7 +296,7 @@ class TestRenderCard:
             "name": "Many Prereqs",
             "type": "ultimate",
 <<<<<<< HEAD
-            "level": "4⭐",
+            "level": "4★",
 =======
 <<<<<<< Updated upstream
             "level": "IV",
@@ -322,7 +322,7 @@ class TestRenderCard:
             "name": "Many Derivs",
             "type": "basic",
 <<<<<<< HEAD
-            "level": "0⭐",
+            "level": "0★",
 =======
 <<<<<<< Updated upstream
             "level": "0",
@@ -345,7 +345,7 @@ class TestRenderCard:
     def test_compact_card_shows_effective_arrow_when_demerited(self, extra_skill):
         compact = render_card_compact(extra_skill)
 <<<<<<< HEAD
-        assert "2⭐→1⭐" in compact
+        assert "2★→1★" in compact
 =======
 <<<<<<< Updated upstream
         assert "Lv.II→I" in compact
@@ -383,7 +383,7 @@ class TestRenderCardCompact:
     def test_contains_level(self, basic_skill):
         result = render_card_compact(basic_skill)
 <<<<<<< HEAD
-        assert "(0⭐)" in result
+        assert "(0★)" in result
 =======
 <<<<<<< Updated upstream
         assert "(Lv.0)" in result
@@ -402,7 +402,7 @@ class TestRenderCardCompact:
             "name": "X",
             "type": "basic",
 <<<<<<< HEAD
-            "level": "0⭐",
+            "level": "0★",
 =======
 <<<<<<< Updated upstream
             "level": "0",
@@ -449,7 +449,7 @@ class TestRenderPromotionPrompt:
         prompt = render_promotion_prompt(
             {"id": "plan-and-execute", "name": "Different Registry Name", "type": "extra", "prerequisites": ["a", "b"]},
 <<<<<<< HEAD
-            "4⭐",
+            "4★",
 =======
 <<<<<<< Updated upstream
             "IV",
@@ -463,8 +463,8 @@ class TestRenderPromotionPrompt:
 
     def test_shows_level_and_rank_name(self):
 <<<<<<< HEAD
-        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3⭐")
-        assert "3⭐" in prompt
+        prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "3★")
+        assert "3★" in prompt
 =======
 <<<<<<< Updated upstream
         prompt = render_promotion_prompt({"id": "research-agent", "type": "extra", "prerequisites": ["x"]}, "III")
@@ -480,7 +480,7 @@ class TestRenderPromotionPrompt:
         prompt = render_promotion_prompt(
             {"id": "research", "type": "extra", "prerequisites": ["web-search", "summarize"]},
 <<<<<<< HEAD
-            "3⭐",
+            "3★",
 =======
 <<<<<<< Updated upstream
             "III",
@@ -509,7 +509,7 @@ class TestLoadAndRender:
                     "name": "Web Scrape",
                     "type": "basic",
 <<<<<<< HEAD
-                    "level": "0⭐",
+                    "level": "0★",
 =======
 <<<<<<< Updated upstream
                     "level": "0",
@@ -558,7 +558,7 @@ class TestLoadAndRender:
                     "name": "Classify",
                     "type": "basic",
 <<<<<<< HEAD
-                    "level": "0⭐",
+                    "level": "0★",
 =======
 <<<<<<< Updated upstream
                     "level": "0",

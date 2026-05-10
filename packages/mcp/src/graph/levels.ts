@@ -1,7 +1,7 @@
 import type { DemeritId, Skill } from "./types.js";
 
 <<<<<<< HEAD
-const LEVEL_ORDER = ["0⭐", "1⭐", "2⭐", "3⭐", "4⭐", "5⭐", "6⭐"] as const;
+const LEVEL_ORDER = ["0★", "1★", "2★", "3★", "4★", "5★", "6★"] as const;
 =======
 <<<<<<< Updated upstream
 const LEVEL_ORDER = ["0", "I", "II", "III", "IV", "V", "VI"] as const;
@@ -15,8 +15,8 @@ const DEMERIT_ORDER: readonly DemeritId[] = [
   "heavyweight-dependency",
 ];
 <<<<<<< HEAD
-const DEMERIT_ELIGIBLE_LEVELS = new Set(["2⭐", "3⭐", "4⭐", "5⭐", "6⭐"]);
-const MIN_EFFECTIVE_LEVEL = "1⭐";
+const DEMERIT_ELIGIBLE_LEVELS = new Set(["2★", "3★", "4★", "5★", "6★"]);
+const MIN_EFFECTIVE_LEVEL = "1★";
 =======
 <<<<<<< Updated upstream
 const DEMERIT_ELIGIBLE_LEVELS = new Set(["II", "III", "IV", "V", "VI"]);

@@ -13,7 +13,7 @@ This is a filled-out example of a `reclassification.md` PR for reference.
 
 ### Justification
 <<<<<<< HEAD
-Since the initial 3⭐ classification, multiple independent demonstrations have shown `webScrape` handling dynamic JavaScript-rendered pages, pagination, and anti-bot measures — failure modes that were previously undocumented. The skill now meets the 4⭐ bar: "Handles edge cases and failures."
+Since the initial 3★ classification, multiple independent demonstrations have shown `webScrape` handling dynamic JavaScript-rendered pages, pagination, and anti-bot measures — failure modes that were previously undocumented. The skill now meets the 4★ bar: "Handles edge cases and failures."
 =======
 <<<<<<< Updated upstream
 Since the initial Level III classification, multiple independent demonstrations have shown `webScrape` handling dynamic JavaScript-rendered pages, pagination, and anti-bot measures — failure modes that were previously undocumented. The skill now meets the Level IV bar: "Handles edge cases and failures."
@@ -33,8 +33,8 @@ Since the initial 3★ classification, multiple independent demonstrations have 
 **Contributor:**
 - [x] Justification references concrete evidence, not opinion.
 <<<<<<< HEAD
-- [x] New evidence meets the threshold for 4⭐ (Evidence Tier B+).
-- [x] Explanation of why previous 3⭐ classification is now insufficient.
+- [x] New evidence meets the threshold for 4★ (Evidence Tier B+).
+- [x] Explanation of why previous 3★ classification is now insufficient.
 =======
 <<<<<<< Updated upstream
 - [x] New evidence meets the threshold for Level IV (Evidence Tier B+).

@@ -3,7 +3,7 @@ export interface Skill {
   name: string;
   type: "basic" | "extra" | "ultimate";
 <<<<<<< HEAD
-  level: "0⭐" | "1⭐" | "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
+  level: "0★" | "1★" | "2★" | "3★" | "4★" | "5★" | "6★";
 =======
 <<<<<<< Updated upstream
   level: "0" | "I" | "II" | "III" | "IV" | "V" | "VI";
@@ -113,7 +113,7 @@ export interface NamedSkill {
   genericSkillRef: string;
   status: "awakened" | "named";
 <<<<<<< HEAD
-  level: "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
+  level: "2★" | "3★" | "4★" | "5★" | "6★";
 =======
 <<<<<<< Updated upstream
   level: "II" | "III" | "IV" | "V" | "VI";

@@ -29,7 +29,7 @@ def mini_graph():
                 "name": "Skill A",
                 "type": "basic",
 <<<<<<< HEAD
-                "level": "0⭐",
+                "level": "0★",
 =======
 <<<<<<< Updated upstream
                 "level": "0",
@@ -45,7 +45,7 @@ def mini_graph():
                 "name": "Skill B",
                 "type": "basic",
 <<<<<<< HEAD
-                "level": "0⭐",
+                "level": "0★",
 =======
 <<<<<<< Updated upstream
                 "level": "0",
@@ -61,7 +61,7 @@ def mini_graph():
                 "name": "Skill C",
                 "type": "basic",
 <<<<<<< HEAD
-                "level": "0⭐",
+                "level": "0★",
 =======
 <<<<<<< Updated upstream
                 "level": "0",
@@ -77,7 +77,7 @@ def mini_graph():
                 "name": "Skill D",
                 "type": "extra",
 <<<<<<< HEAD
-                "level": "1⭐",
+                "level": "1★",
 =======
 <<<<<<< Updated upstream
                 "level": "I",
@@ -93,7 +93,7 @@ def mini_graph():
                 "name": "Skill E",
                 "type": "extra",
 <<<<<<< HEAD
-                "level": "1⭐",
+                "level": "1★",
 =======
 <<<<<<< Updated upstream
                 "level": "I",
@@ -244,8 +244,8 @@ class TestComputePaths:
         graph = {
             "skills": [
 <<<<<<< HEAD
-                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
-                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0⭐", "prerequisites": [], "derivatives": []},
+                {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
+                {"id": "skill-b", "name": "Skill B", "type": "basic", "level": "0★", "prerequisites": [], "derivatives": []},
 =======
 <<<<<<< Updated upstream
                 {"id": "skill-a", "name": "Skill A", "type": "basic", "level": "0", "prerequisites": [], "derivatives": []},
@@ -260,7 +260,7 @@ class TestComputePaths:
                     "name": "Skill Fusion",
                     "type": "extra",
 <<<<<<< HEAD
-                    "level": "3⭐",
+                    "level": "3★",
 =======
 <<<<<<< Updated upstream
                     "level": "III",
@@ -277,19 +277,19 @@ class TestComputePaths:
         result = compute_paths(graph, ["skill-a"], [])
         one_away = result["oneAway"][0]
 <<<<<<< HEAD
-        assert one_away["levelFloor"] == "2⭐"
-        assert one_away["baseLevelFloor"] == "3⭐"
-        assert one_away["effectiveLevelFloor"] == "2⭐"
-        assert one_away["levelMeta"]["baseLevel"] == "3⭐"
-        assert one_away["levelMeta"]["effectiveLevel"] == "2⭐"
+        assert one_away["levelFloor"] == "2★"
+        assert one_away["baseLevelFloor"] == "3★"
+        assert one_away["effectiveLevelFloor"] == "2★"
+        assert one_away["levelMeta"]["baseLevel"] == "3★"
+        assert one_away["levelMeta"]["effectiveLevel"] == "2★"
 
         result = compute_paths(graph, ["skill-a", "skill-b"], [])
         entry = result["nearUnlocks"][0]
-        assert entry["levelFloor"] == "2⭐"
-        assert entry["baseLevelFloor"] == "3⭐"
-        assert entry["effectiveLevelFloor"] == "2⭐"
-        assert entry["levelMeta"]["baseLevel"] == "3⭐"
-        assert entry["levelMeta"]["effectiveLevel"] == "2⭐"
+        assert entry["levelFloor"] == "2★"
+        assert entry["baseLevelFloor"] == "3★"
+        assert entry["effectiveLevelFloor"] == "2★"
+        assert entry["levelMeta"]["baseLevel"] == "3★"
+        assert entry["levelMeta"]["effectiveLevel"] == "2★"
 =======
 <<<<<<< Updated upstream
         assert one_away["levelFloor"] == "II"
@@ -425,8 +425,8 @@ class TestRegeneratePaths:
             "userId": "alice",
             "unlockedSkills": [
 <<<<<<< HEAD
-                {"skillId": "web-scrape", "level": "0⭐"},
-                {"skillId": "parse-json", "level": "0⭐"},
+                {"skillId": "web-scrape", "level": "0★"},
+                {"skillId": "parse-json", "level": "0★"},
 =======
 <<<<<<< Updated upstream
                 {"skillId": "web-scrape", "level": "0"},

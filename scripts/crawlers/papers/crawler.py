@@ -30,8 +30,8 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
 
     Targets:
 <<<<<<< HEAD
-      - Skills at 2⭐+ with only Class C evidence (need B/A)
-      - Skills at 0⭐⭐/1⭐ with no evidence at all
+      - Skills at 2★+ with only Class C evidence (need B/A)
+      - Skills at 0★★/1★ with no evidence at all
 =======
 <<<<<<< Updated upstream
       - Skills at level II+ with only Class C evidence (need B/A)
@@ -61,7 +61,7 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
         evidence = skill.get("evidence", [])
         evidence_classes = {e.get("class") for e in evidence}
 <<<<<<< HEAD
-        level = skill.get("level", "0⭐")
+        level = skill.get("level", "0★")
 =======
 <<<<<<< Updated upstream
         level = skill.get("level", "0")
@@ -79,7 +79,7 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
 
         # Only Class C evidence but at a level that needs B/A
 <<<<<<< HEAD
-        elif evidence_classes == {"C"} and level in ("2⭐", "3⭐", "4⭐", "5⭐", "6⭐"):
+        elif evidence_classes == {"C"} and level in ("2★", "3★", "4★", "5★", "6★"):
 =======
 <<<<<<< Updated upstream
         elif evidence_classes == {"C"} and level in ("II", "III", "IV", "V", "VI"):
@@ -95,7 +95,7 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
 
         # Has no Class A evidence (paper search could add one)
 <<<<<<< HEAD
-        elif "A" not in evidence_classes and level in ("3⭐", "4⭐", "5⭐", "6⭐"):
+        elif "A" not in evidence_classes and level in ("3★", "4★", "5★", "6★"):
 =======
 <<<<<<< Updated upstream
         elif "A" not in evidence_classes and level in ("III", "IV", "V", "VI"):

@@ -23,7 +23,7 @@ const TEST_SKILL_A: NamedSkill = {
   genericSkillRef: "autonomous-research-agent",
   status: "named",
 <<<<<<< HEAD
-  level: "2⭐",
+  level: "2★",
 =======
 <<<<<<< Updated upstream
   level: "II",
@@ -45,7 +45,7 @@ const TEST_SKILL_B: NamedSkill = {
   genericSkillRef: "autonomous-debug",
   status: "named",
 <<<<<<< HEAD
-  level: "3⭐",
+  level: "3★",
 =======
 <<<<<<< Updated upstream
   level: "III",
@@ -161,7 +161,7 @@ describe("namedLoader", () => {
       expect(skill.contributor).toBe("karpathy");
       expect(skill.origin).toBe(true);
 <<<<<<< HEAD
-      expect(skill.level).toBe("2⭐");
+      expect(skill.level).toBe("2★");
 =======
 <<<<<<< Updated upstream
       expect(skill.level).toBe("II");
@@ -265,7 +265,7 @@ describe("namedLoader", () => {
               genericSkillRef: "web-search",
               status: "named",
 <<<<<<< HEAD
-              level: "2⭐",
+              level: "2★",
 =======
 <<<<<<< Updated upstream
               level: "II",

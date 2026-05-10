@@ -52,7 +52,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
   - 25–30 atomic skills (primitives: tokenize, classify, retrieve, rank, parseJson, parseHtml, executeBash, generateText, summarize, citeSources, extractEntities, routeIntent, evaluateOutput, embedText, chunkDocument, planDecompose, writeReport, audienceModel, toolSelect, errorInterpretation, codeGeneration, webSearch, scoreRelevance, formatOutput, diffContent).
   - 10–15 composite skills with full prerequisite chains traceable to atomics.
 <<<<<<< HEAD
-  - 2–3 legendary stubs (clearly `provisional`, 1⭐ only).
+  - 2–3 legendary stubs (clearly `provisional`, 1★ only).
 =======
 <<<<<<< Updated upstream
   - 2–3 legendary stubs (clearly `provisional`, Level I only).
@@ -83,7 +83,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
   - DAG cycle detection (DFS from all root nodes).
   - Reference integrity (every parent ID resolves to an existing node).
 <<<<<<< HEAD
-  - Evidence threshold by level (2⭐ needs Evidence Tier C+, 3⭐ needs Evidence Tier B+, etc.).
+  - Evidence threshold by level (2★ needs Evidence Tier C+, 3★ needs Evidence Tier B+, etc.).
 =======
 <<<<<<< Updated upstream
   - Evidence threshold by level (Level II needs Evidence Tier C+, Level III needs Evidence Tier B+, etc.).
@@ -104,7 +104,7 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 ### Exit Criteria
 - [ ] CI passes on the seed graph with zero warnings.
 <<<<<<< HEAD
-- [ ] CI correctly catches: a cycle, a missing parent reference, a 3⭐ skill with no Evidence Tier B source.
+- [ ] CI correctly catches: a cycle, a missing parent reference, a 3★ skill with no Evidence Tier B source.
 =======
 <<<<<<< Updated upstream
 - [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Evidence Tier B source.
@@ -326,7 +326,7 @@ documentAnalyst   = parseJson + extractEntities + summarize + formatOutput
 ```
 
 <<<<<<< HEAD
-### Legendary Stubs (stubs only at launch, 1⭐, provisional)
+### Legendary Stubs (stubs only at launch, 1★, provisional)
 =======
 <<<<<<< Updated upstream
 ### Legendary Stubs (stubs only at launch, Level I, provisional)
@@ -364,7 +364,7 @@ autonomousResearchAgent
 ### Data Quality
 - % of skills with all required fields populated.
 <<<<<<< HEAD
-- % of 3⭐+ skills with at least one Evidence Tier B source.
+- % of 3★+ skills with at least one Evidence Tier B source.
 =======
 <<<<<<< Updated upstream
 - % of Level III+ skills with at least one Evidence Tier B source.

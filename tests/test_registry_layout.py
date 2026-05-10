@@ -57,8 +57,8 @@ def test_promotion_candidates_round_trip(tmp_path):
         {
             "skillId": "web-search",
 <<<<<<< HEAD
-            "currentLevel": "2⭐",
-            "suggestedLevel": "3⭐",
+            "currentLevel": "2★",
+            "suggestedLevel": "3★",
 =======
 <<<<<<< Updated upstream
             "currentLevel": "II",
@@ -105,8 +105,8 @@ def test_promote_from_candidates_uses_scan_suggested_level(tmp_path):
             "updatedAt": "2026-05-01",
             "unlockedSkills": [
 <<<<<<< HEAD
-                {"skillId": "web-search", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
-                {"skillId": "parse-html", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "web-search", "level": "2★", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "parse-html", "level": "2★", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
 =======
 <<<<<<< Updated upstream
                 {"skillId": "web-search", "level": "II", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
@@ -124,11 +124,11 @@ def test_promote_from_candidates_uses_scan_suggested_level(tmp_path):
         str(tmp_path),
         "alice",
 <<<<<<< HEAD
-        [{"skillId": "web-search", "currentLevel": "2⭐", "suggestedLevel": "3⭐", "evidence": []}],
+        [{"skillId": "web-search", "currentLevel": "2★", "suggestedLevel": "3★", "evidence": []}],
     )
 
     result = promote_from_candidates("alice", "web-search", str(tmp_path))
-    assert result["newLevel"] == "3⭐"
+    assert result["newLevel"] == "3★"
 =======
 <<<<<<< Updated upstream
         [{"skillId": "web-search", "currentLevel": "II", "suggestedLevel": "III", "evidence": []}],

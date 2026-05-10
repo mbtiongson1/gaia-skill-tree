@@ -81,13 +81,13 @@ TIER_COLORS = {
 }
 RANK_COLORS = {
 <<<<<<< HEAD
-    "0⭐":  (148, 163, 184),   # Slate
-    "1⭐":  (56, 189, 248),    # Sky
-    "2⭐": (99, 202, 183),    # Teal
-    "3⭐": (167, 139, 250),  # Violet
-    "4⭐": (232, 121, 249),   # Fuchsia
-    "5⭐":  (251, 191, 36),    # Amber
-    "6⭐": (251, 191, 36),    # Amber bright
+    "0★":  (148, 163, 184),   # Slate
+    "1★":  (56, 189, 248),    # Sky
+    "2★": (99, 202, 183),    # Teal
+    "3★": (167, 139, 250),  # Violet
+    "4★": (232, 121, 249),   # Fuchsia
+    "5★":  (251, 191, 36),    # Amber
+    "6★": (251, 191, 36),    # Amber bright
 =======
 <<<<<<< Updated upstream
     "0":  (148, 163, 184),   # Slate
@@ -150,13 +150,13 @@ RARITY_LABELS = {
 # Level display
 LEVEL_LABELS = {
 <<<<<<< HEAD
-    "0⭐": "0⭐ Basic",
-    "1⭐": "1⭐ Awakened",
-    "2⭐": "2⭐ Named",
-    "3⭐": "3⭐ Evolved",
-    "4⭐": "4⭐ Hardened",
-    "5⭐": "5⭐ Transcendent",
-    "6⭐": "6⭐ Transcendent ★",
+    "0★": "0★ Basic",
+    "1★": "1★ Awakened",
+    "2★": "2★ Named",
+    "3★": "3★ Evolved",
+    "4★": "4★ Hardened",
+    "5★": "5★ Transcendent",
+    "6★": "6★ Transcendent ★",
 =======
 <<<<<<< Updated upstream
     "0": "Lv.0 Basic",
@@ -301,7 +301,7 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     rarity = skill.get("rarity", "common")
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
 <<<<<<< HEAD
-    level = skill.get("level", "0⭐")
+    level = skill.get("level", "0★")
     level_label = LEVEL_LABELS.get(level, f"{level}")
 =======
 <<<<<<< Updated upstream
@@ -402,7 +402,7 @@ def render_card_compact(skill: dict) -> str:
     skill_id = skill.get("id", skill.get("name", "unknown"))
     name = f"/{skill_id}"
 <<<<<<< HEAD
-    level = skill.get("level", "0⭐")
+    level = skill.get("level", "0★")
 =======
 <<<<<<< Updated upstream
     level = skill.get("level", "0")
@@ -498,11 +498,11 @@ def render_appraise_card(
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
 <<<<<<< HEAD
-    rc = RANK_COLORS.get(skill_data.get("level", "0⭐"), (148, 163, 184))
+    rc = RANK_COLORS.get(skill_data.get("level", "0★"), (148, 163, 184))
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill_data.get("id", "?")
     name = f"/{skill_id}"
-    level = skill_data.get("level", "0⭐")
+    level = skill_data.get("level", "0★")
 =======
 <<<<<<< Updated upstream
     rc = RANK_COLORS.get(skill_data.get("level", "0"), (148, 163, 184))
@@ -623,7 +623,7 @@ def render_unlock_card(skill_data: dict, new_paths: list) -> str:
     name = f"/{skill_id}"
     glyph = TIER_GLYPHS.get(tier, "○")
 <<<<<<< HEAD
-    level = skill_data.get("level", "0⭐")
+    level = skill_data.get("level", "0★")
 =======
 <<<<<<< Updated upstream
     level = skill_data.get("level", "0")

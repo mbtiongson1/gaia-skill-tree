@@ -46,13 +46,13 @@ TIER_COLORS = {
 
 RANK_COLORS = {
 <<<<<<< HEAD
-    "0⭐":   (148, 163, 184),   # Slate
-    "1⭐":   (56, 189, 248),    # Sky
-    "2⭐":  (99, 202, 183),    # Teal
-    "3⭐": (167, 139, 250),   # Violet
-    "4⭐":  (232, 121, 249),   # Fuchsia
-    "5⭐":   (251, 191, 36),    # Amber
-    "6⭐":  (251, 191, 36),    # Amber bright
+    "0★":   (148, 163, 184),   # Slate
+    "1★":   (56, 189, 248),    # Sky
+    "2★":  (99, 202, 183),    # Teal
+    "3★": (167, 139, 250),   # Violet
+    "4★":  (232, 121, 249),   # Fuchsia
+    "5★":   (251, 191, 36),    # Amber
+    "6★":  (251, 191, 36),    # Amber bright
 =======
 <<<<<<< Updated upstream
     "0":   (148, 163, 184),   # Slate
@@ -93,7 +93,7 @@ def format_skill_plain(skill_id: str, *, named_contributor: str | None = None,
 
 
 <<<<<<< HEAD
-def format_skill_colored(skill_id: str, level: str = "0⭐", *,
+def format_skill_colored(skill_id: str, level: str = "0★", *,
 =======
 <<<<<<< Updated upstream
 def format_skill_colored(skill_id: str, level: str = "0", *,
@@ -111,7 +111,7 @@ def format_skill_colored(skill_id: str, level: str = "0★", *,
     """
     r = _reset()
 <<<<<<< HEAD
-    rank_color = RANK_COLORS.get(level, RANK_COLORS["0⭐"])
+    rank_color = RANK_COLORS.get(level, RANK_COLORS["0★"])
 =======
 <<<<<<< Updated upstream
     rank_color = RANK_COLORS.get(level, RANK_COLORS["0"])
@@ -148,7 +148,7 @@ def format_type_colored(skill_type: str) -> str:
 def format_level_colored(level: str) -> str:
     """Return level badge colored by rank."""
 <<<<<<< HEAD
-    rank_color = RANK_COLORS.get(level, RANK_COLORS["0⭐"])
+    rank_color = RANK_COLORS.get(level, RANK_COLORS["0★"])
 =======
 <<<<<<< Updated upstream
     rank_color = RANK_COLORS.get(level, RANK_COLORS["0"])

@@ -9,7 +9,7 @@
     LEVEL_META_SE = {};
     Object.keys(lc).forEach(function(k) {
 <<<<<<< HEAD
-      if (k === '0⭐' || k === '1⭐') return; // explorer only shows II+
+      if (k === '0★' || k === '1★') return; // explorer only shows II+
 =======
 <<<<<<< Updated upstream
       if (k === '0' || k === 'I') return; // explorer only shows II+
@@ -78,7 +78,7 @@
   // ── RENDER HERO ──────────────────────────────────────────────
   function renderHero(ns, generic) {
 <<<<<<< HEAD
-    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2⭐'];
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2★'];
 =======
 <<<<<<< Updated upstream
     var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
@@ -508,11 +508,11 @@
       if (!LEVEL_META_SE) {
         LEVEL_META_SE = {
 <<<<<<< HEAD
-          '2⭐':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
-          '3⭐': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
-          '4⭐':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
-          '5⭐':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
-          '6⭐': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+          '2★':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
+          '3★': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          '4★':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          '5★':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
+          '6★': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
 =======
 <<<<<<< Updated upstream
           'II':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
@@ -794,7 +794,7 @@
     if (e.target.closest('button')) return;
     var rect = treeDialog.getBoundingClientRect();
 <<<<<<< HEAD
-    treeDialog.style.margin = '0⭐';
+    treeDialog.style.margin = '0★';
 =======
 <<<<<<< Updated upstream
     treeDialog.style.margin = '0';

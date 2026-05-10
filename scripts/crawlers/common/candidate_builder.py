@@ -20,7 +20,7 @@ def build_candidate(
         "name": name,
         "type": skill_type,
 <<<<<<< HEAD
-        "level": "1⭐",
+        "level": "1★",
 =======
 <<<<<<< Updated upstream
         "level": "I",

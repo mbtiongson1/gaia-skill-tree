@@ -283,7 +283,7 @@ def scan_command(args):
                 sk = smap.get(sid, {})
                 glyph = TYPE_SYMBOLS.get(sk.get('type', 'basic'), '○')
 <<<<<<< HEAD
-                colored_name = format_skill_colored(sid, sk.get('level', '0⭐'))
+                colored_name = format_skill_colored(sid, sk.get('level', '0★'))
 =======
 <<<<<<< Updated upstream
                 colored_name = format_skill_colored(sid, sk.get('level', '0'))
@@ -345,7 +345,7 @@ def scan_command(args):
                 skill = skill_map.get(promo["skillId"])
                 if skill:
 <<<<<<< HEAD
-                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2⭐")))
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★")))
 =======
 <<<<<<< Updated upstream
                     print(render_promotion_prompt(skill, promo.get("suggestedLevel", "II")))
@@ -950,7 +950,7 @@ def _pending_skills(registry_path: str, username: str | None = None) -> list[dic
                     "name": skill.get("name", skill.get("id")),
                     "description": skill.get("description", ""),
 <<<<<<< HEAD
-                    "level": skill.get("level", "1⭐"),
+                    "level": skill.get("level", "1★"),
 =======
 <<<<<<< Updated upstream
                     "level": skill.get("level", "I"),

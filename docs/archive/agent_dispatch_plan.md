@@ -52,7 +52,7 @@ graph TD
   - `tests/fixtures/cycle.json` — Graph with an intentional cycle (`A→B→C→A`)
   - `tests/fixtures/missing_ref.json` — Composite skill referencing a nonexistent parent
 <<<<<<< HEAD
-  - `tests/fixtures/bad_evidence.json` — 3⭐ skill with only Evidence Tier C
+  - `tests/fixtures/bad_evidence.json` — 3★ skill with only Evidence Tier C
 =======
 <<<<<<< Updated upstream
   - `tests/fixtures/bad_evidence.json` — Level III skill with only Evidence Tier C

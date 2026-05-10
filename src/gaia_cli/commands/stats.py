@@ -19,16 +19,16 @@ TYPE_LABELS = {
 
 LEVEL_LABELS = {
 <<<<<<< HEAD
-    "0⭐": "Basic",
-    "1⭐": "Awakened",
-    "2⭐": "Named",
-    "3⭐": "Evolved",
-    "4⭐": "Hardened",
-    "5⭐": "Transcendent",
-    "6⭐": "Transcendent★",
+    "0★": "Basic",
+    "1★": "Awakened",
+    "2★": "Named",
+    "3★": "Evolved",
+    "4★": "Hardened",
+    "5★": "Transcendent",
+    "6★": "Transcendent★",
 }
 
-LEVEL_ORDER = ("0⭐", "1⭐", "2⭐", "3⭐", "4⭐", "5⭐", "6⭐")
+LEVEL_ORDER = ("0★", "1★", "2★", "3★", "4★", "5★", "6★")
 =======
 <<<<<<< Updated upstream
     "0": "Basic",
@@ -160,7 +160,7 @@ def collect_stats(registry_path: str | Path) -> dict:
         skill["id"]
         for skill in skills
 <<<<<<< HEAD
-        if skill.get("id") and skill.get("level") != "0⭐"
+        if skill.get("id") and skill.get("level") != "0★"
 =======
 <<<<<<< Updated upstream
         if skill.get("id") and skill.get("level") != "0"
@@ -234,10 +234,10 @@ def render_stats(stats: dict) -> str:
         count = stats["level_counts"].get(level, 0)
         suffix = ""
 <<<<<<< HEAD
-        if level == "2⭐" and stats.get("named_unclaimed", 0):
+        if level == "2★" and stats.get("named_unclaimed", 0):
             suffix = f"  ({stats['named_unclaimed']} slots unclaimed)"
         if use_color:
-            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0⭐"]))
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
 =======
 <<<<<<< Updated upstream
         if level == "II" and stats.get("named_unclaimed", 0):
@@ -264,7 +264,7 @@ def render_stats(stats: dict) -> str:
         count = stats.get("effective_level_counts", {}).get(level, 0)
         if use_color:
 <<<<<<< HEAD
-            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0⭐"]))
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
 =======
 <<<<<<< Updated upstream
             color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0"]))

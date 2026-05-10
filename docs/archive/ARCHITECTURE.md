@@ -66,7 +66,7 @@ Single-file SPA with three JS modules and embedded CSS:
 - Flowchart: SVG grid layout with bezier edges connecting prerequisites → target
 - GitHub timeline: Fetches commit history for the skill's canonical markdown file
 <<<<<<< HEAD
-- 6⭐ shimmer + 5⭐ pulse animations
+- 6★ shimmer + 5★ pulse animations
 =======
 <<<<<<< Updated upstream
 - Level VI shimmer + Level V pulse animations

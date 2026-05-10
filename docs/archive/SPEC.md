@@ -41,7 +41,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
 - FR-06: The registry SHALL enforce that all extra and ultimate skills reference at least two valid parent skill IDs.
 - FR-07: The registry SHALL enforce DAG integrity — no cycles are permitted at any depth.
 <<<<<<< HEAD
-- FR-08: Every non-Unawakened (0⭐) and non-Awakened (1⭐) skill SHALL reference at least one evidence source.
+- FR-08: Every non-Unawakened (0★) and non-Awakened (1★) skill SHALL reference at least one evidence source.
 =======
 <<<<<<< Updated upstream
 - FR-08: Every non-Unawakened (Level 0) and non-Awakened (Level I) skill SHALL reference at least one evidence source.
@@ -98,7 +98,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
   "name": "Web Scrape",
   "type": "extra",
 <<<<<<< HEAD
-  "level": "3⭐",
+  "level": "3★",
 =======
 <<<<<<< Updated upstream
   "level": "III",
@@ -136,7 +136,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
   "edgeType": "prerequisite",
   "condition": "structured output mode enabled",
 <<<<<<< HEAD
-  "levelFloor": "2⭐",
+  "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
   "levelFloor": "II",
@@ -157,7 +157,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
     {
       "skillId": "webScrape",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -175,7 +175,7 @@ AI agent capabilities are fragmented across papers, benchmarks, vendor docs, and
       "detectedSkills": ["codeGeneration", "executeBash"],
       "candidateResult": "autonomousDebug",
 <<<<<<< HEAD
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "III",
@@ -265,12 +265,12 @@ Rarity is computed from observed agent prevalence data — it is never declared 
 ### 8.2 Evidence Requirements by Level
 
 <<<<<<< HEAD
-- **0⭐ (Unawakened):** No evidence required.
-- **1⭐ (Awakened):** No evidence required.
-- **2⭐ (Named):** At least one Evidence Tier C source.
-- **3⭐ (Evolved):** At least one Evidence Tier B source.
-- **4⭐ (Hardened):** At least one Evidence Tier B or A source, with documented failure modes.
-- **5⭐ (Transcendent):** At least one Evidence Tier A source with composability or self-improvement evidence.
+- **0★ (Unawakened):** No evidence required.
+- **1★ (Awakened):** No evidence required.
+- **2★ (Named):** At least one Evidence Tier C source.
+- **3★ (Evolved):** At least one Evidence Tier B source.
+- **4★ (Hardened):** At least one Evidence Tier B or A source, with documented failure modes.
+- **5★ (Transcendent):** At least one Evidence Tier A source with composability or self-improvement evidence.
 =======
 <<<<<<< Updated upstream
 - **Level 0 (Unawakened):** No evidence required.

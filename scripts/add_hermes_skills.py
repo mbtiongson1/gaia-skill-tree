@@ -17,7 +17,7 @@ NEW_SKILLS = [
         "name": "Feed Monitoring",
         "type": "basic",
 <<<<<<< HEAD
-        "level": "4⭐",
+        "level": "4★",
 =======
 <<<<<<< Updated upstream
         "level": "IV",
@@ -50,7 +50,7 @@ NEW_SKILLS = [
         "name": "Wiki Search",
         "type": "extra",
 <<<<<<< HEAD
-        "level": "4⭐",
+        "level": "4★",
 =======
 <<<<<<< Updated upstream
         "level": "IV",
@@ -83,7 +83,7 @@ NEW_SKILLS = [
         "name": "Prediction Market Analysis",
         "type": "extra",
 <<<<<<< HEAD
-        "level": "4⭐",
+        "level": "4★",
 =======
 <<<<<<< Updated upstream
         "level": "IV",
@@ -116,7 +116,7 @@ NEW_SKILLS = [
         "name": "Humanize Prose",
         "type": "extra",
 <<<<<<< HEAD
-        "level": "4⭐",
+        "level": "4★",
 =======
 <<<<<<< Updated upstream
         "level": "IV",
@@ -149,7 +149,7 @@ NEW_SKILLS = [
         "name": "Architecture Diagram",
         "type": "extra",
 <<<<<<< HEAD
-        "level": "4⭐",
+        "level": "4★",
 =======
 <<<<<<< Updated upstream
         "level": "IV",
@@ -189,7 +189,7 @@ for skill in NEW_SKILLS:
                 "edgeType": "prerequisite",
                 "condition": skill["conditions"],
 <<<<<<< HEAD
-                "levelFloor": "2⭐",
+                "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
                 "levelFloor": "II",

@@ -114,7 +114,7 @@ async function proposeNovel(
     name: input.name!,
     type: input.type ?? "basic",
 <<<<<<< HEAD
-    level: "1⭐",
+    level: "1★",
 =======
 <<<<<<< Updated upstream
     level: "I",

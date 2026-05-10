@@ -22,7 +22,7 @@ origin: true
 genericSkillRef: autonomous-research-agent
 status: named
 <<<<<<< HEAD
-level: "2⭐"
+level: "2★"
 =======
 <<<<<<< Updated upstream
 level: II
@@ -43,7 +43,7 @@ Body text here.
         self.assertEqual(fm.get("contributor"), "karpathy")
         self.assertTrue(fm.get("origin"))
 <<<<<<< HEAD
-        self.assertEqual(fm.get("level"), "2⭐")
+        self.assertEqual(fm.get("level"), "2★")
 =======
 <<<<<<< Updated upstream
         self.assertEqual(fm.get("level"), "II")
@@ -70,7 +70,7 @@ origin: false
 genericSkillRef: web-search
 status: named
 <<<<<<< HEAD
-level: "2⭐"
+level: "2★"
 =======
 <<<<<<< Updated upstream
 level: II
@@ -99,8 +99,8 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
 
         named_skills = [
 <<<<<<< HEAD
-            ("registry/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2⭐", "description": "Alice's version."}),
-            ("registry/named/bob/skill.md",   {"id": "bob/skill",   "name": "Skill", "contributor": "bob",   "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2⭐", "description": "Bob's version."}),
+            ("registry/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2★", "description": "Alice's version."}),
+            ("registry/named/bob/skill.md",   {"id": "bob/skill",   "name": "Skill", "contributor": "bob",   "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2★", "description": "Bob's version."}),
 =======
 <<<<<<< Updated upstream
             ("registry/named/alice/skill.md", {"id": "alice/skill", "name": "Skill", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice's version."}),
@@ -121,9 +121,9 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
 
         named_skills = [
 <<<<<<< HEAD
-            ("registry/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2⭐", "description": "Alice version."}),
-            ("registry/named/bob/skill-b.md",   {"id": "bob/skill-b",   "name": "Skill B", "contributor": "bob",   "origin": False, "genericSkillRef": "web-search", "status": "named", "level": "2⭐", "description": "Bob version."}),
-            ("registry/named/carol/code.md",     {"id": "carol/code",    "name": "Carol Code", "contributor": "carol", "origin": True, "genericSkillRef": "code-generation", "status": "named", "level": "2⭐", "description": "Carol version."}),
+            ("registry/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "2★", "description": "Alice version."}),
+            ("registry/named/bob/skill-b.md",   {"id": "bob/skill-b",   "name": "Skill B", "contributor": "bob",   "origin": False, "genericSkillRef": "web-search", "status": "named", "level": "2★", "description": "Bob version."}),
+            ("registry/named/carol/code.md",     {"id": "carol/code",    "name": "Carol Code", "contributor": "carol", "origin": True, "genericSkillRef": "code-generation", "status": "named", "level": "2★", "description": "Carol version."}),
 =======
 <<<<<<< Updated upstream
             ("registry/named/alice/skill-a.md", {"id": "alice/skill-a", "name": "Skill A", "contributor": "alice", "origin": True, "genericSkillRef": "web-search", "status": "named", "level": "II", "description": "Alice version."}),

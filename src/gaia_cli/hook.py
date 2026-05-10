@@ -118,7 +118,7 @@ def hook_entry(event: str = "file_edit", registry_path: str | None = None) -> No
                 skill = skill_map.get(promo["skillId"])
                 if skill:
 <<<<<<< HEAD
-                    print(render_promotion_prompt(skill, promo.get("nextLevel", "2⭐")))
+                    print(render_promotion_prompt(skill, promo.get("nextLevel", "2★")))
 =======
 <<<<<<< Updated upstream
                     print(render_promotion_prompt(skill, promo.get("nextLevel", "II")))

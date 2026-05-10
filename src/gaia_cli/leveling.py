@@ -41,7 +41,7 @@ def demerit_penalty(skill: dict) -> int:
 def effective_level(skill: dict) -> str:
     """Return the demerit-adjusted effective level for a skill."""
 <<<<<<< HEAD
-    current = skill.get("level", "1⭐")
+    current = skill.get("level", "1★")
 =======
 <<<<<<< Updated upstream
     current = skill.get("level", "I")
@@ -61,7 +61,7 @@ def level_summary(skill: dict) -> dict:
     """Return base/effective level summary plus demerits."""
     return {
 <<<<<<< HEAD
-        "baseLevel": skill.get("level", "1⭐"),
+        "baseLevel": skill.get("level", "1★"),
 =======
 <<<<<<< Updated upstream
         "baseLevel": skill.get("level", "I"),

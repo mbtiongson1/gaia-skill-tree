@@ -32,7 +32,7 @@ MINI_GRAPH = {
             "name": "Python Basics",
             "type": "basic",
 <<<<<<< HEAD
-            "level": "1⭐",
+            "level": "1★",
 =======
 <<<<<<< Updated upstream
             "level": "I",
@@ -49,7 +49,7 @@ MINI_GRAPH = {
             "name": "Web Frameworks",
             "type": "extra",
 <<<<<<< HEAD
-            "level": "2⭐",
+            "level": "2★",
 =======
 <<<<<<< Updated upstream
             "level": "II",
@@ -66,7 +66,7 @@ MINI_GRAPH = {
             "name": "Testing",
             "type": "basic",
 <<<<<<< HEAD
-            "level": "1⭐",
+            "level": "1★",
 =======
 <<<<<<< Updated upstream
             "level": "I",
@@ -86,8 +86,8 @@ MINI_TREE = {
     "updatedAt": "2024-01-01T00:00:00Z",
     "unlockedSkills": [
 <<<<<<< HEAD
-        {"skillId": "python-basics", "level": "3⭐"},
-        {"skillId": "testing", "level": "1⭐"},
+        {"skillId": "python-basics", "level": "3★"},
+        {"skillId": "testing", "level": "1★"},
 =======
 <<<<<<< Updated upstream
         {"skillId": "python-basics", "level": "III"},
@@ -334,7 +334,7 @@ class TestAllSkills:
         assert novel_entry["local"] is True
         assert novel_entry["type"] == "basic"
 <<<<<<< HEAD
-        assert novel_entry["level"] == "0⭐"
+        assert novel_entry["level"] == "0★"
 =======
 <<<<<<< Updated upstream
         assert novel_entry["level"] == "0"
@@ -366,7 +366,7 @@ class TestSkillLevelAndType:
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
 <<<<<<< HEAD
-        assert ctx.skill_level("python-basics") == "3⭐"
+        assert ctx.skill_level("python-basics") == "3★"
 =======
 <<<<<<< Updated upstream
         assert ctx.skill_level("python-basics") == "III"
@@ -380,18 +380,18 @@ class TestSkillLevelAndType:
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
 <<<<<<< HEAD
-        assert ctx.skill_level("web-frameworks") == "2⭐"
+        assert ctx.skill_level("web-frameworks") == "2★"
 =======
 <<<<<<< Updated upstream
         assert ctx.skill_level("web-frameworks") == "II"
 >>>>>>> schema/star-tiers-split
 
     def test_skill_level_unknown(self, mock_registry, monkeypatch):
-        """Returns '0⭐' for unknown skills."""
+        """Returns '0★' for unknown skills."""
         monkeypatch.chdir(mock_registry)
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
 <<<<<<< HEAD
-        assert ctx.skill_level("nonexistent") == "0⭐"
+        assert ctx.skill_level("nonexistent") == "0★"
 =======
         assert ctx.skill_level("nonexistent") == "0"
 =======

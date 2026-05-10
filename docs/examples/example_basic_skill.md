@@ -23,7 +23,7 @@ This is a filled-out example of a `new_basic_skill.md` PR for reference.
 - [x] Skill ID uses `camelCase` with no vendor references.
 - [x] Description is precise, falsifiable, and non-overlapping with existing skills.
 <<<<<<< HEAD
-- [x] Evidence meets the minimum threshold for the claimed level (2⭐ = Evidence Tier C+).
+- [x] Evidence meets the minimum threshold for the claimed level (2★ = Evidence Tier C+).
 =======
 <<<<<<< Updated upstream
 - [x] Evidence meets the minimum threshold for the claimed level (Level II = Evidence Tier C+).
@@ -46,7 +46,7 @@ Added to `skills` array:
   "name": "Parse CSV",
   "type": "basic",
 <<<<<<< HEAD
-  "level": "2⭐",
+  "level": "2★",
 =======
 <<<<<<< Updated upstream
   "level": "II",

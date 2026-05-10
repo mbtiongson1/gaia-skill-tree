@@ -10,13 +10,13 @@
     },
     "levelLabels": {
 <<<<<<< HEAD
-      "0⭐": "Basic",
-      "1⭐": "Awakened",
-      "2⭐": "Named",
-      "3⭐": "Evolved",
-      "4⭐": "Hardened",
-      "5⭐": "Transcendent",
-      "6⭐": "Transcendent \u2605"
+      "0★": "Basic",
+      "1★": "Awakened",
+      "2★": "Named",
+      "3★": "Evolved",
+      "4★": "Hardened",
+      "5★": "Transcendent",
+      "6★": "Transcendent \u2605"
 =======
 <<<<<<< Updated upstream
       "0": "Basic",
@@ -42,7 +42,7 @@
     },
     "levelColors": {
 <<<<<<< HEAD
-      "0⭐": {
+      "0★": {
 =======
 <<<<<<< Updated upstream
       "0": {
@@ -55,7 +55,7 @@
         "border": "rgba(148,163,184,.4)"
       },
 <<<<<<< HEAD
-      "1⭐": {
+      "1★": {
 =======
 <<<<<<< Updated upstream
       "I": {
@@ -68,7 +68,7 @@
         "border": "rgba(56,189,248,.4)"
       },
 <<<<<<< HEAD
-      "2⭐": {
+      "2★": {
 =======
 <<<<<<< Updated upstream
       "II": {
@@ -81,7 +81,7 @@
         "border": "rgba(99,202,183,.4)"
       },
 <<<<<<< HEAD
-      "3⭐": {
+      "3★": {
 =======
 <<<<<<< Updated upstream
       "III": {
@@ -94,7 +94,7 @@
         "border": "rgba(167,139,250,.4)"
       },
 <<<<<<< HEAD
-      "4⭐": {
+      "4★": {
 =======
 <<<<<<< Updated upstream
       "IV": {
@@ -107,7 +107,7 @@
         "border": "rgba(232,121,249,.4)"
       },
 <<<<<<< HEAD
-      "5⭐": {
+      "5★": {
 =======
 <<<<<<< Updated upstream
       "V": {
@@ -120,7 +120,7 @@
         "border": "rgba(251,191,36,.4)"
       },
 <<<<<<< HEAD
-      "6⭐": {
+      "6★": {
 =======
 <<<<<<< Updated upstream
       "VI": {
@@ -164,7 +164,7 @@
       "name": "Tokenize",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -199,7 +199,7 @@
       "name": "Classify",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -235,7 +235,7 @@
       "name": "Retrieve",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -273,7 +273,7 @@
       "name": "Rank",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -308,7 +308,7 @@
       "name": "Parse JSON",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -344,7 +344,7 @@
       "name": "Parse HTML",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -379,7 +379,7 @@
       "name": "Execute Bash",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -418,7 +418,7 @@
       "name": "Generate Text",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -454,7 +454,7 @@
       "name": "Summarize",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -493,7 +493,7 @@
       "name": "Cite Sources",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -532,7 +532,7 @@
       "name": "Extract Entities",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -572,7 +572,7 @@
       "name": "Route Intent",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -609,7 +609,7 @@
       "name": "Evaluate Output",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -652,7 +652,7 @@
       "name": "Embed Text",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -689,7 +689,7 @@
       "name": "Chunk Document",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -724,7 +724,7 @@
       "name": "Plan and Decompose",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -765,7 +765,7 @@
       "name": "Write Report",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -803,7 +803,7 @@
       "name": "Audience Model",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -840,7 +840,7 @@
       "name": "Tool Select",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -877,7 +877,7 @@
       "name": "Error Interpretation",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -913,7 +913,7 @@
       "name": "Code Generation",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -952,7 +952,7 @@
       "name": "Web Search",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -990,7 +990,7 @@
       "name": "Score Relevance",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -1026,7 +1026,7 @@
       "name": "Format Output",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -1065,7 +1065,7 @@
       "name": "Diff Content",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -1100,7 +1100,7 @@
       "name": "Web Scrape",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -1139,7 +1139,7 @@
       "name": "Research",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -1182,7 +1182,7 @@
       "name": "Ghostwrite",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -1219,7 +1219,7 @@
       "name": "Autonomous Debug",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -1256,7 +1256,7 @@
       "name": "Plan and Execute",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -1295,7 +1295,7 @@
       "name": "Knowledge Harvest",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -1332,7 +1332,7 @@
       "name": "RAG Pipeline",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -1379,7 +1379,7 @@
       "name": "Document Analyst",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -1417,7 +1417,7 @@
       "name": "Recursive Self-Improvement",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -1455,7 +1455,7 @@
       "name": "Multi-Agent Orchestration",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -1493,7 +1493,7 @@
       "name": "Autonomous Research Agent",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "6⭐",
+      "level": "6★",
 =======
 <<<<<<< Updated upstream
       "level": "VI",
@@ -1538,7 +1538,7 @@
       "name": "Translate",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -1573,7 +1573,7 @@
       "name": "Sentiment Analysis",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -1609,7 +1609,7 @@
       "name": "Image Caption",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1644,7 +1644,7 @@
       "name": "Speech to Text",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1679,7 +1679,7 @@
       "name": "Text to Speech",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1714,7 +1714,7 @@
       "name": "Generate SQL",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1750,7 +1750,7 @@
       "name": "Question Answer",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -1787,7 +1787,7 @@
       "name": "Image Generate",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1820,7 +1820,7 @@
       "name": "Math Reason",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1856,7 +1856,7 @@
       "name": "Logical Inference",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -1892,7 +1892,7 @@
       "name": "Memory Manage",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1928,7 +1928,7 @@
       "name": "API Call",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1964,7 +1964,7 @@
       "name": "Refactor Code",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1999,7 +1999,7 @@
       "name": "Generate Test",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -2034,7 +2034,7 @@
       "name": "Parse PDF",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -2069,7 +2069,7 @@
       "name": "Detect Anomaly",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -2104,7 +2104,7 @@
       "name": "Data Visualize",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -2140,7 +2140,7 @@
       "name": "Conversational Agent",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2177,7 +2177,7 @@
       "name": "Text-to-SQL Pipeline",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2214,7 +2214,7 @@
       "name": "Code Review Pipeline",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2254,7 +2254,7 @@
       "name": "Data Analysis",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2295,7 +2295,7 @@
       "name": "Voice Agent",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2337,7 +2337,7 @@
       "name": "Automated Testing",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2378,7 +2378,7 @@
       "name": "Content Moderation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2415,7 +2415,7 @@
       "name": "Multimodal Reasoning",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2455,7 +2455,7 @@
       "name": "Translation Pipeline",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2492,7 +2492,7 @@
       "name": "Document Digitization",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2529,7 +2529,7 @@
       "name": "Full-Stack Developer",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -2581,7 +2581,7 @@
       "name": "Autonomous Data Scientist",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -2633,7 +2633,7 @@
       "name": "Real-Time Voice Assistant",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -2685,7 +2685,7 @@
       "name": "Registry Curation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -2752,7 +2752,7 @@
       "name": "Gaia Audit",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -2791,7 +2791,7 @@
       "name": "Gaia Meta Audit",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2828,7 +2828,7 @@
       "name": "Tool Use",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -2873,7 +2873,7 @@
       "name": "Function Calling",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -2917,7 +2917,7 @@
       "name": "Chain-of-Thought Reasoning",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -2962,7 +2962,7 @@
       "name": "Self-Critique",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -3005,7 +3005,7 @@
       "name": "Structured Output Generation",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "1⭐",
+      "level": "1★",
 =======
 <<<<<<< Updated upstream
       "level": "I",
@@ -3050,7 +3050,7 @@
       "name": "Code Execution",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3094,7 +3094,7 @@
       "name": "Computer Use",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3136,7 +3136,7 @@
       "name": "Hypothesis Generation",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3185,7 +3185,7 @@
       "name": "ReAct Reasoning",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3231,7 +3231,7 @@
       "name": "Browser Automation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3277,7 +3277,7 @@
       "name": "Knowledge Graph Construction",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3323,7 +3323,7 @@
       "name": "Autonomous Scientific Discovery",
       "type": "ultimate",
 <<<<<<< HEAD
-      "level": "5⭐",
+      "level": "5★",
 =======
 <<<<<<< Updated upstream
       "level": "V",
@@ -3375,7 +3375,7 @@
       "name": "Self-Consistency",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3411,7 +3411,7 @@
       "name": "Few-Shot Learning",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3447,7 +3447,7 @@
       "name": "Tree of Thought",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3492,7 +3492,7 @@
       "name": "Prompt Optimization",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3537,7 +3537,7 @@
       "name": "Tool Creation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3583,7 +3583,7 @@
       "name": "OCR",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3625,7 +3625,7 @@
       "name": "Object Detection",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3668,7 +3668,7 @@
       "name": "Code Explain",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3711,7 +3711,7 @@
       "name": "Reward Modeling",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -3754,7 +3754,7 @@
       "name": "Grounding",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3798,7 +3798,7 @@
       "name": "Multi-Agent Debate",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3842,7 +3842,7 @@
       "name": "Fine-Tune",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -3889,7 +3889,7 @@
       "name": "Guardrails",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3933,7 +3933,7 @@
       "name": "Agent Evaluation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -3983,7 +3983,7 @@
       "name": "Semantic Cache",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4030,7 +4030,7 @@
       "name": "Workflow Automation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4084,7 +4084,7 @@
       "name": "Framework Upgrade",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -4117,7 +4117,7 @@
       "name": "Skill Discovery",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -4150,7 +4150,7 @@
       "name": "Document Editing",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -4185,7 +4185,7 @@
       "name": "Test-Driven Development",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -4218,7 +4218,7 @@
       "name": "UX Audit",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -4251,7 +4251,7 @@
       "name": "Context Compression",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4298,7 +4298,7 @@
       "name": "Prompt Injection Defense",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4345,7 +4345,7 @@
       "name": "Visual Question Answering",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4385,7 +4385,7 @@
       "name": "Tool Chaining",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4428,7 +4428,7 @@
       "name": "Issue Triage",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4475,7 +4475,7 @@
       "name": "PRD Generation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4518,7 +4518,7 @@
       "name": "Vertical Slice Planning",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4554,7 +4554,7 @@
       "name": "Design Review",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4597,7 +4597,7 @@
       "name": "Statistical Analysis",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4639,7 +4639,7 @@
       "name": "Scientific Visualization",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -4674,7 +4674,7 @@
       "name": "Literature Review",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4718,7 +4718,7 @@
       "name": "Scientific Writing",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4762,7 +4762,7 @@
       "name": "ML Pipeline",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -4806,7 +4806,7 @@
       "name": "MCP Integration",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4856,7 +4856,7 @@
       "name": "Parallel Execution",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -4889,7 +4889,7 @@
       "name": "Requirements Analysis",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -4922,7 +4922,7 @@
       "name": "Schema Design",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -4955,7 +4955,7 @@
       "name": "End-to-End Testing",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -4998,7 +4998,7 @@
       "name": "Security Audit",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -5041,7 +5041,7 @@
       "name": "Release Automation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -5078,7 +5078,7 @@
       "name": "Deployment Automation",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -5117,7 +5117,7 @@
       "name": "Feed Monitoring",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -5152,7 +5152,7 @@
       "name": "Wiki Search",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -5191,7 +5191,7 @@
       "name": "Prediction Market Analysis",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -5230,7 +5230,7 @@
       "name": "Humanize Prose",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -5269,7 +5269,7 @@
       "name": "Architecture Diagram",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "4⭐",
+      "level": "4★",
 =======
 <<<<<<< Updated upstream
       "level": "IV",
@@ -5311,7 +5311,7 @@
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5329,7 +5329,7 @@
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5347,7 +5347,7 @@
       "edgeType": "prerequisite",
       "condition": "Structured output mode required.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5365,7 +5365,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5383,7 +5383,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5401,7 +5401,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5419,7 +5419,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5437,7 +5437,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5455,7 +5455,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires research output as input context.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5473,7 +5473,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5491,7 +5491,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5509,7 +5509,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5527,7 +5527,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5545,7 +5545,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5563,7 +5563,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5581,7 +5581,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5599,7 +5599,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5617,7 +5617,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5635,7 +5635,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5653,7 +5653,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5671,7 +5671,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5689,7 +5689,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5707,7 +5707,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5725,7 +5725,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5743,7 +5743,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5761,7 +5761,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5779,7 +5779,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5795,7 +5795,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5811,7 +5811,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5827,7 +5827,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5843,7 +5843,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5859,7 +5859,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5875,7 +5875,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5891,7 +5891,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5907,7 +5907,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires extensive multi-system validation before level advancement.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5923,7 +5923,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5941,7 +5941,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5959,7 +5959,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires persistent memory store across turns.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5977,7 +5977,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -5995,7 +5995,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6013,7 +6013,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires schema context in prompt.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6031,7 +6031,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6049,7 +6049,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6067,7 +6067,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6085,7 +6085,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6103,7 +6103,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6121,7 +6121,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6139,7 +6139,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6157,7 +6157,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6175,7 +6175,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio I/O or audio file access.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6193,7 +6193,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6211,7 +6211,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6229,7 +6229,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6247,7 +6247,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6265,7 +6265,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6283,7 +6283,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6301,7 +6301,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6319,7 +6319,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6337,7 +6337,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires vision-language model capability.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6355,7 +6355,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6373,7 +6373,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6391,7 +6391,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6409,7 +6409,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6427,7 +6427,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6445,7 +6445,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6463,7 +6463,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6481,7 +6481,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6499,7 +6499,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires access to repository, execution environment, and test runner. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6517,7 +6517,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6535,7 +6535,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6553,7 +6553,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6571,7 +6571,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6589,7 +6589,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6607,7 +6607,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6625,7 +6625,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6643,7 +6643,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6661,7 +6661,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires write access to the canonical graph and a passing validation suite.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -6679,7 +6679,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6695,7 +6695,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6711,7 +6711,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6727,7 +6727,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6743,7 +6743,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6759,7 +6759,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6775,7 +6775,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6791,7 +6791,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6807,7 +6807,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6823,7 +6823,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6839,7 +6839,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6855,7 +6855,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6871,7 +6871,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6887,7 +6887,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6903,7 +6903,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6919,7 +6919,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6935,7 +6935,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6951,7 +6951,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6967,7 +6967,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6983,7 +6983,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -6999,7 +6999,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7015,7 +7015,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7031,7 +7031,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7047,7 +7047,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7063,7 +7063,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7079,7 +7079,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7095,7 +7095,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7111,7 +7111,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7127,7 +7127,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7143,7 +7143,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7159,7 +7159,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7175,7 +7175,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7191,7 +7191,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7207,7 +7207,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7223,7 +7223,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7239,7 +7239,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7255,7 +7255,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7271,7 +7271,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7287,7 +7287,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7303,7 +7303,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7319,7 +7319,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7335,7 +7335,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7351,7 +7351,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7367,7 +7367,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7383,7 +7383,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7399,7 +7399,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7415,7 +7415,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7431,7 +7431,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7447,7 +7447,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7463,7 +7463,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7479,7 +7479,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7495,7 +7495,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7511,7 +7511,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7529,7 +7529,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7547,7 +7547,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires a defined policy schema and an evaluation loop.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7565,7 +7565,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7583,7 +7583,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7601,7 +7601,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7619,7 +7619,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7637,7 +7637,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7655,7 +7655,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires at least two distinct tools whose data schemas are compatible for chaining.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7673,7 +7673,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires at least two distinct tools whose data schemas are compatible for chaining.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7691,7 +7691,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7707,7 +7707,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -7723,7 +7723,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "III",
@@ -7739,7 +7739,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "III",
@@ -7755,7 +7755,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7771,7 +7771,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7787,7 +7787,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7803,7 +7803,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7819,7 +7819,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "III",
@@ -7835,7 +7835,7 @@
       "edgeType": "enhances",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "III",
@@ -7851,7 +7851,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7869,7 +7869,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7887,7 +7887,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7905,7 +7905,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7923,7 +7923,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7941,7 +7941,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7959,7 +7959,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7977,7 +7977,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -7995,7 +7995,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8013,7 +8013,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8029,7 +8029,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8045,7 +8045,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8061,7 +8061,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8077,7 +8077,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8093,7 +8093,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8109,7 +8109,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8125,7 +8125,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8141,7 +8141,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8157,7 +8157,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -8175,7 +8175,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -8193,7 +8193,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "1⭐",
+      "levelFloor": "1★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "I",
@@ -8211,7 +8211,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8229,7 +8229,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8247,7 +8247,7 @@
       "edgeType": "prerequisite",
       "condition": "",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8265,7 +8265,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8283,7 +8283,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8301,7 +8301,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8319,7 +8319,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8337,7 +8337,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8355,7 +8355,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8373,7 +8373,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8391,7 +8391,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8409,7 +8409,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8427,7 +8427,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8445,7 +8445,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",
@@ -8463,7 +8463,7 @@
       "edgeType": "prerequisite",
       "condition": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
 <<<<<<< HEAD
-      "levelFloor": "2⭐",
+      "levelFloor": "2★",
 =======
 <<<<<<< Updated upstream
       "levelFloor": "II",

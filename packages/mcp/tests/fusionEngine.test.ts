@@ -8,13 +8,13 @@ const mockGraph: GaiaGraph = {
   meta: { typeLabels: {}, levelLabels: {}, rarityLabels: {} },
   skills: [
 <<<<<<< HEAD
-    { id: "web-search", name: "Web Search", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "parse-html", name: "Parse HTML", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "summarize", name: "Summarize", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3⭐", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
-    { id: "research", name: "Research", type: "extra", level: "3⭐", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-search", name: "Web Search", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "parse-html", name: "Parse HTML", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "summarize", name: "Summarize", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
+    { id: "research", name: "Research", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
 =======
 <<<<<<< Updated upstream
     { id: "web-search", name: "Web Search", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
@@ -75,7 +75,7 @@ describe("fusionEngine", () => {
     );
     const ready = result.find((c) => c.candidateResult === "web-scrape");
 <<<<<<< HEAD
-    expect(ready?.levelFloor).toBe("2⭐");
+    expect(ready?.levelFloor).toBe("2★");
 =======
 <<<<<<< Updated upstream
     expect(ready?.levelFloor).toBe("II");

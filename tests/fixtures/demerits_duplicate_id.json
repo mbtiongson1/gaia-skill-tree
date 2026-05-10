@@ -8,9 +8,9 @@
       "name": "Skill A",
       "type": "extra",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
       "rarity": "common",
-      "description": "2⭐ skill with a duplicate demerit id.",
+      "description": "2★ skill with a duplicate demerit id.",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -50,7 +50,7 @@
       "name": "Skill B",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",
@@ -76,7 +76,7 @@
       "name": "Skill C",
       "type": "basic",
 <<<<<<< HEAD
-      "level": "0⭐",
+      "level": "0★",
 =======
 <<<<<<< Updated upstream
       "level": "0",

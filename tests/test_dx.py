@@ -146,7 +146,7 @@ def test_bare_skills_command_prints_skills_help(monkeypatch, capsys):
 def test_promote_label_override_is_not_available(monkeypatch):
     with pytest.raises(SystemExit) as exc:
 <<<<<<< HEAD
-        run_cli(monkeypatch, ["promote", "web-search", "--label", "3⭐"])
+        run_cli(monkeypatch, ["promote", "web-search", "--label", "3★"])
 =======
 <<<<<<< Updated upstream
         run_cli(monkeypatch, ["promote", "web-search", "--label", "III"])

@@ -341,7 +341,7 @@ origin: true
 genericSkillRef: web-search
 status: named
 <<<<<<< HEAD
-level: "2⭐"
+level: "2★"
 =======
 <<<<<<< Updated upstream
 level: II
@@ -374,7 +374,7 @@ class TestListAvailable:
         assert sid == "contrib/my-skill"
         assert meta["name"] == "My Skill"
 <<<<<<< HEAD
-        assert meta["level"] == "2⭐"
+        assert meta["level"] == "2★"
 =======
 <<<<<<< Updated upstream
         assert meta["level"] == "II"

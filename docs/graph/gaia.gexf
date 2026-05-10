@@ -15,7 +15,7 @@
       <node id="agent-eval" label="Agent Evaluation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -31,7 +31,7 @@
       <node id="api-call" label="API Call">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -47,7 +47,7 @@
       <node id="architecture-diagram" label="Architecture Diagram">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -63,7 +63,7 @@
       <node id="audience-model" label="Audience Model">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -79,7 +79,7 @@
       <node id="automated-testing" label="Automated Testing">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -95,7 +95,7 @@
       <node id="autonomous-data-scientist" label="Autonomous Data Scientist">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -111,7 +111,7 @@
       <node id="autonomous-debug" label="Autonomous Debug">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -127,7 +127,7 @@
       <node id="autonomous-research-agent" label="Autonomous Research Agent">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="6⭐" />
+          <attvalue for="level" value="6★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="VI" />
@@ -143,7 +143,7 @@
       <node id="browser-automation" label="Browser Automation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -159,7 +159,7 @@
       <node id="chain-of-thought" label="Chain-of-Thought Reasoning">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -175,7 +175,7 @@
       <node id="chunk-document" label="Chunk Document">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -191,7 +191,7 @@
       <node id="cite-sources" label="Cite Sources">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -207,7 +207,7 @@
       <node id="classify" label="Classify">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -223,7 +223,7 @@
       <node id="code-execution" label="Code Execution">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -239,7 +239,7 @@
       <node id="code-explain" label="Code Explain">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -255,7 +255,7 @@
       <node id="code-generation" label="Code Generation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -271,7 +271,7 @@
       <node id="code-review-pipeline" label="Code Review Pipeline">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -287,7 +287,7 @@
       <node id="computer-use" label="Computer Use">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -303,7 +303,7 @@
       <node id="content-moderation" label="Content Moderation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -319,7 +319,7 @@
       <node id="context-compression" label="Context Compression">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -335,7 +335,7 @@
       <node id="conversational-agent" label="Conversational Agent">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -351,7 +351,7 @@
       <node id="data-analysis" label="Data Analysis">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -367,7 +367,7 @@
       <node id="data-visualize" label="Data Visualize">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -383,7 +383,7 @@
       <node id="deployment-automation" label="Deployment Automation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -399,7 +399,7 @@
       <node id="design-review" label="Design Review">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -415,7 +415,7 @@
       <node id="detect-anomaly" label="Detect Anomaly">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -431,7 +431,7 @@
       <node id="diff-content" label="Diff Content">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -447,7 +447,7 @@
       <node id="document-analyst" label="Document Analyst">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -463,7 +463,7 @@
       <node id="document-digitization" label="Document Digitization">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -479,7 +479,7 @@
       <node id="document-editing" label="Document Editing">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -495,7 +495,7 @@
       <node id="e2e-testing" label="End-to-End Testing">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -511,7 +511,7 @@
       <node id="embed-text" label="Embed Text">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -527,7 +527,7 @@
       <node id="error-interpretation" label="Error Interpretation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -543,7 +543,7 @@
       <node id="evaluate-output" label="Evaluate Output">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -559,7 +559,7 @@
       <node id="execute-bash" label="Execute Bash">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -575,7 +575,7 @@
       <node id="extract-entities" label="Extract Entities">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -591,7 +591,7 @@
       <node id="feed-monitoring" label="Feed Monitoring">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -607,7 +607,7 @@
       <node id="few-shot-learning" label="Few-Shot Learning">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -623,7 +623,7 @@
       <node id="fine-tune" label="Fine-Tune">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -639,7 +639,7 @@
       <node id="format-output" label="Format Output">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -655,7 +655,7 @@
       <node id="framework-upgrade" label="Framework Upgrade">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -671,7 +671,7 @@
       <node id="full-stack-developer" label="Full-Stack Developer">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -687,7 +687,7 @@
       <node id="function-calling" label="Function Calling">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -703,7 +703,7 @@
       <node id="gaia-audit" label="Gaia Audit">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -719,7 +719,7 @@
       <node id="gaia-meta-audit" label="Gaia Meta Audit">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -735,7 +735,7 @@
       <node id="generate-sql" label="Generate SQL">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -751,7 +751,7 @@
       <node id="generate-test" label="Generate Test">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -767,7 +767,7 @@
       <node id="generate-text" label="Generate Text">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -783,7 +783,7 @@
       <node id="ghostwrite" label="Ghostwrite">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -799,7 +799,7 @@
       <node id="grounding" label="Grounding">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -815,7 +815,7 @@
       <node id="guardrails" label="Guardrails">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -831,7 +831,7 @@
       <node id="humanize-prose" label="Humanize Prose">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -847,7 +847,7 @@
       <node id="hypothesis-generate" label="Hypothesis Generation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -863,7 +863,7 @@
       <node id="image-caption" label="Image Caption">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -879,7 +879,7 @@
       <node id="image-generate" label="Image Generate">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -895,7 +895,7 @@
       <node id="issue-triage" label="Issue Triage">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -911,7 +911,7 @@
       <node id="knowledge-graph-build" label="Knowledge Graph Construction">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -927,7 +927,7 @@
       <node id="knowledge-harvest" label="Knowledge Harvest">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -943,7 +943,7 @@
       <node id="literature-review" label="Literature Review">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -959,7 +959,7 @@
       <node id="logical-inference" label="Logical Inference">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -975,7 +975,7 @@
       <node id="math-reason" label="Math Reason">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -991,7 +991,7 @@
       <node id="mcp-integration" label="MCP Integration">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1007,7 +1007,7 @@
       <node id="memory-manage" label="Memory Manage">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1023,7 +1023,7 @@
       <node id="ml-pipeline" label="ML Pipeline">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1039,7 +1039,7 @@
       <node id="multi-agent-debate" label="Multi-Agent Debate">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1055,7 +1055,7 @@
       <node id="multi-agent-orchestration-v" label="Multi-Agent Orchestration">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -1071,7 +1071,7 @@
       <node id="multimodal-reasoning" label="Multimodal Reasoning">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1087,7 +1087,7 @@
       <node id="object-detection" label="Object Detection">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1103,7 +1103,7 @@
       <node id="ocr" label="OCR">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1119,7 +1119,7 @@
       <node id="parallel-execution" label="Parallel Execution">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1135,7 +1135,7 @@
       <node id="parse-html" label="Parse HTML">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1151,7 +1151,7 @@
       <node id="parse-json" label="Parse JSON">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1167,7 +1167,7 @@
       <node id="parse-pdf" label="Parse PDF">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1183,7 +1183,7 @@
       <node id="plan-and-execute" label="Plan and Execute">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1199,7 +1199,7 @@
       <node id="plan-decompose" label="Plan and Decompose">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1215,7 +1215,7 @@
       <node id="prd-generation" label="PRD Generation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1231,7 +1231,7 @@
       <node id="prediction-market-analysis" label="Prediction Market Analysis">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1247,7 +1247,7 @@
       <node id="prompt-injection-defense" label="Prompt Injection Defense">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1263,7 +1263,7 @@
       <node id="prompt-optimization" label="Prompt Optimization">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1279,7 +1279,7 @@
       <node id="question-answer" label="Question Answer">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1295,7 +1295,7 @@
       <node id="rag-pipeline" label="RAG Pipeline">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1311,7 +1311,7 @@
       <node id="rank" label="Rank">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1327,7 +1327,7 @@
       <node id="re-act-reasoning" label="ReAct Reasoning">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1343,7 +1343,7 @@
       <node id="real-time-voice-assistant" label="Real-Time Voice Assistant">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -1359,7 +1359,7 @@
       <node id="recursive-self-improvement" label="Recursive Self-Improvement">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -1375,7 +1375,7 @@
       <node id="refactor-code" label="Refactor Code">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1391,7 +1391,7 @@
       <node id="registry-curation" label="Registry Curation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1407,7 +1407,7 @@
       <node id="release-automation" label="Release Automation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1423,7 +1423,7 @@
       <node id="requirements-analysis" label="Requirements Analysis">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1439,7 +1439,7 @@
       <node id="research" label="Research">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1455,7 +1455,7 @@
       <node id="retrieve" label="Retrieve">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1471,7 +1471,7 @@
       <node id="reward-modeling" label="Reward Modeling">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1487,7 +1487,7 @@
       <node id="route-intent" label="Route Intent">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1503,7 +1503,7 @@
       <node id="schema-design" label="Schema Design">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1519,7 +1519,7 @@
       <node id="scientific-discovery" label="Autonomous Scientific Discovery">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="5⭐" />
+          <attvalue for="level" value="5★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="V" />
@@ -1535,7 +1535,7 @@
       <node id="scientific-visualization" label="Scientific Visualization">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1551,7 +1551,7 @@
       <node id="scientific-writing" label="Scientific Writing">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1567,7 +1567,7 @@
       <node id="score-relevance" label="Score Relevance">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1583,7 +1583,7 @@
       <node id="security-audit" label="Security Audit">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1599,7 +1599,7 @@
       <node id="self-consistency" label="Self-Consistency">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1615,7 +1615,7 @@
       <node id="self-critique" label="Self-Critique">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1631,7 +1631,7 @@
       <node id="semantic-cache" label="Semantic Cache">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1647,7 +1647,7 @@
       <node id="sentiment-analysis" label="Sentiment Analysis">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1663,7 +1663,7 @@
       <node id="skill-discovery" label="Skill Discovery">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1679,7 +1679,7 @@
       <node id="speech-to-text" label="Speech to Text">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1695,7 +1695,7 @@
       <node id="statistical-analysis" label="Statistical Analysis">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1711,7 +1711,7 @@
       <node id="structured-output" label="Structured Output Generation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1727,7 +1727,7 @@
       <node id="summarize" label="Summarize">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1743,7 +1743,7 @@
       <node id="test-driven-development" label="Test-Driven Development">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1759,7 +1759,7 @@
       <node id="text-to-speech" label="Text to Speech">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="2⭐" />
+          <attvalue for="level" value="2★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="II" />
@@ -1775,7 +1775,7 @@
       <node id="text-to-sql-pipeline" label="Text-to-SQL Pipeline">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1791,7 +1791,7 @@
       <node id="tokenize" label="Tokenize">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1807,7 +1807,7 @@
       <node id="tool-chaining" label="Tool Chaining">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1823,7 +1823,7 @@
       <node id="tool-creation" label="Tool Creation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1839,7 +1839,7 @@
       <node id="tool-select" label="Tool Select">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1855,7 +1855,7 @@
       <node id="tool-use" label="Tool Use">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -1871,7 +1871,7 @@
       <node id="translate" label="Translate">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1887,7 +1887,7 @@
       <node id="translation-pipeline" label="Translation Pipeline">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1903,7 +1903,7 @@
       <node id="tree-of-thought" label="Tree of Thought">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -1919,7 +1919,7 @@
       <node id="ux-audit" label="UX Audit">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="0⭐" />
+          <attvalue for="level" value="0★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="0" />
@@ -1935,7 +1935,7 @@
       <node id="vertical-slice-planning" label="Vertical Slice Planning">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1951,7 +1951,7 @@
       <node id="vision-qa" label="Visual Question Answering">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1967,7 +1967,7 @@
       <node id="voice-agent" label="Voice Agent">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1983,7 +1983,7 @@
       <node id="web-scrape" label="Web Scrape">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="3⭐" />
+          <attvalue for="level" value="3★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="III" />
@@ -1999,7 +1999,7 @@
       <node id="web-search" label="Web Search">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />
@@ -2015,7 +2015,7 @@
       <node id="wiki-search" label="Wiki Search">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -2031,7 +2031,7 @@
       <node id="workflow-automation" label="Workflow Automation">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="4⭐" />
+          <attvalue for="level" value="4★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="IV" />
@@ -2047,7 +2047,7 @@
       <node id="write-report" label="Write Report">
         <attvalues>
 <<<<<<< HEAD
-          <attvalue for="level" value="1⭐" />
+          <attvalue for="level" value="1★" />
 =======
 <<<<<<< Updated upstream
           <attvalue for="level" value="I" />

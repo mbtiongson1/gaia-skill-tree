@@ -6,7 +6,7 @@ from gaia_cli.registry import named_skills_index_path, user_tree_path
 
 _USERNAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
 <<<<<<< HEAD
-_TRANSCENDENT_LEVELS = {"5⭐", "6⭐"}
+_TRANSCENDENT_LEVELS = {"5★", "6★"}
 =======
 <<<<<<< Updated upstream
 _TRANSCENDENT_LEVELS = {"V", "VI"}

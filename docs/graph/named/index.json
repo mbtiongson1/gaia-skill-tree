@@ -10,7 +10,7 @@
         "genericSkillRef": "automated-testing",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -44,7 +44,7 @@
         "genericSkillRef": "test-driven-development",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -74,7 +74,7 @@
         "genericSkillRef": "test-driven-development",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -106,7 +106,7 @@
         "genericSkillRef": "document-editing",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -136,7 +136,7 @@
         "genericSkillRef": "document-editing",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -168,7 +168,7 @@
         "genericSkillRef": "tool-creation",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -197,7 +197,7 @@
         "genericSkillRef": "tool-creation",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -229,7 +229,7 @@
         "genericSkillRef": "autonomous-debug",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -259,7 +259,7 @@
         "genericSkillRef": "autonomous-debug",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -291,7 +291,7 @@
         "genericSkillRef": "write-report",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -320,7 +320,7 @@
         "genericSkillRef": "write-report",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -352,7 +352,7 @@
         "genericSkillRef": "browser-automation",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -384,7 +384,7 @@
         "genericSkillRef": "api-call",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -416,7 +416,7 @@
         "genericSkillRef": "data-analysis",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -448,7 +448,7 @@
         "genericSkillRef": "fine-tune",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -480,7 +480,7 @@
         "genericSkillRef": "literature-review",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -512,7 +512,7 @@
         "genericSkillRef": "object-detection",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -544,7 +544,7 @@
         "genericSkillRef": "multimodal-reasoning",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -576,7 +576,7 @@
         "genericSkillRef": "autonomous-research-agent",
         "status": "named",
 <<<<<<< HEAD
-        "level": "6⭐",
+        "level": "6★",
 =======
 <<<<<<< Updated upstream
         "level": "VI",
@@ -606,7 +606,7 @@
         "genericSkillRef": "framework-upgrade",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -637,7 +637,7 @@
         "genericSkillRef": "ux-audit",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -669,7 +669,7 @@
         "genericSkillRef": "design-review",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -699,7 +699,7 @@
         "genericSkillRef": "design-review",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -732,7 +732,7 @@
         "genericSkillRef": "refactor-code",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -765,7 +765,7 @@
         "genericSkillRef": "vertical-slice-planning",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -798,7 +798,7 @@
         "genericSkillRef": "prd-generation",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -830,7 +830,7 @@
         "genericSkillRef": "issue-triage",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -862,7 +862,7 @@
         "genericSkillRef": "code-explain",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -894,7 +894,7 @@
         "genericSkillRef": "multi-agent-orchestration-v",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -926,7 +926,7 @@
         "genericSkillRef": "generate-test",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -958,7 +958,7 @@
         "genericSkillRef": "skill-discovery",
         "status": "named",
 <<<<<<< HEAD
-        "level": "2⭐",
+        "level": "2★",
 =======
 <<<<<<< Updated upstream
         "level": "II",
@@ -989,7 +989,7 @@
         "genericSkillRef": "rag-pipeline",
         "status": "named",
 <<<<<<< HEAD
-        "level": "3⭐",
+        "level": "3★",
 =======
 <<<<<<< Updated upstream
         "level": "III",
@@ -1024,7 +1024,7 @@
       "genericSkillRef": "write-report",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1052,7 +1052,7 @@
       "genericSkillRef": "schema-design",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1079,7 +1079,7 @@
       "genericSkillRef": "deployment-automation",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1106,7 +1106,7 @@
       "genericSkillRef": "mcp-integration",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",
@@ -1130,7 +1130,7 @@
       "genericSkillRef": "parallel-execution",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1154,7 +1154,7 @@
       "genericSkillRef": "release-automation",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1180,7 +1180,7 @@
       "genericSkillRef": "requirements-analysis",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1205,7 +1205,7 @@
       "genericSkillRef": "security-audit",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "2⭐",
+      "level": "2★",
 =======
 <<<<<<< Updated upstream
       "level": "II",
@@ -1231,7 +1231,7 @@
       "genericSkillRef": "e2e-testing",
       "status": "awakened",
 <<<<<<< HEAD
-      "level": "3⭐",
+      "level": "3★",
 =======
 <<<<<<< Updated upstream
       "level": "III",

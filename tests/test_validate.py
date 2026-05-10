@@ -83,9 +83,9 @@ class TestValidate(unittest.TestCase):
 
     def test_demerits_reject_level_i_skills(self):
 <<<<<<< HEAD
-        """Ensure demerits are rejected on 1⭐ and below."""
+        """Ensure demerits are rejected on 1★ and below."""
         code, out = run_validate(os.path.join(FIXTURES_DIR, "demerits_level_i.json"))
-        self.assertEqual(code, 1, "Expected 1⭐ demerits to fail validation.")
+        self.assertEqual(code, 1, "Expected 1★ demerits to fail validation.")
 =======
 <<<<<<< Updated upstream
         """Ensure demerits are rejected on Level I and below."""
@@ -196,7 +196,7 @@ class TestNamedSkillValidation(unittest.TestCase):
 
     def test_seed_skills_have_no_level_i(self):
 <<<<<<< HEAD
-        """No seed named skill uses 1⭐ (which is forbidden for named skills)."""
+        """No seed named skill uses 1★ (which is forbidden for named skills)."""
 =======
 <<<<<<< Updated upstream
         """No seed named skill uses level I (which is forbidden for named skills)."""
@@ -218,12 +218,12 @@ class TestNamedSkillValidation(unittest.TestCase):
             self.assertNotEqual(
                 level,
 <<<<<<< HEAD
-                "1⭐",
-                f"Seed skill {fp} has forbidden level '1⭐'.",
+                "1★",
+                f"Seed skill {fp} has forbidden level '1★'.",
             )
 
     def test_bad_level_fails_validation(self):
-        """validate_and_group reports an error when level is '1⭐'."""
+        """validate_and_group reports an error when level is '1★'."""
 =======
 <<<<<<< Updated upstream
                 "I",
@@ -254,8 +254,8 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "genericSkillRef": "web-search",
                     "status": "named",
 <<<<<<< HEAD
-                    "level": "1⭐",
-                    "description": "A fake skill at 1⭐.",
+                    "level": "1★",
+                    "description": "A fake skill at 1★.",
 =======
 <<<<<<< Updated upstream
                     "level": "I",
@@ -271,7 +271,7 @@ class TestNamedSkillValidation(unittest.TestCase):
         errors, *_ = validate_and_group(named_skills, {"web-search"})
         self.assertTrue(
 <<<<<<< HEAD
-            any("level" in e.lower() or "'1⭐'" in e or "1⭐" in e or "II or above" in e
+            any("level" in e.lower() or "'1★'" in e or "1★" in e or "II or above" in e
 =======
 <<<<<<< Updated upstream
             any("level" in e.lower() or "'I'" in e or "level I" in e or "II or above" in e
@@ -314,7 +314,7 @@ class TestNamedSkillValidation(unittest.TestCase):
                     "genericSkillRef": "definitely-not-a-real-skill-id",
                     "status": "named",
 <<<<<<< HEAD
-                    "level": "2⭐",
+                    "level": "2★",
 =======
 <<<<<<< Updated upstream
                     "level": "II",

@@ -16,8 +16,8 @@ def write_fixture_registry(root: Path) -> None:
             {
                 "skills": [
 <<<<<<< HEAD
-                    {"id": "tokenize", "type": "basic", "level": "0⭐", "evidence": []},
-                    {"id": "web-search", "type": "basic", "level": "1⭐", "evidence": [{"class": "C"}]},
+                    {"id": "tokenize", "type": "basic", "level": "0★", "evidence": []},
+                    {"id": "web-search", "type": "basic", "level": "1★", "evidence": [{"class": "C"}]},
 =======
 <<<<<<< Updated upstream
                     {"id": "tokenize", "type": "basic", "level": "0", "evidence": []},
@@ -26,12 +26,12 @@ def write_fixture_registry(root: Path) -> None:
                     {
                         "id": "automated-testing",
                         "type": "extra",
-                        "level": "2⭐",
+                        "level": "2★",
                         "demerits": ["niche-integration"],
                         "evidence": [{"class": "B"}],
                     },
 <<<<<<< HEAD
-                    {"id": "autonomous-swe", "type": "ultimate", "level": "5⭐", "evidence": [{"class": "B"}, {"class": "A"}]},
+                    {"id": "autonomous-swe", "type": "ultimate", "level": "5★", "evidence": [{"class": "B"}, {"class": "A"}]},
 =======
                     {"id": "autonomous-swe", "type": "ultimate", "level": "V", "evidence": [{"class": "B"}, {"class": "A"}]},
 =======
@@ -72,8 +72,8 @@ def test_collect_stats_matches_fixture_graph(tmp_path):
     assert stats["total_edges"] == 1
     assert stats["type_counts"] == {"basic": 2, "extra": 1, "ultimate": 1}
 <<<<<<< HEAD
-    assert stats["level_counts"] == {"0⭐": 1, "1⭐": 1, "2⭐": 1, "5⭐": 1}
-    assert stats["effective_level_counts"] == {"0⭐": 1, "1⭐": 2, "5⭐": 1}
+    assert stats["level_counts"] == {"0★": 1, "1★": 1, "2★": 1, "5★": 1}
+    assert stats["effective_level_counts"] == {"0★": 1, "1★": 2, "5★": 1}
 =======
 <<<<<<< Updated upstream
     assert stats["level_counts"] == {"0": 1, "I": 1, "II": 1, "V": 1}
@@ -101,8 +101,8 @@ def test_collect_stats_supports_legacy_graph_layout(tmp_path):
             {
                 "skills": [
 <<<<<<< HEAD
-                    {"id": "plan", "type": "basic", "level": "1⭐", "prerequisites": [], "evidence": [{"class": "C"}]},
-                    {"id": "execute", "type": "extra", "level": "2⭐", "prerequisites": ["plan"], "evidence": []},
+                    {"id": "plan", "type": "basic", "level": "1★", "prerequisites": [], "evidence": [{"class": "C"}]},
+                    {"id": "execute", "type": "extra", "level": "2★", "prerequisites": ["plan"], "evidence": []},
 =======
 <<<<<<< Updated upstream
                     {"id": "plan", "type": "basic", "level": "I", "prerequisites": [], "evidence": [{"class": "C"}]},
