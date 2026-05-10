@@ -8,7 +8,7 @@
       "id": "api-call",
       "label": "API Call",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -26,7 +26,7 @@
       "id": "audience-model",
       "label": "Audience Model",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -44,7 +44,7 @@
       "id": "chain-of-thought",
       "label": "Chain-of-Thought Reasoning",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -62,7 +62,7 @@
       "id": "chunk-document",
       "label": "Chunk Document",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -80,7 +80,7 @@
       "id": "cite-sources",
       "label": "Cite Sources",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -98,7 +98,7 @@
       "id": "classify",
       "label": "Classify",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -116,7 +116,7 @@
       "id": "code-execution",
       "label": "Code Execution",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -134,7 +134,7 @@
       "id": "code-explain",
       "label": "Code Explain",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -152,7 +152,7 @@
       "id": "code-generation",
       "label": "Code Generation",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -170,7 +170,7 @@
       "id": "computer-use",
       "label": "Computer Use",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -188,7 +188,7 @@
       "id": "context-compression",
       "label": "Context Compression",
       "type": "basic",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -206,7 +206,7 @@
       "id": "data-visualize",
       "label": "Data Visualize",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -224,7 +224,7 @@
       "id": "detect-anomaly",
       "label": "Detect Anomaly",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -242,7 +242,7 @@
       "id": "diff-content",
       "label": "Diff Content",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -260,7 +260,7 @@
       "id": "document-editing",
       "label": "Document Editing",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -278,7 +278,7 @@
       "id": "embed-text",
       "label": "Embed Text",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -296,7 +296,7 @@
       "id": "error-interpretation",
       "label": "Error Interpretation",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -314,7 +314,7 @@
       "id": "evaluate-output",
       "label": "Evaluate Output",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -332,7 +332,7 @@
       "id": "execute-bash",
       "label": "Execute Bash",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -350,7 +350,7 @@
       "id": "extract-entities",
       "label": "Extract Entities",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -368,7 +368,7 @@
       "id": "feed-monitoring",
       "label": "Feed Monitoring",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -386,7 +386,7 @@
       "id": "few-shot-learning",
       "label": "Few-Shot Learning",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -404,7 +404,7 @@
       "id": "fine-tune",
       "label": "Fine-Tune",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -422,7 +422,7 @@
       "id": "format-output",
       "label": "Format Output",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -440,7 +440,7 @@
       "id": "framework-upgrade",
       "label": "Framework Upgrade",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -458,7 +458,7 @@
       "id": "generate-sql",
       "label": "Generate SQL",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -476,7 +476,7 @@
       "id": "generate-test",
       "label": "Generate Test",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -494,7 +494,7 @@
       "id": "generate-text",
       "label": "Generate Text",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -512,7 +512,7 @@
       "id": "hypothesis-generate",
       "label": "Hypothesis Generation",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -530,7 +530,7 @@
       "id": "image-caption",
       "label": "Image Caption",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -548,7 +548,7 @@
       "id": "image-generate",
       "label": "Image Generate",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -566,7 +566,7 @@
       "id": "issue-triage",
       "label": "Issue Triage",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -584,7 +584,7 @@
       "id": "logical-inference",
       "label": "Logical Inference",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -602,7 +602,7 @@
       "id": "mcp-integration",
       "label": "MCP Integration",
       "type": "basic",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "III",
@@ -624,7 +624,7 @@
       "id": "math-reason",
       "label": "Math Reason",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -642,7 +642,7 @@
       "id": "memory-manage",
       "label": "Memory Manage",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -660,7 +660,7 @@
       "id": "ocr",
       "label": "OCR",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -678,7 +678,7 @@
       "id": "object-detection",
       "label": "Object Detection",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -696,7 +696,7 @@
       "id": "parallel-execution",
       "label": "Parallel Execution",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -714,7 +714,7 @@
       "id": "parse-html",
       "label": "Parse HTML",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -732,7 +732,7 @@
       "id": "parse-json",
       "label": "Parse JSON",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -750,7 +750,7 @@
       "id": "parse-pdf",
       "label": "Parse PDF",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -768,7 +768,7 @@
       "id": "plan-decompose",
       "label": "Plan and Decompose",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -786,7 +786,7 @@
       "id": "prompt-injection-defense",
       "label": "Prompt Injection Defense",
       "type": "basic",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -804,7 +804,7 @@
       "id": "question-answer",
       "label": "Question Answer",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -822,7 +822,7 @@
       "id": "rank",
       "label": "Rank",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -840,7 +840,7 @@
       "id": "refactor-code",
       "label": "Refactor Code",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -858,7 +858,7 @@
       "id": "requirements-analysis",
       "label": "Requirements Analysis",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -876,7 +876,7 @@
       "id": "retrieve",
       "label": "Retrieve",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -894,7 +894,7 @@
       "id": "reward-modeling",
       "label": "Reward Modeling",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -912,7 +912,7 @@
       "id": "route-intent",
       "label": "Route Intent",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -930,7 +930,7 @@
       "id": "schema-design",
       "label": "Schema Design",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -948,7 +948,7 @@
       "id": "scientific-visualization",
       "label": "Scientific Visualization",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -966,7 +966,7 @@
       "id": "score-relevance",
       "label": "Score Relevance",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -984,7 +984,7 @@
       "id": "self-consistency",
       "label": "Self-Consistency",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1002,7 +1002,7 @@
       "id": "self-critique",
       "label": "Self-Critique",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1020,7 +1020,7 @@
       "id": "semantic-cache",
       "label": "Semantic Cache",
       "type": "basic",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1038,7 +1038,7 @@
       "id": "sentiment-analysis",
       "label": "Sentiment Analysis",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1056,7 +1056,7 @@
       "id": "skill-discovery",
       "label": "Skill Discovery",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1074,7 +1074,7 @@
       "id": "speech-to-text",
       "label": "Speech to Text",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -1092,7 +1092,7 @@
       "id": "statistical-analysis",
       "label": "Statistical Analysis",
       "type": "basic",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1110,7 +1110,7 @@
       "id": "structured-output",
       "label": "Structured Output Generation",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1128,7 +1128,7 @@
       "id": "summarize",
       "label": "Summarize",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1146,7 +1146,7 @@
       "id": "test-driven-development",
       "label": "Test-Driven Development",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1164,7 +1164,7 @@
       "id": "text-to-speech",
       "label": "Text to Speech",
       "type": "basic",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -1182,7 +1182,7 @@
       "id": "tokenize",
       "label": "Tokenize",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1200,7 +1200,7 @@
       "id": "tool-select",
       "label": "Tool Select",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1218,7 +1218,7 @@
       "id": "tool-use",
       "label": "Tool Use",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1236,7 +1236,7 @@
       "id": "translate",
       "label": "Translate",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1254,7 +1254,7 @@
       "id": "ux-audit",
       "label": "UX Audit",
       "type": "basic",
-      "level": "0",
+      "level": "0⭐",
       "effectiveLevel": "0",
       "levelMeta": {
         "baseLevel": "0",
@@ -1272,7 +1272,7 @@
       "id": "vision-qa",
       "label": "Visual Question Answering",
       "type": "basic",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1290,7 +1290,7 @@
       "id": "web-search",
       "label": "Web Search",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1308,7 +1308,7 @@
       "id": "write-report",
       "label": "Write Report",
       "type": "basic",
-      "level": "I",
+      "level": "1⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "I",
@@ -1326,7 +1326,7 @@
       "id": "agent-eval",
       "label": "Agent Evaluation",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1344,7 +1344,7 @@
       "id": "architecture-diagram",
       "label": "Architecture Diagram",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1362,7 +1362,7 @@
       "id": "automated-testing",
       "label": "Automated Testing",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1380,7 +1380,7 @@
       "id": "autonomous-debug",
       "label": "Autonomous Debug",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1398,7 +1398,7 @@
       "id": "browser-automation",
       "label": "Browser Automation",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1416,7 +1416,7 @@
       "id": "code-review-pipeline",
       "label": "Code Review Pipeline",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1434,7 +1434,7 @@
       "id": "content-moderation",
       "label": "Content Moderation",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1452,7 +1452,7 @@
       "id": "conversational-agent",
       "label": "Conversational Agent",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1470,7 +1470,7 @@
       "id": "data-analysis",
       "label": "Data Analysis",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1488,7 +1488,7 @@
       "id": "deployment-automation",
       "label": "Deployment Automation",
       "type": "extra",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "I",
       "levelMeta": {
         "baseLevel": "II",
@@ -1510,7 +1510,7 @@
       "id": "design-review",
       "label": "Design Review",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1528,7 +1528,7 @@
       "id": "document-analyst",
       "label": "Document Analyst",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1546,7 +1546,7 @@
       "id": "document-digitization",
       "label": "Document Digitization",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1564,7 +1564,7 @@
       "id": "e2e-testing",
       "label": "End-to-End Testing",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1582,7 +1582,7 @@
       "id": "function-calling",
       "label": "Function Calling",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1600,7 +1600,7 @@
       "id": "gaia-audit",
       "label": "Gaia Audit",
       "type": "extra",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -1618,7 +1618,7 @@
       "id": "gaia-meta-audit",
       "label": "Gaia Meta Audit",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1636,7 +1636,7 @@
       "id": "ghostwrite",
       "label": "Ghostwrite",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1654,7 +1654,7 @@
       "id": "grounding",
       "label": "Grounding",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1672,7 +1672,7 @@
       "id": "guardrails",
       "label": "Guardrails",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1690,7 +1690,7 @@
       "id": "humanize-prose",
       "label": "Humanize Prose",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1708,7 +1708,7 @@
       "id": "knowledge-graph-build",
       "label": "Knowledge Graph Construction",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1726,7 +1726,7 @@
       "id": "knowledge-harvest",
       "label": "Knowledge Harvest",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1744,7 +1744,7 @@
       "id": "literature-review",
       "label": "Literature Review",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1762,7 +1762,7 @@
       "id": "ml-pipeline",
       "label": "ML Pipeline",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1780,7 +1780,7 @@
       "id": "multi-agent-debate",
       "label": "Multi-Agent Debate",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1798,7 +1798,7 @@
       "id": "multimodal-reasoning",
       "label": "Multimodal Reasoning",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "III",
@@ -1820,7 +1820,7 @@
       "id": "prd-generation",
       "label": "PRD Generation",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1838,7 +1838,7 @@
       "id": "plan-and-execute",
       "label": "Plan and Execute",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1856,7 +1856,7 @@
       "id": "prediction-market-analysis",
       "label": "Prediction Market Analysis",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1874,7 +1874,7 @@
       "id": "prompt-optimization",
       "label": "Prompt Optimization",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1892,7 +1892,7 @@
       "id": "rag-pipeline",
       "label": "RAG Pipeline",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1910,7 +1910,7 @@
       "id": "re-act-reasoning",
       "label": "ReAct Reasoning",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1928,7 +1928,7 @@
       "id": "registry-curation",
       "label": "Registry Curation",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -1946,7 +1946,7 @@
       "id": "release-automation",
       "label": "Release Automation",
       "type": "extra",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -1964,7 +1964,7 @@
       "id": "research",
       "label": "Research",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -1982,7 +1982,7 @@
       "id": "scientific-writing",
       "label": "Scientific Writing",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2000,7 +2000,7 @@
       "id": "security-audit",
       "label": "Security Audit",
       "type": "extra",
-      "level": "II",
+      "level": "2⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "II",
@@ -2018,7 +2018,7 @@
       "id": "text-to-sql-pipeline",
       "label": "Text-to-SQL Pipeline",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2036,7 +2036,7 @@
       "id": "tool-chaining",
       "label": "Tool Chaining",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2054,7 +2054,7 @@
       "id": "tool-creation",
       "label": "Tool Creation",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -2072,7 +2072,7 @@
       "id": "translation-pipeline",
       "label": "Translation Pipeline",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2090,7 +2090,7 @@
       "id": "tree-of-thought",
       "label": "Tree of Thought",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -2108,7 +2108,7 @@
       "id": "vertical-slice-planning",
       "label": "Vertical Slice Planning",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2126,7 +2126,7 @@
       "id": "voice-agent",
       "label": "Voice Agent",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "II",
       "levelMeta": {
         "baseLevel": "III",
@@ -2148,7 +2148,7 @@
       "id": "web-scrape",
       "label": "Web Scrape",
       "type": "extra",
-      "level": "III",
+      "level": "3⭐",
       "effectiveLevel": "III",
       "levelMeta": {
         "baseLevel": "III",
@@ -2166,7 +2166,7 @@
       "id": "wiki-search",
       "label": "Wiki Search",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -2184,7 +2184,7 @@
       "id": "workflow-automation",
       "label": "Workflow Automation",
       "type": "extra",
-      "level": "IV",
+      "level": "4⭐",
       "effectiveLevel": "IV",
       "levelMeta": {
         "baseLevel": "IV",
@@ -2202,7 +2202,7 @@
       "id": "autonomous-data-scientist",
       "label": "Autonomous Data Scientist",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
@@ -2220,7 +2220,7 @@
       "id": "autonomous-research-agent",
       "label": "Autonomous Research Agent",
       "type": "ultimate",
-      "level": "VI",
+      "level": "6⭐",
       "effectiveLevel": "VI",
       "levelMeta": {
         "baseLevel": "VI",
@@ -2238,7 +2238,7 @@
       "id": "scientific-discovery",
       "label": "Autonomous Scientific Discovery",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
@@ -2256,7 +2256,7 @@
       "id": "full-stack-developer",
       "label": "Full-Stack Developer",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
@@ -2274,7 +2274,7 @@
       "id": "multi-agent-orchestration-v",
       "label": "Multi-Agent Orchestration",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
@@ -2292,7 +2292,7 @@
       "id": "real-time-voice-assistant",
       "label": "Real-Time Voice Assistant",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
@@ -2310,7 +2310,7 @@
       "id": "recursive-self-improvement",
       "label": "Recursive Self-Improvement",
       "type": "ultimate",
-      "level": "V",
+      "level": "5⭐",
       "effectiveLevel": "V",
       "levelMeta": {
         "baseLevel": "V",
