@@ -7,7 +7,7 @@ genericSkillRef: api-call
 status: named
 title: "The Hub Operator"
 catalogRef: huggingface-hf-cli
-level: II
+level: "2⭐"
 description: Guides Hugging Face Hub CLI operations for downloading, uploading, managing repos, running Jobs, querying datasets, configuring Spaces, and handling Hub authentication.
 links:
   github: https://github.com/huggingface/skills/blob/main/skills/hf-cli/SKILL.md

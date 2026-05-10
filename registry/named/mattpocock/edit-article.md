@@ -7,7 +7,7 @@ genericSkillRef: document-editing
 status: named
 title: "The Section-by-Section Rewrite"
 catalogRef: mattpocock-edit-article
-level: "II"
+level: "2⭐"
 description: Edits articles by first sectioning them as a DAG of information dependencies, confirming the section order, then rewriting each section for clarity and flow with a 240-character-per-paragraph constraint.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/personal/edit-article/SKILL.md

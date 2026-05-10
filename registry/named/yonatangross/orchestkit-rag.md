@@ -7,7 +7,7 @@ genericSkillRef: rag-pipeline
 status: named
 title: "The Knowledge Architect"
 catalogRef: yonatangross-orchestkit-rag
-level: III
+level: "3⭐"
 description: Production-grade RAG retrieval skill covering 30+ patterns including core pipeline composition, HyDE query expansion, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.
 links:
   github: https://github.com/yonatangross/orchestkit

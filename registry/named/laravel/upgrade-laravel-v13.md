@@ -7,7 +7,7 @@ genericSkillRef: framework-upgrade
 status: named
 title: "The Versionist's Trial"
 catalogRef: laravel-upgrade-laravel-v13
-level: II
+level: "2⭐"
 description: Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, config migrations, and post-upgrade test validation.
 links:
   github: https://github.com/laravel/boost/issues/698

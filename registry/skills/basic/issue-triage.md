@@ -1,7 +1,7 @@
-# mattpocock/triage  [IV · Hardened]
+# mattpocock/triage  [4⭐ · Hardened]
 **ID:** issue-triage  
 **Type:** Basic Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/issue-triage`
 

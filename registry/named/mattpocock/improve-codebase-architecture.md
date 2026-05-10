@@ -7,7 +7,7 @@ genericSkillRef: refactor-code
 status: named
 title: "The Depth Seeker"
 catalogRef: mattpocock-improve-codebase-architecture
-level: "III"
+level: "3⭐"
 description: Identifies architectural deepening opportunities in a codebase — shallow modules with high interface-to-implementation ratios — using domain-glossary vocabulary and the deletion test, then grills the developer on the chosen candidate to design a deep-module replacement with better locality and testability.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md

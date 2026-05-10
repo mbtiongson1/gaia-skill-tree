@@ -7,7 +7,7 @@ genericSkillRef: literature-review
 status: named
 title: "The Paper Indexer"
 catalogRef: huggingface-papers
-level: II
+level: "2⭐"
 description: Looks up Hugging Face paper pages and arXiv IDs, fetching markdown paper content and structured metadata such as authors, linked models, datasets, Spaces, GitHub repos, and project pages.
 links:
   github: https://github.com/huggingface/skills/blob/main/skills/huggingface-papers/SKILL.md

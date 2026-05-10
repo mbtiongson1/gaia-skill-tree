@@ -7,7 +7,7 @@ genericSkillRef: tool-creation
 status: named
 title: "The Skill Forger's Art"
 catalogRef: anthropic-skill-creator
-level: II
+level: "2⭐"
 description: Interviews the user through a structured dialogue to elicit the skill's purpose, trigger conditions, and step-by-step instructions, then programmatically writes a new SKILL.md file ready for use in a Claude Code or Codex CLI skills directory.
 links:
   github: https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md

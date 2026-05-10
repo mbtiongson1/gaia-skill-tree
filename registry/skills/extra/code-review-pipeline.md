@@ -1,7 +1,7 @@
-# Extra Skill: /code-review-pipeline  [III · Evolved]
+# Extra Skill: /code-review-pipeline  [3⭐ · Evolved]
 **ID:** code-review-pipeline  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/code-review-pipeline`
 

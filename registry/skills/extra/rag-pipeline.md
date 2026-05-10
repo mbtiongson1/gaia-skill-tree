@@ -1,7 +1,7 @@
-# Extra Skill: yonatangross/orchestkit-rag  [III · Evolved]
+# Extra Skill: yonatangross/orchestkit-rag  [3⭐ · Evolved]
 **ID:** rag-pipeline  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/rag-pipeline`
 

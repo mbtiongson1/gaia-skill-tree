@@ -1,7 +1,7 @@
-# Extra Skill: /security-audit  [II · Named]
+# Extra Skill: /security-audit  [2⭐ · Named]
 **ID:** security-audit  
 **Type:** Extra Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
 **Skill Call:** `/security-audit`
 

@@ -1,7 +1,7 @@
-# /vision-qa  [III · Evolved]
+# /vision-qa  [3⭐ · Evolved]
 **ID:** vision-qa  
 **Type:** Basic Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/vision-qa`
 

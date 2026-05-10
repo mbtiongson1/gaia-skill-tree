@@ -1,7 +1,7 @@
-# Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [V · Transcendent]
+# Ultimate Skill: /full-stack-developer [Unclaimed ✦]  [5⭐ · Transcendent]
 **ID:** full-stack-developer  
 **Type:** Ultimate Skill  
-**Level:** V  
+**Level:** 5⭐  
 **Tier:** Transcendent  
 **Skill Call:** `/full-stack-developer`
 

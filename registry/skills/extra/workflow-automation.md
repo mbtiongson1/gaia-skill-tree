@@ -1,7 +1,7 @@
-# Extra Skill: /workflow-automation  [IV · Hardened]
+# Extra Skill: /workflow-automation  [4⭐ · Hardened]
 **ID:** workflow-automation  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/workflow-automation`
 

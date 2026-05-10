@@ -1,7 +1,7 @@
-# Extra Skill: /skill-performance-benchmarking  [IV · Hardened]
+# Extra Skill: /skill-performance-benchmarking  [4⭐ · Hardened]
 **ID:** skill-performance-benchmarking  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/skill-performance-benchmarking`
 

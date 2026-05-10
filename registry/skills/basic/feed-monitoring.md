@@ -1,7 +1,7 @@
-# /feed-monitoring  [IV · Hardened]
+# /feed-monitoring  [4⭐ · Hardened]
 **ID:** feed-monitoring  
 **Type:** Basic Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/feed-monitoring`
 

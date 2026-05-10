@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/mcp-client/SKILL.md
 genericSkillRef: mcp-integration
 status: awakened
-level: III
+level: "3⭐"
 description: Portable CLI tool that connects to MCP servers on-demand, enumerates available tools, displays them, and executes calls — works with any MCP-compatible backend without platform lock-in.
 tags: [mcp, model-context-protocol, tool-integration, cli]
 ---

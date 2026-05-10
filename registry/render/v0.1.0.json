@@ -4,252 +4,252 @@
       "id": "tokenize",
       "label": "Tokenize",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "classify",
       "label": "Classify",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "retrieve",
       "label": "Retrieve",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "rank",
       "label": "Rank",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "parseJson",
       "label": "Parse JSON",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "parseHtml",
       "label": "Parse HTML",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "executeBash",
       "label": "Execute Bash",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "generateText",
       "label": "Generate Text",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "summarize",
       "label": "Summarize",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "citeSources",
       "label": "Cite Sources",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "extractEntities",
       "label": "Extract Entities",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "routeIntent",
       "label": "Route Intent",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "evaluateOutput",
       "label": "Evaluate Output",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "embedText",
       "label": "Embed Text",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "chunkDocument",
       "label": "Chunk Document",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "planDecompose",
       "label": "Plan and Decompose",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "writeReport",
       "label": "Write Report",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "audienceModel",
       "label": "Audience Model",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "toolSelect",
       "label": "Tool Select",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "errorInterpretation",
       "label": "Error Interpretation",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "codeGeneration",
       "label": "Code Generation",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "webSearch",
       "label": "Web Search",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "scoreRelevance",
       "label": "Score Relevance",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "formatOutput",
       "label": "Format Output",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "diffContent",
       "label": "Diff Content",
       "type": "atomic",
-      "level": "I",
+      "level": "1⭐",
       "rarity": "common"
     },
     {
       "id": "webScrape",
       "label": "Web Scrape",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "uncommon"
     },
     {
       "id": "research",
       "label": "Research",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "uncommon"
     },
     {
       "id": "ghostwrite",
       "label": "Ghostwrite",
       "type": "composite",
-      "level": "IV",
+      "level": "4⭐",
       "rarity": "rare"
     },
     {
       "id": "autonomousDebug",
       "label": "Autonomous Debug",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "rare"
     },
     {
       "id": "planAndExecute",
       "label": "Plan and Execute",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "rare"
     },
     {
       "id": "knowledgeHarvest",
       "label": "Knowledge Harvest",
       "type": "composite",
-      "level": "IV",
+      "level": "4⭐",
       "rarity": "rare"
     },
     {
       "id": "ragPipeline",
       "label": "RAG Pipeline",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "uncommon"
     },
     {
       "id": "documentAnalyst",
       "label": "Document Analyst",
       "type": "composite",
-      "level": "III",
+      "level": "3⭐",
       "rarity": "uncommon"
     },
     {
       "id": "recursiveSelfImprovement",
       "label": "Recursive Self-Improvement",
       "type": "legendary",
-      "level": "V",
+      "level": "5⭐",
       "rarity": "legendary"
     },
     {
       "id": "multiAgentOrchestrationV",
       "label": "Multi-Agent Orchestration V",
       "type": "legendary",
-      "level": "V",
+      "level": "5⭐",
       "rarity": "legendary"
     },
     {
       "id": "autonomousResearchAgent",
       "label": "Autonomous Research Agent",
       "type": "legendary",
-      "level": "VI",
+      "level": "6⭐",
       "rarity": "legendary"
     }
   ],

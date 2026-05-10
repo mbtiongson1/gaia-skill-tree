@@ -1,7 +1,7 @@
-# Extra Skill: /ghostwrite  [IV · Hardened]
+# Extra Skill: /ghostwrite  [4⭐ · Hardened]
 **ID:** ghostwrite  
 **Type:** Extra Skill  
-**Level:** IV  
+**Level:** 4⭐  
 **Tier:** Hardened  
 **Skill Call:** `/ghostwrite`
 

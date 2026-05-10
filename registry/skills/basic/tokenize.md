@@ -1,7 +1,7 @@
-# /tokenize  [0 · Basic]
+# /tokenize  [0⭐ · Basic]
 **ID:** tokenize  
 **Type:** Basic Skill  
-**Level:** 0  
+**Level:** 0⭐  
 **Tier:** Basic  
 **Skill Call:** `/tokenize`
 

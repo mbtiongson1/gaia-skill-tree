@@ -1,9 +1,9 @@
-# Extra Skill: /deployment-automation  [II · Named]
+# Extra Skill: /deployment-automation  [2⭐ · Named]
 **ID:** deployment-automation  
 **Type:** Extra Skill  
-**Level:** II  
+**Level:** 2⭐  
 **Tier:** Named  
-**Potential:** I  
+**Potential:** 1⭐  
 **Demerits:** heavyweight-dependency  
 **Skill Call:** `/deployment-automation`
 

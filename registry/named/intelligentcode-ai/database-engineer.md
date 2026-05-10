@@ -5,7 +5,7 @@ contributor: intelligentcode-ai
 origin: https://github.com/intelligentcode-ai/skills/blob/main/skills/database-engineer/SKILL.md
 genericSkillRef: schema-design
 status: awakened
-level: II
+level: "2⭐"
 description: Schema design and query optimization expert across relational, NoSQL, graph, time-series, and data warehouse stores with sub-second response targets.
 tags: [database, schema, sql, nosql, graph-db, time-series, normalization]
 ---

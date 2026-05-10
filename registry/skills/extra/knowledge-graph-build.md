@@ -1,7 +1,7 @@
-# Extra Skill: /knowledge-graph-build  [III · Evolved]
+# Extra Skill: /knowledge-graph-build  [3⭐ · Evolved]
 **ID:** knowledge-graph-build  
 **Type:** Extra Skill  
-**Level:** III  
+**Level:** 3⭐  
 **Tier:** Evolved  
 **Skill Call:** `/knowledge-graph-build`
 
