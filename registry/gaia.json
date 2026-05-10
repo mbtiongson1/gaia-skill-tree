@@ -291,7 +291,8 @@
       "prerequisites": [],
       "derivatives": [
         "prompt-optimization",
-        "release-automation"
+        "release-automation",
+        "skill-authoring"
       ],
       "conditions": "",
       "evidence": [
@@ -306,7 +307,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-29",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -685,7 +686,8 @@
         "code-review-pipeline",
         "registry-curation",
         "tool-creation",
-        "ml-pipeline"
+        "ml-pipeline",
+        "skill-authoring"
       ],
       "conditions": "",
       "evidence": [
@@ -700,7 +702,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-26",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -1481,7 +1483,8 @@
       "prerequisites": [],
       "derivatives": [
         "function-calling",
-        "workflow-automation"
+        "workflow-automation",
+        "mcp-server-creation"
       ],
       "conditions": "",
       "evidence": [
@@ -1496,7 +1499,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-05-10",
       "version": "0.2.0"
     },
     {
@@ -2352,7 +2355,8 @@
         "rag-pipeline",
         "text-to-sql-pipeline",
         "function-calling",
-        "guardrails"
+        "guardrails",
+        "skill-authoring"
       ],
       "conditions": "",
       "evidence": [
@@ -2374,7 +2378,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-28",
-      "updatedAt": "2026-04-28",
+      "updatedAt": "2026-05-10",
       "version": "0.2.0"
     },
     {
@@ -2789,7 +2793,8 @@
       ],
       "derivatives": [
         "full-stack-developer",
-        "autonomous-research-agent"
+        "autonomous-research-agent",
+        "mcp-server-creation"
       ],
       "conditions": "",
       "evidence": [
@@ -2811,7 +2816,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-29",
-      "updatedAt": "2026-04-29",
+      "updatedAt": "2026-05-10",
       "version": "0.2.0"
     },
     {
@@ -3111,7 +3116,9 @@
         "evaluate-output",
         "score-relevance"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "skill-performance-benchmarking"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3139,7 +3146,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -3260,7 +3267,10 @@
       "rarity": "common",
       "description": "Searches a skill or tool registry, ranks results by relevance and install count, and surfaces candidates for the agent to adopt or invoke.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "skill-performance-benchmarking",
+        "skill-security-analysis"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3274,7 +3284,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -3401,7 +3411,9 @@
       "rarity": "uncommon",
       "description": "Detects and neutralizes adversarial instructions injected into agent context from untrusted external sources (indirect prompt injection), using techniques such as context isolation, hierarchical intent verification, or semantic consistency checks.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "skill-security-analysis"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3429,7 +3441,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -3645,7 +3657,8 @@
       "description": "Performs hypothesis testing, regression analysis, and Bayesian modelling with effect size calculation and APA-formatted statistical reporting using scipy, statsmodels, and PyMC.",
       "prerequisites": [],
       "derivatives": [
-        "prediction-market-analysis"
+        "prediction-market-analysis",
+        "skill-performance-benchmarking"
       ],
       "conditions": "",
       "evidence": [
@@ -3667,7 +3680,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-05-06",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     },
     {
@@ -3813,7 +3826,9 @@
       "rarity": "uncommon",
       "description": "Connect to and invoke tools exposed by Model Context Protocol (MCP) servers \u2014 enumerate available tools, execute calls, and handle responses across any MCP-compatible backend.",
       "prerequisites": [],
-      "derivatives": [],
+      "derivatives": [
+        "mcp-server-creation"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -3844,7 +3859,7 @@
       ],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.2.0"
     },
     {
@@ -3968,7 +3983,9 @@
         "code-review-pipeline",
         "evaluate-output"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "skill-security-analysis"
+      ],
       "conditions": "Requires access to the full codebase or diff; output must include severity classification and reproduction steps.",
       "evidence": [
         {
@@ -3989,7 +4006,7 @@
       "knownAgents": [],
       "status": "provisional",
       "createdAt": "2026-04-30",
-      "updatedAt": "2026-04-30",
+      "updatedAt": "2026-05-10",
       "version": "0.2.0"
     },
     {
@@ -4201,6 +4218,183 @@
       "status": "provisional",
       "createdAt": "2026-05-06",
       "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "skill-authoring",
+      "name": "Skill Authoring",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Designs, writes, packages, and iteratively improves reusable agent skill directories with metadata, progressive instructions, supporting assets, and measurable trigger criteria.",
+      "prerequisites": [
+        "generate-text",
+        "structured-output",
+        "code-generation"
+      ],
+      "derivatives": [
+        "skill-performance-benchmarking",
+        "registry-curation"
+      ],
+      "conditions": "Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2602.08004",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Agent Skills data-driven analysis characterizes SKILL.md packages as an emerging infrastructure layer and quantifies common design, reuse, and safety patterns."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Anthropic skill-creator provides a reproducible workflow for creating, editing, evaluating, benchmarking, and optimizing agent skills."
+        }
+      ],
+      "knownAgents": [
+        "Claude"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-10",
+      "updatedAt": "2026-05-10",
+      "version": "0.1.0"
+    },
+    {
+      "id": "skill-performance-benchmarking",
+      "name": "Skill Performance Benchmarking",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Builds and runs task suites that measure whether agents select, invoke, and complete installed skills correctly across artifact-rich workflows and repeated trials.",
+      "prerequisites": [
+        "agent-eval",
+        "skill-discovery",
+        "statistical-analysis"
+      ],
+      "derivatives": [
+        "registry-curation",
+        "gaia-meta-audit"
+      ],
+      "conditions": "Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2603.02176",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "AgentSkillOS paper introduces ecosystem-scale organization, orchestration, and benchmarking with a 30-task suite spanning data computation, documents, video, design, and web interaction."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Anthropic skill-creator explicitly includes measuring skill performance, benchmarking with variance analysis, and optimizing skill descriptions for triggering accuracy."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/ynulihao/AgentSkillOS",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "AgentSkillOS repository provides the reproducible retrieval/orchestration framework and benchmark implementation for 30 artifact-rich agent-skill tasks with Bradley-Terry scoring."
+        }
+      ],
+      "knownAgents": [
+        "Claude"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-10",
+      "updatedAt": "2026-05-10",
+      "version": "0.1.0"
+    },
+    {
+      "id": "skill-security-analysis",
+      "name": "Skill Security Analysis",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Assesses third-party agent skills for malicious behavior, unsafe permissions, prompt-injection exposure, repository-context mismatch, and supply-chain risk before installation or invocation.",
+      "prerequisites": [
+        "security-audit",
+        "prompt-injection-defense",
+        "skill-discovery"
+      ],
+      "derivatives": [
+        "guardrails",
+        "registry-curation"
+      ],
+      "conditions": "Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2603.16572",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Malicious Or Not studies agent skill classification and improves detection by comparing skill descriptions with surrounding repository context."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2602.12430",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Agent Skills architecture and security survey reports vulnerabilities in community-contributed skills and proposes a governance framework for provenance and deployment permissions."
+        },
+        {
+          "class": "A",
+          "source": "https://arxiv.org/abs/2604.25109",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "SkillGuard-Robust formulates pre-load auditing for untrusted Agent Skills as cross-file package review over SKILL.md, scripts, references, and repository context, with reported high exact-match and malicious-risk recall."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-10",
+      "updatedAt": "2026-05-10",
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-server-creation",
+      "name": "MCP Server Creation",
+      "type": "extra",
+      "level": "IV",
+      "rarity": "rare",
+      "description": "Designs and implements Model Context Protocol servers that expose external APIs, files, or services as well-typed tools with clear schemas, authentication, and testable agent workflows.",
+      "prerequisites": [
+        "mcp-integration",
+        "tool-creation",
+        "api-call"
+      ],
+      "derivatives": [
+        "workflow-automation",
+        "tool-chaining",
+        "multi-agent-orchestration-v"
+      ],
+      "conditions": "Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Anthropic mcp-builder skill gives a reproducible guide for building high-quality MCP servers in Python FastMCP or the Node/TypeScript MCP SDK."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/modelcontextprotocol/python-sdk",
+          "evaluator": "codex",
+          "date": "2026-05-10",
+          "notes": "Official MCP Python SDK is active and provides FastMCP server examples for exposing tools, resources, prompts, structured outputs, transports, and inspector-based testing."
+        }
+      ],
+      "knownAgents": [
+        "Claude"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-10",
+      "updatedAt": "2026-05-10",
       "version": "0.1.0"
     }
   ],
@@ -5893,6 +6087,126 @@
       "levelFloor": "II",
       "evidenceRefs": [
         "architecture-diagram#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "generate-text",
+      "targetSkillId": "skill-authoring",
+      "edgeType": "prerequisite",
+      "condition": "Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-authoring#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "structured-output",
+      "targetSkillId": "skill-authoring",
+      "edgeType": "prerequisite",
+      "condition": "Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-authoring#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "skill-authoring",
+      "edgeType": "prerequisite",
+      "condition": "Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-authoring#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "agent-eval",
+      "targetSkillId": "skill-performance-benchmarking",
+      "edgeType": "prerequisite",
+      "condition": "Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-performance-benchmarking#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "skill-discovery",
+      "targetSkillId": "skill-performance-benchmarking",
+      "edgeType": "prerequisite",
+      "condition": "Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-performance-benchmarking#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "statistical-analysis",
+      "targetSkillId": "skill-performance-benchmarking",
+      "edgeType": "prerequisite",
+      "condition": "Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-performance-benchmarking#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "security-audit",
+      "targetSkillId": "skill-security-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-security-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "prompt-injection-defense",
+      "targetSkillId": "skill-security-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-security-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "skill-discovery",
+      "targetSkillId": "skill-security-analysis",
+      "edgeType": "prerequisite",
+      "condition": "Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "skill-security-analysis#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "mcp-integration",
+      "targetSkillId": "mcp-server-creation",
+      "edgeType": "prerequisite",
+      "condition": "Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "mcp-server-creation#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "tool-creation",
+      "targetSkillId": "mcp-server-creation",
+      "edgeType": "prerequisite",
+      "condition": "Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "mcp-server-creation#evidence[0]"
+      ]
+    },
+    {
+      "sourceSkillId": "api-call",
+      "targetSkillId": "mcp-server-creation",
+      "edgeType": "prerequisite",
+      "condition": "Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client.",
+      "levelFloor": "II",
+      "evidenceRefs": [
+        "mcp-server-creation#evidence[0]"
       ]
     }
   ]

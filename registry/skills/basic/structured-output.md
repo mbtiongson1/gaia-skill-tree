@@ -18,6 +18,7 @@ _None._
 - [Text-to-SQL Pipeline](../extra/text-to-sql-pipeline.md)
 - [Function Calling](../extra/function-calling.md)
 - [Guardrails](../extra/guardrails.md)
+- [Skill Authoring](../extra/skill-authoring.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

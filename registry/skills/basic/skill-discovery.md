@@ -14,7 +14,8 @@ Searches a skill or tool registry, ranks results by relevance and install count,
 _None._
 
 ## Unlocks
-_None._
+- [Skill Performance Benchmarking](../extra/skill-performance-benchmarking.md)
+- [Skill Security Analysis](../extra/skill-security-analysis.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

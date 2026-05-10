@@ -11,6 +11,7 @@ Authoritative list of known skill sources and marketplaces. `gaia-curate` agents
 | Name | URL | Type | Search |
 |---|---|---|---|
 | SkillsMP | https://skillsmp.com | marketplace | `GET /api/v1/skills/search?q=<skill>` — 50 req/day unauthenticated |
+| SkillKit | https://skillkit.io | marketplace | browse directory pages for SKILL.md packages and source links |
 | GLINCKER Claude Marketplace | https://github.com/GLINCKER/claude-code-marketplace | github-repo | `gh api repos/GLINCKER/claude-code-marketplace/contents/skills` |
 | MCP.so Registry | https://mcp.so | mcp-registry | `WebFetch /servers` — list all MCP servers as skill evidence candidates |
 | Smithery MCP Registry | https://smithery.ai | mcp-registry | `WebFetch /` — browse MCP tool listings |
@@ -19,7 +20,9 @@ Authoritative list of known skill sources and marketplaces. `gaia-curate` agents
 
 | Name | URL | Type | Search |
 |---|---|---|---|
+| anthropics/skills | https://github.com/anthropics/skills | github-repo | `gh api repos/anthropics/skills/contents/skills` |
 | mattpocock/skills | https://github.com/mattpocock/skills | github-repo | `gh api repos/mattpocock/skills/contents/skills` |
+| addyosmani/agent-skills | https://github.com/addyosmani/agent-skills | github-repo | `gh api repos/addyosmani/agent-skills/contents/skills` |
 | intelligentcode-ai/skills | https://github.com/intelligentcode-ai/skills | github-repo | `gh api repos/intelligentcode-ai/skills/contents/skills` |
 | ruvnet/ruflo | https://github.com/ruvnet/ruflo | github-repo | orchestration platform; check `/skills` and `/.claude/skills` |
 | karpathy/autoresearch | https://github.com/karpathy/autoresearch | github-repo | origin implementation of autonomous-research-agent |

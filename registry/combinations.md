@@ -29,6 +29,7 @@
 | ◇ Extra Skill: /knowledge-graph-build | Extra Skill | Extract Entities, Logical Inference | III |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | IV |  |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | IV | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
+| ◇ Extra Skill: /mcp-server-creation | Extra Skill | MCP Integration, Tool Creation, API Call | IV | Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client. |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | IV | Requires access to a container orchestration environment and model registry. |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | IV |  |
 | ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | Plan and Execute, Route Intent, Tool Select | V | Requires extensive multi-system validation before level advancement. |
@@ -47,6 +48,9 @@
 | ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦] | Ultimate Skill | Hypothesis Generation, Research, Math Reason | V | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Extra Skill: /scientific-writing | Extra Skill | Write Report, Cite Sources, Scientific Visualization | III |  |
 | ◇ Extra Skill: /security-audit | Extra Skill | Code Review Pipeline, Evaluate Output | II | Requires access to the full codebase or diff; output must include severity classification and reproduction steps. |
+| ◇ Extra Skill: /skill-authoring | Extra Skill | Generate Text, Structured Output Generation, Code Generation | IV | Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success. |
+| ◇ Extra Skill: /skill-performance-benchmarking | Extra Skill | Agent Evaluation, Skill Discovery, Statistical Analysis | IV | Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs. |
+| ◇ Extra Skill: /skill-security-analysis | Extra Skill | Security Audit, Prompt Injection Defense, Skill Discovery | IV | Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions. |
 | ◇ Extra Skill: /text-to-sql-pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | III | Requires schema context in prompt. |
 | ◇ Extra Skill: /tool-chaining | Extra Skill | Tool Use, Tool Select | III | Requires at least two distinct tools whose data schemas are compatible for chaining. |
 | ◇ Extra Skill: anthropic/skill-creator | Extra Skill | Code Generation, Tool Use | IV |  |

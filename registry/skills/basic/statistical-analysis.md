@@ -15,6 +15,7 @@ _None._
 
 ## Unlocks
 - [Prediction Market Analysis](../extra/prediction-market-analysis.md)
+- [Skill Performance Benchmarking](../extra/skill-performance-benchmarking.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |

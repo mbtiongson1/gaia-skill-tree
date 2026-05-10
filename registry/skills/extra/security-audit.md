@@ -15,7 +15,7 @@ Systematically identify security vulnerabilities, assess attack surface, and pro
 - [Evaluate Output](../basic/evaluate-output.md)
 
 ## Unlocks
-_None._
+- [Skill Security Analysis](../extra/skill-security-analysis.md)
 
 ## Fusion Condition
 Requires access to the full codebase or diff; output must include severity classification and reproduction steps.

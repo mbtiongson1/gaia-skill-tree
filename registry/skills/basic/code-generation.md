@@ -19,6 +19,7 @@ _None._
 - [Registry Curation](../extra/registry-curation.md)
 - [Tool Creation](../extra/tool-creation.md)
 - [ML Pipeline](../extra/ml-pipeline.md)
+- [Skill Authoring](../extra/skill-authoring.md)
 
 ## Evidence
 | Class | Source | Evaluator | Date |
