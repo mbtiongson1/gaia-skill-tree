@@ -1,7 +1,7 @@
-# Extra Skill: /humanize-prose  [4⭐ · Hardened]
+# Extra Skill: /humanize-prose  [4★ · Hardened]
 **ID:** humanize-prose  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/humanize-prose`
 

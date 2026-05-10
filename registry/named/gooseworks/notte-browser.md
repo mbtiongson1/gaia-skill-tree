@@ -7,7 +7,7 @@ genericSkillRef: browser-automation
 status: named
 title: "The Digital Navigator"
 catalogRef: gooseworks-notte-browser
-level: "3⭐"
+level: "3★"
 description: AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.
 links:
   github: https://github.com/gooseworks-ai/goose-skills

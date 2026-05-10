@@ -7,7 +7,7 @@ genericSkillRef: test-driven-development
 status: named
 title: "The Red-Green Oath"
 catalogRef: addy-osmani-test-driven-development
-level: "2⭐"
+level: "2★"
 description: Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.
 links:
   github: https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md

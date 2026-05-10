@@ -1,7 +1,7 @@
-# Extra Skill: mattpocock/to-issues  [3⭐ · Evolved]
+# Extra Skill: mattpocock/to-issues  [3★ · Evolved]
 **ID:** vertical-slice-planning  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/vertical-slice-planning`
 
