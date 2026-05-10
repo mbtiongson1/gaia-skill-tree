@@ -1,7 +1,7 @@
-# Ultimate Skill: /scientific-discovery [Unclaimed ✦]  [5⭐ · Transcendent]
+# Ultimate Skill: /scientific-discovery [Unclaimed ✦]  [5★ · Transcendent]
 **ID:** scientific-discovery  
 **Type:** Ultimate Skill  
-**Level:** 5⭐  
+**Level:** 5★  
 **Tier:** Transcendent  
 **Skill Call:** `/scientific-discovery`
 

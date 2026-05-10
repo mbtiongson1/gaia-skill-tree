@@ -1,6 +1,6 @@
 # DESIGN.md — Gaia Skill Registry
-**Version:** 0.1.0-draft  
-**Status:** In Review  
+**Version:** 0.1.0-draft
+**Status:** In Review
 **Last Updated:** 2026-04-26
 
 ---
@@ -261,10 +261,10 @@ Each skill gets a generated `.md` page. Structure:
 
 ```markdown
 # Web Scrape
-**ID:** webScrape  
-**Type:** Composite  
-**Level:** III — Competent  
-**Rarity:** Uncommon  
+**ID:** webScrape
+**Type:** Composite
+**Level:** III — Competent
+**Rarity:** Uncommon
 **Status:** Validated
 
 ---
@@ -301,9 +301,9 @@ _None verified yet._
 
 ```markdown
 # Skill Tree — mbtiongson1
-**Last Updated:** 2026-04-26  
-**Total Skills Unlocked:** 14  
-**Highest Rarity:** Rare  
+**Last Updated:** 2026-04-26
+**Total Skills Unlocked:** 14
+**Highest Rarity:** Rare
 **Deepest Lineage:** 5
 
 ---
@@ -319,8 +319,8 @@ _None verified yet._
 
 ## Pending Combinations
 
-> **autonomousDebug** — combine `codeGeneration` + `executeBash` + `errorInterpretation`  
-> Level floor: III · Detected in: tracker-automation  
+> **autonomousDebug** — combine `codeGeneration` + `executeBash` + `errorInterpretation`
+> Level floor: III · Detected in: tracker-automation
 > Run `gaia fuse autonomousDebug` to confirm.
 
 ---
@@ -352,7 +352,7 @@ gaia push [--dry-run] [--no-pr]
 gaia propose /<skillId> [--ultimate] [--target <contributor/name>] [--no-pr]
   Proposes a named implementation for a specific canonical skill.
   Creates a proposal batch and opens an intake PR.
-  Use --ultimate for 5⭐/6⭐ skills.
+  Use --ultimate for 5★/6★ skills.
 
 gaia name <batch-file> <index> <contributor/skill-name>
   Promotes an awakened skill from intake to a named skill in graph/named/.
@@ -440,13 +440,13 @@ jobs:
           - Reference integrity (all parent IDs resolvable)
           - Evidence threshold by level
           - Legendary approval count
-      
+
   generate:
     needs: validate
     steps:
       - Run scripts/generateProjections.py
       - Fail if generated output differs from committed files
-      
+
   dag-checks:
     needs: validate
     steps:
@@ -463,7 +463,7 @@ jobs:
 ```json
 {
   "nodes": [
-    { "id": "webScrape", "label": "Web Scrape", "type": "extra", "level": "3⭐", "rarity": "uncommon" }
+    { "id": "webScrape", "label": "Web Scrape", "type": "extra", "level": "3★", "rarity": "uncommon" }
   ],
   "edges": [
     { "source": "webSearch", "target": "webScrape", "type": "prerequisite" }
@@ -517,7 +517,7 @@ Named skills are real, user-contributed implementations of generic skills. They 
 |---|---|---|
 | Location | `graph/gaia.json` | `graph/named/{contributor}/{skill-name}.md` |
 | Identity | Abstract capability (e.g., `autonomous-research-agent`) | Concrete implementation (e.g., `karpathy/autoresearch`) |
-| Level restriction | All levels (I–VI) | 2⭐ ("Named") and above only |
+| Level restriction | All levels (I–VI) | 2★ ("Named") and above only |
 | Origin | Defined by taxonomy maintainers | Attributed to first contributor |
 | Edit | Direct PR to `gaia.json` | PR to `graph/named/` |
 
@@ -564,7 +564,7 @@ The `graph/named/index.json` file produced by `generateNamedIndex.py` has three 
 - `awaitingClassification` — skills with `status: awakened`, pending reviewer action
 - `byContributor` — secondary index mapping contributor username → list of named skill IDs
 
-0⭐ (Basic) and 1⭐ (Awakened) skills are generic-only and do not accept named implementations.
+0★ (Basic) and 1★ (Awakened) skills are generic-only and do not accept named implementations.
 
 ### 13.4 Install & Sync
 

@@ -7,7 +7,7 @@ genericSkillRef: vertical-slice-planning
 status: named
 title: "The Vertical Slicer"
 catalogRef: mattpocock-to-issues
-level: "3⭐"
+level: "3★"
 description: Breaks a plan, spec, or PRD into independently-grabbable GitHub issues as tracer-bullet vertical slices that each cut through all integration layers end-to-end. Classifies each slice HITL or AFK, maps dependency chains, quizzes the user on granularity, and publishes structured issues with acceptance criteria in dependency order.
 links:
   github: https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md

@@ -1,7 +1,7 @@
-# Extra Skill: /grounding  [3⭐ · Evolved]
+# Extra Skill: /grounding  [3★ · Evolved]
 **ID:** grounding  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/grounding`
 

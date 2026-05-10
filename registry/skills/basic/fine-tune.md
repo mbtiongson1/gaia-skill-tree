@@ -1,7 +1,7 @@
-# huggingface/huggingface-llm-trainer  [4⭐ · Hardened]
+# huggingface/huggingface-llm-trainer  [4★ · Hardened]
 **ID:** fine-tune  
 **Type:** Basic Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/fine-tune`
 

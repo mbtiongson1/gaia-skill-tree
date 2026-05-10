@@ -7,7 +7,7 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
-      "level": "3⭐",
+      "level": "3★",
       "rarity": "common",
       "description": "Composite with only one prerequisite.",
       "prerequisites": [
@@ -31,7 +31,7 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
-      "level": "2⭐",
+      "level": "2★",
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

@@ -1,7 +1,7 @@
-# /retrieve  [1⭐ · Awakened]
+# /retrieve  [1★ · Awakened]
 **ID:** retrieve  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/retrieve`
 

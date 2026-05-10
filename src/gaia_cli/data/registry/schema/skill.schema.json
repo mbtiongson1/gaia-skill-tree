@@ -48,15 +48,15 @@
     "level": {
       "type": "string",
       "enum": [
-        "0⭐",
-        "1⭐",
-        "2⭐",
-        "3⭐",
-        "4⭐",
-        "5⭐",
-        "6⭐"
+        "0★",
+        "1★",
+        "2★",
+        "3★",
+        "4★",
+        "5★",
+        "6★"
       ],
-      "description": "Skill tier in the upgrade path (0⭐ = Basic, 1⭐ = Awakened, 6⭐ = Transcendent ★)."
+      "description": "Skill tier in the upgrade path (0★ = Basic, 1★ = Awakened, 6★ = Transcendent ★)."
     },
     "rarity": {
       "type": "string",
@@ -124,7 +124,7 @@
           "contributor": { "type": "string" },
           "level": {
             "type": "string",
-            "enum": ["2⭐", "3⭐", "4⭐", "5⭐", "6⭐"]
+            "enum": ["2★", "3★", "4★", "5★", "6★"]
           },
           "origin": { "type": "boolean" },
           "catalogRef": { "type": "string" }

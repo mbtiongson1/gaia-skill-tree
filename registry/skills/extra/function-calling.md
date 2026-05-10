@@ -1,7 +1,7 @@
-# Extra Skill: /function-calling  [3⭐ · Evolved]
+# Extra Skill: /function-calling  [3★ · Evolved]
 **ID:** function-calling  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/function-calling`
 

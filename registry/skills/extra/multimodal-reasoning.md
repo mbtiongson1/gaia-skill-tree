@@ -1,9 +1,9 @@
-# Extra Skill: huggingface/transformers-js  [3⭐ · Evolved]
+# Extra Skill: huggingface/transformers-js  [3★ · Evolved]
 **ID:** multimodal-reasoning  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
-**Potential:** 2⭐  
+**Potential:** 2★  
 **Demerits:** experimental-feature  
 **Skill Call:** `/multimodal-reasoning`
 

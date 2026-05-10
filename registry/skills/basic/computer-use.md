@@ -1,7 +1,7 @@
-# /computer-use  [2⭐ · Named]
+# /computer-use  [2★ · Named]
 **ID:** computer-use  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/computer-use`
 

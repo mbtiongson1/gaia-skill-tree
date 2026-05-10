@@ -1,7 +1,7 @@
-# /structured-output  [1⭐ · Awakened]
+# /structured-output  [1★ · Awakened]
 **ID:** structured-output  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/structured-output`
 

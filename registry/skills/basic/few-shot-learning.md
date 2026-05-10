@@ -1,7 +1,7 @@
-# /few-shot-learning  [4⭐ · Hardened]
+# /few-shot-learning  [4★ · Hardened]
 **ID:** few-shot-learning  
 **Type:** Basic Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/few-shot-learning`
 

@@ -87,7 +87,7 @@ def promote_to_named(skill_data, contributor, skill_name, registry_path):
         "origin: true\n"
         f"genericSkillRef: {skill_data['id']}\n"
         "status: named\n"
-        "level: II\n"
+        "level: 2★\n"
         f"description: {skill_data['description']}\n"
         "links:\n"
         f"  github: https://github.com/{contributor}/{skill_name}\n"

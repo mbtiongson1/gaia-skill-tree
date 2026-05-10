@@ -22,7 +22,7 @@ const TEST_SKILL_A: NamedSkill = {
   origin: true,
   genericSkillRef: "autonomous-research-agent",
   status: "named",
-  level: "2⭐",
+  level: "2★",
   description: "Autonomous research agent that synthesizes academic papers.",
   tags: ["research", "autonomous", "paper-synthesis"],
   createdAt: "2026-04-29",
@@ -36,7 +36,7 @@ const TEST_SKILL_B: NamedSkill = {
   origin: true,
   genericSkillRef: "autonomous-debug",
   status: "named",
-  level: "3⭐",
+  level: "3★",
   description: "Autonomous software engineering agent for end-to-end debugging.",
   tags: ["software-engineering", "autonomous", "debugging"],
   createdAt: "2026-04-29",
@@ -144,7 +144,7 @@ describe("namedLoader", () => {
       const [skill] = getNamedSkillsForGeneric("autonomous-research-agent", indexPath);
       expect(skill.contributor).toBe("karpathy");
       expect(skill.origin).toBe(true);
-      expect(skill.level).toBe("2⭐");
+      expect(skill.level).toBe("2★");
       expect(skill.status).toBe("named");
     });
   });
@@ -240,7 +240,7 @@ describe("namedLoader", () => {
               origin: true,
               genericSkillRef: "web-search",
               status: "named",
-              level: "2⭐",
+              level: "2★",
               description: "A web search skill.",
               createdAt: "2026-05-01",
               updatedAt: "2026-05-01",

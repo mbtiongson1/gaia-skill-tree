@@ -65,13 +65,13 @@ Single-file SPA with three JS modules and embedded CSS:
 - Hash routing: `#/explorer/:skillId` → opens overlay with tabs (Overview, Prerequisites, Evidence, Flowchart, Timeline)
 - Flowchart: SVG grid layout with bezier edges connecting prerequisites → target
 - GitHub timeline: Fetches commit history for the skill's canonical markdown file
-- 6⭐ shimmer + 5⭐ pulse animations
+- 6★ shimmer + 5★ pulse animations
 
 ---
 
 ## Golden Rule
 
-**`graph/gaia.json` is the only file humans ever directly edit.**  
+**`graph/gaia.json` is the only file humans ever directly edit.**
 Every other file is generated; CI fails if generated files are stale relative to `gaia.json`.
 
 ---

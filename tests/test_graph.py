@@ -17,14 +17,14 @@ def make_registry(root):
                         "id": "tokenize",
                         "name": "Tokenize",
                         "type": "basic",
-                        "level": "1⭐",
+                        "level": "1★",
                         "prerequisites": [],
                     },
                     {
                         "id": "research",
                         "name": "Research",
                         "type": "extra",
-                        "level": "3⭐",
+                        "level": "3★",
                         "demerits": ["experimental-feature"],
                         "prerequisites": ["tokenize"],
                     },
@@ -85,9 +85,9 @@ def test_write_graph_artifact_keeps_render_json_default_path(tmp_path):
     data = json.loads(out_path.read_text(encoding="utf-8"))
     assert data["nodes"][0]["id"] == "tokenize"
     research_node = next(node for node in data["nodes"] if node["id"] == "research")
-    assert research_node["effectiveLevel"] == "2⭐"
-    assert research_node["levelMeta"]["baseLevel"] == "3⭐"
-    assert research_node["levelMeta"]["effectiveLevel"] == "2⭐"
+    assert research_node["effectiveLevel"] == "2★"
+    assert research_node["levelMeta"]["baseLevel"] == "3★"
+    assert research_node["levelMeta"]["effectiveLevel"] == "2★"
     assert research_node["demerits"] == ["experimental-feature"]
     assert data["edges"] == [{"source": "tokenize", "target": "research", "type": "extra"}]
 

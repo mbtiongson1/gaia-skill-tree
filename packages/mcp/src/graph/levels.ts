@@ -1,13 +1,13 @@
 import type { DemeritId, Skill } from "./types.js";
 
-const LEVEL_ORDER = ["0⭐", "1⭐", "2⭐", "3⭐", "4⭐", "5⭐", "6⭐"] as const;
+const LEVEL_ORDER = ["0★", "1★", "2★", "3★", "4★", "5★", "6★"] as const;
 const DEMERIT_ORDER: readonly DemeritId[] = [
   "niche-integration",
   "experimental-feature",
   "heavyweight-dependency",
 ];
-const DEMERIT_ELIGIBLE_LEVELS = new Set(["2⭐", "3⭐", "4⭐", "5⭐", "6⭐"]);
-const MIN_EFFECTIVE_LEVEL = "1⭐";
+const DEMERIT_ELIGIBLE_LEVELS = new Set(["2★", "3★", "4★", "5★", "6★"]);
+const MIN_EFFECTIVE_LEVEL = "1★";
 
 function levelIndex(level: string): number {
   return LEVEL_ORDER.indexOf(level as (typeof LEVEL_ORDER)[number]);

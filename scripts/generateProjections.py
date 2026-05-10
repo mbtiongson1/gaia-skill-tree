@@ -109,7 +109,7 @@ def _build_skill_display(skill_id, skill_type, named_map=None):
     return named_id if named_id else f"/{skill_id}"
 
 def _sorted_ultimates(skills):
-    order = {"6⭐": 0, "5⭐": 1, "4⭐": 2, "3⭐": 3, "2⭐": 4, "1⭐": 5, "0⭐": 6}
+    order = {"6★": 0, "5★": 1, "4★": 2, "3★": 3, "2★": 4, "1★": 5, "0★": 6}
     return sorted(
         [s for s in skills if s.get("type") == "ultimate"],
         key=lambda s: (order.get(s.get("level"), 9), s.get("name", ""))
@@ -388,11 +388,11 @@ def main():
             with open(md_path, "w", encoding="utf-8") as f:
                 user_id = tree.get("userId", username)
                 f.write(f"# Skill Tree — {user_id}\n")
-                f.write(f"**Last Updated:** {tree.get('updatedAt', 'unknown')}  \n")
+                f.write(f"**Last Updated:** {tree.get('updatedAt', 'unknown')}\n")
                 stats = tree.get("stats", {})
-                f.write(f"**Total Skills Unlocked:** {stats.get('totalUnlocked', 0)}  \n")
+                f.write(f"**Total Skills Unlocked:** {stats.get('totalUnlocked', 0)}\n")
                 highest_level = stats.get('highestLevel', stats.get('highestRarity', ''))
-                f.write(f"**Highest Tier:** {get_tier_label(meta, highest_level)}  \n")
+                f.write(f"**Highest Tier:** {get_tier_label(meta, highest_level)}\n")
                 f.write(f"**Deepest Lineage:** {stats.get('deepestLineage', 0)}\n\n")
                 f.write("---\n\n")
 
@@ -454,8 +454,8 @@ def main():
                         candidate = pc.get("candidateResult", "")
                         prereqs_list = ", ".join(f"`{s}`" for s in pc.get("detectedSkills", []))
                         level_floor = get_level_label(meta, pc.get("levelFloor", ""))
-                        f.write(f"> **{candidate}** — combine {prereqs_list}  \n")
-                        f.write(f"> Level floor: {level_floor}  \n")
+                        f.write(f"> **{candidate}** — combine {prereqs_list}\n")
+                        f.write(f"> Level floor: {level_floor}\n")
                         f.write(f"> Run `gaia fuse {candidate}` to confirm.\n\n")
                 else:
                     f.write("_No pending combinations._\n\n")

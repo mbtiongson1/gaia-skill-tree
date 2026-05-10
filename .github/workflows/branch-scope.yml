@@ -126,7 +126,9 @@ jobs:
             esac
           done <<< "$FILES"
 
-          if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ]; then
+          # dev/* branches are consolidation branches and may include schema changes
+          # alongside docs, UI, tests, and generated artifacts.
+          if [ -n "$SCHEMA_CHANGED" ] && [ "$PREFIX" != "schema" ] && [ "$PREFIX" != "infra" ] && [ "$PREFIX" != "dev" ]; then
             echo "::error::Schema files changed on a non-schema branch. Use a schema/ branch for nomenclature changes."
             echo ""
             echo "Files touching registry/schema/:"
@@ -134,7 +136,7 @@ jobs:
               echo "  - $f"
             done
             echo ""
-            echo "Create your branch as: schema/<description>"
+            echo "Create your branch as: schema/<description>, use a dev/* consolidation branch, or add the 'skip-scope-check' label."
             exit 1
           fi
 

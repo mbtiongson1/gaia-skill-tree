@@ -4,42 +4,42 @@
   "unlockedSkills": [
     {
       "skillId": "web-search",
-      "level": "2⭐",
+      "level": "2★",
       "unlockedAt": "2026-03-01",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": []
     },
     {
       "skillId": "parse-html",
-      "level": "2⭐",
+      "level": "2★",
       "unlockedAt": "2026-03-05",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": []
     },
     {
       "skillId": "extract-entities",
-      "level": "2⭐",
+      "level": "2★",
       "unlockedAt": "2026-03-08",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": []
     },
     {
       "skillId": "summarize",
-      "level": "2⭐",
+      "level": "2★",
       "unlockedAt": "2026-03-10",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": []
     },
     {
       "skillId": "cite-sources",
-      "level": "2⭐",
+      "level": "2★",
       "unlockedAt": "2026-03-12",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": []
     },
     {
       "skillId": "web-scrape",
-      "level": "4⭐",
+      "level": "4★",
       "unlockedAt": "2026-03-15",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": [
@@ -50,7 +50,7 @@
     },
     {
       "skillId": "research",
-      "level": "3⭐",
+      "level": "3★",
       "unlockedAt": "2026-04-01",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": [
@@ -68,7 +68,7 @@
         "error-interpretation"
       ],
       "candidateResult": "autonomous-debug",
-      "levelFloor": "3⭐",
+      "levelFloor": "3★",
       "promptedAt": "2026-04-26"
     }
   ],

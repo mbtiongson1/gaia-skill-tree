@@ -56,8 +56,8 @@ def test_promotion_candidates_round_trip(tmp_path):
     candidates = [
         {
             "skillId": "web-search",
-            "currentLevel": "2⭐",
-            "suggestedLevel": "3⭐",
+            "currentLevel": "2★",
+            "suggestedLevel": "3★",
             "evidence": [{"source": "scan"}],
         }
     ]
@@ -94,8 +94,8 @@ def test_promote_from_candidates_uses_scan_suggested_level(tmp_path):
             "userId": "alice",
             "updatedAt": "2026-05-01",
             "unlockedSkills": [
-                {"skillId": "web-search", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
-                {"skillId": "parse-html", "level": "2⭐", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "web-search", "level": "2★", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
+                {"skillId": "parse-html", "level": "2★", "unlockedAt": "2026-05-01", "unlockedIn": "test"},
             ],
         },
         registry_path=str(tmp_path),
@@ -103,11 +103,11 @@ def test_promote_from_candidates_uses_scan_suggested_level(tmp_path):
     write_promotion_candidates(
         str(tmp_path),
         "alice",
-        [{"skillId": "web-search", "currentLevel": "2⭐", "suggestedLevel": "3⭐", "evidence": []}],
+        [{"skillId": "web-search", "currentLevel": "2★", "suggestedLevel": "3★", "evidence": []}],
     )
 
     result = promote_from_candidates("alice", "web-search", str(tmp_path))
-    assert result["newLevel"] == "3⭐"
+    assert result["newLevel"] == "3★"
 
     with pytest.raises(ValueError, match="only promotable skills could be promoted"):
         promote_from_candidates("alice", "parse-html", str(tmp_path))

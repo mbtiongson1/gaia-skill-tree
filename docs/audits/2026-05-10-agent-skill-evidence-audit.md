@@ -17,7 +17,7 @@ Quick evidence-quality audit for the four skills added in commit `9f3a965`:
 
 ## Verdict
 
-Overall evidence quality is now acceptable for provisional 4⭐ nodes: every skill has at least one directly relevant Class A or Class B source, and the weakest sources from the initial pass were replaced or supplemented.
+Overall evidence quality is now acceptable for provisional 4★ nodes: every skill has at least one directly relevant Class A or Class B source, and the weakest sources from the initial pass were replaced or supplemented.
 
 ## Findings and corrections
 

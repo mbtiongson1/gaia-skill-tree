@@ -1,7 +1,7 @@
-# /hypothesis-generate  [2⭐ · Named]
+# /hypothesis-generate  [2★ · Named]
 **ID:** hypothesis-generate  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/hypothesis-generate`
 

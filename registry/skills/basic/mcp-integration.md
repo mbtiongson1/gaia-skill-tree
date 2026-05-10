@@ -1,9 +1,9 @@
-# /mcp-integration  [3⭐ · Evolved]
+# /mcp-integration  [3★ · Evolved]
 **ID:** mcp-integration  
 **Type:** Basic Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
-**Potential:** 2⭐  
+**Potential:** 2★  
 **Demerits:** niche-integration  
 **Skill Call:** `/mcp-integration`
 

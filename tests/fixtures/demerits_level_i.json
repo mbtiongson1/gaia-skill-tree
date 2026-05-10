@@ -7,9 +7,9 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "basic",
-      "level": "1⭐",
+      "level": "1★",
       "rarity": "common",
-      "description": "1⭐ skill that incorrectly declares a demerit.",
+      "description": "1★ skill that incorrectly declares a demerit.",
       "prerequisites": [],
       "derivatives": [],
       "demerits": [
