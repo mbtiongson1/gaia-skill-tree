@@ -7,7 +7,15 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "extra",
-      "level": "3⭐",
+<<<<<<< HEAD
+      "level": "3★",
+=======
+<<<<<<< Updated upstream
+      "level": "III",
+=======
+      "level": "3★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Composite with only one prerequisite.",
       "prerequisites": [
@@ -31,7 +39,15 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
-      "level": "2⭐",
+<<<<<<< HEAD
+      "level": "2★",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

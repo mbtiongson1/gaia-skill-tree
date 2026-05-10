@@ -29,8 +29,18 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
     """Find skills in the graph that could benefit from better evidence.
 
     Targets:
-      - Skills at 2⭐+ with only Class C evidence (need B/A)
-      - Skills at 0⭐⭐/1⭐ with no evidence at all
+<<<<<<< HEAD
+      - Skills at 2★+ with only Class C evidence (need B/A)
+      - Skills at 0★★/1★ with no evidence at all
+=======
+<<<<<<< Updated upstream
+      - Skills at level II+ with only Class C evidence (need B/A)
+      - Skills at level 0/I with no evidence at all
+=======
+      - Skills at 2★+ with only Class C evidence (need B/A)
+      - Skills at 0★★/1★ with no evidence at all
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       - Skills with status "provisional"
     """
     if graph_path is None:
@@ -50,7 +60,15 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
     for skill in graph.get("skills", []):
         evidence = skill.get("evidence", [])
         evidence_classes = {e.get("class") for e in evidence}
-        level = skill.get("level", "0⭐")
+<<<<<<< HEAD
+        level = skill.get("level", "0★")
+=======
+<<<<<<< Updated upstream
+        level = skill.get("level", "0")
+=======
+        level = skill.get("level", "0★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         status = skill.get("status", "")
 
         is_upgrade_candidate = False
@@ -60,7 +78,15 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
             is_upgrade_candidate = True
 
         # Only Class C evidence but at a level that needs B/A
-        elif evidence_classes == {"C"} and level in ("2⭐", "3⭐", "4⭐", "5⭐", "6⭐"):
+<<<<<<< HEAD
+        elif evidence_classes == {"C"} and level in ("2★", "3★", "4★", "5★", "6★"):
+=======
+<<<<<<< Updated upstream
+        elif evidence_classes == {"C"} and level in ("II", "III", "IV", "V", "VI"):
+=======
+        elif evidence_classes == {"C"} and level in ("2★", "3★", "4★", "5★", "6★"):
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             is_upgrade_candidate = True
 
         # Provisional status (could be validated with better evidence)
@@ -68,7 +94,15 @@ def load_upgrade_candidates(graph_path: str = None) -> list[dict]:
             is_upgrade_candidate = True
 
         # Has no Class A evidence (paper search could add one)
-        elif "A" not in evidence_classes and level in ("3⭐", "4⭐", "5⭐", "6⭐"):
+<<<<<<< HEAD
+        elif "A" not in evidence_classes and level in ("3★", "4★", "5★", "6★"):
+=======
+<<<<<<< Updated upstream
+        elif "A" not in evidence_classes and level in ("III", "IV", "V", "VI"):
+=======
+        elif "A" not in evidence_classes and level in ("3★", "4★", "5★", "6★"):
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             is_upgrade_candidate = True
 
         if is_upgrade_candidate:

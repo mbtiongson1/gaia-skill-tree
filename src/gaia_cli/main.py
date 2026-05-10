@@ -282,7 +282,15 @@ def scan_command(args):
             for sid in sorted(resolved):
                 sk = smap.get(sid, {})
                 glyph = TYPE_SYMBOLS.get(sk.get('type', 'basic'), '○')
-                colored_name = format_skill_colored(sid, sk.get('level', '0⭐'))
+<<<<<<< HEAD
+                colored_name = format_skill_colored(sid, sk.get('level', '0★'))
+=======
+<<<<<<< Updated upstream
+                colored_name = format_skill_colored(sid, sk.get('level', '0'))
+=======
+                colored_name = format_skill_colored(sid, sk.get('level', '0★'))
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                 skill_parts.append(f"  {glyph} {colored_name}")
             print("\n".join(skill_parts))
         else:
@@ -336,7 +344,15 @@ def scan_command(args):
             for promo in eligible[:2]:
                 skill = skill_map.get(promo["skillId"])
                 if skill:
-                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2⭐")))
+<<<<<<< HEAD
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★")))
+=======
+<<<<<<< Updated upstream
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "II")))
+=======
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★")))
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         render_user_tree_outputs(username, tree, graph_data, args.registry, quiet=quiet)
         if getattr(args, "auto_promote", False) and eligible:
             promoted = promote_all_candidates(username, args.registry)
@@ -933,7 +949,15 @@ def _pending_skills(registry_path: str, username: str | None = None) -> list[dic
                     "id": skill.get("id"),
                     "name": skill.get("name", skill.get("id")),
                     "description": skill.get("description", ""),
-                    "level": skill.get("level", "1⭐"),
+<<<<<<< HEAD
+                    "level": skill.get("level", "1★"),
+=======
+<<<<<<< Updated upstream
+                    "level": skill.get("level", "I"),
+=======
+                    "level": skill.get("level", "1★"),
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
                     "pending": True,
                 })
     return pending

@@ -18,16 +18,42 @@ TYPE_LABELS = {
 }
 
 LEVEL_LABELS = {
-    "0⭐": "Basic",
-    "1⭐": "Awakened",
-    "2⭐": "Named",
-    "3⭐": "Evolved",
-    "4⭐": "Hardened",
-    "5⭐": "Transcendent",
-    "6⭐": "Transcendent★",
+<<<<<<< HEAD
+    "0★": "Basic",
+    "1★": "Awakened",
+    "2★": "Named",
+    "3★": "Evolved",
+    "4★": "Hardened",
+    "5★": "Transcendent",
+    "6★": "Transcendent★",
 }
 
-LEVEL_ORDER = ("0⭐", "1⭐", "2⭐", "3⭐", "4⭐", "5⭐", "6⭐")
+LEVEL_ORDER = ("0★", "1★", "2★", "3★", "4★", "5★", "6★")
+=======
+<<<<<<< Updated upstream
+    "0": "Basic",
+    "I": "Awakened",
+    "II": "Named",
+    "III": "Evolved",
+    "IV": "Hardened",
+    "V": "Transcendent",
+    "VI": "Transcendent★",
+}
+
+LEVEL_ORDER = ("0", "I", "II", "III", "IV", "V", "VI")
+=======
+    "0★": "Basic",
+    "1★": "Awakened",
+    "2★": "Named",
+    "3★": "Evolved",
+    "4★": "Hardened",
+    "5★": "Transcendent",
+    "6★": "Transcendent★",
+}
+
+LEVEL_ORDER = ("0★", "1★", "2★", "3★", "4★", "5★", "6★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 TYPE_ORDER = ("basic", "extra", "ultimate")
 EVIDENCE_ORDER = ("A", "B", "C")
 _EVIDENCE_RANK = {klass: rank for rank, klass in enumerate(reversed(EVIDENCE_ORDER), start=1)}
@@ -133,7 +159,15 @@ def collect_stats(registry_path: str | Path) -> dict:
     eligible_slots = {
         skill["id"]
         for skill in skills
-        if skill.get("id") and skill.get("level") != "0⭐"
+<<<<<<< HEAD
+        if skill.get("id") and skill.get("level") != "0★"
+=======
+<<<<<<< Updated upstream
+        if skill.get("id") and skill.get("level") != "0"
+=======
+        if skill.get("id") and skill.get("level") != "0★"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     }
 
     return {
@@ -199,10 +233,24 @@ def render_stats(stats: dict) -> str:
         label = LEVEL_LABELS[level]
         count = stats["level_counts"].get(level, 0)
         suffix = ""
-        if level == "2⭐" and stats.get("named_unclaimed", 0):
+<<<<<<< HEAD
+        if level == "2★" and stats.get("named_unclaimed", 0):
             suffix = f"  ({stats['named_unclaimed']} slots unclaimed)"
         if use_color:
-            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0⭐"]))
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
+=======
+<<<<<<< Updated upstream
+        if level == "II" and stats.get("named_unclaimed", 0):
+            suffix = f"  ({stats['named_unclaimed']} slots unclaimed)"
+        if use_color:
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0"]))
+=======
+        if level == "2★" and stats.get("named_unclaimed", 0):
+            suffix = f"  ({stats['named_unclaimed']} slots unclaimed)"
+        if use_color:
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             lines.append(f"  {color}{level:<3} {label:<14}{rst} {count:>4}{suffix}")
         else:
             lines.append(f"  {level:<3} {label:<14} {count:>4}{suffix}")
@@ -215,7 +263,15 @@ def render_stats(stats: dict) -> str:
         label = LEVEL_LABELS[level]
         count = stats.get("effective_level_counts", {}).get(level, 0)
         if use_color:
-            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0⭐"]))
+<<<<<<< HEAD
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
+=======
+<<<<<<< Updated upstream
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0"]))
+=======
+            color = _fg(*RANK_COLORS.get(level, RANK_COLORS["0★"]))
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
             lines.append(f"  {color}{level:<3} {label:<14}{rst} {count:>4}")
         else:
             lines.append(f"  {level:<3} {label:<14} {count:>4}")

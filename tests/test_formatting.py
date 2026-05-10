@@ -60,19 +60,43 @@ class TestFormatSkillColoredNoColor:
 
     def test_canon_no_color(self, monkeypatch):
         monkeypatch.setenv("NO_COLOR", "1")
-        result = format_skill_colored("python-basics", "1⭐")
+<<<<<<< HEAD
+        result = format_skill_colored("python-basics", "1★")
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("python-basics", "I")
+=======
+        result = format_skill_colored("python-basics", "1★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert result == "/python-basics"
         assert "\033" not in result
 
     def test_named_no_color(self, monkeypatch):
         monkeypatch.setenv("NO_COLOR", "1")
-        result = format_skill_colored("web-scraping", "2⭐", named_contributor="alice")
+<<<<<<< HEAD
+        result = format_skill_colored("web-scraping", "2★", named_contributor="alice")
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("web-scraping", "II", named_contributor="alice")
+=======
+        result = format_skill_colored("web-scraping", "2★", named_contributor="alice")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert result == "alice/web-scraping"
         assert "\033" not in result
 
     def test_local_no_color(self, monkeypatch):
         monkeypatch.setenv("NO_COLOR", "1")
-        result = format_skill_colored("my-tool", "3⭐", is_local=True, local_user="bob")
+<<<<<<< HEAD
+        result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("my-tool", "III", is_local=True, local_user="bob")
+=======
+        result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert result == "bob/my-tool"
         assert "\033" not in result
 
@@ -93,39 +117,97 @@ class TestFormatSkillColoredTruecolor:
         monkeypatch.setattr(fmt_mod, "_use_color", lambda: True)
 
     def test_canon_has_rank_color(self):
-        result = format_skill_colored("python-basics", "1⭐")
-        r, g, b = RANK_COLORS["1⭐"]
+<<<<<<< HEAD
+        result = format_skill_colored("python-basics", "1★")
+        r, g, b = RANK_COLORS["1★"]
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("python-basics", "I")
+        r, g, b = RANK_COLORS["I"]
+=======
+        result = format_skill_colored("python-basics", "1★")
+        r, g, b = RANK_COLORS["1★"]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert f"\033[38;2;{r};{g};{b}m" in result
         assert "/python-basics" in result
         assert "\033[0m" in result
 
     def test_named_has_red_contributor(self):
-        result = format_skill_colored("web-scraping", "2⭐", named_contributor="alice")
+<<<<<<< HEAD
+        result = format_skill_colored("web-scraping", "2★", named_contributor="alice")
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("web-scraping", "II", named_contributor="alice")
+=======
+        result = format_skill_colored("web-scraping", "2★", named_contributor="alice")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         r, g, b = COLOR_CONTRIBUTOR
         assert f"\033[38;2;{r};{g};{b}m" in result
         assert "alice" in result
         # Skill name has rank color
-        sr, sg, sb = RANK_COLORS["2⭐"]
+<<<<<<< HEAD
+        sr, sg, sb = RANK_COLORS["2★"]
+=======
+<<<<<<< Updated upstream
+        sr, sg, sb = RANK_COLORS["II"]
+=======
+        sr, sg, sb = RANK_COLORS["2★"]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert f"\033[38;2;{sr};{sg};{sb}m" in result
         assert "web-scraping" in result
 
     def test_local_has_green_user(self):
-        result = format_skill_colored("my-tool", "3⭐", is_local=True, local_user="bob")
+<<<<<<< HEAD
+        result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
         r, g, b = COLOR_LOCAL_USER
         assert f"\033[38;2;{r};{g};{b}m" in result
         assert "bob" in result
-        sr, sg, sb = RANK_COLORS["3⭐"]
+        sr, sg, sb = RANK_COLORS["3★"]
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("my-tool", "III", is_local=True, local_user="bob")
+        r, g, b = COLOR_LOCAL_USER
+        assert f"\033[38;2;{r};{g};{b}m" in result
+        assert "bob" in result
+        sr, sg, sb = RANK_COLORS["III"]
+=======
+        result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
+        r, g, b = COLOR_LOCAL_USER
+        assert f"\033[38;2;{r};{g};{b}m" in result
+        assert "bob" in result
+        sr, sg, sb = RANK_COLORS["3★"]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert f"\033[38;2;{sr};{sg};{sb}m" in result
         assert "my-tool" in result
 
     def test_unknown_level_falls_to_zero(self):
         result = format_skill_colored("foo", "IX")
-        r, g, b = RANK_COLORS["0⭐"]
+<<<<<<< HEAD
+        r, g, b = RANK_COLORS["0★"]
+=======
+<<<<<<< Updated upstream
+        r, g, b = RANK_COLORS["0"]
+=======
+        r, g, b = RANK_COLORS["0★"]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert f"\033[38;2;{r};{g};{b}m" in result
 
     def test_default_level_is_zero(self):
         result = format_skill_colored("bar")
-        r, g, b = RANK_COLORS["0⭐"]
+<<<<<<< HEAD
+        r, g, b = RANK_COLORS["0★"]
+=======
+<<<<<<< Updated upstream
+        r, g, b = RANK_COLORS["0"]
+=======
+        r, g, b = RANK_COLORS["0★"]
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert f"\033[38;2;{r};{g};{b}m" in result
 
 
@@ -145,7 +227,15 @@ class TestFormatSkillColored256:
         monkeypatch.setattr(fmt_mod, "_use_color", lambda: True)
 
     def test_256_color_format(self):
-        result = format_skill_colored("test-skill", "1⭐")
+<<<<<<< HEAD
+        result = format_skill_colored("test-skill", "1★")
+=======
+<<<<<<< Updated upstream
+        result = format_skill_colored("test-skill", "I")
+=======
+        result = format_skill_colored("test-skill", "1★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert "\033[38;5;" in result
         assert "\033[38;2;" not in result
 
@@ -200,17 +290,39 @@ class TestFormatTypeColored:
 class TestFormatLevelColored:
     def test_no_color(self, monkeypatch):
         monkeypatch.setenv("NO_COLOR", "1")
-        assert format_level_colored("3⭐") == "3⭐"
+<<<<<<< HEAD
+        assert format_level_colored("3★") == "3★"
+=======
+<<<<<<< Updated upstream
+        assert format_level_colored("III") == "III"
+=======
+        assert format_level_colored("3★") == "3★"
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_with_color(self, monkeypatch):
         monkeypatch.delenv("NO_COLOR", raising=False)
         monkeypatch.setenv("COLORTERM", "truecolor")
         monkeypatch.setattr(fmt_mod, "_use_color", lambda: True)
 
-        result = format_level_colored("5⭐")
-        r, g, b = RANK_COLORS["5⭐"]
+<<<<<<< HEAD
+        result = format_level_colored("5★")
+        r, g, b = RANK_COLORS["5★"]
         assert f"\033[38;2;{r};{g};{b}m" in result
-        assert "5⭐" in result
+        assert "5★" in result
+=======
+<<<<<<< Updated upstream
+        result = format_level_colored("V")
+        r, g, b = RANK_COLORS["V"]
+        assert f"\033[38;2;{r};{g};{b}m" in result
+        assert "V" in result
+=======
+        result = format_level_colored("5★")
+        r, g, b = RANK_COLORS["5★"]
+        assert f"\033[38;2;{r};{g};{b}m" in result
+        assert "5★" in result
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         assert "\033[0m" in result
 
 
@@ -251,7 +363,15 @@ class TestConstants:
         assert set(TIER_COLORS.keys()) == {"basic", "extra", "ultimate"}
 
     def test_rank_colors_keys(self):
-        assert set(RANK_COLORS.keys()) == {"0⭐", "1⭐", "2⭐", "3⭐", "4⭐", "5⭐", "6⭐"}
+<<<<<<< HEAD
+        assert set(RANK_COLORS.keys()) == {"0★", "1★", "2★", "3★", "4★", "5★", "6★"}
+=======
+<<<<<<< Updated upstream
+        assert set(RANK_COLORS.keys()) == {"0", "I", "II", "III", "IV", "V", "VI"}
+=======
+        assert set(RANK_COLORS.keys()) == {"0★", "1★", "2★", "3★", "4★", "5★", "6★"}
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 
     def test_type_symbols_keys(self):
         assert set(TYPE_SYMBOLS.keys()) == {"basic", "extra", "ultimate"}

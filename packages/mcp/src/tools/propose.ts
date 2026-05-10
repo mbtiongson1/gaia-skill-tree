@@ -113,7 +113,15 @@ async function proposeNovel(
     id,
     name: input.name!,
     type: input.type ?? "basic",
-    level: "1⭐",
+<<<<<<< HEAD
+    level: "1★",
+=======
+<<<<<<< Updated upstream
+    level: "I",
+=======
+    level: "1★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     rarity: "common",
     description: input.description!,
     prerequisites: input.prerequisites ?? [],

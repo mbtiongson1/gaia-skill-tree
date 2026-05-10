@@ -80,13 +80,33 @@ TIER_COLORS = {
     "ultimate": (245, 158, 11),
 }
 RANK_COLORS = {
-    "0⭐":  (148, 163, 184),   # Slate
-    "1⭐":  (56, 189, 248),    # Sky
-    "2⭐": (99, 202, 183),    # Teal
-    "3⭐": (167, 139, 250),  # Violet
-    "4⭐": (232, 121, 249),   # Fuchsia
-    "5⭐":  (251, 191, 36),    # Amber
-    "6⭐": (251, 191, 36),    # Amber bright
+<<<<<<< HEAD
+    "0★":  (148, 163, 184),   # Slate
+    "1★":  (56, 189, 248),    # Sky
+    "2★": (99, 202, 183),    # Teal
+    "3★": (167, 139, 250),  # Violet
+    "4★": (232, 121, 249),   # Fuchsia
+    "5★":  (251, 191, 36),    # Amber
+    "6★": (251, 191, 36),    # Amber bright
+=======
+<<<<<<< Updated upstream
+    "0":  (148, 163, 184),   # Slate
+    "I":  (56, 189, 248),    # Sky
+    "II": (99, 202, 183),    # Teal
+    "III": (167, 139, 250),  # Violet
+    "IV": (232, 121, 249),   # Fuchsia
+    "V":  (251, 191, 36),    # Amber
+    "VI": (251, 191, 36),    # Amber bright
+=======
+    "0★":  (148, 163, 184),   # Slate
+    "1★":  (56, 189, 248),    # Sky
+    "2★": (99, 202, 183),    # Teal
+    "3★": (167, 139, 250),  # Violet
+    "4★": (232, 121, 249),   # Fuchsia
+    "5★":  (251, 191, 36),    # Amber
+    "6★": (251, 191, 36),    # Amber bright
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 }
 COLOR_SUCCESS = (134, 239, 172)
 COLOR_MISSING = (100, 116, 139)
@@ -129,13 +149,33 @@ RARITY_LABELS = {
 
 # Level display
 LEVEL_LABELS = {
-    "0⭐": "0⭐ Basic",
-    "1⭐": "1⭐ Awakened",
-    "2⭐": "2⭐ Named",
-    "3⭐": "3⭐ Evolved",
-    "4⭐": "4⭐ Hardened",
-    "5⭐": "5⭐ Transcendent",
-    "6⭐": "6⭐ Transcendent ★",
+<<<<<<< HEAD
+    "0★": "0★ Basic",
+    "1★": "1★ Awakened",
+    "2★": "2★ Named",
+    "3★": "3★ Evolved",
+    "4★": "4★ Hardened",
+    "5★": "5★ Transcendent",
+    "6★": "6★ Transcendent ★",
+=======
+<<<<<<< Updated upstream
+    "0": "Lv.0 Basic",
+    "I": "Lv.I Awakened",
+    "II": "Lv.II Named",
+    "III": "Lv.III Evolved",
+    "IV": "Lv.IV Hardened",
+    "V": "Lv.V Transcendent",
+    "VI": "Lv.VI Transcendent ★",
+=======
+    "0★": "0★ Basic",
+    "1★": "1★ Awakened",
+    "2★": "2★ Named",
+    "3★": "3★ Evolved",
+    "4★": "4★ Hardened",
+    "5★": "5★ Transcendent",
+    "6★": "6★ Transcendent ★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 }
 
 
@@ -260,8 +300,18 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     name = f"/{skill_id}"
     rarity = skill.get("rarity", "common")
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
-    level = skill.get("level", "0⭐")
+<<<<<<< HEAD
+    level = skill.get("level", "0★")
     level_label = LEVEL_LABELS.get(level, f"{level}")
+=======
+<<<<<<< Updated upstream
+    level = skill.get("level", "0")
+    level_label = LEVEL_LABELS.get(level, f"Lv.{level}")
+=======
+    level = skill.get("level", "0★")
+    level_label = LEVEL_LABELS.get(level, f"{level}")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     level_meta = level_summary(skill)
     effective = level_meta["effectiveLevel"]
     effective_label = LEVEL_LABELS.get(effective, f"{effective}")
@@ -351,7 +401,15 @@ def render_card_compact(skill: dict) -> str:
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill.get("id", skill.get("name", "unknown"))
     name = f"/{skill_id}"
-    level = skill.get("level", "0⭐")
+<<<<<<< HEAD
+    level = skill.get("level", "0★")
+=======
+<<<<<<< Updated upstream
+    level = skill.get("level", "0")
+=======
+    level = skill.get("level", "0★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     effective = level_summary(skill)["effectiveLevel"]
     rarity = skill.get("rarity", "common")
     desc = skill.get("description", "")
@@ -439,11 +497,27 @@ def render_appraise_card(
 
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
-    rc = RANK_COLORS.get(skill_data.get("level", "0⭐"), (148, 163, 184))
+<<<<<<< HEAD
+    rc = RANK_COLORS.get(skill_data.get("level", "0★"), (148, 163, 184))
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill_data.get("id", "?")
     name = f"/{skill_id}"
-    level = skill_data.get("level", "0⭐")
+    level = skill_data.get("level", "0★")
+=======
+<<<<<<< Updated upstream
+    rc = RANK_COLORS.get(skill_data.get("level", "0"), (148, 163, 184))
+    glyph = TIER_GLYPHS.get(tier, "○")
+    skill_id = skill_data.get("id", "?")
+    name = f"/{skill_id}"
+    level = skill_data.get("level", "0")
+=======
+    rc = RANK_COLORS.get(skill_data.get("level", "0★"), (148, 163, 184))
+    glyph = TIER_GLYPHS.get(tier, "○")
+    skill_id = skill_data.get("id", "?")
+    name = f"/{skill_id}"
+    level = skill_data.get("level", "0★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     rarity = skill_data.get("rarity", "common")
     desc = skill_data.get("description", "")
 
@@ -548,7 +622,15 @@ def render_unlock_card(skill_data: dict, new_paths: list) -> str:
     skill_id = skill_data.get("id", "?")
     name = f"/{skill_id}"
     glyph = TIER_GLYPHS.get(tier, "○")
-    level = skill_data.get("level", "0⭐")
+<<<<<<< HEAD
+    level = skill_data.get("level", "0★")
+=======
+<<<<<<< Updated upstream
+    level = skill_data.get("level", "0")
+=======
+    level = skill_data.get("level", "0★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     rarity = skill_data.get("rarity", "common")
 
     gc = fg(*COLOR_GOLD)

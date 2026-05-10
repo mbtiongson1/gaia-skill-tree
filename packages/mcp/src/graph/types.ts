@@ -2,7 +2,15 @@ export interface Skill {
   id: string;
   name: string;
   type: "basic" | "extra" | "ultimate";
-  level: "0⭐" | "1⭐" | "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
+<<<<<<< HEAD
+  level: "0★" | "1★" | "2★" | "3★" | "4★" | "5★" | "6★";
+=======
+<<<<<<< Updated upstream
+  level: "0" | "I" | "II" | "III" | "IV" | "V" | "VI";
+=======
+  level: "0★" | "1★" | "2★" | "3★" | "4★" | "5★" | "6★";
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;
   prerequisites: string[];
@@ -104,7 +112,15 @@ export interface NamedSkill {
   origin: boolean;
   genericSkillRef: string;
   status: "awakened" | "named";
-  level: "2⭐" | "3⭐" | "4⭐" | "5⭐" | "6⭐";
+<<<<<<< HEAD
+  level: "2★" | "3★" | "4★" | "5★" | "6★";
+=======
+<<<<<<< Updated upstream
+  level: "II" | "III" | "IV" | "V" | "VI";
+=======
+  level: "2★" | "3★" | "4★" | "5★" | "6★";
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   description: string;
   links?: {
     github?: string;

@@ -7,7 +7,15 @@
       "id": "source-skill",
       "name": "Source Skill",
       "type": "basic",
-      "level": "0⭐",
+<<<<<<< HEAD
+      "level": "0★",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "A source skill for duplicate edge validation.",
       "prerequisites": [],
@@ -23,7 +31,15 @@
       "id": "helper-skill",
       "name": "Helper Skill",
       "type": "basic",
-      "level": "0⭐",
+<<<<<<< HEAD
+      "level": "0★",
+=======
+<<<<<<< Updated upstream
+      "level": "0",
+=======
+      "level": "0★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "A helper skill that satisfies the target prerequisite count.",
       "prerequisites": [],
@@ -39,7 +55,15 @@
       "id": "target-skill",
       "name": "Target Skill",
       "type": "extra",
-      "level": "2⭐",
+<<<<<<< HEAD
+      "level": "2★",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "uncommon",
       "description": "A target skill reached through duplicated edges.",
       "prerequisites": ["source-skill", "helper-skill"],

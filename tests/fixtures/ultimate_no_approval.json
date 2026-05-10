@@ -7,7 +7,15 @@
       "id": "skill-a",
       "name": "Skill A",
       "type": "ultimate",
-      "level": "5⭐",
+<<<<<<< HEAD
+      "level": "5★",
+=======
+<<<<<<< Updated upstream
+      "level": "V",
+=======
+      "level": "5★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "legendary",
       "description": "Legendary skill with insufficient sources for validation.",
       "prerequisites": [
@@ -39,7 +47,15 @@
       "id": "skill-b",
       "name": "Skill B",
       "type": "basic",
-      "level": "2⭐",
+<<<<<<< HEAD
+      "level": "2★",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],
@@ -63,7 +79,15 @@
       "id": "skill-c",
       "name": "Skill C",
       "type": "basic",
-      "level": "2⭐",
+<<<<<<< HEAD
+      "level": "2★",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],
@@ -87,7 +111,15 @@
       "id": "skill-d",
       "name": "Skill D",
       "type": "basic",
-      "level": "2⭐",
+<<<<<<< HEAD
+      "level": "2★",
+=======
+<<<<<<< Updated upstream
+      "level": "II",
+=======
+      "level": "2★",
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       "rarity": "common",
       "description": "Valid atomic skill.",
       "prerequisites": [],

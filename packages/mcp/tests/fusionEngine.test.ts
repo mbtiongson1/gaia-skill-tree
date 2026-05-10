@@ -7,13 +7,33 @@ const mockGraph: GaiaGraph = {
   generatedAt: "2026-04-28",
   meta: { typeLabels: {}, levelLabels: {}, rarityLabels: {} },
   skills: [
-    { id: "web-search", name: "Web Search", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "parse-html", name: "Parse HTML", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "summarize", name: "Summarize", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "2⭐", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
-    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3⭐", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
-    { id: "research", name: "Research", type: "extra", level: "3⭐", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+<<<<<<< HEAD
+    { id: "web-search", name: "Web Search", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "parse-html", name: "Parse HTML", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "summarize", name: "Summarize", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
+    { id: "research", name: "Research", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+=======
+<<<<<<< Updated upstream
+    { id: "web-search", name: "Web Search", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "parse-html", name: "Parse HTML", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "summarize", name: "Summarize", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "II", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "III", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
+    { id: "research", name: "Research", type: "extra", level: "III", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+=======
+    { id: "web-search", name: "Web Search", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape", "research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "parse-html", name: "Parse HTML", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "extract-entities", name: "Extract Entities", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["web-scrape"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "summarize", name: "Summarize", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "cite-sources", name: "Cite Sources", type: "basic", level: "2★", rarity: "common", description: "", prerequisites: [], derivatives: ["research"], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+    { id: "web-scrape", name: "Web Scrape", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "parse-html", "extract-entities"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0", demerits: ["experimental-feature"] },
+    { id: "research", name: "Research", type: "extra", level: "3★", rarity: "uncommon", description: "", prerequisites: ["web-search", "summarize", "cite-sources"], derivatives: [], conditions: "", evidence: [], knownAgents: [], status: "validated", createdAt: "", updatedAt: "", version: "0.1.0" },
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   ],
   edges: [],
 };
@@ -54,7 +74,15 @@ describe("fusionEngine", () => {
       ["web-search", "parse-html", "extract-entities"]
     );
     const ready = result.find((c) => c.candidateResult === "web-scrape");
-    expect(ready?.levelFloor).toBe("2⭐");
+<<<<<<< HEAD
+    expect(ready?.levelFloor).toBe("2★");
+=======
+<<<<<<< Updated upstream
+    expect(ready?.levelFloor).toBe("II");
+=======
+    expect(ready?.levelFloor).toBe("2★");
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   });
 
   it("combines owned and detected skills for fusion detection", () => {

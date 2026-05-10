@@ -40,7 +40,15 @@ def demerit_penalty(skill: dict) -> int:
 
 def effective_level(skill: dict) -> str:
     """Return the demerit-adjusted effective level for a skill."""
-    current = skill.get("level", "1⭐")
+<<<<<<< HEAD
+    current = skill.get("level", "1★")
+=======
+<<<<<<< Updated upstream
+    current = skill.get("level", "I")
+=======
+    current = skill.get("level", "1★")
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     if current not in DEMERIT_ELIGIBLE_LEVELS:
         return current
     base_idx = level_index(current)
@@ -52,7 +60,15 @@ def effective_level(skill: dict) -> str:
 def level_summary(skill: dict) -> dict:
     """Return base/effective level summary plus demerits."""
     return {
-        "baseLevel": skill.get("level", "1⭐"),
+<<<<<<< HEAD
+        "baseLevel": skill.get("level", "1★"),
+=======
+<<<<<<< Updated upstream
+        "baseLevel": skill.get("level", "I"),
+=======
+        "baseLevel": skill.get("level", "1★"),
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         "effectiveLevel": effective_level(skill),
         "demerits": list(skill.get("demerits", []) or []),
     }

@@ -51,7 +51,15 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 - [ ] Seed `registry/gaia.json` with:
   - 25–30 atomic skills (primitives: tokenize, classify, retrieve, rank, parseJson, parseHtml, executeBash, generateText, summarize, citeSources, extractEntities, routeIntent, evaluateOutput, embedText, chunkDocument, planDecompose, writeReport, audienceModel, toolSelect, errorInterpretation, codeGeneration, webSearch, scoreRelevance, formatOutput, diffContent).
   - 10–15 composite skills with full prerequisite chains traceable to atomics.
-  - 2–3 legendary stubs (clearly `provisional`, 1⭐ only).
+<<<<<<< HEAD
+  - 2–3 legendary stubs (clearly `provisional`, 1★ only).
+=======
+<<<<<<< Updated upstream
+  - 2–3 legendary stubs (clearly `provisional`, Level I only).
+=======
+  - 2–3 legendary stubs (clearly `provisional`, 1★ only).
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 - [ ] Write `CONTRIBUTING.md` with evidence requirements, PR types, naming conventions, and reviewer rubric.
 - [ ] Write `README.md` with project overview, quickstart, and link to CONTRIBUTING.
 
@@ -74,7 +82,15 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
   - JSON Schema validation for all nodes and edges.
   - DAG cycle detection (DFS from all root nodes).
   - Reference integrity (every parent ID resolves to an existing node).
-  - Evidence threshold by level (2⭐ needs Evidence Tier C+, 3⭐ needs Evidence Tier B+, etc.).
+<<<<<<< HEAD
+  - Evidence threshold by level (2★ needs Evidence Tier C+, 3★ needs Evidence Tier B+, etc.).
+=======
+<<<<<<< Updated upstream
+  - Evidence threshold by level (Level II needs Evidence Tier C+, Level III needs Evidence Tier B+, etc.).
+=======
+  - Evidence threshold by level (2★ needs Evidence Tier C+, 3★ needs Evidence Tier B+, etc.).
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
   - Legendary approval count check (placeholder for Phase 5 enforcement).
 - [ ] Set up `.github/workflows/validate.yml`:
   - Triggers on all PRs touching `registry/`.
@@ -87,7 +103,15 @@ Stand up a usable, validated repo skeleton with schemas and seed data that passe
 
 ### Exit Criteria
 - [ ] CI passes on the seed graph with zero warnings.
-- [ ] CI correctly catches: a cycle, a missing parent reference, a 3⭐ skill with no Evidence Tier B source.
+<<<<<<< HEAD
+- [ ] CI correctly catches: a cycle, a missing parent reference, a 3★ skill with no Evidence Tier B source.
+=======
+<<<<<<< Updated upstream
+- [ ] CI correctly catches: a cycle, a missing parent reference, a Level III skill with no Evidence Tier B source.
+=======
+- [ ] CI correctly catches: a cycle, a missing parent reference, a 3★ skill with no Evidence Tier B source.
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 - [ ] `python scripts/validate.py` runs in under 5 seconds on the seed graph.
 
 ---
@@ -301,7 +325,15 @@ ragPipeline       = retrieve + chunkDocument + embedText + scoreRelevance
 documentAnalyst   = parseJson + extractEntities + summarize + formatOutput
 ```
 
-### Legendary Stubs (stubs only at launch, 1⭐, provisional)
+<<<<<<< HEAD
+### Legendary Stubs (stubs only at launch, 1★, provisional)
+=======
+<<<<<<< Updated upstream
+### Legendary Stubs (stubs only at launch, Level I, provisional)
+=======
+### Legendary Stubs (stubs only at launch, 1★, provisional)
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 ```
 recursiveSelfImprovement
 multiAgentOrchestrationV
@@ -331,7 +363,15 @@ autonomousResearchAgent
 
 ### Data Quality
 - % of skills with all required fields populated.
-- % of 3⭐+ skills with at least one Evidence Tier B source.
+<<<<<<< HEAD
+- % of 3★+ skills with at least one Evidence Tier B source.
+=======
+<<<<<<< Updated upstream
+- % of Level III+ skills with at least one Evidence Tier B source.
+=======
+- % of 3★+ skills with at least one Evidence Tier B source.
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
 - Number of disputed claims resolved per month.
 - Zero `validated` legendary skills with fewer than 3 evidence sources.
 

@@ -8,7 +8,15 @@
     var ll = meta.levelLabels || {};
     LEVEL_META_SE = {};
     Object.keys(lc).forEach(function(k) {
-      if (k === '0⭐' || k === '1⭐') return; // explorer only shows II+
+<<<<<<< HEAD
+      if (k === '0★' || k === '1★') return; // explorer only shows II+
+=======
+<<<<<<< Updated upstream
+      if (k === '0' || k === 'I') return; // explorer only shows II+
+=======
+      if (k === '0★' || k === '1★') return; // explorer only shows II+
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
       LEVEL_META_SE[k] = { name: ll[k] || k, color: lc[k].hex, bg: lc[k].bg, border: lc[k].border };
     });
     TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', ultimate:'◆' };
@@ -69,7 +77,15 @@
 
   // ── RENDER HERO ──────────────────────────────────────────────
   function renderHero(ns, generic) {
-    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2⭐'];
+<<<<<<< HEAD
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2★'];
+=======
+<<<<<<< Updated upstream
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['II'];
+=======
+    var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2★'];
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
     var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
     var links = ns.links || {};
@@ -491,11 +507,27 @@
       // fallback if meta not in data
       if (!LEVEL_META_SE) {
         LEVEL_META_SE = {
-          '2⭐':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
-          '3⭐': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
-          '4⭐':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
-          '5⭐':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
-          '6⭐': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+<<<<<<< HEAD
+          '2★':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
+          '3★': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          '4★':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          '5★':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
+          '6★': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+=======
+<<<<<<< Updated upstream
+          'II':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
+          'III': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          'IV':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          'V':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
+          'VI': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+=======
+          '2★':  { name:'Named', color:'#63cab7', bg:'rgba(99,202,183,.15)', border:'rgba(99,202,183,.4)' },
+          '3★': { name:'Evolved', color:'#a78bfa', bg:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.4)' },
+          '4★':  { name:'Hardened', color:'#e879f9', bg:'rgba(232,121,249,.15)', border:'rgba(232,121,249,.4)' },
+          '5★':  { name:'Transcendent', color:'#fbbf24', bg:'rgba(251,191,36,.15)', border:'rgba(251,191,36,.4)' },
+          '6★': { name:'Transcendent ★', color:'#fbbf24', bg:'rgba(251,191,36,.22)', border:'rgba(251,191,36,.55)' },
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
         };
       }
       if (!TYPE_SYMBOL) {
@@ -761,7 +793,15 @@
   treeHeader.addEventListener('mousedown', function(e) {
     if (e.target.closest('button')) return;
     var rect = treeDialog.getBoundingClientRect();
-    treeDialog.style.margin = '0⭐';
+<<<<<<< HEAD
+    treeDialog.style.margin = '0★';
+=======
+<<<<<<< Updated upstream
+    treeDialog.style.margin = '0';
+=======
+    treeDialog.style.margin = '0★';
+>>>>>>> Stashed changes
+>>>>>>> schema/star-tiers-split
     treeDialog.style.position = 'fixed';
     treeDialog.style.left = rect.left + 'px';
     treeDialog.style.top = rect.top + 'px';
