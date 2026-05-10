@@ -18,3 +18,12 @@ def test_skill_explorer_normalizes_github_skill_file_urls_for_skills_add():
 
     assert ".replace('/blob/', '/tree/')" in js
     assert ".replace(/\\/SKILL\\.md$/i, '')" in js
+
+
+def test_skill_explorer_adds_demerits_to_update_timeline():
+    js = (ROOT / "docs" / "js" / "skill-explorer.js").read_text(encoding="utf-8")
+
+    assert "function demeritTimelineEvents(generic)" in js
+    assert "Demerit noted: " in js
+    assert "withDemeritTimeline(evts, generic)" in js
+    assert "renderTimeline(ns, generic)" in js

@@ -362,7 +362,31 @@
   }
 
   // ── RENDER TIMELINE ──────────────────────────────────────────
-  function renderTimeline(ns) {
+  function demeritLabel(id) {
+    var labels = {
+      'niche-integration': 'Niche Integration',
+      'experimental-feature': 'Experimental Feature',
+      'heavyweight-dependency': 'Heavyweight Dependency',
+    };
+    return labels[id] || String(id || '').replace(/-/g, ' ');
+  }
+
+  function demeritTimelineEvents(generic) {
+    if (!generic || !Array.isArray(generic.demerits) || !generic.demerits.length) return [];
+    return [{
+      date: '2026-05-09',
+      msg: 'Demerit noted: ' + generic.demerits.map(demeritLabel).join(', '),
+      sha: 'e336695',
+    }];
+  }
+
+  function withDemeritTimeline(evts, generic) {
+    return (evts || []).concat(demeritTimelineEvents(generic)).sort(function(a, b) {
+      return String(b.date || '').localeCompare(String(a.date || ''));
+    });
+  }
+
+  function renderTimeline(ns, generic) {
     var el = document.getElementById('se-timeline');
     el.innerHTML = '<div class="se-flow-h">&#9203; Update Timeline</div><div class="se-empty">Loading history…</div>';
     var parts = ns.id.split('/');
@@ -377,7 +401,7 @@
           var evts = [];
           if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
           if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
-          renderTimelineEvents(el, evts);
+          renderTimelineEvents(el, withDemeritTimeline(evts, generic));
           return;
         }
         var evts = commits.map(function(c){
@@ -387,13 +411,13 @@
             sha: c.sha ? c.sha.slice(0,7) : ''
           };
         });
-        renderTimelineEvents(el, evts);
+        renderTimelineEvents(el, withDemeritTimeline(evts, generic));
       })
       .catch(function(){
         var evts = [];
         if (ns.createdAt) evts.push({ date: ns.createdAt, msg: 'Skill created', sha: '' });
         if (ns.updatedAt && ns.updatedAt !== ns.createdAt) evts.push({ date: ns.updatedAt, msg: 'Skill updated', sha: '' });
-        renderTimelineEvents(el, evts);
+        renderTimelineEvents(el, withDemeritTimeline(evts, generic));
       });
   }
 
@@ -502,7 +526,7 @@
       renderInstall(ns);
       renderDocs(ns, generic);
       renderFlowchart(ns, generic);
-      renderTimeline(ns);
+      renderTimeline(ns, generic);
 
       // Export button
       document.getElementById('seExport').onclick = function(){
