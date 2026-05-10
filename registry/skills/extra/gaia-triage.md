@@ -15,10 +15,10 @@ Triage and audit GitHub issues for the Gaia Skill Tree project. Helps identify s
 - [Retrieve](../basic/retrieve.md)
 
 ## Unlocks
-_None yet._
+_None._
 
 ## Fusion Condition
-Requires access to the `mbtiongson1/gaia-skill-tree` repository and GitHub CLI (`gh`) for execution.
+Requires access to the mbtiongson1/gaia-skill-tree repository and GitHub CLI (gh) for execution.
 
 ## Evidence
 | Class | Source | Evaluator | Date |

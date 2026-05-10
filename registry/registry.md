@@ -40,6 +40,7 @@
 | ◇ Extra Skill: /function-calling | Extra Skill | III | Evolved | `/function-calling` |
 | ◇ Extra Skill: /gaia-audit | Extra Skill | II | Named | `/gaia-audit` |
 | ◇ Extra Skill: /gaia-meta-audit | Extra Skill | III | Evolved | `/gaia-meta-audit` |
+| ◇ Extra Skill: /gaia-triage | Extra Skill | II | Named | `/gaia-triage` |
 | ○ /generate-sql | Basic Skill | II | Named | `/generate-sql` |
 | ○ upsonic/unittest-generator | Basic Skill | II | Named | `/generate-test` |
 | ○ /generate-text | Basic Skill | 0 | Basic | `/generate-text` |
@@ -49,6 +50,7 @@
 | ◇ Extra Skill: /humanize-prose | Extra Skill | IV | Hardened | `/humanize-prose` |
 | ○ /hypothesis-generate | Basic Skill | II | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic Skill | II | Named | `/image-caption` |
+| ○ mattpocock/triage | Basic Skill | IV | Hardened | `/issue-triage` |
 | ◇ Extra Skill: /knowledge-graph-build | Extra Skill | III | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | IV | Hardened | `/knowledge-harvest` |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | IV | Hardened | `/literature-review` |
@@ -129,7 +131,6 @@
 | ○ Fine-Tune | Intrinsic Skill | IV | Hardened | `/fine-tune` |
 | ○ Framework Upgrade | Intrinsic Skill | 0 | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | II | Named | `/image-generate` |
-| ○ Issue Triage | Intrinsic Skill | IV | Hardened | `/issue-triage` |
 | ○ Object Detection | Intrinsic Skill | II | Named | `/object-detection` |
 | ○ OCR | Intrinsic Skill | II | Named | `/ocr` |
 | ○ Parallel Execution | Intrinsic Skill | II | Named | `/parallel-execution` |
