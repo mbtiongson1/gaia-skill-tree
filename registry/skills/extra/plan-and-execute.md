@@ -1,7 +1,7 @@
-# Extra Skill: /plan-and-execute  [4⭐ · Hardened]
+# Extra Skill: /plan-and-execute  [4★ · Hardened]
 **ID:** plan-and-execute  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/plan-and-execute`
 

@@ -1,7 +1,7 @@
-# /text-to-speech  [2⭐ · Named]
+# /text-to-speech  [2★ · Named]
 **ID:** text-to-speech  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/text-to-speech`
 

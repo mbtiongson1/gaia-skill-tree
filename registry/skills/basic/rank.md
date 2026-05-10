@@ -1,7 +1,7 @@
-# /rank  [1⭐ · Awakened]
+# /rank  [1★ · Awakened]
 **ID:** rank  
 **Type:** Basic Skill  
-**Level:** 1⭐  
+**Level:** 1★  
 **Tier:** Awakened  
 **Skill Call:** `/rank`
 

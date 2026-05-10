@@ -1,7 +1,7 @@
-# Extra Skill: /prediction-market-analysis  [4⭐ · Hardened]
+# Extra Skill: /prediction-market-analysis  [4★ · Hardened]
 **ID:** prediction-market-analysis  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/prediction-market-analysis`
 

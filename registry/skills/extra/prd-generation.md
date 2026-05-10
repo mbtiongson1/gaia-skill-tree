@@ -1,7 +1,7 @@
-# Extra Skill: mattpocock/to-prd  [4⭐ · Hardened]
+# Extra Skill: mattpocock/to-prd  [4★ · Hardened]
 **ID:** prd-generation  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/prd-generation`
 

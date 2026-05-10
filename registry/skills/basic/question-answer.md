@@ -1,7 +1,7 @@
-# /question-answer  [0⭐ · Basic]
+# /question-answer  [0★ · Basic]
 **ID:** question-answer  
 **Type:** Basic Skill  
-**Level:** 0⭐  
+**Level:** 0★  
 **Tier:** Basic  
 **Skill Call:** `/question-answer`
 

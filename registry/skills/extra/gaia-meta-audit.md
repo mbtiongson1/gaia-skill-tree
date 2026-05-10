@@ -1,7 +1,7 @@
-# Extra Skill: /gaia-meta-audit  [3⭐ · Evolved]
+# Extra Skill: /gaia-meta-audit  [3★ · Evolved]
 **ID:** gaia-meta-audit  
 **Type:** Extra Skill  
-**Level:** 3⭐  
+**Level:** 3★  
 **Tier:** Evolved  
 **Skill Call:** `/gaia-meta-audit`
 

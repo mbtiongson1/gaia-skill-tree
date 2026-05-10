@@ -1,7 +1,7 @@
-# vercel/find-skills  [0⭐ · Basic]
+# vercel/find-skills  [0★ · Basic]
 **ID:** skill-discovery  
 **Type:** Basic Skill  
-**Level:** 0⭐  
+**Level:** 0★  
 **Tier:** Basic  
 **Skill Call:** `/skill-discovery`
 

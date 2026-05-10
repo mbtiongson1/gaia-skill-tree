@@ -1,7 +1,7 @@
-# Extra Skill: huggingface/huggingface-papers  [4⭐ · Hardened]
+# Extra Skill: huggingface/huggingface-papers  [4★ · Hardened]
 **ID:** literature-review  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/literature-review`
 

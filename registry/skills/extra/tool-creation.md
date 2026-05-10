@@ -1,7 +1,7 @@
-# Extra Skill: anthropic/skill-creator  [4⭐ · Hardened]
+# Extra Skill: anthropic/skill-creator  [4★ · Hardened]
 **ID:** tool-creation  
 **Type:** Extra Skill  
-**Level:** 4⭐  
+**Level:** 4★  
 **Tier:** Hardened  
 **Skill Call:** `/tool-creation`
 

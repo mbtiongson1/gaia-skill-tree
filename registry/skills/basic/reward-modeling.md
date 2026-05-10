@@ -1,7 +1,7 @@
-# /reward-modeling  [2⭐ · Named]
+# /reward-modeling  [2★ · Named]
 **ID:** reward-modeling  
 **Type:** Basic Skill  
-**Level:** 2⭐  
+**Level:** 2★  
 **Tier:** Named  
 **Skill Call:** `/reward-modeling`
 
