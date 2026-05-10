@@ -73,14 +73,21 @@ Hard rule: any schema file change must come from a `schema/...` branch.
 - Skill types in graph: `basic`, `extra`, `ultimate`
 - Keep skills vendor-agnostic
 
-### Evidence by level
+### Evidence by star level
 
-- Level 0–I: no evidence required
-- Level II (Named): ≥ 1 Tier C
-- Level III (Evolved): ≥ 1 Tier B
-- Level IV (Hardened): ≥ 1 Tier B/A
-- Level V (Transcendent): ≥ 1 Tier A
-- Level VI (Transcendent ★): Tier A + peer review
+Use the schema star notation for all new and updated registry entries. The old roman numeral labels are legacy-only and should not appear in `level` values.
+
+| Level value | Rank label | Evidence floor |
+|---|---|---|
+| `0★` | Basic | no evidence required |
+| `1★` | Awakened | no evidence required |
+| `2★` | Named | ≥ 1 Tier C |
+| `3★` | Evolved | ≥ 1 Tier B |
+| `4★` | Hardened | ≥ 1 Tier B/A |
+| `5★` | Transcendent | ≥ 1 Tier B/A |
+| `6★` | Transcendent ★ | Tier A + peer review |
+
+Legacy mapping for reviewers: `0`/`I` → `0★`/`1★`, `II` → `2★`, `III` → `3★`, `IV` → `4★`, `V` → `5★`, and `VI` → `6★`.
 
 ### Ultimate (`ultimate`) requirements
 
@@ -90,9 +97,9 @@ Hard rule: any schema file change must come from a `schema/...` branch.
 
 ### Demerits and effective level
 
-- Demerits are allowed only on claimed levels `II` and above.
+- Demerits are allowed only on claimed levels `2★` and above.
 - Allowed demerit IDs are canonical and schema-validated: `niche-integration`, `experimental-feature`, `heavyweight-dependency`.
-- Each demerit lowers runtime potential by one level (effective level), floored at `I`.
+- Each demerit lowers runtime potential by one star level (effective level), floored at `1★`.
 - Named skill claims stay constrained by canonical level requirements; demerits do not bypass evidence floors.
 
 ---
