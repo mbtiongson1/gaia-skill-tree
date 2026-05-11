@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { lookupSkill } from "./tools/lookup.js";
@@ -77,8 +77,8 @@ export function createServer(): McpServer {
   );
 
   server.resource(
+    "gaia-registry",
     "gaia://registry",
-    "The Gaia skill registry — all skills with their types, levels, rarities, and prerequisites",
     async () => {
       const data = await getRegistryResource();
       return { contents: [{ uri: "gaia://registry", text: data, mimeType: "application/json" }] };
@@ -86,8 +86,8 @@ export function createServer(): McpServer {
   );
 
   server.resource(
-    "gaia://tree/{username}",
-    "A user's Gaia skill tree",
+    "gaia-tree",
+    new ResourceTemplate("gaia://tree/{username}", { list: undefined }),
     async (uri) => {
       const username = uri.pathname.split("/").pop() ?? "";
       const data = await getUserTreeResource(username);
