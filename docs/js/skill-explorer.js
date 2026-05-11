@@ -11,7 +11,7 @@
       if (k === '0★' || k === '1★') return; // explorer only shows 2★+
       LEVEL_META_SE[k] = { name: ll[k] || k, color: lc[k].hex, bg: lc[k].bg, border: lc[k].border };
     });
-    TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', ultimate:'◆' };
+    TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', unique:'◉', ultimate:'◆' };
   }
 
   var REPO_SLUG = (function(){
@@ -70,7 +70,7 @@
   // ── RENDER HERO ──────────────────────────────────────────────
   function renderHero(ns, generic) {
     var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2★'];
-    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
+    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'unique' ? '#7c3aed' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
     var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
     var links = ns.links || {};
     var repoUrl = links.github || links.npm || '';
@@ -82,7 +82,8 @@
     ].filter(Boolean).join('');
 
     var installCmd = 'gaia install ' + ns.id;
-    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
+    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '" data-type="' + esc((generic && generic.type) || 'basic') + '">' +
+      '<div class="se-node-orb se-node-orb--' + esc((generic && generic.type) || 'basic') + (ns.level === '6★' ? ' se-node-orb--vi' : '') + '"></div>' +
       (repoUrl ? '<a class="se-github-link" href="' + esc(repoUrl) + '" target="_blank" rel="noopener">Show in GitHub ↗</a>' : '') +
       '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
       '<div class="se-contrib"><span style="color:#ef4444;font-weight:700">' + esc(ns.contributor) + '</span> / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
@@ -691,6 +692,7 @@
 
   function highlightTree(text) {
     var ultIdx = 0;
+    var unqIdx = 0;
     return text.split('\n').map(function(line) {
       // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [6★]
       var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
@@ -712,12 +714,32 @@
         return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
                label + skillHtml + suffix + '</span>';
       }
+      // Unique skill header lines: ◉ Unique Skill: contributor/name  [4★]
+      var u = line.match(/^(◉ Unique Skill: )(\S+)(.*)$/);
+      if (u) {
+        var ulabel = esc(u[1]);
+        var uid = u[2];
+        var usuffix = esc(u[3]);
+        var udelay = -((unqIdx++ * 0.9) % 4);
+        var uslash = uid.indexOf('/');
+        var uskillHtml;
+        if (uslash > 0) {
+          uskillHtml = '<span class="tree-unique-contributor">' + esc(uid.slice(0, uslash)) + '</span>' +
+                       '<span class="tree-unique-slash">/</span>' +
+                       '<span class="tree-unique-skillname">' + esc(uid.slice(uslash + 1)) + '</span>';
+        } else {
+          uskillHtml = '<span class="tree-unique-skillname">' + esc(uid) + '</span>';
+        }
+        return '<span class="tree-unique-line" style="animation-delay:' + udelay + 's">' +
+               ulabel + uskillHtml + usuffix + '</span>';
+      }
       // Separator lines
       if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
-      // Inline ◇ / ○ glyphs
+      // Inline ◇ / ○ / ◉ glyphs
       var out = esc(line);
       out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
       out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
+      out = out.replace(/◉/g, '<span class="tree-unique-glyph">◉</span>');
       return out;
     }).join('\n');
   }
