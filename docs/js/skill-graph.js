@@ -1,6 +1,6 @@
 (function () {
   const GRAPH_JSON_URL = 'graph/gaia.json';
-  const GRAPH_SCALE = 1.25;
+  const GRAPH_SCALE = 1.625;
 
   // Defaults — overwritten from meta once data loads
   let PALETTE = {
@@ -667,6 +667,31 @@
       canvas.parentElement.appendChild(legend);
       state.legendEl = legend;
 
+      const scatterWrap = document.createElement('div');
+      scatterWrap.className = 'graph-scatter-wrap';
+      const scatterLabel = document.createElement('div');
+      scatterLabel.className = 'graph-scatter-label';
+      scatterLabel.textContent = 'Scatter';
+      const scatterTrack = document.createElement('div');
+      scatterTrack.className = 'graph-scatter-track';
+      const scatterInput = document.createElement('input');
+      scatterInput.type = 'range';
+      scatterInput.className = 'graph-scatter-slider';
+      scatterInput.min = '0.5';
+      scatterInput.max = '3.0';
+      scatterInput.step = '0.05';
+      scatterInput.value = String(state.scale);
+      scatterInput.setAttribute('aria-label', 'Graph scatter');
+      scatterInput.addEventListener('input', () => {
+        state.scale = parseFloat(scatterInput.value);
+        state.positions = buildPositions(state.skills, state.scale);
+      });
+      scatterInput.addEventListener('mousedown', e => e.stopPropagation());
+      scatterTrack.appendChild(scatterInput);
+      scatterWrap.appendChild(scatterLabel);
+      scatterWrap.appendChild(scatterTrack);
+      canvas.parentElement.appendChild(scatterWrap);
+
       const redPill = document.createElement('button');
       redPill.type = 'button';
       redPill.className = 'graph-redpill';
@@ -774,7 +799,7 @@
   const closeBtn = document.querySelector('[data-graph-close]');
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
+    labelMode:'all', scale:1.8, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
     onNodeClick: function(id) {
       var buckets = window._gaiaNamedBuckets || {};
       if (buckets[id] && buckets[id].length) {
