@@ -789,14 +789,8 @@
   .graph-neighbor-card[data-type="unique"]{border-color:rgba(124,58,237,.35)}
   @media(max-width:700px){.graph-scatter-strip,.graph-bottom-bar,.graph-collection-panel{display:none!important}}
 
-  /* ── REGISTRY STATS — mobile compact row ── */
+  /* ── REGISTRY STATS — 2×2 grid on mobile ── */
   @media(max-width:700px){
-    .rs-stat{padding:1rem .55rem}
-    .rs-num{font-size:1.65rem}
-    .rs-label{font-size:.7rem;letter-spacing:.04em}
-  }
-  /* ── REGISTRY STATS — 2×2 grid on very narrow ── */
-  @media(max-width:420px){
     .registry-stats{display:grid;grid-template-columns:1fr 1fr;border-radius:12px}
     .rs-divider{display:none}
     .rs-stat{padding:.9rem .5rem;position:relative}
