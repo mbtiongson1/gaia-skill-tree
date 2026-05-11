@@ -382,31 +382,9 @@
   .graph-canvas-wrap{position:relative;flex:1;min-height:0;background:radial-gradient(circle at center,rgba(15,23,42,.75),#020617 68%)}
   #graphDialogCanvas{position:absolute;inset:0;width:100%;height:100%}
   .graph-status{
-    position:absolute;top:.6rem;left:60px;z-index:5;
-    display:flex;align-items:center;gap:.42rem;flex-wrap:nowrap;
-    pointer-events:none;
-  }
-  .gst-stat{
-    color:rgba(148,163,184,.7);font-size:.7rem;white-space:nowrap;
-    background:rgba(3,7,18,.68);border:1px solid rgba(148,163,184,.15);
-    border-radius:999px;padding:.26rem .62rem;
-  }
-  .gst-dim{color:rgba(148,163,184,.4)}
-  .gst-tip{
-    display:inline-flex;align-items:center;gap:.24rem;
-    color:rgba(148,163,184,.42);font-size:.67rem;white-space:nowrap;
-  }
-  .gst-tip span{color:rgba(148,163,184,.55)}
-  .gst-or{color:rgba(148,163,184,.28)!important;font-size:.6rem}
-  .gst-ctrl{
-    font:.7rem/1 Inter,system-ui,sans-serif;font-weight:700;
-    color:rgba(148,163,184,.6);background:rgba(3,7,18,.68);
-    border:1px solid rgba(148,163,184,.22);border-bottom-width:2px;
-    border-radius:3px;padding:.08rem .3rem;
-  }
-  .gst-icon{
-    width:10px;height:15px;flex-shrink:0;
-    color:rgba(148,163,184,.55);overflow:visible;
+    position:absolute;left:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.78rem;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.35rem .75rem;
   }
   /* ── tree dialog ── */
   .tree-dialog{
@@ -537,9 +515,16 @@
   }
   .graph-legend-rank-pill:hover{transform:scale(1.18);box-shadow:0 0 8px currentColor}
   .graph-legend-rank-pill.active{transform:scale(1.18);box-shadow:0 0 10px currentColor,inset 0 0 0 1.5px currentColor}
-  .graph-label-toggle{display:none}
+  .graph-label-toggle{
+    position:absolute;right:1rem;bottom:1rem;z-index:2;
+    color:#94a3b8;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
+    border:1px solid rgba(148,163,184,.18);border-radius:999px;padding:.3rem .7rem;
+    cursor:pointer;transition:border-color .2s,color .2s,background .2s;font-family:inherit;
+  }
+  .graph-label-toggle:hover{border-color:rgba(56,189,248,.5);color:#e2e8f0}
+  .graph-label-toggle.active{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.45);color:#e2e8f0}
   .graph-redpill{
-    position:absolute;bottom:calc(52px + .75rem);right:.75rem;z-index:10;
+    position:absolute;bottom:3.4rem;right:.75rem;z-index:10;
     color:#f87171;font-size:.72rem;font-weight:700;background:rgba(3,7,18,.68);
     border:1px solid rgba(239,68,68,.45);border-radius:999px;padding:.3rem .78rem;
     cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;
@@ -549,103 +534,6 @@
     background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.7);
     color:#fca5a5;box-shadow:0 0 14px rgba(239,68,68,.35);
   }
-  .graph-scatter-strip{
-    position:absolute;left:0;top:0;bottom:52px;width:52px;z-index:10;
-    display:flex;flex-direction:column;align-items:center;
-    background:linear-gradient(to bottom,rgba(56,189,248,.07) 0%,rgba(3,7,18,.65) 22%,rgba(3,7,18,.65) 78%,rgba(192,132,252,.07) 100%);
-    border-right:1px solid rgba(148,163,184,.1);
-    cursor:ns-resize;user-select:none;
-  }
-  .graph-scatter-edge{
-    font-size:1.15rem;font-weight:700;line-height:1;padding:.55rem 0;user-select:none;
-  }
-  .graph-scatter-edge--top{color:rgba(56,189,248,.55)}
-  .graph-scatter-edge--bot{color:rgba(192,132,252,.45)}
-  .graph-scatter-track{
-    flex:1;position:relative;width:100%;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .graph-scatter-line{
-    width:1px;height:100%;pointer-events:none;
-    background:linear-gradient(to bottom,rgba(56,189,248,.5),rgba(148,163,184,.15) 40%,rgba(148,163,184,.15) 60%,rgba(192,132,252,.4));
-  }
-  .graph-scatter-knob{
-    position:absolute;width:26px;height:26px;left:50%;
-    transform:translate(-50%,-50%);
-    background:rgba(3,7,18,.9);
-    border:1.5px solid rgba(56,189,248,.55);border-radius:50%;
-    pointer-events:none;transition:border-color .15s,box-shadow .15s;
-  }
-  .graph-scatter-knob.active{
-    border-color:rgba(56,189,248,1);
-    box-shadow:0 0 14px rgba(56,189,248,.55),0 0 4px rgba(56,189,248,.3);
-  }
-  .graph-scatter-title{
-    font-size:.49rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(148,163,184,.3);padding:.45rem 0;white-space:nowrap;
-  }
-  /* ── Bottom bar ── */
-  .graph-bottom-bar{
-    position:absolute;bottom:0;left:0;right:0;height:52px;z-index:10;
-    display:flex;flex-direction:row;align-items:stretch;
-    background:linear-gradient(to right,rgba(56,189,248,.07) 0%,rgba(3,7,18,.65) 12%,rgba(3,7,18,.65) 88%,rgba(192,132,252,.07) 100%);
-    border-top:1px solid rgba(148,163,184,.1);
-  }
-  .graph-pause-btn{
-    flex:0 0 52px;display:flex;align-items:center;justify-content:center;
-    font-size:1.1rem;color:rgba(148,163,184,.65);
-    background:transparent;border:none;border-right:1px solid rgba(148,163,184,.1);
-    cursor:pointer;transition:color .15s,background .15s;font-family:inherit;
-  }
-  .graph-pause-btn:hover{color:#e2e8f0;background:rgba(255,255,255,.04)}
-  .graph-pause-btn.active{color:rgba(56,189,248,.9)}
-  .graph-bottom-btn{
-    flex:0 0 auto;padding:0 .85rem;
-    display:flex;align-items:center;justify-content:center;
-    font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    color:rgba(148,163,184,.55);background:transparent;
-    border:none;border-right:1px solid rgba(148,163,184,.1);
-    cursor:pointer;transition:color .15s,background .15s;
-    font-family:inherit;white-space:nowrap;
-  }
-  .graph-bottom-btn:hover{color:#e2e8f0;background:rgba(255,255,255,.04)}
-  .graph-bottom-btn.active{color:rgba(56,189,248,.9)}
-  .graph-bottom-btn.off{color:rgba(148,163,184,.2);text-decoration:line-through}
-  .graph-speed-strip{
-    flex:1;display:flex;flex-direction:row;align-items:center;
-    position:relative;cursor:ew-resize;user-select:none;
-  }
-  .graph-speed-edge{
-    font-size:.9rem;font-weight:700;line-height:1;padding:0 .55rem;
-    flex-shrink:0;user-select:none;
-  }
-  .graph-speed-edge--left{color:rgba(148,163,184,.28)}
-  .graph-speed-edge--right{color:rgba(192,132,252,.45)}
-  .graph-speed-track{
-    flex:1;position:relative;height:100%;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .graph-speed-line{
-    width:100%;height:1px;pointer-events:none;
-    background:linear-gradient(to right,rgba(148,163,184,.15),rgba(56,189,248,.4) 40%,rgba(56,189,248,.4) 60%,rgba(192,132,252,.4));
-  }
-  .graph-speed-knob{
-    position:absolute;width:26px;height:26px;top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    background:rgba(3,7,18,.9);
-    border:1.5px solid rgba(56,189,248,.55);border-radius:50%;
-    pointer-events:none;transition:border-color .15s,box-shadow .15s;
-  }
-  .graph-speed-knob.active{
-    border-color:rgba(56,189,248,1);
-    box-shadow:0 0 14px rgba(56,189,248,.55),0 0 4px rgba(56,189,248,.3);
-  }
-  .graph-speed-title{
-    position:absolute;top:3px;left:50%;transform:translateX(-50%);
-    font-size:.49rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(148,163,184,.25);white-space:nowrap;pointer-events:none;
-  }
-  @media(max-width:700px){.graph-scatter-strip,.graph-bottom-bar{display:none}}
   @media (max-width:700px){
     html,body{overflow-x:clip}
     nav{
