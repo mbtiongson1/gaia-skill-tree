@@ -562,6 +562,60 @@
       ctx.strokeStyle = `rgba(124,58,237,${(alpha * 0.5).toFixed(2)})`;
       ctx.lineWidth = r * 0.15; ctx.stroke();
     }
+    function drawNodeUnique(sx, sy, r, alpha, t, p) {
+      const phase = p.phase || 0;
+      const spin = t * 2.2 + phase;
+      // Big dark spinning void glow
+      const voidR = r * 6;
+      ctx.save();
+      ctx.translate(sx, sy);
+      ctx.rotate(spin * 0.3);
+      const voidGrad = ctx.createRadialGradient(0, 0, r * 0.8, 0, 0, voidR);
+      voidGrad.addColorStop(0, `rgba(10,0,20,${(alpha * 0.7).toFixed(2)})`);
+      voidGrad.addColorStop(0.3, `rgba(26,5,51,${(alpha * 0.4).toFixed(2)})`);
+      voidGrad.addColorStop(0.6, `rgba(124,58,237,${(alpha * 0.12).toFixed(2)})`);
+      voidGrad.addColorStop(1, `rgba(124,58,237,0)`);
+      ctx.beginPath(); ctx.arc(0, 0, voidR, 0, Math.PI * 2);
+      ctx.fillStyle = voidGrad; ctx.fill();
+      // Spinning dark arms (like a spiral galaxy but dark)
+      for (let arm = 0; arm < 3; arm++) {
+        const armAngle = (Math.PI * 2 * arm / 3) + spin * 0.7;
+        ctx.beginPath();
+        for (let j = 0; j <= 20; j++) {
+          const frac = j / 20;
+          const spiralR = r * 1.2 + frac * voidR * 0.7;
+          const spiralA = armAngle + frac * Math.PI * 1.5;
+          const px = Math.cos(spiralA) * spiralR;
+          const py = Math.sin(spiralA) * spiralR * 0.45;
+          if (j === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = `rgba(26,5,51,${(alpha * 0.4).toFixed(2)})`;
+        ctx.lineWidth = r * 0.4;
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Accretion disk particles spinning wildly
+      for (let i = 0; i < 16; i++) {
+        const a = (Math.PI * 2 * i / 16) + spin * (1.5 + (i % 4) * 0.4);
+        const orbitR = r * (1.6 + 0.4 * Math.sin(spin * 0.9 + i * 0.7));
+        const dx = Math.cos(a) * orbitR;
+        const dy = Math.sin(a) * orbitR * 0.35;
+        const particleAlpha = alpha * (0.4 + 0.35 * Math.sin(spin * 2.5 + i * 1.1));
+        const particleR = r * (0.1 + 0.05 * Math.sin(t * 4 + i));
+        ctx.beginPath();
+        ctx.arc(sx + dx, sy + dy, particleR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(167,139,250,${particleAlpha.toFixed(2)})`;
+        ctx.fill();
+      }
+      // Event horizon ring — bright purple edge
+      ctx.beginPath(); ctx.arc(sx, sy, r * 1.12, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(124,58,237,${(alpha * 0.9).toFixed(2)})`;
+      ctx.lineWidth = 2; ctx.stroke();
+      // Void core — pure darkness
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(10,0,20,${Math.min(alpha * 1.2, 1).toFixed(2)})`;
+      ctx.fill();
+    }
     function shouldLabel(skill) {
       if (state.redPillActive && state.namedMap[skill.id]) return true;
       if (state.labelMode === 'none') return false;

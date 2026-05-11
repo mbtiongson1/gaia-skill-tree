@@ -44,6 +44,7 @@ from gaia_cli.cardRenderer import (
 )
 from gaia_cli.promotion import (
     check_promotion_eligibility,
+    detect_unique_candidates,
     load_promotion_candidates,
     promote_from_candidates,
     promote_skill,
@@ -329,7 +330,10 @@ def scan_command(args):
 
         # Promotion hints
         eligible = check_promotion_eligibility(graph_data, tree)
-        candidate_path = write_promotion_candidates(args.registry, username, eligible)
+        from .graph import load_named_skills
+        named_index = load_named_skills(args.registry)
+        unique_eligible = detect_unique_candidates(graph_data, named_index)
+        candidate_path = write_promotion_candidates(args.registry, username, eligible, unique_eligible)
         if not quiet:
             print(f"  saved {os.path.basename(candidate_path)}")
         if eligible:
@@ -337,6 +341,9 @@ def scan_command(args):
                 skill = skill_map.get(promo["skillId"])
                 if skill:
                     print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★")))
+        if unique_eligible and not quiet:
+            for uc in unique_eligible:
+                print(f"  ◉ {uc['name']} eligible for unique promotion (gaia promote {uc['skillId']} --unique)")
         render_user_tree_outputs(username, tree, graph_data, args.registry, quiet=quiet)
         if getattr(args, "auto_promote", False) and eligible:
             promoted = promote_all_candidates(username, args.registry)
@@ -533,6 +540,17 @@ def promote_command(args):
     display_name = getattr(args, 'name', None)
 
     try:
+        if getattr(args, "unique", False):
+            if not skill_id:
+                print("Usage: gaia promote <skill> --unique", file=sys.stderr)
+                sys.exit(2)
+            from .promotion import promote_to_unique
+            result = promote_to_unique(skill_id, args.registry)
+            print(f"\n◉ {result['displayName']} promoted to Unique Skill (type: unique)!")
+            print(f"  Level: {result['level']}")
+            print()
+            return
+
         if getattr(args, "all", False):
             results = promote_all_candidates(username, args.registry)
             if not results:
@@ -1177,6 +1195,7 @@ def get_parser():
     promote_parser = subparsers.add_parser('promote', help="Promote a skill eligible for level-up")
     promote_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to promote")
     promote_parser.add_argument('--all', action='store_true', help="Promote every candidate from the last scan")
+    promote_parser.add_argument('--unique', action='store_true', help="Promote a basic skill to unique type (4★+ graph-isolated with named impl)")
     promote_parser.add_argument('--name', help="Optional display name for the promoted skill")
     fuse_parser = subparsers.add_parser('fuse', help="Confirm a skill combination or promotion candidate")
     fuse_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to fuse or promote")

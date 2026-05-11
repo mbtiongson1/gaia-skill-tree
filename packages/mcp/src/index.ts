@@ -67,7 +67,7 @@ export function createServer(): McpServer {
       skillId: z.string().optional().describe("ID of an existing skill to fuse/claim (e.g. 'web-scrape')"),
       name: z.string().optional().describe("Name for a novel skill proposal"),
       description: z.string().optional().describe("Description of the novel skill"),
-      type: z.enum(["basic", "extra", "ultimate"]).optional().describe("Skill type"),
+      type: z.enum(["basic", "extra", "unique", "ultimate"]).optional().describe("Skill type"),
       prerequisites: z.array(z.string()).optional().describe("Prerequisite skill IDs for extra/ultimate proposals"),
     },
     async (input) => {
