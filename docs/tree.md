@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v3.1.1  ·  generated 2026-05-06
+GAIA SKILL TREE  v3.1.4  ·  generated 2026-05-06
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -92,6 +92,12 @@ Shared prerequisites marked (↑ see above) on second occurrence.
      └─ ○ /tool-select  [1★]
 
 ══════════════════════════════════════════════════════════════════════
+Unique Skills — graph-isolated singularities at 4★+
+══════════════════════════════════════════════════════════════════════
+
+  ◉ Unique Skill: huggingface/huggingface-llm-trainer - Fine-Tune  [4★ · Hardened]
+
+══════════════════════════════════════════════════════════════════════
 Pure / Undeveloped — basic skills not yet wired into any upgrade path.
 ══════════════════════════════════════════════════════════════════════
 
@@ -100,7 +106,6 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /context-compression  [3★ · Evolved]
   ○ /feed-monitoring  [4★ · Hardened]
   ○ /few-shot-learning  [4★ · Hardened]
-  ○ huggingface/huggingface-llm-trainer - Fine-Tune  [4★ · Hardened]
   ○ laravel/upgrade-laravel-v13 - Framework Upgrade  [0★ · Basic]
   ○ /image-generate  [2★ · Named]
   ○ huggingface/huggingface-vision-trainer - Object Detection  [2★ · Named]
