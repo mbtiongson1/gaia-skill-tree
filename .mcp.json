@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "gaia": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["packages/mcp/dist/bin/gaia-mcp.js"]
+    }
+  }
+}

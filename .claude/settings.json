@@ -1,4 +1,5 @@
 {
+  "enabledMcpjsonServers": ["gaia"],
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": false
   },
