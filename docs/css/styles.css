@@ -788,6 +788,37 @@
   .graph-neighbor-card[data-type="ultimate"]{border-color:rgba(245,158,11,.35)}
   .graph-neighbor-card[data-type="unique"]{border-color:rgba(124,58,237,.35)}
   @media(max-width:700px){.graph-scatter-strip,.graph-bottom-bar,.graph-collection-panel{display:none!important}}
+
+  /* ── REGISTRY STATS — 2×2 grid on mobile ── */
+  @media(max-width:700px){
+    .registry-stats{display:grid;grid-template-columns:1fr 1fr;border-radius:12px}
+    .rs-divider{display:none}
+    .rs-stat{padding:.9rem .5rem;position:relative}
+    .rs-stat:nth-child(1){border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .rs-stat:nth-child(3){border-right:1px solid var(--border)}
+    .rs-stat:nth-child(5){border-bottom:1px solid var(--border)}
+    .rs-num{font-size:1.5rem}
+    .rs-label{font-size:.67rem}
+  }
+
+  /* ── GRAPH MODAL — mobile desktop hint ── */
+  .graph-mobile-hint{
+    display:none;
+    position:absolute;inset:0;z-index:20;
+    align-items:center;justify-content:center;flex-direction:column;gap:.75rem;
+    background:rgba(3,7,18,.88);backdrop-filter:blur(4px);
+    text-align:center;padding:2rem;
+  }
+  .graph-mobile-hint-icon{font-size:2.4rem;line-height:1}
+  .graph-mobile-hint-title{font-size:1rem;font-weight:700;color:var(--text)}
+  .graph-mobile-hint-sub{font-size:.84rem;color:var(--muted);line-height:1.55;max-width:240px}
+  .graph-mobile-hint-dismiss{
+    margin-top:.4rem;padding:.45rem .9rem;
+    border:1px solid rgba(56,189,248,.45);border-radius:999px;
+    background:transparent;color:var(--basic);font-size:.8rem;font-weight:700;cursor:pointer;
+  }
+  .graph-mobile-hint-dismiss:hover{background:rgba(56,189,248,.1)}
+  @media(max-width:700px){.graph-mobile-hint{display:flex}}
   @media (max-width:700px){
     html,body{overflow-x:clip}
     nav{
