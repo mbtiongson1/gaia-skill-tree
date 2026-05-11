@@ -203,11 +203,16 @@
       orbitX: 0,
       orbitY: 0,
       dragging: false,
+      dragMode: 'pan',
       dragLastX: 0,
       dragLastY: 0,
       dragStartX: 0,
       dragStartY: 0,
       dragMoved: false,
+      panX: 0,
+      panY: 0,
+      paused: false,
+      rotSpeed: 1,
       hoveredId: null,
       lastHoveredId: null,
       projectedNodes: {},
@@ -267,7 +272,7 @@
       const fov = Math.min(state.width, state.height) * 0.75;
       const dist = fov / (fov + p.z + 360 * state.scale);
       const z = state.zoom;
-      return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
+      return { sx: state.width / 2 + p.x * dist * z + state.panX, sy: state.height / 2 + p.y * dist * z + state.panY, scale: dist * z };
     }
     function drawNode(sx, sy, r, color, alpha) {
       const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
@@ -407,7 +412,7 @@
     }
     function draw() {
       if (!state.running) return;
-      state.t += 0.006;
+      if (!state.paused) state.t += 0.006 * state.rotSpeed;
       ctx.clearRect(0, 0, state.width, state.height);
       state.projectedNodes = {};
       const ry = options.draggable
@@ -738,25 +743,122 @@
       canvas.parentElement.appendChild(redPill);
       state.redPillEl = redPill;
 
+      // ── Bottom bar: [pause][labels][titles][speed strip] ──
+      const bottomBar = document.createElement('div');
+      bottomBar.className = 'graph-bottom-bar';
+      bottomBar.addEventListener('mousedown', e => e.stopPropagation());
+
+      const pauseBtn = document.createElement('button');
+      pauseBtn.type = 'button';
+      pauseBtn.className = 'graph-pause-btn';
+      pauseBtn.textContent = '⏸';
+      pauseBtn.title = 'Pause / resume rotation';
+      pauseBtn.addEventListener('click', () => {
+        state.paused = !state.paused;
+        pauseBtn.textContent = state.paused ? '▶' : '⏸';
+        pauseBtn.classList.toggle('active', state.paused);
+      });
+      bottomBar.appendChild(pauseBtn);
+      state.pauseBtnEl = pauseBtn;
+
+      const labelsToggle = document.createElement('button');
+      labelsToggle.type = 'button';
+      labelsToggle.className = 'graph-bottom-btn';
+      labelsToggle.textContent = 'Labels';
+      labelsToggle.title = 'Toggle skill labels';
+      labelsToggle.addEventListener('click', () => {
+        if (state.labelMode === 'none') {
+          state.labelMode = options.labelMode || 'ultimate';
+          labelsToggle.classList.remove('off');
+        } else {
+          state.labelMode = 'none';
+          labelsToggle.classList.add('off');
+        }
+      });
+      bottomBar.appendChild(labelsToggle);
+      state.labelsToggleEl = labelsToggle;
+
       const labelToggle = document.createElement('button');
       labelToggle.type = 'button';
-      labelToggle.className = 'graph-label-toggle';
-      labelToggle.textContent = 'Show Title';
-      labelToggle.addEventListener('mousedown', e => e.stopPropagation());
+      labelToggle.className = 'graph-bottom-btn';
+      labelToggle.textContent = 'Titles';
+      labelToggle.title = 'Show skill titles instead of /IDs';
       labelToggle.addEventListener('click', () => {
         state.showTitles = !state.showTitles;
         labelToggle.classList.toggle('active', state.showTitles);
       });
-      canvas.parentElement.appendChild(labelToggle);
+      bottomBar.appendChild(labelToggle);
       state.labelToggleEl = labelToggle;
+
+      // Speed strip — horizontal infinite drag, right=faster
+      const speedStrip = document.createElement('div');
+      speedStrip.className = 'graph-speed-strip';
+      const speedLeft = document.createElement('div');
+      speedLeft.className = 'graph-speed-edge graph-speed-edge--left';
+      speedLeft.textContent = '◀';
+      const speedTrackWrap = document.createElement('div');
+      speedTrackWrap.className = 'graph-speed-track';
+      const speedLine = document.createElement('div');
+      speedLine.className = 'graph-speed-line';
+      const speedKnob = document.createElement('div');
+      speedKnob.className = 'graph-speed-knob';
+      speedTrackWrap.appendChild(speedLine);
+      speedTrackWrap.appendChild(speedKnob);
+      const speedRight = document.createElement('div');
+      speedRight.className = 'graph-speed-edge graph-speed-edge--right';
+      speedRight.textContent = '▶';
+      const speedTitle = document.createElement('div');
+      speedTitle.className = 'graph-speed-title';
+      speedTitle.textContent = 'SPEED';
+      speedStrip.appendChild(speedLeft);
+      speedStrip.appendChild(speedTrackWrap);
+      speedStrip.appendChild(speedRight);
+      speedStrip.appendChild(speedTitle);
+
+      let speedDragging = false, speedLastX = 0, speedKnobPct = 0.5;
+      function updateSpeedKnob() {
+        const w = speedTrackWrap.clientWidth || 200;
+        speedKnob.style.left = (speedKnobPct * w) + 'px';
+      }
+      speedStrip.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        speedStrip.setPointerCapture(e.pointerId);
+        speedDragging = true;
+        speedLastX = e.clientX;
+        speedKnob.classList.add('active');
+        const rect = speedTrackWrap.getBoundingClientRect();
+        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        updateSpeedKnob();
+      });
+      speedStrip.addEventListener('pointermove', e => {
+        if (!speedDragging) return;
+        const dx = e.clientX - speedLastX;
+        speedLastX = e.clientX;
+        state.rotSpeed = Math.max(0, state.rotSpeed * Math.exp(dx * 0.007));
+        const rect = speedTrackWrap.getBoundingClientRect();
+        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        updateSpeedKnob();
+      });
+      speedStrip.addEventListener('pointerup', e => {
+        speedDragging = false;
+        speedKnob.classList.remove('active');
+        speedStrip.releasePointerCapture(e.pointerId);
+      });
+      bottomBar.appendChild(speedStrip);
+      canvas.parentElement.appendChild(bottomBar);
     }
     window.addEventListener('resize', resize);
     const pointerTarget = options.pointerTarget || canvas;
     pointerTarget.addEventListener('mousemove', event => {
       const rect = canvas.getBoundingClientRect();
       if (options.draggable && state.dragging) {
-        state.orbitY += (event.clientX - state.dragLastX) * 0.007;
-        state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        if (state.dragMode === 'orbit') {
+          state.orbitY += (event.clientX - state.dragLastX) * 0.007;
+          state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        } else {
+          state.panX += event.clientX - state.dragLastX;
+          state.panY += event.clientY - state.dragLastY;
+        }
         state.dragLastX = event.clientX;
         state.dragLastY = event.clientY;
         if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 5) state.dragMoved = true;
@@ -780,15 +882,18 @@
     if (options.draggable) {
       canvas.style.cursor = 'grab';
       canvas.addEventListener('mouseleave', () => { if (!state.dragging) state.hoveredId = null; });
+      canvas.addEventListener('contextmenu', e => e.preventDefault());
       canvas.addEventListener('mousedown', e => {
+        if (e.button === 2) return;
         e.preventDefault();
         state.dragging = true;
+        state.dragMode = (e.button === 1 || e.ctrlKey) ? 'orbit' : 'pan';
         state.dragMoved = false;
         state.dragStartX = e.clientX;
         state.dragStartY = e.clientY;
         state.dragLastX = e.clientX;
         state.dragLastY = e.clientY;
-        canvas.style.cursor = 'grabbing';
+        canvas.style.cursor = state.dragMode === 'orbit' ? 'grabbing' : 'move';
       });
       window.addEventListener('mouseup', e => {
         if (!state.dragging) return;
@@ -813,6 +918,10 @@
       state.showTitles = false;
       state.searchText = '';
       state.redPillActive = false;
+      state.panX = 0; state.panY = 0;
+      state.paused = false; state.rotSpeed = 1;
+      if (state.pauseBtnEl) { state.pauseBtnEl.textContent = '⏸'; state.pauseBtnEl.classList.remove('active'); }
+      if (state.labelsToggleEl) { state.labelMode = options.labelMode || 'ultimate'; state.labelsToggleEl.classList.remove('off'); }
       if (state.redPillEl) state.redPillEl.classList.remove('active');
       if (state.legendEl) {
         state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
