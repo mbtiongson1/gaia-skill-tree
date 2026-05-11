@@ -193,6 +193,8 @@ def validate_prerequisites_count(graph):
         actual = len(skill.get("prerequisites", []))
         if skill["type"] == "basic" and actual > 0:
             errors.append(f"Basic skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
+        elif skill["type"] == "unique" and actual > 0:
+            errors.append(f"Unique skill '{skill['id']}' must have 0 prerequisites (has {actual}).")
         elif actual < min_req:
             errors.append(f"{skill['type'].title()} skill '{skill['id']}' needs ≥{min_req} prerequisites (has {actual}).")
     return errors
@@ -241,6 +243,54 @@ def validate_ultimate(graph):
                     f"Validated ultimate '{skill['id']}' needs ≥3 Class A/B evidence "
                     f"sources (has {len(ab_evidence)})."
                 )
+    return errors
+
+
+def validate_unique_skills(graph):
+    """Check unique-type-specific constraints: level ≥4★, 0 prerequisites, graph-isolated, has named impl."""
+    errors = []
+    all_prereq_refs = set()
+    for skill in graph.get("skills", []):
+        for pid in skill.get("prerequisites", []):
+            all_prereq_refs.add(pid)
+
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    named_index_path = os.path.join(repo_root, "registry", "named-skills.json")
+    named_buckets = {}
+    if os.path.isfile(named_index_path):
+        with open(named_index_path, "r", encoding="utf-8") as f:
+            named_buckets = json.load(f).get("buckets", {})
+
+    level_order = ["0★", "1★", "2★", "3★", "4★", "5★", "6★"]
+    for skill in graph.get("skills", []):
+        if skill["type"] != "unique":
+            continue
+
+        level_idx = level_order.index(skill.get("level", "0★")) if skill.get("level") in level_order else 0
+        if level_idx < 4:
+            errors.append(
+                f"Unique skill '{skill['id']}' must be level 4★ or above "
+                f"(got '{skill.get('level')}')."
+            )
+
+        if skill.get("prerequisites", []):
+            errors.append(
+                f"Unique skill '{skill['id']}' must have 0 prerequisites "
+                f"(has {len(skill['prerequisites'])})."
+            )
+
+        if skill["id"] in all_prereq_refs:
+            errors.append(
+                f"Unique skill '{skill['id']}' is referenced as a prerequisite "
+                f"by another skill — unique skills must be graph-isolated."
+            )
+
+        if skill["id"] not in named_buckets or not named_buckets[skill["id"]]:
+            errors.append(
+                f"Unique skill '{skill['id']}' has no named implementation — "
+                f"unique skills require at least one entry in named-skills.json."
+            )
+
     return errors
 
 
@@ -657,39 +707,43 @@ def main():
     all_errors = []
 
     # 1. Schema validation
-    print("   [1/9] Schema validation...")
+    print("   [1/10] Schema validation...")
     all_errors.extend(validate_schema(graph, schema_dir))
 
     # 2. Unique identifiers
-    print("   [2/9] Unique identifiers...")
+    print("   [2/10] Unique identifiers...")
     all_errors.extend(validate_unique_ids(graph))
 
     # 3. DAG cycle detection
-    print("   [3/9] DAG cycle detection...")
+    print("   [3/10] DAG cycle detection...")
     all_errors.extend(validate_dag(graph))
 
     # 4. Reference integrity
-    print("   [4/9] Reference integrity...")
+    print("   [4/10] Reference integrity...")
     all_errors.extend(validate_references(graph))
 
     # 5. Prerequisite count
-    print("   [5/9] Prerequisite count...")
+    print("   [5/10] Prerequisite count...")
     all_errors.extend(validate_prerequisites_count(graph))
 
     # 6. Evidence threshold
-    print("   [6/9] Evidence thresholds...")
+    print("   [6/10] Evidence thresholds...")
     all_errors.extend(validate_evidence(graph))
 
     # 7. Ultimate constraints
-    print("   [7/9] Ultimate constraints...")
+    print("   [7/10] Ultimate constraints...")
     all_errors.extend(validate_ultimate(graph))
 
-    # 8. Demerit constraints
-    print("   [8/9] Demerit constraints...")
+    # 8. Unique skill constraints
+    print("   [8/10] Unique skill constraints...")
+    all_errors.extend(validate_unique_skills(graph))
+
+    # 9. Demerit constraints
+    print("   [9/10] Demerit constraints...")
     all_errors.extend(validate_demerits(graph))
 
-    # 9. Named skills validation (includes reviewer gate + catalog cross-refs)
-    print("   [9/9] Named skills validation...")
+    # 10. Named skills validation (includes reviewer gate + catalog cross-refs)
+    print("   [10/10] Named skills validation...")
     all_errors.extend(validate_named_skills(graph))
 
     # Stats

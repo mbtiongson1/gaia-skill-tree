@@ -41,6 +41,7 @@ def _bold() -> str:
 TIER_COLORS = {
     "basic": (56, 189, 248),
     "extra": (192, 132, 252),
+    "unique": (124, 58, 237),
     "ultimate": (245, 158, 11),
 }
 
@@ -54,7 +55,7 @@ RANK_COLORS = {
     "6★":  (251, 191, 36),    # Amber bright
 }
 
-TYPE_SYMBOLS = {"basic": "○", "extra": "◇", "ultimate": "◆"}
+TYPE_SYMBOLS = {"basic": "○", "extra": "◇", "unique": "◉", "ultimate": "◆"}
 
 COLOR_CONTRIBUTOR = (239, 68, 68)    # #ef4444 -- red for named contributors
 COLOR_LOCAL_USER  = (134, 239, 172)  # #86efac -- bright green for local/user skills
@@ -96,7 +97,7 @@ def format_skill_colored(skill_id: str, level: str = "0★", *,
 
 def format_type_label(skill_type: str) -> str:
     """Return type glyph + label like '○ Basic Skill'."""
-    labels = {"basic": "Basic Skill", "extra": "Extra Skill", "ultimate": "Ultimate Skill"}
+    labels = {"basic": "Basic Skill", "extra": "Extra Skill", "unique": "Unique Skill", "ultimate": "Ultimate Skill"}
     symbol = TYPE_SYMBOLS.get(skill_type, "?")
     label = labels.get(skill_type, skill_type)
     return f"{symbol} {label}"

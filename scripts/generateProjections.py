@@ -86,7 +86,7 @@ def get_tier_label(meta, level):
 
 
 def get_tier_symbol(skill_type):
-    return {"basic": "○", "extra": "◇", "ultimate": "◆"}.get(skill_type, "·")
+    return {"basic": "○", "extra": "◇", "unique": "◉", "ultimate": "◆"}.get(skill_type, "·")
 
 
 def _build_skill_display(skill_id, skill_type, named_map=None):
@@ -102,6 +102,10 @@ def _build_skill_display(skill_id, skill_type, named_map=None):
         if named_id:
             return f"Ultimate Skill: {named_id}"
         return f"Ultimate Skill: /{skill_id} [Unclaimed ✦]"
+    if skill_type == "unique":
+        if named_id:
+            return f"Unique Skill: {named_id}"
+        return f"Unique Skill: /{skill_id}"
     if skill_type == "extra":
         if named_id:
             return f"Extra Skill: {named_id}"
@@ -185,6 +189,7 @@ def main():
 
     os.makedirs("registry/skills/basic", exist_ok=True)
     os.makedirs("registry/skills/extra", exist_ok=True)
+    os.makedirs("registry/skills/unique", exist_ok=True)
     os.makedirs("registry/skills/ultimate", exist_ok=True)
 
     skill_map = {s["id"]: s for s in skills}
@@ -312,12 +317,31 @@ def main():
             f.write(f"| {name_display} | {type_label or 'Basic Skill'} | {level_label} | {tier_label} | {skill_call} |\n")
 
         f.write("\n")
+
+        # Unique Skills section
+        unique_skills = [s for s in skills if s.get("type") == "unique"]
+        if unique_skills:
+            f.write("## Unique Skills\n\n")
+            f.write("*Singular mastery skills — graph-isolated, 4★+ with named implementations. Promoted via `/gaia promote --unique`.*\n\n")
+            f.write("| Name | Class | Rank | Tier | Skill Call |\n")
+            f.write("|---|---|---|---|---|\n")
+            for skill in unique_skills:
+                level_label = get_effective_level_label(meta, skill)
+                tier_label = get_tier_label(meta, skill.get("level"))
+                reg_display = _build_skill_display(skill.get('id'), "unique", named_map)
+                name_display = f"◉ {reg_display}"
+                skill_call = f"`/{skill.get('id')}`"
+                f.write(f"| {name_display} | Unique Skill | {level_label} | {tier_label} | {skill_call} |\n")
+            f.write("\n")
+
         f.write("## Pure / Undeveloped\n\n")
         f.write("*Atomic skills with no connections to the upgrade graph — no prerequisites and not referenced as a component of any other skill.*\n\n")
         f.write("| Name | Class | Rank | Tier | Skill Call |\n")
         f.write("|---|---|---|---|---|\n")
         for skill in skills:
             if skill["id"] not in orphan_ids:
+                continue
+            if skill.get("type") == "unique":
                 continue
             level_label = get_effective_level_label(meta, skill)
             tier_label = get_tier_label(meta, skill.get("level"))
@@ -474,6 +498,12 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
     for s in skills:
         for pid in s.get("prerequisites", []):
             all_prereq_ids.add(pid)
+
+    unique_skills = sorted(
+        [s for s in skills if s.get("type") == "unique"],
+        key=lambda s: s.get("id", "")
+    )
+
     pure_skills = sorted(
         [s for s in skills
          if s.get("type") == "basic"
@@ -512,6 +542,20 @@ def _generate_tree(skills, skill_map, meta, version, date_str, named_map=None):
             lines.extend(_render_subtree(prereq_id, skill_map, meta, "  ", is_last, seen,
                                          named_map=named_map))
 
+        lines.append("")
+
+    if unique_skills:
+        lines.append("═" * 70)
+        lines.append("Unique Skills — graph-isolated singularities at 4★+")
+        lines.append("═" * 70)
+        lines.append("")
+        for us in unique_skills:
+            uid = us.get("id")
+            level_label = get_level_label(meta, us.get("level"))
+            tier_label = get_tier_label(meta, us.get("level"))
+            named_id = (named_map or {}).get(uid)
+            display = f"{named_id} - {us.get('name')}" if named_id else f"/{uid}"
+            lines.append(f"  ◉ Unique Skill: {display}  [{level_label} · {tier_label}]")
         lines.append("")
 
     if pure_skills:

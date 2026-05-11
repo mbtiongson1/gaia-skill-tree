@@ -109,7 +109,11 @@ def build_docs_index(check: bool) -> bool:
     graph = json.loads((ROOT / "registry" / "gaia.json").read_text(encoding="utf-8"))
     named = json.loads((ROOT / "registry" / "named-skills.json").read_text(encoding="utf-8"))
     named_count = sum(len(entries) for entries in named.get("buckets", {}).values())
-    body = f"skills={len(graph.get('skills', []))}; namedSkills={named_count}; version={graph.get('version', 'unknown')}"
+    unique_count = sum(1 for s in graph.get("skills", []) if s.get("type") == "unique")
+    body = (
+        f"skills={len(graph.get('skills', []))}; namedSkills={named_count}; "
+        f"uniqueSkills={unique_count}; version={graph.get('version', 'unknown')}"
+    )
     text = path.read_text(encoding="utf-8")
     text, changed = _replace_region(
         text,
