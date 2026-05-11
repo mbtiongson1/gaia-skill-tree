@@ -6,6 +6,7 @@
     "typeLabels": {
       "basic": "Basic Skill",
       "extra": "Extra Skill",
+      "unique": "Unique Skill",
       "ultimate": "Ultimate Skill"
     },
     "levelLabels": {
@@ -66,6 +67,10 @@
         "hex": "#c084fc",
         "rgb": "192,132,252"
       },
+      "unique": {
+        "hex": "#7c3aed",
+        "rgb": "124,58,237"
+      },
       "ultimate": {
         "hex": "#f59e0b",
         "rgb": "245,158,11"
@@ -74,6 +79,7 @@
     "typeSymbols": {
       "basic": "\u25cb",
       "extra": "\u25c7",
+      "unique": "\u25c9",
       "ultimate": "\u25c6"
     },
     "demeritLabels": {

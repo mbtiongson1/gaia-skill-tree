@@ -116,23 +116,24 @@
     <div class="tier-grid">
       <div class="tier-card basic">
         <div class="tier-icon">○</div>
-        <!-- <span class="tier-badge badge-basic">Basic</span> -->
         <div class="tier-name">Basic Skills</div>
         <div class="tier-desc">The genome of every agent. Primitive, indivisible capabilities — <em>Tokenize</em>,
-          <em>Retrieve</em>, <em>Classify</em>, <em>Embed Text</em>.
-        </div>
+          <em>Retrieve</em>, <em>Classify</em>, <em>Embed Text</em>.</div>
       </div>
       <div class="tier-card extra">
         <div class="tier-icon">◇</div>
-        <!-- <span class="tier-badge badge-extra">Extra Skill</span> -->
         <div class="tier-name">Extra Skills</div>
         <div class="tier-desc">Emerge when 2+ basics combine — <em>RAG Pipeline</em>, <em>Autonomous Debug</em>,
-          <em>Research</em>. More than the sum of their parts.
-        </div>
+          <em>Research</em>. More than the sum of their parts.</div>
+      </div>
+      <div class="tier-card unique">
+        <div class="tier-icon">◉</div>
+        <div class="tier-name">Unique Skills</div>
+        <div class="tier-desc">Graph-isolated singularities that reached elite status through depth alone —
+          <em>Fine-Tune</em>. Mastered at 4★+ with no fusion path.</div>
       </div>
       <div class="tier-card ultimate">
         <div class="tier-icon">◆</div>
-        <!-- <span class="tier-badge badge-ultimate">Ultimate Skill</span> -->
         <div class="tier-name">Ultimate Skills</div>
         <div class="tier-desc">High-complexity emergent capabilities found in &lt;1% of agents — <em>Autonomous Research
             Agent</em>, <em>Full-Stack Developer</em>.</div>
@@ -369,21 +370,12 @@
       <input type="search" id="nsSearch" class="ns-search" placeholder="Search skills, tags, contributors…"
         autocomplete="off">
       <div class="ns-filter-row">
-        <div class="ns-level-tabs" id="nsLevelTabs">
-          <button class="ns-tab active" type="button" data-level="all">All</button>
-          <button class="ns-tab" type="button" data-level="0★" disabled><span
-              style="color:#94a3b8;font-weight:800">0★</span> Basic</button>
-          <button class="ns-tab" type="button" data-level="1★" disabled><span
-              style="color:#38bdf8;font-weight:800">1★</span> Awakened</button>
-          <button class="ns-tab" type="button" data-level="2★"><span style="color:#63cab7;font-weight:800">2★</span>
-            Named</button>
-          <button class="ns-tab" type="button" data-level="3★"><span style="color:#a78bfa;font-weight:800">3★</span>
-            Evolved</button>
-          <button class="ns-tab" type="button" data-level="4★"><span style="color:#e879f9;font-weight:800">4★</span>
-            Hardened</button>
-          <button class="ns-tab" type="button" data-level="5★"><span style="color:#fbbf24;font-weight:800">5★</span>
-            Transcendent</button>
-          <button class="ns-tab" type="button" data-level="6★"><span style="color:#fbbf24;font-weight:800">6★</span></button>
+        <div class="ns-type-tabs" id="nsTypeTabs">
+          <button class="ns-tab active" type="button" data-type="all">All</button>
+          <button class="ns-tab" type="button" data-type="basic"><span style="color:#38bdf8;font-weight:800">○</span> Basic</button>
+          <button class="ns-tab" type="button" data-type="extra"><span style="color:#c084fc;font-weight:800">◇</span> Extra</button>
+          <button class="ns-tab" type="button" data-type="unique"><span style="color:#7c3aed;font-weight:800">◉</span> Unique</button>
+          <button class="ns-tab" type="button" data-type="ultimate"><span style="color:#f59e0b;font-weight:800">◆</span> Ultimate</button>
         </div>
         <div class="ns-view-btns" id="nsViewBtns">
           <button class="ns-view-btn active" data-view="tile" title="Tile view">
@@ -562,5 +554,5 @@
 </html>
 
 <!-- gaia:stats-start -->
-<!-- skills=133; namedSkills=32; version=3.1.2 -->
+<!-- skills=133; namedSkills=32; uniqueSkills=1; version=3.1.4 -->
 <!-- gaia:stats-end -->

@@ -23,11 +23,12 @@ from gaia_cli.registry import named_skills_index_path, registry_graph_path
 PALETTE = {
     "basic": {"fill": "#38bdf8", "stroke": "#7dd3fc", "label": "Basic"},
     "extra": {"fill": "#a78bfa", "stroke": "#c4b5fd", "label": "Extra"},
+    "unique": {"fill": "#7c3aed", "stroke": "#a78bfa", "label": "Unique"},
     "ultimate": {"fill": "#fbbf24", "stroke": "#fde68a", "label": "Ultimate"},
 }
-TYPE_ORDER = {"basic": 0, "extra": 1, "ultimate": 2}
-RADIUS_BY_TYPE = {"basic": 285, "extra": 170, "ultimate": 54}
-NODE_RADIUS = {"basic": 6, "extra": 10, "ultimate": 15}
+TYPE_ORDER = {"basic": 0, "extra": 1, "unique": 2, "ultimate": 3}
+RADIUS_BY_TYPE = {"basic": 285, "extra": 170, "unique": 112, "ultimate": 54}
+NODE_RADIUS = {"basic": 6, "extra": 10, "unique": 13, "ultimate": 15}
 
 
 def _registry_root(registry_path: str | os.PathLike[str]) -> Path:
@@ -58,7 +59,7 @@ def _stable_angle(skill_id: str, index: int, total: int) -> float:
 
 def build_render_graph(graph: dict[str, Any], width: int = 1280, height: int = 880) -> dict[str, Any]:
     skills = graph.get("skills", [])
-    groups: dict[str, list[dict[str, Any]]] = {"basic": [], "extra": [], "ultimate": []}
+    groups: dict[str, list[dict[str, Any]]] = {"basic": [], "extra": [], "unique": [], "ultimate": []}
     for skill in skills:
         groups.setdefault(skill.get("type", "basic"), []).append(skill)
 
@@ -67,7 +68,7 @@ def build_render_graph(graph: dict[str, Any], width: int = 1280, height: int = 8
 
     cx, cy = width / 2, height / 2
     nodes: list[dict[str, Any]] = []
-    for skill_type in ("basic", "extra", "ultimate"):
+    for skill_type in ("basic", "extra", "unique", "ultimate"):
         bucket = groups.get(skill_type, [])
         radius = RADIUS_BY_TYPE.get(skill_type, 220)
         for i, skill in enumerate(bucket):
@@ -180,7 +181,7 @@ def render_svg(render_graph: dict[str, Any]) -> str:
             f'<text x="{legend_x}" y="{legend_y - 22}" font-size="20" font-weight="800" fill="#e2e8f0">Gaia Skill Graph</text>',
         ]
     )
-    for i, skill_type in enumerate(("basic", "extra", "ultimate")):
+    for i, skill_type in enumerate(("basic", "extra", "unique", "ultimate")):
         y = legend_y + i * 28
         color = PALETTE[skill_type]
         count = sum(1 for node in nodes if node.get("type") == skill_type)

@@ -1,7 +1,7 @@
 export interface Skill {
   id: string;
   name: string;
-  type: "basic" | "extra" | "ultimate";
+  type: "basic" | "extra" | "unique" | "ultimate";
   level: "0★" | "1★" | "2★" | "3★" | "4★" | "5★" | "6★";
   rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   description: string;

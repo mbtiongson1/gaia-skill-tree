@@ -8,7 +8,7 @@ interface ProposeInput {
   skillId?: string;
   name?: string;
   description?: string;
-  type?: "basic" | "extra" | "ultimate";
+  type?: "basic" | "extra" | "unique" | "ultimate";
   prerequisites?: string[];
 }
 

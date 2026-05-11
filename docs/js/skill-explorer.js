@@ -11,7 +11,7 @@
       if (k === '0★' || k === '1★') return; // explorer only shows 2★+
       LEVEL_META_SE[k] = { name: ll[k] || k, color: lc[k].hex, bg: lc[k].bg, border: lc[k].border };
     });
-    TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', ultimate:'◆' };
+    TYPE_SYMBOL = meta.typeSymbols || { basic:'○', extra:'◇', unique:'◉', ultimate:'◆' };
   }
 
   var REPO_SLUG = (function(){
@@ -691,6 +691,7 @@
 
   function highlightTree(text) {
     var ultIdx = 0;
+    var unqIdx = 0;
     return text.split('\n').map(function(line) {
       // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [6★]
       var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
@@ -712,12 +713,32 @@
         return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
                label + skillHtml + suffix + '</span>';
       }
+      // Unique skill header lines: ◉ Unique Skill: contributor/name  [4★]
+      var u = line.match(/^(◉ Unique Skill: )(\S+)(.*)$/);
+      if (u) {
+        var ulabel = esc(u[1]);
+        var uid = u[2];
+        var usuffix = esc(u[3]);
+        var udelay = -((unqIdx++ * 0.9) % 4);
+        var uslash = uid.indexOf('/');
+        var uskillHtml;
+        if (uslash > 0) {
+          uskillHtml = '<span class="tree-unique-contributor">' + esc(uid.slice(0, uslash)) + '</span>' +
+                       '<span class="tree-unique-slash">/</span>' +
+                       '<span class="tree-unique-skillname">' + esc(uid.slice(uslash + 1)) + '</span>';
+        } else {
+          uskillHtml = '<span class="tree-unique-skillname">' + esc(uid) + '</span>';
+        }
+        return '<span class="tree-unique-line" style="animation-delay:' + udelay + 's">' +
+               ulabel + uskillHtml + usuffix + '</span>';
+      }
       // Separator lines
       if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
-      // Inline ◇ / ○ glyphs
+      // Inline ◇ / ○ / ◉ glyphs
       var out = esc(line);
       out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
       out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
+      out = out.replace(/◉/g, '<span class="tree-unique-glyph">◉</span>');
       return out;
     }).join('\n');
   }
