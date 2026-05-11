@@ -176,6 +176,41 @@
     return positions;
   }
 
+  function drawRuler(canvas, logValue, opts) {
+    const ctx2 = canvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const cw = canvas.clientWidth || 36, ch = canvas.clientHeight || 160;
+    canvas.width = cw * dpr; canvas.height = ch * dpr;
+    ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx2.clearRect(0, 0, cw, ch);
+    const vert = opts.vertical !== false;
+    const mainSize = vert ? ch : cw;
+    const crossSize = vert ? cw : ch;
+    const ppu = opts.pxPerUnit || 36;
+    const minorStep = opts.minorStep || 0.15;
+    const majorEvery = opts.majorEvery || 4;
+    const startTick = Math.ceil((logValue - mainSize / 2 / ppu) / minorStep);
+    const endTick   = Math.floor((logValue + mainSize / 2 / ppu) / minorStep);
+    ctx2.lineWidth = 1;
+    for (let tick = startTick; tick <= endTick; tick++) {
+      const pos = mainSize / 2 + (tick * minorStep - logValue) * ppu;
+      const isMajor = tick % majorEvery === 0;
+      const tickLen = isMajor ? crossSize * 0.38 : crossSize * 0.18;
+      const alpha = isMajor ? 0.18 : 0.08;
+      ctx2.beginPath();
+      if (vert) { ctx2.moveTo(crossSize/2 - tickLen/2, pos); ctx2.lineTo(crossSize/2 + tickLen/2, pos); }
+      else       { ctx2.moveTo(pos, crossSize/2 - tickLen/2); ctx2.lineTo(pos, crossSize/2 + tickLen/2); }
+      ctx2.strokeStyle = `rgba(148,163,184,${alpha})`;
+      ctx2.stroke();
+    }
+    ctx2.beginPath();
+    if (vert) { ctx2.moveTo(0, mainSize/2); ctx2.lineTo(crossSize, mainSize/2); }
+    else      { ctx2.moveTo(mainSize/2, 0); ctx2.lineTo(mainSize/2, crossSize); }
+    ctx2.strokeStyle = `rgba(148,163,184,.28)`;
+    ctx2.lineWidth = 1;
+    ctx2.stroke();
+  }
+
   function createSkillGraph(canvas, options) {
     const ctx = canvas.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -208,6 +243,17 @@
       panY: 0,
       paused: false,
       rotSpeed: 1,
+      hoverSlowdown: 0,
+      nebula: true,
+      nebulaClouds: [],
+      pinnedId: null,
+      pinnedPos: null,
+      collection: [],
+      collectionEl: null,
+      skillPanelEl: null,
+      zoomCounterEl: null,
+      scatterRulerCanvas: null,
+      speedRulerCanvas: null,
       hoveredId: null,
       lastHoveredId: null,
       projectedNodes: {},
@@ -239,6 +285,21 @@
         const point = spherePoint((500 + (seed % 280)) * state.scale, seed, i, options.stars || 260);
         return { ...point, size: 0.4 + (seed % 13) / 10, alpha: 0.22 + (seed % 55) / 100 };
       });
+      state.nebulaClouds = Array.from({ length: 8 }, (_, i) => {
+        const seed = i * 1337 + 41;
+        const a1 = (seed % 628) / 100, a2 = ((seed * 7) % 628) / 100;
+        const r = (550 + (seed % 320)) * state.scale;
+        const isAurora = i >= 6;
+        const auroraHues = [140, 280];
+        return {
+          x: Math.cos(a1) * Math.cos(a2) * r, y: Math.sin(a2) * r, z: Math.sin(a1) * Math.cos(a2) * r,
+          radius: (200 + (seed % 140)) * state.scale,
+          isAurora,
+          hue: isAurora ? auroraHues[i - 6] : 220,
+          sat: isAurora ? 60 : 5 + (seed % 8),
+          alpha: isAurora ? 0.035 + (seed % 4) / 100 : 0.04 + (seed % 5) / 100,
+        };
+      });
     }
 
     function setSkills(skills) {
@@ -249,11 +310,14 @@
       state.nodeAlphas = newAlphas;
       if (state.statusEl) {
         const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
+        const uniqueCount = skills.filter(s => s.type === 'unique').length;
         const mb = (fill) => `<svg class="gst-icon" viewBox="0 0 10 15" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><rect x=".7" y=".7" width="8.6" height="13.6" rx="4.3"/><path d="M5 .7v5.8" stroke-width="1"/><path d="M.7 6.5h8.6" stroke-width="1"/>${fill}</svg>`;
         const iL = mb('<rect x=".7" y=".7" width="4.3" height="5.8" rx="2 0 0 2" stroke="none" fill="currentColor" opacity=".55"/>');
         const iM = mb('<rect x="3.4" y="1.4" width="3.2" height="4.2" rx="1.6" stroke="none" fill="currentColor" opacity=".55"/>');
         const iS = mb('<rect x="3.4" y="1.4" width="3.2" height="4.2" rx="1.6" stroke-width=".9" opacity=".5"/><path d="M5 2.2v3.2M4 3.1 5 2.2 6 3.1M4 4.5 5 5.4 6 4.5" stroke-width=".9"/>');
-        const stat = `<span class="gst-stat">${skills.length}<span class="gst-dim"> skills</span> · ${edgeCount}<span class="gst-dim"> links</span></span>`;
+        const stat = `<span class="gst-stat">${skills.length}<span class="gst-dim"> skills</span> · ${edgeCount}<span class="gst-dim"> links</span>` +
+          (uniqueCount ? ` · <span style="color:#7c3aed">${uniqueCount}</span><span class="gst-dim"> Unique</span>` : '') +
+          `</span>`;
         let tips = '';
         if (options.draggable) {
           tips += `<span class="gst-tip">${iL}<span>pan</span></span>`;
@@ -274,7 +338,9 @@
     }
     function project(p) {
       const fov = Math.min(state.width, state.height) * 0.75;
-      const dist = fov / (fov + p.z + 360 * state.scale);
+      const denom = fov + p.z + 360 * state.scale;
+      if (denom < 1) return { sx: state.width / 2 + state.panX, sy: state.height / 2 + state.panY, scale: 0 };
+      const dist = fov / denom;
       const z = state.zoom;
       return { sx: state.width / 2 + p.x * dist * z + state.panX, sy: state.height / 2 + p.y * dist * z + state.panY, scale: dist * z };
     }
@@ -299,59 +365,202 @@
       ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.65).toFixed(2)})`; ctx.fill();
     }
     function drawNodeVI(sx, sy, r, alpha, t, p) {
-      const hue = (t * 45) % 360;
       const phase = p.phase || 0;
-      const spin = t * 1.4 + phase;
-      const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + phase);
-      const glowR = r * (4.8 + glowPulse);
-      const glow = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, glowR);
-      glow.addColorStop(0,    `hsla(${hue},100%,72%,${(alpha * 0.55).toFixed(2)})`);
-      glow.addColorStop(0.35, `hsla(${(hue + 90) % 360},100%,65%,${(alpha * 0.32).toFixed(2)})`);
-      glow.addColorStop(0.65, `hsla(45,100%,58%,${(alpha * 0.18).toFixed(2)})`);
-      glow.addColorStop(1,    'hsla(45,100%,50%,0)');
-      ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
-      // Super white spinning glow overlay
+      const spin = t * 1.3 + phase;
+
+      // Impact blink: fires every ~5s, quick flash then gradual fade-out
+      const blinkT = (t + phase * 2.3) % 1.8;
+      const blink = blinkT < 0.012 ? 1 : blinkT < 0.18 ? 1 - (blinkT - 0.012) / 0.168 : 0;
+
+      // ── GOLD CORONA (outermost glow) ──
+      const coronaPulse = 0.85 + 0.15 * Math.sin(t * 0.9 + phase);
+      const coronaR = r * (7.5 * coronaPulse);
+      const corona = ctx.createRadialGradient(sx, sy, r * 1.2, sx, sy, coronaR);
+      corona.addColorStop(0,   `rgba(255,215,0,${(alpha * 0.48).toFixed(2)})`);
+      corona.addColorStop(0.35,`rgba(255,170,0,${(alpha * 0.22).toFixed(2)})`);
+      corona.addColorStop(0.7, `rgba(255,120,0,${(alpha * 0.08).toFixed(2)})`);
+      corona.addColorStop(1,   `rgba(255,80,0,0)`);
+      ctx.beginPath(); ctx.arc(sx, sy, coronaR, 0, Math.PI * 2);
+      ctx.fillStyle = corona; ctx.fill();
+
+      // ── PULSAR BEAMS (triangular cones) ──
       ctx.save();
       ctx.translate(sx, sy);
       ctx.rotate(spin);
-      const whiteR = r * 5.5;
-      const whiteGlow = ctx.createRadialGradient(0, 0, r * 0.3, 0, 0, whiteR);
-      whiteGlow.addColorStop(0, `rgba(255,255,255,${(alpha * 0.5).toFixed(2)})`);
-      whiteGlow.addColorStop(0.2, `rgba(255,255,255,${(alpha * 0.25).toFixed(2)})`);
-      whiteGlow.addColorStop(0.5, `rgba(255,255,255,${(alpha * 0.08).toFixed(2)})`);
-      whiteGlow.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.beginPath(); ctx.arc(0, 0, whiteR, 0, Math.PI * 2);
-      ctx.fillStyle = whiteGlow; ctx.fill();
-      // White spinning rays
-      for (let i = 0; i < 5; i++) {
-        const rayAngle = (Math.PI * 2 * i / 5);
-        const rayAlpha = alpha * (0.3 + 0.2 * Math.sin(t * 3 + i * 1.2));
+      for (let beam = 0; beam < 2; beam++) {
+        const ba = beam * Math.PI;
+        const beamLen = r * 5.8;
+        const cone = Math.PI * 0.055;
+        const bA = alpha * (0.45 + 0.15 * Math.sin(t * 1.8 + beam * 2.1)) * (1 - blink * 0.6);
         ctx.beginPath();
-        ctx.moveTo(Math.cos(rayAngle) * r * 1.3, Math.sin(rayAngle) * r * 1.3);
-        ctx.lineTo(Math.cos(rayAngle) * r * 4.5, Math.sin(rayAngle) * r * 4.5);
-        ctx.strokeStyle = `rgba(255,255,255,${rayAlpha.toFixed(2)})`;
-        ctx.lineWidth = r * 0.25;
-        ctx.lineCap = 'round';
+        ctx.moveTo(0, 0);
+        ctx.lineTo(Math.cos(ba - cone) * beamLen, Math.sin(ba - cone) * beamLen);
+        ctx.lineTo(Math.cos(ba + cone) * beamLen, Math.sin(ba + cone) * beamLen);
+        ctx.closePath();
+        const bg = ctx.createLinearGradient(0, 0, Math.cos(ba) * beamLen, Math.sin(ba) * beamLen);
+        bg.addColorStop(0,   `rgba(255,255,255,${bA.toFixed(2)})`);
+        bg.addColorStop(0.35,`rgba(255,240,180,${(bA * 0.45).toFixed(2)})`);
+        bg.addColorStop(1,   `rgba(255,215,0,0)`);
+        ctx.fillStyle = bg; ctx.fill();
+      }
+      ctx.restore();
+
+      // ── ORBITING SATELLITES ──
+      for (let i = 0; i < 5; i++) {
+        const orbitR = r * (1.7 + i * 0.55);
+        const speed = 1.6 - i * 0.22;
+        const angle = spin * speed + (Math.PI * 2 * i / 5);
+        const satX = sx + Math.cos(angle) * orbitR;
+        const satY = sy + Math.sin(angle) * orbitR * 0.72;
+        const satR = r * (0.14 + 0.04 * Math.sin(t * 3 + i));
+        const sA = alpha * (0.55 + 0.45 * Math.sin(t * 2.2 + i * 1.4)) * (1 - blink * 0.8);
+        if (sA < 0.01) continue;
+        const sg = ctx.createRadialGradient(satX, satY, 0, satX, satY, satR * 3.2);
+        sg.addColorStop(0,   `rgba(255,240,200,${sA.toFixed(2)})`);
+        sg.addColorStop(0.35,`rgba(255,215,0,${(sA * 0.5).toFixed(2)})`);
+        sg.addColorStop(1,   `rgba(255,180,0,0)`);
+        ctx.beginPath(); ctx.arc(satX, satY, satR * 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = sg; ctx.fill();
+        ctx.beginPath(); ctx.arc(satX, satY, satR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,250,220,${Math.min(sA * 1.2, 1).toFixed(2)})`;
+        ctx.fill();
+      }
+
+      // ── BRIGHT WHITE ENERGY GLOW ──
+      const glowPulse = 0.9 + 0.1 * Math.sin(t * 1.6 + phase);
+      const glowR = r * (5.0 * glowPulse);
+      const glow = ctx.createRadialGradient(sx, sy, r * 0.1, sx, sy, glowR);
+      glow.addColorStop(0,   `rgba(255,255,255,${(alpha * 0.72).toFixed(2)})`);
+      glow.addColorStop(0.15,`rgba(255,255,245,${(alpha * 0.52).toFixed(2)})`);
+      glow.addColorStop(0.4, `rgba(255,245,210,${(alpha * 0.22).toFixed(2)})`);
+      glow.addColorStop(0.7, `rgba(255,230,160,${(alpha * 0.08).toFixed(2)})`);
+      glow.addColorStop(1,   `rgba(255,215,0,0)`);
+      ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+      ctx.fillStyle = glow; ctx.fill();
+
+      // ── IMPACT BLINK (anime impact frame) ──
+      if (blink > 0) {
+        // White shockwave flash outward
+        const blinkR = r * (12 + blink * 10);
+        const blinkGrad = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, blinkR);
+        blinkGrad.addColorStop(0,   `rgba(255,255,255,${(alpha * blink * 0.9).toFixed(2)})`);
+        blinkGrad.addColorStop(0.3, `rgba(255,255,255,${(alpha * blink * 0.6).toFixed(2)})`);
+        blinkGrad.addColorStop(0.6, `rgba(255,255,240,${(alpha * blink * 0.25).toFixed(2)})`);
+        blinkGrad.addColorStop(1,   `rgba(255,255,255,0)`);
+        ctx.beginPath(); ctx.arc(sx, sy, blinkR, 0, Math.PI * 2);
+        ctx.fillStyle = blinkGrad; ctx.fill();
+
+        // BLACK inversion ring (perimeter inverts)
+        const invR = r * (3.5 + blink * 3);
+        ctx.beginPath(); ctx.arc(sx, sy, invR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(0,0,0,${(alpha * blink * 0.8).toFixed(2)})`;
+        ctx.lineWidth = r * (0.7 + blink * 0.5);
+        ctx.stroke();
+
+        // Bold black radial speed lines (like manga impact)
+        const numImpact = 14;
+        for (let i = 0; i < numImpact; i++) {
+          const a = (Math.PI * 2 * i / numImpact) + phase;
+          const len = r * (5 + blink * 7) * (0.6 + 0.4 * ((i * 7 + 3) % 5) / 5);
+          const iA = alpha * blink * (0.5 + 0.5 * ((i * 13) % 7) / 7);
+          ctx.beginPath();
+          ctx.moveTo(sx + Math.cos(a) * r * 1.8, sy + Math.sin(a) * r * 1.8);
+          ctx.lineTo(sx + Math.cos(a) * len, sy + Math.sin(a) * len);
+          ctx.strokeStyle = `rgba(0,0,0,${iA.toFixed(2)})`;
+          ctx.lineWidth = r * (0.3 + blink * 0.4);
+          ctx.lineCap = 'round';
+          ctx.stroke();
+        }
+      }
+
+      // ── WHITE CORE ──
+      const coreGrad = ctx.createRadialGradient(sx - r * 0.12, sy - r * 0.12, 0, sx, sy, r * 1.05);
+      coreGrad.addColorStop(0,    `rgba(255,255,255,${Math.min(alpha * 1.2, 1).toFixed(2)})`);
+      coreGrad.addColorStop(0.35, `rgba(255,253,245,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
+      coreGrad.addColorStop(0.7,  `rgba(255,240,200,${Math.min(alpha * 1.0, 1).toFixed(2)})`);
+      coreGrad.addColorStop(1,    `rgba(255,215,0,${(alpha * 0.85).toFixed(2)})`);
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = coreGrad; ctx.fill();
+
+      // Specular highlight
+      ctx.beginPath(); ctx.arc(sx - r * 0.22, sy - r * 0.22, r * 0.35, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.95).toFixed(2)})`; ctx.fill();
+    }
+    function drawNodeUnique(sx, sy, r, alpha, t, p) {
+      const phase = p.phase || 0;
+      const spin = t * 2.2 + phase;
+      // Gravitational distortion — concentric rings that darken surrounding space
+      const distortR = r * 8;
+      const rings = 5;
+      for (let i = rings; i >= 1; i--) {
+        const ringR = r * 1.4 + (i / rings) * (distortR - r * 1.4);
+        const warp = Math.sin(spin * 0.4 + i * 0.8) * 0.15;
+        const ringAlpha = alpha * (0.06 + warp * 0.03) * (1 - i / (rings + 1));
+        ctx.save();
+        ctx.translate(sx, sy);
+        ctx.rotate(spin * 0.12 + i * 0.3);
+        ctx.scale(1, 0.55 + 0.15 * Math.sin(spin * 0.2 + i));
+        ctx.beginPath(); ctx.arc(0, 0, ringR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(0,0,0,${(ringAlpha * 2.5).toFixed(3)})`;
+        ctx.lineWidth = r * (0.6 + 0.3 * Math.sin(spin * 0.3 + i * 1.2));
+        ctx.stroke();
+        ctx.restore();
+      }
+      // Big dark spinning void glow
+      const voidR = r * 6;
+      ctx.save();
+      ctx.translate(sx, sy);
+      ctx.rotate(spin * 0.3);
+      const voidGrad = ctx.createRadialGradient(0, 0, r * 0.8, 0, 0, voidR);
+      voidGrad.addColorStop(0, `rgba(0,0,0,${(alpha * 0.85).toFixed(2)})`);
+      voidGrad.addColorStop(0.25, `rgba(10,0,20,${(alpha * 0.5).toFixed(2)})`);
+      voidGrad.addColorStop(0.5, `rgba(26,5,51,${(alpha * 0.2).toFixed(2)})`);
+      voidGrad.addColorStop(0.75, `rgba(124,58,237,${(alpha * 0.07).toFixed(2)})`);
+      voidGrad.addColorStop(1, `rgba(124,58,237,0)`);
+      ctx.beginPath(); ctx.arc(0, 0, voidR, 0, Math.PI * 2);
+      ctx.fillStyle = voidGrad; ctx.fill();
+      // Spinning dark arms (like a spiral galaxy but dark)
+      for (let arm = 0; arm < 3; arm++) {
+        const armAngle = (Math.PI * 2 * arm / 3) + spin * 0.7;
+        ctx.beginPath();
+        for (let j = 0; j <= 20; j++) {
+          const frac = j / 20;
+          const spiralR = r * 1.2 + frac * voidR * 0.7;
+          const spiralA = armAngle + frac * Math.PI * 1.5;
+          const px = Math.cos(spiralA) * spiralR;
+          const py = Math.sin(spiralA) * spiralR * 0.45;
+          if (j === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = `rgba(0,0,0,${(alpha * 0.5).toFixed(2)})`;
+        ctx.lineWidth = r * 0.5;
         ctx.stroke();
       }
       ctx.restore();
-      const coreGrad = ctx.createRadialGradient(sx - r * 0.25, sy - r * 0.25, 0, sx, sy, r * 1.05);
-      coreGrad.addColorStop(0,    `hsla(${(hue + 200) % 360},100%,88%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
-      coreGrad.addColorStop(0.45, `hsla(${hue},100%,68%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
-      coreGrad.addColorStop(0.8,  `hsla(${(hue + 60) % 360},90%,55%,${alpha.toFixed(2)})`);
-      coreGrad.addColorStop(1,    `hsla(45,100%,45%,${alpha.toFixed(2)})`);
-      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2); ctx.fillStyle = coreGrad; ctx.fill();
-      for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI * 2 * i / 6) + t * 0.4;
-        const dist = r * (1.65 + 0.35 * Math.sin(t * 2.1 + i));
-        const sAlpha = alpha * (0.5 + 0.5 * Math.sin(t * 3.0 + i * 1.05));
+      // Accretion disk particles spinning wildly
+      for (let i = 0; i < 16; i++) {
+        const a = (Math.PI * 2 * i / 16) + spin * (1.5 + (i % 4) * 0.4);
+        const orbitR = r * (1.6 + 0.4 * Math.sin(spin * 0.9 + i * 0.7));
+        const dx = Math.cos(a) * orbitR;
+        const dy = Math.sin(a) * orbitR * 0.35;
+        const particleAlpha = alpha * (0.4 + 0.35 * Math.sin(spin * 2.5 + i * 1.1));
+        const particleR = r * (0.1 + 0.05 * Math.sin(t * 4 + i));
         ctx.beginPath();
-        ctx.arc(sx + Math.cos(angle) * dist, sy + Math.sin(angle) * dist, r * 0.2, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${(hue + i * 60) % 360},100%,82%,${sAlpha.toFixed(2)})`;
+        ctx.arc(sx + dx, sy + dy, particleR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(167,139,250,${particleAlpha.toFixed(2)})`;
         ctx.fill();
       }
-      ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
+      // Event horizon ring — bright purple edge
+      ctx.beginPath(); ctx.arc(sx, sy, r * 1.12, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(124,58,237,${(alpha * 0.9).toFixed(2)})`;
+      ctx.lineWidth = 2; ctx.stroke();
+      // Void core — fully opaque black
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      // Inner purple shimmer at edge of core
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(124,58,237,${(alpha * 0.5).toFixed(2)})`;
+      ctx.lineWidth = r * 0.15; ctx.stroke();
     }
     function drawNodeUnique(sx, sy, r, alpha, t, p) {
       const phase = p.phase || 0;
@@ -416,7 +625,9 @@
     }
     function draw() {
       if (!state.running) return;
-      if (!state.paused) state.t += 0.006 * state.rotSpeed;
+      const targetSlowdown = ((state.hoveredId || state.pinnedId) && !state.paused) ? 1 : 0;
+      state.hoverSlowdown += (targetSlowdown - state.hoverSlowdown) * 0.035;
+      if (!state.paused) state.t += 0.006 * state.rotSpeed * (1 - state.hoverSlowdown);
       ctx.clearRect(0, 0, state.width, state.height);
       state.projectedNodes = {};
       const ry = options.draggable
@@ -425,6 +636,32 @@
       const rx = options.draggable
         ? Math.sin(state.t * 0.055) * 0.20 + state.orbitX
         : Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
+      if (state.nebula) {
+        const maxR = Math.max(state.width, state.height) * 1.5;
+        state.nebulaClouds.forEach(cloud => {
+          const p = rotX(rotY(cloud, ry * 0.08), rx * 0.08);
+          const pr = project(p);
+          if (pr.scale < 0.005) return;
+          const r = Math.min(cloud.radius * pr.scale * 2.8, maxR);
+          if (r < 1) return;
+          const g = ctx.createRadialGradient(pr.sx, pr.sy, 0, pr.sx, pr.sy, r);
+          const s = cloud.sat;
+          const h = cloud.hue;
+          if (cloud.isAurora) {
+            g.addColorStop(0,   `hsla(${h},${s}%,55%,${(cloud.alpha * 0.85).toFixed(3)})`);
+            g.addColorStop(0.4, `hsla(${h},${s * 0.7}%,40%,${(cloud.alpha * 0.4).toFixed(3)})`);
+            g.addColorStop(0.75,`hsla(${h},${s * 0.4}%,30%,${(cloud.alpha * 0.12).toFixed(3)})`);
+            g.addColorStop(1,   `hsla(${h},${s * 0.2}%,20%,0)`);
+          } else {
+            g.addColorStop(0,   `hsla(${h},${s}%,72%,${(cloud.alpha * 0.8).toFixed(3)})`);
+            g.addColorStop(0.3, `hsla(${h},${s}%,55%,${(cloud.alpha * 0.4).toFixed(3)})`);
+            g.addColorStop(0.65,`hsla(${h},${s * 0.5}%,40%,${(cloud.alpha * 0.12).toFixed(3)})`);
+            g.addColorStop(1,   `hsla(${h},0%,30%,0)`);
+          }
+          ctx.beginPath(); ctx.arc(pr.sx, pr.sy, r, 0, Math.PI * 2);
+          ctx.fillStyle = g; ctx.fill();
+        });
+      }
       const xf = {};
       const allPrereqRefs = new Set();
       state.skills.forEach(skill => skill.prerequisites.forEach(pid => allPrereqRefs.add(pid)));
@@ -444,13 +681,14 @@
         }
       });
       const neighborSet = new Set();
-      if (state.hoveredId) {
-        neighborSet.add(state.hoveredId);
-        const hoveredSkill = state.skills.find(s => s.id === state.hoveredId);
-        if (hoveredSkill) hoveredSkill.prerequisites.forEach(pid => neighborSet.add(pid));
-        state.skills.forEach(s => { if (s.prerequisites.includes(state.hoveredId)) neighborSet.add(s.id); });
+      const focusId = state.pinnedId || state.hoveredId;
+      if (focusId) {
+        neighborSet.add(focusId);
+        const focusSkill = state.skills.find(s => s.id === focusId);
+        if (focusSkill) focusSkill.prerequisites.forEach(pid => neighborSet.add(pid));
+        state.skills.forEach(s => { if (s.prerequisites.includes(focusId)) neighborSet.add(s.id); });
       }
-      const hovering = Boolean(state.hoveredId);
+      const hovering = Boolean(focusId);
       const isSearchActive = Boolean(state.searchText);
       const searchQuery = isSearchActive ? state.searchText.toLowerCase() : '';
       const legendHovering = Boolean(state.legendHoverType || state.legendHoverRank);
@@ -458,7 +696,7 @@
       state.skills.forEach(skill => {
         let targetVis;
         if (hovering) {
-          targetVis = skill.id === state.hoveredId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
+          targetVis = skill.id === focusId ? 1.0 : neighborSet.has(skill.id) ? 0.88 : 0.12;
         } else if (legendHovering) {
           const mt = !state.legendHoverType || skill.type === state.legendHoverType;
           const mr = !state.legendHoverRank || skill.level === state.legendHoverRank;
@@ -518,6 +756,7 @@
       nodes.forEach(({ skill }) => {
         const p = xf[skill.id]; if (!p) return;
         const pr = project(p);
+        if (pr.scale <= 0) return;
         state.projectedNodes[skill.id] = pr;
         const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
         const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
@@ -565,11 +804,28 @@
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         if (vis > 0.95) drawLabel(skill, true);
       });
+      // Final pass: redraw unique void cores on top of everything (labels, other effects)
+      nodes.forEach(({ skill }) => {
+        if (skill.type !== 'unique') return;
+        const p = xf[skill.id]; if (!p) return;
+        const pr = project(p);
+        if (pr.scale <= 0) return;
+        const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
+        const baseR = 9.5;
+        const r = baseR * state.scale * pr.scale * pulse;
+        ctx.beginPath(); ctx.arc(pr.sx, pr.sy, r * 1.05, 0, Math.PI * 2);
+        ctx.fillStyle = '#000';
+        ctx.fill();
+        ctx.beginPath(); ctx.arc(pr.sx, pr.sy, r * 1.05, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(124,58,237,0.5)`;
+        ctx.lineWidth = r * 0.15; ctx.stroke();
+      });
       if (options.hoverable && state.tooltipEl) {
-        const pr = state.projectedNodes[state.hoveredId];
-        if (state.hoveredId && pr) {
-          if (state.hoveredId !== state.lastHoveredId) {
-            const skill = state.skills.find(s => s.id === state.hoveredId);
+        const displayId = state.pinnedId || state.hoveredId;
+        const pr = state.projectedNodes[displayId];
+        if (displayId && pr) {
+          if (displayId !== state.lastHoveredId) {
+            const skill = state.skills.find(s => s.id === displayId);
             const col = PALETTE[skill.type] || PALETTE.basic;
             const typeClass = `skill-tooltip-type-${skill.type}`;
             const rm = skill.level ? RANK_META[skill.level] : null;
@@ -582,20 +838,96 @@
             const demeritNote = skill.demerits && skill.demerits.length
               ? `<div style="color:#fbbf24;font-size:.66rem;margin-top:.26rem">${skill.demerits.length} demerit${skill.demerits.length === 1 ? '' : 's'}</div>`
               : '';
+            const namedId = state.namedMap[skill.id] || null;
+            const namedLine = namedId
+              ? `<div style="color:#ef4444;font-size:.67rem;font-weight:600;font-family:monospace;margin-bottom:.3rem;letter-spacing:.01em">${namedId}</div>`
+              : '';
             state.tooltipEl.innerHTML =
               `<div class="skill-tooltip-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>` +
+              namedLine +
               `<div style="color:#64748b;font-size:.68rem;font-weight:500;margin-bottom:.3rem;font-family:monospace">${skill.id}</div>` +
-              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}${effectivePill}</div>${demeritNote}`;
-            state.lastHoveredId = state.hoveredId;
+              `<div class="skill-tooltip-row"><span class="skill-tooltip-badge ${typeClass}">${skill.type.toUpperCase()}</span>${rankPill}${effectivePill}</div>` +
+              demeritNote +
+              `<button class="graph-tooltip-add" title="Add to collection">+</button>`;
+            state.lastHoveredId = displayId;
+            const addBtn = state.tooltipEl.querySelector('.graph-tooltip-add');
+            if (addBtn) {
+              addBtn.addEventListener('mousedown', e => { e.stopPropagation(); e.preventDefault(); });
+              addBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                if (!state.collection.includes(displayId)) {
+                  state.collection.push(displayId);
+                  renderCollection();
+                }
+              });
+            }
           }
-          let tx = pr.sx + 18, ty = pr.sy - 34;
-          tx = Math.min(tx, state.width - 240); ty = Math.max(ty, 8);
-          state.tooltipEl.style.left = tx + 'px';
-          state.tooltipEl.style.top  = ty + 'px';
+          if (state.pinnedId) {
+            if (!state.pinnedPos) {
+              let tx = pr.sx + 18, ty = pr.sy - 34;
+              tx = Math.min(tx, state.width - 250); ty = Math.max(ty, 8);
+              state.pinnedPos = { left: tx + 'px', top: ty + 'px' };
+            }
+            state.tooltipEl.style.left = state.pinnedPos.left;
+            state.tooltipEl.style.top  = state.pinnedPos.top;
+          } else {
+            let tx = pr.sx + 18, ty = pr.sy - 34;
+            tx = Math.min(tx, state.width - 250); ty = Math.max(ty, 8);
+            state.tooltipEl.style.left = tx + 'px';
+            state.tooltipEl.style.top  = ty + 'px';
+          }
           state.tooltipEl.style.display = 'block';
-        } else {
+          state.tooltipEl.classList.toggle('pinned', Boolean(state.pinnedId));
+        } else if (!state.pinnedId) {
           state.tooltipEl.style.display = 'none';
           state.lastHoveredId = null;
+        }
+      }
+      // ── Neighbor mini-cards when pinned ──
+      if (options.hoverable && state.neighborCardsEl) {
+        if (state.pinnedId && neighborSet.size > 1) {
+          const neighbors = [...neighborSet].filter(id => id !== state.pinnedId);
+          if (state._neighborIds !== neighbors.join(',')) {
+            state._neighborIds = neighbors.join(',');
+            state.neighborCardsEl.innerHTML = '';
+            neighbors.forEach(nid => {
+              const ns = state.skills.find(s => s.id === nid);
+              if (!ns) return;
+              const col = PALETTE[ns.type] || PALETTE.basic;
+              const card = document.createElement('div');
+              card.className = 'graph-neighbor-card';
+              card.dataset.nid = nid;
+              card.dataset.type = ns.type || 'basic';
+              card.innerHTML = `<span style="color:rgba(${col.rgb},.9)">${ns.name}</span>`;
+              card.addEventListener('mousedown', e => e.stopPropagation());
+              card.addEventListener('click', e => {
+                e.stopPropagation();
+                state.pinnedId = nid;
+                state.pinnedPos = null;
+                state.lastHoveredId = null;
+                state._neighborIds = null;
+              });
+              state.neighborCardsEl.appendChild(card);
+            });
+          }
+          neighbors.forEach(nid => {
+            const pr = state.projectedNodes[nid];
+            const card = state.neighborCardsEl.querySelector(`[data-nid="${nid}"]`);
+            if (pr && card) {
+              card.style.left = pr.sx + 'px';
+              card.style.top = (pr.sy - 18) + 'px';
+              card.style.display = '';
+            } else if (card) {
+              card.style.display = 'none';
+            }
+          });
+          state.neighborCardsEl.style.display = '';
+        } else {
+          if (state._neighborIds) {
+            state._neighborIds = null;
+            state.neighborCardsEl.innerHTML = '';
+          }
+          state.neighborCardsEl.style.display = 'none';
         }
       }
       state.frame = requestAnimationFrame(draw);
@@ -619,6 +951,183 @@
       tip.className = 'skill-tooltip';
       canvas.parentElement.appendChild(tip);
       state.tooltipEl = tip;
+
+      const neighborCards = document.createElement('div');
+      neighborCards.className = 'graph-neighbor-cards';
+      canvas.parentElement.appendChild(neighborCards);
+      state.neighborCardsEl = neighborCards;
+
+      const skillPanel = document.createElement('div');
+      skillPanel.className = 'graph-skill-panel';
+      skillPanel.style.display = 'none';
+      canvas.parentElement.appendChild(skillPanel);
+      state.skillPanelEl = skillPanel;
+      skillPanel.addEventListener('mousedown', e => e.stopPropagation());
+
+      const collectionPanel = document.createElement('div');
+      collectionPanel.className = 'graph-collection-panel';
+      collectionPanel.style.display = 'none';
+      collectionPanel.innerHTML =
+        `<div class="graph-collection-header">` +
+        `<span class="graph-collection-title">Collection</span>` +
+        `<div class="graph-collection-actions">` +
+        `<button class="graph-collection-copy-all" title="Copy all named install commands">Copy <span style="color:#ef4444">Named</span></button>` +
+        `<button class="graph-collection-clear-all" title="Clear collection">Clear All</button>` +
+        `</div></div>` +
+        `<div class="graph-collection-list"></div>` +
+        `<div class="graph-collection-note">You can only install <span style="color:#ef4444">named</span> skills. For unnamed ones, propose one first.</div>`;
+      canvas.parentElement.appendChild(collectionPanel);
+      state.collectionEl = collectionPanel;
+      collectionPanel.addEventListener('mousedown', e => e.stopPropagation());
+
+      let clearConfirmTimer = null;
+      const clearBtn = collectionPanel.querySelector('.graph-collection-clear-all');
+      clearBtn.addEventListener('click', () => {
+        if (clearBtn.dataset.confirm === 'yes') {
+          state.collection = [];
+          renderCollection();
+          clearBtn.dataset.confirm = '';
+          clearBtn.textContent = 'Clear All';
+          clearBtn.classList.remove('confirming');
+          if (clearConfirmTimer) { clearTimeout(clearConfirmTimer); clearConfirmTimer = null; }
+        } else {
+          clearBtn.dataset.confirm = 'yes';
+          clearBtn.textContent = 'Are you sure?';
+          clearBtn.classList.add('confirming');
+          clearConfirmTimer = setTimeout(() => {
+            clearBtn.dataset.confirm = '';
+            clearBtn.textContent = 'Clear All';
+            clearBtn.classList.remove('confirming');
+          }, 3000);
+        }
+      });
+
+      const copyAllBtn = collectionPanel.querySelector('.graph-collection-copy-all');
+      copyAllBtn.addEventListener('click', () => {
+        const lines = state.collection
+          .map(id => state.namedMap[id])
+          .filter(Boolean)
+          .map(nid => `gaia install ${nid}`);
+        if (lines.length === 0) return;
+        navigator.clipboard.writeText(lines.join('\n')).then(() => {
+          copyAllBtn.innerHTML = '✓ Copied';
+          copyAllBtn.classList.add('copied');
+          setTimeout(() => { copyAllBtn.innerHTML = 'Copy <span style="color:#ef4444">Named</span>'; copyAllBtn.classList.remove('copied'); }, 1500);
+        });
+      });
+
+      function renderCollection() {
+        const list = collectionPanel.querySelector('.graph-collection-list');
+        if (state.collection.length === 0) {
+          collectionPanel.style.display = 'none';
+          list.innerHTML = '';
+          return;
+        }
+        collectionPanel.style.display = 'flex';
+        let html = '';
+        state.collection.forEach(id => {
+          const skill = state.skills.find(s => s.id === id) || { id, name: id, type: 'basic' };
+          const col = PALETTE[skill.type] || PALETTE.basic;
+          const namedId = state.namedMap[id] || null;
+          const cmd = namedId ? `gaia install ${namedId}` : `gaia propose /${id}`;
+          const shareLink = namedId
+            ? `<button class="graph-collection-share" data-nid="${namedId}" title="Open in Explorer">↗</button>`
+            : '';
+          html += `<div class="graph-collection-card" data-cid="${id}">` +
+            `<div class="graph-collection-card-top">` +
+            `<span class="graph-collection-card-name" style="color:rgba(${col.rgb},1)">${skill.name}</span>` +
+            `<div class="graph-collection-card-btns">${shareLink}<button class="graph-collection-remove" data-cid="${id}" title="Remove">×</button></div>` +
+            `</div>` +
+            (namedId ? `<div class="graph-collection-card-named">${namedId}</div>` : '') +
+            `<code class="graph-collection-cmd" data-cmd="${cmd}">$ ${cmd}</code>` +
+            `</div>`;
+        });
+        list.innerHTML = html;
+        list.querySelectorAll('.graph-collection-remove').forEach(btn => {
+          btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const cid = btn.dataset.cid;
+            state.collection = state.collection.filter(x => x !== cid);
+            renderCollection();
+          });
+        });
+        list.querySelectorAll('.graph-collection-cmd').forEach(el => {
+          el.addEventListener('click', () => {
+            navigator.clipboard.writeText(el.dataset.cmd).then(() => {
+              el.classList.add('copied');
+              setTimeout(() => el.classList.remove('copied'), 1500);
+            });
+          });
+        });
+        list.querySelectorAll('.graph-collection-share').forEach(btn => {
+          btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const nid = btn.dataset.nid;
+            const url = window.location.origin + window.location.pathname + '#explorer/' + nid;
+            window.open(url, '_blank');
+          });
+        });
+      }
+
+      function openSkillPanel(skillId) {
+        const skill = state.skills.find(s => s.id === skillId) || { id: skillId, name: skillId, type: 'basic', prerequisites: [] };
+        const col = PALETTE[skill.type] || PALETTE.basic;
+        const namedId = state.namedMap[skill.id] || null;
+        const titleText = (state.titleMap && state.titleMap[skill.id]) || null;
+        const rm = skill.level ? RANK_META[skill.level] : null;
+        const wasPaused = state.paused;
+        state.paused = true;
+        let c = `<div class="graph-skill-panel-header">`;
+        c += `<div class="graph-skill-panel-name" style="color:rgba(${col.rgb},1)">${skill.name}</div>`;
+        c += `<button class="graph-skill-panel-close" title="Close">×</button>`;
+        c += `</div>`;
+        c += `<div class="graph-skill-panel-body">`;
+        if (namedId) c += `<div class="graph-skill-panel-named-id">${namedId}</div>`;
+        if (namedId && titleText) c += `<div class="graph-skill-panel-title">"${titleText}"</div>`;
+        c += `<div class="graph-skill-panel-type-row">`;
+        c += `<span class="skill-tooltip-badge skill-tooltip-type-${skill.type}">${skill.type.toUpperCase()}</span>`;
+        if (rm) c += `<span style="display:inline-block;padding:.12rem .42rem;border-radius:999px;font-size:.62rem;font-weight:700;background:${rm.bg};color:${rm.hex}">${skill.level}</span>`;
+        c += `</div>`;
+        c += `<div class="graph-skill-panel-terminal">`;
+        if (namedId) {
+          c += `<code class="graph-skill-panel-cmd" data-cmd="gaia install ${namedId}">$ gaia install ${namedId}</code>`;
+          c += `<a class="graph-skill-panel-explorer-link" href="#explorer/${namedId}">Open in Explorer →</a>`;
+        } else {
+          c += `<code class="graph-skill-panel-cmd" data-cmd="gaia propose /${skill.id}">$ gaia propose /${skill.id}</code>`;
+          c += `<div class="graph-skill-panel-hint">Claim this skill as your own named implementation</div>`;
+        }
+        c += `</div></div>`;
+        skillPanel.innerHTML = c;
+        skillPanel.style.display = 'flex';
+        state.tooltipEl.style.display = 'none';
+        const closePanel = () => {
+          skillPanel.style.display = 'none';
+          if (!wasPaused) state.paused = false;
+          state.lastHoveredId = null;
+        };
+        skillPanel.querySelector('.graph-skill-panel-close').addEventListener('click', closePanel);
+        const cmdEl = skillPanel.querySelector('.graph-skill-panel-cmd');
+        if (cmdEl) {
+          cmdEl.addEventListener('click', () => {
+            const cmd = cmdEl.dataset.cmd;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(cmd).then(() => {
+                cmdEl.classList.add('copied');
+                setTimeout(() => cmdEl.classList.remove('copied'), 1500);
+              });
+            }
+          });
+        }
+        const explorerLink = skillPanel.querySelector('.graph-skill-panel-explorer-link');
+        if (explorerLink) {
+          explorerLink.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.hash = `explorer/${namedId}`;
+            if (window.openSkillExplorer) window.openSkillExplorer(namedId);
+          });
+        }
+      }
+      state.openSkillPanel = openSkillPanel;
       const searchWrap = document.createElement('div');
       searchWrap.className = 'graph-search-wrap';
       const searchInput = document.createElement('input');
@@ -681,55 +1190,49 @@
       scatterTop.textContent = '+';
       const scatterTrackWrap = document.createElement('div');
       scatterTrackWrap.className = 'graph-scatter-track';
-      const scatterLine = document.createElement('div');
-      scatterLine.className = 'graph-scatter-line';
-      const scatterKnob = document.createElement('div');
-      scatterKnob.className = 'graph-scatter-knob';
-      scatterTrackWrap.appendChild(scatterLine);
-      scatterTrackWrap.appendChild(scatterKnob);
+      const scatterRulerCanvas = document.createElement('canvas');
+      scatterRulerCanvas.className = 'graph-ruler-canvas';
+      scatterTrackWrap.appendChild(scatterRulerCanvas);
+      state.scatterRulerCanvas = scatterRulerCanvas;
       const scatterBot = document.createElement('div');
       scatterBot.className = 'graph-scatter-edge graph-scatter-edge--bot';
       scatterBot.textContent = '−';
       const scatterTitle = document.createElement('div');
       scatterTitle.className = 'graph-scatter-title';
-      scatterTitle.textContent = 'SCATTER';
+      scatterTitle.textContent = Math.round(state.scale / (options.scale || GRAPH_SCALE) * 100) + '%';
       scatterStrip.appendChild(scatterTop);
       scatterStrip.appendChild(scatterTrackWrap);
       scatterStrip.appendChild(scatterBot);
       scatterStrip.appendChild(scatterTitle);
 
-      let scatterDragging = false, scatterLastY = 0, scatterKnobPct = 0.5;
-      function updateScatterKnob() {
-        const h = scatterTrackWrap.clientHeight || 200;
-        scatterKnob.style.top = (scatterKnobPct * h) + 'px';
+      function redrawScatterRuler() {
+        const logVal = Math.log(state.scale);
+        drawRuler(scatterRulerCanvas, logVal, { vertical: true, pxPerUnit: 42, minorStep: 0.1, majorEvery: 5 });
+        scatterTitle.textContent = Math.round(state.scale / (options.scale || GRAPH_SCALE) * 100) + '%';
       }
+      let scatterDragging = false, scatterLastY = 0;
       scatterStrip.addEventListener('mousedown', e => e.stopPropagation());
       scatterStrip.addEventListener('pointerdown', e => {
         e.preventDefault(); e.stopPropagation();
         scatterStrip.setPointerCapture(e.pointerId);
         scatterDragging = true;
         scatterLastY = e.clientY;
-        scatterKnob.classList.add('active');
-        const rect = scatterTrackWrap.getBoundingClientRect();
-        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-        updateScatterKnob();
+        redrawScatterRuler();
       });
       scatterStrip.addEventListener('pointermove', e => {
         if (!scatterDragging) return;
         const dy = scatterLastY - e.clientY;
         scatterLastY = e.clientY;
-        state.scale = Math.max(0.05, state.scale * Math.exp(dy * 0.007));
+        state.scale = Math.max(0.05, Math.min((options.scale || GRAPH_SCALE) * 10, state.scale * Math.exp(dy * 0.007)));
         state.positions = buildPositions(state.skills, state.scale);
-        const rect = scatterTrackWrap.getBoundingClientRect();
-        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-        updateScatterKnob();
+        redrawScatterRuler();
       });
       scatterStrip.addEventListener('pointerup', e => {
         scatterDragging = false;
-        scatterKnob.classList.remove('active');
         scatterStrip.releasePointerCapture(e.pointerId);
       });
       canvas.parentElement.appendChild(scatterStrip);
+      setTimeout(redrawScatterRuler, 50);
 
       const redPill = document.createElement('button');
       redPill.type = 'button';
@@ -791,6 +1294,66 @@
       bottomBar.appendChild(labelToggle);
       state.labelToggleEl = labelToggle;
 
+      const nebulaToggle = document.createElement('button');
+      nebulaToggle.type = 'button';
+      nebulaToggle.className = 'graph-bottom-btn';
+      nebulaToggle.textContent = 'Nebula';
+      nebulaToggle.title = 'Toggle nebula cloud atmosphere';
+      nebulaToggle.addEventListener('click', () => {
+        state.nebula = !state.nebula;
+        nebulaToggle.classList.toggle('active', state.nebula);
+      });
+      nebulaToggle.classList.add('active');
+      bottomBar.appendChild(nebulaToggle);
+      state.nebulaToggleEl = nebulaToggle;
+
+      const randomBtn = document.createElement('button');
+      randomBtn.type = 'button';
+      randomBtn.className = 'graph-bottom-btn';
+      randomBtn.textContent = 'Random';
+      randomBtn.title = 'Zoom to a random skill';
+      randomBtn.addEventListener('click', () => {
+        if (!state.skills.length) return;
+        const picked = state.skills[Math.floor(Math.random() * state.skills.length)];
+        state.paused = true;
+        if (state.pauseBtnEl) { state.pauseBtnEl.textContent = '▶'; state.pauseBtnEl.classList.add('active'); }
+        state.zoom = 2.2;
+        if (state.zoomCounterEl) state.zoomCounterEl.textContent = state.zoom.toFixed(1) + '×';
+        state.hoveredId = picked.id;
+        state.lastHoveredId = null;
+        const p0 = state.positions[picked.id];
+        if (p0) {
+          const ry = state.t * 0.16 + state.orbitY;
+          const rx = Math.sin(state.t * 0.055) * 0.20 + state.orbitX;
+          const xfP = rotX(rotY(p0, ry), rx);
+          const pr = project(xfP);
+          state.panX += state.width / 2 - pr.sx;
+          state.panY += state.height / 2 - pr.sy;
+        }
+      });
+      bottomBar.appendChild(randomBtn);
+
+      const resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'graph-bottom-btn';
+      resetBtn.textContent = 'Reset';
+      resetBtn.title = 'Reset all settings to default';
+      resetBtn.addEventListener('click', () => {
+        resetFilters();
+      });
+      bottomBar.appendChild(resetBtn);
+
+      const zoomCounter = document.createElement('div');
+      zoomCounter.className = 'graph-zoom-counter';
+      zoomCounter.textContent = '1.0×';
+      zoomCounter.title = 'Zoom level (click to reset)';
+      zoomCounter.addEventListener('click', () => {
+        state.zoom = 1;
+        zoomCounter.textContent = '1.0×';
+      });
+      bottomBar.appendChild(zoomCounter);
+      state.zoomCounterEl = zoomCounter;
+
       // Speed strip — horizontal infinite drag, right=faster
       const speedStrip = document.createElement('div');
       speedStrip.className = 'graph-speed-strip';
@@ -799,53 +1362,47 @@
       speedLeft.textContent = '◀';
       const speedTrackWrap = document.createElement('div');
       speedTrackWrap.className = 'graph-speed-track';
-      const speedLine = document.createElement('div');
-      speedLine.className = 'graph-speed-line';
-      const speedKnob = document.createElement('div');
-      speedKnob.className = 'graph-speed-knob';
-      speedTrackWrap.appendChild(speedLine);
-      speedTrackWrap.appendChild(speedKnob);
+      const speedRulerCanvas = document.createElement('canvas');
+      speedRulerCanvas.className = 'graph-ruler-canvas';
+      speedTrackWrap.appendChild(speedRulerCanvas);
+      state.speedRulerCanvas = speedRulerCanvas;
       const speedRight = document.createElement('div');
       speedRight.className = 'graph-speed-edge graph-speed-edge--right';
       speedRight.textContent = '▶';
       const speedTitle = document.createElement('div');
       speedTitle.className = 'graph-speed-title';
-      speedTitle.textContent = 'SPEED';
+      speedTitle.textContent = '×' + state.rotSpeed.toFixed(1);
       speedStrip.appendChild(speedLeft);
       speedStrip.appendChild(speedTrackWrap);
       speedStrip.appendChild(speedRight);
       speedStrip.appendChild(speedTitle);
 
-      let speedDragging = false, speedLastX = 0, speedKnobPct = 0.5;
-      function updateSpeedKnob() {
-        const w = speedTrackWrap.clientWidth || 200;
-        speedKnob.style.left = (speedKnobPct * w) + 'px';
+      function redrawSpeedRuler() {
+        const logVal = Math.log(Math.max(0.001, state.rotSpeed));
+        drawRuler(speedRulerCanvas, logVal, { vertical: false, pxPerUnit: 42, minorStep: 0.1, majorEvery: 5 });
+        speedTitle.textContent = '×' + state.rotSpeed.toFixed(1);
       }
+      let speedDragging = false, speedLastX = 0;
       speedStrip.addEventListener('pointerdown', e => {
         e.preventDefault();
         speedStrip.setPointerCapture(e.pointerId);
         speedDragging = true;
         speedLastX = e.clientX;
-        speedKnob.classList.add('active');
-        const rect = speedTrackWrap.getBoundingClientRect();
-        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        updateSpeedKnob();
+        redrawSpeedRuler();
       });
       speedStrip.addEventListener('pointermove', e => {
         if (!speedDragging) return;
         const dx = e.clientX - speedLastX;
         speedLastX = e.clientX;
-        state.rotSpeed = Math.max(0, state.rotSpeed * Math.exp(dx * 0.007));
-        const rect = speedTrackWrap.getBoundingClientRect();
-        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        updateSpeedKnob();
+        state.rotSpeed = Math.max(0, Math.min(50, state.rotSpeed * Math.exp(dx * 0.007)));
+        redrawSpeedRuler();
       });
       speedStrip.addEventListener('pointerup', e => {
         speedDragging = false;
-        speedKnob.classList.remove('active');
         speedStrip.releasePointerCapture(e.pointerId);
       });
       bottomBar.appendChild(speedStrip);
+      setTimeout(redrawSpeedRuler, 50);
       canvas.parentElement.appendChild(bottomBar);
     }
     window.addEventListener('resize', resize);
@@ -882,7 +1439,7 @@
     });
     if (options.draggable) {
       canvas.style.cursor = 'grab';
-      canvas.addEventListener('mouseleave', () => { if (!state.dragging) state.hoveredId = null; });
+      canvas.addEventListener('mouseleave', () => { if (!state.dragging && !state.pinnedId) state.hoveredId = null; });
       canvas.addEventListener('contextmenu', e => e.preventDefault());
       canvas.addEventListener('mousedown', e => {
         if (e.button === 2) return;
@@ -898,17 +1455,28 @@
       });
       window.addEventListener('mouseup', e => {
         if (!state.dragging) return;
-        const didClick = !state.dragMoved && state.hoveredId;
+        const didClick = !state.dragMoved;
         state.dragging = false;
         state.dragMoved = false;
         canvas.style.cursor = state.hoveredId ? 'pointer' : 'grab';
-        if (didClick && options.onNodeClick) options.onNodeClick(state.hoveredId);
+        if (didClick) {
+          if (state.hoveredId) {
+            state.pinnedId = state.hoveredId;
+            state.pinnedPos = null;
+            state.lastHoveredId = null;
+          } else {
+            state.pinnedId = null;
+            state.pinnedPos = null;
+            state.lastHoveredId = null;
+          }
+        }
       });
     }
     if (options.zoomable) {
       canvas.addEventListener('wheel', e => {
         e.preventDefault();
         state.zoom = Math.max(0.3, Math.min(3.0, state.zoom * (1 - e.deltaY * 0.001)));
+        if (state.zoomCounterEl) state.zoomCounterEl.textContent = state.zoom.toFixed(1) + '×';
       }, { passive: false });
     }
     function resetFilters() {
@@ -920,7 +1488,15 @@
       state.searchText = '';
       state.redPillActive = false;
       state.panX = 0; state.panY = 0;
+      state.orbitX = 0; state.orbitY = 0;
       state.paused = false; state.rotSpeed = 1;
+      state.zoom = 1;
+      state.scale = options.scale || GRAPH_SCALE;
+      state.positions = buildPositions(state.skills, state.scale);
+      state.nebula = true;
+      state.hoverSlowdown = 0;
+      state.pinnedId = null; state.pinnedPos = null;
+      if (state.skillPanelEl) state.skillPanelEl.style.display = 'none';
       if (state.pauseBtnEl) { state.pauseBtnEl.textContent = '⏸'; state.pauseBtnEl.classList.remove('active'); }
       if (state.labelsToggleEl) { state.labelMode = options.labelMode || 'ultimate'; state.labelsToggleEl.classList.remove('off'); }
       if (state.redPillEl) state.redPillEl.classList.remove('active');
@@ -929,6 +1505,14 @@
       }
       if (state.searchInputEl) state.searchInputEl.value = '';
       if (state.labelToggleEl) state.labelToggleEl.classList.remove('active');
+      if (state.zoomCounterEl) state.zoomCounterEl.textContent = '1.0×';
+      if (state.nebulaToggleEl) state.nebulaToggleEl.classList.add('active');
+      if (state.scatterRulerCanvas) {
+        drawRuler(state.scatterRulerCanvas, Math.log(state.scale), { vertical: true, pxPerUnit: 42, minorStep: 0.1, majorEvery: 5 });
+      }
+      if (state.speedRulerCanvas) {
+        drawRuler(state.speedRulerCanvas, 0, { vertical: false, pxPerUnit: 42, minorStep: 0.1, majorEvery: 5 });
+      }
     }
     if (state.running) draw();
     function setNamedMap(map) { state.namedMap = map || {}; }
@@ -943,16 +1527,6 @@
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
     labelMode:'all', scale:1.8, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
-    onNodeClick: function(id) {
-      var buckets = window._gaiaNamedBuckets || {};
-      if (buckets[id] && buckets[id].length) {
-        if (window.openNamedPopup) window.openNamedPopup(buckets[id][0]);
-        else window.openSkillExplorer(buckets[id][0].id);
-      } else {
-        var skill = (window._gaiaSkillMap || {})[id] || { id: id, name: id, type: 'basic' };
-        window.openUnnamedPopup(skill);
-      }
-    }
   });
 
   function peek(on) { hero.classList.toggle('hero-graph-peek', Boolean(on)); }

@@ -70,7 +70,7 @@
   // ── RENDER HERO ──────────────────────────────────────────────
   function renderHero(ns, generic) {
     var lm = LEVEL_META_SE[ns.level] || LEVEL_META_SE['2★'];
-    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
+    var typeColor = ns.type === 'ultimate' ? '#f59e0b' : ns.type === 'unique' ? '#7c3aed' : ns.type === 'extra' ? '#c084fc' : '#38bdf8';
     var typeSymbol = TYPE_SYMBOL[(generic && generic.type) || 'basic'];
     var links = ns.links || {};
     var repoUrl = links.github || links.npm || '';
@@ -82,7 +82,8 @@
     ].filter(Boolean).join('');
 
     var installCmd = 'gaia install ' + ns.id;
-    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '">' +
+    var heroLeft = '<div class="se-hero-card" data-level="' + esc(ns.level) + '" data-type="' + esc((generic && generic.type) || 'basic') + '">' +
+      '<div class="se-node-orb se-node-orb--' + esc((generic && generic.type) || 'basic') + (ns.level === '6★' ? ' se-node-orb--vi' : '') + '"></div>' +
       (repoUrl ? '<a class="se-github-link" href="' + esc(repoUrl) + '" target="_blank" rel="noopener">Show in GitHub ↗</a>' : '') +
       '<div class="se-skill-name">' + esc(ns.name || ns.id) + '</div>' +
       '<div class="se-contrib"><span style="color:#ef4444;font-weight:700">' + esc(ns.contributor) + '</span> / ' + esc(ns.id.split('/')[1] || '') + '</div>' +
