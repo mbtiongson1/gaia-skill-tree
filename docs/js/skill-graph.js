@@ -154,28 +154,23 @@
     const uniqueCount = satellite.unique.length;
     satellite.unique.forEach((skill, idx) => {
       const seed = stableHash(skill.id);
-      const spread = uniqueCount > 1 ? (idx - (uniqueCount - 1) / 2) * 120 * scale : 0;
       positions[skill.id] = {
-        x: -340 * scale + spread * 0.4,
-        y: spread,
-        z: ((seed % 80) - 40) * scale,
-        phase: (seed % 628) / 100,
+        ...spherePoint(330 * scale, seed, idx, Math.max(uniqueCount, 1)),
         _satellite: 'unique',
       };
     });
-    satellite.orphan.forEach((skill) => {
+    satellite.orphan.forEach((skill, idx) => {
       const seed = stableHash(skill.id);
-      const angle = Math.PI * 0.4 + (seed % 1000) / 1000 * Math.PI * 1.2;
-      const dist = (160 + (seed % 140)) * scale;
+      const baseR = (320 + (seed % 70)) * scale;
+      const pos = spherePoint(baseR, seed, idx, Math.max(satellite.orphan.length, 1));
       positions[skill.id] = {
-        x: -340 * scale + Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist * 0.7,
-        z: ((seed % 100) - 50) * scale,
-        phase: (seed % 628) / 100,
+        ...pos,
         _satellite: 'orphan',
-        _orbitSpeed: 0.3 + (seed % 100) / 100 * 0.9,
-        _orbitRadius: dist,
-        _orbitAngle: angle,
+        _orbitSpeed: 0.2 + (seed % 100) / 100 * 0.65,
+        _orbitAmp:   (22 + (seed % 38)) * scale,
+        _phX: (seed % 628) / 100,
+        _phY: ((seed * 7) % 628) / 100,
+        _phZ: ((seed * 13) % 628) / 100,
       };
     });
     return positions;
@@ -436,17 +431,14 @@
       state.skills.forEach(skill => {
         const p0 = state.positions[skill.id];
         if (!p0) return;
-        if (p0._satellite === 'unique') {
-          xf[skill.id] = { x: p0.x, y: p0.y, z: p0.z, phase: p0.phase };
-        } else if (p0._satellite === 'orphan') {
-          const a = p0._orbitAngle + state.t * p0._orbitSpeed;
-          const cx = -340 * state.scale;
-          xf[skill.id] = {
-            x: cx + Math.cos(a) * p0._orbitRadius,
-            y: Math.sin(a) * p0._orbitRadius * 0.7,
-            z: p0.z * Math.cos(state.t * p0._orbitSpeed * 0.5),
+        if (p0._satellite === 'orphan') {
+          const s = p0._orbitSpeed, amp = p0._orbitAmp;
+          xf[skill.id] = rotX(rotY({
+            x: p0.x + Math.cos(state.t * s + p0._phX) * amp,
+            y: p0.y + Math.sin(state.t * s * 1.3 + p0._phY) * amp,
+            z: p0.z + Math.sin(state.t * s * 0.7 + p0._phZ) * amp,
             phase: p0.phase,
-          };
+          }, ry), rx);
         } else {
           xf[skill.id] = rotX(rotY(p0, ry), rx);
         }
