@@ -151,31 +151,32 @@
         positions[skill.id] = spherePoint(radii[type] || radii.basic, stableHash(skill.id), index, group.length);
       });
     });
-    const satAll = [...satellite.unique, ...satellite.orphan];
-    satAll.forEach((skill) => {
+    const uniqueCount = satellite.unique.length;
+    satellite.unique.forEach((skill, idx) => {
       const seed = stableHash(skill.id);
-      if (skill.type === 'unique') {
-        positions[skill.id] = {
-          x: -340 * scale,
-          y: 0,
-          z: 0,
-          phase: (seed % 628) / 100,
-          _satellite: 'unique',
-        };
-      } else {
-        const angle = Math.PI * 0.4 + (seed % 1000) / 1000 * Math.PI * 1.2;
-        const dist = (160 + (seed % 140)) * scale;
-        positions[skill.id] = {
-          x: -340 * scale + Math.cos(angle) * dist,
-          y: Math.sin(angle) * dist * 0.7,
-          z: ((seed % 100) - 50) * scale,
-          phase: (seed % 628) / 100,
-          _satellite: 'orphan',
-          _orbitSpeed: 0.3 + (seed % 100) / 100 * 0.9,
-          _orbitRadius: dist,
-          _orbitAngle: angle,
-        };
-      }
+      const spread = uniqueCount > 1 ? (idx - (uniqueCount - 1) / 2) * 120 * scale : 0;
+      positions[skill.id] = {
+        x: -340 * scale + spread * 0.4,
+        y: spread,
+        z: ((seed % 80) - 40) * scale,
+        phase: (seed % 628) / 100,
+        _satellite: 'unique',
+      };
+    });
+    satellite.orphan.forEach((skill) => {
+      const seed = stableHash(skill.id);
+      const angle = Math.PI * 0.4 + (seed % 1000) / 1000 * Math.PI * 1.2;
+      const dist = (160 + (seed % 140)) * scale;
+      positions[skill.id] = {
+        x: -340 * scale + Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist * 0.7,
+        z: ((seed % 100) - 50) * scale,
+        phase: (seed % 628) / 100,
+        _satellite: 'orphan',
+        _orbitSpeed: 0.3 + (seed % 100) / 100 * 0.9,
+        _orbitRadius: dist,
+        _orbitAngle: angle,
+      };
     });
     return positions;
   }

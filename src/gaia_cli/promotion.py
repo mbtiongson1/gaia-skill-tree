@@ -358,6 +358,12 @@ def promote_to_unique(skill_id: str, registry_path: str) -> dict:
     if skill_id in all_prereq_refs:
         raise ValueError(f"Skill '{skill_id}' is referenced as a prerequisite — must be graph-isolated.")
 
+    from .graph import load_named_skills
+    named_index = load_named_skills(registry_path)
+    named_buckets = named_index.get("buckets", {})
+    if skill_id not in named_buckets or not named_buckets[skill_id]:
+        raise ValueError(f"Skill '{skill_id}' has no named implementation — required for unique promotion.")
+
     graph_skill["type"] = "unique"
     graph_skill["updatedAt"] = date.today().isoformat()
 

@@ -247,12 +247,19 @@ def validate_ultimate(graph):
 
 
 def validate_unique_skills(graph):
-    """Check unique-type-specific constraints: level ≥4★, 0 prerequisites, graph-isolated."""
+    """Check unique-type-specific constraints: level ≥4★, 0 prerequisites, graph-isolated, has named impl."""
     errors = []
     all_prereq_refs = set()
     for skill in graph.get("skills", []):
         for pid in skill.get("prerequisites", []):
             all_prereq_refs.add(pid)
+
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    named_index_path = os.path.join(repo_root, "registry", "named-skills.json")
+    named_buckets = {}
+    if os.path.isfile(named_index_path):
+        with open(named_index_path, "r", encoding="utf-8") as f:
+            named_buckets = json.load(f).get("buckets", {})
 
     level_order = ["0★", "1★", "2★", "3★", "4★", "5★", "6★"]
     for skill in graph.get("skills", []):
@@ -276,6 +283,12 @@ def validate_unique_skills(graph):
             errors.append(
                 f"Unique skill '{skill['id']}' is referenced as a prerequisite "
                 f"by another skill — unique skills must be graph-isolated."
+            )
+
+        if skill["id"] not in named_buckets or not named_buckets[skill["id"]]:
+            errors.append(
+                f"Unique skill '{skill['id']}' has no named implementation — "
+                f"unique skills require at least one entry in named-skills.json."
             )
 
     return errors
