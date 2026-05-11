@@ -534,22 +534,42 @@
     background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.7);
     color:#fca5a5;box-shadow:0 0 14px rgba(239,68,68,.35);
   }
-  .graph-scatter-wrap{
-    position:absolute;left:.75rem;top:50%;transform:translateY(-50%);z-index:10;
-    display:flex;flex-direction:column;align-items:center;gap:.42rem;
-    background:rgba(3,7,18,.68);border:1px solid rgba(148,163,184,.12);
-    border-radius:8px;padding:.7rem .45rem;user-select:none;
+  .graph-scatter-strip{
+    position:absolute;left:0;top:0;bottom:0;width:52px;z-index:10;
+    display:flex;flex-direction:column;align-items:center;
+    background:linear-gradient(to bottom,rgba(56,189,248,.07) 0%,rgba(3,7,18,.65) 22%,rgba(3,7,18,.65) 78%,rgba(192,132,252,.07) 100%);
+    border-right:1px solid rgba(148,163,184,.1);
+    cursor:ns-resize;user-select:none;
   }
-  .graph-scatter-label{
-    font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:#64748b;white-space:nowrap;
+  .graph-scatter-edge{
+    font-size:1.15rem;font-weight:700;line-height:1;padding:.55rem 0;user-select:none;
   }
-  .graph-scatter-track{width:20px;height:110px;position:relative}
-  .graph-scatter-slider{
-    position:absolute;width:110px;left:50%;top:50%;
-    transform:translate(-50%,-50%) rotate(-90deg);
-    margin:0;cursor:pointer;accent-color:rgba(56,189,248,.8);
+  .graph-scatter-edge--top{color:rgba(56,189,248,.55)}
+  .graph-scatter-edge--bot{color:rgba(192,132,252,.45)}
+  .graph-scatter-track{
+    flex:1;position:relative;width:100%;
+    display:flex;align-items:center;justify-content:center;
   }
+  .graph-scatter-line{
+    width:1px;height:100%;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(56,189,248,.5),rgba(148,163,184,.15) 40%,rgba(148,163,184,.15) 60%,rgba(192,132,252,.4));
+  }
+  .graph-scatter-knob{
+    position:absolute;width:26px;height:26px;left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(3,7,18,.9);
+    border:1.5px solid rgba(56,189,248,.55);border-radius:50%;
+    pointer-events:none;transition:border-color .15s,box-shadow .15s;
+  }
+  .graph-scatter-knob.active{
+    border-color:rgba(56,189,248,1);
+    box-shadow:0 0 14px rgba(56,189,248,.55),0 0 4px rgba(56,189,248,.3);
+  }
+  .graph-scatter-title{
+    font-size:.49rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(148,163,184,.3);padding:.45rem 0;white-space:nowrap;
+  }
+  @media(max-width:700px){.graph-scatter-strip{display:none}}
   @media (max-width:700px){
     html,body{overflow-x:clip}
     nav{

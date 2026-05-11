@@ -667,30 +667,63 @@
       canvas.parentElement.appendChild(legend);
       state.legendEl = legend;
 
-      const scatterWrap = document.createElement('div');
-      scatterWrap.className = 'graph-scatter-wrap';
-      const scatterLabel = document.createElement('div');
-      scatterLabel.className = 'graph-scatter-label';
-      scatterLabel.textContent = 'Scatter';
-      const scatterTrack = document.createElement('div');
-      scatterTrack.className = 'graph-scatter-track';
-      const scatterInput = document.createElement('input');
-      scatterInput.type = 'range';
-      scatterInput.className = 'graph-scatter-slider';
-      scatterInput.min = '0.5';
-      scatterInput.max = '3.0';
-      scatterInput.step = '0.05';
-      scatterInput.value = String(state.scale);
-      scatterInput.setAttribute('aria-label', 'Graph scatter');
-      scatterInput.addEventListener('input', () => {
-        state.scale = parseFloat(scatterInput.value);
-        state.positions = buildPositions(state.skills, state.scale);
+      const scatterStrip = document.createElement('div');
+      scatterStrip.className = 'graph-scatter-strip';
+      scatterStrip.setAttribute('aria-label', 'Scatter — drag up to spread, drag down to clump');
+      const scatterTop = document.createElement('div');
+      scatterTop.className = 'graph-scatter-edge graph-scatter-edge--top';
+      scatterTop.textContent = '+';
+      const scatterTrackWrap = document.createElement('div');
+      scatterTrackWrap.className = 'graph-scatter-track';
+      const scatterLine = document.createElement('div');
+      scatterLine.className = 'graph-scatter-line';
+      const scatterKnob = document.createElement('div');
+      scatterKnob.className = 'graph-scatter-knob';
+      scatterTrackWrap.appendChild(scatterLine);
+      scatterTrackWrap.appendChild(scatterKnob);
+      const scatterBot = document.createElement('div');
+      scatterBot.className = 'graph-scatter-edge graph-scatter-edge--bot';
+      scatterBot.textContent = '−';
+      const scatterTitle = document.createElement('div');
+      scatterTitle.className = 'graph-scatter-title';
+      scatterTitle.textContent = 'SCATTER';
+      scatterStrip.appendChild(scatterTop);
+      scatterStrip.appendChild(scatterTrackWrap);
+      scatterStrip.appendChild(scatterBot);
+      scatterStrip.appendChild(scatterTitle);
+
+      let scatterDragging = false, scatterLastY = 0, scatterKnobPct = 0.5;
+      function updateScatterKnob() {
+        const h = scatterTrackWrap.clientHeight || 200;
+        scatterKnob.style.top = (scatterKnobPct * h) + 'px';
+      }
+      scatterStrip.addEventListener('mousedown', e => e.stopPropagation());
+      scatterStrip.addEventListener('pointerdown', e => {
+        e.preventDefault(); e.stopPropagation();
+        scatterStrip.setPointerCapture(e.pointerId);
+        scatterDragging = true;
+        scatterLastY = e.clientY;
+        scatterKnob.classList.add('active');
+        const rect = scatterTrackWrap.getBoundingClientRect();
+        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        updateScatterKnob();
       });
-      scatterInput.addEventListener('mousedown', e => e.stopPropagation());
-      scatterTrack.appendChild(scatterInput);
-      scatterWrap.appendChild(scatterLabel);
-      scatterWrap.appendChild(scatterTrack);
-      canvas.parentElement.appendChild(scatterWrap);
+      scatterStrip.addEventListener('pointermove', e => {
+        if (!scatterDragging) return;
+        const dy = scatterLastY - e.clientY;
+        scatterLastY = e.clientY;
+        state.scale = Math.max(0.05, state.scale * Math.exp(dy * 0.007));
+        state.positions = buildPositions(state.skills, state.scale);
+        const rect = scatterTrackWrap.getBoundingClientRect();
+        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        updateScatterKnob();
+      });
+      scatterStrip.addEventListener('pointerup', e => {
+        scatterDragging = false;
+        scatterKnob.classList.remove('active');
+        scatterStrip.releasePointerCapture(e.pointerId);
+      });
+      canvas.parentElement.appendChild(scatterStrip);
 
       const redPill = document.createElement('button');
       redPill.type = 'button';
