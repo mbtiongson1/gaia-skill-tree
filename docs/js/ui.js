@@ -7,6 +7,24 @@ window.switchOsTab = function(btn) {
 (function(){
   var CLIP='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v7a1 1 0 001 1h2"/></svg>';
   var CHECK='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l4 4 8-8"/></svg>';
+
+  function initMobileNav(){
+    var toggle = document.querySelector('.nav-menu-toggle');
+    if(!toggle) return;
+    var nav = toggle.closest('nav');
+    if(!nav) return;
+    toggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a, .nav-tree').forEach(function(item){
+      item.addEventListener('click', function(){
+        nav.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   function initCopyButtons(){
     document.querySelectorAll('pre').forEach(function(pre){
       if(pre.closest('.pre-wrap')) return;
@@ -33,8 +51,9 @@ window.switchOsTab = function(btn) {
     });
   }
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initCopyButtons);
+    document.addEventListener('DOMContentLoaded', function(){ initCopyButtons(); initMobileNav(); });
   } else {
     initCopyButtons();
+    initMobileNav();
   }
 })();
