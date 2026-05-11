@@ -1,6 +1,6 @@
 (function () {
   const GRAPH_JSON_URL = 'graph/gaia.json';
-  const GRAPH_SCALE = 1.25;
+  const GRAPH_SCALE = 1.625;
 
   // Defaults — overwritten from meta once data loads
   let PALETTE = {
@@ -154,28 +154,23 @@
     const uniqueCount = satellite.unique.length;
     satellite.unique.forEach((skill, idx) => {
       const seed = stableHash(skill.id);
-      const spread = uniqueCount > 1 ? (idx - (uniqueCount - 1) / 2) * 120 * scale : 0;
       positions[skill.id] = {
-        x: -340 * scale + spread * 0.4,
-        y: spread,
-        z: ((seed % 80) - 40) * scale,
-        phase: (seed % 628) / 100,
+        ...spherePoint(330 * scale, seed, idx, Math.max(uniqueCount, 1)),
         _satellite: 'unique',
       };
     });
-    satellite.orphan.forEach((skill) => {
+    satellite.orphan.forEach((skill, idx) => {
       const seed = stableHash(skill.id);
-      const angle = Math.PI * 0.4 + (seed % 1000) / 1000 * Math.PI * 1.2;
-      const dist = (160 + (seed % 140)) * scale;
+      const baseR = (320 + (seed % 70)) * scale;
+      const pos = spherePoint(baseR, seed, idx, Math.max(satellite.orphan.length, 1));
       positions[skill.id] = {
-        x: -340 * scale + Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist * 0.7,
-        z: ((seed % 100) - 50) * scale,
-        phase: (seed % 628) / 100,
+        ...pos,
         _satellite: 'orphan',
-        _orbitSpeed: 0.3 + (seed % 100) / 100 * 0.9,
-        _orbitRadius: dist,
-        _orbitAngle: angle,
+        _orbitSpeed: 0.2 + (seed % 100) / 100 * 0.65,
+        _orbitAmp:   (22 + (seed % 38)) * scale,
+        _phX: (seed % 628) / 100,
+        _phY: ((seed * 7) % 628) / 100,
+        _phZ: ((seed * 13) % 628) / 100,
       };
     });
     return positions;
@@ -203,11 +198,16 @@
       orbitX: 0,
       orbitY: 0,
       dragging: false,
+      dragMode: 'pan',
       dragLastX: 0,
       dragLastY: 0,
       dragStartX: 0,
       dragStartY: 0,
       dragMoved: false,
+      panX: 0,
+      panY: 0,
+      paused: false,
+      rotSpeed: 1,
       hoveredId: null,
       lastHoveredId: null,
       projectedNodes: {},
@@ -249,9 +249,18 @@
       state.nodeAlphas = newAlphas;
       if (state.statusEl) {
         const edgeCount = skills.reduce((sum, skill) => sum + skill.prerequisites.length, 0);
-        const zoomNote = options.zoomable ? ' · scroll to zoom' : '';
-        const dragNote = options.draggable ? ' · drag to orbit' : '';
-        state.statusEl.textContent = `${skills.length} skills · ${edgeCount} links${zoomNote}${dragNote}`;
+        const mb = (fill) => `<svg class="gst-icon" viewBox="0 0 10 15" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><rect x=".7" y=".7" width="8.6" height="13.6" rx="4.3"/><path d="M5 .7v5.8" stroke-width="1"/><path d="M.7 6.5h8.6" stroke-width="1"/>${fill}</svg>`;
+        const iL = mb('<rect x=".7" y=".7" width="4.3" height="5.8" rx="2 0 0 2" stroke="none" fill="currentColor" opacity=".55"/>');
+        const iM = mb('<rect x="3.4" y="1.4" width="3.2" height="4.2" rx="1.6" stroke="none" fill="currentColor" opacity=".55"/>');
+        const iS = mb('<rect x="3.4" y="1.4" width="3.2" height="4.2" rx="1.6" stroke-width=".9" opacity=".5"/><path d="M5 2.2v3.2M4 3.1 5 2.2 6 3.1M4 4.5 5 5.4 6 4.5" stroke-width=".9"/>');
+        const stat = `<span class="gst-stat">${skills.length}<span class="gst-dim"> skills</span> · ${edgeCount}<span class="gst-dim"> links</span></span>`;
+        let tips = '';
+        if (options.draggable) {
+          tips += `<span class="gst-tip">${iL}<span>pan</span></span>`;
+          tips += `<span class="gst-tip"><kbd class="gst-ctrl">⌃</kbd>${iL}<span class="gst-or">/</span>${iM}<span>orbit</span></span>`;
+        }
+        if (options.zoomable) tips += `<span class="gst-tip">${iS}<span>zoom</span></span>`;
+        state.statusEl.innerHTML = stat + tips;
       }
     }
 
@@ -267,7 +276,7 @@
       const fov = Math.min(state.width, state.height) * 0.75;
       const dist = fov / (fov + p.z + 360 * state.scale);
       const z = state.zoom;
-      return { sx: state.width / 2 + p.x * dist * z, sy: state.height / 2 + p.y * dist * z, scale: dist * z };
+      return { sx: state.width / 2 + p.x * dist * z + state.panX, sy: state.height / 2 + p.y * dist * z + state.panY, scale: dist * z };
     }
     function drawNode(sx, sy, r, color, alpha) {
       const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, r * 3.9);
@@ -407,7 +416,7 @@
     }
     function draw() {
       if (!state.running) return;
-      state.t += 0.006;
+      if (!state.paused) state.t += 0.006 * state.rotSpeed;
       ctx.clearRect(0, 0, state.width, state.height);
       state.projectedNodes = {};
       const ry = options.draggable
@@ -422,17 +431,14 @@
       state.skills.forEach(skill => {
         const p0 = state.positions[skill.id];
         if (!p0) return;
-        if (p0._satellite === 'unique') {
-          xf[skill.id] = { x: p0.x, y: p0.y, z: p0.z, phase: p0.phase };
-        } else if (p0._satellite === 'orphan') {
-          const a = p0._orbitAngle + state.t * p0._orbitSpeed;
-          const cx = -340 * state.scale;
-          xf[skill.id] = {
-            x: cx + Math.cos(a) * p0._orbitRadius,
-            y: Math.sin(a) * p0._orbitRadius * 0.7,
-            z: p0.z * Math.cos(state.t * p0._orbitSpeed * 0.5),
+        if (p0._satellite === 'orphan') {
+          const s = p0._orbitSpeed, amp = p0._orbitAmp;
+          xf[skill.id] = rotX(rotY({
+            x: p0.x + Math.cos(state.t * s + p0._phX) * amp,
+            y: p0.y + Math.sin(state.t * s * 1.3 + p0._phY) * amp,
+            z: p0.z + Math.sin(state.t * s * 0.7 + p0._phZ) * amp,
             phase: p0.phase,
-          };
+          }, ry), rx);
         } else {
           xf[skill.id] = rotX(rotY(p0, ry), rx);
         }
@@ -667,6 +673,64 @@
       canvas.parentElement.appendChild(legend);
       state.legendEl = legend;
 
+      const scatterStrip = document.createElement('div');
+      scatterStrip.className = 'graph-scatter-strip';
+      scatterStrip.setAttribute('aria-label', 'Scatter — drag up to spread, drag down to clump');
+      const scatterTop = document.createElement('div');
+      scatterTop.className = 'graph-scatter-edge graph-scatter-edge--top';
+      scatterTop.textContent = '+';
+      const scatterTrackWrap = document.createElement('div');
+      scatterTrackWrap.className = 'graph-scatter-track';
+      const scatterLine = document.createElement('div');
+      scatterLine.className = 'graph-scatter-line';
+      const scatterKnob = document.createElement('div');
+      scatterKnob.className = 'graph-scatter-knob';
+      scatterTrackWrap.appendChild(scatterLine);
+      scatterTrackWrap.appendChild(scatterKnob);
+      const scatterBot = document.createElement('div');
+      scatterBot.className = 'graph-scatter-edge graph-scatter-edge--bot';
+      scatterBot.textContent = '−';
+      const scatterTitle = document.createElement('div');
+      scatterTitle.className = 'graph-scatter-title';
+      scatterTitle.textContent = 'SCATTER';
+      scatterStrip.appendChild(scatterTop);
+      scatterStrip.appendChild(scatterTrackWrap);
+      scatterStrip.appendChild(scatterBot);
+      scatterStrip.appendChild(scatterTitle);
+
+      let scatterDragging = false, scatterLastY = 0, scatterKnobPct = 0.5;
+      function updateScatterKnob() {
+        const h = scatterTrackWrap.clientHeight || 200;
+        scatterKnob.style.top = (scatterKnobPct * h) + 'px';
+      }
+      scatterStrip.addEventListener('mousedown', e => e.stopPropagation());
+      scatterStrip.addEventListener('pointerdown', e => {
+        e.preventDefault(); e.stopPropagation();
+        scatterStrip.setPointerCapture(e.pointerId);
+        scatterDragging = true;
+        scatterLastY = e.clientY;
+        scatterKnob.classList.add('active');
+        const rect = scatterTrackWrap.getBoundingClientRect();
+        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        updateScatterKnob();
+      });
+      scatterStrip.addEventListener('pointermove', e => {
+        if (!scatterDragging) return;
+        const dy = scatterLastY - e.clientY;
+        scatterLastY = e.clientY;
+        state.scale = Math.max(0.05, state.scale * Math.exp(dy * 0.007));
+        state.positions = buildPositions(state.skills, state.scale);
+        const rect = scatterTrackWrap.getBoundingClientRect();
+        scatterKnobPct = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        updateScatterKnob();
+      });
+      scatterStrip.addEventListener('pointerup', e => {
+        scatterDragging = false;
+        scatterKnob.classList.remove('active');
+        scatterStrip.releasePointerCapture(e.pointerId);
+      });
+      canvas.parentElement.appendChild(scatterStrip);
+
       const redPill = document.createElement('button');
       redPill.type = 'button';
       redPill.className = 'graph-redpill';
@@ -680,25 +744,122 @@
       canvas.parentElement.appendChild(redPill);
       state.redPillEl = redPill;
 
+      // ── Bottom bar: [pause][labels][titles][speed strip] ──
+      const bottomBar = document.createElement('div');
+      bottomBar.className = 'graph-bottom-bar';
+      bottomBar.addEventListener('mousedown', e => e.stopPropagation());
+
+      const pauseBtn = document.createElement('button');
+      pauseBtn.type = 'button';
+      pauseBtn.className = 'graph-pause-btn';
+      pauseBtn.textContent = '⏸';
+      pauseBtn.title = 'Pause / resume rotation';
+      pauseBtn.addEventListener('click', () => {
+        state.paused = !state.paused;
+        pauseBtn.textContent = state.paused ? '▶' : '⏸';
+        pauseBtn.classList.toggle('active', state.paused);
+      });
+      bottomBar.appendChild(pauseBtn);
+      state.pauseBtnEl = pauseBtn;
+
+      const labelsToggle = document.createElement('button');
+      labelsToggle.type = 'button';
+      labelsToggle.className = 'graph-bottom-btn';
+      labelsToggle.textContent = 'Labels';
+      labelsToggle.title = 'Toggle skill labels';
+      labelsToggle.addEventListener('click', () => {
+        if (state.labelMode === 'none') {
+          state.labelMode = options.labelMode || 'ultimate';
+          labelsToggle.classList.remove('off');
+        } else {
+          state.labelMode = 'none';
+          labelsToggle.classList.add('off');
+        }
+      });
+      bottomBar.appendChild(labelsToggle);
+      state.labelsToggleEl = labelsToggle;
+
       const labelToggle = document.createElement('button');
       labelToggle.type = 'button';
-      labelToggle.className = 'graph-label-toggle';
-      labelToggle.textContent = 'Show Title';
-      labelToggle.addEventListener('mousedown', e => e.stopPropagation());
+      labelToggle.className = 'graph-bottom-btn';
+      labelToggle.textContent = 'Titles';
+      labelToggle.title = 'Show skill titles instead of /IDs';
       labelToggle.addEventListener('click', () => {
         state.showTitles = !state.showTitles;
         labelToggle.classList.toggle('active', state.showTitles);
       });
-      canvas.parentElement.appendChild(labelToggle);
+      bottomBar.appendChild(labelToggle);
       state.labelToggleEl = labelToggle;
+
+      // Speed strip — horizontal infinite drag, right=faster
+      const speedStrip = document.createElement('div');
+      speedStrip.className = 'graph-speed-strip';
+      const speedLeft = document.createElement('div');
+      speedLeft.className = 'graph-speed-edge graph-speed-edge--left';
+      speedLeft.textContent = '◀';
+      const speedTrackWrap = document.createElement('div');
+      speedTrackWrap.className = 'graph-speed-track';
+      const speedLine = document.createElement('div');
+      speedLine.className = 'graph-speed-line';
+      const speedKnob = document.createElement('div');
+      speedKnob.className = 'graph-speed-knob';
+      speedTrackWrap.appendChild(speedLine);
+      speedTrackWrap.appendChild(speedKnob);
+      const speedRight = document.createElement('div');
+      speedRight.className = 'graph-speed-edge graph-speed-edge--right';
+      speedRight.textContent = '▶';
+      const speedTitle = document.createElement('div');
+      speedTitle.className = 'graph-speed-title';
+      speedTitle.textContent = 'SPEED';
+      speedStrip.appendChild(speedLeft);
+      speedStrip.appendChild(speedTrackWrap);
+      speedStrip.appendChild(speedRight);
+      speedStrip.appendChild(speedTitle);
+
+      let speedDragging = false, speedLastX = 0, speedKnobPct = 0.5;
+      function updateSpeedKnob() {
+        const w = speedTrackWrap.clientWidth || 200;
+        speedKnob.style.left = (speedKnobPct * w) + 'px';
+      }
+      speedStrip.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        speedStrip.setPointerCapture(e.pointerId);
+        speedDragging = true;
+        speedLastX = e.clientX;
+        speedKnob.classList.add('active');
+        const rect = speedTrackWrap.getBoundingClientRect();
+        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        updateSpeedKnob();
+      });
+      speedStrip.addEventListener('pointermove', e => {
+        if (!speedDragging) return;
+        const dx = e.clientX - speedLastX;
+        speedLastX = e.clientX;
+        state.rotSpeed = Math.max(0, state.rotSpeed * Math.exp(dx * 0.007));
+        const rect = speedTrackWrap.getBoundingClientRect();
+        speedKnobPct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        updateSpeedKnob();
+      });
+      speedStrip.addEventListener('pointerup', e => {
+        speedDragging = false;
+        speedKnob.classList.remove('active');
+        speedStrip.releasePointerCapture(e.pointerId);
+      });
+      bottomBar.appendChild(speedStrip);
+      canvas.parentElement.appendChild(bottomBar);
     }
     window.addEventListener('resize', resize);
     const pointerTarget = options.pointerTarget || canvas;
     pointerTarget.addEventListener('mousemove', event => {
       const rect = canvas.getBoundingClientRect();
       if (options.draggable && state.dragging) {
-        state.orbitY += (event.clientX - state.dragLastX) * 0.007;
-        state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        if (state.dragMode === 'orbit') {
+          state.orbitY += (event.clientX - state.dragLastX) * 0.007;
+          state.orbitX += (event.clientY - state.dragLastY) * 0.007;
+        } else {
+          state.panX += event.clientX - state.dragLastX;
+          state.panY += event.clientY - state.dragLastY;
+        }
         state.dragLastX = event.clientX;
         state.dragLastY = event.clientY;
         if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 5) state.dragMoved = true;
@@ -722,15 +883,18 @@
     if (options.draggable) {
       canvas.style.cursor = 'grab';
       canvas.addEventListener('mouseleave', () => { if (!state.dragging) state.hoveredId = null; });
+      canvas.addEventListener('contextmenu', e => e.preventDefault());
       canvas.addEventListener('mousedown', e => {
+        if (e.button === 2) return;
         e.preventDefault();
         state.dragging = true;
+        state.dragMode = (e.button === 1 || e.ctrlKey) ? 'orbit' : 'pan';
         state.dragMoved = false;
         state.dragStartX = e.clientX;
         state.dragStartY = e.clientY;
         state.dragLastX = e.clientX;
         state.dragLastY = e.clientY;
-        canvas.style.cursor = 'grabbing';
+        canvas.style.cursor = state.dragMode === 'orbit' ? 'grabbing' : 'move';
       });
       window.addEventListener('mouseup', e => {
         if (!state.dragging) return;
@@ -755,6 +919,10 @@
       state.showTitles = false;
       state.searchText = '';
       state.redPillActive = false;
+      state.panX = 0; state.panY = 0;
+      state.paused = false; state.rotSpeed = 1;
+      if (state.pauseBtnEl) { state.pauseBtnEl.textContent = '⏸'; state.pauseBtnEl.classList.remove('active'); }
+      if (state.labelsToggleEl) { state.labelMode = options.labelMode || 'ultimate'; state.labelsToggleEl.classList.remove('off'); }
       if (state.redPillEl) state.redPillEl.classList.remove('active');
       if (state.legendEl) {
         state.legendEl.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
@@ -774,7 +942,7 @@
   const closeBtn = document.querySelector('[data-graph-close]');
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
-    labelMode:'all', scale:1.38, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
+    labelMode:'all', scale:1.8, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
     onNodeClick: function(id) {
       var buckets = window._gaiaNamedBuckets || {};
       if (buckets[id] && buckets[id].length) {
