@@ -1470,6 +1470,11 @@
   const trigger = document.querySelector('[data-graph-trigger]');
   const dialog = document.getElementById('skillGraphDialog');
   const closeBtn = document.querySelector('[data-graph-close]');
+  const mobileHint = document.getElementById('graphMobileHint');
+  const mobileHintDismiss = document.getElementById('graphMobileHintDismiss');
+  if (mobileHintDismiss && mobileHint) {
+    mobileHintDismiss.addEventListener('click', () => { mobileHint.style.display = 'none'; });
+  }
   const heroGraph = createSkillGraph(document.getElementById('canvas3d'), { labelMode:'none', scale:GRAPH_SCALE, stars:280, pointerTarget:hero });
   const modalGraph = createSkillGraph(document.getElementById('graphDialogCanvas'), {
     labelMode:'all', scale:1.8, stars:320, statusEl:document.querySelector('[data-graph-status]'), autostart:false, zoomable:true, draggable:true, hoverable:true,
