@@ -35,6 +35,7 @@
 | ○ /evaluate-output | Basic Skill | 1★ | Awakened | `/evaluate-output` |
 | ○ /execute-bash | Basic Skill | 1★ | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic Skill | 1★ | Awakened | `/extract-entities` |
+| ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
 | ○ /format-output | Basic Skill | 0★ | Basic | `/format-output` |
 | ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/full-stack-developer` |
 | ◇ Extra Skill: /function-calling | Extra Skill | 3★ | Evolved | `/function-calling` |
@@ -117,6 +118,14 @@
 | ◇ Extra Skill: /workflow-automation | Extra Skill | 4★ | Hardened | `/workflow-automation` |
 | ○ glincker/readme-generator | Basic Skill | 1★ | Awakened | `/write-report` |
 
+## Unique Skills
+
+*Singular mastery skills — graph-isolated, 4★+ with named implementations. Promoted via `/gaia promote --unique`.*
+
+| Name | Class | Rank | Tier | Skill Call |
+|---|---|---|---|---|
+| ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
+
 ## Pure / Undeveloped
 
 *Atomic skills with no connections to the upgrade graph — no prerequisites and not referenced as a component of any other skill.*
@@ -128,7 +137,6 @@
 | ○ Context Compression | Intrinsic Skill | 3★ | Evolved | `/context-compression` |
 | ○ Feed Monitoring | Intrinsic Skill | 4★ | Hardened | `/feed-monitoring` |
 | ○ Few-Shot Learning | Intrinsic Skill | 4★ | Hardened | `/few-shot-learning` |
-| ○ Fine-Tune | Intrinsic Skill | 4★ | Hardened | `/fine-tune` |
 | ○ Framework Upgrade | Intrinsic Skill | 0★ | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | 2★ | Named | `/image-generate` |
 | ○ Object Detection | Intrinsic Skill | 2★ | Named | `/object-detection` |

@@ -156,3 +156,46 @@ A review is required when evidence shows a skill is:
 Reviewer workflow:
 - Reviewers should use `/gaia-audit` before approving PRs that demote, declassify, remap, dispute, or re-promote a specific skill.
 - Reviewers should use `/gaia-meta-audit` to build queues for stale links, unsupported promotions, possible duplicates, and broad mapping quality checks.
+
+---
+
+## 9) Unique Skill Promotion
+
+A **Unique Skill** (◉) is a graph-isolated intrinsic skill that has reached elite mastery through individual depth rather than fusion/combination. Unique skills occupy their own tier between Extra and Ultimate in prestige.
+
+### Eligibility Criteria
+
+A basic skill may be promoted to `type: "unique"` when ALL of the following are true:
+
+1. **Level ≥ 4★** (Hardened or above)
+2. **Zero prerequisites** (`prerequisites: []`)
+3. **Graph-isolated** — not referenced as a prerequisite by any other skill
+4. **Has at least one named implementation** in `registry/named/`
+
+### Promotion Workflow
+
+```bash
+# 1. Scan detects eligible skills automatically
+gaia scan
+
+# 2. Review unique-eligible candidates in the output
+cat generated-output/promotion-candidates.json | grep '"promotionType": "unique"'
+
+# 3. Promote via CLI (updates type field in gaia.json)
+gaia promote <skill-id> --unique
+```
+
+### Validation Rules
+
+The schema and validator enforce:
+- Unique skills MUST be level 4★, 5★, or 6★
+- Unique skills MUST have `prerequisites: []`
+- Unique skills MUST NOT appear in any other skill's `prerequisites` array
+- Unique skills CANNOT become extra or ultimate (no fusion path)
+- Further level-up within unique (4★ → 5★ → 6★) follows standard evidence requirements
+
+### Approval Requirements
+
+- PRs promoting a skill to unique require maintainer approval
+- Evidence must meet the standard floor for the skill's level (B/A class for 4★+)
+- Reviewers should use `/gaia-audit` to verify isolation and evidence quality before approving

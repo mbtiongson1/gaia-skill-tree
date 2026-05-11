@@ -1,11 +1,12 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "3.1.2",
+  "version": "3.1.5",
   "generatedAt": "2026-05-06T00:00:00Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
       "extra": "Extra Skill",
+      "unique": "Unique Skill",
       "ultimate": "Ultimate Skill"
     },
     "levelLabels": {
@@ -66,6 +67,10 @@
         "hex": "#c084fc",
         "rgb": "192,132,252"
       },
+      "unique": {
+        "hex": "#7c3aed",
+        "rgb": "124,58,237"
+      },
       "ultimate": {
         "hex": "#f59e0b",
         "rgb": "245,158,11"
@@ -74,6 +79,7 @@
     "typeSymbols": {
       "basic": "\u25cb",
       "extra": "\u25c7",
+      "unique": "\u25c9",
       "ultimate": "\u25c6"
     },
     "demeritLabels": {
@@ -3061,7 +3067,7 @@
     {
       "id": "fine-tune",
       "name": "Fine-Tune",
-      "type": "basic",
+      "type": "unique",
       "level": "4\u2605",
       "rarity": "uncommon",
       "description": "Adapts a pre-trained model to a new task or domain by updating model weights using parameter-efficient methods such as LoRA, QLoRA, or full supervised fine-tuning, without retraining from scratch.",

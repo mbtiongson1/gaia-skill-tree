@@ -321,7 +321,7 @@
           <attvalue for="level" value="4★" />
           <attvalue for="rarity" value="uncommon" />
           <attvalue for="status" value="provisional" />
-          <attvalue for="type" value="basic" />
+          <attvalue for="type" value="unique" />
         </attvalues>
       </node>
       <node id="format-output" label="Format Output">

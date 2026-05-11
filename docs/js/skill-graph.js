@@ -6,9 +6,10 @@
   let PALETTE = {
     basic:    { rgb:'56,189,248',   hex:'#38bdf8' },
     extra:    { rgb:'192,132,252',  hex:'#c084fc' },
+    unique:   { rgb:'124,58,237',   hex:'#7c3aed' },
     ultimate: { rgb:'245,158,11',   hex:'#f59e0b' },
   };
-  let TYPE_ORDER = { basic:0, extra:1, ultimate:2 };
+  let TYPE_ORDER = { basic:0, extra:1, unique:2, ultimate:3 };
   let RANK_META = {
     '1★':  { name:'Awakened',       hex:'#38bdf8', bg:'rgba(56,189,248,.12)' },
     '2★': { name:'Named',          hex:'#63cab7', bg:'rgba(99,202,183,.12)' },
@@ -129,14 +130,53 @@
 
   function buildPositions(skills, scale) {
     const groups = { basic:[], extra:[], ultimate:[] };
-    skills.forEach(skill => (groups[skill.type] || groups.basic).push(skill));
+    const satellite = { unique:[], orphan:[] };
+    const allPrereqRefs = new Set();
+    skills.forEach(skill => skill.prerequisites.forEach(pid => allPrereqRefs.add(pid)));
+    skills.forEach(skill => {
+      if (skill.type === 'unique') { satellite.unique.push(skill); }
+      else if (skill.type === 'basic' && !skill.prerequisites.length && !allPrereqRefs.has(skill.id)) {
+        satellite.orphan.push(skill);
+      } else {
+        (groups[skill.type] || groups.basic).push(skill);
+      }
+    });
     Object.values(groups).forEach(group => group.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id)));
+    satellite.unique.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id));
+    satellite.orphan.sort((a,b) => (a.name || a.id).localeCompare(b.name || b.id));
     const positions = {};
     const radii = { basic: 250 * scale, extra: 145 * scale, ultimate: 44 * scale };
     Object.entries(groups).forEach(([type, group]) => {
       group.forEach((skill, index) => {
         positions[skill.id] = spherePoint(radii[type] || radii.basic, stableHash(skill.id), index, group.length);
       });
+    });
+    const uniqueCount = satellite.unique.length;
+    satellite.unique.forEach((skill, idx) => {
+      const seed = stableHash(skill.id);
+      const spread = uniqueCount > 1 ? (idx - (uniqueCount - 1) / 2) * 120 * scale : 0;
+      positions[skill.id] = {
+        x: -340 * scale + spread * 0.4,
+        y: spread,
+        z: ((seed % 80) - 40) * scale,
+        phase: (seed % 628) / 100,
+        _satellite: 'unique',
+      };
+    });
+    satellite.orphan.forEach((skill) => {
+      const seed = stableHash(skill.id);
+      const angle = Math.PI * 0.4 + (seed % 1000) / 1000 * Math.PI * 1.2;
+      const dist = (160 + (seed % 140)) * scale;
+      positions[skill.id] = {
+        x: -340 * scale + Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist * 0.7,
+        z: ((seed % 100) - 50) * scale,
+        phase: (seed % 628) / 100,
+        _satellite: 'orphan',
+        _orbitSpeed: 0.3 + (seed % 100) / 100 * 0.9,
+        _orbitRadius: dist,
+        _orbitAngle: angle,
+      };
     });
     return positions;
   }
@@ -251,7 +291,9 @@
     }
     function drawNodeVI(sx, sy, r, alpha, t, p) {
       const hue = (t * 45) % 360;
-      const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + (p.phase || 0));
+      const phase = p.phase || 0;
+      const spin = t * 1.4 + phase;
+      const glowPulse = 0.7 + 0.3 * Math.sin(t * 1.8 + phase);
       const glowR = r * (4.8 + glowPulse);
       const glow = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, glowR);
       glow.addColorStop(0,    `hsla(${hue},100%,72%,${(alpha * 0.55).toFixed(2)})`);
@@ -259,6 +301,31 @@
       glow.addColorStop(0.65, `hsla(45,100%,58%,${(alpha * 0.18).toFixed(2)})`);
       glow.addColorStop(1,    'hsla(45,100%,50%,0)');
       ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+      // Super white spinning glow overlay
+      ctx.save();
+      ctx.translate(sx, sy);
+      ctx.rotate(spin);
+      const whiteR = r * 5.5;
+      const whiteGlow = ctx.createRadialGradient(0, 0, r * 0.3, 0, 0, whiteR);
+      whiteGlow.addColorStop(0, `rgba(255,255,255,${(alpha * 0.5).toFixed(2)})`);
+      whiteGlow.addColorStop(0.2, `rgba(255,255,255,${(alpha * 0.25).toFixed(2)})`);
+      whiteGlow.addColorStop(0.5, `rgba(255,255,255,${(alpha * 0.08).toFixed(2)})`);
+      whiteGlow.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath(); ctx.arc(0, 0, whiteR, 0, Math.PI * 2);
+      ctx.fillStyle = whiteGlow; ctx.fill();
+      // White spinning rays
+      for (let i = 0; i < 5; i++) {
+        const rayAngle = (Math.PI * 2 * i / 5);
+        const rayAlpha = alpha * (0.3 + 0.2 * Math.sin(t * 3 + i * 1.2));
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(rayAngle) * r * 1.3, Math.sin(rayAngle) * r * 1.3);
+        ctx.lineTo(Math.cos(rayAngle) * r * 4.5, Math.sin(rayAngle) * r * 4.5);
+        ctx.strokeStyle = `rgba(255,255,255,${rayAlpha.toFixed(2)})`;
+        ctx.lineWidth = r * 0.25;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+      ctx.restore();
       const coreGrad = ctx.createRadialGradient(sx - r * 0.25, sy - r * 0.25, 0, sx, sy, r * 1.05);
       coreGrad.addColorStop(0,    `hsla(${(hue + 200) % 360},100%,88%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
       coreGrad.addColorStop(0.45, `hsla(${hue},100%,68%,${Math.min(alpha * 1.1, 1).toFixed(2)})`);
@@ -277,12 +344,66 @@
       ctx.beginPath(); ctx.arc(sx - r * 0.28, sy - r * 0.28, r * 0.32, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.85).toFixed(2)})`; ctx.fill();
     }
+    function drawNodeUnique(sx, sy, r, alpha, t, p) {
+      const phase = p.phase || 0;
+      const spin = t * 2.2 + phase;
+      // Big dark spinning void glow
+      const voidR = r * 6;
+      ctx.save();
+      ctx.translate(sx, sy);
+      ctx.rotate(spin * 0.3);
+      const voidGrad = ctx.createRadialGradient(0, 0, r * 0.8, 0, 0, voidR);
+      voidGrad.addColorStop(0, `rgba(10,0,20,${(alpha * 0.7).toFixed(2)})`);
+      voidGrad.addColorStop(0.3, `rgba(26,5,51,${(alpha * 0.4).toFixed(2)})`);
+      voidGrad.addColorStop(0.6, `rgba(124,58,237,${(alpha * 0.12).toFixed(2)})`);
+      voidGrad.addColorStop(1, `rgba(124,58,237,0)`);
+      ctx.beginPath(); ctx.arc(0, 0, voidR, 0, Math.PI * 2);
+      ctx.fillStyle = voidGrad; ctx.fill();
+      // Spinning dark arms (like a spiral galaxy but dark)
+      for (let arm = 0; arm < 3; arm++) {
+        const armAngle = (Math.PI * 2 * arm / 3) + spin * 0.7;
+        ctx.beginPath();
+        for (let j = 0; j <= 20; j++) {
+          const frac = j / 20;
+          const spiralR = r * 1.2 + frac * voidR * 0.7;
+          const spiralA = armAngle + frac * Math.PI * 1.5;
+          const px = Math.cos(spiralA) * spiralR;
+          const py = Math.sin(spiralA) * spiralR * 0.45;
+          if (j === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = `rgba(26,5,51,${(alpha * 0.4).toFixed(2)})`;
+        ctx.lineWidth = r * 0.4;
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Accretion disk particles spinning wildly
+      for (let i = 0; i < 16; i++) {
+        const a = (Math.PI * 2 * i / 16) + spin * (1.5 + (i % 4) * 0.4);
+        const orbitR = r * (1.6 + 0.4 * Math.sin(spin * 0.9 + i * 0.7));
+        const dx = Math.cos(a) * orbitR;
+        const dy = Math.sin(a) * orbitR * 0.35;
+        const particleAlpha = alpha * (0.4 + 0.35 * Math.sin(spin * 2.5 + i * 1.1));
+        const particleR = r * (0.1 + 0.05 * Math.sin(t * 4 + i));
+        ctx.beginPath();
+        ctx.arc(sx + dx, sy + dy, particleR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(167,139,250,${particleAlpha.toFixed(2)})`;
+        ctx.fill();
+      }
+      // Event horizon ring — bright purple edge
+      ctx.beginPath(); ctx.arc(sx, sy, r * 1.12, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(124,58,237,${(alpha * 0.9).toFixed(2)})`;
+      ctx.lineWidth = 2; ctx.stroke();
+      // Void core — pure darkness
+      ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(10,0,20,${Math.min(alpha * 1.2, 1).toFixed(2)})`;
+      ctx.fill();
+    }
     function shouldLabel(skill) {
       if (state.redPillActive && state.namedMap[skill.id]) return true;
       if (state.labelMode === 'none') return false;
       if (state.labelMode === 'all') return true;
       if (state.labelMode === 'modal') return skill.type !== 'basic' || stableHash(skill.id) % 7 === 0;
-      return skill.type === 'ultimate';
+      return skill.type === 'ultimate' || skill.type === 'unique';
     }
     function draw() {
       if (!state.running) return;
@@ -296,10 +417,25 @@
         ? Math.sin(state.t * 0.055) * 0.20 + state.orbitX
         : Math.sin(state.t * 0.055) * 0.20 + state.my * 0.055;
       const xf = {};
+      const allPrereqRefs = new Set();
+      state.skills.forEach(skill => skill.prerequisites.forEach(pid => allPrereqRefs.add(pid)));
       state.skills.forEach(skill => {
         const p0 = state.positions[skill.id];
         if (!p0) return;
-        xf[skill.id] = rotX(rotY(p0, ry), rx);
+        if (p0._satellite === 'unique') {
+          xf[skill.id] = { x: p0.x, y: p0.y, z: p0.z, phase: p0.phase };
+        } else if (p0._satellite === 'orphan') {
+          const a = p0._orbitAngle + state.t * p0._orbitSpeed;
+          const cx = -340 * state.scale;
+          xf[skill.id] = {
+            x: cx + Math.cos(a) * p0._orbitRadius,
+            y: Math.sin(a) * p0._orbitRadius * 0.7,
+            z: p0.z * Math.cos(state.t * p0._orbitSpeed * 0.5),
+            phase: p0.phase,
+          };
+        } else {
+          xf[skill.id] = rotX(rotY(p0, ry), rx);
+        }
       });
       const neighborSet = new Set();
       if (state.hoveredId) {
@@ -380,10 +516,12 @@
         const pulse = 0.84 + 0.16 * Math.sin(state.t * 2.2 + p.phase);
         const depthAlpha = Math.min(Math.max((p.z + 430 * state.scale) / (860 * state.scale), 0.16), 1);
         const col = PALETTE[skill.type] || PALETTE.basic;
-        const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'extra' ? 6.9 : 3.5;
+        const baseR = skill.type === 'ultimate' ? 12.5 : skill.type === 'unique' ? 9.5 : skill.type === 'extra' ? 6.9 : 3.5;
         const vis = state.nodeAlphas[skill.id] !== undefined ? state.nodeAlphas[skill.id] : 1.0;
         if (skill.level === '6★') {
           drawNodeVI(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
+        } else if (skill.type === 'unique') {
+          drawNodeUnique(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis, state.t, p);
         } else if (state.redPillActive && state.namedMap[skill.id]) {
           drawNodeNamed(pr.sx, pr.sy, baseR * state.scale * pr.scale * pulse, depthAlpha * vis);
         } else {
@@ -494,6 +632,7 @@
         '<div class="graph-legend-section"><div class="graph-legend-heading">Type</div>' +
         '<div class="graph-legend-item" data-legend-type="basic"><span class="graph-legend-swatch" style="background:#38bdf8;width:7px;height:7px"></span>Basic</div>' +
         '<div class="graph-legend-item" data-legend-type="extra"><span class="graph-legend-swatch" style="background:#c084fc;width:10px;height:10px"></span>Extra</div>' +
+        '<div class="graph-legend-item" data-legend-type="unique"><span class="graph-legend-swatch" style="background:#7c3aed;width:12px;height:12px"></span>Unique</div>' +
         '<div class="graph-legend-item" data-legend-type="ultimate"><span class="graph-legend-swatch" style="background:#f59e0b;width:14px;height:14px"></span>Ultimate</div>' +
         '</div><div class="graph-legend-section"><div class="graph-legend-heading">Rank</div>' +
         '<div class="graph-legend-ranks">' +

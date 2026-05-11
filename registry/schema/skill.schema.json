@@ -41,6 +41,7 @@
       "enum": [
         "basic",
         "extra",
+        "unique",
         "ultimate"
       ],
       "description": "Skill classification type."
@@ -257,6 +258,25 @@
         "properties": {
           "prerequisites": {
             "minItems": 3
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "unique"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prerequisites": {
+            "maxItems": 0
+          },
+          "level": {
+            "enum": ["4★", "5★", "6★"]
           }
         }
       }

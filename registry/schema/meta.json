@@ -32,25 +32,29 @@
     }
   },
   "types": {
-    "order": ["basic", "extra", "ultimate"],
+    "order": ["basic", "extra", "unique", "ultimate"],
     "labels": {
       "basic": "Basic Skill",
       "extra": "Extra Skill",
+      "unique": "Unique Skill",
       "ultimate": "Ultimate Skill"
     },
     "symbols": {
       "basic": "○",
       "extra": "◇",
+      "unique": "◉",
       "ultimate": "◆"
     },
     "colors": {
       "basic": { "hex": "#38bdf8", "rgb": "56,189,248" },
       "extra": { "hex": "#c084fc", "rgb": "192,132,252" },
+      "unique": { "hex": "#7c3aed", "rgb": "124,58,237" },
       "ultimate": { "hex": "#f59e0b", "rgb": "245,158,11" }
     },
     "minPrereqs": {
       "basic": 0,
       "extra": 2,
+      "unique": 0,
       "ultimate": 3
     }
   },

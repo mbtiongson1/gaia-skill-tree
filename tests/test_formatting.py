@@ -248,13 +248,13 @@ class TestFusionEquation:
 
 class TestConstants:
     def test_tier_colors_keys(self):
-        assert set(TIER_COLORS.keys()) == {"basic", "extra", "ultimate"}
+        assert set(TIER_COLORS.keys()) == {"basic", "extra", "unique", "ultimate"}
 
     def test_rank_colors_keys(self):
         assert set(RANK_COLORS.keys()) == {"0★", "1★", "2★", "3★", "4★", "5★", "6★"}
 
     def test_type_symbols_keys(self):
-        assert set(TYPE_SYMBOLS.keys()) == {"basic", "extra", "ultimate"}
+        assert set(TYPE_SYMBOLS.keys()) == {"basic", "extra", "unique", "ultimate"}
 
     def test_all_colors_are_rgb_tuples(self):
         for name, color in RANK_COLORS.items():

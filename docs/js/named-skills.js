@@ -81,7 +81,7 @@
 
     var dagNodes = {};
     Object.values(skillMap).forEach(function(s) {
-      if (s.type === 'extra' || s.type === 'ultimate') dagNodes[s.id] = s;
+      if (s.type === 'extra' || s.type === 'ultimate' || s.type === 'unique') dagNodes[s.id] = s;
     });
 
     var edges = [];
@@ -123,7 +123,7 @@
         var ns = namedIds[id];
         var isGhost = !ns;
         var lm = LEVEL_META[s.level] || LEVEL_META['2★'];
-        var glyph = s.type === 'ultimate' ? '\u25c6' : '\u25c7';
+        var glyph = s.type === 'ultimate' ? '\u25c6' : s.type === 'unique' ? '\u25c9' : '\u25c7';
         var clickAttr = ns ? nsClick(ns.id) : 'onclick="openSkillExplorer(\'' + id.replace(/'/g, "\\'") + '\')"';
         html += '<div class="ns-dag-card' + (isGhost ? ' ns-dag-ghost' : '') +
           '" data-id="' + esc(id) + '" data-type="' + esc(s.type) + '" ' +
@@ -170,14 +170,14 @@
 
   function initNamedSkills() {
     var grid = document.getElementById('nsGrid');
-    var tabsEl = document.getElementById('nsLevelTabs');
+    var tabsEl = document.getElementById('nsTypeTabs');
     var viewBtnsEl = document.getElementById('nsViewBtns');
     var searchEl = document.getElementById('nsSearch');
     var sortEl = document.getElementById('nsSort');
     if (!grid) return;
 
     var viewMode = 'tile';
-    var levelFilter = 'all';
+    var typeFilter = 'all';
     var searchQuery = '';
     var sortMode = 'level';
     var FALLBACK_NAMED_INDEX = { buckets: {
@@ -255,7 +255,7 @@
           TYPE_META_G[t] = { glyph: _meta.typeSymbols[t] || '', label: _meta.typeLabels[t] || t, color: _meta.typeColors[t].hex };
         });
         TYPE_ORDER = Object.keys(_meta.typeColors).sort(function(a, b) {
-          var order = { ultimate: 0, extra: 1, basic: 2 };
+          var order = { ultimate: 0, unique: 1, extra: 2, basic: 3 };
           return (order[a] !== undefined ? order[a] : 99) - (order[b] !== undefined ? order[b] : 99);
         });
       }
@@ -274,11 +274,12 @@
         };
       }
       if (!TYPE_ORDER) {
-        TYPE_ORDER = ['ultimate','extra','basic'];
+        TYPE_ORDER = ['ultimate','unique','extra','basic'];
       }
       if (!TYPE_META_G) {
         TYPE_META_G = {
           ultimate: { glyph:'◆', label:'Ultimate', color:'#f59e0b' },
+          unique:   { glyph:'◉', label:'Unique',   color:'#7c3aed' },
           extra:    { glyph:'◇', label:'Extra',    color:'#c084fc' },
           basic:    { glyph:'○', label:'Basic',    color:'#38bdf8' },
         };
@@ -296,7 +297,7 @@
       function renderCurrent() {
         var q = searchQuery.toLowerCase();
         var filtered = allNamed.filter(function(ns) {
-          if (levelFilter !== 'all' && ns.level !== levelFilter) return false;
+          if (typeFilter !== 'all' && (ns.type || 'basic') !== typeFilter) return false;
           if (q) {
             var hay = (nsDisplayName(ns)+' '+ns.id+' '+(ns.tags||[]).join(' ')+' '+(ns.contributor||'')).toLowerCase();
             if (hay.indexOf(q) === -1) return false;
@@ -312,8 +313,8 @@
           grid.className = 'ns-grid-flow';
           grid.innerHTML = renderFlowchartView(filtered, LEVEL_META);
         } else {
-          // Group by type: ultimate → extra → basic
-          var groups = { ultimate:[], extra:[], basic:[] };
+          // Group by type: ultimate → unique → extra → basic
+          var groups = { ultimate:[], unique:[], extra:[], basic:[] };
           filtered.forEach(function(ns){ var t=nsType(ns); (groups[t]||(groups[t]=[])).push(ns); });
           var html = '';
           TYPE_ORDER.forEach(function(type) {
@@ -333,7 +334,7 @@
           if (!btn) return;
           tabsEl.querySelectorAll('.ns-tab').forEach(function(t){ t.classList.remove('active'); });
           btn.classList.add('active');
-          levelFilter = btn.dataset.level || 'all';
+          typeFilter = btn.dataset.type || 'all';
           renderCurrent();
         });
       }
