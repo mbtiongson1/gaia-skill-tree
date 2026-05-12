@@ -264,7 +264,7 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH, canon: bool = False, di
     if canon:
         name = f"/{skill_id}"
     else:
-        name = display_name or (ctx.display_name(skill_id) if ctx else None) or skill.get("name") or _name_from_slug(skill_id)
+        name = display_name or (ctx.display_name(skill_id) if ctx else f"/{skill_id}")
     
     rarity = skill.get("rarity", "common")
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
@@ -359,7 +359,7 @@ def render_card_compact(skill: dict, canon: bool = False, ctx: Optional["LocalCo
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill.get("id", skill.get("name", "unknown"))
     
-    name = (ctx.display_name(skill_id, canon=canon) if ctx else (f"/{skill_id}" if canon else skill.get("name", f"/{skill_id}")))
+    name = (ctx.display_name(skill_id, canon=canon) if ctx else f"/{skill_id}")
     
     level = skill.get("level", "0★")
     effective = level_summary(skill)["effectiveLevel"]

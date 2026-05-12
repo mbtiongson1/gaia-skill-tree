@@ -70,6 +70,7 @@ from gaia_cli.formatting import (
     COLOR_LOCAL_USER,
     _fg,
     _reset,
+    _bold,
     _use_color,
 )
 from gaia_cli.localContext import LocalContext
@@ -480,6 +481,8 @@ def lookup_command(args):
     ctx = LocalContext.load(args.registry, username or "", include_scan=False)
     
     display = ctx.display_name(skill_id, canon=canon)
+    if not canon and not ctx.is_named(skill_id):
+        display = skill.get("name") or f"/{skill_id}"
     print(f"{display}")
     
     print(f"Type: {skill.get('type', 'unknown')}    Level: {skill.get('level', '?')}")

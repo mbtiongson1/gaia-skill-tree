@@ -175,11 +175,6 @@ def _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode, canon=Fa
                 return f"{full_id}  [{level}]"
             return f"/{full_id}  [{level}]"
 
-    # Fallback to human name (Real Skill Name)
-    canon_name = skill_map.get(skill_id, {}).get("name")
-    if canon_name:
-        return f"{canon_name}  [{level}]"
-        
     return f"/{skill_id}  [{level}]"
 
 

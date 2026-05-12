@@ -172,14 +172,9 @@ class LocalContext:
 
         # 2. Check for local novel skill
         if skill_id in self.novel_ids:
-            return f"/{skill_id}"
+            return f"{self.username}/{skill_id}"
 
-        # 3. Fallback to human-readable Real Skill Name (Dog Breed Name)
-        skill = self._skill_map.get(skill_id)
-        if skill and skill.get("name"):
-            return skill["name"]
-
-        # 4. Final fallback to generic ID
+        # 3. Fallback to generic slash ID
         return f"/{skill_id}"
 
 
