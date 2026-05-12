@@ -480,46 +480,40 @@
     90% {color:#34d399;text-shadow:0 0 10px rgba(52,211,153,.8),0 0 22px rgba(52,211,153,.4)}
     100%{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.8),0 0 22px rgba(56,189,248,.4)}
   }
-  .tree-dialog-body pre .tree-ult-line{font-weight:700!important}
-  .tree-dialog-body pre .tree-ult-contributor{color:#ef4444!important;font-weight:800!important;text-shadow:0 0 8px rgba(239,68,68,.6)!important}
-  .tree-dialog-body pre .tree-ult-slash{color:var(--muted)!important}
-  .tree-dialog-body pre .tree-ult-skillname,
-  .tree-dialog-body pre .tree-ult-id{color:#f59e0b!important}
+  /* ── Tree Highlighting ── */
+  .tree-ult-line { font-weight: 700 !important; color: var(--text) !important; }
+  .tree-ult-contributor { color: #ef4444 !important; font-weight: 800 !important; text-shadow: 0 0 8px rgba(239,68,68,0.4) !important; }
+  .tree-ult-slash { color: var(--muted) !important; opacity: 0.5 !important; }
+  .tree-ult-skillname, .tree-ult-id { color: #f59e0b !important; font-weight: 700 !important; }
   
-  .tree-dialog-body pre .tree-unique-line{font-weight:700!important}
-  .tree-dialog-body pre .tree-unique-contributor{color:#ef4444!important;font-weight:800!important}
-  .tree-dialog-body pre .tree-unique-slash{color:var(--muted)!important}
-  .tree-dialog-body pre .tree-unique-skillname{
-    color:#000!important;
-    font-weight:900!important;
-    text-shadow: 
-      0 0 8px rgba(124,58,237,.8),
-      0 0 16px rgba(124,58,237,.4)!important;
-    -webkit-text-stroke: 1px rgba(124,58,237,.5)!important;
+  .tree-unique-line { font-weight: 700 !important; color: var(--text) !important; }
+  .tree-unique-contributor { color: #ef4444 !important; font-weight: 800 !important; }
+  .tree-unique-slash { color: var(--muted) !important; opacity: 0.5 !important; }
+  .tree-unique-skillname {
+    color: #000 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 8px #7c3aed, 0 0 16px rgba(124,58,237,0.4) !important;
+    -webkit-text-stroke: 1px rgba(124,58,237,0.6) !important;
   }
-  .tree-dialog-body pre .tree-unique-gold{
-    text-shadow: 
-      0 0 8px rgba(251,191,36,.8),
-      0 0 16px rgba(251,191,36,.4)!important;
-    -webkit-text-stroke: 1px rgba(251,191,36,.5)!important;
+  .tree-unique-gold {
+    text-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251,191,36,0.4) !important;
+    -webkit-text-stroke: 1px rgba(251,191,36,0.6) !important;
   }
-  .tree-dialog-body pre .tree-unique-glyph{color:var(--unique)!important}
+  .tree-unique-glyph { color: #7c3aed !important; }
 
-  .tree-dialog-body pre .tree-extra-glyph{color:var(--extra)!important}
-  .tree-dialog-body pre .tree-basic-glyph{color:var(--basic)!important}
-  .tree-dialog-body pre .tree-sep{color:rgba(56,189,248,.3)!important}
+  .tree-extra-line { font-weight: 600 !important; color: var(--text) !important; }
+  .tree-extra-glyph { color: #c084fc !important; }
+  .tree-extra-contributor { color: #ef4444 !important; font-weight: 700 !important; }
+  .tree-extra-slash { color: var(--muted) !important; opacity: 0.5 !important; }
+  .tree-extra-skillname, .tree-extra-id { color: #c084fc !important; }
 
-  .tree-dialog-body pre .tree-extra-line{font-weight:600!important}
-  .tree-dialog-body pre .tree-extra-contributor{color:#ef4444!important;font-weight:700!important;text-shadow:0 0 6px rgba(239,68,68,.5)!important}
-  .tree-dialog-body pre .tree-extra-slash{color:var(--muted)!important}
-  .tree-dialog-body pre .tree-extra-skillname,
-  .tree-dialog-body pre .tree-extra-id{color:var(--extra)!important}
+  .tree-basic-line { color: var(--text) !important; }
+  .tree-basic-glyph { color: #38bdf8 !important; }
+  .tree-basic-contributor { color: #ef4444 !important; font-weight: 600 !important; }
+  .tree-basic-slash { color: var(--muted) !important; opacity: 0.5 !important; }
+  .tree-basic-skillname, .tree-basic-id { color: #38bdf8 !important; }
 
-  .tree-dialog-body pre .tree-basic-line{color:inherit!important}
-  .tree-dialog-body pre .tree-basic-contributor{color:#ef4444!important;font-weight:600!important}
-  .tree-dialog-body pre .tree-basic-slash{color:var(--muted)!important}
-  .tree-dialog-body pre .tree-basic-skillname,
-  .tree-dialog-body pre .tree-basic-id{color:var(--basic)!important}
+  .tree-sep { color: rgba(56,189,248,0.25) !important; }
   .skill-tooltip{
     position:absolute;pointer-events:all;display:none;z-index:15;
     background:rgba(3,7,18,.9);border:1px solid rgba(148,163,184,.22);
