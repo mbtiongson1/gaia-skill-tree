@@ -106,7 +106,7 @@ def promote_to_named(skill_data, contributor, skill_name, registry_path):
         f"for the \"{skill_data['id']}\" skill bucket.\n"
     )
 
-    with open(dest_path, "w") as f:
+    with open(dest_path, "w", encoding="utf-8") as f:
         f.write(content)
 
     return dest_path
