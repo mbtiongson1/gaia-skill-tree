@@ -109,7 +109,7 @@ def _gradient_text(text, start_rgb, end_rgb):
     return "".join(parts) + reset()
 
 
-def _color_entry(symbol, plain_label, tier, is_named, level):
+def _color_entry(symbol, plain_label, tier, is_named, level, current_user=None):
     from gaia_cli.cardRenderer import fg, reset, bold, _use_color, TIER_COLORS, RANK_COLORS, COLOR_CONTRIBUTOR, COLOR_LOCAL_USER
     if not _use_color():
         return f"{symbol} {plain_label}"
@@ -117,16 +117,26 @@ def _color_entry(symbol, plain_label, tier, is_named, level):
         if level in _TRANSCENDENT_LEVELS:
             colored = _gradient_text(f"{symbol} {plain_label}", _GRAD_GOLD, _GRAD_RED)
             return f"{bold()}{colored}{reset()}"
-        # Named skills: contributor in red, rest in rank color
+        
+        # Named skills
         rc = RANK_COLORS.get(level, (148, 163, 184))
-        cr, cg, cb = COLOR_CONTRIBUTOR
-        # Check if label has contributor prefix (contains / before [)
-        if "/" in plain_label.split("[")[0]:
-            parts = plain_label.split("/", 1)
+        
+        # Check for contributor prefix
+        parts = plain_label.split("[")[0].strip().split("/", 1)
+        if len(parts) == 2 and parts[0]:
             contrib_part = parts[0]
             rest = parts[1]
-            return f"{fg(cr, cg, cb)}{symbol} {contrib_part}{reset()}/{fg(*rc)}{rest}{reset()}"
-        return f"{bold()}{fg(cr, cg, cb)}{symbol} {plain_label}{reset()}"
+            color = COLOR_LOCAL_USER if current_user and contrib_part == current_user else COLOR_CONTRIBUTOR
+            return f"{fg(*color)}{symbol} {contrib_part}{reset()}/{fg(*rc)}{rest}{reset()}"
+        
+        # No contributor part (or leading slash)
+        color = COLOR_CONTRIBUTOR
+        if plain_label.startswith("/"):
+            # If it starts with / but no contributor, it's a local/own nickname
+            color = COLOR_LOCAL_USER
+        
+        return f"{bold()}{fg(*color)}{symbol} {plain_label}{reset()}"
+    
     # Canon skills: rank color for entire label
     rc = RANK_COLORS.get(level, (148, 163, 184))
     return f"{fg(*rc)}{symbol} {plain_label}{reset()}"
@@ -142,17 +152,34 @@ def _dim(text):
 _TYPE_SYMBOL = {"basic": "○", "extra": "◇", "ultimate": "◆"}
 
 
-def _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode):
+def _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode, canon=False, current_user=None):
     level = skill_map.get(skill_id, {}).get("level", "?")
+    if canon:
+        return f"/{skill_id}  [{level}]"
+    
     if mode == "title":
         name = skill_map.get(skill_id, {}).get("name", skill_id)
         return f"{name}  [{level}]"
+    
     local = local_by_ref.get(skill_id)
     named = named_by_ref.get(skill_id)
-    if local:
-        return f"{local['id']}  [{level}]  (/{skill_id})"
-    if named:
-        return f"{named['id']}  [{level}]"
+    
+    specific = local or named
+    if specific:
+        full_id = specific.get("id")
+        if full_id:
+            if "/" in full_id:
+                contrib, nickname = full_id.split("/", 1)
+                if current_user and contrib == current_user:
+                    return f"/{nickname}  [{level}]"
+                return f"{full_id}  [{level}]"
+            return f"/{full_id}  [{level}]"
+
+    # Fallback to human name (Real Skill Name)
+    canon_name = skill_map.get(skill_id, {}).get("name")
+    if canon_name:
+        return f"{canon_name}  [{level}]"
+        
     return f"/{skill_id}  [{level}]"
 
 
@@ -162,15 +189,15 @@ def _is_named(skill_id, named_by_ref, local_by_ref):
 
 # ─── recursive renderer ───────────────────────────────────────────────────────
 
-def _render_subtree(skill_id, skill_map, display_ids, named_by_ref, local_by_ref, mode, prefix, is_last, seen):
+def _render_subtree(skill_id, skill_map, display_ids, named_by_ref, local_by_ref, mode, prefix, is_last, seen, canon=False, current_user=None):
     skill = skill_map.get(skill_id, {})
     tier = skill.get("type", "basic")
     level = skill.get("level", "?")
     symbol = _TYPE_SYMBOL.get(tier, "○")
     named = _is_named(skill_id, named_by_ref, local_by_ref)
-    label = _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode)
+    label = _plain_label(skill_id, skill_map, named_by_ref, local_by_ref, mode, canon=canon, current_user=current_user)
     connector = "└── " if is_last else "├── "
-    lines = [_dim(prefix + connector) + _color_entry(symbol, label, tier, named, level)]
+    lines = [_dim(prefix + connector) + _color_entry(symbol, label, tier, named, level, current_user=current_user)]
     seen.add(skill_id)
 
     child_prefix = prefix + ("    " if is_last else "│   ")
@@ -182,18 +209,18 @@ def _render_subtree(skill_id, skill_map, display_ids, named_by_ref, local_by_ref
         child_level = child_skill.get("level", "?")
         child_sym = _TYPE_SYMBOL.get(child_tier, "○")
         child_named = _is_named(child_id, named_by_ref, local_by_ref)
-        child_label = _plain_label(child_id, skill_map, named_by_ref, local_by_ref, mode)
+        child_label = _plain_label(child_id, skill_map, named_by_ref, local_by_ref, mode, canon=canon, current_user=current_user)
         if child_id in seen:
             conn2 = "└── " if child_is_last else "├── "
             lines.append(
                 _dim(child_prefix + conn2)
-                + _color_entry(child_sym, child_label + " ...", child_tier, child_named, child_level)
+                + _color_entry(child_sym, child_label + " ...", child_tier, child_named, child_level, current_user=current_user)
             )
         else:
             lines.extend(
                 _render_subtree(
                     child_id, skill_map, display_ids, named_by_ref, local_by_ref,
-                    mode, child_prefix, child_is_last, seen,
+                    mode, child_prefix, child_is_last, seen, canon=canon, current_user=current_user
                 )
             )
     return lines
@@ -201,7 +228,7 @@ def _render_subtree(skill_id, skill_map, display_ids, named_by_ref, local_by_ref
 
 # ─── public entry point ───────────────────────────────────────────────────────
 
-def show_tree(tree_data, graph_data=None, registry_path=".", mode="default"):
+def show_tree(tree_data, graph_data=None, registry_path=".", mode="default", canon=False):
     if not tree_data:
         print("No skill tree found.")
         return
@@ -232,10 +259,13 @@ def show_tree(tree_data, graph_data=None, registry_path=".", mode="default"):
     tier_order = {"ultimate": 0, "extra": 1, "basic": 2}
     roots.sort(key=lambda s: (tier_order.get(skill_map.get(s["skillId"], {}).get("type", "basic"), 2), s["skillId"]))
 
-    print(username)
+    from gaia_cli.formatting import _fg, _reset, COLOR_CONTRIBUTOR
+    # Use a direct ANSI code to ensure color even if _use_color() fails in a subshell/pipe
+    username_colored = f"\033[38;2;{COLOR_CONTRIBUTOR[0]};{COLOR_CONTRIBUTOR[1]};{COLOR_CONTRIBUTOR[2]}m{username}\033[0m"
+    print(username_colored)
     seen: set[str] = set()
     for i, entry in enumerate(roots):
         sid = entry["skillId"]
         is_last = i == len(roots) - 1
-        for line in _render_subtree(sid, skill_map, display_ids, named_by_ref, local_by_ref, mode, "", is_last, seen):
+        for line in _render_subtree(sid, skill_map, display_ids, named_by_ref, local_by_ref, mode, "", is_last, seen, canon=canon, current_user=username):
             print(line)
