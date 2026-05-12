@@ -116,13 +116,13 @@ gaia push            # submit for maintainer review
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,update,skills}
+            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
             ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,update,skills}
+  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
@@ -140,6 +140,7 @@ positional arguments:
     promote             Promote a skill eligible for level-up
     fuse                Confirm a skill combination or promotion candidate
     docs                Documentation maintenance commands
+    lookup              Look up a canonical skill and its named implementations
     skills              Browse and manage named skills
 
 options:
@@ -167,6 +168,7 @@ Quick usage:
   gaia update
   gaia stats
   gaia docs build [--check]
+  gaia lookup <skillId>
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]

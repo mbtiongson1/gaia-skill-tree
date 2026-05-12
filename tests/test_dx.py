@@ -115,6 +115,7 @@ def test_top_level_help_shows_all_public_commands_with_usage(monkeypatch, capsys
         "appraise",
         "promote",
         "docs",
+        "lookup",
         "skills",
     ]:
         assert command in output
@@ -147,6 +148,26 @@ def test_promote_label_override_is_not_available(monkeypatch):
     with pytest.raises(SystemExit) as exc:
         run_cli(monkeypatch, ["promote", "web-search", "--label", "3★"])
     assert exc.value.code == 2
+
+
+def test_lookup_lists_named_implementation_roles(tmp_path, monkeypatch, capsys):
+    registry = tmp_path / "registry"
+    registry.mkdir()
+    (registry / "gaia.json").write_text(
+        '{"skills":[{"id":"web-search","name":"Web Search","type":"basic","level":"1★","description":"Find web pages.","prerequisites":[]}]}',
+        encoding="utf-8",
+    )
+    (registry / "named-skills.json").write_text(
+        '{"buckets":{"web-search":[{"id":"alice/search","name":"Alice Search","origin":true,"role":"origin"},{"id":"bob/search","name":"Bob Search","origin":false,"role":"variant"}]}}',
+        encoding="utf-8",
+    )
+
+    run_cli(monkeypatch, ["--registry", str(tmp_path), "lookup", "web-search"])
+
+    output = capsys.readouterr().out
+    assert "/web-search - Web Search" in output
+    assert "[origin] Alice Search (alice/search)" in output
+    assert "[variant] Bob Search (bob/search)" in output
 
 
 def parse_config(path):

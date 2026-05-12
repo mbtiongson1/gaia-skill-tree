@@ -10,7 +10,7 @@ VALIDATE_INTAKE_SCRIPT = os.path.join(REPO_ROOT, "scripts", "validate_intake.py"
 GRAPH_PATH = os.path.join(REPO_ROOT, "registry", "gaia.json")
 
 
-def run_validate_intake(intake_dir):
+def run_validate_intake(intake_dir, *extra_args):
     env = os.environ.copy()
     env["PYTHONIOENCODING"] = "utf-8"
     result = subprocess.run(
@@ -21,6 +21,7 @@ def run_validate_intake(intake_dir):
             intake_dir,
             "--graph",
             GRAPH_PATH,
+            *extra_args,
         ],
         capture_output=True,
         text=True,
@@ -68,12 +69,21 @@ class TestIntakeValidation(unittest.TestCase):
             self.assertEqual(code, 0, out)
             self.assertIn("All intake checks passed.", out)
 
-    def test_duplicate_proposed_id_against_canonical_fails(self):
+    def test_duplicate_proposed_id_against_canonical_warns(self):
         with tempfile.TemporaryDirectory() as tmp:
             write_batch(tmp, "batch-one", proposed_id="web-search")
             code, out = run_validate_intake(tmp)
+            self.assertEqual(code, 0, out)
+            self.assertIn("already exists as a generic skill", out)
+            self.assertIn("Treating this proposal as a named-skill submission", out)
+            self.assertIn("All intake checks passed.", out)
+
+    def test_strict_duplicate_proposed_id_against_canonical_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write_batch(tmp, "batch-one", proposed_id="web-search")
+            code, out = run_validate_intake(tmp, "--strict")
             self.assertEqual(code, 1)
-            self.assertIn("duplicates canonical skill", out)
+            self.assertIn("already exists as a generic skill", out)
 
     def test_duplicate_proposed_ids_across_batches_fail(self):
         with tempfile.TemporaryDirectory() as tmp:

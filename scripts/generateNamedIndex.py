@@ -54,6 +54,11 @@ INDEX_SKILL_FIELDS = [
 ]
 
 
+def role_for_entry(entry):
+    """Return the display role for a named skill bucket entry."""
+    return "origin" if entry.get("origin") is True else "variant"
+
+
 def parse_frontmatter(text):
     """Parse YAML frontmatter from a markdown string.
 
@@ -316,6 +321,7 @@ def validate_and_group(named_skills, valid_ids):
         # Route by status: named → buckets (real variants); awakened → awaiting
         status = fm.get("status", "awakened")
         if status == "named":
+            entry["role"] = role_for_entry(entry)
             bucket_key = ref or "__unknown__"
             if bucket_key not in buckets:
                 buckets[bucket_key] = []

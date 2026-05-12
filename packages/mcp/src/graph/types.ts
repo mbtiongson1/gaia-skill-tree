@@ -102,6 +102,7 @@ export interface NamedSkill {
   name: string;
   contributor: string;
   origin: boolean;
+  role?: "origin" | "variant";
   genericSkillRef: string;
   status: "awakened" | "named";
   level: "2★" | "3★" | "4★" | "5★" | "6★";
