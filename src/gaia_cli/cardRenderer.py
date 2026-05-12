@@ -241,13 +241,16 @@ def _bottom_border(width: int = CARD_WIDTH) -> str:
 # ─── Main rendering ─────────────────────────────────────────────────────────
 
 
-def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
+def render_card(skill: dict, *, width: int = CARD_WIDTH, canon: bool = False, display_name: str | None = None, ctx: Optional["LocalContext"] = None) -> str:
     """
     Render a single skill as an ASCII card.
 
     Args:
         skill: A skill dict (from gaia.json skills array).
         width: Card width in characters (default 48).
+        canon: If True, show canonical slash-prefixed IDs.
+        display_name: Optional override for the skill name.
+        ctx: Optional LocalContext for nickname resolution of prereqs/derivatives.
 
     Returns:
         Multi-line string representing the card.
@@ -257,7 +260,12 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     tier = skill.get("type", "basic")
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill.get("id", "unknown")
-    name = f"/{skill_id}"
+    
+    if canon:
+        name = f"/{skill_id}"
+    else:
+        name = display_name or (ctx.display_name(skill_id) if ctx else f"/{skill_id}")
+    
     rarity = skill.get("rarity", "common")
     rarity_label = RARITY_LABELS.get(rarity, rarity.capitalize())
     level = skill.get("level", "0★")
@@ -310,17 +318,17 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     # Separator
     lines.append(_separator(width))
 
-    # Prerequisites (slash-named)
+    # Prerequisites (Local-First or slash-named)
     if prereqs:
-        prereq_list = [f"/{p}" for p in prereqs]
+        prereq_list = [(ctx.display_name(p, canon=canon) if ctx else f"/{p}") for p in prereqs]
         prereq_str = _fit_list(prereq_list, inner, prefix="Prereqs: ")
         lines.append(_line(prereq_str, width))
     else:
         lines.append(_line("Prereqs: (none)", width))
 
-    # Derivatives (slash-named)
+    # Derivatives (Local-First or slash-named)
     if derivatives:
-        deriv_list = [f"/{d}" for d in derivatives]
+        deriv_list = [(ctx.display_name(d, canon=canon) if ctx else f"/{d}") for d in derivatives]
         deriv_str = _fit_list(deriv_list, inner, prefix="Unlocks: ")
         lines.append(_line(deriv_str, width))
     else:
@@ -341,7 +349,7 @@ def render_card(skill: dict, *, width: int = CARD_WIDTH) -> str:
     return "\n".join(lines)
 
 
-def render_card_compact(skill: dict) -> str:
+def render_card_compact(skill: dict, canon: bool = False, ctx: Optional["LocalContext"] = None) -> str:
     """
     Render a compact single-line card summary.
 
@@ -350,7 +358,9 @@ def render_card_compact(skill: dict) -> str:
     tier = skill.get("type", "basic")
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill.get("id", skill.get("name", "unknown"))
-    name = f"/{skill_id}"
+    
+    name = (ctx.display_name(skill_id, canon=canon) if ctx else f"/{skill_id}")
+    
     level = skill.get("level", "0★")
     effective = level_summary(skill)["effectiveLevel"]
     rarity = skill.get("rarity", "common")
@@ -361,7 +371,7 @@ def render_card_compact(skill: dict) -> str:
     return f"{glyph} {name} ({level}) [{rarity}] — {short_desc}"
 
 
-def render_cards(skills: list[dict], *, width: int = CARD_WIDTH, compact: bool = False) -> str:
+def render_cards(skills: list[dict], *, width: int = CARD_WIDTH, compact: bool = False, canon: bool = False, ctx: Optional["LocalContext"] = None) -> str:
     """
     Render multiple skills as cards.
 
@@ -369,13 +379,15 @@ def render_cards(skills: list[dict], *, width: int = CARD_WIDTH, compact: bool =
         skills: List of skill dicts.
         width: Card width (ignored in compact mode).
         compact: If True, render one-line summaries instead of full cards.
+        canon: If True, show canonical IDs.
+        ctx: Optional LocalContext for nickname resolution.
 
     Returns:
         Multi-line string with all cards.
     """
     if compact:
-        return "\n".join(render_card_compact(s) for s in skills)
-    return "\n\n".join(render_card(s, width=width) for s in skills)
+        return "\n".join(render_card_compact(s, canon=canon, ctx=ctx) for s in skills)
+    return "\n\n".join(render_card(s, width=width, canon=canon, ctx=ctx) for s in skills)
 
 
 def load_and_render(
@@ -384,6 +396,8 @@ def load_and_render(
     *,
     compact: bool = False,
     width: int = CARD_WIDTH,
+    canon: bool = False,
+    ctx: Optional["LocalContext"] = None,
 ) -> Optional[str]:
     """
     Load a skill by ID from the registry and render its card.
@@ -393,6 +407,8 @@ def load_and_render(
         registry_path: Path to the registry root.
         compact: Use compact rendering.
         width: Card width.
+        canon: Show canonical IDs.
+        ctx: Optional LocalContext for nickname resolution.
 
     Returns:
         Rendered card string, or None if skill not found.
@@ -410,8 +426,8 @@ def load_and_render(
         return None
 
     if compact:
-        return render_card_compact(skill)
-    return render_card(skill, width=width)
+        return render_card_compact(skill, canon=canon, ctx=ctx)
+    return render_card(skill, width=width, canon=canon, ctx=ctx)
 
 
 # ─── Appraise card (colored, with prereq status + actions) ─────────────────
@@ -423,6 +439,8 @@ def render_appraise_card(
     derivatives: list,
     actions: list[str],
     owned: bool = False,
+    canon: bool = False,
+    display_name: str | None = None,
 ) -> str:
     """
     Rich appraise card with ANSI color.
@@ -433,6 +451,8 @@ def render_appraise_card(
         derivatives: list of derivative skill dicts [{id, name, type}]
         actions: list of action labels (e.g. ["[F] Fuse", "[P] Promote"])
         owned: whether user owns this skill
+        canon: if True, show slash-prefixed IDs
+        display_name: optional override for skill name
     """
     width = CARD_WIDTH
     inner = width - 4
@@ -442,7 +462,11 @@ def render_appraise_card(
     rc = RANK_COLORS.get(skill_data.get("level", "0★"), (148, 163, 184))
     glyph = TIER_GLYPHS.get(tier, "○")
     skill_id = skill_data.get("id", "?")
-    name = f"/{skill_id}"
+    if canon:
+        name = f"/{skill_id}"
+    else:
+        name = display_name or skill_data.get("name") or _name_from_slug(skill_id)
+    
     level = skill_data.get("level", "0★")
     rarity = skill_data.get("rarity", "common")
     desc = skill_data.get("description", "")
@@ -490,7 +514,8 @@ def render_appraise_card(
         prereq_items = []
         for pid, has in prereq_status.items():
             icon = f"{fg(*COLOR_SUCCESS)}✓{r}" if has else f"{fg(*COLOR_MISSING)}○{r}"
-            prereq_items.append(f"  {icon} /{pid}")
+            pr_label = f"/{pid}" if canon else (skill_data.get("name") or _name_from_slug(pid))
+            prereq_items.append(f"  {icon} {pr_label}")
         # Two-column layout
         col_w = inner // 2
         for i in range(0, len(prereq_items), 2):
@@ -511,7 +536,15 @@ def render_appraise_card(
 
     # Derivatives (unlocks) — slash-named
     if derivatives:
-        deriv_line = "Unlocks: " + ", ".join("/" + (d.get("id", d) if isinstance(d, dict) else d) for d in derivatives[:4])
+        prefix = "Unlocks: "
+        deriv_items = []
+        for d in derivatives[:4]:
+            if isinstance(d, dict):
+                d_label = f"/{d['id']}" if canon else (d.get("name") or _name_from_slug(d["id"]))
+            else:
+                d_label = f"/{d}" if canon else _name_from_slug(d)
+            deriv_items.append(d_label)
+        deriv_line = prefix + ", ".join(deriv_items)
         if len(derivatives) > 4:
             deriv_line += f" +{len(derivatives) - 4} more"
         lines.append(f"{bc}{V}{r} {fg(*COLOR_MUTED)}{_pad(deriv_line, inner)}{r} {bc}{V}{r}")
@@ -541,12 +574,16 @@ def render_appraise_card(
 # ─── Unlock celebration ────────────────────────────────────────────────────
 
 
-def render_unlock_card(skill_data: dict, new_paths: list) -> str:
+def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False) -> str:
     """Celebratory unlock card with ASCII art."""
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
     skill_id = skill_data.get("id", "?")
-    name = f"/{skill_id}"
+    if canon:
+        name = f"/{skill_id}"
+    else:
+        name = skill_data.get("name") or _name_from_slug(skill_id)
+    
     glyph = TIER_GLYPHS.get(tier, "○")
     level = skill_data.get("level", "0★")
     rarity = skill_data.get("rarity", "common")
@@ -573,8 +610,12 @@ def render_unlock_card(skill_data: dict, new_paths: list) -> str:
         art.append(f"")
         art.append(f"    {fg(*COLOR_TEXT)}New paths opened:{r}")
         for p in new_paths[:4]:
-            pname = p.get("name", p.get("skillId", "?")) if isinstance(p, dict) else p
-            dist = p.get("distance", "?") if isinstance(p, dict) else "?"
+            if isinstance(p, dict):
+                pname = f"/{p['skillId']}" if canon else (p.get("name") or _name_from_slug(p["skillId"]))
+                dist = p.get("distance", "?")
+            else:
+                pname = f"/{p}" if canon else _name_from_slug(p)
+                dist = "?"
             art.append(f"      {fg(*COLOR_MUTED)}→{r} {pname} ({dist} away)")
 
     return "\n".join(art)
@@ -611,7 +652,7 @@ def render_path_summary(paths: dict) -> str:
 # ─── Promotion prompt ──────────────────────────────────────────────────────
 
 
-def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
+def render_promotion_prompt(skill_data: dict, proposed_level: str, canon: bool = False, ctx: Optional["LocalContext"] = None) -> str:
     """Prompt shown when a skill is eligible for promotion."""
     skill_id = skill_data.get("id", "?")
     skill_type = skill_data.get("type", "extra")
@@ -627,10 +668,13 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
     lines = [""]
     # Show fusion diagram if skill has prerequisites
     if prereqs:
-        lines.append(render_fusion_diagram(prereqs, skill_id, skill_type))
+        lines.append(render_fusion_diagram(prereqs, skill_id, skill_type, canon=canon, ctx=ctx))
+    
+    display = (ctx.display_name(skill_id, canon=canon) if ctx else f"/{skill_id}")
+    
     lines.extend([
         f"  {gc}┌─ Fusion ──────────────────────────────┐{r}",
-        f"  {gc}│{r}  {tc}{b}/{skill_id}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
+        f"  {gc}│{r}  {tc}{b}{display}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
         f"  {gc}│{r}  Run: {b}gaia fuse {skill_id}{r}",
         f"  {gc}└───────────────────────────────────────────┘{r}",
         "",
@@ -641,7 +685,7 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str) -> str:
 # ─── Fusion diagram ───────────────────────────────────────────────────────
 
 
-def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "extra") -> str:
+def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "extra", canon: bool = False, ctx: Optional["LocalContext"] = None) -> str:
     """Render a Unicode fusion flow diagram showing skill combination."""
     tier_color = TIER_COLORS.get(result_type, TIER_COLORS["extra"])
     glyph = TIER_GLYPHS.get(result_type, "◇")
@@ -651,9 +695,9 @@ def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "e
     tb = bold() + fg(*tier_color)
     r = reset()
 
-    # Format skill names with slash prefix
-    prereq_names = [f"/{p}" for p in prereqs]
-    result_name = f"/{result}"
+    # Format skill names with slash prefix or nickname
+    prereq_names = [(ctx.display_name(p, canon=canon) if ctx else f"/{p}") for p in prereqs]
+    result_name = (ctx.display_name(result, canon=canon) if ctx else f"/{result}")
 
     # Single prereq: simple arrow
     if len(prereqs) == 1:

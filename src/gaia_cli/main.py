@@ -70,6 +70,7 @@ from gaia_cli.formatting import (
     COLOR_LOCAL_USER,
     _fg,
     _reset,
+    _bold,
     _use_color,
 )
 from gaia_cli.localContext import LocalContext
@@ -249,9 +250,21 @@ def init_command(args):
         hook_script = os.path.join(registry_abs, "scripts", "install-git-hooks.sh")
         if os.path.exists(hook_script):
             try:
-                subprocess.run(["bash", hook_script], check=True)
-                print("  git hooks:  installed automatically")
-            except subprocess.CalledProcessError:
+                # Windows doesn't always have bash in PATH; skip or use sh if available
+                if sys.platform == "win32":
+                    # Check if 'sh' or 'bash' exists before running
+                    if subprocess.run(["where", "bash"], capture_output=True).returncode == 0:
+                        subprocess.run(["bash", hook_script], check=True)
+                        print("  git hooks:  installed automatically")
+                    elif subprocess.run(["where", "sh"], capture_output=True).returncode == 0:
+                        subprocess.run(["sh", hook_script], check=True)
+                        print("  git hooks:  installed automatically")
+                    else:
+                        print("  git hooks:  bash/sh not found, skipping auto-install")
+                else:
+                    subprocess.run(["bash", hook_script], check=True)
+                    print("  git hooks:  installed automatically")
+            except Exception:
                 print("  git hooks:  failed to install automatically")
 
 
@@ -267,6 +280,13 @@ def scan_command(args):
     raw_tokens = scan_result["tokens"]
     graph_path = registry_graph_path(args.registry)
     resolved = resolve_skills(raw_tokens, registry_path=graph_path)
+    
+    username = config.get('gaiaUser')
+    canon = getattr(args, 'canon', False)
+    
+    # Unified local context for display
+    ctx = LocalContext.load(args.registry, username or "", include_scan=False)
+
     if not quiet:
         print(
             f"Scanned {scan_result['files_scanned']} file(s) across "
@@ -282,20 +302,41 @@ def scan_command(args):
             with open(graph_path_file, 'r', encoding='utf-8') as gf:
                 gdata = json.load(gf)
             smap = {s['id']: s for s in gdata.get('skills', [])}
+            
             skill_parts = []
             for sid in sorted(resolved):
                 sk = smap.get(sid, {})
                 glyph = TYPE_SYMBOLS.get(sk.get('type', 'basic'), '○')
-                colored_name = format_skill_colored(sid, sk.get('level', '0★'))
+                
+                # Resolve display name via LocalContext
+                display = ctx.display_name(sid, canon=canon)
+                rank_color = RANK_COLORS.get(sk.get('level', '0★'), RANK_COLORS["0★"])
+                
+                # Apply nickname coloring if not canon and it's a nickname
+                if not canon and ("/" in display or sid in ctx.novel_ids):
+                    # Check if it's our own nickname (starts with /)
+                    if display.startswith("/"):
+                        colored_name = f"{_fg(*COLOR_LOCAL_USER)}{_bold()}{display}{_reset()}"
+                    else:
+                        # Other contributor nickname: contrib in red, rest in rank color
+                        parts = display.split("/", 1)
+                        if len(parts) == 2:
+                            colored_name = f"{_fg(*COLOR_CONTRIBUTOR)}{parts[0]}{_reset()}/{_fg(*rank_color)}{parts[1]}{_reset()}"
+                        else:
+                            colored_name = f"{_fg(*rank_color)}{display}{_reset()}"
+                else:
+                    colored_name = f"{_fg(*rank_color)}{display}{_reset()}"
+                
                 skill_parts.append(f"  {glyph} {colored_name}")
             print("\n".join(skill_parts))
         else:
             print('Tip: try `gaia skills search "code review"` or expand scanPaths.')
-    username = config.get('gaiaUser')
+
     tree = load_tree(username, registry_path=args.registry)
     if tree:
         with open(graph_path, 'r', encoding='utf-8') as f:
             graph_data = json.load(f)
+        skill_map = {s['id']: s for s in graph_data.get('skills', [])}
         unlocked = [s.get('skillId') for s in tree.get('unlockedSkills', [])]
         combos = get_combinations(graph_data, unlocked, resolved)
         if combos and not quiet:
@@ -304,7 +345,8 @@ def scan_command(args):
                 result_skill = skill_map.get(c['candidateResult'], {})
                 result_type = result_skill.get('type', 'extra')
                 print(render_fusion_diagram(
-                    c['detectedSkills'], c['candidateResult'], result_type
+                    c['detectedSkills'], c['candidateResult'], result_type,
+                    canon=canon, ctx=ctx
                 ))
             print("Run `gaia fuse <skill>` to confirm.")
 
@@ -317,14 +359,13 @@ def scan_command(args):
         save_paths(new_paths)
 
         # Show unlock cards for newly reachable skills
-        skill_map = {s['id']: s for s in graph_data.get('skills', [])}
         if changes.get("new_near_unlocks"):
             print()
             for sid in changes["new_near_unlocks"]:
                 skill = skill_map.get(sid)
                 if skill:
                     opened = [p for p in new_paths.get("availablePaths", []) if p.get("distance", 99) <= 2]
-                    print(render_unlock_card(skill, opened[:3]))
+                    print(render_unlock_card(skill, opened[:3], canon=canon, ctx=ctx))
                     print()
 
         # Path summary
@@ -343,7 +384,7 @@ def scan_command(args):
             for promo in eligible[:2]:
                 skill = skill_map.get(promo["skillId"])
                 if skill:
-                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★")))
+                    print(render_promotion_prompt(skill, promo.get("suggestedLevel", "2★"), canon=canon, ctx=ctx))
         if unique_eligible and not quiet:
             for uc in unique_eligible:
                 print(f"  ◉ {uc['name']} eligible for unique promotion (gaia promote {uc['skillId']} --unique)")
@@ -433,7 +474,20 @@ def lookup_command(args):
             sys.exit(1)
 
     skill_id = skill["id"]
-    print(f"/{skill_id} - {skill.get('name', skill_id)}")
+    canon = getattr(args, 'canon', False)
+
+    config = load_config() or {}
+    username = config.get("gaiaUser")
+    ctx = LocalContext.load(args.registry, username, include_scan=False) if username else None
+
+    if canon:
+        display = f"/{skill_id}"
+    elif ctx and ctx.is_named(skill_id):
+        display = ctx.display_name(skill_id)
+    else:
+        display = skill.get("name") or f"/{skill_id}"
+    print(f"{display}")
+    
     print(f"Type: {skill.get('type', 'unknown')}    Level: {skill.get('level', '?')}")
     if skill.get("description"):
         print(skill["description"])
@@ -561,7 +615,15 @@ def appraise_command(args):
     if derivatives:
         actions.append("[→] Paths")
 
-    print(render_appraise_card(skill, prereq_status, derivatives, actions, owned=owned))
+    # Local-first display name
+    canon = getattr(args, "canon", False)
+    ctx = LocalContext.load(args.registry, username or "", include_scan=False)
+    display_name = ctx.display_name(skill_id, canon=canon)
+
+    print(render_appraise_card(
+        skill, prereq_status, derivatives, actions, 
+        owned=owned, canon=canon, display_name=display_name
+    ))
     try:
         candidates = load_promotion_candidates(args.registry).get("candidates", [])
         matching = [c for c in candidates if c.get("skillId") == skill_id]
@@ -778,7 +840,8 @@ def tree_command(args):
             graph_data = json.load(f)
     tree = load_tree(config.get('gaiaUser'), registry_path=args.registry)
     mode = "named" if getattr(args, 'named', False) else ("title" if getattr(args, 'title', False) else "default")
-    show_tree(tree, graph_data=graph_data, registry_path=args.registry, mode=mode)
+    canon = getattr(args, 'canon', False)
+    show_tree(tree, graph_data=graph_data, registry_path=args.registry, mode=mode, canon=canon)
     if tree:
         render_user_tree_outputs(config.get('gaiaUser'), tree, graph_data, args.registry, quiet=False)
 
@@ -1229,6 +1292,7 @@ def get_parser():
     tree_parser = subparsers.add_parser('tree', help="Show your Gaia skill tree")
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
+    tree_parser.add_argument('--canon', action='store_true', help="Show canonical registry data instead of local-first view.")
     push_parser = subparsers.add_parser('push', help="Prepare detected skills for review")
     push_parser.add_argument('--dry-run', action='store_true', help="Print the skill batch without writing it")
     push_parser.add_argument('--no-pr', action='store_true', help="Write intake record without creating a PR")
@@ -1247,7 +1311,8 @@ def get_parser():
     graph_parser.add_argument('-o', '--output', help="Output path (default: registry/render/gaia.html)")
     graph_parser.add_argument('--open', dest='open', action='store_true', default=True, help="Open the generated graph (default)")
     graph_parser.add_argument('--no-open', dest='open', action='store_false', help="Do not open the generated graph")
-    subparsers.add_parser('stats', help="Show registry health at a glance")
+    stats_parser = subparsers.add_parser('stats', help="Show registry health at a glance")
+    stats_parser.add_argument('--canon', action='store_true', help="Show canonical registry data instead of local-first view.")
     appraise_parser = subparsers.add_parser('appraise', help="Inspect a skill card with status and actions")
     appraise_parser.add_argument('skillId', nargs='?', default=None, help="Skill ID to appraise (default: most recent)")
     promote_parser = subparsers.add_parser('promote', help="Promote a skill eligible for level-up")
