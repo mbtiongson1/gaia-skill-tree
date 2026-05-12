@@ -147,15 +147,39 @@ class LocalContext:
                 })
         return skills
 
-    def display_name(self, skill_id: str) -> str:
-        """Return the best display name for a skill (plain text, no ANSI).
+    def display_name(self, skill_id: str, canon: bool = False) -> str:
+        """Return the best display name for a skill.
 
-        Priority: named ref > local user/id > /id
+        Priority (Local-First): 
+        - Nickname ID (e.g. /gaia-curate or karpathy/autoresearch)
+        - Human-readable Name (e.g. Research)
+        - Generic ID as fallback (/research)
+        
+        If canon=True, always returns /skill-id.
         """
+        if canon:
+            return f"/{skill_id}"
+
+        # 1. Check for named nickname (Pet Nickname)
         if skill_id in self.named_map:
-            return self.named_map[skill_id]
+            ref = self.named_map[skill_id]
+            if "/" in ref:
+                contrib, nickname = ref.split("/", 1)
+                if contrib == self.username:
+                    return f"/{nickname}"
+                return ref
+            return f"/{ref}"
+
+        # 2. Check for local novel skill
         if skill_id in self.novel_ids:
-            return f"{self.username}/{skill_id}"
+            return f"/{skill_id}"
+
+        # 3. Fallback to human-readable Real Skill Name (Dog Breed Name)
+        skill = self._skill_map.get(skill_id)
+        if skill and skill.get("name"):
+            return skill["name"]
+
+        # 4. Final fallback to generic ID
         return f"/{skill_id}"
 
 
