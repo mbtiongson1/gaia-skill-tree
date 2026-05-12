@@ -694,8 +694,8 @@
     var ultIdx = 0;
     var unqIdx = 0;
     return text.split('\n').map(function(line) {
-      // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [6★]
-      var m = line.match(/^(\s*◆ Ultimate Skill: )(\S+)(.*)$/);
+      // Ultimate skill header lines
+      var m = line.match(/^(\s*◆\s*(?:Ultimate Skill:\s*)?)(\S+)(.*)$/);
       if (m) {
         var label = esc(m[1]);
         var skillId = m[2];
@@ -714,7 +714,7 @@
                label + skillHtml + suffix + '</span>';
       }
 
-      // Unique skill lines (header or sub-item): ◉ Unique Skill: ... or just ◉ /...
+      // Unique skill lines
       var u = line.match(/^([\s│├└─]*◉\s*(?:Unique Skill:\s*)?)(\S+)(.*)$/);
       if (u) {
         var ulabel = esc(u[1]);
@@ -724,7 +724,6 @@
         var uslash = uid.indexOf('/');
         var uskillHtml;
         
-        // Detect level for gold/purple glow
         var isGold = usuffix.indexOf('5★') >= 0 || usuffix.indexOf('6★') >= 0;
         var uniqueClass = isGold ? 'tree-unique-skillname tree-unique-gold' : 'tree-unique-skillname';
 
@@ -739,7 +738,7 @@
                ulabel + uskillHtml + usuffix + '</span>';
       }
 
-      // Extra skill lines: ├─ ◇ Extra Skill: /research  [3★]
+      // Extra skill lines
       var e = line.match(/^([\s│├└─]*◇\s*(?:Extra Skill:\s*)?)(\S+)(.*)$/);
       if (e) {
         var elabel = esc(e[1]);
@@ -757,7 +756,7 @@
         return '<span class="tree-extra-line">' + elabel + eskillHtml + esuffix + '</span>';
       }
 
-      // Basic skill lines: ├─ ○ /web-search  [1★]
+      // Basic skill lines
       var b = line.match(/^([\s│├└─]*○\s*)(\S+)(.*)$/);
       if (b) {
         var blabel = esc(b[1]);
@@ -775,9 +774,7 @@
         return '<span class="tree-basic-line">' + blabel + bskillHtml + bsuffix + '</span>';
       }
 
-      // Separator lines
       if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
-      // Inline ◇ / ○ / ◉ glyphs
       var out = esc(line);
       out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
       out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
