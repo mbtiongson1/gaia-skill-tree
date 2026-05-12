@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06",
+  "generatedAt": "2026-05-12",
   "buckets": {
     "automated-testing": [
       {
@@ -289,6 +289,28 @@
           "github": "https://github.com/gooseworks-ai/goose-skills"
         },
         "role": "origin"
+      },
+      {
+        "id": "garrytan/gstack",
+        "name": "Gstack",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "browser-automation",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Fast headless browser for QA testing and site dogfooding. Optimized for high-speed navigation and element interaction (~100ms per command), featuring built-in anti-bot stealth and annotated screenshot capabilities.",
+        "title": "Gstack Browser Engine",
+        "catalogRef": "garrytan-gstack",
+        "tags": [
+          "browser-automation",
+          "stealth",
+          "qa-testing",
+          "headless-browser"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/SKILL.md"
+        },
+        "role": "origin"
       }
     ],
     "api-call": [
@@ -560,6 +582,28 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
         },
         "role": "origin"
+      },
+      {
+        "id": "garrytan/design-shotgun",
+        "name": "Design Shotgun",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Rapid design exploration that generates multiple AI design variants, opens a comparison board for the user, collects structured feedback, and iterates until a preferred visual direction is reached.",
+        "title": "Design Shotgun",
+        "catalogRef": "garrytan-design-shotgun",
+        "tags": [
+          "ui-ux",
+          "design-exploration",
+          "prototyping",
+          "visual-qa"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
+        },
+        "role": "origin"
       }
     ],
     "refactor-code": [
@@ -610,6 +654,29 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md"
+        },
+        "role": "origin"
+      },
+      {
+        "id": "garrytan/garrytan",
+        "name": "Garrytan",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "vertical-slice-planning",
+        "status": "named",
+        "level": "5\u2605",
+        "description": "The definitive autonomous 'Founder mode' review and decision suite. An auto-review pipeline that reads full CEO, design, engineering, and DX review skills and runs them sequentially with auto-decisions.",
+        "title": "Founder Mode Autoplan",
+        "catalogRef": "garrytan-autoplan",
+        "tags": [
+          "founder-mode",
+          "autoplan",
+          "decision-suite",
+          "ceo-review",
+          "orchestration"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md"
         },
         "role": "origin"
       }
@@ -786,6 +853,74 @@
         ],
         "links": {
           "github": "https://github.com/yonatangross/orchestkit"
+        },
+        "role": "origin"
+      }
+    ],
+    "question-answer": [
+      {
+        "id": "garrytan/office-hours",
+        "name": "Office Hours",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "question-answer",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "YC-style startup and builder brainstorming. Startup mode uses six forcing questions to expose reality. Builder mode focuses on design thinking for side projects and hackathons.",
+        "title": "YC Office Hours",
+        "catalogRef": "garrytan-office-hours",
+        "tags": [
+          "brainstorming",
+          "startup-strategy",
+          "design-thinking",
+          "y-combinator",
+          "ideation"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "security-audit": [
+      {
+        "id": "intelligentcode-ai/security-engineer",
+        "name": "Security Engineer",
+        "contributor": "intelligentcode-ai",
+        "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/security-engineer/SKILL.md",
+        "genericSkillRef": "security-audit",
+        "status": "awakened",
+        "level": "2\u2605",
+        "description": "Security architecture specialist \u2014 vulnerability assessment, zero-trust design, compliance management, and incident response with severity-classified remediation guidance.",
+        "tags": [
+          "security",
+          "vulnerability",
+          "zero-trust",
+          "compliance",
+          "owasp",
+          "penetration-testing"
+        ]
+      },
+      {
+        "id": "garrytan/cso",
+        "name": "CSO",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "security-audit",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Infrastructure-first security audit focusing on secrets archaeology, dependency supply chain, and CI/CD security. Includes OWASP Top 10, STRIDE threat modeling, and active verification.",
+        "title": "Chief Security Officer Mode",
+        "catalogRef": "garrytan-cso",
+        "tags": [
+          "security",
+          "infrastructure",
+          "audit",
+          "threat-modeling",
+          "cso"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/cso/SKILL.md"
         },
         "role": "origin"
       }
@@ -991,6 +1126,13 @@
     "gaiabot": [
       "gaiabot/gaia-triage",
       "gaiabot/repo-docs-before-pr"
+    ],
+    "garrytan": [
+      "garrytan/garrytan",
+      "garrytan/office-hours",
+      "garrytan/cso",
+      "garrytan/design-shotgun",
+      "garrytan/gstack"
     ],
     "glincker": [
       "glincker/readme-generator"

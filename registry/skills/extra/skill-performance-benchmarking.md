@@ -28,6 +28,7 @@ Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware re
 | A | https://arxiv.org/abs/2603.02176 | codex | 2026-05-10 |
 | B | https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md | codex | 2026-05-10 |
 | B | https://github.com/ynulihao/AgentSkillOS | codex | 2026-05-10 |
+| B | https://github.com/garrytan/gstack/blob/main/benchmark/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 - Claude

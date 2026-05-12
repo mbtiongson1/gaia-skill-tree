@@ -26,6 +26,7 @@ _None specified._
 |---|---|---|---|
 | A | https://arxiv.org/abs/2401.13919 | mbtiongson1 | 2026-04-28 |
 | B | https://github.com/web-arena-x/webarena | mbtiongson1 | 2026-04-28 |
+| B | https://github.com/garrytan/gstack/blob/main/browse/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 _None verified yet._
