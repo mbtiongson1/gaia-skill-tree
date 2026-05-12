@@ -695,7 +695,7 @@
     var unqIdx = 0;
     return text.split('\n').map(function(line) {
       // Ultimate skill header lines: ◆ Ultimate Skill: contributor/name  [6★]
-      var m = line.match(/^(◆ Ultimate Skill: )(\S+)(.*)$/);
+      var m = line.match(/^(\s*◆ Ultimate Skill: )(\S+)(.*)$/);
       if (m) {
         var label = esc(m[1]);
         var skillId = m[2];
@@ -704,7 +704,6 @@
         var slash = skillId.indexOf('/');
         var skillHtml;
         if (slash > 0) {
-          // named — contributor in red, skill name in amber
           skillHtml = '<span class="tree-ult-contributor">' + esc(skillId.slice(0, slash)) + '</span>' +
                       '<span class="tree-ult-slash">/</span>' +
                       '<span class="tree-ult-skillname">' + esc(skillId.slice(slash + 1)) + '</span>';
@@ -714,8 +713,9 @@
         return '<span class="tree-ult-line" style="animation-delay:' + delay + 's">' +
                label + skillHtml + suffix + '</span>';
       }
-      // Unique skill header lines: ◉ Unique Skill: contributor/name  [4★]
-      var u = line.match(/^(◉ Unique Skill: )(\S+)(.*)$/);
+
+      // Unique skill lines (header or sub-item): ◉ Unique Skill: ... or just ◉ /...
+      var u = line.match(/^([\s│├└─]*◉\s*(?:Unique Skill:\s*)?)(\S+)(.*)$/);
       if (u) {
         var ulabel = esc(u[1]);
         var uid = u[2];
@@ -723,16 +723,58 @@
         var udelay = -((unqIdx++ * 0.9) % 4);
         var uslash = uid.indexOf('/');
         var uskillHtml;
+        
+        // Detect level for gold/purple glow
+        var isGold = usuffix.indexOf('5★') >= 0 || usuffix.indexOf('6★') >= 0;
+        var uniqueClass = isGold ? 'tree-unique-skillname tree-unique-gold' : 'tree-unique-skillname';
+
         if (uslash > 0) {
           uskillHtml = '<span class="tree-unique-contributor">' + esc(uid.slice(0, uslash)) + '</span>' +
                        '<span class="tree-unique-slash">/</span>' +
-                       '<span class="tree-unique-skillname">' + esc(uid.slice(uslash + 1)) + '</span>';
+                       '<span class="' + uniqueClass + '">' + esc(uid.slice(uslash + 1)) + '</span>';
         } else {
-          uskillHtml = '<span class="tree-unique-skillname">' + esc(uid) + '</span>';
+          uskillHtml = '<span class="' + uniqueClass + '">' + esc(uid) + '</span>';
         }
         return '<span class="tree-unique-line" style="animation-delay:' + udelay + 's">' +
                ulabel + uskillHtml + usuffix + '</span>';
       }
+
+      // Extra skill lines: ├─ ◇ Extra Skill: /research  [3★]
+      var e = line.match(/^([\s│├└─]*◇\s*(?:Extra Skill:\s*)?)(\S+)(.*)$/);
+      if (e) {
+        var elabel = esc(e[1]);
+        var eid = e[2];
+        var esuffix = esc(e[3]);
+        var eslash = eid.indexOf('/');
+        var eskillHtml;
+        if (eslash > 0) {
+          eskillHtml = '<span class="tree-extra-contributor">' + esc(eid.slice(0, eslash)) + '</span>' +
+                       '<span class="tree-extra-slash">/</span>' +
+                       '<span class="tree-extra-skillname">' + esc(eid.slice(eslash + 1)) + '</span>';
+        } else {
+          eskillHtml = '<span class="tree-extra-id">' + esc(eid) + '</span>';
+        }
+        return '<span class="tree-extra-line">' + elabel + eskillHtml + esuffix + '</span>';
+      }
+
+      // Basic skill lines: ├─ ○ /web-search  [1★]
+      var b = line.match(/^([\s│├└─]*○\s*)(\S+)(.*)$/);
+      if (b) {
+        var blabel = esc(b[1]);
+        var bid = b[2];
+        var bsuffix = esc(b[3]);
+        var bslash = bid.indexOf('/');
+        var bskillHtml;
+        if (bslash > 0) {
+          bskillHtml = '<span class="tree-basic-contributor">' + esc(bid.slice(0, bslash)) + '</span>' +
+                       '<span class="tree-basic-slash">/</span>' +
+                       '<span class="tree-basic-skillname">' + esc(bid.slice(bslash + 1)) + '</span>';
+        } else {
+          bskillHtml = '<span class="tree-basic-id">' + esc(bid) + '</span>';
+        }
+        return '<span class="tree-basic-line">' + blabel + bskillHtml + bsuffix + '</span>';
+      }
+
       // Separator lines
       if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
       // Inline ◇ / ○ / ◉ glyphs
