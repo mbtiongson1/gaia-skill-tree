@@ -206,23 +206,6 @@
       "openQuestions": []
     },
     {
-      "id": "codex",
-      "name": "Codex",
-      "type": "extra",
-      "description": "OpenAI Codex CLI wrapper \u2014 three modes. Code review: independent diff review via codex review with pass/fail gate. Challenge: adversarial mode that tries to break your code. Consult: ask codex anything with session continuity for follow-ups. The \"200 IQ autistic developer\" second opinion. Use when asked to \"codex review\", \"codex challenge\", \"ask codex\", \"second opinion\", or \"consult codex\". (gstack) Voice triggers (speech-to-text aliases): \"code x\", \"code ex\", \"get another opinion\".",
-      "sourceRepo": "garrytan/gstack",
-      "lifecycle": "rejected",
-      "evidence": [
-        {
-          "type": "source",
-          "url": "https://github.com/garrytan/gstack/blob/main/codex/SKILL.md",
-          "notes": "SKILL.md frontmatter and workflow documentation for /codex."
-        }
-      ],
-      "rationale": "Curated from garrytan/gstack codex/SKILL.md; repository ships this as a first-class agent skill.",
-      "openQuestions": []
-    },
-    {
       "id": "context-restore",
       "name": "Context Restore",
       "type": "extra",
@@ -1223,6 +1206,30 @@
     {
       "sourceSkillId": "ship",
       "targetSkillId": "release-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /ship capability to Gaia canonical release-automation."
+    },
+    {
+      "sourceSkillId": "skillify",
+      "targetSkillId": "workflow-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /skillify capability to Gaia canonical workflow-automation."
+    },
+    {
+      "sourceSkillId": "sync-gbrain",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /sync-gbrain capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "unfreeze",
+      "targetSkillId": "workflow-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /unfreeze capability to Gaia canonical workflow-automation."
+    }
+  ]
+}
+e-automation",
       "score": 0.72,
       "reason": "Curated mapping from garrytan/gstack /ship capability to Gaia canonical release-automation."
     },

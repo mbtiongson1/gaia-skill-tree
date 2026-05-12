@@ -90,5 +90,10 @@ Curated named skills from live SKILL.md ecosystems.
 - [BAAI/bge-reranker-v2-m3](https://huggingface.co/BAAI/bge-reranker-v2-m3) - Hugging Face reranker model for improving retrieval and RAG result ordering. Maps to: `rank`, `score-relevance`, `rag-pipeline`.
 - [StanfordAIMI/stanford-deidentifier-base](https://huggingface.co/StanfordAIMI/stanford-deidentifier-base) - Hugging Face model for clinical text de-identification and privacy-preserving entity removal. Maps to: `extract-entities`, `content-moderation`.
 - [s-nlp/roberta_toxicity_classifier](https://huggingface.co/s-nlp/roberta_toxicity_classifier) - Hugging Face toxicity classifier for moderation and guardrail pipelines. Maps to: `content-moderation`, `classify`, `guardrails`.
+- [garrytan/autoplan](https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md) - The definitive autonomous 'Founder mode' review and decision suite. Orchestrates CEO, design, engineering, and DX reviews with auto-decisions. Maps to: `vertical-slice-planning`.
+- [garrytan/office-hours](https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md) - YC-style startup and builder brainstorming with six forcing questions to expose reality. Maps to: `question-answer`.
+- [garrytan/cso](https://github.com/garrytan/gstack/blob/main/cso/SKILL.md) - Infrastructure-first security audit focusing on secrets archaeology and dependency supply chain. Maps to: `security-audit`.
+- [garrytan/design-shotgun](https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md) - Rapid design exploration generating multiple AI design variants for comparison and feedback. Maps to: `design-review`.
+- [garrytan/gstack](https://github.com/garrytan/gstack/blob/main/SKILL.md) - Fast headless browser for QA testing and site dogfooding with built-in anti-bot stealth. Maps to: `browser-automation`.
 
 *Generated from registry/real-skills.json on 2026-05-08.*

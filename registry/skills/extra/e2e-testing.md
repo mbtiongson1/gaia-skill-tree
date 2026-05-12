@@ -25,7 +25,6 @@ Requires a live or containerised target environment; browser automation must be 
 |---|---|---|---|
 | B | https://github.com/zachblume/autospec | mbtiongson1 | 2026-04-30 |
 | C | https://github.com/intelligentcode-ai/skills/blob/main/skills/user-tester/SKILL.md | mbtiongson1 | 2026-04-30 |
-| B | https://github.com/garrytan/gstack/blob/main/qa/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 _None verified yet._

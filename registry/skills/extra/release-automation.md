@@ -25,7 +25,6 @@ Requires write access to the repository and a configured release token.
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
 | C | https://github.com/intelligentcode-ai/skills/blob/main/skills/release/SKILL.md | mbtiongson1 | 2026-04-30 |
-| B | https://github.com/garrytan/gstack/blob/main/ship/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 _None verified yet._

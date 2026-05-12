@@ -25,7 +25,6 @@ _None specified._
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
 | B | https://github.com/gaia-registry/gaia/blob/main/docs/evidence/autonomousDebug.md | mbtiongson1 | 2026-04-26 |
-| B | https://github.com/garrytan/gstack/blob/main/investigate/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 _None verified yet._

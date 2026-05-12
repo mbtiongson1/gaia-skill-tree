@@ -20,7 +20,6 @@ _None._
 | Class | Source | Evaluator | Date |
 |---|---|---|---|
 | B | https://github.com/NousResearch/hermes-agent/blob/main/skills/research/blogwatcher/SKILL.md | openai-codex | 2026-05-06 |
-| B | https://github.com/garrytan/gstack/blob/main/canary/SKILL.md | gemini-cli | 2026-05-12 |
 
 ## Known Agents
 - NousResearch/hermes-agent
