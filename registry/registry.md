@@ -73,7 +73,7 @@
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | 4★ | Hardened | `/prediction-market-analysis` |
 | ○ /prompt-injection-defense | Basic Skill | 3★ | Evolved | `/prompt-injection-defense` |
 | ◇ Extra Skill: /prompt-optimization | Extra Skill | 4★ | Hardened | `/prompt-optimization` |
-| ○ /question-answer | Basic Skill | 0★ | Basic | `/question-answer` |
+| ○ garrytan/office-hours | Basic Skill | 0★ | Basic | `/question-answer` |
 | ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | 3★ | Evolved | `/rag-pipeline` |
 | ○ /rank | Basic Skill | 1★ | Awakened | `/rank` |
 | ◇ Extra Skill: /re-act-reasoning | Extra Skill | 3★ | Evolved | `/re-act-reasoning` |
@@ -89,7 +89,7 @@
 | ○ /scientific-visualization | Basic Skill | 2★ | Named | `/scientific-visualization` |
 | ◇ Extra Skill: /scientific-writing | Extra Skill | 3★ | Evolved | `/scientific-writing` |
 | ○ /score-relevance | Basic Skill | 1★ | Awakened | `/score-relevance` |
-| ◇ Extra Skill: /security-audit | Extra Skill | 2★ | Named | `/security-audit` |
+| ◇ Extra Skill: garrytan/cso | Extra Skill | 2★ | Named | `/security-audit` |
 | ○ /self-critique | Basic Skill | 1★ | Awakened | `/self-critique` |
 | ○ /sentiment-analysis | Basic Skill | 0★ | Basic | `/sentiment-analysis` |
 | ◇ Extra Skill: /skill-authoring | Extra Skill | 4★ | Hardened | `/skill-authoring` |
