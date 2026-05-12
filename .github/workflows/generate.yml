@@ -5,6 +5,7 @@ on:
     paths:
       - 'registry/**'
       - 'registry/schema/**'
+      - 'scripts/generateNamedIndex.py'
 
 jobs:
   generate:
@@ -32,6 +33,14 @@ jobs:
       - name: Export GEXF
         run: python scripts/exportGexf.py
 
+      - name: Generate Named Skills Index
+        run: python scripts/generateNamedIndex.py
+
+      - name: Sync named-skills index to docs
+        run: |
+          mkdir -p docs/graph/named
+          cp registry/named-skills.json docs/graph/named/index.json
+
       - name: Check for Drift
         run: |
-          git diff --exit-code || (echo "❌ Generated files differ from committed ones. Run scripts/generateProjections.py and scripts/exportGexf.py locally and commit the changes." && exit 1)
+          git diff --exit-code || (echo "❌ Generated files differ from committed ones. Run scripts/generateProjections.py, scripts/exportGexf.py, and scripts/generateNamedIndex.py locally and commit the changes." && exit 1)
