@@ -24,7 +24,8 @@
         ],
         "links": {
           "github": "https://github.com/aiskillstore/marketplace"
-        }
+        },
+        "role": "origin"
       }
     ],
     "test-driven-development": [
@@ -48,7 +49,8 @@
         ],
         "links": {
           "github": "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md"
-        }
+        },
+        "role": "origin"
       },
       {
         "id": "mattpocock/tdd",
@@ -70,7 +72,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "document-editing": [
@@ -94,7 +97,8 @@
         ],
         "links": {
           "github": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md"
-        }
+        },
+        "role": "origin"
       },
       {
         "id": "mattpocock/edit-article",
@@ -116,7 +120,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/personal/edit-article/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "tool-creation": [
@@ -139,7 +144,8 @@
         ],
         "links": {
           "github": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md"
-        }
+        },
+        "role": "origin"
       },
       {
         "id": "mattpocock/write-a-skill",
@@ -161,7 +167,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "autonomous-debug": [
@@ -185,7 +192,8 @@
         ],
         "links": {
           "github": "https://github.com/cognition-labs/devin"
-        }
+        },
+        "role": "origin"
       },
       {
         "id": "mattpocock/diagnose",
@@ -207,7 +215,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "write-report": [
@@ -230,7 +239,8 @@
         ],
         "links": {
           "github": "https://github.com/GLINCKER/claude-code-marketplace/blob/main/skills/documentation/readme-generator/SKILL.md"
-        }
+        },
+        "role": "origin"
       },
       {
         "id": "spring-ai/readme-generate",
@@ -252,7 +262,8 @@
         ],
         "links": {
           "github": "https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "browser-automation": [
@@ -276,7 +287,8 @@
         ],
         "links": {
           "github": "https://github.com/gooseworks-ai/goose-skills"
-        }
+        },
+        "role": "origin"
       }
     ],
     "api-call": [
@@ -300,7 +312,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/hf-cli/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "data-analysis": [
@@ -324,7 +337,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-datasets/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "fine-tune": [
@@ -348,7 +362,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-llm-trainer/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "literature-review": [
@@ -372,7 +387,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-papers/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "object-detection": [
@@ -396,7 +412,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/huggingface-vision-trainer/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "multimodal-reasoning": [
@@ -420,7 +437,8 @@
         ],
         "links": {
           "github": "https://github.com/huggingface/skills/blob/main/skills/transformers-js/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "autonomous-research-agent": [
@@ -442,7 +460,8 @@
         ],
         "links": {
           "github": "https://github.com/karpathy/autoresearch"
-        }
+        },
+        "role": "origin"
       }
     ],
     "framework-upgrade": [
@@ -465,7 +484,8 @@
         ],
         "links": {
           "github": "https://github.com/laravel/boost/issues/698"
-        }
+        },
+        "role": "origin"
       }
     ],
     "ux-audit": [
@@ -489,7 +509,8 @@
         ],
         "links": {
           "github": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "design-review": [
@@ -513,7 +534,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        }
+        },
+        "role": "variant"
       },
       {
         "id": "mattpocock/grill-with-docs",
@@ -536,7 +558,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "refactor-code": [
@@ -561,7 +584,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md"
-        }
+        },
+        "role": "variant"
       }
     ],
     "vertical-slice-planning": [
@@ -586,7 +610,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "prd-generation": [
@@ -610,7 +635,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "issue-triage": [
@@ -634,7 +660,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "code-explain": [
@@ -658,7 +685,8 @@
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/zoom-out/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "multi-agent-orchestration-v": [
@@ -682,7 +710,8 @@
         ],
         "links": {
           "github": "https://github.com/ruvnet/ruflo"
-        }
+        },
+        "role": "origin"
       }
     ],
     "generate-test": [
@@ -706,7 +735,8 @@
         ],
         "links": {
           "github": "https://github.com/Upsonic/Upsonic"
-        }
+        },
+        "role": "origin"
       }
     ],
     "skill-discovery": [
@@ -729,7 +759,8 @@
         ],
         "links": {
           "github": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md"
-        }
+        },
+        "role": "origin"
       }
     ],
     "rag-pipeline": [
@@ -755,7 +786,8 @@
         ],
         "links": {
           "github": "https://github.com/yonatangross/orchestkit"
-        }
+        },
+        "role": "origin"
       }
     ]
   },

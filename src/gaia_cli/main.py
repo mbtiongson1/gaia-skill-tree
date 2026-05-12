@@ -25,6 +25,7 @@ from gaia_cli.registry import (
     generated_output_dir,
     embeddings_path,
     named_skills_dir,
+    named_skills_index_path,
     promotion_candidates_path,
     registry_graph_path,
     skill_batches_dir,
@@ -95,6 +96,7 @@ Quick usage:
   gaia update
   gaia stats
   gaia docs build [--check]
+  gaia lookup <skillId>
   gaia skills <list|search|info|install|uninstall>
   gaia skills list [--exclude-pending]
   gaia skills search <query> [--exclude-pending]
@@ -129,6 +131,7 @@ PUBLIC_COMMANDS = (
     "promote",
     "fuse",
     "docs",
+    "lookup",
     "update",
     "skills",
 )
@@ -395,6 +398,61 @@ def promote_all_candidates(username: str, registry_path: str) -> list[dict]:
             registry_path,
         ))
     return promoted
+
+
+def _entry_role(entry):
+    return entry.get("role") or ("origin" if entry.get("origin") is True else "variant")
+
+
+def lookup_command(args):
+    graph_path = registry_graph_path(args.registry)
+    if not os.path.exists(graph_path):
+        print("Registry graph not found.", file=sys.stderr)
+        sys.exit(1)
+
+    with open(graph_path, "r", encoding="utf-8") as f:
+        graph_data = json.load(f)
+
+    query = args.skillId.strip().lstrip("/")
+    skill_map = {s["id"]: s for s in graph_data.get("skills", [])}
+    skill = skill_map.get(query)
+    if not skill:
+        matches = [
+            s for s in graph_data.get("skills", [])
+            if query.lower() in s.get("id", "").lower()
+            or query.lower() in s.get("name", "").lower()
+        ]
+        if len(matches) == 1:
+            skill = matches[0]
+        else:
+            print(f"Skill '{query}' not found.", file=sys.stderr)
+            if matches:
+                print("Matches:")
+                for candidate in matches[:10]:
+                    print(f"  /{candidate['id']} - {candidate.get('name', candidate['id'])}")
+            sys.exit(1)
+
+    skill_id = skill["id"]
+    print(f"/{skill_id} - {skill.get('name', skill_id)}")
+    print(f"Type: {skill.get('type', 'unknown')}    Level: {skill.get('level', '?')}")
+    if skill.get("description"):
+        print(skill["description"])
+
+    named_path = named_skills_index_path(args.registry)
+    named_index = {}
+    if os.path.exists(named_path):
+        with open(named_path, "r", encoding="utf-8") as f:
+            named_index = json.load(f)
+    entries = named_index.get("buckets", {}).get(skill_id, [])
+    if entries:
+        print("\nNamed implementations:")
+        for entry in entries:
+            role = _entry_role(entry)
+            name = entry.get("name") or entry.get("id", "unknown")
+            entry_id = entry.get("id", "unknown")
+            print(f"- [{role}] {name} ({entry_id})")
+    else:
+        print("\nNamed implementations: none")
 
 def status_command(args):
     config = load_config()
@@ -1204,6 +1262,8 @@ def get_parser():
     docs_sub = docs_parser.add_subparsers(dest='docs_command')
     docs_build = docs_sub.add_parser('build', help="Regenerate generated documentation regions")
     docs_build.add_argument('--check', action='store_true', help="Fail if docs are stale without writing")
+    lookup_parser = subparsers.add_parser('lookup', help="Look up a canonical skill and its named implementations")
+    lookup_parser.add_argument('skillId', help='Skill ID to inspect')
     skills_parser = subparsers.add_parser(
         'skills',
         help="Browse and manage named skills",
@@ -1279,6 +1339,8 @@ def main():
         fuse_command(args)
     elif args.command == 'docs' and getattr(args, 'docs_command', None) == 'build':
         docs_command(args)
+    elif args.command == 'lookup':
+        lookup_command(args)
     elif args.command == 'skills':
         if not getattr(args, 'skills_command', None):
             skills_parser.print_help()

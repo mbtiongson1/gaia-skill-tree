@@ -75,8 +75,8 @@ function formatNamedImplementations(named: NamedSkill[]): string {
     if (ns.links?.agentskills) linkParts.push(`[AgentSkills](${ns.links.agentskills})`);
     if (ns.links?.docs) linkParts.push(`[Docs](${ns.links.docs})`);
     const links = linkParts.length > 0 ? ` — ${linkParts.join(", ")}` : "";
-    const origin = ns.origin ? " ★ origin" : "";
-    lines.push(`- **${ns.name}** (${ns.id})${origin}${links}`);
+    const role = ns.role || (ns.origin ? "origin" : "variant");
+    lines.push(`- [${role}] **${ns.name}** (${ns.id})${links}`);
     lines.push(`  ${ns.description.slice(0, 120)}`);
   }
   return lines.join("\n");

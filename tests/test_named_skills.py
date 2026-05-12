@@ -95,6 +95,8 @@ class TestNamedSkillIndexGeneration(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertIn("web-search", buckets)
         self.assertEqual(len(buckets["web-search"]), 2)
+        self.assertEqual(buckets["web-search"][0]["role"], "origin")
+        self.assertEqual(buckets["web-search"][1]["role"], "variant")
         self.assertIn("code-generation", buckets)
         self.assertEqual(len(buckets["code-generation"]), 1)
 

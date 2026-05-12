@@ -103,8 +103,18 @@ def validate_schema(batch, schema, path):
         return [f"{path}: schema error: {exc.message}"]
 
 
-def validate_intake(intake_dir, graph_path, schema_path=None):
+def canonical_duplicate_warning(path, skill_id):
+    return (
+        f"{path}: Warning: '{skill_id}' already exists as a generic skill.\n"
+        f"  - To add a named implementation: create registry/named/<contributor>/{skill_id}.md\n"
+        "  - To reclassify or evolve the generic skill: use PR type [reclassify]\n"
+        "Treating this proposal as a named-skill submission. Review required."
+    )
+
+
+def validate_intake(intake_dir, graph_path, schema_path=None, strict=False):
     errors = []
+    warnings = []
     canonical_ids = load_canonical_ids(graph_path)
     schema = load_json(schema_path) if schema_path and HAS_JSONSCHEMA else None
     proposed_seen = {}
@@ -132,7 +142,11 @@ def validate_intake(intake_dir, graph_path, schema_path=None):
             if not skill_id:
                 continue
             if skill_id in canonical_ids:
-                errors.append(f"{path}: proposed skill '{skill_id}' duplicates canonical skill.")
+                message = canonical_duplicate_warning(path, skill_id)
+                if strict:
+                    errors.append(message)
+                else:
+                    warnings.append(message)
             if skill_id in proposed_seen:
                 errors.append(
                     f"{path}: Duplicate proposed skill '{skill_id}' also appears in {proposed_seen[skill_id]}."
@@ -149,24 +163,34 @@ def validate_intake(intake_dir, graph_path, schema_path=None):
             if target and target not in known_candidate_ids:
                 errors.append(f"{path}: similarity has unknown targetSkillId '{target}'.")
 
-    return errors, len(batches)
+    return errors, warnings, len(batches)
 
 
 def main():
+    if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(description="Validate Gaia intake skill batches.")
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument("--intake-dir", default=os.path.join(repo_root, "registry-for-review"))
     parser.add_argument("--graph", default=os.path.join(repo_root, "registry", "gaia.json"))
     parser.add_argument("--schema", default=os.path.join(repo_root, "registry", "schema", "skillBatch.schema.json"))
+    parser.add_argument("--strict", action="store_true", help="Treat canonical skill ID proposals as errors.")
     args = parser.parse_args()
 
     if not HAS_JSONSCHEMA:
         print("⚠  jsonschema not installed — skipping intake schema validation.")
         print("   Install with: pip install jsonschema")
 
-    errors, total = validate_intake(args.intake_dir, args.graph, args.schema)
+    errors, warnings, total = validate_intake(args.intake_dir, args.graph, args.schema, strict=args.strict)
     print(f"Validating intake batches: {args.intake_dir}")
     print(f"Found {total} batch file(s).")
+
+    if warnings:
+        print(f"\n{len(warnings)} intake validation warning(s):")
+        for idx, warning in enumerate(warnings, 1):
+            print(f"   {idx}. {warning}")
 
     if errors:
         print(f"\n❌ {len(errors)} intake validation error(s):")
