@@ -81,7 +81,7 @@
 · ◆ Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦]  [5★]
   ├─ · ◇ Extra Skill: /voice-agent  [3★]
   │  ├─ · ○ /speech-to-text  [2★]
-  │  ├─ · ○ /question-answer  [0★]
+  │  ├─ · ○ garrytan/office-hours  [0★]
   │  └─ · ○ /text-to-speech  [2★]
   ├─ · ○ /memory-manage  [2★]
   └─ · ◇ Extra Skill: /plan-and-execute  [4★]
