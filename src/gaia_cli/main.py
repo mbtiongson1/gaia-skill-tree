@@ -475,13 +475,16 @@ def lookup_command(args):
 
     skill_id = skill["id"]
     canon = getattr(args, 'canon', False)
-    
+
     config = load_config() or {}
     username = config.get("gaiaUser")
-    ctx = LocalContext.load(args.registry, username or "", include_scan=False)
-    
-    display = ctx.display_name(skill_id, canon=canon)
-    if not canon and not ctx.is_named(skill_id):
+    ctx = LocalContext.load(args.registry, username, include_scan=False) if username else None
+
+    if canon:
+        display = f"/{skill_id}"
+    elif ctx and ctx.is_named(skill_id):
+        display = ctx.display_name(skill_id)
+    else:
         display = skill.get("name") or f"/{skill_id}"
     print(f"{display}")
     
