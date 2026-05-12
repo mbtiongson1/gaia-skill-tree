@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import os
 import shutil
@@ -12,6 +13,15 @@ import pytest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def require_build_package():
+    if importlib.util.find_spec("build") is None:
+        pytest.skip(
+            'packaging tests require the "build" package; install developer '
+            'dependencies with `pip install -e ".[dev]"` or '
+            '`pip install -e ".[embeddings,dev]"`.'
+        )
 
 
 def run_python(args, *, cwd=None, env=None):
@@ -276,6 +286,8 @@ def test_install_cache_honors_gaia_home(tmp_path, monkeypatch):
 
 @pytest.mark.packaging
 def test_built_wheel_contains_only_python_package_data(tmp_path):
+    require_build_package()
+
     dist_dir = tmp_path / "dist"
     result = build_wheel(dist_dir)
     assert result.returncode == 0, result.stderr
@@ -305,6 +317,8 @@ def test_built_wheel_contains_only_python_package_data(tmp_path):
 
 @pytest.mark.packaging
 def test_wheel_install_smoke_tests_console_script(tmp_path):
+    require_build_package()
+
     dist_dir = tmp_path / "dist"
     build_result = build_wheel(dist_dir)
     assert build_result.returncode == 0, build_result.stderr
