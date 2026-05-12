@@ -694,7 +694,7 @@
     var ultIdx = 0;
     var unqIdx = 0;
     return text.split('\n').map(function(line) {
-      // Ultimate skill header lines
+      // 1. Ultimate Skill lines (◆)
       var m = line.match(/^(\s*◆\s*(?:Ultimate Skill:\s*)?)(\S+)(.*)$/);
       if (m) {
         var label = esc(m[1]);
@@ -714,7 +714,7 @@
                label + skillHtml + suffix + '</span>';
       }
 
-      // Unique skill lines
+      // 2. Unique Skill lines (◉)
       var u = line.match(/^([\s│├└─]*◉\s*(?:Unique Skill:\s*)?)(\S+)(.*)$/);
       if (u) {
         var ulabel = esc(u[1]);
@@ -723,14 +723,12 @@
         var udelay = -((unqIdx++ * 0.9) % 4);
         var uslash = uid.indexOf('/');
         var uskillHtml;
-        
         var isGold = usuffix.indexOf('5★') >= 0 || usuffix.indexOf('6★') >= 0;
         var uniqueClass = isGold ? 'tree-unique-skillname tree-unique-gold' : 'tree-unique-skillname';
-
         if (uslash > 0) {
           uskillHtml = '<span class="tree-unique-contributor">' + esc(uid.slice(0, uslash)) + '</span>' +
                        '<span class="tree-unique-slash">/</span>' +
-                       '<span class="' + uniqueClass + '">' + esc(uid.slice(uslash + 1)) + '</span>';
+                       '<span class="' + uniqueClass + '">' + esc(uid.slice(slash + 1)) + '</span>';
         } else {
           uskillHtml = '<span class="' + uniqueClass + '">' + esc(uid) + '</span>';
         }
@@ -738,7 +736,7 @@
                ulabel + uskillHtml + usuffix + '</span>';
       }
 
-      // Extra skill lines
+      // 3. Extra Skill lines (◇)
       var e = line.match(/^([\s│├└─]*◇\s*(?:Extra Skill:\s*)?)(\S+)(.*)$/);
       if (e) {
         var elabel = esc(e[1]);
@@ -756,7 +754,7 @@
         return '<span class="tree-extra-line">' + elabel + eskillHtml + esuffix + '</span>';
       }
 
-      // Basic skill lines
+      // 4. Basic Skill lines (○)
       var b = line.match(/^([\s│├└─]*○\s*)(\S+)(.*)$/);
       if (b) {
         var blabel = esc(b[1]);
@@ -774,11 +772,14 @@
         return '<span class="tree-basic-line">' + blabel + bskillHtml + bsuffix + '</span>';
       }
 
-      if (/^[═─]{3,}/.test(line)) return '<span class="tree-sep">' + esc(line) + '</span>';
+      // 5. Separators and Catch-alls
+      if (/^[═─]{3,}/.test(line.trim())) return '<span class="tree-sep">' + esc(line) + '</span>';
+      
       var out = esc(line);
       out = out.replace(/◇/g, '<span class="tree-extra-glyph">◇</span>');
       out = out.replace(/○/g, '<span class="tree-basic-glyph">○</span>');
       out = out.replace(/◉/g, '<span class="tree-unique-glyph">◉</span>');
+      out = out.replace(/◆/g, '<span class="tree-ult-glyph">◆</span>');
       return out;
     }).join('\n');
   }
