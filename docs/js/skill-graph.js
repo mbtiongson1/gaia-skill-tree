@@ -1486,6 +1486,7 @@
   trigger.addEventListener('focus', () => peek(true));
   trigger.addEventListener('blur', () => peek(false));
   trigger.addEventListener('click', () => {
+    hero.classList.add('transitioning-to-graph');
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
     modalGraph.resize();
@@ -1495,14 +1496,16 @@
   function closeDialog() {
     if (dialog.close) dialog.close();
     else dialog.removeAttribute('open');
-    modalGraph.resetFilters();
-    modalGraph.stop();
   }
   closeBtn.addEventListener('click', closeDialog);
   dialog.addEventListener('click', event => {
     if (event.target === dialog) closeDialog();
   });
-  dialog.addEventListener('close', () => modalGraph.stop());
+  dialog.addEventListener('close', () => {
+    hero.classList.remove('transitioning-to-graph');
+    modalGraph.resetFilters();
+    modalGraph.stop();
+  });
 
   fetch(GRAPH_JSON_URL)
     .then(response => {
