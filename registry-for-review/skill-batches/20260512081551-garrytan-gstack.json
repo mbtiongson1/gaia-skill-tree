@@ -1,0 +1,1248 @@
+{
+  "batchId": "20260512081551-garrytan-gstack",
+  "userId": "garrytan",
+  "sourceRepo": "garrytan/gstack",
+  "generatedAt": "2026-05-12T08:15:51Z",
+  "knownSkills": [
+    {
+      "skillId": "audience-model"
+    },
+    {
+      "skillId": "browser-automation"
+    },
+    {
+      "skillId": "code-generation"
+    },
+    {
+      "skillId": "code-review-pipeline"
+    },
+    {
+      "skillId": "autonomous-debug"
+    },
+    {
+      "skillId": "deployment-automation"
+    },
+    {
+      "skillId": "design-review"
+    },
+    {
+      "skillId": "e2e-testing"
+    },
+    {
+      "skillId": "feed-monitoring"
+    },
+    {
+      "skillId": "memory-manage"
+    },
+    {
+      "skillId": "parse-pdf"
+    },
+    {
+      "skillId": "question-answer"
+    },
+    {
+      "skillId": "release-automation"
+    },
+    {
+      "skillId": "security-audit"
+    },
+    {
+      "skillId": "skill-performance-benchmarking"
+    },
+    {
+      "skillId": "skill-security-analysis"
+    },
+    {
+      "skillId": "summarize"
+    },
+    {
+      "skillId": "ux-audit"
+    },
+    {
+      "skillId": "vertical-slice-planning"
+    },
+    {
+      "skillId": "web-scrape"
+    },
+    {
+      "skillId": "workflow-automation"
+    }
+  ],
+  "proposedSkills": [
+    {
+      "id": "gstack",
+      "name": "Gstack",
+      "type": "extra",
+      "description": "Fast headless browser for QA testing and site dogfooding. Navigate pages, interact with elements, verify state, diff before/after, take annotated screenshots, test responsive layouts, forms, uploads, dialogs, and capture bug evidence. Use when asked to open or test a site, verify a deployment, dogfood a user flow, or file a bug with screenshots.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "autoplan",
+      "name": "Autoplan",
+      "type": "extra",
+      "description": "Auto-review pipeline \u2014 reads the full CEO, design, eng, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles. Surfaces taste decisions (close approaches, borderline scope, codex disagreements) at a final approval gate. One command, fully reviewed plan out. Use when asked to \"auto review\", \"autoplan\", \"run all reviews\", \"review this plan automatically\", or \"make the decisions for me\". Proactively suggest when the user has a plan file and wants to run the full review gauntlet without answering 15-30 intermediate questions. (gstack) Voice triggers (speech-to-text aliases): \"auto plan\",...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /autoplan."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack autoplan/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "benchmark",
+      "name": "Benchmark",
+      "type": "extra",
+      "description": "Performance regression detection using the browse daemon. Establishes baselines for page load times, Core Web Vitals, and resource sizes. Compares before/after on every PR. Tracks performance trends over time. Use when: \"performance\", \"benchmark\", \"page speed\", \"lighthouse\", \"web vitals\", \"bundle size\", \"load time\". (gstack) Voice triggers (speech-to-text aliases): \"speed test\", \"check performance\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/benchmark/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /benchmark."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack benchmark/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "benchmark-models",
+      "name": "Benchmark Models",
+      "type": "extra",
+      "description": "Cross-model benchmark for gstack skills. Runs the same prompt through Claude, GPT (via Codex CLI), and Gemini side-by-side \u2014 compares latency, tokens, cost, and optionally quality via LLM judge. Answers \"which model is actually best for this skill?\" with data instead of vibes. Separate from /benchmark, which measures web page performance. Use when: \"benchmark models\", \"compare models\", \"which model is best for X\", \"cross-model comparison\", \"model shootout\". (gstack) Voice triggers (speech-to-text aliases): \"compare models\", \"model shootout\", \"which model is best\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/benchmark-models/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /benchmark-models."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack benchmark-models/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "browse",
+      "name": "Browse",
+      "type": "extra",
+      "description": "Fast headless browser for QA testing and site dogfooding. Navigate any URL, interact with elements, verify page state, diff before/after actions, take annotated screenshots, check responsive layouts, test forms and uploads, handle dialogs, and assert element states. ~100ms per command. Use when you need to test a feature, verify a deployment, dogfood a user flow, or file a bug with evidence. Use when asked to \"open in browser\", \"test the site\", \"take a screenshot\", or \"dogfood this\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/browse/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /browse."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack browse/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "hackernews-frontpage",
+      "name": "Hackernews Frontpage",
+      "type": "basic",
+      "description": "Scrape the Hacker News front page (titles, points, comment counts).",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/browser-skills/hackernews-frontpage/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /hackernews-frontpage."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack browser-skills/hackernews-frontpage/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "canary",
+      "name": "Canary",
+      "type": "extra",
+      "description": "Post-deploy canary monitoring. Watches the live app for console errors, performance regressions, and page failures using the browse daemon. Takes periodic screenshots, compares against pre-deploy baselines, and alerts on anomalies. Use when: \"monitor deploy\", \"canary\", \"post-deploy check\", \"watch production\", \"verify deploy\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/canary/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /canary."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack canary/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "careful",
+      "name": "Careful",
+      "type": "basic",
+      "description": "Safety guardrails for destructive commands. Warns before rm -rf, DROP TABLE, force-push, git reset --hard, kubectl delete, and similar destructive operations. User can override each warning. Use when touching prod, debugging live systems, or working in a shared environment. Use when asked to \"be careful\", \"safety mode\", \"prod mode\", or \"careful mode\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/careful/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /careful."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack careful/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "type": "extra",
+      "description": "OpenAI Codex CLI wrapper \u2014 three modes. Code review: independent diff review via codex review with pass/fail gate. Challenge: adversarial mode that tries to break your code. Consult: ask codex anything with session continuity for follow-ups. The \"200 IQ autistic developer\" second opinion. Use when asked to \"codex review\", \"codex challenge\", \"ask codex\", \"second opinion\", or \"consult codex\". (gstack) Voice triggers (speech-to-text aliases): \"code x\", \"code ex\", \"get another opinion\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/codex/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /codex."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack codex/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "context-restore",
+      "name": "Context Restore",
+      "type": "extra",
+      "description": "Restore working context saved earlier by /context-save. Loads the most recent saved state (across all branches by default) so you can pick up where you left off \u2014 even across Conductor workspace handoffs. Use when asked to \"resume\", \"restore context\", \"where was I\", or \"pick up where I left off\". Pair with /context-save. Formerly /checkpoint resume \u2014 renamed because Claude Code treats /checkpoint as a native rewind alias in current environments.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/context-restore/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /context-restore."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack context-restore/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "context-save",
+      "name": "Context Save",
+      "type": "extra",
+      "description": "Save working context. Captures git state, decisions made, and remaining work so any future session can pick up without losing a beat. Use when asked to \"save progress\", \"save state\", \"context save\", or \"save my work\". Pair with /context-restore to resume later. Formerly /checkpoint \u2014 renamed because Claude Code treats /checkpoint as a native rewind alias in current environments, which was shadowing this skill.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/context-save/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /context-save."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack context-save/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "cso",
+      "name": "CSO",
+      "type": "extra",
+      "description": "Chief Security Officer mode. Infrastructure-first security audit: secrets archaeology, dependency supply chain, CI/CD pipeline security, LLM/AI security, skill supply chain scanning, plus OWASP Top 10, STRIDE threat modeling, and active verification. Two modes: daily (zero-noise, 8/10 confidence gate) and comprehensive (monthly deep scan, 2/10 bar). Trend tracking across audit runs. Use when: \"security audit\", \"threat model\", \"pentest review\", \"OWASP\", \"CSO review\". (gstack) Voice triggers (speech-to-text aliases): \"see-so\", \"see so\", \"security review\", \"security check\", \"vulnerability scan\", \"run security\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/cso/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /cso."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack cso/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "design-consultation",
+      "name": "Design Consultation",
+      "type": "extra",
+      "description": "Design consultation: understands your product, researches the landscape, proposes a complete design system (aesthetic, typography, color, layout, spacing, motion), and generates font+color preview pages. Creates DESIGN.md as your project's design source of truth. For existing sites, use /plan-design-review to infer the system instead. Use when asked to \"design system\", \"brand guidelines\", or \"create DESIGN.md\". Proactively suggest when starting a new project's UI with no existing design system or DESIGN.md.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/design-consultation/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /design-consultation."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack design-consultation/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "design-html",
+      "name": "Design Html",
+      "type": "extra",
+      "description": "Design finalization: generates production-quality Pretext-native HTML/CSS. Works with approved mockups from /design-shotgun, CEO plans from /plan-ceo-review, design review context from /plan-design-review, or from scratch with a user description. Text actually reflows, heights are computed, layouts are dynamic. 30KB overhead, zero deps. Smart API routing: picks the right Pretext patterns for each design type. Use when: \"finalize this design\", \"turn this into HTML\", \"build me a page\", \"implement this design\", or after any planning skill. Proactively suggest when user has approved a design or has a plan ready. (gstack) Voice triggers...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/design-html/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /design-html."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack design-html/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "design-review",
+      "name": "Design Review",
+      "type": "extra",
+      "description": "Designer's eye QA: finds visual inconsistency, spacing issues, hierarchy problems, AI slop patterns, and slow interactions \u2014 then fixes them. Iteratively fixes issues in source code, committing each fix atomically and re-verifying with before/after screenshots. For plan-mode design review (before implementation), use /plan-design-review. Use when asked to \"audit the design\", \"visual QA\", \"check if it looks good\", or \"design polish\". Proactively suggest when the user mentions visual inconsistencies or wants to polish the look of a live site.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/design-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /design-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack design-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "design-shotgun",
+      "name": "Design Shotgun",
+      "type": "extra",
+      "description": "Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate. Standalone design exploration you can run anytime. Use when: \"explore designs\", \"show me options\", \"design variants\", \"visual brainstorm\", or \"I don't like how this looks\". Proactively suggest when the user describes a UI feature but hasn't seen what it could look like.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /design-shotgun."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack design-shotgun/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "devex-review",
+      "name": "Devex Review",
+      "type": "extra",
+      "description": "Live developer experience audit. Uses the browse tool to actually TEST the developer experience: navigates docs, tries the getting started flow, times TTHW, screenshots error messages, evaluates CLI help text. Produces a DX scorecard with evidence. Compares against /plan-devex-review scores if they exist (the boomerang: plan said 3 minutes, reality says 8). Use when asked to \"test the DX\", \"DX audit\", \"developer experience test\", or \"try the onboarding\". Proactively suggest after shipping a developer-facing feature. (gstack) Voice triggers (speech-to-text aliases): \"dx audit\", \"test the developer experience\", \"try the onboarding\",...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/devex-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /devex-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack devex-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "document-release",
+      "name": "Document Release",
+      "type": "extra",
+      "description": "Post-ship documentation update. Reads all project docs, cross-references the diff, updates README/ARCHITECTURE/CONTRIBUTING/CLAUDE.md to match what shipped, polishes CHANGELOG voice, cleans up TODOS, and optionally bumps VERSION. Use when asked to \"update the docs\", \"sync documentation\", or \"post-ship docs\". Proactively suggest after a PR is merged or code is shipped.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/document-release/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /document-release."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack document-release/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "freeze",
+      "name": "Freeze",
+      "type": "basic",
+      "description": "Restrict file edits to a specific directory for the session. Blocks Edit and Write outside the allowed path. Use when debugging to prevent accidentally \"fixing\" unrelated code, or when you want to scope changes to one module. Use when asked to \"freeze\", \"restrict edits\", \"only edit this folder\", or \"lock down edits\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/freeze/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /freeze."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack freeze/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "gstack-upgrade",
+      "name": "Gstack Upgrade",
+      "type": "extra",
+      "description": "Upgrade gstack to the latest version. Detects global vs vendored install, runs the upgrade, and shows what's new. Use when asked to \"upgrade gstack\", \"update gstack\", or \"get latest version\". Voice triggers (speech-to-text aliases): \"upgrade the tools\", \"update the tools\", \"gee stack upgrade\", \"g stack upgrade\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/gstack-upgrade/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack-upgrade."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack gstack-upgrade/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "guard",
+      "name": "Guard",
+      "type": "extra",
+      "description": "Full safety mode: destructive command warnings + directory-scoped edits. Combines /careful (warns before rm -rf, DROP TABLE, force-push, etc.) with /freeze (blocks edits outside a specified directory). Use for maximum safety when touching prod or debugging live systems. Use when asked to \"guard mode\", \"full safety\", \"lock it down\", or \"maximum safety\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/guard/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /guard."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack guard/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "type": "extra",
+      "description": "Code quality dashboard. Wraps existing project tools (type checker, linter, test runner, dead code detector, shell linter), computes a weighted composite 0-10 score, and tracks trends over time. Use when: \"health check\", \"code quality\", \"how healthy is the codebase\", \"run all checks\", \"quality score\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/health/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /health."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack health/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "investigate",
+      "name": "Investigate",
+      "type": "extra",
+      "description": "Systematic debugging with root cause investigation. Four phases: investigate, analyze, hypothesize, implement. Iron Law: no fixes without root cause. Use when asked to \"debug this\", \"fix this bug\", \"why is this broken\", \"investigate this error\", or \"root cause analysis\". Proactively invoke this skill (do NOT debug directly) when the user reports errors, 500 errors, stack traces, unexpected behavior, \"it was working yesterday\", or is troubleshooting why something stopped working.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/investigate/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /investigate."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack investigate/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "land-and-deploy",
+      "name": "Land And Deploy",
+      "type": "extra",
+      "description": "Land and deploy workflow. Merges the PR, waits for CI and deploy, verifies production health via canary checks. Takes over after /ship creates the PR. Use when: \"merge\", \"land\", \"deploy\", \"merge and verify\", \"land it\", \"ship it to production\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/land-and-deploy/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /land-and-deploy."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack land-and-deploy/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "landing-report",
+      "name": "Landing Report",
+      "type": "extra",
+      "description": "Read-only queue dashboard for workspace-aware ship. Shows which VERSION slots are currently claimed by open PRs, which sibling Conductor workspaces have WIP work likely to ship soon, and what slot /ship would pick next. No mutations \u2014 just a snapshot. Use when asked to \"landing report\", \"what's in the queue\", \"show me open PRs\", or \"which version do I claim next\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/landing-report/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /landing-report."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack landing-report/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "learn",
+      "name": "Learn",
+      "type": "extra",
+      "description": "Manage project learnings. Review, search, prune, and export what gstack has learned across sessions. Use when asked to \"what have we learned\", \"show learnings\", \"prune stale learnings\", or \"export learnings\". Proactively suggest when the user asks about past patterns or wonders \"didn't we fix this before?\"",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/learn/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /learn."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack learn/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "make-pdf",
+      "name": "Make Pdf",
+      "type": "basic",
+      "description": "Turn any markdown file into a publication-quality PDF. Proper 1in margins, intelligent page breaks, page numbers, cover pages, running headers, curly quotes and em dashes, clickable TOC, diagonal DRAFT watermark. Not a draft artifact \u2014 a finished artifact. Use when asked to \"make a PDF\", \"export to PDF\", \"turn this markdown into a PDF\", or \"generate a document\". (gstack) Voice triggers (speech-to-text aliases): \"make this a pdf\", \"make it a pdf\", \"export to pdf\", \"turn this into a pdf\", \"turn this markdown into a pdf\", \"generate a pdf\", \"make a pdf from\", \"pdf this markdown\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/make-pdf/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /make-pdf."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack make-pdf/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "office-hours",
+      "name": "Office Hours",
+      "type": "extra",
+      "description": "YC Office Hours \u2014 two modes. Startup mode: six forcing questions that expose demand reality, status quo, desperate specificity, narrowest wedge, observation, and future-fit. Builder mode: design thinking brainstorming for side projects, hackathons, learning, and open source. Saves a design doc. Use when asked to \"brainstorm this\", \"I have an idea\", \"help me think through this\", \"office hours\", or \"is this worth building\". Proactively invoke this skill (do NOT answer directly) when the user describes a new product idea, asks whether something is worth building, wants to think through design decisions for something that doesn't exist yet,...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /office-hours."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack office-hours/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "open-gstack-browser",
+      "name": "Open Gstack Browser",
+      "type": "basic",
+      "description": "Launch GStack Browser \u2014 AI-controlled Chromium with the sidebar extension baked in. Opens a visible browser window where you can watch every action in real time. The sidebar shows a live activity feed and chat. Anti-bot stealth built in. Use when asked to \"open gstack browser\", \"launch browser\", \"connect chrome\", \"open chrome\", \"real browser\", \"launch chrome\", \"side panel\", or \"control my browser\". Voice triggers (speech-to-text aliases): \"show me the browser\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/open-gstack-browser/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /open-gstack-browser."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack open-gstack-browser/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "gstack-openclaw-ceo-review",
+      "name": "Gstack Openclaw Ceo Review",
+      "type": "extra",
+      "description": "Use when asked to review a plan, challenge a proposal, run a CEO review, poke holes in an approach, think bigger about scope, or decide whether to expand or reduce the plan.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/openclaw/skills/gstack-openclaw-ceo-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack-openclaw-ceo-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack openclaw/skills/gstack-openclaw-ceo-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "gstack-openclaw-investigate",
+      "name": "Gstack Openclaw Investigate",
+      "type": "extra",
+      "description": "Use when asked to debug, fix a bug, investigate an error, or do root cause analysis, and when users report errors, stack traces, unexpected behavior, or say something stopped working.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/openclaw/skills/gstack-openclaw-investigate/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack-openclaw-investigate."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack openclaw/skills/gstack-openclaw-investigate/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "gstack-openclaw-office-hours",
+      "name": "Gstack Openclaw Office Hours",
+      "type": "extra",
+      "description": "Use when asked to brainstorm, evaluate whether an idea is worth building, run office hours, or think through a new product idea or design direction before any code is written.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/openclaw/skills/gstack-openclaw-office-hours/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack-openclaw-office-hours."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack openclaw/skills/gstack-openclaw-office-hours/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "gstack-openclaw-retro",
+      "name": "Gstack Openclaw Retro",
+      "type": "extra",
+      "description": "\"Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics with persistent history and trend tracking. Team-aware with per-person contributions, praise, and growth areas. Use when asked for weekly retro, what shipped this week, or engineering retrospective.\"",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/openclaw/skills/gstack-openclaw-retro/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /gstack-openclaw-retro."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack openclaw/skills/gstack-openclaw-retro/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "pair-agent",
+      "name": "Pair Agent",
+      "type": "extra",
+      "description": "Pair a remote AI agent with your browser. One command generates a setup key and prints instructions the other agent can follow to connect. Works with OpenClaw, Hermes, Codex, Cursor, or any agent that can make HTTP requests. The remote agent gets its own tab with scoped access (read+write by default, admin on request). Use when asked to \"pair agent\", \"connect agent\", \"share browser\", \"remote browser\", \"let another agent use my browser\", or \"give browser access\". (gstack) Voice triggers (speech-to-text aliases): \"pair agent\", \"connect agent\", \"share my browser\", \"remote browser access\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/pair-agent/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /pair-agent."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack pair-agent/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "plan-ceo-review",
+      "name": "Plan Ceo Review",
+      "type": "extra",
+      "description": "CEO/founder-mode plan review. Rethink the problem, find the 10-star product, challenge premises, expand scope when it creates a better product. Four modes: SCOPE EXPANSION (dream big), SELECTIVE EXPANSION (hold scope + cherry-pick expansions), HOLD SCOPE (maximum rigor), SCOPE REDUCTION (strip to essentials). Use when asked to \"think bigger\", \"expand scope\", \"strategy review\", \"rethink this\", or \"is this ambitious enough\". Proactively suggest when the user is questioning scope or ambition of a plan, or when the plan feels like it could be thinking bigger.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/plan-ceo-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /plan-ceo-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack plan-ceo-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "plan-design-review",
+      "name": "Plan Design Review",
+      "type": "extra",
+      "description": "Designer's eye plan review \u2014 interactive, like CEO and Eng review. Rates each design dimension 0-10, explains what would make it a 10, then fixes the plan to get there. Works in plan mode. For live site visual audits, use /design-review. Use when asked to \"review the design plan\" or \"design critique\". Proactively suggest when the user has a plan with UI/UX components that should be reviewed before implementation.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/plan-design-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /plan-design-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack plan-design-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "plan-devex-review",
+      "name": "Plan Devex Review",
+      "type": "extra",
+      "description": "Interactive developer experience plan review. Explores developer personas, benchmarks against competitors, designs magical moments, and traces friction points before scoring. Three modes: DX EXPANSION (competitive advantage), DX POLISH (bulletproof every touchpoint), DX TRIAGE (critical gaps only). Use when asked to \"DX review\", \"developer experience audit\", \"devex review\", or \"API design review\". Proactively suggest when the user has a plan for developer-facing products (APIs, CLIs, SDKs, libraries, platforms, docs). (gstack) Voice triggers (speech-to-text aliases): \"dx review\", \"developer experience review\", \"devex review\", \"devex...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/plan-devex-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /plan-devex-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack plan-devex-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "plan-eng-review",
+      "name": "Plan Eng Review",
+      "type": "extra",
+      "description": "Eng manager-mode plan review. Lock in the execution plan \u2014 architecture, data flow, diagrams, edge cases, test coverage, performance. Walks through issues interactively with opinionated recommendations. Use when asked to \"review the architecture\", \"engineering review\", or \"lock in the plan\". Proactively suggest when the user has a plan or design doc and is about to start coding \u2014 to catch architecture issues before implementation. (gstack) Voice triggers (speech-to-text aliases): \"tech review\", \"technical review\", \"plan engineering review\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/plan-eng-review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /plan-eng-review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack plan-eng-review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "plan-tune",
+      "name": "Plan Tune",
+      "type": "extra",
+      "description": "Self-tuning question sensitivity + developer psychographic for gstack (v1: observational). Review which AskUserQuestion prompts fire across gstack skills, set per-question preferences (never-ask / always-ask / ask-only-for-one-way), inspect the dual-track profile (what you declared vs what your behavior suggests), and enable/disable question tuning. Conversational interface \u2014 no CLI syntax required.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/plan-tune/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /plan-tune."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack plan-tune/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "qa",
+      "name": "QA",
+      "type": "extra",
+      "description": "Systematically QA test a web application and fix bugs found. Runs QA testing, then iteratively fixes bugs in source code, committing each fix atomically and re-verifying. Use when asked to \"qa\", \"QA\", \"test this site\", \"find bugs\", \"test and fix\", or \"fix what's broken\". Proactively suggest when the user says a feature is ready for testing or asks \"does this work?\". Three tiers: Quick (critical/high only), Standard (+ medium), Exhaustive (+ cosmetic). Produces before/after health scores, fix evidence, and a ship-readiness summary. For report-only mode, use /qa-only. (gstack) Voice triggers (speech-to-text aliases): \"quality check\", \"test...",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/qa/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /qa."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack qa/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "qa-only",
+      "name": "QA Only",
+      "type": "extra",
+      "description": "Report-only QA testing. Systematically tests a web application and produces a structured report with health score, screenshots, and repro steps \u2014 but never fixes anything. Use when asked to \"just report bugs\", \"qa report only\", or \"test but don't fix\". For the full test-fix-verify loop, use /qa instead. Proactively suggest when the user wants a bug report without any code changes. (gstack) Voice triggers (speech-to-text aliases): \"bug report\", \"just check for bugs\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/qa-only/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /qa-only."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack qa-only/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "retro",
+      "name": "Retro",
+      "type": "extra",
+      "description": "Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics with persistent history and trend tracking. Team-aware: breaks down per-person contributions with praise and growth areas. Use when asked to \"weekly retro\", \"what did we ship\", or \"engineering retrospective\". Proactively suggest at the end of a work week or sprint.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/retro/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /retro."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack retro/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "review",
+      "name": "Review",
+      "type": "extra",
+      "description": "Pre-landing PR review. Analyzes diff against the base branch for SQL safety, LLM trust boundary violations, conditional side effects, and other structural issues. Use when asked to \"review this PR\", \"code review\", \"pre-landing review\", or \"check my diff\". Proactively suggest when the user is about to merge or land code changes.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/review/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /review."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack review/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "scrape",
+      "name": "Scrape",
+      "type": "extra",
+      "description": "Pull data from a web page. First call on a new intent prototypes the flow via $B primitives and returns JSON. Subsequent calls on a matching intent route to a codified browser-skill and return in ~200ms. Read-only \u2014 for mutating flows (form fills, clicks, submissions), use /automate. Use when asked to \"scrape\", \"get data from\", \"pull\", \"extract from\", or \"what's on\" a page.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/scrape/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /scrape."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack scrape/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "setup-browser-cookies",
+      "name": "Setup Browser Cookies",
+      "type": "basic",
+      "description": "Import cookies from your real Chromium browser into the headless browse session. Opens an interactive picker UI where you select which cookie domains to import. Use before QA testing authenticated pages. Use when asked to \"import cookies\", \"login to the site\", or \"authenticate the browser\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/setup-browser-cookies/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /setup-browser-cookies."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack setup-browser-cookies/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "setup-deploy",
+      "name": "Setup Deploy",
+      "type": "extra",
+      "description": "Configure deployment settings for /land-and-deploy. Detects your deploy platform (Fly.io, Render, Vercel, Netlify, Heroku, GitHub Actions, custom), production URL, health check endpoints, and deploy status commands. Writes the configuration to CLAUDE.md so all future deploys are automatic. Use when: \"setup deploy\", \"configure deployment\", \"set up land-and-deploy\", \"how do I deploy with gstack\", \"add deploy config\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/setup-deploy/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /setup-deploy."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack setup-deploy/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "setup-gbrain",
+      "name": "Setup Gbrain",
+      "type": "extra",
+      "description": "Set up gbrain for this coding agent: install the CLI, initialize a local PGLite or Supabase brain, register MCP, capture per-remote trust policy. One command from zero to \"gbrain is running, and this agent can call it.\" Use when: \"setup gbrain\", \"connect gbrain\", \"start gbrain\", \"install gbrain\", \"configure gbrain for this machine\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/setup-gbrain/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /setup-gbrain."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack setup-gbrain/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "ship",
+      "name": "Ship",
+      "type": "extra",
+      "description": "Ship workflow: detect + merge base branch, run tests, review diff, bump VERSION, update CHANGELOG, commit, push, create PR. Use when asked to \"ship\", \"deploy\", \"push to main\", \"create a PR\", \"merge and push\", or \"get it deployed\". Proactively invoke this skill (do NOT push/PR directly) when the user says code is ready, asks about deploying, wants to push code up, or asks to create a PR.",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/ship/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /ship."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack ship/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "skillify",
+      "name": "Skillify",
+      "type": "extra",
+      "description": "Codify the most recent successful /scrape flow into a permanent browser-skill on disk. Future /scrape calls with the same intent run the codified script in ~200ms instead of re-driving the page. Walks back through the conversation, synthesizes script.ts + script.test.ts + fixture, runs the test in a temp dir, and asks before committing. Use when asked to \"skillify\", \"codify\", \"save this scrape\", or \"make this permanent\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/skillify/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /skillify."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack skillify/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "sync-gbrain",
+      "name": "Sync Gbrain",
+      "type": "extra",
+      "description": "Keep gbrain current with this repo's code and refresh agent search guidance in CLAUDE.md. Wraps the gstack-gbrain-sync orchestrator with state probing, native code-surface registration, capability checks, and a verdict block. Re-runnable, idempotent. Use when: \"sync gbrain\", \"refresh gbrain\", \"re-index this repo\", \"gbrain search isn't finding things\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/sync-gbrain/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /sync-gbrain."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack sync-gbrain/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    },
+    {
+      "id": "unfreeze",
+      "name": "Unfreeze",
+      "type": "basic",
+      "description": "Clear the freeze boundary set by /freeze, allowing edits to all directories again. Use when you want to widen edit scope without ending the session. Use when asked to \"unfreeze\", \"unlock edits\", \"remove freeze\", or \"allow all edits\".",
+      "sourceRepo": "garrytan/gstack",
+      "lifecycle": "pending",
+      "evidence": [
+        {
+          "type": "source",
+          "url": "https://github.com/garrytan/gstack/blob/main/unfreeze/SKILL.md",
+          "notes": "SKILL.md frontmatter and workflow documentation for /unfreeze."
+        }
+      ],
+      "rationale": "Curated from garrytan/gstack unfreeze/SKILL.md; repository ships this as a first-class agent skill.",
+      "openQuestions": []
+    }
+  ],
+  "similarity": [
+    {
+      "sourceSkillId": "gstack",
+      "targetSkillId": "browser-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack capability to Gaia canonical browser-automation."
+    },
+    {
+      "sourceSkillId": "autoplan",
+      "targetSkillId": "vertical-slice-planning",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /autoplan capability to Gaia canonical vertical-slice-planning."
+    },
+    {
+      "sourceSkillId": "benchmark",
+      "targetSkillId": "skill-performance-benchmarking",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /benchmark capability to Gaia canonical skill-performance-benchmarking."
+    },
+    {
+      "sourceSkillId": "benchmark-models",
+      "targetSkillId": "skill-performance-benchmarking",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /benchmark-models capability to Gaia canonical skill-performance-benchmarking."
+    },
+    {
+      "sourceSkillId": "browse",
+      "targetSkillId": "browser-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /browse capability to Gaia canonical browser-automation."
+    },
+    {
+      "sourceSkillId": "hackernews-frontpage",
+      "targetSkillId": "web-scrape",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /hackernews-frontpage capability to Gaia canonical web-scrape."
+    },
+    {
+      "sourceSkillId": "canary",
+      "targetSkillId": "feed-monitoring",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /canary capability to Gaia canonical feed-monitoring."
+    },
+    {
+      "sourceSkillId": "careful",
+      "targetSkillId": "skill-security-analysis",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /careful capability to Gaia canonical skill-security-analysis."
+    },
+    {
+      "sourceSkillId": "codex",
+      "targetSkillId": "code-review-pipeline",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /codex capability to Gaia canonical code-review-pipeline."
+    },
+    {
+      "sourceSkillId": "context-restore",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /context-restore capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "context-save",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /context-save capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "cso",
+      "targetSkillId": "security-audit",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /cso capability to Gaia canonical security-audit."
+    },
+    {
+      "sourceSkillId": "design-consultation",
+      "targetSkillId": "design-review",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /design-consultation capability to Gaia canonical design-review."
+    },
+    {
+      "sourceSkillId": "design-html",
+      "targetSkillId": "code-generation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /design-html capability to Gaia canonical code-generation."
+    },
+    {
+      "sourceSkillId": "design-review",
+      "targetSkillId": "design-review",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /design-review capability to Gaia canonical design-review."
+    },
+    {
+      "sourceSkillId": "design-shotgun",
+      "targetSkillId": "design-review",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /design-shotgun capability to Gaia canonical design-review."
+    },
+    {
+      "sourceSkillId": "devex-review",
+      "targetSkillId": "ux-audit",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /devex-review capability to Gaia canonical ux-audit."
+    },
+    {
+      "sourceSkillId": "document-release",
+      "targetSkillId": "release-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /document-release capability to Gaia canonical release-automation."
+    },
+    {
+      "sourceSkillId": "freeze",
+      "targetSkillId": "workflow-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /freeze capability to Gaia canonical workflow-automation."
+    },
+    {
+      "sourceSkillId": "gstack-upgrade",
+      "targetSkillId": "release-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack-upgrade capability to Gaia canonical release-automation."
+    },
+    {
+      "sourceSkillId": "guard",
+      "targetSkillId": "skill-security-analysis",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /guard capability to Gaia canonical skill-security-analysis."
+    },
+    {
+      "sourceSkillId": "health",
+      "targetSkillId": "feed-monitoring",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /health capability to Gaia canonical feed-monitoring."
+    },
+    {
+      "sourceSkillId": "investigate",
+      "targetSkillId": "autonomous-debug",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /investigate capability to Gaia canonical autonomous-debug."
+    },
+    {
+      "sourceSkillId": "land-and-deploy",
+      "targetSkillId": "deployment-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /land-and-deploy capability to Gaia canonical deployment-automation."
+    },
+    {
+      "sourceSkillId": "landing-report",
+      "targetSkillId": "summarize",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /landing-report capability to Gaia canonical summarize."
+    },
+    {
+      "sourceSkillId": "learn",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /learn capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "make-pdf",
+      "targetSkillId": "parse-pdf",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /make-pdf capability to Gaia canonical parse-pdf."
+    },
+    {
+      "sourceSkillId": "office-hours",
+      "targetSkillId": "question-answer",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /office-hours capability to Gaia canonical question-answer."
+    },
+    {
+      "sourceSkillId": "open-gstack-browser",
+      "targetSkillId": "browser-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /open-gstack-browser capability to Gaia canonical browser-automation."
+    },
+    {
+      "sourceSkillId": "gstack-openclaw-ceo-review",
+      "targetSkillId": "vertical-slice-planning",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack-openclaw-ceo-review capability to Gaia canonical vertical-slice-planning."
+    },
+    {
+      "sourceSkillId": "gstack-openclaw-investigate",
+      "targetSkillId": "autonomous-debug",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack-openclaw-investigate capability to Gaia canonical autonomous-debug."
+    },
+    {
+      "sourceSkillId": "gstack-openclaw-office-hours",
+      "targetSkillId": "question-answer",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack-openclaw-office-hours capability to Gaia canonical question-answer."
+    },
+    {
+      "sourceSkillId": "gstack-openclaw-retro",
+      "targetSkillId": "code-review-pipeline",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /gstack-openclaw-retro capability to Gaia canonical code-review-pipeline."
+    },
+    {
+      "sourceSkillId": "pair-agent",
+      "targetSkillId": "browser-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /pair-agent capability to Gaia canonical browser-automation."
+    },
+    {
+      "sourceSkillId": "plan-ceo-review",
+      "targetSkillId": "vertical-slice-planning",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /plan-ceo-review capability to Gaia canonical vertical-slice-planning."
+    },
+    {
+      "sourceSkillId": "plan-design-review",
+      "targetSkillId": "design-review",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /plan-design-review capability to Gaia canonical design-review."
+    },
+    {
+      "sourceSkillId": "plan-devex-review",
+      "targetSkillId": "ux-audit",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /plan-devex-review capability to Gaia canonical ux-audit."
+    },
+    {
+      "sourceSkillId": "plan-eng-review",
+      "targetSkillId": "vertical-slice-planning",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /plan-eng-review capability to Gaia canonical vertical-slice-planning."
+    },
+    {
+      "sourceSkillId": "plan-tune",
+      "targetSkillId": "audience-model",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /plan-tune capability to Gaia canonical audience-model."
+    },
+    {
+      "sourceSkillId": "qa",
+      "targetSkillId": "e2e-testing",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /qa capability to Gaia canonical e2e-testing."
+    },
+    {
+      "sourceSkillId": "qa-only",
+      "targetSkillId": "e2e-testing",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /qa-only capability to Gaia canonical e2e-testing."
+    },
+    {
+      "sourceSkillId": "retro",
+      "targetSkillId": "code-review-pipeline",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /retro capability to Gaia canonical code-review-pipeline."
+    },
+    {
+      "sourceSkillId": "review",
+      "targetSkillId": "code-review-pipeline",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /review capability to Gaia canonical code-review-pipeline."
+    },
+    {
+      "sourceSkillId": "scrape",
+      "targetSkillId": "web-scrape",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /scrape capability to Gaia canonical web-scrape."
+    },
+    {
+      "sourceSkillId": "setup-browser-cookies",
+      "targetSkillId": "browser-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /setup-browser-cookies capability to Gaia canonical browser-automation."
+    },
+    {
+      "sourceSkillId": "setup-deploy",
+      "targetSkillId": "deployment-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /setup-deploy capability to Gaia canonical deployment-automation."
+    },
+    {
+      "sourceSkillId": "setup-gbrain",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /setup-gbrain capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "ship",
+      "targetSkillId": "release-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /ship capability to Gaia canonical release-automation."
+    },
+    {
+      "sourceSkillId": "skillify",
+      "targetSkillId": "workflow-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /skillify capability to Gaia canonical workflow-automation."
+    },
+    {
+      "sourceSkillId": "sync-gbrain",
+      "targetSkillId": "memory-manage",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /sync-gbrain capability to Gaia canonical memory-manage."
+    },
+    {
+      "sourceSkillId": "unfreeze",
+      "targetSkillId": "workflow-automation",
+      "score": 0.72,
+      "reason": "Curated mapping from garrytan/gstack /unfreeze capability to Gaia canonical workflow-automation."
+    }
+  ]
+}
