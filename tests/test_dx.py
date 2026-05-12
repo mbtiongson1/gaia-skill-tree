@@ -165,9 +165,15 @@ def test_lookup_lists_named_implementation_roles(tmp_path, monkeypatch, capsys):
     run_cli(monkeypatch, ["--registry", str(tmp_path), "lookup", "web-search"])
 
     output = capsys.readouterr().out
-    assert "/web-search - Web Search" in output
+    assert "Web Search" in output
+    assert "Type: basic    Level: 1★" in output
     assert "[origin] Alice Search (alice/search)" in output
     assert "[variant] Bob Search (bob/search)" in output
+
+    # Verify canon flag reveals slash ID
+    run_cli(monkeypatch, ["--registry", str(tmp_path), "--canon", "lookup", "web-search"])
+    output_canon = capsys.readouterr().out
+    assert "/web-search" in output_canon
 
 
 def parse_config(path):
