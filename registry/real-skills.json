@@ -1367,6 +1367,102 @@
         "moderation",
         "classification"
       ]
+    },
+    {
+      "id": "garrytan-autoplan",
+      "name": "garrytan/autoplan",
+      "contributor": "garrytan",
+      "title": "Founder Mode Autoplan",
+      "description": "The definitive autonomous 'Founder mode' review and decision suite. Orchestrates CEO, design, engineering, and DX reviews with auto-decisions.",
+      "sourceRepo": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md",
+      "mapsToGaia": [
+        "vertical-slice-planning"
+      ],
+      "promotedNamedSkillId": "garrytan/garrytan",
+      "addedAt": "2026-05-12",
+      "tags": [
+        "founder-mode",
+        "autoplan",
+        "decision-suite",
+        "ceo-review"
+      ]
+    },
+    {
+      "id": "garrytan-office-hours",
+      "name": "garrytan/office-hours",
+      "contributor": "garrytan",
+      "title": "YC Office Hours",
+      "description": "YC-style startup and builder brainstorming with six forcing questions to expose reality.",
+      "sourceRepo": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md",
+      "mapsToGaia": [
+        "question-answer"
+      ],
+      "promotedNamedSkillId": "garrytan/office-hours",
+      "addedAt": "2026-05-12",
+      "tags": [
+        "brainstorming",
+        "startup-strategy",
+        "y-combinator"
+      ]
+    },
+    {
+      "id": "garrytan-cso",
+      "name": "garrytan/cso",
+      "contributor": "garrytan",
+      "title": "Chief Security Officer Mode",
+      "description": "Infrastructure-first security audit focusing on secrets archaeology and dependency supply chain.",
+      "sourceRepo": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack/blob/main/cso/SKILL.md",
+      "mapsToGaia": [
+        "security-audit"
+      ],
+      "promotedNamedSkillId": "garrytan/cso",
+      "addedAt": "2026-05-12",
+      "tags": [
+        "security",
+        "infrastructure",
+        "audit"
+      ]
+    },
+    {
+      "id": "garrytan-design-shotgun",
+      "name": "garrytan/design-shotgun",
+      "contributor": "garrytan",
+      "title": "Design Shotgun",
+      "description": "Rapid design exploration generating multiple AI design variants for comparison and feedback.",
+      "sourceRepo": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md",
+      "mapsToGaia": [
+        "design-review"
+      ],
+      "promotedNamedSkillId": "garrytan/design-shotgun",
+      "addedAt": "2026-05-12",
+      "tags": [
+        "ui-ux",
+        "design-exploration",
+        "prototyping"
+      ]
+    },
+    {
+      "id": "garrytan-gstack",
+      "name": "garrytan/gstack",
+      "contributor": "garrytan",
+      "title": "Gstack Browser Engine",
+      "description": "Fast headless browser for QA testing and site dogfooding with built-in anti-bot stealth.",
+      "sourceRepo": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack/blob/main/SKILL.md",
+      "mapsToGaia": [
+        "browser-automation"
+      ],
+      "promotedNamedSkillId": "garrytan/gstack",
+      "addedAt": "2026-05-12",
+      "tags": [
+        "browser-automation",
+        "stealth",
+        "qa-testing"
+      ]
     }
   ]
 }

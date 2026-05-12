@@ -219,6 +219,223 @@
         "role": "variant"
       }
     ],
+    "security-audit": [
+      {
+        "id": "garrytan/cso",
+        "name": "CSO",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "security-audit",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Infrastructure-first security audit focusing on secrets archaeology, dependency supply chain, and CI/CD security. Includes OWASP Top 10, STRIDE threat modeling, and active verification with daily (zero-noise) and monthly (comprehensive) scan modes.",
+        "title": "Chief Security Officer Mode",
+        "catalogRef": "garrytan-cso",
+        "tags": [
+          "security",
+          "infrastructure",
+          "audit",
+          "threat-modeling",
+          "cso"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/cso/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "design-review": [
+      {
+        "id": "garrytan/design-shotgun",
+        "name": "Design Shotgun",
+        "contributor": "garrytan",
+        "origin": false,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Rapid design exploration that generates multiple AI design variants, opens a comparison board for the user, collects structured feedback, and iterates until a preferred visual direction is reached.",
+        "title": "Design Shotgun",
+        "catalogRef": "garrytan-design-shotgun",
+        "tags": [
+          "ui-ux",
+          "design-exploration",
+          "prototyping",
+          "visual-qa"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
+        },
+        "role": "variant"
+      },
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "2\u2605",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        },
+        "role": "variant"
+      },
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "design-review",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
+        "title": "The Domain-Aware Interrogator",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "vertical-slice-planning": [
+      {
+        "id": "garrytan/garrytan",
+        "name": "Garrytan",
+        "contributor": "garrytan",
+        "origin": false,
+        "genericSkillRef": "vertical-slice-planning",
+        "status": "named",
+        "level": "5\u2605",
+        "description": "The definitive autonomous \"Founder mode\" review and decision suite. An auto-review pipeline that reads the full CEO, design, engineering, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles.",
+        "title": "Founder Mode Autoplan",
+        "catalogRef": "garrytan-autoplan",
+        "tags": [
+          "founder-mode",
+          "autoplan",
+          "decision-suite",
+          "ceo-review",
+          "orchestration"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md"
+        },
+        "role": "variant"
+      },
+      {
+        "id": "mattpocock/to-issues",
+        "name": "To Issues",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "vertical-slice-planning",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "Breaks a plan, spec, or PRD into independently-grabbable GitHub issues as tracer-bullet vertical slices that each cut through all integration layers end-to-end. Classifies each slice HITL or AFK, maps dependency chains, quizzes the user on granularity, and publishes structured issues with acceptance criteria in dependency order.",
+        "title": "The Vertical Slicer",
+        "catalogRef": "mattpocock-to-issues",
+        "tags": [
+          "vertical-slicing",
+          "issue-decomposition",
+          "tracer-bullet",
+          "hitl",
+          "afk",
+          "acceptance-criteria"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "browser-automation": [
+      {
+        "id": "garrytan/gstack",
+        "name": "Gstack",
+        "contributor": "garrytan",
+        "origin": false,
+        "genericSkillRef": "browser-automation",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Fast headless browser for QA testing and site dogfooding. Optimized for high-speed navigation and element interaction (~100ms per command), featuring built-in anti-bot stealth and annotated screenshot capabilities.",
+        "title": "Gstack Browser Engine",
+        "catalogRef": "garrytan-gstack",
+        "tags": [
+          "browser-automation",
+          "stealth",
+          "qa-testing",
+          "headless-browser"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/SKILL.md"
+        },
+        "role": "variant"
+      },
+      {
+        "id": "gooseworks/notte-browser",
+        "name": "Notte Browser",
+        "contributor": "gooseworks",
+        "origin": true,
+        "genericSkillRef": "browser-automation",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.",
+        "title": "The Digital Navigator",
+        "catalogRef": "gooseworks-notte-browser",
+        "tags": [
+          "browser",
+          "automation",
+          "web-agent",
+          "scraping",
+          "notte"
+        ],
+        "links": {
+          "github": "https://github.com/gooseworks-ai/goose-skills"
+        },
+        "role": "origin"
+      }
+    ],
+    "question-answer": [
+      {
+        "id": "garrytan/office-hours",
+        "name": "Office Hours",
+        "contributor": "garrytan",
+        "origin": true,
+        "genericSkillRef": "question-answer",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "YC-style startup and builder brainstorming. Startup mode uses six forcing questions (demand reality, status quo, desperate specificity, narrowest wedge, observation, future-fit) to expose reality. Builder mode focuses on design thinking for side projects and hackathons.",
+        "title": "YC Office Hours",
+        "catalogRef": "garrytan-office-hours",
+        "tags": [
+          "brainstorming",
+          "startup-strategy",
+          "design-thinking",
+          "y-combinator",
+          "ideation"
+        ],
+        "links": {
+          "github": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
     "write-report": [
       {
         "id": "glincker/readme-generator",
@@ -264,31 +481,6 @@
           "github": "https://github.com/spring-ai-alibaba/examples/blob/main/.claude/skills/readme-generate/SKILL.md"
         },
         "role": "variant"
-      }
-    ],
-    "browser-automation": [
-      {
-        "id": "gooseworks/notte-browser",
-        "name": "Notte Browser",
-        "contributor": "gooseworks",
-        "origin": true,
-        "genericSkillRef": "browser-automation",
-        "status": "named",
-        "level": "3\u2605",
-        "description": "AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.",
-        "title": "The Digital Navigator",
-        "catalogRef": "gooseworks-notte-browser",
-        "tags": [
-          "browser",
-          "automation",
-          "web-agent",
-          "scraping",
-          "notte"
-        ],
-        "links": {
-          "github": "https://github.com/gooseworks-ai/goose-skills"
-        },
-        "role": "origin"
       }
     ],
     "api-call": [
@@ -513,55 +705,6 @@
         "role": "origin"
       }
     ],
-    "design-review": [
-      {
-        "id": "mattpocock/grill-me",
-        "name": "Grill Me",
-        "contributor": "mattpocock",
-        "origin": false,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "2\u2605",
-        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
-        "title": "The Relentless Interviewer",
-        "catalogRef": "mattpocock-grill-me",
-        "tags": [
-          "design-review",
-          "decision-tree",
-          "socratic-method",
-          "plan-stress-test",
-          "one-question-at-a-time"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        },
-        "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-with-docs",
-        "name": "Grill With Docs",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "3\u2605",
-        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
-        "title": "The Domain-Aware Interrogator",
-        "catalogRef": "mattpocock-grill-with-docs",
-        "tags": [
-          "design-review",
-          "domain-model",
-          "ubiquitous-language",
-          "adr",
-          "context-md",
-          "socratic-method"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        },
-        "role": "origin"
-      }
-    ],
     "refactor-code": [
       {
         "id": "mattpocock/improve-codebase-architecture",
@@ -586,32 +729,6 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md"
         },
         "role": "variant"
-      }
-    ],
-    "vertical-slice-planning": [
-      {
-        "id": "mattpocock/to-issues",
-        "name": "To Issues",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "vertical-slice-planning",
-        "status": "named",
-        "level": "3\u2605",
-        "description": "Breaks a plan, spec, or PRD into independently-grabbable GitHub issues as tracer-bullet vertical slices that each cut through all integration layers end-to-end. Classifies each slice HITL or AFK, maps dependency chains, quizzes the user on granularity, and publishes structured issues with acceptance criteria in dependency order.",
-        "title": "The Vertical Slicer",
-        "catalogRef": "mattpocock-to-issues",
-        "tags": [
-          "vertical-slicing",
-          "issue-decomposition",
-          "tracer-bullet",
-          "hitl",
-          "afk",
-          "acceptance-criteria"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-issues/SKILL.md"
-        },
-        "role": "origin"
       }
     ],
     "prd-generation": [
@@ -991,6 +1108,13 @@
     "gaiabot": [
       "gaiabot/gaia-triage",
       "gaiabot/repo-docs-before-pr"
+    ],
+    "garrytan": [
+      "garrytan/cso",
+      "garrytan/design-shotgun",
+      "garrytan/garrytan",
+      "garrytan/gstack",
+      "garrytan/office-hours"
     ],
     "glincker": [
       "glincker/readme-generator"

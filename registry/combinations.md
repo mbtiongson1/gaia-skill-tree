@@ -48,7 +48,7 @@
 | ◇ Extra Skill: /research | Extra Skill | Web Search, Summarize, Cite Sources | 3★ |  |
 | ◆ Ultimate Skill: /scientific-discovery [Unclaimed ✦] | Ultimate Skill | Hypothesis Generation, Research, Math Reason | 5★ | Requires laboratory tool access or simulation environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Extra Skill: /scientific-writing | Extra Skill | Write Report, Cite Sources, Scientific Visualization | 3★ |  |
-| ◇ Extra Skill: /security-audit | Extra Skill | Code Review Pipeline, Evaluate Output | 2★ | Requires access to the full codebase or diff; output must include severity classification and reproduction steps. |
+| ◇ Extra Skill: garrytan/cso | Extra Skill | Code Review Pipeline, Evaluate Output | 2★ | Requires access to the full codebase or diff; output must include severity classification and reproduction steps. |
 | ◇ Extra Skill: /skill-authoring | Extra Skill | Generate Text, Structured Output Generation, Code Generation | 4★ | Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success. |
 | ◇ Extra Skill: /skill-performance-benchmarking | Extra Skill | Agent Evaluation, Skill Discovery, Statistical Analysis | 4★ | Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs. |
 | ◇ Extra Skill: /skill-security-analysis | Extra Skill | Security Audit, Prompt Injection Defense, Skill Discovery | 4★ | Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions. |
