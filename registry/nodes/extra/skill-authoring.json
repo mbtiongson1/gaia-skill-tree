@@ -1,0 +1,41 @@
+{
+  "id": "skill-authoring",
+  "name": "Skill Authoring",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Designs, writes, packages, and iteratively improves reusable agent skill directories with metadata, progressive instructions, supporting assets, and measurable trigger criteria.",
+  "prerequisites": [
+    "generate-text",
+    "structured-output",
+    "code-generation"
+  ],
+  "derivatives": [
+    "skill-performance-benchmarking",
+    "registry-curation"
+  ],
+  "conditions": "Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success.",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2602.08004",
+      "evaluator": "codex",
+      "date": "2026-05-10",
+      "notes": "Agent Skills data-driven analysis characterizes SKILL.md packages as an emerging infrastructure layer and quantifies common design, reuse, and safety patterns."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+      "evaluator": "codex",
+      "date": "2026-05-10",
+      "notes": "Anthropic skill-creator provides a reproducible workflow for creating, editing, evaluating, benchmarking, and optimizing agent skills."
+    }
+  ],
+  "knownAgents": [
+    "Claude"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-10",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

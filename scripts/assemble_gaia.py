@@ -1,0 +1,62 @@
+import json
+import os
+import datetime
+
+def assemble():
+    registry_dir = "registry"
+    nodes_dir = os.path.join(registry_dir, "nodes")
+    gaia_json_path = os.path.join(registry_dir, "gaia.json")
+    
+    # Load metadata from gaia.json if it exists, otherwise use defaults
+    if os.path.exists(gaia_json_path):
+        with open(gaia_json_path, "r", encoding="utf-8") as f:
+            old_data = json.load(f)
+    else:
+        old_data = {}
+
+    assembled_data = {
+        "$schema": "./schema/skill.schema.json",
+        "version": old_data.get("version", "3.2.2"),
+        "generatedAt": datetime.datetime.utcnow().isoformat() + "Z",
+        "meta": old_data.get("meta", {}),
+        "skills": [],
+        "edges": []
+    }
+
+    # Collect skills
+    all_skills = []
+    for root, dirs, files in os.walk(nodes_dir):
+        for file in files:
+            if file.endswith(".json"):
+                with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                    skill = json.load(f)
+                    all_skills.append(skill)
+
+    # Sort skills by ID for deterministic output
+    all_skills.sort(key=lambda x: x["id"])
+    assembled_data["skills"] = all_skills
+
+    # Generate edges for backward compatibility
+    edges = []
+    for skill in all_skills:
+        target_id = skill["id"]
+        prereqs = skill.get("prerequisites", [])
+        for source_id in prereqs:
+            edges.append({
+                "sourceSkillId": source_id,
+                "targetSkillId": target_id,
+                "edgeType": "prerequisite"
+            })
+    
+    # Sort edges for determinism
+    edges.sort(key=lambda x: (x["sourceSkillId"], x["targetSkillId"]))
+    assembled_data["edges"] = edges
+
+    with open(gaia_json_path, "w", encoding="utf-8") as f:
+        json.dump(assembled_data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    
+    print(f"Assembled {len(all_skills)} skills and {len(edges)} edges into {gaia_json_path}")
+
+if __name__ == "__main__":
+    assemble()

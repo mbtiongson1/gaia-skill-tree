@@ -1,0 +1,29 @@
+{
+  "id": "conversational-agent",
+  "name": "Conversational Agent",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
+  "prerequisites": [
+    "question-answer",
+    "memory-manage",
+    "route-intent"
+  ],
+  "derivatives": [],
+  "conditions": "Requires persistent memory store across turns.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain/chains/conversation",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "LangChain ConversationChain â€” reproducible open-source multi-turn conversational agent with buffer and summary memory backends."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

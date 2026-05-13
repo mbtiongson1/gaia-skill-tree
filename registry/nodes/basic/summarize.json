@@ -1,0 +1,31 @@
+{
+  "id": "summarize",
+  "name": "Summarize",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Condenses longer input into a shorter representation that preserves key information and intent.",
+  "prerequisites": [],
+  "derivatives": [
+    "research",
+    "document-analyst",
+    "data-analysis",
+    "literature-review",
+    "wiki-search"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/summarize.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Summarize."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "format-output",
+  "name": "Format Output",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Structures raw output into a specified format such as markdown, JSON, CSV, or HTML.",
+  "prerequisites": [],
+  "derivatives": [
+    "document-analyst",
+    "document-digitization",
+    "text-to-sql-pipeline",
+    "humanize-prose",
+    "architecture-diagram"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/formatOutput.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Format Output."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

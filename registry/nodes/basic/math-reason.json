@@ -1,0 +1,28 @@
+{
+  "id": "math-reason",
+  "name": "Math Reason",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Solves multi-step mathematical problems including arithmetic, algebra, calculus, and competition mathematics through symbolic and numeric reasoning.",
+  "prerequisites": [],
+  "derivatives": [
+    "autonomous-data-scientist",
+    "scientific-discovery"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2206.14858",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Minerva (Google) â€” 50.3% on MATH and 78.5% on MMLU-STEM benchmarks using chain-of-thought over scientific literature."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

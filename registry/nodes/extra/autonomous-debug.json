@@ -1,0 +1,29 @@
+{
+  "id": "autonomous-debug",
+  "name": "Autonomous Debug",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
+  "prerequisites": [
+    "code-generation",
+    "execute-bash",
+    "error-interpretation"
+  ],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/autonomousDebug.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Autonomous Debug."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

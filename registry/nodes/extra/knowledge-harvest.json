@@ -1,0 +1,29 @@
+{
+  "id": "knowledge-harvest",
+  "name": "Knowledge Harvest",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
+  "prerequisites": [
+    "web-scrape",
+    "extract-entities",
+    "embed-text"
+  ],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/knowledgeHarvest.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Knowledge Harvest."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

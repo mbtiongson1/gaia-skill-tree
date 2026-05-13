@@ -1,0 +1,27 @@
+{
+  "id": "parse-html",
+  "name": "Parse HTML",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Extracts structured content from raw HTML, navigating DOM trees and handling malformed markup.",
+  "prerequisites": [],
+  "derivatives": [
+    "web-scrape"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/parseHtml.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Parse HTML."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

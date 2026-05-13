@@ -1,0 +1,29 @@
+{
+  "id": "route-intent",
+  "name": "Route Intent",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Classifies user intent and directs execution to the appropriate handler, tool, or sub-agent.",
+  "prerequisites": [],
+  "derivatives": [
+    "plan-and-execute",
+    "conversational-agent",
+    "vertical-slice-planning"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/routeIntent.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Route Intent."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

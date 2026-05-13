@@ -1,0 +1,31 @@
+{
+  "id": "gaia-audit",
+  "name": "Gaia Audit",
+  "type": "extra",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
+  "prerequisites": [
+    "retrieve",
+    "cite-sources",
+    "evaluate-output"
+  ],
+  "derivatives": [
+    "gaia-meta-audit"
+  ],
+  "conditions": "Requires a specific Gaia skill ID, named skill ID, or real-skill catalog item plus access to the registry source files and current public evidence sources.",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+      "evaluator": "mbtiongson1",
+      "date": "2026-05-03",
+      "notes": "Codified from a source-backed review that kept openai/chatgpt-apps in the real-skill catalog while removing its unsupported claim on the full-stack-developer Ultimate skill."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-05-03",
+  "updatedAt": "2026-05-03",
+  "version": "0.1.0"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "fine-tune",
+  "name": "Fine-Tune",
+  "type": "unique",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Adapts a pre-trained model to a new task or domain by updating model weights using parameter-efficient methods such as LoRA, QLoRA, or full supervised fine-tuning, without retraining from scratch.",
+  "prerequisites": [],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2604.22783",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "LARS (2026) -- Parameter Efficiency Is Not Memory Efficiency: Rethinking Fine-Tuning on-Device LLM Adaptation; reduces GPU memory footprint 33.54% vs LoRA."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/huggingface/peft",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "HuggingFace PEFT -- state-of-the-art LoRA/QLoRA/IA3 fine-tuning; 100k+ stars, CI, active maintenance."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/hiyouga/LlamaFactory",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "LlamaFactory (ACL 2024) -- unified efficient fine-tuning of 100+ LLMs and VLMs; 50k+ stars, reproducible benchmarks."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

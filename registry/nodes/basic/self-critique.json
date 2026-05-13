@@ -1,0 +1,35 @@
+{
+  "id": "self-critique",
+  "name": "Self-Critique",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "uncommon",
+  "description": "Iteratively evaluates and refines its own outputs using self-generated feedback, improving quality without external supervision.",
+  "prerequisites": [],
+  "derivatives": [
+    "multi-agent-debate",
+    "recursive-self-improvement"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2303.17651",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Self-Refine (Madaan et al., 2023) â€” iterative self-feedback loop; +20% on code generation and +13% on math reasoning vs single-pass generation."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/madaan/self-refine",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Self-Refine repo â€” reproducible demos across 7 tasks (code, math, dialogue, sentiment reversal) with evaluation scripts."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

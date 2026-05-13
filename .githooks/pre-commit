@@ -62,8 +62,12 @@ print(bump_versions(".", "$bump"))
 PY
 git add "${version_files[@]}"
 
-if printf '%s\n' "$changed" | grep -Eq '^(registry/gaia\.json|registry/named/|registry-for-review/skill-batches/|scripts/generateProjections\.py|scripts/exportGexf\.py|scripts/renderGraphSvg\.py|scripts/generateNamedIndex\.py|scripts/generateRealSkills\.py)'; then
+if printf '%s\n' "$changed" | grep -Eq '^(registry/nodes/|registry/gaia\.json|registry/named/|registry-for-review/skill-batches/|scripts/generateProjections\.py|scripts/exportGexf\.py|scripts/renderGraphSvg\.py|scripts/generateNamedIndex\.py|scripts/generateRealSkills\.py)'; then
   printf 'Gaia pre-commit: validating and regenerating registry artifacts...\n'
+  if printf '%s\n' "$changed" | grep -q '^registry/nodes/'; then
+    python3 scripts/assemble_gaia.py
+    git add registry/gaia.json
+  fi
   python3 scripts/validate.py
   python3 scripts/validate_intake.py
   python3 scripts/generateProjections.py

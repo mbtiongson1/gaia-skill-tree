@@ -1,0 +1,29 @@
+{
+  "id": "api-call",
+  "name": "API Call",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Constructs, executes, and handles responses from HTTP APIs by interpreting documentation and selecting appropriate endpoints and parameters.",
+  "prerequisites": [],
+  "derivatives": [
+    "function-calling",
+    "workflow-automation",
+    "mcp-server-creation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2305.15334",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Gorilla (Patil et al.) â€” LLM that generates accurate API calls across TorchHub, TensorFlow Hub, and HuggingFace; 20.43% AST accuracy improvement over GPT-4."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-05-10",
+  "version": "0.2.0"
+}

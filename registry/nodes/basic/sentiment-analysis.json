@@ -1,0 +1,28 @@
+{
+  "id": "sentiment-analysis",
+  "name": "Sentiment Analysis",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Determines the emotional valence (positive, negative, neutral) and intensity of text input.",
+  "prerequisites": [],
+  "derivatives": [
+    "content-moderation",
+    "translation-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/1810.04805",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "BERT paper â€” achieves SOTA on SST-2 sentiment benchmark (93.5% accuracy), foundational evidence for LLM-based sentiment analysis."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

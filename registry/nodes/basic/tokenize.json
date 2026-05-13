@@ -1,0 +1,27 @@
+{
+  "id": "tokenize",
+  "name": "Tokenize",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Splits input text into discrete tokens suitable for downstream processing by language models. MODIFIED FOR TESTING.",
+  "prerequisites": [],
+  "derivatives": [
+    "rag-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/tokenize.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Tokenize."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

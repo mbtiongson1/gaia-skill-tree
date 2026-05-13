@@ -1,0 +1,36 @@
+{
+  "id": "code-execution",
+  "name": "Code Execution",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Writes and executes code in a sandboxed environment, uses the runtime output to verify correctness, and iterates until the result is correct.",
+  "prerequisites": [],
+  "derivatives": [
+    "autonomous-debug",
+    "code-review-pipeline",
+    "automated-testing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2211.10435",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "PAL (Gao et al., 2023) â€” Program-Aided Language Models; delegates computation to Python interpreter, achieving +7% on GSM8K over direct CoT."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/reasoning-machines/pal",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "PAL repo â€” reproducible harness across 13 reasoning benchmarks; evaluation scripts and baseline comparisons included."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "browser-automation",
+  "name": "Browser Automation",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
+  "prerequisites": [
+    "web-search",
+    "computer-use"
+  ],
+  "derivatives": [
+    "autonomous-research-agent",
+    "e2e-testing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2401.13919",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "WebVoyager (He et al., 2024) â€” end-to-end web agent with GPT-4V; 59.1% task success on real-world web tasks across 15 popular websites."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/web-arena-x/webarena",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "WebArena â€” self-hosted web environment with 812 realistic tasks; reproducible benchmark with ground-truth evaluation scripts."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

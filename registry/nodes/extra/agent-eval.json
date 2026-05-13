@@ -1,0 +1,44 @@
+{
+  "id": "agent-eval",
+  "name": "Agent Evaluation",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Holistically evaluates an AI agent's performance on multi-step tasks by running standardised benchmarks, scoring full interaction trajectories, and producing reproducible capability reports.",
+  "prerequisites": [
+    "evaluate-output",
+    "score-relevance"
+  ],
+  "derivatives": [
+    "skill-performance-benchmarking"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2412.14470",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Agent-SafetyBench (2024) -- benchmark with 349 interaction environments and 2,000 test cases covering safety risks in agent deployments; establishes reproducible trajectory-level metrics."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/truera/trulens",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "TruLens -- open-source evaluation and tracking for LLM experiments and AI agents; CI, active maintenance, 5k+ stars."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/Giskard-AI/giskard-oss",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Giskard OSS -- testing library for LLM agents with automated vulnerability scanning and RAG evaluation; Apache-2 license."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "translate",
+  "name": "Translate",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Converts text from one natural language to another while preserving meaning, tone, and formatting.",
+  "prerequisites": [],
+  "derivatives": [
+    "translation-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2207.04672",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "NLLB (No Language Left Behind) â€” Meta AI paper demonstrating 200-language translation at human-level quality on FLORES-200 benchmark."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

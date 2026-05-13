@@ -1,0 +1,27 @@
+{
+  "id": "text-to-speech",
+  "name": "Text to Speech",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Synthesizes natural-sounding speech audio from text input, supporting voice cloning and prosody control.",
+  "prerequisites": [],
+  "derivatives": [
+    "voice-agent"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2301.02111",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "VALL-E (Microsoft) â€” neural codec language model achieving SOTA speech synthesis with 3-second voice cloning on LibriSpeech."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

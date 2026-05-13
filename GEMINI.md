@@ -47,6 +47,19 @@ cd packages/cli-npm && npm install
 
 ## Technical Guidelines
 
+### Agent-Managed Files (Hermes Ownership)
+- **DO NOT** modify, stage, or delete the following files. They are managed by an autonomous agent (Hermes) and will be relocated in the future:
+    - `STEWARDSHIP_PLAN.md`
+    - `scripts/marketing_engine.py`
+    - `scripts/email_sender.py`
+    - `scripts/share_deliverable.py`
+    - `scripts/generate_adoption_dashboard.py`
+    - `scripts/generate_showcase.py`
+    - `docs/ADOPTION.html`
+    - `docs/SHOWCASE.html`
+    - `docs/WHY-GAIA.md`
+    - `docs/QUICKSTART.md`
+
 ### Source of Truth
 - **NEVER** hand-edit files in `docs/` or generated artifacts like `registry/gaia.svg`.
 - **Edit Only:** `registry/gaia.json`, `registry/named/*.json`, or `registry-for-review/skill-batches/*.json`.

@@ -1,0 +1,41 @@
+{
+  "id": "hypothesis-generate",
+  "name": "Hypothesis Generation",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "rare",
+  "description": "Formulates novel, testable scientific hypotheses by synthesising existing literature, identifying knowledge gaps, and proposing mechanistic explanations.",
+  "prerequisites": [],
+  "derivatives": [
+    "scientific-discovery"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2304.05376",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "ChemCrow (Bran et al., 2023) â€” LLM augmented with 18 chemistry tools autonomously proposes and validates synthesis routes; GPT-4 outperforms on Chem. benchmark."
+    },
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2304.05332",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Coscientist (Boiko et al., 2023) â€” autonomous LLM system designs and executes chemistry experiments; independently re-derived Suzuki coupling conditions."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/SakanaAI/AI-Scientist",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "The AI Scientist (Sakana AI) â€” end-to-end pipeline generating ideas, running experiments, and writing ML papers; 50+ auto-generated manuscripts reviewed."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

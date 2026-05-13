@@ -1,0 +1,28 @@
+{
+  "id": "data-visualize",
+  "name": "Data Visualize",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Generates charts, graphs, and visual summaries from datasets by selecting appropriate visualization types and mapping data dimensions.",
+  "prerequisites": [],
+  "derivatives": [
+    "data-analysis",
+    "architecture-diagram"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/microsoft/lida",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "LIDA (Microsoft) â€” open-source LLM-based data visualization tool with reproducible generation pipeline; evaluated on diverse real-world datasets."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-05-06",
+  "version": "0.2.0"
+}

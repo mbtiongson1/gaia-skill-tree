@@ -1,0 +1,30 @@
+{
+  "id": "multi-agent-orchestration-v",
+  "name": "Multi-Agent Orchestration",
+  "type": "ultimate",
+  "level": "5★",
+  "rarity": "legendary",
+  "description": "Coordinates multiple specialized agents across complex workflows with dynamic task allocation and conflict resolution.",
+  "prerequisites": [
+    "plan-and-execute",
+    "route-intent",
+    "tool-select"
+  ],
+  "derivatives": [],
+  "conditions": "Requires extensive multi-system validation before level advancement.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/seed.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-29",
+      "notes": "Seed evidence â€” structural validation placeholder."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0",
+  "title": "Grand Conductor"
+}

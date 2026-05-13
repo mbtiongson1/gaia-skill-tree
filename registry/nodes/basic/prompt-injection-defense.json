@@ -1,0 +1,41 @@
+{
+  "id": "prompt-injection-defense",
+  "name": "Prompt Injection Defense",
+  "type": "basic",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Detects and neutralizes adversarial instructions injected into agent context from untrusted external sources (indirect prompt injection), using techniques such as context isolation, hierarchical intent verification, or semantic consistency checks.",
+  "prerequisites": [],
+  "derivatives": [
+    "skill-security-analysis"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2604.10134",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "PlanGuard (2026) — training-free indirect prompt injection defense; planning-based consistency verification reduces InjecAgent attack success rate from 72.8% to 0%."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/tldrsec/prompt-injection-defenses",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "tldrsec/prompt-injection-defenses (682 stars) — curated, reproducible catalog of defense techniques with implementation references; actively maintained."
+    },
+    {
+      "class": "C",
+      "source": "https://skillsmp.com/api/v1/skills/search?q=prompt-injection-defense",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "SkillsMP top hit: openclaw/prompt-injection-defense (4,419 stars) — 'Harden agent sessions against prompt injection from untrusted content'; references CaMeL benchmark."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

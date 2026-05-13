@@ -1,0 +1,39 @@
+{
+  "id": "tool-creation",
+  "name": "Tool Creation",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
+  "prerequisites": [
+    "code-generation",
+    "tool-use"
+  ],
+  "derivatives": [
+    "full-stack-developer",
+    "autonomous-research-agent",
+    "mcp-server-creation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2305.17126",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-29",
+      "notes": "Cai et al. (2023) â€” Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/ctlllll/LLM-ToolMaker",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-29",
+      "notes": "LATM repo â€” reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-29",
+  "updatedAt": "2026-05-10",
+  "version": "0.2.0"
+}

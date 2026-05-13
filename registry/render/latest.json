@@ -1,6 +1,6 @@
 {
-  "version": "3.1.4",
-  "generatedAt": "2026-05-06T00:00:00Z",
+  "version": "3.2.3",
+  "generatedAt": "2026-05-13T21:50:25.987654Z",
   "width": 1280,
   "height": 880,
   "nodes": [
@@ -1173,7 +1173,7 @@
       },
       "demerits": [],
       "rarity": "common",
-      "description": "Splits input text into discrete tokens suitable for downstream processing by language models.",
+      "description": "Splits input text into discrete tokens suitable for downstream processing by language models. MODIFIED FOR TESTING.",
       "x": 860.637,
       "y": 259.599,
       "radius": 6
@@ -2417,33 +2417,293 @@
   ],
   "edges": [
     {
-      "source": "web-search",
-      "target": "web-scrape",
+      "source": "evaluate-output",
+      "target": "agent-eval",
       "type": "extra"
     },
     {
-      "source": "parse-html",
-      "target": "web-scrape",
+      "source": "score-relevance",
+      "target": "agent-eval",
+      "type": "extra"
+    },
+    {
+      "source": "data-visualize",
+      "target": "architecture-diagram",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "architecture-diagram",
+      "type": "extra"
+    },
+    {
+      "source": "write-report",
+      "target": "architecture-diagram",
+      "type": "extra"
+    },
+    {
+      "source": "generate-test",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "error-interpretation",
+      "target": "automated-testing",
+      "type": "extra"
+    },
+    {
+      "source": "data-analysis",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "math-reason",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "research",
+      "target": "autonomous-data-scientist",
+      "type": "ultimate"
+    },
+    {
+      "source": "code-generation",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "error-interpretation",
+      "target": "autonomous-debug",
+      "type": "extra"
+    },
+    {
+      "source": "research",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "knowledge-harvest",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "ghostwrite",
+      "target": "autonomous-research-agent",
+      "type": "ultimate"
+    },
+    {
+      "source": "web-search",
+      "target": "browser-automation",
+      "type": "extra"
+    },
+    {
+      "source": "computer-use",
+      "target": "browser-automation",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "diff-content",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "code-review-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "classify",
+      "target": "content-moderation",
+      "type": "extra"
+    },
+    {
+      "source": "sentiment-analysis",
+      "target": "content-moderation",
       "type": "extra"
     },
     {
       "source": "extract-entities",
-      "target": "web-scrape",
+      "target": "content-moderation",
       "type": "extra"
     },
     {
-      "source": "web-search",
-      "target": "research",
+      "source": "question-answer",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "memory-manage",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "route-intent",
+      "target": "conversational-agent",
+      "type": "extra"
+    },
+    {
+      "source": "generate-sql",
+      "target": "data-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "data-visualize",
+      "target": "data-analysis",
       "type": "extra"
     },
     {
       "source": "summarize",
-      "target": "research",
+      "target": "data-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "workflow-automation",
+      "target": "deployment-automation",
+      "type": "extra"
+    },
+    {
+      "source": "execute-bash",
+      "target": "deployment-automation",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "design-review",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "design-review",
+      "type": "extra"
+    },
+    {
+      "source": "parse-json",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "document-analyst",
+      "type": "extra"
+    },
+    {
+      "source": "parse-pdf",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "document-digitization",
+      "type": "extra"
+    },
+    {
+      "source": "browser-automation",
+      "target": "e2e-testing",
+      "type": "extra"
+    },
+    {
+      "source": "automated-testing",
+      "target": "e2e-testing",
+      "type": "extra"
+    },
+    {
+      "source": "code-review-pipeline",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "automated-testing",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "refactor-code",
+      "target": "full-stack-developer",
+      "type": "ultimate"
+    },
+    {
+      "source": "structured-output",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "api-call",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "tool-select",
+      "target": "function-calling",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "gaia-audit",
       "type": "extra"
     },
     {
       "source": "cite-sources",
-      "target": "research",
+      "target": "gaia-audit",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "gaia-audit",
+      "type": "extra"
+    },
+    {
+      "source": "gaia-audit",
+      "target": "gaia-meta-audit",
+      "type": "extra"
+    },
+    {
+      "source": "registry-curation",
+      "target": "gaia-meta-audit",
+      "type": "extra"
+    },
+    {
+      "source": "detect-anomaly",
+      "target": "gaia-meta-audit",
+      "type": "extra"
+    },
+    {
+      "source": "issue-triage",
+      "target": "gaia-triage",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "gaia-triage",
       "type": "extra"
     },
     {
@@ -2462,18 +2722,163 @@
       "type": "extra"
     },
     {
+      "source": "retrieve",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "grounding",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "classify",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "structured-output",
+      "target": "guardrails",
+      "type": "extra"
+    },
+    {
+      "source": "document-editing",
+      "target": "humanize-prose",
+      "type": "extra"
+    },
+    {
+      "source": "audience-model",
+      "target": "humanize-prose",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "humanize-prose",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "knowledge-graph-build",
+      "type": "extra"
+    },
+    {
+      "source": "logical-inference",
+      "target": "knowledge-graph-build",
+      "type": "extra"
+    },
+    {
+      "source": "web-scrape",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "embed-text",
+      "target": "knowledge-harvest",
+      "type": "extra"
+    },
+    {
+      "source": "research",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "cite-sources",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "mcp-integration",
+      "target": "mcp-server-creation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-creation",
+      "target": "mcp-server-creation",
+      "type": "extra"
+    },
+    {
+      "source": "api-call",
+      "target": "mcp-server-creation",
+      "type": "extra"
+    },
+    {
+      "source": "data-analysis",
+      "target": "ml-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "automated-testing",
+      "target": "ml-pipeline",
+      "type": "extra"
+    },
+    {
       "source": "code-generation",
-      "target": "autonomous-debug",
+      "target": "ml-pipeline",
       "type": "extra"
     },
     {
-      "source": "execute-bash",
-      "target": "autonomous-debug",
+      "source": "self-critique",
+      "target": "multi-agent-debate",
       "type": "extra"
     },
     {
-      "source": "error-interpretation",
-      "target": "autonomous-debug",
+      "source": "evaluate-output",
+      "target": "multi-agent-debate",
+      "type": "extra"
+    },
+    {
+      "source": "chain-of-thought",
+      "target": "multi-agent-debate",
+      "type": "extra"
+    },
+    {
+      "source": "plan-and-execute",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "route-intent",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "tool-select",
+      "target": "multi-agent-orchestration-v",
+      "type": "ultimate"
+    },
+    {
+      "source": "image-caption",
+      "target": "multimodal-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "question-answer",
+      "target": "multimodal-reasoning",
+      "type": "extra"
+    },
+    {
+      "source": "logical-inference",
+      "target": "multimodal-reasoning",
       "type": "extra"
     },
     {
@@ -2492,18 +2897,38 @@
       "type": "extra"
     },
     {
-      "source": "web-scrape",
-      "target": "knowledge-harvest",
+      "source": "write-report",
+      "target": "prd-generation",
       "type": "extra"
     },
     {
-      "source": "extract-entities",
-      "target": "knowledge-harvest",
+      "source": "plan-decompose",
+      "target": "prd-generation",
       "type": "extra"
     },
     {
-      "source": "embed-text",
-      "target": "knowledge-harvest",
+      "source": "data-analysis",
+      "target": "prediction-market-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "web-search",
+      "target": "prediction-market-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "statistical-analysis",
+      "target": "prediction-market-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "prompt-optimization",
+      "type": "extra"
+    },
+    {
+      "source": "generate-text",
+      "target": "prompt-optimization",
       "type": "extra"
     },
     {
@@ -2537,249 +2962,14 @@
       "type": "extra"
     },
     {
-      "source": "parse-json",
-      "target": "document-analyst",
+      "source": "plan-decompose",
+      "target": "re-act-reasoning",
       "type": "extra"
     },
     {
-      "source": "extract-entities",
-      "target": "document-analyst",
+      "source": "tool-use",
+      "target": "re-act-reasoning",
       "type": "extra"
-    },
-    {
-      "source": "summarize",
-      "target": "document-analyst",
-      "type": "extra"
-    },
-    {
-      "source": "format-output",
-      "target": "document-analyst",
-      "type": "extra"
-    },
-    {
-      "source": "autonomous-debug",
-      "target": "recursive-self-improvement",
-      "type": "ultimate"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "recursive-self-improvement",
-      "type": "ultimate"
-    },
-    {
-      "source": "plan-and-execute",
-      "target": "recursive-self-improvement",
-      "type": "ultimate"
-    },
-    {
-      "source": "plan-and-execute",
-      "target": "multi-agent-orchestration-v",
-      "type": "ultimate"
-    },
-    {
-      "source": "route-intent",
-      "target": "multi-agent-orchestration-v",
-      "type": "ultimate"
-    },
-    {
-      "source": "tool-select",
-      "target": "multi-agent-orchestration-v",
-      "type": "ultimate"
-    },
-    {
-      "source": "research",
-      "target": "autonomous-research-agent",
-      "type": "ultimate"
-    },
-    {
-      "source": "knowledge-harvest",
-      "target": "autonomous-research-agent",
-      "type": "ultimate"
-    },
-    {
-      "source": "ghostwrite",
-      "target": "autonomous-research-agent",
-      "type": "ultimate"
-    },
-    {
-      "source": "question-answer",
-      "target": "conversational-agent",
-      "type": "extra"
-    },
-    {
-      "source": "memory-manage",
-      "target": "conversational-agent",
-      "type": "extra"
-    },
-    {
-      "source": "route-intent",
-      "target": "conversational-agent",
-      "type": "extra"
-    },
-    {
-      "source": "generate-sql",
-      "target": "text-to-sql-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "parse-json",
-      "target": "text-to-sql-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "format-output",
-      "target": "text-to-sql-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "code-generation",
-      "target": "code-review-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "diff-content",
-      "target": "code-review-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "code-review-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "generate-sql",
-      "target": "data-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "data-visualize",
-      "target": "data-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "summarize",
-      "target": "data-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "speech-to-text",
-      "target": "voice-agent",
-      "type": "extra"
-    },
-    {
-      "source": "question-answer",
-      "target": "voice-agent",
-      "type": "extra"
-    },
-    {
-      "source": "text-to-speech",
-      "target": "voice-agent",
-      "type": "extra"
-    },
-    {
-      "source": "generate-test",
-      "target": "automated-testing",
-      "type": "extra"
-    },
-    {
-      "source": "execute-bash",
-      "target": "automated-testing",
-      "type": "extra"
-    },
-    {
-      "source": "error-interpretation",
-      "target": "automated-testing",
-      "type": "extra"
-    },
-    {
-      "source": "classify",
-      "target": "content-moderation",
-      "type": "extra"
-    },
-    {
-      "source": "sentiment-analysis",
-      "target": "content-moderation",
-      "type": "extra"
-    },
-    {
-      "source": "extract-entities",
-      "target": "content-moderation",
-      "type": "extra"
-    },
-    {
-      "source": "image-caption",
-      "target": "multimodal-reasoning",
-      "type": "extra"
-    },
-    {
-      "source": "question-answer",
-      "target": "multimodal-reasoning",
-      "type": "extra"
-    },
-    {
-      "source": "logical-inference",
-      "target": "multimodal-reasoning",
-      "type": "extra"
-    },
-    {
-      "source": "translate",
-      "target": "translation-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "sentiment-analysis",
-      "target": "translation-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "audience-model",
-      "target": "translation-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "parse-pdf",
-      "target": "document-digitization",
-      "type": "extra"
-    },
-    {
-      "source": "extract-entities",
-      "target": "document-digitization",
-      "type": "extra"
-    },
-    {
-      "source": "format-output",
-      "target": "document-digitization",
-      "type": "extra"
-    },
-    {
-      "source": "code-review-pipeline",
-      "target": "full-stack-developer",
-      "type": "ultimate"
-    },
-    {
-      "source": "automated-testing",
-      "target": "full-stack-developer",
-      "type": "ultimate"
-    },
-    {
-      "source": "refactor-code",
-      "target": "full-stack-developer",
-      "type": "ultimate"
-    },
-    {
-      "source": "data-analysis",
-      "target": "autonomous-data-scientist",
-      "type": "ultimate"
-    },
-    {
-      "source": "math-reason",
-      "target": "autonomous-data-scientist",
-      "type": "ultimate"
-    },
-    {
-      "source": "research",
-      "target": "autonomous-data-scientist",
-      "type": "ultimate"
     },
     {
       "source": "voice-agent",
@@ -2797,6 +2987,21 @@
       "type": "ultimate"
     },
     {
+      "source": "autonomous-debug",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
+      "source": "evaluate-output",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
+      "source": "plan-and-execute",
+      "target": "recursive-self-improvement",
+      "type": "ultimate"
+    },
+    {
       "source": "research",
       "target": "registry-curation",
       "type": "extra"
@@ -2812,88 +3017,33 @@
       "type": "extra"
     },
     {
-      "source": "retrieve",
-      "target": "gaia-audit",
+      "source": "workflow-automation",
+      "target": "release-automation",
       "type": "extra"
     },
     {
-      "source": "cite-sources",
-      "target": "gaia-audit",
+      "source": "execute-bash",
+      "target": "release-automation",
       "type": "extra"
     },
     {
-      "source": "evaluate-output",
-      "target": "gaia-audit",
-      "type": "extra"
-    },
-    {
-      "source": "issue-triage",
-      "target": "gaia-triage",
-      "type": "extra"
-    },
-    {
-      "source": "retrieve",
-      "target": "gaia-triage",
-      "type": "extra"
-    },
-    {
-      "source": "gaia-audit",
-      "target": "gaia-meta-audit",
-      "type": "extra"
-    },
-    {
-      "source": "registry-curation",
-      "target": "gaia-meta-audit",
-      "type": "extra"
-    },
-    {
-      "source": "detect-anomaly",
-      "target": "gaia-meta-audit",
-      "type": "extra"
-    },
-    {
-      "source": "structured-output",
-      "target": "function-calling",
-      "type": "extra"
-    },
-    {
-      "source": "api-call",
-      "target": "function-calling",
-      "type": "extra"
-    },
-    {
-      "source": "tool-select",
-      "target": "function-calling",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "re-act-reasoning",
-      "type": "extra"
-    },
-    {
-      "source": "tool-use",
-      "target": "re-act-reasoning",
+      "source": "generate-text",
+      "target": "release-automation",
       "type": "extra"
     },
     {
       "source": "web-search",
-      "target": "browser-automation",
+      "target": "research",
       "type": "extra"
     },
     {
-      "source": "computer-use",
-      "target": "browser-automation",
+      "source": "summarize",
+      "target": "research",
       "type": "extra"
     },
     {
-      "source": "extract-entities",
-      "target": "knowledge-graph-build",
-      "type": "extra"
-    },
-    {
-      "source": "logical-inference",
-      "target": "knowledge-graph-build",
+      "source": "cite-sources",
+      "target": "research",
       "type": "extra"
     },
     {
@@ -2912,161 +3062,6 @@
       "type": "ultimate"
     },
     {
-      "source": "chain-of-thought",
-      "target": "tree-of-thought",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "tree-of-thought",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "prompt-optimization",
-      "type": "extra"
-    },
-    {
-      "source": "generate-text",
-      "target": "prompt-optimization",
-      "type": "extra"
-    },
-    {
-      "source": "code-generation",
-      "target": "tool-creation",
-      "type": "extra"
-    },
-    {
-      "source": "tool-use",
-      "target": "tool-creation",
-      "type": "extra"
-    },
-    {
-      "source": "retrieve",
-      "target": "grounding",
-      "type": "extra"
-    },
-    {
-      "source": "cite-sources",
-      "target": "grounding",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "grounding",
-      "type": "extra"
-    },
-    {
-      "source": "self-critique",
-      "target": "multi-agent-debate",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "multi-agent-debate",
-      "type": "extra"
-    },
-    {
-      "source": "chain-of-thought",
-      "target": "multi-agent-debate",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "guardrails",
-      "type": "extra"
-    },
-    {
-      "source": "classify",
-      "target": "guardrails",
-      "type": "extra"
-    },
-    {
-      "source": "structured-output",
-      "target": "guardrails",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "agent-eval",
-      "type": "extra"
-    },
-    {
-      "source": "score-relevance",
-      "target": "agent-eval",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "workflow-automation",
-      "type": "extra"
-    },
-    {
-      "source": "tool-use",
-      "target": "workflow-automation",
-      "type": "extra"
-    },
-    {
-      "source": "api-call",
-      "target": "workflow-automation",
-      "type": "extra"
-    },
-    {
-      "source": "tool-use",
-      "target": "tool-chaining",
-      "type": "extra"
-    },
-    {
-      "source": "tool-select",
-      "target": "tool-chaining",
-      "type": "extra"
-    },
-    {
-      "source": "write-report",
-      "target": "prd-generation",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "prd-generation",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "vertical-slice-planning",
-      "type": "extra"
-    },
-    {
-      "source": "route-intent",
-      "target": "vertical-slice-planning",
-      "type": "extra"
-    },
-    {
-      "source": "evaluate-output",
-      "target": "design-review",
-      "type": "extra"
-    },
-    {
-      "source": "plan-decompose",
-      "target": "design-review",
-      "type": "extra"
-    },
-    {
-      "source": "research",
-      "target": "literature-review",
-      "type": "extra"
-    },
-    {
-      "source": "cite-sources",
-      "target": "literature-review",
-      "type": "extra"
-    },
-    {
-      "source": "summarize",
-      "target": "literature-review",
-      "type": "extra"
-    },
-    {
       "source": "write-report",
       "target": "scientific-writing",
       "type": "extra"
@@ -3082,31 +3077,6 @@
       "type": "extra"
     },
     {
-      "source": "data-analysis",
-      "target": "ml-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "automated-testing",
-      "target": "ml-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "code-generation",
-      "target": "ml-pipeline",
-      "type": "extra"
-    },
-    {
-      "source": "browser-automation",
-      "target": "e2e-testing",
-      "type": "extra"
-    },
-    {
-      "source": "automated-testing",
-      "target": "e2e-testing",
-      "type": "extra"
-    },
-    {
       "source": "code-review-pipeline",
       "target": "security-audit",
       "type": "extra"
@@ -3114,91 +3084,6 @@
     {
       "source": "evaluate-output",
       "target": "security-audit",
-      "type": "extra"
-    },
-    {
-      "source": "workflow-automation",
-      "target": "release-automation",
-      "type": "extra"
-    },
-    {
-      "source": "execute-bash",
-      "target": "release-automation",
-      "type": "extra"
-    },
-    {
-      "source": "generate-text",
-      "target": "release-automation",
-      "type": "extra"
-    },
-    {
-      "source": "workflow-automation",
-      "target": "deployment-automation",
-      "type": "extra"
-    },
-    {
-      "source": "execute-bash",
-      "target": "deployment-automation",
-      "type": "extra"
-    },
-    {
-      "source": "retrieve",
-      "target": "wiki-search",
-      "type": "extra"
-    },
-    {
-      "source": "embed-text",
-      "target": "wiki-search",
-      "type": "extra"
-    },
-    {
-      "source": "summarize",
-      "target": "wiki-search",
-      "type": "extra"
-    },
-    {
-      "source": "data-analysis",
-      "target": "prediction-market-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "web-search",
-      "target": "prediction-market-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "statistical-analysis",
-      "target": "prediction-market-analysis",
-      "type": "extra"
-    },
-    {
-      "source": "document-editing",
-      "target": "humanize-prose",
-      "type": "extra"
-    },
-    {
-      "source": "audience-model",
-      "target": "humanize-prose",
-      "type": "extra"
-    },
-    {
-      "source": "format-output",
-      "target": "humanize-prose",
-      "type": "extra"
-    },
-    {
-      "source": "data-visualize",
-      "target": "architecture-diagram",
-      "type": "extra"
-    },
-    {
-      "source": "format-output",
-      "target": "architecture-diagram",
-      "type": "extra"
-    },
-    {
-      "source": "write-report",
-      "target": "architecture-diagram",
       "type": "extra"
     },
     {
@@ -3247,18 +3132,133 @@
       "type": "extra"
     },
     {
-      "source": "mcp-integration",
-      "target": "mcp-server-creation",
+      "source": "generate-sql",
+      "target": "text-to-sql-pipeline",
       "type": "extra"
     },
     {
-      "source": "tool-creation",
-      "target": "mcp-server-creation",
+      "source": "parse-json",
+      "target": "text-to-sql-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "format-output",
+      "target": "text-to-sql-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "tool-chaining",
+      "type": "extra"
+    },
+    {
+      "source": "tool-select",
+      "target": "tool-chaining",
+      "type": "extra"
+    },
+    {
+      "source": "code-generation",
+      "target": "tool-creation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "tool-creation",
+      "type": "extra"
+    },
+    {
+      "source": "translate",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "sentiment-analysis",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "audience-model",
+      "target": "translation-pipeline",
+      "type": "extra"
+    },
+    {
+      "source": "chain-of-thought",
+      "target": "tree-of-thought",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "tree-of-thought",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "vertical-slice-planning",
+      "type": "extra"
+    },
+    {
+      "source": "route-intent",
+      "target": "vertical-slice-planning",
+      "type": "extra"
+    },
+    {
+      "source": "speech-to-text",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "question-answer",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "text-to-speech",
+      "target": "voice-agent",
+      "type": "extra"
+    },
+    {
+      "source": "web-search",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "parse-html",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "extract-entities",
+      "target": "web-scrape",
+      "type": "extra"
+    },
+    {
+      "source": "retrieve",
+      "target": "wiki-search",
+      "type": "extra"
+    },
+    {
+      "source": "embed-text",
+      "target": "wiki-search",
+      "type": "extra"
+    },
+    {
+      "source": "summarize",
+      "target": "wiki-search",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "workflow-automation",
+      "type": "extra"
+    },
+    {
+      "source": "tool-use",
+      "target": "workflow-automation",
       "type": "extra"
     },
     {
       "source": "api-call",
-      "target": "mcp-server-creation",
+      "target": "workflow-automation",
       "type": "extra"
     }
   ]

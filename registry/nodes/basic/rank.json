@@ -1,0 +1,27 @@
+{
+  "id": "rank",
+  "name": "Rank",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Orders a set of candidate items by relevance, quality, or fitness for a given objective.",
+  "prerequisites": [],
+  "derivatives": [
+    "rag-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/rank.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Rank."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

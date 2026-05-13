@@ -1,0 +1,28 @@
+{
+  "id": "score-relevance",
+  "name": "Score Relevance",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Assigns a numerical relevance score to candidate items relative to a query or objective.",
+  "prerequisites": [],
+  "derivatives": [
+    "rag-pipeline",
+    "agent-eval"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/scoreRelevance.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Score Relevance."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

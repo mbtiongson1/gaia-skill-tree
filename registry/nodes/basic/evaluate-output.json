@@ -1,0 +1,35 @@
+{
+  "id": "evaluate-output",
+  "name": "Evaluate Output",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Assesses the quality, correctness, or safety of generated output against defined criteria.",
+  "prerequisites": [],
+  "derivatives": [
+    "code-review-pipeline",
+    "gaia-audit",
+    "grounding",
+    "multi-agent-debate",
+    "prompt-optimization",
+    "guardrails",
+    "agent-eval",
+    "design-review",
+    "security-audit"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/evaluateOutput.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Evaluate Output."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

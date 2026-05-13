@@ -57,7 +57,41 @@ DEMERIT_ELIGIBLE_LEVELS = set(_META.get("demerits", {}).get("eligibleLevels", []
 
 
 def load_graph(path):
-    """Load and parse the canonical graph JSON."""
+    """Load and parse the canonical graph JSON (or aggregate from a directory)."""
+    if os.path.isdir(path):
+        skills = []
+        for root, _, files in os.walk(path):
+            for file in files:
+                if file.endswith(".json"):
+                    with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                        skills.append(json.load(f))
+
+        # Load meta.json
+        meta_path = os.path.join(os.path.dirname(path), "schema", "meta.json")
+        if not os.path.exists(meta_path):
+            meta_path = os.path.join(os.path.dirname(__file__), "..", "registry", "schema", "meta.json")
+
+        with open(meta_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+
+        # Virtual edges for validation
+        edges = []
+        for skill in skills:
+            target_id = skill["id"]
+            for source_id in skill.get("prerequisites", []):
+                edges.append({
+                    "sourceSkillId": source_id,
+                    "targetSkillId": target_id,
+                    "edgeType": "prerequisite"
+                })
+
+        return {
+            "version": "source-modular",
+            "meta": meta,
+            "skills": skills,
+            "edges": edges
+        }
+
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -694,7 +728,14 @@ def main():
 
     # Resolve paths
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    graph_path = args.graph or os.path.join(repo_root, "registry", "gaia.json")
+    nodes_dir = os.path.join(repo_root, "registry", "nodes")
+
+    # Default to nodes_dir if it exists, otherwise gaia.json
+    if not args.graph and os.path.isdir(nodes_dir):
+        graph_path = nodes_dir
+    else:
+        graph_path = args.graph or os.path.join(repo_root, "registry", "gaia.json")
+
     schema_dir = args.schema_dir or os.path.join(repo_root, "registry", "schema")
 
     if not os.path.exists(graph_path):

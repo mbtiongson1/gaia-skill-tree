@@ -1,0 +1,27 @@
+{
+  "id": "image-caption",
+  "name": "Image Caption",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Generates accurate natural-language descriptions of images, capturing objects, actions, and spatial relationships.",
+  "prerequisites": [],
+  "derivatives": [
+    "multimodal-reasoning"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2301.12597",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "BLIP-2 â€” bootstrapped language-image pre-training achieving SOTA on COCO Captions (CIDEr 145.8) and NoCaps benchmarks."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

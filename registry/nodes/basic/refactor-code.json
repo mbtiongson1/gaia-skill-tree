@@ -1,0 +1,27 @@
+{
+  "id": "refactor-code",
+  "name": "Refactor Code",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Restructures existing source code to improve readability, maintainability, or performance without changing observable behavior.",
+  "prerequisites": [],
+  "derivatives": [
+    "full-stack-developer"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2310.06770",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "SWE-bench â€” 2294 real GitHub issues benchmark; agents that resolve issues must safely refactor code while passing existing test suites."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

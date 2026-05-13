@@ -1,0 +1,35 @@
+{
+  "id": "code-explain",
+  "name": "Code Explain",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Generates accurate natural-language explanations of source code, describing intent, logic flow, and key decisions at function or module level.",
+  "prerequisites": [],
+  "derivatives": [
+    "code-review-pipeline",
+    "autonomous-debug"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2109.00859",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "CodeT5 (Wang et al., 2021) -- unified pre-trained model for code understanding and generation; 73.7 BLEU on CodeSearchNet code summarization (Python), SOTA across 4 programming languages on the NL4Code benchmark."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/salesforce/CodeT5",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Salesforce CodeT5/CodeT5+ open-source repository -- reproducible fine-tuning and evaluation scripts for code summarization, generation, and translation across 8 programming languages."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

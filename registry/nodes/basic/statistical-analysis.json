@@ -1,0 +1,35 @@
+{
+  "id": "statistical-analysis",
+  "name": "Statistical Analysis",
+  "type": "basic",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Performs hypothesis testing, regression analysis, and Bayesian modelling with effect size calculation and APA-formatted statistical reporting using scipy, statsmodels, and PyMC.",
+  "prerequisites": [],
+  "derivatives": [
+    "prediction-market-analysis",
+    "skill-performance-benchmarking"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2511.06701",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Sargsyan (2025) — Structural Enforcement of Statistical Rigor in AI-Driven Discovery; monadic architecture achieves 1.1% false discovery rate vs 41% for naive LLM approaches across automated hypothesis-testing pipelines."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/scientific-skills/statistical-analysis/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "K-Dense-AI scientific-agent-skills — reproducible statistical-analysis skill covering parametric, non-parametric, and Bayesian workflows with scipy/statsmodels/pingouin/PyMC and APA-formatted output."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

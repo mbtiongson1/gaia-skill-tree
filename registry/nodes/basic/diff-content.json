@@ -1,0 +1,27 @@
+{
+  "id": "diff-content",
+  "name": "Diff Content",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Compares two versions of content and produces a structured delta highlighting additions, deletions, and modifications.",
+  "prerequisites": [],
+  "derivatives": [
+    "code-review-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/diffContent.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Diff Content."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

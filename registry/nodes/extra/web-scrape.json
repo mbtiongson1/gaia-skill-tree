@@ -1,0 +1,31 @@
+{
+  "id": "web-scrape",
+  "name": "Web Scrape",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Retrieves and structures data from web pages into usable entities.",
+  "prerequisites": [
+    "web-search",
+    "parse-html",
+    "extract-entities"
+  ],
+  "derivatives": [
+    "knowledge-harvest"
+  ],
+  "conditions": "Structured output mode required.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/webScrape.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Web Scrape."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-28",
+  "version": "0.1.0"
+}

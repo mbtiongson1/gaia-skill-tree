@@ -1,0 +1,28 @@
+{
+  "id": "parse-json",
+  "name": "Parse JSON",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Extracts structured data from JSON-formatted input, handling nested objects and arrays.",
+  "prerequisites": [],
+  "derivatives": [
+    "document-analyst",
+    "text-to-sql-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/parseJson.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Parse JSON."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

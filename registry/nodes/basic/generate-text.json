@@ -1,0 +1,29 @@
+{
+  "id": "generate-text",
+  "name": "Generate Text",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Produces coherent natural language output given a prompt, instruction, or context window.",
+  "prerequisites": [],
+  "derivatives": [
+    "prompt-optimization",
+    "release-automation",
+    "skill-authoring"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/generateText.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Generate Text."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

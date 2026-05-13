@@ -1,0 +1,46 @@
+{
+  "id": "workflow-automation",
+  "name": "Workflow Automation",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Designs, configures, and runs trigger-based multi-step automation pipelines that connect external services, schedule jobs, and orchestrate tool sequences without continuous human supervision.",
+  "prerequisites": [
+    "plan-decompose",
+    "tool-use",
+    "api-call"
+  ],
+  "derivatives": [
+    "release-automation",
+    "deployment-automation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/n8n-io/n8n",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "n8n -- fair-code workflow automation with 400+ integrations and native AI capabilities; 90k+ stars, Apache-2 + EE license."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/activepieces/activepieces",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Activepieces -- AI agents and workflow automation with 400 MCP servers; MIT license, active community."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/FlowiseAI/Flowise",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Flowise -- visual AI agent and workflow builder; 40k+ stars, Apache-2 license, reproducible demos."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

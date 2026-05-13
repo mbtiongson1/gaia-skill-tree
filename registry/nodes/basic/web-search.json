@@ -1,0 +1,30 @@
+{
+  "id": "web-search",
+  "name": "Web Search",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Queries external search engines or APIs and retrieves relevant result sets.",
+  "prerequisites": [],
+  "derivatives": [
+    "browser-automation",
+    "research",
+    "web-scrape",
+    "prediction-market-analysis"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/webSearch.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Web Search."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

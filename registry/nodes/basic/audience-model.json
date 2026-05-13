@@ -1,0 +1,29 @@
+{
+  "id": "audience-model",
+  "name": "Audience Model",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Adapts tone, complexity, and framing of output to match a target audience profile.",
+  "prerequisites": [],
+  "derivatives": [
+    "ghostwrite",
+    "translation-pipeline",
+    "humanize-prose"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/audienceModel.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Audience Model."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

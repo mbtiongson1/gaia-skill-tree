@@ -1,0 +1,27 @@
+{
+  "id": "chunk-document",
+  "name": "Chunk Document",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Splits a document into semantically meaningful segments optimized for embedding and retrieval.",
+  "prerequisites": [],
+  "derivatives": [
+    "rag-pipeline"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/chunkDocument.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Chunk Document."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "structured-output",
+  "name": "Structured Output Generation",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Generates output guaranteed to conform to a given schema (JSON, YAML, Pydantic model, etc.) using constrained decoding or grammar-guided generation.",
+  "prerequisites": [],
+  "derivatives": [
+    "rag-pipeline",
+    "text-to-sql-pipeline",
+    "function-calling",
+    "guardrails",
+    "skill-authoring"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2307.09702",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Willard & Louf (2023) â€” Efficient Guided Generation for LLMs; finite-state machine approach guarantees schema-valid output with <1% throughput overhead."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/outlines-dev/outlines",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Outlines library â€” production-grade constrained decoding supporting JSON Schema, regex, and CFG grammars; 2k+ GitHub stars."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-05-10",
+  "version": "0.2.0"
+}

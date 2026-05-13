@@ -1,0 +1,33 @@
+{
+  "id": "plan-decompose",
+  "name": "Plan and Decompose",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Breaks a complex objective into an ordered sequence of executable sub-tasks.",
+  "prerequisites": [],
+  "derivatives": [
+    "plan-and-execute",
+    "re-act-reasoning",
+    "tree-of-thought",
+    "workflow-automation",
+    "prd-generation",
+    "vertical-slice-planning",
+    "design-review"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/planDecompose.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Plan and Decompose."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-29",
+  "version": "0.1.0"
+}

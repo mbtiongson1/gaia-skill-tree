@@ -1,0 +1,31 @@
+{
+  "id": "plan-and-execute",
+  "name": "Plan and Execute",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
+  "prerequisites": [
+    "route-intent",
+    "plan-decompose",
+    "tool-select"
+  ],
+  "derivatives": [
+    "real-time-voice-assistant"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/planAndExecute.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Plan and Execute."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

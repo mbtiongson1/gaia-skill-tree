@@ -1,0 +1,36 @@
+{
+  "id": "grounding",
+  "name": "Grounding",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
+  "prerequisites": [
+    "retrieve",
+    "cite-sources",
+    "evaluate-output"
+  ],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2210.08726",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "RARR (Gao et al., 2022) -- retrieval and attribution for LLM outputs; +32 points on the AIS attribution benchmark by revising ungrounded claims using retrieved web evidence."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/shmsw25/FActScoring",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "FActScore (Min et al., EMNLP 2023) -- atomic factuality scoring pipeline decomposing generation into claims and verifying each against a retrieval corpus; open-source with reproducible evaluation on biography generation."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

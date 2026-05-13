@@ -1,0 +1,27 @@
+{
+  "id": "parse-pdf",
+  "name": "Parse PDF",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Extracts text, tables, equations, and structure from PDF documents, preserving layout and reading order.",
+  "prerequisites": [],
+  "derivatives": [
+    "document-digitization"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2308.13418",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Nougat (Meta AI) â€” visual transformer for scientific PDF parsing; 7.6% edit distance on arXiv papers, handling LaTeX, tables, and equations."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

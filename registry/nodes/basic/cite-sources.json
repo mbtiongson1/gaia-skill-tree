@@ -1,0 +1,31 @@
+{
+  "id": "cite-sources",
+  "name": "Cite Sources",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Attributes claims to specific sources with proper references, URLs, or bibliographic entries.",
+  "prerequisites": [],
+  "derivatives": [
+    "gaia-audit",
+    "grounding",
+    "research",
+    "literature-review",
+    "scientific-writing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/citeSources.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Cite Sources."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}
