@@ -1,0 +1,39 @@
+{
+  "id": "semantic-cache",
+  "name": "Semantic Cache",
+  "type": "basic",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Stores LLM responses keyed by embedding similarity so that semantically equivalent queries are served from cache, reducing inference latency and token cost without sacrificing answer quality.",
+  "prerequisites": [],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2604.20021",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Continuous Semantic Caching for Low-Cost LLM Serving (2026) -- first rigorous theoretical framework for semantic LLM caching in continuous query space using kernel ridge regression."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/codefuse-ai/ModelCache",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "ModelCache -- LLM semantic caching system reducing response time via cached query-result pairs; reproducible, MIT license."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/vcache-project/vCache",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "vCache -- reliable and efficient semantic prompt caching; active research prototype with published benchmarks."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

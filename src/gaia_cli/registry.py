@@ -35,6 +35,10 @@ def registry_graph_path(registry_path):
     return os.path.join(registry_dir(registry_path), "gaia.json")
 
 
+def registry_nodes_dir(registry_path) -> str:
+    return os.path.join(registry_dir(registry_path), "nodes")
+
+
 def registry_schema_dir(registry_path) -> str:
     return os.path.join(registry_dir(registry_path), "schema")
 

@@ -1,0 +1,37 @@
+{
+  "id": "chain-of-thought",
+  "name": "Chain-of-Thought Reasoning",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "uncommon",
+  "description": "Produces explicit intermediate reasoning steps before arriving at a final answer, dramatically improving accuracy on multi-step problems.",
+  "prerequisites": [],
+  "derivatives": [
+    "multi-agent-debate",
+    "re-act-reasoning",
+    "scientific-discovery",
+    "tree-of-thought"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2201.11903",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Wei et al. (2022) â€” Chain-of-Thought Prompting; +18% on GSM8K and +14% on MATH with PaLM 540B vs standard prompting."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/princeton-nlp/chain-of-thought-hub",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Chain-of-Thought Hub â€” reproducible evaluation suite covering 10+ reasoning benchmarks with CoT prompts and baselines."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

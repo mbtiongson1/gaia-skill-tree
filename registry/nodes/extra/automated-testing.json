@@ -1,0 +1,33 @@
+{
+  "id": "automated-testing",
+  "name": "Automated Testing",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
+  "prerequisites": [
+    "generate-test",
+    "execute-bash",
+    "error-interpretation"
+  ],
+  "derivatives": [
+    "full-stack-developer",
+    "ml-pipeline",
+    "e2e-testing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/princeton-nlp/SWE-bench",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "SWE-bench Verified â€” open-source evaluation harness where agents fix GitHub issues by generating and passing test suites; full execution logs archived."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

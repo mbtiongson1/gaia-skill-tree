@@ -1,0 +1,31 @@
+{
+  "id": "architecture-diagram",
+  "name": "Architecture Diagram",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Generates technical architecture, infrastructure, or cloud diagrams as structured visual artifacts from natural-language system descriptions.",
+  "prerequisites": [
+    "data-visualize",
+    "format-output",
+    "write-report"
+  ],
+  "derivatives": [],
+  "conditions": "Requires enough system context to identify components, relationships, boundaries, and rendering constraints.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/architecture-diagram/SKILL.md",
+      "evaluator": "openai-codex",
+      "date": "2026-05-06",
+      "notes": "Hermes Agent architecture-diagram skill generates standalone HTML files with inline SVG architecture diagrams from system descriptions."
+    }
+  ],
+  "knownAgents": [
+    "NousResearch/hermes-agent"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-06",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

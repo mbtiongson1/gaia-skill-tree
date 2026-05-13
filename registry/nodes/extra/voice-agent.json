@@ -1,0 +1,34 @@
+{
+  "id": "voice-agent",
+  "name": "Voice Agent",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
+  "prerequisites": [
+    "speech-to-text",
+    "question-answer",
+    "text-to-speech"
+  ],
+  "derivatives": [
+    "real-time-voice-assistant"
+  ],
+  "conditions": "Requires real-time audio I/O or audio file access.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/rasa/rasa",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Rasa Open Source â€” production voice agent framework with ASR/TTS integrations; reproducible pipeline with test suite and documented benchmarks."
+    }
+  ],
+  "knownAgents": [],
+  "demerits": [
+    "heavyweight-dependency"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

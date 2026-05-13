@@ -1,0 +1,35 @@
+{
+  "id": "research",
+  "name": "Research",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
+  "prerequisites": [
+    "web-search",
+    "summarize",
+    "cite-sources"
+  ],
+  "derivatives": [
+    "autonomous-data-scientist",
+    "ghostwrite",
+    "registry-curation",
+    "scientific-discovery",
+    "literature-review"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/research.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Research."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

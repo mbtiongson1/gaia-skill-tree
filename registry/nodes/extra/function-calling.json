@@ -1,0 +1,36 @@
+{
+  "id": "function-calling",
+  "name": "Function Calling",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
+  "prerequisites": [
+    "structured-output",
+    "api-call",
+    "tool-select"
+  ],
+  "derivatives": [],
+  "conditions": "Requires an available function or tool catalog with machine-readable argument schemas and result contracts.",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2307.16789",
+      "evaluator": "rico-favor",
+      "date": "2026-04-29",
+      "notes": "ToolLLM / ToolBench demonstrates LLM tool invocation over 16,000+ real-world APIs with documented evaluation tasks and failure analysis, supporting function calling as a schema-driven tool-use pattern."
+    },
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2305.15334",
+      "evaluator": "rico-favor",
+      "date": "2026-04-29",
+      "notes": "Gorilla / APIBench evaluates model generation of API calls across large API collections, including accurate endpoint and argument selection."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-29",
+  "updatedAt": "2026-04-29",
+  "version": "0.1.0"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "speech-to-text",
+  "name": "Speech to Text",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Transcribes spoken audio into accurate text, handling diverse accents, noise conditions, and multiple languages.",
+  "prerequisites": [],
+  "derivatives": [
+    "voice-agent"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2212.04356",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Whisper (OpenAI) â€” large-scale weak supervision across 680K hours of audio achieves near-human WER on LibriSpeech and multilingual benchmarks."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

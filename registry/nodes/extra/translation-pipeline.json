@@ -1,0 +1,29 @@
+{
+  "id": "translation-pipeline",
+  "name": "Translation Pipeline",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
+  "prerequisites": [
+    "translate",
+    "sentiment-analysis",
+    "audience-model"
+  ],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2308.11596",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "SeamlessM4T (Meta AI) â€” unified speech and text translation model with tone and register control; BLEU +3.3 over NLLB on FLORES-200."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

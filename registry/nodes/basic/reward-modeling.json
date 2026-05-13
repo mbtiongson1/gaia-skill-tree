@@ -1,0 +1,35 @@
+{
+  "id": "reward-modeling",
+  "name": "Reward Modeling",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "rare",
+  "description": "Learns a scalar reward signal from human preference comparisons between model outputs, enabling reinforcement learning from human feedback (RLHF) to align model behavior with human values.",
+  "prerequisites": [],
+  "derivatives": [
+    "recursive-self-improvement",
+    "prompt-optimization"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2203.02155",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "InstructGPT (Ouyang et al., 2022) -- RLHF with reward model trained on 33K human comparisons; 1.3B InstructGPT preferred over 175B GPT-3 by 85% of labelers, demonstrating reward modeling as the key alignment primitive."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/huggingface/trl",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "TRL (HuggingFace) -- production RLHF library with reward model training, PPO, DPO, and GRPO support; 10k+ GitHub stars, reproducible training scripts and documented evaluation pipelines."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

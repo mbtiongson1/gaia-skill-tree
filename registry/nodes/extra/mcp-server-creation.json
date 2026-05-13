@@ -1,0 +1,42 @@
+{
+  "id": "mcp-server-creation",
+  "name": "MCP Server Creation",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "rare",
+  "description": "Designs and implements Model Context Protocol servers that expose external APIs, files, or services as well-typed tools with clear schemas, authentication, and testable agent workflows.",
+  "prerequisites": [
+    "mcp-integration",
+    "tool-creation",
+    "api-call"
+  ],
+  "derivatives": [
+    "workflow-automation",
+    "tool-chaining",
+    "multi-agent-orchestration-v"
+  ],
+  "conditions": "Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md",
+      "evaluator": "codex",
+      "date": "2026-05-10",
+      "notes": "Anthropic mcp-builder skill gives a reproducible guide for building high-quality MCP servers in Python FastMCP or the Node/TypeScript MCP SDK."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/modelcontextprotocol/python-sdk",
+      "evaluator": "codex",
+      "date": "2026-05-10",
+      "notes": "Official MCP Python SDK is active and provides FastMCP server examples for exposing tools, resources, prompts, structured outputs, transports, and inspector-based testing."
+    }
+  ],
+  "knownAgents": [
+    "Claude"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-10",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

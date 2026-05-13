@@ -1,0 +1,37 @@
+{
+  "id": "prompt-optimization",
+  "name": "Prompt Optimization",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
+  "prerequisites": [
+    "evaluate-output",
+    "generate-text"
+  ],
+  "derivatives": [
+    "registry-curation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2310.03714",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-29",
+      "notes": "Khattab et al. (2023) â€” DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines; automated prompt tuning matches or exceeds hand-crafted prompts on GSM8K, HotPotQA, and FEVER."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/stanfordnlp/dspy",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-29",
+      "notes": "DSPy â€” Stanford NLP library for programmable LM pipelines; 18k+ GitHub stars, supports multiple optimizers (BootstrapFewShot, MIPRO, COPRO) across any LM."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-29",
+  "updatedAt": "2026-04-29",
+  "version": "0.2.0"
+}

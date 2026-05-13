@@ -1,0 +1,30 @@
+{
+  "id": "write-report",
+  "name": "Write Report",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Produces structured, multi-section written output with headings, citations, and coherent narrative.",
+  "prerequisites": [],
+  "derivatives": [
+    "ghostwrite",
+    "prd-generation",
+    "scientific-writing",
+    "architecture-diagram"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/writeReport.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Write Report."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "document-editing",
+  "name": "Document Editing",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "common",
+  "description": "Reads, edits, repacks, and applies styling or design principles to structured binary document formats such as PPTX, DOCX, and XLSX.",
+  "prerequisites": [],
+  "derivatives": [
+    "humanize-prose"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Anthropic /pptx slash command -- extracts, edits, packs, and applies design principles to PowerPoint files using markitdown."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-05-06",
+  "version": "0.1.0"
+}

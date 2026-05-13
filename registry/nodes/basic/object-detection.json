@@ -1,0 +1,35 @@
+{
+  "id": "object-detection",
+  "name": "Object Detection",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Locates and classifies multiple objects within images by producing bounding boxes, confidence scores, and category labels in a single forward pass.",
+  "prerequisites": [],
+  "derivatives": [
+    "multimodal-reasoning",
+    "browser-automation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2005.12872",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "DETR (Carion et al., 2020) -- end-to-end object detection with transformers; eliminates hand-crafted anchor design and achieves COCO AP 42.0 with ResNet-50, matching Faster R-CNN with simplified pipeline."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/ultralytics/ultralytics",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Ultralytics YOLOv8 -- production real-time detection library; COCO AP 50.2 at 8ms inference, 25k+ GitHub stars, reproducible training and evaluation scripts for detection and segmentation."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}

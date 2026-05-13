@@ -1,0 +1,32 @@
+{
+  "id": "vision-qa",
+  "name": "Visual Question Answering",
+  "type": "basic",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Answers natural-language questions grounded in a specific image or screenshot by combining visual perception with language reasoning, enabling visual debugging, UI analysis, and document-image Q&A.",
+  "prerequisites": [],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2604.17488",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "AutoVQA-G (ICASSP 2026) — self-improving agentic framework for automated VQA and grounding annotation; uses Chain-of-Thought verification + prompt optimization to generate high-quality VQA-G datasets."
+    },
+    {
+      "class": "C",
+      "source": "https://skillsmp.com/api/v1/skills/search?q=vision-qa",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "SkillsMP: 6+ named entries including visual-qa, vision-qa-workflow, claude-vision-qa, visual-qa-analysis from multiple contributors."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "error-interpretation",
+  "name": "Error Interpretation",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Diagnoses error messages, stack traces, and failure modes to identify root causes and suggest fixes.",
+  "prerequisites": [],
+  "derivatives": [
+    "autonomous-debug",
+    "automated-testing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/errorInterpretation.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Error Interpretation."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-26",
+  "version": "0.1.0"
+}

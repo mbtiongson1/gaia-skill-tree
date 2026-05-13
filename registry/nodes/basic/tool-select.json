@@ -1,0 +1,29 @@
+{
+  "id": "tool-select",
+  "name": "Tool Select",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Chooses the most appropriate tool or API from a set of available options given a task description.",
+  "prerequisites": [],
+  "derivatives": [
+    "plan-and-execute",
+    "function-calling",
+    "tool-chaining"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/toolSelect.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Tool Select."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-28",
+  "version": "0.1.0"
+}

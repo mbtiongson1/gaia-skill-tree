@@ -1,0 +1,25 @@
+{
+  "id": "ux-audit",
+  "name": "UX Audit",
+  "type": "basic",
+  "level": "0★",
+  "rarity": "uncommon",
+  "description": "Systematically evaluates a user interface against established usability heuristics or accessibility standards, producing a scored finding report with remediation recommendations.",
+  "prerequisites": [],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Martin Stepanoski @mastepanoski/claude-skills -- /nielsen-heuristics-audit audits UI against Nielsen 10 usability heuristics step-by-step."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

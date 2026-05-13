@@ -1,0 +1,27 @@
+{
+  "id": "scientific-visualization",
+  "name": "Scientific Visualization",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Creates publication-ready scientific figures with multi-panel layouts, statistical annotations, colorblind-safe palettes, and journal-specific formatting (Nature, Science, Cell) using matplotlib, seaborn, and plotly.",
+  "prerequisites": [],
+  "derivatives": [
+    "scientific-writing"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/scientific-skills/scientific-visualization/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "K-Dense-AI scientific-agent-skills — reproducible scientific-visualization skill orchestrating matplotlib, seaborn, and plotly for journal-quality multi-panel figures with PDF/EPS/TIFF/PNG export and accessibility annotations."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "code-generation",
+  "name": "Code Generation",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Produces syntactically correct and functionally appropriate source code from specifications or prompts.",
+  "prerequisites": [],
+  "derivatives": [
+    "autonomous-debug",
+    "code-review-pipeline",
+    "registry-curation",
+    "tool-creation",
+    "ml-pipeline",
+    "skill-authoring"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/codeGeneration.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Code Generation."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-05-10",
+  "version": "0.1.0"
+}

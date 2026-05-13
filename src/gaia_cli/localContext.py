@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from gaia_cli.registry import registry_graph_path, named_skills_dir, user_tree_path
+from gaia_cli.registry import registry_graph_path, registry_nodes_dir, named_skills_dir, user_tree_path
 from gaia_cli.treeManager import load_tree
 from gaia_cli.pathEngine import load_paths
 
@@ -45,14 +45,32 @@ class LocalContext:
         if tree_data:
             owned_ids = {s.get('skillId') for s in tree_data.get('unlockedSkills', []) if s.get('skillId')}
 
-        # Load canon graph
+        # Load canon graph metadata (for type symbols etc)
         graph_path = registry_graph_path(registry_path)
         graph_data = None
-        skill_map = {}
-        canon_ids = set()
         if os.path.isfile(graph_path):
             with open(graph_path, 'r', encoding='utf-8') as f:
                 graph_data = json.load(f)
+
+        # Load skills from modular nodes
+        skill_map = {}
+        canon_ids = set()
+        nodes_dir = registry_nodes_dir(registry_path)
+        if os.path.isdir(nodes_dir):
+            for root, _, files in os.walk(nodes_dir):
+                for file in files:
+                    if file.endswith(".json"):
+                        try:
+                            with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                                skill = json.load(f)
+                                sid = skill.get('id')
+                                if sid:
+                                    skill_map[sid] = skill
+                                    canon_ids.add(sid)
+                        except (OSError, json.JSONDecodeError):
+                            continue
+        elif graph_data:
+            # Fallback to legacy gaia.json if nodes dir missing
             for skill in graph_data.get('skills', []):
                 sid = skill.get('id')
                 if sid:

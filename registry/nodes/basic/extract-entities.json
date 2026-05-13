@@ -1,0 +1,32 @@
+{
+  "id": "extract-entities",
+  "name": "Extract Entities",
+  "type": "basic",
+  "level": "1★",
+  "rarity": "common",
+  "description": "Identifies and extracts named entities such as people, organizations, dates, and locations from text.",
+  "prerequisites": [],
+  "derivatives": [
+    "content-moderation",
+    "document-analyst",
+    "document-digitization",
+    "knowledge-graph-build",
+    "knowledge-harvest",
+    "web-scrape"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "C",
+      "source": "https://github.com/gaia-registry/gaia/blob/main/docs/evidence/extractEntities.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-26",
+      "notes": "Seed evidence for Extract Entities."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-26",
+  "updatedAt": "2026-04-28",
+  "version": "0.1.0"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "prd-generation",
+  "name": "PRD Generation",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Synthesizes conversation context and codebase knowledge into a structured Product Requirements Document containing a problem statement, extensive user stories, implementation decisions, module boundaries, testing decisions, and out-of-scope items.",
+  "prerequisites": [
+    "write-report",
+    "plan-decompose"
+  ],
+  "derivatives": [],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/mattpocock/skills/blob/main/skills/engineering/to-prd/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Production skill that synthesises live conversation context into a fully-structured PRD and publishes it to the issue tracker."
+    },
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2507.19113",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Practical study: LLMs generate Functional Design Specifications and user stories from fragmented requirement sources in an IT consulting deployment."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

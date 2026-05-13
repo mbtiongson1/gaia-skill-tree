@@ -1,0 +1,28 @@
+{
+  "id": "generate-sql",
+  "name": "Generate SQL",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "common",
+  "description": "Translates natural-language data questions into syntactically correct, executable SQL queries against a given schema.",
+  "prerequisites": [],
+  "derivatives": [
+    "text-to-sql-pipeline",
+    "data-analysis"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/1809.08887",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Spider benchmark â€” cross-domain text-to-SQL dataset; LLM baselines reach >85% exact match, establishing reproducible evaluation methodology."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

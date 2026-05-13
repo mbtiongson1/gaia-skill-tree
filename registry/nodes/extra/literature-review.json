@@ -1,0 +1,36 @@
+{
+  "id": "literature-review",
+  "name": "Literature Review",
+  "type": "extra",
+  "level": "4★",
+  "rarity": "uncommon",
+  "description": "Conducts systematic multi-database academic literature searches following PRISMA/SWARM protocols, screens and synthesises findings, verifies all citations, and generates a structured review report.",
+  "prerequisites": [
+    "research",
+    "cite-sources",
+    "summarize"
+  ],
+  "derivatives": [],
+  "conditions": "Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent).",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2501.05468",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "Rouzrokh et al. (2025) — LatteReview: multi-agent framework for systematic review automation; modular agents for title/abstract screening, relevance scoring, and structured data extraction with RAG and multimodal support."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/scientific-skills/literature-review/SKILL.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "K-Dense-AI scientific-agent-skills — reproducible literature-review skill: seven-phase workflow from research-question planning through multi-database search, screening, extraction, synthesis, citation verification to final PDF output."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.1.0"
+}

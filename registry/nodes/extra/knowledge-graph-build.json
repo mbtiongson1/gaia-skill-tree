@@ -1,0 +1,38 @@
+{
+  "id": "knowledge-graph-build",
+  "name": "Knowledge Graph Construction",
+  "type": "extra",
+  "level": "3★",
+  "rarity": "uncommon",
+  "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
+  "prerequisites": [
+    "extract-entities",
+    "logical-inference"
+  ],
+  "derivatives": [
+    "rag-pipeline",
+    "autonomous-research-agent"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2306.08302",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Pan et al. (2024) â€” Unifying Large Language Models and Knowledge Graphs: A Roadmap; comprehensive survey showing LLM-KG synergy improves downstream tasks by 5-15%."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/microsoft/graphrag",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-28",
+      "notes": "Microsoft GraphRAG â€” production KG construction pipeline; extracts community summaries and entity graphs from corpora, enabling global sensemaking queries."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-28",
+  "updatedAt": "2026-04-28",
+  "version": "0.2.0"
+}

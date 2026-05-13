@@ -1,0 +1,34 @@
+{
+  "id": "ocr",
+  "name": "OCR",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Extracts machine-readable text from raster images, scanned pages, and photo documents using optical character recognition, preserving layout and handling skew, noise, and varied fonts.",
+  "prerequisites": [],
+  "derivatives": [
+    "document-digitization"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "A",
+      "source": "https://arxiv.org/abs/2109.10282",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "TrOCR (Li et al., 2021) -- transformer-based OCR model achieving SOTA on IIIT-5K (97.9%), SVT (97.0%), and CUTE80 (97.9%) scene-text benchmarks, outperforming CNN+attention baselines across all datasets."
+    },
+    {
+      "class": "B",
+      "source": "https://github.com/JaidedAI/EasyOCR",
+      "evaluator": "mbtiongson1",
+      "date": "2026-04-30",
+      "notes": "EasyOCR -- production-grade OCR library supporting 80+ languages; 24k+ GitHub stars, reproducible benchmarks, and documented performance across diverse real-world document types."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-04-30",
+  "updatedAt": "2026-04-30",
+  "version": "0.2.0"
+}
