@@ -78,3 +78,18 @@ The pre-commit hook keeps these in lockstep:
 - `registry/gaia.json`
 
 If they disagree before the bump, the hook fails loudly. Do not silently repair version drift without calling it out.
+
+## Agent-Managed Files (Hermes Ownership)
+
+The following files are managed by an autonomous agent (Hermes) and should **not** be modified, staged, or deleted:
+
+- `STEWARDSHIP_PLAN.md`
+- `scripts/marketing_engine.py`
+- `scripts/email_sender.py`
+- `scripts/share_deliverable.py`
+- `scripts/generate_adoption_dashboard.py`
+- `scripts/generate_showcase.py`
+- `docs/ADOPTION.html`
+- `docs/SHOWCASE.html`
+- `docs/WHY-GAIA.md`
+- `docs/QUICKSTART.md`
