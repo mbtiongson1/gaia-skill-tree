@@ -120,6 +120,9 @@ PUBLIC_COMMANDS = (
     "init",
     "scan",
     "pull",
+    "update",
+    "install",
+    "uninstall",
     "tree",
     "push",
     "propose",
@@ -1177,22 +1180,26 @@ def skills_command(args):
 
 
 def pull_command(args):
-    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+    res = subprocess.run(["git", "-C", args.registry, "pull", "--ff-only"])
+    if res.returncode != 0:
+        print("Warning: git pull failed. Ensure you are on a tracking branch.", file=sys.stderr)
 
 
 def update_command(args):
-    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+    res = subprocess.run(["git", "-C", args.registry, "pull", "--ff-only"])
+    if res.returncode != 0:
+        print("Warning: git pull failed. Proceeding with installation...", file=sys.stderr)
     registry_pyproject = Path(args.registry) / "pyproject.toml"
     if registry_pyproject.exists():
         # Editable source install — pipx doesn't support -e, so pip only
         subprocess.run(
-            [sys.executable, "-m", "pip", "install", "-e", f"{args.registry}[embeddings]"],
+            [sys.executable, "-m", "pip", "install", "-e", args.registry],
             check=True,
         )
         return
     # Non-editable: try pip first, fall back to pipx
     pip_ok = subprocess.run(
-        [sys.executable, "-m", "pip", "install", "gaia-cli[embeddings]", "--upgrade"],
+        [sys.executable, "-m", "pip", "install", "gaia-cli", "--upgrade"],
     ).returncode == 0
     if not pip_ok:
         pipx = subprocess.run(["pipx", "upgrade", "gaia-cli"]).returncode
@@ -1289,6 +1296,14 @@ def get_parser():
     scan_parser.add_argument('--auto-promote', action='store_true', help="Promote every scan-recommended candidate after scanning")
     subparsers.add_parser('pull', help="Refresh registry data from origin")
     subparsers.add_parser('update', help="Pull latest registry and reinstall the CLI")
+    
+    install_parser = subparsers.add_parser('install', help="Install a named skill")
+    install_parser.add_argument('skill_id', nargs='?', help="Skill ID, catalogRef, or unique bare slug to install")
+    install_parser.add_argument('--list', action='store_true', help="List and interactively select skills to install")
+    
+    uninstall_parser = subparsers.add_parser('uninstall', help="Uninstall a named skill")
+    uninstall_parser.add_argument('skill_id', help="Skill ID to uninstall")
+
     tree_parser = subparsers.add_parser('tree', help="Show your Gaia skill tree")
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
@@ -1380,6 +1395,10 @@ def main():
         pull_command(args)
     elif args.command == 'update':
         update_command(args)
+    elif args.command == 'install':
+        install_command(args)
+    elif args.command == 'uninstall':
+        uninstall_command(args)
     elif args.command == 'tree':
         tree_command(args)
     elif args.command == 'push':

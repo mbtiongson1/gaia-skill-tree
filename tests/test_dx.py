@@ -89,10 +89,14 @@ def test_scan_repo_detailed_reports_file_and_candidate_counts(tmp_path, monkeypa
     assert detailed["candidate_count"] >= 2
 
 
-def test_flat_skill_verbs_are_removed(monkeypatch):
+def test_top_level_install_commands_are_restored(monkeypatch):
     with pytest.raises(SystemExit) as exc:
         run_cli(monkeypatch, ["install", "--help"])
-    assert exc.value.code == 2
+    assert exc.value.code == 0
+
+    with pytest.raises(SystemExit) as exc:
+        run_cli(monkeypatch, ["uninstall", "--help"])
+    assert exc.value.code == 0
 
 
 def test_top_level_help_shows_all_public_commands_with_usage(monkeypatch, capsys):
