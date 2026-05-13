@@ -60,9 +60,17 @@ cd packages/cli-npm && npm install
     - `docs/WHY-GAIA.md`
     - `docs/QUICKSTART.md`
 
+### Wiki Management
+- The project wiki lives in a separate repository: `https://github.com/mbtiongson1/gaia-skill-tree.wiki.git`.
+- It is NOT part of the main workspace. If a wiki update is required:
+    1. Clone the wiki repository to an adjacent directory (e.g., `../gaia-wiki`).
+    2. Make changes, commit, and push from that directory.
+    3. **DO NOT** delete the wiki directory after use; keep it for future updates.
+    4. Return to the main workspace to continue core development.
+
 ### Source of Truth
-- **NEVER** hand-edit files in `docs/` or generated artifacts like `registry/gaia.svg`.
-- **Edit Only:** `registry/gaia.json`, `registry/named/*.json`, or `registry-for-review/skill-batches/*.json`.
+- **NEVER** hand-edit `registry/gaia.json` or generated artifacts in `docs/`.
+- **Edit Only:** `registry/nodes/**/*.json`, `registry/named/*.json`, or `registry-for-review/skill-batches/*.json`.
 
 ### Python Internal Modules
 - `src/gaia_cli/formatting.py`: Centralized slash-naming formatters, RANK_COLORS, and tier colors.
