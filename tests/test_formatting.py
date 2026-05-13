@@ -35,7 +35,7 @@ class TestFormatSkillPlain:
 
     def test_local_user(self):
         result = format_skill_plain("my-tool", is_local=True, local_user="bob")
-        assert result == "bob/my-tool"
+        assert result == "/my-tool"
 
     def test_local_without_user_falls_to_canon(self):
         # is_local=True but no local_user -> fallback to canon display
@@ -73,7 +73,7 @@ class TestFormatSkillColoredNoColor:
     def test_local_no_color(self, monkeypatch):
         monkeypatch.setenv("NO_COLOR", "1")
         result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
-        assert result == "bob/my-tool"
+        assert result == "/my-tool"
         assert "\033" not in result
 
 
@@ -113,10 +113,7 @@ class TestFormatSkillColoredTruecolor:
         result = format_skill_colored("my-tool", "3★", is_local=True, local_user="bob")
         r, g, b = COLOR_LOCAL_USER
         assert f"\033[38;2;{r};{g};{b}m" in result
-        assert "bob" in result
-        sr, sg, sb = RANK_COLORS["3★"]
-        assert f"\033[38;2;{sr};{sg};{sb}m" in result
-        assert "my-tool" in result
+        assert "/my-tool" in result
 
     def test_unknown_level_falls_to_zero(self):
         result = format_skill_colored("foo", "IX")

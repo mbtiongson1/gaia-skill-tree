@@ -68,8 +68,8 @@ def format_skill_plain(skill_id: str, *, named_contributor: str | None = None,
     """Return plain display string without ANSI codes."""
     if named_contributor:
         return f"{named_contributor}/{skill_id}"
-    if is_local and local_user:
-        return f"{local_user}/{skill_id}"
+    if is_local:
+        return f"/{skill_id}"
     return f"/{skill_id}"
 
 
@@ -79,7 +79,7 @@ def format_skill_colored(skill_id: str, level: str = "0★", *,
     """Return ANSI-colored display string.
 
     - Named: RED contributor + rank-colored skill name
-    - Local: GREEN username + rank-colored skill name
+    - Local: GREEN slash and skill name
     - Canon: rank-colored /skill-id
     """
     r = _reset()
@@ -89,9 +89,10 @@ def format_skill_colored(skill_id: str, level: str = "0★", *,
     if named_contributor:
         contrib_colored = f"{_fg(*COLOR_CONTRIBUTOR)}{named_contributor}{r}"
         return f"{contrib_colored}/{skill_colored}"
-    if is_local and local_user:
-        user_colored = f"{_fg(*COLOR_LOCAL_USER)}{local_user}{r}"
-        return f"{user_colored}/{skill_colored}"
+    if is_local:
+        # Philosophy: Real/local skill names should be displayed with their slash and colored green
+        # to distinguish them from generic canonical concepts.
+        return f"{_fg(*COLOR_LOCAL_USER)}/{skill_id}{r}"
     return f"{_fg(*rank_color)}/{skill_id}{r}"
 
 
