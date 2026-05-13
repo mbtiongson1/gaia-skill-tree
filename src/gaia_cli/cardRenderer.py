@@ -481,12 +481,25 @@ def render_appraise_card(
 
     # Header line: glyph + name + level (rank-colored)
     level_str = f"Level {level}"
-    header_left = f"{glyph} {name}"
-    space = inner - len(header_left) - len(level_str)
+    header_left_plain = f"{glyph} {name}"
+    space = inner - len(header_left_plain) - len(level_str)
     if space < 1:
-        header_left = header_left[: inner - len(level_str) - 2] + "…"
+        # truncating name if too long
+        name_plain = name[: inner - len(level_str) - 4] + "…"
         space = 1
-    lines.append(f"{bc}{V}{r} {bold()}{fg(*tc)}{header_left}{r}{' ' * space}{fg(*rc)}{level_str}{r} {bc}{V}{r}")
+    else:
+        name_plain = name
+        
+    if "/" in name_plain:
+        parts = name_plain.split("/", 1)
+        if parts[0] == "": # starts with /
+            name_colored = f"{fg(*COLOR_LOCAL_USER)}{name_plain}{r}"
+        else:
+            name_colored = f"{fg(*COLOR_CONTRIBUTOR)}{parts[0]}{r}/{fg(*rc)}{parts[1]}{r}"
+    else:
+        name_colored = f"{fg(*tc)}{name_plain}{r}"
+
+    lines.append(f"{bc}{V}{r} {bold()}{fg(*tc)}{glyph}{r} {name_colored}{' ' * space}{fg(*rc)}{level_str}{r} {bc}{V}{r}")
 
     # Thin divider
     lines.append(f"{bc}{V}{r} {fg(*COLOR_MUTED)}{H * inner}{r} {bc}{V}{r}")
@@ -593,6 +606,15 @@ def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False, c
     r = reset()
     b = bold()
 
+    if "/" in name:
+        parts = name.split("/", 1)
+        if parts[0] == "":
+            name_colored = f"{fg(*COLOR_LOCAL_USER)}{name}{r}"
+        else:
+            name_colored = f"{fg(*COLOR_CONTRIBUTOR)}{parts[0]}{r}/{fg(*RANK_COLORS.get(level, RANK_COLORS['0★']))}{parts[1]}{r}"
+    else:
+        name_colored = f"{tc_fg}{name}{r}"
+
     art = [
         f"{gc}        ✦  ·  ✦        {r}",
         f"{gc}     ·  ╱────╲  ·     {r}",
@@ -602,7 +624,7 @@ def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False, c
         f"",
         f"    {b}{gc}═══ SKILL UNLOCKED ═══{r}",
         f"",
-        f"    {tc_fg}{b}{glyph} {name}{r}",
+        f"    {tc_fg}{b}{glyph}{r} {name_colored}",
         f"    {fg(*COLOR_MUTED)}Level {level} • {tier.capitalize()} • {rarity}{r}",
     ]
 
@@ -672,9 +694,18 @@ def render_promotion_prompt(skill_data: dict, proposed_level: str, canon: bool =
     
     display = (ctx.display_name(skill_id, canon=canon) if ctx else f"/{skill_id}")
     
+    if "/" in display:
+        parts = display.split("/", 1)
+        if parts[0] == "":
+            display_colored = f"{fg(*COLOR_LOCAL_USER)}{display}{r}"
+        else:
+            display_colored = f"{fg(*COLOR_CONTRIBUTOR)}{parts[0]}{r}/{tc}{b}{parts[1]}{r}"
+    else:
+        display_colored = f"{tc}{b}{display}{r}"
+    
     lines.extend([
         f"  {gc}┌─ Fusion ──────────────────────────────┐{r}",
-        f"  {gc}│{r}  {tc}{b}{display}{r} can advance to {b}Level {proposed_level}{r} ({level_name})",
+        f"  {gc}│{r}  {display_colored} can advance to {b}Level {proposed_level}{r} ({level_name})",
         f"  {gc}│{r}  Run: {b}gaia fuse {skill_id}{r}",
         f"  {gc}└───────────────────────────────────────────┘{r}",
         "",
@@ -696,30 +727,50 @@ def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "e
     r = reset()
 
     # Format skill names with slash prefix or nickname
-    prereq_names = [(ctx.display_name(p, canon=canon) if ctx else f"/{p}") for p in prereqs]
-    result_name = (ctx.display_name(result, canon=canon) if ctx else f"/{result}")
+    prereq_raw = [(ctx.display_name(p, canon=canon) if ctx else f"/{p}") for p in prereqs]
+    result_raw = (ctx.display_name(result, canon=canon) if ctx else f"/{result}")
+
+    def _color_name(n: str, is_result: bool = False) -> str:
+        # returns the colored string and its plain length
+        if "/" in n:
+            parts = n.split("/", 1)
+            if parts[0] == "":
+                colored = f"{fg(*COLOR_LOCAL_USER)}{n}{r}"
+            else:
+                colored = f"{fg(*COLOR_CONTRIBUTOR)}{parts[0]}{r}/{tb if is_result else mc}{parts[1]}{r}"
+        else:
+            colored = f"{tb if is_result else mc}{n}{r}"
+        return colored, len(n)
+
+    result_colored, _ = _color_name(result_raw, is_result=True)
 
     # Single prereq: simple arrow
     if len(prereqs) == 1:
-        return f"  {mc}{prereq_names[0]} ────▶{r} {tb}{result_name} {glyph}{r}"
+        p_col, _ = _color_name(prereq_raw[0])
+        return f"  {p_col} {mc}────▶{r} {result_colored} {tc}{glyph}{r}"
 
     # Pad prereq names to equal width
-    max_len = max(len(n) for n in prereq_names)
-    padded = [n.ljust(max_len) for n in prereq_names]
+    max_len = max(len(n) for n in prereq_raw)
+    
+    padded_colored = []
+    for n in prereq_raw:
+        c, length = _color_name(n)
+        pad = " " * (max_len - length)
+        padded_colored.append(f"{c}{pad}")
 
-    n = len(padded)
+    n = len(padded_colored)
     lines = []
 
     if n == 2:
         # Two prereqs: bracket rows with a connector row in between
         padding = " " * max_len
-        lines.append(f"  {mc}{padded[0]} ─┐{r}")
-        lines.append(f"  {mc}{padding}  {r}{tc}├──▶{r} {tb}{result_name} {glyph}{r}")
-        lines.append(f"  {mc}{padded[1]} ─┘{r}")
+        lines.append(f"  {padded_colored[0]} {mc}─┐{r}")
+        lines.append(f"  {padding}  {tc}├──▶{r} {result_colored} {tc}{glyph}{r}")
+        lines.append(f"  {padded_colored[1]} {mc}─┘{r}")
     else:
         # 3+ prereqs: arrow on the vertical midpoint row
         mid = n // 2
-        for i, name in enumerate(padded):
+        for i, colored_n in enumerate(padded_colored):
             if i == 0:
                 bracket = "─┐"
             elif i == n - 1:
@@ -730,9 +781,9 @@ def render_fusion_diagram(prereqs: list[str], result: str, result_type: str = "e
                 bracket = "─┤"
 
             if i == mid:
-                line = f"  {mc}{name} {r}{tc}─┼──▶{r} {tb}{result_name} {glyph}{r}"
+                line = f"  {colored_n} {tc}{bracket}{r} {result_colored} {tc}{glyph}{r}"
             else:
-                line = f"  {mc}{name} {bracket}{r}"
+                line = f"  {colored_n} {mc}{bracket}{r}"
             lines.append(line)
 
     return "\n".join(lines)
