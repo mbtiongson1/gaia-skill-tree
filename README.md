@@ -58,7 +58,7 @@ Skills level up through evidence, not declaration. Each demerit lowers effective
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `3.2.7`.
+Current Gaia CLI version: `3.2.8`.
 
 Python install:
 
@@ -94,6 +94,16 @@ Windows — if `gaia` isn't recognized after install:
 $env:PATH += ";" + (python -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))")
 ```
 </details>
+
+## Updating Gaia
+
+To instantly pull the latest registry data and update the core CLI, use:
+
+```bash
+gaia update
+```
+
+> **Note:** Semantic search users must manually update embeddings by running `pip install gaia-cli[embeddings] --upgrade` if required. `gaia update` alone handles the core tools in seconds.
 
 ## Quickstart
 
