@@ -574,7 +574,7 @@ def render_appraise_card(
 # ─── Unlock celebration ────────────────────────────────────────────────────
 
 
-def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False) -> str:
+def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False, ctx: Optional["LocalContext"] = None) -> str:
     """Celebratory unlock card with ASCII art."""
     tier = skill_data.get("type", "basic")
     tc = TIER_COLORS.get(tier, (56, 189, 248))
@@ -582,7 +582,7 @@ def render_unlock_card(skill_data: dict, new_paths: list, canon: bool = False) -
     if canon:
         name = f"/{skill_id}"
     else:
-        name = skill_data.get("name") or _name_from_slug(skill_id)
+        name = ctx.display_name(skill_id, canon=canon) if ctx else (skill_data.get("name") or _name_from_slug(skill_id))
     
     glyph = TIER_GLYPHS.get(tier, "○")
     level = skill_data.get("level", "0★")
