@@ -120,6 +120,9 @@ PUBLIC_COMMANDS = (
     "init",
     "scan",
     "pull",
+    "update",
+    "install",
+    "uninstall",
     "tree",
     "push",
     "propose",
@@ -1289,6 +1292,14 @@ def get_parser():
     scan_parser.add_argument('--auto-promote', action='store_true', help="Promote every scan-recommended candidate after scanning")
     subparsers.add_parser('pull', help="Refresh registry data from origin")
     subparsers.add_parser('update', help="Pull latest registry and reinstall the CLI")
+    
+    install_parser = subparsers.add_parser('install', help="Install a named skill")
+    install_parser.add_argument('skill_id', nargs='?', help="Skill ID, catalogRef, or unique bare slug to install")
+    install_parser.add_argument('--list', action='store_true', help="List and interactively select skills to install")
+    
+    uninstall_parser = subparsers.add_parser('uninstall', help="Uninstall a named skill")
+    uninstall_parser.add_argument('skill_id', help="Skill ID to uninstall")
+
     tree_parser = subparsers.add_parser('tree', help="Show your Gaia skill tree")
     tree_parser.add_argument('--named', action='store_true', help="Show only skills that have a named implementation")
     tree_parser.add_argument('--title', action='store_true', help="Show display name instead of slash command / contributor ID")
@@ -1380,6 +1391,10 @@ def main():
         pull_command(args)
     elif args.command == 'update':
         update_command(args)
+    elif args.command == 'install':
+        install_command(args)
+    elif args.command == 'uninstall':
+        uninstall_command(args)
     elif args.command == 'tree':
         tree_command(args)
     elif args.command == 'push':

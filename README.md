@@ -58,7 +58,7 @@ Skills level up through evidence, not declaration. Each demerit lowers effective
 ## Install
 
 <!-- gaia:version-start -->
-Current Gaia CLI version: `3.2.4`.
+Current Gaia CLI version: `3.2.5`.
 
 Python install:
 
@@ -116,18 +116,20 @@ gaia push            # submit for maintainer review
 <!-- gaia:cli-start -->
 ```text
 usage: gaia [-h] [--registry REGISTRY] [--global] [--version]
-            {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
+            {help,init,scan,pull,update,install,uninstall,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
             ...
 
 Gaia Registry CLI
 
 positional arguments:
-  {help,init,scan,pull,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
+  {help,init,scan,pull,update,install,uninstall,tree,push,propose,version,mcp,release,graph,stats,appraise,promote,fuse,docs,lookup,update,skills}
     help                Show command help
     init                Create or update local Gaia config
     scan                Scan configured paths for skill evidence
     pull                Refresh registry data from origin
     update              Pull latest registry and reinstall the CLI
+    install             Install a named skill
+    uninstall           Uninstall a named skill
     tree                Show your Gaia skill tree
     push                Prepare detected skills for review
     propose             Propose a single canonical skill as a named PR
