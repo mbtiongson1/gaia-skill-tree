@@ -1180,22 +1180,26 @@ def skills_command(args):
 
 
 def pull_command(args):
-    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+    res = subprocess.run(["git", "-C", args.registry, "pull", "--ff-only"])
+    if res.returncode != 0:
+        print("Warning: git pull failed. Ensure you are on a tracking branch.", file=sys.stderr)
 
 
 def update_command(args):
-    subprocess.run(["git", "-C", args.registry, "pull", "--ff-only", "origin"], check=True)
+    res = subprocess.run(["git", "-C", args.registry, "pull", "--ff-only"])
+    if res.returncode != 0:
+        print("Warning: git pull failed. Proceeding with installation...", file=sys.stderr)
     registry_pyproject = Path(args.registry) / "pyproject.toml"
     if registry_pyproject.exists():
         # Editable source install — pipx doesn't support -e, so pip only
         subprocess.run(
-            [sys.executable, "-m", "pip", "install", "-e", f"{args.registry}[embeddings]"],
+            [sys.executable, "-m", "pip", "install", "-e", args.registry],
             check=True,
         )
         return
     # Non-editable: try pip first, fall back to pipx
     pip_ok = subprocess.run(
-        [sys.executable, "-m", "pip", "install", "gaia-cli[embeddings]", "--upgrade"],
+        [sys.executable, "-m", "pip", "install", "gaia-cli", "--upgrade"],
     ).returncode == 0
     if not pip_ok:
         pipx = subprocess.run(["pipx", "upgrade", "gaia-cli"]).returncode
