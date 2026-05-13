@@ -29,20 +29,22 @@ Use this when proposing skills via `registry-for-review/skill-batches/*.json`.
 ### B) Update the canonical graph directly
 
 1. Fork the repo.
-2. Edit `registry/gaia.json` (`skills` and/or `edges`).
+2. Edit or add individual JSON files in `registry/nodes/`.
 3. Validate:
    ```bash
    python3 scripts/validate.py
    ```
-4. Open a PR using the right template in `.github/PULL_REQUEST_TEMPLATE/`.
+   Note: The validator now checks the `registry/nodes/` directory by default.
+4. Open a PR. The pre-commit hooks will automatically handle `gaia.json` assembly and documentation regeneration.
 
 ---
 
 ## 2) What files are source-of-truth?
 
-- ✅ `registry/gaia.json` (canonical graph)
+- ✅ `registry/nodes/**/*.json` (**The ONLY source for skills**)
 - ✅ `registry-for-review/skill-batches/*.json` (intake batches)
-- ❌ Do not hand-edit generated docs/graph projections produced by docs/build pipelines.
+- ❌ **DO NOT** edit `registry/gaia.json` directly — it is now an auto-generated artifact.
+- ❌ Do not hand-edit generated docs/graph projections produced by build pipelines.
 
 ---
 

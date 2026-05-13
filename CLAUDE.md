@@ -79,6 +79,15 @@ The pre-commit hook keeps these in lockstep:
 
 If they disagree before the bump, the hook fails loudly. Do not silently repair version drift without calling it out.
 
+## Wiki Management
+
+The project wiki lives in a separate repository: `https://github.com/mbtiongson1/gaia-skill-tree.wiki.git`.
+
+If wiki updates are required:
+1. Clone the wiki repository adjacent to the workspace (e.g., `../gaia-wiki`).
+2. Update, commit, and push from that directory.
+3. **Do not** delete the wiki folder; preserve it for subsequent updates.
+
 ## Agent-Managed Files (Hermes Ownership)
 
 The following files are managed by an autonomous agent (Hermes) and should **not** be modified, staged, or deleted:
