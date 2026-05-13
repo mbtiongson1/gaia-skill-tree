@@ -258,12 +258,12 @@ class TestDisplayName:
         assert ctx.display_name("web-frameworks") == "alice/flask-mastery"
 
     def test_display_novel_skill(self, mock_registry, monkeypatch):
-        """Novel/local skills display as username/id."""
+        """Novel/local skills display as /id."""
         monkeypatch.chdir(mock_registry)
         # Manually inject a novel skill
         ctx = LocalContext.load(mock_registry, "testuser", include_scan=False)
         ctx.novel_ids.add("my-experiment")
-        assert ctx.display_name("my-experiment") == "testuser/my-experiment"
+        assert ctx.display_name("my-experiment") == "/my-experiment"
 
     def test_display_canon_skill(self, mock_registry, monkeypatch):
         """Canon skills without named impl display as /id."""

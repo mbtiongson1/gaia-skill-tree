@@ -190,7 +190,7 @@ class LocalContext:
 
         # 2. Check for local novel skill
         if skill_id in self.novel_ids:
-            return f"{self.username}/{skill_id}"
+            return f"/{skill_id}"
 
         # 3. Fallback to generic slash ID
         return f"/{skill_id}"
