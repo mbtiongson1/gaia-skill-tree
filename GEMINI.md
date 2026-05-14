@@ -91,6 +91,10 @@ cd packages/cli-npm && npm install
 - **Node.js:** TypeScript for the MCP server.
 - **Registry:** Skills use `kebab-case` IDs. Display names are Title Case.
 
+### Unique Promotion Policy
+- **Eligibility:** A Basic skill may be promoted to `type: "unique"` if it reaches level `4★` or above AND is graph-isolated (not a prerequisite for any other skill).
+- **Isolation:** Unique skills must have 0 prerequisites and 0 derivatives that are referenced as prerequisites by other nodes.
+
 ### CLI Design Philosophy
 - **Local-First Skill Names:** The CLI must prioritize the developer's local workspace context. "Pet names" (e.g. `/gaia-curate` or `gaiabot/gaia-triage`) are considered the *actual*, real skill names for a local developer.
 - **Slashes and Colors:** Do NOT remove the slash from local skill IDs. Real/local skill names should be displayed with their slash and colored green to distinguish them from generic canonical concepts. The generic canonical names ("Human Readable Names") are strictly for the state of all skills in the global graph, but developers using the CLI should see their own local skill names.

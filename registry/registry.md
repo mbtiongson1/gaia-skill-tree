@@ -40,6 +40,8 @@
 | ○ /evaluate-output | Basic Skill | 1★ | Awakened | `/evaluate-output` |
 | ○ /execute-bash | Basic Skill | 1★ | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic Skill | 1★ | Awakened | `/extract-entities` |
+| ◉ Unique Skill: nousresearch/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
+| ◉ Unique Skill: openai/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
 | ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
 | ○ /format-output | Basic Skill | 0★ | Basic | `/format-output` |
 | ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/full-stack-developer` |
@@ -51,6 +53,8 @@
 | ○ upsonic/unittest-generator | Basic Skill | 2★ | Named | `/generate-test` |
 | ○ /generate-text | Basic Skill | 0★ | Basic | `/generate-text` |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | 4★ | Hardened | `/ghostwrite` |
+| ◇ Extra Skill: /grill-me | Extra Skill | 4★ | Hardened | `/grill-me` |
+| ◆ Ultimate Skill: /grill-with-docs [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/grill-with-docs` |
 | ◇ Extra Skill: /grounding | Extra Skill | 3★ | Evolved | `/grounding` |
 | ◇ Extra Skill: /guardrails | Extra Skill | 3★ | Evolved | `/guardrails` |
 | ◇ Extra Skill: /humanize-prose | Extra Skill | 4★ | Hardened | `/humanize-prose` |
@@ -88,6 +92,7 @@
 | ○ mattpocock/improve-codebase-architecture | Basic Skill | 2★ | Named | `/refactor-code` |
 | ◇ Extra Skill: /registry-curation | Extra Skill | 4★ | Hardened | `/registry-curation` |
 | ◇ Extra Skill: /release-automation | Extra Skill | 2★ | Named | `/release-automation` |
+| ○ /requirements-analysis | Basic Skill | 2★ | Named | `/requirements-analysis` |
 | ◇ Extra Skill: /research | Extra Skill | 3★ | Evolved | `/research` |
 | ○ /retrieve | Basic Skill | 1★ | Awakened | `/retrieve` |
 | ○ /route-intent | Basic Skill | 1★ | Awakened | `/route-intent` |
@@ -96,7 +101,9 @@
 | ◇ Extra Skill: /scientific-writing | Extra Skill | 3★ | Evolved | `/scientific-writing` |
 | ○ /score-relevance | Basic Skill | 1★ | Awakened | `/score-relevance` |
 | ◇ Extra Skill: garrytan/cso | Extra Skill | 2★ | Named | `/security-audit` |
+| ◉ Unique Skill: openai/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
 | ○ /self-critique | Basic Skill | 1★ | Awakened | `/self-critique` |
+| ◉ Unique Skill: huggingface/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
 | ○ /sentiment-analysis | Basic Skill | 0★ | Basic | `/sentiment-analysis` |
 | ◇ Extra Skill: /skill-authoring | Extra Skill | 4★ | Hardened | `/skill-authoring` |
 | ○ vercel/find-skills | Basic Skill | 0★ | Basic | `/skill-discovery` |
@@ -117,6 +124,7 @@
 | ○ /translate | Basic Skill | 0★ | Basic | `/translate` |
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | 3★ | Evolved | `/translation-pipeline` |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | 4★ | Hardened | `/tree-of-thought` |
+| ◇ Extra Skill: /ubiquitous-language | Extra Skill | 4★ | Hardened | `/ubiquitous-language` |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | 3★ | Evolved | `/vertical-slice-planning` |
 | ◇ Extra Skill: bradautomates/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
 | ○ /vision-qa | Basic Skill | 3★ | Evolved | `/vision-qa` |
@@ -133,7 +141,11 @@
 
 | Name | Class | Rank | Tier | Skill Call |
 |---|---|---|---|---|
+| ◉ Unique Skill: nousresearch/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
+| ◉ Unique Skill: openai/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
 | ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
+| ◉ Unique Skill: openai/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
+| ◉ Unique Skill: huggingface/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
 
 ## Pure / Undeveloped
 
@@ -145,18 +157,13 @@
 | ○ Code Execution | Intrinsic Skill | 2★ | Named | `/code-execution` |
 | ○ Code Explain | Intrinsic Skill | 2★ | Named | `/code-explain` |
 | ○ Context Compression | Intrinsic Skill | 3★ | Evolved | `/context-compression` |
-| ○ Feed Monitoring | Intrinsic Skill | 4★ | Hardened | `/feed-monitoring` |
-| ○ Few-Shot Learning | Intrinsic Skill | 4★ | Hardened | `/few-shot-learning` |
 | ○ Framework Upgrade | Intrinsic Skill | 0★ | Basic | `/framework-upgrade` |
 | ○ Image Generate | Intrinsic Skill | 2★ | Named | `/image-generate` |
 | ○ Object Detection | Intrinsic Skill | 2★ | Named | `/object-detection` |
 | ○ OCR | Intrinsic Skill | 2★ | Named | `/ocr` |
 | ○ Parallel Execution | Intrinsic Skill | 2★ | Named | `/parallel-execution` |
-| ○ Requirements Analysis | Intrinsic Skill | 2★ | Named | `/requirements-analysis` |
 | ○ Reward Modeling | Intrinsic Skill | 2★ | Named | `/reward-modeling` |
 | ○ Schema Design | Intrinsic Skill | 2★ | Named | `/schema-design` |
-| ○ Self-Consistency | Intrinsic Skill | 4★ | Hardened | `/self-consistency` |
-| ○ Semantic Cache | Intrinsic Skill | 4★ | Hardened | `/semantic-cache` |
 | ○ Test-Driven Development | Intrinsic Skill | 0★ | Basic | `/test-driven-development` |
 | ○ Token Observability | Intrinsic Skill | 2★ | Named | `/token-observability` |
 | ○ UX Audit | Intrinsic Skill | 0★ | Basic | `/ux-audit` |
@@ -169,6 +176,7 @@
 |---|---|---|
 | `/autonomous-data-scientist` | 5★ | `/data-analysis`, `/math-reason`, `/research` |
 | `/full-stack-developer` | 5★ | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
+| `/grill-with-docs` | 5★ | `/grill-me`, `/ubiquitous-language`, `/document-editing` |
 | `/real-time-voice-assistant` | 5★ | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
 | `/recursive-self-improvement` | 5★ | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
 | `/scientific-discovery` | 5★ | `/hypothesis-generate`, `/research`, `/math-reason` |

@@ -110,6 +110,10 @@ Curated named skills from live SKILL.md ecosystems.
 - [pbakaus/impeccable](https://github.com/pbakaus/impeccable) - Elite design vocabulary and audit tool for polishing AI-generated frontend code to professional standards. Maps to: `ux-audit`.
 - [Manavarya09/design-extract](https://github.com/Manavarya09/design-extract) - Discovery tool for extracting design systems and Tailwind configurations from live URLs. Maps to: `design-system-extraction`.
 - [santifer/career-ops](https://github.com/santifer/career-ops) - Agentic job search pipeline for automated scanning, fit evaluation, and tailored CV generation. Maps to: `career-operations`.
+- [openai/few-shot-learning](https://arxiv.org/abs/2005.14165) - Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates. Maps to: `few-shot-learning`.
+- [openai/self-consistency](https://arxiv.org/abs/2203.11171) - Samples multiple reasoning paths and selects the most consistent answer by majority vote. Maps to: `self-consistency`.
+- [huggingface/semantic-cache](https://github.com/codefuse-ai/ModelCache) - High-performance semantic caching for LLM responses using embedding similarity. Maps to: `semantic-cache`.
+- [nousresearch/feed-monitoring](https://github.com/NousResearch/hermes-agent) - Continuous monitoring of content feeds with intelligent discovery and state tracking. Maps to: `feed-monitoring`.
 - [browser-use/browser-harness](https://github.com/browser-use/browser-harness) - Resilient, self-healing browser harness for direct agent control via CDP and runtime helper generation. Maps to: `browser-control`.
 
 *Generated from registry/real-skills.json on 2026-05-14.*

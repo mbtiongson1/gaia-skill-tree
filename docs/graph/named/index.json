@@ -9,7 +9,7 @@
         "origin": true,
         "genericSkillRef": "automated-testing",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Comprehensive pytest skill covering modern patterns for Python test automation including fixtures, parametrize, async testing, mocking, coverage strategies, integration tests, and conftest organisation for pytest 7.0+ projects.",
         "title": "The Quality Guardian",
         "catalogRef": "0xdarkmatter-pytest-patterns",
@@ -36,7 +36,7 @@
         "origin": true,
         "genericSkillRef": "design-system-extraction",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Extracts complete design systems, Tailwind configs, and Figma variables from any live URL.",
         "title": "The Token Scavenger",
         "tags": [
@@ -58,8 +58,8 @@
         "origin": true,
         "genericSkillRef": "test-driven-development",
         "status": "named",
-        "level": "2\u2605",
-        "description": "Forces the AI agent to follow a strict red-green-refactor TDD workflow \u2014 writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.",
+        "level": "2★",
+        "description": "Forces the AI agent to follow a strict red-green-refactor TDD workflow — writing failing tests before any implementation code, blocking code generation that skips the test step, and enforcing coverage thresholds before completing a task.",
         "title": "The Red-Green Oath",
         "catalogRef": "addy-osmani-test-driven-development",
         "tags": [
@@ -81,8 +81,8 @@
         "origin": false,
         "genericSkillRef": "test-driven-development",
         "status": "named",
-        "level": "3\u2605",
-        "description": "Enforces strict vertical-slice TDD \u2014 one test then one implementation at a time \u2014 explicitly blocking horizontal slicing (all tests first, then all code). Tests verify behaviour through public interfaces only; mocking internal collaborators is treated as an anti-pattern.",
+        "level": "3★",
+        "description": "Enforces strict vertical-slice TDD — one test then one implementation at a time — explicitly blocking horizontal slicing (all tests first, then all code). Tests verify behaviour through public interfaces only; mocking internal collaborators is treated as an anti-pattern.",
         "title": "Vertical-Slice TDD",
         "catalogRef": "mattpocock-tdd",
         "tags": [
@@ -106,8 +106,8 @@
         "origin": true,
         "genericSkillRef": "document-editing",
         "status": "named",
-        "level": "2\u2605",
-        "description": "Extracts slide content from PowerPoint (.pptx) files using markitdown, applies edits or design principles in-place, and repacks the file \u2014 enabling agents to read, modify, and write structured presentation files without a GUI.",
+        "level": "2★",
+        "description": "Extracts slide content from PowerPoint (.pptx) files using markitdown, applies edits or design principles in-place, and repacks the file — enabling agents to read, modify, and write structured presentation files without a GUI.",
         "title": "The Slide Artisan",
         "catalogRef": "anthropic-pptx",
         "tags": [
@@ -129,7 +129,7 @@
         "origin": false,
         "genericSkillRef": "document-editing",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Edits articles by first sectioning them as a DAG of information dependencies, confirming the section order, then rewriting each section for clarity and flow with a 240-character-per-paragraph constraint.",
         "title": "The Section-by-Section Rewrite",
         "catalogRef": "mattpocock-edit-article",
@@ -154,7 +154,7 @@
         "origin": true,
         "genericSkillRef": "tool-creation",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Interviews the user through a structured dialogue to elicit the skill's purpose, trigger conditions, and step-by-step instructions, then programmatically writes a new SKILL.md file ready for use in a Claude Code or Codex CLI skills directory.",
         "title": "The Skill Forger's Art",
         "catalogRef": "anthropic-skill-creator",
@@ -176,8 +176,8 @@
         "origin": false,
         "genericSkillRef": "tool-creation",
         "status": "named",
-        "level": "3\u2605",
-        "description": "Guides creation of new agent skills through a structured requirements interview, then produces a SKILL.md with a trigger-aware description, progressive-disclosure layout, and optional bundled scripts or reference files \u2014 ready for installation in any Claude Code, Cursor, or Codex CLI skills directory.",
+        "level": "3★",
+        "description": "Guides creation of new agent skills through a structured requirements interview, then produces a SKILL.md with a trigger-aware description, progressive-disclosure layout, and optional bundled scripts or reference files — ready for installation in any Claude Code, Cursor, or Codex CLI skills directory.",
         "title": "The Skill Scaffolder",
         "catalogRef": "mattpocock-write-a-skill",
         "tags": [
@@ -201,7 +201,7 @@
         "origin": true,
         "genericSkillRef": "video-intelligence",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Enables AI agents to watch videos by downloading them, extracting frames, and transcribing audio for multimodal analysis.",
         "title": "The Temporal Eye",
         "tags": [
@@ -223,7 +223,7 @@
         "origin": true,
         "genericSkillRef": "browser-control",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Self-healing harness for direct browser control via CDP, enabling agents to write custom helpers at runtime.",
         "title": "The Dom Whispering",
         "tags": [
@@ -245,7 +245,7 @@
         "origin": true,
         "genericSkillRef": "autonomous-debug",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Autonomous software engineering agent capable of end-to-end debugging, code generation, and self-correction across complex multi-file codebases.",
         "title": "The Codebreaker's Will",
         "catalogRef": "devin-ai-autonomous-swe",
@@ -268,8 +268,8 @@
         "origin": false,
         "genericSkillRef": "autonomous-debug",
         "status": "named",
-        "level": "2\u2605",
-        "description": "Drives a rigorous five-phase debugging discipline \u2014 build a feedback loop, minimise, hypothesise, instrument, fix and regression-test \u2014 refusing to proceed until a fast deterministic pass/fail signal exists. Applies to hard bugs and performance regressions.",
+        "level": "2★",
+        "description": "Drives a rigorous five-phase debugging discipline — build a feedback loop, minimise, hypothesise, instrument, fix and regression-test — refusing to proceed until a fast deterministic pass/fail signal exists. Applies to hard bugs and performance regressions.",
         "title": "The Disciplined Diagnosis Loop",
         "catalogRef": "mattpocock-diagnose",
         "tags": [
@@ -293,7 +293,7 @@
         "origin": true,
         "genericSkillRef": "security-audit",
         "status": "named",
-        "level": "4\u2605",
+        "level": "4★",
         "description": "Infrastructure-first security audit focusing on secrets archaeology, dependency supply chain, and CI/CD security. Includes OWASP Top 10, STRIDE threat modeling, and active verification with daily (zero-noise) and monthly (comprehensive) scan modes.",
         "title": "Chief Security Officer Mode",
         "catalogRef": "garrytan-cso",
@@ -318,7 +318,7 @@
         "origin": false,
         "genericSkillRef": "design-review",
         "status": "named",
-        "level": "4\u2605",
+        "level": "4★",
         "description": "Rapid design exploration that generates multiple AI design variants, opens a comparison board for the user, collects structured feedback, and iterates until a preferred visual direction is reached.",
         "title": "Design Shotgun",
         "catalogRef": "garrytan-design-shotgun",
@@ -340,7 +340,7 @@
         "origin": false,
         "genericSkillRef": "design-review",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
         "title": "The Relentless Interviewer",
         "catalogRef": "mattpocock-grill-me",
@@ -363,7 +363,7 @@
         "origin": true,
         "genericSkillRef": "design-review",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
         "title": "The Domain-Aware Interrogator",
         "catalogRef": "mattpocock-grill-with-docs",
@@ -389,7 +389,7 @@
         "origin": false,
         "genericSkillRef": "vertical-slice-planning",
         "status": "named",
-        "level": "5\u2605",
+        "level": "5★",
         "description": "The definitive autonomous \"Founder mode\" review and decision suite. An auto-review pipeline that reads the full CEO, design, engineering, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles.",
         "title": "Founder Mode Autoplan",
         "catalogRef": "garrytan-autoplan",
@@ -412,7 +412,7 @@
         "origin": true,
         "genericSkillRef": "vertical-slice-planning",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Breaks a plan, spec, or PRD into independently-grabbable GitHub issues as tracer-bullet vertical slices that each cut through all integration layers end-to-end. Classifies each slice HITL or AFK, maps dependency chains, quizzes the user on granularity, and publishes structured issues with acceptance criteria in dependency order.",
         "title": "The Vertical Slicer",
         "catalogRef": "mattpocock-to-issues",
@@ -438,7 +438,7 @@
         "origin": false,
         "genericSkillRef": "browser-automation",
         "status": "named",
-        "level": "4\u2605",
+        "level": "4★",
         "description": "Fast headless browser for QA testing and site dogfooding. Optimized for high-speed navigation and element interaction (~100ms per command), featuring built-in anti-bot stealth and annotated screenshot capabilities.",
         "title": "Gstack Browser Engine",
         "catalogRef": "garrytan-gstack",
@@ -460,7 +460,7 @@
         "origin": true,
         "genericSkillRef": "browser-automation",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "AI-first browser automation using the Notte Browser API to control browser sessions, scrape pages, fill forms, take screenshots, and run autonomous web agents with managed credential handling.",
         "title": "The Digital Navigator",
         "catalogRef": "gooseworks-notte-browser",
@@ -485,7 +485,7 @@
         "origin": true,
         "genericSkillRef": "question-answer",
         "status": "named",
-        "level": "4\u2605",
+        "level": "4★",
         "description": "YC-style startup and builder brainstorming. Startup mode uses six forcing questions (demand reality, status quo, desperate specificity, narrowest wedge, observation, future-fit) to expose reality. Builder mode focuses on design thinking for side projects and hackathons.",
         "title": "YC Office Hours",
         "catalogRef": "garrytan-office-hours",
@@ -510,7 +510,7 @@
         "origin": true,
         "genericSkillRef": "token-observability",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Cost and token observability tool for tracking AI coding agent spending across models and projects.",
         "title": "The Ledger of Light",
         "tags": [
@@ -532,7 +532,7 @@
         "origin": true,
         "genericSkillRef": "write-report",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Analyzes a project's directory structure, dependency manifests, and configuration files to generate a professional README.md covering installation, usage, API reference, and contributing guidelines.",
         "title": "The Document Weaver",
         "catalogRef": "glincker-readme-generator",
@@ -554,7 +554,7 @@
         "origin": false,
         "genericSkillRef": "write-report",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Scans a Java Spring project for controller annotations, extracts REST API endpoint definitions, and automatically generates structured API documentation in README format.",
         "title": "The Endpoint Scribe",
         "catalogRef": "spring-ai-readme-generate",
@@ -579,7 +579,7 @@
         "origin": false,
         "genericSkillRef": "api-call",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Guides Hugging Face Hub CLI operations for downloading, uploading, managing repos, running Jobs, querying datasets, configuring Spaces, and handling Hub authentication.",
         "title": "The Hub Operator",
         "catalogRef": "huggingface-hf-cli",
@@ -604,7 +604,7 @@
         "origin": false,
         "genericSkillRef": "data-analysis",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Explores Hugging Face datasets through the Dataset Viewer API, resolving configs and splits, previewing rows, paginating records, searching text, filtering rows, and retrieving parquet metadata.",
         "title": "The Dataset Cartographer",
         "catalogRef": "huggingface-datasets",
@@ -629,7 +629,7 @@
         "origin": false,
         "genericSkillRef": "fine-tune",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Runs LLM fine-tuning on Hugging Face Jobs using TRL or Unsloth, covering SFT, DPO, GRPO, reward modeling, dataset validation, hardware selection, Trackio monitoring, and Hub persistence.",
         "title": "The Cloud Fine-Tuner",
         "catalogRef": "huggingface-llm-trainer",
@@ -654,7 +654,7 @@
         "origin": false,
         "genericSkillRef": "literature-review",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Looks up Hugging Face paper pages and arXiv IDs, fetching markdown paper content and structured metadata such as authors, linked models, datasets, Spaces, GitHub repos, and project pages.",
         "title": "The Paper Indexer",
         "catalogRef": "huggingface-papers",
@@ -679,7 +679,7 @@
         "origin": false,
         "genericSkillRef": "object-detection",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Trains and fine-tunes object detection, image classification, and SAM/SAM2 segmentation models on Hugging Face Jobs or locally with dataset validation, metrics, Trackio, and Hub persistence.",
         "title": "The Vision Forge",
         "catalogRef": "huggingface-vision-trainer",
@@ -696,6 +696,31 @@
         "role": "variant"
       }
     ],
+    "semantic-cache": [
+      {
+        "id": "huggingface/semantic-cache",
+        "name": "Semantic Cache",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "semantic-cache",
+        "status": "named",
+        "level": "4★",
+        "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+        "title": "The Neural Memory",
+        "catalogRef": "huggingface-semantic-cache",
+        "tags": [
+          "semantic-cache",
+          "embeddings",
+          "vector-search",
+          "cost-optimization",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/codefuse-ai/ModelCache"
+        },
+        "role": "variant"
+      }
+    ],
     "multimodal-reasoning": [
       {
         "id": "huggingface/transformers-js",
@@ -704,7 +729,7 @@
         "origin": false,
         "genericSkillRef": "multimodal-reasoning",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Runs Hugging Face Transformers.js models directly in JavaScript and TypeScript across browser and server runtimes for NLP, vision, audio, and multimodal inference with WebGPU or WASM.",
         "title": "The Browser Modelwright",
         "catalogRef": "huggingface-transformers-js",
@@ -729,7 +754,7 @@
         "origin": true,
         "genericSkillRef": "autonomous-research-agent",
         "status": "named",
-        "level": "6\u2605",
+        "level": "6★",
         "description": "Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",
         "title": "The Scholar's Compass",
         "catalogRef": "karpathy-autoresearch",
@@ -752,7 +777,7 @@
         "origin": true,
         "genericSkillRef": "framework-upgrade",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Guides an AI agent through upgrading a Laravel 12 application to Laravel 13 safely, covering breaking changes, dependency updates, config migrations, and post-upgrade test validation.",
         "title": "The Versionist's Trial",
         "catalogRef": "laravel-upgrade-laravel-v13",
@@ -776,7 +801,7 @@
         "origin": true,
         "genericSkillRef": "ux-audit",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Audits a UI interface against Jakob Nielsen's 10 usability heuristics step-by-step, scoring each heuristic, surfacing violations, and producing a prioritized remediation report.",
         "title": "The Ten Laws of Sight",
         "catalogRef": "martin-stepanoski-nielsen-heuristics-audit",
@@ -799,7 +824,7 @@
         "origin": false,
         "genericSkillRef": "ux-audit",
         "status": "named",
-        "level": "4\u2605",
+        "level": "4★",
         "description": "Elite design vocabulary and audit tool for polishing AI-generated frontend code.",
         "title": "The Aesthetic Shield",
         "tags": [
@@ -822,8 +847,8 @@
         "origin": false,
         "genericSkillRef": "refactor-code",
         "status": "named",
-        "level": "3\u2605",
-        "description": "Identifies architectural deepening opportunities in a codebase \u2014 shallow modules with high interface-to-implementation ratios \u2014 using domain-glossary vocabulary and the deletion test, then grills the developer on the chosen candidate to design a deep-module replacement with better locality and testability.",
+        "level": "3★",
+        "description": "Identifies architectural deepening opportunities in a codebase — shallow modules with high interface-to-implementation ratios — using domain-glossary vocabulary and the deletion test, then grills the developer on the chosen candidate to design a deep-module replacement with better locality and testability.",
         "title": "The Depth Seeker",
         "catalogRef": "mattpocock-improve-codebase-architecture",
         "tags": [
@@ -848,8 +873,8 @@
         "origin": true,
         "genericSkillRef": "prd-generation",
         "status": "named",
-        "level": "2\u2605",
-        "description": "Synthesises the current conversation context and codebase knowledge into a fully-structured PRD \u2014 problem statement, extensive numbered user stories, implementation decisions (modules, interfaces, schema), testing decisions, and out-of-scope items \u2014 then publishes it to the project issue tracker.",
+        "level": "2★",
+        "description": "Synthesises the current conversation context and codebase knowledge into a fully-structured PRD — problem statement, extensive numbered user stories, implementation decisions (modules, interfaces, schema), testing decisions, and out-of-scope items — then publishes it to the project issue tracker.",
         "title": "The PRD Synthesiser",
         "catalogRef": "mattpocock-to-prd",
         "tags": [
@@ -873,8 +898,8 @@
         "origin": true,
         "genericSkillRef": "issue-triage",
         "status": "named",
-        "level": "3\u2605",
-        "description": "Moves GitHub issues through a two-category (bug/enhancement) \u00d7 five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
+        "level": "3★",
+        "description": "Moves GitHub issues through a two-category (bug/enhancement) × five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
         "title": "The State-Machine Triager",
         "catalogRef": "mattpocock-triage",
         "tags": [
@@ -898,7 +923,7 @@
         "origin": true,
         "genericSkillRef": "code-explain",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Signals the agent to ascend one layer of abstraction and produce a map of all relevant modules, callers, and domain-glossary terms in the unfamiliar code area, without explaining implementation details.",
         "title": "The Abstraction Lift",
         "catalogRef": "mattpocock-zoom-out",
@@ -923,7 +948,7 @@
         "origin": true,
         "genericSkillRef": "design-generation",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Local-first design engine for generating high-fidelity UI/UX prototypes and brand assets from structured intent.",
         "title": "The Artisan's Forge",
         "tags": [
@@ -938,6 +963,81 @@
         "role": "origin"
       }
     ],
+    "feed-monitoring": [
+      {
+        "id": "nousresearch/feed-monitoring",
+        "name": "Feed Monitoring",
+        "contributor": "nousresearch",
+        "origin": true,
+        "genericSkillRef": "feed-monitoring",
+        "status": "named",
+        "level": "4★",
+        "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+        "title": "The Signal Scout",
+        "catalogRef": "nousresearch-feed-monitoring",
+        "tags": [
+          "rss",
+          "feeds",
+          "monitoring",
+          "signal-discovery",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/NousResearch/hermes-agent"
+        },
+        "role": "origin"
+      }
+    ],
+    "few-shot-learning": [
+      {
+        "id": "openai/few-shot-learning",
+        "name": "Few-Shot Learning",
+        "contributor": "openai",
+        "origin": true,
+        "genericSkillRef": "few-shot-learning",
+        "status": "named",
+        "level": "4★",
+        "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+        "title": "The In-Context Learner",
+        "catalogRef": "openai-few-shot-learning",
+        "tags": [
+          "few-shot",
+          "icl",
+          "prompt-engineering",
+          "gpt-3",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2005.14165"
+        },
+        "role": "origin"
+      }
+    ],
+    "self-consistency": [
+      {
+        "id": "openai/self-consistency",
+        "name": "Self-Consistency",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "self-consistency",
+        "status": "named",
+        "level": "4★",
+        "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+        "title": "The Majority Consensus",
+        "catalogRef": "openai-self-consistency",
+        "tags": [
+          "self-consistency",
+          "reasoning",
+          "ensemble",
+          "cot",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2203.11171"
+        },
+        "role": "variant"
+      }
+    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -946,7 +1046,7 @@
         "origin": true,
         "genericSkillRef": "multi-agent-orchestration-v",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Cloud-based AI swarm orchestration platform supporting hierarchical, mesh, ring, and star topologies with event-driven workflows, message queue processing, and intelligent agent assignment.",
         "title": "The Grand Conductor's Blueprint",
         "catalogRef": "ruvnet-flow-nexus-swarm",
@@ -971,7 +1071,7 @@
         "origin": true,
         "genericSkillRef": "knowledge-graph-build",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Maps codebases and documentation into a queryable knowledge graph using AST analysis and semantic extraction.",
         "title": "The Structural Muse",
         "tags": [
@@ -993,7 +1093,7 @@
         "origin": true,
         "genericSkillRef": "career-operations",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Agentic job search pipeline that automates scanning, fit scoring, and CV tailoring.",
         "title": "The Professional's Edge",
         "tags": [
@@ -1015,7 +1115,7 @@
         "origin": true,
         "genericSkillRef": "generate-test",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Autonomous Claude agent that generates comprehensive unittest.TestCase suites from source code, organising tests into concept-based subfolders under a tests/ directory with proper imports, fixtures, and edge-case coverage.",
         "title": "The Test Weaver",
         "catalogRef": "upsonic-unittest-generator",
@@ -1040,7 +1140,7 @@
         "origin": true,
         "genericSkillRef": "skill-discovery",
         "status": "named",
-        "level": "2\u2605",
+        "level": "2★",
         "description": "Searches the skills.sh registry by keyword or category, queries install counts to surface popular skills, and auto-installs the selected skill into the current project's skills directory.",
         "title": "The Registry Scout",
         "catalogRef": "vercel-find-skills",
@@ -1064,7 +1164,7 @@
         "origin": true,
         "genericSkillRef": "rag-pipeline",
         "status": "named",
-        "level": "3\u2605",
+        "level": "3★",
         "description": "Production-grade RAG retrieval skill covering 30+ patterns including core pipeline composition, HyDE query expansion, pgvector hybrid search, cross-encoder reranking, multimodal chunking, and agentic self-RAG and corrective-RAG loops.",
         "title": "The Knowledge Architect",
         "catalogRef": "yonatangross-orchestkit-rag",
@@ -1092,7 +1192,7 @@
       "origin": false,
       "genericSkillRef": "gaia-triage",
       "status": "awakened",
-      "level": "2\u2605",
+      "level": "2★",
       "description": "Automates repository triage for the Gaia Skill Tree, including fixing documentation drift, managing build dependencies (build, setuptools, wheel), and synchronizing generated graph projections and GEXF exports.",
       "tags": [
         "maintenance",
@@ -1112,7 +1212,7 @@
       "origin": false,
       "genericSkillRef": "write-report",
       "status": "awakened",
-      "level": "2\u2605",
+      "level": "2★",
       "description": "Builds and validates repository documentation as a pre-PR guardrail by reminding contributors to run the local docs drift check, then surfaces actionable regeneration commands so pull requests do not fail CI on documentation freshness.",
       "tags": [
         "documentation",
@@ -1132,7 +1232,7 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/database-engineer/SKILL.md",
       "genericSkillRef": "schema-design",
       "status": "awakened",
-      "level": "2\u2605",
+      "level": "2★",
       "description": "Schema design and query optimization expert across relational, NoSQL, graph, time-series, and data warehouse stores with sub-second response targets.",
       "tags": [
         "database",
@@ -1151,8 +1251,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/devops-engineer/SKILL.md",
       "genericSkillRef": "deployment-automation",
       "status": "awakened",
-      "level": "2\u2605",
-      "description": "CI/CD pipeline design and deployment automation specialist \u2014 build systems, artifact publishing, environment promotion, and rollback strategies.",
+      "level": "2★",
+      "description": "CI/CD pipeline design and deployment automation specialist — build systems, artifact publishing, environment promotion, and rollback strategies.",
       "tags": [
         "cicd",
         "deployment",
@@ -1170,8 +1270,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/mcp-client/SKILL.md",
       "genericSkillRef": "mcp-integration",
       "status": "awakened",
-      "level": "3\u2605",
-      "description": "Portable CLI tool that connects to MCP servers on-demand, enumerates available tools, displays them, and executes calls \u2014 works with any MCP-compatible backend without platform lock-in.",
+      "level": "3★",
+      "description": "Portable CLI tool that connects to MCP servers on-demand, enumerates available tools, displays them, and executes calls — works with any MCP-compatible backend without platform lock-in.",
       "tags": [
         "mcp",
         "model-context-protocol",
@@ -1186,7 +1286,7 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/parallel-execution/SKILL.md",
       "genericSkillRef": "parallel-execution",
       "status": "awakened",
-      "level": "2\u2605",
+      "level": "2★",
       "description": "Manages concurrent work item execution with independence verification, queue-based state tracking, and configurable concurrency limits (default 5).",
       "tags": [
         "parallelism",
@@ -1202,8 +1302,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/release/SKILL.md",
       "genericSkillRef": "release-automation",
       "status": "awakened",
-      "level": "2\u2605",
-      "description": "Automates the full release cycle \u2014 semantic version bump, CHANGELOG update, PR merge, git tag, and GitHub release creation with multiple verification gates.",
+      "level": "2★",
+      "description": "Automates the full release cycle — semantic version bump, CHANGELOG update, PR merge, git tag, and GitHub release creation with multiple verification gates.",
       "tags": [
         "release",
         "semver",
@@ -1220,8 +1320,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/requirements-engineer/SKILL.md",
       "genericSkillRef": "requirements-analysis",
       "status": "awakened",
-      "level": "2\u2605",
-      "description": "Business analysis specialist bridging stakeholders and technical teams \u2014 requirements gathering, user story writing, acceptance criteria, and full requirements lifecycle management.",
+      "level": "2★",
+      "description": "Business analysis specialist bridging stakeholders and technical teams — requirements gathering, user story writing, acceptance criteria, and full requirements lifecycle management.",
       "tags": [
         "requirements",
         "brd",
@@ -1237,8 +1337,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/security-engineer/SKILL.md",
       "genericSkillRef": "security-audit",
       "status": "awakened",
-      "level": "2\u2605",
-      "description": "Security architecture specialist \u2014 vulnerability assessment, zero-trust design, compliance management, and incident response with severity-classified remediation guidance.",
+      "level": "2★",
+      "description": "Security architecture specialist — vulnerability assessment, zero-trust design, compliance management, and incident response with severity-classified remediation guidance.",
       "tags": [
         "security",
         "vulnerability",
@@ -1255,8 +1355,8 @@
       "origin": "https://github.com/intelligentcode-ai/skills/blob/main/skills/user-tester/SKILL.md",
       "genericSkillRef": "e2e-testing",
       "status": "awakened",
-      "level": "3\u2605",
-      "description": "E2E testing specialist with Puppeteer/Playwright automation \u2014 cross-browser validation, full user journey simulation, and visual regression detection.",
+      "level": "3★",
+      "description": "E2E testing specialist with Puppeteer/Playwright automation — cross-browser validation, full user journey simulation, and visual regression detection.",
       "tags": [
         "e2e",
         "playwright",
@@ -1316,6 +1416,7 @@
       "huggingface/huggingface-llm-trainer",
       "huggingface/huggingface-papers",
       "huggingface/huggingface-vision-trainer",
+      "huggingface/semantic-cache",
       "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
@@ -1352,6 +1453,13 @@
     ],
     "nexu-io": [
       "nexu-io/open-design"
+    ],
+    "nousresearch": [
+      "nousresearch/feed-monitoring"
+    ],
+    "openai": [
+      "openai/few-shot-learning",
+      "openai/self-consistency"
     ],
     "pbakaus": [
       "pbakaus/impeccable"

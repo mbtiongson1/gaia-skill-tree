@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v3.5.0  ·  generated 2026-05-14
+GAIA SKILL TREE  v3.9.2  ·  generated 2026-05-14
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -58,6 +58,18 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   │  └─ ○ /error-interpretation  [1★]
   └─ ○ mattpocock/improve-codebase-architecture  [2★]
 
+◆ Ultimate Skill: /grill-with-docs [Unclaimed ✦]  [5★]
+─────────────────────────────────────────────────────────────────
+  ├─ ◇ Extra Skill: /grill-me  [4★]
+  │  ├─ ◇ Extra Skill: mattpocock/grill-with-docs  [3★]
+  │  │  ├─ ○ /evaluate-output  [1★]
+  │  │  └─ ○ /plan-decompose  [1★]
+  │  └─ ○ /self-critique  [1★]
+  ├─ ◇ Extra Skill: /ubiquitous-language  [4★]
+  │  ├─ ○ /extract-entities  [1★]
+  │  └─ ○ /requirements-analysis  [2★]
+  └─ ○ anthropic/pptx  [0★]
+
 ◆ Ultimate Skill: ruvnet/flow-nexus-swarm  [5★]
 ─────────────────────────────────────────────────────────────────
   ├─ ◇ Extra Skill: /plan-and-execute  [4★]
@@ -95,7 +107,11 @@ Shared prerequisites marked (↑ see above) on second occurrence.
 Unique Skills — graph-isolated singularities at 4★+
 ══════════════════════════════════════════════════════════════════════
 
+  ◉ Unique Skill: nousresearch/feed-monitoring - Feed Monitoring  [4★ · Hardened]
+  ◉ Unique Skill: openai/few-shot-learning - Few-Shot Learning  [4★ · Hardened]
   ◉ Unique Skill: huggingface/huggingface-llm-trainer - Fine-Tune  [4★ · Hardened]
+  ◉ Unique Skill: openai/self-consistency - Self-Consistency  [4★ · Hardened]
+  ◉ Unique Skill: huggingface/semantic-cache - Semantic Cache  [4★ · Hardened]
 
 ══════════════════════════════════════════════════════════════════════
 Pure / Undeveloped — basic skills not yet wired into any upgrade path.
@@ -105,18 +121,13 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /code-execution  [2★ · Named]
   ○ mattpocock/zoom-out - Code Explain  [2★ · Named]
   ○ /context-compression  [3★ · Evolved]
-  ○ /feed-monitoring  [4★ · Hardened]
-  ○ /few-shot-learning  [4★ · Hardened]
   ○ laravel/upgrade-laravel-v13 - Framework Upgrade  [0★ · Basic]
   ○ /image-generate  [2★ · Named]
   ○ huggingface/huggingface-vision-trainer - Object Detection  [2★ · Named]
   ○ /ocr  [2★ · Named]
   ○ /parallel-execution  [2★ · Named]
-  ○ /requirements-analysis  [2★ · Named]
   ○ /reward-modeling  [2★ · Named]
   ○ /schema-design  [2★ · Named]
-  ○ /self-consistency  [4★ · Hardened]
-  ○ /semantic-cache  [4★ · Hardened]
   ○ addy-osmani/test-driven-development - Test-Driven Development  [0★ · Basic]
   ○ getagentseal/codeburn - Token Observability  [2★ · Named]
   ○ martin-stepanoski/nielsen-heuristics-audit - UX Audit  [0★ · Basic]

@@ -359,7 +359,7 @@ def write_index(buckets, awaiting_classification, by_contributor, output_path, t
     }
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(index, f, indent=2)
+        json.dump(index, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
 
