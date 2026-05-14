@@ -73,14 +73,17 @@ Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent 
 
 3. **Design the batch** — for each candidate skill determine:
    - Type: `atomic` (no prerequisites) / `composite` (≥2 prereqs) / `legendary` (≥3 prereqs + 3 Evidence Tier A/B sources)
+   - **Fusion-First Design**: Before creating a new skill, check if it can be an **Extra skill** (◇) fused from existing basic capabilities. If the implementation provides a high-level orchestration or specialized resilient pattern (e.g., `agentic-workflow-design`), use an Extra skill type.
    - Level: target **IV** (Hardened) minimum — requires at least 1× Evidence Tier B or A
    - Rarity: `common` / `uncommon` / `rare` / `epic` / `legendary`
    - Prerequisites and derivatives (must reference existing IDs)
+   - **Demerit Check (Strategic)**: Identify `heavyweight-dependency`, `niche-integration`, or `experimental-feature`. Only strictly apply these to skills at **Level 3★+**. If a high-level skill is cross-platform and "Universal," reward it by omitting demerits.
+   - **Named Promotion**: Determine if the specific implementation should be promoted to a **Named Skill** in `registry/named/`.
 4. **Present draft for review** — before writing any code or committing, display the full proposed skills table:
 
-   | ID | Name | Type | Rarity | Prereqs | Similarity hints |
-   |---|---|---|---|---|---|
-   | … | … | … | … | … | … |
+   | ID | Name | Type | Rarity | Prereqs | Demerits | Named Promotion? |
+   |---|---|---|---|---|---|---|
+   | … | … | … | … | … | … | … |
 
    Similarity hints are lexical matches from the existing registry (≥0.45 score). For each proposed skill, ask the user to mark one of:
    - `accept` — proceed as designed

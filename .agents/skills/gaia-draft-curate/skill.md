@@ -20,34 +20,22 @@ Review pending Gaia draft skill intake batches and open draft PRs. This skill is
    ```
    Cross-reference with local batch files by `batchId` where possible. List any PRs that have no corresponding local batch (remote-only) and any local batches that have no open PR.
 
-4. **Evidence enrichment** — before displaying the review table, for each proposed skill in the batch:
+4. **Evidence enrichment and Rigorous Verification** — before displaying the review table, for each proposed skill in the batch:
 
    a. Search GitHub for concrete implementations:
    ```bash
    gh search repos "<proposed-skill-name>" --sort=stars --limit=5
    gh search repos --topic="<proposed-skill-id>" --sort=stars --limit=5
    ```
-   b. **Inspect each qualifying repo for individual skill files.** A repo is often a *collection*, not a single skill. After finding a repo with >50 stars, check the common skill directory layouts:
-   ```bash
-   gh api repos/{owner}/{repo}/contents/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/.claude/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/codex/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/.codex/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/cursor/skills --jq '.[].name'
-   ```
-   If skill subdirectories exist, for each subdirectory that matches the proposed skill name (fuzzy-match OK):
-   ```bash
-   gh api repos/{owner}/{repo}/contents/<skills-dir>/<skill-name>/SKILL.md --jq '.download_url'
-   ```
-   Fetch the SKILL.md to read its description. **Use the specific file URL** (`https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Evidence Tier B source — never the repo root URL.
+   b. **Verify Agent Playbooks**: Inspect each qualifying repo for an **agent playbook** (e.g., `AGENTS.md`, `CLAUDE.md`, `.claude/skills/`, or a documented autonomous agent workflow). A repo without a clear playbook should be flagged as `needs-playbook`.
+   
+   c. **Fusion Analysis**: Determine if the proposed skill represents a new capability or is "original enough" to warrant a new **Generic (Extra) Name** in the canonical `registry/gaia.json`.
 
-   If the repo has *multiple* skill subdirectories and several map to proposed skills in the current batch (or to unproposed skills worth adding), note each one separately in the review table — they each get their own row and decision.
+   d. **Demerit Identification (Strategic)**: Check for `heavyweight-dependency` or `niche-integration`. Only actively look for these for **3★+** skills. Favor cross-platform/universal implementations by keeping them demerit-free.
+   
+   e. If a repo-level URL was previously recorded as evidence for this skill (e.g., the `sourceRepo` in the intake batch), **re-resolve it to a specific SKILL.md path** using the steps above before accepting. Flag repo-root URLs as `needs-specific-url` if no SKILL.md can be found.
 
-   If no skills directory is found, the repo URL itself is acceptable as Evidence Tier B.
-
-   c. If a repo-level URL was previously recorded as evidence for this skill (e.g., the `sourceRepo` in the intake batch), **re-resolve it to a specific SKILL.md path** using the steps above before accepting. Flag repo-root URLs as `needs-specific-url` if no SKILL.md can be found.
-
-   d. Query SkillsMP for matching community skills:
+   f. Query SkillsMP for matching community skills:
    ```
    WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
    ```

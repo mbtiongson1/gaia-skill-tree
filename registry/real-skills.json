@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-08",
+  "generatedAt": "2026-05-14",
   "sources": [
     {
       "repo": "karpathy/autoresearch",
@@ -104,6 +104,26 @@
       "description": "Bot-curated Hugging Face model crawl filtered to concrete safety, reranking, compression, and moderation capabilities.",
       "url": "https://huggingface.co/models",
       "crawledAt": "2026-05-08"
+    },
+    {
+      "repo": "apache/airflow",
+      "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
+      "url": "https://github.com/apache/airflow"
+    },
+    {
+      "repo": "apify/crawlee-python",
+      "description": "Crawlee\u2014A web scraping and browser automation library for Python to build reliable crawlers.",
+      "url": "https://github.com/apify/crawlee-python"
+    },
+    {
+      "repo": "firecrawl/firecrawl-mcp-server",
+      "description": "Official Firecrawl MCP Server - Adds powerful web scraping and search to Cursor, Claude and any other LLM clients.",
+      "url": "https://github.com/firecrawl/firecrawl-mcp-server"
+    },
+    {
+      "repo": "LadislavSopko/mcp-server-for-vs",
+      "description": "Deep MCP server for Visual Studio with Roslyn-powered tools and debugger control.",
+      "url": "https://github.com/LadislavSopko/mcp-server-for-vs"
     }
   ],
   "items": [
@@ -420,7 +440,7 @@
       "name": "mattpocock/diagnose",
       "contributor": "mattpocock",
       "title": "The Disciplined Diagnosis Loop",
-      "description": "Enforces a five-phase debugging discipline prioritising the feedback loop above all else — refuses to proceed until a fast deterministic pass/fail signal exists.",
+      "description": "Enforces a five-phase debugging discipline prioritising the feedback loop above all else \u2014 refuses to proceed until a fast deterministic pass/fail signal exists.",
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md",
       "mapsToGaia": [
@@ -1048,15 +1068,16 @@
       "sourceRepo": "apify/crawlee",
       "url": "https://github.com/apify/crawlee",
       "mapsToGaia": [
-        "web-scrape",
-        "browser-automation"
+        "stealth-browser-interaction"
       ],
       "addedAt": "2026-05-08",
       "tags": [
         "web-scrape",
         "browser-automation",
         "crawler"
-      ]
+      ],
+      "promotedNamedSkillId": "apify/crawlee",
+      "title": "The Ghost in the Machine"
     },
     {
       "id": "d4vinci-scrapling",
@@ -1463,6 +1484,83 @@
         "stealth",
         "qa-testing"
       ]
+    },
+    {
+      "id": "apache-airflow",
+      "name": "apache/airflow",
+      "contributor": "apache",
+      "description": "Scalable workflow orchestration platform for authoring, scheduling, and monitoring complex data pipelines and agentic workflows.",
+      "sourceRepo": "apache/airflow",
+      "url": "https://github.com/apache/airflow",
+      "mapsToGaia": [
+        "agentic-workflow-design"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "workflow",
+        "orchestration",
+        "airflow",
+        "python"
+      ],
+      "promotedNamedSkillId": "apache/airflow",
+      "title": "The Architect's Blueprint"
+    },
+    {
+      "id": "apify-crawlee",
+      "name": "apify/crawlee",
+      "contributor": "apify",
+      "description": "Python library for reliable web scraping and browser automation, supporting diverse extraction patterns for AI applications.",
+      "sourceRepo": "apify/crawlee-python",
+      "url": "https://github.com/apify/crawlee-python",
+      "mapsToGaia": [
+        "stealth-browser-interaction"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "web-scrape",
+        "browser-automation",
+        "python"
+      ],
+      "promotedNamedSkillId": "apify/crawlee",
+      "title": "The Ghost in the Machine"
+    },
+    {
+      "id": "firecrawl-mcp",
+      "name": "firecrawl/mcp",
+      "contributor": "firecrawl",
+      "description": "MCP server implementation for Firecrawl, enabling seamless web scraping and search tool integration for agents.",
+      "sourceRepo": "firecrawl/firecrawl-mcp-server",
+      "url": "https://github.com/firecrawl/firecrawl-mcp-server",
+      "mapsToGaia": [
+        "autonomous-web-research"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "mcp",
+        "web-scrape",
+        "tool-use"
+      ],
+      "promotedNamedSkillId": "firecrawl/mcp",
+      "title": "The Digital Pathweaver"
+    },
+    {
+      "id": "ladislav-sopko-mcp-vs",
+      "name": "ladislav-sopko/mcp-vs",
+      "contributor": "Ladislav Sopko",
+      "description": "Deep MCP server for Visual Studio providing Roslyn-powered semantic navigation and full debugger control (breakpoints, stepping, variable inspection).",
+      "sourceRepo": "LadislavSopko/mcp-server-for-vs",
+      "url": "https://github.com/LadislavSopko/mcp-server-for-vs",
+      "mapsToGaia": [
+        "mcp-debugger-control"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "mcp",
+        "visual-studio",
+        "roslyn"
+      ],
+      "promotedNamedSkillId": "ladislav-sopko/mcp-vs",
+      "title": "The Runtime Oracle"
     }
   ]
 }

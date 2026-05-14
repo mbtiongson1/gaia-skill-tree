@@ -21,17 +21,22 @@ Audit exactly one Gaia skill, named skill, or real-skill catalog item and submit
    - Does it map to the claimed Gaia capability?
    - Does it justify its level, rarity, named status, or `promotedNamedSkillId`?
    - Is it outdated, superseded, overpromoted, duplicate, or under-sourced?
+   - **Upgrade Path Analysis**: Can this skill be evolved? If it's a basic skill with multiple implementation "flavors," should it be fused into a new Extra skill (Generic Name)?
+   - **Rigorous Verification**: Does the source include a specific **agent playbook** (e.g., `AGENTS.md`, `CLAUDE.md`, `.claude/skills/`, or a documented autonomous agent workflow)?
+   - **Demerit Check (Strategic)**: Only actively audit demerits for skills at **3★+**. Be lenient toward skills that are portable across platforms. Reward "Generalized" skills by favoring them for higher Rarity or Legendary status if they remain demerit-free at high levels.
 5. Present findings first. If a correction is warranted, edit only source-of-truth files:
-   - `registry/gaia.json`
+   - `registry/gaia.json` or `registry/nodes/**/*.json`
    - `registry/named/**`
    - `registry/real-skills.json`
    - reviewer policy docs when criteria are missing
-6. Regenerate outputs:
-   ```bash
-   python3 scripts/generateProjections.py
-   python3 scripts/syncDocsGraphAssets.py
-   PYTHONPATH=src python3 scripts/build_docs.py
-   ```
+6. Regenerate outputs and promote:
+   - If a skill is promoted to Named status, ensure its `registry/named/` file exists and the real-skill catalog entry is updated.
+   - Run:
+     ```bash
+     python3 scripts/generateProjections.py
+     python3 scripts/syncDocsGraphAssets.py
+     PYTHONPATH=src python3 scripts/build_docs.py
+     ```
 7. Verify:
    ```bash
    ./.venv/bin/python scripts/validate.py

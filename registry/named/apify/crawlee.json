@@ -1,0 +1,13 @@
+{
+  "id": "apify/crawlee",
+  "name": "apify/crawlee",
+  "title": "The Ghost in the Machine",
+  "contributor": "apify",
+  "targetSkillId": "stealth-browser-interaction",
+  "description": "Adaptive web crawling framework with human-like stealth and agent playbooks.",
+  "url": "https://github.com/apify/crawlee-python",
+  "status": "named",
+  "addedAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "1.0.0"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "firecrawl/mcp",
+  "name": "firecrawl/mcp",
+  "title": "The Digital Pathweaver",
+  "contributor": "firecrawl",
+  "targetSkillId": "autonomous-web-research",
+  "description": "Native MCP research agent with autonomous site mapping and crawling capabilities.",
+  "url": "https://github.com/firecrawl/firecrawl-mcp-server",
+  "status": "named",
+  "addedAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "1.0.0"
+}

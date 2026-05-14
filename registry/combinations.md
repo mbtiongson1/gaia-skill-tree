@@ -3,11 +3,13 @@
 | Skill | Class | Prerequisites | Level Floor | Conditions |
 |---|---|---|---|---|
 | ◇ Extra Skill: /agent-eval | Extra Skill | Evaluate Output, Score Relevance | 3★ |  |
+| ◇ Extra Skill: /agentic-workflow-design | Extra Skill | Workflow Automation, Plan and Decompose | 5★ → 4★ | Requires a workflow orchestration target (e.g. Airflow, Temporal) and access to its authoring API. |
 | ◇ Extra Skill: /architecture-diagram | Extra Skill | Data Visualize, Format Output, Write Report | 4★ | Requires enough system context to identify components, relationships, boundaries, and rendering constraints. |
 | ◇ Extra Skill: 0xdarkmatter/pytest-patterns | Extra Skill | Generate Test, Execute Bash, Error Interpretation | 3★ |  |
 | ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦] | Ultimate Skill | Data Analysis, Math Reason, Research | 5★ | Requires dataset access and compute environment. Minimum 3 Class A/B evidence sources. |
 | ◇ Extra Skill: devin-ai/autonomous-swe | Extra Skill | Code Generation, Execute Bash, Error Interpretation | 4★ |  |
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | 6★ | Requires extensive multi-system validation before level advancement. |
+| ◇ Extra Skill: /autonomous-web-research | Extra Skill | Web Scrape, Web Search | 4★ | Requires a multi-step crawling engine and mapping logic to resolve site structures. |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | Web Search, Computer Use | 3★ |  |
 | ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | 3★ |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | 3★ |  |
@@ -30,6 +32,7 @@
 | ◇ Extra Skill: /knowledge-graph-build | Extra Skill | Extract Entities, Logical Inference | 3★ |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | 4★ |  |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | 4★ | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
+| ◇ Extra Skill: /mcp-debugger-control | Extra Skill | MCP Integration, Refactor Code | 4★ → 3★ | Requires a target debugger integration and a supported MCP client. |
 | ◇ Extra Skill: /mcp-server-creation | Extra Skill | MCP Integration, Tool Creation, API Call | 4★ | Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client. |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | 4★ | Requires access to a container orchestration environment and model registry. |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | Self-Critique, Evaluate Output, Chain-of-Thought Reasoning | 4★ |  |
@@ -52,6 +55,7 @@
 | ◇ Extra Skill: /skill-authoring | Extra Skill | Generate Text, Structured Output Generation, Code Generation | 4★ | Requires a target agent skill format and a repeatable evaluation loop for trigger accuracy and task success. |
 | ◇ Extra Skill: /skill-performance-benchmarking | Extra Skill | Agent Evaluation, Skill Discovery, Statistical Analysis | 4★ | Requires a skill corpus, benchmark tasks, success rubrics, and variance-aware reporting across multiple runs. |
 | ◇ Extra Skill: /skill-security-analysis | Extra Skill | Security Audit, Prompt Injection Defense, Skill Discovery | 4★ | Requires access to the skill manifest, referenced files, source repository context, and a policy for trusted permissions. |
+| ◇ Extra Skill: /stealth-browser-interaction | Extra Skill | Browser Automation, Computer Use | 4★ → 3★ | Requires a stealth-enabled browser driver and session management infrastructure. |
 | ◇ Extra Skill: /text-to-sql-pipeline | Extra Skill | Generate SQL, Parse JSON, Format Output | 3★ | Requires schema context in prompt. |
 | ◇ Extra Skill: /tool-chaining | Extra Skill | Tool Use, Tool Select | 3★ | Requires at least two distinct tools whose data schemas are compatible for chaining. |
 | ◇ Extra Skill: anthropic/skill-creator | Extra Skill | Code Generation, Tool Use | 4★ |  |

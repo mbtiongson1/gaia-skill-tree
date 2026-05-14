@@ -1,0 +1,35 @@
+{
+  "id": "agentic-workflow-design",
+  "name": "Agentic Workflow Design",
+  "type": "extra",
+  "level": "5\u2605",
+  "rarity": "rare",
+  "description": "Autonomously designs, authors, and iterates on complex multi-step workflows by translating high-level goals into executable DAGs or playbooks, managing task dependencies and distributed execution environments.",
+  "prerequisites": [
+    "workflow-automation",
+    "plan-decompose"
+  ],
+  "derivatives": [
+    "full-stack-developer"
+  ],
+  "conditions": "Requires a workflow orchestration target (e.g. Airflow, Temporal) and access to its authoring API.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/apache/airflow/blob/main/AGENTS.md",
+      "evaluator": "mbtiongson1",
+      "date": "2026-05-14",
+      "notes": "Airflow AGENTS.md defines agentic workflow design patterns using the TaskFlow API for dynamic DAG generation."
+    }
+  ],
+  "knownAgents": [
+    "apache/airflow"
+  ],
+  "demerits": [
+    "heavyweight-dependency"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "0.1.0"
+}

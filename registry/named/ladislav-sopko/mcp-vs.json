@@ -1,0 +1,13 @@
+{
+  "id": "ladislav-sopko/mcp-vs",
+  "name": "ladislav-sopko/mcp-vs",
+  "title": "The Runtime Oracle",
+  "contributor": "ladislav-sopko",
+  "targetSkillId": "mcp-debugger-control",
+  "description": "Deep MCP integration for Visual Studio exposing debugger control and semantic code search to agents.",
+  "url": "https://github.com/LadislavSopko/mcp-server-for-vs",
+  "status": "named",
+  "addedAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "1.0.0"
+}

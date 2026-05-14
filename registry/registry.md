@@ -3,6 +3,7 @@
 | Name | Class | Rank | Tier | Skill Call |
 |---|---|---|---|---|
 | ◇ Extra Skill: /agent-eval | Extra Skill | 3★ | Evolved | `/agent-eval` |
+| ◇ Extra Skill: /agentic-workflow-design | Extra Skill | 5★ → 4★ | Transcendent | `/agentic-workflow-design` |
 | ○ huggingface/hf-cli | Basic Skill | 2★ | Named | `/api-call` |
 | ◇ Extra Skill: /architecture-diagram | Extra Skill | 4★ | Hardened | `/architecture-diagram` |
 | ○ /audience-model | Basic Skill | 1★ | Awakened | `/audience-model` |
@@ -10,6 +11,7 @@
 | ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/autonomous-data-scientist` |
 | ◇ Extra Skill: devin-ai/autonomous-swe | Extra Skill | 4★ | Hardened | `/autonomous-debug` |
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | 6★ | Transcendent ★ | `/autonomous-research-agent` |
+| ◇ Extra Skill: /autonomous-web-research | Extra Skill | 4★ | Hardened | `/autonomous-web-research` |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | 3★ | Evolved | `/browser-automation` |
 | ○ /chain-of-thought | Basic Skill | 1★ | Awakened | `/chain-of-thought` |
 | ○ /chunk-document | Basic Skill | 1★ | Awakened | `/chunk-document` |
@@ -57,6 +59,7 @@
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | 4★ | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic Skill | 1★ | Awakened | `/logical-inference` |
 | ○ /math-reason | Basic Skill | 2★ | Named | `/math-reason` |
+| ◇ Extra Skill: /mcp-debugger-control | Extra Skill | 4★ → 3★ | Hardened | `/mcp-debugger-control` |
 | ○ /mcp-integration | Basic Skill | 3★ → 2★ | Evolved | `/mcp-integration` |
 | ◇ Extra Skill: /mcp-server-creation | Extra Skill | 4★ | Hardened | `/mcp-server-creation` |
 | ○ /memory-manage | Basic Skill | 2★ | Named | `/memory-manage` |
@@ -98,6 +101,7 @@
 | ◇ Extra Skill: /skill-security-analysis | Extra Skill | 4★ | Hardened | `/skill-security-analysis` |
 | ○ /speech-to-text | Basic Skill | 2★ | Named | `/speech-to-text` |
 | ○ /statistical-analysis | Basic Skill | 3★ | Evolved | `/statistical-analysis` |
+| ◇ Extra Skill: /stealth-browser-interaction | Extra Skill | 4★ → 3★ | Hardened | `/stealth-browser-interaction` |
 | ○ /structured-output | Basic Skill | 1★ | Awakened | `/structured-output` |
 | ○ /summarize | Basic Skill | 0★ | Basic | `/summarize` |
 | ○ /text-to-speech | Basic Skill | 2★ | Named | `/text-to-speech` |

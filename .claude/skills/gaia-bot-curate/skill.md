@@ -26,16 +26,22 @@ Curate remote `bot/*` crawler branches into `registry/real-skills.json` from a f
    - Give each agent only the relevant `/tmp` candidate JSON subset plus the rule below; do not pass full raw payloads or unrelated history.
    - Ask for accepted/rejected JSON-like output with `id`, `name`, `contributor`, `url`, optional `sourceRepo`, `mapsToGaia`, and `reason`.
 
-4. **Accept only real skills**
-   - Accept concrete skill implementations, workflow artifacts, model capability pages, or reputable package/repo pages that map to existing Gaia IDs.
-   - Prefer `registry/real-skills.json` for real-world implementations; do not create new abstract `registry/gaia.json` nodes unless `/gaia-curate` review explicitly justifies one.
-   - Reject generic model listings, broad marketing wrappers, stale repos, awesome lists, templates, duplicates, and candidates without stable capability mapping.
-   - Treat MCP servers, API connectors, marketplace extensions, and tool endpoints as `needs-evidence` unless they include a specific skill/workflow artifact such as `SKILL.md`, a documented agent playbook, or a concrete workflow implementation beyond “exposes tools over MCP.”
+4. **Accept and Analyze Real Skills**
+   - **Accept** concrete skill implementations, workflow artifacts, model capability pages, or reputable package/repo pages.
+   - **Rigorous Verification**: Treat MCP servers, API connectors, and tool extensions as `needs-evidence` unless they include a specific **agent playbook** (e.g., `AGENTS.md`, `CLAUDE.md`, `.claude/skills/`, or a documented autonomous agent workflow like Firecrawl's `Map` logic).
+   - **Fusion Analysis**: For each accepted item, determine if it is "original enough" to warrant a new **Generic (Extra) Name** in the canonical `registry/gaia.json`. If it fuses multiple basic capabilities (e.g., `web-scrape` + `browser-automation`), propose a new Extra skill.
+   - **Demerit Assignment (Strategic)**: Apply demerits only to skills at **Level 3★ (Evolved)** or higher. For lower levels, be lenient unless the skill is strictly vendor-locked.
+     - **Threshold**: Only assign a demerit if it breaks the "Install Anywhere" promise for a developer.
+     - `heavyweight-dependency`: Only if it requires massive infrastructure (e.g., full Airflow stack, 10GB+ Docker) that a typical dev can't run locally.
+     - `niche-integration`: Only if restricted to a specific non-portable OS or IDE (e.g., Windows-only Visual Studio).
+     - **Reward Generality**: If a high-level skill remains demerit-free, prioritize it for **Named Promotion**.
+   - **Named Promotion**: If the item has a clear playbook and high quality, propose it as a **Named Skill** (2★+) in `registry/named/` with a unique Title (e.g., "The Digital Pathweaver").
 
-5. **Integrate centrally**
-   - Main agent edits only accepted entries into `registry/real-skills.json`.
-   - Regenerate with `python3 scripts/generateRealSkills.py`; run broader projection scripts only if canonical registry files changed.
-   - Do not commit raw `proposals/*.json` files or local `/tmp` snapshots.
+5. **Integrate and Promote**
+   - Main agent edits accepted entries into `registry/real-skills.json`.
+   - If a new Generic skill was identified in step 4, create the corresponding node in `registry/nodes/extra/`.
+   - If promotion was justified, create the `registry/named/` JSON file and link it to the generic bucket.
+   - Regenerate with `python3 scripts/generateRealSkills.py` and `python3 scripts/generateProjections.py`.
 
 6. **Clean remote bot branches**
    - Delete consumed remote bot branches only after the `/tmp` snapshot exists and the review branch contains the curated result.

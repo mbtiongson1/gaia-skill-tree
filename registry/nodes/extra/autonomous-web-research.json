@@ -1,0 +1,32 @@
+{
+  "id": "autonomous-web-research",
+  "name": "Autonomous Web Research",
+  "type": "extra",
+  "level": "4\u2605",
+  "rarity": "rare",
+  "description": "Independently surveys, maps, and extracts structured information from the web by autonomously deciding which domains to crawl and synthesizing data into comprehensive research reports.",
+  "prerequisites": [
+    "web-scrape",
+    "web-search"
+  ],
+  "derivatives": [
+    "autonomous-research-agent"
+  ],
+  "conditions": "Requires a multi-step crawling engine and mapping logic to resolve site structures.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/firecrawl/firecrawl-mcp-server",
+      "evaluator": "mbtiongson1",
+      "date": "2026-05-14",
+      "notes": "Firecrawl's Map and Crawl logic combined with the firecrawl_agent tool enables autonomous multi-source web research."
+    }
+  ],
+  "knownAgents": [
+    "firecrawl/mcp"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "0.1.0"
+}
