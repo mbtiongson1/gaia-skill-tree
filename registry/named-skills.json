@@ -28,6 +28,28 @@
         "role": "origin"
       }
     ],
+    "design-system-extraction": [
+      {
+        "id": "Manavarya09/design-extract",
+        "name": "Design Extract",
+        "contributor": "Manavarya09",
+        "origin": true,
+        "genericSkillRef": "design-system-extraction",
+        "status": "named",
+        "level": "2\u2605",
+        "description": "Extracts complete design systems, Tailwind configs, and Figma variables from any live URL.",
+        "title": "The Token Scavenger",
+        "tags": [
+          "design-system",
+          "tailwind",
+          "scraping"
+        ],
+        "links": {
+          "github": "https://github.com/Manavarya09/design-extract"
+        },
+        "role": "origin"
+      }
+    ],
     "test-driven-development": [
       {
         "id": "addy-osmani/test-driven-development",
@@ -169,6 +191,50 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md"
         },
         "role": "variant"
+      }
+    ],
+    "video-intelligence": [
+      {
+        "id": "bradautomates/claude-video",
+        "name": "Claude Video",
+        "contributor": "bradautomates",
+        "origin": true,
+        "genericSkillRef": "video-intelligence",
+        "status": "named",
+        "level": "2\u2605",
+        "description": "Enables AI agents to watch videos by downloading them, extracting frames, and transcribing audio for multimodal analysis.",
+        "title": "The Temporal Eye",
+        "tags": [
+          "video",
+          "multimodal",
+          "vision"
+        ],
+        "links": {
+          "github": "https://github.com/bradautomates/claude-video"
+        },
+        "role": "origin"
+      }
+    ],
+    "browser-control": [
+      {
+        "id": "browser-use/browser-harness",
+        "name": "Browser Harness",
+        "contributor": "browser-use",
+        "origin": true,
+        "genericSkillRef": "browser-control",
+        "status": "named",
+        "level": "2\u2605",
+        "description": "Self-healing harness for direct browser control via CDP, enabling agents to write custom helpers at runtime.",
+        "title": "The Dom Whispering",
+        "tags": [
+          "browser",
+          "cdp",
+          "automation"
+        ],
+        "links": {
+          "github": "https://github.com/browser-use/browser-harness"
+        },
+        "role": "origin"
       }
     ],
     "autonomous-debug": [
@@ -432,6 +498,28 @@
         ],
         "links": {
           "github": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "token-observability": [
+      {
+        "id": "getagentseal/codeburn",
+        "name": "CodeBurn",
+        "contributor": "getagentseal",
+        "origin": true,
+        "genericSkillRef": "token-observability",
+        "status": "named",
+        "level": "2\u2605",
+        "description": "Cost and token observability tool for tracking AI coding agent spending across models and projects.",
+        "title": "The Ledger of Light",
+        "tags": [
+          "observability",
+          "cost",
+          "tokens"
+        ],
+        "links": {
+          "github": "https://github.com/getagentseal/codeburn"
         },
         "role": "origin"
       }
@@ -703,6 +791,27 @@
           "github": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md"
         },
         "role": "origin"
+      },
+      {
+        "id": "pbakaus/impeccable",
+        "name": "Impeccable",
+        "contributor": "pbakaus",
+        "origin": false,
+        "genericSkillRef": "ux-audit",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Elite design vocabulary and audit tool for polishing AI-generated frontend code.",
+        "title": "The Aesthetic Shield",
+        "tags": [
+          "design",
+          "audit",
+          "frontend",
+          "polishing"
+        ],
+        "links": {
+          "github": "https://github.com/pbakaus/impeccable"
+        },
+        "role": "variant"
       }
     ],
     "refactor-code": [
@@ -806,6 +915,29 @@
         "role": "origin"
       }
     ],
+    "design-generation": [
+      {
+        "id": "nexu-io/open-design",
+        "name": "Open Design",
+        "contributor": "nexu-io",
+        "origin": true,
+        "genericSkillRef": "design-generation",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "Local-first design engine for generating high-fidelity UI/UX prototypes and brand assets from structured intent.",
+        "title": "The Artisan's Forge",
+        "tags": [
+          "design",
+          "ui",
+          "ux",
+          "generation"
+        ],
+        "links": {
+          "github": "https://github.com/nexu-io/open-design"
+        },
+        "role": "origin"
+      }
+    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -827,6 +959,50 @@
         ],
         "links": {
           "github": "https://github.com/ruvnet/ruflo"
+        },
+        "role": "origin"
+      }
+    ],
+    "knowledge-graph-build": [
+      {
+        "id": "safishamsi/graphify",
+        "name": "Graphify",
+        "contributor": "safishamsi",
+        "origin": true,
+        "genericSkillRef": "knowledge-graph-build",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "Maps codebases and documentation into a queryable knowledge graph using AST analysis and semantic extraction.",
+        "title": "The Structural Muse",
+        "tags": [
+          "knowledge-graph",
+          "rag",
+          "ast"
+        ],
+        "links": {
+          "github": "https://github.com/safishamsi/graphify"
+        },
+        "role": "origin"
+      }
+    ],
+    "career-operations": [
+      {
+        "id": "santifer/career-ops",
+        "name": "Career-Ops",
+        "contributor": "santifer",
+        "origin": true,
+        "genericSkillRef": "career-operations",
+        "status": "named",
+        "level": "3\u2605",
+        "description": "Agentic job search pipeline that automates scanning, fit scoring, and CV tailoring.",
+        "title": "The Professional's Edge",
+        "tags": [
+          "career",
+          "job-search",
+          "automation"
+        ],
+        "links": {
+          "github": "https://github.com/santifer/career-ops"
         },
         "role": "origin"
       }
@@ -1095,12 +1271,21 @@
     "0xdarkmatter": [
       "0xdarkmatter/pytest-patterns"
     ],
+    "Manavarya09": [
+      "Manavarya09/design-extract"
+    ],
     "addy-osmani": [
       "addy-osmani/test-driven-development"
     ],
     "anthropic": [
       "anthropic/pptx",
       "anthropic/skill-creator"
+    ],
+    "bradautomates": [
+      "bradautomates/claude-video"
+    ],
+    "browser-use": [
+      "browser-use/browser-harness"
     ],
     "devin-ai": [
       "devin-ai/autonomous-swe"
@@ -1115,6 +1300,9 @@
       "garrytan/garrytan",
       "garrytan/gstack",
       "garrytan/office-hours"
+    ],
+    "getagentseal": [
+      "getagentseal/codeburn"
     ],
     "glincker": [
       "glincker/readme-generator"
@@ -1162,8 +1350,20 @@
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],
+    "nexu-io": [
+      "nexu-io/open-design"
+    ],
+    "pbakaus": [
+      "pbakaus/impeccable"
+    ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"
+    ],
+    "safishamsi": [
+      "safishamsi/graphify"
+    ],
+    "santifer": [
+      "santifer/career-ops"
     ],
     "spring-ai": [
       "spring-ai/readme-generate"

@@ -125,8 +125,8 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "3.7.0",
-  "generatedAt": "2026-05-14T07:35:58.734343Z",
+  "version": "3.5.0",
+  "generatedAt": "2026-05-14T09:36:11.355691Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -594,6 +594,62 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
       "version": "0.2.0"
+    },
+    {
+      "id": "browser-control",
+      "name": "Browser Control",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "uncommon",
+      "description": "Directly controls a web browser via low-level protocols (like CDP) to manipulate DOM, manage cookies, and intercept network traffic.",
+      "prerequisites": [],
+      "derivatives": [
+        "browser-automation"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/browser-use/browser-harness",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "Browser Harness -- self-healing harness connecting LLMs to browser via CDP."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
+      "id": "career-operations",
+      "name": "Career Operations",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "legendary",
+      "description": "Orchestrates an end-to-end job application pipeline, including automated search, fit evaluation, and tailored CV/cover letter generation.",
+      "prerequisites": [
+        "autonomous-web-research",
+        "summarize",
+        "document-editing"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/santifer/career-ops",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "Career-Ops -- AI-powered job search system with CV tailoring and dashboard."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
     },
     {
       "id": "chain-of-thought",
@@ -1077,6 +1133,36 @@
       "version": "0.2.0"
     },
     {
+      "id": "design-generation",
+      "name": "Design Generation",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "rare",
+      "description": "Generates high-fidelity visual assets, prototypes, and UI components from design intent or discovery forms, adhering to brand and UX standards.",
+      "prerequisites": [
+        "code-generation",
+        "vision-qa"
+      ],
+      "derivatives": [
+        "full-stack-developer"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/nexu-io/open-design",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "Open Design -- local-first design engine generating high-fidelity prototypes and brand assets."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
       "id": "design-review",
       "name": "Design Review",
       "type": "extra",
@@ -1109,6 +1195,36 @@
       "status": "provisional",
       "createdAt": "2026-04-30",
       "updatedAt": "2026-04-30",
+      "version": "0.1.0"
+    },
+    {
+      "id": "design-system-extraction",
+      "name": "Design System Extraction",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "rare",
+      "description": "Automates the discovery and extraction of design tokens, component architectures, and CSS configurations from live web applications or URLs.",
+      "prerequisites": [
+        "browser-automation",
+        "parse-html"
+      ],
+      "derivatives": [
+        "design-generation"
+      ],
+      "conditions": "Requires headless browser (Playwright/Puppeteer).",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/Manavarya09/design-extract",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "Design Extract -- extracts complete design systems (Tailwind, Figma variables, etc.) from any URL."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
       "version": "0.1.0"
     },
     {
@@ -4148,6 +4264,33 @@
       "version": "0.2.0"
     },
     {
+      "id": "token-observability",
+      "name": "Token Observability",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "uncommon",
+      "description": "Tracks and analyzes token usage and cost across multiple AI models and agents, providing session-level and project-level spending metrics.",
+      "prerequisites": [],
+      "derivatives": [
+        "data-analysis"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/getagentseal/codeburn",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "CodeBurn -- provides cost and token observability for AI coding tools; integrated with 19+ tools."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
       "id": "tokenize",
       "name": "Tokenize",
       "type": "basic",
@@ -4461,6 +4604,36 @@
       "version": "0.1.0"
     },
     {
+      "id": "video-intelligence",
+      "name": "Video Intelligence",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "rare",
+      "description": "Processes video streams by extracting frames, transcribing audio, and applying multimodal reasoning to understand temporal and visual context.",
+      "prerequisites": [
+        "multimodal-reasoning",
+        "speech-to-text"
+      ],
+      "derivatives": [
+        "autonomous-web-research"
+      ],
+      "conditions": "Requires FFmpeg and multimodal LLM support.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/bradautomates/claude-video",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-14",
+          "notes": "Claude Video -- enables AI agents to watch videos by downloading, frame extraction, and transcription."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
       "id": "vision-qa",
       "name": "Visual Question Answering",
       "type": "basic",
@@ -4752,6 +4925,16 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "autonomous-web-research",
+      "targetSkillId": "career-operations",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "browser-automation",
+      "targetSkillId": "design-system-extraction",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "browser-automation",
       "targetSkillId": "e2e-testing",
       "edgeType": "prerequisite"
@@ -4819,6 +5002,11 @@
     {
       "sourceSkillId": "code-generation",
       "targetSkillId": "code-review-pipeline",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "code-generation",
+      "targetSkillId": "design-generation",
       "edgeType": "prerequisite"
     },
     {
@@ -4894,6 +5082,11 @@
     {
       "sourceSkillId": "diff-content",
       "targetSkillId": "code-review-pipeline",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "document-editing",
+      "targetSkillId": "career-operations",
       "edgeType": "prerequisite"
     },
     {
@@ -5157,6 +5350,16 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "multimodal-reasoning",
+      "targetSkillId": "video-intelligence",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "parse-html",
+      "targetSkillId": "design-system-extraction",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "parse-html",
       "targetSkillId": "web-scrape",
       "edgeType": "prerequisite"
@@ -5393,6 +5596,11 @@
     },
     {
       "sourceSkillId": "speech-to-text",
+      "targetSkillId": "video-intelligence",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "speech-to-text",
       "targetSkillId": "voice-agent",
       "edgeType": "prerequisite"
     },
@@ -5419,6 +5627,11 @@
     {
       "sourceSkillId": "structured-output",
       "targetSkillId": "skill-authoring",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "summarize",
+      "targetSkillId": "career-operations",
       "edgeType": "prerequisite"
     },
     {
@@ -5504,6 +5717,11 @@
     {
       "sourceSkillId": "translate",
       "targetSkillId": "translation-pipeline",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "vision-qa",
+      "targetSkillId": "design-generation",
       "edgeType": "prerequisite"
     },
     {
@@ -5609,6 +5827,28 @@
         ],
         "links": {
           "github": "https://github.com/aiskillstore/marketplace"
+        },
+        "role": "origin"
+      }
+    ],
+    "design-system-extraction": [
+      {
+        "id": "Manavarya09/design-extract",
+        "name": "Design Extract",
+        "contributor": "Manavarya09",
+        "origin": true,
+        "genericSkillRef": "design-system-extraction",
+        "status": "named",
+        "level": "2★",
+        "description": "Extracts complete design systems, Tailwind configs, and Figma variables from any live URL.",
+        "title": "The Token Scavenger",
+        "tags": [
+          "design-system",
+          "tailwind",
+          "scraping"
+        ],
+        "links": {
+          "github": "https://github.com/Manavarya09/design-extract"
         },
         "role": "origin"
       }
@@ -5754,6 +5994,50 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/write-a-skill/SKILL.md"
         },
         "role": "variant"
+      }
+    ],
+    "video-intelligence": [
+      {
+        "id": "bradautomates/claude-video",
+        "name": "Claude Video",
+        "contributor": "bradautomates",
+        "origin": true,
+        "genericSkillRef": "video-intelligence",
+        "status": "named",
+        "level": "2★",
+        "description": "Enables AI agents to watch videos by downloading them, extracting frames, and transcribing audio for multimodal analysis.",
+        "title": "The Temporal Eye",
+        "tags": [
+          "video",
+          "multimodal",
+          "vision"
+        ],
+        "links": {
+          "github": "https://github.com/bradautomates/claude-video"
+        },
+        "role": "origin"
+      }
+    ],
+    "browser-control": [
+      {
+        "id": "browser-use/browser-harness",
+        "name": "Browser Harness",
+        "contributor": "browser-use",
+        "origin": true,
+        "genericSkillRef": "browser-control",
+        "status": "named",
+        "level": "2★",
+        "description": "Self-healing harness for direct browser control via CDP, enabling agents to write custom helpers at runtime.",
+        "title": "The Dom Whispering",
+        "tags": [
+          "browser",
+          "cdp",
+          "automation"
+        ],
+        "links": {
+          "github": "https://github.com/browser-use/browser-harness"
+        },
+        "role": "origin"
       }
     ],
     "autonomous-debug": [
@@ -6017,6 +6301,28 @@
         ],
         "links": {
           "github": "https://github.com/garrytan/gstack/blob/main/office-hours/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
+    "token-observability": [
+      {
+        "id": "getagentseal/codeburn",
+        "name": "CodeBurn",
+        "contributor": "getagentseal",
+        "origin": true,
+        "genericSkillRef": "token-observability",
+        "status": "named",
+        "level": "2★",
+        "description": "Cost and token observability tool for tracking AI coding agent spending across models and projects.",
+        "title": "The Ledger of Light",
+        "tags": [
+          "observability",
+          "cost",
+          "tokens"
+        ],
+        "links": {
+          "github": "https://github.com/getagentseal/codeburn"
         },
         "role": "origin"
       }
@@ -6288,6 +6594,27 @@
           "github": "https://github.com/mastepanoski/claude-skills/blob/main/skills/nielsen-heuristics-audit/SKILL.md"
         },
         "role": "origin"
+      },
+      {
+        "id": "pbakaus/impeccable",
+        "name": "Impeccable",
+        "contributor": "pbakaus",
+        "origin": false,
+        "genericSkillRef": "ux-audit",
+        "status": "named",
+        "level": "4★",
+        "description": "Elite design vocabulary and audit tool for polishing AI-generated frontend code.",
+        "title": "The Aesthetic Shield",
+        "tags": [
+          "design",
+          "audit",
+          "frontend",
+          "polishing"
+        ],
+        "links": {
+          "github": "https://github.com/pbakaus/impeccable"
+        },
+        "role": "variant"
       }
     ],
     "refactor-code": [
@@ -6391,6 +6718,29 @@
         "role": "origin"
       }
     ],
+    "design-generation": [
+      {
+        "id": "nexu-io/open-design",
+        "name": "Open Design",
+        "contributor": "nexu-io",
+        "origin": true,
+        "genericSkillRef": "design-generation",
+        "status": "named",
+        "level": "3★",
+        "description": "Local-first design engine for generating high-fidelity UI/UX prototypes and brand assets from structured intent.",
+        "title": "The Artisan's Forge",
+        "tags": [
+          "design",
+          "ui",
+          "ux",
+          "generation"
+        ],
+        "links": {
+          "github": "https://github.com/nexu-io/open-design"
+        },
+        "role": "origin"
+      }
+    ],
     "multi-agent-orchestration-v": [
       {
         "id": "ruvnet/flow-nexus-swarm",
@@ -6412,6 +6762,50 @@
         ],
         "links": {
           "github": "https://github.com/ruvnet/ruflo"
+        },
+        "role": "origin"
+      }
+    ],
+    "knowledge-graph-build": [
+      {
+        "id": "safishamsi/graphify",
+        "name": "Graphify",
+        "contributor": "safishamsi",
+        "origin": true,
+        "genericSkillRef": "knowledge-graph-build",
+        "status": "named",
+        "level": "3★",
+        "description": "Maps codebases and documentation into a queryable knowledge graph using AST analysis and semantic extraction.",
+        "title": "The Structural Muse",
+        "tags": [
+          "knowledge-graph",
+          "rag",
+          "ast"
+        ],
+        "links": {
+          "github": "https://github.com/safishamsi/graphify"
+        },
+        "role": "origin"
+      }
+    ],
+    "career-operations": [
+      {
+        "id": "santifer/career-ops",
+        "name": "Career-Ops",
+        "contributor": "santifer",
+        "origin": true,
+        "genericSkillRef": "career-operations",
+        "status": "named",
+        "level": "3★",
+        "description": "Agentic job search pipeline that automates scanning, fit scoring, and CV tailoring.",
+        "title": "The Professional's Edge",
+        "tags": [
+          "career",
+          "job-search",
+          "automation"
+        ],
+        "links": {
+          "github": "https://github.com/santifer/career-ops"
         },
         "role": "origin"
       }
@@ -6680,12 +7074,21 @@
     "0xdarkmatter": [
       "0xdarkmatter/pytest-patterns"
     ],
+    "Manavarya09": [
+      "Manavarya09/design-extract"
+    ],
     "addy-osmani": [
       "addy-osmani/test-driven-development"
     ],
     "anthropic": [
       "anthropic/pptx",
       "anthropic/skill-creator"
+    ],
+    "bradautomates": [
+      "bradautomates/claude-video"
+    ],
+    "browser-use": [
+      "browser-use/browser-harness"
     ],
     "devin-ai": [
       "devin-ai/autonomous-swe"
@@ -6700,6 +7103,9 @@
       "garrytan/garrytan",
       "garrytan/gstack",
       "garrytan/office-hours"
+    ],
+    "getagentseal": [
+      "getagentseal/codeburn"
     ],
     "glincker": [
       "glincker/readme-generator"
@@ -6747,8 +7153,20 @@
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],
+    "nexu-io": [
+      "nexu-io/open-design"
+    ],
+    "pbakaus": [
+      "pbakaus/impeccable"
+    ],
     "ruvnet": [
       "ruvnet/flow-nexus-swarm"
+    ],
+    "safishamsi": [
+      "safishamsi/graphify"
+    ],
+    "santifer": [
+      "santifer/career-ops"
     ],
     "spring-ai": [
       "spring-ai/readme-generate"

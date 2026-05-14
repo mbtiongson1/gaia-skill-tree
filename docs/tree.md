@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v3.4.0  ·  generated 2026-05-14
+GAIA SKILL TREE  v3.5.0  ·  generated 2026-05-14
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -101,6 +101,7 @@ Unique Skills — graph-isolated singularities at 4★+
 Pure / Undeveloped — basic skills not yet wired into any upgrade path.
 ══════════════════════════════════════════════════════════════════════
 
+  ○ browser-use/browser-harness - Browser Control  [2★ · Named]
   ○ /code-execution  [2★ · Named]
   ○ mattpocock/zoom-out - Code Explain  [2★ · Named]
   ○ /context-compression  [3★ · Evolved]
@@ -117,8 +118,8 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
   ○ /self-consistency  [4★ · Hardened]
   ○ /semantic-cache  [4★ · Hardened]
   ○ addy-osmani/test-driven-development - Test-Driven Development  [0★ · Basic]
+  ○ getagentseal/codeburn - Token Observability  [2★ · Named]
   ○ martin-stepanoski/nielsen-heuristics-audit - UX Audit  [0★ · Basic]
-  ○ /vision-qa  [3★ · Evolved]
 
 ```
 

@@ -11,12 +11,15 @@
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | Research, Knowledge Harvest, Ghostwrite | 6★ | Requires extensive multi-system validation before level advancement. |
 | ◇ Extra Skill: /autonomous-web-research | Extra Skill | Web Scrape, Web Search | 4★ | Requires a multi-step crawling engine and mapping logic to resolve site structures. |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | Web Search, Computer Use | 3★ |  |
+| ◇ Extra Skill: santifer/career-ops | Extra Skill | Autonomous Web Research, Summarize, Document Editing | 3★ |  |
 | ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | 3★ |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | 3★ |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | 3★ | Requires persistent memory store across turns. |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | 3★ |  |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | 2★ → 1★ | Requires environment credentials and a configured pipeline definition. |
+| ◇ Extra Skill: nexu-io/open-design | Extra Skill | Code Generation, Visual Question Answering | 3★ |  |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | Evaluate Output, Plan and Decompose | 3★ |  |
+| ◇ Extra Skill: Manavarya09/design-extract | Extra Skill | Browser Automation, Parse HTML | 3★ | Requires headless browser (Playwright/Puppeteer). |
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | 3★ |  |
 | ◇ Extra Skill: /document-digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | 3★ |  |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | Browser Automation, Automated Testing | 3★ | Requires a live or containerised target environment; browser automation must be available. |
@@ -29,7 +32,7 @@
 | ◇ Extra Skill: /grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | 3★ |  |
 | ◇ Extra Skill: /guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | 3★ | Requires a defined policy schema and an evaluation loop. |
 | ◇ Extra Skill: /humanize-prose | Extra Skill | Document Editing, Audience Model, Format Output | 4★ | Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims. |
-| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | Extract Entities, Logical Inference | 3★ |  |
+| ◇ Extra Skill: safishamsi/graphify | Extra Skill | Extract Entities, Logical Inference | 3★ |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | 4★ |  |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | 4★ | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
 | ◇ Extra Skill: /mcp-debugger-control | Extra Skill | MCP Integration, Refactor Code | 4★ → 3★ | Requires a target debugger integration and a supported MCP client. |
@@ -62,6 +65,7 @@
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | 3★ |  |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | 4★ |  |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | Plan and Decompose, Route Intent | 3★ |  |
+| ◇ Extra Skill: bradautomates/claude-video | Extra Skill | Multimodal Reasoning, Speech to Text | 3★ | Requires FFmpeg and multimodal LLM support. |
 | ◇ Extra Skill: /voice-agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | 3★ → 2★ | Requires real-time audio I/O or audio file access. |
 | ◇ Extra Skill: /web-scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | 3★ | Structured output mode required. |
 | ◇ Extra Skill: /wiki-search | Extra Skill | Retrieve, Embed Text, Summarize | 4★ | Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention. |

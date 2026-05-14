@@ -1561,6 +1561,158 @@
       ],
       "promotedNamedSkillId": "ladislav-sopko/mcp-vs",
       "title": "The Runtime Oracle"
+    },
+    {
+      "id": "bradautomates-claude-video",
+      "name": "bradautomates/claude-video",
+      "contributor": "bradautomates",
+      "description": "Enables AI agents to watch videos by downloading frames and transcribing audio for multimodal context.",
+      "sourceRepo": "bradautomates/claude-video",
+      "url": "https://github.com/bradautomates/claude-video",
+      "mapsToGaia": [
+        "video-intelligence"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "video",
+        "vision",
+        "multimodal"
+      ],
+      "promotedNamedSkillId": "bradautomates/claude-video",
+      "title": "The Temporal Eye"
+    },
+    {
+      "id": "safishamsi-graphify",
+      "name": "safishamsi/graphify",
+      "contributor": "safishamsi",
+      "description": "Knowledge graph construction from codebases and docs to provide agents with architectural memory.",
+      "sourceRepo": "safishamsi/graphify",
+      "url": "https://github.com/safishamsi/graphify",
+      "mapsToGaia": [
+        "knowledge-graph-build"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "knowledge-graph",
+        "rag",
+        "code-analysis"
+      ],
+      "promotedNamedSkillId": "safishamsi/graphify",
+      "title": "The Structural Muse"
+    },
+    {
+      "id": "nexu-io-open-design",
+      "name": "nexu-io/open-design",
+      "contributor": "nexu-io",
+      "description": "Local-first design engine for generating high-fidelity UI prototypes and brand assets from design intent.",
+      "sourceRepo": "nexu-io/open-design",
+      "url": "https://github.com/nexu-io/open-design",
+      "mapsToGaia": [
+        "design-generation"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "design",
+        "ui",
+        "generation"
+      ],
+      "promotedNamedSkillId": "nexu-io/open-design",
+      "title": "The Artisan's Forge"
+    },
+    {
+      "id": "getagentseal-codeburn",
+      "name": "getagentseal/codeburn",
+      "contributor": "getagentseal",
+      "description": "Token and cost observability for AI coding tools, providing session-level spend attribution.",
+      "sourceRepo": "getagentseal/codeburn",
+      "url": "https://github.com/getagentseal/codeburn",
+      "mapsToGaia": [
+        "token-observability"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "observability",
+        "cost",
+        "tokens"
+      ],
+      "promotedNamedSkillId": "getagentseal/codeburn",
+      "title": "The Ledger of Light"
+    },
+    {
+      "id": "pbakaus-impeccable",
+      "name": "pbakaus/impeccable",
+      "contributor": "pbakaus",
+      "description": "Elite design vocabulary and audit tool for polishing AI-generated frontend code to professional standards.",
+      "sourceRepo": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "mapsToGaia": [
+        "ux-audit"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "design",
+        "audit",
+        "polishing"
+      ],
+      "promotedNamedSkillId": "pbakaus/impeccable",
+      "title": "The Aesthetic Shield"
+    },
+    {
+      "id": "manavarya09-design-extract",
+      "name": "Manavarya09/design-extract",
+      "contributor": "Manavarya09",
+      "description": "Discovery tool for extracting design systems and Tailwind configurations from live URLs.",
+      "sourceRepo": "Manavarya09/design-extract",
+      "url": "https://github.com/Manavarya09/design-extract",
+      "mapsToGaia": [
+        "design-system-extraction"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "design-system",
+        "scraping",
+        "tailwind"
+      ],
+      "promotedNamedSkillId": "Manavarya09/design-extract",
+      "title": "The Token Scavenger"
+    },
+    {
+      "id": "santifer-career-ops",
+      "name": "santifer/career-ops",
+      "contributor": "santifer",
+      "description": "Agentic job search pipeline for automated scanning, fit evaluation, and tailored CV generation.",
+      "sourceRepo": "santifer/career-ops",
+      "url": "https://github.com/santifer/career-ops",
+      "mapsToGaia": [
+        "career-operations"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "career",
+        "automation",
+        "job-search"
+      ],
+      "promotedNamedSkillId": "santifer/career-ops",
+      "title": "The Professional's Edge"
+    },
+    {
+      "id": "browser-use-browser-harness",
+      "name": "browser-use/browser-harness",
+      "contributor": "browser-use",
+      "description": "Resilient, self-healing browser harness for direct agent control via CDP and runtime helper generation.",
+      "sourceRepo": "browser-use/browser-harness",
+      "url": "https://github.com/browser-use/browser-harness",
+      "mapsToGaia": [
+        "browser-control"
+      ],
+      "addedAt": "2026-05-14",
+      "tags": [
+        "browser",
+        "cdp",
+        "automation"
+      ],
+      "promotedNamedSkillId": "browser-use/browser-harness",
+      "title": "The Dom Whispering"
     }
   ]
 }

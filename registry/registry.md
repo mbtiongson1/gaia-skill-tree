@@ -13,6 +13,7 @@
 | ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | 6★ | Transcendent ★ | `/autonomous-research-agent` |
 | ◇ Extra Skill: /autonomous-web-research | Extra Skill | 4★ | Hardened | `/autonomous-web-research` |
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | 3★ | Evolved | `/browser-automation` |
+| ◇ Extra Skill: santifer/career-ops | Extra Skill | 3★ | Evolved | `/career-operations` |
 | ○ /chain-of-thought | Basic Skill | 1★ | Awakened | `/chain-of-thought` |
 | ○ /chunk-document | Basic Skill | 1★ | Awakened | `/chunk-document` |
 | ○ /cite-sources | Basic Skill | 1★ | Awakened | `/cite-sources` |
@@ -25,7 +26,9 @@
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | 3★ | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic Skill | 2★ | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | 2★ → 1★ | Named | `/deployment-automation` |
+| ◇ Extra Skill: nexu-io/open-design | Extra Skill | 3★ | Evolved | `/design-generation` |
 | ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | 3★ | Evolved | `/design-review` |
+| ◇ Extra Skill: Manavarya09/design-extract | Extra Skill | 3★ | Evolved | `/design-system-extraction` |
 | ○ /detect-anomaly | Basic Skill | 2★ | Named | `/detect-anomaly` |
 | ○ /diff-content | Basic Skill | 1★ | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | 3★ | Evolved | `/document-analyst` |
@@ -54,7 +57,7 @@
 | ○ /hypothesis-generate | Basic Skill | 2★ | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic Skill | 2★ | Named | `/image-caption` |
 | ○ mattpocock/triage | Basic Skill | 4★ | Hardened | `/issue-triage` |
-| ◇ Extra Skill: /knowledge-graph-build | Extra Skill | 3★ | Evolved | `/knowledge-graph-build` |
+| ◇ Extra Skill: safishamsi/graphify | Extra Skill | 3★ | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | 4★ | Hardened | `/knowledge-harvest` |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | 4★ | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic Skill | 1★ | Awakened | `/logical-inference` |
@@ -115,6 +118,8 @@
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | 3★ | Evolved | `/translation-pipeline` |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | 4★ | Hardened | `/tree-of-thought` |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | 3★ | Evolved | `/vertical-slice-planning` |
+| ◇ Extra Skill: bradautomates/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
+| ○ /vision-qa | Basic Skill | 3★ | Evolved | `/vision-qa` |
 | ◇ Extra Skill: /voice-agent | Extra Skill | 3★ → 2★ | Evolved | `/voice-agent` |
 | ◇ Extra Skill: /web-scrape | Extra Skill | 3★ | Evolved | `/web-scrape` |
 | ○ /web-search | Basic Skill | 1★ | Awakened | `/web-search` |
@@ -136,6 +141,7 @@
 
 | Name | Class | Rank | Tier | Skill Call |
 |---|---|---|---|---|
+| ○ Browser Control | Intrinsic Skill | 2★ | Named | `/browser-control` |
 | ○ Code Execution | Intrinsic Skill | 2★ | Named | `/code-execution` |
 | ○ Code Explain | Intrinsic Skill | 2★ | Named | `/code-explain` |
 | ○ Context Compression | Intrinsic Skill | 3★ | Evolved | `/context-compression` |
@@ -152,8 +158,8 @@
 | ○ Self-Consistency | Intrinsic Skill | 4★ | Hardened | `/self-consistency` |
 | ○ Semantic Cache | Intrinsic Skill | 4★ | Hardened | `/semantic-cache` |
 | ○ Test-Driven Development | Intrinsic Skill | 0★ | Basic | `/test-driven-development` |
+| ○ Token Observability | Intrinsic Skill | 2★ | Named | `/token-observability` |
 | ○ UX Audit | Intrinsic Skill | 0★ | Basic | `/ux-audit` |
-| ○ Visual Question Answering | Intrinsic Skill | 3★ | Evolved | `/vision-qa` |
 
 ## Ultimate Skills Awaiting Name
 

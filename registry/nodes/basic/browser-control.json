@@ -1,0 +1,27 @@
+{
+  "id": "browser-control",
+  "name": "Browser Control",
+  "type": "basic",
+  "level": "2★",
+  "rarity": "uncommon",
+  "description": "Directly controls a web browser via low-level protocols (like CDP) to manipulate DOM, manage cookies, and intercept network traffic.",
+  "prerequisites": [],
+  "derivatives": [
+    "browser-automation"
+  ],
+  "conditions": "",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/browser-use/browser-harness",
+      "evaluator": "gemini-cli",
+      "date": "2026-05-14",
+      "notes": "Browser Harness -- self-healing harness connecting LLMs to browser via CDP."
+    }
+  ],
+  "knownAgents": [],
+  "status": "provisional",
+  "createdAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "0.1.0"
+}
