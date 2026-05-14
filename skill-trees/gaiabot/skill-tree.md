@@ -67,6 +67,17 @@
   │  └─ · ○ /error-interpretation  [1★]
   └─ · ○ mattpocock/improve-codebase-architecture  [2★]
 
+· ◆ Ultimate Skill: /grill-with-docs [Unclaimed ✦]  [5★]
+  ├─ · ◇ Extra Skill: /grill-me  [4★]
+  │  ├─ · ◇ Extra Skill: mattpocock/grill-with-docs  [3★]
+  │  │  ├─ · ○ /evaluate-output  [1★]
+  │  │  └─ ✓ ○ /plan-decompose  [1★]
+  │  └─ · ○ /self-critique  [1★]
+  ├─ · ◇ Extra Skill: /ubiquitous-language  [4★]
+  │  ├─ · ○ /extract-entities  [1★]
+  │  └─ · ○ /requirements-analysis  [2★]
+  └─ · ○ anthropic/pptx  [0★]
+
 · ◆ Ultimate Skill: ruvnet/flow-nexus-swarm  [5★]
   ├─ ✓ ◇ Extra Skill: /plan-and-execute  [4★]
   │  ├─ ✓ ○ /route-intent  [1★]

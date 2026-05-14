@@ -696,6 +696,31 @@
         "role": "variant"
       }
     ],
+    "semantic-cache": [
+      {
+        "id": "huggingface/semantic-cache",
+        "name": "Semantic Cache",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "semantic-cache",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+        "title": "The Neural Memory",
+        "catalogRef": "huggingface-semantic-cache",
+        "tags": [
+          "semantic-cache",
+          "embeddings",
+          "vector-search",
+          "cost-optimization",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/codefuse-ai/ModelCache"
+        },
+        "role": "variant"
+      }
+    ],
     "multimodal-reasoning": [
       {
         "id": "huggingface/transformers-js",
@@ -936,6 +961,81 @@
           "github": "https://github.com/nexu-io/open-design"
         },
         "role": "origin"
+      }
+    ],
+    "feed-monitoring": [
+      {
+        "id": "nousresearch/feed-monitoring",
+        "name": "Feed Monitoring",
+        "contributor": "nousresearch",
+        "origin": true,
+        "genericSkillRef": "feed-monitoring",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+        "title": "The Signal Scout",
+        "catalogRef": "nousresearch-feed-monitoring",
+        "tags": [
+          "rss",
+          "feeds",
+          "monitoring",
+          "signal-discovery",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/NousResearch/hermes-agent"
+        },
+        "role": "origin"
+      }
+    ],
+    "few-shot-learning": [
+      {
+        "id": "openai/few-shot-learning",
+        "name": "Few-Shot Learning",
+        "contributor": "openai",
+        "origin": true,
+        "genericSkillRef": "few-shot-learning",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+        "title": "The In-Context Learner",
+        "catalogRef": "openai-few-shot-learning",
+        "tags": [
+          "few-shot",
+          "icl",
+          "prompt-engineering",
+          "gpt-3",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2005.14165"
+        },
+        "role": "origin"
+      }
+    ],
+    "self-consistency": [
+      {
+        "id": "openai/self-consistency",
+        "name": "Self-Consistency",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "self-consistency",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+        "title": "The Majority Consensus",
+        "catalogRef": "openai-self-consistency",
+        "tags": [
+          "self-consistency",
+          "reasoning",
+          "ensemble",
+          "cot",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2203.11171"
+        },
+        "role": "variant"
       }
     ],
     "multi-agent-orchestration-v": [
@@ -1316,6 +1416,7 @@
       "huggingface/huggingface-llm-trainer",
       "huggingface/huggingface-papers",
       "huggingface/huggingface-vision-trainer",
+      "huggingface/semantic-cache",
       "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
@@ -1352,6 +1453,13 @@
     ],
     "nexu-io": [
       "nexu-io/open-design"
+    ],
+    "nousresearch": [
+      "nousresearch/feed-monitoring"
+    ],
+    "openai": [
+      "openai/few-shot-learning",
+      "openai/self-consistency"
     ],
     "pbakaus": [
       "pbakaus/impeccable"

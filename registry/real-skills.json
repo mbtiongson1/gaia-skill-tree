@@ -1696,6 +1696,82 @@
       "title": "The Professional's Edge"
     },
     {
+      "id": "openai-few-shot-learning",
+      "name": "openai/few-shot-learning",
+      "contributor": "openai",
+      "title": "The In-Context Learner",
+      "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+      "sourceRepo": "openai/gpt-3",
+      "url": "https://arxiv.org/abs/2005.14165",
+      "mapsToGaia": [
+        "few-shot-learning"
+      ],
+      "promotedNamedSkillId": "openai/few-shot-learning",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "few-shot",
+        "icl",
+        "gpt-3"
+      ]
+    },
+    {
+      "id": "openai-self-consistency",
+      "name": "openai/self-consistency",
+      "contributor": "openai",
+      "title": "The Majority Consensus",
+      "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+      "sourceRepo": "openai/research",
+      "url": "https://arxiv.org/abs/2203.11171",
+      "mapsToGaia": [
+        "self-consistency"
+      ],
+      "promotedNamedSkillId": "openai/self-consistency",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "self-consistency",
+        "reasoning",
+        "ensemble"
+      ]
+    },
+    {
+      "id": "huggingface-semantic-cache",
+      "name": "huggingface/semantic-cache",
+      "contributor": "huggingface",
+      "title": "The Neural Memory",
+      "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+      "sourceRepo": "codefuse-ai/ModelCache",
+      "url": "https://github.com/codefuse-ai/ModelCache",
+      "mapsToGaia": [
+        "semantic-cache"
+      ],
+      "promotedNamedSkillId": "huggingface/semantic-cache",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "semantic-cache",
+        "embeddings",
+        "vector-search"
+      ]
+    },
+    {
+      "id": "nousresearch-feed-monitoring",
+      "name": "nousresearch/feed-monitoring",
+      "contributor": "nousresearch",
+      "title": "The Signal Scout",
+      "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+      "sourceRepo": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "mapsToGaia": [
+        "feed-monitoring"
+      ],
+      "promotedNamedSkillId": "nousresearch/feed-monitoring",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "rss",
+        "feeds",
+        "monitoring"
+      ]
+    },
+    {
       "id": "browser-use-browser-harness",
       "name": "browser-use/browser-harness",
       "contributor": "browser-use",
