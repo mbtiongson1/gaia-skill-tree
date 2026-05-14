@@ -18,7 +18,7 @@
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | 3★ |  |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | Workflow Automation, Execute Bash | 2★ → 1★ | Requires environment credentials and a configured pipeline definition. |
 | ◇ Extra Skill: nexu-io/open-design | Extra Skill | Code Generation, Visual Question Answering | 3★ |  |
-| ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | Evaluate Output, Plan and Decompose | 3★ |  |
+| ◇ Extra Skill: garrytan/design-shotgun | Extra Skill | Evaluate Output, Plan and Decompose | 3★ |  |
 | ◇ Extra Skill: Manavarya09/design-extract | Extra Skill | Browser Automation, Parse HTML | 3★ | Requires headless browser (Playwright/Puppeteer). |
 | ◇ Extra Skill: /document-analyst | Extra Skill | Parse JSON, Extract Entities, Summarize, Format Output | 3★ |  |
 | ◇ Extra Skill: /document-digitization | Extra Skill | Parse PDF, Extract Entities, Format Output | 3★ |  |
@@ -29,6 +29,8 @@
 | ◇ Extra Skill: /gaia-meta-audit | Extra Skill | Gaia Audit, Registry Curation, Detect Anomaly | 3★ | Requires the current registry, named-skill index, real-skill catalog, and permission to compare against current source URLs or discovery indexes. |
 | ◇ Extra Skill: /gaia-triage | Extra Skill | Issue Triage, Retrieve | 2★ | Requires access to the mbtiongson1/gaia-skill-tree repository and GitHub CLI (gh) for execution. |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | Research, Write Report, Audience Model | 4★ | Requires research output as input context. |
+| ◇ Extra Skill: mattpocock/grill-me | Extra Skill | Design Review, Self-Critique | 4★ | Enforces a strict questioning loop that prevents the agent from proceeding to implementation until all branches are resolved. |
+| ◆ Ultimate Skill: mattpocock/grill-with-docs | Ultimate Skill | Grill Me, Ubiquitous Language, Document Editing | 5★ | Requires the agent to maintain a live glossary (CONTEXT.md) and generate ADRs for all non-trivial trade-offs discovered during the grill. |
 | ◇ Extra Skill: /grounding | Extra Skill | Retrieve, Cite Sources, Evaluate Output | 3★ |  |
 | ◇ Extra Skill: /guardrails | Extra Skill | Evaluate Output, Classify, Structured Output Generation | 3★ | Requires a defined policy schema and an evaluation loop. |
 | ◇ Extra Skill: /humanize-prose | Extra Skill | Document Editing, Audience Model, Format Output | 4★ | Requires explicit user permission to revise voice, tone, and stylistic markers without changing factual claims. |
@@ -64,6 +66,7 @@
 | ◇ Extra Skill: anthropic/skill-creator | Extra Skill | Code Generation, Tool Use | 4★ |  |
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | Translate, Sentiment Analysis, Audience Model | 3★ |  |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | Chain-of-Thought Reasoning, Plan and Decompose | 4★ |  |
+| ◇ Extra Skill: mattpocock/ubiquitous-language | Extra Skill | Extract Entities, Requirements Analysis | 4★ | Requires active persistence of terms and immediate conflict resolution during sessions. |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | Plan and Decompose, Route Intent | 3★ |  |
 | ◇ Extra Skill: bradautomates/claude-video | Extra Skill | Multimodal Reasoning, Speech to Text | 3★ | Requires FFmpeg and multimodal LLM support. |
 | ◇ Extra Skill: /voice-agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | 3★ → 2★ | Requires real-time audio I/O or audio file access. |

@@ -9,7 +9,10 @@
     "evaluate-output",
     "plan-decompose"
   ],
-  "derivatives": [],
+  "derivatives": [
+    "grill-me",
+    "grill-with-docs"
+  ],
   "conditions": "",
   "evidence": [
     {

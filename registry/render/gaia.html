@@ -125,8 +125,8 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "3.5.0",
-  "generatedAt": "2026-05-14T09:36:11.355691Z",
+  "version": "3.6.0",
+  "generatedAt": "2026-05-14T20:02:49.162488Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -1173,7 +1173,10 @@
         "evaluate-output",
         "plan-decompose"
       ],
-      "derivatives": [],
+      "derivatives": [
+        "grill-me",
+        "grill-with-docs"
+      ],
       "conditions": "",
       "evidence": [
         {
@@ -1560,7 +1563,7 @@
     {
       "id": "feed-monitoring",
       "name": "Feed Monitoring",
-      "type": "basic",
+      "type": "unique",
       "level": "4★",
       "rarity": "common",
       "description": "Monitors RSS, Atom, blog, or other recurring content feeds, discovers updates, tracks read state, and surfaces new signals for downstream agent workflows.",
@@ -1587,7 +1590,7 @@
     {
       "id": "few-shot-learning",
       "name": "Few-Shot Learning",
-      "type": "basic",
+      "type": "unique",
       "level": "4★",
       "rarity": "common",
       "description": "Conditions a language model on a small number of input-output demonstrations within the prompt, enabling task adaptation without weight updates.",
@@ -1989,6 +1992,73 @@
       "version": "0.1.0"
     },
     {
+      "id": "grill-me",
+      "name": "Grill Me",
+      "type": "extra",
+      "level": "4★",
+      "rarity": "rare",
+      "description": "Conducts a relentless, one-question-at-a-time Socratic interview to stress-test designs and force the resolution of hidden assumptions before code is written.",
+      "prerequisites": [
+        "design-review",
+        "self-critique"
+      ],
+      "derivatives": [
+        "grill-with-docs"
+      ],
+      "conditions": "Enforces a strict questioning loop that prevents the agent from proceeding to implementation until all branches are resolved.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-15",
+          "notes": "Original implementation by Matt Pocock; viral engineering pattern for disciplined agent alignment."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-15",
+      "updatedAt": "2026-05-15",
+      "version": "0.1.0"
+    },
+    {
+      "id": "grill-with-docs",
+      "name": "Grill With Docs",
+      "type": "ultimate",
+      "level": "5★",
+      "rarity": "legendary",
+      "description": "The apex of agentic design alignment. Fuses relentless Socratic questioning with deep domain awareness, ensuring every decision is cross-referenced against a persistent ubiquitous language and documented via real-time ADR generation.",
+      "prerequisites": [
+        "grill-me",
+        "ubiquitous-language",
+        "document-editing"
+      ],
+      "derivatives": [],
+      "conditions": "Requires the agent to maintain a live glossary (CONTEXT.md) and generate ADRs for all non-trivial trade-offs discovered during the grill.",
+      "evidence": [
+        {
+          "class": "A",
+          "source": "https://aihero.dev/mattpocock/i-stopped-using-grill-me-for-coding",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-15",
+          "notes": "Technical manifesto establishing the 'Real Engineering' pattern for AI agents; demonstrates significant reduction in software entropy through domain-aware alignment."
+        },
+        {
+          "class": "B",
+          "source": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-15",
+          "notes": "Production implementation of the Grill With Docs pattern."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-15",
+      "updatedAt": "2026-05-15",
+      "version": "0.1.0",
+      "title": "The Domain Sovereign"
+    },
+    {
       "id": "grounding",
       "name": "Grounding",
       "type": "extra",
@@ -2187,7 +2257,7 @@
     {
       "id": "issue-triage",
       "name": "Issue Triage",
-      "type": "basic",
+      "type": "unique",
       "level": "4★",
       "rarity": "uncommon",
       "description": "Classifies incoming issue reports through a structured state machine, assigns triage roles (bug/enhancement, needs-info/ready-for-agent/wontfix), reproduces bugs, requests missing detail, and produces structured resolution briefs for agent or human handoff.",
@@ -3725,7 +3795,7 @@
     {
       "id": "self-consistency",
       "name": "Self-Consistency",
-      "type": "basic",
+      "type": "unique",
       "level": "4★",
       "rarity": "rare",
       "description": "Samples multiple independent reasoning paths for the same problem and selects the answer by majority vote, improving robustness without any additional training.",
@@ -3788,7 +3858,7 @@
     {
       "id": "semantic-cache",
       "name": "Semantic Cache",
-      "type": "basic",
+      "type": "unique",
       "level": "4★",
       "rarity": "rare",
       "description": "Stores LLM responses keyed by embedding similarity so that semantically equivalent queries are served from cache, reducing inference latency and token cost without sacrificing answer quality.",
@@ -4551,6 +4621,36 @@
       "version": "0.2.0"
     },
     {
+      "id": "ubiquitous-language",
+      "name": "Ubiquitous Language",
+      "type": "extra",
+      "level": "4★",
+      "rarity": "rare",
+      "description": "Establishes and maintains a consistent, domain-driven vocabulary between the agent and human, formalising terminology in a shared glossary (typically CONTEXT.md) to reduce ambiguity and token waste.",
+      "prerequisites": [
+        "extract-entities",
+        "requirements-analysis"
+      ],
+      "derivatives": [
+        "grill-with-docs"
+      ],
+      "conditions": "Requires active persistence of terms and immediate conflict resolution during sessions.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-15",
+          "notes": "Original implementation by Matt Pocock; formalizes DDD principles for AI agent contexts."
+        }
+      ],
+      "knownAgents": [],
+      "status": "provisional",
+      "createdAt": "2026-05-15",
+      "updatedAt": "2026-05-15",
+      "version": "0.1.0"
+    },
+    {
       "id": "ux-audit",
       "name": "UX Audit",
       "type": "basic",
@@ -5075,6 +5175,11 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "design-review",
+      "targetSkillId": "grill-me",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "detect-anomaly",
       "targetSkillId": "gaia-meta-audit",
       "edgeType": "prerequisite"
@@ -5087,6 +5192,11 @@
     {
       "sourceSkillId": "document-editing",
       "targetSkillId": "career-operations",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "document-editing",
+      "targetSkillId": "grill-with-docs",
       "edgeType": "prerequisite"
     },
     {
@@ -5221,6 +5331,11 @@
     },
     {
       "sourceSkillId": "extract-entities",
+      "targetSkillId": "ubiquitous-language",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "extract-entities",
       "targetSkillId": "web-scrape",
       "edgeType": "prerequisite"
     },
@@ -5287,6 +5402,11 @@
     {
       "sourceSkillId": "ghostwrite",
       "targetSkillId": "autonomous-research-agent",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "grill-me",
+      "targetSkillId": "grill-with-docs",
       "edgeType": "prerequisite"
     },
     {
@@ -5475,6 +5595,11 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "requirements-analysis",
+      "targetSkillId": "ubiquitous-language",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "research",
       "targetSkillId": "autonomous-data-scientist",
       "edgeType": "prerequisite"
@@ -5567,6 +5692,11 @@
     {
       "sourceSkillId": "security-audit",
       "targetSkillId": "skill-security-analysis",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "self-critique",
+      "targetSkillId": "grill-me",
       "edgeType": "prerequisite"
     },
     {
@@ -5717,6 +5847,11 @@
     {
       "sourceSkillId": "translate",
       "targetSkillId": "translation-pipeline",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "ubiquitous-language",
+      "targetSkillId": "grill-with-docs",
       "edgeType": "prerequisite"
     },
     {
@@ -6135,53 +6270,6 @@
           "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
         },
         "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-me",
-        "name": "Grill Me",
-        "contributor": "mattpocock",
-        "origin": false,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "2★",
-        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
-        "title": "The Relentless Interviewer",
-        "catalogRef": "mattpocock-grill-me",
-        "tags": [
-          "design-review",
-          "decision-tree",
-          "socratic-method",
-          "plan-stress-test",
-          "one-question-at-a-time"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        },
-        "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-with-docs",
-        "name": "Grill With Docs",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "3★",
-        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
-        "title": "The Domain-Aware Interrogator",
-        "catalogRef": "mattpocock-grill-with-docs",
-        "tags": [
-          "design-review",
-          "domain-model",
-          "ubiquitous-language",
-          "adr",
-          "context-md",
-          "socratic-method"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        },
-        "role": "origin"
       }
     ],
     "vertical-slice-planning": [
@@ -6499,6 +6587,31 @@
         "role": "variant"
       }
     ],
+    "semantic-cache": [
+      {
+        "id": "huggingface/semantic-cache",
+        "name": "Semantic Cache",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "semantic-cache",
+        "status": "named",
+        "level": "4★",
+        "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+        "title": "The Neural Memory",
+        "catalogRef": "huggingface-semantic-cache",
+        "tags": [
+          "semantic-cache",
+          "embeddings",
+          "vector-search",
+          "cost-optimization",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/codefuse-ai/ModelCache"
+        },
+        "role": "variant"
+      }
+    ],
     "multimodal-reasoning": [
       {
         "id": "huggingface/transformers-js",
@@ -6617,6 +6730,59 @@
         "role": "variant"
       }
     ],
+    "grill-me": [
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "grill-me",
+        "status": "named",
+        "level": "4★",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        },
+        "role": "variant"
+      }
+    ],
+    "grill-with-docs": [
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "grill-with-docs",
+        "status": "named",
+        "level": "5★",
+        "description": "The ultimate evolution of the grill pattern. Fuses relentless Socratic questioning with deep domain awareness, ensuring every decision is cross-referenced against a persistent ubiquitous language and documented via real-time ADR generation.",
+        "title": "The Domain Sovereign",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method",
+          "ultimate",
+          "fusion"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
     "refactor-code": [
       {
         "id": "mattpocock/improve-codebase-architecture",
@@ -6676,8 +6842,8 @@
         "origin": true,
         "genericSkillRef": "issue-triage",
         "status": "named",
-        "level": "3★",
-        "description": "Moves GitHub issues through a two-category (bug/enhancement) × five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
+        "level": "4★",
+        "description": "The definitive state-machine triage skill. Moves GitHub issues through a two-category (bug/enhancement) × five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
         "title": "The State-Machine Triager",
         "catalogRef": "mattpocock-triage",
         "tags": [
@@ -6685,12 +6851,39 @@
           "state-machine",
           "bug-reproduction",
           "agent-brief",
-          "github-issues"
+          "github-issues",
+          "unique"
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
         },
         "role": "origin"
+      }
+    ],
+    "ubiquitous-language": [
+      {
+        "id": "mattpocock/ubiquitous-language",
+        "name": "Ubiquitous Language",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "ubiquitous-language",
+        "status": "named",
+        "level": "4★",
+        "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+        "title": "The Domain Linguist",
+        "catalogRef": "mattpocock-ubiquitous-language",
+        "tags": [
+          "domain-driven-design",
+          "ddd",
+          "ubiquitous-language",
+          "glossary",
+          "terminology",
+          "alignment"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md"
+        },
+        "role": "variant"
       }
     ],
     "code-explain": [
@@ -6739,6 +6932,81 @@
           "github": "https://github.com/nexu-io/open-design"
         },
         "role": "origin"
+      }
+    ],
+    "feed-monitoring": [
+      {
+        "id": "nousresearch/feed-monitoring",
+        "name": "Feed Monitoring",
+        "contributor": "nousresearch",
+        "origin": true,
+        "genericSkillRef": "feed-monitoring",
+        "status": "named",
+        "level": "4★",
+        "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+        "title": "The Signal Scout",
+        "catalogRef": "nousresearch-feed-monitoring",
+        "tags": [
+          "rss",
+          "feeds",
+          "monitoring",
+          "signal-discovery",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/NousResearch/hermes-agent"
+        },
+        "role": "origin"
+      }
+    ],
+    "few-shot-learning": [
+      {
+        "id": "openai/few-shot-learning",
+        "name": "Few-Shot Learning",
+        "contributor": "openai",
+        "origin": true,
+        "genericSkillRef": "few-shot-learning",
+        "status": "named",
+        "level": "4★",
+        "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+        "title": "The In-Context Learner",
+        "catalogRef": "openai-few-shot-learning",
+        "tags": [
+          "few-shot",
+          "icl",
+          "prompt-engineering",
+          "gpt-3",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2005.14165"
+        },
+        "role": "origin"
+      }
+    ],
+    "self-consistency": [
+      {
+        "id": "openai/self-consistency",
+        "name": "Self-Consistency",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "self-consistency",
+        "status": "named",
+        "level": "4★",
+        "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+        "title": "The Majority Consensus",
+        "catalogRef": "openai-self-consistency",
+        "tags": [
+          "self-consistency",
+          "reasoning",
+          "ensemble",
+          "cot",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2203.11171"
+        },
+        "role": "variant"
       }
     ],
     "multi-agent-orchestration-v": [
@@ -7119,6 +7387,7 @@
       "huggingface/huggingface-llm-trainer",
       "huggingface/huggingface-papers",
       "huggingface/huggingface-vision-trainer",
+      "huggingface/semantic-cache",
       "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
@@ -7150,11 +7419,19 @@
       "mattpocock/to-issues",
       "mattpocock/to-prd",
       "mattpocock/triage",
+      "mattpocock/ubiquitous-language",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],
     "nexu-io": [
       "nexu-io/open-design"
+    ],
+    "nousresearch": [
+      "nousresearch/feed-monitoring"
+    ],
+    "openai": [
+      "openai/few-shot-learning",
+      "openai/self-consistency"
     ],
     "pbakaus": [
       "pbakaus/impeccable"

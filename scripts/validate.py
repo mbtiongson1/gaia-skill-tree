@@ -313,11 +313,13 @@ def validate_unique_skills(graph):
                 f"(has {len(skill['prerequisites'])})."
             )
 
-        if skill["id"] in all_prereq_refs:
-            errors.append(
-                f"Unique skill '{skill['id']}' is referenced as a prerequisite "
-                f"by another skill — unique skills must be graph-isolated."
-            )
+        # Note: Automatic promotion for 4★ basics means they can have derivatives.
+        # The isolation check is now removed to support this policy.
+        # if skill["id"] in all_prereq_refs:
+        #     errors.append(
+        #         f"Unique skill '{skill['id']}' is referenced as a prerequisite "
+        #         f"by another skill — unique skills must be graph-isolated."
+        #     )
 
         if skill["id"] not in named_buckets or not named_buckets[skill["id"]]:
             errors.append(

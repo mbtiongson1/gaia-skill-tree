@@ -332,53 +332,6 @@
           "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
         },
         "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-me",
-        "name": "Grill Me",
-        "contributor": "mattpocock",
-        "origin": false,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "2\u2605",
-        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
-        "title": "The Relentless Interviewer",
-        "catalogRef": "mattpocock-grill-me",
-        "tags": [
-          "design-review",
-          "decision-tree",
-          "socratic-method",
-          "plan-stress-test",
-          "one-question-at-a-time"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        },
-        "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-with-docs",
-        "name": "Grill With Docs",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "3\u2605",
-        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
-        "title": "The Domain-Aware Interrogator",
-        "catalogRef": "mattpocock-grill-with-docs",
-        "tags": [
-          "design-review",
-          "domain-model",
-          "ubiquitous-language",
-          "adr",
-          "context-md",
-          "socratic-method"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        },
-        "role": "origin"
       }
     ],
     "vertical-slice-planning": [
@@ -696,6 +649,31 @@
         "role": "variant"
       }
     ],
+    "semantic-cache": [
+      {
+        "id": "huggingface/semantic-cache",
+        "name": "Semantic Cache",
+        "contributor": "huggingface",
+        "origin": false,
+        "genericSkillRef": "semantic-cache",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+        "title": "The Neural Memory",
+        "catalogRef": "huggingface-semantic-cache",
+        "tags": [
+          "semantic-cache",
+          "embeddings",
+          "vector-search",
+          "cost-optimization",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/codefuse-ai/ModelCache"
+        },
+        "role": "variant"
+      }
+    ],
     "multimodal-reasoning": [
       {
         "id": "huggingface/transformers-js",
@@ -814,6 +792,59 @@
         "role": "variant"
       }
     ],
+    "grill-me": [
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "grill-me",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        },
+        "role": "variant"
+      }
+    ],
+    "grill-with-docs": [
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "grill-with-docs",
+        "status": "named",
+        "level": "5\u2605",
+        "description": "The ultimate evolution of the grill pattern. Fuses relentless Socratic questioning with deep domain awareness, ensuring every decision is cross-referenced against a persistent ubiquitous language and documented via real-time ADR generation.",
+        "title": "The Domain Sovereign",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method",
+          "ultimate",
+          "fusion"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
     "refactor-code": [
       {
         "id": "mattpocock/improve-codebase-architecture",
@@ -873,8 +904,8 @@
         "origin": true,
         "genericSkillRef": "issue-triage",
         "status": "named",
-        "level": "3\u2605",
-        "description": "Moves GitHub issues through a two-category (bug/enhancement) \u00d7 five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
+        "level": "4\u2605",
+        "description": "The definitive state-machine triage skill. Moves GitHub issues through a two-category (bug/enhancement) \u00d7 five-state (needs-triage/needs-info/ready-for-agent/ready-for-human/wontfix) state machine. Reproduces bugs from issue steps, runs a domain-aware grilling session when needed, writes structured agent briefs, and appends AI-generated triage notes with the required disclaimer.",
         "title": "The State-Machine Triager",
         "catalogRef": "mattpocock-triage",
         "tags": [
@@ -882,12 +913,39 @@
           "state-machine",
           "bug-reproduction",
           "agent-brief",
-          "github-issues"
+          "github-issues",
+          "unique"
         ],
         "links": {
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
         },
         "role": "origin"
+      }
+    ],
+    "ubiquitous-language": [
+      {
+        "id": "mattpocock/ubiquitous-language",
+        "name": "Ubiquitous Language",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "ubiquitous-language",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+        "title": "The Domain Linguist",
+        "catalogRef": "mattpocock-ubiquitous-language",
+        "tags": [
+          "domain-driven-design",
+          "ddd",
+          "ubiquitous-language",
+          "glossary",
+          "terminology",
+          "alignment"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md"
+        },
+        "role": "variant"
       }
     ],
     "code-explain": [
@@ -936,6 +994,81 @@
           "github": "https://github.com/nexu-io/open-design"
         },
         "role": "origin"
+      }
+    ],
+    "feed-monitoring": [
+      {
+        "id": "nousresearch/feed-monitoring",
+        "name": "Feed Monitoring",
+        "contributor": "nousresearch",
+        "origin": true,
+        "genericSkillRef": "feed-monitoring",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+        "title": "The Signal Scout",
+        "catalogRef": "nousresearch-feed-monitoring",
+        "tags": [
+          "rss",
+          "feeds",
+          "monitoring",
+          "signal-discovery",
+          "unique"
+        ],
+        "links": {
+          "github": "https://github.com/NousResearch/hermes-agent"
+        },
+        "role": "origin"
+      }
+    ],
+    "few-shot-learning": [
+      {
+        "id": "openai/few-shot-learning",
+        "name": "Few-Shot Learning",
+        "contributor": "openai",
+        "origin": true,
+        "genericSkillRef": "few-shot-learning",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+        "title": "The In-Context Learner",
+        "catalogRef": "openai-few-shot-learning",
+        "tags": [
+          "few-shot",
+          "icl",
+          "prompt-engineering",
+          "gpt-3",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2005.14165"
+        },
+        "role": "origin"
+      }
+    ],
+    "self-consistency": [
+      {
+        "id": "openai/self-consistency",
+        "name": "Self-Consistency",
+        "contributor": "openai",
+        "origin": false,
+        "genericSkillRef": "self-consistency",
+        "status": "named",
+        "level": "4\u2605",
+        "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+        "title": "The Majority Consensus",
+        "catalogRef": "openai-self-consistency",
+        "tags": [
+          "self-consistency",
+          "reasoning",
+          "ensemble",
+          "cot",
+          "unique"
+        ],
+        "links": {
+          "arxiv": "https://arxiv.org/abs/2203.11171"
+        },
+        "role": "variant"
       }
     ],
     "multi-agent-orchestration-v": [
@@ -1316,6 +1449,7 @@
       "huggingface/huggingface-llm-trainer",
       "huggingface/huggingface-papers",
       "huggingface/huggingface-vision-trainer",
+      "huggingface/semantic-cache",
       "huggingface/transformers-js"
     ],
     "intelligentcode-ai": [
@@ -1347,11 +1481,19 @@
       "mattpocock/to-issues",
       "mattpocock/to-prd",
       "mattpocock/triage",
+      "mattpocock/ubiquitous-language",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],
     "nexu-io": [
       "nexu-io/open-design"
+    ],
+    "nousresearch": [
+      "nousresearch/feed-monitoring"
+    ],
+    "openai": [
+      "openai/few-shot-learning",
+      "openai/self-consistency"
     ],
     "pbakaus": [
       "pbakaus/impeccable"

@@ -86,6 +86,10 @@ cd packages/cli-npm && npm install
 - `4★+` (Hardened/Transcendent): ≥ 1 Tier B/A evidence.
 - `6★` (Transcendent ★): Tier A + peer review.
 
+### Unique Promotion Policy
+- **Automatic Promotion:** Any Basic skill that reaches level `4★` or above is automatically promoted to `type: "unique"`.
+- **Precedence:** This automatic promotion for high-level basics takes precedence over the requirement for graph isolation; unique skills promoted from basics may still have derivatives.
+
 ### Coding Style
 - **Python:** Follow idiomatic patterns; use `jsonschema` for data validation.
 - **Node.js:** TypeScript for the MCP server.

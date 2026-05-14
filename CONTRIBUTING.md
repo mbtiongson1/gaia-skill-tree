@@ -163,36 +163,19 @@ Reviewer workflow:
 
 ## 9) Unique Skill Promotion
 
-A **Unique Skill** (◉) is a graph-isolated intrinsic skill that has reached elite mastery through individual depth rather than fusion/combination. Unique skills occupy their own tier between Extra and Ultimate in prestige.
+A **Unique Skill** (◉) is a high-level intrinsic skill that has reached elite mastery (4★+). This includes basics that have achieved Hardened status or above, or graph-isolated singularities.
 
 ### Eligibility Criteria
 
-A basic skill may be promoted to `type: "unique"` when ALL of the following are true:
-
-1. **Level ≥ 4★** (Hardened or above)
-2. **Zero prerequisites** (`prerequisites: []`)
-3. **Graph-isolated** — not referenced as a prerequisite by any other skill
-4. **Has at least one named implementation** in `registry/named/`
-
-### Promotion Workflow
-
-```bash
-# 1. Scan detects eligible skills automatically
-gaia scan
-
-# 2. Review unique-eligible candidates in the output
-cat generated-output/promotion-candidates.json | grep '"promotionType": "unique"'
-
-# 3. Promote via CLI (updates type field in gaia.json)
-gaia promote <skill-id> --unique
-```
+- **Automatic Promotion:** Any Basic skill that reaches level **4★** or above is automatically promoted to `type: "unique"`.
+- **Precedence:** This automatic promotion for high-level basics takes precedence over the requirement for graph isolation; unique skills promoted from basics may still have derivatives.
 
 ### Validation Rules
 
 The schema and validator enforce:
 - Unique skills MUST be level 4★, 5★, or 6★
 - Unique skills MUST have `prerequisites: []`
-- Unique skills MUST NOT appear in any other skill's `prerequisites` array
+- Standard unique skills (non-basics) SHOULD NOT appear in any other skill's `prerequisites` array, but promoted basics may have derivatives.
 - Unique skills CANNOT become extra or ultimate (no fusion path)
 - Further level-up within unique (4★ → 5★ → 6★) follows standard evidence requirements
 

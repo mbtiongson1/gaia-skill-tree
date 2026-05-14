@@ -1,4 +1,4 @@
-# Extra Skill: mattpocock/grill-with-docs  [3★ · Evolved]
+# Extra Skill: garrytan/design-shotgun  [3★ · Evolved]
 **ID:** design-review  
 **Type:** Extra Skill  
 **Level:** 3★  
@@ -15,7 +15,8 @@ Stress-tests a plan or design through relentless targeted questioning, walking t
 - [Plan and Decompose](../basic/plan-decompose.md)
 
 ## Unlocks
-_None._
+- [Grill Me](../extra/grill-me.md)
+- [Grill With Docs](../ultimate/grill-with-docs.md)
 
 ## Fusion Condition
 _None specified._

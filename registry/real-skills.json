@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-14",
+  "generatedAt": "2026-05-15",
   "sources": [
     {
       "repo": "karpathy/autoresearch",
@@ -541,11 +541,87 @@
       ]
     },
     {
+      "id": "openai-few-shot-learning",
+      "name": "openai/few-shot-learning",
+      "contributor": "openai",
+      "title": "The In-Context Learner",
+      "description": "Conditions the model on a small set of examples within the prompt to adapt to new tasks without weight updates.",
+      "sourceRepo": "openai/gpt-3",
+      "url": "https://arxiv.org/abs/2005.14165",
+      "mapsToGaia": [
+        "few-shot-learning"
+      ],
+      "promotedNamedSkillId": "openai/few-shot-learning",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "few-shot",
+        "icl",
+        "gpt-3"
+      ]
+    },
+    {
+      "id": "openai-self-consistency",
+      "name": "openai/self-consistency",
+      "contributor": "openai",
+      "title": "The Majority Consensus",
+      "description": "Samples multiple reasoning paths and selects the most consistent answer by majority vote.",
+      "sourceRepo": "openai/research",
+      "url": "https://arxiv.org/abs/2203.11171",
+      "mapsToGaia": [
+        "self-consistency"
+      ],
+      "promotedNamedSkillId": "openai/self-consistency",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "self-consistency",
+        "reasoning",
+        "ensemble"
+      ]
+    },
+    {
+      "id": "huggingface-semantic-cache",
+      "name": "huggingface/semantic-cache",
+      "contributor": "huggingface",
+      "title": "The Neural Memory",
+      "description": "High-performance semantic caching for LLM responses using embedding similarity.",
+      "sourceRepo": "codefuse-ai/ModelCache",
+      "url": "https://github.com/codefuse-ai/ModelCache",
+      "mapsToGaia": [
+        "semantic-cache"
+      ],
+      "promotedNamedSkillId": "huggingface/semantic-cache",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "semantic-cache",
+        "embeddings",
+        "vector-search"
+      ]
+    },
+    {
+      "id": "nousresearch-feed-monitoring",
+      "name": "nousresearch/feed-monitoring",
+      "contributor": "nousresearch",
+      "title": "The Signal Scout",
+      "description": "Continuous monitoring of content feeds with intelligent discovery and state tracking.",
+      "sourceRepo": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "mapsToGaia": [
+        "feed-monitoring"
+      ],
+      "promotedNamedSkillId": "nousresearch/feed-monitoring",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "rss",
+        "feeds",
+        "monitoring"
+      ]
+    },
+    {
       "id": "mattpocock-triage",
       "name": "mattpocock/triage",
       "contributor": "mattpocock",
       "title": "The State-Machine Triager",
-      "description": "Moves GitHub issues through a two-category x five-state machine with bug reproduction, agent-brief writing, and structured triage notes bearing an AI-generation disclaimer.",
+      "description": "The definitive state-machine triage skill. Moves GitHub issues through a two-category x five-state machine with bug reproduction, agent-brief writing, and structured triage notes bearing an AI-generation disclaimer.",
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md",
       "mapsToGaia": [
@@ -558,7 +634,8 @@
         "state-machine",
         "bug-reproduction",
         "agent-brief",
-        "github-issues"
+        "github-issues",
+        "unique"
       ]
     },
     {
@@ -608,12 +685,12 @@
       "id": "mattpocock-grill-with-docs",
       "name": "mattpocock/grill-with-docs",
       "contributor": "mattpocock",
-      "title": "The Domain-Aware Interrogator",
+      "title": "The Domain Sovereign",
       "description": "Stress-tests a plan against the project's domain model, challenging language against CONTEXT.md, cross-referencing code, and persisting resolved decisions as inline glossary updates and ADRs.",
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md",
       "mapsToGaia": [
-        "design-review"
+        "grill-with-docs"
       ],
       "promotedNamedSkillId": "mattpocock/grill-with-docs",
       "addedAt": "2026-04-30",
@@ -623,7 +700,8 @@
         "ubiquitous-language",
         "adr",
         "context-md",
-        "socratic-method"
+        "socratic-method",
+        "ultimate"
       ]
     },
     {
@@ -635,7 +713,7 @@
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
       "mapsToGaia": [
-        "design-review"
+        "grill-me"
       ],
       "promotedNamedSkillId": "mattpocock/grill-me",
       "addedAt": "2026-04-30",
@@ -645,6 +723,26 @@
         "socratic-method",
         "plan-stress-test",
         "one-question-at-a-time"
+      ]
+    },
+    {
+      "id": "mattpocock-ubiquitous-language",
+      "name": "mattpocock/ubiquitous-language",
+      "contributor": "mattpocock",
+      "title": "The Domain Linguist",
+      "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md",
+      "mapsToGaia": [
+        "ubiquitous-language"
+      ],
+      "promotedNamedSkillId": "mattpocock/ubiquitous-language",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "domain-driven-design",
+        "ddd",
+        "ubiquitous-language",
+        "glossary"
       ]
     },
     {

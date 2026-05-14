@@ -11,7 +11,7 @@
 Triage and audit GitHub issues for the Gaia Skill Tree project. Helps identify stale issues, gather evidence from the codebase, and manage issue lifecycle via GitHub CLI.
 
 ## Prerequisites
-- [Issue Triage](../basic/issue-triage.md)
+- [Issue Triage](../unique/issue-triage.md)
 - [Retrieve](../basic/retrieve.md)
 
 ## Unlocks
