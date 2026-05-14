@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/skill.schema.json",
   "version": "3.4.0",
-  "generatedAt": "2026-05-13T21:50:25.987654Z",
+  "generatedAt": "2026-05-14T07:35:58.734343Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -131,6 +131,41 @@
       "status": "provisional",
       "createdAt": "2026-04-30",
       "updatedAt": "2026-05-10",
+      "version": "0.1.0"
+    },
+    {
+      "id": "agentic-workflow-design",
+      "name": "Agentic Workflow Design",
+      "type": "extra",
+      "level": "5\u2605",
+      "rarity": "rare",
+      "description": "Autonomously designs, authors, and iterates on complex multi-step workflows by translating high-level goals into executable DAGs or playbooks, managing task dependencies and distributed execution environments.",
+      "prerequisites": [
+        "workflow-automation",
+        "plan-decompose"
+      ],
+      "derivatives": [
+        "full-stack-developer"
+      ],
+      "conditions": "Requires a workflow orchestration target (e.g. Airflow, Temporal) and access to its authoring API.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/apache/airflow/blob/main/AGENTS.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-14",
+          "notes": "Airflow AGENTS.md defines agentic workflow design patterns using the TaskFlow API for dynamic DAG generation."
+        }
+      ],
+      "knownAgents": [
+        "apache/airflow"
+      ],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
       "version": "0.1.0"
     },
     {
@@ -364,6 +399,38 @@
       "updatedAt": "2026-04-30",
       "version": "0.1.0",
       "title": "Wisdom King"
+    },
+    {
+      "id": "autonomous-web-research",
+      "name": "Autonomous Web Research",
+      "type": "extra",
+      "level": "4\u2605",
+      "rarity": "rare",
+      "description": "Independently surveys, maps, and extracts structured information from the web by autonomously deciding which domains to crawl and synthesizing data into comprehensive research reports.",
+      "prerequisites": [
+        "web-scrape",
+        "web-search"
+      ],
+      "derivatives": [
+        "autonomous-research-agent"
+      ],
+      "conditions": "Requires a multi-step crawling engine and mapping logic to resolve site structures.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/firecrawl/firecrawl-mcp-server",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-14",
+          "notes": "Firecrawl's Map and Crawl logic combined with the firecrawl_agent tool enables autonomous multi-source web research."
+        }
+      ],
+      "knownAgents": [
+        "firecrawl/mcp"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
     },
     {
       "id": "browser-automation",
@@ -2075,6 +2142,41 @@
       "version": "0.2.0"
     },
     {
+      "id": "mcp-debugger-control",
+      "name": "MCP Debugger Control",
+      "type": "extra",
+      "level": "4\u2605",
+      "rarity": "rare",
+      "description": "Exposes low-level debugger capabilities (breakpoints, stepping, stack inspection, variable evaluation) to AI agents via the Model Context Protocol, enabling real-time runtime diagnosis and autonomous bug fixing.",
+      "prerequisites": [
+        "mcp-integration",
+        "refactor-code"
+      ],
+      "derivatives": [
+        "autonomous-debug"
+      ],
+      "conditions": "Requires a target debugger integration and a supported MCP client.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/LadislavSopko/mcp-server-for-vs",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-14",
+          "notes": "Exposes the Visual Studio Debugger via MCP tool calls for breakpoints and execution control."
+        }
+      ],
+      "knownAgents": [
+        "ladislav-sopko/mcp-vs"
+      ],
+      "demerits": [
+        "niche-integration"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-integration",
       "name": "MCP Integration",
       "type": "basic",
@@ -3735,6 +3837,42 @@
       "version": "0.1.0"
     },
     {
+      "id": "stealth-browser-interaction",
+      "name": "Stealth Browser Interaction",
+      "type": "extra",
+      "level": "4\u2605",
+      "rarity": "uncommon",
+      "description": "Operates web browsers through an advanced stealth layer that handles bot-detection, fingerprinting, session rotation, and human-like interaction patterns to maintain resilient access to protected domains.",
+      "prerequisites": [
+        "browser-automation",
+        "computer-use"
+      ],
+      "derivatives": [
+        "autonomous-web-research",
+        "e2e-testing"
+      ],
+      "conditions": "Requires a stealth-enabled browser driver and session management infrastructure.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/apify/crawlee-python/blob/main/AGENTS.md",
+          "evaluator": "mbtiongson1",
+          "date": "2026-05-14",
+          "notes": "Crawlee's StagehandCrawler and stealth engine provide autonomous, resilient browser interaction for agents."
+        }
+      ],
+      "knownAgents": [
+        "apify/crawlee"
+      ],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-14",
+      "updatedAt": "2026-05-14",
+      "version": "0.1.0"
+    },
+    {
       "id": "structured-output",
       "name": "Structured Output Generation",
       "type": "basic",
@@ -4494,6 +4632,11 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "browser-automation",
+      "targetSkillId": "stealth-browser-interaction",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "chain-of-thought",
       "targetSkillId": "multi-agent-debate",
       "edgeType": "prerequisite"
@@ -4586,6 +4729,11 @@
     {
       "sourceSkillId": "computer-use",
       "targetSkillId": "browser-automation",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "computer-use",
+      "targetSkillId": "stealth-browser-interaction",
       "edgeType": "prerequisite"
     },
     {
@@ -4865,6 +5013,11 @@
     },
     {
       "sourceSkillId": "mcp-integration",
+      "targetSkillId": "mcp-debugger-control",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "mcp-integration",
       "targetSkillId": "mcp-server-creation",
       "edgeType": "prerequisite"
     },
@@ -4911,6 +5064,11 @@
     {
       "sourceSkillId": "plan-and-execute",
       "targetSkillId": "recursive-self-improvement",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "plan-decompose",
+      "targetSkillId": "agentic-workflow-design",
       "edgeType": "prerequisite"
     },
     {
@@ -4976,6 +5134,11 @@
     {
       "sourceSkillId": "refactor-code",
       "targetSkillId": "full-stack-developer",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "refactor-code",
+      "targetSkillId": "mcp-debugger-control",
       "edgeType": "prerequisite"
     },
     {
@@ -5225,7 +5388,17 @@
     },
     {
       "sourceSkillId": "web-scrape",
+      "targetSkillId": "autonomous-web-research",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "web-scrape",
       "targetSkillId": "knowledge-harvest",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "web-search",
+      "targetSkillId": "autonomous-web-research",
       "edgeType": "prerequisite"
     },
     {
@@ -5246,6 +5419,11 @@
     {
       "sourceSkillId": "web-search",
       "targetSkillId": "web-scrape",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "workflow-automation",
+      "targetSkillId": "agentic-workflow-design",
       "edgeType": "prerequisite"
     },
     {

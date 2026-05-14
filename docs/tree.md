@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v3.4.0  ·  generated 2026-05-13
+GAIA SKILL TREE  v3.4.0  ·  generated 2026-05-14
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -122,4 +122,4 @@ Pure / Undeveloped — basic skills not yet wired into any upgrade path.
 
 ```
 
-*Generated from gaia.json on 2026-05-13. Do not edit directly.*
+*Generated from gaia.json on 2026-05-14. Do not edit directly.*

@@ -1,6 +1,6 @@
 {
-  "version": "3.2.3",
-  "generatedAt": "2026-05-13T21:50:25.987654Z",
+  "version": "3.7.0",
+  "generatedAt": "2026-05-14T07:35:58.734343Z",
   "width": 1280,
   "height": 880,
   "nodes": [
@@ -1318,8 +1318,30 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Holistically evaluates an AI agent's performance on multi-step tasks by running standardised benchmarks, scoring full interaction trajectories, and producing reproducible capability reports.",
-      "x": 735.067,
-      "y": 299.066,
+      "x": 729.117,
+      "y": 295.231,
+      "radius": 10
+    },
+    {
+      "id": "agentic-workflow-design",
+      "label": "Agentic Workflow Design",
+      "type": "extra",
+      "level": "5\u2605",
+      "effectiveLevel": "4\u2605",
+      "levelMeta": {
+        "baseLevel": "5\u2605",
+        "effectiveLevel": "4\u2605",
+        "demerits": [
+          "heavyweight-dependency"
+        ]
+      },
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "rarity": "rare",
+      "description": "Autonomously designs, authors, and iterates on complex multi-step workflows by translating high-level goals into executable DAGs or playbooks, managing task dependencies and distributed execution environments.",
+      "x": 620.027,
+      "y": 271.177,
       "radius": 10
     },
     {
@@ -1336,8 +1358,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Generates technical architecture, infrastructure, or cloud diagrams as structured visual artifacts from natural-language system descriptions.",
-      "x": 537.179,
-      "y": 575.38,
+      "x": 576.39,
+      "y": 597.651,
       "radius": 10
     },
     {
@@ -1354,8 +1376,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Generates test suites, executes them in a sandbox, interprets failures, and iterates until the target pass rate is reached.",
-      "x": 753.422,
-      "y": 313.369,
+      "x": 746.785,
+      "y": 307.724,
       "radius": 10
     },
     {
@@ -1372,8 +1394,26 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Independently identifies, diagnoses, and fixes software bugs through code generation and execution.",
-      "x": 524.049,
-      "y": 564.32,
+      "x": 561.883,
+      "y": 590.989,
+      "radius": 10
+    },
+    {
+      "id": "autonomous-web-research",
+      "label": "Autonomous Web Research",
+      "type": "extra",
+      "level": "4\u2605",
+      "effectiveLevel": "4\u2605",
+      "levelMeta": {
+        "baseLevel": "4\u2605",
+        "effectiveLevel": "4\u2605",
+        "demerits": []
+      },
+      "demerits": [],
+      "rarity": "rare",
+      "description": "Independently surveys, maps, and extracts structured information from the web by autonomously deciding which domains to crawl and synthesizing data into comprehensive research reports.",
+      "x": 540.488,
+      "y": 577.831,
       "radius": 10
     },
     {
@@ -1390,8 +1430,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Navigates web pages, fills forms, clicks elements, and extracts information by combining web search with screenshot-based GUI control to complete multi-step web tasks.",
-      "x": 764.195,
-      "y": 323.915,
+      "x": 757.32,
+      "y": 316.972,
       "radius": 10
     },
     {
@@ -1408,8 +1448,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Performs automated code review by generating, diffing, and evaluating code changes for correctness, style, security, and maintainability.",
-      "x": 778.17,
-      "y": 340.96,
+      "x": 771.274,
+      "y": 331.985,
       "radius": 10
     },
     {
@@ -1426,8 +1466,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Detects policy-violating content by combining intent classification, sentiment scoring, and entity extraction across text, images, and mixed media.",
-      "x": 787.268,
-      "y": 355.075,
+      "x": 780.631,
+      "y": 344.487,
       "radius": 10
     },
     {
@@ -1444,8 +1484,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Manages coherent multi-turn dialogue by routing intent, maintaining memory across turns, and generating contextually appropriate responses.",
-      "x": 797.727,
-      "y": 376.578,
+      "x": 791.895,
+      "y": 363.659,
       "radius": 10
     },
     {
@@ -1462,8 +1502,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Conducts end-to-end quantitative analysis: queries data via SQL, computes statistics, generates visualizations, and summarizes findings.",
-      "x": 804.198,
-      "y": 395.965,
+      "x": 799.467,
+      "y": 381.091,
       "radius": 10
     },
     {
@@ -1484,7 +1524,7 @@
       ],
       "rarity": "uncommon",
       "description": "Automate CI/CD pipeline execution and deployment to target environments \u2014 build, test, artifact publishing, environment promotion, and rollback strategies.",
-      "x": 640.853,
+      "x": 640.793,
       "y": 270.002,
       "radius": 10
     },
@@ -1502,8 +1542,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Stress-tests a plan or design through relentless targeted questioning, walking the decision tree branch-by-branch, resolving concept dependencies, surfacing contradictions against the existing codebase, and crystallising ubiquitous language \u2014 optionally persisting resolved decisions to CONTEXT.md and ADRs.",
-      "x": 808.137,
-      "y": 414.904,
+      "x": 804.799,
+      "y": 398.271,
       "radius": 10
     },
     {
@@ -1520,8 +1560,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Parses, extracts entities from, summarizes, and formats structured documents.",
-      "x": 809.905,
-      "y": 434.308,
+      "x": 808.304,
+      "y": 416.047,
       "radius": 10
     },
     {
@@ -1538,8 +1578,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Converts scanned or PDF documents into structured, machine-readable output by parsing layout, extracting entities, and formatting results.",
-      "x": 809.275,
-      "y": 455.684,
+      "x": 809.95,
+      "y": 435.865,
       "radius": 10
     },
     {
@@ -1556,8 +1596,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Execute full end-to-end user journey tests using browser automation frameworks (Playwright/Puppeteer), validating complete workflows from UI to backend across real environments.",
-      "x": 805.904,
-      "y": 477.094,
+      "x": 809.245,
+      "y": 456.008,
       "radius": 10
     },
     {
@@ -1574,8 +1614,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Selects an external callable, emits schema-valid arguments, invokes the function or API, and integrates the returned result into the agent loop.",
-      "x": 800.118,
-      "y": 497.116,
+      "x": 806.323,
+      "y": 475.166,
       "radius": 10
     },
     {
@@ -1592,8 +1632,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Reviews one Gaia skill, named skill, or real-skill catalog item against current evidence, source URLs, taxonomy mapping, promotion status, and demotion criteria, then proposes the smallest source-of-truth correction.",
-      "x": 660.44,
-      "y": 271.233,
+      "x": 659.012,
+      "y": 271.066,
       "radius": 10
     },
     {
@@ -1610,8 +1650,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Scans Gaia registry and real-skill catalog entries for review candidates whose evidence may be outdated, superseded, overpromoted, unmapped, stale, or insufficient for their current level or named-skill claim.",
-      "x": 792.387,
-      "y": 515.355,
+      "x": 801.542,
+      "y": 492.956,
       "radius": 10
     },
     {
@@ -1628,8 +1668,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Triage and audit GitHub issues for the Gaia Skill Tree project. Helps identify stale issues, gather evidence from the codebase, and manage issue lifecycle via GitHub CLI.",
-      "x": 680.566,
-      "y": 274.911,
+      "x": 677.769,
+      "y": 274.249,
       "radius": 10
     },
     {
@@ -1646,8 +1686,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Produces audience-tailored, research-backed long-form written content.",
-      "x": 509.749,
-      "y": 549.246,
+      "x": 530.302,
+      "y": 569.871,
       "radius": 10
     },
     {
@@ -1664,8 +1704,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Verifies generated claims against retrieved evidence, identifies unsupported or contradicted assertions, and anchors outputs in traceable, cited sources.",
-      "x": 782.463,
-      "y": 532.76,
+      "x": 794.776,
+      "y": 510.316,
       "radius": 10
     },
     {
@@ -1682,8 +1722,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Wraps LLM outputs with programmatic safety rules, content filters, and topical constraints that detect policy violations and enforce compliant, on-policy responses before they reach the user.",
-      "x": 770.092,
-      "y": 549.436,
+      "x": 785.805,
+      "y": 527.413,
       "radius": 10
     },
     {
@@ -1700,8 +1740,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Audits and rewrites prose to remove generic AI-writing patterns, preserve author intent, and adapt tone toward a more natural human voice.",
-      "x": 494.587,
-      "y": 528.063,
+      "x": 512.956,
+      "y": 552.96,
       "radius": 10
     },
     {
@@ -1718,8 +1758,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Extracts entities and relations from unstructured text, resolves co-references, and assembles them into a queryable graph structure with typed edges.",
-      "x": 756.524,
-      "y": 563.783,
+      "x": 775.527,
+      "y": 542.628,
       "radius": 10
     },
     {
@@ -1736,8 +1776,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Extracts, structures, and embeds knowledge from web sources into a searchable corpus.",
-      "x": 485.093,
-      "y": 510.028,
+      "x": 501.172,
+      "y": 538.116,
       "radius": 10
     },
     {
@@ -1754,8 +1794,30 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Conducts systematic multi-database academic literature searches following PRISMA/SWARM protocols, screens and synthesises findings, verifies all citations, and generates a structured review report.",
-      "x": 479.889,
-      "y": 497.136,
+      "x": 494.117,
+      "y": 527.283,
+      "radius": 10
+    },
+    {
+      "id": "mcp-debugger-control",
+      "label": "MCP Debugger Control",
+      "type": "extra",
+      "level": "4\u2605",
+      "effectiveLevel": "3\u2605",
+      "levelMeta": {
+        "baseLevel": "4\u2605",
+        "effectiveLevel": "3\u2605",
+        "demerits": [
+          "niche-integration"
+        ]
+      },
+      "demerits": [
+        "niche-integration"
+      ],
+      "rarity": "rare",
+      "description": "Exposes low-level debugger capabilities (breakpoints, stepping, stack inspection, variable evaluation) to AI agents via the Model Context Protocol, enabling real-time runtime diagnosis and autonomous bug fixing.",
+      "x": 483.69,
+      "y": 506.836,
       "radius": 10
     },
     {
@@ -1772,8 +1834,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Designs and implements Model Context Protocol servers that expose external APIs, files, or services as well-typed tools with clear schemas, authentication, and testable agent workflows.",
-      "x": 473.478,
-      "y": 474.209,
+      "x": 477.524,
+      "y": 490.016,
       "radius": 10
     },
     {
@@ -1790,8 +1852,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Designs and implements production ML pipelines with experiment tracking (MLflow, W&B), feature stores (Feast), orchestration (Kubeflow, Airflow), and automated retraining workflows including model evaluation gates and A/B deployment.",
-      "x": 470.469,
-      "y": 452.617,
+      "x": 472.725,
+      "y": 470.318,
       "radius": 10
     },
     {
@@ -1808,8 +1870,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Runs multiple LLM agents that propose, critique, and iteratively refine answers across structured debate rounds, converging on more accurate and well-reasoned responses than any single agent achieves.",
-      "x": 470.16,
-      "y": 432.633,
+      "x": 470.415,
+      "y": 451.877,
       "radius": 10
     },
     {
@@ -1830,8 +1892,8 @@
       ],
       "rarity": "rare",
       "description": "Integrates information from images and text to answer questions requiring visual grounding and logical inference across modalities.",
-      "x": 741.18,
-      "y": 576.611,
+      "x": 763.504,
+      "y": 556.819,
       "radius": 10
     },
     {
@@ -1848,8 +1910,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Synthesizes conversation context and codebase knowledge into a structured Product Requirements Document containing a problem statement, extensive user stories, implementation decisions, module boundaries, testing decisions, and out-of-scope items.",
-      "x": 471.44,
-      "y": 417.923,
+      "x": 470.01,
+      "y": 438.154,
       "radius": 10
     },
     {
@@ -1866,8 +1928,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Decomposes complex objectives into sub-tasks, selects tools, and orchestrates execution.",
-      "x": 476.399,
-      "y": 393.796,
+      "x": 471.801,
+      "y": 415.318,
       "radius": 10
     },
     {
@@ -1884,8 +1946,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Queries prediction-market data, compares market probabilities and price history, and summarizes probabilistic signals for forecasting or decision-support workflows.",
-      "x": 481.935,
-      "y": 377.426,
+      "x": 474.883,
+      "y": 399.547,
       "radius": 10
     },
     {
@@ -1902,8 +1964,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Automatically improves prompt instructions through iterative compilation, treating prompts as programs that can be optimized against a metric using LLM-driven feedback loops.",
-      "x": 491.185,
-      "y": 357.817,
+      "x": 480.833,
+      "y": 380.284,
       "radius": 10
     },
     {
@@ -1920,8 +1982,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "End-to-end retrieval-augmented generation combining document chunking, embedding, retrieval, and relevance scoring.",
-      "x": 729.185,
-      "y": 584.727,
+      "x": 753.871,
+      "y": 566.228,
       "radius": 10
     },
     {
@@ -1938,8 +2000,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Interleaves free-form reasoning traces with discrete tool actions in a single loop, enabling agents to plan, act, observe, and update beliefs step-by-step.",
-      "x": 705.465,
-      "y": 596.889,
+      "x": 734.302,
+      "y": 581.446,
       "radius": 10
     },
     {
@@ -1956,8 +2018,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Systematically discovers, evaluates, and ingests new skill definitions into a structured skill registry: researching capabilities, sourcing reproducible evidence, scripting graph updates, validating schema and DAG integrity, and publishing via pull request.",
-      "x": 501.006,
-      "y": 342.119,
+      "x": 487.691,
+      "y": 364.489,
       "radius": 10
     },
     {
@@ -1974,8 +2036,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Automate the full software release cycle: determine semantic version bump, update CHANGELOG, commit, create a git tag, and publish a GitHub release with release notes.",
-      "x": 696.23,
-      "y": 279.569,
+      "x": 692.419,
+      "y": 278.283,
       "radius": 10
     },
     {
@@ -1992,8 +2054,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Conducts multi-source information gathering, synthesis, and citation for a given topic.",
-      "x": 687.823,
-      "y": 603.135,
+      "x": 719.347,
+      "y": 590.346,
       "radius": 10
     },
     {
@@ -2010,8 +2072,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Composes research manuscripts in IMRAD structure with reporting-guideline compliance (CONSORT, STROBE, PRISMA), citation management, publication-quality figures, and LaTeX/PDF formatting.",
-      "x": 667.732,
-      "y": 607.723,
+      "x": 701.922,
+      "y": 598.321,
       "radius": 10
     },
     {
@@ -2028,8 +2090,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Systematically identify security vulnerabilities, assess attack surface, and produce actionable remediation guidance across code, dependencies, and infrastructure.",
-      "x": 720.411,
-      "y": 290.22,
+      "x": 715.186,
+      "y": 287.53,
       "radius": 10
     },
     {
@@ -2046,8 +2108,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Designs, writes, packages, and iteratively improves reusable agent skill directories with metadata, progressive instructions, supporting assets, and measurable trigger criteria.",
-      "x": 515.342,
-      "y": 324.412,
+      "x": 498.266,
+      "y": 346.131,
       "radius": 10
     },
     {
@@ -2064,8 +2126,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Builds and runs task suites that measure whether agents select, invoke, and complete installed skills correctly across artifact-rich workflows and repeated trials.",
-      "x": 529.921,
-      "y": 310.453,
+      "x": 509.477,
+      "y": 331.079,
       "radius": 10
     },
     {
@@ -2082,8 +2144,30 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Assesses third-party agent skills for malicious behavior, unsafe permissions, prompt-injection exposure, repository-context mismatch, and supply-chain risk before installation or invocation.",
-      "x": 542.403,
-      "y": 300.806,
+      "x": 519.353,
+      "y": 320.232,
+      "radius": 10
+    },
+    {
+      "id": "stealth-browser-interaction",
+      "label": "Stealth Browser Interaction",
+      "type": "extra",
+      "level": "4\u2605",
+      "effectiveLevel": "3\u2605",
+      "levelMeta": {
+        "baseLevel": "4\u2605",
+        "effectiveLevel": "3\u2605",
+        "demerits": [
+          "heavyweight-dependency"
+        ]
+      },
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "rarity": "uncommon",
+      "description": "Operates web browsers through an advanced stealth layer that handles bot-detection, fingerprinting, session rotation, and human-like interaction patterns to maintain resilient access to protected domains.",
+      "x": 535.841,
+      "y": 305.646,
       "radius": 10
     },
     {
@@ -2100,8 +2184,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Converts natural-language queries into validated, executable SQL against a target schema and returns formatted result sets.",
-      "x": 652.079,
-      "y": 609.57,
+      "x": 688.056,
+      "y": 603.066,
       "radius": 10
     },
     {
@@ -2118,8 +2202,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Sequences multiple tool invocations into a dependency graph where the output of each tool feeds as structured input to the next, handling state propagation, intermediate result validation, and error recovery across multi-step execution pipelines.",
-      "x": 631.247,
-      "y": 609.774,
+      "x": 669.19,
+      "y": 607.475,
       "radius": 10
     },
     {
@@ -2136,8 +2220,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Dynamically generates reusable tool functions (code) at runtime to solve novel sub-tasks, then invokes those tools to complete the overall objective without human-written APIs.",
-      "x": 562.414,
-      "y": 288.737,
+      "x": 551.012,
+      "y": 295.151,
       "radius": 10
     },
     {
@@ -2154,8 +2238,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Translates content end-to-end while preserving sentiment and adapting tone and register for the target audience.",
-      "x": 607.616,
-      "y": 606.887,
+      "x": 647.18,
+      "y": 609.848,
       "radius": 10
     },
     {
@@ -2172,8 +2256,8 @@
       "demerits": [],
       "rarity": "rare",
       "description": "Frames problem solving as a search over a tree of partial solutions, using LLM-generated evaluations to prune unpromising branches and backtrack, dramatically improving success on complex reasoning tasks.",
-      "x": 579.465,
-      "y": 281.143,
+      "x": 566.246,
+      "y": 286.833,
       "radius": 10
     },
     {
@@ -2190,8 +2274,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Decomposes a product plan into independently-demoable vertical slices that each cut through all integration layers end-to-end. Classifies each slice as HITL (human-in-the-loop) or AFK (autonomous), identifies dependency ordering, and publishes structured issues with acceptance criteria.",
-      "x": 587.6,
-      "y": 601.723,
+      "x": 627.96,
+      "y": 609.573,
       "radius": 10
     },
     {
@@ -2212,8 +2296,8 @@
       ],
       "rarity": "uncommon",
       "description": "Handles spoken interactions end-to-end: transcribes audio input, produces language responses, and synthesizes speech output.",
-      "x": 570.606,
-      "y": 595.192,
+      "x": 611.153,
+      "y": 607.535,
       "radius": 10
     },
     {
@@ -2230,8 +2314,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Retrieves and structures data from web pages into usable entities.",
-      "x": 553.108,
-      "y": 586.116,
+      "x": 593.284,
+      "y": 603.455,
       "radius": 10
     },
     {
@@ -2248,8 +2332,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Builds, maintains, and queries an interlinked markdown or wiki-style knowledge base so an agent can retrieve durable local context across research sessions.",
-      "x": 601.084,
-      "y": 274.514,
+      "x": 585.72,
+      "y": 278.899,
       "radius": 10
     },
     {
@@ -2266,8 +2350,8 @@
       "demerits": [],
       "rarity": "uncommon",
       "description": "Designs, configures, and runs trigger-based multi-step automation pipelines that connect external services, schedule jobs, and orchestrate tool sequences without continuous human supervision.",
-      "x": 618.254,
-      "y": 271.397,
+      "x": 601.327,
+      "y": 274.457,
       "radius": 10
     },
     {
@@ -2427,6 +2511,16 @@
       "type": "extra"
     },
     {
+      "source": "workflow-automation",
+      "target": "agentic-workflow-design",
+      "type": "extra"
+    },
+    {
+      "source": "plan-decompose",
+      "target": "agentic-workflow-design",
+      "type": "extra"
+    },
+    {
       "source": "data-visualize",
       "target": "architecture-diagram",
       "type": "extra"
@@ -2500,6 +2594,16 @@
       "source": "ghostwrite",
       "target": "autonomous-research-agent",
       "type": "ultimate"
+    },
+    {
+      "source": "web-scrape",
+      "target": "autonomous-web-research",
+      "type": "extra"
+    },
+    {
+      "source": "web-search",
+      "target": "autonomous-web-research",
+      "type": "extra"
     },
     {
       "source": "web-search",
@@ -2804,6 +2908,16 @@
     {
       "source": "summarize",
       "target": "literature-review",
+      "type": "extra"
+    },
+    {
+      "source": "mcp-integration",
+      "target": "mcp-debugger-control",
+      "type": "extra"
+    },
+    {
+      "source": "refactor-code",
+      "target": "mcp-debugger-control",
       "type": "extra"
     },
     {
@@ -3129,6 +3243,16 @@
     {
       "source": "skill-discovery",
       "target": "skill-security-analysis",
+      "type": "extra"
+    },
+    {
+      "source": "browser-automation",
+      "target": "stealth-browser-interaction",
+      "type": "extra"
+    },
+    {
+      "source": "computer-use",
+      "target": "stealth-browser-interaction",
       "type": "extra"
     },
     {

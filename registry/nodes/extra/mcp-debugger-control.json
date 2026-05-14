@@ -1,0 +1,35 @@
+{
+  "id": "mcp-debugger-control",
+  "name": "MCP Debugger Control",
+  "type": "extra",
+  "level": "4\u2605",
+  "rarity": "rare",
+  "description": "Exposes low-level debugger capabilities (breakpoints, stepping, stack inspection, variable evaluation) to AI agents via the Model Context Protocol, enabling real-time runtime diagnosis and autonomous bug fixing.",
+  "prerequisites": [
+    "mcp-integration",
+    "refactor-code"
+  ],
+  "derivatives": [
+    "autonomous-debug"
+  ],
+  "conditions": "Requires a target debugger integration and a supported MCP client.",
+  "evidence": [
+    {
+      "class": "B",
+      "source": "https://github.com/LadislavSopko/mcp-server-for-vs",
+      "evaluator": "mbtiongson1",
+      "date": "2026-05-14",
+      "notes": "Exposes the Visual Studio Debugger via MCP tool calls for breakpoints and execution control."
+    }
+  ],
+  "knownAgents": [
+    "ladislav-sopko/mcp-vs"
+  ],
+  "demerits": [
+    "niche-integration"
+  ],
+  "status": "provisional",
+  "createdAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "0.1.0"
+}

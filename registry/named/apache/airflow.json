@@ -1,0 +1,13 @@
+{
+  "id": "apache/airflow",
+  "name": "apache/airflow",
+  "title": "The Architect's Blueprint",
+  "contributor": "apache",
+  "targetSkillId": "agentic-workflow-design",
+  "description": "Programmable workflow orchestration platform using TaskFlow for dynamic agentic DAG design.",
+  "url": "https://github.com/apache/airflow",
+  "status": "named",
+  "addedAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "version": "1.0.0"
+}

@@ -26,6 +26,10 @@ Curated named skills from live SKILL.md ecosystems.
 | github/web-scrape-crawl | Bot-curated GitHub crawl of active web scraping, browser automation, and MCP repositories. | https://github.com/topics/web-scraping |
 | vscode-marketplace/agent-extensions | Bot-curated VS Code Marketplace crawl of agent, MCP, and AI coding extensions. | https://marketplace.visualstudio.com/search?term=agent%20mcp&target=VSCode |
 | huggingface/model-capabilities | Bot-curated Hugging Face model crawl filtered to concrete safety, reranking, compression, and moderation capabilities. | https://huggingface.co/models |
+| apache/airflow | Apache Airflow - A platform to programmatically author, schedule, and monitor workflows | https://github.com/apache/airflow |
+| apify/crawlee-python | Crawlee—A web scraping and browser automation library for Python to build reliable crawlers. | https://github.com/apify/crawlee-python |
+| firecrawl/firecrawl-mcp-server | Official Firecrawl MCP Server - Adds powerful web scraping and search to Cursor, Claude and any other LLM clients. | https://github.com/firecrawl/firecrawl-mcp-server |
+| LadislavSopko/mcp-server-for-vs | Deep MCP server for Visual Studio with Roslyn-powered tools and debugger control. | https://github.com/LadislavSopko/mcp-server-for-vs |
 
 ## Items
 
@@ -72,7 +76,7 @@ Curated named skills from live SKILL.md ecosystems.
 - [openai/security-best-practices](https://officialskills.sh/openai/skills/security-best-practices) - Reviews Python, JavaScript, TypeScript, and Go code for language-specific security vulnerabilities and hardening opportunities. Maps to: `code-review-pipeline`, `detect-anomaly`, `evaluate-output`.
 - [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) - Open-source API for AI-oriented web search, scraping, crawling, and structured extraction from websites. Maps to: `web-scrape`, `web-search`, `retrieve`.
 - [scrapy/scrapy](https://github.com/scrapy/scrapy) - Mature Python framework for building web crawlers and extracting structured data from websites. Maps to: `web-scrape`.
-- [apify/crawlee](https://github.com/apify/crawlee) - Crawling and browser automation library for reliable extraction with HTTP, Playwright, Puppeteer, and Cheerio workflows. Maps to: `web-scrape`, `browser-automation`.
+- [apify/crawlee](https://github.com/apify/crawlee) - Crawling and browser automation library for reliable extraction with HTTP, Playwright, Puppeteer, and Cheerio workflows. Maps to: `stealth-browser-interaction`.
 - [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling) - Adaptive web scraping framework with browser and stealth support for resilient page extraction. Maps to: `web-scrape`, `browser-automation`.
 - [ScrapeGraphAI/Scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) - LLM-assisted scraping framework that converts websites into structured outputs through graph-style extraction pipelines. Maps to: `web-scrape`, `structured-output`, `rag-pipeline`.
 - [getmaxun/maxun](https://github.com/getmaxun/maxun) - Open-source no-code platform for scraping, crawling, search, and AI data extraction from websites. Maps to: `web-scrape`, `browser-automation`.
@@ -95,5 +99,9 @@ Curated named skills from live SKILL.md ecosystems.
 - [garrytan/cso](https://github.com/garrytan/gstack/blob/main/cso/SKILL.md) - Infrastructure-first security audit focusing on secrets archaeology and dependency supply chain. Maps to: `security-audit`.
 - [garrytan/design-shotgun](https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md) - Rapid design exploration generating multiple AI design variants for comparison and feedback. Maps to: `design-review`.
 - [garrytan/gstack](https://github.com/garrytan/gstack/blob/main/SKILL.md) - Fast headless browser for QA testing and site dogfooding with built-in anti-bot stealth. Maps to: `browser-automation`.
+- [apache/airflow](https://github.com/apache/airflow) - Scalable workflow orchestration platform for authoring, scheduling, and monitoring complex data pipelines and agentic workflows. Maps to: `agentic-workflow-design`.
+- [apify/crawlee](https://github.com/apify/crawlee-python) - Python library for reliable web scraping and browser automation, supporting diverse extraction patterns for AI applications. Maps to: `stealth-browser-interaction`.
+- [firecrawl/mcp](https://github.com/firecrawl/firecrawl-mcp-server) - MCP server implementation for Firecrawl, enabling seamless web scraping and search tool integration for agents. Maps to: `autonomous-web-research`.
+- [ladislav-sopko/mcp-vs](https://github.com/LadislavSopko/mcp-server-for-vs) - Deep MCP server for Visual Studio providing Roslyn-powered semantic navigation and full debugger control (breakpoints, stepping, variable inspection). Maps to: `mcp-debugger-control`.
 
-*Generated from registry/real-skills.json on 2026-05-08.*
+*Generated from registry/real-skills.json on 2026-05-14.*
