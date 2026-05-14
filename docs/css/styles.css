@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap');
+
+/* Departure Mono — OFL, https://departuremono.com.
+   TODO(phase-5): add docs/assets/fonts/DepartureMono-Regular.woff2 binary.
+   Falls back to JetBrains Mono / system mono until the file is present. */
+@font-face {
+  font-family: 'Departure Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Departure Mono'),
+       url('../assets/fonts/DepartureMono-Regular.woff2') format('woff2');
+}
+
   :root {
     --basic:    #38bdf8;
     --extra:    #c084fc;
@@ -9,6 +23,15 @@
     --text:     #e2e8f0;
     --muted:    #64748b;
     --code-bg:  #0f172a;
+    /* Hunter's Atlas brand-voice role tokens (Phase 1) */
+    --honor-red: #ef4444;
+    --honor-red-rgb: 239, 68, 68;
+    --apex-gold: #fbbf24;
+    --apex-gold-rgb: 251, 191, 36;
+    --font-display: 'EB Garamond', Georgia, serif;
+    --font-body: 'Bricolage Grotesque', Inter, system-ui, sans-serif;
+    --font-mono: 'Departure Mono', 'JetBrains Mono', ui-monospace, monospace;
+    --diamond-seal-stroke: 1.5;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}

@@ -112,16 +112,19 @@ Sphere layout radii (at scale 1.25):
 
 ## Typography
 
+The Hunter's Atlas type stack is **Scholar's Plate** — a 19th-century natural-history atlas serif for display, a humanist grotesque for body, and an OFL pixel mono for HUD/code. All three faces are OFL/free.
+
 | Context | Stack |
 |---|---|
-| Body | `Inter, system-ui, sans-serif` |
-| Code / CLI | `JetBrains Mono, Fira Code, Courier New, monospace` |
+| Body | `Bricolage Grotesque, Inter, system-ui, sans-serif` |
+| Display | `EB Garamond, Georgia, serif` — hero titles, plate headings, section h2 only |
+| Code / HUD | `Departure Mono, JetBrains Mono, ui-monospace, monospace` |
 
 Type scale:
-- Hero h1: `clamp(2.4rem, 6vw, 4rem)`, weight 800, line-height 1.1
-- Section h2: `clamp(1.6rem, 4vw, 2.2rem)`, weight 700
-- Body: 1rem / 1.65
-- Small / badge: 0.72–0.82rem
+- Hero h1: `clamp(2.4rem, 6vw, 4rem)`, `font-family: var(--font-display)`, weight 600, line-height 1.1
+- Section h2: `clamp(1.6rem, 4vw, 2.2rem)`, `font-family: var(--font-display)`, weight 600 (EB Garamond is heavier at 600 than Inter is at 700, so the visual weight matches without going to 800)
+- Body: 1rem / 1.65, `var(--font-body)`
+- Small / badge: 0.72–0.82rem, `var(--font-mono)` for ledger strips and numeric HUD elements
 
 Syntax highlighting in `<pre>` blocks:
 - `.comment` — `#4b6378`
@@ -133,22 +136,25 @@ Syntax highlighting in `<pre>` blocks:
 
 ## Key UI Patterns
 
-**Nav** — frosted glass: `background: rgba(3,7,18,.75)`, `backdrop-filter: blur(12px)`.
+**Nav** — sits on a 1px hairline divider in `var(--border)` over `var(--bg)`. No glassmorphism on the main nav (the previous frosted-glass treatment is retired here). Diamond Seal mark + wordmark on the left, destination links on the right.
 
-**Hero gradient** — three-stop sweep across all three tier colors:
+**Hero titles** — solid `var(--text)` in EB Garamond at weight 600 (`var(--font-display)`). No gradient text. Emphasis words (e.g., "rare", "earned") may carry a single hairline gold underline using `border-bottom: 1px solid var(--apex-gold)` or an equivalent inline `<span>` underline accent. The previous three-stop tier-gradient sweep on titles is retired.
+
+**Hero tier gradient (retained, scoped)** — the three-stop sweep
 ```
 linear-gradient(135deg, #38bdf8 0%, #c084fc 50%, #f59e0b 100%)
 ```
+is retained ONLY as the background fill for the floating hero CTA pills (`◆ Open full graph`, `⇄ View as HUD`). It is no longer used on titles or body copy.
 
 **Buttons**
-- Primary: `linear-gradient(135deg, --basic, --extra)`, white text, `box-shadow: 0 0 20px rgba(56,189,248,.3)`
-- Ghost: transparent bg, `--border` outline → `--basic` on hover
+- Primary: solid `var(--apex-gold)` background on a midnight (`var(--bg)`) border, white-on-midnight text (`color: var(--text)`), `box-shadow: 0 0 24px rgba(var(--apex-gold-rgb), .3)`. Used only for Apex affordances.
+- Ghost: transparent bg, `var(--border)` outline → `var(--basic)` on hover.
 
-**Cards** — `var(--surface)` background, `var(--border)` 1 px border, 14 px radius, radial glow overlay per tier (see Skill Tiers above).
+**Cards** — `var(--surface)` background, `var(--border)` 1 px hairline border, 14 px radius. The per-tier radial glow overlay (see Skill Tiers above) is no longer applied by default; it appears **on hover only**, reinforcing that the tier glow is an affordance, not decoration.
 
 **Callout** — dual-gradient tint: `linear-gradient(135deg, rgba(56,189,248,.08), rgba(167,139,250,.08))`, `--extra` title.
 
-**Graph dialog** — `border: 1px solid rgba(56,189,248,.35)`, `box-shadow: 0 30px 100px rgba(0,0,0,.72), 0 0 55px rgba(56,189,248,.16)`, backdrop `rgba(0,0,0,.72) blur(6px)`.
+**Graph dialog** — `border: 1px solid rgba(56,189,248,.35)`, `box-shadow: 0 30px 100px rgba(0,0,0,.72), 0 0 55px rgba(56,189,248,.16)`, backdrop `rgba(0,0,0,.72) blur(6px)`. (The graph dialog is the one place glassmorphism earns its place — it is preserved here.)
 
 ---
 
@@ -258,3 +264,32 @@ Canvas glow via `ctx.shadowColor` / `ctx.shadowBlur = 8` on ultimate/extra label
 ### Implementation Branch
 
 This design ships on branch **`design/skill-color-cycling`** (per branch naming convention: `design/` prefix for website design changes touching `docs/` HTML/CSS/JS).
+
+---
+
+## Brand Voice Tokens
+
+These role tokens layer on top of the locked tier and rank colour tables. They define **brand-voice** roles — what carries meaning across every page — without re-allocating any tier/rank slot. Declared in `docs/css/styles.css` `:root`.
+
+| Token | Value | Role / where used |
+|---|---|---|
+| `--honor-red` | `#ef4444` | Contributor handle colour. Used wherever a real contributor name appears (graph labels, plaques, named-skills cards, nav `Named` link). Never decorative. |
+| `--honor-red-rgb` | `239, 68, 68` | RGB triplet for composing `rgba(var(--honor-red-rgb), α)` overlays and shadows. |
+| `--apex-gold` | `#fbbf24` | 6★ / Ultimate / Diamond Seal mark accent. Used for Apex affordances only — the seal mark, the apex CTA pill, the Hall of Heroes apex glyph. Never decorative; never as a paragraph-level accent. |
+| `--apex-gold-rgb` | `251, 191, 36` | RGB triplet for composing `rgba(var(--apex-gold-rgb), α)` glows, button shadows, ledger-strip highlights. |
+| `--font-display` | `'EB Garamond', Georgia, serif` | Display face. Hero titles, plate headings, section h2 only. |
+| `--font-body` | `'Bricolage Grotesque', Inter, system-ui, sans-serif` | Body face. All paragraph and UI text. |
+| `--font-mono` | `'Departure Mono', 'JetBrains Mono', ui-monospace, monospace` | HUD / code face. Ledger strip, command blocks, Departure-Mono numerals, Plate-numbering. |
+| `--diamond-seal-stroke` | `1.5` | Stroke-width unit for the Diamond Seal brand mark. Unitless multiplier applied at render time. |
+
+Honor Red and Apex Gold are the **two carry-everything brand roles**. Tier tokens (`--basic`, `--extra`, `--ultimate`) remain reserved for their tier roles in the graph, badge, and rank plate — they are not repurposed as decorative accents anywhere on the new surfaces.
+
+---
+
+## Hunter's Atlas Brand Lane
+
+Gaia's public surface (`gaia.tiongson.co`) is the **Hunter's Atlas**: a Sacred-Atlas × Solo-Leveling guild registry where contributing devs feel their repo is a main character earning evidence-based rank, and where claiming an Ultimate carries the prestige of going on the permanent record. The voice register is **Half-Merged** — primary labels stay truthful (commands, schema, evidence, named contributors) while section titles and ornamental copy carry ceremonial verbs (Initiate's Rite, Ascension Cycle, Hall of Heroes, The Codex).
+
+On top of the locked tier and rank colour tokens, two brand-voice tokens do the carry-everything work: **Honor Red (`--honor-red`)** is reserved for contributor handles; **Apex Gold (`--apex-gold`)** is reserved for 6★/Ultimate/Diamond-Seal moments and Apex-only affordances. Tier and rank colour tokens, Level VI shimmer, the graph canvas geometry, the Skill Explorer glow tokens, and the Ultimate/Extra cycling animations are all hard-locked and survive unchanged into this lane.
+
+The 3D HUD canvas (`canvas3d`) is **preserved** as a secondary view — repurposed as an ambient parallax background behind the 2D graph hero, and reachable as the primary view via a `⇄ View as HUD` toggle. The 2D skill graph is the primary hero. The Diamond Seal mark (`◇G` lock-up) is the brand mark; the apex `◆` glyph remains free for its tier role.
