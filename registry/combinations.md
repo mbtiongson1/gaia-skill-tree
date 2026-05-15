@@ -73,3 +73,4 @@
 | ◇ Extra Skill: /web-scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | 3★ | Structured output mode required. |
 | ◇ Extra Skill: /wiki-search | Extra Skill | Retrieve, Embed Text, Summarize | 4★ | Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention. |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | Plan and Decompose, Tool Use, API Call | 4★ |  |
+| ◇ Extra Skill: /x-twitter-automation | Extra Skill | Browser Automation, Web Scrape, Workflow Automation | 4★ | Requires configured X/Twitter access, repeatable read paths, and explicit approval gates before posting tweets, replies, DMs, or other write actions. |

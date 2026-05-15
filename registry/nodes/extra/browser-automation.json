@@ -11,7 +11,8 @@
   ],
   "derivatives": [
     "autonomous-research-agent",
-    "e2e-testing"
+    "e2e-testing",
+    "x-twitter-automation"
   ],
   "conditions": "",
   "evidence": [

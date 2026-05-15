@@ -12,7 +12,8 @@
   ],
   "derivatives": [
     "release-automation",
-    "deployment-automation"
+    "deployment-automation",
+    "x-twitter-automation"
   ],
   "conditions": "",
   "evidence": [

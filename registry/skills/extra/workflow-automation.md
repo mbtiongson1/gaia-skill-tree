@@ -18,6 +18,7 @@ Designs, configures, and runs trigger-based multi-step automation pipelines that
 ## Unlocks
 - [Release Automation](../extra/release-automation.md)
 - [Deployment Automation](../extra/deployment-automation.md)
+- [X/Twitter Automation](../extra/x-twitter-automation.md)
 
 ## Fusion Condition
 _None specified._

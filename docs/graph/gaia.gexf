@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <gexf xmlns="http://www.gexf.net/1.2draft" version="1.2">
-  <meta lastmodifieddate="2026-05-14">
+  <meta lastmodifieddate="2026-05-15">
     <creator>Gaia</creator>
     <description>Gaia Skill Registry Graph</description>
   </meta>
@@ -1180,6 +1180,14 @@
           <attvalue for="type" value="basic" />
         </attvalues>
       </node>
+      <node id="x-twitter-automation" label="X/Twitter Automation">
+        <attvalues>
+          <attvalue for="level" value="4★" />
+          <attvalue for="rarity" value="rare" />
+          <attvalue for="status" value="provisional" />
+          <attvalue for="type" value="extra" />
+        </attvalues>
+      </node>
     </nodes>
     <edges>
       <edge id="e0" source="evaluate-output" target="agent-eval" />
@@ -1375,6 +1383,9 @@
       <edge id="e190" source="plan-decompose" target="workflow-automation" />
       <edge id="e191" source="tool-use" target="workflow-automation" />
       <edge id="e192" source="api-call" target="workflow-automation" />
+      <edge id="e193" source="browser-automation" target="x-twitter-automation" />
+      <edge id="e194" source="web-scrape" target="x-twitter-automation" />
+      <edge id="e195" source="workflow-automation" target="x-twitter-automation" />
     </edges>
   </graph>
 </gexf>
