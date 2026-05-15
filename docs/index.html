@@ -6,26 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gaia — AI Agent Skill Registry</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/plaque.css">
 </head>
 
 <body class="home-page">
 
   <!-- ─── NAV ─── -->
   <nav>
-    <span class="nav-logo">◆ GAIA</span>
+    <div class="nav-logo">
+      <img src="assets/marks/diamond-seal.svg" alt="Diamond Seal" width="24" height="24">
+      GAIA
+    </div>
     <button class="nav-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
     <ul>
-      <li><a href="#what">What</a></li>
-      <li><a href="#ranks">Ranks</a></li>
-      <li><a href="#start">Start</a></li>
-      <li><a href="#mcp">Agent MCP</a></li>
-      <li><a href="#workflow">Flow</a></li>
-      <li><a href="how-we-do-things.html">How We Work</a></li>
+      <li><a href="#registry">Registry</a></li>
+      <li><a href="#hall-of-heroes">Hall of Heroes</a></li>
       <li><a href="#named" class="nav-named-explorer">Named Skills</a></li>
+      <li><a href="codex.html">The Codex</a></li>
       <li><button type="button" class="nav-tree" id="treeNavBtn">Tree</button></li>
     </ul>
   </nav>
@@ -38,39 +39,26 @@
     <div class="hero-content">
       <button class="hero-eyebrow graph-trigger" type="button" data-graph-trigger aria-controls="skillGraphDialog">Open
         Skill Graph for AI Agents</button>
-      <h1 class="hero-title">Every capability<br>your agent has<br><span>lives on the tree.</span></h1>
+      <h1 class="hero-title">Skills are catalogued.<br>Names are earned.<br><span>Apex is rare.</span></h1>
       <p class="hero-sub">
-        Gaia maps AI agent skills — from primitive building blocks to ultimate
-        emergent capabilities — into an evidence-backed, versioned graph
-        anyone can contribute to.
+        An evidence-backed atlas of agent capabilities.
+        Bring your repo, claim your name.
       </p>
-      <div class="hero-cta">
-        <a href="#start" class="btn btn-primary">Get Started →</a>
-        <a href="https://github.com/mbtiongson1/gaia-skill-tree" class="btn btn-ghost" target="_blank">View on
-          GitHub</a>
+      <div class="doors">
+        <a href="#path-a" class="door door-a">
+          <h3>→ Register your repo</h3>
+          <p>3 commands · 5min</p>
+        </a>
+        <a href="#path-b" class="door door-b">
+          <h3>◆ Claim an Ultimate</h3>
+          <p class="live-ultimates">6 currently unclaimed</p>
+        </a>
       </div>
-      <div class="registry-stats">
-        <div class="rs-stat">
-          <div class="rs-num">133</div>
-          <div class="rs-label">Skills</div>
-        </div>
-        <div class="rs-divider"></div>
-        <div class="rs-stat">
-          <div class="rs-num rs-named">32</div>
-          <div class="rs-label">Named</div>
-        </div>
-        <div class="rs-divider"></div>
-        <div class="rs-stat">
-          <div class="rs-num" style="color:#7c3aed">1</div>
-          <div class="rs-label">Unique</div>
-        </div>
-        <div class="rs-divider"></div>
-        <div class="rs-stat">
-          <a href="#named" class="rs-legendary-link">
-            <div class="rs-num rs-legendary">1</div>
-            <div class="rs-label">6★ Ultimate</div>
-          </a>
-        </div>
+      <div class="ledger-strip">
+        <span class="ledger-stat" data-filter="all">133 SKILLS</span> ·
+        <span class="ledger-stat rs-named" data-filter="named">32 NAMED</span> ·
+        <span class="ledger-stat rs-legendary" data-filter="apex">1 APEX</span> ·
+        <span class="ledger-stat">UPDATED 14 MAY 2026</span>
       </div>
     </div>
     <div class="scroll-hint">
@@ -79,6 +67,7 @@
         <polyline points="6 9 12 15 18 9" />
       </svg>
     </div>
+    <button class="graph-toggle-pill" id="hudToggleBtn">⇄ View as HUD</button>
   </section>
 
   <dialog id="skillGraphDialog" class="graph-dialog" aria-labelledby="skillGraphTitle">
@@ -377,6 +366,72 @@
     </div>
   </section>
 
+  <!-- ─── TWO PATHS ─── -->
+  <div class="paths-container">
+    <div id="path-a" class="path-col path-a">
+      <h2>The Initiate's Rite</h2>
+      <div class="rite-step">
+        <h3 class="rite-num">I.</h3>
+        <div class="rite-content">
+          <h4>Install</h4>
+          <div class="pre-wrap">
+            <pre><span class="cmd">pip install</span> gaia-cli</pre>
+          </div>
+        </div>
+      </div>
+      <div class="rite-step">
+        <h3 class="rite-num">II.</h3>
+        <div class="rite-content">
+          <h4>Initialise</h4>
+          <div class="pre-wrap">
+            <pre><span class="cmd">gaia init</span></pre>
+          </div>
+        </div>
+      </div>
+      <div class="rite-step">
+        <h3 class="rite-num">III.</h3>
+        <div class="rite-content">
+          <h4>Scan</h4>
+          <div class="pre-wrap">
+            <pre><span class="cmd">gaia scan</span></pre>
+          </div>
+        </div>
+      </div>
+      <p class="bond-agent">Bond your agent (MCP) →</p>
+    </div>
+    <div id="path-b" class="path-col path-b">
+      <h2>Available Ultimates</h2>
+      <div class="ultimates-list" id="unclaimedUltimatesList">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <section id="hall-of-heroes">
+    <h2>Hall of Heroes</h2>
+    <div class="plates-strip" id="hallOfHeroesStrip">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <section id="ascension-cycle">
+    <h2>Ascension Cycle</h2>
+    <div class="ascension-diagram">
+      <div class="cycle-stage" data-caption="Connect your repo to the Gaia network.">Register</div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-stage" data-caption="Detect which agent skills are active.">Scan</div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-stage" data-caption="Provide evidence to increase skill maturity.">Rank up</div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-stage" data-caption="First at 2★ claims the origin contributor name.">Name</div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-stage" data-caption="Combine basic skills into complex extra skills.">Fuse</div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-stage stage-apex" data-caption="Reach 6★ Transcendent peer-reviewed mastery.">Apex</div>
+    </div>
+    <div class="ascension-caption" id="ascensionCaption">Hover a stage to learn more.</div>
+  </section>
+
   <div class="section-divider section-divider--glow"></div>
 
   <!-- ─── NAMED SKILLS ─── -->
@@ -488,10 +543,11 @@
     </p>
     <p>
       <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank">GitHub</a> ·
-      <a href="how-we-do-things.html">How We Work</a> ·
+      <a href="codex.html">The Codex</a> ·
       <a href="https://github.com/mbtiongson1/gaia-skill-tree/blob/main/CONTRIBUTING.md"
         target="_blank">Contributing</a> ·
-      MIT License
+      MIT License ·
+      <button class="footer-tree-btn" id="footerTreeBtn" style="background:none;border:none;cursor:pointer;color:var(--muted);font:inherit">Your Tree</button>
     </p>
   </footer>
 
@@ -567,6 +623,9 @@
   <script src="js/named-skills.js"></script>
   <script src="js/skill-explorer.js"></script>
   <script src="js/ui.js"></script>
+  <script src="js/hud-toggle.js"></script>
+  <script src="js/plaque-reveal.js"></script>
+  <script src="js/hunters-atlas.js"></script>
 
 </body>
 

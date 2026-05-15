@@ -30,6 +30,8 @@ CSS custom properties defined in `docs/index.html`:
 | `--basic`     | `#38bdf8` | Basic tier accent (sky blue) |
 | `--extra`     | `#c084fc` | Extra Skill tier accent (purple) |
 | `--ultimate`  | `#f59e0b` | Ultimate Skill tier accent (amber) |
+| `--honor-red` | `#ef4444` | Contributor handles and naming |
+| `--apex-gold` | `#fbbf24` | 6★ tier and Ultimate actions |
 
 ---
 
@@ -114,14 +116,17 @@ Sphere layout radii (at scale 1.25):
 
 | Context | Stack |
 |---|---|
-| Body | `Inter, system-ui, sans-serif` |
-| Code / CLI | `JetBrains Mono, Fira Code, Courier New, monospace` |
+| Display / Plates | `EB Garamond, serif` |
+| Body / HUD | `Bricolage Grotesque, sans-serif` |
+| Code / Ledger | `Departure Mono, monospace` |
 
-Type scale:
-- Hero h1: `clamp(2.4rem, 6vw, 4rem)`, weight 800, line-height 1.1
-- Section h2: `clamp(1.6rem, 4vw, 2.2rem)`, weight 700
-- Body: 1rem / 1.65
-- Small / badge: 0.72–0.82rem
+Type scale (Modular):
+- Hero Display: `clamp(2.8rem, 7vw, 5rem)`, weight 400 (Garamond), line-height 1.1
+- Plate Headings: `clamp(1.6rem, 4vw, 2.2rem)`, weight 400 (Garamond)
+- Body: `1rem / 1.6`, weight 400 (Bricolage)
+- Ledger / Code: `0.85rem / 1.4`, weight 400 (Departure Mono)
+
+No gradient text on heroes. Honor red and Apex gold do the work.
 
 Syntax highlighting in `<pre>` blocks:
 - `.comment` — `#4b6378`

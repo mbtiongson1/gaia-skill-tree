@@ -1,0 +1,107 @@
+/* ── THE PLAQUE VISUAL SYSTEM ── */
+
+.plaque-plate {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: #030712;
+  border: 1px solid #1e293b;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.1);
+  overflow: hidden;
+}
+
+.plaque-seal {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 2rem;
+}
+
+.plaque-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.plaque-handle {
+  font-family: 'Departure Mono', monospace;
+  font-size: 1rem;
+  color: #ef4444;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.plaque-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+  color: #fbbf24;
+  font-size: 1.2rem;
+}
+
+.plaque-class {
+  display: inline-block;
+  font-family: 'Departure Mono', monospace;
+  font-size: 0.85rem;
+  color: #030712;
+  background: #fbbf24;
+  padding: 0.2rem 0.6rem;
+  font-weight: bold;
+}
+
+/* Priority D: Naming Reveal Animation */
+.plaque-reveal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(3, 7, 18, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.plaque-reveal-container.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.plaque-reveal-container .plaque-plate {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.plaque-reveal-container.active .plaque-plate {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Naming reveal steps */
+.reveal-step-name .plaque-name {
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+  background-size: 200% 100%;
+  animation: goldPour 1.5s forwards;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@keyframes goldPour {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; color: #fbbf24; }
+}
+
+@media (prefers-reduced-motion) {
+  .plaque-reveal-container .plaque-plate,
+  .reveal-step-name .plaque-name {
+    animation: none;
+    transition: none;
+  }
+}
