@@ -125,8 +125,8 @@
 </div>
 <script type="application/json" id="gaia-graph-data">{
   "$schema": "./schema/skill.schema.json",
-  "version": "3.9.2",
-  "generatedAt": "2026-05-14T20:36:31.357434Z",
+  "version": "3.9.3",
+  "generatedAt": "2026-05-15T18:58:01.631882Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -570,7 +570,8 @@
       ],
       "derivatives": [
         "autonomous-research-agent",
-        "e2e-testing"
+        "e2e-testing",
+        "x-twitter-automation"
       ],
       "conditions": "",
       "evidence": [
@@ -4809,7 +4810,8 @@
         "extract-entities"
       ],
       "derivatives": [
-        "knowledge-harvest"
+        "knowledge-harvest",
+        "x-twitter-automation"
       ],
       "conditions": "Structured output mode required.",
       "evidence": [
@@ -4902,7 +4904,8 @@
       ],
       "derivatives": [
         "release-automation",
-        "deployment-automation"
+        "deployment-automation",
+        "x-twitter-automation"
       ],
       "conditions": "",
       "evidence": [
@@ -4962,6 +4965,37 @@
       "status": "provisional",
       "createdAt": "2026-04-26",
       "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "x-twitter-automation",
+      "name": "X/Twitter Automation",
+      "type": "extra",
+      "level": "4★",
+      "rarity": "rare",
+      "description": "Coordinates platform-specific X/Twitter search, tweet and reply retrieval, user lookup, follower export, monitoring, and approval-gated write workflows for social-media agent tasks.",
+      "prerequisites": [
+        "browser-automation",
+        "web-scrape",
+        "workflow-automation"
+      ],
+      "derivatives": [],
+      "conditions": "Requires configured X/Twitter access, repeatable read paths, and explicit approval gates before posting tweets, replies, DMs, or other write actions.",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/Xquik-dev/hermes-tweet",
+          "evaluator": "kriptoburak",
+          "date": "2026-05-15",
+          "notes": "Hermes Tweet provides an installable Hermes Agent X/Twitter skill and plugin for searching tweets, reading replies, looking up users, monitoring tweets, exporting followers, and gating post, reply, and DM actions."
+        }
+      ],
+      "knownAgents": [
+        "Xquik-dev/hermes-tweet"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-15",
+      "updatedAt": "2026-05-15",
       "version": "0.1.0"
     }
   ],
@@ -5039,6 +5073,11 @@
     {
       "sourceSkillId": "browser-automation",
       "targetSkillId": "stealth-browser-interaction",
+      "edgeType": "prerequisite"
+    },
+    {
+      "sourceSkillId": "browser-automation",
+      "targetSkillId": "x-twitter-automation",
       "edgeType": "prerequisite"
     },
     {
@@ -5872,6 +5911,11 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "web-scrape",
+      "targetSkillId": "x-twitter-automation",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "web-search",
       "targetSkillId": "autonomous-web-research",
       "edgeType": "prerequisite"
@@ -5912,6 +5956,11 @@
       "edgeType": "prerequisite"
     },
     {
+      "sourceSkillId": "workflow-automation",
+      "targetSkillId": "x-twitter-automation",
+      "edgeType": "prerequisite"
+    },
+    {
       "sourceSkillId": "write-report",
       "targetSkillId": "architecture-diagram",
       "edgeType": "prerequisite"
@@ -5934,7 +5983,7 @@
   ]
 }</script>
 <script type="application/json" id="gaia-named-skills">{
-  "generatedAt": "2026-05-14",
+  "generatedAt": "2026-05-15",
   "buckets": {
     "automated-testing": [
       {
@@ -6267,53 +6316,6 @@
           "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
         },
         "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-me",
-        "name": "Grill Me",
-        "contributor": "mattpocock",
-        "origin": false,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "2★",
-        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
-        "title": "The Relentless Interviewer",
-        "catalogRef": "mattpocock-grill-me",
-        "tags": [
-          "design-review",
-          "decision-tree",
-          "socratic-method",
-          "plan-stress-test",
-          "one-question-at-a-time"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        },
-        "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-with-docs",
-        "name": "Grill With Docs",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "3★",
-        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
-        "title": "The Domain-Aware Interrogator",
-        "catalogRef": "mattpocock-grill-with-docs",
-        "tags": [
-          "design-review",
-          "domain-model",
-          "ubiquitous-language",
-          "adr",
-          "context-md",
-          "socratic-method"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        },
-        "role": "origin"
       }
     ],
     "vertical-slice-planning": [
@@ -6774,6 +6776,59 @@
         "role": "variant"
       }
     ],
+    "grill-me": [
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "grill-me",
+        "status": "named",
+        "level": "4★",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        },
+        "role": "variant"
+      }
+    ],
+    "grill-with-docs": [
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "grill-with-docs",
+        "status": "named",
+        "level": "5★",
+        "description": "The ultimate evolution of the grill pattern. Fuses relentless Socratic questioning with deep domain awareness, ensuring every decision is cross-referenced against a persistent ubiquitous language and documented via real-time ADR generation.",
+        "title": "The Domain Sovereign",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method",
+          "ultimate",
+          "fusion"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
     "refactor-code": [
       {
         "id": "mattpocock/improve-codebase-architecture",
@@ -6848,6 +6903,32 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
         },
         "role": "origin"
+      }
+    ],
+    "ubiquitous-language": [
+      {
+        "id": "mattpocock/ubiquitous-language",
+        "name": "Ubiquitous Language",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "ubiquitous-language",
+        "status": "named",
+        "level": "4★",
+        "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+        "title": "The Domain Linguist",
+        "catalogRef": "mattpocock-ubiquitous-language",
+        "tags": [
+          "domain-driven-design",
+          "ddd",
+          "ubiquitous-language",
+          "glossary",
+          "terminology",
+          "alignment"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md"
+        },
+        "role": "variant"
       }
     ],
     "code-explain": [
@@ -7300,6 +7381,27 @@
         "user-journey",
         "visual-regression"
       ]
+    },
+    {
+      "id": "xquik-dev/hermes-tweet",
+      "name": "Hermes Tweet",
+      "contributor": "xquik-dev",
+      "origin": true,
+      "genericSkillRef": "x-twitter-automation",
+      "status": "awakened",
+      "level": "4★",
+      "description": "Installable Hermes Agent skill and plugin for X/Twitter search, reply reading, user lookup, monitoring, follower export, and approval-gated write actions.",
+      "tags": [
+        "x-twitter",
+        "twitter",
+        "social-automation",
+        "hermes-agent",
+        "monitoring"
+      ],
+      "links": {
+        "github": "https://github.com/Xquik-dev/hermes-tweet",
+        "docs": "https://docs.xquik.com/guides/hermes-tweet"
+      }
     }
   ],
   "byContributor": {
@@ -7383,6 +7485,7 @@
       "mattpocock/to-issues",
       "mattpocock/to-prd",
       "mattpocock/triage",
+      "mattpocock/ubiquitous-language",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],
@@ -7416,6 +7519,9 @@
     ],
     "vercel": [
       "vercel/find-skills"
+    ],
+    "xquik-dev": [
+      "xquik-dev/hermes-tweet"
     ],
     "yonatangross": [
       "yonatangross/orchestkit-rag"

@@ -332,53 +332,6 @@
           "github": "https://github.com/garrytan/gstack/blob/main/design-shotgun/SKILL.md"
         },
         "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-me",
-        "name": "Grill Me",
-        "contributor": "mattpocock",
-        "origin": false,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "2★",
-        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
-        "title": "The Relentless Interviewer",
-        "catalogRef": "mattpocock-grill-me",
-        "tags": [
-          "design-review",
-          "decision-tree",
-          "socratic-method",
-          "plan-stress-test",
-          "one-question-at-a-time"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
-        },
-        "role": "variant"
-      },
-      {
-        "id": "mattpocock/grill-with-docs",
-        "name": "Grill With Docs",
-        "contributor": "mattpocock",
-        "origin": true,
-        "genericSkillRef": "design-review",
-        "status": "named",
-        "level": "3★",
-        "description": "Stress-tests a plan against the project's domain model by relentlessly questioning each design decision one at a time, surfacing language conflicts with CONTEXT.md, cross-referencing code contradictions, and crystallising decisions as inline CONTEXT.md updates and ADRs as they are resolved.",
-        "title": "The Domain-Aware Interrogator",
-        "catalogRef": "mattpocock-grill-with-docs",
-        "tags": [
-          "design-review",
-          "domain-model",
-          "ubiquitous-language",
-          "adr",
-          "context-md",
-          "socratic-method"
-        ],
-        "links": {
-          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
-        },
-        "role": "origin"
       }
     ],
     "vertical-slice-planning": [
@@ -839,6 +792,59 @@
         "role": "variant"
       }
     ],
+    "grill-me": [
+      {
+        "id": "mattpocock/grill-me",
+        "name": "Grill Me",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "grill-me",
+        "status": "named",
+        "level": "4★",
+        "description": "Conducts a relentless one-question-at-a-time interview about a plan or design, walking every branch of the decision tree with a recommended answer per question, resolving dependencies in order, and substituting codebase exploration wherever a question can be answered empirically.",
+        "title": "The Relentless Interviewer",
+        "catalogRef": "mattpocock-grill-me",
+        "tags": [
+          "design-review",
+          "decision-tree",
+          "socratic-method",
+          "plan-stress-test",
+          "one-question-at-a-time"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md"
+        },
+        "role": "variant"
+      }
+    ],
+    "grill-with-docs": [
+      {
+        "id": "mattpocock/grill-with-docs",
+        "name": "Grill With Docs",
+        "contributor": "mattpocock",
+        "origin": true,
+        "genericSkillRef": "grill-with-docs",
+        "status": "named",
+        "level": "5★",
+        "description": "The ultimate evolution of the grill pattern. Fuses relentless Socratic questioning with deep domain awareness, ensuring every decision is cross-referenced against a persistent ubiquitous language and documented via real-time ADR generation.",
+        "title": "The Domain Sovereign",
+        "catalogRef": "mattpocock-grill-with-docs",
+        "tags": [
+          "design-review",
+          "domain-model",
+          "ubiquitous-language",
+          "adr",
+          "context-md",
+          "socratic-method",
+          "ultimate",
+          "fusion"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md"
+        },
+        "role": "origin"
+      }
+    ],
     "refactor-code": [
       {
         "id": "mattpocock/improve-codebase-architecture",
@@ -913,6 +919,32 @@
           "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md"
         },
         "role": "origin"
+      }
+    ],
+    "ubiquitous-language": [
+      {
+        "id": "mattpocock/ubiquitous-language",
+        "name": "Ubiquitous Language",
+        "contributor": "mattpocock",
+        "origin": false,
+        "genericSkillRef": "ubiquitous-language",
+        "status": "named",
+        "level": "4★",
+        "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+        "title": "The Domain Linguist",
+        "catalogRef": "mattpocock-ubiquitous-language",
+        "tags": [
+          "domain-driven-design",
+          "ddd",
+          "ubiquitous-language",
+          "glossary",
+          "terminology",
+          "alignment"
+        ],
+        "links": {
+          "github": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md"
+        },
+        "role": "variant"
       }
     ],
     "code-explain": [
@@ -1469,6 +1501,7 @@
       "mattpocock/to-issues",
       "mattpocock/to-prd",
       "mattpocock/triage",
+      "mattpocock/ubiquitous-language",
       "mattpocock/write-a-skill",
       "mattpocock/zoom-out"
     ],

@@ -27,7 +27,7 @@
 | ○ /data-visualize | Basic Skill | 2★ | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | 2★ → 1★ | Named | `/deployment-automation` |
 | ◇ Extra Skill: nexu-io/open-design | Extra Skill | 3★ | Evolved | `/design-generation` |
-| ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | 3★ | Evolved | `/design-review` |
+| ◇ Extra Skill: garrytan/design-shotgun | Extra Skill | 3★ | Evolved | `/design-review` |
 | ◇ Extra Skill: Manavarya09/design-extract | Extra Skill | 3★ | Evolved | `/design-system-extraction` |
 | ○ /detect-anomaly | Basic Skill | 2★ | Named | `/detect-anomaly` |
 | ○ /diff-content | Basic Skill | 1★ | Awakened | `/diff-content` |
@@ -53,8 +53,8 @@
 | ○ upsonic/unittest-generator | Basic Skill | 2★ | Named | `/generate-test` |
 | ○ /generate-text | Basic Skill | 0★ | Basic | `/generate-text` |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | 4★ | Hardened | `/ghostwrite` |
-| ◇ Extra Skill: /grill-me | Extra Skill | 4★ | Hardened | `/grill-me` |
-| ◆ Ultimate Skill: /grill-with-docs [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/grill-with-docs` |
+| ◇ Extra Skill: mattpocock/grill-me | Extra Skill | 4★ | Hardened | `/grill-me` |
+| ◆ Ultimate Skill: mattpocock/grill-with-docs | Ultimate Skill | 5★ | Transcendent | `/grill-with-docs` |
 | ◇ Extra Skill: /grounding | Extra Skill | 3★ | Evolved | `/grounding` |
 | ◇ Extra Skill: /guardrails | Extra Skill | 3★ | Evolved | `/guardrails` |
 | ◇ Extra Skill: /humanize-prose | Extra Skill | 4★ | Hardened | `/humanize-prose` |
@@ -124,7 +124,7 @@
 | ○ /translate | Basic Skill | 0★ | Basic | `/translate` |
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | 3★ | Evolved | `/translation-pipeline` |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | 4★ | Hardened | `/tree-of-thought` |
-| ◇ Extra Skill: /ubiquitous-language | Extra Skill | 4★ | Hardened | `/ubiquitous-language` |
+| ◇ Extra Skill: mattpocock/ubiquitous-language | Extra Skill | 4★ | Hardened | `/ubiquitous-language` |
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | 3★ | Evolved | `/vertical-slice-planning` |
 | ◇ Extra Skill: bradautomates/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
 | ○ /vision-qa | Basic Skill | 3★ | Evolved | `/vision-qa` |
@@ -177,7 +177,6 @@
 |---|---|---|
 | `/autonomous-data-scientist` | 5★ | `/data-analysis`, `/math-reason`, `/research` |
 | `/full-stack-developer` | 5★ | `/code-review-pipeline`, `/automated-testing`, `/refactor-code` |
-| `/grill-with-docs` | 5★ | `/grill-me`, `/ubiquitous-language`, `/document-editing` |
 | `/real-time-voice-assistant` | 5★ | `/voice-agent`, `/memory-manage`, `/plan-and-execute` |
 | `/recursive-self-improvement` | 5★ | `/autonomous-debug`, `/evaluate-output`, `/plan-and-execute` |
 | `/scientific-discovery` | 5★ | `/hypothesis-generate`, `/research`, `/math-reason` |
