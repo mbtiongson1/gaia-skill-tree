@@ -134,6 +134,7 @@
 | ◇ Extra Skill: /wiki-search | Extra Skill | 4★ | Hardened | `/wiki-search` |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | 4★ | Hardened | `/workflow-automation` |
 | ○ glincker/readme-generator | Basic Skill | 1★ | Awakened | `/write-report` |
+| ◇ Extra Skill: /x-twitter-automation | Extra Skill | 4★ | Hardened | `/x-twitter-automation` |
 
 ## Unique Skills
 

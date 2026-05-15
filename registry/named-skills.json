@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14",
+  "generatedAt": "2026-05-15",
   "buckets": {
     "automated-testing": [
       {
@@ -1365,6 +1365,27 @@
         "user-journey",
         "visual-regression"
       ]
+    },
+    {
+      "id": "xquik-dev/hermes-tweet",
+      "name": "Hermes Tweet",
+      "contributor": "xquik-dev",
+      "origin": true,
+      "genericSkillRef": "x-twitter-automation",
+      "status": "awakened",
+      "level": "4★",
+      "description": "Installable Hermes Agent skill and plugin for X/Twitter search, reply reading, user lookup, monitoring, follower export, and approval-gated write actions.",
+      "tags": [
+        "x-twitter",
+        "twitter",
+        "social-automation",
+        "hermes-agent",
+        "monitoring"
+      ],
+      "links": {
+        "github": "https://github.com/Xquik-dev/hermes-tweet",
+        "docs": "https://docs.xquik.com/guides/hermes-tweet"
+      }
     }
   ],
   "byContributor": {
@@ -1481,6 +1502,9 @@
     ],
     "vercel": [
       "vercel/find-skills"
+    ],
+    "xquik-dev": [
+      "xquik-dev/hermes-tweet"
     ],
     "yonatangross": [
       "yonatangross/orchestkit-rag"

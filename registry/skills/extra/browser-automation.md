@@ -17,6 +17,7 @@ Navigates web pages, fills forms, clicks elements, and extracts information by c
 ## Unlocks
 - [Autonomous Research Agent](../ultimate/autonomous-research-agent.md)
 - [End-to-End Testing](../extra/e2e-testing.md)
+- [X/Twitter Automation](../extra/x-twitter-automation.md)
 
 ## Fusion Condition
 _None specified._
