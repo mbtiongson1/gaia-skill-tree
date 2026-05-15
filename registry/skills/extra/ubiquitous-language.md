@@ -1,4 +1,4 @@
-# Extra Skill: /ubiquitous-language  [4★ · Hardened]
+# Extra Skill: mattpocock/ubiquitous-language  [4★ · Hardened]
 **ID:** ubiquitous-language  
 **Type:** Extra Skill  
 **Level:** 4★  

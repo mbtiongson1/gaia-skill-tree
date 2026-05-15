@@ -1,7 +1,7 @@
 # Gaia Skill Tree
 
 ```
-GAIA SKILL TREE  v3.9.2  ·  generated 2026-05-15
+GAIA SKILL TREE  v3.9.3  ·  generated 2026-05-15
 ══════════════════════════════════════════════════════════════════════
 Upgrade paths — each legendary shows its full prerequisite chain.
 Shared prerequisites marked (↑ see above) on second occurrence.
@@ -58,14 +58,14 @@ Shared prerequisites marked (↑ see above) on second occurrence.
   │  └─ ○ /error-interpretation  [1★]
   └─ ○ mattpocock/improve-codebase-architecture  [2★]
 
-◆ Ultimate Skill: /grill-with-docs [Unclaimed ✦]  [5★]
+◆ Ultimate Skill: mattpocock/grill-with-docs  [5★]
 ─────────────────────────────────────────────────────────────────
-  ├─ ◇ Extra Skill: /grill-me  [4★]
-  │  ├─ ◇ Extra Skill: mattpocock/grill-with-docs  [3★]
+  ├─ ◇ Extra Skill: mattpocock/grill-me  [4★]
+  │  ├─ ◇ Extra Skill: garrytan/design-shotgun  [3★]
   │  │  ├─ ○ /evaluate-output  [1★]
   │  │  └─ ○ /plan-decompose  [1★]
   │  └─ ○ /self-critique  [1★]
-  ├─ ◇ Extra Skill: /ubiquitous-language  [4★]
+  ├─ ◇ Extra Skill: mattpocock/ubiquitous-language  [4★]
   │  ├─ ○ /extract-entities  [1★]
   │  └─ ○ /requirements-analysis  [2★]
   └─ ○ anthropic/pptx  [0★]

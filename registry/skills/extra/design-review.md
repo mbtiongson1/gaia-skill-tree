@@ -1,4 +1,4 @@
-# Extra Skill: mattpocock/grill-with-docs  [3★ · Evolved]
+# Extra Skill: garrytan/design-shotgun  [3★ · Evolved]
 **ID:** design-review  
 **Type:** Extra Skill  
 **Level:** 3★  

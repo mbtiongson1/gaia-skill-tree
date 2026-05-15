@@ -608,12 +608,12 @@
       "id": "mattpocock-grill-with-docs",
       "name": "mattpocock/grill-with-docs",
       "contributor": "mattpocock",
-      "title": "The Domain-Aware Interrogator",
+      "title": "The Domain Sovereign",
       "description": "Stress-tests a plan against the project's domain model, challenging language against CONTEXT.md, cross-referencing code, and persisting resolved decisions as inline glossary updates and ADRs.",
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md",
       "mapsToGaia": [
-        "design-review"
+        "grill-with-docs"
       ],
       "promotedNamedSkillId": "mattpocock/grill-with-docs",
       "addedAt": "2026-04-30",
@@ -623,7 +623,8 @@
         "ubiquitous-language",
         "adr",
         "context-md",
-        "socratic-method"
+        "socratic-method",
+        "ultimate"
       ]
     },
     {
@@ -635,7 +636,7 @@
       "sourceRepo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
       "mapsToGaia": [
-        "design-review"
+        "grill-me"
       ],
       "promotedNamedSkillId": "mattpocock/grill-me",
       "addedAt": "2026-04-30",
@@ -645,6 +646,26 @@
         "socratic-method",
         "plan-stress-test",
         "one-question-at-a-time"
+      ]
+    },
+    {
+      "id": "mattpocock-ubiquitous-language",
+      "name": "mattpocock/ubiquitous-language",
+      "contributor": "mattpocock",
+      "title": "The Domain Linguist",
+      "description": "Extracts and formalises a project's domain terminology into a shared glossary, enforcing consistent naming across code and conversations to eliminate ambiguity.",
+      "sourceRepo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/ubiquitous-language/SKILL.md",
+      "mapsToGaia": [
+        "ubiquitous-language"
+      ],
+      "promotedNamedSkillId": "mattpocock/ubiquitous-language",
+      "addedAt": "2026-05-15",
+      "tags": [
+        "domain-driven-design",
+        "ddd",
+        "ubiquitous-language",
+        "glossary"
       ]
     },
     {
