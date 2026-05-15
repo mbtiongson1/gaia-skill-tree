@@ -4,16 +4,16 @@
 |---|---|---|---|---|
 | ◇ Extra Skill: /agent-eval | Extra Skill | 3★ | Evolved | `/agent-eval` |
 | ◇ Extra Skill: /agentic-workflow-design | Extra Skill | 5★ → 4★ | Transcendent | `/agentic-workflow-design` |
-| ○ huggingface/hf-cli | Basic Skill | 2★ | Named | `/api-call` |
+| ○ [huggingface](../docs/u/huggingface/)/hf-cli | Basic Skill | 2★ | Named | `/api-call` |
 | ◇ Extra Skill: /architecture-diagram | Extra Skill | 4★ | Hardened | `/architecture-diagram` |
 | ○ /audience-model | Basic Skill | 1★ | Awakened | `/audience-model` |
-| ◇ Extra Skill: 0xdarkmatter/pytest-patterns | Extra Skill | 3★ | Evolved | `/automated-testing` |
+| ◇ Extra Skill: [0xdarkmatter](../docs/u/0xdarkmatter/)/pytest-patterns | Extra Skill | 3★ | Evolved | `/automated-testing` |
 | ◆ Ultimate Skill: /autonomous-data-scientist [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/autonomous-data-scientist` |
-| ◇ Extra Skill: devin-ai/autonomous-swe | Extra Skill | 4★ | Hardened | `/autonomous-debug` |
-| ◆ Ultimate Skill: karpathy/autoresearch | Ultimate Skill | 6★ | Transcendent ★ | `/autonomous-research-agent` |
+| ◇ Extra Skill: [devin-ai](../docs/u/devin-ai/)/autonomous-swe | Extra Skill | 4★ | Hardened | `/autonomous-debug` |
+| ◆ Ultimate Skill: [karpathy](../docs/u/karpathy/)/autoresearch | Ultimate Skill | 6★ | Transcendent ★ | `/autonomous-research-agent` |
 | ◇ Extra Skill: /autonomous-web-research | Extra Skill | 4★ | Hardened | `/autonomous-web-research` |
-| ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | 3★ | Evolved | `/browser-automation` |
-| ◇ Extra Skill: santifer/career-ops | Extra Skill | 3★ | Evolved | `/career-operations` |
+| ◇ Extra Skill: [gooseworks](../docs/u/gooseworks/)/notte-browser | Extra Skill | 3★ | Evolved | `/browser-automation` |
+| ◇ Extra Skill: [santifer](../docs/u/santifer/)/career-ops | Extra Skill | 3★ | Evolved | `/career-operations` |
 | ○ /chain-of-thought | Basic Skill | 1★ | Awakened | `/chain-of-thought` |
 | ○ /chunk-document | Basic Skill | 1★ | Awakened | `/chunk-document` |
 | ○ /cite-sources | Basic Skill | 1★ | Awakened | `/cite-sources` |
@@ -23,26 +23,26 @@
 | ○ /computer-use | Basic Skill | 2★ | Named | `/computer-use` |
 | ◇ Extra Skill: /content-moderation | Extra Skill | 3★ | Evolved | `/content-moderation` |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | 3★ | Evolved | `/conversational-agent` |
-| ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | 3★ | Evolved | `/data-analysis` |
+| ◇ Extra Skill: [huggingface](../docs/u/huggingface/)/huggingface-datasets | Extra Skill | 3★ | Evolved | `/data-analysis` |
 | ○ /data-visualize | Basic Skill | 2★ | Named | `/data-visualize` |
 | ◇ Extra Skill: /deployment-automation | Extra Skill | 2★ → 1★ | Named | `/deployment-automation` |
-| ◇ Extra Skill: nexu-io/open-design | Extra Skill | 3★ | Evolved | `/design-generation` |
-| ◇ Extra Skill: mattpocock/grill-with-docs | Extra Skill | 3★ | Evolved | `/design-review` |
-| ◇ Extra Skill: Manavarya09/design-extract | Extra Skill | 3★ | Evolved | `/design-system-extraction` |
+| ◇ Extra Skill: [nexu-io](../docs/u/nexu-io/)/open-design | Extra Skill | 3★ | Evolved | `/design-generation` |
+| ◇ Extra Skill: [mattpocock](../docs/u/mattpocock/)/grill-with-docs | Extra Skill | 3★ | Evolved | `/design-review` |
+| ◇ Extra Skill: [Manavarya09](../docs/u/Manavarya09/)/design-extract | Extra Skill | 3★ | Evolved | `/design-system-extraction` |
 | ○ /detect-anomaly | Basic Skill | 2★ | Named | `/detect-anomaly` |
 | ○ /diff-content | Basic Skill | 1★ | Awakened | `/diff-content` |
 | ◇ Extra Skill: /document-analyst | Extra Skill | 3★ | Evolved | `/document-analyst` |
 | ◇ Extra Skill: /document-digitization | Extra Skill | 3★ | Evolved | `/document-digitization` |
-| ○ anthropic/pptx | Basic Skill | 0★ | Basic | `/document-editing` |
+| ○ [anthropic](../docs/u/anthropic/)/pptx | Basic Skill | 0★ | Basic | `/document-editing` |
 | ◇ Extra Skill: /e2e-testing | Extra Skill | 3★ | Evolved | `/e2e-testing` |
 | ○ /embed-text | Basic Skill | 1★ | Awakened | `/embed-text` |
 | ○ /error-interpretation | Basic Skill | 1★ | Awakened | `/error-interpretation` |
 | ○ /evaluate-output | Basic Skill | 1★ | Awakened | `/evaluate-output` |
 | ○ /execute-bash | Basic Skill | 1★ | Awakened | `/execute-bash` |
 | ○ /extract-entities | Basic Skill | 1★ | Awakened | `/extract-entities` |
-| ◉ Unique Skill: nousresearch/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
-| ◉ Unique Skill: openai/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
-| ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
+| ◉ Unique Skill: [nousresearch](../docs/u/nousresearch/)/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
+| ◉ Unique Skill: [openai](../docs/u/openai/)/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
+| ◉ Unique Skill: [huggingface](../docs/u/huggingface/)/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
 | ○ /format-output | Basic Skill | 0★ | Basic | `/format-output` |
 | ◆ Ultimate Skill: /full-stack-developer [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/full-stack-developer` |
 | ◇ Extra Skill: /function-calling | Extra Skill | 3★ | Evolved | `/function-calling` |
@@ -50,7 +50,7 @@
 | ◇ Extra Skill: /gaia-meta-audit | Extra Skill | 3★ | Evolved | `/gaia-meta-audit` |
 | ◇ Extra Skill: /gaia-triage | Extra Skill | 2★ | Named | `/gaia-triage` |
 | ○ /generate-sql | Basic Skill | 2★ | Named | `/generate-sql` |
-| ○ upsonic/unittest-generator | Basic Skill | 2★ | Named | `/generate-test` |
+| ○ [upsonic](../docs/u/upsonic/)/unittest-generator | Basic Skill | 2★ | Named | `/generate-test` |
 | ○ /generate-text | Basic Skill | 0★ | Basic | `/generate-text` |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | 4★ | Hardened | `/ghostwrite` |
 | ◇ Extra Skill: /grill-me | Extra Skill | 4★ | Hardened | `/grill-me` |
@@ -60,10 +60,10 @@
 | ◇ Extra Skill: /humanize-prose | Extra Skill | 4★ | Hardened | `/humanize-prose` |
 | ○ /hypothesis-generate | Basic Skill | 2★ | Named | `/hypothesis-generate` |
 | ○ /image-caption | Basic Skill | 2★ | Named | `/image-caption` |
-| ○ mattpocock/triage | Basic Skill | 4★ | Hardened | `/issue-triage` |
-| ◇ Extra Skill: safishamsi/graphify | Extra Skill | 3★ | Evolved | `/knowledge-graph-build` |
+| ○ [mattpocock](../docs/u/mattpocock/)/triage | Basic Skill | 4★ | Hardened | `/issue-triage` |
+| ◇ Extra Skill: [safishamsi](../docs/u/safishamsi/)/graphify | Extra Skill | 3★ | Evolved | `/knowledge-graph-build` |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | 4★ | Hardened | `/knowledge-harvest` |
-| ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | 4★ | Hardened | `/literature-review` |
+| ◇ Extra Skill: [huggingface](../docs/u/huggingface/)/huggingface-papers | Extra Skill | 4★ | Hardened | `/literature-review` |
 | ○ /logical-inference | Basic Skill | 1★ | Awakened | `/logical-inference` |
 | ○ /math-reason | Basic Skill | 2★ | Named | `/math-reason` |
 | ◇ Extra Skill: /mcp-debugger-control | Extra Skill | 4★ → 3★ | Hardened | `/mcp-debugger-control` |
@@ -72,24 +72,24 @@
 | ○ /memory-manage | Basic Skill | 2★ | Named | `/memory-manage` |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | 4★ | Hardened | `/ml-pipeline` |
 | ◇ Extra Skill: /multi-agent-debate | Extra Skill | 4★ | Hardened | `/multi-agent-debate` |
-| ◆ Ultimate Skill: ruvnet/flow-nexus-swarm | Ultimate Skill | 5★ | Transcendent | `/multi-agent-orchestration-v` |
-| ◇ Extra Skill: huggingface/transformers-js | Extra Skill | 3★ → 2★ | Evolved | `/multimodal-reasoning` |
+| ◆ Ultimate Skill: [ruvnet](../docs/u/ruvnet/)/flow-nexus-swarm | Ultimate Skill | 5★ | Transcendent | `/multi-agent-orchestration-v` |
+| ◇ Extra Skill: [huggingface](../docs/u/huggingface/)/transformers-js | Extra Skill | 3★ → 2★ | Evolved | `/multimodal-reasoning` |
 | ○ /parse-html | Basic Skill | 1★ | Awakened | `/parse-html` |
 | ○ /parse-json | Basic Skill | 1★ | Awakened | `/parse-json` |
 | ○ /parse-pdf | Basic Skill | 1★ | Awakened | `/parse-pdf` |
 | ◇ Extra Skill: /plan-and-execute | Extra Skill | 4★ | Hardened | `/plan-and-execute` |
 | ○ /plan-decompose | Basic Skill | 1★ | Awakened | `/plan-decompose` |
-| ◇ Extra Skill: mattpocock/to-prd | Extra Skill | 4★ | Hardened | `/prd-generation` |
+| ◇ Extra Skill: [mattpocock](../docs/u/mattpocock/)/to-prd | Extra Skill | 4★ | Hardened | `/prd-generation` |
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | 4★ | Hardened | `/prediction-market-analysis` |
 | ○ /prompt-injection-defense | Basic Skill | 3★ | Evolved | `/prompt-injection-defense` |
 | ◇ Extra Skill: /prompt-optimization | Extra Skill | 4★ | Hardened | `/prompt-optimization` |
-| ○ garrytan/office-hours | Basic Skill | 0★ | Basic | `/question-answer` |
-| ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | 3★ | Evolved | `/rag-pipeline` |
+| ○ [garrytan](../docs/u/garrytan/)/office-hours | Basic Skill | 0★ | Basic | `/question-answer` |
+| ◇ Extra Skill: [yonatangross](../docs/u/yonatangross/)/orchestkit-rag | Extra Skill | 3★ | Evolved | `/rag-pipeline` |
 | ○ /rank | Basic Skill | 1★ | Awakened | `/rank` |
 | ◇ Extra Skill: /re-act-reasoning | Extra Skill | 3★ | Evolved | `/re-act-reasoning` |
 | ◆ Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/real-time-voice-assistant` |
 | ◆ Ultimate Skill: /recursive-self-improvement [Unclaimed ✦] | Ultimate Skill | 5★ | Transcendent | `/recursive-self-improvement` |
-| ○ mattpocock/improve-codebase-architecture | Basic Skill | 2★ | Named | `/refactor-code` |
+| ○ [mattpocock](../docs/u/mattpocock/)/improve-codebase-architecture | Basic Skill | 2★ | Named | `/refactor-code` |
 | ◇ Extra Skill: /registry-curation | Extra Skill | 4★ | Hardened | `/registry-curation` |
 | ◇ Extra Skill: /release-automation | Extra Skill | 2★ | Named | `/release-automation` |
 | ○ /requirements-analysis | Basic Skill | 2★ | Named | `/requirements-analysis` |
@@ -100,13 +100,13 @@
 | ○ /scientific-visualization | Basic Skill | 2★ | Named | `/scientific-visualization` |
 | ◇ Extra Skill: /scientific-writing | Extra Skill | 3★ | Evolved | `/scientific-writing` |
 | ○ /score-relevance | Basic Skill | 1★ | Awakened | `/score-relevance` |
-| ◇ Extra Skill: garrytan/cso | Extra Skill | 2★ | Named | `/security-audit` |
-| ◉ Unique Skill: openai/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
+| ◇ Extra Skill: [garrytan](../docs/u/garrytan/)/cso | Extra Skill | 2★ | Named | `/security-audit` |
+| ◉ Unique Skill: [openai](../docs/u/openai/)/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
 | ○ /self-critique | Basic Skill | 1★ | Awakened | `/self-critique` |
-| ◉ Unique Skill: huggingface/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
+| ◉ Unique Skill: [huggingface](../docs/u/huggingface/)/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
 | ○ /sentiment-analysis | Basic Skill | 0★ | Basic | `/sentiment-analysis` |
 | ◇ Extra Skill: /skill-authoring | Extra Skill | 4★ | Hardened | `/skill-authoring` |
-| ○ vercel/find-skills | Basic Skill | 0★ | Basic | `/skill-discovery` |
+| ○ [vercel](../docs/u/vercel/)/find-skills | Basic Skill | 0★ | Basic | `/skill-discovery` |
 | ◇ Extra Skill: /skill-performance-benchmarking | Extra Skill | 4★ | Hardened | `/skill-performance-benchmarking` |
 | ◇ Extra Skill: /skill-security-analysis | Extra Skill | 4★ | Hardened | `/skill-security-analysis` |
 | ○ /speech-to-text | Basic Skill | 2★ | Named | `/speech-to-text` |
@@ -118,22 +118,22 @@
 | ◇ Extra Skill: /text-to-sql-pipeline | Extra Skill | 3★ | Evolved | `/text-to-sql-pipeline` |
 | ○ /tokenize | Basic Skill | 0★ | Basic | `/tokenize` |
 | ◇ Extra Skill: /tool-chaining | Extra Skill | 3★ | Evolved | `/tool-chaining` |
-| ◇ Extra Skill: anthropic/skill-creator | Extra Skill | 4★ | Hardened | `/tool-creation` |
+| ◇ Extra Skill: [anthropic](../docs/u/anthropic/)/skill-creator | Extra Skill | 4★ | Hardened | `/tool-creation` |
 | ○ /tool-select | Basic Skill | 1★ | Awakened | `/tool-select` |
 | ○ /tool-use | Basic Skill | 1★ | Awakened | `/tool-use` |
 | ○ /translate | Basic Skill | 0★ | Basic | `/translate` |
 | ◇ Extra Skill: /translation-pipeline | Extra Skill | 3★ | Evolved | `/translation-pipeline` |
 | ◇ Extra Skill: /tree-of-thought | Extra Skill | 4★ | Hardened | `/tree-of-thought` |
 | ◇ Extra Skill: /ubiquitous-language | Extra Skill | 4★ | Hardened | `/ubiquitous-language` |
-| ◇ Extra Skill: mattpocock/to-issues | Extra Skill | 3★ | Evolved | `/vertical-slice-planning` |
-| ◇ Extra Skill: bradautomates/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
+| ◇ Extra Skill: [mattpocock](../docs/u/mattpocock/)/to-issues | Extra Skill | 3★ | Evolved | `/vertical-slice-planning` |
+| ◇ Extra Skill: [bradautomates](../docs/u/bradautomates/)/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
 | ○ /vision-qa | Basic Skill | 3★ | Evolved | `/vision-qa` |
 | ◇ Extra Skill: /voice-agent | Extra Skill | 3★ → 2★ | Evolved | `/voice-agent` |
 | ◇ Extra Skill: /web-scrape | Extra Skill | 3★ | Evolved | `/web-scrape` |
 | ○ /web-search | Basic Skill | 1★ | Awakened | `/web-search` |
 | ◇ Extra Skill: /wiki-search | Extra Skill | 4★ | Hardened | `/wiki-search` |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | 4★ | Hardened | `/workflow-automation` |
-| ○ glincker/readme-generator | Basic Skill | 1★ | Awakened | `/write-report` |
+| ○ [glincker](../docs/u/glincker/)/readme-generator | Basic Skill | 1★ | Awakened | `/write-report` |
 
 ## Unique Skills
 
@@ -141,11 +141,11 @@
 
 | Name | Class | Rank | Tier | Skill Call |
 |---|---|---|---|---|
-| ◉ Unique Skill: nousresearch/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
-| ◉ Unique Skill: openai/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
-| ◉ Unique Skill: huggingface/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
-| ◉ Unique Skill: openai/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
-| ◉ Unique Skill: huggingface/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
+| ◉ Unique Skill: [nousresearch](../docs/u/nousresearch/)/feed-monitoring | Unique Skill | 4★ | Hardened | `/feed-monitoring` |
+| ◉ Unique Skill: [openai](../docs/u/openai/)/few-shot-learning | Unique Skill | 4★ | Hardened | `/few-shot-learning` |
+| ◉ Unique Skill: [huggingface](../docs/u/huggingface/)/huggingface-llm-trainer | Unique Skill | 4★ | Hardened | `/fine-tune` |
+| ◉ Unique Skill: [openai](../docs/u/openai/)/self-consistency | Unique Skill | 4★ | Hardened | `/self-consistency` |
+| ◉ Unique Skill: [huggingface](../docs/u/huggingface/)/semantic-cache | Unique Skill | 4★ | Hardened | `/semantic-cache` |
 
 ## Pure / Undeveloped
 
