@@ -13,6 +13,7 @@
 | ◇ Extra Skill: gooseworks/notte-browser | Extra Skill | Web Search, Computer Use | 3★ |  |
 | ◇ Extra Skill: santifer/career-ops | Extra Skill | Autonomous Web Research, Summarize, Document Editing | 3★ |  |
 | ◇ Extra Skill: /code-review-pipeline | Extra Skill | Code Generation, Diff Content, Evaluate Output | 3★ |  |
+| ◇ Extra Skill: /collaborative-diagramming | Extra Skill | Data Visualize | 2★ |  |
 | ◇ Extra Skill: /content-moderation | Extra Skill | Classify, Sentiment Analysis, Extract Entities | 3★ |  |
 | ◇ Extra Skill: /conversational-agent | Extra Skill | Question Answer, Memory Manage, Route Intent | 3★ | Requires persistent memory store across turns. |
 | ◇ Extra Skill: huggingface/huggingface-datasets | Extra Skill | Generate SQL, Data Visualize, Summarize | 3★ |  |
@@ -28,6 +29,7 @@
 | ◇ Extra Skill: /gaia-audit | Extra Skill | Retrieve, Cite Sources, Evaluate Output | 2★ | Requires a specific Gaia skill ID, named skill ID, or real-skill catalog item plus access to the registry source files and current public evidence sources. |
 | ◇ Extra Skill: /gaia-meta-audit | Extra Skill | Gaia Audit, Registry Curation, Detect Anomaly | 3★ | Requires the current registry, named-skill index, real-skill catalog, and permission to compare against current source URLs or discovery indexes. |
 | ◇ Extra Skill: /gaia-triage | Extra Skill | Issue Triage, Retrieve | 2★ | Requires access to the mbtiongson1/gaia-skill-tree repository and GitHub CLI (gh) for execution. |
+| ◇ Extra Skill: /generative-media | Extra Skill | Data Visualize | 3★ → 2★ |  |
 | ◇ Extra Skill: /ghostwrite | Extra Skill | Research, Write Report, Audience Model | 4★ | Requires research output as input context. |
 | ◇ Extra Skill: mattpocock/grill-me | Extra Skill | Design Review, Self-Critique | 4★ | Enforces a strict questioning loop that prevents the agent from proceeding to implementation until all branches are resolved. |
 | ◆ Ultimate Skill: mattpocock/grill-with-docs | Ultimate Skill | Grill Me, Ubiquitous Language, Document Editing | 5★ | Requires the agent to maintain a live glossary (CONTEXT.md) and generate ADRs for all non-trivial trade-offs discovered during the grill. |
@@ -37,6 +39,7 @@
 | ◇ Extra Skill: safishamsi/graphify | Extra Skill | Extract Entities, Logical Inference | 3★ |  |
 | ◇ Extra Skill: /knowledge-harvest | Extra Skill | Web Scrape, Extract Entities, Embed Text | 4★ |  |
 | ◇ Extra Skill: huggingface/huggingface-papers | Extra Skill | Research, Cite Sources, Summarize | 4★ | Requires access to academic databases (PubMed, bioRxiv, ChEMBL, or equivalent). |
+| ◇ Extra Skill: /mathematical-animation | Extra Skill | Data Visualize | 3★ → 2★ |  |
 | ◇ Extra Skill: /mcp-debugger-control | Extra Skill | MCP Integration, Refactor Code | 4★ → 3★ | Requires a target debugger integration and a supported MCP client. |
 | ◇ Extra Skill: /mcp-server-creation | Extra Skill | MCP Integration, Tool Creation, API Call | 4★ | Requires an integration target, a supported MCP SDK, tool schemas, authentication handling, and local validation against an MCP client. |
 | ◇ Extra Skill: /ml-pipeline | Extra Skill | Data Analysis, Automated Testing, Code Generation | 4★ | Requires access to a container orchestration environment and model registry. |

@@ -261,6 +261,7 @@ Thank you to everyone who has expanded the Gaia registry.
 | [@GLINCKER](https://github.com/GLINCKER) | Named skill: `glincker/readme-generator` |
 | [@spring-ai-alibaba](https://github.com/spring-ai-alibaba) | Named skill: `spring-ai/readme-generate` |
 | [@balukosuri](https://github.com/balukosuri) | Evidence: community reproduction of Karpathy's autoresearch as a universal skill |
+| @gemini-cli | Curation: added generative-media, mathematical-animation, and other generic skills from Hermes ecosystem |
 
 ---
 
