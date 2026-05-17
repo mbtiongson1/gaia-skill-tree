@@ -1,3 +1,16 @@
+---
+id: stanfordnlp/dspy
+name: DSPy
+contributor: stanfordnlp
+origin: true
+genericSkillRef: prompt-optimization
+status: named
+level: 3★
+description: Declarative programming of language model pipelines, automatically optimizing prompts and RAG retrieval using bootstrapping and teleprompters.
+title: "The Programmatic Prompt Engineer"
+catalogRef: stanfordnlp-dspy
+---
+
 # DSPy
 
 **The Programmatic Prompt Engineer**

@@ -49,7 +49,7 @@
 | ◇ Extra Skill: /plan-and-execute | Extra Skill | Route Intent, Plan and Decompose, Tool Select | 4★ |  |
 | ◇ Extra Skill: mattpocock/to-prd | Extra Skill | Write Report, Plan and Decompose | 4★ |  |
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | Data Analysis, Web Search, Statistical Analysis | 4★ | Requires read-only market data sources and clear separation between analysis output and financial advice or trade execution. |
-| ◇ Extra Skill: /prompt-optimization | Extra Skill | Evaluate Output, Generate Text | 4★ |  |
+| ◇ Extra Skill: stanfordnlp/dspy | Extra Skill | Evaluate Output, Generate Text | 4★ |  |
 | ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | Retrieve, Chunk Document, Embed Text, Score Relevance, Tokenize, Rank | 3★ |  |
 | ◇ Extra Skill: /re-act-reasoning | Extra Skill | Plan and Decompose, Tool Use | 3★ |  |
 | ◆ Ultimate Skill: /real-time-voice-assistant [Unclaimed ✦] | Ultimate Skill | Voice Agent, Memory Manage, Plan and Execute | 5★ | Requires real-time audio pipeline, <500ms end-to-end latency target, and persistent session store. Minimum 3 Class A/B evidence sources. |
@@ -73,7 +73,7 @@
 | ◇ Extra Skill: mattpocock/to-issues | Extra Skill | Plan and Decompose, Route Intent | 3★ |  |
 | ◇ Extra Skill: bradautomates/claude-video | Extra Skill | Multimodal Reasoning, Speech to Text | 3★ | Requires FFmpeg and multimodal LLM support. |
 | ◇ Extra Skill: /voice-agent | Extra Skill | Speech to Text, Question Answer, Text to Speech | 3★ → 2★ | Requires real-time audio I/O or audio file access. |
-| ◇ Extra Skill: /web-scrape | Extra Skill | Web Search, Parse HTML, Extract Entities | 3★ | Structured output mode required. |
+| ◇ Extra Skill: firecrawl/firecrawl | Extra Skill | Web Search, Parse HTML, Extract Entities | 3★ | Structured output mode required. |
 | ◇ Extra Skill: /wiki-search | Extra Skill | Retrieve, Embed Text, Summarize | 4★ | Requires an accessible local wiki or markdown knowledge-base directory and a consistent linking or indexing convention. |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | Plan and Decompose, Tool Use, API Call | 4★ |  |
 | ◇ Extra Skill: /x-twitter-automation | Extra Skill | Browser Automation, Web Scrape, Workflow Automation | 4★ | Requires configured X/Twitter access, repeatable read paths, and explicit approval gates before posting tweets, replies, DMs, or other write actions. |

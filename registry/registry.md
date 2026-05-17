@@ -88,7 +88,7 @@
 | ◇ Extra Skill: /prediction-market-analysis | Extra Skill | 4★ | Hardened | `/prediction-market-analysis` |
 | ○ /project-management | Basic Skill | 2★ | Named | `/project-management` |
 | ○ /prompt-injection-defense | Basic Skill | 3★ | Evolved | `/prompt-injection-defense` |
-| ◇ Extra Skill: /prompt-optimization | Extra Skill | 4★ | Hardened | `/prompt-optimization` |
+| ◇ Extra Skill: stanfordnlp/dspy | Extra Skill | 4★ | Hardened | `/prompt-optimization` |
 | ○ garrytan/office-hours | Basic Skill | 0★ | Basic | `/question-answer` |
 | ◇ Extra Skill: yonatangross/orchestkit-rag | Extra Skill | 3★ | Evolved | `/rag-pipeline` |
 | ○ /rank | Basic Skill | 1★ | Awakened | `/rank` |
@@ -135,7 +135,7 @@
 | ◇ Extra Skill: bradautomates/claude-video | Extra Skill | 3★ | Evolved | `/video-intelligence` |
 | ○ /vision-qa | Basic Skill | 3★ | Evolved | `/vision-qa` |
 | ◇ Extra Skill: /voice-agent | Extra Skill | 3★ → 2★ | Evolved | `/voice-agent` |
-| ◇ Extra Skill: /web-scrape | Extra Skill | 3★ | Evolved | `/web-scrape` |
+| ◇ Extra Skill: firecrawl/firecrawl | Extra Skill | 3★ | Evolved | `/web-scrape` |
 | ○ /web-search | Basic Skill | 1★ | Awakened | `/web-search` |
 | ◇ Extra Skill: /wiki-search | Extra Skill | 4★ | Hardened | `/wiki-search` |
 | ◇ Extra Skill: /workflow-automation | Extra Skill | 4★ | Hardened | `/workflow-automation` |

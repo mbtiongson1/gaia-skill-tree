@@ -786,6 +786,35 @@
       "version": "0.2.0"
     },
     {
+      "id": "collaborative-diagramming",
+      "name": "Collaborative Diagramming",
+      "type": "extra",
+      "level": "2★",
+      "rarity": "common",
+      "description": "Generates and manages digital diagrams, flowcharts, and architecture maps in web-native or collaborative formats, optimized for hand-drawn aesthetics or structured vector output.",
+      "prerequisites": [
+        "data-visualize"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/excalidraw/excalidraw",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Excalidraw -- virtual whiteboard for sketching hand-drawn like diagrams; widespread adoption for developer documentation."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
+      "version": "0.1.0"
+    },
+    {
       "id": "computer-use",
       "name": "Computer Use",
       "type": "basic",
@@ -1836,6 +1865,38 @@
       "version": "0.1.0"
     },
     {
+      "id": "generative-media",
+      "name": "Generative Media",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "rare",
+      "description": "Generates and manipulates images, video, and audio through complex node-based or scripted generative workflows, managing model dependencies and parameter injection.",
+      "prerequisites": [
+        "data-visualize"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/comfyanonymous/ComfyUI",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "ComfyUI -- most powerful and modular stable diffusion GUI and backend; node-based graph execution for generative media."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
+      "version": "0.1.0"
+    },
+    {
       "id": "ghostwrite",
       "name": "Ghostwrite",
       "type": "extra",
@@ -2234,6 +2295,37 @@
       "version": "0.1.0"
     },
     {
+      "id": "knowledge-management",
+      "name": "Knowledge Management",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "common",
+      "description": "Organizes, relates, and retrieves information across structured pages, databases, and shared knowledge bases, maintaining semantic links between information nodes.",
+      "prerequisites": [
+        "api-call"
+      ],
+      "derivatives": [
+        "knowledge-harvest"
+      ],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "https://hermes-agent.nousresearch.com/docs/skills",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Hermes Skills Hub: Notion integration for structured notes and databases."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
+      "version": "0.1.0"
+    },
+    {
       "id": "literature-review",
       "name": "Literature Review",
       "type": "extra",
@@ -2324,6 +2416,38 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
       "version": "0.2.0"
+    },
+    {
+      "id": "mathematical-animation",
+      "name": "Mathematical Animation",
+      "type": "extra",
+      "level": "3★",
+      "rarity": "rare",
+      "description": "Produces programmatic mathematical and algorithmic animations with high pedagogical and visual quality, utilizing LaTeX for notation and geometric coordinate systems for spatial layout.",
+      "prerequisites": [
+        "data-visualize"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/ManimCommunity/manim",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Manim Community Edition -- programmatic animation engine for explanatory math videos; inspired by 3Blue1Brown."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "demerits": [
+        "heavyweight-dependency"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
+      "version": "0.1.0"
     },
     {
       "id": "mcp-debugger-control",
@@ -2473,6 +2597,35 @@
       "createdAt": "2026-04-28",
       "updatedAt": "2026-04-28",
       "version": "0.2.0"
+    },
+    {
+      "id": "ml-artifact-management",
+      "name": "ML Artifact Management",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "uncommon",
+      "description": "Manages machine learning models, datasets, and experiment logs through centralized hub or tracking repositories, handling versioning and metadata extraction.",
+      "prerequisites": [
+        "api-call"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "B",
+          "source": "https://github.com/huggingface/huggingface_hub",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Hugging Face Hub CLI -- standard interface for managing ML artifacts."
+        }
+      ],
+      "knownAgents": [
+        "huggingface/hf-cli"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
+      "version": "0.1.0"
     },
     {
       "id": "ml-pipeline",
@@ -2912,6 +3065,35 @@
       "status": "provisional",
       "createdAt": "2026-05-06",
       "updatedAt": "2026-05-06",
+      "version": "0.1.0"
+    },
+    {
+      "id": "project-management",
+      "name": "Project Management",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "uncommon",
+      "description": "Manages issues, tasks, projects, and team workflows through structured project management platforms, handling state transitions and priority levels.",
+      "prerequisites": [
+        "issue-triage"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "https://hermes-agent.nousresearch.com/docs/skills",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Hermes Skills Hub: Linear integration for issue and project management."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
       "version": "0.1.0"
     },
     {
@@ -4866,6 +5048,35 @@
       "status": "provisional",
       "createdAt": "2026-04-30",
       "updatedAt": "2026-04-30",
+      "version": "0.1.0"
+    },
+    {
+      "id": "workspace-automation",
+      "name": "Workspace Automation",
+      "type": "basic",
+      "level": "2★",
+      "rarity": "uncommon",
+      "description": "Orchestrates productivity tasks across email, calendar, drive, and documents through unified office suite integrations, automating scheduling and file management.",
+      "prerequisites": [
+        "api-call"
+      ],
+      "derivatives": [],
+      "conditions": "",
+      "evidence": [
+        {
+          "class": "C",
+          "source": "https://hermes-agent.nousresearch.com/docs/skills",
+          "evaluator": "gemini-cli",
+          "date": "2026-05-17",
+          "notes": "Hermes Skills Hub: Google Workspace integration for unified email, calendar, and drive access."
+        }
+      ],
+      "knownAgents": [
+        "NousResearch/hermes-agent"
+      ],
+      "status": "provisional",
+      "createdAt": "2026-05-17",
+      "updatedAt": "2026-05-17",
       "version": "0.1.0"
     },
     {
