@@ -1,4 +1,4 @@
-# /deployment-automation  [2★ · Named]
+# [garrytan](../../../docs/u/garrytan/)/land-and-deploy  [2★ · Named]
 **ID:** deployment-automation  
 **Type:** Extra Skill  
 **Level:** 2★  
@@ -15,9 +15,10 @@ Automate CI/CD pipeline execution and deployment to target environments — buil
 ## Prerequisites
 - [Workflow Automation](../extra/workflow-automation.md)
 - [Execute Bash](../basic/execute-bash.md)
+- [Finishing a Development Branch](../extra/finishing-a-development-branch.md)
 
 ## Unlocks
-_None._
+- [Founder Mode](../ultimate/gstack.md)
 
 ## Fusion Condition
 Requires environment credentials and a configured pipeline definition.
