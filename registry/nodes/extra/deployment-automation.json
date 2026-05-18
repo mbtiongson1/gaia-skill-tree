@@ -7,7 +7,8 @@
   "description": "Automate CI/CD pipeline execution and deployment to target environments — build, test, artifact publishing, environment promotion, and rollback strategies.",
   "prerequisites": [
     "workflow-automation",
-    "execute-bash"
+    "execute-bash",
+    "finishing-a-development-branch"
   ],
   "derivatives": [
     "gstack"
