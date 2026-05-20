@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "version": "3.20.4",
-  "generatedAt": "2026-05-20T00:02:47.514315Z",
+  "version": "3.20.5",
+  "generatedAt": "2026-05-20T00:05:55.834635Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -1816,7 +1816,6 @@
       "derivatives": [
         "content-moderation",
         "document-analyst",
-        "document-digitization",
         "knowledge-graph-build",
         "knowledge-harvest",
         "web-scrape"
@@ -2002,7 +2001,6 @@
       "prerequisites": [],
       "derivatives": [
         "document-analyst",
-        "document-digitization",
         "text-to-sql-pipeline",
         "humanize-prose",
         "architecture-diagram",
