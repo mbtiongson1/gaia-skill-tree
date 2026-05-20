@@ -68,3 +68,4 @@ When `gaia-curate` discovers a new marketplace, registry, or skill collection re
 3. Commit the change in the same PR as the skill additions that led to its discovery.
 
 _Never remove a source; mark it stale with a `<!-- stale: <reason> -->` comment if it goes offline._
+| langgenius/dify | https://github.com/langgenius/dify | github-repo | `gh api repos/langgenius/dify/contents/.agents/skills` |
