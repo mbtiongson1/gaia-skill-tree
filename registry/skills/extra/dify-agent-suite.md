@@ -1,8 +1,8 @@
 # /dify-agent-suite  [1★ · Awakened]
-**ID:** dify-agent-suite
-**Type:** Extra Skill
-**Level:** 1★
-**Tier:** Awakened
+**ID:** dify-agent-suite  
+**Type:** Extra Skill  
+**Level:** 1★  
+**Tier:** Awakened  
 **Skill Call:** `/dify-agent-suite`
 
 ---
