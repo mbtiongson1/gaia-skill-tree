@@ -5116,6 +5116,18 @@ footer::before {
   --glow-IV: 0 0 14px var(--rank-4), 0 0 32px rgba(232, 121, 249, .45);
   --glow-V: 0 0 18px var(--rank-5), 0 0 40px rgba(251, 191, 36, .5);
   --glow-VI: 0 0 20px var(--rank-6), 0 0 50px rgba(251, 191, 36, .6), 0 0 80px rgba(56, 189, 248, .3);
+
+  /* Cluster palette — 8 semantic groups from ML k-means (rgb triplets,
+     no alpha, so callers can compose rgba() freely). Override on a
+     host page's :root to retheme the cluster-colour mode. */
+  --cluster-0-rgb: 78, 155, 255;
+  --cluster-1-rgb: 249, 115, 22;
+  --cluster-2-rgb: 16, 185, 129;
+  --cluster-3-rgb: 239, 68, 68;
+  --cluster-4-rgb: 139, 92, 246;
+  --cluster-5-rgb: 236, 72, 153;
+  --cluster-6-rgb: 34, 211, 238;
+  --cluster-7-rgb: 251, 113, 133;
 }
 
 .skill-explorer {
