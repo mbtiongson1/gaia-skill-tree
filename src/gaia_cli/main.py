@@ -64,7 +64,6 @@ from gaia_cli.promotion import (
     detect_unique_candidates,
     load_promotion_candidates,
     promote_from_candidates,
-    promote_skill,
     promotable_candidates,
     promotion_state,
     write_promotion_candidates,
