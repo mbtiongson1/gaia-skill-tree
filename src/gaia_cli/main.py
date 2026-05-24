@@ -23,6 +23,7 @@ from gaia_cli.push import (
 from gaia_cli.embeddings import generate_embeddings
 from gaia_cli.semantic_search import search as semantic_search
 from gaia_cli.name import promote_to_named, update_batch_lifecycle
+<<<<<<< HEAD
 from gaia_cli.install import (
     install_skill,
     install_suite,
@@ -31,6 +32,9 @@ from gaia_cli.install import (
     interactive_install,
     list_available,
 )
+=======
+from gaia_cli.install import install_skill, install_suite, update_skills, uninstall_skill, interactive_install, list_available
+>>>>>>> origin/main
 from gaia_cli.graph import graph_command
 from gaia_cli.commands.stats import stats_command
 from gaia_cli.commands.dev import (
@@ -314,6 +318,7 @@ def init_command(args):
         # Auto-install git hooks
         hook_script = os.path.join(registry_abs, "scripts", "install-git-hooks.sh")
         if os.path.exists(hook_script):
+<<<<<<< HEAD
             try:
                 # Windows doesn't always have bash in PATH; skip or use sh if available
                 if sys.platform == "win32":
@@ -339,6 +344,9 @@ def init_command(args):
                     print("  git hooks:  installed automatically")
             except Exception:
                 print("  git hooks:  failed to install automatically")
+=======
+            print("  git hooks:  found hook script (run manually if trusted: sh scripts/install-git-hooks.sh)")
+>>>>>>> origin/main
 
 
 def _print_scan_results(scan_result, resolved, args, canon, ctx, graph_data):
@@ -1273,7 +1281,10 @@ def name_command(args):
 
 
 def install_command(args):
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     if args.list:
         interactive_install(args.registry)
         return
@@ -1293,7 +1304,10 @@ def install_command(args):
 
 
 def uninstall_command(args):
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     success = uninstall_skill(args.skill_id)
     if not success:
         sys.exit(1)
@@ -1333,7 +1347,10 @@ def _pending_skills(registry_path: str, username: str | None = None) -> list[dic
 
 
 def skills_command(args):
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     config = load_config() or {}
     username = config.get("gaiaUser") or config.get("username")
     pending = (
@@ -2034,6 +2051,7 @@ def get_parser():
         help="Skip rebuilding docs and graph assets after updating",
     )
 
+<<<<<<< HEAD
     dev_evidence = dev_sub.add_parser("evidence", help="Add evidence to a skill")
     dev_evidence.add_argument("skill_id", help="Skill ID to add evidence to")
     dev_evidence.add_argument("source", help="URL to the evidence source")
@@ -2052,6 +2070,9 @@ def get_parser():
         action="store_true",
         help="Skip rebuilding docs and graph assets after adding evidence",
     )
+=======
+    dev_sub.add_parser('build', help="Regenerate registry and documentation site")
+>>>>>>> origin/main
 
     dev_sub.add_parser("build", help="Regenerate registry and documentation site")
 
@@ -2097,6 +2118,7 @@ def get_parser():
         epilog=SKILLS_USAGE,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+<<<<<<< HEAD
     skills_sub = skills_parser.add_subparsers(dest="skills_command")
     skills_list = skills_sub.add_parser("list", help="List available named skills")
     skills_list.add_argument(
@@ -2139,6 +2161,26 @@ def get_parser():
     )
     skills_uninstall.add_argument("skill_id", help="Skill ID to uninstall")
     hook_parser = subparsers.add_parser("_hook", help=argparse.SUPPRESS)
+=======
+    skills_sub = skills_parser.add_subparsers(dest='skills_command')
+    skills_list = skills_sub.add_parser('list', help="List available named skills")
+    skills_list.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_search = skills_sub.add_parser('search', help="Search named skills")
+    skills_search.add_argument('query', help="Search query")
+    skills_search.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_info = skills_sub.add_parser('info', help="Show details for a named skill")
+    skills_info.add_argument('skill_id', help="Skill ID to inspect")
+    skills_info.add_argument('--exclude-pending', action='store_true', help="Hide pending skill proposals")
+    skills_install = skills_sub.add_parser('install', help="Install a named skill")
+    skills_install.add_argument('skill_id', metavar='skill', help="Skill ID, catalogRef, or unique bare slug to install")
+    skills_install.add_argument('--suite', action='store_true', help="Install as a suite (recursive)")
+    skills_install.add_argument('--global', dest='install_global', action='store_true', help='Install to ~/.gaia/skills')
+    skills_install.add_argument('--local', dest='install_local', action='store_true', help='Install to project agent skills')
+    skills_sub.add_parser('update', help="Update all installed skills from source")
+    skills_uninstall = skills_sub.add_parser('uninstall', help="Uninstall a named skill")
+    skills_uninstall.add_argument('skill_id', help="Skill ID to uninstall")
+    hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
+>>>>>>> origin/main
     subparsers._choices_actions = [
         action for action in subparsers._choices_actions if action.dest != "_hook"
     ]
@@ -2181,6 +2223,50 @@ def test_command(args):
         sys.exit(result.returncode)
 
 
+<<<<<<< HEAD
+=======
+COMMANDS = {
+    'init': init_command,
+    'scan': scan_command,
+    'pull': pull_command,
+    'update': update_command,
+    'install': install_command,
+    'uninstall': uninstall_command,
+    'tree': tree_command,
+    'push': push_command,
+    'propose': propose_command,
+    'version': version_command,
+    'mcp': mcp_command,
+    'release': release_command,
+    'graph': graph_command,
+    'stats': stats_command,
+    'appraise': appraise_command,
+    'promote': promote_command,
+    'fuse': fuse_command,
+    'lookup': lookup_command,
+    'validate': validate_command,
+    'test': test_command,
+    '_hook': hook_command,
+}
+
+DEV_COMMANDS = {
+    'list': meta_list_command,
+    'merge': meta_merge_command,
+    'split': meta_split_command,
+    'rename': meta_rename_command,
+    'calibrate': meta_calibrate_command,
+    'add': meta_add_command,
+    'rm': meta_remove_command,
+    'link': meta_link_command,
+    'reclassify': meta_reclassify_command,
+    'update-named': meta_update_named_command,
+    'evidence': meta_evidence_command,
+    'build': meta_build_command,
+    'audit': meta_audit_command,
+    'diff': meta_diff_command,
+}
+
+>>>>>>> origin/main
 def main():
     # Suppress BrokenPipeError traceback when output is piped to head/less/etc.
     # Placed here (not __main__.py) so it covers all entry paths: console script,
@@ -2207,9 +2293,11 @@ def main():
     args = parser.parse_args()
     args.registry = resolve_registry_path(args.registry, global_flag=args.global_flag)
     require_explicit_writable_registry(parser, args)
+
     if args.version:
         version_command(args)
         return
+<<<<<<< HEAD
     if args.command == "init":
         init_command(args)
     elif args.command == "help":
@@ -2294,6 +2382,30 @@ def main():
         skills_command(args)
     elif args.command == "_hook":
         hook_command(args)
+=======
+
+    if args.command == 'help':
+        parser.print_help()
+    elif args.command == 'docs':
+        if getattr(args, 'docs_command', None) == 'build':
+            docs_command(args)
+        else:
+            parser.print_help()
+    elif args.command == 'dev':
+        dev_cmd = getattr(args, 'dev_command', None)
+        if dev_cmd in DEV_COMMANDS:
+            DEV_COMMANDS[dev_cmd](args)
+        else:
+            _, subparsers = get_parser()
+            subparsers.choices['dev'].print_help()
+    elif args.command == 'skills':
+        if getattr(args, 'skills_command', None):
+            skills_command(args)
+        else:
+            skills_parser.print_help()
+    elif args.command in COMMANDS:
+        COMMANDS[args.command](args)
+>>>>>>> origin/main
     else:
         parser.print_help()
 
