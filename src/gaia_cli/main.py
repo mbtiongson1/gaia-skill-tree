@@ -16,9 +16,9 @@ from gaia_cli.treeManager import load_tree, save_tree, show_status, show_tree
 from gaia_cli.prWriter import open_pr, open_intake_pr
 from gaia_cli.push import build_skill_batch, write_skill_batch, build_proposed_skill, detect_source_repo
 from gaia_cli.embeddings import generate_embeddings
-from gaia_cli.semantic_search import search as semantic_search, load_embeddings
-from gaia_cli.name import find_awakened_skill, promote_to_named, update_batch_lifecycle
-from gaia_cli.install import install_skill, install_suite, update_skills, uninstall_skill, list_installed, interactive_install, list_available
+from gaia_cli.semantic_search import search as semantic_search
+from gaia_cli.name import promote_to_named, update_batch_lifecycle
+from gaia_cli.install import install_skill, install_suite, update_skills, uninstall_skill, interactive_install, list_available
 from gaia_cli.graph import graph_command
 from gaia_cli.commands.stats import stats_command
 from gaia_cli.commands.dev import (
@@ -40,9 +40,7 @@ from gaia_cli.commands.dev import (
 from gaia_cli.registry import (
     generated_output_dir,
     embeddings_path,
-    named_skills_dir,
     named_skills_index_path,
-    promotion_candidates_path,
     registry_graph_path,
     skill_batches_dir,
     user_tree_path,
@@ -52,34 +50,27 @@ from gaia_cli.registry import (
 )
 from gaia_cli.pathEngine import compute_paths, load_paths, save_paths, diff_paths
 from gaia_cli.cardRenderer import (
-    render_card,
     render_appraise_card,
     render_unlock_card,
     render_path_summary,
     render_promotion_prompt,
-    load_and_render,
 )
 from gaia_cli.promotion import (
     check_promotion_eligibility,
     detect_unique_candidates,
     load_promotion_candidates,
     promote_from_candidates,
-    promote_skill,
     promotable_candidates,
     promotion_state,
     write_promotion_candidates,
-    next_level,
     LEVEL_NAMES,
 )
 from gaia_cli.hook import hook_entry
 from gaia_cli.formatting import (
     format_skill_plain,
     format_skill_colored,
-    format_type_label,
     format_type_colored,
     format_level_colored,
-    fusion_equation,
-    TIER_COLORS,
     RANK_COLORS,
     TYPE_SYMBOLS,
     COLOR_CONTRIBUTOR,
@@ -87,7 +78,6 @@ from gaia_cli.formatting import (
     _fg,
     _reset,
     _bold,
-    _use_color,
 )
 from gaia_cli.localContext import LocalContext
 from gaia_cli.cardRenderer import render_fusion_diagram
@@ -1109,7 +1099,7 @@ def name_command(args):
     print(f"Batch lifecycle updated: '{skill_data['id']}' -> named")
 
 def install_command(args):
-    from gaia_cli.install import interactive_install, install_skill, install_suite, update_skills
+    from gaia_cli.install import install_skill, install_suite, update_skills
     if args.list:
         interactive_install(args.registry)
         return
@@ -1166,35 +1156,45 @@ def _pending_skills(registry_path: str, username: str | None = None) -> list[dic
     return pending
 
 
-def skills_command(args):
-    from gaia_cli.install import list_available, install_skill, install_suite, uninstall_skill, update_skills
-    config = load_config() or {}
-    username = config.get("gaiaUser") or config.get("username")
-    pending = [] if getattr(args, "exclude_pending", False) else _pending_skills(args.registry, username)
-    verb = getattr(args, "skills_command", None)
-    if verb == "install":
-        if getattr(args, "suite", False):
-            success = install_suite(args.skill_id, args.registry)
-        else:
-            success = install_skill(args.skill_id, args.registry)
-        if not success:
-            sys.exit(1)
-        return
-    if verb == "update":
-        update_skills(args.registry)
-        return
-    if verb == "uninstall":
-        success = uninstall_skill(args.skill_id.lstrip("/"))
-        if not success:
-            sys.exit(1)
-        return
+def _handle_skills_install(args):
+    if getattr(args, "suite", False):
+        success = install_suite(args.skill_id, args.registry)
+    else:
+        success = install_skill(args.skill_id, args.registry)
+    if not success:
+        sys.exit(1)
 
-    available = [
-        {"id": sid, "name": meta.get("name") or sid, "level": meta.get("level", "?"), "description": meta.get("description", "")}
-        for sid, meta in list_available(args.registry)
-    ]
-    items = available + pending
+def _handle_skills_update(args):
+    update_skills(args.registry)
+
+def _handle_skills_uninstall(args):
+    success = uninstall_skill(args.skill_id.lstrip("/"))
+    if not success:
+        sys.exit(1)
+
+def _handle_skills_info(args, items, ctx, ctx_user):
+    q = args.skill_id.lstrip("/")
+    match = next((item for item in items if item.get("id") == q), None)
+    if not match:
+        print(f"Skill '/{q}' not found.", file=sys.stderr)
+        sys.exit(1)
+    sid = match.get("id", q)
+    level = match.get("level", "?")
+    skill_type = match.get("type", "basic")
+    named_contrib = ctx.named_contributor(sid) if ctx and ctx.is_named(sid) else None
+    is_local = ctx.is_local(sid) if ctx else False
+    display = format_skill_colored(sid, level, named_contributor=named_contrib,
+                                   is_local=is_local, local_user=ctx_user)
+    suffix = " (pending)" if match.get("pending") else ""
+    print(f"{display}{suffix}")
+    print(f"  Type:  {format_type_colored(skill_type)}")
+    print(f"  Level: {format_level_colored(level)}")
+    if match.get("description"):
+        print(f"  {match['description']}")
+
+def _handle_skills_search_or_list(args, items, ctx, ctx_user):
     query = getattr(args, "query", None)
+    verb = getattr(args, "skills_command", None)
     if verb == "search" and query:
         q = query.lower()
         items = [
@@ -1204,34 +1204,6 @@ def skills_command(args):
             or q in str(item.get("description", "")).lower()
         ]
 
-    # Build local context for named-first display
-    config = load_config() or {}
-    ctx_user = config.get("gaiaUser") or config.get("username") or ""
-    try:
-        ctx = LocalContext.load(args.registry, ctx_user, include_scan=False)
-    except Exception:
-        ctx = None
-
-    if verb == "info":
-        q = args.skill_id.lstrip("/")
-        match = next((item for item in items if item.get("id") == q), None)
-        if not match:
-            print(f"Skill '/{q}' not found.", file=sys.stderr)
-            sys.exit(1)
-        sid = match.get("id", q)
-        level = match.get("level", "?")
-        skill_type = match.get("type", "basic")
-        named_contrib = ctx.named_contributor(sid) if ctx and ctx.is_named(sid) else None
-        is_local = ctx.is_local(sid) if ctx else False
-        display = format_skill_colored(sid, level, named_contributor=named_contrib,
-                                       is_local=is_local, local_user=ctx_user)
-        suffix = " (pending)" if match.get("pending") else ""
-        print(f"{display}{suffix}")
-        print(f"  Type:  {format_type_colored(skill_type)}")
-        print(f"  Level: {format_level_colored(level)}")
-        if match.get("description"):
-            print(f"  {match['description']}")
-        return
     if not items:
         print("No skills found.")
         return
@@ -1269,6 +1241,41 @@ def skills_command(args):
         # Use plain width for padding since ANSI codes don't count
         pad = width - len(plain_display)
         print(f"{display}{' ' * max(0, pad)}  {level_col:<5}  {type_col}{suffix}")
+
+def skills_command(args):
+    config = load_config() or {}
+    username = config.get("gaiaUser") or config.get("username")
+    verb = getattr(args, "skills_command", None)
+
+    if verb == "install":
+        _handle_skills_install(args)
+        return
+    elif verb == "update":
+        _handle_skills_update(args)
+        return
+    elif verb == "uninstall":
+        _handle_skills_uninstall(args)
+        return
+
+    pending = [] if getattr(args, "exclude_pending", False) else _pending_skills(args.registry, username)
+    available = [
+        {"id": sid, "name": meta.get("name") or sid, "level": meta.get("level", "?"), "description": meta.get("description", "")}
+        for sid, meta in list_available(args.registry)
+    ]
+    items = available + pending
+
+    ctx_user = username or ""
+    try:
+        ctx = LocalContext.load(args.registry, ctx_user, include_scan=False)
+    except Exception:
+        ctx = None
+
+    if verb == "info":
+        _handle_skills_info(args, items, ctx, ctx_user)
+        return
+    else:
+        _handle_skills_search_or_list(args, items, ctx, ctx_user)
+        return
 
 
 def pull_command(args):
@@ -1576,7 +1583,7 @@ def get_parser():
     dev_evidence.add_argument('--notes', help="Optional notes about the evaluation")
     dev_evidence.add_argument('--no-build', action='store_true', help="Skip rebuilding docs and graph assets after adding evidence")
 
-    dev_build = dev_sub.add_parser('build', help="Regenerate registry and documentation site")
+    dev_sub.add_parser('build', help="Regenerate registry and documentation site")
 
     dev_audit = dev_sub.add_parser('audit', help="Run registry maintenance linter")
     dev_audit.add_argument('--level', type=int, help="Filter audit by level threshold")
@@ -1622,7 +1629,7 @@ def get_parser():
     skills_install.add_argument('--suite', action='store_true', help="Install as a suite (recursive)")
     skills_install.add_argument('--global', dest='install_global', action='store_true', help='Install to ~/.gaia/skills')
     skills_install.add_argument('--local', dest='install_local', action='store_true', help='Install to project agent skills')
-    skills_update = skills_sub.add_parser('update', help="Update all installed skills from source")
+    skills_sub.add_parser('update', help="Update all installed skills from source")
     skills_uninstall = skills_sub.add_parser('uninstall', help="Uninstall a named skill")
     skills_uninstall.add_argument('skill_id', help="Skill ID to uninstall")
     hook_parser = subparsers.add_parser('_hook', help=argparse.SUPPRESS)
