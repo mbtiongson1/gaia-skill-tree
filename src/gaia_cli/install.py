@@ -32,15 +32,21 @@ def get_repo_skills_dir(location: str = "local") -> str:
     """Return the target agent skills directory.
 
     Args:
-        location: "local" (project-relative .agents/.claude), "global" (~/.gaia/skills), or None for default behavior
+        location: "local" (project-relative .agents/.claude) or "global" (~/.gaia/skills)
 
     Returns:
         Absolute path to the skills directory.
+
+    Raises:
+        ValueError: If location is not "local" or "global"
     """
+    if location not in ("local", "global"):
+        raise ValueError(f"Invalid location '{location}'; must be 'local' or 'global'")
+
     if location == "global":
         return os.path.join(get_gaia_home(), "skills")
 
-    # Default to local (project-relative)
+    # Local: project-relative (.agents/.claude)
     if os.path.isdir(".agents"):
         return os.path.abspath(".agents/skills")
     if os.path.isdir(".claude"):
@@ -198,7 +204,7 @@ def _install_single(sid: str, meta: dict, registry_path: str, visited: set[str],
         else:
             shutil.copy2(source_skill_path, local_skill_path)
 
-    # 3. Update manifest
+    # 3. Update manifest and clean up old installation if location changed
     manifest = load_manifest()
     existing = next((s for s in manifest["installed"] if s["id"] == sid), None)
     entry = {
@@ -210,6 +216,19 @@ def _install_single(sid: str, meta: dict, registry_path: str, visited: set[str],
         "location": location,
     }
     if existing:
+        # If reinstalling with different location, clean up old path
+        old_path = existing.get("localPath")
+        old_location = existing.get("location", "local")
+        if old_path and old_location != location and (os.path.exists(old_path) or os.path.islink(old_path)):
+            try:
+                if os.path.islink(old_path):
+                    os.remove(old_path)
+                elif os.path.isdir(old_path):
+                    shutil.rmtree(old_path)
+                else:
+                    os.remove(old_path)
+            except Exception as e:
+                print(f"Warning: could not remove old installation at {old_path}: {e}", file=sys.stderr)
         existing.update(entry)
     else:
         manifest["installed"].append(entry)
@@ -467,8 +486,12 @@ def list_installed():
         print(f"{entry['id']:<35} {entry['installedAt'][:19]:<25} {rel_loc}")
 
 
-def interactive_install(registry_path):
-    """Display all available named skills and let the user pick which to install."""
+def interactive_install(registry_path, location: str = "local"):
+    """Display all available named skills and let the user pick which to install.
+
+    Args:
+        location: "local" (default, .agents/.claude) or "global" (~/.gaia/skills)
+    """
     skills = list_available(registry_path)
     if not skills:
         print("No named skills found in registry.")
@@ -485,7 +508,8 @@ def interactive_install(registry_path):
         print(f"{i:<4}{marker} {sid:<38} {name:<30} {level}")
 
     print("\n✓ = already installed")
-    print("Enter numbers to install (space or comma separated), or press Enter to cancel:")
+    loc_hint = "(global)" if location == "global" else "(local)"
+    print(f"Enter numbers to install {loc_hint} (space or comma separated), or press Enter to cancel:")
     try:
         raw = input("> ").strip()
     except (EOFError, KeyboardInterrupt):
@@ -516,4 +540,4 @@ def interactive_install(registry_path):
 
     print()
     for sid in selected:
-        install_skill(sid, registry_path)
+        install_skill(sid, registry_path, location=location)
