@@ -9,47 +9,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@browserbase — Gaia Skill Registry</title>
   <meta name="description" content="Contributor profile for @browserbase on the Gaia Skill Registry. 1 named skill, highest rank 2★.">
-  <!-- OG meta -->
   <meta property="og:type" content="profile">
   <meta property="og:title" content="@browserbase — Gaia Skill Registry">
   <meta property="og:description" content="Contributor profile for @browserbase on the Gaia Skill Registry. 1 named skill, highest rank 2★.">
   <meta property="og:url" content="https://mbtiongson1.github.io/gaia-skill-tree/u/browserbase/">
-  <meta property="og:image" content="../../og/browserbase/stagehand.png">
-  <!-- Stage 1 — Web fonts (EB Garamond display, Bricolage body, JetBrains Mono fallback). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../../css/styles.css?v=3.25.1">
   <link rel="stylesheet" href="../../css/plaque.css?v=3.25.1">
-  <!-- Stage 1 — icon sprite helper, loaded BEFORE other UI scripts. -->
+  <script>window.PROFILE_SKILLS = [{"id":"browserbase/stagehand","name":"Stagehand","contributor":"browserbase","level":"2★","levelNum":2,"type":"extra","origin":false,"description":"SDK for browser agents that combines deterministic browser automation with AI-assisted page interaction.","tags":["browser-automation","agent","sdk"],"createdAt":"2026-05-17"}];</script>
   <script src="../../js/icons.js?v=3.25.1"></script>
-  <!-- Stage 2 — rank-badge component, loaded after icons.js. -->
   <script src="../../js/rank-badge.js?v=3.25.1"></script>
-  <!-- Stage 3 — plaque component family, loaded after rank-badge.js. -->
   <script src="../../js/plaque.js?v=3.25.1"></script>
-  <script src="../../js/ui.js?v=3.25.1" defer></script>
+  <script src="../../js/profile-sort.js?v=3.25.1" defer></script>
+  <script src="../../js/profile-share.js?v=3.25.1" defer></script>
+  <script src="../../js/profile-timeline.js?v=3.25.1" defer></script>
 </head>
 <body class="profile-page">
 
   <nav>
-  <a href="../../" class="nav-logo" aria-label="Gaia home">
-    <svg class="ico nav-seal" aria-hidden="true" focusable="false"><use href="../../assets/icons.svg#seal-diamond"/></svg>
-    <span class="nav-wordmark">Gaia</span>
-    </a>
-    <button type="button" class="nav-search-back" id="navSearchBack" aria-label="Back">
-      <svg class="ico" width="20" height="20" aria-hidden="true"><use href="../../assets/icons.svg#arrow-back"/></svg>
-    </button>
-    <input type="search" id="navMobileSearch" class="nav-mobile-search" placeholder="Search skills…" autocomplete="off" aria-label="Search skills">
-    <button class="nav-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <a class="nav-logo" href="../../">◆ GAIA</a>
   <ul>
-    <li><a href="../../#paths">Registry</a></li>
-    <li><a href="../../#hall-of-heroes">Hall of Heroes</a></li>
-    <li><a href="../../codex.html">The Codex</a></li>
-    <li><a href="../../#tree" class="nav-tree">Tree</a></li>
-    <li><a href="../../#search" class="nav-search-btn" aria-label="Search skills"><svg class="ico" width="14" height="14" aria-hidden="true"><use href="../../assets/icons.svg#search"/></svg></a></li>
+    <li><a href="../../#what">What</a></li>
+    <li><a href="../../#ranks">Ranks</a></li>
+    <li><a href="../../#start">Start</a></li>
+    <li><a href="../../#named" class="nav-named-explorer">Named Skills</a></li>
   </ul>
 </nav>
 
@@ -62,46 +47,62 @@
     
   </div>
 
-  <!-- ─── SKILL PLAQUES ─── -->
+  <!-- ─── NAMED SKILLS ─── -->
   <section class="profile-section">
     <h2 class="profile-section-title">Named Skills</h2>
     <p class="profile-section-sub">All named implementations attributed to @browserbase in the Gaia registry.</p>
+    <div class="profile-sort-bar" role="group" aria-label="Sort skills">
+      <button class="profile-sort-btn active" type="button" data-sort="rank"
+        aria-pressed="true">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../../assets/icons.svg#sort-rank"/></svg>
+        Rank
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="alpha" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../../assets/icons.svg#sort-alpha"/></svg>
+        A – Z
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="type" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../../assets/icons.svg#sort-type"/></svg>
+        Type
+      </button>
+    </div>
     <div class="plaque-grid">
-      <article class="plaque plaque--settled" data-skill-id="browserbase/stagehand" data-type="extra" data-level="2"><div class="plaque__header plaque-header"><div class="plaque-orb plaque-orb--extra" aria-hidden="true"></div><div class="plaque__rank"><span class="rank-badge" data-level="2" data-variant="chip" data-size="md" role="img" aria-label="Rank 2 of 6"><span class="rank-badge__chip">2★</span></span></div><a class="plaque__gh-link ns-gh-link" href="https://github.com/browserbase/stagehand" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on GitHub"><svg class="ico" width="14" height="14" aria-hidden="true"><use href="../../assets/icons.svg#github"/></svg></a></div><div class="plaque__slug plaque-skill-name named-slug" title="browserbase/stagehand">/stagehand</div><div class="plaque__title plaque-title">The SDK of Intent</div><div class="plaque__handle plaque-contrib-row"><a class="atlas-handle plaque-contributor" href="../../u/browserbase/">@browserbase</a></div><p class="plaque__description plaque-description">SDK for browser agents that combines deterministic browser automation with AI-assisted page interaction.</p><div class="plaque__tags plaque-tags"><span class="plaque__tag plaque-tag">browser-automation</span><span class="plaque__tag plaque-tag">agent</span><span class="plaque__tag plaque-tag">sdk</span></div><div class="plaque__rank"><span class="rank-badge" data-level="2" data-variant="stars" data-size="md" role="img" aria-label="Rank 2 of 6"><span class="rank-badge__stars" aria-hidden="true"><span class="rank-badge__star" data-on="">★</span><span class="rank-badge__star" data-on="">★</span><span class="rank-badge__star" data-off="">★</span><span class="rank-badge__star" data-off="">★</span><span class="rank-badge__star" data-off="">★</span><span class="rank-badge__star" data-off="">★</span></span></span></div><div class="plaque__evidence plaque-evidence">CLASS C</div><div class="plaque__underline plaque-underline plaque-underline--settled"></div></article>
+      <article class="plaque plaque--settled" data-skill-id="browserbase/stagehand" data-type="extra" data-level="2"><div class="plaque__header"><div class="plaque-orb" data-type="extra"></div><span class="rank-chip" style="color:#63cab7;background:rgba(99,202,183,.15);border:1px solid rgba(99,202,183,.4)">2★</span><a class="plaque__gh-link" href="https://github.com/browserbase/stagehand" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on GitHub"><svg class="ico" width="14" height="14" aria-hidden="true" focusable="false"><use href="../../assets/icons.svg#github"/></svg></a><button class="plaque__share-btn" type="button" aria-label="Share Stagehand" data-skill-id="browserbase/stagehand" onclick="event.stopPropagation();profileShare.open(this)"><svg class="ico" width="14" height="14" aria-hidden="true" focusable="false"><use href="../../assets/icons.svg#share"/></svg></button></div><div class="plaque__slug">/stagehand</div><div class="plaque__title">Stagehand</div><div class="plaque__handle">by <a href="../../u/browserbase/">@browserbase</a></div><p class="plaque__description">SDK for browser agents that combines deterministic browser automation with AI-assisted page interaction.</p><div class="plaque__tags"><span class="plaque__tag" style="color:#f59e0b;background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3)">browser-automation</span><span class="plaque__tag" style="color:#e879f9;background:rgba(232,121,249,.12);border-color:rgba(232,121,249,.3)">agent</span><span class="plaque__tag" style="color:#f59e0b;background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3)">sdk</span></div><span class="rank-stars"><span class="rank-star filled">★</span><span class="rank-star filled">★</span><span class="rank-star">★</span><span class="rank-star">★</span><span class="rank-star">★</span><span class="rank-star">★</span></span><div class="plaque__evidence">CLASS C</div><div class="plaque__install-row"><span class="plaque__install-prompt">$</span><span class="plaque__install-cmd">gaia install browserbase/stagehand</span><button class="plaque__install-copy" type="button" aria-label="Copy" title="Copy install command" data-cmd="gaia install browserbase/stagehand" onclick="event.stopPropagation();if(typeof window.nsInstCopy===&#x27;function&#x27;){window.nsInstCopy(this);}else{navigator.clipboard.writeText(this.dataset.cmd);}"><svg class="ico" width="13" height="13" aria-hidden="true" focusable="false"><use href="../../assets/icons.svg#copy"/></svg></button></div><div class="plaque__underline"></div></article>
     </div>
   </section>
 
   <!-- ─── ASCENSION LOG ─── -->
   <section class="profile-section">
     <h2 class="profile-section-title">Ascension Log</h2>
-    <p class="profile-section-sub">Registry events attributed to this contributor, in descending rank order.</p>
+    <p class="profile-section-sub">Registry events attributed to this contributor, most recent first.</p>
     <div class="ascension-log">
-      <div class="ascension-log-header">Date · Action · Skill ID · Level</div>
-      <div class="ascension-log-row">
-  <span class="al-date">—</span>
-  <span class="al-action">NAMED</span>
-  <span class="al-skill">browserbase/stagehand</span>
-  <span class="al-level">2★</span>
-</div>
+      <div class="ascension-log-header">
+        <span>Date</span><span>Action</span><span>Skill ID</span><span>Level</span>
+      </div>
+      <div class="ascension-log-row"><span class="al-date">May 2026</span><span class="al-action">NAMED</span><span class="al-skill">browserbase/stagehand</span><span class="al-level">2★</span></div>
     </div>
   </section>
 
-  <footer>
-  <div class="footer-mark">
-    <svg class="ico footer-seal" aria-hidden="true" focusable="false"><use href="../../assets/icons.svg#seal-diamond"/></svg>
-    <span class="footer-wordmark">Gaia</span>
-  </div>
-  <p>
-    <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank">GitHub</a> ·
-    MIT ·
-    <a href="../../codex.html">The Codex</a>
-  </p>
+  <!-- ─── PROGRESSION TIMELINE ─── -->
+  <section class="profile-section">
+    <h2 class="profile-section-title">Progression Timeline</h2>
+    <p class="profile-section-sub">Skill rank progression over time — hover chips for details.</p>
+    <div id="profile-timeline" class="profile-timeline"></div>
+  </section>
+
+  <footer style="text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.82rem">
+  <p>◆ Gaia ·
+  <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank" style="color:var(--muted)">GitHub</a> ·
+  MIT License</p>
 </footer>
 
-  <script src="../../js/plaque-reveal.js?v=3.25.1" defer></script>
-
-  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-    <svg class="ico" width="20" height="20" aria-hidden="true"><use href="../../assets/icons.svg#arrow-up"/></svg>
+  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top"
+    style="position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;
+           border-radius:50%;background:var(--surface);border:1px solid var(--border);
+           color:var(--muted);cursor:pointer;display:flex;align-items:center;
+           justify-content:center;transition:color .15s,border-color .15s;z-index:90"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg class="ico" width="18" height="18" aria-hidden="true"><use href="../../assets/icons.svg#arrow-up"/></svg>
   </button>
 
 </body>

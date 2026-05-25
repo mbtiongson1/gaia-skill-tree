@@ -5,10 +5,11 @@ Reads registry/named-skills.json and generates static HTML contributor
 profile pages at docs/u/{handle}/index.html.
 
 Each page shows:
-  - Contributor handle in honor red
-  - Origin contributor badge + skill count
-  - A grid of settled plaque cards (one per named skill)
-  - An ascension log ledger
+  - Contributor handle (honor red)
+  - Origin contributor badge (SVG #1 laurel badge) + skill count
+  - Sortable grid of settled plaque cards (one per named skill)
+  - Ascension log with real dates from createdAt
+  - Interactive JS progression timeline
 
 Usage:
     python scripts/generateProfilePages.py [--named PATH] [--out-dir PATH]
@@ -23,21 +24,19 @@ import os
 import sys
 import argparse
 import html
-import datetime
 import re
 from pathlib import Path
+import datetime
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-NAMED_JSON = REPO_ROOT / "registry" / "named-skills.json"
-GAIA_JSON = REPO_ROOT / "registry" / "gaia.json"
-DOCS_DIR = REPO_ROOT / "docs"
-OUT_DIR = DOCS_DIR / "u"
+REPO_ROOT   = Path(__file__).resolve().parent.parent
+NAMED_JSON  = REPO_ROOT / "registry" / "named-skills.json"
+GAIA_JSON   = REPO_ROOT / "registry" / "gaia.json"
+DOCS_DIR    = REPO_ROOT / "docs"
+OUT_DIR     = DOCS_DIR / "u"
+ICON_BASE   = "../../assets/icons.svg"   # relative from docs/u/{handle}/
 
-# Phase 8d — share slash-naming + linked-handle helpers with the JS
-# atlas-helpers module via scripts/_atlas_helpers.py.
-sys.path.insert(0, str(REPO_ROOT / "scripts"))
-from _atlas_helpers import handle_link, named_slug  # noqa: E402
 
+# ── helpers ───────────────────────────────────────────────────────────
 
 def _read_version() -> str:
     pyproject = REPO_ROOT / "pyproject.toml"
@@ -49,7 +48,6 @@ def _read_version() -> str:
 
 
 def _apply_cache_busting(text: str, version: str) -> str:
-    # 1. Inject or update Cache-Control meta tags inside <head>
     cache_meta = (
         '\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n'
         '  <meta http-equiv="Pragma" content="no-cache">\n'
@@ -58,36 +56,30 @@ def _apply_cache_busting(text: str, version: str) -> str:
     if 'http-equiv="Cache-Control"' not in text:
         text = text.replace("<head>", f"<head>{cache_meta}", 1)
 
-    # 2. Inject or update window.GAIA_VERSION in <head>
     version_script = f'\n  <script>window.GAIA_VERSION = "{version}";</script>'
-    if 'window.GAIA_VERSION = ' in text:
+    if "window.GAIA_VERSION" in text:
         text = re.sub(
             r'<script>\s*window\.GAIA_VERSION\s*=\s*"[^"]*";\s*</script>',
-            f'<script>window.GAIA_VERSION = "{version}";</script>',
-            text
+            f'<script>window.GAIA_VERSION = "{version}";</script>', text,
         )
     else:
         text = text.replace("<head>", f"<head>{version_script}", 1)
 
-    # 3. Append version query parameters (?v={version}) to local CSS and JS imports.
     text = re.sub(
-        r'href="((?:(?:\.\./)*)css/[a-zA-Z0-9_\-\./]+\.css)(?:\?v=[^"]*)?"',
-        fr'href="\1?v={version}"',
-        text
+        r'href="((?:\.\./)*)css/([^"?]+\.css)(?:\?v=[^"]*)?"',
+        fr'href="\1css/\2?v={version}"', text,
     )
     text = re.sub(
-        r'src="((?:(?:\.\./)*)js/[a-zA-Z0-9_\-\./]+\.js)(?:\?v=[^"]*)?"',
-        fr'src="\1?v={version}"',
-        text
+        r'src="((?:\.\./)*)js/([^"?]+\.js)(?:\?v=[^"]*)?"',
+        fr'src="\1js/\2?v={version}"', text,
     )
     return text
 
 
 def load_type_lookup(gaia_path: Path) -> dict:
-    """Return a dict mapping canonical skill id → type (ultimate/unique/extra/basic)."""
     if not gaia_path.exists():
         return {}
-    with open(gaia_path, "r", encoding="utf-8") as f:
+    with open(gaia_path, encoding="utf-8") as f:
         data = json.load(f)
     return {s.get("id"): s.get("type", "basic") for s in data.get("skills", [])}
 
@@ -96,459 +88,409 @@ TYPE_LOOKUP: dict = {}
 
 
 def resolve_type(entry: dict) -> str:
-    """Resolve the canonical type for a named-skill entry, with slug fallback."""
-    ref = entry.get("genericSkillRef")
-    if ref and ref in TYPE_LOOKUP:
-        return TYPE_LOOKUP[ref]
-    raw_id = entry.get("id", "")
-    if "/" in raw_id:
-        slug = raw_id.split("/", 1)[1]
-        if slug in TYPE_LOOKUP:
-            return TYPE_LOOKUP[slug]
-    return "basic"
+    ref = entry.get("genericSkillRef", "")
+    t   = TYPE_LOOKUP.get(ref) or TYPE_LOOKUP.get(entry.get("id", ""))
+    if not t:
+        t = entry.get("type", "basic")
+    return t or "basic"
 
 
 def level_num(level: str) -> int:
-    """Return the integer rank (1-6) from a level string like '3★'."""
     if not level:
         return 0
-    try:
-        return int("".join(c for c in level if c.isdigit()))
-    except ValueError:
-        return 0
-
-
-def tier_glyph(level: str) -> str:
-    n = level_num(level)
-    if n >= 6:
-        return "◆"
-    if n >= 4:
-        return "◇"
-    return "○"
+    m = re.search(r"(\d+)", str(level))
+    return int(m.group(1)) if m else 0
 
 
 def evidence_class(level: str) -> str:
     n = level_num(level)
-    if n >= 6:
-        return "CLASS A"
-    if n >= 5:
-        return "CLASS A"
     if n >= 4:
         return "CLASS A"
-    if n >= 3:
+    if n == 3:
         return "CLASS B"
-    if n >= 2:
+    if n == 2:
         return "CLASS C"
     return "AWAITED"
 
 
-def rank_badge_html(level: str, variant: str = "stars", size: str = "md", label: str | None = None) -> str:
-    """Stage 2 — Python sibling of window.rankBadge(level, opts).
+def fmt_date(iso: str) -> str:
+    """Format ISO date string as 'Apr 2026'."""
+    if not iso or iso == "—":
+        return "—"
+    try:
+        d = datetime.date.fromisoformat(iso[:10])
+        return d.strftime("%b %Y")
+    except ValueError:
+        return iso[:7] if len(iso) >= 7 else iso
 
-    Emits the same .rank-badge DOM the JS component produces so that the
-    server-rendered surfaces (profile pages, OG cards) stay pixel-
-    identical to the live surfaces. Reads colours via CSS tokens only
-    — no Python colour logic.
 
-    Args:
-        level: rank token, e.g. '4★', '4', or 4.
-        variant: 'chip' | 'stars' | 'full'. Default 'stars'.
-        size: 'sm' | 'md' | 'lg'. Default 'md'.
-        label: chip label override. Defaults to '<N>★'.
-    """
-    n = level_num(level)
-    if variant not in ("chip", "stars", "full"):
-        variant = "chip"
-    if size not in ("sm", "md", "lg"):
-        size = "md"
-    chip_label = label if label is not None else f"{n}★"
-    aria = f"Rank {n} of 6"
-
-    def _chip() -> str:
-        return f'<span class="rank-badge__chip">{html.escape(chip_label)}</span>'
-
-    def _stars() -> str:
-        parts = ['<span class="rank-badge__stars" aria-hidden="true">']
-        for i in range(1, 7):
-            attr = "data-on=\"\"" if i <= n else "data-off=\"\""
-            parts.append(f'<span class="rank-badge__star" {attr}>★</span>')
-        parts.append("</span>")
-        return "".join(parts)
-
-    if variant == "chip":
-        inner = _chip()
-    elif variant == "stars":
-        inner = _stars()
-    else:  # full
-        inner = _chip() + _stars()
-
+def _icon(icon_id: str, size: int) -> str:
     return (
-        f'<span class="rank-badge" data-level="{n}" data-variant="{variant}" '
-        f'data-size="{size}" role="img" aria-label="{html.escape(aria)}">'
-        f"{inner}</span>"
+        f'<svg class="ico" width="{size}" height="{size}" aria-hidden="true" focusable="false">'
+        f'<use href="{ICON_BASE}#{icon_id}"/></svg>'
     )
 
 
-def build_stars(level: str) -> str:
-    """Deprecated — kept as a one-line redirect to rank_badge_html('stars').
+# ── field builders (match plaque.js exactly) ──────────────────────────
 
-    Stage 2 unified the stars rendering behind .rank-badge; the legacy
-    .plaque-star markup is no longer emitted. Stage 5 may remove this
-    wrapper entirely once no callers remain.
-    """
-    return rank_badge_html(level, variant="stars")
+TAG_PALETTE = [
+    ("#38bdf8", "rgba(56,189,248,.12)",  "rgba(56,189,248,.3)"),
+    ("#c084fc", "rgba(192,132,252,.12)", "rgba(192,132,252,.3)"),
+    ("#63cab7", "rgba(99,202,183,.12)",  "rgba(99,202,183,.3)"),
+    ("#a78bfa", "rgba(167,139,250,.12)", "rgba(167,139,250,.3)"),
+    ("#f59e0b", "rgba(245,158,11,.12)",  "rgba(245,158,11,.3)"),
+    ("#e879f9", "rgba(232,121,249,.12)", "rgba(232,121,249,.3)"),
+]
+
+RANK_COLORS = {
+    0: ("#94a3b8", "rgba(100,116,139,.15)", "rgba(100,116,139,.4)"),
+    1: ("#38bdf8", "rgba(56,189,248,.15)",  "rgba(56,189,248,.4)"),
+    2: ("#63cab7", "rgba(99,202,183,.15)",  "rgba(99,202,183,.4)"),
+    3: ("#a78bfa", "rgba(167,139,250,.15)", "rgba(167,139,250,.4)"),
+    4: ("#e879f9", "rgba(232,121,249,.15)", "rgba(232,121,249,.4)"),
+    5: ("#fbbf24", "rgba(251,191,36,.15)",  "rgba(251,191,36,.4)"),
+    6: ("#fbbf24", "rgba(251,191,36,.22)",  "rgba(251,191,36,.55)"),
+}
 
 
-# Stage 1 — sprite-driven icons. Profile pages live at docs/u/<handle>/index.html
-# so the sprite is two levels above the page (../../assets/icons.svg).
-ICON_SPRITE_REL = "../../assets/icons.svg"
-DIAMOND_SEAL_SVG = (
-    f'<svg class="ico plaque-seal" aria-hidden="true">'
-    f'<use href="{ICON_SPRITE_REL}#seal-diamond"/></svg>'
-)
+def _tag_color(tag: str) -> tuple:
+    h = 0
+    for c in tag:
+        h = (h * 31 + ord(c)) % len(TAG_PALETTE)
+    return TAG_PALETTE[h]
 
 
-# Stage 3 — Python sibling field helpers. One source of truth per
-# field across all three variants Python emits (--mini, --tile,
-# --settled) so the server-rendered DOM matches docs/js/plaque.js
-# exactly. The dict below names every slot and the lambda that
-# emits it; the variant functions below assemble them.
-def _field_orb(ns: dict, size_modifier: str = "") -> str:
-    type_str = resolve_type(ns)
+def _field_orb(ns: dict) -> str:
+    typ = resolve_type(ns)
+    return f'<div class="plaque-orb" data-type="{html.escape(typ)}"></div>'
+
+
+def _field_rank_chip(ns: dict) -> str:
     n = level_num(ns.get("level", ""))
-    mod = f" plaque-orb--{size_modifier}" if size_modifier else ""
-    apex = " plaque-orb--vi" if n >= 6 else ""
-    return f'<div class="plaque-orb plaque-orb--{type_str}{mod}{apex}" aria-hidden="true"></div>'
+    c, bg, bd = RANK_COLORS.get(n, RANK_COLORS[0])
+    return (
+        f'<span class="rank-chip" style="color:{c};background:{bg};border:1px solid {bd}">'
+        f'{n}★</span>'
+    )
+
+
+def _field_rank_stars(ns: dict) -> str:
+    n = level_num(ns.get("level", ""))
+    stars = "".join(
+        f'<span class="rank-star{" filled" if i <= n else ""}">★</span>'
+        for i in range(1, 7)
+    )
+    return f'<span class="rank-stars">{stars}</span>'
+
+
+def _field_origin_badge(ns: dict) -> str:
+    """Render the #1 laurel SVG origin badge — matches plaque.js _fieldOriginBadge()."""
+    if not ns.get("origin"):
+        return ""
+    icon_svg  = _icon("origin-badge", 16)
+    info_svg  = (
+        f'<span class="origin-info" style="margin-left:2px;color:var(--muted);opacity:.65">'
+        f'{_icon("info", 10)}</span>'
+    )
+    return (
+        f'<span class="plaque__origin" '
+        f'data-tooltip="Origin contributor: The creator of the first skill version" '
+        f'aria-label="Origin contributor">{icon_svg}{info_svg}</span>'
+    )
+
+
+def _field_gh_link(ns: dict) -> str:
+    links = ns.get("links", {})
+    url = links.get("github") or links.get("npm") or ""
+    if not url:
+        return ""
+    icon_svg = _icon("github", 14)
+    return (
+        f'<a class="plaque__gh-link" href="{html.escape(url)}" target="_blank" '
+        f'rel="noopener" onclick="event.stopPropagation()" title="View on GitHub">'
+        f'{icon_svg}</a>'
+    )
+
+
+def _field_share_btn(ns: dict) -> str:
+    icon_svg = _icon("share", 14)
+    skill_id = html.escape(ns.get("id", ""))
+    name     = html.escape(ns.get("name", ns.get("id", "")))
+    return (
+        f'<button class="plaque__share-btn" type="button" '
+        f'aria-label="Share {name}" data-skill-id="{skill_id}" '
+        f'onclick="event.stopPropagation();profileShare.open(this)">'
+        f'{icon_svg}</button>'
+    )
 
 
 def _field_slug(ns: dict) -> str:
-    raw_id = ns.get("id", "")
-    slug = html.escape(named_slug(ns))
-    return (
-        f'<div class="plaque__slug plaque-skill-name named-slug" '
-        f'title="{html.escape(raw_id)}">{slug}</div>'
-    )
+    slug = "/" + html.escape(str(ns.get("id", "")).split("/")[-1])
+    return f'<div class="plaque__slug">{slug}</div>'
 
 
 def _field_title(ns: dict) -> str:
-    title = ns.get("title", "") or ns.get("name", "")
-    if not title:
-        return ""
-    return f'<div class="plaque__title plaque-title">{html.escape(title)}</div>'
+    name = html.escape(ns.get("name") or str(ns.get("id", "")).split("/")[-1])
+    return f'<div class="plaque__title">{name}</div>'
 
 
-def _field_handle_row(ns: dict, rel: str = "../../u/") -> str:
-    contributor_link = handle_link(
-        ns.get("contributor", ""),
-        rel=rel,
-        extra_class="plaque-contributor",
-    )
-    if not contributor_link:
-        return ""
-    return f'<div class="plaque__handle plaque-contrib-row">{contributor_link}</div>'
+def _field_handle(ns: dict) -> str:
+    h = html.escape(ns.get("contributor", ""))
+    return f'<div class="plaque__handle">by <a href="../../u/{h}/">@{h}</a></div>'
 
 
 def _field_description(ns: dict) -> str:
     desc = ns.get("description", "")
     if not desc:
         return ""
-    return f'<p class="plaque__description plaque-description">{html.escape(desc)}</p>'
+    short = desc[:220] + ("…" if len(desc) > 220 else "")
+    return f'<p class="plaque__description">{html.escape(short)}</p>'
 
 
-def _field_tags(ns: dict, limit: int | None = None) -> str:
-    tags = ns.get("tags", []) or []
-    if limit is not None:
-        tags = tags[:limit]
+def _field_tags(ns: dict, max_tags: int = 5) -> str:
+    raw = ns.get("tags") or []
+    tags = list(raw) if not isinstance(raw, list) else raw
+    tags = tags[:max_tags]
     if not tags:
         return ""
-    inner = "".join(
-        f'<span class="plaque__tag plaque-tag">{html.escape(t)}</span>' for t in tags
-    )
-    return f'<div class="plaque__tags plaque-tags">{inner}</div>'
+    spans = []
+    for t in tags:
+        c, bg, bd = _tag_color(t)
+        spans.append(
+            f'<span class="plaque__tag" style="color:{c};background:{bg};border-color:{bd}">'
+            f'{html.escape(t)}</span>'
+        )
+    return f'<div class="plaque__tags">{"".join(spans)}</div>'
 
 
-def _field_rank(ns: dict, variant: str = "stars") -> str:
-    rb = rank_badge_html(ns.get("level", ""), variant=variant, label=ns.get("level"))
-    return f'<div class="plaque__rank">{rb}</div>'
+def _field_evidence(ns: dict) -> str:
+    return f'<div class="plaque__evidence">{evidence_class(ns.get("level", ""))}</div>'
 
 
-def _field_install_row(ns: dict) -> str:
+def _field_install(ns: dict) -> str:
     skill_id = ns.get("id", "")
     if not skill_id:
         return ""
     cmd = f"gaia install {skill_id}"
-    safe_cmd = html.escape(cmd)
-    copy_icon = (
-        f'<svg class="ico" width="13" height="13" aria-hidden="true">'
-        f'<use href="{ICON_SPRITE_REL}#copy"/></svg>'
+    copy_click = (
+        "event.stopPropagation();"
+        "if(typeof window.nsInstCopy==='function'){window.nsInstCopy(this);}"
+        "else{navigator.clipboard.writeText(this.dataset.cmd);}"
     )
     return (
-        f'<div class="plaque__install-row ns-install-row">'
-        f'<span class="plaque__install-prompt ns-install-prompt">$</span>'
-        f'<span class="plaque__install-cmd ns-install-cmd-txt">{safe_cmd}</span>'
-        f'<button class="plaque__install-copy ns-install-copy" type="button" '
-        f'title="Copy install command" data-cmd="{safe_cmd}" '
-        f'onclick="event.stopPropagation();navigator.clipboard.writeText(this.dataset.cmd);">'
-        f"{copy_icon}</button></div>"
+        f'<div class="plaque__install-row">'
+        f'<span class="plaque__install-prompt">$</span>'
+        f'<span class="plaque__install-cmd">{html.escape(cmd)}</span>'
+        f'<button class="plaque__install-copy" type="button" aria-label="Copy" '
+        f'title="Copy install command" data-cmd="{html.escape(cmd)}" '
+        f'onclick="{html.escape(copy_click)}">{_icon("copy", 13)}</button>'
+        f'</div>'
     )
 
 
-def _field_gh_link(ns: dict) -> str:
-    links = ns.get("links", {}) or {}
-    url = links.get("github") or links.get("npm") or ""
-    if not url:
-        return ""
-    gh_icon = (
-        f'<svg class="ico" width="14" height="14" aria-hidden="true">'
-        f'<use href="{ICON_SPRITE_REL}#github"/></svg>'
-    )
+# ── plaque shell ───────────────────────────────────────────────────────
+
+def _plaque_shell(variant: str, ns: dict, inner: str) -> str:
+    n      = level_num(ns.get("level", ""))
+    apex   = " plaque--apex-vi" if n >= 6 else ""
+    typ    = html.escape(resolve_type(ns))
+    sid    = html.escape(ns.get("id", ""))
     return (
-        f'<a class="plaque__gh-link ns-gh-link" href="{html.escape(url)}" '
-        f'target="_blank" rel="noopener" onclick="event.stopPropagation()" '
-        f'title="View on GitHub">{gh_icon}</a>'
+        f'<article class="plaque plaque--{variant}{apex}" '
+        f'data-skill-id="{sid}" data-type="{typ}" data-level="{n}">'
+        f'{inner}</article>'
     )
-
-
-def _field_origin_star(ns: dict) -> str:
-    if not ns.get("origin"):
-        return ""
-    return '<span class="plaque__origin ns-origin" title="Origin contributor">★</span>'
-
-
-# Public dispatch table: name → builder. Useful for diagnostics and
-# for the OG generator to reuse the same slot vocabulary.
-PLAQUE_FIELDS = {
-    "orb":         _field_orb,
-    "slug":        _field_slug,
-    "title":       _field_title,
-    "handle":      _field_handle_row,
-    "description": _field_description,
-    "tags":        _field_tags,
-    "rank":        _field_rank,
-    "install":     _field_install_row,
-    "gh":          _field_gh_link,
-    "origin":      _field_origin_star,
-}
-
-
-def _plaque_shell(variant: str, ns: dict, inner: str, extra_class: str = "") -> str:
-    """Wrap a field-set string in the canonical .plaque shell."""
-    n = level_num(ns.get("level", ""))
-    apex = " plaque--apex-vi" if n >= 6 else ""
-    type_str = resolve_type(ns)
-    extra = f" {extra_class}" if extra_class else ""
-    skill_id = html.escape(ns.get("id", ""))
-    return (
-        f'<article class="plaque plaque--{variant}{apex}{extra}" '
-        f'data-skill-id="{skill_id}" data-type="{type_str}" data-level="{n}">'
-        f"{inner}"
-        f"</article>"
-    )
-
-
-def plaque_mini_html(ns: dict) -> str:
-    """Stage 3 — Python sibling of window.plaque.renderMini(ns).
-
-    HoH track plate field set: orb · slug · handle · rank stars.
-    """
-    inner = (
-        _field_orb(ns)
-        + _field_slug(ns)
-        + _field_handle_row(ns)
-        + _field_rank(ns, "stars")
-    )
-    return _plaque_shell("mini", ns, inner)
-
-
-def plaque_tile_html(ns: dict) -> str:
-    """Stage 3 — Python sibling of window.plaque.renderTile(ns).
-
-    Explorer grid card: header(orb+chip+origin+gh) · slug · title ·
-    handle · description · tags(3) · install row.
-    """
-    header = (
-        '<div class="plaque__header plaque-header">'
-        + _field_orb(ns)
-        + _field_rank(ns, "chip")
-        + _field_origin_star(ns)
-        + _field_gh_link(ns)
-        + "</div>"
-    )
-    inner = (
-        header
-        + _field_slug(ns)
-        + _field_title(ns)
-        + _field_handle_row(ns)
-        + _field_description(ns)
-        + _field_tags(ns, 3)
-        + _field_install_row(ns)
-    )
-    return _plaque_shell("tile", ns, inner)
 
 
 def plaque_settled_html(ns: dict) -> str:
-    """Stage 3 — Python sibling of window.plaque.renderSettled(ns).
-
-    Profile trophy card. Tile field set + rank stars + evidence-class
-    chip + gold underline. Produces DOM-equivalent output to the JS
-    renderSettled — the explorer modal (detail variant) and the
-    profile card (settled variant) read as the same vocabulary.
-    """
+    """Settled profile trophy card — mirrors plaque.js renderSettled()."""
     header = (
-        '<div class="plaque__header plaque-header">'
+        '<div class="plaque__header">'
         + _field_orb(ns)
-        + _field_rank(ns, "chip")
-        + _field_origin_star(ns)
+        + _field_rank_chip(ns)
+        + _field_origin_badge(ns)
         + _field_gh_link(ns)
+        + _field_share_btn(ns)
         + "</div>"
     )
     inner = (
         header
         + _field_slug(ns)
         + _field_title(ns)
-        + _field_handle_row(ns)
+        + _field_handle(ns)
         + _field_description(ns)
         + _field_tags(ns, 5)
-        + _field_rank(ns, "stars")
-        + f'<div class="plaque__evidence plaque-evidence">{html.escape(evidence_class(ns.get("level", "")))}</div>'
-        + '<div class="plaque__underline plaque-underline plaque-underline--settled"></div>'
+        + _field_rank_stars(ns)
+        + _field_evidence(ns)
+        + _field_install(ns)
+        + '<div class="plaque__underline"></div>'
     )
     return _plaque_shell("settled", ns, inner)
 
 
-def build_plaque_card(skill: dict) -> str:
-    """Build a settled plaque card HTML for a named skill.
-
-    Stage 3 — delegates to plaque_settled_html so this code path and
-    the JS renderSettled emit the same DOM. The Diamond Seal that
-    used to anchor the legacy header is dropped here because the
-    settled variant now uses the canonical orb-led header that
-    matches the explorer modal's two-column hero.
-    """
-    return plaque_settled_html(skill)
-
+# ── ascension log ──────────────────────────────────────────────────────
 
 def build_ascension_log(skills: list) -> str:
-    """Build ascension log rows for all skills."""
+    def sort_key(s):
+        created = s.get("createdAt", "")
+        return (created, -level_num(s.get("level", "")))
+
+    sorted_skills = sorted(skills, key=sort_key, reverse=True)
     rows = []
-    for skill in sorted(skills, key=lambda s: -level_num(s.get("level", ""))):
+    for skill in sorted_skills:
         skill_id = html.escape(skill.get("id", ""))
-        level = html.escape(skill.get("level", "—"))
-        generic_ref = html.escape(skill.get("genericSkillRef", skill.get("id", "")))
-        rows.append(f"""<div class="ascension-log-row">
-  <span class="al-date">—</span>
-  <span class="al-action">NAMED</span>
-  <span class="al-skill">{skill_id}</span>
-  <span class="al-level">{level}</span>
-</div>""")
+        level    = html.escape(skill.get("level", "—"))
+        date_str = fmt_date(skill.get("createdAt", ""))
+        status   = skill.get("status", "named").upper()
+        rows.append(
+            f'<div class="ascension-log-row">'
+            f'<span class="al-date">{html.escape(date_str)}</span>'
+            f'<span class="al-action">{html.escape(status)}</span>'
+            f'<span class="al-skill">{skill_id}</span>'
+            f'<span class="al-level">{level}</span>'
+            f'</div>'
+        )
     if not rows:
         return '<div class="ascension-log-row"><span style="color:var(--muted);font-size:.85rem">No entries yet.</span></div>'
     return "\n".join(rows)
 
 
-NAV_HTML = f"""<nav>
-  <a href="../../" class="nav-logo" aria-label="Gaia home">
-    <svg class="ico nav-seal" aria-hidden="true" focusable="false"><use href="{ICON_SPRITE_REL}#seal-diamond"/></svg>
-    <span class="nav-wordmark">Gaia</span>
-    </a>
-    <button type="button" class="nav-search-back" id="navSearchBack" aria-label="Back">
-      <svg class="ico" width="20" height="20" aria-hidden="true"><use href="{ICON_SPRITE_REL}#arrow-back"/></svg>
-    </button>
-    <input type="search" id="navMobileSearch" class="nav-mobile-search" placeholder="Search skills…" autocomplete="off" aria-label="Search skills">
-    <button class="nav-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+# ── nav / footer ───────────────────────────────────────────────────────
+
+def _nav_html() -> str:
+    return """<nav>
+  <a class="nav-logo" href="../../">◆ GAIA</a>
   <ul>
-    <li><a href="../../#paths">Registry</a></li>
-    <li><a href="../../#hall-of-heroes">Hall of Heroes</a></li>
-    <li><a href="../../codex.html">The Codex</a></li>
-    <li><a href="../../#tree" class="nav-tree">Tree</a></li>
-    <li><a href="../../#search" class="nav-search-btn" aria-label="Search skills"><svg class="ico" width="14" height="14" aria-hidden="true"><use href="{ICON_SPRITE_REL}#search"/></svg></a></li>
+    <li><a href="../../#what">What</a></li>
+    <li><a href="../../#ranks">Ranks</a></li>
+    <li><a href="../../#start">Start</a></li>
+    <li><a href="../../#named" class="nav-named-explorer">Named Skills</a></li>
   </ul>
 </nav>"""
 
-FOOTER_HTML = f"""<footer>
-  <div class="footer-mark">
-    <svg class="ico footer-seal" aria-hidden="true" focusable="false"><use href="{ICON_SPRITE_REL}#seal-diamond"/></svg>
-    <span class="footer-wordmark">Gaia</span>
-  </div>
-  <p>
-    <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank">GitHub</a> ·
-    MIT ·
-    <a href="../../codex.html">The Codex</a>
-  </p>
+
+def _footer_html() -> str:
+    return """<footer style="text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.82rem">
+  <p>◆ Gaia ·
+  <a href="https://github.com/mbtiongson1/gaia-skill-tree" target="_blank" style="color:var(--muted)">GitHub</a> ·
+  MIT License</p>
 </footer>"""
 
 
+# ── profile data for JS ────────────────────────────────────────────────
+
+def _profile_skills_json(skills: list) -> str:
+    """Serialize minimal skill data as JSON for profile-share.js + profile-timeline.js."""
+    data = []
+    for s in skills:
+        data.append({
+            "id":          s.get("id", ""),
+            "name":        s.get("name") or s.get("id", "").split("/")[-1],
+            "contributor": s.get("contributor", ""),
+            "level":       s.get("level", ""),
+            "levelNum":    level_num(s.get("level", "")),
+            "type":        resolve_type(s),
+            "origin":      bool(s.get("origin")),
+            "description": (s.get("description") or "")[:200],
+            "tags":        (list(s.get("tags") or []))[:5],
+            "createdAt":   s.get("createdAt", ""),
+        })
+    return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+
+# ── full page builder ──────────────────────────────────────────────────
+
 def build_profile_page(handle: str, skills: list) -> str:
-    """Build the full HTML for a contributor profile page."""
-    safe_handle = html.escape(handle)
-    skill_count = len(skills)
+    safe_handle  = html.escape(handle)
+    skill_count  = len(skills)
     origin_count = sum(1 for s in skills if s.get("origin"))
-    max_level = max((level_num(s.get("level", "")) for s in skills), default=0)
-    highest_level = f"{max_level}★" if max_level else "—"
+    max_n        = max((level_num(s.get("level", "")) for s in skills), default=0)
+    highest      = f"{max_n}★" if max_n else "—"
 
-    plaques_html = "\n".join(build_plaque_card(s) for s in skills)
-    log_html = build_ascension_log(skills)
+    plaques_html = "\n".join(plaque_settled_html(s) for s in skills)
+    log_html     = build_ascension_log(skills)
+    skills_json  = _profile_skills_json(skills)
 
-    # OG image tag (raster PNG for social crawlers; SVG sibling exists at the same path)
-    og_image_tags = "\n".join(
-        f'  <meta property="og:image" content="../../og/{html.escape(handle)}/{html.escape(s["id"].split("/")[-1])}.png">'
-        for s in skills[:1]  # use first skill for og:image
-    )
-
-    page_title = f"@{safe_handle} — Gaia Skill Registry"
-    og_description = (
+    page_title   = f"@{safe_handle} — Gaia Skill Registry"
+    og_desc      = (
         f"Contributor profile for @{safe_handle} on the Gaia Skill Registry. "
         f"{skill_count} named skill{'s' if skill_count != 1 else ''}, "
-        f"highest rank {highest_level}."
+        f"highest rank {highest}."
     )
 
-    html_content = f"""<!DOCTYPE html>
+    # origin badge in hero
+    if origin_count:
+        icon_svg  = (
+            f'<svg class="ico" width="16" height="16" aria-hidden="true">'
+            f'<use href="{ICON_BASE}#origin-badge"/></svg>'
+        )
+        hero_origin = (
+            f'<span class="profile-origin-badge">'
+            f'{icon_svg}'
+            f'◆ Origin Contributor · {origin_count} origin{"s" if origin_count != 1 else ""}'
+            f'</span>'
+        )
+    else:
+        hero_origin = ""
+
+    version = _read_version()
+
+    page = f"""<!DOCTYPE html>
 <html lang="en" data-icon-base="../../assets/icons.svg">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{page_title}</title>
-  <meta name="description" content="{html.escape(og_description)}">
-  <!-- OG meta -->
+  <meta name="description" content="{html.escape(og_desc)}">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="{page_title}">
-  <meta property="og:description" content="{html.escape(og_description)}">
+  <meta property="og:title" content="{html.escape(page_title)}">
+  <meta property="og:description" content="{html.escape(og_desc)}">
   <meta property="og:url" content="https://mbtiongson1.github.io/gaia-skill-tree/u/{html.escape(handle)}/">
-{og_image_tags}
-  <!-- Stage 1 — Web fonts (EB Garamond display, Bricolage body, JetBrains Mono fallback). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/plaque.css">
-  <!-- Stage 1 — icon sprite helper, loaded BEFORE other UI scripts. -->
+  <script>window.PROFILE_SKILLS = {skills_json};</script>
   <script src="../../js/icons.js"></script>
-  <!-- Stage 2 — rank-badge component, loaded after icons.js. -->
   <script src="../../js/rank-badge.js"></script>
-  <!-- Stage 3 — plaque component family, loaded after rank-badge.js. -->
   <script src="../../js/plaque.js"></script>
-  <script src="../../js/ui.js" defer></script>
+  <script src="../../js/profile-sort.js" defer></script>
+  <script src="../../js/profile-share.js" defer></script>
+  <script src="../../js/profile-timeline.js" defer></script>
 </head>
 <body class="profile-page">
 
-  {NAV_HTML}
+  {_nav_html()}
 
   <!-- ─── PROFILE HERO ─── -->
   <div class="profile-hero">
     <h1 class="profile-handle">{safe_handle}</h1>
     <div class="profile-meta">
-      {skill_count} named skill{'s' if skill_count != 1 else ''} · highest rank {highest_level}
+      {skill_count} named skill{"s" if skill_count != 1 else ""} · highest rank {highest}
     </div>
-    {f'<span class="profile-origin-badge">◆ Origin Contributor · {origin_count} origin{"s" if origin_count != 1 else ""}</span>' if origin_count else ''}
+    {hero_origin}
   </div>
 
-  <!-- ─── SKILL PLAQUES ─── -->
+  <!-- ─── NAMED SKILLS ─── -->
   <section class="profile-section">
     <h2 class="profile-section-title">Named Skills</h2>
     <p class="profile-section-sub">All named implementations attributed to @{safe_handle} in the Gaia registry.</p>
+    <div class="profile-sort-bar" role="group" aria-label="Sort skills">
+      <button class="profile-sort-btn active" type="button" data-sort="rank"
+        aria-pressed="true">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="{ICON_BASE}#sort-rank"/></svg>
+        Rank
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="alpha" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="{ICON_BASE}#sort-alpha"/></svg>
+        A – Z
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="type" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="{ICON_BASE}#sort-type"/></svg>
+        Type
+      </button>
+    </div>
     <div class="plaque-grid">
       {plaques_html}
     </div>
@@ -557,107 +499,108 @@ def build_profile_page(handle: str, skills: list) -> str:
   <!-- ─── ASCENSION LOG ─── -->
   <section class="profile-section">
     <h2 class="profile-section-title">Ascension Log</h2>
-    <p class="profile-section-sub">Registry events attributed to this contributor, in descending rank order.</p>
+    <p class="profile-section-sub">Registry events attributed to this contributor, most recent first.</p>
     <div class="ascension-log">
-      <div class="ascension-log-header">Date · Action · Skill ID · Level</div>
+      <div class="ascension-log-header">
+        <span>Date</span><span>Action</span><span>Skill ID</span><span>Level</span>
+      </div>
       {log_html}
     </div>
   </section>
 
-  {FOOTER_HTML}
+  <!-- ─── PROGRESSION TIMELINE ─── -->
+  <section class="profile-section">
+    <h2 class="profile-section-title">Progression Timeline</h2>
+    <p class="profile-section-sub">Skill rank progression over time — hover chips for details.</p>
+    <div id="profile-timeline" class="profile-timeline"></div>
+  </section>
 
-  <script src="../../js/plaque-reveal.js" defer></script>
+  {_footer_html()}
 
-  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-    <svg class="ico" width="20" height="20" aria-hidden="true"><use href="../../assets/icons.svg#arrow-up"/></svg>
+  <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top"
+    style="position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;
+           border-radius:50%;background:var(--surface);border:1px solid var(--border);
+           color:var(--muted);cursor:pointer;display:flex;align-items:center;
+           justify-content:center;transition:color .15s,border-color .15s;z-index:90"
+    onclick="window.scrollTo({{top:0,behavior:'smooth'}})">
+    <svg class="ico" width="18" height="18" aria-hidden="true"><use href="{ICON_BASE}#arrow-up"/></svg>
   </button>
 
 </body>
-</html>
-"""
-    return _apply_cache_busting(html_content, _read_version())
+</html>"""
 
+    return _apply_cache_busting(page, version)
+
+
+# ── data loading ───────────────────────────────────────────────────────
 
 def load_named_data(path: Path) -> dict:
-    """Load and return named-skills.json data."""
     if not path.exists():
         print(f"ERROR: {path} not found", file=sys.stderr)
         sys.exit(1)
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
 def collect_by_contributor(data: dict) -> dict:
-    """Return dict of handle -> list of skill entries (including awaitingClassification)."""
     by_handle: dict[str, list] = {}
-
-    # Named buckets
     for bucket_skills in data.get("buckets", {}).values():
         for entry in bucket_skills:
-            handle = entry.get("contributor", "")
-            if not handle:
-                continue
-            by_handle.setdefault(handle, []).append(entry)
-
-    # awaiting classification — include if they have a contributor
+            h = entry.get("contributor", "")
+            if h:
+                by_handle.setdefault(h, []).append(entry)
     for entry in data.get("awaitingClassification", []):
-        handle = entry.get("contributor", "")
-        if not handle:
-            continue
-        by_handle.setdefault(handle, []).append(entry)
-
+        h = entry.get("contributor", "")
+        if h:
+            by_handle.setdefault(h, []).append(entry)
     return by_handle
 
 
+# ── main ───────────────────────────────────────────────────────────────
+
 def generate_pages(named_path: Path, out_dir: Path) -> int:
-    """Generate all profile pages. Returns number of pages written."""
     global TYPE_LOOKUP
     TYPE_LOOKUP = load_type_lookup(GAIA_JSON)
-    data = load_named_data(named_path)
-    by_contributor = collect_by_contributor(data)
+    data            = load_named_data(named_path)
+    by_contributor  = collect_by_contributor(data)
 
     if not by_contributor:
-        print("No contributors found in named-skills.json — no pages generated.")
+        print("No contributors found — no pages generated.")
         return 0
 
     out_dir.mkdir(parents=True, exist_ok=True)
     count = 0
 
     for handle, skills in sorted(by_contributor.items()):
+        # Sort by level desc, then createdAt desc for default order
+        skills_sorted = sorted(
+            skills,
+            key=lambda s: (-level_num(s.get("level", "")), s.get("createdAt", "")),
+            reverse=False,
+        )
         handle_dir = out_dir / handle
         handle_dir.mkdir(parents=True, exist_ok=True)
-        page_html = build_profile_page(handle, skills)
-        out_file = handle_dir / "index.html"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(page_html)
-        print(f"  Generated: docs/u/{handle}/index.html ({len(skills)} skill(s))")
+        page_html = build_profile_page(handle, skills_sorted)
+        output_path = handle_dir / "index.html"
+        output_path.write_text(page_html, encoding="utf-8")
         count += 1
+        print(f"  wrote {output_path.relative_to(REPO_ROOT)}")
 
     return count
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Generate contributor profile pages from named-skills.json"
-    )
-    parser.add_argument(
-        "--named",
-        default=str(NAMED_JSON),
-        help="Path to named-skills.json (default: registry/named-skills.json)",
-    )
-    parser.add_argument(
-        "--out-dir",
-        default=str(OUT_DIR),
-        help="Output directory for profile pages (default: docs/u/)",
-    )
+def main():
+    parser = argparse.ArgumentParser(description="Generate contributor profile pages.")
+    parser.add_argument("--named",   default=str(NAMED_JSON), help="Path to named-skills.json")
+    parser.add_argument("--out-dir", default=str(OUT_DIR),    help="Output directory")
     args = parser.parse_args()
 
     named_path = Path(args.named)
-    out_dir = Path(args.out_dir)
+    out_dir    = Path(args.out_dir)
 
-    print(f"Loading named skills from: {named_path}")
+    print(f"Reading {named_path} …")
     count = generate_pages(named_path, out_dir)
-    print(f"\nDone. {count} contributor profile page(s) generated in {out_dir}/")
+    print(f"Generated {count} profile page(s) under {out_dir.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

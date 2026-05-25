@@ -1,394 +1,193 @@
-/* Gaia Plaque component family — Stage 3.
- *
- * Single source of truth for every plaque variant. One field-helper set
- * powers six render methods (mini / tile / row / detail / settled / og).
- * Only variant chrome — layout + which slots are visible — differs.
- *
- *   plaque.renderMini(ns, opts)      // HoH track plate
- *   plaque.renderTile(ns, opts)      // explorer grid card
- *   plaque.renderRow(ns, opts)       // explorer list row
- *   plaque.renderDetail(ns, opts)    // explorer modal hero (two-column)
- *   plaque.renderSettled(ns, opts)   // profile trophy card
- *   plaque.renderOg(ns, opts)        // 1200×630 social card (HTML mock;
- *                                     the canonical OG is server-rendered
- *                                     by scripts/generateOgCards.py)
- *
- * All variants emit `.plaque` + `.plaque--<variant>` with the existing
- * `data-type="<basic|extra|unique|ultimate>"` and `data-level="N"`
- * attributes. Apex (6★) adds `plaque--apex-vi` for the rainbow shimmer
- * shadow animation defined in plaque.css.
- *
- * Forbidden: inline SVG strings, inline hex codes, inline rank chips.
- * - Icons: window.gaiaIcon(id, opts).
- * - Rank surfaces: window.rankBadge(level, opts).
- * - Slug/handle/profile helpers: window.namedSlug / window.handleLink.
- *
- * Loaded AFTER icons.js and rank-badge.js, BEFORE named-skills.js,
- * skill-explorer.js, page-ia.js.
+/* plaque.js — client-side plaque card renderer.
+ * Exposes window.plaque with renderSettled(), renderTile(), renderMini().
+ * Depends on: icons.js (window.icon), rank-badge.js (window.rankBadge).
  */
 (function () {
-  'use strict';
+  var ICON_BASE = document.documentElement.getAttribute('data-icon-base') || '../../assets/icons.svg';
 
-  // ── shared utilities ──────────────────────────────────────────────
+  var TAG_PAL = [
+    { c:'#38bdf8', bg:'rgba(56,189,248,.12)',  bd:'rgba(56,189,248,.3)'  },
+    { c:'#c084fc', bg:'rgba(192,132,252,.12)', bd:'rgba(192,132,252,.3)' },
+    { c:'#63cab7', bg:'rgba(99,202,183,.12)',  bd:'rgba(99,202,183,.3)'  },
+    { c:'#a78bfa', bg:'rgba(167,139,250,.12)', bd:'rgba(167,139,250,.3)' },
+    { c:'#f59e0b', bg:'rgba(245,158,11,.12)',  bd:'rgba(245,158,11,.3)'  },
+    { c:'#e879f9', bg:'rgba(232,121,249,.12)', bd:'rgba(232,121,249,.3)' },
+  ];
+
   function esc(s) {
     return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function jsStr(s) {
-    return String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  function tagColor(t) {
+    var h = 0;
+    for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % TAG_PAL.length;
+    return TAG_PAL[h];
   }
 
-  function levelNum(level) {
-    if (level == null) return 0;
-    if (typeof level === 'number') return level | 0;
-    var n = parseInt(String(level).replace(/[^\d]/g, ''), 10);
-    return isNaN(n) ? 0 : Math.max(0, Math.min(6, n));
+  function tagHtml(t) {
+    var p = tagColor(t);
+    return '<span class="plaque__tag" style="color:' + p.c + ';background:' + p.bg + ';border-color:' + p.bd + '">' + esc(t) + '</span>';
   }
 
-  function icon(id, size) {
-    return (typeof window.gaiaIcon === 'function')
-      ? window.gaiaIcon(id, { size: size || 14 })
-      : '<svg class="ico" width="' + (size || 14) + '" height="' + (size || 14) + '" aria-hidden="true"></svg>';
+  function ico(id, size) {
+    return '<svg class="ico" width="' + size + '" height="' + size + '" aria-hidden="true"><use href="' + ICON_BASE + '#' + id + '"/></svg>';
   }
 
-  function rankBadge(level, opts) {
-    if (typeof window.rankBadge !== 'function') return '';
-    return window.rankBadge(level, opts || {});
+  /* ── field builders ─────────────────────────────────────── */
+
+  function fieldOrb(ns) {
+    var type = ns.type || 'basic';
+    return '<div class="plaque-orb" data-type="' + esc(type) + '"></div>';
   }
 
-  function namedSlug(ns) {
-    if (typeof window.namedSlug === 'function') return window.namedSlug(ns);
-    if (!ns) return '';
-    var id = ns.id || '';
-    if (id.indexOf('/') !== -1) return '/' + id.split('/', 2)[1];
-    return '/' + (ns.genericSkillRef || id || '');
+  function fieldRankChip(ns) {
+    var n = window.rankBadge.levelNum(ns.level);
+    return window.rankBadge.chip(n);
   }
 
-  function handleLink(handle, opts) {
-    if (typeof window.handleLink === 'function') return window.handleLink(handle || '', opts || {});
-    if (!handle) return '';
-    var cls = 'atlas-handle' + (opts && opts.extraClass ? ' ' + opts.extraClass : '');
-    var rel = (opts && opts.rel) || './u/';
-    return '<a class="' + esc(cls) + '" href="' + esc(rel + encodeURIComponent(handle) + '/') + '">@' + esc(handle) + '</a>';
+  function fieldRankStars(ns) {
+    var n = window.rankBadge.levelNum(ns.level);
+    return window.rankBadge.stars(n);
   }
 
-  // ── shared field helpers (one source of truth) ───────────────────
-  // Each field helper returns HTML for that slot. Variants opt in/out
-  // by including or skipping the slot in their render method — variant
-  // chrome lives in CSS, never JS.
-
-  function _fieldOrb(ns, sizeModifier) {
-    var type = (ns && ns.type) || 'basic';
-    var n = levelNum(ns && ns.level);
-    var mod = sizeModifier ? ' plaque-orb--' + sizeModifier : '';
-    var apex = n >= 6 ? ' plaque-orb--vi' : '';
-    return '<div class="plaque-orb plaque-orb--' + esc(type) + mod + apex + '" aria-hidden="true"></div>';
-  }
-
-  function _fieldSlug(ns) {
-    var slug = namedSlug(ns);
-    var id = ns && ns.id || '';
-    return '<div class="plaque__slug plaque-skill-name named-slug" title="' + esc(id) + '">' + esc(slug) + '</div>';
-  }
-
-  function _fieldTitle(ns) {
-    var title = ns && (ns.title || ns.name) || '';
-    if (!title) return '';
-    return '<div class="plaque__title plaque-title">' + esc(title) + '</div>';
-  }
-
-  function _fieldHandleRow(ns) {
-    var contribLink = handleLink(ns && ns.contributor || '');
-    if (!contribLink) return '';
-    return '<div class="plaque__handle plaque-contrib-row">' + contribLink + _fieldOriginBadge(ns) + '</div>';
-  }
-
-  function _fieldDescription(ns) {
-    var desc = ns && ns.description || '';
-    if (!desc) return '';
-    return '<p class="plaque__description plaque-description">' + esc(desc) + '</p>';
-  }
-
-  function _fieldTags(ns, limit) {
-    var tags = (ns && Array.isArray(ns.tags)) ? ns.tags : [];
-    var cap = (typeof limit === 'number') ? limit : tags.length;
-    var sliced = tags.slice(0, cap);
-    if (!sliced.length) return '';
-    var inner = sliced.map(function (t) {
-      return '<span class="plaque__tag plaque-tag">' + esc(t) + '</span>';
-    }).join('');
-    return '<div class="plaque__tags plaque-tags">' + inner + '</div>';
-  }
-
-  function _fieldRank(ns, variant) {
-    var v = variant || 'stars';
-    var type = (ns && ns.type) || 'basic';
-    var html = rankBadge(ns && ns.level, { variant: v, label: ns && ns.level, tier: type });
-    if (!html) return '';
-    return '<div class="plaque__rank">' + html + '</div>';
-  }
-
-  function _fieldGhLink(ns) {
-    var links = (ns && ns.links) || {};
-    var url = links.github || links.npm || '';
-    if (!url) return '';
-    return '<a class="plaque__gh-link ns-gh-link" href="' + esc(url) +
-      '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on GitHub">' +
-      icon('github', 14) + '</a>';
-  }
-
-  function _fieldVariantsBadge(ns) {
-    if (!ns || !ns.variants || !ns.variants.length) return '';
-    var count = ns.variants.length;
-    return '<div class="plaque__variants-badge ns-variants-badge" title="' + count + ' additional implementation(s) available">' +
-      '+' + count + ' implementation' + (count > 1 ? 's' : '') +
-      '</div>';
-  }
-
-  function _fieldOriginBadge(ns) {
+  function fieldOriginBadge(ns) {
     if (!ns || !ns.origin) return '';
-    // Stage 4 — render the origin badge from the shared sprite so it inherits
-    // --honor-red via currentColor. Include a small (i) icon for context on hover.
-    return '<span class="plaque__origin" data-tooltip="Origin contributor: The creator of the first skill version" aria-label="Origin contributor: The creator of the first skill version">' +
-      icon('origin-badge', 16) +
-      '<span class="origin-info" style="margin-left: 3px; color: var(--muted); opacity: 0.7;">' + icon('info', 10) + '</span>' +
-      '</span>';
+    return (
+      '<span class="plaque__origin" ' +
+      'data-tooltip="Origin contributor: The creator of the first skill version" ' +
+      'aria-label="Origin contributor">' +
+      ico('origin-badge', 16) +
+      '<span class="origin-info">' + ico('info', 10) + '</span>' +
+      '</span>'
+    );
   }
 
-  // Install row — shared mini-terminal block (used by tile / detail / settled).
-  // The copy button is wired in via inline onclick that delegates to
-  // window.nsInstCopy (defined by named-skills.js). If that's not present
-  // we fall back to navigator.clipboard inline.
-  function _fieldInstallRow(ns) {
-    if (!ns || !ns.id) return '';
+  function fieldGhLink(ns) {
+    var url = (ns.links || {}).github || (ns.links || {}).npm || '';
+    if (!url) return '';
+    return (
+      '<a class="plaque__gh-link" href="' + esc(url) + '" ' +
+      'target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on GitHub">' +
+      ico('github', 14) + '</a>'
+    );
+  }
+
+  function fieldShareBtn(ns) {
+    return (
+      '<button class="plaque__share-btn" type="button" ' +
+      'aria-label="Share ' + esc(ns.name || ns.id) + '" ' +
+      'data-skill-id="' + esc(ns.id) + '" ' +
+      'onclick="event.stopPropagation();profileShare.open(this)">' +
+      ico('share', 14) + '</button>'
+    );
+  }
+
+  function fieldSlug(ns) {
+    var slug = '/' + String(ns.id || '').split('/').pop();
+    return '<div class="plaque__slug">' + esc(slug) + '</div>';
+  }
+
+  function fieldTitle(ns) {
+    var name = ns.name || (String(ns.id || '').split('/').pop()) || ns.id;
+    return '<div class="plaque__title">' + esc(name) + '</div>';
+  }
+
+  function fieldHandle(ns) {
+    var h = ns.contributor || '';
+    return '<div class="plaque__handle">by <a href="../../u/' + esc(h) + '/">@' + esc(h) + '</a></div>';
+  }
+
+  function fieldDescription(ns) {
+    if (!ns.description) return '';
+    var d = String(ns.description).slice(0, 220) + (ns.description.length > 220 ? '…' : '');
+    return '<p class="plaque__description">' + esc(d) + '</p>';
+  }
+
+  function fieldTags(ns, max) {
+    var tags = (ns.tags || []).slice(0, max || 5).map(tagHtml).join('');
+    return tags ? '<div class="plaque__tags">' + tags + '</div>' : '';
+  }
+
+  function fieldEvidence(ns) {
+    var n = window.rankBadge.levelNum(ns.level);
+    var cls = n >= 4 ? 'CLASS A' : n === 3 ? 'CLASS B' : n === 2 ? 'CLASS C' : 'AWAITED';
+    return '<div class="plaque__evidence">' + cls + '</div>';
+  }
+
+  function fieldInstall(ns) {
+    if (!ns.id) return '';
     var cmd = 'gaia install ' + ns.id;
-    var copyClick = 'event.stopPropagation();' +
-      'if(typeof window.nsInstCopy===\'function\'){window.nsInstCopy(this);}' +
-      'else{navigator.clipboard.writeText(this.dataset.cmd);}';
-    return '<div class="plaque__install-row ns-install-row">' +
-      '<span class="plaque__install-prompt ns-install-prompt">$</span>' +
-      '<span class="plaque__install-cmd ns-install-cmd-txt">' + esc(cmd) + '</span>' +
-      '<button class="plaque__install-copy ns-install-copy" type="button" aria-label="Copy install command" title="Copy install command" data-cmd="' + esc(cmd) + '" onclick="' + copyClick + '">' +
-      icon('copy', 13) + '</button>' +
-      '</div>';
+    return (
+      '<div class="plaque__install-row">' +
+      '<span class="plaque__install-prompt">$</span>' +
+      '<span class="plaque__install-cmd">' + esc(cmd) + '</span>' +
+      '<button class="plaque__install-copy" type="button" aria-label="Copy" title="Copy" ' +
+      'data-cmd="' + esc(cmd) + '" onclick="event.stopPropagation();placCopy(this)">' +
+      ico('copy', 13) + '</button></div>'
+    );
   }
 
-  // ── plaque shell ─────────────────────────────────────────────────
-  function _shell(variant, ns, innerHtml, extraOpts) {
-    var type = (ns && ns.type) || 'basic';
-    var n = levelNum(ns && ns.level);
+  /* ── shell wrapper ──────────────────────────────────────── */
+
+  function shell(variant, ns, inner) {
+    var n    = window.rankBadge.levelNum(ns.level);
+    var type = ns.type || 'basic';
     var apex = n >= 6 ? ' plaque--apex-vi' : '';
-    extraOpts = extraOpts || {};
-    var extraCls = extraOpts.extraClass ? ' ' + extraOpts.extraClass : '';
-    var clickAttr = '';
-    if (ns && ns.id && extraOpts.click !== false) {
-      clickAttr = ' onclick="' + (extraOpts.onclick ||
-        '(function(id){if(typeof openSkillExplorer===\'function\')openSkillExplorer(id);})(\'' + jsStr(ns.id) + '\')') + '"';
-    }
-    var role = extraOpts.role ? ' role="' + esc(extraOpts.role) + '" tabindex="0"' : '';
-    var extraAttrs = extraOpts.attrs || '';
-    return '<article class="plaque plaque--' + esc(variant) + apex + extraCls +
-      '" data-type="' + esc(type) + '" data-level="' + esc(n) +
-      '" data-skill-id="' + esc(ns && ns.id || '') + '"' +
-      clickAttr + role + extraAttrs + '>' +
-      innerHtml +
-      '</article>';
+    return (
+      '<article class="plaque plaque--' + variant + apex + '" ' +
+      'data-skill-id="' + esc(ns.id || '') + '" ' +
+      'data-type="' + esc(type) + '" data-level="' + n + '">' +
+      inner + '</article>'
+    );
   }
 
-  // ── variant: mini (HoH track plate + tree-view DAG node) ────────
-  // Field set: orb · slug · handle · rank stars (no description, no tags,
-  // no install row).
-  // Stage 4 — extra opts supported:
-  //   opts.dagId   string  → emits data-id=<dagId> so the Tree-view
-  //                          DAG layer can resolve nodes for arrow drawing.
-  //   opts.ghost   boolean → emits data-ghost + a hatched-border CSS hook
-  //                          (no GitHub icon for ghosts; suppress rank stars).
-  //   opts.extraClass / attrs / onclick / click flow through _shell.
-  function renderMini(ns, opts) {
-    opts = opts || {};
-    var isGhost = !!opts.ghost;
-    var inner =
-      _fieldOrb(ns) +
-      _fieldSlug(ns) +
-      (isGhost ? '' : _fieldHandleRow(ns)) +
-      (isGhost ? '' : _fieldRank(ns, 'stars')) +
-      (isGhost ? '' : _fieldGhLink(ns));
+  /* ── public variants ────────────────────────────────────── */
 
-    var shellOpts = {};
-    if (opts.onclick) shellOpts.onclick = opts.onclick;
-    if (opts.click === false) shellOpts.click = false;
-    if (opts.role) shellOpts.role = opts.role;
-    var extra = opts.extraClass || '';
-    if (isGhost) extra = (extra ? extra + ' ' : '') + 'plaque--ghost';
-    if (extra) shellOpts.extraClass = extra;
-    var attrs = opts.attrs || '';
-    if (opts.dagId) attrs += ' data-id="' + esc(opts.dagId) + '"';
-    if (isGhost) attrs += ' data-ghost="true"';
-    if (attrs) shellOpts.attrs = attrs;
-
-    return _shell('mini', ns, inner, shellOpts);
-  }
-
-  // ── variant: tile (explorer grid) ────────────────────────────────
-  // Field set: header (orb + level chip + origin star + gh link)
-  //          · slug · title · handle · description · tags (3) · install row.
-  function renderTile(ns, opts) {
-    var header =
-      '<div class="plaque__header plaque-header">' +
-        _fieldOrb(ns) +
-        _fieldRank(ns, 'chip') +
-        _fieldGhLink(ns) +
-      '</div>';
-
-    var inner =
+  function renderSettled(ns) {
+    var header = (
+      '<div class="plaque__header">' +
+      fieldOrb(ns) + fieldRankChip(ns) + fieldOriginBadge(ns) +
+      fieldGhLink(ns) + fieldShareBtn(ns) +
+      '</div>'
+    );
+    var inner = (
       header +
-      _fieldSlug(ns) +
-      _fieldTitle(ns) +
-      _fieldHandleRow(ns) +
-      _fieldDescription(ns) +
-      _fieldTags(ns, 3) +
-      _fieldInstallRow(ns);
-
-    return _shell('tile', ns, inner, opts);
+      fieldSlug(ns) + fieldTitle(ns) + fieldHandle(ns) +
+      fieldDescription(ns) + fieldTags(ns, 5) +
+      fieldRankStars(ns) + fieldEvidence(ns) + fieldInstall(ns) +
+      '<div class="plaque__underline"></div>'
+    );
+    return shell('settled', ns, inner);
   }
 
-  // ── variant: row (explorer list) ─────────────────────────────────
-  // Field set: same as tile, laid horizontally. Description hidden via
-  // CSS only — no silent field drops at the JS level.
-  function renderRow(ns, opts) {
-    var inner =
-      _fieldOrb(ns, 'sm') +
-      _fieldSlug(ns) +
-      _fieldTitle(ns) +
-      _fieldHandleRow(ns) +
-      _fieldTags(ns, 2) +
-      _fieldRank(ns, 'chip') +
-      _fieldGhLink(ns) +
-      '<span class="plaque__arrow ns-lr-arrow" aria-hidden="true">›</span>';
-
-    return _shell('row', ns, inner, opts);
-  }
-
-  // ── variant: detail (explorer modal hero, two-column) ────────────
-  // Left column: orb (lg) · slug · handle · rank (full) · install row · gh link
-  // Right column: title · description · tags
-  function renderDetail(ns, opts) {
-    opts = opts || {};
-    var links = (ns && ns.links) || {};
-    var repoUrl = links.github || links.npm || '';
-    var ghLink = repoUrl
-      ? '<a class="plaque__gh-link ns-gh-link" href="' + esc(repoUrl) + '" target="_blank" rel="noopener" aria-label="Show on GitHub">' +
-          icon('github', 14) + '</a>'
-      : '';
-
-    var left =
-      '<div class="plaque__col plaque-detail-left">' +
-        _fieldOrb(ns, 'lg') +
-        _fieldSlug(ns) +
-        _fieldHandleRow(ns) +
-        _fieldRank(ns, 'stars') +
-        _fieldInstallRow(ns) +
-        ghLink +
-      '</div>';
-
-    var right =
-      '<div class="plaque__col plaque-detail-right">' +
-        _fieldTitle(ns) +
-        _fieldDescription(ns) +
-        _fieldTags(ns) +
-      '</div>';
-
-    // Detail is the modal content — it's not itself clickable.
-    var shellOpts = Object.assign({}, opts, { click: false });
-    return _shell('detail', ns, left + right, shellOpts);
-  }
-
-  // ── variant: settled (profile trophy card) ───────────────────────
-  // Tile field set + rank stars + evidence-class chip + gold underline.
-  function renderSettled(ns, opts) {
-    opts = opts || {};
-    var header =
-      '<div class="plaque__header plaque-header">' +
-        _fieldOrb(ns) +
-        _fieldRank(ns, 'chip') +
-        _fieldGhLink(ns) +
-      '</div>';
-
-    var inner =
+  function renderTile(ns) {
+    var header = (
+      '<div class="plaque__header">' +
+      fieldOrb(ns) + fieldRankChip(ns) + fieldOriginBadge(ns) +
+      fieldGhLink(ns) + '</div>'
+    );
+    var inner = (
       header +
-      _fieldSlug(ns) +
-      _fieldTitle(ns) +
-      _fieldHandleRow(ns) +
-      _fieldDescription(ns) +
-      _fieldTags(ns, 5) +
-      _fieldRank(ns, 'stars') +
-      '<div class="plaque__evidence plaque-evidence">' + esc(_evidenceClass(ns && ns.level)) + '</div>' +
-      '<div class="plaque__underline plaque-underline plaque-underline--settled"></div>';
-
-    return _shell('settled', ns, inner, opts);
+      fieldSlug(ns) + fieldTitle(ns) + fieldHandle(ns) +
+      fieldDescription(ns) + fieldTags(ns, 3) + fieldInstall(ns)
+    );
+    return shell('tile', ns, inner);
   }
 
-  function _evidenceClass(level) {
-    var n = levelNum(level);
-    if (n >= 4) return 'CLASS A';
-    if (n >= 3) return 'CLASS B';
-    if (n >= 2) return 'CLASS C';
-    return 'AWAITED';
+  function renderMini(ns) {
+    var inner = fieldOrb(ns) + fieldSlug(ns) + fieldHandle(ns) + fieldRankStars(ns);
+    return shell('mini', ns, inner);
   }
 
-  // ── variant: og (HTML mock of the 1200×630 social card) ──────────
-  // The canonical OG card is generated as SVG by generateOgCards.py.
-  // This HTML mock exists so the sampler page can show what the OG card
-  // looks like in-browser — at scaled-down size — without a raster step.
-  function renderOg(ns, opts) {
-    opts = opts || {};
-    var header =
-      '<div class="plaque__header plaque-header">' +
-        '<span class="plaque__og-seal">' + icon('seal-diamond', 36) + '</span>' +
-        _fieldRank(ns, 'full') +
-      '</div>';
-
-    var inner =
-      header +
-      _fieldOrb(ns, 'lg') +
-      _fieldSlug(ns) +
-      _fieldTitle(ns) +
-      _fieldHandleRow(ns) +
-      _fieldDescription(ns) +
-      _fieldTags(ns, 4) +
-      _fieldInstallRow(ns);
-
-    var shellOpts = Object.assign({}, opts, { click: false });
-    return _shell('og', ns, inner, shellOpts);
-  }
-
-  // ── public API ───────────────────────────────────────────────────
-  var plaque = {
-    renderMini: renderMini,
-    renderTile: renderTile,
-    renderRow: renderRow,
-    renderDetail: renderDetail,
-    renderSettled: renderSettled,
-    renderOg: renderOg,
-    // Private helpers exposed for debugging only; do not depend on these
-    // in call-site code — the public render methods are the contract.
-    _fields: {
-      orb: _fieldOrb,
-      slug: _fieldSlug,
-      title: _fieldTitle,
-      handle: _fieldHandleRow,
-      description: _fieldDescription,
-      tags: _fieldTags,
-      rank: _fieldRank,
-      install: _fieldInstallRow,
-      gh: _fieldGhLink,
-      origin: _fieldOriginBadge,
-    },
+  /* ── copy helper ────────────────────────────────────────── */
+  window.placCopy = function (btn) {
+    navigator.clipboard.writeText(btn.dataset.cmd).then(function () {
+      var prev = btn.innerHTML;
+      btn.innerHTML = ico('check', 13);
+      setTimeout(function () { btn.innerHTML = prev; }, 1500);
+    }).catch(function () {});
   };
 
-  window.plaque = plaque;
+  window.plaque = { renderSettled: renderSettled, renderTile: renderTile, renderMini: renderMini };
 })();
