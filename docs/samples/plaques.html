@@ -3,242 +3,348 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plaque Sampler — Gaia Skill Registry</title>
+  <title>Plaque Family Sampler — Gaia (Stage 3)</title>
+  <meta name="description" content="The same skill (karpathy/autoresearch, 6★ Ultimate) rendered in all six plaque variants. Verifies slug color, handle color, italic title, tag chip style, and 6★ shimmer animation match across --mini / --tile / --row / --detail / --settled / --og.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/plaque.css">
-  <script>
-  /* ── Sampler fixture data ── */
-  window.PROFILE_SKILLS = [
-    { id:"karpathy/autoresearch",          name:"AutoResearch",              contributor:"karpathy",      level:"6★", levelNum:6, type:"ultimate", origin:true,  description:"Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",            tags:["research","autonomous","paper-synthesis"],              createdAt:"2026-04-01" },
-    { id:"ruvnet/flow-nexus-swarm",        name:"Flow Nexus Swarm",          contributor:"ruvnet",        level:"3★", levelNum:3, type:"extra",    origin:true,  description:"Cloud-based AI swarm orchestration with hierarchical, mesh, ring, and star topologies.",                                           tags:["multi-agent","swarm","orchestration","event-driven"],   createdAt:"2026-04-15" },
-    { id:"0xdarkmatter/pytest-patterns",   name:"Pytest Patterns",           contributor:"0xdarkmatter",  level:"3★", levelNum:3, type:"extra",    origin:true,  description:"Comprehensive pytest skill covering modern patterns for Python test automation.",                                                  tags:["pytest","python","test-automation","fixtures"],          createdAt:"2026-04-30" },
-    { id:"anthropic/pptx",                 name:"PPTX Editor",               contributor:"anthropic",     level:"2★", levelNum:2, type:"basic",    origin:true,  description:"Extracts slide content from PowerPoint files, applies edits, and repacks the file.",                                              tags:["pptx","powerpoint","document-editing","markitdown"],    createdAt:"2026-05-01" },
-    { id:"addy-osmani/tdd",               name:"Test-Driven Development",   contributor:"addy-osmani",   level:"2★", levelNum:2, type:"basic",    origin:false, description:"Forces the AI agent to follow a strict red-green-refactor TDD workflow.",                                                         tags:["tdd","testing","red-green-refactor","workflow"],         createdAt:"2026-05-10" },
-    { id:"garrytan/health",               name:"Health",                    contributor:"garrytan",      level:"3★", levelNum:3, type:"extra",    origin:false, description:"Executes the full automated test suite and surfaces newly introduced failures with root-cause notes.",                              tags:["automated-testing","ci","quality"],                     createdAt:"2026-05-18" },
-  ];
-  </script>
   <script src="../js/icons.js"></script>
   <script src="../js/rank-badge.js"></script>
+  <script src="../js/atlas-helpers.js"></script>
   <script src="../js/plaque.js"></script>
-  <script src="../js/profile-sort.js" defer></script>
-  <script src="../js/profile-share.js" defer></script>
-  <script src="../js/profile-timeline.js" defer></script>
   <style>
-    .sampler-hero {
-      max-width: 720px; margin: 0 auto;
-      padding: 5.5rem 1.5rem 2rem;
-      text-align: center;
+    body {
+      padding: 4rem 1.5rem 6rem;
+      max-width: 1280px;
+      margin: 0 auto;
     }
-    .sampler-kicker {
-      font-size: .75rem; font-weight: 700; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--basic);
-      border: 1px solid rgba(56,189,248,.3);
-      display: inline-block; padding: .35rem 1rem; border-radius: 999px;
-      margin-bottom: 1.1rem;
+    .sampler-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: .25rem;
     }
-    .sampler-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: .5rem; }
-    .sampler-hero h1 span {
-      background: linear-gradient(135deg, var(--basic) 0%, var(--extra) 50%, var(--ultimate) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .sampler-sub {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
     }
-    .sampler-hero p { color: var(--muted); font-size: .95rem; }
-    .sampler-section { max-width: 1020px; margin: 0 auto; padding: 2rem 1.5rem 3.5rem; }
-    .sampler-section-label {
-      font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--muted);
-      border-bottom: 1px solid var(--border); padding-bottom: .65rem; margin-bottom: 1.5rem;
+    .sampler-section {
+      margin: 3rem 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
     }
-    .demo-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .demo-badge-row {
-      display: flex; gap: .75rem; align-items: center; flex-wrap: wrap;
-      padding: 1rem 1.25rem;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    .sampler-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
     }
+    .sampler-section .density {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .sampler-stage {
+      position: relative;
+      padding: 1.25rem;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .sampler-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(3, 7, 18, 0.92);
+      backdrop-filter: blur(4px);
+      padding: .8rem 0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+    }
+    .sampler-toolbar button {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: .55rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .sampler-toolbar button:hover {
+      border-color: var(--apex-gold);
+    }
+    .sampler-toolbar button[aria-pressed="true"] {
+      border-color: var(--apex-gold);
+      background: rgba(var(--apex-gold-rgb), 0.08);
+    }
+    .sampler-toolbar .toolbar-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* OG card preview — scale down so it fits next to the others. */
+    .og-preview-wrap {
+      position: relative;
+      width: 600px;
+      max-width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .og-preview-wrap .plaque--og {
+      transform-origin: top left;
+      transform: scale(0.5);
+      width: 1200px;
+    }
+    .og-preview-wrap::after {
+      content: '1200×630 OG card (scaled 0.5×)';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(226, 232, 240, 0.4);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .og-preview-wrap {
+      height: 315px; /* 630 / 2 */
+    }
+
+    /* Alignment grid overlay — 4 px baseline grid drawn on top of every
+       plaque. Use `body[data-grid="on"]` to toggle. The pseudo-element
+       sits absolutely inside each plaque stage so it doesn't clip the
+       hover lift, but only renders when the body flag is set. */
+    body[data-grid="on"] .plaque {
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 3px,
+          rgba(var(--apex-gold-rgb), 0.06) 3px,
+          rgba(var(--apex-gold-rgb), 0.06) 4px
+        );
+    }
+    body[data-grid="on"] .sampler-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 3px,
+          rgba(99, 202, 183, 0.04) 3px,
+          rgba(99, 202, 183, 0.04) 4px
+        );
+      border-radius: inherit;
+    }
+
+    .sampler-key {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .sampler-key span { display: inline-flex; align-items: center; gap: .35rem; }
+    .swatch-honor { width: 12px; height: 12px; background: var(--honor-red); border-radius: 2px; }
+    .swatch-gold  { width: 12px; height: 12px; background: var(--apex-gold); border-radius: 2px; }
+    .swatch-italic { font-family: var(--font-display); font-style: italic; }
+
+    /* Tile grid wrapper for the --tile sample */
+    .sampler-tile-grid {
+      width: 320px;
+      max-width: 100%;
+    }
+    /* The --row sample needs full container width */
+    .sampler-row-wrap { width: 100%; max-width: 720px; }
   </style>
 </head>
-<body class="profile-page">
+<body data-grid="off">
 
-<nav>
-  <a class="nav-logo" href="../">◆ GAIA</a>
-  <ul>
-    <li><a href="../">Home</a></li>
-    <li><a href="../#named" class="nav-named-explorer">Named Skills</a></li>
-    <li><a href="plaques.html" style="color:var(--honor-red, #ef4444);font-weight:700">Sampler</a></li>
-  </ul>
-</nav>
+  <h1 class="sampler-h1">Plaque Family Sampler</h1>
+  <p class="sampler-sub">Stage 3 · One skill · Six variants · One vocabulary</p>
 
-<!-- ─── HERO ─── -->
-<div class="sampler-hero">
-  <span class="sampler-kicker">Design Foundation</span>
-  <h1>Plaque <span>Sampler</span></h1>
-  <p>Live showcase of every plaque variant, badge, sort control, share popover,
-     and timeline component — all rendered from fixture data matching DESIGN.md tokens.</p>
-</div>
+  <p style="color: var(--muted); margin-bottom: 1.4rem; max-width: 64ch;">
+    The same skill (<code style="color:var(--honor-red);font-family:var(--font-mono)">karpathy/autoresearch</code>,
+    6★ Ultimate) rendered in every plaque variant. The acceptance test is visual: the slug font weight,
+    the italic serif title, the Honor-Red handle, the tag-chip style, and the 6★ rainbow shimmer should
+    all read as identical across the six. Toggle the alignment grid to verify slug / title / handle / description
+    baselines align.
+  </p>
 
-<!-- ─── 1. ORIGIN BADGE ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">1 · Origin Badge — #1 Laurel SVG (updated)</div>
-  <div class="demo-badge-row">
-    <span class="ns-origin" data-tooltip="Origin contributor: The creator of the first skill version" aria-label="Origin contributor">
-      <svg class="ico" width="18" height="18" aria-hidden="true"><use href="../assets/icons.svg#origin-badge"/></svg>
-    </span>
-    <span style="color:var(--muted);font-size:.82rem">on a plaque card (hover for tooltip)</span>
-    <span class="profile-origin-badge">
-      <svg class="ico" width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#origin-badge"/></svg>
-      ◆ Origin Contributor · 3 origins
-    </span>
-    <span style="color:var(--muted);font-size:.82rem">in the profile hero</span>
+  <div class="sampler-key">
+    <span><span class="swatch-gold"></span> Apex Gold — Ultimate slug</span>
+    <span><span class="swatch-honor"></span> Honor Red — @handle</span>
+    <span><span class="swatch-italic">Aa</span> EB Garamond italic — title</span>
   </div>
-</section>
 
-<!-- ─── 2. RANK BADGES ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">2 · Rank Chips &amp; Star Rows</div>
-  <div class="demo-badge-row" id="rank-chips"></div>
-  <div class="demo-badge-row" id="rank-stars" style="margin-top:.75rem"></div>
+  <div class="sampler-toolbar" role="toolbar" aria-label="Sampler controls">
+    <span class="toolbar-label">View:</span>
+    <button type="button" id="toggleGrid" aria-pressed="false">⚏ Alignment grid</button>
+    <button type="button" id="toggleApex" aria-pressed="true">★ 6★ shimmer</button>
+    <button type="button" id="reload">↻ Reload data</button>
+  </div>
+
+  <section class="sampler-section">
+    <h2>--mini (Hall of Heroes)</h2>
+    <p class="density">Density: orb · slug · handle · rank stars · (no description / tags / install)</p>
+    <div class="sampler-stage" id="stageMini"></div>
+  </section>
+
+  <section class="sampler-section">
+    <h2>--tile (Named Skills Explorer)</h2>
+    <p class="density">Density: header(orb·chip·origin·gh) · slug · title · handle · description(3) · tags(3) · install</p>
+    <div class="sampler-stage">
+      <div class="sampler-tile-grid" id="stageTile"></div>
+    </div>
+  </section>
+
+  <section class="sampler-section">
+    <h2>--row (Named Skills Explorer · List)</h2>
+    <p class="density">Density: orb(sm) · slug · title · handle · tags(2) · chip · gh · arrow (description hidden via CSS, not field-dropped)</p>
+    <div class="sampler-stage">
+      <div class="sampler-row-wrap" id="stageRow"></div>
+    </div>
+  </section>
+
+  <section class="sampler-section">
+    <h2>--detail (Skill Explorer · Modal hero)</h2>
+    <p class="density">Density: two-column. Left = orb(lg) · slug · handle · rank(full) · install · gh. Right = title · description · tags(all)</p>
+    <div class="sampler-stage" id="stageDetail"></div>
+  </section>
+
+  <section class="sampler-section">
+    <h2>--settled (Profile trophy)</h2>
+    <p class="density">Density: tile + rank stars + evidence-class chip + gold underline. Corner ornaments visible.</p>
+    <div class="sampler-stage">
+      <div class="sampler-tile-grid" id="stageSettled"></div>
+    </div>
+  </section>
+
+  <section class="sampler-section">
+    <h2>--og (1200×630 Social card · HTML mock)</h2>
+    <p class="density">Density: HTML preview of the SVG card emitted by <code>scripts/generateOgCards.py</code>. Same slot vocabulary.</p>
+    <div class="sampler-stage">
+      <div class="og-preview-wrap" id="stageOg"></div>
+    </div>
+  </section>
+
   <script>
-    var rc = document.getElementById('rank-chips');
-    var rs = document.getElementById('rank-stars');
-    for (var i = 0; i <= 6; i++) {
-      var chip = document.createElement('span');
-      chip.innerHTML = window.rankBadge.chip(i);
-      rc.appendChild(chip);
-      var stars = document.createElement('span');
-      stars.innerHTML = window.rankBadge.stars(i);
-      rs.appendChild(stars);
-    }
+    (function () {
+      // Sampler harness — fetches registry/named-skills.json (via the docs
+      // graph mirror) and renders the same skill in all six variants.
+      var SAMPLE_ID = 'karpathy/autoresearch';
+      // Fallback entry (kept inline so the sampler works even when offline
+      // or when the docs/graph mirror hasn't been synced).
+      var FALLBACK = {
+        id: 'karpathy/autoresearch',
+        name: 'AutoResearch',
+        contributor: 'karpathy',
+        origin: true,
+        genericSkillRef: 'autonomous-research-agent',
+        status: 'named',
+        level: '6★',
+        type: 'ultimate',
+        title: "The Scholar's Compass",
+        description: 'Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.',
+        tags: ['research', 'autonomous', 'paper-synthesis'],
+        links: { github: 'https://github.com/karpathy/autoresearch' },
+      };
+
+      function findSampleSkill(data) {
+        var buckets = (data && data.buckets) || {};
+        var keys = Object.keys(buckets);
+        for (var i = 0; i < keys.length; i++) {
+          var arr = buckets[keys[i]] || [];
+          for (var j = 0; j < arr.length; j++) {
+            if (arr[j].id === SAMPLE_ID) {
+              // Ensure the entry knows it's Ultimate / 6★ even if the
+              // registry hasn't bound type to the named entry.
+              return Object.assign({}, arr[j], { type: arr[j].type || 'ultimate' });
+            }
+          }
+        }
+        return null;
+      }
+
+      function renderAll(ns) {
+        var p = window.plaque;
+        if (!p) {
+          document.body.innerHTML = '<p style="color:var(--honor-red);font-family:var(--font-mono)">window.plaque missing — plaque.js failed to load.</p>';
+          return;
+        }
+        document.getElementById('stageMini').innerHTML    = p.renderMini(ns);
+        document.getElementById('stageTile').innerHTML    = p.renderTile(ns);
+        document.getElementById('stageRow').innerHTML     = p.renderRow(ns);
+        document.getElementById('stageDetail').innerHTML  = p.renderDetail(ns);
+        document.getElementById('stageSettled').innerHTML = p.renderSettled(ns);
+        document.getElementById('stageOg').innerHTML      = p.renderOg(ns);
+      }
+
+      function load() {
+        // The docs site serves named/index.json at /graph/named/index.json.
+        // For the sampler in /samples/ the registry source is one level up
+        // and at /graph/named/index.json. Fall back to inline.
+        return fetch('../graph/named/index.json')
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (data) {
+            var ns = findSampleSkill(data);
+            return ns || FALLBACK;
+          })
+          .catch(function () { return FALLBACK; });
+      }
+
+      // Wire toolbar
+      var gridBtn = document.getElementById('toggleGrid');
+      gridBtn.addEventListener('click', function () {
+        var on = document.body.getAttribute('data-grid') === 'on';
+        document.body.setAttribute('data-grid', on ? 'off' : 'on');
+        gridBtn.setAttribute('aria-pressed', on ? 'false' : 'true');
+      });
+      var apexBtn = document.getElementById('toggleApex');
+      apexBtn.addEventListener('click', function () {
+        var on = apexBtn.getAttribute('aria-pressed') === 'true';
+        apexBtn.setAttribute('aria-pressed', on ? 'false' : 'true');
+        document.querySelectorAll('.plaque--apex-vi').forEach(function (el) {
+          el.style.animationPlayState = on ? 'paused' : 'running';
+        });
+      });
+      var reloadBtn = document.getElementById('reload');
+      reloadBtn.addEventListener('click', function () {
+        load().then(renderAll);
+      });
+
+      load().then(renderAll);
+    })();
   </script>
-</section>
-
-<!-- ─── 3. SETTLED PLAQUE GRID (sortable) ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">3 · Settled Plaque Cards — sortable grid</div>
-  <div class="profile-sort-bar" role="group" aria-label="Sort">
-    <button class="profile-sort-btn active" type="button" data-sort="rank">
-      <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-rank"/></svg>Rank
-    </button>
-    <button class="profile-sort-btn" type="button" data-sort="alpha">
-      <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-alpha"/></svg>A – Z
-    </button>
-    <button class="profile-sort-btn" type="button" data-sort="type">
-      <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-type"/></svg>Type
-    </button>
-  </div>
-  <div class="plaque-grid" id="sample-grid"></div>
-  <script>
-    var grid = document.getElementById('sample-grid');
-    window.PROFILE_SKILLS.forEach(function(ns) {
-      grid.insertAdjacentHTML('beforeend', window.plaque.renderSettled(ns));
-    });
-  </script>
-</section>
-
-<!-- ─── 4. SHARE POPOVER (demo card) ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">4 · Share Popover + PNG Canvas Card</div>
-  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">
-    Click the <strong style="color:var(--text)">↑ share icon</strong> on any card above
-    to open the share popover. On mobile/supported browsers, "Share to apps…" sends a
-    1080×1080 PNG to Instagram, WhatsApp, Twitter/X, and any OS share sheet.
-    "Download card (PNG)" works on all platforms.
-  </p>
-  <div class="demo-row">
-    <canvas id="preview-canvas" width="360" height="360"
-      style="border:1px solid var(--border);border-radius:12px;width:360px;height:360px;max-width:100%;display:block"></canvas>
-  </div>
-  <p style="color:var(--muted);font-size:.78rem">
-    Preview of the karpathy/autoresearch skill card (1080×1080, downscaled here).
-  </p>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function() {
-      var c = document.getElementById('preview-canvas');
-      if (!c || !window.profileShare) return;
-      var ns = window.PROFILE_SKILLS[0];
-      /* re-use the internal drawCard via a temporary full-size canvas */
-      var full = document.createElement('canvas');
-      /* profileShare doesn't expose drawCard directly — draw via open/close workaround:
-         just scale the full canvas into the preview */
-      full.width = full.height = 1080;
-      /* trigger drawing by temporarily opening + immediately closing share */
-      var fakeBtn = document.createElement('button');
-      fakeBtn.className = 'plaque__share-btn';
-      fakeBtn.dataset.skillId = ns.id;
-      /* wrap in a fake plaque */
-      var fakePlaque = document.createElement('article');
-      fakePlaque.className = 'plaque';
-      fakePlaque.dataset.skillId = ns.id;
-      fakePlaque.appendChild(fakeBtn);
-      document.body.appendChild(fakePlaque);
-      /* draw directly via OffscreenCanvas fallback */
-      var ctx = c.getContext('2d');
-      ctx.fillStyle = '#030712';
-      ctx.fillRect(0, 0, 360, 360);
-      ctx.font = 'bold 18px Inter,system-ui,sans-serif';
-      ctx.fillStyle = '#fbbf24';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'center';
-      ctx.fillText('6★ AutoResearch — karpathy', 180, 155);
-      ctx.font = '13px Inter,system-ui,sans-serif';
-      ctx.fillStyle = '#64748b';
-      ctx.fillText('Open share icon on any card to generate PNG', 180, 185);
-      ctx.fillText('and share to Instagram, WhatsApp, X…', 180, 204);
-      document.body.removeChild(fakePlaque);
-    });
-  </script>
-</section>
-
-<!-- ─── 5. ASCENSION LOG ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">5 · Ascension Log — real dates from createdAt</div>
-  <div class="ascension-log">
-    <div class="ascension-log-header">
-      <span>Date</span><span>Action</span><span>Skill ID</span><span>Level</span>
-    </div>
-    <div class="ascension-log-row">
-      <span class="al-date">May 2026</span>
-      <span class="al-action">NAMED</span>
-      <span class="al-skill">garrytan/health</span>
-      <span class="al-level">3★</span>
-    </div>
-    <div class="ascension-log-row">
-      <span class="al-date">May 2026</span>
-      <span class="al-action">NAMED</span>
-      <span class="al-skill">addy-osmani/tdd</span>
-      <span class="al-level">2★</span>
-    </div>
-    <div class="ascension-log-row">
-      <span class="al-date">Apr 2026</span>
-      <span class="al-action">NAMED</span>
-      <span class="al-skill">0xdarkmatter/pytest-patterns</span>
-      <span class="al-level">3★</span>
-    </div>
-    <div class="ascension-log-row">
-      <span class="al-date">Apr 2026</span>
-      <span class="al-action">NAMED</span>
-      <span class="al-skill">karpathy/autoresearch</span>
-      <span class="al-level">6★</span>
-    </div>
-  </div>
-</section>
-
-<!-- ─── 6. TIMELINE ─── -->
-<section class="sampler-section">
-  <div class="sampler-section-label">6 · Progression Timeline — interactive JS</div>
-  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">
-    Hover skill chips for name · level · type tooltip. Rows animate in on scroll.
-  </p>
-  <div id="profile-timeline" class="profile-timeline"></div>
-</section>
-
-<footer style="text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.82rem">
-  <p>◆ Gaia Design Foundation ·
-  <a href="../" style="color:var(--muted)">Home</a> ·
-  <a href="https://github.com/mbtiongson1/gaia-skill-tree/blob/main/DESIGN.md" target="_blank" style="color:var(--muted)">DESIGN.md</a>
-  </p>
-</footer>
-
 </body>
 </html>

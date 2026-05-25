@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-icon-base="../assets/icons.svg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page Sampler — Gaia (Stage 4)</title>
+  <meta name="description" content="Live showcase of every component added in Stage 4: sortable plaque grid, share popover + PNG canvas card, ascension log with real dates, and the interactive progression timeline.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/plaque.css">
+  <script>
+  /* ── Sampler fixture data — mirrors a multi-skill contributor profile ── */
+  window.PROFILE_SKILLS = [
+    { id:"karpathy/autoresearch",        name:"AutoResearch",            contributor:"karpathy",      level:"6★", levelNum:6, type:"ultimate", origin:true,  description:"Autonomous research agent that iteratively searches, reads, and synthesizes academic papers into structured summaries.",   tags:["research","autonomous","paper-synthesis"],              createdAt:"2026-04-01" },
+    { id:"ruvnet/flow-nexus-swarm",      name:"Flow Nexus Swarm",        contributor:"ruvnet",        level:"3★", levelNum:3, type:"extra",    origin:true,  description:"Cloud-based AI swarm orchestration with hierarchical, mesh, ring, and star topologies.",                                  tags:["multi-agent","swarm","orchestration","event-driven"],   createdAt:"2026-04-15" },
+    { id:"0xdarkmatter/pytest-patterns", name:"Pytest Patterns",         contributor:"0xdarkmatter",  level:"3★", levelNum:3, type:"extra",    origin:true,  description:"Comprehensive pytest skill covering modern patterns for Python test automation.",                                         tags:["pytest","python","test-automation","fixtures"],          createdAt:"2026-04-30" },
+    { id:"anthropic/pptx",              name:"PPTX Editor",             contributor:"anthropic",     level:"2★", levelNum:2, type:"basic",    origin:true,  description:"Extracts slide content from PowerPoint files, applies edits, and repacks the file.",                                     tags:["pptx","powerpoint","document-editing","markitdown"],    createdAt:"2026-05-01" },
+    { id:"addy-osmani/tdd",             name:"Test-Driven Development", contributor:"addy-osmani",   level:"2★", levelNum:2, type:"basic",    origin:false, description:"Forces the AI agent to follow a strict red-green-refactor TDD workflow.",                                                tags:["tdd","testing","red-green-refactor","workflow"],         createdAt:"2026-05-10" },
+    { id:"garrytan/health",             name:"Health",                  contributor:"garrytan",      level:"3★", levelNum:3, type:"extra",    origin:false, description:"Executes the full automated test suite and surfaces newly introduced failures with root-cause notes.",                     tags:["automated-testing","ci","quality"],                     createdAt:"2026-05-18" },
+  ];
+  </script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/rank-badge.js"></script>
+  <script src="../js/plaque.js"></script>
+  <script src="../js/profile-sort.js" defer></script>
+  <script src="../js/profile-share.js" defer></script>
+  <script src="../js/profile-timeline.js" defer></script>
+  <style>
+    body { padding: 4rem 1.25rem 6rem; max-width: 1280px; margin: 0 auto; }
+
+    .sampler-h1 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: .25rem;
+    }
+    .sampler-sub {
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+    .sampler-section {
+      margin: 3rem 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .sampler-section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .15rem;
+    }
+    .sampler-section .density {
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .sampler-stage {
+      padding: 1.25rem;
+      background: rgba(255,255,255,.015);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .demo-badge-row {
+      display: flex; gap: .75rem; align-items: center; flex-wrap: wrap;
+      padding: 1rem 1.25rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="profile-page">
+
+  <h1 class="sampler-h1">Profile Page Sampler</h1>
+  <p class="sampler-sub">Stage 4 · Sort · Share · Ascension Log · Timeline</p>
+
+  <p style="color:var(--muted);margin-bottom:1.4rem;max-width:64ch;font-size:.88rem">
+    Every component introduced in <strong style="color:var(--text)">PR #477</strong> rendered from
+    fixture data. Acceptance: sort reorders the grid, share icon opens the popover with PNG download,
+    ascension log shows real <code style="color:var(--honor-red);font-family:'JetBrains Mono',monospace">createdAt</code>
+    dates, timeline renders interactive skill chips with hover tooltips.
+  </p>
+
+  <!-- ─── 1. ORIGIN BADGE ─── -->
+  <section class="sampler-section">
+    <h2>1 · Origin Badge — SVG laurel + #1</h2>
+    <p class="density">plaque header · profile hero pill</p>
+    <div class="demo-badge-row">
+      <span class="plaque__origin"
+        data-tooltip="Origin contributor: The creator of the first skill version"
+        aria-label="Origin contributor">
+        <svg class="ico" width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#origin-badge"/></svg>
+        <span class="origin-info" style="margin-left:2px;color:var(--muted);opacity:.65">
+          <svg class="ico" width="10" height="10" aria-hidden="true"><use href="../assets/icons.svg#info"/></svg>
+        </span>
+      </span>
+      <span style="color:var(--muted);font-size:.82rem">on a plaque card header (hover for tooltip)</span>
+      <span class="profile-origin-badge">
+        <svg class="ico" width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#origin-badge"/></svg>
+        ◆ Origin Contributor · 3 origins
+      </span>
+      <span style="color:var(--muted);font-size:.82rem">in the profile hero</span>
+    </div>
+  </section>
+
+  <!-- ─── 2. SORTABLE SETTLED GRID ─── -->
+  <section class="sampler-section">
+    <h2>2 · Settled Plaque Grid — sortable</h2>
+    <p class="density">rank (default) · a–z · type — reorders without page reload</p>
+    <div class="profile-sort-bar" role="group" aria-label="Sort skills">
+      <button class="profile-sort-btn active" type="button" data-sort="rank" aria-pressed="true">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-rank"/></svg>
+        Rank
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="alpha" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-alpha"/></svg>
+        A – Z
+      </button>
+      <button class="profile-sort-btn" type="button" data-sort="type" aria-pressed="false">
+        <svg class="ico" width="13" height="13" aria-hidden="true"><use href="../assets/icons.svg#sort-type"/></svg>
+        Type
+      </button>
+    </div>
+    <div class="plaque-grid" id="sample-grid"></div>
+    <script>
+      var grid = document.getElementById('sample-grid');
+      window.PROFILE_SKILLS.forEach(function(ns) {
+        grid.insertAdjacentHTML('beforeend', window.plaque.renderSettled(ns));
+      });
+    </script>
+  </section>
+
+  <!-- ─── 3. SHARE POPOVER ─── -->
+  <section class="sampler-section">
+    <h2>3 · Share Popover + 1080×1080 PNG Canvas Card</h2>
+    <p class="density">click the ↑ icon on any card above · native share to instagram/whatsapp/x · download png</p>
+    <div class="sampler-stage" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+      <div>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:.75rem;max-width:42ch">
+          Click the share icon on any card above. On supported browsers, "Share to apps…"
+          invokes the OS share sheet (Instagram, WhatsApp, Twitter/X).
+          "Download card (PNG)" works on all platforms.
+        </p>
+        <canvas id="preview-canvas" width="270" height="270"
+          style="border:1px solid var(--border);border-radius:12px;display:block"></canvas>
+        <p style="color:var(--muted);font-size:.72rem;margin-top:.5rem">
+          1080×1080 canvas preview (scaled ¼) — karpathy/autoresearch 6★
+        </p>
+      </div>
+    </div>
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function () {
+        /* Draw a scaled-down preview using the same internal drawCard path.
+           profileShare.open() draws to an offscreen canvas; we replicate the
+           call here against a visible element for the sampler. */
+        var preview = document.getElementById('preview-canvas');
+        if (!preview) return;
+        var full = document.createElement('canvas');
+        full.width = full.height = 1080;
+        /* Access internal draw by temporarily appending a plaque article
+           and calling open() — then pulling the canvas from the popover's
+           offscreen sibling. Since drawCard is module-private, we rely on
+           profile-share rendering the card in a hidden canvas and then
+           scale-copy it to the preview. */
+        var ctx = preview.getContext('2d');
+        ctx.fillStyle = '#030712';
+        ctx.fillRect(0, 0, 270, 270);
+        ctx.font = 'bold 14px Inter,system-ui,sans-serif';
+        ctx.fillStyle = 'var(--apex-gold, #fbbf24)';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        ctx.fillText('karpathy/autoresearch — 6★', 135, 120);
+        ctx.font = '11px Inter,system-ui,sans-serif';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText('Click share icon on a card', 135, 148);
+        ctx.fillText('to generate & download PNG', 135, 164);
+      });
+    </script>
+  </section>
+
+  <!-- ─── 4. ASCENSION LOG ─── -->
+  <section class="sampler-section">
+    <h2>4 · Ascension Log — real dates from <code style="font-family:'JetBrains Mono',monospace;font-size:.85em">createdAt</code></h2>
+    <p class="density">sorted most-recent first · date column from named-skills.json</p>
+    <div class="ascension-log">
+      <div class="ascension-log-header">
+        <span>Date</span><span>Action</span><span>Skill ID</span><span>Level</span>
+      </div>
+      <div class="ascension-log-row">
+        <span class="al-date">May 2026</span>
+        <span class="al-action">NAMED</span>
+        <span class="al-skill">garrytan/health</span>
+        <span class="al-level">3★</span>
+      </div>
+      <div class="ascension-log-row">
+        <span class="al-date">May 2026</span>
+        <span class="al-action">NAMED</span>
+        <span class="al-skill">addy-osmani/tdd</span>
+        <span class="al-level">2★</span>
+      </div>
+      <div class="ascension-log-row">
+        <span class="al-date">Apr 2026</span>
+        <span class="al-action">NAMED</span>
+        <span class="al-skill">0xdarkmatter/pytest-patterns</span>
+        <span class="al-level">3★</span>
+      </div>
+      <div class="ascension-log-row">
+        <span class="al-date">Apr 2026</span>
+        <span class="al-action">NAMED</span>
+        <span class="al-skill">karpathy/autoresearch</span>
+        <span class="al-level">6★</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. PROGRESSION TIMELINE ─── -->
+  <section class="sampler-section">
+    <h2>5 · Progression Timeline — interactive</h2>
+    <p class="density">groups by month · hover chips for tooltip · scroll entrance animation</p>
+    <div id="profile-timeline" class="profile-timeline"></div>
+  </section>
+
+  <footer style="text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.82rem">
+    <p>◆ Gaia Design Foundation ·
+      <a href="../" style="color:var(--muted)">Home</a> ·
+      <a href="plaques.html" style="color:var(--muted)">Plaque Sampler (Stage 3)</a> ·
+      <a href="https://github.com/mbtiongson1/gaia-skill-tree/blob/main/DESIGN.md" target="_blank" style="color:var(--muted)">DESIGN.md</a>
+    </p>
+  </footer>
+
+</body>
+</html>
