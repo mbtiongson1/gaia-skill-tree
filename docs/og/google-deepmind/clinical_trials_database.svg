@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#111827"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="120" cy="110" r="42" fill="#1f2937" stroke="#f59e0b" stroke-width="3"/>
+  <text x="120" y="118" font-size="20" text-anchor="middle" fill="#fbbf24">✦</text>
+  <text x="200" y="120" font-size="62" fill="#f8fafc" font-family="EB Garamond, serif">Clinical-Trials-Database</text>
+  <text x="200" y="170" font-size="34" fill="#cbd5e1" font-family="JetBrains Mono, monospace"></text>
+  <text x="200" y="220" font-size="28" fill="#94a3b8">rank 2★ · @google-deepmind</text>
+  <text x="72" y="560" font-size="36" fill="#f8fafc" font-family="EB Garamond, serif">Gaia</text>
+  <text x="72" y="598" font-size="24" fill="#94a3b8">gaia-skill-tree</text>
+</svg>

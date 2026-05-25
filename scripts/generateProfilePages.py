@@ -312,7 +312,21 @@ def _field_gh_link(ns: dict) -> str:
 def _field_origin_star(ns: dict) -> str:
     if not ns.get("origin"):
         return ""
-    return '<span class="plaque__origin ns-origin" title="Origin contributor">★</span>'
+    icon_svg = (
+        f'<svg class="ico" width="16" height="16" aria-hidden="true">'
+        f'<use href="{ICON_SPRITE_REL}#origin-badge"/></svg>'
+    )
+    info_svg = (
+        f'<span class="origin-info" style="margin-left:3px;color:var(--muted);opacity:.7">'
+        f'<svg class="ico" width="10" height="10" aria-hidden="true">'
+        f'<use href="{ICON_SPRITE_REL}#info"/></svg></span>'
+    )
+    return (
+        f'<span class="plaque__origin ns-origin" '
+        f'data-tooltip="Origin contributor: The creator of the first skill version" '
+        f'aria-label="Origin contributor: The creator of the first skill version">'
+        f"{icon_svg}{info_svg}</span>"
+    )
 
 
 # Public dispatch table: name → builder. Useful for diagnostics and
@@ -410,6 +424,7 @@ def plaque_settled_html(ns: dict) -> str:
         + _field_description(ns)
         + _field_tags(ns, 5)
         + _field_rank(ns, "stars")
+        + '<button class="plaque__share-btn" type="button" aria-label="Share skill">Share</button>'
         + f'<div class="plaque__evidence plaque-evidence">{html.escape(evidence_class(ns.get("level", "")))}</div>'
         + '<div class="plaque__underline plaque-underline plaque-underline--settled"></div>'
     )
@@ -431,13 +446,26 @@ def build_plaque_card(skill: dict) -> str:
 def build_ascension_log(skills: list) -> str:
     """Build ascension log rows for all skills."""
     rows = []
-    for skill in sorted(skills, key=lambda s: -level_num(s.get("level", ""))):
+    def fmt_date(v: str) -> str:
+        if not v:
+            return "—"
+        try:
+            return datetime.datetime.fromisoformat(v).strftime("%b %Y")
+        except ValueError:
+            return "—"
+
+    for skill in sorted(
+        skills,
+        key=lambda s: (s.get("createdAt", ""), level_num(s.get("level", ""))),
+        reverse=True,
+    ):
         skill_id = html.escape(skill.get("id", ""))
         level = html.escape(skill.get("level", "—"))
-        generic_ref = html.escape(skill.get("genericSkillRef", skill.get("id", "")))
+        action = html.escape((skill.get("status", "named") or "named").upper())
+        created = fmt_date(skill.get("createdAt", ""))
         rows.append(f"""<div class="ascension-log-row">
-  <span class="al-date">—</span>
-  <span class="al-action">NAMED</span>
+  <span class="al-date">{created}</span>
+  <span class="al-action">{action}</span>
   <span class="al-skill">{skill_id}</span>
   <span class="al-level">{level}</span>
 </div>""")
@@ -491,6 +519,20 @@ def build_profile_page(handle: str, skills: list) -> str:
 
     plaques_html = "\n".join(build_plaque_card(s) for s in skills)
     log_html = build_ascension_log(skills)
+    profile_skills_json = json.dumps(
+        [
+            {
+                "id": s.get("id"),
+                "name": s.get("name"),
+                "level": s.get("level"),
+                "levelNum": level_num(s.get("level", "")),
+                "createdAt": s.get("createdAt"),
+                "type": resolve_type(s),
+                "origin": bool(s.get("origin")),
+            }
+            for s in skills
+        ]
+    )
 
     # OG image tag (raster PNG for social crawlers; SVG sibling exists at the same path)
     og_image_tags = "\n".join(
@@ -530,6 +572,9 @@ def build_profile_page(handle: str, skills: list) -> str:
   <script src="../../js/rank-badge.js"></script>
   <!-- Stage 3 — plaque component family, loaded after rank-badge.js. -->
   <script src="../../js/plaque.js"></script>
+  <script src="../../js/profile-sort.js" defer></script>
+  <script src="../../js/profile-share.js" defer></script>
+  <script src="../../js/profile-timeline.js" defer></script>
   <script src="../../js/ui.js" defer></script>
 </head>
 <body class="profile-page">
@@ -542,13 +587,18 @@ def build_profile_page(handle: str, skills: list) -> str:
     <div class="profile-meta">
       {skill_count} named skill{'s' if skill_count != 1 else ''} · highest rank {highest_level}
     </div>
-    {f'<span class="profile-origin-badge">◆ Origin Contributor · {origin_count} origin{"s" if origin_count != 1 else ""}</span>' if origin_count else ''}
+    {f'<span class="profile-origin-badge"><svg class="ico" width="16" height="16" aria-hidden="true"><use href="{ICON_SPRITE_REL}#origin-badge"/></svg> Origin Contributor · {origin_count} origin{"s" if origin_count != 1 else ""}</span>' if origin_count else ''}
   </div>
 
   <!-- ─── SKILL PLAQUES ─── -->
   <section class="profile-section">
     <h2 class="profile-section-title">Named Skills</h2>
     <p class="profile-section-sub">All named implementations attributed to @{safe_handle} in the Gaia registry.</p>
+    <div class="profile-sort-bar">
+      <button class="profile-sort-btn is-active" type="button" data-sort="rank">Rank</button>
+      <button class="profile-sort-btn" type="button" data-sort="alpha">A-Z</button>
+      <button class="profile-sort-btn" type="button" data-sort="type">Type</button>
+    </div>
     <div class="plaque-grid">
       {plaques_html}
     </div>
@@ -563,8 +613,14 @@ def build_profile_page(handle: str, skills: list) -> str:
       {log_html}
     </div>
   </section>
+  <section class="profile-section">
+    <h2 class="profile-section-title">Progression Timeline</h2>
+    <p class="profile-section-sub">Skill rank progression over time.</p>
+    <div id="profile-timeline" class="profile-timeline"></div>
+  </section>
 
   {FOOTER_HTML}
+  <script>window.PROFILE_SKILLS = {profile_skills_json};</script>
 
   <script src="../../js/plaque-reveal.js" defer></script>
 
@@ -585,6 +641,31 @@ def load_named_data(path: Path) -> dict:
         sys.exit(1)
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def generate_og_cards(handle: str, skills: list, out_dir: Path) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for skill in skills:
+        skill_id = skill.get("id", "").split("/")[-1]
+        if not skill_id:
+            continue
+        name = html.escape(skill.get("name", skill_id))
+        slug = html.escape(named_slug(skill.get("id", "")))
+        level = html.escape(skill.get("level", "—"))
+        contributor = html.escape(handle)
+        origin_badge = " · Origin contributor" if skill.get("origin") else ""
+        svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#111827"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="120" cy="110" r="42" fill="#1f2937" stroke="#f59e0b" stroke-width="3"/>
+  <text x="120" y="118" font-size="20" text-anchor="middle" fill="#fbbf24">✦</text>
+  <text x="200" y="120" font-size="62" fill="#f8fafc" font-family="EB Garamond, serif">{name}</text>
+  <text x="200" y="170" font-size="34" fill="#cbd5e1" font-family="JetBrains Mono, monospace">{slug}</text>
+  <text x="200" y="220" font-size="28" fill="#94a3b8">rank {level} · @{contributor}{origin_badge}</text>
+  <text x="72" y="560" font-size="36" fill="#f8fafc" font-family="EB Garamond, serif">Gaia</text>
+  <text x="72" y="598" font-size="24" fill="#94a3b8">gaia-skill-tree</text>
+</svg>"""
+        (out_dir / f"{skill_id}.svg").write_text(svg, encoding="utf-8")
 
 
 def collect_by_contributor(data: dict) -> dict:
@@ -631,6 +712,7 @@ def generate_pages(named_path: Path, out_dir: Path) -> int:
         with open(out_file, "w", encoding="utf-8") as f:
             f.write(page_html)
         print(f"  Generated: docs/u/{handle}/index.html ({len(skills)} skill(s))")
+        generate_og_cards(handle, skills, Path("docs/og") / handle)
         count += 1
 
     return count
