@@ -326,7 +326,7 @@
     var skillIdShort = slashIdx !== -1 ? skillId.slice(slashIdx + 1) : skillId;
     var handle = (ns && ns.contributor) || '';
     var skillName = (ns && ns.name) || '';
-    var ogPath = handle && skillIdShort ? '/og/' + handle + '/' + skillIdShort + '.svg' : '';
+    var ogPath = handle && skillIdShort ? 'og/' + handle + '/' + skillIdShort + '.svg' : '';
     var actions =
       '<div class="plaque__actions plaque-detail-actions">' +
         '<button type="button" class="plaque__share-btn" ' +

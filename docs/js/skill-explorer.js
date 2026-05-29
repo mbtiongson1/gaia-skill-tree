@@ -2,6 +2,7 @@
   var LEVEL_META_SE = null;
   var TYPE_SYMBOL = null;
   var lastActiveElement = null;
+  var _currentNs = null; // tracks the skill open in the explorer
 
   function _initMeta(meta) {
     if (!meta) return;
@@ -1357,6 +1358,7 @@
       document.body.style.overflow = 'hidden';
 
       renderHero(ns, generic);
+      _currentNs = ns;
       renderDescription(ns, generic);
       renderInstall(ns);
       renderDocs(ns, generic);
@@ -1399,6 +1401,7 @@
   function closeExplorer() {
     var el = document.getElementById('skillExplorer');
     if (el) el.classList.remove('open');
+    _currentNs = null;
     document.body.style.overflow = '';
     if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
       lastActiveElement.focus();
@@ -1416,6 +1419,29 @@
 
     var closeEl = document.getElementById('seClose');
     if (closeEl) closeEl.onclick = function(){ closeExplorer(); history.pushState(null, '', location.pathname); };
+
+    // Topbar Share button → same HOH fullscreen modal as the plaque share button
+    var shareBtn = document.getElementById('seShare');
+    if (shareBtn) {
+      shareBtn.onclick = function() {
+        if (!_currentNs) return;
+        if (typeof window.openHohFullscreenModal !== 'function') return;
+        var skillId = _currentNs.id || '';
+        var handle  = _currentNs.contributor || skillId.split('/')[0];
+        var slug    = skillId.split('/').pop();
+        window.openHohFullscreenModal({
+          id: skillId,
+          contributor: handle,
+          name: _currentNs.name || slug,
+          level: _currentNs.level || '',
+          type: _currentNs.type || 'basic',
+          origin: !!_currentNs.origin,
+          ogPath: handle && slug ? 'og/' + handle + '/' + slug + '.svg' : '',
+          description: _currentNs.description || '',
+          tags: Array.isArray(_currentNs.tags) ? _currentNs.tags : [],
+        });
+      };
+    }
 
     // Delegate plaque__share-btn clicks inside the explorer → HOH fullscreen modal
     var explorerBody = document.getElementById('skillExplorer');

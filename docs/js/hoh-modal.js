@@ -605,6 +605,8 @@
     document.addEventListener('webkitfullscreenchange', syncFullscreenClass);
   }
 
+  window.openHohFullscreenModal = openHohFullscreenModal;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
