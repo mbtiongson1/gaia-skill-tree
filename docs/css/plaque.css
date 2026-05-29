@@ -1488,11 +1488,34 @@ button.plaque__slug:focus-visible {
   transform: none;
 }
 .plaque--detail .plaque__gh-link {
+  position: static;
+  width: 24px;
+  height: 24px;
+}
+.plaque--detail .plaque__gh-row {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.plaque--detail .plaque__share-btn {
   width: 24px;
   height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgba(226, 232, 240, 0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.18s ease;
+}
+.plaque--detail .plaque__share-btn:hover {
+  color: rgba(226, 232, 240, 0.9);
 }
 .plaque--detail .plaque__col,
 .plaque--detail .plaque-detail-left,

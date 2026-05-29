@@ -327,16 +327,24 @@
     var handle = (ns && ns.contributor) || '';
     var skillName = (ns && ns.name) || '';
     var ogPath = handle && skillIdShort ? 'og/' + handle + '/' + skillIdShort + '.svg' : '';
+    var shareBtn =
+      '<button type="button" class="plaque__share-btn" ' +
+        'data-skill-id="' + esc(skillId) + '" ' +
+        'data-skill-name="' + esc(skillName) + '" ' +
+        'data-handle="' + esc(handle) + '" ' +
+        'data-og="' + esc(ogPath) + '" ' +
+        'aria-label="Share this skill">' +
+        icon('share', 14) +
+      '</button>';
+
+    var ghRow =
+      '<div class="plaque__gh-row">' +
+        ghLink +
+        shareBtn +
+      '</div>';
+
     var actions =
       '<div class="plaque__actions plaque-detail-actions">' +
-        '<button type="button" class="plaque__share-btn" ' +
-          'data-skill-id="' + esc(skillId) + '" ' +
-          'data-skill-name="' + esc(skillName) + '" ' +
-          'data-handle="' + esc(handle) + '" ' +
-          'data-og="' + esc(ogPath) + '" ' +
-          'aria-label="Share this skill">' +
-          icon('share', 14) +
-        '</button>' +
         '<a class="plaque__claim-btn" ' +
           'href="badges/?u=' + encodeURIComponent(handle) + '" ' +
           'target="_blank" rel="noopener">' +
@@ -351,7 +359,7 @@
         _fieldHandleRow(ns) +
         _fieldRank(ns, 'stars') +
         _fieldInstallRow(ns) +
-        ghLink +
+        ghRow +
         actions +
       '</div>';
 
