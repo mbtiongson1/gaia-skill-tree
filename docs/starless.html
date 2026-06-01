@@ -13,12 +13,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="css/styles.css?v=3.27.0">
+<link rel="stylesheet" href="css/alpha-rail.css?v=3.27.0">
 <!-- Stage 1 — icon sprite helper, loaded BEFORE other UI scripts. -->
 <script src="js/icons.js?v=3.27.0"></script>
 <!-- Stage 2 — shared rank-badge primitive. -->
 <script src="js/rank-badge.js?v=3.27.0"></script>
 <!-- Stage 3 — plaque component family. -->
 <script src="js/plaque.js?v=3.27.0"></script>
+<!-- Universal alphabetical scrubber component. -->
+<script src="js/alpha-rail.js?v=3.27.0"></script>
 <style>
   /* ───────────────────────────────────────────────────────────────────
      Starless taxonomy — a single-page ledger.
@@ -104,34 +107,10 @@
 
   .sl-msg { color: var(--muted); font-style: italic; padding: 2rem 0; }
 
-  /* Reserve a fixed lane on the right so the rail never covers content. */
-  body.process-page { --rail-w: 30px; }
-  .process-page main { padding-right: var(--rail-w); }
-
-  /* Floating A-Z rail — a proportional scrubber pinned to the right edge,
-     spanning between the fixed nav and the scroll-to-top button. Letter
-     segments grow with how many entries sit under each letter, so busy
-     letters spread apart. Click a letter or drag along the rail to scrub. */
-  .sl-rail {
-    position: fixed; right: 0; top: 80px; bottom: 88px; width: var(--rail-w);
-    display: flex; flex-direction: column; align-items: stretch;
-    z-index: 40; touch-action: none; user-select: none; -webkit-user-select: none;
-  }
-  .sl-rail button {
-    flex: 0 0 auto;                 /* absent letters: natural (thin) height */
-    display: flex; align-items: center; justify-content: center;
-    font: 600 .62rem/1 var(--font-mono); letter-spacing: .02em;
-    color: var(--muted); background: none; border: 0; cursor: pointer;
-    padding: 0; transition: color .15s ease;
-  }
-  .sl-rail button:hover:not(:disabled) { color: var(--text); }
-  .sl-rail button[aria-current="true"] { color: var(--tier-basic); font-weight: 700; }
-  .sl-rail button:disabled { opacity: .2; cursor: default; }
+  /* The floating A-Z rail is the universal AlphaRail component
+     (css/alpha-rail.css + js/alpha-rail.js); it reserves its own lane. */
 
   @media (max-width: 720px) {
-    body.process-page { --rail-w: 24px; }
-    .sl-rail { top: 70px; bottom: 74px; }
-    .sl-rail button { font-size: .56rem; }
     .sl-row { grid-template-columns: 1fr; gap: .3rem; padding: .7rem 0; }
     .sl-generic { font-size: 1.05rem; }
     .sl-named { gap: .25rem .85rem; }
@@ -140,7 +119,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sl-rail button, .sl-row, .sl-search { transition: none; }
+    .sl-row, .sl-search { transition: none; }
   }
 </style>
 </head>
@@ -200,9 +179,6 @@
   </section>
 </main>
 
-<!-- Floating alphabetical rail (built at runtime) -->
-<nav class="sl-rail" id="slRail" aria-label="Jump to letter"></nav>
-
 <footer>
   <div class="footer-mark">
     <svg class="ico footer-seal" aria-hidden="true" focusable="false"><use href="assets/icons.svg#seal-diamond"/></svg>
@@ -248,14 +224,24 @@
       "use strict";
 
       var ledgerEl = document.getElementById("slLedger");
-      var railEl   = document.getElementById("slRail");
       var searchEl = document.getElementById("slSearch");
       var clearEl  = document.getElementById("slSearchClear");
       var emptyBtn = document.getElementById("slToggleEmpty");
       var csvBtn   = document.getElementById("slCsv");
       var statsEl  = document.getElementById("slStats");
 
-      var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      var REDUCED = window.matchMedia &&
+                    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Universal alphabetical scrubber. Tapping/scrubbing a letter scrolls the
+      // ledger to that letter's group; scroll position feeds back via setActive.
+      var rail = new AlphaRail({
+        side: "right",
+        onSelect: function (L) {
+          var t = document.getElementById("L-" + L);
+          if (t) t.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+        }
+      });
 
       var allSkills = [];     // starless generic refs
       var buckets   = {};     // id -> [named skills]
@@ -361,7 +347,7 @@
           msg.className = "sl-msg";
           msg.appendChild(txt("Nothing matches that search."));
           ledgerEl.appendChild(msg);
-          buildRail({});
+          rail.render({});
           updateStats(view);
           return;
         }
@@ -383,92 +369,17 @@
           ledgerEl.appendChild(row(skill));
         });
 
-        buildRail(counts);
+        rail.render(counts);
         observeLetters();
         updateStats(view);
       }
 
-      var REDUCED = window.matchMedia &&
-                    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      function jumpToLetter(L, smooth) {
-        var t = document.getElementById("L-" + L);
-        if (t) t.scrollIntoView({ behavior: (smooth && !REDUCED) ? "smooth" : "auto", block: "start" });
-        setActiveLetter(L);
-      }
-
-      // Each letter's segment height is proportional to its entry count, so
-      // letters with many skills spread far apart (a minimap, not a fixed list).
-      function buildRail(counts) {
-        railEl.innerHTML = "";
-        ALPHA.forEach(function (L) {
-          var c = counts[L] || 0;
-          var b = document.createElement("button");
-          b.type = "button";
-          b.setAttribute("data-letter", L);
-          b.setAttribute("aria-label", "Jump to " + L);
-          b.appendChild(txt(L));
-          if (c > 0) {
-            b.style.flex = c + " 1 0";          /* grow ∝ count */
-            b.addEventListener("click", function () { jumpToLetter(L, true); });
-          } else {
-            b.disabled = true;                   /* absent letters: thin, dimmed */
-          }
-          railEl.appendChild(b);
-        });
-      }
-
-      function setActiveLetter(L) {
-        railEl.querySelectorAll("button").forEach(function (b) {
-          b.setAttribute("aria-current", b.getAttribute("data-letter") === L ? "true" : "false");
-        });
-      }
-
-      // ── Drag-to-scrub (pointer = mouse + touch). Tap or drag both work. ──
-      var scrubbing = false;
-      function railButtons() { return [].slice.call(railEl.querySelectorAll("button")); }
-      function letterFromY(y) {
-        var btns = railButtons(), hit = null;
-        for (var i = 0; i < btns.length; i++) {
-          var r = btns[i].getBoundingClientRect();
-          if (y >= r.top && y <= r.bottom) { hit = btns[i]; break; }
-        }
-        if (!hit && btns.length) {
-          hit = (y < btns[0].getBoundingClientRect().top) ? btns[0] : btns[btns.length - 1];
-        }
-        return hit;
-      }
-      function nearestEnabled(btn) {
-        if (!btn || !btn.disabled) return btn;
-        var btns = railButtons(), i = btns.indexOf(btn);
-        for (var d = 1; d < ALPHA.length; d++) {
-          if (btns[i - d] && !btns[i - d].disabled) return btns[i - d];
-          if (btns[i + d] && !btns[i + d].disabled) return btns[i + d];
-        }
-        return null;
-      }
-      function scrubTo(y) {
-        var b = nearestEnabled(letterFromY(y));
-        if (b) jumpToLetter(b.getAttribute("data-letter"), false);
-      }
-      railEl.addEventListener("pointerdown", function (e) {
-        scrubbing = true;
-        try { railEl.setPointerCapture(e.pointerId); } catch (_) {}
-        scrubTo(e.clientY); e.preventDefault();
-      });
-      railEl.addEventListener("pointermove", function (e) { if (scrubbing) scrubTo(e.clientY); });
-      function endScrub(e) {
-        scrubbing = false;
-        try { railEl.releasePointerCapture(e.pointerId); } catch (_) {}
-      }
-      railEl.addEventListener("pointerup", endScrub);
-      railEl.addEventListener("pointercancel", endScrub);
-
+      // Feed scroll position back to the rail so the active letter recenters.
       function observeLetters() {
         if (observer) observer.disconnect();
         observer = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) setActiveLetter(e.target.getAttribute("data-letter"));
+            if (e.isIntersecting) rail.setActive(e.target.getAttribute("data-letter"));
           });
         }, { rootMargin: "-8% 0px -88% 0px", threshold: 0 });
         ledgerEl.querySelectorAll(".sl-letter").forEach(function (h) { observer.observe(h); });
