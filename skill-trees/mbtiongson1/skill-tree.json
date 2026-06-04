@@ -1,6 +1,6 @@
 {
   "userId": "mbtiongson1",
-  "updatedAt": "2026-05-01",
+  "updatedAt": "2026-06-04",
   "unlockedSkills": [
     {
       "skillId": "web-search",
@@ -39,7 +39,7 @@
     },
     {
       "skillId": "web-scrape",
-      "level": "4★",
+      "level": "2★",
       "unlockedAt": "2026-03-15",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": [
@@ -50,7 +50,7 @@
     },
     {
       "skillId": "research",
-      "level": "3★",
+      "level": "2★",
       "unlockedAt": "2026-04-01",
       "unlockedIn": "mbtiongson1/gaia-skill-tree",
       "combinedFrom": [
@@ -60,18 +60,7 @@
       ]
     }
   ],
-  "pendingCombinations": [
-    {
-      "detectedSkills": [
-        "code-generation",
-        "execute-bash",
-        "error-interpretation"
-      ],
-      "candidateResult": "autonomous-debug",
-      "levelFloor": "3★",
-      "promptedAt": "2026-04-26"
-    }
-  ],
+  "pendingCombinations": [],
   "stats": {
     "totalUnlocked": 7,
     "highestRarity": "uncommon",
