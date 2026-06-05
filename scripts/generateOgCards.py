@@ -756,6 +756,12 @@ def build_og_svg(skill: dict) -> str:
     n_lvl = level_num(level)
     tier_type = resolve_type_for_og(skill)
 
+    # Redact contributor handle for pre-named (0★/1★) skills
+    if n_lvl <= 1:
+        skill = dict(skill)
+        skill["contributor"] = "[anonymous]"
+        skill["origin"] = False
+
     if n_lvl >= 6:
         return build_supernova_plate(skill)
     if tier_type == "ultimate":

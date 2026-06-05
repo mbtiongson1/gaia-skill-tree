@@ -524,7 +524,10 @@ def write_user_badges(handle: str, info: dict, scan: dict | None,
             else:
                 scolor = rank_colors.get(srank, AMBER)
 
-            slabel = f"Gaia: @{handle}{sslash} {srank} stars"
+            # Redact contributor handle for pre-named (0★/1★) skills
+            badge_handle_text = "[anonymous]" if srank <= 1 else handle
+
+            slabel = f"Gaia: @{badge_handle_text}{sslash} {srank} stars"
             sbg = "#000000" if is_sunique else None
             # filename: slash-skill without leading slash, e.g. /health -> health.svg
             fname = sslash.lstrip("/").replace("/", "-") or "skill"
@@ -532,11 +535,11 @@ def write_user_badges(handle: str, info: dict, scan: dict | None,
                 # Avoid clobbering rank.svg / skills.svg / handle.svg.
                 fname = f"{fname}~"
             (user_dir / f"{fname}.svg").write_text(
-                badge_handle(handle, sslash, srank, scolor, slabel,
+                badge_handle(badge_handle_text, sslash, srank, scolor, slabel,
                              right_bg_override=sbg),
                 encoding="utf-8")
             (user_dir / f"{fname}-seal.svg").write_text(
-                badge_handle(handle, sslash, srank, scolor, slabel, seal_only=True,
+                badge_handle(badge_handle_text, sslash, srank, scolor, slabel, seal_only=True,
                              right_bg_override=sbg),
                 encoding="utf-8")
 

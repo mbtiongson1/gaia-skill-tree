@@ -68,6 +68,10 @@
     return '/' + (ns.genericSkillRef || id || '');
   }
 
+  function _isHandleRedacted(ns) {
+    return levelNum(ns && ns.level) <= 1;
+  }
+
   function handleLink(handle, opts) {
     if (typeof window.handleLink === 'function') return window.handleLink(handle || '', opts || {});
     if (!handle) return '';
@@ -102,6 +106,11 @@
   }
 
   function _fieldHandleRow(ns) {
+    if (_isHandleRedacted(ns)) {
+      return '<div class="plaque__handle plaque-contrib-row">' +
+        '<span class="plaque__redacted-handle" aria-label="Contributor not yet revealed">@[anonymous]</span>' +
+        '</div>';
+    }
     var contribLink = handleLink(ns && ns.contributor || '');
     if (!contribLink) return '';
     return '<div class="plaque__handle plaque-contrib-row">' + contribLink + _fieldOriginBadge(ns) + '</div>';

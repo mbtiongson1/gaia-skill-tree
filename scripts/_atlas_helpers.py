@@ -11,6 +11,26 @@ from __future__ import annotations
 import html
 
 
+REDACTED_HANDLE = "[anonymous]"
+REDACTED_SLUG   = "[unnamed]"
+
+
+def is_handle_redacted(level: str | int) -> bool:
+    """Return True when a skill's level is pre-named (0★ or 1★).
+
+    Named skills start at 2★; anything below that should have its
+    contributor handle withheld from public-facing output.
+    """
+    if isinstance(level, int):
+        n = level
+    else:
+        try:
+            n = int("".join(c for c in str(level) if c.isdigit()))
+        except ValueError:
+            n = 0
+    return n <= 1
+
+
 def named_slug(entry: dict) -> str:
     """Return '/{second_segment}' from entry["id"].
 

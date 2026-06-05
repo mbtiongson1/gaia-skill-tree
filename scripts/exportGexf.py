@@ -52,9 +52,15 @@ def main():
     edge_id = 0
     
     for skill in skills:
-        node = ET.SubElement(nodes, "node", attrib={"id": skill['id'], "label": skill.get('name', skill['id'])})
+        raw_level = skill.get('level', '')
+        try:
+            level_int = int("".join(c for c in str(raw_level) if c.isdigit()))
+        except (ValueError, TypeError):
+            level_int = 0
+        label = "[unnamed]" if level_int <= 1 else skill.get('name', skill['id'])
+        node = ET.SubElement(nodes, "node", attrib={"id": skill['id'], "label": label})
         attvalues = ET.SubElement(node, "attvalues")
-        ET.SubElement(attvalues, "attvalue", attrib={"for": "level", "value": skill.get('level', '')})
+        ET.SubElement(attvalues, "attvalue", attrib={"for": "level", "value": raw_level})
         ET.SubElement(attvalues, "attvalue", attrib={"for": "rarity", "value": skill.get('rarity', '')})
         ET.SubElement(attvalues, "attvalue", attrib={"for": "status", "value": skill.get('status', '')})
         ET.SubElement(attvalues, "attvalue", attrib={"for": "type", "value": skill.get('type', '')})

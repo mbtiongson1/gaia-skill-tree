@@ -114,7 +114,8 @@ def _link_named_id(named_id, handle_rel=None):
     return f"{markdown_handle_link(handle, rel=handle_rel, with_at=False)}/{tail}"
 
 
-def _build_skill_display(skill_id, skill_type, named_map=None, handle_rel=None):
+def _build_skill_display(skill_id, skill_type, named_map=None, handle_rel=None,
+                         named_level_map=None):
     """Return canonical display string for a skill (no tier prefix).
 
     All rows:  glyph already encodes tier; the section header labels the group.
@@ -125,8 +126,23 @@ def _build_skill_display(skill_id, skill_type, named_map=None, handle_rel=None):
     contributor segment of any claimed named id is wrapped in a
     markdown link to the contributor's profile page. Pass ``None``
     (the default) to keep the original plain-text behaviour.
+
+    ``named_level_map`` (mapping skill_id → level string like '3★') is used
+    to redact contributor handles for pre-named (0★/1★) skills. A skill with
+    a named variant absent from the map (i.e., no 2★+ variant) is treated as
+    ≤1★ and its handle is replaced with ``[anonymous]``.
     """
     named_id = (named_map or {}).get(skill_id)
+
+    # Redact contributor for 0★/1★ named skills — suppress the markdown link too.
+    if named_id and named_level_map is not None:
+        top_level_str = named_level_map.get(skill_id)  # None means no 2★+ variant
+        if top_level_str is None:
+            # No named variant at 2★+ → contributor is pre-named, redact handle
+            _, _, tail = named_id.partition("/")
+            named_id = f"[anonymous]/{tail}" if tail else named_id
+            handle_rel = None  # no profile link for anonymous contributor
+
     named_id_display = _link_named_id(named_id, handle_rel)
     if skill_type == "ultimate":
         if named_id:
@@ -168,7 +184,8 @@ def _render_subtree(root_id, skill_map, meta, prefix, is_last, seen,
     symbol = get_tier_symbol(skill.get("type"))
 
     skill_type = skill.get("type", "basic")
-    display = _build_skill_display(root_id, skill_type, named_map, handle_rel)
+    display = _build_skill_display(root_id, skill_type, named_map, handle_rel,
+                                   named_level_map=named_level_map)
 
     # Generic refs are rank-less — show the top named-variant star, if any.
     star = (named_level_map or {}).get(root_id)
@@ -281,6 +298,7 @@ def main():
             page_display = _build_skill_display(
                 skill_id, skill_type, named_map,
                 handle_rel="../../../docs/u/",
+                named_level_map=named_level_map,
             )
             star_suffix = f"  [{top_star}]" if top_star else ""
             f.write(f"# {page_display}{star_suffix}\n")
@@ -415,7 +433,8 @@ def main():
             skill_type = skill.get("type", "basic")
             symbol = get_tier_symbol(skill_type)
             type_label = get_type_label(meta, skill_type)
-            reg_display = _build_skill_display(skill.get('id'), skill_type, named_map, _REG_HANDLE_REL)
+            reg_display = _build_skill_display(skill.get('id'), skill_type, named_map, _REG_HANDLE_REL,
+                                               named_level_map=named_level_map)
             name_display = f"{symbol} {reg_display}"
             skill_call = f"`/{skill.get('id')}`"
             f.write(f"| {name_display} | {type_label or 'Basic Skill'} | {_top_star(skill['id'])} | {skill_call} |\n")
@@ -430,7 +449,8 @@ def main():
             f.write("| Name | Class | Top ★ | Skill Call |\n")
             f.write("|---|---|---|---|\n")
             for skill in unique_skills:
-                reg_display = _build_skill_display(skill.get('id'), "unique", named_map, _REG_HANDLE_REL)
+                reg_display = _build_skill_display(skill.get('id'), "unique", named_map, _REG_HANDLE_REL,
+                                                   named_level_map=named_level_map)
                 name_display = f"◉ {reg_display}"
                 skill_call = f"`/{skill.get('id')}`"
                 f.write(f"| {name_display} | Unique Skill | {_top_star(skill['id'])} | {skill_call} |\n")
@@ -483,7 +503,8 @@ def main():
                 type_label = get_type_label(meta, skill_type)
                 prereqs = [skill_map.get(pid, {}).get("name", pid) for pid in skill.get("prerequisites", [])]
                 prereq_str = ", ".join(prereqs)
-                combo_display = _build_skill_display(skill.get('id'), skill_type, named_map, _COMBO_HANDLE_REL)
+                combo_display = _build_skill_display(skill.get('id'), skill_type, named_map, _COMBO_HANDLE_REL,
+                                                     named_level_map=named_level_map)
                 name_display = f"{symbol} {combo_display}"
                 f.write(f"| {name_display} | {type_label} | {prereq_str} | {_top_star(skill['id'])} | {skill.get('conditions', '')} |\n")
         # f.write(f"\n*Generated from gaia.json v{version}.*\n")

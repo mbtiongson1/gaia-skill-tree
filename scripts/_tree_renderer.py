@@ -270,7 +270,8 @@ def render_tree(
         lines.append("")
         for us in unique_skills:
             uid_s = us.get("id")
-            display = _bsd(uid_s, "unique", named_map, handle_rel)
+            display = _bsd(uid_s, "unique", named_map, handle_rel,
+                           named_level_map=named_level_map)
             star_pill = _star_pill(named_level_map, uid_s)
             if is_user:
                 marker = "✓ " if uid_s in owned_ids else "· "
@@ -290,7 +291,8 @@ def render_tree(
         lines.append("")
         for ps in basic_orphans:
             pid = ps.get("id")
-            display = _bsd(pid, "basic", named_map, handle_rel)
+            display = _bsd(pid, "basic", named_map, handle_rel,
+                           named_level_map=named_level_map)
             star_pill = _star_pill(named_level_map, pid)
             if is_user:
                 marker = "✓ " if pid in owned_ids else "· "

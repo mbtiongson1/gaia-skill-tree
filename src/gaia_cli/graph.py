@@ -215,9 +215,15 @@ def write_gexf(
         if not sid:
             continue
         skill_ids.add(sid)
+        raw_level = skill.get("level", "")
+        try:
+            level_int = int("".join(c for c in str(raw_level) if c.isdigit()))
+        except (ValueError, TypeError):
+            level_int = 0
+        node_label = "[unnamed]" if level_int <= 1 else (skill.get("name") or sid)
         node_el = ET.SubElement(nodes_el, "node")
         node_el.set("id", sid)
-        node_el.set("label", skill.get("name") or sid)
+        node_el.set("label", node_label)
         attvalues_el = ET.SubElement(node_el, "attvalues")
         for attr_id in ("level", "rarity", "status", "type"):
             val = skill.get(attr_id, "")
