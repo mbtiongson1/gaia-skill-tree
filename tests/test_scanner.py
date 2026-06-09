@@ -134,6 +134,21 @@ class TestSkillSearchDirs:
         results = scan_skill_mds(root=str(tmp_path))
         assert any(r["id"] == "surf-skill" for r in results)
 
+    def test_finds_xcode_rules_and_skills(self, tmp_path):
+        """.xcode/rules/ and .xcode/skills/ subdirs are treated as skills."""
+        d1 = tmp_path / ".xcode" / "rules" / "xcode-rule"
+        d1.mkdir(parents=True)
+        _write(str(d1 / "skill.md"), "---\nname: Xcode Rule\ndescription: test\n---\n")
+
+        d2 = tmp_path / ".xcode" / "skills" / "xcode-skill"
+        d2.mkdir(parents=True)
+        _write(str(d2 / "skill.md"), "---\nname: Xcode Skill\ndescription: test\n---\n")
+
+        results = scan_skill_mds(root=str(tmp_path))
+        ids = [r["id"] for r in results]
+        assert "xcode-rule" in ids
+        assert "xcode-skill" in ids
+
     def test_source_dir_recorded(self, tmp_path):
         """Each result records which directory it came from."""
         d = tmp_path / ".agents" / "skills" / "tracked"
