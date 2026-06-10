@@ -130,35 +130,36 @@ def _registry_tree() -> str:
     if content_start == -1:
         return f"```text\n{tree_body}\n```"
 
-    # Take first 2 Ultimates, max 15 lines each
-    ultimate_count = 0
+    # Show preferred samples: mattpocock/skills (6★) first, then garrytan/gstack (5★)
+    PREFERRED_SAMPLES = ["mattpocock/skills", "garrytan/gstack"]
     truncated_lines = []
-    
-    i = content_start
-    while i < len(lines) and ultimate_count < 2:
-        line = lines[i]
-        if line.startswith("◆ "):
-            ultimate_count += 1
-            block = [line]
-            i += 1
-            while i < len(lines) and not lines[i].startswith("◆ ") and not lines[i].startswith("═"):
-                # Skip the long ──── separator line usually following an ultimate
-                if lines[i].startswith("────"):
-                    i += 1
-                    continue
-                if len(block) < 15:
-                    # Limit depth to keep it clean in README
-                    depth = lines[i].count("│") + lines[i].count(" ") // 2
-                    if depth <= 8:
-                        block.append(lines[i])
+
+    def _extract_ultimate_block(lines: list, start_idx: int) -> tuple[list, int]:
+        """Extract up to 15 lines of a ◆ block starting at start_idx."""
+        block = [lines[start_idx]]
+        i = start_idx + 1
+        while i < len(lines) and not lines[i].startswith("◆ ") and not lines[i].startswith("═"):
+            if lines[i].startswith("────"):
                 i += 1
-            # Trim trailing empty lines in block
-            while block and not block[-1].strip():
-                block.pop()
-            truncated_lines.extend(block)
-            truncated_lines.append("")
-        else:
+                continue
+            if len(block) < 15:
+                depth = lines[i].count("│") + lines[i].count(" ") // 2
+                if depth <= 8:
+                    block.append(lines[i])
             i += 1
+        while block and not block[-1].strip():
+            block.pop()
+        return block, i
+
+    for sample_name in PREFERRED_SAMPLES:
+        for i in range(content_start, len(lines)):
+            if lines[i].startswith("◆ " + sample_name):
+                block, _ = _extract_ultimate_block(lines, i)
+                truncated_lines.extend(block)
+                truncated_lines.append("")
+                break
+        else:
+            pass  # sample not found in tree; skip
 
     # Look for Uniques section
     uniques_start = -1
