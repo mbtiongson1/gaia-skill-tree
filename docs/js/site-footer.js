@@ -74,7 +74,7 @@
             <span class="footer-col-heading">About</span>
             <ul>
               <li><a href="${r}about.html">About Gaia</a></li>
-              <li><a href="${r}u/mbtiongson1/" class="footer-link-honor">@mbtiongson1</a></li>
+              <li><a href="https://github.com/mbtiongson1" target="_blank" rel="noopener" class="footer-link-honor">@mbtiongson1</a></li>
               <li><a href="${r}privacy.html">Privacy</a></li>
               <li>
                 <button id="copyAgentFooterBtn" type="button" class="footer-link-btn" aria-label="Copy page context for agents">
