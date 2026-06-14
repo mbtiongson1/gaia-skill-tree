@@ -1590,6 +1590,15 @@
         seShareBtn.style.display = (window.isRedacted && window.isRedacted(ns.level)) ? 'none' : '';
       }
 
+      // Topbar Trust Report button — links to the per-skill actionable report page.
+      var seTrustReportBtn = document.getElementById('seTrustReport');
+      if (seTrustReportBtn) {
+        seTrustReportBtn.style.display = '';
+        seTrustReportBtn.onclick = function() {
+          window.open('report.html?id=' + encodeURIComponent(ns.id), '_blank', 'noopener');
+        };
+      }
+
       // Push hash (skip if already correct)
       var newHash = '#explorer/' + ns.id;
       var decodedCurrent = decodeURIComponent(location.hash);
