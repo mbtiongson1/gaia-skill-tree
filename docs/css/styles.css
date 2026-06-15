@@ -821,6 +821,16 @@ nav.docs-nav .nav-sep {
   transition: color .26s cubic-bezier(0.16, 1, 0.3, 1),
               transform .34s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.grade-segment {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  position: relative;
+}
 nav.docs-nav:hover .nav-sep {
   color: var(--tier-basic, #38bdf8);
 }
@@ -10267,7 +10277,45 @@ button.nav-graph-trigger:hover {
 .meta-sidebar.swiping {
   transition: none !important;
 }
-
+/* Evidence Grade Bar */
+.grade-bar {
+  display: flex;
+  gap: 4px;
+  height: 1.6rem;
+  border-radius: .5rem;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.grade-segment {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--bg);
+  position: relative;
+}
+.grade-segment.grade-plat { background: var(--grade-S); }
+.grade-segment.grade-gold { background: var(--grade-A); }
+.grade-segment.grade-silver { background: var(--grade-B); }
+.grade-segment.grade-bronze { background: var(--grade-C); }
+.grade-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grade-row {
+  display: flex;
+  width: 100%;
+}
+.grade-ungraded {
+  background: transparent;
+  border: 1px solid var(--border);
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .meta-sidebar-backdrop {
