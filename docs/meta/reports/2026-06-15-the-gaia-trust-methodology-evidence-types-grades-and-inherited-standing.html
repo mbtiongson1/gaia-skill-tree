@@ -18,6 +18,11 @@
       --font-serif: 'EB Garamond', Georgia, serif;
       --font-sans: 'Bricolage Grotesque', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --grade-s: #e2e8f0;
+      --grade-a: #fbbf24;
+      --grade-b: #94a3b8;
+      --grade-c: #b45309;
+      --grade-none: #475569;
     }
     * { box-sizing: border-box; }
     body {
@@ -40,15 +45,15 @@
       counter-reset: section;
     }
     header { text-align: center; margin-bottom: 5rem; }
-    .paper-journal-header {{
+    .paper-journal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding-bottom: 1.5rem;
       margin-bottom: 3rem;
       border-bottom: 1px solid #e0e0dc;
-    }}
-    .paper-journal-logo {{
+    }
+    .paper-journal-logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -58,17 +63,17 @@
       font-weight: 600;
       font-size: 0.9rem;
       letter-spacing: 0.04em;
-    }}
-    .paper-journal-logo img {{
+    }
+    .paper-journal-logo img {
       filter: invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(95%);
-    }}
-    .paper-journal-series {{
+    }
+    .paper-journal-series {
       font-family: var(--font-sans);
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #999;
-    }}
+    }
     h1 {
       font-family: var(--font-serif);
       font-size: 2.6rem;
@@ -113,7 +118,6 @@
     h2::before { content: counter(section) ". "; }
     h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
     p { text-align: justify; margin-bottom: 1.5rem; hyphens: auto; }
-    .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 2.5rem 0; }
     ul { padding-left: 1.2rem; list-style-type: square; }
     li { margin-bottom: 0.6rem; }
     code { font-family: var(--font-mono); background: #f7f7f7; padding: 0.15rem 0.35rem; font-size: 0.85em; border: 1px solid #eee; }
@@ -125,13 +129,437 @@
     th { font-weight: 600; text-align: left; padding: 0.8rem 0.5rem; font-variant-caps: small-caps; }
     td { padding: 0.8rem 0.5rem; border-bottom: 0.5px solid #eee; vertical-align: top; }
     tbody tr:last-child { border-bottom: 2px solid var(--paper-text); }
-    .chart-container { margin: 4.5rem -2rem; padding: 2.5rem; background: #ffffff; border: 1px solid #eee; }
-    .chart-caption { text-align: center; font-size: 0.85rem; color: var(--paper-muted); margin-top: 1.5rem; line-height: 1.4; }
+
+    /* ── Figure containers ── */
+    .fig { margin: 3.5rem -2rem; }
+    .fig-inner {
+      background: #fafaf9;
+      border: 1px solid #e8e8e4;
+      padding: 2.5rem 2.5rem 1.8rem;
+    }
+    .fig-caption {
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--paper-muted);
+      margin-top: 1.2rem;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+    }
+    .fig-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #bbb;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── Grade scale bar ── */
+    .grade-scale {
+      display: flex;
+      height: 44px;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .grade-zone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(0,0,0,0.65);
+      transition: filter 0.2s;
+      cursor: default;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .grade-zone:hover { filter: brightness(0.9); }
+    .grade-zone-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+    .grade-zone-name { font-size: 0.6rem; opacity: 0.7; letter-spacing: 0.05em; }
+    .grade-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: #aaa;
+      padding: 0 0;
+      margin-top: 0.4rem;
+    }
+    .grade-tick { text-align: center; }
+
+    /* ── Stat callouts ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: #e8e8e4;
+      border: 1px solid #e8e8e4;
+      margin-bottom: 0;
+    }
+    .stat-cell {
+      background: #fafaf9;
+      padding: 1.4rem 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-sans);
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+    }
+    .stat-sub {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: #aaa;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Inheritance diagram ── */
+    .inherit-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      font-family: var(--font-sans);
+    }
+    .inherit-parent {
+      background: #f0f0ee;
+      border: 1.5px dashed #ccc;
+      border-radius: 4px;
+      padding: 0.9rem 2.2rem;
+      text-align: center;
+      color: #888;
+      font-style: italic;
+      font-size: 0.9rem;
+      width: 260px;
+    }
+    .inherit-parent-label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bbb;
+      margin-bottom: 0.3rem;
+      font-style: normal;
+    }
+    .inherit-parent-name { font-weight: 500; font-size: 1rem; }
+    .inherit-parent-pool {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 0.4rem;
+      font-style: normal;
+      font-family: var(--font-mono);
+    }
+    .inherit-connector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      width: 340px;
+      height: 56px;
+    }
+    .inherit-connector svg { overflow: visible; }
+    .inherit-children {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .inherit-child {
+      background: #fff;
+      border: 1.5px solid #d0d0ca;
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      text-align: center;
+      width: 160px;
+    }
+    .inherit-child-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bbb;
+      margin-bottom: 0.3rem;
+    }
+    .inherit-child-name { font-weight: 600; font-size: 0.88rem; color: #111; }
+    .inherit-child-pool {
+      font-size: 0.67rem;
+      color: #888;
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      line-height: 1.4;
+    }
+    .inherit-child-grade {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+    }
+    .badge-silver { background: #e2e8f0; color: #475569; }
+    .badge-gold { background: #fef3c7; color: #92400e; }
+    .badge-bronze { background: #fef3c7; color: #92400e; }
+    .inherit-plus {
+      font-size: 0.65rem;
+      color: #bbb;
+      font-family: var(--font-mono);
+      margin-top: 0.4rem;
+    }
+
+    /* ── Before / After gate ── */
+    .gate-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #e8e8e4;
+    }
+    .gate-panel {
+      background: #fafaf9;
+      padding: 1.6rem 1.4rem;
+    }
+    .gate-panel-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .gate-panel.before .gate-panel-label { color: #ef4444; }
+    .gate-panel.after .gate-panel-label { color: #22c55e; }
+    .gate-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ebebeb;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    .gate-row:last-child { border-bottom: none; }
+    .gate-skill { color: #333; }
+    .gate-result-bad {
+      color: #ef4444;
+      font-weight: 500;
+    }
+    .gate-result-good {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #333;
+    }
+    .gate-badge {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .gate-verdict {
+      margin-top: 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      padding: 0.6rem 0.8rem;
+    }
+    .gate-panel.before .gate-verdict { background: #fff5f5; color: #ef4444; }
+    .gate-panel.after .gate-verdict { background: #f0fdf4; color: #16a34a; }
+
+    /* ── Rollout timeline ── */
+    .rollout-timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+      padding: 0.5rem 0 0;
+    }
+    .rollout-step {
+      flex: 1;
+      position: relative;
+      padding: 0 0.5rem;
+    }
+    .rollout-step::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: calc(50% + 12px);
+      right: calc(-50% + 12px);
+      height: 1px;
+      background: #ddd;
+    }
+    .rollout-step:last-child::before { display: none; }
+    .rollout-dot-wrap { display: flex; justify-content: center; margin-bottom: 0.8rem; }
+    .rollout-dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #111;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1.5px #111;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .rollout-content { text-align: center; }
+    .rollout-pr {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+    .rollout-title {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 0.4rem;
+    }
+    .rollout-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    .rollout-items li {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      color: #666;
+      padding: 0.2rem 0;
+      margin: 0;
+      border-bottom: 1px solid #f0f0ee;
+      padding-left: 0.8rem;
+      position: relative;
+    }
+    .rollout-items li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #ccc;
+    }
+    .rollout-stat {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #888;
+      margin-top: 0.6rem;
+      text-align: center;
+    }
+
+    /* ── Evidence type bars ── */
+    .evidence-type-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .et-row { display: flex; align-items: center; gap: 0.8rem; }
+    .et-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #555;
+      width: 110px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .et-bar-wrap { flex: 1; background: #f0f0ee; height: 22px; position: relative; border-radius: 1px; }
+    .et-bar {
+      height: 100%;
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .et-count {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #888;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── Verification signals ── */
+    .signal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #e8e8e4;
+      margin: 2rem 0;
+    }
+    .signal-card {
+      background: #fafaf9;
+      padding: 1.4rem 1.4rem;
+    }
+    .signal-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .signal-name {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    .signal-desc {
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.5;
+    }
+    .signal-tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      background: #f0f0ee;
+      color: #888;
+      border-radius: 1px;
+    }
+
+    /* ── Chart container ── */
+    .chart-wrap { position: relative; max-width: 340px; margin: 0 auto; }
+
     .references { margin-top: 6rem; padding-top: 3rem; border-top: 1px solid #eee; }
     .ref-item { font-size: 0.9rem; margin-bottom: 1.2rem; text-indent: -1.8rem; padding-left: 1.8rem; text-align: left; }
     .footer-nav { margin-top: 5rem; text-align: center; font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .footer-nav a { color: var(--paper-text); text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px; transition: border-color 0.2s; }
     .footer-nav a:hover { border-color: var(--accent); }
+
+    /* ── Floating UI ── */
     .floating-cluster {
       position: fixed; top: 2rem; right: 2rem; z-index: 1000;
       display: flex; align-items: center; gap: 0.5rem;
@@ -166,12 +594,19 @@
     .ms-header h2::before { content: none !important; }
     .ms-body { flex: 1; overflow-y: auto; padding: 1.5rem; font-family: 'Bricolage Grotesque', sans-serif; }
     .ms-close { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
+
     @media (max-width: 768px) {
       .paper { padding: 3rem 2rem; }
       body { padding: 1rem 0; }
       .floating-cluster { top: 0.75rem; right: 0.75rem; }
       .floating-changelog-btn { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
       .meta-sidebar { width: 100%; }
+      .stat-row { grid-template-columns: repeat(3, 1fr); }
+      .gate-compare { grid-template-columns: 1fr; }
+      .inherit-children { flex-direction: column; }
+      .rollout-timeline { flex-direction: column; }
+      .rollout-step::before { display: none; }
+      .signal-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -227,11 +662,51 @@
       <div class="abstract-content">GAIA's trust model (issue #646) retires the single Evidence Class letter and the idea of a user-facing numeric trust score. In their place: an Evidence Type axis for provenance, an Evidence Grade axis for quality, a computed Overall Trust Grade per skill, and an inheritance model in which a starless capability reference holds shared evidence that every named implementation inherits and then extends. This report documents the model end to end and records its rollout across the #659, #686, and #690 changes.
 </div>
     </section>
-<div class="chart-container"><canvas id="timelineChart"></canvas><div class="chart-caption" id="chartCaption">Figure 1</div></div>
+
+    <!-- ── Figure 1: Grade Distribution ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 1 — Overall Trust Grade distribution · 183 named skills</div>
+        <div class="stat-row" id="statRow">
+          <div class="stat-cell">
+            <div class="stat-value" style="color:#94a3b8;opacity:0.45">0</div>
+            <div class="stat-label">Platinum (S)</div>
+            <div class="stat-sub">0% · ≥ 90</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value" style="color:#fbbf24">42</div>
+            <div class="stat-label">Gold (A)</div>
+            <div class="stat-sub">23% · ≥ 80</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value" style="color:#94a3b8">130</div>
+            <div class="stat-label">Silver (B)</div>
+            <div class="stat-sub">71% · ≥ 60</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value" style="color:#b45309">10</div>
+            <div class="stat-label">Bronze (C)</div>
+            <div class="stat-sub">5% · ≥ 40</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value" style="color:#334155">1</div>
+            <div class="stat-label">Ungraded</div>
+            <div class="stat-sub">1% · &lt; 40</div>
+          </div>
+        </div>
+        <div class="chart-wrap" style="margin-top:1.8rem">
+          <canvas id="distChart" height="220"></canvas>
+        </div>
+        <div class="fig-caption">The heavy concentration at Silver (71%) reflects the mechanical backfill. No skill has yet earned Platinum (S) — that grade requires editorial judgement from a 4★+ Verifier.</div>
+      </div>
+    </div>
+
     <p>GAIA describes how trustworthy an agent skill is using two things people can actually reason about: the <strong>stars</strong> a skill has earned, and the <strong>Evidence Grades</strong> of the demonstrations behind it. This report sets out the full methodology — why a single Evidence Class letter and a 0–100 "trust score" were rejected, how provenance (Evidence Type) and quality (Evidence Grade) were split into orthogonal axes, how a skill's <strong>Overall Trust Grade</strong> accumulates from its evidence, and how a starless capability reference passes shared evidence down to each named implementation that builds on it. It closes with the rollout status and the open recalibration question.</p>
+
 <h2>The Case Against a Single Number</h2>
 <p>A registry that ranks skills invites a tempting shortcut: reduce every skill to one 0–100 number and sort. GAIA deliberately does not do this. A single score conflates unrelated questions — <em>where did the evidence come from?</em>, <em>how strong is it?</em>, and <em>how much of it is there?</em> — into a figure that looks precise and is not. It also rewards score-chasing over genuine demonstration.</p>
 <p>The model instead keeps the human-legible signal — a skill's <strong>stars</strong>, on the 0★–6★ maturity axis — as the headline, and grounds it in graded evidence. The internal <strong>trust number</strong> still exists, but only as the input a grade is derived from; it is never shown in copy. Surfaces display the <strong>grade</strong> the number yields, not the raw number.</p>
+
 <h2>Two Standing Axes: Tier and Stars</h2>
 <p>Every skill sits on two orthogonal axes that predate the trust model and remain unchanged:</p>
 <ul>
@@ -239,65 +714,329 @@
   <li><strong>Stars</strong> — verified maturity from 0★ to 6★, derived from evidence and never declared. Each star value has a <strong>rank name</strong> used only when paired (for example, "the Hardened rank"); the bare word is never used for the axis itself.</li>
 </ul>
 <p>The trust model does not touch these axes. It governs the <em>evidence</em> that justifies a skill's stars, and the aggregate standing that evidence implies.</p>
+
 <h2>Splitting Evidence: Type and Grade</h2>
 <p>The legacy schema carried a single <strong>Evidence Class</strong> letter (C, B, A) that quietly encoded two different things at once — roughly, provenance <em>and</em> quality. The #646 model splits that one letter into two independent axes. Evidence Class remains valid in the schema until the next major release, then is removed; new evidence carries a Type and a Grade instead. A standing warning applies throughout: <strong>Class A/B are not Grade A/B</strong> — the axes share letters but mean different things.</p>
-<h3>Evidence Type — provenance</h3>
-<p>An <strong>Evidence Type</strong> records <em>where</em> a demonstration comes from, not how good it is. Values are kebab-case and list-driven from <code>meta.json</code> <code>evidence.types</code>, so new provenance kinds extend the list without a schema change. The initial set:</p>
-<table><thead><tr><th>Evidence Type</th><th>Provenance</th></tr></thead><tbody><tr><td><code>arxiv</code></td><td>A paper or preprint</td></tr><tr><td><code>repo</code></td><td>A source repository or <code>SKILL.md</code> implementation</td></tr><tr><td><code>github-stars</code></td><td>Popularity signal from a repository's stars</td></tr></tbody></table>
-<h3>Evidence Grade — quality</h3>
-<p>An <strong>Evidence Grade</strong> records <em>how strong</em> a single demonstration is, on an S / A / B / C axis presented as Platinum, Gold, Silver, and Bronze. The grade is derived from that demonstration's <strong>trust number</strong> against the thresholds in <code>meta.json</code> <code>evidence.gradeThresholds</code>:</p>
-<table><thead><tr><th>Grade</th><th>Label</th><th>Trust number</th></tr></thead><tbody><tr><td>S</td><td>Platinum</td><td>≥ 90</td></tr><tr><td>A</td><td>Gold</td><td>≥ 80</td></tr><tr><td>B</td><td>Silver</td><td>≥ 60</td></tr><tr><td>C</td><td>Bronze</td><td>≥ 40</td></tr><tr><td>—</td><td>ungraded</td><td>< 40</td></tr></tbody></table>
-<p>A demonstration below the C threshold is <strong>ungraded</strong>: it stays on the record but counts toward no gate. Grading is mechanical; a repository link alone does not earn a high grade, which is why a separate editorial step (below) exists to award S where genuine demonstrations justify it.</p>
-<h3>Worked Example: garrytan/health</h3>
-<p>The skill <code>garrytan/health</code> (3★ Evolved, automated-testing) carries one evidence entry:</p>
-<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Evidence Type</td><td><code>repo</code></td></tr><tr><td>Evidence Grade</td><td><strong>B (Silver)</strong></td></tr><tr><td>Trust Number</td><td>70.0</td></tr><tr><td>Source</td><td><a href="https://github.com/garrytan/gstack/blob/main/health/SKILL.md">garrytan/gstack/health/SKILL.md</a></td></tr><tr><td>Evaluator</td><td>mbtiongson1</td></tr><tr><td>Date</td><td>2026-06-03</td></tr></tbody></table>
-<p>Its timeline tells the story:</p>
-<ul>
-  <li><strong>2026-06-03</strong> <code>evidence_added</code> — B evidence from the SKILL.md source</li>
-  <li><strong>2026-06-14</strong> <code>evidence_graded</code> — Re-graded as B (trustNumber: 70.0) during the in-place re-grade</li>
-</ul>
-<p>The Overall Trust Grade is <strong>B</strong> — the strongest (and only) grade in its evidence pool. This is the model working as designed: one repo demonstration, mechanically graded, auditable via two timeline events.</p>
+
+    <h3>Evidence Type — provenance</h3>
+    <p>An <strong>Evidence Type</strong> records <em>where</em> a demonstration comes from, not how good it is. Values are kebab-case and list-driven from <code>meta.json</code> <code>evidence.types</code>, so new provenance kinds extend the list without a schema change.</p>
+
+    <!-- ── Figure 2: Evidence Type breakdown ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 2 — Evidence Type breakdown across all graded entries</div>
+        <div class="evidence-type-bars" id="etBars">
+          <div class="et-row">
+            <div class="et-label">repo</div>
+            <div class="et-bar-wrap">
+              <div class="et-bar" style="width:82%;background:#c8d6e8;">82%</div>
+            </div>
+            <div class="et-count">~320</div>
+          </div>
+          <div class="et-row">
+            <div class="et-label">arxiv</div>
+            <div class="et-bar-wrap">
+              <div class="et-bar" style="width:14%;background:#fde68a;">14%</div>
+            </div>
+            <div class="et-count">~55</div>
+          </div>
+          <div class="et-row">
+            <div class="et-label">github-stars</div>
+            <div class="et-bar-wrap">
+              <div class="et-bar" style="width:4%;background:#d1fae5;">4%</div>
+            </div>
+            <div class="et-count">~18</div>
+          </div>
+        </div>
+        <div class="fig-caption">Most entries are <code>repo</code>-sourced (SKILL.md implementations). <code>arxiv</code> entries — which tend to score higher due to academic peer review — make up 14% and produce the bulk of Gold-graded skills.</div>
+      </div>
+    </div>
+
+    <h3>Evidence Grade — quality</h3>
+    <p>An <strong>Evidence Grade</strong> records <em>how strong</em> a single demonstration is, on an S / A / B / C axis presented as Platinum, Gold, Silver, and Bronze. The grade is derived from that demonstration's <strong>trust number</strong> against the thresholds in <code>meta.json</code> <code>evidence.gradeThresholds</code>:</p>
+
+    <!-- ── Figure 3: Trust Scale Bar ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 3 — Trust number → Evidence Grade mapping</div>
+        <div class="grade-scale">
+          <div class="grade-zone" style="width:40%;background:#f0f0ee;">
+            <div class="grade-zone-label">
+              <span>—</span>
+              <span class="grade-zone-name">Ungraded</span>
+            </div>
+          </div>
+          <div class="grade-zone" style="width:20%;background:#deb88733;">
+            <div class="grade-zone-label">
+              <span style="color:#92400e">C</span>
+              <span class="grade-zone-name" style="color:#92400e">Bronze</span>
+            </div>
+          </div>
+          <div class="grade-zone" style="width:20%;background:#94a3b833;">
+            <div class="grade-zone-label">
+              <span style="color:#475569">B</span>
+              <span class="grade-zone-name" style="color:#475569">Silver</span>
+            </div>
+          </div>
+          <div class="grade-zone" style="width:10%;background:#fbbf2433;">
+            <div class="grade-zone-label">
+              <span style="color:#92400e">A</span>
+              <span class="grade-zone-name" style="color:#92400e">Gold</span>
+            </div>
+          </div>
+          <div class="grade-zone" style="width:10%;background:#e2e8f0;">
+            <div class="grade-zone-label">
+              <span style="color:#334155">S</span>
+              <span class="grade-zone-name" style="color:#334155">Platinum</span>
+            </div>
+          </div>
+        </div>
+        <div class="grade-ticks">
+          <div class="grade-tick">0</div>
+          <div class="grade-tick">40</div>
+          <div class="grade-tick">60</div>
+          <div class="grade-tick">80</div>
+          <div class="grade-tick">90</div>
+          <div class="grade-tick">100</div>
+        </div>
+        <div class="fig-caption">The trust number is internal — never displayed in copy. Only the grade label it maps to appears on skill surfaces.</div>
+      </div>
+    </div>
+
+    <p>A demonstration below the C threshold is <strong>ungraded</strong>: it stays on the record but counts toward no gate. Grading is mechanical; a repository link alone does not earn a high grade, which is why a separate editorial step (below) exists to award S where genuine demonstrations justify it.</p>
+
+    <h3>Worked Example: garrytan/health</h3>
+    <p>The skill <code>garrytan/health</code> (3★ Evolved, automated-testing) carries one evidence entry:</p>
+    <table>
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Evidence Type</td><td><code>repo</code></td></tr>
+        <tr><td>Evidence Grade</td><td><strong>B (Silver)</strong></td></tr>
+        <tr><td>Trust Number</td><td>70.0</td></tr>
+        <tr><td>Source</td><td><a href="https://github.com/garrytan/gstack/blob/main/health/SKILL.md">garrytan/gstack/health/SKILL.md</a></td></tr>
+        <tr><td>Evaluator</td><td>mbtiongson1</td></tr>
+        <tr><td>Date</td><td>2026-06-03 → re-graded 2026-06-14</td></tr>
+      </tbody>
+    </table>
+    <p>Its timeline tells the story: <code>evidence_added</code> on Jun 3 (B from the SKILL.md source), then <code>evidence_graded</code> on Jun 14 (re-graded B, trustNumber: 70.0 during the in-place re-grade). Overall Trust Grade: <strong>B</strong> — the strongest (and only) grade in its evidence pool. One repo demonstration, mechanically graded, auditable via two timeline events.</p>
+
 <h2>The Overall Trust Grade</h2>
 <p>A skill's <strong>Overall Trust Grade</strong> is its aggregate standing — the accumulation of its individual Evidence Grades that establishes the capability "beyond reasonable doubt." It is computed from the evidence inventory at build time and <strong>never stored in a node</strong>; it materialises only in the generated catalogs (<code>named-skills.json</code>, <code>docs/graph/gaia.json</code>). It is distinct from any single demonstration's Evidence Grade.</p>
 <p>The current implementation takes the strongest grade in the evidence pool. Whether aggregate standing should instead require corroboration — several independent demonstrations rather than one strong one — is the open question reserved for the post-rollout recalibration review.</p>
+
 <h2>Inheritance: the Starless Layer</h2>
-<p>Skills are organised under <strong>starless</strong> references — rank-less taxonomy nodes that carry no stars of their own and render as <em>generic</em> in italic, greyed styling. A starless reference holds the shared, capability-level evidence pool — the academic and general-purpose demonstrations of a capability. Its <strong>named</strong> implementations (its children) each inherit that pool and then add their own implementation-specific evidence, typically a repository demonstration. That implementation-specific layer is the <em>differentiator</em> between two named skills that share a parent.</p>
-<p>The trust model honours this structure directly. A named skill's <strong>effective evidence</strong> is its own evidence unioned with the evidence inherited from its starless parent, and its Overall Trust Grade is computed from that combined pool. A child therefore inherits its parent's capability floor and can exceed it on the strength of its own demonstration — but never reports a weaker standing than the capability it implements.</p>
-<p>This layering was the step that turned the model from correct-on-paper into correct-in-practice. Grading only the parent layer left every suite reading "0/3 components carry graded evidence," because component standing was being looked up by the wrong identity. Resolving each component to its <em>named</em> effective evidence fixed the gates to report real, actionable reasons.</p>
-<h3>Before and After: the Suite Gate Fix</h3>
-<blockquote><p>Before the inheritance fix, component standing was looked up by the starless parent identity. The gate reported "0/3 components carry graded evidence" — because parent-level evidence was being counted, not child-level effective evidence.</p></blockquote>
-<p>After resolving each component to its <strong>named</strong> effective evidence:</p>
-<table><thead><tr><th>Component</th><th>Before (parent lookup)</th><th>After (effective evidence)</th></tr></thead><tbody><tr><td>garrytan/health</td><td>0 graded</td><td>B (Silver)</td></tr><tr><td>garrytan/deploy</td><td>0 graded</td><td>B (Silver)</td></tr><tr><td>garrytan/docs</td><td>0 graded</td><td>B (Silver)</td></tr></tbody></table>
-<p>The gate now reports real, actionable gaps — "needs one component graded S" — instead of the lookup artifact.</p>
+<p>Skills are organised under <strong>starless</strong> references — rank-less taxonomy nodes that carry no stars of their own and render as <em>generic</em> in italic, greyed styling. A starless reference holds the shared, capability-level evidence pool — the academic and general-purpose demonstrations of a capability. Its <strong>named</strong> implementations each inherit that pool and then add their own implementation-specific evidence, typically a repository demonstration.</p>
+
+    <!-- ── Figure 4: Inheritance diagram ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 4 — Inheritance: starless parent → named children</div>
+        <div class="inherit-diagram">
+          <div class="inherit-parent">
+            <div class="inherit-parent-label">Starless reference · Generic</div>
+            <div class="inherit-parent-name"><em>health-check</em></div>
+            <div class="inherit-parent-pool">evidence pool: [arxiv · B] [arxiv · A]</div>
+          </div>
+          <div class="inherit-connector">
+            <svg width="340" height="56" viewBox="0 0 340 56">
+              <line x1="170" y1="0" x2="90" y2="48" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="170" y1="0" x2="250" y2="48" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>
+              <circle cx="170" cy="0" r="3" fill="#ccc"/>
+              <circle cx="90" cy="48" r="3" fill="#bbb"/>
+              <circle cx="250" cy="48" r="3" fill="#bbb"/>
+              <text x="170" y="28" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#bbb">inherits</text>
+            </svg>
+          </div>
+          <div class="inherit-children">
+            <div class="inherit-child">
+              <div class="inherit-child-label">Named · 3★ Evolved</div>
+              <div class="inherit-child-name">garrytan/health</div>
+              <div class="inherit-child-pool">
+                ↳ inherited: [arxiv·B] [arxiv·A]<br>
+                + own: [repo·B, trust 70]
+              </div>
+              <div class="inherit-plus">effective pool: 3 entries</div>
+              <span class="inherit-child-grade badge-gold">Overall: A (Gold)</span>
+            </div>
+            <div class="inherit-child">
+              <div class="inherit-child-label">Named · 2★ Named</div>
+              <div class="inherit-child-name">otheruser/health</div>
+              <div class="inherit-child-pool">
+                ↳ inherited: [arxiv·B] [arxiv·A]<br>
+                + own: [repo·B, trust 62]
+              </div>
+              <div class="inherit-plus">effective pool: 3 entries</div>
+              <span class="inherit-child-grade badge-gold">Overall: A (Gold)</span>
+            </div>
+          </div>
+        </div>
+        <div class="fig-caption">A named skill's <em>effective evidence</em> is its own pool unioned with its parent's. The child inherits the capability floor and can exceed it — but never reports a weaker standing than the capability it implements.</div>
+      </div>
+    </div>
+
+    <p>The trust model honours this structure directly. A named skill's <strong>effective evidence</strong> is its own evidence unioned with the evidence inherited from its starless parent, and its Overall Trust Grade is computed from that combined pool. A child therefore inherits its parent's capability floor and can exceed it on the strength of its own demonstration — but never reports a weaker standing than the capability it implements.</p>
+    <p>This layering was the step that turned the model from correct-on-paper into correct-in-practice. Grading only the parent layer left every suite reading "0/3 components carry graded evidence," because component standing was being looked up by the wrong identity. Resolving each component to its <em>named</em> effective evidence fixed the gates to report real, actionable reasons.</p>
+
+    <h3>Before and After: the Suite Gate Fix</h3>
+
+    <!-- ── Figure 5: Gate before/after ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 5 — Suite gate component lookup: before vs. after the inheritance fix</div>
+        <div class="gate-compare">
+          <div class="gate-panel before">
+            <div class="gate-panel-label">✕ Before — parent lookup</div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/health</span>
+              <span class="gate-result-bad">0 graded</span>
+            </div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/deploy</span>
+              <span class="gate-result-bad">0 graded</span>
+            </div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/docs</span>
+              <span class="gate-result-bad">0 graded</span>
+            </div>
+            <div class="gate-verdict">Gate reports: "0/3 components carry graded evidence" — a lookup artifact, not a real gap.</div>
+          </div>
+          <div class="gate-panel after">
+            <div class="gate-panel-label">✓ After — effective evidence</div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/health</span>
+              <span class="gate-result-good"><span class="gate-badge">B Silver</span></span>
+            </div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/deploy</span>
+              <span class="gate-result-good"><span class="gate-badge">B Silver</span></span>
+            </div>
+            <div class="gate-row">
+              <span class="gate-skill">garrytan/docs</span>
+              <span class="gate-result-good"><span class="gate-badge">B Silver</span></span>
+            </div>
+            <div class="gate-verdict">Gate reports: "needs one component graded S" — an accurate, actionable gap.</div>
+          </div>
+        </div>
+        <div class="fig-caption">Resolving each component to its named effective evidence replaced a systematic false-zero with real, actionable gate gaps across all six suite ultimates.</div>
+      </div>
+    </div>
+
 <h2>Suite Ultimates: the Pillar Gate</h2>
 <p>An <strong>Ultimate</strong>-tier skill that fuses a suite of components is held to a pillar rule, expressed in <code>meta.json</code> <code>evidence.ultimateGate</code>: at least <strong>three</strong> components carrying graded evidence, of which at least <strong>one</strong> is graded S and at least <strong>two</strong> are graded A or better, with <strong>no</strong> component below the C floor. The gate scores each component by its child effective grade, not the shared parent grade, so a suite's standing reflects the real strength of its implementations.</p>
 <p>By design, mechanical backfill alone does not let any suite pass: clearing the gate requires at least one component graded S, and awarding S is an editorial judgement reserved for a 4★+ Verifier reviewing a genuine demonstration. A gate that has not yet been cleared now reports an accurate gap (for example, "needs one component graded S") rather than a lookup artifact.</p>
+
 <h2>Tenure and Verification</h2>
 <p>Two further signals sit alongside grading, each orthogonal to it.</p>
-<p><strong>Tenure</strong> measures how long a skill has held its current stars, derived from its timeline <code>rank_up</code> and <code>demote</code> events and rendered as "held the <em>[rank name]</em> rank since <em>[date]</em>." It is computed, never stored, and is display-only — it never inflates or regresses standing.</p>
-<p><strong>Verification</strong> is the state of a single evidence entry: unverified by default, <strong>verified</strong> once confirmed by a 4★+ Verifier, or <strong>disputed</strong>. Verification attests that a demonstration is <em>real</em>; grading measures how <em>strong</em> it is. The two never substitute for each other — a verified Bronze is still Bronze, and an unverified Platinum still counts toward gates while inviting scrutiny.</p>
+
+    <!-- ── Figure 6: Signal cards ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 6 — Orthogonal signals: Tenure and Verification</div>
+        <div class="signal-grid">
+          <div class="signal-card">
+            <span class="signal-icon">⏱</span>
+            <div class="signal-name">Tenure</div>
+            <div class="signal-desc">How long a skill has held its current stars, derived from <code>rank_up</code> and <code>demote</code> timeline events. Rendered as "held the <em>[rank name]</em> rank since <em>[date]</em>."</div>
+            <div style="margin-top:0.8rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+              <span class="signal-tag">computed</span>
+              <span class="signal-tag">never stored</span>
+              <span class="signal-tag">display-only</span>
+            </div>
+          </div>
+          <div class="signal-card">
+            <span class="signal-icon">🔍</span>
+            <div class="signal-name">Verification</div>
+            <div class="signal-desc">The state of a single evidence entry. Unverified by default; <strong>verified</strong> once confirmed by a 4★+ Verifier; or <strong>disputed</strong>. Attests a demonstration is <em>real</em> — distinct from how <em>strong</em> it is.</div>
+            <div style="margin-top:0.8rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+              <span class="signal-tag">per-entry</span>
+              <span class="signal-tag">editorial</span>
+              <span class="signal-tag">4★+ only</span>
+            </div>
+          </div>
+        </div>
+        <div class="fig-caption">A verified Bronze is still Bronze. An unverified Platinum still counts toward gates — while inviting scrutiny. The two signals never substitute for each other.</div>
+      </div>
+    </div>
+
 <h2>Auditability and the Programmatic-First Discipline</h2>
 <p>Every change to graded evidence flows through the CLI (<code>gaia dev evidence</code>), never a hand-edit, and each grading writes an <code>evidence_graded</code> event to the skill's timeline. The schema's timeline action enum admits that event, so the registry's own validator (<code>gaia validate</code>) treats a graded history as well-formed. The result is that a skill's present standing is always explained by an auditable trail of events, and the build pipeline — not a human typing into a node — is the only thing that ever computes an Overall Trust Grade or a gate status.</p>
+
 <h2>Rollout Status</h2>
 <p>The methodology shipped in three reviewed stages, all on <code>main</code>:</p>
-<ul>
-  <li><strong>Schema (#659)</strong> — the <code>evidenceEntry</code> gains <code>type</code>, <code>grade</code>, and <code>trustNumber</code>; <code>meta.json</code> gains the grade thresholds and the pillar <code>ultimateGate</code>; Evidence Class is marked deprecated.</li>
-  <li><strong>Grading pipeline (#686)</strong> — <code>gaia dev evidence</code> derives a grade from a trust number, grade colours join the shared design tokens, and the Overall Trust Grade aggregation lands in the build step.</li>
-  <li><strong>Backfill and inheritance (#690)</strong> — the in-place re-grade path and the <code>evidence_graded</code> enum; the backfill of 220 starless and 173 named evidence entries; and the inheritance layer that gives named skills an effective grade and fixes the suite gates. After this stage, 182 of 183 named skills carry an Overall Trust Grade and all six suite ultimates report real component standing.</li>
-</ul>
-<p>What remains: the actionable per-skill reports that surface this model to readers, and a recalibration review — opened roughly a month after the gate has lived against real grade distributions — to revisit both the pillar thresholds and whether the Overall Trust Grade should demand corroboration rather than a single strongest demonstration.</p>
+
+    <!-- ── Figure 7: Rollout timeline ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 7 — Three-stage rollout on main</div>
+        <div class="rollout-timeline">
+          <div class="rollout-step">
+            <div class="rollout-dot-wrap">
+              <div class="rollout-dot">1</div>
+            </div>
+            <div class="rollout-content">
+              <div class="rollout-pr">#659</div>
+              <div class="rollout-title">Schema</div>
+              <ul class="rollout-items">
+                <li><code>evidenceEntry</code> gains <code>type</code>, <code>grade</code>, <code>trustNumber</code></li>
+                <li><code>meta.json</code> gets grade thresholds + <code>ultimateGate</code></li>
+                <li>Evidence Class marked deprecated</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rollout-step">
+            <div class="rollout-dot-wrap">
+              <div class="rollout-dot">2</div>
+            </div>
+            <div class="rollout-content">
+              <div class="rollout-pr">#686</div>
+              <div class="rollout-title">Grading Pipeline</div>
+              <ul class="rollout-items">
+                <li><code>gaia dev evidence</code> derives grade from trust number</li>
+                <li>Grade colours → shared design tokens</li>
+                <li>Overall Trust Grade aggregation lands in build</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rollout-step">
+            <div class="rollout-dot-wrap">
+              <div class="rollout-dot">3</div>
+            </div>
+            <div class="rollout-content">
+              <div class="rollout-pr">#690</div>
+              <div class="rollout-title">Backfill + Inheritance</div>
+              <ul class="rollout-items">
+                <li>In-place re-grade + <code>evidence_graded</code> enum</li>
+                <li>220 starless + 173 named entries backfilled</li>
+                <li>Named skill inheritance layer + suite gate fix</li>
+              </ul>
+              <div class="rollout-stat">182/183 named skills graded · 6 suites fixed</div>
+            </div>
+          </div>
+        </div>
+        <div class="fig-caption">What remains: per-skill trust reports surfacing this model to readers, and a recalibration review ~one month after live gate data accumulates.</div>
+      </div>
+    </div>
+
 <h2>Grade Distribution</h2>
-<p>Across the 183 named skills in the registry, the Overall Trust Grade distribution is:</p>
-<table><thead><tr><th>Grade</th><th>Label</th><th>Count</th><th>Share</th></tr></thead><tbody><tr><td>S</td><td>Platinum</td><td>0</td><td>0%</td></tr><tr><td>A</td><td>Gold</td><td>42</td><td>23%</td></tr><tr><td>B</td><td>Silver</td><td>130</td><td>71%</td></tr><tr><td>C</td><td>Bronze</td><td>10</td><td>5%</td></tr><tr><td>—</td><td>Ungraded</td><td>1</td><td>1%</td></tr></tbody></table>
-<p>The heavy concentration at Silver reflects the mechanical backfill: most evidence entered the registry as repository links graded in the 60–79 trust-number band. Gold entries are predominantly <code>arxiv</code>-sourced academic demonstrations. No skill has yet earned Platinum (S), because that grade requires editorial judgement from a 4★+ Verifier reviewing a genuine demonstration — a gate the backfill deliberately does not clear.</p>
-<div class="references">
-  <div class="abstract-title" style="text-align: left; margin-bottom: 1.5rem;">References</div>
-  <div class="ref-item">[1] GAIA Registry. (2026). <em>Trust Model RFC v2</em> (issue #646). Internal handover, <code>handovers/TRUST<em>MODEL</em>RFC.md</code>.</div>
-  <div class="ref-item">[2] GAIA Registry. (2026). <em>Evidence Type + Grade + trustNumber schema split</em> (PR #659).</div>
-  <div class="ref-item">[3] GAIA Registry. (2026). <em>Grading pipeline</em> (PR #686).</div>
-  <div class="ref-item">[4] GAIA Registry. (2026). <em>Grade layering & inheritance for named skills and suite ultimates</em> (PR #690, issue #689).</div>
-  <div class="ref-item">[5] GAIA Registry. <em>CONTEXT.md</em> — vocabulary source of truth for tier, stars, Evidence Type, Evidence Grade, Overall Trust Grade, tenure, verification, and the starless layer.</div>
-</div>
+<p>Across the 183 named skills in the registry, the Overall Trust Grade distribution is dominated by Silver — reflecting the mechanical backfill of repository links graded in the 60–79 trust-number band. Gold entries are predominantly <code>arxiv</code>-sourced academic demonstrations. No skill has yet earned Platinum (S), because that grade requires editorial judgement from a 4★+ Verifier reviewing a genuine demonstration — a gate the backfill deliberately does not clear.</p>
+
+    <!-- ── Figure 8: Grade breakdown bar chart ── -->
+    <div class="fig">
+      <div class="fig-inner">
+        <div class="fig-label">Figure 8 — Grade breakdown (horizontal bar)</div>
+        <canvas id="gradeBarChart" height="140"></canvas>
+        <div class="fig-caption">Silver (B) at 71% reflects bulk repo evidence. Gold (A) at 23% traces to arxiv-backed skills. The 0% Platinum bar is a design guarantee — not a gap in the data.</div>
+      </div>
+    </div>
+
+    <div class="references">
+      <div class="abstract-title" style="text-align: left; margin-bottom: 1.5rem;">References</div>
+      <div class="ref-item">[1] GAIA Registry. (2026). <em>Trust Model RFC v2</em> (issue #646). Internal handover, <code>handovers/TRUST_MODEL_RFC.md</code>.</div>
+      <div class="ref-item">[2] GAIA Registry. (2026). <em>Evidence Type + Grade + trustNumber schema split</em> (PR #659).</div>
+      <div class="ref-item">[3] GAIA Registry. (2026). <em>Grading pipeline</em> (PR #686).</div>
+      <div class="ref-item">[4] GAIA Registry. (2026). <em>Grade layering &amp; inheritance for named skills and suite ultimates</em> (PR #690, issue #689).</div>
+      <div class="ref-item">[5] GAIA Registry. <em>CONTEXT.md</em> — vocabulary source of truth for tier, stars, Evidence Type, Evidence Grade, Overall Trust Grade, tenure, verification, and the starless layer.</div>
+    </div>
 
     <div class="footer-nav">
       <a href="../../index.html">← Back to Gaia</a>
@@ -305,6 +1044,7 @@
   </article>
 
   <script>
+    /* ── Sidebar ── */
     const sidebar = document.getElementById('metaSidebar');
     const openBtn = document.getElementById('viewChangelogBtn');
     const closeBtn = document.getElementById('closeChangelogBtn');
@@ -331,6 +1071,7 @@
     }
     loadChangelog();
 
+    /* ── Share / copy ── */
     (function() {
       var shareBtn = document.getElementById('reportShareBtn');
       var copyBtn = document.getElementById('reportCopyLinkBtn');
@@ -344,55 +1085,98 @@
         if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(function() { flashBtn(copyBtn); });
       });
     })();
-    async function initChart() {
-      try {
-        const res = await fetch('grade-distribution.json');
-        const data = await res.json();
-        const ctx = document.getElementById('timelineChart').getContext('2d');
-        if (data.caption) {
-          const cap = document.getElementById('chartCaption');
-          if (cap) cap.textContent = data.caption;
-        }
-        new Chart(ctx, {
-          type: data.type || 'line',
-          data: {
-            labels: data.labels,
-            datasets: data.datasets.map(ds => {
-              const isDoughnut = (data.type === 'doughnut');
-              return {
-                label: ds.label,
-                data: ds.data,
-                borderColor: isDoughnut ? '#ffffff' : ds.color,
-                backgroundColor: isDoughnut ? ds.color : (ds.color + '22'),
-                borderWidth: 2,
-                fill: !isDoughnut,
-                tension: 0.3,
-                pointRadius: isDoughnut ? undefined : 0,
-                pointHoverRadius: isDoughnut ? undefined : 5
-              };
-            })
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: (data.type === 'doughnut') ? 'right' : 'bottom',
-                labels: { font: { family: 'JetBrains Mono', size: 10 } }
-              },
-              tooltip: {
-                mode: (data.type === 'doughnut') ? 'average' : 'index',
-                intersect: (data.type === 'doughnut')
+
+    /* ── Figure 1: Doughnut distribution chart ── */
+    (function() {
+      const ctx = document.getElementById('distChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Platinum (S)', 'Gold (A)', 'Silver (B)', 'Bronze (C)', 'Ungraded'],
+          datasets: [{
+            data: [0, 42, 130, 10, 1],
+            backgroundColor: ['#e2e8f0', '#fbbf24', '#94a3b8', '#b45309', '#334155'],
+            borderColor: '#fafaf9',
+            borderWidth: 3,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: '68%',
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                font: { family: 'JetBrains Mono', size: 10 },
+                padding: 14,
+                usePointStyle: true,
+                pointStyleWidth: 10
               }
             },
-            scales: (data.type === 'doughnut') ? {} : {
-              x: { grid: { display: false }, ticks: { font: { family: 'JetBrains Mono', size: 9 } } },
-              y: { beginAtZero: true, grid: { color: '#eee' }, ticks: { font: { family: 'JetBrains Mono', size: 9 } } }
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const total = 183;
+                  const pct = Math.round(ctx.parsed / total * 100);
+                  return ` ${ctx.parsed} skills (${pct}%)`;
+                }
+              }
             }
           }
-        });
-      } catch (e) { console.error('Chart failed', e); }
-    }
-    initChart();
+        }
+      });
+    })();
+
+    /* ── Figure 8: Horizontal bar chart ── */
+    (function() {
+      const ctx = document.getElementById('gradeBarChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Platinum (S)', 'Gold (A)', 'Silver (B)', 'Bronze (C)', 'Ungraded'],
+          datasets: [{
+            label: 'Named Skills',
+            data: [0, 42, 130, 10, 1],
+            backgroundColor: ['#e2e8f0', '#fbbf24', '#94a3b8cc', '#b45309aa', '#334155aa'],
+            borderColor: ['#cbd5e1', '#f59e0b', '#64748b', '#92400e', '#1e293b'],
+            borderWidth: 1,
+            borderRadius: 2
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const pct = Math.round(ctx.parsed.x / 183 * 100);
+                  return ` ${ctx.parsed.x} skills — ${pct}% of registry`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 140,
+              grid: { color: '#f0f0ee' },
+              ticks: {
+                font: { family: 'JetBrains Mono', size: 9 },
+                color: '#aaa'
+              }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#555' },
+              afterFit(scale) { scale.width = 110; }
+            }
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
