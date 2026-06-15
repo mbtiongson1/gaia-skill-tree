@@ -112,7 +112,6 @@
     .ev-chart-svg {
       width: 140px;
       height: 140px;
-      transform: rotate(-90deg);
     }
     .ev-chart-legend {
       display: flex;
@@ -536,7 +535,7 @@
     </div>
     <div class="ev-filter-row">
       <div class="ev-filter-group">
-        <span class="ev-filter-label">Provenance</span>
+        <span class="ev-filter-label">Evidence Type</span>
         <div class="ev-type-tabs" id="evTypeTabs" role="tablist">
           <button class="ev-tab active" data-type="all">All</button>
           <button class="ev-tab" data-type="repo">repo</button>
@@ -545,9 +544,10 @@
         </div>
       </div>
       <div class="ev-filter-group">
-        <span class="ev-filter-label">Quality</span>
+        <span class="ev-filter-label">Evidence Grade</span>
         <div class="ev-grade-tabs" id="evGradeTabs" role="tablist">
           <button class="ev-tab active" data-grade="all">All</button>
+          <button class="ev-tab" data-grade="S">Platinum</button>
           <button class="ev-tab" data-grade="A">Gold</button>
           <button class="ev-tab" data-grade="B">Silver</button>
           <button class="ev-tab" data-grade="C">Bronze</button>

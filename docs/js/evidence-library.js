@@ -234,10 +234,7 @@
       // Grade filter
       if (currentFilters.grade !== 'all') {
         const g = ev.grade || 'ungraded';
-        // Match Gold (A), Silver (B), Bronze (C)
-        if (currentFilters.grade === 'A' && g !== 'A') return false;
-        if (currentFilters.grade === 'B' && g !== 'B') return false;
-        if (currentFilters.grade === 'C' && g !== 'C') return false;
+        if (g !== currentFilters.grade) return false;
       }
 
       return true;
@@ -410,6 +407,7 @@
     const circumference = 2 * Math.PI * radius; // ~314.159
 
     let svgContent = `<svg class="ev-chart-svg" viewBox="0 0 120 120">`;
+    svgContent += `<g transform="rotate(-90 60 60)">`;
 
     // Render segments
     grades.forEach(grade => {
@@ -432,6 +430,8 @@
 
       currentPercent += percent;
     });
+
+    svgContent += `</g>`;
 
     // Add inner card
     svgContent += `
