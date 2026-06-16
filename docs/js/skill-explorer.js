@@ -69,6 +69,18 @@
     return (window._gaiaSkillMap || {})[id] || null;
   }
 
+  // Resolve the doc-root URL prefix for absolute-from-root links (e.g.
+  // /evidence/, /u/<handle>/). The same helper exists inside the second IIFE
+  // (line ~1982) where it powers the tree-dialog handle links — IIFE scopes
+  // don't share lexical bindings, so this duplicate keeps renderDocs from
+  // throwing ReferenceError when its caller (renderDocs:619) reaches for it.
+  // See CLAUDE.md § Known Skill Explorer Issues.
+  function getRootPath() {
+    return (typeof window.gaiaIconBase === 'function')
+      ? window.gaiaIconBase().replace(/assets\/icons\.svg(\?.*)?$/, '')
+      : '';
+  }
+
   // ── RENDER HERO ──────────────────────────────────────────────
   // Stage 3 — hero is the .plaque--detail variant of the shared
   // component family. Markup emission moved entirely to plaque.js;
@@ -1934,6 +1946,11 @@
       treeDialogPre.textContent = SKELETON;
       treeDialogPre.classList.add('tree-skeleton');
       var prefix = getRootPath();
+      // Cache-bust on the page's GAIA_VERSION so a new tree.md ships with the
+      // release. Mirrors the version helper in named-skills.js:468. Was an
+      // undeclared identifier before — would throw ReferenceError silently
+      // from this onclick handler and the dialog stayed empty.
+      var version = window.GAIA_VERSION ? '?v=' + window.GAIA_VERSION : '';
       fetch(prefix + 'tree.md' + version)
         .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
         .then(function(text) {
