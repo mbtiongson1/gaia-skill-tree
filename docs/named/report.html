@@ -197,11 +197,7 @@
       letter-spacing: 0.04em;
     }
 
-    .otg-badge[data-grade="S"] { color: var(--grade-s); background: var(--grade-s-bg); border-color: var(--grade-s-border); }
-    .otg-badge[data-grade="A"] { color: var(--grade-a); background: var(--grade-a-bg); border-color: var(--grade-a-border); }
-    .otg-badge[data-grade="B"] { color: var(--grade-b); background: var(--grade-b-bg); border-color: var(--grade-b-border); }
-    .otg-badge[data-grade="C"] { color: var(--grade-c); background: var(--grade-c-bg); border-color: var(--grade-c-border); }
-    .otg-badge[data-grade="—"] { color: var(--grade-none); background: var(--grade-none-bg); border-color: var(--grade-none-border); }
+
 
     .otg-meta { font-size: 0.85rem; }
     .otg-label { font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
@@ -270,11 +266,7 @@
       letter-spacing: 0.04em;
       vertical-align: middle;
     }
-    .ev-grade[data-grade="S"] { color: var(--grade-s); background: var(--grade-s-bg); border-color: var(--grade-s-border); }
-    .ev-grade[data-grade="A"] { color: var(--grade-a); background: var(--grade-a-bg); border-color: var(--grade-a-border); }
-    .ev-grade[data-grade="B"] { color: var(--grade-b); background: var(--grade-b-bg); border-color: var(--grade-b-border); }
-    .ev-grade[data-grade="C"] { color: var(--grade-c); background: var(--grade-c-bg); border-color: var(--grade-c-border); }
-    .ev-grade[data-grade="—"] { color: var(--grade-none); background: var(--grade-none-bg); border-color: var(--grade-none-border); }
+
 
     /* Evidence type chip */
     .ev-type {
@@ -1023,6 +1015,8 @@
             root.innerHTML = renderNotFound(skillId);
             return;
           }
+          var grade = (skill.overallTrustGrade || '—').trim();
+          document.body.setAttribute('data-overall-grade', grade);
           root.innerHTML = renderSkill(skill);
         })
         .catch(function(err) {

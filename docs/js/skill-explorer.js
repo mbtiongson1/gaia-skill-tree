@@ -596,11 +596,34 @@
     var issuesUrl = 'https://github.com/' + REPO_SLUG + '/issues';
     var readmeUrl = repoUrl && isGithubUrl(repoUrl) ? repoUrl.replace(/\.(git|\/?)$/,'') : '';
 
-    var evidenceHtml = '';
-    if (generic && Array.isArray(generic.evidence) && generic.evidence.length) {
-      evidenceHtml = '<div class="se-docs-block"><h4>Evidence</h4><div class="grade-bar" style="max-width: 100%;">' +
-        generic.evidence.map(function(ev){
-          var gradeChar = (ev.class || '?').toUpperCase().charAt(0);
+    var combinedEvidence = [];
+    var seenUrls = new Set();
+    
+    function addEvidences(list) {
+      if (Array.isArray(list)) {
+        list.forEach(function(ev) {
+          if (ev && ev.source) {
+            var url = ev.source.trim();
+            if (!seenUrls.has(url)) {
+              seenUrls.add(url);
+              combinedEvidence.push(ev);
+            }
+          }
+        });
+      }
+    }
+    
+    addEvidences(ns.evidence);
+    addEvidences(generic ? generic.evidence : null);
+
+    var rootPath = getRootPath();
+    var evidenceLibraryUrl = rootPath + 'evidence/';
+
+    var evidenceContent = '';
+    if (combinedEvidence.length) {
+      evidenceContent = '<div class="grade-bar" style="max-width: 100%;">' +
+        combinedEvidence.map(function(ev){
+          var gradeChar = (ev.grade || ev.class || '?').toUpperCase().charAt(0);
           var gradeClass = 'grade-ungraded';
           if (gradeChar === 'S') gradeClass = 'grade-plat';
           else if (gradeChar === 'A') gradeClass = 'grade-gold';
@@ -618,8 +641,20 @@
               '<span style="color: var(--muted); font-family: var(--font-mono); font-size: 0.8rem; flex-shrink: 0;">' + esc(ev.date||'') + '</span>' +
             '</div>' +
           '</div>';
-        }).join('') + '</div></div>';
+        }).join('') + '</div>';
+    } else {
+      evidenceContent = '<p style="color: var(--muted); font-style: italic; font-size: 0.85rem; margin: 0.5rem 0 0;">No evidence sources registered for this skill.</p>';
     }
+
+    var evidenceHtml = '<div class="se-docs-block">' +
+      '<h4 style="display: flex; justify-content: space-between; align-items: center;">' +
+        '<span>Evidence</span>' +
+        '<a href="' + evidenceLibraryUrl + '" style="font-size: 0.75rem; font-weight: normal; color: var(--basic); text-decoration: none; display: flex; align-items: center; gap: 4px;">' +
+          'Library ↗' +
+        '</a>' +
+      '</h4>' +
+      evidenceContent +
+    '</div>';
 
     var demeritText = (generic && Array.isArray(generic.demerits) && generic.demerits.length)
       ? ('  ·  Demerits: <strong style="color:var(--apex-gold)">' + esc(generic.demerits.join(', ')) + '</strong>')
@@ -1865,8 +1900,7 @@
     if (_treeContent === null) {
       treeDialogPre.textContent = SKELETON;
       treeDialogPre.classList.add('tree-skeleton');
-      var version = window.GAIA_VERSION ? '?v=' + window.GAIA_VERSION : '';
-      var prefix = (typeof window.gaiaIconBase === 'function') ? window.gaiaIconBase().replace(/assets\/icons\.svg(\?.*)?$/, '') : '';
+      var prefix = getRootPath();
       fetch(prefix + 'tree.md' + version)
         .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
         .then(function(text) {
@@ -1912,6 +1946,12 @@
   // Phase 8d — wrap a contributor span in a profile-page anchor so the
   // tree dialog renders handles as hover-underlined links. Mirrors the
   // atlas-helpers handleLink() convention used everywhere else.
+  function getRootPath() {
+    return (typeof window.gaiaIconBase === 'function')
+      ? window.gaiaIconBase().replace(/assets\/icons\.svg(\?.*)?$/, '')
+      : '';
+  }
+
   function handleAnchor(handle, inner) {
     if (!handle) return inner;
     // The tree.md text is already redacted at source (handle = "████████" for
@@ -1920,9 +1960,7 @@
     if (handle === (window.REDACTED_BLOCK || '████████') || handle === '[anonymous]') {
       return '<span class="plaque__redacted-handle" aria-label="Contributor not yet revealed">' + esc(handle) + '</span>';
     }
-    var prefix = (typeof window.gaiaIconBase === 'function')
-      ? window.gaiaIconBase().replace(/assets\/icons\.svg(\?.*)?$/, '')
-      : '';
+    var prefix = getRootPath();
     var href = prefix + 'u/' + encodeURIComponent(handle) + '/';
     return '<a class="atlas-handle" href="' + href + '">' + inner + '</a>';
   }

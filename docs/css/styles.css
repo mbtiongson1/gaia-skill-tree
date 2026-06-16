@@ -10314,7 +10314,25 @@ button.nav-graph-trigger:hover {
   100% { background-position: 150% 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
 }
 
-.grade-segment.grade-plat {
+.ev-grade-pill,
+.otg-badge,
+.ev-grade,
+.ev-tab {
+  position: relative;
+  overflow: hidden;
+}
+
+body[data-overall-grade="S"] .report-card {
+  border-color: rgba(56, 189, 248, 0.22);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.04);
+}
+
+.grade-segment.grade-plat,
+.ev-grade-pill.grade-S,
+.otg-badge[data-grade="S"],
+.ev-grade[data-grade="S"],
+.ev-tab[data-grade="S"].active,
+.ev-legend-dot.grade-S {
   position: relative;
   overflow: hidden;
   border: 1px solid #3b82f6; /* Stronger blue border */
@@ -10353,7 +10371,12 @@ button.nav-graph-trigger:hover {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 4px rgba(147, 197, 253, 0.6);
 }
 
-.grade-segment.grade-gold {
+.grade-segment.grade-gold,
+.ev-grade-pill.grade-A,
+.otg-badge[data-grade="A"],
+.ev-grade[data-grade="A"],
+.ev-tab[data-grade="A"].active,
+.ev-legend-dot.grade-A {
   border: 1px solid #d99706;
   background:
     /* Specular reflections (anisotropic sheen) */
@@ -10379,7 +10402,12 @@ button.nav-graph-trigger:hover {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
-.grade-segment.grade-silver {
+.grade-segment.grade-silver,
+.ev-grade-pill.grade-B,
+.otg-badge[data-grade="B"],
+.ev-grade[data-grade="B"],
+.ev-tab[data-grade="B"].active,
+.ev-legend-dot.grade-B {
   border: 1px solid #475569; /* Darker border */
   background:
     /* Specular reflections (matte sheen) */
@@ -10403,7 +10431,12 @@ button.nav-graph-trigger:hover {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.grade-segment.grade-bronze {
+.grade-segment.grade-bronze,
+.ev-grade-pill.grade-C,
+.otg-badge[data-grade="C"],
+.ev-grade[data-grade="C"],
+.ev-tab[data-grade="C"].active,
+.ev-legend-dot.grade-C {
   border: 1px solid #7c2d12;
   background:
     /* Specular reflections (faint) */
@@ -10425,7 +10458,12 @@ button.nav-graph-trigger:hover {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
 }
 
-.grade-segment.grade-ungraded {
+.grade-segment.grade-ungraded,
+.ev-grade-pill.grade-ungraded,
+.otg-badge[data-grade="—"],
+.ev-grade[data-grade="—"],
+.ev-tab[data-grade="—"].active,
+.ev-legend-dot.grade-ungraded {
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--border);
   color: var(--muted);

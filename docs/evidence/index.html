@@ -109,9 +109,44 @@
       padding: 1.5rem 2rem;
       flex-wrap: wrap;
     }
-    .ev-chart-svg {
-      width: 140px;
-      height: 140px;
+    .ev-bar-chart {
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ev-bar-total-count {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      text-align: center;
+    }
+    .ev-bar-total-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+      text-align: center;
+    }
+    .ev-bar-track {
+      width: 100%;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .ev-bar-segment {
+      height: 100%;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
     .ev-chart-legend {
       display: flex;
@@ -206,12 +241,12 @@
     }
 
     .ev-tab {
-      padding: 0.35rem 0.7rem;
+      padding: 0.3rem 0.65rem;
       font-size: 0.75rem;
       font-family: var(--font-mono);
       color: var(--muted);
       background: transparent;
-      border: 0;
+      border: 1px solid transparent;
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.15s, color 0.15s;
@@ -343,9 +378,9 @@
       justify-content: center;
     }
     .ev-grade-pill {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
+      width: 32px;
+      height: 20px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -354,11 +389,6 @@
       font-size: 0.8rem;
       color: #0f172a; /* high contrast on grade colors */
     }
-    .ev-grade-pill.grade-S { background: var(--grade-S); }
-    .ev-grade-pill.grade-A { background: var(--grade-A); }
-    .ev-grade-pill.grade-B { background: var(--grade-B); }
-    .ev-grade-pill.grade-C { background: var(--grade-C); }
-    .ev-grade-pill.grade-ungraded { background: #475569; color: #f8fafc; }
 
     /* Type tag */
     .ev-type-col {

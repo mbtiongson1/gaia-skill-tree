@@ -104,6 +104,8 @@ Evidence items are evaluated and assigned quality grades. Their visual represent
 | - | Ungraded | `transparent` with `var(--border)` stroke (no texture) | `var(--muted)` |
 
 > **Note:** The grades utilize multi-layered CSS repeating gradients (radial for Platinum, linear for others) and horizontal SVG fractal noise overlays to achieve a metallic texture that descends in polish and detail according to the grade. Platinum adds an iridescent tempered look (violet, cyan, and gold hints) and an animated shimmer sweep for the highest hierarchy, while Silver is deliberately darkened to maximize contrast against Platinum, and Bronze carries a tarnished, rougher appearance. Evidence bars use `var(--font-mono)` to emphasize their role as metric ledgers.
+>
+> **Design Quirk:** Evidence grade visual elements are strictly rectangular (e.g., metric bars, rectangular badges, or linear tracks) and must **never** be rendered as circular grade badges or circular graphs (such as doughnut charts). This rule applies to all visual representations of evidence, including the main library metrics, individual report badges, and overall distribution charts.
 
 ---
 

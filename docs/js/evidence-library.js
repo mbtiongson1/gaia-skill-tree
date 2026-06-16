@@ -207,8 +207,8 @@
         </div>`;
     }).join('');
 
-    // Render SVG Doughnut
-    evChartEl.innerHTML = generateSvgDoughnut(gradeCounts);
+    // Render Horizontal Bar Chart
+    evChartEl.innerHTML = generateGradeBarChart(gradeCounts);
     evChartLegendEl.innerHTML = renderLegend(gradeCounts);
   }
 
@@ -388,59 +388,30 @@
       </div>`;
   }
 
-  // Generates Lightweight SVG Doughnut
-  function generateSvgDoughnut(dataMap) {
+  // Generates Premium Horizontal Stacked Bar Chart
+  function generateGradeBarChart(dataMap) {
     const grades = ['S', 'A', 'B', 'C', 'ungraded'];
-    const colors = {
-      'S': 'var(--grade-S, #e2e8f0)',
-      'A': 'var(--grade-A, #fbbf24)',
-      'B': 'var(--grade-B, #94a3b8)',
-      'C': 'var(--grade-C, #b45309)',
-      'ungraded': '#334155'
-    };
-
     const total = Object.values(dataMap).reduce((a, b) => a + b, 0);
     if (total === 0) return '';
 
-    let currentPercent = 0;
-    const radius = 50;
-    const circumference = 2 * Math.PI * radius; // ~314.159
-
-    let svgContent = `<svg class="ev-chart-svg" viewBox="0 0 120 120">`;
-    svgContent += `<g transform="rotate(-90 60 60)">`;
-
-    // Render segments
-    grades.forEach(grade => {
+    const segmentsHtml = grades.map(grade => {
       const count = dataMap[grade] || 0;
-      if (count === 0) return;
+      if (count === 0) return '';
+      const pct = (count / total) * 100;
+      
+      const gradeClass = grade === 'S' ? 'plat' : (grade === 'A' ? 'gold' : (grade === 'B' ? 'silver' : (grade === 'C' ? 'bronze' : 'ungraded')));
 
-      const percent = count / total;
-      const dashArray = `${percent * circumference} ${circumference}`;
-      const dashOffset = -currentPercent * circumference;
+      return `<div class="ev-bar-segment grade-segment grade-${gradeClass}" style="width: ${pct}%;" title="${grade === 'ungraded' ? 'Ungraded' : 'Grade ' + grade}: ${count} (${Math.round(pct)}%)"></div>`;
+    }).join('');
 
-      svgContent += `
-        <circle cx="60" cy="60" r="${radius}"
-          fill="transparent"
-          stroke="${colors[grade]}"
-          stroke-width="10"
-          stroke-dasharray="${dashArray}"
-          stroke-dashoffset="${dashOffset}"
-          style="transition: stroke-dashoffset 0.3s;"
-        />`;
-
-      currentPercent += percent;
-    });
-
-    svgContent += `</g>`;
-
-    // Add inner card
-    svgContent += `
-      <circle cx="60" cy="60" r="41" fill="var(--surface)" />
-      <text x="60" y="58" text-anchor="middle" font-family="var(--font-mono)" font-size="14" font-weight="700" fill="var(--text)" dominant-baseline="central">${total}</text>
-      <text x="60" y="74" text-anchor="middle" font-family="var(--font-mono)" font-size="7" fill="var(--muted)" dominant-baseline="central">SOURCES</text>
-    </svg>`;
-
-    return svgContent;
+    return `
+      <div class="ev-bar-chart">
+        <div class="ev-bar-total-count">${total}</div>
+        <div class="ev-bar-total-label">Total Sources</div>
+        <div class="ev-bar-track">
+          ${segmentsHtml}
+        </div>
+      </div>`;
   }
 
   // Generates Legend Table
@@ -452,13 +423,6 @@
       'C': 'Bronze (C)',
       'ungraded': 'Ungraded'
     };
-    const colors = {
-      'S': 'var(--grade-S, #e2e8f0)',
-      'A': 'var(--grade-A, #fbbf24)',
-      'B': 'var(--grade-B, #94a3b8)',
-      'C': 'var(--grade-C, #b45309)',
-      'ungraded': '#334155'
-    };
     const total = Object.values(dataMap).reduce((a, b) => a + b, 0);
 
     return ['S', 'A', 'B', 'C', 'ungraded'].map(grade => {
@@ -467,7 +431,7 @@
       const pct = total > 0 ? Math.round((count / total) * 100) : 0;
       return `
         <div class="ev-legend-item">
-          <span class="ev-legend-dot" style="background: ${colors[grade]}"></span>
+          <span class="ev-legend-dot grade-${grade}"></span>
           <span class="ev-legend-text">${labels[grade]}: <strong>${count}</strong> (${pct}%)</span>
         </div>`;
     }).join('');
