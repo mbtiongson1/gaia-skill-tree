@@ -680,23 +680,23 @@ This file lists the raw evidence sources for named skills rated at 3★.
 
 ### Evidence Rows:
 
-#### E1: `repo`
+#### E1: `proxy-containment`
 - **Source:** [https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md)
 - **Date:** 2026-05-10
 - **Verified Stars:** 152,091 stars
-- **Description:** Anthropic mcp-builder skill gives a reproducible guide for building high-quality MCP servers in Python FastMCP or the Node/TypeScript MCP SDK. (backfilled — class-to-type migration)
+- **Description:** Proxy repository Anthropic mcp-builder skill, which provides a reproducible guide for building high-quality MCP servers implementing the mcp-server-creation skill.
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk)
 - **Date:** 2026-05-10
 - **Verified Stars:** 23,353 stars
-- **Description:** Official MCP Python SDK is active and provides FastMCP server examples for exposing tools, resources, prompts, structured outputs, transports, and inspector-based testing. (backfilled — class-to-type migration)
+- **Description:** Proxy repository modelcontextprotocol/python-sdk, which demonstrates implementing the mcp-server-creation skill with FastMCP server examples.
 
 #### E3: `repo`
 - **Source:** [https://raw.githubusercontent.com/sickn33/antigravity-awesome-skills/main/skills/mcp-builder/SKILL.md](https://raw.githubusercontent.com/sickn33/antigravity-awesome-skills/main/skills/mcp-builder/SKILL.md)
 - **Date:** 2026-05-27
 - **Trust Metric:** 70.0
-- **Description:** (backfilled — class-to-type migration)
+- **Description:** Community MCP builder skill in sickn33/antigravity-awesome-skills repository.
 
 ---
 

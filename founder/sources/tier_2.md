@@ -2629,17 +2629,17 @@ This file lists the raw evidence sources for named skills rated at 2★.
 
 ### Evidence Rows:
 
-#### E1: `repo`
+#### E1: `proxy-containment`
 - **Source:** [https://github.com/modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk)
 - **Date:** 2026-04-30
 - **Verified Stars:** 4,696 stars
-- **Description:** Official Go SDK for MCP servers and clients (4.4k stars, maintained by Anthropic + Google). Demonstrates production-grade MCP client integration pattern. (backfilled — class-to-type migration)
+- **Description:** Proxy repository modelcontextprotocol/go-sdk, which demonstrates implementing the mcp-integration skill for production-grade MCP client-server workflows.
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/nanbingxyz/5ire](https://github.com/nanbingxyz/5ire)
 - **Date:** 2026-04-30
 - **Verified Stars:** 5,247 stars
-- **Description:** Cross-platform AI assistant with full MCP client support (5.2k stars). Reproduces tool enumeration, execution, and multi-server routing. (backfilled — class-to-type migration)
+- **Description:** Proxy repository nanbingxyz/5ire, which implements the mcp-integration skill to support tool execution and multi-server routing.
 
 ---
 
@@ -2649,17 +2649,17 @@ This file lists the raw evidence sources for named skills rated at 2★.
 
 ### Evidence Rows:
 
-#### E1: `repo`
+#### E1: `proxy-containment`
 - **Source:** [https://github.com/modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk)
 - **Date:** 2026-04-30
 - **Verified Stars:** 4,696 stars
-- **Description:** Official Go SDK for MCP servers and clients (4.4k stars, maintained by Anthropic + Google). Demonstrates production-grade MCP client integration pattern. (backfilled — class-to-type migration)
+- **Description:** Proxy repository modelcontextprotocol/go-sdk, which demonstrates implementing the mcp-integration skill for production-grade MCP client-server workflows.
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/nanbingxyz/5ire](https://github.com/nanbingxyz/5ire)
 - **Date:** 2026-04-30
 - **Verified Stars:** 5,247 stars
-- **Description:** Cross-platform AI assistant with full MCP client support (5.2k stars). Reproduces tool enumeration, execution, and multi-server routing. (backfilled — class-to-type migration)
+- **Description:** Proxy repository nanbingxyz/5ire, which implements the mcp-integration skill to support tool execution and multi-server routing.
 
 ---
 
