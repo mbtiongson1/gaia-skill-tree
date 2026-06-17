@@ -315,19 +315,23 @@ This file lists the raw evidence sources for named skills rated at 1★.
 - **Contributor:** `safishamsi`
 - **Primary GitHub Repository:** [https://github.com/safishamsi/graphify](https://github.com/safishamsi/graphify) (68,616 stars)
 
-### Evidence Rows:
+#### E1: `repo`
+- **Source:** [https://github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)
+- **Date:** 2026-06-18
+- **Verified Stars:** 68,616 stars
+- **Description:** Public repository for Graphify, the official implementation of the knowledge-graph-build skill.
 
-#### E1: `arxiv`
+#### E2: `arxiv`
 - **Source:** [https://arxiv.org/abs/2306.08302](https://arxiv.org/abs/2306.08302)
 - **Date:** 2026-04-28
 - **Trust Metric:** 85.0
-- **Description:** Pan et al. (2024) â€” Unifying Large Language Models and Knowledge Graphs: A Roadmap; comprehensive survey showing LLM-KG synergy improves downstream tasks by 5-15%. (backfilled — class-to-type migration)
+- **Description:** Pan et al. (2024) — Unifying Large Language Models and Knowledge Graphs: A Roadmap; comprehensive survey showing LLM-KG synergy improves downstream tasks by 5-15%. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E3: `proxy-containment`
 - **Source:** [https://github.com/microsoft/graphrag](https://github.com/microsoft/graphrag)
 - **Date:** 2026-04-28
 - **Verified Stars:** 33,817 stars
-- **Description:** Microsoft GraphRAG â€” production KG construction pipeline; extracts community summaries and entity graphs from corpora, enabling global sensemaking queries. (backfilled — class-to-type migration)
+- **Description:** Proxy repository Microsoft GraphRAG, which implements the knowledge-graph-build skill to construct entity graphs and community summaries from corpora.
 
 ---
 
