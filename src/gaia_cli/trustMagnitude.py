@@ -330,7 +330,19 @@ def computeArtifactScoreOrNone(
     engagementRatio = 1.0
     if evidenceType == "social-signal":
         creatorMult = float(evidenceRow.get("creatorMultiplier", 1.0))
-        engagementRatio = float(evidenceRow.get("engagementRatio", 1.0))
+        if "engagementRatio" in evidenceRow:
+            # Pre-stored value — back-compat path.
+            engagementRatio = float(evidenceRow["engagementRatio"])
+        elif "likes" in evidenceRow or "comments" in evidenceRow:
+            # Compute from raw fields when present (RFC §2.11).
+            # engagement_ratio = min(1.5, (likes + comments*5) / views * 50)
+            rawViews = float(evidenceRow.get("views", 0) or 0)
+            if rawViews > 0:
+                rawLikes = float(evidenceRow.get("likes", 0) or 0)
+                rawComments = float(evidenceRow.get("comments", 0) or 0)
+                engagementRatio = min(1.5, (rawLikes + rawComments * 5.0) / rawViews * 50.0)
+            # If views zero/absent, fall through leaving engagementRatio=1.0.
+        # If neither stored ratio nor raw fields are present, fall through to 1.0.
 
     score = rawMagnitude * weight * freshness * mothership * creatorMult * engagementRatio
     return score
