@@ -420,17 +420,17 @@ This file lists the raw evidence sources for named skills rated at 3★.
 - **Verified Stars:** 87,345 stars
 - **Description:** Karpathy's autoresearch repo serving as the evidence/inspiration for the skill. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/firecrawl/firecrawl-mcp-server](https://github.com/firecrawl/firecrawl-mcp-server)
 - **Date:** 2026-05-14
 - **Verified Stars:** 6,608 stars
-- **Description:** Firecrawl's Map and Crawl logic combined with the firecrawl_agent tool enables autonomous multi-source web research. (backfilled — class-to-type migration)
+- **Description:** Proxy repository firecrawl-mcp-server whose crawl and map tools are used by this skill to automate multi-source web research.
 
-#### E3: `repo`
+#### E3: `proxy-containment`
 - **Source:** [https://github.com/balukosuri/Andrej-Karpathy-s-Autoresearch-As-a-Universal-Skill](https://github.com/balukosuri/Andrej-Karpathy-s-Autoresearch-As-a-Universal-Skill)
 - **Date:** 2026-04-30
 - **Verified Stars:** 135 stars
-- **Description:** Community reproduction of Karpathy's autoresearch pattern as a universal agent skill, demonstrating generalizability beyond the original repo. (backfilled — class-to-type migration)
+- **Description:** Proxy repository that implements a community reproduction of Karpathy's autoresearch pattern as a universal agent skill.
 
 ---
 
