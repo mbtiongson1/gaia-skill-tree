@@ -2689,7 +2689,13 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Source:** [https://arxiv.org/abs/2107.03374](https://arxiv.org/abs/2107.03374)
 - **Date:** 2026-04-28
 - **Trust Metric:** 85.0
-- **Description:** Codex/HumanEval (Chen et al.) â€” evaluates LLMs on writing Python functions that pass hand-crafted unit tests; pass@1 72.0% for GPT-4. (backfilled — class-to-type migration)
+- **Description:** Codex/HumanEval (Chen et al.) — evaluates LLMs on writing Python functions that pass hand-crafted unit tests; pass@1 72.0% for GPT-4. (backfilled — class-to-type migration)
+
+#### E2: `repo`
+- **Source:** [https://github.com/Upsonic/Upsonic](https://github.com/Upsonic/Upsonic)
+- **Date:** 2026-06-18
+- **Verified Stars:** 7,887 stars
+- **Description:** Public repository for Upsonic autonomous agent framework, containing the official implementation of the generate-test skill.
 
 ---
 
