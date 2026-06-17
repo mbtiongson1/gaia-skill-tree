@@ -15,6 +15,11 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 3,264 stars
 - **Description:** Design Extract -- extracts complete design systems (Tailwind, Figma variables, etc.) from any URL. (backfilled — class-to-type migration)
 
+#### E2: `url`
+- **Source:** [https://www.npmjs.com/package/designlang](https://www.npmjs.com/package/designlang)
+- **Date:** 2026-06-17
+- **Description:** npm package `designlang` which implements the design-extract tool for global CLI usage.
+
 ---
 
 ## Skill: `Taoidle/plan-decompose-gh-plan-cascade`
