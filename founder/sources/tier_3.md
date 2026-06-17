@@ -15,6 +15,12 @@ This file lists the raw evidence sources for named skills rated at 3★.
 - **Verified Stars:** 5,197 stars
 - **Description:** SWE-bench Verified â€” open-source evaluation harness where agents fix GitHub issues by generating and passing test suites; full execution logs archived. (backfilled — class-to-type migration)
 
+#### E2: `repo`
+- **Source:** [https://github.com/0xDarkMatter/claude-mods](https://github.com/0xDarkMatter/claude-mods)
+- **Date:** 2026-06-17
+- **Verified Stars:** 22 stars
+- **Description:** 0xDarkMatter's claude-mods repository containing testing patterns for Claude Code.
+
 ---
 
 ## Skill: `addy-osmani/performance-optimization`
