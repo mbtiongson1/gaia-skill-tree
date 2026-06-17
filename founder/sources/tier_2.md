@@ -1646,6 +1646,12 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 3,509 stars
 - **Description:** Laravel /upgrade-laravel-v13 slash command -- real-world agentic framework upgrade workflow published by the Laravel team. (backfilled — class-to-type migration)
 
+#### E2: `proxy-containment`
+- **Source:** [https://github.com/rectorphp/rector](https://github.com/rectorphp/rector)
+- **Date:** 2026-06-18
+- **Verified Stars:** 8,200 stars
+- **Description:** Proxy repository Rector that provides automated PHP and Laravel framework upgrade rules, which are utilized by this skill for version migrations.
+
 ---
 
 ## Skill: `martin-stepanoski/nielsen-heuristics-audit`
