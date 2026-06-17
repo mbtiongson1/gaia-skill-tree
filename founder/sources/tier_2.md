@@ -50,22 +50,28 @@ This file lists the raw evidence sources for named skills rated at 2★.
 ## Skill: `anthropic/pptx`
 - **Name:** PPTX Editor
 - **Contributor:** `anthropic`
-- **Primary GitHub Repository:** [https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md) (152,091 stars)
+- **Primary GitHub Repository:** [https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md) (152,095 stars)
 
 ### Evidence Rows:
 
 #### E1: `repo`
 - **Source:** [https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md)
 - **Date:** 2026-04-30
-- **Verified Stars:** 152,091 stars
+- **Verified Stars:** 152,095 stars
 - **Description:** Anthropic /pptx slash command -- extracts, edits, packs, and applies design principles to PowerPoint files using markitdown. (backfilled — class-to-type migration)
+
+#### E2: `repo`
+- **Source:** [https://github.com/microsoft/markitdown](https://github.com/microsoft/markitdown)
+- **Date:** 2026-06-18
+- **Verified Stars:** 155,130 stars
+- **Description:** Microsoft markitdown repository enabling agentic conversion of office files (including PPTX) into markdown.
 
 ---
 
 ## Skill: `anthropic/skill-creator`
 - **Name:** Skill Creator
 - **Contributor:** `anthropic`
-- **Primary GitHub Repository:** [https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md) (152,091 stars)
+- **Primary GitHub Repository:** [https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md) (152,095 stars)
 
 ### Evidence Rows:
 
@@ -73,13 +79,19 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Source:** [https://arxiv.org/abs/2305.17126](https://arxiv.org/abs/2305.17126)
 - **Date:** 2026-04-29
 - **Trust Metric:** 85.0
-- **Description:** Cai et al. (2023) â€” Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT. (backfilled — class-to-type migration)
+- **Description:** Cai et al. (2023) — Large Language Models as Tool Makers (LATM); LLM-generated tools reused across problem instances achieve +8.7% on BigBench Hard vs per-instance CoT. (backfilled — class-to-type migration)
 
 #### E2: `repo`
 - **Source:** [https://github.com/ctlllll/LLM-ToolMaker](https://github.com/ctlllll/LLM-ToolMaker)
 - **Date:** 2026-04-29
 - **Verified Stars:** 1,061 stars
-- **Description:** LATM repo â€” reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches. (backfilled — class-to-type migration)
+- **Description:** LATM repo — reproducible tool-maker/tool-user pipeline with evaluation on BigBench Hard tasks and tool reuse across problem batches. (backfilled — class-to-type migration)
+
+#### E3: `repo`
+- **Source:** [https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md)
+- **Date:** 2026-06-18
+- **Verified Stars:** 152,095 stars
+- **Description:** Anthropic skill-creator provides a reproducible workflow for creating, editing, evaluating, benchmarking, and optimizing agent skills.
 
 ---
 
