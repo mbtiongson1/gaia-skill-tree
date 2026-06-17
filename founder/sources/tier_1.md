@@ -34,13 +34,19 @@ This file lists the raw evidence sources for named skills rated at 1★.
 - **Source:** [https://arxiv.org/abs/2401.13919](https://arxiv.org/abs/2401.13919)
 - **Date:** 2026-04-28
 - **Trust Metric:** 85.0
-- **Description:** WebVoyager (He et al., 2024) â€” end-to-end web agent with GPT-4V; 59.1% task success on real-world web tasks across 15 popular websites. (backfilled — class-to-type migration)
+- **Description:** WebVoyager (He et al., 2024) — end-to-end web agent with GPT-4V; 59.1% task success on real-world web tasks across 15 popular websites. (backfilled — class-to-type migration)
 
 #### E2: `repo`
 - **Source:** [https://github.com/web-arena-x/webarena](https://github.com/web-arena-x/webarena)
 - **Date:** 2026-04-28
 - **Verified Stars:** 1,516 stars
-- **Description:** WebArena â€” self-hosted web environment with 812 realistic tasks; reproducible benchmark with ground-truth evaluation scripts. (backfilled — class-to-type migration)
+- **Description:** WebArena — self-hosted web environment with 812 realistic tasks; reproducible benchmark with ground-truth evaluation scripts. (backfilled — class-to-type migration)
+
+#### E3: `repo`
+- **Source:** [https://github.com/gooseworks-ai/goose-skills](https://github.com/gooseworks-ai/goose-skills)
+- **Date:** 2026-06-18
+- **Verified Stars:** 736 stars
+- **Description:** goose-skills -- suite of tools and agent-skills by gooseworks including Notte browser integration.
 
 ---
 
