@@ -318,38 +318,52 @@ def _apexReadySkill():
         "id": "apex-skill",
         "suiteComponents": ["nestedSuiteId"],
         "evidence": [
-            # Five A-graded origin rows for predicate 1
+            # Fusion-recipe with 5 non-variant origins (A-graded in the map).
+            # origin1 is also depth1Skill to satisfy depth2OnlyReachableGte1.
+            {
+                "type": "fusion-recipe",
+                "origins": ["origin1", "origin2", "origin3", "origin4", "origin5"],
+            },
+            # A/S-graded evidence rows for sourceTenureDaysGte180AorS predicate
             {"type": "verifier-attestation", "verifiers": 4, "grade": "A",
              "source": "https://verifier.example/1", "sourceStartedAt": longAgo},
-            {"type": "verifier-attestation", "verifiers": 4, "grade": "A",
-             "source": "https://verifier.example/2", "sourceStartedAt": longAgo},
             {"type": "arxiv", "citations": 200, "grade": "A",
              "source": "https://arxiv.org/abs/1234.5678", "sourceStartedAt": longAgo},
             {"type": "github-stars-own", "stars": 50000, "grade": "A",
              "source": "https://github.com/o/r", "sourceStartedAt": longAgo},
-            {"type": "benchmark-result", "percentile": 95, "grade": "A",
-             "source": "https://bench.example/1", "sourceStartedAt": longAgo},
-            # Fusion-recipe with depth-2 reachable origin
-            {"type": "fusion-recipe", "gradedOriginCount": 5,
-             "origins": ["depth1Skill"]},
         ],
         "apexGateStatus": {"apexPromotionPrSigned": True},
+    }
+
+
+def _apexReadyGenericMap():
+    """GenericSkillMap for use with _apexReadySkill.
+
+    - nestedSuiteId: has suiteComponents -> directNestedSuiteGte1 passes.
+    - origin1: has a fusion-recipe leading to depth2Skill -> depth2OnlyReachableGte1 passes.
+    - origin1..origin5: all A-graded -> aGradedOriginsGte5 passes.
+    """
+    return {
+        "nestedSuiteId": {"id": "nestedSuiteId", "suiteComponents": ["x", "y"]},
+        "origin1": {
+            "id": "origin1",
+            "overallTrustGrade": "A",
+            "evidence": [
+                {"type": "fusion-recipe", "origins": ["depth2Skill"]},
+            ],
+        },
+        "origin2": {"id": "origin2", "overallTrustGrade": "A"},
+        "origin3": {"id": "origin3", "overallTrustGrade": "A"},
+        "origin4": {"id": "origin4", "overallTrustGrade": "A"},
+        "origin5": {"id": "origin5", "overallTrustGrade": "A"},
+        "depth2Skill": {"id": "depth2Skill"},
     }
 
 
 def test_apex_gate_passes_with_full_setup():
     """Six active predicates all True => isApex returns True."""
     skill = _apexReadySkill()
-    genericSkillMap = {
-        "nestedSuiteId": {"id": "nestedSuiteId", "suiteComponents": ["x", "y"]},
-        "depth1Skill": {
-            "id": "depth1Skill",
-            "evidence": [
-                {"type": "fusion-recipe", "origins": ["depth2Skill"]}
-            ],
-        },
-        "depth2Skill": {"id": "depth2Skill"},
-    }
+    genericSkillMap = _apexReadyGenericMap()
     state = {"genericSkillMap": genericSkillMap}
     result = passesApexGate(skill, state)
     # Inactive scaffolds -> None
@@ -366,16 +380,11 @@ def test_apex_gate_passes_with_full_setup():
 
 
 def test_apex_gate_fails_when_only_4_a_graded_origins():
-    """Predicate 1 fails => isApex False."""
+    """Predicate 1 fails when only 4 out of 5 fusion-graph origins are A-graded."""
     skill = _apexReadySkill()
-    # Drop one A-graded row
-    skill["evidence"] = [r for r in skill["evidence"] if r.get("source") != "https://bench.example/1"]
-    genericSkillMap = {
-        "nestedSuiteId": {"id": "nestedSuiteId", "suiteComponents": ["x", "y"]},
-        "depth1Skill": {"id": "depth1Skill",
-                        "evidence": [{"type": "fusion-recipe", "origins": ["d2"]}]},
-        "d2": {"id": "d2"},
-    }
+    genericSkillMap = _apexReadyGenericMap()
+    # Downgrade origin5 to B so only 4 origins are A-graded
+    genericSkillMap["origin5"] = {"id": "origin5", "overallTrustGrade": "B"}
     result = passesApexGate(skill, {"genericSkillMap": genericSkillMap})
     assert result["aGradedOriginsGte5"] is False
     assert isApex(result) is False
@@ -388,7 +397,8 @@ def test_apex_gate_fails_when_tenure_under_180_days():
     for row in skill["evidence"]:
         if "sourceStartedAt" in row:
             row["sourceStartedAt"] = recent
-    result = passesApexGate(skill, {"genericSkillMap": {"nestedSuiteId": {"suiteComponents": ["x"]}}})
+    genericSkillMap = _apexReadyGenericMap()
+    result = passesApexGate(skill, {"genericSkillMap": genericSkillMap})
     assert result["sourceTenureDaysGte180AorS"] is False
     assert isApex(result) is False
 
@@ -597,3 +607,148 @@ def test_edge_case_single_self_attestation_only_yields_ungraded():
     assert grade == "ungraded"
     # Also via convenience wrapper
     assert computeOverallTrustGradeFromSkill(skill) == "ungraded"
+
+
+# ---------------------------------------------------------------------------
+# Batch J: aGradedOriginsGte5 strict-semantics tests (issue #729)
+# ---------------------------------------------------------------------------
+
+
+def test_aGradedOriginsGte5_counts_fusion_recipe_origins_with_A_grade():
+    """Fusion-recipe origins all A-graded in namedSkillMap -> True."""
+    skill = {
+        "evidence": [
+            {
+                "type": "fusion-recipe",
+                "origins": ["s1", "s2", "s3", "s4", "s5"],
+            }
+        ]
+    }
+    namedSkillMap = {
+        "s1": {"overallTrustGrade": "A"},
+        "s2": {"overallTrustGrade": "A"},
+        "s3": {"overallTrustGrade": "A"},
+        "s4": {"overallTrustGrade": "S"},
+        "s5": {"overallTrustGrade": "A"},
+    }
+    assert checkAGradedOriginsGte5(skill, namedSkillMap=namedSkillMap) is True
+
+
+def test_aGradedOriginsGte5_counts_suite_components_with_A_grade():
+    """Suite components all A-graded in genericSkillMap -> True (strict+expansion)."""
+    skill = {
+        "suiteComponents": ["c1", "c2", "c3", "c4", "c5"],
+        "evidence": [],
+    }
+    genericSkillMap = {
+        "c1": {"overallTrustGrade": "A"},
+        "c2": {"overallTrustGrade": "S"},
+        "c3": {"overallTrustGrade": "A"},
+        "c4": {"overallTrustGrade": "A"},
+        "c5": {"overallTrustGrade": "A"},
+    }
+    assert checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap) is True
+
+
+def test_aGradedOriginsGte5_dedupes_suite_and_fusion_overlap():
+    """Overlap between suiteComponents and fusion-recipe origins is deduplicated.
+
+    3 IDs in both sources + 2 unique fusion + 2 unique suite = 7 distinct origins.
+    5 are A-graded. Returns True. Dedup verified (overlap counted once).
+    """
+    # shared: x1, x2, x3 appear in BOTH fusion-recipe origins and suiteComponents
+    # uniqueFusion: f1, f2  unique to fusion-recipe
+    # uniqueSuite: u1, u2   unique to suiteComponents
+    skill = {
+        "suiteComponents": ["x1", "x2", "x3", "u1", "u2"],
+        "evidence": [
+            {
+                "type": "fusion-recipe",
+                "origins": ["x1", "x2", "x3", "f1", "f2"],
+            }
+        ],
+    }
+    genericSkillMap = {
+        "x1": {"overallTrustGrade": "A"},
+        "x2": {"overallTrustGrade": "A"},
+        "x3": {"overallTrustGrade": "A"},
+        "f1": {"overallTrustGrade": "A"},
+        "f2": {"overallTrustGrade": "A"},
+        "u1": {"overallTrustGrade": "B"},  # not A/S
+        "u2": {"overallTrustGrade": "C"},  # not A/S
+    }
+    # 7 distinct origins; 5 are A-graded (x1..x3, f1, f2) -> True
+    result = checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap)
+    assert result is True
+
+
+def test_aGradedOriginsGte5_evidence_rows_alone_do_not_count():
+    """Bare verifier-attestation rows graded A with no fusion/suite -> False.
+
+    This is the loose-semantic refutation per #729 strict ruling.
+    """
+    skill = {
+        "evidence": [
+            {"type": "verifier-attestation", "verifiers": 1, "grade": "A",
+             "source": "https://v.example/1"},
+            {"type": "verifier-attestation", "verifiers": 1, "grade": "A",
+             "source": "https://v.example/2"},
+            {"type": "verifier-attestation", "verifiers": 1, "grade": "A",
+             "source": "https://v.example/3"},
+            {"type": "verifier-attestation", "verifiers": 1, "grade": "A",
+             "source": "https://v.example/4"},
+            {"type": "verifier-attestation", "verifiers": 1, "grade": "A",
+             "source": "https://v.example/5"},
+        ]
+    }
+    genericSkillMap: dict = {}
+    # Zero fusion-recipe rows and no suiteComponents -> no origins -> False
+    assert checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap) is False
+
+
+def test_aGradedOriginsGte5_role_variant_origin_excluded():
+    """Fusion-recipe with role='variant' origin excluded; only 4 non-variant A-graded -> False."""
+    skill = {
+        "evidence": [
+            {
+                "type": "fusion-recipe",
+                "origins": [
+                    {"id": "a", "grade": "A"},
+                    {"id": "b", "grade": "A"},
+                    {"id": "c", "grade": "A"},
+                    {"id": "d", "grade": "A"},
+                    {"id": "variant-x", "role": "variant", "grade": "S"},  # excluded
+                ],
+            }
+        ]
+    }
+    genericSkillMap = {
+        "a": {"overallTrustGrade": "A"},
+        "b": {"overallTrustGrade": "A"},
+        "c": {"overallTrustGrade": "A"},
+        "d": {"overallTrustGrade": "A"},
+        "variant-x": {"overallTrustGrade": "S"},
+    }
+    # variant-x excluded from origin set; only 4 A-graded non-variant origins -> False
+    assert checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap) is False
+
+
+def test_aGradedOriginsGte5_unresolvable_origin_skipped():
+    """Origins that resolve in neither map are skipped; 4 A-graded + 1 B -> False."""
+    skill = {
+        "evidence": [
+            {
+                "type": "fusion-recipe",
+                "origins": ["r1", "r2", "r3", "r4", "unknown-skill"],
+            }
+        ]
+    }
+    genericSkillMap = {
+        "r1": {"overallTrustGrade": "A"},
+        "r2": {"overallTrustGrade": "A"},
+        "r3": {"overallTrustGrade": "A"},
+        "r4": {"overallTrustGrade": "A"},
+        # "unknown-skill" is NOT in either map -> skipped
+    }
+    # 5 origins in origin set; 4 resolve to A, 1 unresolvable -> count=4 < 5 -> False
+    assert checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap) is False

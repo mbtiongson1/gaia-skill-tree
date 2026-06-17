@@ -676,31 +676,79 @@ def _hasNonSelfProducible(skill: dict) -> bool:
 # ---------------------------------------------------------------------------
 
 
-def checkAGradedOriginsGte5(skill: dict, genericSkillMap: Optional[dict] = None) -> bool:
-    """>=5 distinct A-or-S-graded origin evidence rows.
+def checkAGradedOriginsGte5(
+    skill: dict,
+    genericSkillMap: Optional[dict] = None,
+    namedSkillMap: Optional[dict] = None,
+) -> bool:
+    """>=5 distinct A-or-S-graded origin skills, walking the fusion graph + suite components.
 
-    Counts evidence rows on `skill` whose effective grade is A or S, deduped
-    by canonical source. Replaces the old transitive-12 + closure-8 predicates.
+    Strict semantics (issue #729 founder ruling): bare evidence rows do NOT count
+    by themselves. Only skill IDs reachable via:
+      - Source A: fusion-recipe role='origin' rows in skill.evidence[]
+      - Source B: skill.suiteComponents entries (counted as fusion structure)
+
+    For each deduplicated origin skill ID, looks up its overallTrustGrade from
+    namedSkillMap (preferred) or genericSkillMap. Returns True if >= 5 origins
+    resolve to grade 'S' or 'A'.
+
+    Conservative fallback: if both maps are None, returns False (can't verify).
+    Unresolvable origin IDs are skipped (not counted).
     """
-    del genericSkillMap
-    evidence = enforceAntiAutoMint(skill)
-    deduped = _dedupeSameSource(evidence)
+    if namedSkillMap is None and genericSkillMap is None:
+        return False
+
+    # Source A: fusion-recipe role='origin' rows (exclude role='variant')
+    fusionOrigins: set[str] = set()
+    for row in skill.get("evidence") or []:
+        if _typeOf(row) != "fusion-recipe":
+            continue
+        for entry in row.get("origins") or []:
+            if isinstance(entry, dict):
+                originId = entry.get("id") or entry.get("skillId")
+                inlineRole = entry.get("role")
+            else:
+                originId = entry
+                inlineRole = None
+            if not originId:
+                continue
+            # Resolve role from inline hint or genericSkillMap
+            role = inlineRole
+            if role is None and genericSkillMap is not None:
+                role = (genericSkillMap.get(originId) or {}).get("role")
+            if role == "variant":
+                continue
+            fusionOrigins.add(originId)
+
+    # Source B: suiteComponents entries
+    suiteOrigins: set[str] = set(skill.get("suiteComponents") or [])
+
+    # Deduplicated union
+    allOrigins = fusionOrigins | suiteOrigins
+
+    if not allOrigins:
+        return False
+
+    # Count origins with overallTrustGrade in {S, A}
     count = 0
-    seen: set[str] = set()
-    for row in deduped:
-        g = _grade(row)
-        if g not in ("S", "A"):
+    for originId in allOrigins:
+        grade = None
+        # Prefer namedSkillMap for overallTrustGrade lookup
+        if namedSkillMap is not None:
+            node = namedSkillMap.get(originId)
+            if node is not None:
+                grade = node.get("overallTrustGrade") or node.get("overallGrade") or node.get("grade")
+        # Fall back to genericSkillMap
+        if grade is None and genericSkillMap is not None:
+            node = genericSkillMap.get(originId)
+            if node is not None:
+                grade = node.get("overallTrustGrade") or node.get("overallGrade") or node.get("grade")
+        # Unresolvable: skip (do not count)
+        if grade is None:
             continue
-        url = (
-            _canonicalUrl(row.get("source"))
-            or _canonicalUrl(row.get("url"))
-            or _canonicalUrl(row.get("sourceUrl"))
-            or f"_idx_{id(row)}"
-        )
-        if url in seen:
-            continue
-        seen.add(url)
-        count += 1
+        if grade in ("S", "A"):
+            count += 1
+
     return count >= APEX_AGRADED_ORIGINS_MIN
 
 
@@ -874,8 +922,9 @@ def passesApexGate(
     """
     state = registryState or {}
     genericSkillMap = state.get("genericSkillMap")
+    namedSkillMap = state.get("namedSkillMap")
     return {
-        "aGradedOriginsGte5": checkAGradedOriginsGte5(skill, genericSkillMap),
+        "aGradedOriginsGte5": checkAGradedOriginsGte5(skill, genericSkillMap, namedSkillMap),
         "sourceTenureDaysGte180AorS": checkSourceTenureDaysGte180AorS(skill),
         "directNestedSuiteGte1": checkDirectNestedSuiteGte1(skill, genericSkillMap),
         "depth2OnlyReachableGte1": checkDepth2OnlyReachableGte1(skill, state),
