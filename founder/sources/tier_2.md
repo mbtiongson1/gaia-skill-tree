@@ -1667,6 +1667,12 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 41 stars
 - **Description:** Martin Stepanoski @mastepanoski/claude-skills -- /nielsen-heuristics-audit audits UI against Nielsen 10 usability heuristics step-by-step. (backfilled — class-to-type migration)
 
+#### E2: `proxy-containment`
+- **Source:** [https://github.com/pbakaus/impeccable](https://github.com/pbakaus/impeccable)
+- **Date:** 2026-06-18
+- **Verified Stars:** 39,158 stars
+- **Description:** Proxy repository pbakaus/impeccable, which is a design and UX auditing tool for agents that supersedes the Nielsen heuristics audit pattern.
+
 ---
 
 ## Skill: `mattpocock/diagnose`
