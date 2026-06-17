@@ -15,7 +15,7 @@ This file lists the raw evidence sources for named skills rated at 1★.
 - **Trust Metric:** 70.0
 - **Description:** Replaced missing seed evidence with live repository from real-skills catalog. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/princeton-nlp/SWE-bench](https://github.com/princeton-nlp/SWE-bench)
 - **Date:** 2026-06-18
 - **Verified Stars:** 4,500 stars

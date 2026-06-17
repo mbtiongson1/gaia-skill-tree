@@ -108,7 +108,7 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 2,120 stars
 - **Description:** Claude Video -- enables AI agents to watch videos by downloading, frame extraction, and transcription. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/byjlw/Video-Analyzer](https://github.com/byjlw/Video-Analyzer)
 - **Date:** 2026-06-18
 - **Verified Stars:** 1,454 stars
@@ -599,7 +599,7 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 8,062 stars
 - **Description:** CodeBurn -- provides cost and token observability for AI coding tools; integrated with 20 AI tools. Includes TUI dashboard, macOS menubar, optimization and yield analysis commands. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/BerriAI/litellm](https://github.com/BerriAI/litellm)
 - **Date:** 2026-06-18
 - **Verified Stars:** 12,000 stars
@@ -619,6 +619,12 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Date:** 2026-06-10
 - **Verified Stars:** 32 stars
 - **Description:** Published implementation in the GLINCKER Claude Code Marketplace; reproducible from SKILL.md. (backfilled — class-to-type migration)
+
+#### E2: `proxy-containment`
+- **Source:** [https://github.com/eli64s/readme-ai](https://github.com/eli64s/readme-ai)
+- **Date:** 2026-06-18
+- **Verified Stars:** 3,800 stars
+- **Description:** readme-ai -- CLI tool that automatically generates structured, comprehensive README.md files for software projects.
 
 ---
 
