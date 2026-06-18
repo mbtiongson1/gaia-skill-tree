@@ -1,23 +1,46 @@
-# Gaia Trust Methodology Evidence Sources
+# Gaia Trust Methodology: Evidence Sources & Adversarial Audits
 
-This directory contains research evidence sources, candidate links, and validation reviews collected for various skill tiers in the Gaia skill registry.
+This directory compiles research evidence sources, engagement signals, peer reviews, and multi-agent adversarial audit reports verifying the trust methodology of the Gaia skill registry.
 
-## Directory Structure
+---
 
-- `tier_6/`: Evidence sources for 6★ Transcendent skills.
-- `tier_5/`: Evidence sources for 5★ skills.
-- `tier_4/`: Evidence sources for 4★ skills.
-- `tier_3_2/`: Evidence sources for 3★ & 2★ skills.
-- `source_report_2026_06_18.md`: Master synthesis report and audit log.
+## 1. Directory Structure
 
-These sources are mapped to the 10 canonical evidence types:
-1. `github-stars-own`
-2. `proxy-containment`
-3. `verifier-attestation`
-4. `benchmark-result`
-5. `arxiv`
-6. `peer-review`
-7. `repo-own`
-8. `self-attestation`
-9. `social-signal`
-10. `fusion-recipe`
+The directory is structured as follows:
+
+*   **`data_lake/`**: The unified evidence data lake containing clean, raw source evidence grouped by star tiers.
+    *   `unified_evidence_lake.md`: Master consolidated database index.
+    *   `tier_1.md` through `tier_6.md`: Individual evidence files for each star tier.
+*   **`collectors/`**: Raw verification and signal collection channel dumps:
+    *   `raw/`: Initial scraped dumps for Tiers 1–6.
+    *   `social/`: Scraped developer blogs, newsletters, and YouTube showcase video logs.
+    *   `technical/`: Peer reviews, arXiv academic preprints, and objective benchmark results.
+    *   `verification/`: Chronological verification logs (`verification_report_YYYY_MM_DD.md`) detailing link status, casing errors, and capability mapping checks.
+*   **`scripts/`**: Automation scripts to generate source dumps, query star metrics, and compile the unified data lake.
+*   **`source_report_YYYY_MM_DD.md`**: Master reports compiling live-verified GitHub star updates, curation logs, and synthesized adversarial audit findings for specific dates.
+
+---
+
+## 2. Canonical Evidence Types
+
+Evidence is mapped to 10 standard categories:
+
+1.  `github-stars-own` — Primary star count for contributor repositories.
+2.  `proxy-containment` — External repos consuming/implementing the capability.
+3.  `verifier-attestation` — Cross-org verifications of working execution.
+4.  `benchmark-result` — Task success rates on objective harnesses (SWE-bench, WebArena, etc.).
+5.  `arxiv` — Academic preprints/papers establishing theoretical/empirical validation.
+6.  `peer-review` — RFC audits, verifications, and design consultations.
+7.  `repo-own` — Target framework repository itself.
+8.  `self-attestation` — Contributor's own statements of capabilities.
+9.  `social-signal` — Community blog tutorials, newsletter highlights, and YouTube demonstrations.
+10. `fusion-recipe` — Core workflow composition rules for agent suites.
+
+---
+
+## 3. Adversarial Curation Rules
+
+Every evidence file and entry must adhere to the following principles:
+*   **Strict Curation Guideline #1:** GitHub subfolder links must use `blob/` format (not default `tree/` format) to be recognized by the skill installer.
+*   **Strict Curation Guideline #4:** Suite component links must point to specific subdirectory paths (`blob/main/skills/subpath`), never to the bare repository root.
+*   **Zero Evaluative Noise:** Evidence descriptions must remain strictly factual. Strip all subjective praise ("elite", "high-quality"), database migration notes, verifier markers ("verified live"), or rank threshold logic.
