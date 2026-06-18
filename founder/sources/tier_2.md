@@ -217,11 +217,21 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 134,017 stars
 - **Description:** Origin repository — open-source web search/scrape/crawl API for LLM agents; reproducible public implementation with documented usage. (backfilled — class-to-type migration)
 
-#### E2: `repo`
+#### E2: `proxy-containment`
 - **Source:** [https://github.com/mendableai/firecrawl-mcp-server](https://github.com/mendableai/firecrawl-mcp-server)
 - **Date:** 2026-06-18
 - **Verified Stars:** 50 stars
-- **Description:** Model Context Protocol (MCP) server for Firecrawl, enabling agents to crawl and scrape URLs directly.
+- **Description:** Proxy repository mendableai/firecrawl-mcp-server, which implements the firecrawl/firecrawl skill enabling agents to crawl and scrape URLs directly.
+
+#### E3: `social-signal`
+- **Source:** [https://www.firecrawl.dev/blog/category/use-cases-and-examples](https://www.firecrawl.dev/blog/category/use-cases-and-examples)
+- **Date:** 2026-06-18
+- **Description:** Firecrawl Use Cases & Community Examples demonstrating agent-driven web crawling and data extraction workflows using the firecrawl/firecrawl skill.
+
+#### E4: `social-signal`
+- **Source:** [https://www.youtube.com/watch?v=eH8JdttKIdA](https://www.youtube.com/watch?v=eH8JdttKIdA)
+- **Date:** 2026-06-18
+- **Description:** Real-world video breakdown showing practical usage of Firecrawl to build data extraction pipelines for autonomous agents, evidencing the firecrawl/firecrawl skill.
 
 ---
 
