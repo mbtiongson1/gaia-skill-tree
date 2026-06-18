@@ -58,3 +58,41 @@ A systematic round of manual verification and curation was conducted, focusing o
 - **`spring-ai` (Tier 2★) & `stanfordnlp` (Tier 1★):** Verified sources align with registry metadata; mapped primary repos successfully.
 - **`ruvnet` (Ecosystem Suite):** Confirmed exemption from file-level checks as per registry guidelines. Mapped directly to the raw repository root.
 
+---
+
+## 4. Multi-Agent Evidence Verification & Adversarial Auditing (June 18, 2026)
+
+To ensure the integrity and robustness of the Gaia Skill Tree trust model, a fleet of specialized **Gemini 3.5 Flash (Low)** collector subagents was fanned out across multiple signal channels, followed by an **Adversarial Evidence Verifier** to test all links and context relevance one-by-one.
+
+### Summary of New Multi-Agent Evidence Families
+1. **Objective Benchmarks (`benchmark-result`):**
+   - Verified **SWE-bench** unassisted solve rate of **13.86%** for `devin-ai/autonomous-swe` and **84.8%** swarm solve rate for `ruvnet/ruflo` (vendor claim).
+   - Verified **78% - 97% task success** for `browser-use/browser-harness` on BU Bench V1 (100 verified tasks).
+   - Documented **71.5x token compression** for `safishamsi/graphify` AST-based query RAG.
+   - Documented **+59% layout consistency** audits for `pbakaus/impeccable` design checker.
+2. **Academic Citations (`arxiv`):**
+   - Mapped key arXiv papers establishing theoretical/empirical validation for target skills:
+     - `safishamsi/graphify` -> *CodexGraph: Bridging LLMs and Code Repos via Code Graph Databases* (arXiv:2408.03910, ~89 citations).
+     - `anthropic/skill-creator` -> *Large Language Models as Tool Makers* (arXiv:2305.17126, ~300+ citations).
+     - `pbakaus/impeccable` -> *DesignRepair: Dual-Stream Design Guideline-Aware Frontend Repair* (arXiv:2411.01606, ~19 citations).
+3. **Showcase Videos (`social-signal`):**
+   - YouTube demos featuring handlers showcasing their skills:
+     - **Garry Tan** demonstrating `garrytan/gstack` Virtual Engineering Team workflows.
+     - **Matt Pocock** demonstrating the `/teach` custom Claude Code skill.
+     - **Jesse Vincent** detailing `obra/superpowers` multi-agent SDLC planning.
+     - **Paul Bakaus** showing `pbakaus/impeccable` aesthetic steering in action.
+4. **Developer Blogs (`social-signal`):**
+   - Active tutorials and articles explaining integration patterns on Dev.to, Medium, and official product blogs.
+
+### Actionable Audit Findings & Recommendations
+The adversarial verifier identified several gaps and mismatches that must be resolved in future metadata releases:
+*   **Broken Links (404):**
+    - The repository link `https://github.com/cognition-labs/devin` does not exist because Devin is closed-source. Future updates should use the public results repo: `https://github.com/CognitionAI/devin-swebench-results`.
+    - Broken tutorial/marketplace pages found at `https://dev.to/anthropic/eval-driven-skill-creation-with-anthropics-skill-creator`, `https://dev.to/ruvnet/ruflo-multi-agent-orchestration-for-claude-code`, and `https://skillsmp.com/skills/unittest-generator`.
+*   **Registry Format Mismatches (Curation Guideline #1):**
+    - Subpaths for `sickn33/mcp-builder` and `anthropic/skill-creator` use GitHub's default `tree/` format instead of the required `blob/` format. These must be replaced to allow the skill installer to function.
+*   **Placeholder Links:**
+    - Generic homepages for Reddit (`https://reddit.com`) and Dev.to (`https://dev.to`) were used for `ruvnet/ruflo`. These must be upgraded to deep links referencing actual discussions.
+
+For a detailed link-by-link audit log, refer to the full verifier report:
+*   [Adversarial Verification Report](file:///Users/marcotiongson/.gemini/antigravity-cli/brain/0be6d288-8c76-43f4-a110-a9924881760c/verification_report.md)
