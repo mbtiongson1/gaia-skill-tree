@@ -752,3 +752,166 @@ def test_aGradedOriginsGte5_unresolvable_origin_skipped():
     }
     # 5 origins in origin set; 4 resolve to A, 1 unresolvable -> count=4 < 5 -> False
     assert checkAGradedOriginsGte5(skill, genericSkillMap=genericSkillMap) is False
+
+
+# ---------------------------------------------------------------------------
+# Batch K: v2 inheritance contract — 5 tests (Section H.3)
+# ---------------------------------------------------------------------------
+
+
+def test_inheritance_arxiv_inherits_with_multiplier_0_70():
+    """H.3 test 1: named child inherits arxiv row from generic with 0.70 multiplier.
+
+    Generic skill has one arxiv row (citations=500 -> raw=100, capped at 100).
+    Named child has no own evidence, only genericSkillRef.
+    The inherited row should contribute 100 * weight(1.0) * 0.70 = 70.0
+    (freshness=1.0 since no lastVerified).
+    """
+    genericId = "generic-ml"
+    generic = {
+        "id": genericId,
+        "evidence": [
+            {
+                "type": "arxiv",
+                "citations": 500,  # 500/5=100, capped at 100
+                "source": "https://arxiv.org/abs/2024.00001",
+                "layer": "generic",
+            }
+        ],
+    }
+    named = {
+        "id": "marco-ml",
+        "genericSkillRef": genericId,
+        "evidence": [],
+    }
+    genericSkillMap = {genericId: generic}
+    tm = computeTrustMagnitude(named, genericSkillMap=genericSkillMap)
+    # Expected: base 100 x weight 1.0 x freshness 1.0 x inheritMultiplier 0.70 = 70.0
+    assert 65 < tm < 75, f"Expected ~70 but got {tm}"
+
+
+def test_inheritance_named_layer_arxiv_no_discount():
+    """H.3 test 2: arxiv row on the named skill itself (layer='named') — no 0.70 discount.
+
+    When the arxiv row is attached directly to the named skill (same layer),
+    _inheritMultiplierFor returns 1.0 and the full magnitude applies.
+    """
+    named = {
+        "id": "marco-ml",
+        "genericSkillRef": "some-generic",
+        "evidence": [
+            {
+                "type": "arxiv",
+                "citations": 500,  # 100 raw, capped; full weight
+                "source": "https://arxiv.org/abs/2024.99999",
+                "layer": "named",  # own layer — no inherit discount
+            }
+        ],
+    }
+    tm = computeTrustMagnitude(named, genericSkillMap={})
+    # Expected: base 100 x weight 1.0 x inheritMultiplier 1.0 = 100.0
+    assert 95 < tm <= 100.0, f"Expected ~100 (no discount) but got {tm}"
+
+
+def test_inheritance_pinned_named_only_zero_or_passes_through():
+    """H.3 test 3: pinned-named type (verifier-attestation) slipping through on a generic.
+
+    Schema validator (PR #726) is the layer that rejects this at intake time.
+    If a row slips through anyway, _inheritMultiplierFor returns 1.0 (defensive:
+    does NOT silently zero it) — the compute layer is not the enforcement gate.
+    """
+    # Schema validator (PR #726) is the gate that rejects verifier-attestation
+    # on generic nodes. compute is defensive and does not silently zero.
+    genericId = "generic-with-verifier"
+    generic = {
+        "id": genericId,
+        "evidence": [
+            {
+                "type": "verifier-attestation",
+                "verifiers": 1,
+                "source": "https://verifier.example/1",
+                "layer": "generic",  # invalid per schema, but we test compute defensiveness
+            }
+        ],
+    }
+    named = {
+        "id": "named-child",
+        "genericSkillRef": genericId,
+        "evidence": [],
+    }
+    genericSkillMap = {genericId: generic}
+    # Should not crash; should contribute at face value (1.0 multiplier)
+    tm = computeTrustMagnitude(named, genericSkillMap=genericSkillMap)
+    # verifier-attestation: 30*1=30; weight 1.5 => 45.0 at face value (no discount)
+    assert tm > 0, f"Expected non-zero contribution (1.0 multiplier), got {tm}"
+    # The exact value should be 45.0 (30 * 1.5 * 1.0 inherit)
+    assert abs(tm - 45.0) < 1.0, f"Expected ~45.0 (face-value, no discount), got {tm}"
+
+
+def test_inheritance_multi_child_amplification_bounded():
+    """H.3 test 4: N named children each inherit the same arxiv row from generic.
+
+    Each child's TM includes the full inherited contribution (arxiv * 0.70).
+    This documents the N-child amplification math from RFC Section 2.14.4:
+    total contribution across 8 children = 8 * ~70 = ~560.
+    """
+    genericId = "shared-generic"
+    generic = {
+        "id": genericId,
+        "evidence": [
+            {
+                "type": "arxiv",
+                "citations": 500,  # 100 raw, capped
+                "source": "https://arxiv.org/abs/2024.multi",
+                "layer": "generic",
+            }
+        ],
+    }
+    genericSkillMap = {genericId: generic}
+
+    children = []
+    for i in range(8):
+        children.append({
+            "id": f"named-child-{i}",
+            "genericSkillRef": genericId,
+            "evidence": [],
+        })
+
+    total = sum(
+        computeTrustMagnitude(child, genericSkillMap=genericSkillMap)
+        for child in children
+    )
+    # Each child gets ~70.0; 8 * 70 = 560 (tolerance for freshness drift)
+    assert 520 < total < 600, f"Expected ~560 across 8 children, got {total}"
+
+
+def test_inheritance_multiplier_chain_visible_in_explain():
+    """H.3 test 5: explainTrustMagnitude output annotates inherited rows.
+
+    For a named skill with one inherited arxiv row (0.70 multiplier), the
+    explain output must contain '0.70' AND ('inherited' OR '^').
+    """
+    from gaia_cli.trustMagnitude import explainTrustMagnitude
+
+    genericId = "explain-generic"
+    generic = {
+        "id": genericId,
+        "evidence": [
+            {
+                "type": "arxiv",
+                "citations": 500,
+                "source": "https://arxiv.org/abs/2024.explain",
+                "layer": "generic",
+            }
+        ],
+    }
+    named = {
+        "id": "named-for-explain",
+        "genericSkillRef": genericId,
+        "evidence": [],
+    }
+    genericSkillMap = {genericId: generic}
+
+    output = explainTrustMagnitude(named, genericSkillMap=genericSkillMap)
+    assert "0.70" in output, "Expected '0.70' in output, got: " + repr(output[:200])
+    assert ("inherited" in output or "^" in output), "Expected inheritance annotation in output, got: " + repr(output[:200])
