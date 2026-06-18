@@ -93,6 +93,16 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 152,095 stars
 - **Description:** Anthropic skill-creator provides a reproducible workflow for creating, editing, evaluating, benchmarking, and optimizing agent skills.
 
+#### E4: `social-signal`
+- **Source:** [https://www.kdnuggets.com/anthropics-complete-guide-to-claude-skills-building](https://www.kdnuggets.com/anthropics-complete-guide-to-claude-skills-building)
+- **Date:** 2026-06-18
+- **Description:** Technical guide explaining Anthropic's Claude skills building process, highlighting the design and benefits of the anthropic/skill-creator skill.
+
+#### E5: `social-signal`
+- **Source:** [https://dev.to/debs_obrien/i-used-skill-creator-v2-to-improve-one-of-my-agent-skills-in-vs-code-fhd](https://dev.to/debs_obrien/i-used-skill-creator-v2-to-improve-one-of-my-agent-skills-in-vs-code-fhd)
+- **Date:** 2026-06-18
+- **Description:** Community blog post showing real-world utility of the anthropic/skill-creator skill to build and refine agent skills in VS Code.
+
 ---
 
 ## Skill: `bradautomates/claude-video`
