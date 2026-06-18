@@ -145,6 +145,16 @@ This file lists the raw evidence sources for named skills rated at 2★.
 - **Verified Stars:** 99,296 stars
 - **Description:** Browser Use -- Make website automation easy for AI agents. Main framework repository with 99k+ stars.
 
+#### E3: `social-signal`
+- **Source:** [https://www.notte.cc/blog/browser-harnesses-compared](https://www.notte.cc/blog/browser-harnesses-compared)
+- **Date:** 2026-06-18
+- **Description:** Tech Blog comparing browser harnesses (Notte-cli, Agent-browser, Browser-harness), highlighting the architecture and usage of the browser-use/browser-harness skill.
+
+#### E4: `social-signal`
+- **Source:** [https://browser-use.com/posts/online-mind2web-benchmark](https://browser-use.com/posts/online-mind2web-benchmark)
+- **Date:** 2026-06-18
+- **Description:** Dev Blog illustrating how browser-use utilizes the browser-use/browser-harness skill to achieve state-of-the-art results on online web benchmarks.
+
 ---
 
 ## Skill: `browserbase/stagehand`
