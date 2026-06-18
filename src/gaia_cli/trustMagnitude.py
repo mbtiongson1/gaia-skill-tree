@@ -24,6 +24,8 @@ import datetime
 import math
 from typing import Any, Optional
 
+from gaia_cli.evidence import inherited_evidence
+
 # ---------------------------------------------------------------------------
 # Constants - RFC §2 master table
 # ---------------------------------------------------------------------------
@@ -69,6 +71,79 @@ APEX_TENURE_DAYS_MIN = 180
 # Feature flags - when False, the predicate returns None (skipped, not failed).
 ENABLE_CROSS_ORG_VERIFIER = False
 ENABLE_SYSTEM_WIDE_CAP = False
+
+
+# ---------------------------------------------------------------------------
+# v2 inheritance contract (RATIFIED 2026-06-18, workflow wf_7cbe217f-006)
+# ---------------------------------------------------------------------------
+# Per-evidence-type partition between layers + inherit multipliers.
+# Layers: "named" (sits on a named skill markdown) or "generic"
+# (sits on a generic taxonomy node and is inheritable by named children).
+#
+# allowedLayers["named"] only -> "pinned-named" types: validation must reject
+#   these rows when attached to a generic node.
+# allowedLayers ["generic", "named"] -> "flexible" types: row may sit on a
+#   named or a generic node. inheritMultiplier is applied ONLY when a flexible
+#   row is inherited (sits on the generic, contributing to a named child's
+#   TM); attached at the named layer itself, the multiplier is 1.0.
+
+EVIDENCE_TYPE_LAYER_CONTRACT: dict = {
+    # Pinned-named (cannot be inherited at all)
+    'fusion-recipe':         {'allowedLayers': ['named'], 'inheritMultiplier': None},
+    'github-stars-own':      {'allowedLayers': ['named'], 'inheritMultiplier': None},
+    'repo-own':              {'allowedLayers': ['named'], 'inheritMultiplier': None},
+    'self-attestation':      {'allowedLayers': ['named'], 'inheritMultiplier': None},
+    'verifier-attestation':  {'allowedLayers': ['named'], 'inheritMultiplier': None},
+    # Flexible (inheritable from generic with discount)
+    'arxiv':                 {'allowedLayers': ['generic', 'named'], 'inheritMultiplier': 0.70},
+    'peer-review':           {'allowedLayers': ['generic', 'named'], 'inheritMultiplier': 0.30},
+    'social-signal':         {'allowedLayers': ['generic', 'named'], 'inheritMultiplier': 0.35},
+    'proxy-containment':     {'allowedLayers': ['generic', 'named'], 'inheritMultiplier': 0.25},
+    'benchmark-result':      {'allowedLayers': ['generic', 'named'], 'inheritMultiplier': 0.15},
+}
+
+
+def _ownLayerOf(skill: dict) -> str:
+    """Return the skill's own layer ("named" if it has genericSkillRef, else "generic")."""
+    return 'named' if skill.get('genericSkillRef') else 'generic'
+
+
+def _rowLayerOf(row: dict, fallback: str = 'generic') -> str:
+    """Read a row's layer field; legacy rows without it fall back per the source skill."""
+    layer = row.get('layer')
+    if layer in ('named', 'generic'):
+        return layer
+    return fallback
+
+
+def _inheritMultiplierFor(row: dict, skill: dict) -> float:
+    """Return the inherit multiplier for a row contributing to *skill*'s TM.
+
+    Returns 1.0 unless:
+    - The row's layer differs from the skill's own layer (i.e. it's inherited).
+    - The row's evidence type is in the flexible partition with a numeric
+      inheritMultiplier (the five non-pinned types).
+
+    Pinned-named types (verifier-attestation, fusion-recipe, github-stars-own,
+    repo-own, self-attestation) never trigger inheritance because the schema
+    validator rejects them on generic nodes; if one slips through, this
+    function returns 1.0 (caller inherits the row at face value rather than
+    silently zeroing it).
+    """
+    rowLayer = _rowLayerOf(row)
+    ownLayer = _ownLayerOf(skill)
+    if rowLayer == ownLayer:
+        return 1.0
+    rowType = _typeOf(row)
+    if rowType is None:
+        return 1.0
+    contract = EVIDENCE_TYPE_LAYER_CONTRACT.get(rowType)
+    if contract is None:
+        return 1.0
+    mult = contract.get('inheritMultiplier')
+    if mult is None:
+        return 1.0
+    return float(mult)
 
 
 # ---------------------------------------------------------------------------
@@ -560,9 +635,15 @@ def computeTrustMagnitude(
     genericSkillMap: Optional[dict] = None,
     namedSkillMap: Optional[dict] = None,
 ) -> float:
-    """Compute the skill's Trust Magnitude (RFC §3).
+    """Compute the skill's Trust Magnitude (RFC §3, v2 inheritance contract).
 
-    Sum of artifact_score for every evidence row, after:
+    Sum of artifact_score for every evidence row in the *effective pool*,
+    after:
+    - effective-pool resolution: own evidence union inherited generic
+      evidence (deduped by source) per `inherited_evidence`. The inherit
+      multiplier (`EVIDENCE_TYPE_LAYER_CONTRACT[type].inheritMultiplier`) is
+      applied at sum-time only to rows that come in via inheritance, not
+      during pool resolution.
     - anti-auto-mint (RFC §10.14)
     - same-source dedup (RFC §5.2)
     - per-type plateau (proxy-containment, peer-review, social-signal)
@@ -571,24 +652,39 @@ def computeTrustMagnitude(
     - social-signal hard A-cap (sum of social-signal contributions <= 80)
     """
     del namedSkillMap  # reserved for future cross-skill rules
-    evidence = enforceAntiAutoMint(skill)
+
+    # 1. Resolve the effective pool (own union inherited).
+    pool = _effectivePool(skill, genericSkillMap)
+
+    # 2. Anti-auto-mint over the merged pool.
+    evidence = enforceAntiAutoMint({"evidence": pool})
+
+    # 3. Same-source dedup, preserving row layer.
     deduped = _dedupeSameSource(evidence)
 
-    # Auto-mint fusion-recipe row from suiteComponents if missing (RFC §10.8).
+    # 4. Auto-mint fusion-recipe row from suiteComponents if missing (RFC §10.8).
     suiteComponents = skill.get("suiteComponents") or []
     hasFusionRow = any(_typeOf(r) == "fusion-recipe" for r in deduped)
     if suiteComponents and not hasFusionRow:
+        # Auto-derived fusion-recipe lives at the skill's own layer.
         deduped = list(deduped) + [{
             "type": "fusion-recipe",
             "origins": list(suiteComponents),
             "_autoDerived": True,
+            "layer": _ownLayerOf(skill),
         }]
 
+    # 5. Per-row artifact score, with inherit multiplier applied at sum-time.
     rowsWithScores: list[tuple[dict, Optional[float]]] = []
     for row in deduped:
-        score = computeArtifactScoreOrNone(row, genericSkillMap)
-        rowsWithScores.append((row, score))
+        baseScore = computeArtifactScoreOrNone(row, genericSkillMap)
+        if baseScore is None:
+            rowsWithScores.append((row, None))
+            continue
+        mult = _inheritMultiplierFor(row, skill)
+        rowsWithScores.append((row, baseScore * mult))
 
+    # 6. Plateau / per-creator dedup, then social cap + sum.
     rowsWithScores = _applyPlateauAndCreatorDedup(rowsWithScores)
 
     socialTotal = 0.0
@@ -602,6 +698,47 @@ def computeTrustMagnitude(
             nonSocialTotal += score
     socialTotal = min(socialTotal, 80.0)
     return nonSocialTotal + socialTotal
+
+
+def _effectivePool(skill: dict, genericSkillMap: Optional[dict]) -> list[dict]:
+    """Resolve the merged own + inherited evidence pool for a skill.
+
+    Generic skills return their own evidence (no parent to inherit from).
+    Named skills (those with `genericSkillRef`) walk the parent generic and
+    merge in any generic-layer rows that aren't already shadowed by their own
+    same-source rows. Each row carries an explicit `layer` field after this
+    pass — own rows are stamped with the skill's own layer, inherited rows
+    keep their generic layer.
+    """
+    ownLayer = _ownLayerOf(skill)
+    ownRows: list[dict] = []
+    for row in skill.get("evidence") or []:
+        # Stamp own-layer (preserve any explicit `layer` already set).
+        stamped = dict(row)
+        stamped.setdefault("layer", ownLayer)
+        ownRows.append(stamped)
+
+    if ownLayer == "generic" or not skill.get("genericSkillRef"):
+        return ownRows
+
+    generic = None
+    if genericSkillMap is not None:
+        generic = genericSkillMap.get(skill.get("genericSkillRef"))
+
+    # `inherited_evidence` returns own-first then generic, deduped by source.
+    merged = inherited_evidence({"evidence": ownRows}, generic)
+
+    # Stamp any inherited rows that aren't already layer-tagged with "generic".
+    out: list[dict] = []
+    ownSources = {r.get("source") for r in ownRows if r.get("source")}
+    for row in merged:
+        if row.get("source") in ownSources:
+            out.append(row)
+            continue
+        stamped = dict(row)
+        stamped.setdefault("layer", "generic")
+        out.append(stamped)
+    return out
 
 
 # ---------------------------------------------------------------------------
