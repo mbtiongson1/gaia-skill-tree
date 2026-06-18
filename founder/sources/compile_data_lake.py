@@ -4,7 +4,7 @@ import re
 def parseTierFiles(sourcesDir, skillsData):
     # Parse tier_1.md to tier_6.md
     for tierNum in range(1, 7):
-        filePath = os.path.join(sourcesDir, f"tier_{tierNum}.md")
+        filePath = os.path.join(sourcesDir, "collectors", "raw", f"tier_{tierNum}.md")
         if not os.path.exists(filePath):
             continue
         

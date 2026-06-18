@@ -23,12 +23,12 @@ Registry evidence parsed directly from the local repository (with updated star c
 
 ### Registry Files Directory:
 - **[Unified Evidence Data Lake (Master)](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/data_lake/unified_evidence_lake.md)**
-- [Tier 6★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_6.md)
-- [Tier 5★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_5.md)
-- [Tier 4★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_4.md)
-- [Tier 3★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_3.md)
-- [Tier 2★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_2.md)
-- [Tier 1★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/tier_1.md)
+- [Tier 6★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_6.md)
+- [Tier 5★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_5.md)
+- [Tier 4★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_4.md)
+- [Tier 3★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_3.md)
+- [Tier 2★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_2.md)
+- [Tier 1★ Source Dump](file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/raw/tier_1.md)
 
 ---
 
