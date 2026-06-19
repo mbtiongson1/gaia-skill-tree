@@ -350,6 +350,93 @@
         font-size: 2rem;
       }
     }
+
+    /* Terminal Simulator styles (terminal-simulation) */
+    .simulator-wrapper {
+      background: #08080a;
+      border: 1px solid var(--border, #222);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 3.5rem 0 2rem 0;
+      font-family: var(--font-mono, ui-monospace, monospace);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .simulator-header {
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border, #222);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .simulator-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .simulator-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .simulator-dots .dot.red { background: #ef4444; }
+    .simulator-dots .dot.yellow { background: #fbbf24; }
+    .simulator-dots .dot.green { background: #22c55e; }
+
+    .simulator-title {
+      font-size: 0.8rem;
+      color: var(--muted, #666);
+    }
+
+    .simulator-btn {
+      margin: 0;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border, #222);
+      color: var(--text, #eee);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .simulator-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text, #eee);
+    }
+
+    .simulator-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .simulator-body {
+      padding: 1.25rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      height: 360px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: #c9d1d9;
+      scroll-behavior: smooth;
+      text-align: left;
+    }
+
+    /* Color Coding Ramps */
+    .console-line {
+      word-break: break-all;
+    }
+    .console-line.system { color: #8b949e; }
+    .console-line.agent { color: #58a6ff; }
+    .console-line.cmd { color: #58a6ff; font-weight: bold; }
+    .console-line.gate-pass { color: #34d399; }
+    .console-line.gate-fail { color: #f85149; }
+    .console-line.user { color: #fbbf24; }
   </style>
 </head>
 <body>
@@ -396,7 +483,7 @@
         <div class="step-title-row">
           <h2 class="step-title">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Collection Phase
+            ev-collection
           </h2>
           <span class="step-tag">Data Intake</span>
         </div>
@@ -420,7 +507,7 @@
         <div class="step-title-row">
           <h2 class="step-title">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Validation & Live Mapping Phase
+            ev-star-verification
           </h2>
           <span class="step-tag">Star Verification</span>
         </div>
@@ -444,7 +531,7 @@
         <div class="step-title-row">
           <h2 class="step-title">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Adversarial Check
+            ev-adversarial-audit
           </h2>
           <span class="step-tag">Vulnerability Scans</span>
         </div>
@@ -456,8 +543,8 @@
             <li><strong>Audit Synthesis:</strong> A 5th synthesis subagent aggregates findings and appends them to the master source report (e.g. <code>source_report_2026_06_19.md</code>).</li>
           </ul>
           <div class="code-panel">
-            <span class="code-line"><span class="code-comment"># Orchestrated via the local gaia-adversarial-audit agent workflow</span></span>
-            <span class="code-line"><span class="code-cmd">/gaia-adversarial-audit</span></span>
+            <span class="code-line"><span class="code-comment"># Orchestrated via the local ev-adversarial-audit agent workflow</span></span>
+            <span class="code-line"><span class="code-cmd">/ev-adversarial-audit</span></span>
           </div>
         </div>
       </div>
@@ -468,7 +555,7 @@
         <div class="step-title-row">
           <h2 class="step-title">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            Firecrawl Links Check
+            ev-link-validation
           </h2>
           <span class="step-tag">Active API Scrapes</span>
         </div>
@@ -488,11 +575,116 @@
 
     </div>
 
+    <!-- ev-pipeline Terminal Simulation -->
+    <h2 style="font-family: var(--font-display); font-size: 2rem; margin-top: 4rem; text-align: center;">Pipeline Orchestrator <span class="underline-accent">Simulation</span></h2>
+    <p style="text-align: center; color: var(--muted); max-width: 600px; margin: 0.5rem auto 1.5rem auto; font-weight: 300;">Interact with the mock CLI terminal below to simulate the execution of <strong><code>ev-pipeline</code></strong> sequentially coordinating all 4 verification phases.</p>
+    
+    <div class="simulator-wrapper" id="simWrapper">
+      <div class="simulator-header">
+        <div class="simulator-dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="simulator-title">ev-pipeline-simulation.sh</div>
+        <button class="simulator-btn" id="startSimBtn">Run Simulation</button>
+      </div>
+      <div class="simulator-body" id="simulatorConsole">
+        <div class="console-line system">> Click "Run Simulation" to execute the mock ev-pipeline process.</div>
+      </div>
+    </div>
+
     <footer>
       <p>Gaia Registry System • Trust Methodology. Logs persisted in <a href="file:///Users/marcotiongson/Documents/gaia-skill-tree/founder/sources/collectors/verification/">founder/sources/collectors/verification/</a></p>
     </footer>
 
   </div>
 
+  <script>
+    (function() {
+      const startBtn = document.getElementById("startSimBtn");
+      const consoleBox = document.getElementById("simulatorConsole");
+      let isRunning = false;
+
+      function addLog(msg, type = "system") {
+        const line = document.createElement("div");
+        line.className = `console-line ${type}`;
+        line.innerHTML = msg;
+        consoleBox.appendChild(line);
+        consoleBox.scrollTop = consoleBox.scrollHeight;
+      }
+
+      if (startBtn && consoleBox) {
+        startBtn.addEventListener("click", () => {
+          if (isRunning) return;
+          isRunning = true;
+          startBtn.disabled = true;
+          startBtn.innerText = "Running...";
+          consoleBox.innerHTML = "";
+          
+          let currentFrame = 0;
+
+          // ev-pipeline sequence simulation
+          const timeline = [
+            { delay: 300, action: () => addLog("[System] Initializing ev-pipeline orchestration...", "system") },
+            { delay: 700, action: () => addLog("[CLI] Executing command: <code>/ev-pipeline</code>", "cmd") },
+            
+            // Phase 1
+            { delay: 1200, action: () => addLog("[System] Step 1/4: Running ev-collection phase...", "system") },
+            { delay: 1500, action: () => addLog("[CLI] Running: <code>.venv/bin/python founder/sources/scripts/compile_data_lake.py</code>", "cmd") },
+            { delay: 2000, action: () => addLog("[Gate] PASS! Compiled and unified 287 evidence records to <code>unified_evidence_lake.md</code>.", "gate-pass") },
+            
+            // Phase 2
+            { delay: 2500, action: () => addLog("[System] Step 2/4: Running ev-star-verification phase...", "system") },
+            { delay: 2800, action: () => addLog("[CLI] Running: <code>.venv/bin/python founder/sources/scripts/generate_source_dump.py</code>", "cmd") },
+            { delay: 3200, action: () => addLog("[Agent] Fetching live stargazers for primary and proxy repositories via GitHub API...", "agent") },
+            { delay: 3700, action: () => addLog("[Gate] PASS! Stargazer counts updated in cache. Segregated dumps generated in <code>founder/sources/data_lake/tier_[1-6].md</code>.", "gate-pass") },
+            
+            // Phase 3
+            { delay: 4200, action: () => addLog("[System] Step 3/4: Executing ev-adversarial-audit scan...", "system") },
+            { delay: 4500, action: () => addLog("[CLI] Running: <code>/ev-adversarial-audit</code>", "cmd") },
+            { delay: 4900, action: () => addLog("[Agent] Fanning out 4 parallel adversarial subagents across data lake tiers...", "agent") },
+            { delay: 5400, action: () => addLog("[Agent] Synthesis agent reports: 0 broken links, 2 style warnings logged to <code>source_report_2026_06_19.md</code>.", "gate-pass") },
+            
+            // Phase 4
+            { delay: 5900, action: () => addLog("[System] Step 4/4: Executing ev-link-validation sweep...", "system") },
+            { delay: 6200, action: () => addLog("[CLI] Running: <code>.venv/bin/python founder/sources/scripts/validate_sources.py</code>", "cmd") },
+            { delay: 6700, action: () => addLog("[Agent] Fetching and parsing links. Initiating parallel Firecrawl scrapes (concurrency=2)...", "agent") },
+            { delay: 7200, action: () => addLog("[Agent] [143/287] Scraped <code>https://github.com/mbtiongson1/gaia-skill-tree</code> -> 200 OK", "system") },
+            { delay: 7500, action: () => addLog("[Agent] [287/287] Scraped <code>https://arxiv.org/abs/2402.14201</code> -> 200 OK", "system") },
+            { delay: 7900, action: () => addLog("[Gate] PASS! Verification report updated. 286 URLs OK, 1 validation timeout, 0 broken links.", "gate-pass") },
+            
+            // Completion
+            { delay: 8400, action: () => addLog("[System] Updating statistics inside <code>verification_process.html</code>...", "system") },
+            { delay: 8900, action: () => addLog("[Gate] ev-pipeline finished successfully. All checks complete.", "gate-pass") }
+          ];
+
+          function runNext() {
+            if (currentFrame >= timeline.length) {
+              resetSimulator();
+              return;
+            }
+
+            const frame = timeline[currentFrame];
+            setTimeout(() => {
+              frame.action();
+              if (!frame.isBlocking) {
+                currentFrame++;
+                runNext();
+              }
+            }, frame.delay);
+          }
+
+          function resetSimulator() {
+            startBtn.disabled = false;
+            isRunning = false;
+            startBtn.innerText = "Run Simulation";
+          }
+
+          runNext();
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
