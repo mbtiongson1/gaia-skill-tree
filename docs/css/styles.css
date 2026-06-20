@@ -408,6 +408,36 @@ nav.docs-nav .nav-logo > span {
   will-change: transform, filter;
 }
 
+/* When the main fixed site-nav (~54px) is also rendered on docs/en pages,
+   push the docs-nav breadcrumb below it so neither covers the other. The
+   site-nav has the hamburger menu (mobile-friendly); the docs-nav stays as
+   a breadcrumb-only strip beneath it. Also hide the version chip — the
+   breadcrumb itself is the wayfinder, not the version number. */
+body:has(> nav#site-nav) nav.docs-nav {
+  top: 54px !important;
+  margin-top: 54px;             /* clear the fixed site-nav */
+}
+body:has(> nav#site-nav) nav.docs-nav .nav-version,
+body:has(> nav#site-nav) nav.docs-nav .docs-nav-version {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  body:has(> nav#site-nav) nav.docs-nav {
+    height: 44px !important;
+    padding: 0 .9rem !important;
+    gap: .4rem !important;
+    top: 54px !important;
+    margin-top: 54px;
+  }
+  body:has(> nav#site-nav) .sidebar {
+    position: static !important;
+    height: auto !important;
+    border-right: 0 !important;
+    padding: 1rem 1rem 0 !important;
+  }
+}
+
 nav.docs-nav .nav-logo:hover > span,
 nav.docs-nav .nav-logo:focus-visible > span {
   animation:
@@ -8078,6 +8108,7 @@ code {
   /* Mobile: expand More dropdown to show all items */
   .nav-more-dropdown {
     width: 100%;
+    display: block;
   }
 
   .nav-more-toggle {
@@ -8086,17 +8117,25 @@ code {
 
   .nav-more-menu {
     position: static;
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
     transform: none;
     background: transparent;
     border: none;
     backdrop-filter: none;
     padding: 0;
     min-width: unset;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: .25rem;
+    width: 100%;
+    list-style: none;
+  }
+
+  .nav-more-menu > li {
+    width: 100%;
+    display: block;
+    text-align: center;
   }
 
   .nav-more-menu li a,
@@ -8107,12 +8146,19 @@ code {
     text-align: center;
   }
 
-  /* Mobile menu — kill the desktop ::before plate-marker, the translateX(4px)
-     slide-on-hover, and the tracking-widen that all together caused the
-     items to drift left and feel jittery. Keep the gentle color/glow only. */
+  /* Mobile menu — kill the desktop ::before plate-marker and ::after
+     underline on ALL items (top-level + dropdown). They were leaking to
+     the far left edge as a floating dot + horizontal line because the
+     mobile drawer items have no left padding to absorb them. */
+  nav.nav-open ul.nav-primary > li > a::before,
+  nav.nav-open ul.nav-primary > li > button::before,
+  nav.nav-open ul.nav-primary > li > a::after,
+  nav.nav-open ul.nav-primary > li > button::after,
   nav.nav-open .nav-more-menu li a::before,
-  nav.nav-open .nav-more-menu li button::before {
-    display: none;
+  nav.nav-open .nav-more-menu li button::before,
+  nav.nav-open .nav-more-menu li a::after,
+  nav.nav-open .nav-more-menu li button::after {
+    display: none !important;
   }
   nav.nav-open .nav-more-menu li a,
   nav.nav-open .nav-more-menu li button,

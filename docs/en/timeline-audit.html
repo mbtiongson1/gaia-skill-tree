@@ -415,6 +415,13 @@
 </head>
 <body>
 
+  <!-- Main site nav (hamburger on mobile, full menu on desktop) -->
+  <nav id="site-nav"></nav>
+  <script src="../js/mounts.js?v=5.0.7"></script>
+  <script src="../js/site-nav.js?v=5.0.7"></script>
+  <script src="../js/ui.js?v=5.0.7"></script>
+
+
 
   <!-- Nav -->
   <nav class="docs-nav" aria-label="Docs navigation">
@@ -1034,6 +1041,5 @@ git log --oneline --all | grep -iE "demot|star-bar|calibrat|reclassif"</pre>
       sections.forEach(s => obs.observe(s));
     })();
   </script>
-  <script src="../js/docs-nav-mobile.js?v=5.0.7" defer></script>
 </body>
 </html>

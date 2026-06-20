@@ -27,8 +27,8 @@
       '.docs-nav-mobile-toggle:hover, .docs-nav-mobile-toggle:focus-visible { background: rgba(255,255,255,.06); outline: 0; }',
       '.docs-nav-mobile-drawer { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; padding: 4rem 1.25rem 2rem; z-index: 9998; display: none; flex-direction: column; gap: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }',
       '.docs-nav-mobile-drawer.open { display: flex; }',
-      '.docs-nav-mobile-drawer a { display: block; width: 100%; padding: .55rem .25rem; font-family: inherit; font-size: .95rem; color: var(--muted, #64748b); text-decoration: none; text-align: center; border: 0; background: transparent; transition: color .2s; }',
-      '.docs-nav-mobile-drawer a:hover { color: var(--text, #e2e8f0); }',
+      '.docs-nav-mobile-drawer a { display: block; width: 100%; padding: .55rem .25rem; font-family: inherit; font-size: .95rem; color: var(--muted, #64748b); text-decoration: none; text-align: center; border: 0; background: transparent; transition: color .2s, text-shadow .2s; }',
+      '.docs-nav-mobile-drawer a:hover { text-shadow: 0 0 10px currentColor; }',
       '.docs-nav-mobile-drawer .group-label { font-family: var(--font-mono, monospace); font-size: .65rem; color: var(--muted, #64748b); letter-spacing: .12em; text-transform: uppercase; padding: 1rem .25rem .35rem; text-align: center; }',
       '.docs-nav-mobile-drawer .close-btn { position: fixed; top: .9rem; right: 1.1rem; width: 30px; height: 30px; background: transparent; border: 0; color: var(--text, #e2e8f0); font-size: 1.4rem; line-height: 1; cursor: pointer; z-index: 9999; }',
       '@media (max-width: 700px) {',
@@ -57,20 +57,20 @@
   var root = '../';
   drawer.innerHTML = [
     '<button type="button" class="close-btn" aria-label="Close menu">×</button>',
-    '<a href="' + root + 'index.html">Home</a>',
-    '<a href="' + root + 'about.html">About</a>',
-    '<a href="' + root + 'badges/' + v + '">GitHub Badges</a>',
-    '<a href="' + root + 'named/' + v + '">Skills</a>',
-    '<a href="index.html">Docs</a>',
+    '<a href="' + root + 'index.html" style="color:var(--text)">Home</a>',
+    '<a href="' + root + 'about.html" style="color:var(--apex-gold)">About</a>',
+    '<a href="' + root + 'badges/' + v + '" style="color:var(--tier-unique)">GitHub Badges</a>',
+    '<a href="' + root + 'named/' + v + '" style="color:var(--honor-red)">Skills</a>',
+    '<a href="index.html" style="color:var(--tier-basic)">Docs</a>',
     '<div class="group-label">More</div>',
-    '<a href="' + root + 'index.html?tree=1">Skill Tree</a>',
-    '<a href="' + root + 'index.html?field=1">Skill Graph</a>',
-    '<a href="' + root + 'codex.html">The Codex</a>',
-    '<a href="' + root + 'trust/ledger/' + v + '">Trust Ledger</a>',
-    '<a href="' + root + 'starless.html">Starless</a>',
-    '<a href="' + root + 'u/' + v + '">Named Contributors</a>',
+    '<a href="' + root + 'index.html?tree=1" style="color:#34d399">Skill Tree</a>',
+    '<a href="' + root + 'index.html?field=1" style="color:var(--tier-basic)">Skill Graph</a>',
+    '<a href="' + root + 'codex.html" style="color:var(--tier-basic)">The Codex</a>',
+    '<a href="' + root + 'trust/ledger/' + v + '" style="color:var(--evidence-gold)">Trust Ledger</a>',
+    '<a href="' + root + 'starless.html" style="color:var(--muted)">Starless</a>',
+    '<a href="' + root + 'u/' + v + '" style="color:var(--honor-red)">Named Contributors</a>',
     '<a href="' + root + 'meta.html">Meta Reports</a>',
-    '<a href="' + root + 'evidence/' + v + '">Evidence Library</a>'
+    '<a href="' + root + 'evidence/' + v + '" style="color:var(--rank-3)">Evidence Library</a>'
   ].join('');
   document.body.appendChild(drawer);
 
