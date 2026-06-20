@@ -6,11 +6,20 @@
  * (.grade-segment.grade-* / [data-trust-grade=*]).
  */
 
+/* ── Page container — full-bleed override of .process-page defaults ─── */
+.ledger-page main {
+  width: 100%;
+}
+
 /* ── Hero ───────────────────────────────────────────────────── */
 .lb-hero {
+  width: 100%;
+  max-width: none;          /* override .process-hero max-width: 1000px */
   min-height: 28vh;
   padding-top: 3rem;
   padding-bottom: 1.5rem;
+  align-items: flex-start;  /* left-align everything in the hero block */
+  text-align: left;
 }
 
 .lb-hero h1 {
@@ -21,7 +30,8 @@
 
 .lb-hero .process-lede {
   max-width: 720px;
-  margin: 0 auto;
+  margin: 0;             /* not auto — left-align with the rest of the page */
+  text-align: left;
 }
 
 .lb-hero .process-lede a {
