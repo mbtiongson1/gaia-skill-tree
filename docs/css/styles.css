@@ -10402,7 +10402,10 @@ body[data-overall-grade="S"] .report-card {
 .ev-tab[data-grade="S"].active,
 .ev-legend-dot.grade-S,
 .se-ev-mag-bar[data-trust-grade="S"],
-.plaque__trust-notch[data-trust-grade="S"] {
+.plaque__trust-notch[data-trust-grade="S"],
+.lb-dist-seg[data-trust-grade="S"],
+.lb-dist-key__pip[data-trust-grade="S"],
+.lb-grade-pill[data-trust-grade="S"] {
   position: relative;
   overflow: hidden;
   border: 1px solid #3b82f6; /* Stronger blue border */
@@ -10448,7 +10451,10 @@ body[data-overall-grade="S"] .report-card {
 .ev-tab[data-grade="A"].active,
 .ev-legend-dot.grade-A,
 .se-ev-mag-bar[data-trust-grade="A"],
-.plaque__trust-notch[data-trust-grade="A"] {
+.plaque__trust-notch[data-trust-grade="A"],
+.lb-dist-seg[data-trust-grade="A"],
+.lb-dist-key__pip[data-trust-grade="A"],
+.lb-grade-pill[data-trust-grade="A"] {
   border: 1px solid #d99706;
   background:
     /* Specular reflections (anisotropic sheen) */
@@ -10481,7 +10487,10 @@ body[data-overall-grade="S"] .report-card {
 .ev-tab[data-grade="B"].active,
 .ev-legend-dot.grade-B,
 .se-ev-mag-bar[data-trust-grade="B"],
-.plaque__trust-notch[data-trust-grade="B"] {
+.plaque__trust-notch[data-trust-grade="B"],
+.lb-dist-seg[data-trust-grade="B"],
+.lb-dist-key__pip[data-trust-grade="B"],
+.lb-grade-pill[data-trust-grade="B"] {
   border: 1px solid #475569; /* Darker border */
   background:
     /* Specular reflections (matte sheen) */
@@ -10512,7 +10521,10 @@ body[data-overall-grade="S"] .report-card {
 .ev-tab[data-grade="C"].active,
 .ev-legend-dot.grade-C,
 .se-ev-mag-bar[data-trust-grade="C"],
-.plaque__trust-notch[data-trust-grade="C"] {
+.plaque__trust-notch[data-trust-grade="C"],
+.lb-dist-seg[data-trust-grade="C"],
+.lb-dist-key__pip[data-trust-grade="C"],
+.lb-grade-pill[data-trust-grade="C"] {
   border: 1px solid #7c2d12;
   background:
     /* Specular reflections (faint) */
@@ -10542,7 +10554,10 @@ body[data-overall-grade="S"] .report-card {
 .ev-legend-dot.grade-ungraded,
 .se-ev-mag-bar[data-trust-grade="none"],
 .plaque__trust-notch[data-trust-grade="—"],
-.plaque__trust-notch[data-trust-grade="none"] {
+.plaque__trust-notch[data-trust-grade="none"],
+.lb-dist-seg[data-trust-grade="none"],
+.lb-dist-key__pip[data-trust-grade="none"],
+.lb-grade-pill[data-trust-grade="none"] {
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--border);
   color: var(--muted);

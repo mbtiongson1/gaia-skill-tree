@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trust Magnitude Leaderboard — The Codex — Gaia</title>
-  <meta name="description" content="GAIA Trust Magnitude leaderboard — every named skill ranked by evidence-backed trust score. Grade bands S/A/B/C, rank-floor protections, apex-gate predicates.">
+  <meta name="description" content="GAIA Trust Magnitude leaderboard — every named skill ranked by evidence-backed trust score.">
   <link rel="icon" type="image/svg+xml" href="../../assets/marks/diamond-seal.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
   <script src="../../js/mounts.js?v=5.0.6"></script>
   <script src="../../js/site-nav.js?v=5.0.6"></script>
 
-  <main style="padding: 0 2rem; max-width: 1240px; margin: 0 auto;">
+  <main style="padding: 0 2rem; max-width: 1280px; margin: 0 auto;">
 
     <!-- ─── BACK ─── -->
     <div class="tm-back-row">
@@ -38,21 +38,14 @@
       <p class="process-kicker">The Codex · Trust &amp; Evidence</p>
       <h1>Trust Magnitude Leaderboard</h1>
       <p class="process-lede">
-        Every named skill in the registry ranked by Trust Magnitude — the evidence-weighted score
-        defined in the <a href="../index.html">Trust Methodology</a>. Banded by Overall Trust Grade
-        (S / A / B / C / Ungraded), with rank-floor protections and apex-gate predicates surfaced inline.
+        Every named skill ranked by evidence-backed Trust Magnitude.
+        Sortable on every column, filterable by grade, searchable by skill ID.
       </p>
-      <div class="process-actions">
-        <a class="btn btn-ghost" href="../index.html">Methodology</a>
-        <a class="btn btn-ghost" href="../../evidence/index.html">Evidence Explorer</a>
-        <a class="btn btn-ghost" href="https://github.com/mbtiongson1/gaia-skill-tree/issues/715" target="_blank" rel="noopener">RFC G7</a>
-      </div>
     </section>
 
-    <!-- ─── SUMMARY STAT CARDS ─── -->
-    <section class="lb-stats" id="lbStats" aria-label="Leaderboard summary">
-      <!-- populated by leaderboard.js -->
-      <div class="lb-stat lb-stat--placeholder"><span class="lb-stat__num">…</span><span class="lb-stat__label">loading</span></div>
+    <!-- ─── DISTRIBUTION STRIP ─── -->
+    <section class="lb-distribution" id="lbDistribution" aria-label="Grade distribution">
+      <!-- populated by JS -->
     </section>
 
     <!-- ─── CONTROLS ─── -->
@@ -61,40 +54,54 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         <input type="search" id="lbSearch" placeholder="Search skill ID (e.g. mattpocock, gstack, web-scrape)…" autocomplete="off">
       </div>
-      <div class="lb-filters" role="group" aria-label="Grade band filters">
-        <button type="button" class="lb-chip is-active" data-band="all">All</button>
-        <button type="button" class="lb-chip lb-chip--s" data-band="S">S</button>
-        <button type="button" class="lb-chip lb-chip--a" data-band="A">A</button>
-        <button type="button" class="lb-chip lb-chip--b" data-band="B">B</button>
-        <button type="button" class="lb-chip lb-chip--c" data-band="C">C</button>
-        <button type="button" class="lb-chip lb-chip--u" data-band="ungraded">Ungraded</button>
+      <div class="lb-filters" role="group" aria-label="Grade filters">
+        <button type="button" class="lb-tab is-active" data-band="all">All</button>
+        <button type="button" class="lb-tab" data-band="S" data-grade="S">S</button>
+        <button type="button" class="lb-tab" data-band="A" data-grade="A">A</button>
+        <button type="button" class="lb-tab" data-band="B" data-grade="B">B</button>
+        <button type="button" class="lb-tab" data-band="C" data-grade="C">C</button>
+        <button type="button" class="lb-tab" data-band="ungraded">Ungraded</button>
       </div>
     </section>
 
-    <!-- ─── BAND SECTIONS ─── -->
-    <div id="lbBands" class="lb-bands"></div>
+    <!-- ─── SINGLE SORTABLE TABLE ─── -->
+    <div class="lb-table-wrap">
+      <table class="lb-table" id="lbTable">
+        <thead>
+          <tr>
+            <th class="col-rank" data-col="rank">#</th>
+            <th class="col-id" data-col="id">Skill ID</th>
+            <th class="col-tm" data-col="tm" data-default-dir="desc">Trust Magnitude</th>
+            <th class="col-grade" data-col="grade">Grade</th>
+            <th class="col-stars" data-col="stars">Stars</th>
+            <th class="col-g7" data-col="g7">G7 Stars</th>
+            <th class="col-flag" data-col="flag">Flag</th>
+            <th class="col-apex" data-col="apex">Apex</th>
+          </tr>
+        </thead>
+        <tbody id="lbTableBody">
+          <tr><td colspan="8" class="lb-empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- ─── FOOTER LEDGER ─── -->
     <section class="lb-ledger" aria-label="Legend">
       <div class="lb-ledger__row">
-        <span class="lb-ledger__key">Stars</span>
-        <span class="lb-ledger__val">Current rank — Awakened · Named · Evolved · Hardened · Transcendent</span>
+        <span class="lb-ledger__key">Trust Magnitude</span>
+        <span class="lb-ledger__val">S ≥ 250 · A ≥ 100 · B ≥ 50 · C ≥ 20. See <a href="../index.html#quick-math">Quick Math Reference</a>.</span>
       </div>
       <div class="lb-ledger__row">
-        <span class="lb-ledger__key">G7 Stars</span>
-        <span class="lb-ledger__val">Effective stars per <a href="https://github.com/mbtiongson1/gaia-skill-tree/issues/715" target="_blank" rel="noopener">RFC G7 §10.10</a> — S=5★ · A=4★ · B=3★ · C=2★ · ungraded=1★</span>
+        <span class="lb-ledger__key">Stars / G7 Stars</span>
+        <span class="lb-ledger__val">Stars = current rank (Awakened → Transcendent). G7 Stars = effective rank from grade per <a href="https://github.com/mbtiongson1/gaia-skill-tree/issues/715" target="_blank" rel="noopener">RFC §10.10</a>.</span>
       </div>
       <div class="lb-ledger__row">
-        <span class="lb-ledger__key">[floor]</span>
-        <span class="lb-ledger__val">Rank-floor §10.10 — 4★+ holds at ≥ Evolved (3★) despite a low grade</span>
+        <span class="lb-ledger__key">Flag</span>
+        <span class="lb-ledger__val"><strong>floor</strong> = rank-floor protection holds at ≥ Evolved. <strong>up</strong> = grade implies promotion above current stars.</span>
       </div>
       <div class="lb-ledger__row">
-        <span class="lb-ledger__key">[up]</span>
-        <span class="lb-ledger__val">G7 grade implies a promotion above the skill's current stars</span>
-      </div>
-      <div class="lb-ledger__row">
-        <span class="lb-ledger__key">Apex Gate</span>
-        <span class="lb-ledger__val">S-grade only — predicates passed / active per <a href="../index.html#apex-gate">RFC §11.12</a>. Apex-eligible skills pass all 6.</span>
+        <span class="lb-ledger__key">Apex</span>
+        <span class="lb-ledger__val">Predicates passed / active for 6★ apex eligibility (<a href="../index.html#apex-gate">RFC §11.12</a>). S-grade only.</span>
       </div>
       <div class="lb-ledger__row lb-ledger__row--meta">
         <span class="lb-ledger__key">Updated</span>
@@ -102,7 +109,6 @@
       </div>
     </section>
 
-    <!-- ─── BACK TO TOP ─── -->
     <div class="lb-back-top">
       <a class="tm-back" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 19l7-7-7-7"/></svg>

@@ -1,9 +1,8 @@
 /*
- * /trust/leaderboard/leaderboard.js
+ * /codex/leaderboard/leaderboard.js
  *
- * Renders the public Trust Magnitude leaderboard from
- * docs/graph/leaderboard/data.json. Search, filter chips, per-band
- * sortable tables, summary stats, footer ledger.
+ * Single-table sortable, filterable Trust Magnitude leaderboard.
+ * No bands, no modals, no circles. Pure flat ranked list.
  *
  * Data shape — see scripts/generateLeaderboardData.py:
  *   { version, generatedAt, summary, rows: [
@@ -15,21 +14,13 @@
   'use strict';
 
   var DATA_URL    = '../../graph/leaderboard/data.json';
-  var SKILL_LINK  = '../../named/?s=';   // resolved relative to /trust/leaderboard/
+  var SKILL_LINK  = '../../named/?s=';
   var GAIA_VER    = window.GAIA_VERSION || '';
   var STARS_ORDER = { '0★': 0, '1★': 1, '2★': 2, '3★': 3, '4★': 4, '5★': 5, '6★': 6 };
   var STARS_NAMES = {
     '0★': 'Unawakened', '1★': 'Awakened', '2★': 'Named', '3★': 'Evolved',
     '4★': 'Hardened',   '5★': 'Transcendent', '6★': 'Transcendent'
   };
-
-  var BANDS = [
-    { key: 'S',        label: 'S grade',  sub: 'TM ≥ 250',           seal: 'S' },
-    { key: 'A',        label: 'A grade',  sub: 'TM ≥ 100',           seal: 'A' },
-    { key: 'B',        label: 'B grade',  sub: 'TM ≥ 50',            seal: 'B' },
-    { key: 'C',        label: 'C grade',  sub: 'TM ≥ 20',            seal: 'C' },
-    { key: 'ungraded', label: 'Ungraded', sub: 'TM < 20',            seal: '·' }
-  ];
 
   var APEX_LABELS = {
     aGradedOriginsGte5:         '≥8 A-graded origins',
@@ -49,7 +40,7 @@
     version: '',
     activeBand: 'all',
     query: '',
-    sort: {} // per band: { S: {col:'tm', dir:'desc'}, ... }
+    sort: { col: 'tm', dir: 'desc' }
   };
 
   /* ── Load data ─────────────────────────────────────────────── */
@@ -64,44 +55,69 @@
       state.generatedAt = data.generatedAt || '';
       state.version     = data.version || '';
 
-      // default sort per band: TM desc
-      BANDS.forEach(function (b) { state.sort[b.key] = { col: 'tm', dir: 'desc' }; });
-
-      renderStats();
-      renderBands();
+      renderDistribution();
+      renderTable();
       renderGeneratedAt();
     })
     .catch(function (err) {
       console.error('[leaderboard] failed to load', err);
-      var bands = document.getElementById('lbBands');
-      if (bands) {
-        bands.innerHTML =
-          '<div class="lb-empty">Could not load leaderboard data. ' +
-          '<a href="' + DATA_URL + '">Try the raw JSON →</a></div>';
+      var body = document.getElementById('lbTableBody');
+      if (body) {
+        body.innerHTML = '<tr><td colspan="8" class="lb-empty">Could not load data. ' +
+          '<a href="' + DATA_URL + '">Try the raw JSON →</a></td></tr>';
       }
     });
 
-  /* ── Stat cards ────────────────────────────────────────────── */
-  function renderStats() {
-    var el = document.getElementById('lbStats');
+  /* ── Distribution strip (replaces stat cards) ────────────── */
+  function renderDistribution() {
+    var el = document.getElementById('lbDistribution');
     if (!el || !state.summary) return;
     var s = state.summary;
-    var cards = [
-      { cls: 'total', num: s.total, label: 'total' },
-      { cls: 's',     num: s.S,     label: 'S grade' },
-      { cls: 'a',     num: s.A,     label: 'A grade' },
-      { cls: 'b',     num: s.B,     label: 'B grade' },
-      { cls: 'c',     num: s.C,     label: 'C grade' },
-      { cls: 'u',     num: s.ungraded, label: 'ungraded' },
-      { cls: 'floor', num: s.floor, label: 'rank-floor' },
-      { cls: 'up',    num: s.up,    label: '[up] promotions' }
+    var total = Math.max(1, s.total || 1);
+
+    // Each grade bar segment proportional to count, with metallic fill
+    var segments = [
+      { grade: 'S', count: s.S || 0,        label: 'Platinum' },
+      { grade: 'A', count: s.A || 0,        label: 'Gold' },
+      { grade: 'B', count: s.B || 0,        label: 'Silver' },
+      { grade: 'C', count: s.C || 0,        label: 'Bronze' },
+      { grade: 'ungraded', count: s.ungraded || 0, label: 'Ungraded' }
     ];
-    el.innerHTML = cards.map(function (c) {
-      return '<div class="lb-stat lb-stat--' + c.cls + '">' +
-                '<span class="lb-stat__num">' + escapeHtml(String(c.num)) + '</span>' +
-                '<span class="lb-stat__label">' + escapeHtml(c.label) + '</span>' +
-             '</div>';
-    }).join('');
+
+    var bar = '<div class="lb-dist-bar" role="img" aria-label="Distribution by grade">' +
+      segments.map(function (seg) {
+        if (!seg.count) return '';
+        var pct = (seg.count / total * 100).toFixed(2);
+        var ds = seg.grade === 'ungraded' ? 'none' : seg.grade;
+        return '<div class="lb-dist-seg" data-trust-grade="' + ds + '"' +
+               ' style="width:' + pct + '%"' +
+               ' title="' + seg.label + ' (' + seg.grade + '): ' + seg.count + ' skills · ' + pct + '%">' +
+               '<span class="lb-dist-seg__count">' + seg.count + '</span>' +
+               '</div>';
+      }).join('') +
+      '</div>';
+
+    var keys = '<div class="lb-dist-keys">' +
+      segments.map(function (seg) {
+        var ds = seg.grade === 'ungraded' ? 'none' : seg.grade;
+        var glabel = seg.grade === 'ungraded' ? '—' : seg.grade;
+        return '<button type="button" class="lb-dist-key" data-band="' + seg.grade + '">' +
+                 '<span class="lb-dist-key__pip" data-trust-grade="' + ds + '">' + glabel + '</span>' +
+                 '<span class="lb-dist-key__name">' + seg.label + '</span>' +
+                 '<span class="lb-dist-key__count">' + seg.count + '</span>' +
+               '</button>';
+      }).join('') +
+      '<div class="lb-dist-key lb-dist-key--total">' +
+        '<span class="lb-dist-key__name">Total</span>' +
+        '<span class="lb-dist-key__count">' + (s.total || 0) + '</span>' +
+      '</div>' +
+      ((s.floor || s.up) ? '<div class="lb-dist-key lb-dist-key--meta">' +
+        (s.floor ? '<span class="lb-dist-meta-pill"><strong>floor</strong> ' + s.floor + '</span>' : '') +
+        (s.up ?    '<span class="lb-dist-meta-pill"><strong>up</strong> ' + s.up + '</span>' : '') +
+      '</div>' : '') +
+      '</div>';
+
+    el.innerHTML = bar + keys;
   }
 
   /* ── Generated-at footer ───────────────────────────────────── */
@@ -120,10 +136,10 @@
     el.textContent = pretty || '—';
   }
 
-  /* ── Bands ─────────────────────────────────────────────────── */
-  function renderBands() {
-    var container = document.getElementById('lbBands');
-    if (!container) return;
+  /* ── Table render ──────────────────────────────────────────── */
+  function renderTable() {
+    var body = document.getElementById('lbTableBody');
+    if (!body) return;
 
     var q = state.query.trim().toLowerCase();
     var filtered = state.rows.filter(function (r) {
@@ -132,85 +148,18 @@
       return true;
     });
 
-    var html = BANDS.map(function (band) {
-      var bandRows = filtered.filter(function (r) { return r.grade === band.key; });
-      if (state.activeBand !== 'all' && state.activeBand !== band.key) return '';
-      if (bandRows.length === 0 && state.activeBand !== 'all') {
-        // user explicitly chose this band — show empty state
-        return renderBand(band, []);
-      }
-      if (bandRows.length === 0) return '';
-      sortRowsInPlace(bandRows, state.sort[band.key]);
-      return renderBand(band, bandRows);
-    }).join('');
+    sortRowsInPlace(filtered, state.sort);
 
-    if (!html.trim()) {
-      html = '<div class="lb-empty">No skills match the current filter.</div>';
-    }
-    container.innerHTML = html;
-    wireSortHandlers();
-  }
-
-  function renderBand(band, rows) {
-    var classKey = band.key === 'ungraded' ? 'u' : band.key.toLowerCase();
-    var sortState = state.sort[band.key] || { col: 'tm', dir: 'desc' };
-    var isS = band.key === 'S';
-
-    var headers = [
-      { col: 'rank',  label: '#',         sortable: false },
-      { col: 'id',    label: 'Skill ID',  sortable: true },
-      { col: 'tm',    label: 'TM',        sortable: true,  align: 'right' },
-      { col: 'grade', label: 'Grade',     sortable: true,  align: 'center' },
-      { col: 'stars', label: 'Stars',     sortable: true,  align: 'center' },
-      { col: 'g7',    label: 'G7 Stars',  sortable: true,  align: 'center' },
-      { col: 'flag',  label: 'Flag',      sortable: true }
-    ];
-    if (isS) headers.push({ col: 'apex', label: 'Apex Gate', sortable: true });
-
-    var theadCells = headers.map(function (h) {
-      var sortable = h.sortable;
-      var ariaSort = '';
-      var arrow = '';
-      if (sortable) {
-        if (sortState.col === h.col) {
-          ariaSort = ' aria-sort="' + (sortState.dir === 'asc' ? 'ascending' : 'descending') + '"';
-          arrow = '<span class="lb-sort">' + (sortState.dir === 'asc' ? '▲' : '▼') + '</span>';
-        } else {
-          arrow = '<span class="lb-sort">↕</span>';
-        }
-      }
-      return '<th data-band="' + escapeAttr(band.key) + '" data-col="' + escapeAttr(h.col) + '"' +
-             (sortable ? '' : ' aria-disabled="true"') + ariaSort +
-             ' class="col-' + escapeAttr(h.col) + '">' +
-             escapeHtml(h.label) + (sortable ? arrow : '') +
-             '</th>';
-    }).join('');
-
-    var bodyRows;
-    if (rows.length === 0) {
-      bodyRows = '<tr><td colspan="' + headers.length + '" class="lb-empty">No skills in this band match your search.</td></tr>';
+    if (filtered.length === 0) {
+      body.innerHTML = '<tr><td colspan="8" class="lb-empty">No skills match the current filter.</td></tr>';
     } else {
-      bodyRows = rows.map(function (r, idx) { return renderRow(r, idx + 1, isS); }).join('');
+      body.innerHTML = filtered.map(function (r, i) { return renderRow(r, i + 1); }).join('');
     }
 
-    return '' +
-      '<section class="lb-band lb-band--' + classKey + '" id="band-' + escapeAttr(band.key) + '">' +
-        '<div class="lb-band__header">' +
-          '<span class="lb-band__seal" aria-hidden="true">' + escapeHtml(band.seal) + '</span>' +
-          '<h2 class="lb-band__title">' + escapeHtml(band.label) + '</h2>' +
-          '<span class="lb-band__count">' + rows.length + ' skill' + (rows.length === 1 ? '' : 's') + '</span>' +
-          '<span class="lb-band__sub">' + escapeHtml(band.sub) + '</span>' +
-        '</div>' +
-        '<div class="lb-table-wrap">' +
-          '<table class="lb-table">' +
-            '<thead><tr>' + theadCells + '</tr></thead>' +
-            '<tbody>' + bodyRows + '</tbody>' +
-          '</table>' +
-        '</div>' +
-      '</section>';
+    updateSortIndicators();
   }
 
-  function renderRow(r, rank, isS) {
+  function renderRow(r, rank) {
     var skillId = r.skillId || '';
     var idLink = SKILL_LINK + encodeURIComponent(skillId);
     var stars = r.currentStars || '?';
@@ -219,35 +168,35 @@
     var g7 = r.g7Stars || '';
     var g7Cls = STARS_ORDER.hasOwnProperty(g7) ? ('lb-stars--' + STARS_ORDER[g7]) : '';
 
-    var gradeKey = r.grade === 'ungraded' ? 'u' : (r.grade || '').toLowerCase();
-    var gradeLabel = r.grade === 'ungraded' ? '—' : (r.grade || '—');
+    var gradeRaw = r.grade || 'ungraded';
+    var gradeKey = gradeRaw === 'ungraded' ? 'none' : gradeRaw;
+    var gradeLabel = gradeRaw === 'ungraded' ? '—' : gradeRaw;
 
     var flagHtml = '';
     if (r.flag === '[floor]') flagHtml = '<span class="lb-flag lb-flag--floor">floor</span>';
     else if (r.flag === '[up]') flagHtml = '<span class="lb-flag lb-flag--up">up</span>';
-    else flagHtml = '<span style="color:var(--border)">·</span>';
+    else flagHtml = '<span class="lb-flag-empty">·</span>';
 
-    var apexHtml = '';
-    if (isS) {
-      apexHtml = '<td class="col-apex">' + renderApex(r.apexResults) + '</td>';
-    }
+    var apexHtml = renderApex(r.apexResults, gradeRaw);
 
     return '' +
-      '<tr>' +
-        '<td class="col-num">' + rank + '</td>' +
-        '<td class="col-id"><a href="' + escapeAttr(idLink) + '" title="' + escapeAttr(skillId) + '">' +
-          escapeHtml(skillId) + '</a></td>' +
-        '<td class="col-tm">' + (typeof r.tm === 'number' ? r.tm.toFixed(2) : escapeHtml(String(r.tm))) + '</td>' +
-        '<td class="col-grade"><span class="lb-grade lb-grade--' + escapeAttr(gradeKey) + '">' + escapeHtml(gradeLabel) + '</span></td>' +
-        '<td class="col-stars"><span class="lb-stars ' + starsCls + '" title="' + escapeAttr(starsTitle) + '">' + escapeHtml(stars) + '</span></td>' +
-        '<td class="col-g7"><span class="lb-stars ' + g7Cls + '">' + escapeHtml(g7) + '</span></td>' +
+      '<tr data-trust-grade="' + esc(gradeKey) + '">' +
+        '<td class="col-rank">' + rank + '</td>' +
+        '<td class="col-id"><a href="' + esc(idLink) + '" title="' + esc(skillId) + '">' +
+          esc(skillId) + '</a></td>' +
+        '<td class="col-tm">' + (typeof r.tm === 'number' ? r.tm.toFixed(1) : esc(String(r.tm))) + '</td>' +
+        '<td class="col-grade">' +
+          '<span class="lb-grade-pill" data-trust-grade="' + esc(gradeKey) + '">' + esc(gradeLabel) + '</span>' +
+        '</td>' +
+        '<td class="col-stars"><span class="lb-stars ' + starsCls + '" title="' + esc(starsTitle) + '">' + esc(stars) + '</span></td>' +
+        '<td class="col-g7"><span class="lb-stars ' + g7Cls + '">' + esc(g7) + '</span></td>' +
         '<td class="col-flag">' + flagHtml + '</td>' +
-        apexHtml +
+        '<td class="col-apex">' + apexHtml + '</td>' +
       '</tr>';
   }
 
-  function renderApex(apexResults) {
-    if (!apexResults) return '<span class="lb-apex lb-apex--na">n/a</span>';
+  function renderApex(apexResults, grade) {
+    if (!apexResults || grade !== 'S') return '<span class="lb-apex-empty">—</span>';
     var keys = Object.keys(apexResults);
     var active = keys.filter(function (k) { return apexResults[k] !== null; });
     var passed = active.filter(function (k) { return apexResults[k] === true; });
@@ -258,12 +207,12 @@
     var detail = '';
     if (failed.length) {
       var shortFails = failed.map(function (k) { return APEX_LABELS[k] || k; }).slice(0, 2);
-      detail = ' <span class="lb-apex__detail">fail: ' + escapeHtml(shortFails.join(', ')) +
+      detail = ' <span class="lb-apex__detail">' + esc(shortFails.join(', ')) +
                (failed.length > 2 ? '…' : '') + '</span>';
     } else if (isApex) {
       detail = ' <span class="lb-apex__detail">apex</span>';
     }
-    var cls = isApex ? 'lb-apex lb-apex--apex' : (failed.length ? 'lb-apex lb-apex__fail' : 'lb-apex lb-apex__pass');
+    var cls = isApex ? 'lb-apex lb-apex--apex' : (failed.length ? 'lb-apex lb-apex--fail' : 'lb-apex lb-apex--pass');
     return '<span class="' + cls + '"><span class="lb-apex__count">' + label + '</span>' + detail + '</span>';
   }
 
@@ -273,6 +222,7 @@
     rows.sort(function (a, b) {
       var av, bv;
       switch (col) {
+        case 'rank': av = 0; bv = 0; break;  // physical position; stable secondary applies
         case 'id':
           av = (a.skillId || '').toLowerCase();
           bv = (b.skillId || '').toLowerCase();
@@ -302,7 +252,11 @@
       }
       if (av < bv) return -1 * dir;
       if (av > bv) return  1 * dir;
-      // stable secondary by skillId
+      // stable secondary: TM desc → id asc
+      if (col !== 'tm') {
+        var atm = +a.tm || 0, btm = +b.tm || 0;
+        if (atm !== btm) return btm - atm;
+      }
       var aid = (a.skillId || '').toLowerCase();
       var bid = (b.skillId || '').toLowerCase();
       return aid < bid ? -1 : aid > bid ? 1 : 0;
@@ -325,27 +279,28 @@
     return passed.length / keys.length;
   }
 
-  function wireSortHandlers() {
-    var ths = document.querySelectorAll('.lb-table thead th[data-col]');
+  function updateSortIndicators() {
+    var ths = document.querySelectorAll('#lbTable thead th[data-col]');
     ths.forEach(function (th) {
       var col = th.getAttribute('data-col');
-      var band = th.getAttribute('data-band');
-      if (col === 'rank') return;
-      th.addEventListener('click', function () {
-        var ss = state.sort[band] || { col: 'tm', dir: 'desc' };
-        if (ss.col === col) {
-          ss.dir = ss.dir === 'asc' ? 'desc' : 'asc';
-        } else {
-          ss.col = col;
-          ss.dir = (col === 'id' ? 'asc' : 'desc');
-        }
-        state.sort[band] = ss;
-        renderBands();
-      });
+      th.removeAttribute('aria-sort');
+      var existing = th.querySelector('.lb-sort');
+      if (existing) existing.remove();
+      var arrow;
+      if (state.sort.col === col) {
+        th.setAttribute('aria-sort', state.sort.dir === 'asc' ? 'ascending' : 'descending');
+        arrow = state.sort.dir === 'asc' ? '▲' : '▼';
+      } else {
+        arrow = '↕';
+      }
+      var span = document.createElement('span');
+      span.className = 'lb-sort';
+      span.textContent = arrow;
+      th.appendChild(span);
     });
   }
 
-  /* ── Search + chips ────────────────────────────────────────── */
+  /* ── Wire up controls ──────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     var search = document.getElementById('lbSearch');
     if (search) {
@@ -354,23 +309,52 @@
         clearTimeout(debounce);
         debounce = setTimeout(function () {
           state.query = e.target.value || '';
-          renderBands();
+          renderTable();
         }, 80);
       });
     }
-    var chips = document.querySelectorAll('.lb-chip');
-    chips.forEach(function (c) {
-      c.addEventListener('click', function () {
-        chips.forEach(function (x) { x.classList.remove('is-active'); });
-        c.classList.add('is-active');
-        state.activeBand = c.getAttribute('data-band') || 'all';
-        renderBands();
-      });
+
+    // Tab filters
+    document.addEventListener('click', function (e) {
+      var tab = e.target.closest('.lb-tab');
+      if (tab) {
+        document.querySelectorAll('.lb-tab').forEach(function (x) { x.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        state.activeBand = tab.getAttribute('data-band') || 'all';
+        renderTable();
+        return;
+      }
+
+      // Distribution-key click also filters
+      var key = e.target.closest('.lb-dist-key[data-band]');
+      if (key) {
+        var band = key.getAttribute('data-band');
+        document.querySelectorAll('.lb-tab').forEach(function (x) {
+          x.classList.toggle('is-active', x.getAttribute('data-band') === band);
+        });
+        state.activeBand = band;
+        renderTable();
+        return;
+      }
+
+      // Header sort click
+      var th = e.target.closest('#lbTable thead th[data-col]');
+      if (th) {
+        var col = th.getAttribute('data-col');
+        if (col === 'rank') return;
+        if (state.sort.col === col) {
+          state.sort.dir = state.sort.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+          state.sort.col = col;
+          state.sort.dir = (col === 'id' ? 'asc' : 'desc');
+        }
+        renderTable();
+      }
     });
   });
 
   /* ── Helpers ───────────────────────────────────────────────── */
-  function escapeHtml(s) {
+  function esc(s) {
     return String(s)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -378,5 +362,4 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
   }
-  function escapeAttr(s) { return escapeHtml(s); }
 })();
