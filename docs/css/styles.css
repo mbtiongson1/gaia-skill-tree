@@ -10933,51 +10933,55 @@ body[data-overall-grade="S"] .report-card {
   border-bottom-color: var(--rank-3);
 }
 
-/* MAG bar — full-width metallic bar at card bottom, plaque-style */
-.se-ev-mag-bar {
-  width: 100%;
-  height: 22px;
-  display: flex;
+/* (i) info button on MAG bars — shows formula tooltip on hover */
+.se-ev-mag-info {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: currentColor;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  font-size: 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: help;
+  pointer-events: auto;
+  opacity: 0.7;
+  margin-left: 5px;
   flex-shrink: 0;
-  border-top: 1px solid var(--border);
-  /* no animation */
+}
+.se-ev-mag-info:hover {
+  opacity: 1;
 }
 
-/* Grade fills — match plaque__trust-notch fills exactly */
-.se-ev-mag-bar[data-trust-grade="S"] {
-  background: linear-gradient(90deg, #d1e8ff 0%, #a5c7eb 50%, #d1e8ff 100%);
-  color: #0f172a;
-}
-.se-ev-mag-bar[data-trust-grade="A"] {
-  background: var(--grade-A, #d4af37);
-  color: #030712;
-}
-.se-ev-mag-bar[data-trust-grade="B"] {
-  background: rgba(148,163,184,0.45);
-  color: var(--text, #e2e8f0);
-}
-.se-ev-mag-bar[data-trust-grade="C"] {
-  background: var(--grade-C, #b45309);
-  color: #fff8f0;
-}
-.se-ev-mag-bar[data-trust-grade="none"] {
-  background: rgba(255,255,255,0.04);
-  color: var(--muted);
-}
-
-.se-ev-mag-label {
+/* (i) button injected into the plaque trust notch in the skill modal */
+.se-notch-info {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: currentColor;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  font-size: 8px;
   font-family: var(--font-mono);
-  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
   line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  pointer-events: auto;
+  opacity: 0.75;
+  margin-left: 8px;
+  flex-shrink: 0;
+  vertical-align: middle;
 }
-.se-ev-mag-num {
-  font-weight: 700;
+.se-notch-info:hover {
+  opacity: 1;
 }

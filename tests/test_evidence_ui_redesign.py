@@ -295,6 +295,16 @@ class TestStylesCSS:
     def test_derive_trust_num_helper_present(self):
         assert "_deriveTrustNum" in SE_JS
 
+    def test_mag_tooltip_helper_present(self):
+        assert "_magTooltip" in SE_JS
+
+    def test_mag_info_button_in_card_html(self):
+        assert "se-ev-mag-info" in SE_JS
+
+    def test_peer_review_reviewer_default_present(self):
+        """peer-review without reviewers should default to 1 when evaluator present."""
+        assert "reviewer.*default" in SE_JS or "evaluator ? 1 : null" in SE_JS or "ev.evaluator ? 1 : null" in SE_JS
+
     def test_tile_grid_class_used(self):
         assert "se-ev-grid" in SE_JS
 

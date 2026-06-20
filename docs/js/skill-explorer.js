@@ -47,7 +47,9 @@
       if (ev.citations != null) return Math.min(100, parseFloat(ev.citations) / 5);
     }
     if (t === 'peer-review') {
-      if (ev.reviewers != null) return Math.min(150, parseFloat(ev.reviewers) * 30);
+      // Default to 1 reviewer when the evaluator field is populated but reviewers count is absent
+      var reviewerCount = ev.reviewers != null ? parseFloat(ev.reviewers) : (ev.evaluator ? 1 : null);
+      if (reviewerCount != null) return Math.min(150, reviewerCount * 30);
     }
     if (t === 'social-signal') {
       if (ev.views != null && ev.views >= 1000) {
@@ -61,6 +63,42 @@
       if (ev.verifiers != null) return Math.min(150, parseFloat(ev.verifiers) * 30);
     }
     return null;
+  }
+
+  // Build a tooltip string explaining how the MAG number was computed for an evidence row.
+  // Note: row MAG = artifact_score for this row only (before type weight + plateau discount).
+  // Skill-level Trust Magnitude = weighted aggregate across all evidence rows.
+  function _magTooltip(ev, tmRaw) {
+    if (tmRaw == null) return 'No magnitude drivers present for this evidence type.';
+    var t = ev.type || '';
+    var lines = [];
+    if (ev.trustNumber != null) {
+      lines.push('Artifact score: ' + ev.trustNumber + ' (stored)');
+    } else if (t === 'github-stars' || t === 'github-stars-own') {
+      var s = ev.stars != null ? parseFloat(ev.stars) : null;
+      if (s != null) lines.push('stars / 1000 = ' + (s/1000).toFixed(1) + ' (cap 200)');
+    } else if (t === 'arxiv') {
+      var c = ev.citations != null ? parseFloat(ev.citations) : null;
+      if (c != null) lines.push('citations / 5 = ' + (c/5).toFixed(1) + ' (cap 100)');
+    } else if (t === 'peer-review') {
+      var r = ev.reviewers != null ? parseFloat(ev.reviewers) : (ev.evaluator ? 1 : null);
+      if (r != null) {
+        lines.push('reviewers × 30 = ' + (r*30).toFixed(0) + ' (cap 150)');
+        if (ev.reviewers == null && ev.evaluator) lines.push('reviewers defaulted to 1 (evaluator present)');
+      }
+    } else if (t === 'social-signal') {
+      var v = ev.views != null ? parseFloat(ev.views) : null;
+      if (v != null && v >= 1000) lines.push('log₁₀(' + v + ') × 8 = ' + (Math.log10(v)*8).toFixed(1) + ' (cap 80)');
+    } else if (t === 'benchmark-result') {
+      var p = ev.percentile != null ? parseFloat(ev.percentile) : null;
+      if (p != null) lines.push('percentile = ' + p + ' (cap 100)');
+    } else if (t === 'verifier-attestation') {
+      var vr = ev.verifiers != null ? parseFloat(ev.verifiers) : null;
+      if (vr != null) lines.push('verifiers × 30 = ' + (vr*30).toFixed(0) + ' (cap 150)');
+    }
+    if (ev.grade) lines.push('Grade: ' + ev.grade);
+    lines.push('Row score only — skill TM = weighted aggregate across all rows');
+    return lines.join('\n') || 'MAG ' + tmRaw;
   }
 
   function effectiveLabel(skill) {
@@ -171,6 +209,29 @@
     }
     if (repoRootUrl) { openBtn.onclick = function(){ window.open(repoRootUrl,'_blank','noopener'); }; openBtn.style.display=''; }
     else { openBtn.style.display = 'none'; }
+
+    // Add (i) button to the trust notch so users can see the calculation context
+    var heroEl = document.getElementById('seHero');
+    if (heroEl) {
+      var notch = heroEl.querySelector('.plaque__trust-notch');
+      if (notch) {
+        var tm = detailNs.trustMagnitude;
+        var tg = detailNs.overallTrustGrade;
+        if (tm != null && tg) {
+          var infoTip = (tg === 'S' ? 'Platinum' : tg === 'A' ? 'Gold' : tg === 'B' ? 'Silver' : 'Bronze') +
+            ' (' + tg + ') · MAG ' + parseFloat(Number(tm).toFixed(1)) +
+            '\nWeighted aggregate Trust Magnitude across all evidence rows.' +
+            '\nIndividual evidence cards show per-row artifact scores.';
+          var infoBtn = document.createElement('button');
+          infoBtn.className = 'se-notch-info';
+          infoBtn.type = 'button';
+          infoBtn.title = infoTip;
+          infoBtn.setAttribute('aria-label', 'Trust Magnitude calculation details');
+          infoBtn.textContent = 'i';
+          notch.appendChild(infoBtn);
+        }
+      }
+    }
   }
 
   // ── RENDER DESCRIPTION TAB ───────────────────────────────────
@@ -748,15 +809,22 @@
             evalHtml = '<span class="se-ev-eval">@' + esc(ev.evaluator) + '</span>';
           }
 
-          // MAG bar -- plaque design language, always expanded, no animation
-          // Use trustNumber if present, otherwise derive from magnitude drivers
-          var tmRaw = _deriveTrustNum(ev);
-          var tmDisplay = tmRaw != null
-            ? (Number.isInteger(tmRaw) ? String(tmRaw) : parseFloat(tmRaw).toFixed(1))
+          // MAG bar — shows the skill's aggregate Trust Magnitude (consistent across all cards)
+          // (i) tooltip shows the per-row artifact score and its derivation formula.
+          var tmRaw = _deriveTrustNum(ev);    // per-row raw artifact score
+          var skillTm = ns.trustMagnitude || ns.overallTrustMagnitude || null;
+          var skillGrade = (ns.overallTrustGrade || ns.trustGrade || '').toUpperCase().charAt(0) || null;
+          // Use skill-level aggregate for the bar display; fall back to per-row if not available
+          var barTm = skillTm != null ? skillTm : tmRaw;
+          var barGrade = skillGrade || trustGrade;
+          var tmDisplay = barTm != null
+            ? (Number.isInteger(barTm) ? String(barTm) : parseFloat(barTm).toFixed(1))
             : '—';
+          var magTooltipText = _magTooltip(ev, tmRaw);
           var magBarHtml = '<div class="se-ev-mag-bar"' +
-            (trustGrade ? ' data-trust-grade="' + esc(trustGrade) + '"' : ' data-trust-grade="none"') + '>' +
+            (barGrade ? ' data-trust-grade="' + esc(barGrade) + '"' : ' data-trust-grade="none"') + '>' +
             '<span class="se-ev-mag-label">MAG <span class="se-ev-mag-num">' + esc(tmDisplay) + '</span></span>' +
+            (tmRaw != null ? '<button class="se-ev-mag-info" type="button" title="' + esc(magTooltipText) + '" aria-label="Per-row artifact score details">i</button>' : '') +
           '</div>';
 
           // Ungraded: greyed-out missing treatment matching unnamed skill cards
@@ -1963,13 +2031,10 @@
         seShareBtn.style.display = (window.isRedacted && window.isRedacted(ns.level)) ? 'none' : '';
       }
 
-      // Topbar Trust Report button — links to the per-skill actionable report page.
+      // Topbar Trust Report button — disabled (reserved for future redesign)
       var seTrustReportBtn = document.getElementById('seTrustReport');
       if (seTrustReportBtn) {
-        seTrustReportBtn.style.display = '';
-        seTrustReportBtn.onclick = function() {
-          window.open('report.html?id=' + encodeURIComponent(ns.id), '_blank', 'noopener');
-        };
+        seTrustReportBtn.style.display = 'none';
       }
 
       // Topbar Submit Evidence button removed — CTA now lives inline in the Evidence

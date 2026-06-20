@@ -266,9 +266,13 @@
     var initialDisplay = tmVal % 1 === 0 ? String(Math.round(tmVal)) : tmVal.toFixed(1);
     var gradeName = GRADE_NAMES[tg];
     var ariaLabel = 'Trust grade: ' + gradeName + (tmVal > 0 ? ', magnitude ' + tmVal : '');
+    var tooltipText = gradeName + ' (' + tg + ') · MAG ' + (tmVal > 0 ? initialDisplay : '—') +
+      '\nWeighted aggregate across all evidence rows.' +
+      '\nIndividual evidence cards show per-row artifact scores.';
     return '<div class="plaque__trust-notch" data-trust-grade="' + esc(tg) + '"' +
       ' data-tm="' + esc(String(tmVal)) + '"' +
-      ' aria-label="' + esc(ariaLabel) + '">' +
+      ' aria-label="' + esc(ariaLabel) + '"' +
+      ' title="' + esc(tooltipText) + '">' +
       '<span class="trust-notch-label">MAG <span class="trust-notch-num">' + esc(initialDisplay) + '</span></span>' +
       '</div>';
   }
