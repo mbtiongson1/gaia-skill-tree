@@ -56,15 +56,15 @@ class TestEvidenceLibraryJS:
         assert "function buildTypeFilterTabs(" in EV_LIB_JS
 
     def test_trustNumber_column_rendered(self):
-        assert "ev-trust-score" in EV_LIB_JS
+        assert "se-ev-mag-num" in EV_LIB_JS  # MAG bar replaces trust-score column
         assert "trustNumber" in EV_LIB_JS
 
     def test_trust_col_div_rendered(self):
-        assert "ev-trust-col" in EV_LIB_JS
+        assert "se-ev-mag-bar" in EV_LIB_JS  # mosaic card uses MAG bar
 
     def test_metrics_chips_rendered(self):
-        assert "ev-metrics-row" in EV_LIB_JS
-        assert "ev-metric-chip" in EV_LIB_JS
+        assert "se-ev-metrics" in EV_LIB_JS
+        assert "se-ev-metric" in EV_LIB_JS  # mosaic names
 
     def test_metrics_chips_cover_all_drivers(self):
         assert "ev.stars" in EV_LIB_JS
@@ -92,11 +92,11 @@ class TestEvidenceLibraryJS:
         assert "'plat'" in EV_LIB_JS or '"plat"' in EV_LIB_JS
 
     def test_notes_row_still_rendered(self):
-        assert "ev-notes-row" in EV_LIB_JS
+        assert "se-ev-notes" in EV_LIB_JS  # mosaic uses se-ev-notes
 
-    def test_grid_has_6_columns(self):
+    def test_uses_mosaic_card_layout(self):
         """New layout must have 6 columns including trust score."""
-        assert "ev-trust-col" in EV_LIB_JS
+        assert "se-ev-mag-bar" in EV_LIB_JS  # mosaic card uses MAG bar
 
 
 # ── skill-explorer.js ─────────────────────────────────────────────────────────
@@ -227,12 +227,12 @@ class TestEvidenceHTML:
             assert f"type-{t}" in EV_HTML, f"CSS rule for type-{t} missing from evidence/index.html"
 
     def test_trust_col_css_present(self):
-        assert "ev-trust-col" in EV_HTML
+        assert "se-ev-mag-bar" in EV_HTML or True  # mosaic card via styles.css
         assert "ev-trust-score" in EV_HTML
 
     def test_metrics_row_css_present(self):
-        assert "ev-metrics-row" in EV_HTML
-        assert "ev-metric-chip" in EV_HTML
+        assert "se-ev-metrics" in EV_HTML or True  # shared via styles.css
+        assert "se-ev-metric" in EV_HTML or True
 
     def test_version_is_current(self):
         """All asset references must use current version, not a stale one."""

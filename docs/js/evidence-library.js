@@ -397,72 +397,209 @@
             </div>
           </div>
           <div class="ev-group-body">
-            ${g.entries.map(renderRow).join('')}
+            <div class="se-ev-grid">
+              ${g.entries.map(renderRow).join('')}
+            </div>
           </div>
         </div>`;
     }).join('');
   }
 
-  // Render a single evidence row
+  // Derive weighted artifact score (mirrors _deriveWeightedScore in skill-explorer.js)
+  function deriveWeightedScore(ev) {
+    const TM = window.TM_CONFIG;
+    if (!TM) return null;
+    const t = TM.canonicalType(ev.type || '');
+    const cfg = TM.TYPES[t];
+    if (!cfg) return null;
+    const d = cfg.describe(ev);
+    let base = null;
+    if (d && d.value != null) {
+      base = TM.applyCap(t, d.value);
+    } else if (ev.trustNumber != null) {
+      return ev.trustNumber;
+    } else {
+      const gc = (ev.grade || '').toUpperCase().charAt(0);
+      base = gc ? (cfg.gradeFloors || {})[gc] : null;
+    }
+    if (base == null) return null;
+    let score = base * cfg.weight;
+    if (cfg.freshness && cfg.freshness.decayPerYear) {
+      const lv = ev.lastVerified || ev.date || null;
+      if (lv) {
+        const ageYrs = (Date.now() - new Date(lv).getTime()) / (1000 * 365.25 * 24 * 3600);
+        score *= Math.max(0, 1 - cfg.freshness.decayPerYear * ageYrs);
+      }
+    }
+    if (t === 'social-signal') {
+      score *= (ev.creatorMultiplier || 1.0) * (ev.engagementRatio || 1.0);
+    }
+    if (ev.layer === 'generic' || ev._layer === 'generic') {
+      const im = { 'arxiv': 0.70, 'peer-review': 0.30, 'social-signal': 0.35,
+                   'proxy-containment': 0.25, 'benchmark-result': 0.15 }[t];
+      if (im) score *= im;
+    }
+    return Math.round(score * 10) / 10;
+  }
+
+  // Build (i) tooltip for a type pill — reads from TM_CONFIG
+  function typePillTooltip(normType) {
+    const TM = window.TM_CONFIG;
+    if (!TM) return normType;
+    const cfg = TM.TYPES[normType];
+    if (!cfg) return normType;
+    return cfg.label.toUpperCase() + ' evidence\nFormula: ' + cfg.formula +
+      '\nweight ×' + cfg.weight +
+      (cfg.cap != null ? '  ·  cap ' + cfg.cap : '') +
+      (cfg.gradeCeiling ? '  ·  ceiling ' + cfg.gradeCeiling : '') +
+      '\nSee: ' + ((TM.RFC && TM.RFC.types) || TM.RFC_BASE);
+  }
+
+  // Build (i) tooltip for MAG bar — shows full chain
+  function magTooltip(ev, weighted) {
+    const TM = window.TM_CONFIG;
+    if (!TM) return 'Trust config unavailable.';
+    const t = TM.canonicalType(ev.type || '');
+    const cfg = TM.TYPES[t];
+    if (!cfg) return ev.type || '';
+    const lines = [cfg.label.toUpperCase() + ' · ' + cfg.formula, ''];
+    const d = cfg.describe ? cfg.describe(ev) : null;
+    if (d && d.value != null) {
+      const capped = TM.applyCap(t, d.value);
+      const capNote = cfg.cap != null && d.value > cfg.cap ? ' → capped at ' + cfg.cap : '';
+      lines.push('base:         ' + d.expr + ' = ' + d.value.toFixed(2) + capNote);
+      lines.push('× weight:     ' + cfg.weight);
+      if (cfg.freshness && cfg.freshness.decayPerYear) {
+        const lv = ev.lastVerified || ev.date || null;
+        if (lv) {
+          const a = (Date.now() - new Date(lv).getTime()) / (1000*365.25*24*3600);
+          const ff = Math.max(0, 1 - cfg.freshness.decayPerYear * a);
+          lines.push('× freshness:  ' + ff.toFixed(3) + '  (−' + Math.round(cfg.freshness.decayPerYear*100) + '%/yr; age ' + a.toFixed(1) + ' yrs)');
+        } else {
+          lines.push('× freshness:  1.00  (assumed — no date)');
+        }
+      } else { lines.push('× freshness:  1.00  (no decay)'); }
+      if (t === 'social-signal') {
+        lines.push('× creator:    ' + (ev.creatorMultiplier || 1.0).toFixed(2));
+        lines.push('× engagement: ' + (ev.engagementRatio || 1.0).toFixed(2));
+      }
+      if (cfg.plateau) {
+        if (cfg.plateau.maxRows === 1) lines.push('× plateau:    1.00  (max 1 row)');
+        else lines.push('× plateau:    ' + cfg.plateau.factors.join(' / ') + '  (max ' + cfg.plateau.maxRows + ' rows)');
+      }
+      lines.push('');
+      lines.push('= MAG ' + (weighted != null ? weighted.toFixed(1) : '—') + '  (pre-plateau approximation)');
+    } else if (ev.trustNumber != null) {
+      lines.push('Stored artifact score: ' + ev.trustNumber);
+    } else {
+      lines.push('No metric drivers present.');
+    }
+    lines.push('');
+    if (ev.grade) lines.push('Row grade: ' + ev.grade);
+    const gf = cfg.gradeFloors || {};
+    const fs = ['S','A','B','C'].filter(g => gf[g] != null).map(g => g + '≥' + gf[g]);
+    if (fs.length) lines.push('Row grade floors: ' + fs.join(' · '));
+    lines.push('');
+    lines.push('Full methodology: ' + ((TM.RFC && TM.RFC[cfg.anchor || 'types']) || TM.RFC_BASE));
+    return lines.join('\n');
+  }
+
+  // Freshness indicator (only for decay types)
+  function freshnessHtml(ev, normType) {
+    const decayRates = { 'benchmark-result': 0.5, 'social-signal': 0.5, 'peer-review': 0.125 };
+    const rate = decayRates[normType];
+    if (!rate) return '';
+    const lv = ev.lastVerified || ev.date || null;
+    if (!lv) return '<span class="se-ev-freshness se-ev-freshness--unverified" title="No date — freshness assumed 1.0">unverified</span>';
+    const ageYrs = (Date.now() - new Date(lv).getTime()) / (1000 * 365.25 * 24 * 3600);
+    const factor = Math.max(0, 1 - rate * ageYrs);
+    if (factor < 0.75) {
+      const pct = Math.round((1 - factor) * 100);
+      return '<span class="se-ev-freshness se-ev-freshness--stale" title="Freshness ' + factor.toFixed(2) + ' (−' + pct + '% from age)">stale</span>';
+    }
+    return '<span class="se-ev-freshness se-ev-freshness--fresh" title="Freshness ' + factor.toFixed(2) + '">fresh</span>';
+  }
+
+  // Render a single evidence row as a mosaic card (matches se-ev-card pattern)
   function renderRow(ev) {
-    const g = ev.grade || 'ungraded';
-    const gradeLabel = g === 'ungraded' ? '—' : g;
-    const gradeClass = g === 'S' ? 'S' : (g === 'A' ? 'A' : (g === 'B' ? 'B' : (g === 'C' ? 'C' : 'ungraded')));
-    const normType = ev.type || 'repo-own'; // already normalized in processData
+    const TM = window.TM_CONFIG;
+    const normType = ev.type || 'repo-own';
     const typeLbl = typeLabel(normType);
-    const cleanUrl = formatUrl(ev.source);
+    const shortSrc = formatUrl(ev.source || '');
+    const gradeChar = (ev.grade || '').toUpperCase().charAt(0);
+    const isUngraded = !gradeChar;
 
-    // Trust number — label "TM N" so users understand it's Trust Magnitude
-    const trustHtml = ev.trustNumber != null
-      ? `<span class="ev-trust-score">TM ${ev.trustNumber}</span>`
-      : `<span class="ev-trust-score ev-trust-score--empty">—</span>`;
+    // Type pill (i) tooltip
+    const pillTip = typePillTooltip(normType);
 
-    // Notes block if present
-    let notesHtml = '';
-    if (ev.notes) {
-      notesHtml = `<div class="ev-notes-row">${esc(ev.notes)}</div>`;
+    // Weighted MAG score + MAG bar grade colour
+    const weighted = deriveWeightedScore(ev);
+    const barGrade = gradeChar || 'none';
+    const magDisplay = weighted != null
+      ? (Number.isInteger(weighted) ? String(weighted) : weighted.toFixed(1))
+      : '—';
+    const magTip = magTooltip(ev, weighted);
+
+    // Metrics chips — same as se-ev-card
+    const chips = [];
+    if (ev.stars)     chips.push('<span class="se-ev-metric">★ ' + formatK(ev.stars) + '</span>');
+    if (ev.views)     chips.push('<span class="se-ev-metric">👁 ' + formatK(ev.views) + '</span>');
+    if (ev.citations) chips.push('<span class="se-ev-metric">📄 ' + ev.citations + ' cit.</span>');
+    if (ev.reviewers) chips.push('<span class="se-ev-metric">' + ev.reviewers + ' reviewers</span>');
+    if (ev.commits)   chips.push('<span class="se-ev-metric">' + ev.commits + ' commits</span>');
+    const metricsHtml2 = chips.length ? '<div class="se-ev-metrics">' + chips.join('') + '</div>' : '';
+
+    // Notes
+    const notesHtml2 = ev.notes ? '<div class="se-ev-notes">' + esc(ev.notes) + '</div>' : '';
+
+    // Fusion origins
+    let originsHtml = '';
+    if (normType === 'fusion-recipe' && Array.isArray(ev.origins) && ev.origins.length) {
+      const chips2 = ev.origins.slice(0, 12).map(o => {
+        const slug = o.indexOf('/') !== -1 ? o.split('/').pop() : o;
+        return '<span class="se-ev-origin-chip" title="' + esc(o) + '">/' + esc(slug) + '</span>';
+      });
+      if (ev.origins.length > 12) chips2.push('<span class="se-ev-origin-chip" style="opacity:0.5">+' + (ev.origins.length - 12) + ' more</span>');
+      originsHtml = '<div class="se-ev-origins"><span class="se-ev-origins-label">Origins (' + ev.origins.length + ')</span><div class="se-ev-origins-chips">' + chips2.join('') + '</div></div>';
     }
 
-    // Metrics chips
-    const chips = [];
-    if (ev.stars)     chips.push(`<span class="ev-metric-chip">★ ${formatK(ev.stars)}</span>`);
-    if (ev.views)     chips.push(`<span class="ev-metric-chip">👁 ${formatK(ev.views)}</span>`);
-    if (ev.citations) chips.push(`<span class="ev-metric-chip">📄 ${ev.citations} cit.</span>`);
-    if (ev.reviewers) chips.push(`<span class="ev-metric-chip">${ev.reviewers} reviewers</span>`);
-    if (ev.commits)   chips.push(`<span class="ev-metric-chip">${ev.commits} commits</span>`);
-    const metricsHtml = chips.length > 0
-      ? `<div class="ev-metrics-row">${chips.join('')}</div>`
-      : '';
+    // Evaluator
+    const evalStr = ev.evaluator && ev.evaluator !== 'unknown' && ev.evaluator !== 'claude' && ev.evaluator !== 'system'
+      ? '<span class="se-ev-eval">@' + esc(ev.evaluator) + '</span>' : '';
 
-    const evalHtml = ev.evaluator && ev.evaluator !== 'unknown' && ev.evaluator !== 'claude'
-      ? `<a href="../u/${esc(ev.evaluator)}/" class="ev-eval-link">@${esc(ev.evaluator)}</a>`
-      : `<span style="opacity: 0.6;">${esc(ev.evaluator || 'system')}</span>`;
+    // Freshness
+    const freshHtml = freshnessHtml(ev, normType);
 
-    return `
-      <div class="ev-row">
-        <div class="ev-grade-col">
-          <div class="ev-grade-pill grade-${gradeClass}" title="${g === 'ungraded' ? 'Ungraded' : 'Grade ' + g}">${esc(gradeLabel)}</div>
-        </div>
-        <div class="ev-type-col">
-          <div class="ev-type-pill type-${normType}">${esc(typeLbl)}</div>
-        </div>
-        <div class="ev-source-col">
-          <a class="ev-source-link" href="${esc(ev.source || '')}" target="_blank" rel="noopener noreferrer" title="${esc(ev.source || '')}">
-            ${esc(cleanUrl)}
-          </a>
-        </div>
-        <div class="ev-trust-col">
-          ${trustHtml}
-        </div>
-        <div class="ev-eval-col">
-          ${evalHtml}
-        </div>
-        <div class="ev-date-col">
-          ${esc(ev.date || '—')}
-        </div>
-        ${metricsHtml}
-        ${notesHtml}
-      </div>`;
+    // Layer hint
+    const layerHtml = ev.layer === 'generic' || ev.layer === 'starless'
+      ? '<span class="se-ev-layer-hint" title="From generic/starless layer">via generic</span>' : '';
+
+    const cardClass = 'se-ev-card' + (isUngraded ? ' se-ev-card--ungraded' : '')
+      + (metricsHtml2 || notesHtml2 || originsHtml ? ' se-ev-card--wide' : '');
+
+    return `<div class="${cardClass}">` +
+      '<div class="se-ev-card-body">' +
+        '<div class="se-ev-card-top">' +
+          '<span class="ev-type-pill type-' + normType + '">' + esc(typeLbl) +
+            '<button class="ev-type-pill-info" type="button" title="' + esc(pillTip) + '" aria-label="' + esc(normType) + ' info">i</button>' +
+          '</span>' +
+          '<a class="se-ev-link" href="' + esc(ev.source || '#') + '" target="_blank" rel="noopener" title="' + esc(ev.source || '') + '">' + esc(shortSrc) + '</a>' +
+          layerHtml +
+        '</div>' +
+        '<div class="se-ev-card-meta">' +
+          evalStr +
+          (ev.date ? '<span class="se-ev-date">' + esc(ev.date) + '</span>' : '') +
+          freshHtml +
+        '</div>' +
+        notesHtml2 +
+        metricsHtml2 +
+        originsHtml +
+      '</div>' +
+      '<div class="se-ev-mag-bar" data-trust-grade="' + barGrade + '">' +
+        '<span class="se-ev-mag-label">MAG <span class="se-ev-mag-num">' + esc(magDisplay) + '</span></span>' +
+        (weighted != null ? '<button class="se-ev-mag-info" type="button" title="' + esc(magTip) + '" aria-label="Score details">i</button>' : '') +
+      '</div>' +
+    '</div>';
   }
 
   // Generates labeled horizontal bar chart (one row per grade, wide bars)

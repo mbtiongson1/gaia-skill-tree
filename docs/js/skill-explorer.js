@@ -57,7 +57,7 @@
     if (!cfg) return null;
     var d = cfg.describe(ev);
     if (d != null && d.value != null) return Math.round(TM.applyCap(t, d.value) * 10) / 10;
-    var gradeChar = (ev.grade || ev.class || '').toUpperCase().charAt(0);
+    var gradeChar = (ev.grade || '').toUpperCase().charAt(0);
     if (gradeChar) {
       var floor = TM.gradeFloor(t, gradeChar);
       if (floor != null) return floor;
@@ -87,7 +87,7 @@
       // No metric drivers in ev — trustNumber is the best we have (may be stale)
       return ev.trustNumber;
     } else {
-      var gradeChar = (ev.grade || ev.class || '').toUpperCase().charAt(0);
+      var gradeChar = (ev.grade || '').toUpperCase().charAt(0);
       base = gradeChar ? TM.gradeFloor(t, gradeChar) : null;
     }
     if (base == null) return null;
@@ -215,7 +215,7 @@
         lines.push('= MAG ' + weighted.toFixed(1) + '  (displayed on card; pre-plateau approximation)');
 
       } else {
-        var gc = (ev.grade || ev.class || '').toUpperCase().charAt(0);
+        var gc = (ev.grade || '').toUpperCase().charAt(0);
         var floor = gc ? TM.gradeFloor(t, gc) : null;
         if (floor != null) {
           lines.push('No metric drivers recorded.');
@@ -235,8 +235,7 @@
     var floorStrs = [];
     ['S','A','B','C'].forEach(function(g){ if (gf[g] != null) floorStrs.push(g + '≥' + gf[g]); });
     if (floorStrs.length) lines.push('Row grade floors: ' + floorStrs.join(' · '));
-    if (ev.grade)      lines.push("Row grade: " + ev.grade);
-    else if (ev.class) lines.push("Row grade: " + ev.class);
+    if (ev.grade) lines.push("Row grade: " + ev.grade);
 
     // ── Aggregate context ─────────────────────────────────────────
     lines.push('');
@@ -946,7 +945,7 @@
     if (combinedEvidence.length) {
       evidenceContent = '<div class="se-ev-grid">' +
         combinedEvidence.map(function(ev){
-          var gradeChar = (ev.grade || ev.class || '').toUpperCase().charAt(0);
+          var gradeChar = (ev.grade || '').toUpperCase().charAt(0);
           var isUngraded = !gradeChar;
           var trustGrade = isUngraded ? '' : gradeChar;
 
