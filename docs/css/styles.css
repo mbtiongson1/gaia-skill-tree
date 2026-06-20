@@ -10400,7 +10400,9 @@ body[data-overall-grade="S"] .report-card {
 .otg-badge[data-grade="S"],
 .ev-grade[data-grade="S"],
 .ev-tab[data-grade="S"].active,
-.ev-legend-dot.grade-S {
+.ev-legend-dot.grade-S,
+.se-ev-mag-bar[data-trust-grade="S"],
+.plaque__trust-notch[data-trust-grade="S"] {
   position: relative;
   overflow: hidden;
   border: 1px solid #3b82f6; /* Stronger blue border */
@@ -10444,7 +10446,9 @@ body[data-overall-grade="S"] .report-card {
 .otg-badge[data-grade="A"],
 .ev-grade[data-grade="A"],
 .ev-tab[data-grade="A"].active,
-.ev-legend-dot.grade-A {
+.ev-legend-dot.grade-A,
+.se-ev-mag-bar[data-trust-grade="A"],
+.plaque__trust-notch[data-trust-grade="A"] {
   border: 1px solid #d99706;
   background:
     /* Specular reflections (anisotropic sheen) */
@@ -10475,7 +10479,9 @@ body[data-overall-grade="S"] .report-card {
 .otg-badge[data-grade="B"],
 .ev-grade[data-grade="B"],
 .ev-tab[data-grade="B"].active,
-.ev-legend-dot.grade-B {
+.ev-legend-dot.grade-B,
+.se-ev-mag-bar[data-trust-grade="B"],
+.plaque__trust-notch[data-trust-grade="B"] {
   border: 1px solid #475569; /* Darker border */
   background:
     /* Specular reflections (matte sheen) */
@@ -10504,7 +10510,9 @@ body[data-overall-grade="S"] .report-card {
 .otg-badge[data-grade="C"],
 .ev-grade[data-grade="C"],
 .ev-tab[data-grade="C"].active,
-.ev-legend-dot.grade-C {
+.ev-legend-dot.grade-C,
+.se-ev-mag-bar[data-trust-grade="C"],
+.plaque__trust-notch[data-trust-grade="C"] {
   border: 1px solid #7c2d12;
   background:
     /* Specular reflections (faint) */
@@ -10531,7 +10539,10 @@ body[data-overall-grade="S"] .report-card {
 .otg-badge[data-grade="—"],
 .ev-grade[data-grade="—"],
 .ev-tab[data-grade="—"].active,
-.ev-legend-dot.grade-ungraded {
+.ev-legend-dot.grade-ungraded,
+.se-ev-mag-bar[data-trust-grade="none"],
+.plaque__trust-notch[data-trust-grade="—"],
+.plaque__trust-notch[data-trust-grade="none"] {
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--border);
   color: var(--muted);
@@ -10934,27 +10945,10 @@ body[data-overall-grade="S"] .report-card {
   border-top: 1px solid var(--border);
 }
 
-/* Grade fills — match plaque__trust-notch fills exactly */
-.se-ev-mag-bar[data-trust-grade="S"] {
-  background: linear-gradient(90deg, #d1e8ff 0%, #a5c7eb 50%, #d1e8ff 100%);
-  color: #0f172a;
-}
-.se-ev-mag-bar[data-trust-grade="A"] {
-  background: var(--grade-A, #d4af37);
-  color: #030712;
-}
-.se-ev-mag-bar[data-trust-grade="B"] {
-  background: rgba(148,163,184,0.45);
-  color: var(--text, #e2e8f0);
-}
-.se-ev-mag-bar[data-trust-grade="C"] {
-  background: var(--grade-C, #b45309);
-  color: #fff8f0;
-}
-.se-ev-mag-bar[data-trust-grade="none"] {
-  background: rgba(255,255,255,0.04);
-  color: var(--muted);
-}
+/* Grade fills — unified with .grade-segment metallic system above (line ~10398).
+   The selectors .se-ev-mag-bar[data-trust-grade="S/A/B/C/none"] are appended to
+   each metallic rule so MAG bars render exactly like plaque trust notches and
+   the docs/index.html Evidence Grade ladder. No separate fills — single source. */
 
 .se-ev-mag-label {
   font-family: var(--font-mono);

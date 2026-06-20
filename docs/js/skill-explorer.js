@@ -35,62 +35,60 @@
     return String(num);
   }
 
+  // Hint which metric fields a curator should add to make a row scoreable.
+  var _DRIVER_HINTS = {
+    'github-stars-own':     'stars (and skillCountInRepo)',
+    'proxy-containment':    'externalStars (≥10000)',
+    'verifier-attestation': 'verifiers',
+    'benchmark-result':     'percentile (0–100)',
+    'arxiv':                'citations',
+    'peer-review':          'reviewers',
+    'repo-own':             'commits + contributors',
+    'self-attestation':     '(self-attestation has flat 10 — no fields needed)',
+    'social-signal':        'views (≥1000)',
+    'fusion-recipe':        'origins (or gradedOriginCount)',
+  };
+  function _missingDriversHint(t) { return _DRIVER_HINTS[t] || 'metric fields'; }
+
   // Derive the pre-weight artifact magnitude (for tooltip chain display only).
   // Returns the capped base magnitude — used as input to _deriveWeightedScore.
+  // ALWAYS prefers the live formula over stored ev.trustNumber (which may be stale).
   function _deriveTrustNum(ev) {
     if (ev._noScore) return null;
-    if (ev.trustNumber != null) return ev.trustNumber;
     var TM = window.TM_CONFIG;
-    if (!TM) {
-      var t0 = ev.type || '';
-      if (t0 === 'github-stars' || t0 === 'github-stars-own') {
-        if (ev.stars != null) return Math.min(200, parseFloat(ev.stars) / 1000).toFixed(1) * 1;
-      }
-      if (t0 === 'peer-review') {
-        var rc = ev.reviewers != null ? parseFloat(ev.reviewers) : (ev.evaluator ? 1 : null);
-        if (rc != null) return Math.min(150, rc * 30);
-      }
-      return null;
-    }
+    if (!TM) return null;
     var t = TM.canonicalType(ev.type || '');
     var cfg = TM.TYPES[t];
     if (!cfg) return null;
+    // Live formula first
     var d = cfg.describe(ev);
     if (d != null && d.value != null) return Math.round(TM.applyCap(t, d.value) * 10) / 10;
-    var gradeChar = (ev.grade || '').toUpperCase().charAt(0);
-    if (gradeChar) {
-      var floor = TM.gradeFloor(t, gradeChar);
-      if (floor != null) return floor;
-    }
+    // No metric drivers: don't fall back to stored trustNumber (it's pre-weight legacy).
+    // Return null so the row honestly shows ungraded / no-score.
     return null;
   }
 
   // Derive the fully-weighted artifact score: base × weight × freshness × creator × engagement.
   // This is what the MAG bar displays — the actual contribution before plateau stacking.
-  // Mirrors computeArtifactScoreOrNone() in trustMagnitude.py: prefer live formula over
-  // stored trustNumber, which may be stale from before formula changes.
+  // Mirrors computeArtifactScoreOrNone() in trustMagnitude.py exactly.
   function _deriveWeightedScore(ev) {
     if (ev._noScore) return null;
     var TM = window.TM_CONFIG;
-    if (!TM) return _deriveTrustNum(ev);
+    if (!TM) return null;
 
     var t = TM.canonicalType(ev.type || '');
     var cfg = TM.TYPES[t];
     if (!cfg) return null;
 
     // Get base (capped) magnitude — prefer live formula over stored trustNumber
-    var base = null;
     var d = cfg.describe(ev);
+    var base = null;
     if (d != null && d.value != null) {
       base = TM.applyCap(t, d.value);
-    } else if (ev.trustNumber != null) {
-      // No metric drivers in ev — trustNumber is the best we have (may be stale)
-      return ev.trustNumber;
     } else {
-      var gradeChar = (ev.grade || '').toUpperCase().charAt(0);
-      base = gradeChar ? TM.gradeFloor(t, gradeChar) : null;
+      // No metric drivers: don't fabricate a score. The row is honestly missing data.
+      return null;
     }
-    if (base == null) return null;
 
     // × weight
     var score = base * cfg.weight;
@@ -130,7 +128,6 @@
   function _magTooltip(ev, tmRaw, skillTm) {
     var TM = window.TM_CONFIG;
     if (!TM) return 'Trust config unavailable. See https://gaia.tiongson.co/codex/trust-methodology.html';
-    if (tmRaw == null) return 'No magnitude drivers present for this evidence type.\nSee ' + TM.RFC.types;
 
     var t = TM.canonicalType(ev.type || '');
     var cfg = TM.TYPES[t];
@@ -146,96 +143,85 @@
     lines.push(cfg.label.toUpperCase() + ' · ' + cfg.formula);
     lines.push('');
 
-    // ── Full multiplier chain ─────────────────────────────────────
-    if (ev.trustNumber != null) {
-      lines.push('Stored artifact score: ' + ev.trustNumber);
-      lines.push('(calibrated at build time — chain unavailable from stored value)');
-    } else {
-      var d = cfg.describe(ev);
-      if (d != null && d.value != null) {
-        var baseMag = d.value;
-        var capped  = TM.applyCap(t, baseMag);
-        var capNote = (cfg.cap != null && baseMag > cfg.cap) ? ' → capped at ' + cfg.cap : '';
+    // ── Full multiplier chain (live formula only — no stale "stored" values) ──
+    var d = cfg.describe(ev);
+    if (d != null && d.value != null) {
+      var baseMag = d.value;
+      var capped  = TM.applyCap(t, baseMag);
+      var capNote = (cfg.cap != null && baseMag > cfg.cap) ? ' → capped at ' + cfg.cap : '';
 
-        // base
-        lines.push('base:          ' + d.expr + ' = ' + baseMag.toFixed(2) + capNote);
+      // base
+      lines.push('base:          ' + d.expr + ' = ' + baseMag.toFixed(2) + capNote);
 
-        // × weight
-        lines.push('× weight:      ' + cfg.weight);
+      // × weight
+      lines.push('× weight:      ' + cfg.weight);
 
-        // × freshness
-        if (cfg.freshness && cfg.freshness.decayPerYear) {
-          var lv = ev.lastVerified || ev.date || null;
-          if (lv) {
-            var ageYrs2 = (Date.now() - new Date(lv).getTime()) / (1000 * 365.25 * 24 * 3600);
-            var ff = Math.max(0, 1 - cfg.freshness.decayPerYear * ageYrs2);
-            lines.push('× freshness:   ' + ff.toFixed(3) + '  (−' + Math.round(cfg.freshness.decayPerYear * 100) + '%/yr; age ' + ageYrs2.toFixed(1) + ' yrs)');
-          } else {
-            lines.push('× freshness:   1.00  (assumed — no lastVerified date)');
-          }
+      // × freshness
+      if (cfg.freshness && cfg.freshness.decayPerYear) {
+        var lv = ev.lastVerified || ev.date || null;
+        if (lv) {
+          var ageYrs2 = (Date.now() - new Date(lv).getTime()) / (1000 * 365.25 * 24 * 3600);
+          var ff = Math.max(0, 1 - cfg.freshness.decayPerYear * ageYrs2);
+          lines.push('× freshness:   ' + ff.toFixed(3) + '  (−' + Math.round(cfg.freshness.decayPerYear * 100) + '%/yr; age ' + ageYrs2.toFixed(1) + ' yrs)');
         } else {
-          lines.push('× freshness:   1.00  (no decay)');
+          lines.push('× freshness:   1.00  (assumed — no lastVerified date)');
         }
-
-        // NOTE: github-stars-own mothership divisor is already baked into base magnitude.
-        // No separate × mothership step — formula is min(200,stars/1000) ÷ min(skillCount,4).
-
-        // × creator + × engagement (social-signal only)
-        if (t === 'social-signal') {
-          var cm = ev.creatorMultiplier != null ? Number(ev.creatorMultiplier) : 1.0;
-          var er = ev.engagementRatio   != null ? Number(ev.engagementRatio)   : 1.0;
-          lines.push('× creator:     ' + cm.toFixed(2));
-          lines.push('× engagement:  ' + er.toFixed(2));
-        }
-
-        // × inheritMultiplier (generic-layer rows only)
-        if (ev._layer === 'generic') {
-          var iContracts = {
-            'arxiv': 0.70, 'peer-review': 0.30, 'social-signal': 0.35,
-            'proxy-containment': 0.25, 'benchmark-result': 0.15
-          };
-          var im = iContracts[t];
-          if (im != null) {
-            lines.push('× inheritMult: ' + im + '  (inherited from generic layer)');
-          }
-        }
-
-        // × plateau
-        if (cfg.plateau) {
-          if (cfg.plateau.maxRows === 1) {
-            lines.push('× plateau:     1.00  (max 1 row)');
-          } else {
-            lines.push('× plateau:     ' + cfg.plateau.factors.join(' / ') + '  (max ' + cfg.plateau.maxRows + ' rows; by descending score)');
-          }
-        }
-
-        // ← MAG on bar = this value (pre-plateau; plateau applied at aggregate time)
-        lines.push('');
-        var weighted = Math.round(capped * cfg.weight * 10) / 10;
-        lines.push('= MAG ' + weighted.toFixed(1) + '  (displayed on card; pre-plateau approximation)');
-
       } else {
-        var gc = (ev.grade || '').toUpperCase().charAt(0);
-        var floor = gc ? TM.gradeFloor(t, gc) : null;
-        if (floor != null) {
-          lines.push('No metric drivers recorded.');
-          lines.push('Estimated from grade ' + gc + ' floor = ' + floor);
-          lines.push('(Add metric fields for a precise score)');
-        } else {
-          lines.push('No metric drivers present.');
+        lines.push('× freshness:   1.00  (no decay)');
+      }
+
+      // NOTE: github-stars-own mothership divisor is already baked into base magnitude.
+      // No separate × mothership step — formula is min(200,stars/1000) ÷ min(skillCount,4).
+
+      // × creator + × engagement (social-signal only)
+      if (t === 'social-signal') {
+        var cm = ev.creatorMultiplier != null ? Number(ev.creatorMultiplier) : 1.0;
+        var er = ev.engagementRatio   != null ? Number(ev.engagementRatio)   : 1.0;
+        lines.push('× creator:     ' + cm.toFixed(2));
+        lines.push('× engagement:  ' + er.toFixed(2));
+      }
+
+      // × inheritMultiplier (generic-layer rows only)
+      if (ev._layer === 'generic') {
+        var iContracts = {
+          'arxiv': 0.70, 'peer-review': 0.30, 'social-signal': 0.35,
+          'proxy-containment': 0.25, 'benchmark-result': 0.15
+        };
+        var im = iContracts[t];
+        if (im != null) {
+          lines.push('× inheritMult: ' + im + '  (inherited from generic layer)');
         }
       }
+
+      // × plateau
+      if (cfg.plateau) {
+        if (cfg.plateau.maxRows === 1) {
+          lines.push('× plateau:     1.00  (max 1 row)');
+        } else {
+          lines.push('× plateau:     ' + cfg.plateau.factors.join(' / ') + '  (max ' + cfg.plateau.maxRows + ' rows; by descending score)');
+        }
+      }
+
+      // Final weighted score that the MAG bar displays
+      lines.push('');
+      var weighted = Math.round(capped * cfg.weight * 10) / 10;
+      lines.push('= MAG ' + weighted.toFixed(1) + '  (displayed on card; pre-plateau approximation)');
+
+    } else {
+      // No metric drivers — honest empty state. Prompt the curator to add fields.
+      lines.push('No metric drivers recorded for this row.');
+      lines.push('Add ' + _missingDriversHint(t) + ' to compute a live score.');
     }
 
     lines.push('');
 
-    // ── Grade ceiling + floors ────────────────────────────────────
-    if (cfg.gradeCeiling) lines.push('Grade ceiling for this type: ' + cfg.gradeCeiling);
+    // ── Per-row grade context (S/A/B/C floors are convenience labels, not RFC primitives) ──
+    if (cfg.gradeCeiling) lines.push('Type ceiling: ' + cfg.gradeCeiling + '  (highest row grade reachable for this type)');
     var gf = cfg.gradeFloors || {};
     var floorStrs = [];
     ['S','A','B','C'].forEach(function(g){ if (gf[g] != null) floorStrs.push(g + '≥' + gf[g]); });
     if (floorStrs.length) lines.push('Row grade floors: ' + floorStrs.join(' · '));
-    if (ev.grade) lines.push("Row grade: " + ev.grade);
+    if (ev.grade) lines.push("This row's grade: " + ev.grade);
 
     // ── Aggregate context ─────────────────────────────────────────
     lines.push('');
@@ -1066,7 +1052,7 @@
           var magBarHtml = '<div class="se-ev-mag-bar"' +
             (barGrade ? ' data-trust-grade="' + esc(barGrade) + '"' : ' data-trust-grade="none"') + '>' +
             '<span class="se-ev-mag-label">MAG <span class="se-ev-mag-num">' + esc(tmDisplay) + '</span></span>' +
-            (tmRaw != null ? '<button class="se-ev-mag-info" type="button" title="' + esc(magTooltipText) + '" aria-label="Evidence score details">i</button>' : '') +
+            '<button class="se-ev-mag-info" type="button" title="' + esc(magTooltipText) + '" aria-label="Evidence score details">i</button>' +
           '</div>';
 
           // Type pill with (i) tooltip from TM_CONFIG

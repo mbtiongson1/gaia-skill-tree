@@ -24,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EV_LIB_JS = (ROOT / "docs" / "js" / "evidence-library.js").read_text(encoding="utf-8")
 SE_JS = (ROOT / "docs" / "js" / "skill-explorer.js").read_text(encoding="utf-8")
+TM_JS = (ROOT / "docs" / "js" / "tm-config.js").read_text(encoding="utf-8")
 EV_HTML = (ROOT / "docs" / "evidence" / "index.html").read_text(encoding="utf-8")
 STYLES_CSS = (ROOT / "docs" / "css" / "styles.css").read_text(encoding="utf-8")
 TM_HTML = (ROOT / "docs" / "codex" / "trust-methodology.html").read_text(encoding="utf-8")
@@ -305,8 +306,9 @@ class TestStylesCSS:
         assert "se-ev-mag-info" in SE_JS
 
     def test_peer_review_reviewer_default_present(self):
-        """peer-review without reviewers should default to 1 when evaluator present."""
-        assert "reviewer.*default" in SE_JS or "evaluator ? 1 : null" in SE_JS or "ev.evaluator ? 1 : null" in SE_JS
+        """peer-review without reviewers should default to 1 when evaluator present.
+        The describe() helper lives in tm-config.js (single source of truth)."""
+        assert "row.evaluator ? 1 : null" in TM_JS or "evaluator ? 1 : null" in TM_JS
 
     def test_tile_grid_class_used(self):
         assert "se-ev-grid" in SE_JS

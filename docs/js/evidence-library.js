@@ -405,7 +405,9 @@
     }).join('');
   }
 
-  // Derive weighted artifact score (mirrors _deriveWeightedScore in skill-explorer.js)
+  // Derive weighted artifact score (mirrors _deriveWeightedScore in skill-explorer.js).
+  // ALWAYS uses the live formula. Returns null when no metric drivers — never falls back
+  // to ev.trustNumber (which is unweighted legacy storage).
   function deriveWeightedScore(ev) {
     const TM = window.TM_CONFIG;
     if (!TM) return null;
@@ -413,16 +415,8 @@
     const cfg = TM.TYPES[t];
     if (!cfg) return null;
     const d = cfg.describe(ev);
-    let base = null;
-    if (d && d.value != null) {
-      base = TM.applyCap(t, d.value);
-    } else if (ev.trustNumber != null) {
-      return ev.trustNumber;
-    } else {
-      const gc = (ev.grade || '').toUpperCase().charAt(0);
-      base = gc ? (cfg.gradeFloors || {})[gc] : null;
-    }
-    if (base == null) return null;
+    if (!d || d.value == null) return null;
+    const base = TM.applyCap(t, d.value);
     let score = base * cfg.weight;
     if (cfg.freshness && cfg.freshness.decayPerYear) {
       const lv = ev.lastVerified || ev.date || null;
@@ -497,16 +491,23 @@
       }
       lines.push('');
       lines.push('= MAG ' + (weighted != null ? weighted.toFixed(1) : '—') + '  (pre-plateau approximation)');
-    } else if (ev.trustNumber != null) {
-      lines.push('Stored artifact score: ' + ev.trustNumber);
     } else {
-      lines.push('No metric drivers present.');
+      lines.push('No metric drivers recorded for this row.');
+      const hints = {
+        'github-stars-own': 'stars (and skillCountInRepo)', 'proxy-containment': 'externalStars (≥10000)',
+        'verifier-attestation': 'verifiers', 'benchmark-result': 'percentile (0–100)',
+        'arxiv': 'citations', 'peer-review': 'reviewers',
+        'repo-own': 'commits + contributors', 'self-attestation': '(flat 10 — no fields needed)',
+        'social-signal': 'views (≥1000)', 'fusion-recipe': 'origins (or gradedOriginCount)',
+      };
+      lines.push('Add ' + (hints[t] || 'metric fields') + ' to compute a live score.');
     }
     lines.push('');
-    if (ev.grade) lines.push('Row grade: ' + ev.grade);
+    if (ev.grade) lines.push("This row's grade: " + ev.grade);
     const gf = cfg.gradeFloors || {};
     const fs = ['S','A','B','C'].filter(g => gf[g] != null).map(g => g + '≥' + gf[g]);
     if (fs.length) lines.push('Row grade floors: ' + fs.join(' · '));
+    if (cfg.gradeCeiling) lines.push('Type ceiling: ' + cfg.gradeCeiling);
     lines.push('');
     lines.push('Full methodology: ' + ((TM.RFC && TM.RFC[cfg.anchor || 'types']) || TM.RFC_BASE));
     return lines.join('\n');
