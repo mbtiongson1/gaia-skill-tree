@@ -264,13 +264,6 @@
       gradeCeiling: null,
       anchor: 'suiteVsFusion',
     },
-      cap: null,
-      plateau: { factors: [1.0], maxRows: 1 },
-      freshness: null,
-      gradeFloors: { S: 200, A: 120, B: 60, C: 30 },
-      gradeCeiling: null,
-      anchor: 'suiteVsFusion',
-    },
 
   };
 
