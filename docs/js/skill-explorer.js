@@ -116,7 +116,14 @@
 
         // × freshness
         if (cfg.freshness && cfg.freshness.decayPerYear) {
-          lines.push('× freshness:   −' + Math.round(cfg.freshness.decayPerYear * 100) + '%/yr  (exact: needs lastVerified date)');
+          var lv = ev.lastVerified || ev.date || null;
+          if (lv) {
+            var ageYrs2 = (Date.now() - new Date(lv).getTime()) / (1000 * 365.25 * 24 * 3600);
+            var ff = Math.max(0, 1 - cfg.freshness.decayPerYear * ageYrs2);
+            lines.push('× freshness:   ' + ff.toFixed(3) + '  (−' + Math.round(cfg.freshness.decayPerYear * 100) + '%/yr; age ' + ageYrs2.toFixed(1) + ' yrs)');
+          } else {
+            lines.push('× freshness:   1.00  (assumed — no lastVerified date)');
+          }
         } else {
           lines.push('× freshness:   1.00  (no decay)');
         }
@@ -944,6 +951,27 @@
             evalHtml = '<span class="se-ev-eval">@' + esc(ev.evaluator) + '</span>';
           }
 
+          // Freshness indicator — only for decay types (benchmark-result, social-signal, peer-review)
+          var decayRates = { 'benchmark-result': 0.5, 'social-signal': 0.5, 'peer-review': 0.125 };
+          var freshnessHtml = '';
+          var decayRate = decayRates[rawType];
+          if (decayRate != null) {
+            var lastVerified = ev.lastVerified || ev.date || null;
+            if (!lastVerified) {
+              freshnessHtml = '<span class="se-ev-freshness se-ev-freshness--unverified" title="No lastVerified date — freshness assumed 1.0 but unconfirmed">unverified</span>';
+            } else {
+              var ageMs = Date.now() - new Date(lastVerified).getTime();
+              var ageYrs = ageMs / (1000 * 365.25 * 24 * 3600);
+              var factor = Math.max(0, 1 - decayRate * ageYrs);
+              if (factor < 0.75) {
+                var pct = Math.round((1 - factor) * 100);
+                freshnessHtml = '<span class="se-ev-freshness se-ev-freshness--stale" title="Freshness factor ' + factor.toFixed(2) + ' (−' + pct + '% from age)">stale</span>';
+              } else {
+                freshnessHtml = '<span class="se-ev-freshness se-ev-freshness--fresh" title="Freshness factor ' + factor.toFixed(2) + '">fresh</span>';
+              }
+            }
+          }
+
           // MAG bar — shows per-row artifact score for this evidence row.
           // (i) tooltip shows the formula derivation + the skill's aggregate TM for context.
           var tmRaw = _deriveTrustNum(ev);    // per-row artifact score (pre-weight, pre-plateau)
@@ -992,6 +1020,7 @@
               '<div class="se-ev-card-meta">' +
                 evalHtml +
                 (ev.date ? '<span class="se-ev-date">' + esc(ev.date) + '</span>' : '') +
+                freshnessHtml +
               '</div>' +
               notesHtml +
               metricsHtml +
