@@ -831,15 +831,14 @@
     });
     var suiteComponents = ns.suiteComponents || [];
     if (suiteComponents.length && !hasFusionRow) {
-      // Suite skills list components as role='variant' — variants are excluded from
-      // fusion-recipe magnitude by the RFC role guard (only role='origin' scores).
-      // Mark _noScore so we don't show a misleading MAG number.
-      // The tile still shows all components so the user sees the installation breadth.
+      // suiteComponents ARE the fusion origins per RFC §2.2.
+      // The backend counts graded ≥C among them; on the frontend we use the
+      // raw count as an upper-bound approximation (tooltip says so).
       combinedEvidence.unshift({
         type: 'fusion-recipe',
         origins: suiteComponents,
-        _isSuite: true,        // drives label: "Suite components" not "Origins"
-        _noScore: true,
+        grade: ns.overallTrustGrade || null,
+        _isSuite: false,   // it IS a fusion, not a mere install suite
         _synthetic: true,
         _layer: 'named',
       });
@@ -893,15 +892,9 @@
           // Fusion-recipe origins display
           var originsHtml = '';
           if (rawType === 'fusion-recipe' && Array.isArray(ev.origins) && ev.origins.length) {
-            var originLabel = ev._isSuite
-              ? 'Suite components (' + ev.origins.length + ')'
-              : 'Origins (' + ev.origins.length + ')';
-            var suiteNote = ev._isSuite
-              ? '<span class="se-ev-suite-note" title="Suite components have role=\'variant\' — only role=\'origin\' components score fusion-recipe magnitude (RFC role guard)">variants · no fusion score</span>'
-              : '';
+            var originLabel = 'Origins (' + ev.origins.length + ')';
             originsHtml = '<div class="se-ev-origins">' +
               '<span class="se-ev-origins-label">' + esc(originLabel) + '</span>' +
-              suiteNote +
               '<div class="se-ev-origins-chips">' +
               ev.origins.slice(0, 12).map(function(o){
                 var slug = o.indexOf('/') !== -1 ? o.split('/').pop() : o;

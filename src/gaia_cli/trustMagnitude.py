@@ -449,8 +449,10 @@ def _rawMagnitudeForType(
     if evidenceType == "github-stars-own":
         stars = float(row.get("stars", 0) or 0)
         skillCount = int(row.get("skillCountInRepo", 1) or 1)
-        # RFC §2.3: stars/1000, mothership-discounted by skill count in repo
-        return (stars / 1000.0) / max(1, skillCount)
+        # RFC §2.3: min(200, stars/1000) / mothership_divisor
+        # mothership_divisor = min(skill_count_in_repo, 4)  — caps at 4 per RFC
+        divisor = min(skillCount, 4)
+        return min(200.0, stars / 1000.0) / max(1, divisor)
 
     if evidenceType == "proxy-containment":
         externalStars = float(row.get("externalStars", 0) or 0)

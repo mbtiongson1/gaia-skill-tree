@@ -59,15 +59,15 @@
 
     'github-stars-own': {
       label: 'stars',
-      formula: 'stars / 1000  (÷ skillCountInRepo for motherships)',
+      formula: 'min(200, stars/1000) ÷ min(skillCountInRepo, 4)',
       describe: function (row) {
         var s = row.stars != null ? Number(row.stars) : null;
         if (s == null) return null;
-        var k = row.skillCountInRepo != null ? Math.max(1, Number(row.skillCountInRepo)) : 1;
-        var val = (s / 1000) / k;
+        var k = row.skillCountInRepo != null ? Math.min(4, Math.max(1, Number(row.skillCountInRepo))) : 1;
+        var val = Math.min(200, s / 1000) / k;
         var expr = k > 1
-          ? '(' + s + '/1000) ÷ ' + k + ' skills'
-          : s + '/1000';
+          ? 'min(200, ' + s + '/1000) ÷ min(' + row.skillCountInRepo + ', 4)'
+          : 'min(200, ' + s + '/1000)';
         return { value: val, expr: expr };
       },
       weight: 1.0,
