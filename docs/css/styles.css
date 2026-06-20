@@ -10668,9 +10668,9 @@ body[data-overall-grade="S"] .report-card {
 .se-ev-card {
   display: flex;
   gap: 10px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 2px;
   background: rgba(255,255,255,0.02);
 }
 .se-ev-card:hover {
@@ -10683,14 +10683,14 @@ body[data-overall-grade="S"] .report-card {
   padding-top: 1px;
 }
 .se-ev-grade-sq {
-  width: 32px !important;
-  height: 32px !important;
-  border-radius: 6px !important;
+  width: 52px !important;
+  height: 24px !important;
+  border-radius: 2px !important;
   flex-shrink: 0;
   box-shadow: none !important;
 }
 .se-ev-grade-sq .grade-label {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
 }
 .se-ev-card-body {
@@ -10708,10 +10708,18 @@ body[data-overall-grade="S"] .report-card {
 }
 .se-ev-trust {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
   margin-left: auto;
   flex-shrink: 0;
+  white-space: nowrap;
+}
+.se-ev-trust--empty {
+  opacity: 0.4;
 }
 .se-ev-card-meta {
   display: flex;

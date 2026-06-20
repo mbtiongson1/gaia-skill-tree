@@ -237,30 +237,37 @@
 
     // Grade counts (S, A, B, C, ungraded)
     const gradeCounts = { S: 0, A: 0, B: 0, C: 0, ungraded: 0 };
+    // Type counts for top-3 stat cards
+    const typeCounts = {};
     allEntries.forEach(ev => {
       const g = ev.grade || 'ungraded';
       if (gradeCounts[g] !== undefined) gradeCounts[g]++;
+      typeCounts[ev.type] = (typeCounts[ev.type] || 0) + 1;
     });
 
-    // Stat cards: total + grade breakdown
-    const gradeLabels = { S: 'Platinum (S)', A: 'Gold (A)', B: 'Silver (B)', C: 'Bronze (C)', ungraded: 'Ungraded' };
-    const gradePills = ['S', 'A', 'B', 'C', 'ungraded'].filter(g => gradeCounts[g] > 0);
+    // Stat cards: total sources + top 3 types by count
+    const topTypes = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const typeDisplayNames = {
+      'arxiv': 'arXiv Papers', 'peer-review': 'Peer-Reviewed', 'repo-own': 'Repositories',
+      'github-stars-own': 'GitHub Stars', 'social-signal': 'Social Signal',
+      'fusion-recipe': 'Fusion Recipes', 'verifier-attestation': 'Verifier Attests',
+      'benchmark-result': 'Benchmarks', 'proxy-containment': 'Proxy Contained',
+      'self-attestation': 'Self-Attested',
+    };
 
     evStatsEl.innerHTML = [
       `<div class="ev-stat-card">
         <div class="ev-stat-num">${allEntries.length}</div>
-        <div class="ev-stat-label">Total Sources</div>
+        <div class="ev-stat-label">Total Evidence</div>
       </div>`,
-      ...gradePills.map(g => {
-        const gradeClass = g === 'S' ? 'plat' : (g === 'A' ? 'gold' : (g === 'B' ? 'silver' : (g === 'C' ? 'bronze' : 'ungraded')));
-        return `<div class="ev-stat-card" style="cursor:pointer;" onclick="document.querySelector('[data-grade=\\'${g}\\']').click()">
-          <div class="ev-stat-num grade-${gradeClass}" style="color:inherit;">${gradeCounts[g]}</div>
-          <div class="ev-stat-label">${gradeLabels[g]}</div>
-        </div>`;
-      })
+      ...topTypes.map(([t, count]) => `
+        <div class="ev-stat-card" style="cursor:pointer;" onclick="document.querySelector('[data-type=\\'${t}\\']') && document.querySelector('[data-type=\\'${t}\\']').click()">
+          <div class="ev-stat-num">${count}</div>
+          <div class="ev-stat-label">${typeDisplayNames[t] || t}</div>
+        </div>`)
     ].join('');
 
-    // Render Horizontal Bar Chart
+    // Render horizontal bar chart
     evChartEl.innerHTML = generateGradeBarChart(gradeCounts);
     evChartLegendEl.innerHTML = renderLegend(gradeCounts);
   }
@@ -405,9 +412,9 @@
     const typeLbl = typeLabel(normType);
     const cleanUrl = formatUrl(ev.source);
 
-    // Trust number
+    // Trust number — label "TM N" so users understand it's Trust Magnitude
     const trustHtml = ev.trustNumber != null
-      ? `<span class="ev-trust-score">${ev.trustNumber}</span>`
+      ? `<span class="ev-trust-score">TM ${ev.trustNumber}</span>`
       : `<span class="ev-trust-score ev-trust-score--empty">—</span>`;
 
     // Notes block if present
@@ -458,28 +465,31 @@
       </div>`;
   }
 
-  // Generates Premium Horizontal Stacked Bar Chart
+  // Generates labeled horizontal bar chart (one row per grade, wide bars)
   function generateGradeBarChart(dataMap) {
     const grades = ['S', 'A', 'B', 'C', 'ungraded'];
     const total = Object.values(dataMap).reduce((a, b) => a + b, 0);
     if (total === 0) return '';
+    const maxCount = Math.max(...grades.map(g => dataMap[g] || 0));
+    const gradeNames = { S: 'Platinum', A: 'Gold', B: 'Silver', C: 'Bronze', ungraded: 'Ungraded' };
 
-    const segmentsHtml = grades.map(grade => {
+    const rows = grades.map(grade => {
       const count = dataMap[grade] || 0;
-      if (count === 0) return '';
-      const pct = (count / total) * 100;
+      if (count === 0 && grade === 'ungraded') return '';
+      const barPct = maxCount > 0 ? (count / maxCount) * 100 : 0;
+      const ofTotal = total > 0 ? Math.round((count / total) * 100) : 0;
       const gradeClass = grade === 'S' ? 'plat' : (grade === 'A' ? 'gold' : (grade === 'B' ? 'silver' : (grade === 'C' ? 'bronze' : 'ungraded')));
-      return `<div class="ev-bar-segment grade-segment grade-${gradeClass}" style="width: ${pct}%;" title="${grade === 'ungraded' ? 'Ungraded' : 'Grade ' + grade}: ${count} (${Math.round(pct)}%)"></div>`;
+      return `
+        <div class="ev-hbar-row" style="cursor:pointer;" onclick="document.querySelector('[data-grade=\\'${grade}\\']') && document.querySelector('[data-grade=\\'${grade}\\']').click()">
+          <div class="ev-hbar-label">${gradeNames[grade]}</div>
+          <div class="ev-hbar-track">
+            <div class="ev-hbar-fill grade-segment grade-${gradeClass}" style="width:${barPct}%;"></div>
+          </div>
+          <div class="ev-hbar-count">${count} <span class="ev-hbar-pct">(${ofTotal}%)</span></div>
+        </div>`;
     }).join('');
 
-    return `
-      <div class="ev-bar-chart">
-        <div class="ev-bar-total-count">${total}</div>
-        <div class="ev-bar-total-label">Total Sources</div>
-        <div class="ev-bar-track">
-          ${segmentsHtml}
-        </div>
-      </div>`;
+    return `<div class="ev-hbar-chart">${rows}</div>`;
   }
 
   // Generates Legend Table

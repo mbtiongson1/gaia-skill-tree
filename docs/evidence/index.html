@@ -99,55 +99,67 @@
     .ev-chart-wrap {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       gap: 2.5rem;
       margin: 2rem auto;
-      max-width: 540px;
+      max-width: 620px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem 2rem;
       flex-wrap: wrap;
     }
-    .ev-bar-chart {
-      width: 180px;
+
+    /* Labeled horizontal bar chart — one row per grade */
+    .ev-hbar-chart {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .ev-bar-total-count {
-      font-family: var(--font-mono);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-      text-align: center;
-    }
-    .ev-bar-total-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-      text-align: center;
-    }
-    .ev-bar-track {
+      gap: 0.55rem;
       width: 100%;
-      height: 16px;
-      background: rgba(255, 255, 255, 0.03);
+    }
+    .ev-hbar-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 64px;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .ev-hbar-row:hover .ev-hbar-fill {
+      filter: brightness(1.15);
+    }
+    .ev-hbar-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: right;
+    }
+    .ev-hbar-track {
+      height: 22px;
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      display: flex;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    .ev-bar-segment {
+    .ev-hbar-fill {
       height: 100%;
-      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      min-width: 4px;
+      border-radius: 0;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .ev-hbar-count {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .ev-hbar-pct {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
     .ev-chart-legend {
       display: flex;
       flex-direction: column;
@@ -378,9 +390,9 @@
       justify-content: center;
     }
     .ev-grade-pill {
-      width: 32px;
-      height: 20px;
-      border-radius: 4px;
+      width: 36px;
+      height: 18px;
+      border-radius: 2px;
       display: flex;
       align-items: center;
       justify-content: center;

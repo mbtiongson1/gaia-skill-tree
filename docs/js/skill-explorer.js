@@ -664,10 +664,10 @@
           };
           var typeLbl = typeLabels[rawType] || rawType;
 
-          // Trust number
+          // Trust number — always show; label as "TM N" to communicate it's Trust Magnitude
           var trustHtml = (ev.trustNumber != null)
-            ? '<span class="se-ev-trust">' + esc(String(ev.trustNumber)) + '</span>'
-            : '';
+            ? '<span class="se-ev-trust" title="Trust Magnitude score">TM ' + esc(String(ev.trustNumber)) + '</span>'
+            : '<span class="se-ev-trust se-ev-trust--empty" title="No Trust Magnitude score">TM —</span>';
 
           // Short source URL
           var shortSrc = (ev.source || '');
