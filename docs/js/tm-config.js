@@ -241,12 +241,21 @@
       formula: '15 × origins + 5 × √origins  (origins ≥ C; role=\'origin\' only)',
       describe: function (row) {
         var n = null;
-        if (Array.isArray(row.origins))               n = row.origins.length;
-        else if (row.gradedOriginCount != null)        n = Number(row.gradedOriginCount);
-        else if (row.origins != null)                  n = Number(row.origins);
+        var caveat = '';
+        // Priority 1: explicit graded-origin count (matches backend exactly)
+        if (row.gradedOriginCount != null) {
+          n = Number(row.gradedOriginCount);
+        // Priority 2: numeric origins field (already a graded count from CLI)
+        } else if (!Array.isArray(row.origins) && row.origins != null) {
+          n = Number(row.origins);
+        // Priority 3: raw array length — approximation; backend filters by grade>=C
+        } else if (Array.isArray(row.origins)) {
+          n = row.origins.length;
+          caveat = ' (raw count — backend uses graded origins only)';
+        }
         if (n == null) return null;
         return { value: 15 * n + 5 * Math.sqrt(n),
-                 expr:  '15 × ' + n + ' + 5 × √' + n };
+                 expr:  '15 × ' + n + ' + 5 × √' + n + caveat };
       },
       weight: 1.4,
       cap: null,

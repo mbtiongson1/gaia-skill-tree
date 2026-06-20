@@ -1670,27 +1670,94 @@
 
   function renderTimelineEvents(el, evts) {
     if (!evts.length) { el.innerHTML = '<div class="se-flow-h">' + _se_icon('hud-toggle') + ' Evolution Changelog</div><div class="se-empty">No history available.</div>'; return; }
-    el.innerHTML = '<div class="se-flow-h">' + _se_icon('hud-toggle') + ' Evolution Changelog</div><div class="se-timeline">' +
-      evts.map(function(ev){
-        var action = ev.action || 'commit';
-        var icon = SE_ACTION_ICON[action] || '·';
-        var actionLabel = action.replace('_', ' ');
+
+    // Group consecutive events that share the same action type.
+    // A group of 1 renders as a normal single event.
+    // A group of N>1 renders as an expandable cluster.
+    var groups = [];
+    evts.forEach(function(ev) {
+      var action = ev.action || 'commit';
+      var last = groups.length ? groups[groups.length - 1] : null;
+      if (last && last.action === action) {
+        last.events.push(ev);
+      } else {
+        groups.push({ action: action, events: [ev] });
+      }
+    });
+
+    var html = '<div class="se-flow-h">' + _se_icon('hud-toggle') + ' Evolution Changelog</div><div class="se-timeline">';
+
+    groups.forEach(function(group, gi) {
+      var action = group.action;
+      var icon = SE_ACTION_ICON[action] || '·';
+      var actionLabel = action.replace(/_/g, ' ');
+      var evs = group.events;
+
+      if (evs.length === 1) {
+        // Single event — normal row
+        var ev = evs[0];
         var contributorHtml = ev.contributor
           ? '<span class="se-tl-contributor">@' + esc(ev.contributor) + '</span> '
           : '';
-        return '<div class="se-tl-event">' +
+        html += '<div class="se-tl-event">' +
           '<div class="se-tl-dot" data-action="' + esc(action) + '"></div>' +
           '<div class="se-tl-body">' +
             '<div class="se-tl-row">' +
               '<span class="se-tl-action" data-action="' + esc(action) + '"><span class="se-tl-action-icon">' + icon + '</span>' + esc(actionLabel) + '</span>' +
-              '<span class="se-tl-date">' + esc(ev.date) + '</span>' +
+              '<span class="se-tl-date">' + esc(ev.date || '') + '</span>' +
             '</div>' +
-            '<div class="se-tl-msg">' + contributorHtml + esc(ev.msg) + '</div>' +
+            '<div class="se-tl-msg">' + contributorHtml + esc(ev.msg || '') + '</div>' +
             (ev.sha ? '<div class="se-tl-sha">' + esc(ev.sha) + '</div>' : '') +
           '</div>' +
         '</div>';
-      }).join('') +
-    '</div>';
+      } else {
+        // Grouped cluster — show first event + collapsed rest
+        var first = evs[0];
+        var last  = evs[evs.length - 1];
+        var dateRange = last.date && first.date && last.date !== first.date
+          ? esc(last.date) + ' – ' + esc(first.date)
+          : esc(first.date || '');
+        var groupId = 'se-tl-group-' + gi;
+
+        // Inner collapsed events (all but first)
+        var innerHtml = evs.slice(1).map(function(ev) {
+          var ch = ev.contributor
+            ? '<span class="se-tl-contributor">@' + esc(ev.contributor) + '</span> '
+            : '';
+          return '<div class="se-tl-group-item">' +
+            '<span class="se-tl-date se-tl-group-date">' + esc(ev.date || '') + '</span>' +
+            '<div class="se-tl-msg se-tl-group-msg">' + ch + esc(ev.msg || '') + '</div>' +
+            (ev.sha ? '<div class="se-tl-sha">' + esc(ev.sha) + '</div>' : '') +
+          '</div>';
+        }).join('');
+
+        var firstContributor = first.contributor
+          ? '<span class="se-tl-contributor">@' + esc(first.contributor) + '</span> '
+          : '';
+
+        html += '<div class="se-tl-event se-tl-event--group">' +
+          '<div class="se-tl-dot se-tl-dot--group" data-action="' + esc(action) + '">' +
+            '<span class="se-tl-group-count">' + evs.length + '</span>' +
+          '</div>' +
+          '<div class="se-tl-body">' +
+            '<div class="se-tl-row">' +
+              '<span class="se-tl-action" data-action="' + esc(action) + '"><span class="se-tl-action-icon">' + icon + '</span>' + esc(actionLabel) + '</span>' +
+              '<span class="se-tl-group-badge">' + evs.length + ' events</span>' +
+              '<span class="se-tl-date">' + dateRange + '</span>' +
+            '</div>' +
+            '<div class="se-tl-msg">' + firstContributor + esc(first.msg || '') + '</div>' +
+            (first.sha ? '<div class="se-tl-sha">' + esc(first.sha) + '</div>' : '') +
+            '<details class="se-tl-group-details" id="' + groupId + '">' +
+              '<summary class="se-tl-group-toggle">Show all ' + evs.length + ' ' + esc(actionLabel) + ' events</summary>' +
+              '<div class="se-tl-group-inner">' + innerHtml + '</div>' +
+            '</details>' +
+          '</div>' +
+        '</div>';
+      }
+    });
+
+    html += '</div>';
+    el.innerHTML = html;
   }
 
   // ── RENDER TRUST MAGNITUDE ────────────────────────────────────────────
