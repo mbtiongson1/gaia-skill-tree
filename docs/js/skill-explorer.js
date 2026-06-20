@@ -648,17 +648,17 @@
     var readmeUrl = repoUrl && isGithubUrl(repoUrl) ? repoUrl.replace(/\.(git|\/?)$/,'') : '';
 
     var combinedEvidence = [];
-    var seenUrls = new Set();
-    
+    var seenKeys = new Set();
+
     function addEvidences(list) {
       if (Array.isArray(list)) {
         list.forEach(function(ev) {
-          if (ev && ev.source) {
-            var url = ev.source.trim();
-            if (!seenUrls.has(url)) {
-              seenUrls.add(url);
-              combinedEvidence.push(ev);
-            }
+          if (!ev) return;
+          // Dedupe by (type + source) — same source URL can have different types
+          var key = (ev.type || '') + '|' + (ev.source || '');
+          if (!seenKeys.has(key)) {
+            seenKeys.add(key);
+            combinedEvidence.push(ev);
           }
         });
       }
@@ -757,21 +757,40 @@
             magBarHtml +
           '</div>';
         }).join('') +
-        // Ghost placeholder tiles: pad grid to at least 3 tiles wide,
-        // visually communicating "more evidence can be submitted here"
+        // Ghost placeholder tiles: pad grid to at least 3 tiles wide.
+        // Show the evidence types most likely to be missing for this skill tier.
         (function() {
           var real = combinedEvidence.length;
           var minTiles = 3;
           var ghosts = Math.max(0, minTiles - real);
+          if (ghosts === 0) return '';
+
+          // Determine which types are already present so ghosts suggest something new
+          var presentTypes = {};
+          combinedEvidence.forEach(function(ev) { presentTypes[ev.type || ''] = true; });
+
+          // Candidate types in priority order for named skills
+          var candidates = ['github-stars-own', 'peer-review', 'arxiv', 'benchmark-result',
+                            'verifier-attestation', 'social-signal', 'proxy-containment'];
+          var typeLabels = {
+            'github-stars-own': 'stars', 'peer-review': 'peer-review',
+            'arxiv': 'arxiv', 'benchmark-result': 'benchmark',
+            'verifier-attestation': 'verifier', 'social-signal': 'social',
+            'proxy-containment': 'proxy'
+          };
+          var suggestions = candidates.filter(function(t) { return !presentTypes[t]; });
+
           var ghostHtml = '';
           for (var i = 0; i < ghosts; i++) {
+            var sugType = suggestions[i] || candidates[i % candidates.length];
+            var sugLbl = typeLabels[sugType] || sugType;
             ghostHtml += '<div class="se-ev-card se-ev-card--ghost">' +
               '<div class="se-ev-card-body">' +
                 '<div class="se-ev-card-top">' +
-                  '<span class="se-ev-ghost-label">No evidence</span>' +
+                  '<span class="ev-type-pill type-' + sugType + '">' + sugLbl + '</span>' +
                 '</div>' +
                 '<div class="se-ev-card-meta">' +
-                  '<span class="se-ev-ghost-hint">Submit a source to support this skill</span>' +
+                  '<span class="se-ev-ghost-hint">Submit evidence</span>' +
                 '</div>' +
               '</div>' +
               '<div class="se-ev-mag-bar" data-trust-grade="none">' +
