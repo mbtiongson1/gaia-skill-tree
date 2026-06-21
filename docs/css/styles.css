@@ -408,39 +408,176 @@ nav.docs-nav .nav-logo > span {
   will-change: transform, filter;
 }
 
-/* docs/en pages: site-nav (fixed, 54px) at top. The legacy .docs-nav
-   element still exists in the markup but we transform it into a thin
-   breadcrumb strip directly below the site-nav, with the redundant
-   "Gaia ◆" logo and version chip removed (site-nav already shows the
-   logo). Only docs/en pairs site-nav with .docs-nav. */
+/* ============================================================================
+   docs/en pages — the legacy in-page <nav class="docs-nav"> element is
+   now redundant: site-nav.js renders breadcrumbs inline next to the Gaia
+   logo. Hide the old element entirely; the body padding clears the fixed
+   site-nav.
+   ========================================================================== */
 body:has(> nav#site-nav) {
   padding-top: 54px;
 }
 body:has(> nav#site-nav) nav.docs-nav {
-  position: static !important;
-  top: auto !important;
-  z-index: auto !important;
-}
-body:has(> nav#site-nav) nav.docs-nav .nav-version,
-body:has(> nav#site-nav) nav.docs-nav .docs-nav-version,
-body:has(> nav#site-nav) nav.docs-nav .nav-logo,
-body:has(> nav#site-nav) nav.docs-nav .docs-nav-logo,
-body:has(> nav#site-nav) nav.docs-nav .docs-nav-sep:first-of-type,
-body:has(> nav#site-nav) nav.docs-nav .nav-sep:first-of-type {
   display: none !important;
 }
 
-@media (max-width: 600px) {
-  body:has(> nav#site-nav) nav.docs-nav {
-    height: 44px !important;
-    padding: 0 .9rem !important;
-    gap: .4rem !important;
+/* ============================================================================
+   Site-nav left cluster — logo + (optional) breadcrumb sit together.
+   ========================================================================== */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  min-width: 0;            /* allow breadcrumb to truncate, not push the layout */
+}
+
+/* Breadcrumb: inline strip directly after .nav-logo. Only emitted on /en/*. */
+.nav-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-width: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .82rem;
+  letter-spacing: .02em;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.nav-breadcrumb-sep {
+  color: var(--muted);
+  opacity: .55;
+}
+
+.nav-breadcrumb-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+.nav-breadcrumb-link:hover,
+.nav-breadcrumb-link:focus-visible {
+  color: var(--text);
+  outline: none;
+}
+.nav-breadcrumb-link[aria-current="page"] {
+  color: var(--tier-basic);
+}
+
+.nav-breadcrumb-current {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .nav-breadcrumb {
+    font-size: .72rem;
+    gap: .35rem;
+    flex: 1 1 0;
+    min-width: 0;
   }
-  body:has(> nav#site-nav) .sidebar {
-    position: static !important;
-    height: auto !important;
-    border-right: 0 !important;
-    padding: 1rem 1rem 0 !important;
+  .nav-breadcrumb-current {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .nav-left {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    margin-right: .5rem;
+  }
+  .nav-menu-toggle {
+    flex: 0 0 auto;
+  }
+}
+
+/* ============================================================================
+   Mobile drawer — dedicated element, never gets confused with the
+   desktop .nav-primary. Hidden by default at every viewport; revealed
+   only when ≤700px AND .open is set.
+   ========================================================================== */
+.nav-mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .nav-mobile-drawer {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    background: #000;
+    z-index: 9998;
+    padding: 3.6rem 1.25rem 1.25rem;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+  }
+  .nav-mobile-drawer.open {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav-mobile-close {
+    position: absolute;
+    top: .55rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .nav-mobile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .15rem;
+    flex: 1;
+    min-height: 0;
+  }
+  .nav-mobile-list li {
+    width: 100%;
+  }
+  .nav-mobile-list a,
+  .nav-mobile-list button {
+    display: block;
+    width: 100%;
+    padding: .45rem .25rem;
+    font-family: var(--font-display, 'EB Garamond', Georgia, serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: text-shadow .2s ease;
+  }
+  .nav-mobile-list a:hover,
+  .nav-mobile-list button:hover,
+  .nav-mobile-list a:focus-visible,
+  .nav-mobile-list button:focus-visible {
+    text-shadow: 0 0 10px currentColor;
+    outline: none;
+  }
+  body.nav-drawer-open {
+    overflow: hidden;
+  }
+  body.nav-drawer-open .hero-audit-btn {
+    display: none !important;
   }
 }
 
@@ -963,6 +1100,80 @@ nav.docs-nav:hover .nav-sep {
   background: rgba(255, 255, 255, .06);
 }
 
+/* ════════════════════════════════════════════════
+   PROFILE BACK BUTTON & PAGE HEADER ROW
+   Standardized layout for all secondary pages
+   (about, badges, named, en, codex, trust, u, etc.)
+   ════════════════════════════════════════════════ */
+
+.profile-back-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.75rem clamp(1.25rem, 4vw, 2.5rem);
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 10;
+  min-height: 2.75rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.profile-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  color: var(--tier-basic, #38bdf8);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s, background 0.2s;
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.profile-back:hover {
+  color: var(--text);
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.15);
+}
+
+.profile-back:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--tier-basic-rgb, 56, 189, 248), 0.4);
+}
+
+.profile-back .ico {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ── Page wrapper for consistent max-width ── */
+.profile-page-wrap,
+.page-wrap,
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Standardize named-hero and similar hero sections */
+.named-hero,
+.profile-hero,
+.page-hero {
+  padding: 1.5rem 0 clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 /* ── HERO ── */
 #hero {
   position: relative;
@@ -1008,6 +1219,52 @@ nav.docs-nav:hover .nav-sep {
   mix-blend-mode: overlay;
   pointer-events: none;
   transition: opacity 0.5s ease;
+}
+
+/* Ensure consistent main section spacing and no extra gaps */
+main section {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body > section,
+body > div[class*="section"],
+body > div[class*="hero"] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Standardize all hero section spacing and centering ── */
+section[class*="hero"],
+section[class*="frontis"],
+.ab-frontis,
+.ev-hero,
+.lb-hero {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Override excessive padding on hero sections to match back button spacing */
+.ab-frontis {
+  padding-top: 1.5rem !important;
+}
+
+.ev-hero {
+  padding-top: 1.5rem !important;
+}
+
+.lb-hero {
+  padding-top: 1.5rem !important;
+}
+
+/* Ensure about page and evidence page heroes are centered */
+.ab-frontis-body {
+  text-align: center;
+}
+
+.named-hero-title,
+.ev-hero-title {
+  text-align: center;
 }
 
 .hero-content {
@@ -1267,6 +1524,30 @@ nav.docs-nav:hover .nav-sep {
 }
 
 @media (max-width: 700px) {
+  .profile-back-row {
+    padding: 0.5rem clamp(0.75rem, 3vw, 1.5rem);
+    min-height: 2.5rem;
+  }
+
+  .profile-back {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  .profile-back .ico {
+    width: 12px;
+    height: 12px;
+  }
+
+  .named-hero,
+  .profile-hero,
+  .page-hero,
+  .ab-frontis,
+  .ev-hero,
+  .lb-hero {
+    padding-top: 1rem !important;
+  }
+
   #hero.hero-graph-fullscreen {
     height: 100svh !important;
     max-height: 100svh !important;
@@ -1276,6 +1557,36 @@ nav.docs-nav:hover .nav-sep {
   #hero.hero-graph-fullscreen::after {
     opacity: 0;
     transition: opacity 0.4s ease;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-back-row {
+    padding: 0.4rem clamp(0.5rem, 2vw, 0.75rem);
+    min-height: 2.25rem;
+  }
+
+  .profile-back {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.8rem;
+  }
+
+  .profile-back span {
+    display: none;
+  }
+
+  .profile-back .ico {
+    width: 14px;
+    height: 14px;
+  }
+
+  .named-hero,
+  .profile-hero,
+  .page-hero,
+  .ab-frontis,
+  .ev-hero,
+  .lb-hero {
+    padding-top: 0.75rem !important;
   }
 }
 
@@ -2315,8 +2626,17 @@ tr:hover td {
 }
 
 /* ── PROCESS PAGE ── */
+/* Override inline styles on process-hero sections to ensure uniform spacing */
+.process-hero[style*="padding-top"] {
+  padding-top: 2rem !important;
+}
+
+.process-hero[style*="min-height: auto"] {
+  min-height: auto !important;
+}
+
 .process-page main {
-  padding-top: 4.5rem
+  padding-top: 0;
 }
 
 .process-hero {
@@ -2325,7 +2645,7 @@ tr:hover td {
   flex-direction: column;
   justify-content: center;
   max-width: 1000px;
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-bottom: 3rem;
 }
 
@@ -8083,186 +8403,10 @@ code {
   }
 
   nav ul.nav-primary {
-    display: none
+    display: none;          /* mobile uses .nav-mobile-drawer instead */
   }
-
-  nav.nav-open ul.nav-primary {
-    display: flex;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;                     /* full-height — needed because there are
-                                   ~13 items including the More group, more
-                                   than fit a half-screen sheet on small
-                                   phones (cut "More" items off the top). */
-    bottom: 0;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    gap: 0;
-    background: #000;
-    z-index: 9999;
-    padding: 4rem 1.25rem 2rem;  /* clear the close (X) at top */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-top: 0;
-    border-radius: 0;
-  }
-
-  /* Mobile: expand More dropdown to show all items */
-  .nav-more-dropdown {
-    width: 100% !important;
-    display: block !important;
-    position: static !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-
-  .nav-more-toggle {
-    display: none !important;
-  }
-
-  .nav-more-menu,
-  nav.nav-open .nav-more-menu,
-  .nav-more-dropdown .nav-more-menu {
-    position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    background: transparent !important;
-    border: none !important;
-    backdrop-filter: none !important;
-    padding: 0 !important;
-    min-width: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: .25rem !important;
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    list-style: none !important;
-    pointer-events: auto !important;
-  }
-
-  .nav-more-menu > li {
-    width: 100% !important;
-    display: block !important;
-    text-align: center !important;
-    height: auto !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .nav-more-menu > li > a,
-  .nav-more-menu > li > button {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  .nav-more-menu li a,
-  .nav-more-menu li button {
-    padding: .5rem .25rem;
-    font-size: .9rem;
-    width: auto;
-    text-align: center;
-  }
-
-  /* Mobile menu — kill the desktop ::before plate-marker and ::after
-     underline on ALL items (top-level + dropdown). They were leaking to
-     the far left edge as a floating dot + horizontal line because the
-     mobile drawer items have no left padding to absorb them. */
-  nav.nav-open ul.nav-primary > li > a::before,
-  nav.nav-open ul.nav-primary > li > button::before,
-  nav.nav-open ul.nav-primary > li > a::after,
-  nav.nav-open ul.nav-primary > li > button::after,
-  nav.nav-open .nav-more-menu li a::before,
-  nav.nav-open .nav-more-menu li button::before,
-  nav.nav-open .nav-more-menu li a::after,
-  nav.nav-open .nav-more-menu li button::after {
-    display: none !important;
-  }
-  nav.nav-open .nav-more-menu li a,
-  nav.nav-open .nav-more-menu li button,
-  nav.nav-open ul.nav-primary > li > a,
-  nav.nav-open ul.nav-primary > li > button {
-    transition: color .2s ease, text-shadow .2s ease;
-    will-change: auto;
-  }
-  nav.nav-open .nav-more-menu li a:hover,
-  nav.nav-open .nav-more-menu li button:hover,
-  nav.nav-open .nav-more-menu li a:focus-visible,
-  nav.nav-open .nav-more-menu li button:focus-visible,
-  nav.nav-open ul.nav-primary > li > a:hover,
-  nav.nav-open ul.nav-primary > li > button:hover,
-  nav.nav-open ul.nav-primary > li > a:focus-visible,
-  nav.nav-open ul.nav-primary > li > button:focus-visible {
-    transform: none;
-    letter-spacing: .01em;
-    background: transparent;
-    text-shadow: 0 0 10px currentColor;
-  }
-  nav.nav-open .nav-menu-toggle {
-    width: 30px;
-    height: 30px;
-  }
-  nav.nav-open .nav-menu-toggle span {
-    width: 16px;
-    height: 1.5px;
-  }
-
-  nav.nav-open.active ul {
-    transform: translateY(0);
-  }
-
-  nav.nav-open ul li {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Remove search icon from hamburger menu */
-  nav.nav-open ul li:has(.nav-search-btn) {
-    display: none;
-  }
-
-  nav.nav-open ul li a,
-  nav.nav-open ul li button {
-    font-family: var(--font-display);
-    font-size: .95rem;
-    font-weight: 500;
-    color: var(--muted);
-    display: block;
-    width: 100%;
-    padding: .55rem .25rem;
-    text-decoration: none;
-    background: transparent;
-    border: none;
-    letter-spacing: 0.01em;
-    transition: color .2s;
-  }
-
-  nav.nav-open ul li a:hover,
-  nav.nav-open ul li button:hover {
-    color: var(--text);
-  }
-
-  nav.nav-open .nav-menu-toggle {
-    position: fixed;
-    top: .9rem;
-    right: 1.1rem;
-    z-index: 10000;
-    color: var(--text);
-  }
-
-  nav.nav-open .nav-logo {
-    position: fixed;
-    top: .9rem;
-    left: 1.1rem;
-    z-index: 10000;
-  }
+  /* Legacy `nav.nav-open` reflow of .nav-primary is intentionally gone.
+     The drawer is a separate sibling element with its own visibility. */
 
   #hero {
     min-height: 100svh;
