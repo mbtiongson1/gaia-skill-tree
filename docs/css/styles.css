@@ -1175,6 +1175,17 @@ main {
   margin-top: 0;
 }
 
+/* Reduce gap between profile-hero and search controls */
+.profile-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.directory-controls {
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+
 /* ── HERO ── */
 #hero {
   position: relative;
@@ -1553,6 +1564,11 @@ section[class*="frontis"],
     min-height: auto !important;
   }
 
+  .directory-controls {
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+
   #hero.hero-graph-fullscreen {
     height: 100svh !important;
     max-height: 100svh !important;
@@ -1596,6 +1612,11 @@ section[class*="frontis"],
   .process-hero {
     padding-top: 0.75rem !important;
     min-height: auto !important;
+  }
+
+  .directory-controls {
+    margin-top: 0 !important;
+    margin-bottom: 0.75rem !important;
   }
 }
 
