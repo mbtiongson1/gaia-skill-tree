@@ -208,6 +208,14 @@ If they disagree before the bump, the hook fails loudly. Use `gaia dev release <
 
 > **Deprecation note:** `gaia release` is a shim that delegates to `gaia dev release` with a warning. Use `gaia dev release` directly; the shim will be removed in v7.0.0.
 
+### Decorative assets must NOT carry version metadata
+
+**Hard rule (codified after Issue #807):** Class S decorative artifacts — `docs/graph/gaia.json`, `docs/tree.md`, `docs/index.html` stats block, badges/cards/og — **must not** carry a `version` field, banner, or comment that tracks the manifest version. The lockstep verifier (`scripts/verify_lockstep.py`) checks only the four manifests above; no rendering surface should have a version string that needs to agree with them.
+
+Before #807 the version stamp on these files was the dominant source of cross-PR CI churn: any PR opened against an old `main` would inherit a stale stamp and trip lockstep before auto-sync could fix it, costing agents 2–4 round-trips of bump-and-push debugging on work that had nothing to do with versioning. Stripping the stamp from decoration ends that class of failure entirely.
+
+If you add a new generated artifact under `docs/`, do not stamp a version on it. If you genuinely need a version string at runtime (e.g. for a cache-bust query param), read it dynamically from a fetched manifest at request time — do not bake it into the file.
+
 ### Adding a new versioned HTML page
 
 **Never manually patch `?v=` query strings.** Instead, add the page path to `build_html_cache_busting()` in `scripts/build_docs.py` — the function at line ~316 lists every HTML file that gets auto-versioned on `gaia dev docs` / CI release. New `docs/<section>/index.html` pages go here; the `_apply_cache_busting` regex handles all relative `.css` and `.js` src/href attributes automatically.

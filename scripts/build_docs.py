@@ -247,7 +247,7 @@ def build_docs_index(check: bool) -> bool:
     unique_count = sum(1 for s in graph.get("skills", []) if s.get("type") == "unique")
     body = (
         f"skills={len(graph.get('skills', []))}; namedSkills={named_count}; "
-        f"uniqueSkills={unique_count}; version={graph.get('version', 'unknown')}"
+        f"uniqueSkills={unique_count}"
     )
     text = path.read_text(encoding="utf-8")
     text, changed = _replace_region(
