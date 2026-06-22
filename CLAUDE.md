@@ -2,9 +2,26 @@
 
 Guidance for AI coding agents working in this repository.
 
+## Workflow Discipline
+
+- When user asks for a specific task (merge, monitor, audit), stay focused on that task. Do NOT deviate into debugging or exploration unless explicitly asked.
+- Read key files BEFORE running exploratory bash commands.
+- When asked to monitor/loop CI checks, monitor — do not switch to debugging failures unless instructed.
+
 ## Git Workflow
 
 Never push directly to main.
+
+### Branch & Worktree Conventions
+
+- Always confirm the target branch/worktree before editing. If user references a specific branch (e.g., `fix/links-3d-graph`), push there — do not create a new design branch.
+- When editing in a worktree, verify CWD matches the requested worktree before making edits.
+
+## Edit Safety
+
+- After Edit/Write operations on JS/HTML, verify no duplication or merged lines were introduced (read the file back, run syntax check if available).
+- Avoid hex color fallbacks; use design tokens only (CI guard rejects hex).
+- When bumping assets, also update cache-bust version strings across all referencing pages.
 
 ## Testing
 
