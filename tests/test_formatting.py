@@ -443,3 +443,4 @@ class TestColorConstantsShape:
             assert len(color) == 3, f"HARNESS_COLORS[{name}] not a 3-tuple"
             assert all(isinstance(c, int) and 0 <= c <= 255 for c in color), \
                 f"HARNESS_COLORS[{name}] contains non-byte values"
+# benchmark-unit-tier
