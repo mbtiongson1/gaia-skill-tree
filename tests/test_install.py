@@ -367,3 +367,4 @@ class TestInstallFlow:
         result = install_skill("nobody/nonexistent", str(tmp_path))
 
         assert result is False
+# benchmark-integration-tier
