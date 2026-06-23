@@ -21,6 +21,14 @@ Never push directly to main.
 
 `infra/` branches may touch `docs/badges/` (registry.json, _assets/) in addition to the standard `.github/`, `scripts/`, `*.md`, `docs/*.html`. This is codified in `.github/workflows/branch-scope.yml` and applies permanently — badge restore/guard commits belong on `infra/` branches and must not require `skip-scope-check` every time.
 
+## Redaction Exemptions — ordained, do not re-litigate
+
+The following 8 contributor handles are **permanently exempt** from Section D badge-dir violations (`validate_redaction.py` + `build_docs.py`). Their `docs/badges/_assets/<handle>/` directories are kept intentionally. Do NOT remove them from the exemption list, do NOT delete their dirs, do NOT open issues about them. If any of them reach 2★ their dir becomes valid anyway and the exemption becomes a no-op.
+
+Exempted handles: `0xdarkmatter`, `Taoidle`, `browserbase`, `changkun`, `glincker`, `gooseworks`, `intelligentcode-ai`, `yonatangross`
+
+To add a new exemption: edit `REDACTION_BADGE_DIR_EXEMPTIONS` in **both** `scripts/validate_redaction.py` and `scripts/build_docs.py` (two frozensets, keep in sync).
+
 ## Edit Safety
 
 - After Edit/Write operations on JS/HTML, verify no duplication or merged lines were introduced (read the file back, run syntax check if available).

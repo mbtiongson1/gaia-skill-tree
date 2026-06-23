@@ -24,6 +24,11 @@ Maintained by the Orchestrator agent. Newest entries first within each section.
 
 `infra/` PRs that restore or update badge artifacts (`docs/badges/registry.json`, `docs/badges/_assets/`) do NOT need `skip-scope-check`. The allowlist in `branch-scope.yml` covers them permanently.
 
+**Redaction exemptions — ordained, do not re-open:**
+These 8 handles are permanently exempt from Section D badge-dir violations. Their `_assets/` dirs are kept. Stop. Do not delete them. Do not file issues. Do not "fix" them.
+`0xdarkmatter`, `Taoidle`, `browserbase`, `changkun`, `glincker`, `gooseworks`, `intelligentcode-ai`, `yonatangross`
+Codified in `REDACTION_BADGE_DIR_EXEMPTIONS` in both `scripts/validate_redaction.py` and `scripts/build_docs.py`.
+
 ---
 
 ## State Snapshot (2026-06-24, session 20 — Pytest tiered CI shipped, badge sanity guard landed)

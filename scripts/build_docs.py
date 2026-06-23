@@ -20,6 +20,22 @@ if str(SRC) not in sys.path:
 
 from gaia_cli.main import PUBLIC_COMMANDS, get_parser  # noqa: E402
 
+# Handles permanently exempted from redaction badge-dir violations.
+# These contributors have ≤1★ skills but their _assets/ dirs are kept
+# intentionally. Add a handle here to stop recurring CI noise; the canonical
+# definition lives in scripts/validate_redaction.py::REDACTION_BADGE_DIR_EXEMPTIONS
+# — keep both sets in sync.
+_REDACTION_BADGE_DIR_EXEMPTIONS: frozenset[str] = frozenset({
+    "0xdarkmatter",
+    "Taoidle",
+    "browserbase",
+    "changkun",
+    "glincker",
+    "gooseworks",
+    "intelligentcode-ai",
+    "yonatangross",
+})
+
 # Stage 1 — bring in the schema-driven CSS-token generator so --check can
 # verify docs/css/tokens.css is in sync with registry/gaia.json.meta.
 SCRIPTS = Path(__file__).resolve().parent
@@ -726,7 +742,8 @@ def _apply_redaction_backstop(badges_dir: Path, *, check: bool) -> None:
 
     Mirrors `scripts/validate_redaction.py` Section D. Called on the generator
     tempdir output AND used to compute committed-tree drift; both surfaces
-    must agree on the invariant.
+    must agree on the invariant. Handles in `_REDACTION_BADGE_DIR_EXEMPTIONS`
+    are skipped — their dirs are kept intentionally.
     """
     prenamed = _prenamed_handles()
     if not prenamed:
@@ -734,6 +751,8 @@ def _apply_redaction_backstop(badges_dir: Path, *, check: bool) -> None:
     assets = badges_dir / "_assets"
     if assets.is_dir():
         for handle in prenamed:
+            if handle in _REDACTION_BADGE_DIR_EXEMPTIONS:
+                continue
             d = assets / handle
             if d.exists():
                 if not check:
@@ -758,7 +777,12 @@ def _apply_redaction_backstop(badges_dir: Path, *, check: bool) -> None:
 
 
 def _committed_redaction_violations(badges_dir: Path) -> list[str]:
-    """Return paths relative to `docs/badges/` that violate redaction on disk."""
+    """Return paths relative to `docs/badges/` that violate redaction on disk.
+
+    Handles in `_REDACTION_BADGE_DIR_EXEMPTIONS` are skipped — their dirs are
+    kept intentionally to avoid recurring CI churn while their skills are
+    pending promotion to 2★.
+    """
     prenamed = _prenamed_handles()
     if not prenamed:
         return []
@@ -766,6 +790,8 @@ def _committed_redaction_violations(badges_dir: Path) -> list[str]:
     assets = badges_dir / "_assets"
     if assets.is_dir():
         for handle in sorted(prenamed):
+            if handle in _REDACTION_BADGE_DIR_EXEMPTIONS:
+                continue
             d = assets / handle
             if d.exists():
                 out.append(f"_assets/{handle}/")
@@ -778,6 +804,8 @@ def _committed_redaction_violations(badges_dir: Path) -> list[str]:
         contribs = reg.get("contributors") if isinstance(reg, dict) else None
         if isinstance(contribs, dict):
             for handle in sorted(prenamed):
+                if handle in _REDACTION_BADGE_DIR_EXEMPTIONS:
+                    continue
                 if handle in contribs:
                     out.append(f"registry.json[{handle}]")
     return out
