@@ -1,114 +1,124 @@
 ---
 name: gaia-draft-curate
-description: Review pending Gaia draft skill intake batches and open draft PRs. Classifies each proposed skill (accept/rename/duplicate/needs-evidence/reject) without touching registry/gaia.json. Optionally triggers a promotion PR for accepted skills. Use when the user asks to "check drafts", "review intake batches", "triage pending skills", or explicitly types /gaia-draft-curate.
-version: 1.2.0
+description: >
+  Triage and classify pending Gaia skill intake batches in registry-for-review/, then optionally hand off accepted skills to /gaia-curate for promotion. Use this skill when the user says "check drafts", "review intake batches", "triage pending skills", "what's waiting in the intake queue", "process batch proposals", "review gaia push output", "what did gaia push submit", "classify draft skills", "look at the review queue", "are there any pending skill proposals", "open a draft PR for intake", or explicitly types /gaia-draft-curate. This is the human-review gate between `gaia push` (which writes to registry-for-review/) and the canonical registry — it never writes to registry/gaia.json directly. If you want to skip staging and add skills straight to the registry, use /gaia-curate instead.
+version: 1.3.0
 ---
 
 # gaia-draft-curate
 
-Review pending Gaia draft skill intake batches and open draft PRs. This skill is read-only with respect to `registry/gaia.json` — it classifies proposals and, after user confirmation, may hand off to `/gaia-curate` for promotion.
+Review and classify pending Gaia skill intake batches from `registry-for-review/skill-batches/`. This skill is the human-review gate between `gaia push` (which stages proposals) and the canonical registry. It reads, enriches, and classifies — it never writes to `registry/gaia.json` directly.
 
 ## What this skill does
 
-1. **Pull latest** — `git pull --ff-only` so local state matches remote.
+### Step 1 — Sync local state
 
-2. **Scan intake batches** — glob `registry-for-review/skill-batches/*.json` (skip `.gitkeep`). For each batch file, parse and validate against `registry/schema/skillBatch.schema.json` using `python3 scripts/validate_intake.py`. Report any schema errors immediately.
+Pull so your view matches remote:
+```bash
+git pull --ff-only
+```
 
-3. **Check open draft PRs** — run:
-   ```bash
-   gh pr list --label "draft-skills" --state open --json number,title,headRefName,url,createdAt
-   ```
-   Cross-reference with local batch files by `batchId` where possible. List any PRs that have no corresponding local batch (remote-only) and any local batches that have no open PR.
+### Step 2 — Scan intake batches
 
-4. **Evidence enrichment and Rigorous Verification** — before displaying the review table, for each proposed skill in the batch:
+Glob `registry-for-review/skill-batches/*.json` (skip `.gitkeep`). For each batch file, validate against schema:
+```bash
+python3 scripts/validate_intake.py
+```
+Report schema errors immediately — do not proceed with a malformed batch.
 
-   a. Search GitHub for concrete implementations:
-   ```bash
-   gh search repos "<proposed-skill-name>" --sort=stars --limit=5
-   gh search repos --topic="<proposed-skill-id>" --sort=stars --limit=5
-   ```
-   b. **Verify Agent Playbooks**: Inspect each qualifying repo for an **agent playbook** (e.g., `AGENTS.md`, `CLAUDE.md`, `.claude/skills/`, or a documented autonomous agent workflow). A repo without a clear playbook should be flagged as `needs-playbook`.
-   
-   c. **Fusion-First & Semantic Mapping Analysis**: Determine if the proposed skill should be mapped to an existing canonical generic skill or if it represents a new broad capability that warrants a new **Generic (Basic/Extra) ID** in `registry/gaia.json`.
-      - *Deduplication & Canonical Alignment*: Avoid making up generic concepts or creating separate generic skills for every vendor/API wrapper (e.g. no distinct generic skills for different search tools). Map them under unified elegant basic concepts like `literature-search`.
-      - *Master Skill Fusion*: Analyze if multiple candidate skills in the batch represent specialized capabilities of a single high-level orchestration workflow. If so, plan to fuse them into a new **Extra**/Master skill (like `computational-biology-workflows`), linking the basic components as prerequisites and promoting/calibrating the composite named implementations to higher stars (`3★` or `4★`).
+### Step 3 — Cross-reference open draft PRs
 
-   d. **Demerit Identification (Strategic)**: Check for `heavyweight-dependency` or `niche-integration`. Only actively look for these for **3★+** skills. Favor cross-platform/universal implementations by keeping them demerit-free.
-   
-   e. If a repo-level URL was previously recorded as evidence for this skill (e.g., the `sourceRepo` in the intake batch), **re-resolve it to a specific SKILL.md path** using the steps above before accepting. Flag repo-root URLs as `needs-specific-url` if no SKILL.md can be found.
+```bash
+gh pr list --label "draft-skills" --state open --json number,title,headRefName,url,createdAt
+```
 
-   f. Query SkillsMP for matching community skills:
-   ```
-   WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
-   ```
-   Note any SkillsMP matches as "Evidence Tier C available".
+Match PRs to local batches by `batchId`. Call out:
+- Local batches with no open PR (needs PR opened)
+- Open PRs with no corresponding local batch (remote-only; flag for manual inspection)
 
-   This enrichment helps reviewers make informed accept/reject decisions. Skills with readily available Evidence Tier B/A and a verified SKILL.md should be favored for acceptance.
+Skip this step and note the limitation if `gh` is not authenticated.
 
-5. **Display review table** — for each batch, show:
+### Step 4 — Enrich each proposed skill
 
-   **Batch `<batchId>`** | Source: `<sourceRepo>` | Generated: `<generatedAt>`
+Before presenting the review table, enrich each proposed skill so the user has enough signal to decide:
 
-   | # | Proposed ID | Name | Type | Similarity hints | Evidence Available | Decision |
-   |---|---|---|---|---|---|---|
-   | 1 | `skill-id` | Skill Name | atomic | `existing-skill` (0.82), `other` (0.61) | B: github.com/... | _(pending)_ |
-   | … |
+**a. Find concrete implementations via GitHub search:**
+```bash
+gh search repos "<proposed-skill-name>" --sort=stars --limit=5
+gh search repos --topic="<proposed-skill-id>" --sort=stars --limit=5
+```
+Only count repos with stars > 50, last commit < 1 year, and a README. Prefer repos with CI and clear docs.
 
-   Also show `knownSkills` count (already in registry — informational only, no action needed).
+**b. Resolve the evidence URL to a specific SKILL.md path.** If the batch recorded a bare repo URL as `sourceRepo`, use the search results to find the actual `SKILL.md` blob URL (`github.com/owner/repo/blob/main/skills/foo/SKILL.md`). Mark bare repo-root URLs as `needs-specific-url` if no SKILL.md can be found — a repo root installs to a root symlink and makes the skill undiscoverable.
 
-6. **Collect decisions** — ask the user to classify each proposed skill:
-   - `accept` — ready to promote into `registry/gaia.json`
-   - `rename <new-id>` — change the ID, then accept
-   - `duplicate <existing-id>` — already covered; drop
-   - `needs-evidence` — hold; note what Evidence Tier A/B source is missing
-   - `reject` — remove from consideration
+**c. Check for deduplication / canonical alignment.** Does this skill map to an existing generic ID in `registry/gaia.json`? Multiple vendor wrappers for the same concept (e.g. different search APIs) should map to one unified generic ID (`literature-search`), not spawn separate generic skills. If several batch entries represent specialized forms of a single high-level workflow, plan to fuse them into one composite extra-tier skill.
 
-   Present one batch at a time. Do not proceed to the next batch until the current one is fully classified.
+**d. For 3★+ skills only — check for heavyweight-dependency or niche-integration demerits.** Favour cross-platform implementations; flag vendor lock-in.
 
-7. **Summarise decisions** — after all batches are reviewed, print a final tally:
-   - Accepted: N skills (list IDs)
-   - Renamed: N skills (old-id → new-id)
-   - Held (needs evidence): N (list IDs + missing evidence notes)
-   - Dropped (duplicate/reject): N (list IDs)
+### Step 5 — Display the review table
 
-8. **Offer promotion** — if there are any accepted/renamed skills, ask the user:
-   > "Promote accepted skills to `registry/gaia.json` now? This will invoke `/gaia-curate` for the accepted batch."
+For each batch:
 
-   - If **yes**: hand off to the `gaia-curate` workflow starting at step 4, pre-populating all decisions as `accept`. The promotion PR must link back to the originating intake PR(s).
-   - If **no**: print the manual promotion steps and exit:
-     ```
-     # For each accepted skill, add to registry/gaia.json, then:
-     python3 scripts/validate.py
-     python3 scripts/generateProjections.py
-     python3 scripts/exportGexf.py
-     git commit -am "[atomic|composite] <name> — promote from registry-for-review/<batchId>"
-     gh pr create --title "[promote] <slug>" --body "Promotes accepted skills from intake PR #<N>"
-     ```
+**Batch `<batchId>`** | Source: `<sourceRepo>` | Generated: `<generatedAt>`
 
-9. **Report** — output a final summary (see Output section).
+| # | Proposed ID | Name | Type | Similarity hints | Evidence available | Decision |
+|---|---|---|---|---|---|---|
+| 1 | `skill-id` | Skill Name | atomic | `existing-skill` (0.82) | B: github.com/… | _(pending)_ |
+
+Also show `knownSkills` count from the batch (informational — these are already in the registry; no action needed).
+
+### Step 6 — Collect decisions
+
+Ask the user to classify each proposed skill. Work one batch at a time — do not move to the next until the current batch is fully classified.
+
+| Decision | Meaning |
+|---|---|
+| `accept` | Ready to promote |
+| `rename <new-id>` | Change the ID, then accept |
+| `duplicate <existing-id>` | Already covered — drop |
+| `needs-evidence` | Hold; note what tier is missing (Tier A paper / Tier B repo / specific SKILL.md URL) |
+| `reject` | Remove from consideration |
+
+### Step 7 — Summarise
+
+Print a final tally after all batches are reviewed:
+- Accepted: N skills (list IDs)
+- Renamed: N skills (old-id → new-id)
+- Held: N (IDs + missing-evidence notes)
+- Dropped: N (IDs)
+
+### Step 8 — Offer promotion
+
+If there are accepted or renamed skills, ask:
+
+> "Promote accepted skills to `registry/gaia.json` now? This will invoke `/gaia-curate` for the accepted batch."
+
+- **Yes** — hand off to `/gaia-curate` starting at its evidence-research step, pre-populated with accepted decisions. The promotion PR must link back to the originating intake PR(s).
+- **No** — print the manual steps and exit:
+  ```bash
+  # For each accepted skill:
+  gaia dev add "<name>" --type basic --description "..."
+  gaia dev evidence <skill-id> "<url>" --class B
+  python3 scripts/validate.py
+  gaia dev docs
+  git commit -am "[atomic|composite] <name> — promote from registry-for-review/<batchId>"
+  gh pr create --title "[promote] <slug>" --body "Promotes accepted skills from intake PR #<N>"
+  ```
 
 ## When there are no pending drafts
 
-If `registry-for-review/skill-batches/` is empty and no open `draft-skills` PRs exist, report:
+If `registry-for-review/skill-batches/` is empty and no open `draft-skills` PRs exist:
 
 > No pending draft intake batches found. Use `gaia push` to generate a new batch, or run `/gaia-curate` to add skills directly to the canonical graph.
 
-Then stop — do not attempt any curation.
+Stop — do not attempt any curation.
 
 ## Constraints
 
-- **Read-only by default** — this skill never writes to `registry/gaia.json` directly. That only happens via the `/gaia-curate` promotion path with explicit user confirmation.
+- Never write to `registry/gaia.json` directly. That only happens via the `/gaia-curate` promotion path with explicit user confirmation.
 - Never modify batch files in `registry-for-review/skill-batches/` — they are immutable intake records.
-- `needs-evidence` decisions should note what evidence tier is missing (Evidence Tier A paper / Evidence Tier B repo).
-- If `gh` is not authenticated, skip the PR listing step and work from local batch files only; note the limitation in output.
-
-## Repo location
-
-Run from the root of your local clone of this repository. If you have not cloned it yet:
-```
-git clone https://github.com/mbtiongson1/gaia-skill-tree.git
-cd gaia-skill-tree
-```
+- `needs-evidence` decisions must specify what is actually missing (type, tier, URL format).
+- All registry mutations that do happen downstream must go through `gaia dev` CLI commands, not direct file edits (Programmatic-First Policy).
 
 ## Output
 

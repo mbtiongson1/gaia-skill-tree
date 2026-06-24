@@ -1,18 +1,24 @@
 ---
 name: fp-plan
 description: >-
-  Phase 2 of the feature-pipeline suite. Reads issues from state, creates a
-  feature branch and draft PR, spawns HEAVIER to produce a numbered
-  implementation plan, presents the plan for user approval, then writes the
-  approved plan to state. Does NOT implement — that is /fp-implement. Use after
-  /fp-explore has filed at least one issue and printed the M1 stop hook.
+  Phase 2 of the feature-pipeline suite. Use this after /fp-explore has filed
+  issues and printed the M1 stop hook — when you need to turn a set of filed
+  GitHub issues into an approved implementation plan and a draft PR. Triggers on:
+  "plan the fix", "create the branch and PR", "draft the implementation plan",
+  "ready to plan", "fp-plan", "next step after explore", "convert issues to a
+  plan", "plan phase". Reads issueNumbers from state, writes a Problem Statement,
+  opens a feature branch + draft PR, spawns a HEAVIER sub-agent for the numbered
+  plan, and blocks on explicit user approval before writing plan to state. Does NOT
+  write any code — that is /fp-implement.
 version: 3.0.0
 ---
 
 # fp-plan  (Phase 2 — Plan & Draft PR)
 
-Read issues, create branch + draft PR, get a HEAVIER plan, wait for approval.
-One bounded turn. Implementation is a separate skill (/fp-implement).
+Read issues, create branch + draft PR, get a HEAVIER plan, block until approval.
+One bounded turn. Code is written by /fp-implement after this skill ends.
+
+---
 
 ## Setup
 
@@ -20,25 +26,34 @@ One bounded turn. Implementation is a separate skill (/fp-implement).
 STATE=".agents/skills/feature-pipeline/scripts/state.sh"
 feature=$($STATE get feature)
 issues=$($STATE get issueNumbers)   # JSON array e.g. [12,13,14]
+phase=$($STATE get phase)
 ```
 
-Verify `phase == 2` and `issueNumbers` is non-empty before proceeding.
+If `phase != 2` or `issueNumbers` is empty, print a clear explanation and end
+the turn — running out of order produces bad state that's hard to recover from.
+
+---
 
 ## Step 1 — Problem Statement
 
-Read each issue body via:
+Read each issue body:
 
 ```bash
 gh issue view <N> --json title,body
 ```
 
 Write a single paragraph Problem Statement: what is broken, why it matters,
-what a correct fix should achieve.
+and what a correct fix should achieve. This is the anchor for the plan —
+HEAVIER will produce better output when it has a crisp statement of intent.
+
+---
 
 ## Step 2 — Create branch and draft PR
 
+Slugify the feature name, create the branch, and push it before opening the PR
+(GitHub requires the branch to exist first):
+
 ```bash
-# Slugify the feature name
 slug=$(echo "$feature" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | cut -c1-40)
 branch="fix/${slug}-findings"
 
@@ -48,7 +63,8 @@ git push -u origin "$branch"
 $STATE set branch "$branch"
 ```
 
-Open draft PR using GitHub MCP (`mcp__github__create_pull_request`):
+Open a draft PR via GitHub MCP (`mcp__github__create_pull_request`):
+
 - **title**: `fix({{feature}}): address exploration findings`
 - **labels**: `draft`, `needs-plan`
 - **draft**: true
@@ -66,19 +82,23 @@ Open draft PR using GitHub MCP (`mcp__github__create_pull_request`):
 _To be filled after approval._
 ```
 
-Write PR info to state:
+Persist PR info to state so downstream skills can find it without user input:
 
 ```bash
 $STATE set prNumber <N>
 $STATE set prUrl    "<url>"
 ```
 
+---
+
 ## Step 3 — HEAVIER plan
 
-Spawn HEAVIER with:
+Spawn HEAVIER — a heavier reasoning pass gets more nuanced, file-aware plans
+than the current context can produce inline. Provide:
+
 - The issue titles and bodies
 - The PR URL
-- Excerpts from the source files relevant to `{{feature}}`
+- Excerpts from source files relevant to `{{feature}}`
 
 HEAVIER brief:
 
@@ -87,21 +107,22 @@ HEAVIER brief:
 > `N. <file/area>  —  <change>  —  <rationale>  [⚠ breaking | ⚠ test-only | ⚠ schema]`
 > Keep the plan to 3–8 steps. Be specific about file paths and function names.
 
-**Present the plan to the user verbatim. Do not proceed until the user
-explicitly types 'approve', 'continue', or provides edits.**
+Present the plan to the user verbatim and wait. Do not proceed until the user
+explicitly types "approve", "continue", or provides edits — the whole point of
+this phase is human sign-off before any code is written.
 
-Accept corrections inline. After approval:
+Accept inline corrections. After the user approves:
 
-1. Update the PR body `## Plan` section with the final plan text.
-2. Write the approved plan to state:
+1. Update the PR body `## Plan` section with the final text.
+2. Write approval to state:
    ```bash
    $STATE set planApproved true
    $STATE set phase 3
    ```
-   (Phase advances to 3 to indicate "ready for implement", but /fp-implement
-   reads `planApproved == true` and `phase == 3`.)
+   Phase 3 signals "plan approved, ready for implement" — /fp-implement reads
+   both `planApproved == true` and `phase == 3`.
 
-Then print M2-plan stop hook and end your turn:
+Print the M2-plan stop hook and end the turn:
 
 ```
 ╔══ STOP HOOK M2-plan ═════════════════════════════════════════════════════════╗
@@ -110,9 +131,14 @@ Then print M2-plan stop hook and end your turn:
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
+---
+
 ## Constraints
 
-- Do not implement any code. /fp-implement does that.
-- Do not advance past plan approval without explicit user sign-off.
-- If HEAVIER spawning fails: write a Handover to `.fp-handover.md` with the
-  issue bodies and source excerpts; end your turn. Do not plan yourself.
+- No code changes here — /fp-implement owns that. Writing code before a plan
+  is approved makes it impossible for the user to redirect without a messy
+  rollback.
+- Do not advance state past `phase 3` without explicit user approval.
+- If HEAVIER spawning fails: write a handover to `.fp-handover.md` with the
+  issue bodies and source excerpts, end the turn. Do not plan inline — the
+  whole point of HEAVIER is a richer reasoning pass.

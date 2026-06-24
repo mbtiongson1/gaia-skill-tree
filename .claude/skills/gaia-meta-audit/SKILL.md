@@ -1,118 +1,112 @@
 ---
 name: gaia-meta-audit
-description: Scan Gaia registry and real-skill catalog entries for candidates that may need review because they are outdated, superseded, overpromoted, weakly sourced, stale, duplicate, brand-coupled, mis-attributed, or incorrectly mapped. Use before focused audits when the user asks what needs review.
-version: 1.1.0
+description: >
+  Generate a prioritized review queue of Gaia registry skills and catalog items that need attention.
+  Use this skill whenever someone asks: "what needs review?", "what's overdue for audit?",
+  "where are the weak spots in the registry?", "what should I audit next?", "run a health
+  check on the registry", "show me flagged skills", "find problems in the registry",
+  "what skills need fixing?", or "triage the registry". This is the triage layer — it
+  surfaces candidates ranked P0–P4 so that focused work (via /gaia-audit) targets the
+  right things first. Run this before any audit pass. Also invoke proactively when a PR
+  changes registry/named/ at scale, or before a release, to catch regressions early.
+version: 1.2.0
 ---
 
 # gaia-meta-audit
 
-> **Starless (rank-less generics):** Generic skill references carry **no `level`, `demerits`, or stars** — they are *starless* taxonomy. Stars live only on named skills (2★–6★); a generic's effective rank is the top star among its named children. Generic nodes keep capability-level (Class A) evidence that every named child **inherits**; implementation-specific evidence lives on the named skill. Never write a level/demerit to a generic and never `gaia dev calibrate` a generic (calibrate is named-only). Advanced evidence tiers are an upcoming meta shift.
-
-
 Build a prioritized queue of Gaia skills or catalog items that need focused review.
 
-## Workflow
+This skill is intentionally scoped to triage, not repair. It reads broadly, flags what
+matters, ranks it, and stops. Focused correction belongs in `/gaia-audit`. Keeping these
+two passes separate prevents a single meta-audit from becoming an unbounded edit session.
 
-1. Load source surfaces:
-   - `registry/gaia.json`
-   - `registry/named-skills.json`
-   - `registry/named/**`
-   - `registry/real-skills.json`
-   - `docs/skill_source_contributions.md`
-   - `META.md` (the source of truth — re-read §1 Taxonomy, §4.1 Origin, §6.2 Semantic Fusion before audit)
+## Preparation
 
-2. **Pivot named skills by `genericSkillRef`.** For every generic referenced by the audit target, list every named skill mapped to it, sorted by `createdAt`. This is the only reliable way to detect mis-attributed `origin: true` claims (see red flag below). A handy one-liner:
-   ```python
-   # walk registry/named/**.md, group by genericSkillRef, print createdAt + origin
-   ```
+Before scanning, load and re-read these sources so your flags reference the correct rules:
 
-3. Scan for red flags:
-   - **Liveness Heartbeat**: Run `python3 scripts/verify_evidence.py` to identify dead links in evidence.
-   - **Star Bar Scan**: Identify skills at **3★+** missing a valid `links.github` (installer-ready) URL.
-   - **Link casing miss**: GitHub raw paths are case-sensitive. A `links.github` URL pointing at `/SKILL.md` (uppercase) when the on-disk file is `skill.md` (lowercase) — or vice versa — will 404. Standardize on `SKILL.md` to match the project-wide convention.
-   - **Wrong-target link**: `links.github` points at a different skill's directory than the named skill claims to implement.
-   - **Brand-coupled generic IDs**: A canonical (generic) skill ID containing the product/brand name (e.g. `gaia-audit`, `gaia-meta-audit`) violates META §1 — generics must be abstract capabilities. Rename via `gaia dev rename` to an abstract noun phrase (e.g. `gaia-audit` → `registry-entry-audit`). The brand stays in the **named** layer.
-   - **Mis-attributed `origin: true`**: Per META §4.1, only ONE contributor holds Origin per generic — the first to implement it. "Lives in this repo" does not equal "Origin." Verify by sorting all named skills with the same `genericSkillRef` by `createdAt` — only the earliest can claim `origin: true`.
-   - **Unbacked star**: a named skill's `level` (star) is not backed by its own + inherited evidence. Generics are rank-less, so there is no generic level to "overshoot" — judge the named star on evidence, not the generic.
-   - `promotedNamedSkillId` entries with weak or broad source evidence.
-   - Catalog URLs that point to directories, homepages, or stale paths instead of specific files.
-   - Repo-root evidence where a specific `SKILL.md` or **agent playbook** should exist.
-   - Broad mappings such as an implementation skill mapped to a much larger Gaia capability (e.g. anything mapped to a `0★` Basic node when an Extra-level generic exists).
-   - Duplicate or superseded skills from the same source family. Flag clusters of redundant generic concepts that should be consolidated under a single Basic skill (e.g. `literature-search`) to prevent registry bloat.
-   - Generated outputs that still reference removed named claims.
-   - **Likely Fusion Candidates** (Semantic Fusion, META §6.2): two or more named skills that represent the composition of two existing Extra generics into one orchestrated workflow. Example from PR #525: `safishamsi/graphify` (knowledge-graph-build) + `mattpocock/triage` (issue-triage) → propose new Extra generic `graph-driven-issue-triage` 3★, prereqs `[knowledge-graph-build, issue-triage]`. **This is NOT an Ultimate fusion** — Ultimates require ≥10k repo stars (META §1.2, §4.2).
-   - **Missing Demerits**: Skills with known heavyweight dependencies or niche integrations that are not yet flagged in the registry.
-   - **Placeholder bodies**: Named-skill markdown files containing only `## Installation\nAdd installation instructions here.` (51 chars) — needs a real `## Overview` paragraph.
-   - **`contributor: testuser` timelines**: Placeholder authorship that survived initial intake.
+- `registry/gaia.json` — canonical graph; generic nodes + their evidence
+- `registry/named-skills.json` — named-skill index
+- `registry/named/**` — individual named-skill markdown files (YAML frontmatter is load-bearing)
+- `registry/real-skills.json` — catalog entries
+- `docs/skill_source_contributions.md` — contribution lineage
+- `META.md` §1 (Taxonomy), §4.1 (Origin), §6.2 (Semantic Fusion) — re-read before every scan; rules drift between releases
 
-4. Re-check only enough external evidence to rank candidates. Do not perform every focused audit in the meta pass.
+> **Generics are rank-less (starless).** Generic nodes carry no `level`, no demerits, and no stars — those live only on named skills (2★–6★). A generic's effective rank is the highest star among its named children. Generic nodes hold capability-level (Class A) evidence inherited by all named children; implementation-specific evidence stays on the named skill. Never call `gaia dev calibrate` on a generic.
 
-5. Prioritize:
-   - **P0**: Unsupported Ultimate claim, unsupported named-origin claim, or named claim with no implementation file in the repo.
-   - **P1**: Dead evidence links (Liveness Heartbeat failure), missing 3★+ Star Bar implementation, link casing miss, wrong-target link, brand-coupled generic ID, unbacked named star.
-   - **P2**: Wrong `promotedNamedSkillId`, stale source URL, likely superseded origin, mis-attributed `origin: true`.
-   - **P3**: Broad `mapsToGaia` / `genericSkillRef`, duplicate catalog item, weak evidence tier, Semantic Fusion candidate ready to extract.
-   - **P4**: Documentation cleanup, placeholder bodies, `testuser` timelines, generated-output drift.
+## Scan for red flags
 
-   Do not flag candidates on rarity grounds — the rarity axis is deprecated (see `CONTEXT.md` § Rarity).
+Work through these checks in order. Stop when you have enough candidates to fill a meaningful queue — do not perform every focused audit inline.
 
-6. Present a queue with target, reason, suggested action, and source files to inspect.
+### P0 — Critical integrity violations
+- **Unsupported Ultimate claim**: a named skill at 5★–6★ with no `repo-own` evidence at ≥10k GitHub stars (META §1.2).
+- **Unsupported named-origin claim**: `origin: true` on a named skill that is not the earliest (`createdAt`) named skill mapped to that `genericSkillRef`. Verify by pivoting all named skills on the generic and sorting by `createdAt` — only one can be origin.
+- **Named claim with no implementation file**: `links.github` points to a repo root, a 404, or a path that doesn't contain a `SKILL.md`.
 
-7. For each accepted candidate, hand off to `/gaia-audit` as a separate focused correction, or use the **Meta Review CLI commands** for direct registry maintenance.
+### P1 — Structural correctness
+- **Dead evidence links**: run `python3 scripts/verify_evidence.py`; anything that 404s is P1.
+- **Star Bar gap**: named skills at 3★+ without a valid installer-ready `links.github` blob URL (META §2.4).
+- **Link casing mismatch**: GitHub raw paths are case-sensitive. `/SKILL.md` vs `/skill.md` will 404 in CI. Standardize on uppercase `SKILL.md`.
+- **Wrong-target link**: `links.github` resolves to a different skill's directory than the named skill claims.
+- **Brand-coupled generic ID**: a canonical generic ID containing a product or person name (e.g. `gaia-audit`, `gaia-meta-audit`) violates META §1 — generics must be abstract capabilities. Flag for rename via `gaia dev rename`.
+- **Unbacked named star**: a named skill's star is not supported by its own plus inherited evidence — judge on evidence, not on the generic's rank.
 
-## CLI vs direct-edit map
+### P2 — Attribution and sourcing issues
+- **Wrong `promotedNamedSkillId`**: the generic's promoted pointer doesn't match the best-evidenced named child.
+- **Stale catalog URL**: points at a directory, homepage, or path that has moved.
+- **Mis-attributed `origin: true`**: per META §4.1, "lives in this repo" does not equal origin. The earliest `createdAt` wins.
 
-`gaia dev` does not cover every mutation. Use this map (validated in PR #525):
+### P3 — Registry hygiene
+- **Broad `genericSkillRef` mapping**: implementation skill mapped to a much larger generic when a more specific one exists (e.g. mapped to a Basic 0★ node when an Extra-level generic is available).
+- **Duplicate or superseded skills**: multiple named skills from the same author or tool family doing the same thing. Flag clusters that should consolidate.
+- **Semantic Fusion candidate** (META §6.2): two or more named skills that compose two existing Extra generics into one orchestrated workflow. Propose a new Extra generic; do not confuse this with an Ultimate fusion (which requires ≥10k repo stars).
 
-| Mutation | Tool |
-|---|---|
-| Generic-skill rename (cascades to prereqs + named refs) | `gaia dev rename old new` |
-| Add new generic | `gaia dev add "Name" --id <slug> --type extra --description "..."` |
-| Set generic prereqs | `gaia dev link <id> a,b,c` |
-| Calibrate **named-skill** star (generics are rank-less) | `gaia dev calibrate <contributor/skill> 3★` |
-| Add **capability** evidence to a generic (inherited by all named) | `gaia dev evidence <id> <url> --class B --evaluator <user>` |
-| Reclassify generic type | `gaia dev reclassify <id> <type>` |
-| Remove generic | `gaia dev rm <id>` |
-| Named-skill `genericSkillRef` change | `gaia dev update-named <author/skill> --generic-ref <new>` |
-| Named-skill `status` change | `gaia dev update-named ... --status <new>` |
-| Named-skill suite metadata | `gaia dev update-named ... --suite-ref / --suite-components / --installation-file` |
-| Named-skill `origin` change | `gaia dev update-named <author/skill> --origin true|false` (enforces uniqueness) |
-| Standalone timeline event | `gaia dev timeline <id> --action <action> --notes "..."` |
-| Named-skill **`level` / `links.github` / `description` / body** | **direct YAML edit** — CLI does not expose these |
-| Named-skill removal | **delete the markdown file** — `gaia dev rm` is generic-only |
-| Demotion-as-event (writes to timeline) | `gaia dev timeline <id> --action demote --notes "..."` |
+### P4 — Documentation cleanup
+- **Placeholder bodies**: named-skill markdown with only boilerplate `## Installation\nAdd installation instructions here.` — flag for a real `## Overview`.
+- **`contributor: testuser` timelines**: placeholder authorship that survived intake.
+- **Generated-output drift**: `docs/` files still reference removed named claims.
 
-After mutating, **always** run `gaia validate` and `gaia docs build`.
+Do not flag anything on rarity grounds — the rarity axis is deprecated (see `CONTEXT.md` § Rarity).
 
-## Common gotchas (validated in PR #525)
+## Output format
 
-- **Renames leave orphan docs.** `gaia dev rename` renames the node JSON and updates `genericSkillRef` in named files, but leaves stale `registry/skills/<type>/<old-id>.md`. Delete the orphan.
-- **Generics are rank-less — do not calibrate them.** A generic carries no level; capability (Class A) evidence on a generic is inherited by every named child. Per-named evidence floors are checked on the named skill's star, not on the generic.
-- **`gaia dev` timeline entries land with `contributor: unknown`** when the local user isn't picked up. Edit the JSON to set `mbtiongson1` (or whoever) before committing.
-- **`gaia docs build` after big changes regenerates ~30 files.** Per CLAUDE.md §8, feature/logic PRs should NOT commit `registry/gaia.json` or `docs/graph/gaia.json` (auto-sync CI handles them). For `review/meta/*` branches, the **branch-scope CI** blocks `docs/` and `.agents/` paths — apply the `skip-scope-check` label, OR keep the working tree limited to `registry/**` and let auto-sync regenerate.
-- **`review/meta/*` Schema + DAG CI requires generated docs in lockstep.** This contradicts the §8 guidance. Resolution: commit the regenerated docs WITH the `skip-scope-check` label and a `[skip-gen]` tag on the commit message to suppress the auto-regen workflow.
-- **Force-push doesn't always re-trigger path-filtered workflows.** After `--force-with-lease`, dispatch `validate.yml` and `python-package.yml` manually via `gh workflow run ... --ref <branch>` if their checks don't appear.
+Present the queue as a table. Stop here unless the user explicitly asks to start running audits.
 
-## Output
-
-Use this table:
-
-| Priority | Target | Why review | Suggested audit action | Source files |
+| Priority | Target | Why review | Suggested action | Source files |
 |---|---|---|---|---|
 
-Stop after the queue unless the user asks to run audits immediately.
+## Handing off to focused audit
 
-## Reference run
+For each accepted P0–P1 candidate, pass it to `/gaia-audit` as a separate focused
+correction. For direct registry maintenance the CLI map below covers which tool to reach
+for — this avoids hand-edits that skip timeline logging.
 
-PR #525 (`review/meta/mbtiongson1-audit`, 2026-05-30) is the canonical worked example for this skill. It exercised every red-flag category above on mbtiongson1's 14 named skills and resulted in:
+## CLI reference
 
-- 2 named removals (`research`, `web-scrape`) — P0 unsupported claims
-- 2 generic renames (`gaia-audit` → `registry-entry-audit`, `gaia-meta-audit` → `registry-health-scan`) — P1 brand-coupled IDs
-- 1 new Extra generic (`graph-driven-issue-triage`, 3★) — P3 Semantic Fusion extraction
-- 5 `genericSkillRef` remaps (broad mappings → correct generics)
-- 1 origin claim flipped to `true` (`graphify-triage` on the new fusion generic)
-- 1 named-level demotion (`gaia-meta-audit` 4★ → 3★) — P1 level overshoot
-- 7 `links.github` casing fixes + 2 wrong-target fixes — P1 Star Bar
-- 12 placeholder body backfills + 12 `testuser` timeline corrections — P4
+| Mutation | Command |
+|---|---|
+| Generic rename (cascades prereqs + named refs) | `gaia dev rename old new` |
+| Add new generic | `gaia dev add "Name" --id <slug> --type extra --description "..."` |
+| Set generic prereqs | `gaia dev link <id> a,b,c` |
+| Calibrate **named-skill** star | `gaia dev calibrate <contributor/skill> 3★` |
+| Add capability evidence to a generic | `gaia dev evidence <id> <url> --class B --evaluator <user>` |
+| Reclassify generic type | `gaia dev reclassify <id> <type>` |
+| Remove generic | `gaia dev rm <id>` |
+| Change named-skill `genericSkillRef` | `gaia dev update-named <author/skill> --generic-ref <new>` |
+| Change named-skill `status` | `gaia dev update-named ... --status <new>` |
+| Change named-skill `origin` (enforces uniqueness) | `gaia dev update-named <author/skill> --origin true\|false` |
+| Append timeline event | `gaia dev timeline <id> --action <action> --notes "..."` |
+| Named-skill `level` / `links.github` / `description` / body | Direct YAML edit — CLI does not expose these |
+| Named-skill removal | Delete the markdown file — `gaia dev rm` is generic-only |
 
-Read its `AUDIT-mbtiongson1.md` (the plan-of-record committed as the first PR commit) and the PR description for the full red-flag → action mapping.
+After any mutation: `gaia validate` then `gaia docs build`.
+
+## Common pitfalls
+
+- **Renames leave orphan docs.** `gaia dev rename` updates node JSON and named refs but leaves stale `registry/skills/<type>/<old-id>.md`. Delete the orphan manually.
+- **Timeline entries land with `contributor: unknown`** when the local user isn't auto-detected. Edit the JSON to set the correct username before committing.
+- **`review/meta/*` branch scope blocks `docs/` paths.** Apply `skip-scope-check` label and `[skip-gen]` commit tag when committing regenerated docs on a meta branch.
+- **Force-push doesn't always re-trigger path-filtered workflows.** Manually dispatch `validate.yml` and `python-package.yml` via `gh workflow run ... --ref <branch>` if their checks don't appear.
+
+## Canonical worked example
+
+PR #525 (`review/meta/mbtiongson1-audit`, 2026-05-30) ran every red-flag category above on 14 named skills and produced: 2 named removals (P0), 2 generic renames (P1), 1 new Extra generic via Semantic Fusion (P3), 5 `genericSkillRef` remaps, 7 `links.github` casing fixes, and 12 placeholder body backfills. Read `AUDIT-mbtiongson1.md` and the PR description for the full flag-to-action mapping.

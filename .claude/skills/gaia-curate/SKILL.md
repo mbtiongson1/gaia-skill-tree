@@ -1,181 +1,233 @@
 ---
 name: gaia-curate
-description: Expand the Gaia skill registry with new popular AI agent skills, fully evidenced and validated, then push a PR. Use this skill when the user asks to "update the tree", "add new skills to Gaia", "curate the registry", "expand the skill graph", or explicitly types /gaia-curate.
-version: 1.7.0
+description: >
+  Expand the Gaia skill registry with new, well-evidenced AI agent skills and open a PR.
+  Use this skill when the user says "update the tree", "add new skills to Gaia",
+  "curate the registry", "expand the skill graph", "research what's trending in AI skills",
+  "populate the registry", "find skills to add", "run a curation pass", "grow the catalog",
+  or types /gaia-curate explicitly. This is the primary single-pass curation workflow —
+  it handles research, evidence gathering, batch review, CLI execution, validation,
+  docs regeneration, and PR creation in one linear pass. Use gaia-curate-chain for
+  higher-stakes multi-agent curation, or gaia-curate-dynamic for large parallel sweeps.
+version: 1.8.0
 ---
 
 # gaia-curate
 
-Expand the Gaia skill registry (`registry/gaia.json`) with new popular AI agent skills, fully evidenced and validated, then push a PR.
+Expand `registry/gaia.json` with new popular AI agent skills, fully evidenced and validated, then push a PR. One linear pass: research → design → review → execute → validate → PR.
 
-## What this skill does
+---
 
-0. **Load the sources registry** — read `registry/skill-sources.md` before doing any research. This is the authoritative list of known skill marketplaces, GitHub orgs, and registries. Use every listed source as a research target in step 2. When you discover a new marketplace or skill collection repo not yet in that file, append it following the format described at the bottom of the file — include it in the same PR.
+## Step 0 — Load known sources before researching
 
-1. **Read the current graph** — load `registry/gaia.json` to see every existing skill ID so nothing is duplicated.
-2. **Research** — for each candidate skill, gather concrete evidence using ALL of the following channels (in order of priority):
+Read `registry/skill-sources.md` first. This file lists every known skill marketplace, GitHub org, and registry the project has already identified — using it prevents redundant research and surfaces the highest-signal repos immediately. When you discover a new source not yet listed, append it (following the format at the bottom of that file) and include the update in the same PR.
 
-   **2a. GitHub search (50% of research effort — Evidence Tier B):**
-   Search for actual repos implementing the skill. **Local runs** use the `gh` CLI; **cloud/remote runs** (where `gh` is unavailable) use the GitHub MCP tools (`search_repositories`, `get_file_contents`) — never report GitHub as unreachable without first checking MCP.
-   ```bash
-   gh search repos --topic="<skill-topic>" --sort=stars --limit=20
-   gh search repos "<skill-name> agent" --sort=stars --limit=10
-   ```
-   Qualify repos: stars > 50, last commit < 1 year, has README + license. Prefer repos with CI, tests, and clear documentation.
+Also load `registry/gaia.json` to map every existing skill ID — you need this to avoid proposing duplicates and to identify upgrade candidates (step 2d).
 
-   **2a-ii. Inspect repos for individual skill files — do not use a repo URL as evidence until you confirm what is inside it.**
+---
 
-   A repo is often a *collection* of many skills, not a single skill. After finding a qualifying repo, check the common skill directory layouts:
-   ```bash
-   # Check each layout — only the first match that returns results matters
-   gh api repos/{owner}/{repo}/contents/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/.claude/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/codex/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/.codex/skills --jq '.[].name'
-   gh api repos/{owner}/{repo}/contents/cursor/skills --jq '.[].name'
-   ```
-   If a skills directory exists, it will return a list of subdirectory names — each is a distinct skill.
+## Step 1 — Research candidates
 
-   **For each skill subdirectory found:**
-   1. Verify it contains a `SKILL.md` (or `skill.md`) file:
-      ```bash
-      gh api repos/{owner}/{repo}/contents/<skills-dir>/<skill-name>/SKILL.md --jq '.download_url'
-      ```
-   2. Fetch the SKILL.md content to read its description.
-   3. Map it to an existing or new Gaia skill ID.
-   4. Use the **raw file URL** (e.g., `https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the Evidence Tier B `source` — never the repo root URL.
-   5. Treat each discovered skill as a **separate candidate** to evaluate independently (accept/rename/duplicate/reject it on its own merits).
+Gather evidence across four channels. Aim for a 50/20/10/20 split of effort:
 
-   If no skills directory is found, the repo itself is the evidence source and its URL may be used directly.
+### 1a. GitHub search (50% — primary signal)
 
-   **2b. SkillsMP search (10% — Evidence Tier C):**
-   Query the SkillsMP public API for related community skills:
-   ```
-   WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
-   ```
-   Use matching SkillsMP entries as supplementary Evidence Tier C. Rate limit: 50 requests/day unauthenticated.
+Search for repos that implement the skill. On local runs use `gh`; on cloud/remote runs where `gh` is unavailable, fall back to GitHub MCP tools (`search_repositories`, `get_file_contents`) — never report GitHub as unreachable before trying MCP.
 
-   **2c. Paper search (20% — Evidence Tier A):**
-   For skills targeting Level II+ or those with only Evidence Tier C:
-   ```
-   WebSearch: "<skill-name> arxiv 2024 2025 2026 agent benchmark"
-   WebSearch: "<skill-name> survey" site:arxiv.org
-   ```
-   Use arXiv abs URLs as Evidence Tier A. Only include papers with clear relevance and measurable benchmarks.
-
-   **2d. Existing tree audit (20%):**
-   Before proposing new skills, scan `registry/gaia.json` for:
-   - Skills at level 0/I with only Evidence Tier C (upgrade candidates)
-   - Skills with `status: "provisional"` that could be validated with better evidence
-   - Skills at level II+ missing Evidence Tier A
-
-   Prioritize upgrading these with B/A evidence before proposing entirely new skills. This ensures the tree grows stronger, not just wider.
-
-3. **Design the batch** — for each candidate skill determine:
-   - Type: `basic` (no prerequisites) / `extra` (≥2 prereqs) / `ultimate` (≥3 prereqs + 3 Evidence Tier A/B sources). A graph-isolated `basic` at 4★+ may be promoted to `unique`.
-   - **Fusion-First Design & Semantic Mapping Rationale**: 
-     - *No Made-up Generics*: Avoid creating a new, separate generic skill for every vendor API or service (e.g., do not create distinct generic skills for `pubmed`, `arxiv`, `biorxiv`, `europepmc` etc.). Map multiple named implementations of identical concepts to a single elegant basic generic skill (e.g. `literature-search`) to prevent registry bloat and maintain a high-quality global graph.
-     - *Master Skill Fusion*: When multiple distinct named skills represent specialized capabilities that can be combined or orchestrated in a multi-step workflow (e.g., fetching structures, aligning sequences, rendering structures), define a composite **Extra** skill (like `computational-biology-workflows`) and link the basic skills as its prerequisites. Calibrate the advanced named implementations (e.g. AlphaFold, AlphaGenome) to higher levels (`3★` or `4★` max) referencing that composite Extra skill.
-   - **Note on generic skill levels**: Generic (starless) skills have no star level — they are rank-less taxonomy. Only the *named* implementations (e.g. `contributor/AlphaFold`) receive star levels (2★–6★). When proposing a generic, omit `--level` flag from `gaia dev add`; the generic's effective rank is the top star among its named children.
-   - Prerequisites and derivatives (must reference existing IDs).
-   - **Demerit Check (Strategic)**: Identify `heavyweight-dependency`, `niche-integration`, or `experimental-feature`. Only strictly apply these to skills at **3★+**. If a high-level skill is cross-platform and "Universal," reward it by omitting demerits.
-   - **Named Promotion**: Determine if the specific implementation should be promoted to a **Named Skill** in `registry/named/`.
-   - Do **not** ask the contributor to choose a rarity value — the rarity axis is deprecated (see `CONTEXT.md` § Rarity). `gaia dev add` writes the legacy default automatically; the field will disappear once the schema migration lands.
-4. **Present draft for review** — before writing any code or committing, display the full proposed skills table:
-
-   | ID | Name | Type | Stars | Prereqs | Demerits | Named Promotion? |
-   |---|---|---|---|---|---|---|
-   | … | … | … | … | … | … | … |
-
-   Similarity hints are lexical matches from the existing registry (≥0.45 score). For each proposed skill, ask the user to mark one of:
-   - `accept` — proceed as designed
-   - `rename <new-id>` — change the ID before generating
-   - `duplicate` — already covered by an existing skill; drop it
-   - `needs-evidence` — hold until an Evidence Tier A/B source is supplied
-   - `reject` — remove from the batch entirely
-
-   **Do not proceed to step 5 until the user has reviewed and the batch contains at least one `accept`.** Incorporate all `rename` decisions before writing the script. Drop everything that is not `accept`/`rename`.
-
-5. **Execute meta shifts via CLI** — for each accepted skill from step 4, use the `gaia dev add` command (the mutation verbs live under `gaia dev`, not at the top level). This ensures timeline logging, schema integrity, and automated assembly.
-   
-   **For generic (starless) skills**, use:
-   ```bash
-   gaia dev add "Skill Name" --id <id> --type <type> --description "..."
-   ```
-   Do NOT pass `--level` — generics are rank-less; the schema will not accept a level on a generic node.
-   
-   **For named implementations**, use:
-   ```bash
-   gaia dev add "Skill Name" --id <id> --named --contributor <user> --generic-ref <ref> --status awakened
-   ```
-   Named skills **must** be submitted with `status: awakened` — the schema's named-status enum is `{awakened, named}`. Only a reviewer later promotes a skill to `named` and assigns its `title`/`catalogRef`; never hand-set those during curation. Calibrate stars (2★–6★) with `gaia dev calibrate` once evidence is reviewed.
-6. **Run validation** — `gaia validate` must exit 0.
-
-7. **Regenerate derived files** — run `gaia docs build`. This ensures `registry.md`, `combinations.md`, `skills/**/*.md`, `registry/gaia.gexf`, and `skill-trees/*/skill-tree.md` stay in sync.
-8. **Commit on a review branch** — branch name `review/meta/<slug>`, commit message follows `[type] Title — brief description`.
-9. **Push and open a PR** via the GitHub API using stored git credentials. The auto-triage CI classifies the PR:
-   - PRs touching `registry/` from a bot with evidence score ≥ 60 are auto-merged.
-   - PRs flagged `draft-skills` or `needs-review` are routed to the `route-review` job — a human must approve before merge.
-   - Ultimate skill proposals always require maintainer approval.
-10. **Register the batch itself** as a `registryCuration` evidence entry if new demonstrations were produced.
-
-## Two-phase intake workflow (gaia push)
-
-For contributors who use the `gaia push` CLI, a separate **draft intake** path exists that does NOT directly modify `registry/gaia.json`:
-
-1. **`gaia push`** — scans the source repo for skill-shaped tokens, builds `registry-for-review/skill-batches/<batchId>.json`, and opens a draft PR with labels `draft-skills` and `needs-review`.
-2. **Reviewer classification** — maintainers review the draft PR and mark each proposed skill: `accept` / `rename` / `duplicate` / `needs-evidence` / `reject`.
-3. **Promotion PR** — accepted skills are promoted into `registry/gaia.json` in a separate follow-up PR. That PR must run `gaia validate` and `gaia validate --intake` and must link back to the intake PR.
-
-Use `/gaia-draft-curate` to triage pending intake batches before running this skill.
-
-To validate intake batch files locally:
 ```bash
-gaia validate --intake
+gh search repos --topic="<skill-topic>" --sort=stars --limit=20
+gh search repos "<skill-name> agent" --sort=stars --limit=10
 ```
 
-## Constraints
+Qualifying bar: stars > 50, last commit < 1 year, has README + license. Prefer repos with CI and tests.
 
-- **Programmatic Registry Management**: NEVER hand-edit files in `registry/nodes/` or `registry/gaia.json`. Use `gaia dev add`, `gaia dev merge`, `gaia dev split`, and `gaia dev evidence`.
-- All evidence `source` values must be real, resolvable URLs (arXiv abs pages or GitHub repos).
-- Ultimate skills at `status: validated` require ≥3 Evidence Tier A/B entries; new ultimates should land as `provisional` until the maintainer merges.
-- No cycles in the DAG. No orphaned composite nodes.
-- Skill IDs: `lowercase-dash` format (e.g., `chain-of-thought`, `web-search`). No camelCase, no vendor names, no abbreviations unless universally understood. Pattern: `^[a-z][a-z0-9]*(-[a-z0-9]+)*$`.
-- **Edge schema**: edges use `sourceSkillId`/`targetSkillId` keys (not `from`/`to`). Valid `edgeType` values are `prerequisite`, `corequisite`, `enhances` only — there is NO `derivative` edge type. Use `enhances` for skill→derivative edges.
-- **Encoding**: all Python `open()` calls must use `encoding='utf-8'` to avoid CP-1252 drift on Windows (em-dash `—` becomes `0x97` without it, failing CI on Linux).
+**Inspect repos before using them as evidence.** A repo is often a collection of many distinct skills, not a single one. Check the common skill-directory layouts before deciding what the evidence URL should be:
 
-## Evidence standards (quick reference)
-
-| Evidence Tier | Standard |
-|---|---|
-| A | Peer-reviewed paper — use `https://arxiv.org/abs/<id>` |
-| B | Reproducible open-source demo — use the GitHub repo URL |
-| C | Credible vendor/community demo (only sufficient for Level II) |
-
-## Repo location
-
-Run from the root of your local clone of this repository. If you have not cloned it yet:
-```
-git clone https://github.com/mbtiongson1/gaia-skill-tree.git
-cd gaia-skill-tree
+```bash
+gh api repos/{owner}/{repo}/contents/skills --jq '.[].name'
+gh api repos/{owner}/{repo}/contents/.claude/skills --jq '.[].name'
+gh api repos/{owner}/{repo}/contents/codex/skills --jq '.[].name'
+gh api repos/{owner}/{repo}/contents/.codex/skills --jq '.[].name'
+gh api repos/{owner}/{repo}/contents/cursor/skills --jq '.[].name'
 ```
 
-## Recording contributors
+If a skills directory exists, each subdirectory is a distinct candidate. For each:
+1. Confirm it contains a `SKILL.md` (or `skill.md`).
+2. Fetch and read that file for its description.
+3. Use the **raw file URL** (`https://github.com/{owner}/{repo}/blob/main/<skills-dir>/<skill-name>/SKILL.md`) as the evidence source — not the repo root URL, which is too coarse to be meaningful.
+4. Evaluate each skill independently (accept / rename / drop on its own merits).
 
-After the PR is opened, add the contributor's GitHub username to the `## Contributors` section of `README.md` (at the bottom of the file, before the License section) if not already listed. Use the format:
+If no skills directory exists, the repo root URL is an acceptable evidence source.
+
+### 1b. Paper search (20% — highest trust signal)
+
+For any Level II+ candidate or a skill with only community evidence:
+
+```
+WebSearch: "<skill-name> arxiv 2024 2025 2026 agent benchmark"
+WebSearch: "<skill-name> survey" site:arxiv.org
+```
+
+Use the arXiv `abs/` URL as the evidence source. Only include papers that directly measure or demonstrate this skill, not tangentially related surveys.
+
+### 1c. SkillsMP community search (10% — supplementary)
+
+```
+WebFetch: https://skillsmp.com/api/v1/skills/search?q=<skill-name>
+```
+
+Treat matching entries as supplementary evidence. Rate limit: 50 requests/day unauthenticated.
+
+### 1d. Existing tree audit (20% — strengthen before widening)
+
+Before proposing net-new skills, scan the loaded `registry/gaia.json` for:
+- Skills at level 0/I with only community evidence (upgrade these first)
+- Skills with `status: "provisional"` that could be validated with better evidence
+- Skills at level II+ missing peer-reviewed evidence
+
+Upgrading weak existing skills delivers more value than pure breadth expansion.
+
+---
+
+## Step 2 — Design the batch
+
+For each candidate, decide:
+
+**Taxonomy tier** (what type of skill is it?):
+- `basic` — primitive capability, no prerequisites
+- `extra` — emerges from ≥2 prerequisite basics
+- `ultimate` — high-complexity emergent, ≥3 prerequisites, ≥3 Evidence Grade A/B entries
+- `unique` — graph-isolated basic that reached 4★+ through depth alone
+
+**Fusion-first design** — Resist the temptation to create one generic skill per vendor API. Multiple named implementations of the same concept (e.g. `pubmed`, `arxiv`, `biorxiv`) should map to a single elegant generic (e.g. `literature-search`). This keeps the global graph readable and prevents registry bloat.
+
+**Composite extras** — When multiple distinct skills combine into a multi-step workflow, design a composite Extra that names them as prerequisites. Calibrate the named implementations at 3★–4★ max, referencing the composite.
+
+**Generic skill levels** — Generic (starless) skills have no star level. Only named implementations receive stars (2★–6★). Omit `--level` from `gaia dev add` for generics.
+
+**Named promotion** — If a specific implementation warrants its own entry in `registry/named/`, mark it for named promotion and submit with `status: awakened`. Never hand-set `title` or `catalogRef` during curation — those are set by a reviewer at Named promotion time.
+
+**Demerit checks** — Only apply `heavyweight-dependency`, `niche-integration`, or `experimental-feature` demerits to skills at 3★+. Cross-platform universal skills at high levels should omit demerits.
+
+**Rarity** — Do not choose or mention a rarity value. The rarity axis is deprecated; `gaia dev add` writes the legacy default automatically.
+
+---
+
+## Step 3 — Present draft for review
+
+Before writing anything to disk, show the full proposed batch:
+
+| ID | Name | Type | Stars | Prereqs | Demerits | Named? |
+|---|---|---|---|---|---|---|
+| … | … | … | … | … | … | … |
+
+For each row, ask the user to mark one of:
+- `accept` — proceed as designed
+- `rename <new-id>` — change the ID before generating
+- `duplicate` — already covered; drop it
+- `needs-evidence` — hold until an Evidence Grade A/B source is supplied
+- `reject` — remove entirely
+
+Do not proceed to Step 4 until the user has reviewed and at least one skill is marked `accept`. Apply all `rename` decisions before writing. Drop everything not `accept`/`rename`.
+
+---
+
+## Step 4 — Execute via CLI
+
+Run `gaia dev add` for each accepted skill. Mutating registry files directly is prohibited — the CLI handles timeline logging, schema integrity, and automated assembly.
+
+**Generic (starless) skill:**
+```bash
+gaia dev add "Skill Name" --id <id> --type <type> --description "At least 10 chars"
+```
+Do NOT pass `--level` for generics.
+
+**Named implementation:**
+```bash
+gaia dev add "Skill Name" --id <id> --named --contributor <user> --generic-ref <ref> --status awakened
+```
+Submit as `awakened`. Calibrate stars with `gaia dev calibrate` after evidence is reviewed.
+
+---
+
+## Step 5 — Validate, regenerate, and commit
+
+```bash
+gaia validate          # must exit 0 before proceeding
+gaia dev docs          # regenerates registry.md, combinations.md, skills/**/*.md, gaia.gexf
+```
+
+Branch name: `review/meta/<slug>`  
+Commit message format: `[type] Title — brief description`
+
+---
+
+## Step 6 — Open the PR
+
+Push the branch and open a PR via the GitHub API. The auto-triage CI classifies it:
+- Evidence Grade A/B score ≥ 60 from a bot actor → eligible for auto-merge
+- `draft-skills` or `needs-review` labels → routed to a human reviewer
+- Ultimate skill proposals → always require maintainer approval
+
+---
+
+## Step 7 — Record contributor and batch evidence
+
+Add the contributor's GitHub username to the `## Contributors` section of `README.md` (create the section if it doesn't exist, before the License section):
 
 ```markdown
 | @username | Brief description of contribution |
 ```
 
-If the `## Contributors` section does not exist yet, create it. Commit this change in the same PR as the skill additions. This ensures every person who runs `/gaia-curate` is permanently thanked in the project.
+Also register the curation batch itself as a `registryCuration` evidence entry if new demonstrations were produced during research.
+
+---
+
+## Two-phase intake (gaia push path)
+
+For contributors using `gaia push`, a separate draft intake path exists that does NOT directly modify `registry/gaia.json`:
+
+1. `gaia push` scans the source repo and writes `registry-for-review/skill-batches/<batchId>.json`
+2. Maintainers review and mark each skill: `accept` / `rename` / `duplicate` / `needs-evidence` / `reject`
+3. Accepted skills are promoted in a follow-up PR that runs `gaia validate` and `gaia validate --intake`
+
+Run `/gaia-draft-curate` to triage pending intake batches before this skill.
+
+Validate intake batches locally:
+```bash
+gaia validate --intake
+```
+
+---
+
+## Hard constraints
+
+- Never hand-edit `registry/nodes/` or `registry/gaia.json`. Use `gaia dev add`, `gaia dev merge`, `gaia dev split`, `gaia dev evidence`.
+- All evidence `source` values must be real, resolvable URLs (arXiv abs pages or GitHub repos). SkillsMP URLs are acceptable only as supplementary Evidence Grade C.
+- Ultimate skills must land as `provisional` — the maintainer sets `validated` after review.
+- No cycles in the DAG. No orphaned composite nodes.
+- Skill IDs: `lowercase-dash` format (`^[a-z][a-z0-9]*(-[a-z0-9]+)*$`). No camelCase, no vendor names, no unexplained abbreviations.
+- Edges use `sourceSkillId`/`targetSkillId` (not `from`/`to`). Valid `edgeType` values: `prerequisite`, `corequisite`, `enhances`. There is no `derivative` edge type — use `enhances` for skill→derivative edges.
+- All Python `open()` calls must use `encoding='utf-8'` to avoid CP-1252 drift on Windows.
+
+---
+
+## Evidence grade reference
+
+| Grade | Standard | Typical source |
+|---|---|---|
+| A (Gold) | Peer-reviewed, benchmarked | `https://arxiv.org/abs/<id>` |
+| B (Silver) | Reproducible open-source demo | GitHub repo or skill file URL |
+| C (Bronze) | Credible vendor/community demo | Sufficient only for Level ≤ II |
+
+---
 
 ## Output
 
 At the end, report:
 - PR URL
 - Skills added (count by type)
-- Validation result summary
+- Validation result
 - Any existing skills whose `derivatives` arrays were patched
 - Review decisions applied (accepted / renamed / dropped)
 - Contributor recorded in README

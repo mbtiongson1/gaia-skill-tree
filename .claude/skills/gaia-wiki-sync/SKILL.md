@@ -1,119 +1,120 @@
 ---
 name: gaia-wiki-sync
 description: >-
-  Dynamic-workflow wiki sync for the Gaia registry. Instead of a single linear
-  pass, this skill fans out parallel sub-agents per source domain and per wiki
-  page, then runs a bounded convergent cross-check for terminology drift before
-  committing. Resumable via a per-run ledger. Use when you want the wiki
-  comprehensively synced to the latest merged changes — /gaia-wiki-sync.
+  Syncs the Gaia GitHub wiki to the current state of the registry. Use this
+  skill when: the wiki is out of date after a batch of merges; a user asks to
+  "update the wiki", "sync the wiki", "regenerate wiki pages", "push docs to
+  the wiki", or "refresh the wiki after this PR"; you notice wiki pages are
+  stale relative to CLI changes, schema changes, named-skill promotions, or
+  policy updates. Fans out parallel sub-agents per source domain and per wiki
+  page, then runs a cross-check for terminology drift before committing. Prefer
+  this over a manual wiki edit — the fan-out coverage catches drift that a
+  single linear pass misses. Resumable if interrupted. Invoke as
+  /gaia-wiki-sync.
 version: 2.0.0
 argument-hint: "[--since <sha|date>] [--resume] [--check]"
 ---
 
-# gaia-wiki-sync (dynamic workflow)
+# gaia-wiki-sync
 
-A **dynamic-workflow** implementation of wiki sync, designed so the fan-out
-width adjusts at runtime to however many source domains changed and however many
-wiki pages are stale. Modelled on the same principles as `/gaia-curate-dynamic`.
+Keeps the Gaia GitHub wiki at `https://github.com/mbtiongson1/gaia-skill-tree.wiki.git`
+in sync with the registry and source code. It analyses what changed, fans out
+parallel agents to read each source domain and draft each stale page, then runs
+a bounded refuter pass to catch terminology drift before anything is committed.
 
-> *Claude analyses the commit range, fans out parallel source-reader agents (one
-> per changed domain), fans out parallel page-drafter agents (one per stale
-> page), then runs a bounded terminology cross-check before committing. Nothing
-> lands until the refuter failed to find drift.*
-
-Prefer the `update-docs` skill for a quick, focused patch on a handful of
-pages. Use this skill when the sync window spans many commits and you want
-parallel coverage with cross-page consistency guarantees.
+**When to reach for this skill vs alternatives:**
+- `/gaia-wiki-sync` — many commits to process, want parallel coverage and
+  cross-page consistency guarantees
+- Manual edit — single typo fix on one page where running the full workflow
+  would be overkill
 
 ---
 
-## Six-Phase Architecture
+## How it works — six phases
 
 ```
-discovery      → single agent  → SyncPlan (schema-validated)
-source-read    → parallel/domain → SourceDigest per domain
-page-draft     → parallel/page  → PageDraft per stale page
-cross-check    → refuter agent  → Conflicts[] (skipped if only 1 page)
-apply          → serial agent   → git commit + push
-ledger-close   → single agent   → summary
+discovery    →  single agent  →  SyncPlan (schema-validated)
+source-read  →  parallel/domain →  SourceDigest per domain
+page-draft   →  parallel/page   →  PageDraft per stale page
+cross-check  →  refuter agent   →  Conflicts[] (skipped if only 1 page)
+apply        →  serial agent    →  git commit + push to ../gaia-wiki
+ledger-close →  single agent    →  summary returned to user
 ```
 
 ### Phase 1 — discovery
 
-Single agent. Reads `git log` and `git diff --name-only` for the sync window,
-classifies changed paths into **source domains**, and maps each domain to the
-wiki pages that depend on it.
-
-Output is a `SyncPlan` (see `schemas/sync-plan.json`). Schema-validated — the
-workflow halts on malformed plans rather than silently drafting wrong pages.
+Read `git log` and `git diff --name-only` for the sync window (default: since
+last wiki commit). Classify changed paths into **source domains** and map each
+domain to the wiki pages that depend on it. Output a schema-validated `SyncPlan`
+(`schemas/sync-plan.json`). Halt on malformed plans rather than silently
+drafting wrong pages — a bad plan contaminates every downstream agent.
 
 Key plan fields:
-- `sourceDomains` — which files to read, keyed by domain name (`cli`, `schema`,
+- `sourceDomains` — which files to read, keyed by domain (`cli`, `schema`,
   `named`, `policy`, `mcp`)
 - `stalePages` — wiki pages that need drafting
 - `ciOwnedRegions` — per-page marker pairs to preserve verbatim (e.g.
-  `gaia:cli-start/end` in CLI-Reference)
+  `<!-- gaia:cli-start/end -->` in CLI-Reference.md)
 
-### Phase 2 — source-read (parallel per domain)
+### Phase 2 — source-read (parallel, one agent per domain)
 
-One agent per domain — typically 3–5 concurrent agents. Each reads all files in
-its domain and emits a `SourceDigest` containing:
-- `facts[]` — discrete claims with `id` and file:line evidence
+Typically 3–5 concurrent agents. Each reads all files in its domain and emits
+a `SourceDigest` containing:
+- `facts[]` — discrete claims with `id` and `file:line` evidence
 - `renames[]` — old-name → new-name pairs since last wiki update
-- `deprecations[]` — terms / axes / commands that no longer exist
+- `deprecations[]` — terms, axes, or commands that no longer exist
 
-Facts are the unit of traceability. Page-drafters cite `factId`s; the refuter
-checks cited IDs against the global rename/deprecation lists.
+Facts are the unit of traceability. Page-drafters cite `factId`s so the
+refuter can verify nothing was invented.
 
-### Phase 3 — page-draft (parallel per stale page)
+### Phase 3 — page-draft (parallel, one agent per stale page)
 
-One agent per stale page. Each agent receives:
-- Current wiki page content (read from `../gaia-wiki/`)
-- The `SourceDigest`s for the domains that affect its page
-- The CI-owned region markers to preserve verbatim
+Each agent receives: current wiki page content, the `SourceDigest`s for its
+relevant domains, and the CI-owned region markers to preserve verbatim.
 
-Output: `PageDraft` with `newContent`, `citedFactIds`, `unresolvedFacts`.
-If `unresolvedFacts` is non-empty, the draft is flagged for human review rather
-than applied — no invented content.
+Output is a `PageDraft` with `newContent`, `citedFactIds`, and `unresolvedFacts`.
+If `unresolvedFacts` is non-empty, flag the draft for human review and do not
+apply it — guessing fills the wiki with plausible-sounding lies.
 
-### Phase 4 — cross-check (skip if only 1 stale page)
+### Phase 4 — cross-check (skip when only 1 stale page)
 
-Single refuter agent reads all drafts and the global `renames[]` /
-`deprecations[]` from all digests. Emits a `Conflicts[]` array (terminology
-drift, cross-page contradictions). If conflicts exist, affected page-drafters
-are re-run with the conflict list appended — capped at 2 iterations. If
-conflicts survive after 2 rounds, the ledger records a `human-review` entry and
-the run halts without committing.
+A single refuter agent reads all drafts plus the global `renames[]` /
+`deprecations[]` from all digests. It emits `Conflicts[]` for terminology
+drift or cross-page contradictions. Affected page-drafters re-run with the
+conflict list appended — capped at 2 iterations. If conflicts survive after
+2 rounds, record `human-review` in the ledger and halt without committing.
+The cap prevents infinite loops on genuinely ambiguous source material.
 
 ### Phase 5 — apply (serial)
 
-Single agent. Re-reads each target wiki file, splices `newContent` while
-preserving CI-owned regions byte-for-byte, stages all changes in `../gaia-wiki`,
-commits, and pushes.
+Re-read each target wiki file, splice `newContent` while preserving CI-owned
+regions byte-for-byte, stage all changes in `../gaia-wiki`, commit, and push.
+Verify that marker pairs exist before splicing — a missing marker means the
+file structure changed and the splice would corrupt the page.
 
 ### Phase 6 — ledger-close
 
-Marks ledger `complete`, writes the summary returned to the user.
+Mark ledger `complete` and write the summary returned to the user.
 
 ---
 
-## Resume Protocol
+## Resume protocol
 
 On invocation, scan `generated-output/wiki-sync-ledger/` for ledgers with
-`status: in-progress`. If one exists and is **< 24 hours old**, offer the user:
+`status: in-progress` that are **< 24 hours old**. If one exists, offer:
 
-- `--resume` — re-load the plan, skip `complete` phases, re-run `failed` /
+- `--resume` — reload the plan, skip `complete` phases, re-run `failed` /
   `pending` agents only
 - (default) — start a fresh run; rename the stale ledger to `.abandoned`
 
-Ledgers older than 24 hours are stale and treated as fresh-run candidates
-(mirrors the `promotion-candidates.json` 24h rule in CLAUDE.md).
+Ledgers older than 24 hours are treated as abandoned (mirrors the
+`promotion-candidates.json` 24h rule in CLAUDE.md).
 
 ---
 
-## Ledger Shape
+## Ledger shape
 
-`generated-output/wiki-sync-ledger/<runId>.json` (gitignored)
+`generated-output/wiki-sync-ledger/<runId>.json` (gitignored — never commit)
 
 ```json
 {
@@ -123,7 +124,7 @@ Ledgers older than 24 hours are stale and treated as fresh-run candidates
   "status": "in-progress",
   "plan": { /* full SyncPlan */ },
   "phases": {
-    "discovery":   { "status": "complete", "completedAt": "...", "outputRef": "artifacts/<runId>/plan.json" },
+    "discovery":   { "status": "complete", "outputRef": "artifacts/<runId>/plan.json" },
     "source-read": {
       "status": "complete",
       "agents": {
@@ -134,9 +135,9 @@ Ledgers older than 24 hours are stale and treated as fresh-run candidates
     "page-draft": {
       "status": "in-progress",
       "agents": {
-        "CLI-Reference":  { "status": "complete",  "outputRef": "artifacts/<runId>/draft-CLI-Reference.json" },
-        "Home":           { "status": "failed",    "error": "missing factId policy.version", "attempts": 1 },
-        "Named-Skills":   { "status": "pending" }
+        "CLI-Reference": { "status": "complete",   "outputRef": "artifacts/<runId>/draft-CLI-Reference.json" },
+        "Home":          { "status": "failed",     "error": "missing factId policy.version", "attempts": 1 },
+        "Named-Skills":  { "status": "pending" }
       }
     },
     "cross-check":  { "status": "pending" },
@@ -148,30 +149,14 @@ Ledgers older than 24 hours are stale and treated as fresh-run candidates
 }
 ```
 
-Large per-agent outputs live in `artifacts/<runId>/` alongside the ledger.
-The ledger itself stays small and diffable.
+Large per-agent outputs live in `artifacts/<runId>/` alongside the ledger so
+the ledger itself stays small and diffable.
 
 ---
 
-## Constraints
+## Source domains → wiki page mapping
 
-- **Wiki repo at `../gaia-wiki`** — clone if missing, never delete.
-- **`<!-- gaia:cli-start/end -->`** in CLI-Reference.md is CI-owned — preserve
-  byte-for-byte. The applier verifies markers exist before writing.
-- **`rarity` axis is deprecated** (CONTEXT.md) — the refuter must flag any
-  draft that reintroduces it.
-- **Banned-synonym list in `CONTEXT.md`** — feed to the refuter as part of
-  `deprecations[]`.
-- **Never invent facts** — if a page-drafter lists an `unresolvedFact`, halt
-  that page's draft and flag for human review rather than guessing.
-- **`[skip-gen]` in commit message** if any `registry/` artifacts are touched
-  (defensive; wiki-sync normally shouldn't touch them).
-
----
-
-## Source Domains → Wiki Page Mapping
-
-| Domain | Source files | Affected pages |
+| Domain | Source files | Affected wiki pages |
 |---|---|---|
 | `cli` | `src/gaia_cli/main.py`, `src/gaia_cli/formatting.py`, README `gaia:cli-start/end` region | CLI-Reference, Initiates-Rite |
 | `schema` | `registry/schema/*.json`, `CONTEXT.md` | Schema-Reference, Stars-and-Ranks, Skill-Types |
@@ -181,12 +166,22 @@ The ledger itself stays small and diffable.
 
 ---
 
-## Entrypoint
+## Guardrails
 
-The Workflow script is at `workflow.mjs` in this directory. Invoke via:
+- **Wiki repo at `../gaia-wiki`** — clone if missing (`git clone https://github.com/mbtiongson1/gaia-skill-tree.wiki.git ../gaia-wiki`), never delete it between runs.
+- **`<!-- gaia:cli-start/end -->`** in CLI-Reference.md is CI-owned — preserve byte-for-byte. The applier verifies markers exist before writing.
+- **`rarity` axis is deprecated** (see `CONTEXT.md`) — the refuter must flag any draft that reintroduces it.
+- **Banned-synonym list in `CONTEXT.md`** — feed to the refuter as part of `deprecations[]` so banned terms don't sneak back in through paraphrase.
+- **Never invent facts** — if a page-drafter has `unresolvedFacts`, flag that page for human review rather than guessing. The wiki is authoritative; a confident wrong answer is worse than an honest gap.
+- **`[skip-gen]` in commit message** if any `registry/` artifacts are incidentally touched (defensive; wiki-sync normally should not touch them).
+
+---
+
+## Invocation
 
 ```
-/gaia-wiki-sync
-/gaia-wiki-sync --resume
+/gaia-wiki-sync                # full sync from last wiki commit
+/gaia-wiki-sync --since abc123 # sync changes since a specific SHA or date
+/gaia-wiki-sync --resume       # resume an in-progress run
 /gaia-wiki-sync --check        # dry-run: plan + source-read only, no writes
 ```

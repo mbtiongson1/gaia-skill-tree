@@ -1,17 +1,21 @@
 ---
 name: gaia-tm-inspect
 description: >
-  Live Trust Magnitude breakdown and ranked leaderboard for all named GAIA skills.
-  Inspect mode shows per-evidence artifact scores, multiplier chains, dead rows, and
-  the next-grade gap. Leaderboard mode ranks all 249+ skills by TM grouped by grade band.
-version: "1.0.0"
+  Use this skill when the user wants to understand why a named Gaia skill has a particular
+  star rank, what its Trust Magnitude (TM) score is, which evidence rows are contributing
+  (or dead), how far it is from the next grade, or what evidence to add to move the needle.
+  Also use when asked for a full leaderboard of all named skills ranked by TM.
+  Triggers: "why does X have 3 stars", "what's the TM for X", "inspect TM",
+  "explain the score for X", "what evidence would rank up X", "show leaderboard",
+  "rank all skills by TM", "what's dragging down X's score", "dead evidence rows",
+  "how close is X to grade A/S".
+version: "1.1.0"
 genericSkillRef: registry-inspection
 ---
 
 # /gaia-tm-inspect
 
-Instantly view the live Trust Magnitude breakdown for any named GAIA skill,
-or generate a ranked leaderboard of all skills.
+Breaks down the Trust Magnitude (TM) score for any named Gaia skill, or produces a full ranked leaderboard. TM is the composite evidence score that gates star promotions — understanding it tells you exactly why a skill is ranked where it is and what would change that.
 
 ## Two Modes
 
@@ -21,23 +25,16 @@ or generate a ranked leaderboard of all skills.
 /gaia-tm-inspect <skillId>
 ```
 
-Where `<skillId>` is the contributor/name path (e.g. `garrytan/gstack`,
-`mattpocock/grill-me`, `obra/superpowers`).
+`<skillId>` is the `contributor/name` path (e.g. `garrytan/gstack`, `mattpocock/grill-me`, `obra/superpowers`).
 
 **Output includes:**
-- Each evidence row: type, source URL, and the full contribution chain:
-  `base magnitude → × weight → × freshness → × mothership/creator/engagement → × inheritMultiplier → × plateau → final score`
-- Dead rows (zero contribution) and the reason why (missing views, stars below
-  10k threshold, deranked verifier, etc.)
-- Auto-derived fusion-recipe info if `suiteComponents` is present: component
-  count, graded origin count, raw fusion magnitude
-- Total TM, overall grade, and the exact points needed to reach the next grade
-- Most efficient evidence type to add for the next TM jump
 
-**Example:**
-```
-/gaia-tm-inspect obra/superpowers
-```
+- Each evidence row with the full score chain:
+  `base magnitude → × type weight → × freshness → × mothership/creator/engagement → × inheritMultiplier → × plateau → final score`
+- Dead rows (score = 0.0) and why (missing views, stars below threshold, deranked verifier, etc.)
+- Fusion-recipe summary if `suiteComponents` is present: component count, graded origins, raw fusion magnitude
+- Total TM, overall grade, and exact points to the next grade threshold
+- Most efficient evidence type to add for the next TM jump
 
 ### Leaderboard Mode — all skills ranked
 
@@ -45,21 +42,19 @@ Where `<skillId>` is the contributor/name path (e.g. `garrytan/gstack`,
 /gaia-tm-inspect --leaderboard
 ```
 
-Generates a full ranked table grouped by grade band:
+Full ranked table grouped by grade band:
 
-| Band | Threshold |
+| Band | TM Threshold |
 |---|---|
-| S grade | TM >= 250 |
-| A grade | TM >= 100 |
-| B grade | TM >= 50  |
-| C grade | TM >= 20  |
-| Ungraded | TM < 20  |
+| S | >= 250 |
+| A | >= 100 |
+| B | >= 50 |
+| C | >= 20 |
+| Ungraded | < 20 |
 
 Columns: Rank, Skill ID, TM, Grade, Level, Contributor.
 
-## Implementation
-
-The skill runs `scripts/inspectTrustMagnitude.py` in the repo root:
+## How to Run It
 
 ```bash
 # Inspect a single skill
@@ -69,52 +64,45 @@ GAIA_OPERATOR_OVERRIDE=1 python scripts/inspectTrustMagnitude.py --skill <skillI
 GAIA_OPERATOR_OVERRIDE=1 python scripts/inspectTrustMagnitude.py --leaderboard
 ```
 
-The script:
-1. Loads the genericSkillMap from `registry/nodes/` (for fusion-recipe resolution)
-2. Finds the named skill in `registry/named/<contributor>/<name>.md`
-3. Calls `explainTrustMagnitude()` from `src/gaia_cli/trustMagnitude.py`
-4. Prints the full factor chain for every evidence row in the effective pool
-5. For leaderboard: loads all 249+ named skills, recomputes live TM, sorts descending
+The script loads named skills from `registry/named/`, resolves fusion recipes from `registry/nodes/`, and calls `explainTrustMagnitude()` in `src/gaia_cli/trustMagnitude.py`.
 
 ## Agent Instructions
 
-When invoked as `/gaia-tm-inspect <skillId>`:
+**For `/gaia-tm-inspect <skillId>`:**
 
 1. Run the inspect command for the requested skill.
-2. Parse the output and present a concise summary table of evidence rows with
-   their final scores.
-3. Highlight any dead rows (score = 0.0) and explain why.
-4. State the next-grade gap clearly: "needs X more TM to reach grade Y".
-5. Suggest the single most efficient evidence type to add.
+2. Present a concise table of evidence rows: type, source, and final score. Group live rows above dead rows.
+3. Call out dead rows and explain the specific reason each one contributes 0 (e.g. "social-signal: 820 views — below 1k floor").
+4. State the next-grade gap plainly: "needs X more TM to reach grade Y (currently Z)".
+5. Recommend the single highest-impact evidence type to add, with reasoning (e.g. "one peer-review with 3 reviewers adds ~90 TM — more than doubling current score").
 
-When invoked as `/gaia-tm-inspect --leaderboard`:
+**For `/gaia-tm-inspect --leaderboard`:**
 
 1. Run the leaderboard command.
-2. Present the full output grouped by grade band.
-3. Note any surprising scores — skills with many evidence rows but low TM
-   may have dead rows worth investigating.
+2. Present the output grouped by grade band.
+3. Flag any skills with many evidence rows but low TM — dead rows are likely culprits worth a follow-up inspect.
 
 ## Trust Magnitude Formula Reference
 
 ```
 artifact_score = magnitude × type_weight × freshness × mothership × creator × engagement
-TM = sum(artifact_scores) × [social-signal capped at 80]
+TM = Σ(artifact_scores), with social-signal capped at 80 across all rows
 ```
 
 ### Per-type magnitude formulas
 
 | Type | Magnitude Formula | Weight | Cap |
 |---|---|---|---|
-| fusion-recipe | 20×N (N<=10); 200+20√(N-10) (N>10) | 1.5 | — |
+| fusion-recipe | 20×N (N≤10); 200+20√(N-10) (N>10) | 1.5 | — |
 | github-stars-own | stars / 1000 | 1.0 | 200 |
-| proxy-containment | (externalStars/1000)×0.8 (min 10k) | 1.0 | 160 |
+| proxy-containment | (externalStars/1000)×0.8 (min 10k stars) | 1.0 | 160 |
 | verifier-attestation | 30 × verifiers | 1.5 | — |
-| benchmark-result | percentile | 1.4 | 100 |
+| benchmark-result | percentile (field required — omitting it scores 0) | 1.4 | 100 |
 | arxiv | citations / 5 | 1.0 | 100 |
 | peer-review | 25 × reviewers | 1.2 | — |
 | repo-own | commits/200 + contributors²×2 | 0.6 | 60 |
 | self-attestation | 10 | 0.5 | 10 |
-| social-signal | log10(views)×8 (min 1k views) | 1.0 | 80 (sum) |
+| social-signal | log10(views)×8 (min 1k views) | 1.0 | 80 (sum cap) |
 
 ### Grade thresholds
 
@@ -124,4 +112,11 @@ TM = sum(artifact_scores) × [social-signal capped at 80]
 | A | 100 | — |
 | B | 50 | — |
 | C | 20 | — |
-| ungraded | < 20 | — |
+| Ungraded | < 20 | — |
+
+### Common dead-row causes to watch for
+
+- `social-signal` with views < 1000 → scores 0 regardless of type weight
+- `github-stars-own` and `repo-own` pointing to the same URL → deduped; only the higher score counts
+- `benchmark-result` missing `percentile` field → magnitude = 0
+- Large suite with `github-stars-own` at the repo root → per-skill contribution tiny due to `/ skill_count_in_repo` divisor; use `social-signal` or `peer-review` instead

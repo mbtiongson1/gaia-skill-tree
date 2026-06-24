@@ -1,40 +1,64 @@
 ---
 name: gaia-integrity
-description: Verify and maintain the consistency of the Gaia Skill Registry via canonical validation and structural checks.
+description: >
+  Run this skill whenever you need to answer "is the registry coherent?" — before
+  opening a PR, after a merge or curation pass, when CI reports schema or validation
+  failures, when someone asks to "check the registry", "validate the registry",
+  "find orphan nodes", "check for missing documentation", "run integrity checks",
+  or "clean up stale skill files". It runs three checks in one pass: canonical schema
+  validation (gaia validate), documentation-alignment (every node has a matching .md),
+  and orphan detection (stray .md files with no backing node). Also covers safe
+  archival of orphaned docs without deleting history.
 ---
 
-# Gaia Registry Integrity Skill
+# Gaia Registry Integrity
 
-Use this skill to quickly verify and maintain the consistency of the Gaia Skill Registry. It combines canonical validation with structural checks.
+This skill answers one question: **is the registry internally consistent?** Three things
+can go wrong silently — a node fails schema validation, a node exists without a
+documentation file, or a documentation file exists without a backing node. This skill
+catches all three in a single pass and gives you a safe path to fix what it finds.
 
-## Quick Integrity Check
-
-The primary tool for this skill is the consolidated integrity script. It runs canonical validation and checks for documentation/node alignment.
+## Run the full integrity check
 
 ```bash
-# Run all integrity checks
 ./.agents/skills/gaia-integrity/scripts/check_integrity.sh
+```
 
-# Archive all orphan documentation (stale/stray .md files)
+The script runs three sequential checks and colour-codes the results:
+
+| Step | What it checks | Fail signal |
+|---|---|---|
+| 1 — Canonical validation | `gaia validate`: schema compliance, no cycles, all cross-references resolve | Red ✗ |
+| 2 — Documentation alignment | Every `registry/nodes/{type}/{id}.json` has a matching `registry/skills/{type}/{id}.md` | Red ✗ — "Missing documentation" |
+| 3 — Orphan documentation | Every `registry/skills/{type}/{id}.md` has a matching node in `registry/nodes/` | Yellow ! — "Orphan documentation" |
+
+Missing docs (step 2) are hard errors — a node with no documentation is incomplete.
+Orphan docs (step 3) are warnings — they're usually leftovers from a rename or type
+change, not broken references.
+
+## Archive orphaned documentation
+
+When step 3 reports orphans and you want to clean them up, use the archive script
+instead of deleting them. Files are moved, not deleted, so history is preserved:
+
+```bash
 ./.agents/skills/gaia-integrity/scripts/archive_orphans.sh
 ```
 
-### Checks Performed by `check_integrity.sh`:
-1.  **Canonical Validation:** Runs `gaia validate` to check schema, cycles, and reference integrity.
-2.  **Documentation Alignment:** Ensures every node in `registry/nodes/` has a matching `.md` file in `registry/skills/` of the **same type**.
-3.  **Orphan Documentation:** Identifies `.md` files in `registry/skills/` that do not have a matching `.json` node in `registry/nodes/` of the **same type**.
+Files land in `registry/archive/YYYYMMDD_HHMMSS/{type}/`, preserving the original
+type-folder structure. The archive script skips suite files (`skills.md`,
+`setup-*.md`) automatically.
 
-## Archive & Cleanup
+After archiving, check whether the removed files were part of the generated graph —
+if so, run `gaia dev docs` to rebuild Class S artifacts.
 
-The `archive_orphans.sh` script provides a safe way to clean up the registry:
-*   **Safe Storage:** Files are moved to `registry/archive/YYYYMMDD_HHMMSS/` rather than deleted.
-*   **Structure Preservation:** The original type folders (`basic/`, `extra/`, etc.) are maintained in the archive.
-*   **Automation:** Useful after renaming skills or changing skill types.
+## Pre-PR checklist
 
-## Procedures
+Before opening any PR that touches `registry/nodes/` or `registry/skills/`:
 
-### Before Submitting a PR
-1.  Run `gaia validate`.
-2.  Run `./.agents/skills/gaia-integrity/scripts/check_integrity.sh`.
-3.  Ensure all "Missing" and "Orphan" reports are resolved or justified.
-4.  If nodes were added/removed, run `gaia docs build` to update `gaia.json` and site artifacts.
+1. Run `gaia validate` — fix any schema or reference errors it reports.
+2. Run `check_integrity.sh` — resolve or explicitly justify every Missing and Orphan entry.
+3. If nodes were added or removed, run `gaia dev docs` and commit the updated `docs/graph/` artifacts in the same PR (CI Guard E in `docs-cohesion.yml` enforces this).
+
+Leaving "Missing" entries unresolved means CI will reject the PR anyway — resolving
+them here saves a round-trip.
