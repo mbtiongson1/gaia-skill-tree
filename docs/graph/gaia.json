@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/skill.schema.json",
-  "generatedAt": "2026-06-26T15:54:31Z",
+  "generatedAt": "2026-06-29T19:13:45Z",
   "meta": {
     "typeLabels": {
       "basic": "Basic Skill",
@@ -6575,7 +6575,7 @@
           "timestamp": "2026-05-29T18:20:48Z",
           "action": "evidence_added",
           "contributor": "mbtiongson1",
-          "details": "Added B evidence from https://github.com/mbtiongson1/gaia-skill-tree/blob/main/.agents/skills/graphify-triage/SKILL.md"
+          "details": "Added B evidence from https://github.com/gaia-research/gaia-skill-tree/blob/main/.agents/skills/graphify-triage/SKILL.md"
         }
       ],
       "cluster": 0,
@@ -11009,7 +11009,7 @@
         },
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md",
+          "source": "https://github.com/gaia-research/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md",
           "evaluator": "mbtiongson1",
           "date": "2026-04-30",
           "notes": "Garry Tan /office-hours -- Q&A skill grounded in specific document sets and founder context. (backfilled — class-to-type migration)",
@@ -11043,7 +11043,7 @@
           "timestamp": "2026-05-19T22:44:52Z",
           "action": "evidence_added",
           "contributor": "mbtiongson1",
-          "details": "Added evidence: https://github.com/mbtiongson1/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md",
+          "details": "Added evidence: https://github.com/gaia-research/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md",
           "previousValue": null,
           "newValue": "4★"
         },
@@ -11057,7 +11057,7 @@
           "timestamp": "2026-06-14T07:08:53Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree/blob/main/registry/named/garrytan/office-hours.md as B (trustNumber: 70.0)"
         }
       ],
       "cluster": 0,
@@ -11682,7 +11682,7 @@
       "evidence": [
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree/pull/2",
+          "source": "https://github.com/gaia-research/gaia-skill-tree/pull/2",
           "evaluator": "mbtiongson1",
           "date": "2026-04-28",
           "notes": "Reproducible demonstration: Claude Code agent researched 30 popular AI skills, sourced 22 peer-reviewed papers, generated gaia.json via script, passed all 6 validator checks, and submitted PR â€” full inputs/outputs archived in the PR diff. (backfilled — class-to-type migration)",
@@ -11691,7 +11691,7 @@
         },
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "source": "https://github.com/gaia-research/gaia-skill-tree",
           "evaluator": "mbtiongson1",
           "date": "2026-04-28",
           "notes": "Batch 2 curation: 11 skills added (7 atomic, 3 composite, 1 legendary) with verified Class A/B evidence. (backfilled — class-to-type migration)",
@@ -11700,7 +11700,7 @@
         },
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "source": "https://github.com/gaia-research/gaia-skill-tree",
           "evaluator": "mbtiongson1",
           "date": "2026-04-29",
           "notes": "Batch 3 curation: 5 skills added (2 atomic, 3 composite) â€” self-consistency, few-shot-learning, tree-of-thought, prompt-optimization, tool-creation. (backfilled — class-to-type migration)",
@@ -11709,7 +11709,7 @@
         },
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "source": "https://github.com/gaia-research/gaia-skill-tree",
           "evaluator": "mbtiongson1",
           "date": "2026-04-30",
           "notes": "Batch 4 curation: 6 skills added (4 atomic, 2 composite) -- optical-character-recognition, object-detection, code-explain, reward-modeling, grounding, multi-agent-debate. (backfilled — class-to-type migration)",
@@ -11718,7 +11718,7 @@
         },
         {
           "class": "B",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree",
+          "source": "https://github.com/gaia-research/gaia-skill-tree",
           "evaluator": "mbtiongson1",
           "date": "2026-04-30",
           "notes": "Batch 5 curation: 5 skills added (2 atomic, 3 composite) -- statistical-analysis, scientific-visualization, literature-review, scientific-writing, ml-pipeline. (backfilled — class-to-type migration)",
@@ -11744,31 +11744,31 @@
           "timestamp": "2026-06-14T07:09:04Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree/pull/2 as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree/pull/2 as B (trustNumber: 70.0)"
         },
         {
           "timestamp": "2026-06-14T07:09:04Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree as B (trustNumber: 70.0)"
         },
         {
           "timestamp": "2026-06-14T07:09:04Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree as B (trustNumber: 70.0)"
         },
         {
           "timestamp": "2026-06-14T07:09:04Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree as B (trustNumber: 70.0)"
         },
         {
           "timestamp": "2026-06-14T07:09:04Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree as B (trustNumber: 70.0)"
         }
       ],
       "cluster": 3,
@@ -11834,7 +11834,7 @@
           "timestamp": "2026-05-19T22:44:52Z",
           "action": "evidence_added",
           "contributor": "mbtiongson1",
-          "details": "Added evidence: https://github.com/mbtiongson1/gaia-skill-tree/blob/main/.agents/skills/gaia-audit/skill.md",
+          "details": "Added evidence: https://github.com/gaia-research/gaia-skill-tree/blob/main/.agents/skills/gaia-audit/skill.md",
           "previousValue": null,
           "newValue": "4★"
         },
@@ -13721,7 +13721,7 @@
         },
         {
           "class": "A",
-          "source": "https://github.com/mbtiongson1/gaia-skill-tree/pull/352",
+          "source": "https://github.com/gaia-research/gaia-skill-tree/pull/352",
           "evaluator": "mbtiongson1",
           "date": "2026-05-22",
           "notes": "Peer-reviewed ultimate capstone suite consolidation. (backfilled — class-to-type migration)",
@@ -13768,7 +13768,7 @@
           "timestamp": "2026-05-21T17:18:32Z",
           "action": "evidence_added",
           "contributor": "mbtiongson1",
-          "details": "Added A evidence from https://github.com/mbtiongson1/gaia-skill-tree/pull/352"
+          "details": "Added A evidence from https://github.com/gaia-research/gaia-skill-tree/pull/352"
         },
         {
           "timestamp": "2026-05-21T17:19:20Z",
@@ -13782,7 +13782,7 @@
           "timestamp": "2026-05-21T17:19:20Z",
           "action": "evidence_added",
           "contributor": "mbtiongson1",
-          "details": "Added evidence: https://github.com/mbtiongson1/gaia-skill-tree/pull/352, https://github.com/mattpocock/skills",
+          "details": "Added evidence: https://github.com/gaia-research/gaia-skill-tree/pull/352, https://github.com/mattpocock/skills",
           "previousValue": null,
           "newValue": "6★"
         },
@@ -13814,7 +13814,7 @@
           "timestamp": "2026-06-14T07:09:08Z",
           "action": "evidence_graded",
           "contributor": "unknown",
-          "details": "Re-graded evidence from https://github.com/mbtiongson1/gaia-skill-tree/pull/352 as B (trustNumber: 70.0)"
+          "details": "Re-graded evidence from https://github.com/gaia-research/gaia-skill-tree/pull/352 as B (trustNumber: 70.0)"
         },
         {
           "timestamp": "2026-06-14T07:09:08Z",
