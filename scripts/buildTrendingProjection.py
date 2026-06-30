@@ -336,7 +336,7 @@ def build_ascended(
         # e.g. "Level updated from 1★ to 4★ …"
         previous_level: str | None = None
         details = latest_event.get("details", "")
-        m_prev = re.search(r"from\s+([^\s]+(?:\s+[^t][^o]\S*)?(?:★[^\s]*)?)\s+to\s+", details)
+        m_prev = re.search(r"from\s+(\S+)\s+to\s+", details)
         if m_prev:
             previous_level = m_prev.group(1).strip()
 
