@@ -4,7 +4,7 @@ Validates that:
 - Valid proposals pass schema validation
 - Invalid proposals (bad fields, missing required, extra fields) are rejected
 - The report wrapper validates correctly
-- The dryRun=true constraint is enforced at the report level
+- The dryRun=true constraint is enforced at the proposal and report levels
 """
 
 from __future__ import annotations
@@ -78,7 +78,8 @@ class TestSourceProposalValid:
             "discoveredBy": "nova-gaia",
             "crawlerBackend": "firecrawl-search",
             "confidence": 0.5,
-            "rationale": "A minimal but valid rationale for this evidence source."
+            "rationale": "A minimal but valid rationale for this evidence source.",
+            "dryRun": True
         }
         jsonschema.validate(data, self.schema, resolver=self.resolver)
 
@@ -106,6 +107,20 @@ class TestSourceProposalInvalid:
     def test_extra_fields_rejected(self):
         """additionalProperties: false must block unknown fields."""
         data = loadFixture("source_proposal_invalid_extra_fields.json")
+        with pytest.raises(jsonschema.ValidationError):
+            jsonschema.validate(data, self.schema, resolver=self.resolver)
+
+    def test_dryrun_false_rejected(self):
+        """Standalone proposals must remain inside the dry-run boundary."""
+        data = loadFixture("source_proposal_valid.json")
+        data["dryRun"] = False
+        with pytest.raises(jsonschema.ValidationError):
+            jsonschema.validate(data, self.schema, resolver=self.resolver)
+
+    def test_missing_dryrun_rejected(self):
+        """Standalone proposals must explicitly declare dryRun: true."""
+        data = loadFixture("source_proposal_valid.json")
+        del data["dryRun"]
         with pytest.raises(jsonschema.ValidationError):
             jsonschema.validate(data, self.schema, resolver=self.resolver)
 
@@ -248,7 +263,7 @@ class TestSourceProposalReportInvalid:
             "reportId": "20260702-live-001",
             "generatedAt": "2026-07-02T14:00:00Z",
             "generatedBy": "nova-gaia",
-            "pipelinePhase": "ingestion",
+            "pipelinePhase": "discovery",
             "dryRun": False,
             "proposals": []
         }
@@ -275,6 +290,19 @@ class TestSourceProposalReportInvalid:
             "generatedBy": "nova-gaia",
             "pipelinePhase": "discovery",
             "dryRun": True
+        }
+        with pytest.raises(jsonschema.ValidationError):
+            jsonschema.validate(data, self.schema, resolver=self.resolver)
+
+    def test_ingestion_phase_rejected(self):
+        """Reports are dry-run only until a publisher exists."""
+        data = {
+            "reportId": "20260702-ingest-001",
+            "generatedAt": "2026-07-02T14:00:00Z",
+            "generatedBy": "nova-gaia",
+            "pipelinePhase": "ingestion",
+            "dryRun": True,
+            "proposals": []
         }
         with pytest.raises(jsonschema.ValidationError):
             jsonschema.validate(data, self.schema, resolver=self.resolver)

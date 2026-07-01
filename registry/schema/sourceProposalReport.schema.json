@@ -32,8 +32,8 @@
     },
     "pipelinePhase": {
       "type": "string",
-      "enum": ["discovery", "adversarial-review", "human-review", "ingestion"],
-      "description": "Current phase of the source-curation pipeline. Dry-run reports stop at 'discovery' or 'adversarial-review'. 'ingestion' is reserved for future auto-PR publishing (not yet implemented)."
+      "enum": ["discovery", "adversarial-review", "human-review"],
+      "description": "Current dry-run phase of the source-curation pipeline. Reports may stop at 'discovery', 'adversarial-review', or 'human-review'. 'ingestion' is reserved for future auto-PR publishing and is not valid until a publisher exists."
     },
     "dryRun": {
       "type": "boolean",

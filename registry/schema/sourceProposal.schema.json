@@ -13,7 +13,8 @@
     "discoveredBy",
     "crawlerBackend",
     "confidence",
-    "rationale"
+    "rationale",
+    "dryRun"
   ],
   "additionalProperties": false,
   "properties": {
@@ -211,8 +212,8 @@
     },
     "dryRun": {
       "type": "boolean",
-      "default": true,
-      "description": "True if this proposal was emitted during a dry-run pass (no registry mutation). MUST be true in the current implementation phase. Auto-PR publishing is not yet implemented."
+      "const": true,
+      "description": "MUST be true. This proposal was emitted during a dry-run pass (no registry mutation). Auto-PR publishing is not yet implemented."
     },
     "quotaCost": {
       "type": "object",
