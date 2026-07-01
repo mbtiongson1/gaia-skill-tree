@@ -110,6 +110,12 @@ def proposalId(seed: dict[str, Any], datePart: str) -> str:
     return f"{safeId(seed.get('skillId', 'unknown-skill'))}-{digest}-{datePart}"
 
 
+def isGithubHost(url: str) -> bool:
+    parsed = urllib.parse.urlparse(url)
+    host = (parsed.hostname or "").lower()
+    return host in {"github.com", "www.github.com"}
+
+
 def canonicalizeGithubBlobUrl(url: str) -> str:
     """Return a canonical GitHub blob URL, rejecting directory tree URLs.
 
@@ -121,16 +127,18 @@ def canonicalizeGithubBlobUrl(url: str) -> str:
     """
 
     parsed = urllib.parse.urlparse(url)
-    if parsed.scheme not in {"http", "https"} or parsed.netloc.lower() != "github.com":
+    host = (parsed.hostname or "").lower()
+    if parsed.scheme.lower() != "https" or host not in {"github.com", "www.github.com"}:
         raise GithubUrlError("GitHub source must be an https://github.com/... URL")
 
     parts = [urllib.parse.unquote(part) for part in parsed.path.split("/") if part]
     if len(parts) < 5:
         raise GithubUrlError("GitHub skill-file source must include /blob/<branch>/<path>")
     owner, repo, view, branch, *subpath = parts
-    if view == "tree":
+    viewType = view.lower()
+    if viewType == "tree":
         raise GithubUrlError("GitHub tree/ URLs are directory views; use a blob/<branch>/<file> source")
-    if view != "blob":
+    if viewType != "blob":
         raise GithubUrlError("GitHub skill-file source must use /blob/<branch>/<path>")
     if not owner or not repo or not branch or not subpath:
         raise GithubUrlError("GitHub blob URL is missing owner, repo, branch, or file path")
@@ -229,7 +237,7 @@ def loadSeeds(inputPath: str | None, liveGithub: bool = False, token: str | None
 def normalizeProposal(seed: dict[str, Any], generatedAt: str) -> dict[str, Any]:
     proposal = copy.deepcopy(seed)
     datePart = generatedAt[:10].replace("-", "")
-    if proposal.get("source", "").startswith("https://github.com/"):
+    if isGithubHost(proposal.get("source", "")):
         proposal["source"] = canonicalizeGithubBlobUrl(proposal["source"])
     proposal.setdefault("proposalId", proposalId(proposal, datePart))
     proposal.setdefault("discoveredAt", generatedAt)
@@ -275,13 +283,13 @@ def buildReport(
         if proposal.get("existingEvidenceCheck", {}).get("duplicate") is True or source in seenSources:
             duplicatesDropped += 1
             continue
-        seenSources.add(source)
         if float(proposal.get("confidence", 0)) < confidenceFloor:
             belowConfidenceDropped += 1
             continue
         skillId = proposal.get("skillId", "")
         if countsBySkill.get(skillId, 0) >= maxProposalsPerSkill:
             continue
+        seenSources.add(source)
         proposals.append(proposal)
         countsBySkill[skillId] = countsBySkill.get(skillId, 0) + 1
 

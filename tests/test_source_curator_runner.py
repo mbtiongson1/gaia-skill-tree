@@ -150,9 +150,45 @@ def test_github_url_canonicalization_rejects_tree_urls():
     assert sourceCuration.canonicalizeGithubBlobUrl(
         "https://github.com/owner/repo/blob/main/skills/example/SKILL.md?plain=1#L1"
     ) == "https://github.com/owner/repo/blob/main/skills/example/SKILL.md"
+    assert sourceCuration.canonicalizeGithubBlobUrl(
+        "https://www.GitHub.com/owner/repo/blob/main/skills/example/SKILL.md?plain=1#L1"
+    ) == "https://github.com/owner/repo/blob/main/skills/example/SKILL.md"
 
     with pytest.raises(sourceCuration.GithubUrlError):
         sourceCuration.canonicalizeGithubBlobUrl("https://github.com/owner/repo/tree/main/skills/example")
+    with pytest.raises(sourceCuration.GithubUrlError):
+        sourceCuration.canonicalizeGithubBlobUrl("http://github.com/owner/repo/tree/main/skills/example")
+    with pytest.raises(sourceCuration.GithubUrlError):
+        sourceCuration.canonicalizeGithubBlobUrl("http://github.com/owner/repo/blob/main/skills/example/SKILL.md")
+    with pytest.raises(sourceCuration.GithubUrlError):
+        sourceCuration.canonicalizeGithubBlobUrl("https://www.github.com/owner/repo/tree/main/skills/example")
+
+
+def test_dry_run_runner_canonicalizes_www_github_urls(tmp_path):
+    root = makeRoot(tmp_path)
+    seeds = [
+        {
+            "skillId": "alice/research-helper",
+            "source": "https://www.GitHub.com/alice/research-helper/blob/main/SKILL.md?plain=1#L4",
+            "evidenceType": "repo-own",
+            "crawlerBackend": "github-fixture",
+            "confidence": 0.8,
+            "rationale": "www GitHub hosts should be detected and normalized for dedupe and installability.",
+            "existingEvidenceCheck": {"checked": True, "duplicate": False},
+        },
+    ]
+    seedPath = tmp_path / "seed.json"
+    seedPath.write_text(json.dumps(seeds), encoding="utf-8")
+
+    report, _ = sourceCuration.runDryRun(
+        rootDir=root,
+        runId="20260702-www-github-canonicalize",
+        generatedAt="2026-07-02T14:00:00Z",
+        inputPath=str(seedPath),
+    )
+
+    assert report["proposals"][0]["source"] == "https://github.com/alice/research-helper/blob/main/SKILL.md"
+    sourceCuration.validateReport(report, root)
 
 
 def test_dry_run_runner_dedupes_same_source_url(tmp_path):
@@ -189,6 +225,45 @@ def test_dry_run_runner_dedupes_same_source_url(tmp_path):
 
     assert len(report["proposals"]) == 1
     assert report["summary"]["duplicatesDropped"] == 1
+    sourceCuration.validateReport(report, root)
+
+
+def test_dry_run_runner_allows_high_confidence_duplicate_after_low_confidence_drop(tmp_path):
+    root = makeRoot(tmp_path)
+    seeds = [
+        {
+            "skillId": "alice/research-helper",
+            "source": "https://github.com/alice/research-helper/blob/main/SKILL.md",
+            "evidenceType": "repo-own",
+            "crawlerBackend": "github-fixture",
+            "confidence": 0.1,
+            "rationale": "Low-confidence duplicate should be dropped without marking the source seen.",
+            "existingEvidenceCheck": {"checked": True, "duplicate": False},
+        },
+        {
+            "skillId": "alice/research-helper",
+            "source": "https://github.com/alice/research-helper/blob/main/SKILL.md",
+            "evidenceType": "repo-own",
+            "crawlerBackend": "github-fixture",
+            "confidence": 0.9,
+            "rationale": "High-confidence duplicate should still be emitted after the weak seed is filtered.",
+            "existingEvidenceCheck": {"checked": True, "duplicate": False},
+        },
+    ]
+    seedPath = tmp_path / "seed.json"
+    seedPath.write_text(json.dumps(seeds), encoding="utf-8")
+
+    report, _ = sourceCuration.runDryRun(
+        rootDir=root,
+        runId="20260702-low-confidence-before-duplicate",
+        generatedAt="2026-07-02T14:00:00Z",
+        inputPath=str(seedPath),
+    )
+
+    assert len(report["proposals"]) == 1
+    assert report["proposals"][0]["confidence"] == 0.9
+    assert report["summary"]["duplicatesDropped"] == 0
+    assert report["summary"]["belowConfidenceDropped"] == 1
     sourceCuration.validateReport(report, root)
 
 
