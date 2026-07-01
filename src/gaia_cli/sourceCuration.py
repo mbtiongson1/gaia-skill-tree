@@ -61,12 +61,27 @@ def schemaStore(schemaDir: Path) -> dict[str, dict[str, Any]]:
     return store
 
 
+def formatChecker() -> jsonschema.FormatChecker:
+    checker = jsonschema.FormatChecker()
+
+    if "date-time" not in checker.checkers:
+        @checker.checks("date-time", raises=ValueError)
+        def isDateTime(value: object) -> bool:
+            if not isinstance(value, str):
+                return True
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            return parsed.tzinfo is not None
+
+    return checker
+
+
 def validateReport(report: dict[str, Any], rootDir: Path | None = None) -> None:
     root = rootDir or repoRoot()
     schemaDir = root / "registry" / "schema"
     schema = loadJson(schemaDir / "sourceProposalReport.schema.json")
     resolver = jsonschema.RefResolver("file://" + str(schemaDir) + "/", {}, store=schemaStore(schemaDir))
-    jsonschema.validate(report, schema, resolver=resolver)
+    validator = jsonschema.Draft7Validator(schema, resolver=resolver, format_checker=formatChecker())
+    validator.validate(report)
 
 
 def safeId(value: str) -> str:
@@ -192,6 +207,17 @@ def defaultOutputPath(rootDir: Path, runId: str) -> Path:
     return rootDir / "generated-output" / "source-curation" / runId / "report.json"
 
 
+def resolveOutputPath(rootDir: Path, runId: str, outputPath: str | None = None) -> Path:
+    allowedDir = (rootDir / "generated-output" / "source-curation").resolve()
+    path = Path(outputPath) if outputPath else defaultOutputPath(rootDir, runId)
+    if not path.is_absolute():
+        path = rootDir / path
+    resolved = path.resolve()
+    if not resolved.is_relative_to(allowedDir):
+        raise ValueError(f"Output path must stay under {allowedDir}")
+    return resolved
+
+
 def runDryRun(
     rootDir: Path | None = None,
     runId: str | None = None,
@@ -207,7 +233,7 @@ def runDryRun(
     seeds = loadSeeds(inputPath)
     report = buildReport(seeds, reportId, stamp, confidenceFloor, maxProposalsPerSkill)
     validateReport(report, root)
-    path = Path(outputPath) if outputPath else defaultOutputPath(root, reportId)
+    path = resolveOutputPath(root, reportId, outputPath)
     writeJson(path, report)
     return report, path
 

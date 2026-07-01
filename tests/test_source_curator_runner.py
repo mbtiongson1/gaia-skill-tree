@@ -95,6 +95,33 @@ def test_dry_run_runner_rejects_report_if_identity_is_changed(tmp_path):
         sourceCuration.validateReport(report, root)
 
 
+def test_dry_run_runner_rejects_invalid_generated_at_format(tmp_path):
+    root = makeRoot(tmp_path)
+    report = sourceCuration.buildReport(
+        sourceCuration.defaultSeeds(),
+        "20260702-invalid-generated-at",
+        "not-a-date-time",
+    )
+
+    with pytest.raises(jsonschema.ValidationError):
+        sourceCuration.validateReport(report, root)
+
+
+def test_dry_run_runner_rejects_output_path_outside_source_curation_dir(tmp_path):
+    root = makeRoot(tmp_path)
+    forbidden = root / "registry" / "named" / "bad.md"
+
+    with pytest.raises(ValueError):
+        sourceCuration.runDryRun(
+            rootDir=root,
+            runId="20260702-bad-output",
+            generatedAt="2026-07-02T14:00:00Z",
+            outputPath="registry/named/bad.md",
+        )
+
+    assert not forbidden.exists()
+
+
 def test_dry_run_runner_filters_duplicates_and_low_confidence(tmp_path):
     root = makeRoot(tmp_path)
     seeds = [
