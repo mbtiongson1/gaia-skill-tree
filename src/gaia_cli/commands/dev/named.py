@@ -15,6 +15,7 @@ from gaia_cli.commands.dev.helpers import (
     _preflight_named_status_identity,
     preflightSuiteComponents,
     preflightGithubLink,
+    parseCommaSeparatedIds,
 )
 
 
@@ -60,7 +61,7 @@ def meta_update_named_command(args):
         changed = True
 
     if getattr(args, "suite_components", None):
-        meta["suiteComponents"] = [s.strip() for s in args.suite_components.split(",")]
+        meta["suiteComponents"] = parseCommaSeparatedIds(args.suite_components, "suite component")
         changed = True
 
     if getattr(args, "suite_ref", None):
@@ -97,7 +98,7 @@ def meta_update_named_command(args):
             meta["origin"] = target_val
             changed = True
             origin_changed = True
-            
+
             # Uniqueness constraint: if we're setting origin=True, strip it from others in the same bucket
             if target_val and meta.get("genericSkillRef"):
                 bucket_ref = meta["genericSkillRef"]

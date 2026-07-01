@@ -239,6 +239,16 @@ def test_add_rejects_named_status_missing_title(tmp_path, capsys):
     assert "status='named' requires 'title' or 'catalogRef'" in err
 
 
+def test_add_awakened_named_does_not_require_title_and_writes_status(tmp_path):
+    root = _make_registry(tmp_path)
+    meta_add_command(_add_args(root, id="my-skill", named=True, status="awakened"))
+    new_file = Path(root) / "registry" / "named" / "gaiabot" / "my-skill.md"
+    assert new_file.exists()
+    md = new_file.read_text(encoding="utf-8")
+    assert "status: awakened" in md
+    assert "title:" not in md
+
+
 def test_add_rejects_nonexistent_generic_ref(tmp_path, capsys):
     root = _make_registry(tmp_path)
     with pytest.raises(SystemExit) as exc:
@@ -298,7 +308,7 @@ def test_link_rejects_duplicate_relationship(tmp_path, capsys):
     meta_add_command(_add_args(root, name="Other Skill", id="other-skill"))
     # link them once (works)
     meta_link_command(_link_args(root, target="existing-skill", prereqs="other-skill"))
-    
+
     # try linking again, should reject
     with pytest.raises(SystemExit) as exc:
         meta_link_command(_link_args(root, target="existing-skill", prereqs="other-skill"))
@@ -307,11 +317,26 @@ def test_link_rejects_duplicate_relationship(tmp_path, capsys):
     assert "Relationship already exists" in err
 
 
+def test_link_rejects_empty_prereq_entry_before_write(tmp_path, capsys):
+    root = _make_registry(tmp_path)
+    meta_add_command(_add_args(root, name="Other Skill", id="other-skill"))
+    target_file = Path(root) / "registry" / "nodes" / "basic" / "existing-skill.json"
+    before = target_file.read_text(encoding="utf-8")
+
+    with pytest.raises(SystemExit) as exc:
+        meta_link_command(_link_args(root, target="existing-skill", prereqs="other-skill,"))
+
+    assert exc.value.code != 0
+    assert target_file.read_text(encoding="utf-8") == before
+    err = capsys.readouterr().err
+    assert "Empty prerequisite entries are not allowed" in err
+
+
 def test_link_happy_path(tmp_path):
     root = _make_registry(tmp_path)
     meta_add_command(_add_args(root, name="Other Skill", id="other-skill"))
     meta_link_command(_link_args(root, target="existing-skill", prereqs="other-skill"))
-    
+
     newFile = Path(root) / "registry" / "nodes" / "basic" / "existing-skill.json"
     data = json.loads(newFile.read_text(encoding="utf-8"))
     assert "other-skill" in data["prerequisites"]
@@ -321,12 +346,12 @@ def test_link_happy_path_with_reset(tmp_path):
     root = _make_registry(tmp_path)
     meta_add_command(_add_args(root, name="Other Skill", id="other-skill"))
     meta_add_command(_add_args(root, name="Another Skill", id="another-skill"))
-    
+
     # link once
     meta_link_command(_link_args(root, target="existing-skill", prereqs="other-skill"))
     # link with reset
     meta_link_command(_link_args(root, target="existing-skill", prereqs="another-skill", reset=True))
-    
+
     newFile = Path(root) / "registry" / "nodes" / "basic" / "existing-skill.json"
     data = json.loads(newFile.read_text(encoding="utf-8"))
     assert data["prerequisites"] == ["another-skill"]

@@ -333,11 +333,25 @@ def namedSkillExists(registryPath: str, contributor: str, skillId: str) -> bool:
     return destFile.exists()
 
 
+def parseCommaSeparatedIds(rawValue: str | None, label: str) -> list[str]:
+    """Parse a comma-separated ID list and reject empty entries."""
+    if rawValue is None or rawValue == "":
+        return []
+    entries = [entry.strip() for entry in rawValue.split(",")]
+    emptyPositions = [str(index + 1) for index, entry in enumerate(entries) if not entry]
+    if emptyPositions:
+        _fail_dev_preflight(
+            f"Empty {label} entries are not allowed at position(s): {', '.join(emptyPositions)}.",
+            fix=f"Remove extra commas from the {label} list."
+        )
+    return entries
+
+
 def preflightSuiteComponents(registryPath: str, suiteComponentsStr: str | None) -> None:
     """Validate suite components exist and have no duplicates."""
-    if not suiteComponentsStr:
+    components = parseCommaSeparatedIds(suiteComponentsStr, "suite component")
+    if not components:
         return
-    components = [c.strip() for c in suiteComponentsStr.split(",") if c.strip()]
     seen = set()
     duplicates = []
     for comp in components:
@@ -366,28 +380,27 @@ def preflightGithubLink(githubLink: str | None) -> None:
     import re
     if not githubLink:
         return
-    if "github.com" in githubLink or githubLink.startswith("https://github.com/"):
-        if not githubLink.startswith("https://github.com/"):
-            _fail_dev_preflight(
-                f"GitHub link must start with 'https://github.com/'; got {githubLink!r}.",
-                fix="Ensure the URL is a valid GitHub URL."
-            )
-        if "/tree/" in githubLink:
-            _fail_dev_preflight(
-                f"GitHub URL uses '/tree/' which is not supported: {githubLink!r}.",
-                fix="Convert the '/tree/' segment to '/blob/' and specify the path to the skill file/directory."
-            )
-        if "/blob/" not in githubLink:
-            _fail_dev_preflight(
-                f"GitHub URL is missing the '/blob/' segment: {githubLink!r}.",
-                fix="Ensure the URL uses the 'blob/<branch>/<subpath>' format rather than a bare repository URL."
-            )
-        match = re.match(r"^https://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$", githubLink)
-        if not match:
-            _fail_dev_preflight(
-                f"GitHub URL must match 'https://github.com/<owner>/<repo>/blob/<branch>/<subpath>'; got {githubLink!r}.",
-                fix="Provide a complete URL including the owner, repo, branch, and subpath."
-            )
+    if not githubLink.startswith("https://github.com/"):
+        _fail_dev_preflight(
+            f"GitHub link must start with 'https://github.com/'; got {githubLink!r}.",
+            fix="Use https://github.com/<owner>/<repo>/blob/<branch>/<subpath>."
+        )
+    if "/tree/" in githubLink:
+        _fail_dev_preflight(
+            f"GitHub URL uses '/tree/' which is not supported: {githubLink!r}.",
+            fix="Convert the '/tree/' segment to '/blob/' and specify the path to the skill file/directory."
+        )
+    if "/blob/" not in githubLink:
+        _fail_dev_preflight(
+            f"GitHub URL is missing the '/blob/' segment: {githubLink!r}.",
+            fix="Ensure the URL uses the 'blob/<branch>/<subpath>' format rather than a bare repository URL."
+        )
+    match = re.match(r"^https://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$", githubLink)
+    if not match:
+        _fail_dev_preflight(
+            f"GitHub URL must match 'https://github.com/<owner>/<repo>/blob/<branch>/<subpath>'; got {githubLink!r}.",
+            fix="Provide a complete URL including the owner, repo, branch, and subpath."
+        )
 
 
 def preflightAddCommand(args) -> None:
@@ -507,7 +520,7 @@ def preflightLinkCommand(args) -> None:
     import json
     registryPath = args.registry
     targetId = args.target.lstrip("/")
-    prereqsList = [p.strip() for p in args.prereqs.split(",") if p.strip()]
+    prereqsList = parseCommaSeparatedIds(args.prereqs, "prerequisite")
     if not prereqsList:
         _fail_dev_preflight(
             "No prerequisite skills specified.",
